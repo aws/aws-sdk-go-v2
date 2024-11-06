@@ -3766,15 +3766,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3782,14 +3776,10 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3895,7 +3885,6 @@ func awsAwsjson10_deserializeDocumentCapabilityOptions(v **types.CapabilityOptio
 			if err := awsAwsjson10_deserializeDocumentOutboundEdiOptions(&sv.OutboundEdi, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3935,7 +3924,6 @@ func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySumma
 				}
 				sv.CapabilityId = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3948,7 +3936,6 @@ func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySumma
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3961,7 +3948,6 @@ func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySumma
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3970,7 +3956,6 @@ func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySumma
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3979,7 +3964,6 @@ func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySumma
 				}
 				sv.Type = types.CapabilityType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4009,15 +3993,9 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4025,14 +4003,10 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4068,17 +4042,14 @@ func awsAwsjson10_deserializeDocumentEdiConfiguration(v **types.EdiConfiguration
 				}
 				sv.CapabilityDirection = types.CapabilityDirection(jtv)
 			}
-
 		case "inputLocation":
 			if err := awsAwsjson10_deserializeDocumentS3Location(&sv.InputLocation, value); err != nil {
 				return err
 			}
-
 		case "outputLocation":
 			if err := awsAwsjson10_deserializeDocumentS3Location(&sv.OutputLocation, value); err != nil {
 				return err
 			}
-
 		case "transformerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4087,12 +4058,10 @@ func awsAwsjson10_deserializeDocumentEdiConfiguration(v **types.EdiConfiguration
 				}
 				sv.TransformerId = ptr.String(jtv)
 			}
-
 		case "type":
 			if err := awsAwsjson10_deserializeDocumentEdiType(&sv.Type, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4208,7 +4177,6 @@ func awsAwsjson10_deserializeDocumentInputConversion(v **types.InputConversion, 
 			if err := awsAwsjson10_deserializeDocumentFormatOptions(&sv.FormatOptions, value); err != nil {
 				return err
 			}
-
 		case "fromFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4217,7 +4185,6 @@ func awsAwsjson10_deserializeDocumentInputConversion(v **types.InputConversion, 
 				}
 				sv.FromFormat = types.FromFormat(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4281,15 +4248,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4297,7 +4258,6 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4310,14 +4270,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4387,7 +4343,6 @@ func awsAwsjson10_deserializeDocumentMapping(v **types.Mapping, value interface{
 				}
 				sv.Template = ptr.String(jtv)
 			}
-
 		case "templateLanguage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4396,7 +4351,6 @@ func awsAwsjson10_deserializeDocumentMapping(v **types.Mapping, value interface{
 				}
 				sv.TemplateLanguage = types.MappingTemplateLanguage(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4472,7 +4426,6 @@ func awsAwsjson10_deserializeDocumentOutputConversion(v **types.OutputConversion
 			if err := awsAwsjson10_deserializeDocumentFormatOptions(&sv.FormatOptions, value); err != nil {
 				return err
 			}
-
 		case "toFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4481,7 +4434,6 @@ func awsAwsjson10_deserializeDocumentOutputConversion(v **types.OutputConversion
 				}
 				sv.ToFormat = types.ToFormat(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4587,12 +4539,10 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
 				return err
 			}
-
 		case "capabilityOptions":
 			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4605,7 +4555,6 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4618,7 +4567,6 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4627,7 +4575,6 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "partnershipId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4636,7 +4583,6 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 				}
 				sv.PartnershipId = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4645,7 +4591,6 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		case "tradingPartnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4654,7 +4599,6 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 				}
 				sv.TradingPartnerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4728,7 +4672,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.BusinessName = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4741,7 +4684,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "logging":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4750,7 +4692,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.Logging = types.Logging(jtv)
 			}
-
 		case "logGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4759,7 +4700,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4772,7 +4712,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4781,7 +4720,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4790,7 +4728,6 @@ func awsAwsjson10_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4820,15 +4757,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4836,14 +4767,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4879,7 +4806,6 @@ func awsAwsjson10_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
-
 		case "key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4888,7 +4814,6 @@ func awsAwsjson10_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4962,7 +4887,6 @@ func awsAwsjson10_deserializeDocumentSampleDocumentKeys(v **types.SampleDocument
 				}
 				sv.Input = ptr.String(jtv)
 			}
-
 		case "output":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4971,7 +4895,6 @@ func awsAwsjson10_deserializeDocumentSampleDocumentKeys(v **types.SampleDocument
 				}
 				sv.Output = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5011,12 +4934,10 @@ func awsAwsjson10_deserializeDocumentSampleDocuments(v **types.SampleDocuments, 
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
-
 		case "keys":
 			if err := awsAwsjson10_deserializeDocumentKeyList(&sv.Keys, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5046,15 +4967,9 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5062,7 +4977,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5071,7 +4985,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5080,7 +4993,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5089,7 +5001,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5098,14 +5009,10 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5141,7 +5048,6 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5150,7 +5056,6 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5214,15 +5119,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5230,7 +5129,6 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5243,14 +5141,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5324,12 +5218,10 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "ediType":
 			if err := awsAwsjson10_deserializeDocumentEdiType(&sv.EdiType, value); err != nil {
 				return err
 			}
-
 		case "fileFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5338,17 +5230,14 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.FileFormat = types.FileFormat(jtv)
 			}
-
 		case "inputConversion":
 			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
 				return err
 			}
-
 		case "mapping":
 			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
 				return err
 			}
-
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5357,7 +5246,6 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.MappingTemplate = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5370,7 +5258,6 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5379,12 +5266,10 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "outputConversion":
 			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
 				return err
 			}
-
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5393,12 +5278,10 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.SampleDocument = ptr.String(jtv)
 			}
-
 		case "sampleDocuments":
 			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5407,7 +5290,6 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.Status = types.TransformerStatus(jtv)
 			}
-
 		case "transformerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5416,7 +5298,6 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				}
 				sv.TransformerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5446,15 +5327,9 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5462,14 +5337,10 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5541,7 +5412,6 @@ func awsAwsjson10_deserializeDocumentX12Delimiters(v **types.X12Delimiters, valu
 				}
 				sv.ComponentSeparator = ptr.String(jtv)
 			}
-
 		case "dataElementSeparator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5550,7 +5420,6 @@ func awsAwsjson10_deserializeDocumentX12Delimiters(v **types.X12Delimiters, valu
 				}
 				sv.DataElementSeparator = ptr.String(jtv)
 			}
-
 		case "segmentTerminator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5559,7 +5428,6 @@ func awsAwsjson10_deserializeDocumentX12Delimiters(v **types.X12Delimiters, valu
 				}
 				sv.SegmentTerminator = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5599,7 +5467,6 @@ func awsAwsjson10_deserializeDocumentX12Details(v **types.X12Details, value inte
 				}
 				sv.TransactionSet = types.X12TransactionSet(jtv)
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5608,7 +5475,6 @@ func awsAwsjson10_deserializeDocumentX12Details(v **types.X12Details, value inte
 				}
 				sv.Version = types.X12Version(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5644,7 +5510,6 @@ func awsAwsjson10_deserializeDocumentX12Envelope(v **types.X12Envelope, value in
 			if err := awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(&sv.Common, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5684,7 +5549,6 @@ func awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(v **types.X12Func
 				}
 				sv.ApplicationReceiverCode = ptr.String(jtv)
 			}
-
 		case "applicationSenderCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5693,7 +5557,6 @@ func awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(v **types.X12Func
 				}
 				sv.ApplicationSenderCode = ptr.String(jtv)
 			}
-
 		case "responsibleAgencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5702,7 +5565,6 @@ func awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(v **types.X12Func
 				}
 				sv.ResponsibleAgencyCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5742,7 +5604,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.AcknowledgmentRequestedCode = ptr.String(jtv)
 			}
-
 		case "receiverId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5751,7 +5612,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.ReceiverId = ptr.String(jtv)
 			}
-
 		case "receiverIdQualifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5760,7 +5620,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.ReceiverIdQualifier = ptr.String(jtv)
 			}
-
 		case "repetitionSeparator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5769,7 +5628,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.RepetitionSeparator = ptr.String(jtv)
 			}
-
 		case "senderId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5778,7 +5636,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.SenderId = ptr.String(jtv)
 			}
-
 		case "senderIdQualifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5787,7 +5644,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.SenderIdQualifier = ptr.String(jtv)
 			}
-
 		case "usageIndicatorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5796,7 +5652,6 @@ func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12I
 				}
 				sv.UsageIndicatorCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5832,17 +5687,14 @@ func awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(v **types.X12Outbound
 			if err := awsAwsjson10_deserializeDocumentX12Delimiters(&sv.Delimiters, value); err != nil {
 				return err
 			}
-
 		case "functionalGroupHeaders":
 			if err := awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(&sv.FunctionalGroupHeaders, value); err != nil {
 				return err
 			}
-
 		case "interchangeControlHeaders":
 			if err := awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(&sv.InterchangeControlHeaders, value); err != nil {
 				return err
 			}
-
 		case "validateEdi":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5851,7 +5703,6 @@ func awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(v **types.X12Outbound
 				}
 				sv.ValidateEdi = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5891,7 +5742,6 @@ func awsAwsjson10_deserializeOpDocumentCreateCapabilityOutput(v **CreateCapabili
 				}
 				sv.CapabilityArn = ptr.String(jtv)
 			}
-
 		case "capabilityId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5900,12 +5750,10 @@ func awsAwsjson10_deserializeOpDocumentCreateCapabilityOutput(v **CreateCapabili
 				}
 				sv.CapabilityId = ptr.String(jtv)
 			}
-
 		case "configuration":
 			if err := awsAwsjson10_deserializeDocumentCapabilityConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5918,12 +5766,10 @@ func awsAwsjson10_deserializeOpDocumentCreateCapabilityOutput(v **CreateCapabili
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "instructionsDocuments":
 			if err := awsAwsjson10_deserializeDocumentInstructionsDocuments(&sv.InstructionsDocuments, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5932,7 +5778,6 @@ func awsAwsjson10_deserializeOpDocumentCreateCapabilityOutput(v **CreateCapabili
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5941,7 +5786,6 @@ func awsAwsjson10_deserializeOpDocumentCreateCapabilityOutput(v **CreateCapabili
 				}
 				sv.Type = types.CapabilityType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5977,12 +5821,10 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
 				return err
 			}
-
 		case "capabilityOptions":
 			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5995,7 +5837,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6004,7 +5845,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.Email = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6013,7 +5853,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "partnershipArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6022,7 +5861,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.PartnershipArn = ptr.String(jtv)
 			}
-
 		case "partnershipId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6031,7 +5869,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.PartnershipId = ptr.String(jtv)
 			}
-
 		case "phone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6040,7 +5877,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.Phone = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6049,7 +5885,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		case "tradingPartnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6058,7 +5893,6 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 				}
 				sv.TradingPartnerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6098,7 +5932,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.BusinessName = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6111,7 +5944,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6120,7 +5952,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.Email = ptr.String(jtv)
 			}
-
 		case "logging":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6129,7 +5960,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.Logging = types.Logging(jtv)
 			}
-
 		case "logGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6138,7 +5968,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6147,7 +5976,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "phone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6156,7 +5984,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.Phone = ptr.String(jtv)
 			}
-
 		case "profileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6165,7 +5992,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6174,7 +6000,6 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6214,7 +6039,6 @@ func awsAwsjson10_deserializeOpDocumentCreateStarterMappingTemplateOutput(v **Cr
 				}
 				sv.MappingTemplate = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6258,12 +6082,10 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "ediType":
 			if err := awsAwsjson10_deserializeDocumentEdiType(&sv.EdiType, value); err != nil {
 				return err
 			}
-
 		case "fileFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6272,17 +6094,14 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.FileFormat = types.FileFormat(jtv)
 			}
-
 		case "inputConversion":
 			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
 				return err
 			}
-
 		case "mapping":
 			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
 				return err
 			}
-
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6291,7 +6110,6 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.MappingTemplate = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6300,12 +6118,10 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "outputConversion":
 			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
 				return err
 			}
-
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6314,12 +6130,10 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.SampleDocument = ptr.String(jtv)
 			}
-
 		case "sampleDocuments":
 			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6328,7 +6142,6 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.Status = types.TransformerStatus(jtv)
 			}
-
 		case "transformerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6337,7 +6150,6 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.TransformerArn = ptr.String(jtv)
 			}
-
 		case "transformerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6346,7 +6158,6 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				}
 				sv.TransformerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6386,7 +6197,6 @@ func awsAwsjson10_deserializeOpDocumentGetCapabilityOutput(v **GetCapabilityOutp
 				}
 				sv.CapabilityArn = ptr.String(jtv)
 			}
-
 		case "capabilityId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6395,12 +6205,10 @@ func awsAwsjson10_deserializeOpDocumentGetCapabilityOutput(v **GetCapabilityOutp
 				}
 				sv.CapabilityId = ptr.String(jtv)
 			}
-
 		case "configuration":
 			if err := awsAwsjson10_deserializeDocumentCapabilityConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6413,12 +6221,10 @@ func awsAwsjson10_deserializeOpDocumentGetCapabilityOutput(v **GetCapabilityOutp
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "instructionsDocuments":
 			if err := awsAwsjson10_deserializeDocumentInstructionsDocuments(&sv.InstructionsDocuments, value); err != nil {
 				return err
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6431,7 +6237,6 @@ func awsAwsjson10_deserializeOpDocumentGetCapabilityOutput(v **GetCapabilityOutp
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6440,7 +6245,6 @@ func awsAwsjson10_deserializeOpDocumentGetCapabilityOutput(v **GetCapabilityOutp
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6449,7 +6253,6 @@ func awsAwsjson10_deserializeOpDocumentGetCapabilityOutput(v **GetCapabilityOutp
 				}
 				sv.Type = types.CapabilityType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6485,12 +6288,10 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
 				return err
 			}
-
 		case "capabilityOptions":
 			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6503,7 +6304,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6512,7 +6312,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.Email = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6525,7 +6324,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6534,7 +6332,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "partnershipArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6543,7 +6340,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.PartnershipArn = ptr.String(jtv)
 			}
-
 		case "partnershipId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6552,7 +6348,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.PartnershipId = ptr.String(jtv)
 			}
-
 		case "phone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6561,7 +6356,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.Phone = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6570,7 +6364,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		case "tradingPartnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6579,7 +6372,6 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 				}
 				sv.TradingPartnerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6619,7 +6411,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.BusinessName = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6632,7 +6423,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6641,7 +6431,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.Email = ptr.String(jtv)
 			}
-
 		case "logging":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6650,7 +6439,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.Logging = types.Logging(jtv)
 			}
-
 		case "logGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6659,7 +6447,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6672,7 +6459,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6681,7 +6467,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "phone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6690,7 +6475,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.Phone = ptr.String(jtv)
 			}
-
 		case "profileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6699,7 +6483,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6708,7 +6491,6 @@ func awsAwsjson10_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6748,12 +6530,10 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerJobOutput(v **GetTransforme
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "outputFiles":
 			if err := awsAwsjson10_deserializeDocumentS3LocationList(&sv.OutputFiles, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6762,7 +6542,6 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerJobOutput(v **GetTransforme
 				}
 				sv.Status = types.TransformerJobStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6806,12 +6585,10 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "ediType":
 			if err := awsAwsjson10_deserializeDocumentEdiType(&sv.EdiType, value); err != nil {
 				return err
 			}
-
 		case "fileFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6820,17 +6597,14 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.FileFormat = types.FileFormat(jtv)
 			}
-
 		case "inputConversion":
 			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
 				return err
 			}
-
 		case "mapping":
 			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
 				return err
 			}
-
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6839,7 +6613,6 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.MappingTemplate = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6852,7 +6625,6 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6861,12 +6633,10 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "outputConversion":
 			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
 				return err
 			}
-
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6875,12 +6645,10 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.SampleDocument = ptr.String(jtv)
 			}
-
 		case "sampleDocuments":
 			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6889,7 +6657,6 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.Status = types.TransformerStatus(jtv)
 			}
-
 		case "transformerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6898,7 +6665,6 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.TransformerArn = ptr.String(jtv)
 			}
-
 		case "transformerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6907,7 +6673,6 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				}
 				sv.TransformerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6943,7 +6708,6 @@ func awsAwsjson10_deserializeOpDocumentListCapabilitiesOutput(v **ListCapabiliti
 			if err := awsAwsjson10_deserializeDocumentCapabilityList(&sv.Capabilities, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6952,7 +6716,6 @@ func awsAwsjson10_deserializeOpDocumentListCapabilitiesOutput(v **ListCapabiliti
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6992,12 +6755,10 @@ func awsAwsjson10_deserializeOpDocumentListPartnershipsOutput(v **ListPartnershi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "partnerships":
 			if err := awsAwsjson10_deserializeDocumentPartnershipList(&sv.Partnerships, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7037,12 +6798,10 @@ func awsAwsjson10_deserializeOpDocumentListProfilesOutput(v **ListProfilesOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "profiles":
 			if err := awsAwsjson10_deserializeDocumentProfileList(&sv.Profiles, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7078,7 +6837,6 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7118,12 +6876,10 @@ func awsAwsjson10_deserializeOpDocumentListTransformersOutput(v **ListTransforme
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "transformers":
 			if err := awsAwsjson10_deserializeDocumentTransformerList(&sv.Transformers, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7163,7 +6919,6 @@ func awsAwsjson10_deserializeOpDocumentStartTransformerJobOutput(v **StartTransf
 				}
 				sv.TransformerJobId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7203,12 +6958,10 @@ func awsAwsjson10_deserializeOpDocumentTestConversionOutput(v **TestConversionOu
 				}
 				sv.ConvertedFileContent = ptr.String(jtv)
 			}
-
 		case "validationMessages":
 			if err := awsAwsjson10_deserializeDocumentValidationMessages(&sv.ValidationMessages, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7248,7 +7001,6 @@ func awsAwsjson10_deserializeOpDocumentTestMappingOutput(v **TestMappingOutput, 
 				}
 				sv.MappedFileContent = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7288,7 +7040,6 @@ func awsAwsjson10_deserializeOpDocumentTestParsingOutput(v **TestParsingOutput, 
 				}
 				sv.ParsedFileContent = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7328,7 +7079,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateCapabilityOutput(v **UpdateCapabili
 				}
 				sv.CapabilityArn = ptr.String(jtv)
 			}
-
 		case "capabilityId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7337,12 +7087,10 @@ func awsAwsjson10_deserializeOpDocumentUpdateCapabilityOutput(v **UpdateCapabili
 				}
 				sv.CapabilityId = ptr.String(jtv)
 			}
-
 		case "configuration":
 			if err := awsAwsjson10_deserializeDocumentCapabilityConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7355,12 +7103,10 @@ func awsAwsjson10_deserializeOpDocumentUpdateCapabilityOutput(v **UpdateCapabili
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "instructionsDocuments":
 			if err := awsAwsjson10_deserializeDocumentInstructionsDocuments(&sv.InstructionsDocuments, value); err != nil {
 				return err
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7373,7 +7119,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateCapabilityOutput(v **UpdateCapabili
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7382,7 +7127,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateCapabilityOutput(v **UpdateCapabili
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7391,7 +7135,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateCapabilityOutput(v **UpdateCapabili
 				}
 				sv.Type = types.CapabilityType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7427,12 +7170,10 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
 				return err
 			}
-
 		case "capabilityOptions":
 			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7445,7 +7186,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7454,7 +7194,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.Email = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7467,7 +7206,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7476,7 +7214,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "partnershipArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7485,7 +7222,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.PartnershipArn = ptr.String(jtv)
 			}
-
 		case "partnershipId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7494,7 +7230,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.PartnershipId = ptr.String(jtv)
 			}
-
 		case "phone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7503,7 +7238,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.Phone = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7512,7 +7246,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		case "tradingPartnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7521,7 +7254,6 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 				}
 				sv.TradingPartnerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7561,7 +7293,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.BusinessName = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7574,7 +7305,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "email":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7583,7 +7313,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.Email = ptr.String(jtv)
 			}
-
 		case "logging":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7592,7 +7321,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.Logging = types.Logging(jtv)
 			}
-
 		case "logGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7601,7 +7329,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7614,7 +7341,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7623,7 +7349,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "phone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7632,7 +7357,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.Phone = ptr.String(jtv)
 			}
-
 		case "profileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7641,7 +7365,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "profileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7650,7 +7373,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 				}
 				sv.ProfileId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7694,12 +7416,10 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "ediType":
 			if err := awsAwsjson10_deserializeDocumentEdiType(&sv.EdiType, value); err != nil {
 				return err
 			}
-
 		case "fileFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7708,17 +7428,14 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.FileFormat = types.FileFormat(jtv)
 			}
-
 		case "inputConversion":
 			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
 				return err
 			}
-
 		case "mapping":
 			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
 				return err
 			}
-
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7727,7 +7444,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.MappingTemplate = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7740,7 +7456,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7749,12 +7464,10 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "outputConversion":
 			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
 				return err
 			}
-
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7763,12 +7476,10 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.SampleDocument = ptr.String(jtv)
 			}
-
 		case "sampleDocuments":
 			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7777,7 +7488,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.Status = types.TransformerStatus(jtv)
 			}
-
 		case "transformerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7786,7 +7496,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.TransformerArn = ptr.String(jtv)
 			}
-
 		case "transformerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7795,7 +7504,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				}
 				sv.TransformerId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

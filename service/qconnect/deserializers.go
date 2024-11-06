@@ -187,7 +187,6 @@ func awsRestjson1_deserializeOpDocumentCreateAIAgentOutput(v **CreateAIAgentOutp
 			if err := awsRestjson1_deserializeDocumentAIAgentData(&sv.AiAgent, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -354,7 +353,6 @@ func awsRestjson1_deserializeOpDocumentCreateAIAgentVersionOutput(v **CreateAIAg
 			if err := awsRestjson1_deserializeDocumentAIAgentData(&sv.AiAgent, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -367,7 +365,6 @@ func awsRestjson1_deserializeOpDocumentCreateAIAgentVersionOutput(v **CreateAIAg
 				}
 				sv.VersionNumber = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -534,7 +531,6 @@ func awsRestjson1_deserializeOpDocumentCreateAIPromptOutput(v **CreateAIPromptOu
 			if err := awsRestjson1_deserializeDocumentAIPromptData(&sv.AiPrompt, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -701,7 +697,6 @@ func awsRestjson1_deserializeOpDocumentCreateAIPromptVersionOutput(v **CreateAIP
 			if err := awsRestjson1_deserializeDocumentAIPromptData(&sv.AiPrompt, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -714,7 +709,6 @@ func awsRestjson1_deserializeOpDocumentCreateAIPromptVersionOutput(v **CreateAIP
 				}
 				sv.VersionNumber = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -875,7 +869,6 @@ func awsRestjson1_deserializeOpDocumentCreateAssistantOutput(v **CreateAssistant
 			if err := awsRestjson1_deserializeDocumentAssistantData(&sv.Assistant, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1039,7 +1032,6 @@ func awsRestjson1_deserializeOpDocumentCreateAssistantAssociationOutput(v **Crea
 			if err := awsRestjson1_deserializeDocumentAssistantAssociationData(&sv.AssistantAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1203,7 +1195,6 @@ func awsRestjson1_deserializeOpDocumentCreateContentOutput(v **CreateContentOutp
 			if err := awsRestjson1_deserializeDocumentContentData(&sv.Content, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1370,7 +1361,6 @@ func awsRestjson1_deserializeOpDocumentCreateContentAssociationOutput(v **Create
 			if err := awsRestjson1_deserializeDocumentContentAssociationData(&sv.ContentAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1531,7 +1521,6 @@ func awsRestjson1_deserializeOpDocumentCreateKnowledgeBaseOutput(v **CreateKnowl
 			if err := awsRestjson1_deserializeDocumentKnowledgeBaseData(&sv.KnowledgeBase, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1695,7 +1684,6 @@ func awsRestjson1_deserializeOpDocumentCreateQuickResponseOutput(v **CreateQuick
 			if err := awsRestjson1_deserializeDocumentQuickResponseData(&sv.QuickResponse, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1856,7 +1844,6 @@ func awsRestjson1_deserializeOpDocumentCreateSessionOutput(v **CreateSessionOutp
 			if err := awsRestjson1_deserializeDocumentSessionData(&sv.Session, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3075,7 +3062,6 @@ func awsRestjson1_deserializeOpDocumentGetAIAgentOutput(v **GetAIAgentOutput, va
 			if err := awsRestjson1_deserializeDocumentAIAgentData(&sv.AiAgent, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3088,7 +3074,6 @@ func awsRestjson1_deserializeOpDocumentGetAIAgentOutput(v **GetAIAgentOutput, va
 				}
 				sv.VersionNumber = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3249,7 +3234,6 @@ func awsRestjson1_deserializeOpDocumentGetAIPromptOutput(v **GetAIPromptOutput, 
 			if err := awsRestjson1_deserializeDocumentAIPromptData(&sv.AiPrompt, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3262,7 +3246,6 @@ func awsRestjson1_deserializeOpDocumentGetAIPromptOutput(v **GetAIPromptOutput, 
 				}
 				sv.VersionNumber = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3420,7 +3403,6 @@ func awsRestjson1_deserializeOpDocumentGetAssistantOutput(v **GetAssistantOutput
 			if err := awsRestjson1_deserializeDocumentAssistantData(&sv.Assistant, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3578,7 +3560,6 @@ func awsRestjson1_deserializeOpDocumentGetAssistantAssociationOutput(v **GetAssi
 			if err := awsRestjson1_deserializeDocumentAssistantAssociationData(&sv.AssistantAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3736,7 +3717,6 @@ func awsRestjson1_deserializeOpDocumentGetContentOutput(v **GetContentOutput, va
 			if err := awsRestjson1_deserializeDocumentContentData(&sv.Content, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3894,7 +3874,6 @@ func awsRestjson1_deserializeOpDocumentGetContentAssociationOutput(v **GetConten
 			if err := awsRestjson1_deserializeDocumentContentAssociationData(&sv.ContentAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4052,7 +4031,6 @@ func awsRestjson1_deserializeOpDocumentGetContentSummaryOutput(v **GetContentSum
 			if err := awsRestjson1_deserializeDocumentContentSummary(&sv.ContentSummary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4210,7 +4188,6 @@ func awsRestjson1_deserializeOpDocumentGetImportJobOutput(v **GetImportJobOutput
 			if err := awsRestjson1_deserializeDocumentImportJobData(&sv.ImportJob, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4368,7 +4345,6 @@ func awsRestjson1_deserializeOpDocumentGetKnowledgeBaseOutput(v **GetKnowledgeBa
 			if err := awsRestjson1_deserializeDocumentKnowledgeBaseData(&sv.KnowledgeBase, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4526,7 +4502,6 @@ func awsRestjson1_deserializeOpDocumentGetQuickResponseOutput(v **GetQuickRespon
 			if err := awsRestjson1_deserializeDocumentQuickResponseData(&sv.QuickResponse, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4684,12 +4659,10 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommend
 			if err := awsRestjson1_deserializeDocumentRecommendationList(&sv.Recommendations, value); err != nil {
 				return err
 			}
-
 		case "triggers":
 			if err := awsRestjson1_deserializeDocumentRecommendationTriggerList(&sv.Triggers, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4847,7 +4820,6 @@ func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, va
 			if err := awsRestjson1_deserializeDocumentSessionData(&sv.Session, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5008,7 +4980,6 @@ func awsRestjson1_deserializeOpDocumentListAIAgentsOutput(v **ListAIAgentsOutput
 			if err := awsRestjson1_deserializeDocumentAIAgentSummaryList(&sv.AiAgentSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5017,7 +4988,6 @@ func awsRestjson1_deserializeOpDocumentListAIAgentsOutput(v **ListAIAgentsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5178,7 +5148,6 @@ func awsRestjson1_deserializeOpDocumentListAIAgentVersionsOutput(v **ListAIAgent
 			if err := awsRestjson1_deserializeDocumentAIAgentVersionSummariesList(&sv.AiAgentVersionSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5187,7 +5156,6 @@ func awsRestjson1_deserializeOpDocumentListAIAgentVersionsOutput(v **ListAIAgent
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5348,7 +5316,6 @@ func awsRestjson1_deserializeOpDocumentListAIPromptsOutput(v **ListAIPromptsOutp
 			if err := awsRestjson1_deserializeDocumentAIPromptSummaryList(&sv.AiPromptSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5357,7 +5324,6 @@ func awsRestjson1_deserializeOpDocumentListAIPromptsOutput(v **ListAIPromptsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5518,7 +5484,6 @@ func awsRestjson1_deserializeOpDocumentListAIPromptVersionsOutput(v **ListAIProm
 			if err := awsRestjson1_deserializeDocumentAIPromptVersionSummariesList(&sv.AiPromptVersionSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5527,7 +5492,6 @@ func awsRestjson1_deserializeOpDocumentListAIPromptVersionsOutput(v **ListAIProm
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5685,7 +5649,6 @@ func awsRestjson1_deserializeOpDocumentListAssistantAssociationsOutput(v **ListA
 			if err := awsRestjson1_deserializeDocumentAssistantAssociationSummaryList(&sv.AssistantAssociationSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5694,7 +5657,6 @@ func awsRestjson1_deserializeOpDocumentListAssistantAssociationsOutput(v **ListA
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5849,7 +5811,6 @@ func awsRestjson1_deserializeOpDocumentListAssistantsOutput(v **ListAssistantsOu
 			if err := awsRestjson1_deserializeDocumentAssistantList(&sv.AssistantSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5858,7 +5819,6 @@ func awsRestjson1_deserializeOpDocumentListAssistantsOutput(v **ListAssistantsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6016,7 +5976,6 @@ func awsRestjson1_deserializeOpDocumentListContentAssociationsOutput(v **ListCon
 			if err := awsRestjson1_deserializeDocumentContentAssociationSummaryList(&sv.ContentAssociationSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6025,7 +5984,6 @@ func awsRestjson1_deserializeOpDocumentListContentAssociationsOutput(v **ListCon
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6183,7 +6141,6 @@ func awsRestjson1_deserializeOpDocumentListContentsOutput(v **ListContentsOutput
 			if err := awsRestjson1_deserializeDocumentContentSummaryList(&sv.ContentSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6192,7 +6149,6 @@ func awsRestjson1_deserializeOpDocumentListContentsOutput(v **ListContentsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6347,7 +6303,6 @@ func awsRestjson1_deserializeOpDocumentListImportJobsOutput(v **ListImportJobsOu
 			if err := awsRestjson1_deserializeDocumentImportJobList(&sv.ImportJobSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6356,7 +6311,6 @@ func awsRestjson1_deserializeOpDocumentListImportJobsOutput(v **ListImportJobsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6511,7 +6465,6 @@ func awsRestjson1_deserializeOpDocumentListKnowledgeBasesOutput(v **ListKnowledg
 			if err := awsRestjson1_deserializeDocumentKnowledgeBaseList(&sv.KnowledgeBaseSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6520,7 +6473,6 @@ func awsRestjson1_deserializeOpDocumentListKnowledgeBasesOutput(v **ListKnowledg
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6682,12 +6634,10 @@ func awsRestjson1_deserializeOpDocumentListQuickResponsesOutput(v **ListQuickRes
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "quickResponseSummaries":
 			if err := awsRestjson1_deserializeDocumentQuickResponseSummaryList(&sv.QuickResponseSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6839,7 +6789,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6997,12 +6946,10 @@ func awsRestjson1_deserializeOpDocumentNotifyRecommendationsReceivedOutput(v **N
 			if err := awsRestjson1_deserializeDocumentNotifyRecommendationsReceivedErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "recommendationIds":
 			if err := awsRestjson1_deserializeDocumentRecommendationIdList(&sv.RecommendationIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7164,7 +7111,6 @@ func awsRestjson1_deserializeOpDocumentPutFeedbackOutput(v **PutFeedbackOutput, 
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7173,12 +7119,10 @@ func awsRestjson1_deserializeOpDocumentPutFeedbackOutput(v **PutFeedbackOutput, 
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "contentFeedback":
 			if err := awsRestjson1_deserializeDocumentContentFeedbackData(&sv.ContentFeedback, value); err != nil {
 				return err
 			}
-
 		case "targetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7187,7 +7131,6 @@ func awsRestjson1_deserializeOpDocumentPutFeedbackOutput(v **PutFeedbackOutput, 
 				}
 				sv.TargetId = ptr.String(jtv)
 			}
-
 		case "targetType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7196,7 +7139,6 @@ func awsRestjson1_deserializeOpDocumentPutFeedbackOutput(v **PutFeedbackOutput, 
 				}
 				sv.TargetType = types.TargetType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7361,12 +7303,10 @@ func awsRestjson1_deserializeOpDocumentQueryAssistantOutput(v **QueryAssistantOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "results":
 			if err := awsRestjson1_deserializeDocumentQueryResultsList(&sv.Results, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7715,7 +7655,6 @@ func awsRestjson1_deserializeOpDocumentSearchContentOutput(v **SearchContentOutp
 			if err := awsRestjson1_deserializeDocumentContentSummaryList(&sv.ContentSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7724,7 +7663,6 @@ func awsRestjson1_deserializeOpDocumentSearchContentOutput(v **SearchContentOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7889,12 +7827,10 @@ func awsRestjson1_deserializeOpDocumentSearchQuickResponsesOutput(v **SearchQuic
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "results":
 			if err := awsRestjson1_deserializeDocumentQuickResponseSearchResultsList(&sv.Results, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8056,12 +7992,10 @@ func awsRestjson1_deserializeOpDocumentSearchSessionsOutput(v **SearchSessionsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "sessionSummaries":
 			if err := awsRestjson1_deserializeDocumentSessionSummaries(&sv.SessionSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8219,7 +8153,6 @@ func awsRestjson1_deserializeOpDocumentStartContentUploadOutput(v **StartContent
 			if err := awsRestjson1_deserializeDocumentHeaders(&sv.HeadersToInclude, value); err != nil {
 				return err
 			}
-
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8228,7 +8161,6 @@ func awsRestjson1_deserializeOpDocumentStartContentUploadOutput(v **StartContent
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8237,7 +8169,6 @@ func awsRestjson1_deserializeOpDocumentStartContentUploadOutput(v **StartContent
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		case "urlExpiry":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8253,7 +8184,6 @@ func awsRestjson1_deserializeOpDocumentStartContentUploadOutput(v **StartContent
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8417,7 +8347,6 @@ func awsRestjson1_deserializeOpDocumentStartImportJobOutput(v **StartImportJobOu
 			if err := awsRestjson1_deserializeDocumentImportJobData(&sv.ImportJob, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8760,7 +8689,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAIAgentOutput(v **UpdateAIAgentOutp
 			if err := awsRestjson1_deserializeDocumentAIAgentData(&sv.AiAgent, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8924,7 +8852,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAIPromptOutput(v **UpdateAIPromptOu
 			if err := awsRestjson1_deserializeDocumentAIPromptData(&sv.AiPrompt, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9085,7 +9012,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAssistantAIAgentOutput(v **UpdateAs
 			if err := awsRestjson1_deserializeDocumentAssistantData(&sv.Assistant, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9246,7 +9172,6 @@ func awsRestjson1_deserializeOpDocumentUpdateContentOutput(v **UpdateContentOutp
 			if err := awsRestjson1_deserializeDocumentContentData(&sv.Content, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9404,7 +9329,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKnowledgeBaseTemplateUriOutput(v **
 			if err := awsRestjson1_deserializeDocumentKnowledgeBaseData(&sv.KnowledgeBase, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9568,7 +9492,6 @@ func awsRestjson1_deserializeOpDocumentUpdateQuickResponseOutput(v **UpdateQuick
 			if err := awsRestjson1_deserializeDocumentQuickResponseData(&sv.QuickResponse, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9726,7 +9649,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSessionOutput(v **UpdateSessionOutp
 			if err := awsRestjson1_deserializeDocumentSessionData(&sv.Session, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9884,7 +9806,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSessionDataOutput(v **UpdateSession
 			if err := awsRestjson1_deserializeDocumentRuntimeSessionDataList(&sv.Data, value); err != nil {
 				return err
 			}
-
 		case "namespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9893,7 +9814,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSessionDataOutput(v **UpdateSession
 				}
 				sv.Namespace = types.SessionDataNamespace(jtv)
 			}
-
 		case "sessionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9902,7 +9822,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSessionDataOutput(v **UpdateSession
 				}
 				sv.SessionArn = ptr.String(jtv)
 			}
-
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9911,7 +9830,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSessionDataOutput(v **UpdateSession
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10265,15 +10183,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10281,14 +10193,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10374,7 +10282,6 @@ func awsRestjson1_deserializeDocumentAIAgentConfigurationData(v **types.AIAgentC
 				}
 				sv.AiAgentId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10449,7 +10356,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.AiAgentArn = ptr.String(jtv)
 			}
-
 		case "aiAgentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10458,7 +10364,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.AiAgentId = ptr.String(jtv)
 			}
-
 		case "assistantArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10467,7 +10372,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10476,12 +10380,10 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "configuration":
 			if err := awsRestjson1_deserializeDocumentAIAgentConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10490,7 +10392,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "modifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10506,7 +10407,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10515,7 +10415,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "origin":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10524,7 +10423,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.Origin = types.Origin(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10533,12 +10431,10 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10547,7 +10443,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.Type = types.AIAgentType(jtv)
 			}
-
 		case "visibilityStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10556,7 +10451,6 @@ func awsRestjson1_deserializeDocumentAIAgentData(v **types.AIAgentData, value in
 				}
 				sv.VisibilityStatus = types.VisibilityStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10596,7 +10490,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.AiAgentArn = ptr.String(jtv)
 			}
-
 		case "aiAgentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10605,7 +10498,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.AiAgentId = ptr.String(jtv)
 			}
-
 		case "assistantArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10614,7 +10506,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10623,12 +10514,10 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "configuration":
 			if err := awsRestjson1_deserializeDocumentAIAgentConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10637,7 +10526,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "modifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10653,7 +10541,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10662,7 +10549,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "origin":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10671,7 +10557,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.Origin = types.Origin(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10680,12 +10565,10 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10694,7 +10577,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.Type = types.AIAgentType(jtv)
 			}
-
 		case "visibilityStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10703,7 +10585,6 @@ func awsRestjson1_deserializeDocumentAIAgentSummary(v **types.AIAgentSummary, va
 				}
 				sv.VisibilityStatus = types.VisibilityStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10807,7 +10688,6 @@ func awsRestjson1_deserializeDocumentAIAgentVersionSummary(v **types.AIAgentVers
 			if err := awsRestjson1_deserializeDocumentAIAgentSummary(&sv.AiAgentSummary, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10820,7 +10700,6 @@ func awsRestjson1_deserializeDocumentAIAgentVersionSummary(v **types.AIAgentVers
 				}
 				sv.VersionNumber = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10860,7 +10739,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.AiPromptArn = ptr.String(jtv)
 			}
-
 		case "aiPromptId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10869,7 +10747,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.AiPromptId = ptr.String(jtv)
 			}
-
 		case "apiFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10878,7 +10755,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.ApiFormat = types.AIPromptAPIFormat(jtv)
 			}
-
 		case "assistantArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10887,7 +10763,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10896,7 +10771,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10905,7 +10779,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "modelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10914,7 +10787,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.ModelId = ptr.String(jtv)
 			}
-
 		case "modifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10930,7 +10802,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10939,7 +10810,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "origin":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10948,7 +10818,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.Origin = types.Origin(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10957,17 +10826,14 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "templateConfiguration":
 			if err := awsRestjson1_deserializeDocumentAIPromptTemplateConfiguration(&sv.TemplateConfiguration, value); err != nil {
 				return err
 			}
-
 		case "templateType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10976,7 +10842,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.TemplateType = types.AIPromptTemplateType(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10985,7 +10850,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.Type = types.AIPromptType(jtv)
 			}
-
 		case "visibilityStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10994,7 +10858,6 @@ func awsRestjson1_deserializeDocumentAIPromptData(v **types.AIPromptData, value 
 				}
 				sv.VisibilityStatus = types.VisibilityStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11034,7 +10897,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.AiPromptArn = ptr.String(jtv)
 			}
-
 		case "aiPromptId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11043,7 +10905,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.AiPromptId = ptr.String(jtv)
 			}
-
 		case "apiFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11052,7 +10913,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.ApiFormat = types.AIPromptAPIFormat(jtv)
 			}
-
 		case "assistantArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11061,7 +10921,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11070,7 +10929,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11079,7 +10937,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "modelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11088,7 +10945,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.ModelId = ptr.String(jtv)
 			}
-
 		case "modifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11104,7 +10960,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11113,7 +10968,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "origin":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11122,7 +10976,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.Origin = types.Origin(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11131,12 +10984,10 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "templateType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11145,7 +10996,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.TemplateType = types.AIPromptTemplateType(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11154,7 +11004,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.Type = types.AIPromptType(jtv)
 			}
-
 		case "visibilityStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11163,7 +11012,6 @@ func awsRestjson1_deserializeDocumentAIPromptSummary(v **types.AIPromptSummary, 
 				}
 				sv.VisibilityStatus = types.VisibilityStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11307,7 +11155,6 @@ func awsRestjson1_deserializeDocumentAIPromptVersionSummary(v **types.AIPromptVe
 			if err := awsRestjson1_deserializeDocumentAIPromptSummary(&sv.AiPromptSummary, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11320,7 +11167,6 @@ func awsRestjson1_deserializeDocumentAIPromptVersionSummary(v **types.AIPromptVe
 				}
 				sv.VersionNumber = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11360,7 +11206,6 @@ func awsRestjson1_deserializeDocumentAmazonConnectGuideAssociationData(v **types
 				}
 				sv.FlowId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11434,12 +11279,10 @@ func awsRestjson1_deserializeDocumentAnswerRecommendationAIAgentConfiguration(v 
 				}
 				sv.AnswerGenerationAIPromptId = ptr.String(jtv)
 			}
-
 		case "associationConfigurations":
 			if err := awsRestjson1_deserializeDocumentAssociationConfigurationList(&sv.AssociationConfigurations, value); err != nil {
 				return err
 			}
-
 		case "intentLabelingGenerationAIPromptId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11448,7 +11291,6 @@ func awsRestjson1_deserializeDocumentAnswerRecommendationAIAgentConfiguration(v 
 				}
 				sv.IntentLabelingGenerationAIPromptId = ptr.String(jtv)
 			}
-
 		case "queryReformulationAIPromptId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11457,7 +11299,6 @@ func awsRestjson1_deserializeDocumentAnswerRecommendationAIAgentConfiguration(v 
 				}
 				sv.QueryReformulationAIPromptId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11497,12 +11338,10 @@ func awsRestjson1_deserializeDocumentAppIntegrationsConfiguration(v **types.AppI
 				}
 				sv.AppIntegrationArn = ptr.String(jtv)
 			}
-
 		case "objectFields":
 			if err := awsRestjson1_deserializeDocumentObjectFieldsList(&sv.ObjectFields, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11542,7 +11381,6 @@ func awsRestjson1_deserializeDocumentAssistantAssociationData(v **types.Assistan
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantAssociationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11551,7 +11389,6 @@ func awsRestjson1_deserializeDocumentAssistantAssociationData(v **types.Assistan
 				}
 				sv.AssistantAssociationArn = ptr.String(jtv)
 			}
-
 		case "assistantAssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11560,7 +11397,6 @@ func awsRestjson1_deserializeDocumentAssistantAssociationData(v **types.Assistan
 				}
 				sv.AssistantAssociationId = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11569,12 +11405,10 @@ func awsRestjson1_deserializeDocumentAssistantAssociationData(v **types.Assistan
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "associationData":
 			if err := awsRestjson1_deserializeDocumentAssistantAssociationOutputData(&sv.AssociationData, value); err != nil {
 				return err
 			}
-
 		case "associationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11583,12 +11417,10 @@ func awsRestjson1_deserializeDocumentAssistantAssociationData(v **types.Assistan
 				}
 				sv.AssociationType = types.AssociationType(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11668,7 +11500,6 @@ func awsRestjson1_deserializeDocumentAssistantAssociationSummary(v **types.Assis
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantAssociationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11677,7 +11508,6 @@ func awsRestjson1_deserializeDocumentAssistantAssociationSummary(v **types.Assis
 				}
 				sv.AssistantAssociationArn = ptr.String(jtv)
 			}
-
 		case "assistantAssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11686,7 +11516,6 @@ func awsRestjson1_deserializeDocumentAssistantAssociationSummary(v **types.Assis
 				}
 				sv.AssistantAssociationId = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11695,12 +11524,10 @@ func awsRestjson1_deserializeDocumentAssistantAssociationSummary(v **types.Assis
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "associationData":
 			if err := awsRestjson1_deserializeDocumentAssistantAssociationOutputData(&sv.AssociationData, value); err != nil {
 				return err
 			}
-
 		case "associationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11709,12 +11536,10 @@ func awsRestjson1_deserializeDocumentAssistantAssociationSummary(v **types.Assis
 				}
 				sv.AssociationType = types.AssociationType(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11788,7 +11613,6 @@ func awsRestjson1_deserializeDocumentAssistantCapabilityConfiguration(v **types.
 				}
 				sv.Type = types.AssistantCapabilityType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11824,7 +11648,6 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 			if err := awsRestjson1_deserializeDocumentAIAgentConfigurationMap(&sv.AiAgentConfiguration, value); err != nil {
 				return err
 			}
-
 		case "assistantArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11833,7 +11656,6 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11842,12 +11664,10 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "capabilityConfiguration":
 			if err := awsRestjson1_deserializeDocumentAssistantCapabilityConfiguration(&sv.CapabilityConfiguration, value); err != nil {
 				return err
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11856,12 +11676,10 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "integrationConfiguration":
 			if err := awsRestjson1_deserializeDocumentAssistantIntegrationConfiguration(&sv.IntegrationConfiguration, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11870,12 +11688,10 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "serverSideEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11884,12 +11700,10 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				}
 				sv.Status = types.AssistantStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11898,7 +11712,6 @@ func awsRestjson1_deserializeDocumentAssistantData(v **types.AssistantData, valu
 				}
 				sv.Type = types.AssistantType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11938,7 +11751,6 @@ func awsRestjson1_deserializeDocumentAssistantIntegrationConfiguration(v **types
 				}
 				sv.TopicIntegrationArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12008,7 +11820,6 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 			if err := awsRestjson1_deserializeDocumentAIAgentConfigurationMap(&sv.AiAgentConfiguration, value); err != nil {
 				return err
 			}
-
 		case "assistantArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12017,7 +11828,6 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12026,12 +11836,10 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "capabilityConfiguration":
 			if err := awsRestjson1_deserializeDocumentAssistantCapabilityConfiguration(&sv.CapabilityConfiguration, value); err != nil {
 				return err
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12040,12 +11848,10 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "integrationConfiguration":
 			if err := awsRestjson1_deserializeDocumentAssistantIntegrationConfiguration(&sv.IntegrationConfiguration, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12054,12 +11860,10 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "serverSideEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12068,12 +11872,10 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 				}
 				sv.Status = types.AssistantStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12082,7 +11884,6 @@ func awsRestjson1_deserializeDocumentAssistantSummary(v **types.AssistantSummary
 				}
 				sv.Type = types.AssistantType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12118,7 +11919,6 @@ func awsRestjson1_deserializeDocumentAssociationConfiguration(v **types.Associat
 			if err := awsRestjson1_deserializeDocumentAssociationConfigurationData(&sv.AssociationConfigurationData, value); err != nil {
 				return err
 			}
-
 		case "associationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12127,7 +11927,6 @@ func awsRestjson1_deserializeDocumentAssociationConfiguration(v **types.Associat
 				}
 				sv.AssociationId = ptr.String(jtv)
 			}
-
 		case "associationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12136,7 +11935,6 @@ func awsRestjson1_deserializeDocumentAssociationConfiguration(v **types.Associat
 				}
 				sv.AssociationType = types.AIAgentAssociationConfigurationType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12250,12 +12048,10 @@ func awsRestjson1_deserializeDocumentBedrockFoundationModelConfigurationForParsi
 				}
 				sv.ModelArn = ptr.String(jtv)
 			}
-
 		case "parsingPrompt":
 			if err := awsRestjson1_deserializeDocumentParsingPrompt(&sv.ParsingPrompt, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12331,22 +12127,18 @@ func awsRestjson1_deserializeDocumentChunkingConfiguration(v **types.ChunkingCon
 				}
 				sv.ChunkingStrategy = types.ChunkingStrategy(jtv)
 			}
-
 		case "fixedSizeChunkingConfiguration":
 			if err := awsRestjson1_deserializeDocumentFixedSizeChunkingConfiguration(&sv.FixedSizeChunkingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "hierarchicalChunkingConfiguration":
 			if err := awsRestjson1_deserializeDocumentHierarchicalChunkingConfiguration(&sv.HierarchicalChunkingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "semanticChunkingConfiguration":
 			if err := awsRestjson1_deserializeDocumentSemanticChunkingConfiguration(&sv.SemanticChunkingConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12390,7 +12182,6 @@ func awsRestjson1_deserializeDocumentCitationSpan(v **types.CitationSpan, value 
 				}
 				sv.BeginOffsetInclusive = int32(i64)
 			}
-
 		case "endOffsetExclusive":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12403,7 +12194,6 @@ func awsRestjson1_deserializeDocumentCitationSpan(v **types.CitationSpan, value 
 				}
 				sv.EndOffsetExclusive = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12473,15 +12263,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12489,14 +12273,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12532,7 +12312,6 @@ func awsRestjson1_deserializeDocumentConnectConfiguration(v **types.ConnectConfi
 				}
 				sv.InstanceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12644,7 +12423,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 			if err := awsRestjson1_deserializeDocumentContentAssociationContents(&sv.AssociationData, value); err != nil {
 				return err
 			}
-
 		case "associationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12653,7 +12431,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.AssociationType = types.ContentAssociationType(jtv)
 			}
-
 		case "contentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12662,7 +12439,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.ContentArn = ptr.String(jtv)
 			}
-
 		case "contentAssociationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12671,7 +12447,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.ContentAssociationArn = ptr.String(jtv)
 			}
-
 		case "contentAssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12680,7 +12455,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.ContentAssociationId = ptr.String(jtv)
 			}
-
 		case "contentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12689,7 +12463,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.ContentId = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12698,7 +12471,6 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12707,12 +12479,10 @@ func awsRestjson1_deserializeDocumentContentAssociationData(v **types.ContentAss
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12748,7 +12518,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 			if err := awsRestjson1_deserializeDocumentContentAssociationContents(&sv.AssociationData, value); err != nil {
 				return err
 			}
-
 		case "associationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12757,7 +12526,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.AssociationType = types.ContentAssociationType(jtv)
 			}
-
 		case "contentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12766,7 +12534,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.ContentArn = ptr.String(jtv)
 			}
-
 		case "contentAssociationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12775,7 +12542,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.ContentAssociationArn = ptr.String(jtv)
 			}
-
 		case "contentAssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12784,7 +12550,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.ContentAssociationId = ptr.String(jtv)
 			}
-
 		case "contentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12793,7 +12558,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.ContentId = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12802,7 +12566,6 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12811,12 +12574,10 @@ func awsRestjson1_deserializeDocumentContentAssociationSummary(v **types.Content
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12890,7 +12651,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.ContentArn = ptr.String(jtv)
 			}
-
 		case "contentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12899,7 +12659,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.ContentId = ptr.String(jtv)
 			}
-
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12908,7 +12667,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12917,7 +12675,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12926,7 +12683,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "linkOutUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12935,12 +12691,10 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.LinkOutUri = ptr.String(jtv)
 			}
-
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12949,7 +12703,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "revisionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12958,7 +12711,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12967,12 +12719,10 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.Status = types.ContentStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12981,7 +12731,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12990,7 +12739,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		case "urlExpiry":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13006,7 +12754,6 @@ func awsRestjson1_deserializeDocumentContentData(v **types.ContentData, value in
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13042,12 +12789,10 @@ func awsRestjson1_deserializeDocumentContentDataDetails(v **types.ContentDataDet
 			if err := awsRestjson1_deserializeDocumentRankingData(&sv.RankingData, value); err != nil {
 				return err
 			}
-
 		case "textData":
 			if err := awsRestjson1_deserializeDocumentTextData(&sv.TextData, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13163,7 +12908,6 @@ func awsRestjson1_deserializeDocumentContentReference(v **types.ContentReference
 				}
 				sv.ContentArn = ptr.String(jtv)
 			}
-
 		case "contentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13172,7 +12916,6 @@ func awsRestjson1_deserializeDocumentContentReference(v **types.ContentReference
 				}
 				sv.ContentId = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13181,7 +12924,6 @@ func awsRestjson1_deserializeDocumentContentReference(v **types.ContentReference
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13190,7 +12932,6 @@ func awsRestjson1_deserializeDocumentContentReference(v **types.ContentReference
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "referenceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13199,7 +12940,6 @@ func awsRestjson1_deserializeDocumentContentReference(v **types.ContentReference
 				}
 				sv.ReferenceType = types.ReferenceType(jtv)
 			}
-
 		case "sourceURL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13208,7 +12948,6 @@ func awsRestjson1_deserializeDocumentContentReference(v **types.ContentReference
 				}
 				sv.SourceURL = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13248,7 +12987,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.ContentArn = ptr.String(jtv)
 			}
-
 		case "contentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13257,7 +12995,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.ContentId = ptr.String(jtv)
 			}
-
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13266,7 +13003,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13275,7 +13011,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13284,12 +13019,10 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13298,7 +13031,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "revisionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13307,7 +13039,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13316,12 +13047,10 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.Status = types.ContentStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13330,7 +13059,6 @@ func awsRestjson1_deserializeDocumentContentSummary(v **types.ContentSummary, va
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13520,12 +13248,10 @@ func awsRestjson1_deserializeDocumentDataSummary(v **types.DataSummary, value in
 			if err := awsRestjson1_deserializeDocumentDataDetails(&sv.Details, value); err != nil {
 				return err
 			}
-
 		case "reference":
 			if err := awsRestjson1_deserializeDocumentDataReference(&sv.Reference, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13595,17 +13321,14 @@ func awsRestjson1_deserializeDocumentDocument(v **types.Document, value interfac
 			if err := awsRestjson1_deserializeDocumentContentReference(&sv.ContentReference, value); err != nil {
 				return err
 			}
-
 		case "excerpt":
 			if err := awsRestjson1_deserializeDocumentDocumentText(&sv.Excerpt, value); err != nil {
 				return err
 			}
-
 		case "title":
 			if err := awsRestjson1_deserializeDocumentDocumentText(&sv.Title, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13641,7 +13364,6 @@ func awsRestjson1_deserializeDocumentDocumentText(v **types.DocumentText, value 
 			if err := awsRestjson1_deserializeDocumentHighlights(&sv.Highlights, value); err != nil {
 				return err
 			}
-
 		case "text":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13650,7 +13372,6 @@ func awsRestjson1_deserializeDocumentDocumentText(v **types.DocumentText, value 
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13686,7 +13407,6 @@ func awsRestjson1_deserializeDocumentExternalSourceConfiguration(v **types.Exter
 			if err := awsRestjson1_deserializeDocumentConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13695,7 +13415,6 @@ func awsRestjson1_deserializeDocumentExternalSourceConfiguration(v **types.Exter
 				}
 				sv.Source = types.ExternalSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13775,7 +13494,6 @@ func awsRestjson1_deserializeDocumentFixedSizeChunkingConfiguration(v **types.Fi
 				}
 				sv.MaxTokens = ptr.Int32(int32(i64))
 			}
-
 		case "overlapPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13788,7 +13506,6 @@ func awsRestjson1_deserializeDocumentFixedSizeChunkingConfiguration(v **types.Fi
 				}
 				sv.OverlapPercentage = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13828,7 +13545,6 @@ func awsRestjson1_deserializeDocumentGenerativeContentFeedbackData(v **types.Gen
 				}
 				sv.Relevance = types.Relevance(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13868,17 +13584,14 @@ func awsRestjson1_deserializeDocumentGenerativeDataDetails(v **types.GenerativeD
 				}
 				sv.Completion = ptr.String(jtv)
 			}
-
 		case "rankingData":
 			if err := awsRestjson1_deserializeDocumentRankingData(&sv.RankingData, value); err != nil {
 				return err
 			}
-
 		case "references":
 			if err := awsRestjson1_deserializeDocumentDataSummaryList(&sv.References, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13918,7 +13631,6 @@ func awsRestjson1_deserializeDocumentGenerativeReference(v **types.GenerativeRef
 				}
 				sv.GenerationId = ptr.String(jtv)
 			}
-
 		case "modelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13927,7 +13639,6 @@ func awsRestjson1_deserializeDocumentGenerativeReference(v **types.GenerativeRef
 				}
 				sv.ModelId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13967,12 +13678,10 @@ func awsRestjson1_deserializeDocumentGroupingConfiguration(v **types.GroupingCon
 				}
 				sv.Criteria = ptr.String(jtv)
 			}
-
 		case "values":
 			if err := awsRestjson1_deserializeDocumentGroupingValues(&sv.Values, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14080,7 +13789,6 @@ func awsRestjson1_deserializeDocumentHierarchicalChunkingConfiguration(v **types
 			if err := awsRestjson1_deserializeDocumentHierarchicalChunkingLevelConfigurations(&sv.LevelConfigurations, value); err != nil {
 				return err
 			}
-
 		case "overlapTokens":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14093,7 +13801,6 @@ func awsRestjson1_deserializeDocumentHierarchicalChunkingConfiguration(v **types
 				}
 				sv.OverlapTokens = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14137,7 +13844,6 @@ func awsRestjson1_deserializeDocumentHierarchicalChunkingLevelConfiguration(v **
 				}
 				sv.MaxTokens = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14215,7 +13921,6 @@ func awsRestjson1_deserializeDocumentHighlight(v **types.Highlight, value interf
 				}
 				sv.BeginOffsetInclusive = int32(i64)
 			}
-
 		case "endOffsetExclusive":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14228,7 +13933,6 @@ func awsRestjson1_deserializeDocumentHighlight(v **types.Highlight, value interf
 				}
 				sv.EndOffsetExclusive = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14309,12 +14013,10 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 
 				}
 			}
-
 		case "externalSourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentExternalSourceConfiguration(&sv.ExternalSourceConfiguration, value); err != nil {
 				return err
 			}
-
 		case "failedRecordReport":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14323,7 +14025,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.FailedRecordReport = ptr.String(jtv)
 			}
-
 		case "importJobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14332,7 +14033,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.ImportJobId = ptr.String(jtv)
 			}
-
 		case "importJobType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14341,7 +14041,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.ImportJobType = types.ImportJobType(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14350,7 +14049,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14359,7 +14057,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14375,12 +14072,10 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 
 				}
 			}
-
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14389,7 +14084,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.Status = types.ImportJobStatus(jtv)
 			}
-
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14398,7 +14092,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14407,7 +14100,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		case "urlExpiry":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14423,7 +14115,6 @@ func awsRestjson1_deserializeDocumentImportJobData(v **types.ImportJobData, valu
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14504,12 +14195,10 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 
 				}
 			}
-
 		case "externalSourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentExternalSourceConfiguration(&sv.ExternalSourceConfiguration, value); err != nil {
 				return err
 			}
-
 		case "importJobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14518,7 +14207,6 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 				}
 				sv.ImportJobId = ptr.String(jtv)
 			}
-
 		case "importJobType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14527,7 +14215,6 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 				}
 				sv.ImportJobType = types.ImportJobType(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14536,7 +14223,6 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14545,7 +14231,6 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14561,12 +14246,10 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 
 				}
 			}
-
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14575,7 +14258,6 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 				}
 				sv.Status = types.ImportJobStatus(jtv)
 			}
-
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14584,7 +14266,6 @@ func awsRestjson1_deserializeDocumentImportJobSummary(v **types.ImportJobSummary
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14624,7 +14305,6 @@ func awsRestjson1_deserializeDocumentIntentDetectedDataDetails(v **types.IntentD
 				}
 				sv.Intent = ptr.String(jtv)
 			}
-
 		case "intentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14633,7 +14313,6 @@ func awsRestjson1_deserializeDocumentIntentDetectedDataDetails(v **types.IntentD
 				}
 				sv.IntentId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14669,7 +14348,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseAssociationConfigurationData(v
 			if err := awsRestjson1_deserializeDocumentTagFilter(&sv.ContentTagFilter, value); err != nil {
 				return err
 			}
-
 		case "maxResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14682,7 +14360,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseAssociationConfigurationData(v
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "overrideKnowledgeBaseSearchType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14691,7 +14368,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseAssociationConfigurationData(v
 				}
 				sv.OverrideKnowledgeBaseSearchType = types.KnowledgeBaseSearchType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14731,7 +14407,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseAssociationData(v **types.Know
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14740,7 +14415,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseAssociationData(v **types.Know
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14780,12 +14454,10 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "ingestionFailureReasons":
 			if err := awsRestjson1_deserializeDocumentFailureReason(&sv.IngestionFailureReasons, value); err != nil {
 				return err
 			}
-
 		case "ingestionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14794,7 +14466,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.IngestionStatus = types.SyncStatus(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14803,7 +14474,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14812,7 +14482,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14821,7 +14490,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.KnowledgeBaseType = types.KnowledgeBaseType(jtv)
 			}
-
 		case "lastContentModificationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14837,7 +14505,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14846,22 +14513,18 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "renderingConfiguration":
 			if err := awsRestjson1_deserializeDocumentRenderingConfiguration(&sv.RenderingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "serverSideEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
 				return err
 			}
-
 		case "sourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentSourceConfiguration(&sv.SourceConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14870,17 +14533,14 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseData(v **types.KnowledgeBaseDa
 				}
 				sv.Status = types.KnowledgeBaseStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vectorIngestionConfiguration":
 			if err := awsRestjson1_deserializeDocumentVectorIngestionConfiguration(&sv.VectorIngestionConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14954,7 +14614,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14963,7 +14622,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14972,7 +14630,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14981,7 +14638,6 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 				}
 				sv.KnowledgeBaseType = types.KnowledgeBaseType(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14990,22 +14646,18 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "renderingConfiguration":
 			if err := awsRestjson1_deserializeDocumentRenderingConfiguration(&sv.RenderingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "serverSideEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
 				return err
 			}
-
 		case "sourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentSourceConfiguration(&sv.SourceConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15014,17 +14666,14 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 				}
 				sv.Status = types.KnowledgeBaseStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vectorIngestionConfiguration":
 			if err := awsRestjson1_deserializeDocumentVectorIngestionConfiguration(&sv.VectorIngestionConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15104,12 +14753,10 @@ func awsRestjson1_deserializeDocumentManualSearchAIAgentConfiguration(v **types.
 				}
 				sv.AnswerGenerationAIPromptId = ptr.String(jtv)
 			}
-
 		case "associationConfigurations":
 			if err := awsRestjson1_deserializeDocumentAssociationConfigurationList(&sv.AssociationConfigurations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15149,7 +14796,6 @@ func awsRestjson1_deserializeDocumentNotifyRecommendationsReceivedError(v **type
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "recommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15158,7 +14804,6 @@ func awsRestjson1_deserializeDocumentNotifyRecommendationsReceivedError(v **type
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15344,7 +14989,6 @@ func awsRestjson1_deserializeDocumentParsingConfiguration(v **types.ParsingConfi
 			if err := awsRestjson1_deserializeDocumentBedrockFoundationModelConfigurationForParsing(&sv.BedrockFoundationModelConfiguration, value); err != nil {
 				return err
 			}
-
 		case "parsingStrategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15353,7 +14997,6 @@ func awsRestjson1_deserializeDocumentParsingConfiguration(v **types.ParsingConfi
 				}
 				sv.ParsingStrategy = types.ParsingStrategy(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15393,7 +15036,6 @@ func awsRestjson1_deserializeDocumentParsingPrompt(v **types.ParsingPrompt, valu
 				}
 				sv.ParsingPromptText = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15423,15 +15065,9 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15439,14 +15075,10 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15482,7 +15114,6 @@ func awsRestjson1_deserializeDocumentQueryRecommendationTriggerData(v **types.Qu
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15594,12 +15225,10 @@ func awsRestjson1_deserializeDocumentQuickResponseContents(v **types.QuickRespon
 			if err := awsRestjson1_deserializeDocumentQuickResponseContentProvider(&sv.Markdown, value); err != nil {
 				return err
 			}
-
 		case "plainText":
 			if err := awsRestjson1_deserializeDocumentQuickResponseContentProvider(&sv.PlainText, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15635,12 +15264,10 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 			if err := awsRestjson1_deserializeDocumentChannels(&sv.Channels, value); err != nil {
 				return err
 			}
-
 		case "contents":
 			if err := awsRestjson1_deserializeDocumentQuickResponseContents(&sv.Contents, value); err != nil {
 				return err
 			}
-
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15649,7 +15276,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
-
 		case "createdTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15665,7 +15291,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15674,12 +15299,10 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "groupingConfiguration":
 			if err := awsRestjson1_deserializeDocumentGroupingConfiguration(&sv.GroupingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "isActive":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15688,7 +15311,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.IsActive = ptr.Bool(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15697,7 +15319,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15706,7 +15327,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15715,7 +15335,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "lastModifiedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15724,7 +15343,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.LastModifiedBy = ptr.String(jtv)
 			}
-
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15740,7 +15358,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15749,7 +15366,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "quickResponseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15758,7 +15374,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.QuickResponseArn = ptr.String(jtv)
 			}
-
 		case "quickResponseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15767,7 +15382,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.QuickResponseId = ptr.String(jtv)
 			}
-
 		case "shortcutKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15776,7 +15390,6 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.ShortcutKey = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15785,12 +15398,10 @@ func awsRestjson1_deserializeDocumentQuickResponseData(v **types.QuickResponseDa
 				}
 				sv.Status = types.QuickResponseStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15826,22 +15437,18 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 			if err := awsRestjson1_deserializeDocumentContactAttributeKeys(&sv.AttributesInterpolated, value); err != nil {
 				return err
 			}
-
 		case "attributesNotInterpolated":
 			if err := awsRestjson1_deserializeDocumentContactAttributeKeys(&sv.AttributesNotInterpolated, value); err != nil {
 				return err
 			}
-
 		case "channels":
 			if err := awsRestjson1_deserializeDocumentChannels(&sv.Channels, value); err != nil {
 				return err
 			}
-
 		case "contents":
 			if err := awsRestjson1_deserializeDocumentQuickResponseContents(&sv.Contents, value); err != nil {
 				return err
 			}
-
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15850,7 +15457,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
-
 		case "createdTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15866,7 +15472,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15875,12 +15480,10 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "groupingConfiguration":
 			if err := awsRestjson1_deserializeDocumentGroupingConfiguration(&sv.GroupingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "isActive":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15889,7 +15492,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.IsActive = ptr.Bool(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15898,7 +15500,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15907,7 +15508,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15916,7 +15516,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "lastModifiedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15925,7 +15524,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.LastModifiedBy = ptr.String(jtv)
 			}
-
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15941,7 +15539,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15950,7 +15547,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "quickResponseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15959,7 +15555,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.QuickResponseArn = ptr.String(jtv)
 			}
-
 		case "quickResponseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15968,7 +15563,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.QuickResponseId = ptr.String(jtv)
 			}
-
 		case "shortcutKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15977,7 +15571,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.ShortcutKey = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15986,12 +15579,10 @@ func awsRestjson1_deserializeDocumentQuickResponseSearchResultData(v **types.Qui
 				}
 				sv.Status = types.QuickResponseStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16061,7 +15652,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 			if err := awsRestjson1_deserializeDocumentChannels(&sv.Channels, value); err != nil {
 				return err
 			}
-
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16070,7 +15660,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
-
 		case "createdTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16086,7 +15675,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16095,7 +15683,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "isActive":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16104,7 +15691,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.IsActive = ptr.Bool(jtv)
 			}
-
 		case "knowledgeBaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16113,7 +15699,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.KnowledgeBaseArn = ptr.String(jtv)
 			}
-
 		case "knowledgeBaseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16122,7 +15707,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.KnowledgeBaseId = ptr.String(jtv)
 			}
-
 		case "lastModifiedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16131,7 +15715,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.LastModifiedBy = ptr.String(jtv)
 			}
-
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16147,7 +15730,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16156,7 +15738,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "quickResponseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16165,7 +15746,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.QuickResponseArn = ptr.String(jtv)
 			}
-
 		case "quickResponseId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16174,7 +15754,6 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.QuickResponseId = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16183,12 +15762,10 @@ func awsRestjson1_deserializeDocumentQuickResponseSummary(v **types.QuickRespons
 				}
 				sv.Status = types.QuickResponseStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16262,7 +15839,6 @@ func awsRestjson1_deserializeDocumentRankingData(v **types.RankingData, value in
 				}
 				sv.RelevanceLevel = types.RelevanceLevel(jtv)
 			}
-
 		case "relevanceScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16296,7 +15872,6 @@ func awsRestjson1_deserializeDocumentRankingData(v **types.RankingData, value in
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16332,12 +15907,10 @@ func awsRestjson1_deserializeDocumentRecommendationData(v **types.Recommendation
 			if err := awsRestjson1_deserializeDocumentDataSummary(&sv.Data, value); err != nil {
 				return err
 			}
-
 		case "document":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.Document, value); err != nil {
 				return err
 			}
-
 		case "recommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16346,7 +15919,6 @@ func awsRestjson1_deserializeDocumentRecommendationData(v **types.Recommendation
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
-
 		case "relevanceLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16355,7 +15927,6 @@ func awsRestjson1_deserializeDocumentRecommendationData(v **types.Recommendation
 				}
 				sv.RelevanceLevel = types.RelevanceLevel(jtv)
 			}
-
 		case "relevanceScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16389,7 +15960,6 @@ func awsRestjson1_deserializeDocumentRecommendationData(v **types.Recommendation
 
 				}
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16398,7 +15968,6 @@ func awsRestjson1_deserializeDocumentRecommendationData(v **types.Recommendation
 				}
 				sv.Type = types.RecommendationType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16504,7 +16073,6 @@ func awsRestjson1_deserializeDocumentRecommendationTrigger(v **types.Recommendat
 			if err := awsRestjson1_deserializeDocumentRecommendationTriggerData(&sv.Data, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16513,12 +16081,10 @@ func awsRestjson1_deserializeDocumentRecommendationTrigger(v **types.Recommendat
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "recommendationIds":
 			if err := awsRestjson1_deserializeDocumentRecommendationIdList(&sv.RecommendationIds, value); err != nil {
 				return err
 			}
-
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16527,7 +16093,6 @@ func awsRestjson1_deserializeDocumentRecommendationTrigger(v **types.Recommendat
 				}
 				sv.Source = types.RecommendationSourceType(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16536,7 +16101,6 @@ func awsRestjson1_deserializeDocumentRecommendationTrigger(v **types.Recommendat
 				}
 				sv.Type = types.RecommendationTriggerType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16650,7 +16214,6 @@ func awsRestjson1_deserializeDocumentRenderingConfiguration(v **types.RenderingC
 				}
 				sv.TemplateUri = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16680,15 +16243,9 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16696,14 +16253,10 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16729,15 +16282,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16745,7 +16292,6 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16754,14 +16300,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16793,12 +16335,10 @@ func awsRestjson1_deserializeDocumentResultData(v **types.ResultData, value inte
 			if err := awsRestjson1_deserializeDocumentDataSummary(&sv.Data, value); err != nil {
 				return err
 			}
-
 		case "document":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.Document, value); err != nil {
 				return err
 			}
-
 		case "relevanceScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16832,7 +16372,6 @@ func awsRestjson1_deserializeDocumentResultData(v **types.ResultData, value inte
 
 				}
 			}
-
 		case "resultId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16841,7 +16380,6 @@ func awsRestjson1_deserializeDocumentResultData(v **types.ResultData, value inte
 				}
 				sv.ResultId = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16850,7 +16388,6 @@ func awsRestjson1_deserializeDocumentResultData(v **types.ResultData, value inte
 				}
 				sv.Type = types.QueryResultType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16890,12 +16427,10 @@ func awsRestjson1_deserializeDocumentRuntimeSessionData(v **types.RuntimeSession
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if err := awsRestjson1_deserializeDocumentRuntimeSessionDataValue(&sv.Value, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17011,7 +16546,6 @@ func awsRestjson1_deserializeDocumentSeedUrl(v **types.SeedUrl, value interface{
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17089,7 +16623,6 @@ func awsRestjson1_deserializeDocumentSemanticChunkingConfiguration(v **types.Sem
 				}
 				sv.BreakpointPercentileThreshold = ptr.Int32(int32(i64))
 			}
-
 		case "bufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17102,7 +16635,6 @@ func awsRestjson1_deserializeDocumentSemanticChunkingConfiguration(v **types.Sem
 				}
 				sv.BufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "maxTokens":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17115,7 +16647,6 @@ func awsRestjson1_deserializeDocumentSemanticChunkingConfiguration(v **types.Sem
 				}
 				sv.MaxTokens = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17155,7 +16686,6 @@ func awsRestjson1_deserializeDocumentServerSideEncryptionConfiguration(v **types
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17185,15 +16715,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17201,14 +16725,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -17240,7 +16760,6 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 			if err := awsRestjson1_deserializeDocumentAIAgentConfigurationMap(&sv.AiAgentConfiguration, value); err != nil {
 				return err
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17249,12 +16768,10 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "integrationConfiguration":
 			if err := awsRestjson1_deserializeDocumentSessionIntegrationConfiguration(&sv.IntegrationConfiguration, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17263,7 +16780,6 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "sessionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17272,7 +16788,6 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 				}
 				sv.SessionArn = ptr.String(jtv)
 			}
-
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17281,17 +16796,14 @@ func awsRestjson1_deserializeDocumentSessionData(v **types.SessionData, value in
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		case "tagFilter":
 			if err := awsRestjson1_deserializeDocumentTagFilter(&sv.TagFilter, value); err != nil {
 				return err
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17331,7 +16843,6 @@ func awsRestjson1_deserializeDocumentSessionIntegrationConfiguration(v **types.S
 				}
 				sv.TopicIntegrationArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17405,7 +16916,6 @@ func awsRestjson1_deserializeDocumentSessionSummary(v **types.SessionSummary, va
 				}
 				sv.AssistantArn = ptr.String(jtv)
 			}
-
 		case "assistantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17414,7 +16924,6 @@ func awsRestjson1_deserializeDocumentSessionSummary(v **types.SessionSummary, va
 				}
 				sv.AssistantId = ptr.String(jtv)
 			}
-
 		case "sessionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17423,7 +16932,6 @@ func awsRestjson1_deserializeDocumentSessionSummary(v **types.SessionSummary, va
 				}
 				sv.SessionArn = ptr.String(jtv)
 			}
-
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17432,7 +16940,6 @@ func awsRestjson1_deserializeDocumentSessionSummary(v **types.SessionSummary, va
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17516,7 +17023,6 @@ func awsRestjson1_deserializeDocumentSourceContentDataDetails(v **types.SourceCo
 			if err := awsRestjson1_deserializeDocumentCitationSpan(&sv.CitationSpan, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17525,17 +17031,14 @@ func awsRestjson1_deserializeDocumentSourceContentDataDetails(v **types.SourceCo
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "rankingData":
 			if err := awsRestjson1_deserializeDocumentRankingData(&sv.RankingData, value); err != nil {
 				return err
 			}
-
 		case "textData":
 			if err := awsRestjson1_deserializeDocumentTextData(&sv.TextData, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17544,7 +17047,6 @@ func awsRestjson1_deserializeDocumentSourceContentDataDetails(v **types.SourceCo
 				}
 				sv.Type = types.SourceContentType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17584,7 +17086,6 @@ func awsRestjson1_deserializeDocumentTagCondition(v **types.TagCondition, value 
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17593,7 +17094,6 @@ func awsRestjson1_deserializeDocumentTagCondition(v **types.TagCondition, value 
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17721,12 +17221,10 @@ func awsRestjson1_deserializeDocumentTextData(v **types.TextData, value interfac
 			if err := awsRestjson1_deserializeDocumentDocumentText(&sv.Excerpt, value); err != nil {
 				return err
 			}
-
 		case "title":
 			if err := awsRestjson1_deserializeDocumentDocumentText(&sv.Title, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17766,7 +17264,6 @@ func awsRestjson1_deserializeDocumentTextFullAIPromptEditTemplateConfiguration(v
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17796,15 +17293,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17812,14 +17303,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -17845,15 +17332,9 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17861,7 +17342,6 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17870,14 +17350,10 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -17909,7 +17385,6 @@ func awsRestjson1_deserializeDocumentUrlConfiguration(v **types.UrlConfiguration
 			if err := awsRestjson1_deserializeDocumentSeedUrls(&sv.SeedUrls, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17975,15 +17450,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17991,14 +17460,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18030,12 +17495,10 @@ func awsRestjson1_deserializeDocumentVectorIngestionConfiguration(v **types.Vect
 			if err := awsRestjson1_deserializeDocumentChunkingConfiguration(&sv.ChunkingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "parsingConfiguration":
 			if err := awsRestjson1_deserializeDocumentParsingConfiguration(&sv.ParsingConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18071,17 +17534,14 @@ func awsRestjson1_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawle
 			if err := awsRestjson1_deserializeDocumentWebCrawlerLimits(&sv.CrawlerLimits, value); err != nil {
 				return err
 			}
-
 		case "exclusionFilters":
 			if err := awsRestjson1_deserializeDocumentUrlFilterList(&sv.ExclusionFilters, value); err != nil {
 				return err
 			}
-
 		case "inclusionFilters":
 			if err := awsRestjson1_deserializeDocumentUrlFilterList(&sv.InclusionFilters, value); err != nil {
 				return err
 			}
-
 		case "scope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18090,12 +17550,10 @@ func awsRestjson1_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawle
 				}
 				sv.Scope = types.WebScopeType(jtv)
 			}
-
 		case "urlConfiguration":
 			if err := awsRestjson1_deserializeDocumentUrlConfiguration(&sv.UrlConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18139,7 +17597,6 @@ func awsRestjson1_deserializeDocumentWebCrawlerLimits(v **types.WebCrawlerLimits
 				}
 				sv.RateLimit = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 

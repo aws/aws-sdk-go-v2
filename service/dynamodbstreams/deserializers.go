@@ -901,15 +901,9 @@ func awsAwsjson10_deserializeDocumentExpiredIteratorException(v **types.ExpiredI
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -917,14 +911,10 @@ func awsAwsjson10_deserializeDocumentExpiredIteratorException(v **types.ExpiredI
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -960,7 +950,6 @@ func awsAwsjson10_deserializeDocumentIdentity(v **types.Identity, value interfac
 				}
 				sv.PrincipalId = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -969,7 +958,6 @@ func awsAwsjson10_deserializeDocumentIdentity(v **types.Identity, value interfac
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -999,15 +987,9 @@ func awsAwsjson10_deserializeDocumentInternalServerError(v **types.InternalServe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1015,14 +997,10 @@ func awsAwsjson10_deserializeDocumentInternalServerError(v **types.InternalServe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1092,7 +1070,6 @@ func awsAwsjson10_deserializeDocumentKeySchemaElement(v **types.KeySchemaElement
 				}
 				sv.AttributeName = ptr.String(jtv)
 			}
-
 		case "KeyType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1101,7 +1078,6 @@ func awsAwsjson10_deserializeDocumentKeySchemaElement(v **types.KeySchemaElement
 				}
 				sv.KeyType = types.KeyType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1131,15 +1107,9 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1147,14 +1117,10 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1292,12 +1258,10 @@ func awsAwsjson10_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.AwsRegion = ptr.String(jtv)
 			}
-
 		case "dynamodb":
 			if err := awsAwsjson10_deserializeDocumentStreamRecord(&sv.Dynamodb, value); err != nil {
 				return err
 			}
-
 		case "eventID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1306,7 +1270,6 @@ func awsAwsjson10_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.EventID = ptr.String(jtv)
 			}
-
 		case "eventName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1315,7 +1278,6 @@ func awsAwsjson10_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.EventName = types.OperationType(jtv)
 			}
-
 		case "eventSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1324,7 +1286,6 @@ func awsAwsjson10_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.EventSource = ptr.String(jtv)
 			}
-
 		case "eventVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1333,12 +1294,10 @@ func awsAwsjson10_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.EventVersion = ptr.String(jtv)
 			}
-
 		case "userIdentity":
 			if err := awsAwsjson10_deserializeDocumentIdentity(&sv.UserIdentity, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1402,15 +1361,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1418,14 +1371,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1461,7 +1410,6 @@ func awsAwsjson10_deserializeDocumentSequenceNumberRange(v **types.SequenceNumbe
 				}
 				sv.EndingSequenceNumber = ptr.String(jtv)
 			}
-
 		case "StartingSequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1470,7 +1418,6 @@ func awsAwsjson10_deserializeDocumentSequenceNumberRange(v **types.SequenceNumbe
 				}
 				sv.StartingSequenceNumber = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1510,12 +1457,10 @@ func awsAwsjson10_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.ParentShardId = ptr.String(jtv)
 			}
-
 		case "SequenceNumberRange":
 			if err := awsAwsjson10_deserializeDocumentSequenceNumberRange(&sv.SequenceNumberRange, value); err != nil {
 				return err
 			}
-
 		case "ShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1524,7 +1469,6 @@ func awsAwsjson10_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.ShardId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1598,7 +1542,6 @@ func awsAwsjson10_deserializeDocumentStream(v **types.Stream, value interface{})
 				}
 				sv.StreamArn = ptr.String(jtv)
 			}
-
 		case "StreamLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1607,7 +1550,6 @@ func awsAwsjson10_deserializeDocumentStream(v **types.Stream, value interface{})
 				}
 				sv.StreamLabel = ptr.String(jtv)
 			}
-
 		case "TableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1616,7 +1558,6 @@ func awsAwsjson10_deserializeDocumentStream(v **types.Stream, value interface{})
 				}
 				sv.TableName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1663,12 +1604,10 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 
 				}
 			}
-
 		case "KeySchema":
 			if err := awsAwsjson10_deserializeDocumentKeySchema(&sv.KeySchema, value); err != nil {
 				return err
 			}
-
 		case "LastEvaluatedShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1677,12 +1616,10 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.LastEvaluatedShardId = ptr.String(jtv)
 			}
-
 		case "Shards":
 			if err := awsAwsjson10_deserializeDocumentShardDescriptionList(&sv.Shards, value); err != nil {
 				return err
 			}
-
 		case "StreamArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1691,7 +1628,6 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamArn = ptr.String(jtv)
 			}
-
 		case "StreamLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1700,7 +1636,6 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamLabel = ptr.String(jtv)
 			}
-
 		case "StreamStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1709,7 +1644,6 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamStatus = types.StreamStatus(jtv)
 			}
-
 		case "StreamViewType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1718,7 +1652,6 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamViewType = types.StreamViewType(jtv)
 			}
-
 		case "TableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1727,7 +1660,6 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.TableName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1808,22 +1740,18 @@ func awsAwsjson10_deserializeDocumentStreamRecord(v **types.StreamRecord, value 
 
 				}
 			}
-
 		case "Keys":
 			if err := awsAwsjson10_deserializeDocumentAttributeMap(&sv.Keys, value); err != nil {
 				return err
 			}
-
 		case "NewImage":
 			if err := awsAwsjson10_deserializeDocumentAttributeMap(&sv.NewImage, value); err != nil {
 				return err
 			}
-
 		case "OldImage":
 			if err := awsAwsjson10_deserializeDocumentAttributeMap(&sv.OldImage, value); err != nil {
 				return err
 			}
-
 		case "SequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1832,7 +1760,6 @@ func awsAwsjson10_deserializeDocumentStreamRecord(v **types.StreamRecord, value 
 				}
 				sv.SequenceNumber = ptr.String(jtv)
 			}
-
 		case "SizeBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1845,7 +1772,6 @@ func awsAwsjson10_deserializeDocumentStreamRecord(v **types.StreamRecord, value 
 				}
 				sv.SizeBytes = ptr.Int64(i64)
 			}
-
 		case "StreamViewType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1854,7 +1780,6 @@ func awsAwsjson10_deserializeDocumentStreamRecord(v **types.StreamRecord, value 
 				}
 				sv.StreamViewType = types.StreamViewType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1920,15 +1845,9 @@ func awsAwsjson10_deserializeDocumentTrimmedDataAccessException(v **types.Trimme
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1936,14 +1855,10 @@ func awsAwsjson10_deserializeDocumentTrimmedDataAccessException(v **types.Trimme
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1975,7 +1890,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeStreamOutput(v **DescribeStreamOu
 			if err := awsAwsjson10_deserializeDocumentStreamDescription(&sv.StreamDescription, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2015,12 +1929,10 @@ func awsAwsjson10_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, va
 				}
 				sv.NextShardIterator = ptr.String(jtv)
 			}
-
 		case "Records":
 			if err := awsAwsjson10_deserializeDocumentRecordList(&sv.Records, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2060,7 +1972,6 @@ func awsAwsjson10_deserializeOpDocumentGetShardIteratorOutput(v **GetShardIterat
 				}
 				sv.ShardIterator = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2100,12 +2011,10 @@ func awsAwsjson10_deserializeOpDocumentListStreamsOutput(v **ListStreamsOutput, 
 				}
 				sv.LastEvaluatedStreamArn = ptr.String(jtv)
 			}
-
 		case "Streams":
 			if err := awsAwsjson10_deserializeDocumentStreamList(&sv.Streams, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

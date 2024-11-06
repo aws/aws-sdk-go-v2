@@ -297,7 +297,6 @@ func awsRestjson1_deserializeOpDocumentCreateGroupOutput(v **CreateGroupOutput, 
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -306,7 +305,6 @@ func awsRestjson1_deserializeOpDocumentCreateGroupOutput(v **CreateGroupOutput, 
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -315,7 +313,6 @@ func awsRestjson1_deserializeOpDocumentCreateGroupOutput(v **CreateGroupOutput, 
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -486,7 +483,6 @@ func awsRestjson1_deserializeOpDocumentCreateUserOutput(v **CreateUserOutput, va
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -495,7 +491,6 @@ func awsRestjson1_deserializeOpDocumentCreateUserOutput(v **CreateUserOutput, va
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -504,7 +499,6 @@ func awsRestjson1_deserializeOpDocumentCreateUserOutput(v **CreateUserOutput, va
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -887,7 +881,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "DistinguishedName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -896,7 +889,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.DistinguishedName = ptr.String(jtv)
 			}
-
 		case "GroupScope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -905,7 +897,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.GroupScope = types.GroupScope(jtv)
 			}
-
 		case "GroupType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -914,12 +905,10 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.GroupType = types.GroupType(jtv)
 			}
-
 		case "OtherAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.OtherAttributes, value); err != nil {
 				return err
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -928,7 +917,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -937,7 +925,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -946,7 +933,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGroupOutput(v **DescribeGroupOutp
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1117,7 +1103,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "DistinguishedName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1126,7 +1111,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.DistinguishedName = ptr.String(jtv)
 			}
-
 		case "EmailAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1135,7 +1119,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.EmailAddress = ptr.String(jtv)
 			}
-
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1144,7 +1127,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
-
 		case "GivenName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1153,12 +1135,10 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.GivenName = ptr.String(jtv)
 			}
-
 		case "OtherAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.OtherAttributes, value); err != nil {
 				return err
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1167,7 +1147,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1176,7 +1155,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1185,7 +1163,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		case "Surname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1194,7 +1171,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.Surname = ptr.String(jtv)
 			}
-
 		case "UserPrincipalName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1203,7 +1179,6 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				}
 				sv.UserPrincipalName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1480,7 +1455,6 @@ func awsRestjson1_deserializeOpDocumentListGroupMembersOutput(v **ListGroupMembe
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "MemberRealm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1489,12 +1463,10 @@ func awsRestjson1_deserializeOpDocumentListGroupMembersOutput(v **ListGroupMembe
 				}
 				sv.MemberRealm = ptr.String(jtv)
 			}
-
 		case "Members":
 			if err := awsRestjson1_deserializeDocumentMemberList(&sv.Members, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1503,7 +1475,6 @@ func awsRestjson1_deserializeOpDocumentListGroupMembersOutput(v **ListGroupMembe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1512,7 +1483,6 @@ func awsRestjson1_deserializeOpDocumentListGroupMembersOutput(v **ListGroupMembe
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1680,12 +1650,10 @@ func awsRestjson1_deserializeOpDocumentListGroupsOutput(v **ListGroupsOutput, va
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "Groups":
 			if err := awsRestjson1_deserializeDocumentGroupSummaryList(&sv.Groups, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1694,7 +1662,6 @@ func awsRestjson1_deserializeOpDocumentListGroupsOutput(v **ListGroupsOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1703,7 +1670,6 @@ func awsRestjson1_deserializeOpDocumentListGroupsOutput(v **ListGroupsOutput, va
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1874,12 +1840,10 @@ func awsRestjson1_deserializeOpDocumentListGroupsForMemberOutput(v **ListGroupsF
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "Groups":
 			if err := awsRestjson1_deserializeDocumentGroupSummaryList(&sv.Groups, value); err != nil {
 				return err
 			}
-
 		case "MemberRealm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1888,7 +1852,6 @@ func awsRestjson1_deserializeOpDocumentListGroupsForMemberOutput(v **ListGroupsF
 				}
 				sv.MemberRealm = ptr.String(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1897,7 +1860,6 @@ func awsRestjson1_deserializeOpDocumentListGroupsForMemberOutput(v **ListGroupsF
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1906,7 +1868,6 @@ func awsRestjson1_deserializeOpDocumentListGroupsForMemberOutput(v **ListGroupsF
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2074,7 +2035,6 @@ func awsRestjson1_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2083,7 +2043,6 @@ func awsRestjson1_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2092,12 +2051,10 @@ func awsRestjson1_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		case "Users":
 			if err := awsRestjson1_deserializeDocumentUserSummaryList(&sv.Users, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2371,12 +2328,10 @@ func awsRestjson1_deserializeOpDocumentSearchGroupsOutput(v **SearchGroupsOutput
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "Groups":
 			if err := awsRestjson1_deserializeDocumentGroupList(&sv.Groups, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2385,7 +2340,6 @@ func awsRestjson1_deserializeOpDocumentSearchGroupsOutput(v **SearchGroupsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2394,7 +2348,6 @@ func awsRestjson1_deserializeOpDocumentSearchGroupsOutput(v **SearchGroupsOutput
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2562,7 +2515,6 @@ func awsRestjson1_deserializeOpDocumentSearchUsersOutput(v **SearchUsersOutput, 
 				}
 				sv.DirectoryId = ptr.String(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2571,7 +2523,6 @@ func awsRestjson1_deserializeOpDocumentSearchUsersOutput(v **SearchUsersOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Realm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2580,12 +2531,10 @@ func awsRestjson1_deserializeOpDocumentSearchUsersOutput(v **SearchUsersOutput, 
 				}
 				sv.Realm = ptr.String(jtv)
 			}
-
 		case "Users":
 			if err := awsRestjson1_deserializeDocumentUserList(&sv.Users, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3099,15 +3048,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3115,7 +3058,6 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3124,14 +3066,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Reason = types.AccessDeniedReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3269,15 +3207,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3285,14 +3217,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3318,15 +3246,9 @@ func awsRestjson1_deserializeDocumentDirectoryUnavailableException(v **types.Dir
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3334,7 +3256,6 @@ func awsRestjson1_deserializeDocumentDirectoryUnavailableException(v **types.Dir
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3343,14 +3264,10 @@ func awsRestjson1_deserializeDocumentDirectoryUnavailableException(v **types.Dir
 				}
 				sv.Reason = types.DirectoryUnavailableReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3386,7 +3303,6 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.DistinguishedName = ptr.String(jtv)
 			}
-
 		case "GroupScope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3395,7 +3311,6 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.GroupScope = types.GroupScope(jtv)
 			}
-
 		case "GroupType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3404,12 +3319,10 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.GroupType = types.GroupType(jtv)
 			}
-
 		case "OtherAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.OtherAttributes, value); err != nil {
 				return err
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3418,7 +3331,6 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3427,7 +3339,6 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3501,7 +3412,6 @@ func awsRestjson1_deserializeDocumentGroupSummary(v **types.GroupSummary, value 
 				}
 				sv.GroupScope = types.GroupScope(jtv)
 			}
-
 		case "GroupType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3510,7 +3420,6 @@ func awsRestjson1_deserializeDocumentGroupSummary(v **types.GroupSummary, value 
 				}
 				sv.GroupType = types.GroupType(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3519,7 +3428,6 @@ func awsRestjson1_deserializeDocumentGroupSummary(v **types.GroupSummary, value 
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3528,7 +3436,6 @@ func awsRestjson1_deserializeDocumentGroupSummary(v **types.GroupSummary, value 
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3592,15 +3499,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3608,14 +3509,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3651,7 +3548,6 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				}
 				sv.MemberType = types.MemberType(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3660,7 +3556,6 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3669,7 +3564,6 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3733,15 +3627,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3749,14 +3637,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3818,15 +3702,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3834,7 +3712,6 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "RetryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3847,14 +3724,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3890,7 +3763,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.DistinguishedName = ptr.String(jtv)
 			}
-
 		case "EmailAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3899,7 +3771,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.EmailAddress = ptr.String(jtv)
 			}
-
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3908,7 +3779,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
-
 		case "GivenName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3917,12 +3787,10 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.GivenName = ptr.String(jtv)
 			}
-
 		case "OtherAttributes":
 			if err := awsRestjson1_deserializeDocumentAttributes(&sv.OtherAttributes, value); err != nil {
 				return err
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3931,7 +3799,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3940,7 +3807,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		case "Surname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3949,7 +3815,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.Surname = ptr.String(jtv)
 			}
-
 		case "UserPrincipalName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3958,7 +3823,6 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				}
 				sv.UserPrincipalName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4032,7 +3896,6 @@ func awsRestjson1_deserializeDocumentUserSummary(v **types.UserSummary, value in
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
-
 		case "GivenName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4041,7 +3904,6 @@ func awsRestjson1_deserializeDocumentUserSummary(v **types.UserSummary, value in
 				}
 				sv.GivenName = ptr.String(jtv)
 			}
-
 		case "SAMAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4050,7 +3912,6 @@ func awsRestjson1_deserializeDocumentUserSummary(v **types.UserSummary, value in
 				}
 				sv.SAMAccountName = ptr.String(jtv)
 			}
-
 		case "SID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4059,7 +3920,6 @@ func awsRestjson1_deserializeDocumentUserSummary(v **types.UserSummary, value in
 				}
 				sv.SID = ptr.String(jtv)
 			}
-
 		case "Surname":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4068,7 +3928,6 @@ func awsRestjson1_deserializeDocumentUserSummary(v **types.UserSummary, value in
 				}
 				sv.Surname = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4132,15 +3991,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4148,7 +4001,6 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4157,14 +4009,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

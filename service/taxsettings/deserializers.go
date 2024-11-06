@@ -177,7 +177,6 @@ func awsRestjson1_deserializeOpDocumentBatchDeleteTaxRegistrationOutput(v **Batc
 			if err := awsRestjson1_deserializeDocumentBatchDeleteTaxRegistrationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -335,7 +334,6 @@ func awsRestjson1_deserializeOpDocumentBatchPutTaxRegistrationOutput(v **BatchPu
 			if err := awsRestjson1_deserializeDocumentBatchPutTaxRegistrationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -344,7 +342,6 @@ func awsRestjson1_deserializeOpDocumentBatchPutTaxRegistrationOutput(v **BatchPu
 				}
 				sv.Status = types.TaxRegistrationStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -696,7 +693,6 @@ func awsRestjson1_deserializeOpDocumentGetTaxRegistrationOutput(v **GetTaxRegist
 			if err := awsRestjson1_deserializeDocumentTaxRegistration(&sv.TaxRegistration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -855,7 +851,6 @@ func awsRestjson1_deserializeOpDocumentGetTaxRegistrationDocumentOutput(v **GetT
 				}
 				sv.DestinationFilePath = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1017,12 +1012,10 @@ func awsRestjson1_deserializeOpDocumentListSupplementalTaxRegistrationsOutput(v 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "taxRegistrations":
 			if err := awsRestjson1_deserializeDocumentSupplementalTaxRegistrationList(&sv.TaxRegistrations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1180,7 +1173,6 @@ func awsRestjson1_deserializeOpDocumentListTaxRegistrationsOutput(v **ListTaxReg
 			if err := awsRestjson1_deserializeDocumentAccountDetailsList(&sv.AccountDetails, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1189,7 +1181,6 @@ func awsRestjson1_deserializeOpDocumentListTaxRegistrationsOutput(v **ListTaxReg
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1351,7 +1342,6 @@ func awsRestjson1_deserializeOpDocumentPutSupplementalTaxRegistrationOutput(v **
 				}
 				sv.AuthorityId = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1360,7 +1350,6 @@ func awsRestjson1_deserializeOpDocumentPutSupplementalTaxRegistrationOutput(v **
 				}
 				sv.Status = types.TaxRegistrationStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1522,7 +1511,6 @@ func awsRestjson1_deserializeOpDocumentPutTaxRegistrationOutput(v **PutTaxRegist
 				}
 				sv.Status = types.TaxRegistrationStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1706,22 +1694,18 @@ func awsRestjson1_deserializeDocumentAccountDetails(v **types.AccountDetails, va
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "accountMetaData":
 			if err := awsRestjson1_deserializeDocumentAccountMetaData(&sv.AccountMetaData, value); err != nil {
 				return err
 			}
-
 		case "taxInheritanceDetails":
 			if err := awsRestjson1_deserializeDocumentTaxInheritanceDetails(&sv.TaxInheritanceDetails, value); err != nil {
 				return err
 			}
-
 		case "taxRegistration":
 			if err := awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(&sv.TaxRegistration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1795,17 +1779,14 @@ func awsRestjson1_deserializeDocumentAccountMetaData(v **types.AccountMetaData, 
 				}
 				sv.AccountName = ptr.String(jtv)
 			}
-
 		case "address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "addressRoleMap":
 			if err := awsRestjson1_deserializeDocumentAddressRoleMap(&sv.AddressRoleMap, value); err != nil {
 				return err
 			}
-
 		case "addressType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1814,7 +1795,6 @@ func awsRestjson1_deserializeDocumentAccountMetaData(v **types.AccountMetaData, 
 				}
 				sv.AddressType = types.AddressRoleType(jtv)
 			}
-
 		case "seller":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1823,7 +1803,6 @@ func awsRestjson1_deserializeDocumentAccountMetaData(v **types.AccountMetaData, 
 				}
 				sv.Seller = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1859,82 +1838,66 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 			if err := awsRestjson1_deserializeDocumentBrazilAdditionalInfo(&sv.BrazilAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "canadaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentCanadaAdditionalInfo(&sv.CanadaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "estoniaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentEstoniaAdditionalInfo(&sv.EstoniaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "georgiaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentGeorgiaAdditionalInfo(&sv.GeorgiaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "indiaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentIndiaAdditionalInfo(&sv.IndiaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "israelAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentIsraelAdditionalInfo(&sv.IsraelAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "italyAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentItalyAdditionalInfo(&sv.ItalyAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "kenyaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentKenyaAdditionalInfo(&sv.KenyaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "malaysiaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentMalaysiaAdditionalInfo(&sv.MalaysiaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "polandAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentPolandAdditionalInfo(&sv.PolandAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "romaniaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentRomaniaAdditionalInfo(&sv.RomaniaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "saudiArabiaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentSaudiArabiaAdditionalInfo(&sv.SaudiArabiaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "southKoreaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentSouthKoreaAdditionalInfo(&sv.SouthKoreaAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "spainAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentSpainAdditionalInfo(&sv.SpainAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "turkeyAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentTurkeyAdditionalInfo(&sv.TurkeyAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		case "ukraineAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentUkraineAdditionalInfo(&sv.UkraineAdditionalInfo, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1974,7 +1937,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.AddressLine1 = ptr.String(jtv)
 			}
-
 		case "addressLine2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1983,7 +1945,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.AddressLine2 = ptr.String(jtv)
 			}
-
 		case "addressLine3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1992,7 +1953,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.AddressLine3 = ptr.String(jtv)
 			}
-
 		case "city":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2001,7 +1961,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.City = ptr.String(jtv)
 			}
-
 		case "countryCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2010,7 +1969,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.CountryCode = ptr.String(jtv)
 			}
-
 		case "districtOrCounty":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2019,7 +1977,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.DistrictOrCounty = ptr.String(jtv)
 			}
-
 		case "postalCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2028,7 +1985,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
-
 		case "stateOrRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2037,7 +1993,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.StateOrRegion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2112,7 +2067,6 @@ func awsRestjson1_deserializeDocumentBatchDeleteTaxRegistrationError(v **types.B
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "code":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2121,7 +2075,6 @@ func awsRestjson1_deserializeDocumentBatchDeleteTaxRegistrationError(v **types.B
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2130,7 +2083,6 @@ func awsRestjson1_deserializeDocumentBatchDeleteTaxRegistrationError(v **types.B
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2204,7 +2156,6 @@ func awsRestjson1_deserializeDocumentBatchPutTaxRegistrationError(v **types.Batc
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "code":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2213,7 +2164,6 @@ func awsRestjson1_deserializeDocumentBatchPutTaxRegistrationError(v **types.Batc
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2222,7 +2172,6 @@ func awsRestjson1_deserializeDocumentBatchPutTaxRegistrationError(v **types.Batc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2296,7 +2245,6 @@ func awsRestjson1_deserializeDocumentBrazilAdditionalInfo(v **types.BrazilAdditi
 				}
 				sv.CcmCode = ptr.String(jtv)
 			}
-
 		case "legalNatureCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2305,7 +2253,6 @@ func awsRestjson1_deserializeDocumentBrazilAdditionalInfo(v **types.BrazilAdditi
 				}
 				sv.LegalNatureCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2345,7 +2292,6 @@ func awsRestjson1_deserializeDocumentCanadaAdditionalInfo(v **types.CanadaAdditi
 				}
 				sv.CanadaQuebecSalesTaxNumber = ptr.String(jtv)
 			}
-
 		case "canadaRetailSalesTaxNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2354,7 +2300,6 @@ func awsRestjson1_deserializeDocumentCanadaAdditionalInfo(v **types.CanadaAdditi
 				}
 				sv.CanadaRetailSalesTaxNumber = ptr.String(jtv)
 			}
-
 		case "isResellerAccount":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2363,7 +2308,6 @@ func awsRestjson1_deserializeDocumentCanadaAdditionalInfo(v **types.CanadaAdditi
 				}
 				sv.IsResellerAccount = ptr.Bool(jtv)
 			}
-
 		case "provincialSalesTaxId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2372,7 +2316,6 @@ func awsRestjson1_deserializeDocumentCanadaAdditionalInfo(v **types.CanadaAdditi
 				}
 				sv.ProvincialSalesTaxId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2402,13 +2345,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "errorCode":
 			if value != nil {
@@ -2418,8 +2355,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2427,14 +2363,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2470,7 +2402,6 @@ func awsRestjson1_deserializeDocumentEstoniaAdditionalInfo(v **types.EstoniaAddi
 				}
 				sv.RegistryCommercialCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2510,7 +2441,6 @@ func awsRestjson1_deserializeDocumentGeorgiaAdditionalInfo(v **types.GeorgiaAddi
 				}
 				sv.PersonType = types.PersonType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2550,7 +2480,6 @@ func awsRestjson1_deserializeDocumentIndiaAdditionalInfo(v **types.IndiaAddition
 				}
 				sv.Pan = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2580,13 +2509,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "errorCode":
 			if value != nil {
@@ -2596,8 +2519,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2605,14 +2527,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2648,7 +2566,6 @@ func awsRestjson1_deserializeDocumentIsraelAdditionalInfo(v **types.IsraelAdditi
 				}
 				sv.CustomerType = types.IsraelCustomerType(jtv)
 			}
-
 		case "dealerType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2657,7 +2574,6 @@ func awsRestjson1_deserializeDocumentIsraelAdditionalInfo(v **types.IsraelAdditi
 				}
 				sv.DealerType = types.IsraelDealerType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2697,7 +2613,6 @@ func awsRestjson1_deserializeDocumentItalyAdditionalInfo(v **types.ItalyAddition
 				}
 				sv.CigNumber = ptr.String(jtv)
 			}
-
 		case "cupNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2706,7 +2621,6 @@ func awsRestjson1_deserializeDocumentItalyAdditionalInfo(v **types.ItalyAddition
 				}
 				sv.CupNumber = ptr.String(jtv)
 			}
-
 		case "sdiAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2715,7 +2629,6 @@ func awsRestjson1_deserializeDocumentItalyAdditionalInfo(v **types.ItalyAddition
 				}
 				sv.SdiAccountId = ptr.String(jtv)
 			}
-
 		case "taxCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2724,7 +2637,6 @@ func awsRestjson1_deserializeDocumentItalyAdditionalInfo(v **types.ItalyAddition
 				}
 				sv.TaxCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2764,7 +2676,6 @@ func awsRestjson1_deserializeDocumentJurisdiction(v **types.Jurisdiction, value 
 				}
 				sv.CountryCode = ptr.String(jtv)
 			}
-
 		case "stateOrRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2773,7 +2684,6 @@ func awsRestjson1_deserializeDocumentJurisdiction(v **types.Jurisdiction, value 
 				}
 				sv.StateOrRegion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2813,7 +2723,6 @@ func awsRestjson1_deserializeDocumentKenyaAdditionalInfo(v **types.KenyaAddition
 				}
 				sv.PersonType = types.PersonType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2853,12 +2762,10 @@ func awsRestjson1_deserializeDocumentMalaysiaAdditionalInfo(v **types.MalaysiaAd
 				}
 				sv.BusinessRegistrationNumber = ptr.String(jtv)
 			}
-
 		case "serviceTaxCodes":
 			if err := awsRestjson1_deserializeDocumentMalaysiaServiceTaxCodesList(&sv.ServiceTaxCodes, value); err != nil {
 				return err
 			}
-
 		case "taxInformationNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2867,7 +2774,6 @@ func awsRestjson1_deserializeDocumentMalaysiaAdditionalInfo(v **types.MalaysiaAd
 				}
 				sv.TaxInformationNumber = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2943,7 +2849,6 @@ func awsRestjson1_deserializeDocumentPolandAdditionalInfo(v **types.PolandAdditi
 				}
 				sv.IndividualRegistrationNumber = ptr.String(jtv)
 			}
-
 		case "isGroupVatEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2952,7 +2857,6 @@ func awsRestjson1_deserializeDocumentPolandAdditionalInfo(v **types.PolandAdditi
 				}
 				sv.IsGroupVatEnabled = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2982,13 +2886,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "errorCode":
 			if value != nil {
@@ -2998,8 +2896,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3007,14 +2904,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3050,7 +2943,6 @@ func awsRestjson1_deserializeDocumentRomaniaAdditionalInfo(v **types.RomaniaAddi
 				}
 				sv.TaxRegistrationNumberType = types.TaxRegistrationNumberType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3090,7 +2982,6 @@ func awsRestjson1_deserializeDocumentSaudiArabiaAdditionalInfo(v **types.SaudiAr
 				}
 				sv.TaxRegistrationNumberType = types.SaudiArabiaTaxRegistrationNumberType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3130,7 +3021,6 @@ func awsRestjson1_deserializeDocumentSouthKoreaAdditionalInfo(v **types.SouthKor
 				}
 				sv.BusinessRepresentativeName = ptr.String(jtv)
 			}
-
 		case "itemOfBusiness":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3139,7 +3029,6 @@ func awsRestjson1_deserializeDocumentSouthKoreaAdditionalInfo(v **types.SouthKor
 				}
 				sv.ItemOfBusiness = ptr.String(jtv)
 			}
-
 		case "lineOfBusiness":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3148,7 +3037,6 @@ func awsRestjson1_deserializeDocumentSouthKoreaAdditionalInfo(v **types.SouthKor
 				}
 				sv.LineOfBusiness = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3188,7 +3076,6 @@ func awsRestjson1_deserializeDocumentSpainAdditionalInfo(v **types.SpainAddition
 				}
 				sv.RegistrationType = types.RegistrationType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3224,7 +3111,6 @@ func awsRestjson1_deserializeDocumentSupplementalTaxRegistration(v **types.Suppl
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "authorityId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3233,7 +3119,6 @@ func awsRestjson1_deserializeDocumentSupplementalTaxRegistration(v **types.Suppl
 				}
 				sv.AuthorityId = ptr.String(jtv)
 			}
-
 		case "legalName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3242,7 +3127,6 @@ func awsRestjson1_deserializeDocumentSupplementalTaxRegistration(v **types.Suppl
 				}
 				sv.LegalName = ptr.String(jtv)
 			}
-
 		case "registrationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3251,7 +3135,6 @@ func awsRestjson1_deserializeDocumentSupplementalTaxRegistration(v **types.Suppl
 				}
 				sv.RegistrationId = ptr.String(jtv)
 			}
-
 		case "registrationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3260,7 +3143,6 @@ func awsRestjson1_deserializeDocumentSupplementalTaxRegistration(v **types.Suppl
 				}
 				sv.RegistrationType = types.SupplementalTaxRegistrationType(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3269,7 +3151,6 @@ func awsRestjson1_deserializeDocumentSupplementalTaxRegistration(v **types.Suppl
 				}
 				sv.Status = types.TaxRegistrationStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3343,7 +3224,6 @@ func awsRestjson1_deserializeDocumentTaxDocumentMetadata(v **types.TaxDocumentMe
 				}
 				sv.TaxDocumentAccessToken = ptr.String(jtv)
 			}
-
 		case "taxDocumentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3352,7 +3232,6 @@ func awsRestjson1_deserializeDocumentTaxDocumentMetadata(v **types.TaxDocumentMe
 				}
 				sv.TaxDocumentName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3426,7 +3305,6 @@ func awsRestjson1_deserializeDocumentTaxInheritanceDetails(v **types.TaxInherita
 				}
 				sv.InheritanceObtainedReason = ptr.String(jtv)
 			}
-
 		case "parentEntityId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3435,7 +3313,6 @@ func awsRestjson1_deserializeDocumentTaxInheritanceDetails(v **types.TaxInherita
 				}
 				sv.ParentEntityId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3471,7 +3348,6 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 			if err := awsRestjson1_deserializeDocumentAdditionalInfoResponse(&sv.AdditionalTaxInformation, value); err != nil {
 				return err
 			}
-
 		case "certifiedEmailId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3480,12 +3356,10 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 				}
 				sv.CertifiedEmailId = ptr.String(jtv)
 			}
-
 		case "legalAddress":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.LegalAddress, value); err != nil {
 				return err
 			}
-
 		case "legalName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3494,7 +3368,6 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 				}
 				sv.LegalName = ptr.String(jtv)
 			}
-
 		case "registrationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3503,7 +3376,6 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 				}
 				sv.RegistrationId = ptr.String(jtv)
 			}
-
 		case "registrationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3512,7 +3384,6 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 				}
 				sv.RegistrationType = types.TaxRegistrationType(jtv)
 			}
-
 		case "sector":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3521,7 +3392,6 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 				}
 				sv.Sector = types.Sector(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3530,12 +3400,10 @@ func awsRestjson1_deserializeDocumentTaxRegistration(v **types.TaxRegistration, 
 				}
 				sv.Status = types.TaxRegistrationStatus(jtv)
 			}
-
 		case "taxDocumentMetadatas":
 			if err := awsRestjson1_deserializeDocumentTaxDocumentMetadatas(&sv.TaxDocumentMetadatas, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3571,7 +3439,6 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 			if err := awsRestjson1_deserializeDocumentAdditionalInfoResponse(&sv.AdditionalTaxInformation, value); err != nil {
 				return err
 			}
-
 		case "certifiedEmailId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3580,12 +3447,10 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 				}
 				sv.CertifiedEmailId = ptr.String(jtv)
 			}
-
 		case "jurisdiction":
 			if err := awsRestjson1_deserializeDocumentJurisdiction(&sv.Jurisdiction, value); err != nil {
 				return err
 			}
-
 		case "legalName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3594,7 +3459,6 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 				}
 				sv.LegalName = ptr.String(jtv)
 			}
-
 		case "registrationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3603,7 +3467,6 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 				}
 				sv.RegistrationId = ptr.String(jtv)
 			}
-
 		case "registrationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3612,7 +3475,6 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 				}
 				sv.RegistrationType = types.TaxRegistrationType(jtv)
 			}
-
 		case "sector":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3621,7 +3483,6 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 				}
 				sv.Sector = types.Sector(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3630,12 +3491,10 @@ func awsRestjson1_deserializeDocumentTaxRegistrationWithJurisdiction(v **types.T
 				}
 				sv.Status = types.TaxRegistrationStatus(jtv)
 			}
-
 		case "taxDocumentMetadatas":
 			if err := awsRestjson1_deserializeDocumentTaxDocumentMetadatas(&sv.TaxDocumentMetadatas, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3675,7 +3534,6 @@ func awsRestjson1_deserializeDocumentTurkeyAdditionalInfo(v **types.TurkeyAdditi
 				}
 				sv.Industries = types.Industries(jtv)
 			}
-
 		case "kepEmailId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3684,7 +3542,6 @@ func awsRestjson1_deserializeDocumentTurkeyAdditionalInfo(v **types.TurkeyAdditi
 				}
 				sv.KepEmailId = ptr.String(jtv)
 			}
-
 		case "secondaryTaxId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3693,7 +3550,6 @@ func awsRestjson1_deserializeDocumentTurkeyAdditionalInfo(v **types.TurkeyAdditi
 				}
 				sv.SecondaryTaxId = ptr.String(jtv)
 			}
-
 		case "taxOffice":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3702,7 +3558,6 @@ func awsRestjson1_deserializeDocumentTurkeyAdditionalInfo(v **types.TurkeyAdditi
 				}
 				sv.TaxOffice = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3742,7 +3597,6 @@ func awsRestjson1_deserializeDocumentUkraineAdditionalInfo(v **types.UkraineAddi
 				}
 				sv.UkraineTrnType = types.UkraineTrnType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3772,13 +3626,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "errorCode":
 			if value != nil {
@@ -3788,13 +3636,11 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.ErrorCode_ = types.ValidationExceptionErrorCode(jtv)
 			}
-
 		case "fieldList":
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3802,14 +3648,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3845,7 +3687,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

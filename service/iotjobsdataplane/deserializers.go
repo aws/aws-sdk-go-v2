@@ -187,7 +187,6 @@ func awsRestjson1_deserializeOpDocumentDescribeJobExecutionOutput(v **DescribeJo
 			if err := awsRestjson1_deserializeDocumentJobExecution(&sv.Execution, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -351,12 +350,10 @@ func awsRestjson1_deserializeOpDocumentGetPendingJobExecutionsOutput(v **GetPend
 			if err := awsRestjson1_deserializeDocumentJobExecutionSummaryList(&sv.InProgressJobs, value); err != nil {
 				return err
 			}
-
 		case "queuedJobs":
 			if err := awsRestjson1_deserializeDocumentJobExecutionSummaryList(&sv.QueuedJobs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -520,7 +517,6 @@ func awsRestjson1_deserializeOpDocumentStartNextPendingJobExecutionOutput(v **St
 			if err := awsRestjson1_deserializeDocumentJobExecution(&sv.Execution, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -687,7 +683,6 @@ func awsRestjson1_deserializeOpDocumentUpdateJobExecutionOutput(v **UpdateJobExe
 			if err := awsRestjson1_deserializeDocumentJobExecutionState(&sv.ExecutionState, value); err != nil {
 				return err
 			}
-
 		case "jobDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -696,7 +691,6 @@ func awsRestjson1_deserializeOpDocumentUpdateJobExecutionOutput(v **UpdateJobExe
 				}
 				sv.JobDocument = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -978,15 +972,9 @@ func awsRestjson1_deserializeDocumentCertificateValidationException(v **types.Ce
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -994,14 +982,10 @@ func awsRestjson1_deserializeDocumentCertificateValidationException(v **types.Ce
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1063,15 +1047,9 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1079,14 +1057,10 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1112,15 +1086,9 @@ func awsRestjson1_deserializeDocumentInvalidStateTransitionException(v **types.I
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1128,14 +1096,10 @@ func awsRestjson1_deserializeDocumentInvalidStateTransitionException(v **types.I
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1175,7 +1139,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.ApproximateSecondsBeforeTimedOut = ptr.Int64(i64)
 			}
-
 		case "executionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1188,7 +1151,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.ExecutionNumber = ptr.Int64(i64)
 			}
-
 		case "jobDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1197,7 +1159,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.JobDocument = ptr.String(jtv)
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1206,7 +1167,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1219,7 +1179,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.LastUpdatedAt = i64
 			}
-
 		case "queuedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1232,7 +1191,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.QueuedAt = i64
 			}
-
 		case "startedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1245,7 +1203,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.StartedAt = ptr.Int64(i64)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1254,12 +1211,10 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.Status = types.JobExecutionStatus(jtv)
 			}
-
 		case "statusDetails":
 			if err := awsRestjson1_deserializeDocumentDetailsMap(&sv.StatusDetails, value); err != nil {
 				return err
 			}
-
 		case "thingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1268,7 +1223,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.ThingName = ptr.String(jtv)
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1281,7 +1235,6 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				}
 				sv.VersionNumber = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1321,12 +1274,10 @@ func awsRestjson1_deserializeDocumentJobExecutionState(v **types.JobExecutionSta
 				}
 				sv.Status = types.JobExecutionStatus(jtv)
 			}
-
 		case "statusDetails":
 			if err := awsRestjson1_deserializeDocumentDetailsMap(&sv.StatusDetails, value); err != nil {
 				return err
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1339,7 +1290,6 @@ func awsRestjson1_deserializeDocumentJobExecutionState(v **types.JobExecutionSta
 				}
 				sv.VersionNumber = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1383,7 +1333,6 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				}
 				sv.ExecutionNumber = ptr.Int64(i64)
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1392,7 +1341,6 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1405,7 +1353,6 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				}
 				sv.LastUpdatedAt = i64
 			}
-
 		case "queuedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1418,7 +1365,6 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				}
 				sv.QueuedAt = i64
 			}
-
 		case "startedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1431,7 +1377,6 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				}
 				sv.StartedAt = ptr.Int64(i64)
 			}
-
 		case "versionNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1444,7 +1389,6 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				}
 				sv.VersionNumber = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1508,15 +1452,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1524,14 +1462,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1557,15 +1491,9 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1573,14 +1501,10 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1606,15 +1530,9 @@ func awsRestjson1_deserializeDocumentTerminalStateException(v **types.TerminalSt
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1622,14 +1540,10 @@ func awsRestjson1_deserializeDocumentTerminalStateException(v **types.TerminalSt
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1655,15 +1569,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1671,7 +1579,6 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "payload":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1684,14 +1591,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Payload = dv
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

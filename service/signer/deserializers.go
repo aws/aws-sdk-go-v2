@@ -195,7 +195,6 @@ func awsRestjson1_deserializeOpDocumentAddProfilePermissionOutput(v **AddProfile
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -470,7 +469,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 
 				}
 			}
-
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -486,7 +484,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 
 				}
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -495,7 +492,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobInvoker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -504,7 +500,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.JobInvoker = ptr.String(jtv)
 			}
-
 		case "jobOwner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -513,12 +508,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.JobOwner = ptr.String(jtv)
 			}
-
 		case "overrides":
 			if err := awsRestjson1_deserializeDocumentSigningPlatformOverrides(&sv.Overrides, value); err != nil {
 				return err
 			}
-
 		case "platformDisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -527,7 +520,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.PlatformDisplayName = ptr.String(jtv)
 			}
-
 		case "platformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -536,7 +528,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.PlatformId = ptr.String(jtv)
 			}
-
 		case "profileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -545,7 +536,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "profileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -554,7 +544,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "requestedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -563,12 +552,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.RequestedBy = ptr.String(jtv)
 			}
-
 		case "revocationRecord":
 			if err := awsRestjson1_deserializeDocumentSigningJobRevocationRecord(&sv.RevocationRecord, value); err != nil {
 				return err
 			}
-
 		case "signatureExpiresAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -584,27 +571,22 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 
 				}
 			}
-
 		case "signedObject":
 			if err := awsRestjson1_deserializeDocumentSignedObject(&sv.SignedObject, value); err != nil {
 				return err
 			}
-
 		case "signingMaterial":
 			if err := awsRestjson1_deserializeDocumentSigningMaterial(&sv.SigningMaterial, value); err != nil {
 				return err
 			}
-
 		case "signingParameters":
 			if err := awsRestjson1_deserializeDocumentSigningParameters(&sv.SigningParameters, value); err != nil {
 				return err
 			}
-
 		case "source":
 			if err := awsRestjson1_deserializeDocumentSource(&sv.Source, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -613,7 +595,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.Status = types.SigningStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -622,7 +603,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -783,7 +763,6 @@ func awsRestjson1_deserializeOpDocumentGetRevocationStatusOutput(v **GetRevocati
 			if err := awsRestjson1_deserializeDocumentRevokedEntities(&sv.RevokedEntities, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -948,7 +927,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.Category = types.Category(jtv)
 			}
-
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -957,7 +935,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
-
 		case "maxSizeInMB":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -970,7 +947,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.MaxSizeInMB = int32(i64)
 			}
-
 		case "partner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -979,7 +955,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.Partner = ptr.String(jtv)
 			}
-
 		case "platformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -988,7 +963,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.PlatformId = ptr.String(jtv)
 			}
-
 		case "revocationSupported":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -997,17 +971,14 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.RevocationSupported = jtv
 			}
-
 		case "signingConfiguration":
 			if err := awsRestjson1_deserializeDocumentSigningConfiguration(&sv.SigningConfiguration, value); err != nil {
 				return err
 			}
-
 		case "signingImageFormat":
 			if err := awsRestjson1_deserializeDocumentSigningImageFormat(&sv.SigningImageFormat, value); err != nil {
 				return err
 			}
-
 		case "target":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1016,7 +987,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				}
 				sv.Target = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1181,12 +1151,10 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "overrides":
 			if err := awsRestjson1_deserializeDocumentSigningPlatformOverrides(&sv.Overrides, value); err != nil {
 				return err
 			}
-
 		case "platformDisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1195,7 +1163,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.PlatformDisplayName = ptr.String(jtv)
 			}
-
 		case "platformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1204,7 +1171,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.PlatformId = ptr.String(jtv)
 			}
-
 		case "profileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1213,7 +1179,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "profileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1222,7 +1187,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "profileVersionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1231,27 +1195,22 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.ProfileVersionArn = ptr.String(jtv)
 			}
-
 		case "revocationRecord":
 			if err := awsRestjson1_deserializeDocumentSigningProfileRevocationRecord(&sv.RevocationRecord, value); err != nil {
 				return err
 			}
-
 		case "signatureValidityPeriod":
 			if err := awsRestjson1_deserializeDocumentSignatureValidityPeriod(&sv.SignatureValidityPeriod, value); err != nil {
 				return err
 			}
-
 		case "signingMaterial":
 			if err := awsRestjson1_deserializeDocumentSigningMaterial(&sv.SigningMaterial, value); err != nil {
 				return err
 			}
-
 		case "signingParameters":
 			if err := awsRestjson1_deserializeDocumentSigningParameters(&sv.SigningParameters, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1260,7 +1219,6 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.Status = types.SigningProfileStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1269,12 +1227,10 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1442,12 +1398,10 @@ func awsRestjson1_deserializeOpDocumentListProfilePermissionsOutput(v **ListProf
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "permissions":
 			if err := awsRestjson1_deserializeDocumentPermissions(&sv.Permissions, value); err != nil {
 				return err
 			}
-
 		case "policySizeBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1460,7 +1414,6 @@ func awsRestjson1_deserializeOpDocumentListProfilePermissionsOutput(v **ListProf
 				}
 				sv.PolicySizeBytes = int32(i64)
 			}
-
 		case "revisionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1469,7 +1422,6 @@ func awsRestjson1_deserializeOpDocumentListProfilePermissionsOutput(v **ListProf
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1630,7 +1582,6 @@ func awsRestjson1_deserializeOpDocumentListSigningJobsOutput(v **ListSigningJobs
 			if err := awsRestjson1_deserializeDocumentSigningJobs(&sv.Jobs, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1639,7 +1590,6 @@ func awsRestjson1_deserializeOpDocumentListSigningJobsOutput(v **ListSigningJobs
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1804,12 +1754,10 @@ func awsRestjson1_deserializeOpDocumentListSigningPlatformsOutput(v **ListSignin
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "platforms":
 			if err := awsRestjson1_deserializeDocumentSigningPlatforms(&sv.Platforms, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1971,12 +1919,10 @@ func awsRestjson1_deserializeOpDocumentListSigningProfilesOutput(v **ListSigning
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "profiles":
 			if err := awsRestjson1_deserializeDocumentSigningProfiles(&sv.Profiles, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2137,7 +2083,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2305,7 +2250,6 @@ func awsRestjson1_deserializeOpDocumentPutSigningProfileOutput(v **PutSigningPro
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "profileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2314,7 +2258,6 @@ func awsRestjson1_deserializeOpDocumentPutSigningProfileOutput(v **PutSigningPro
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "profileVersionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2323,7 +2266,6 @@ func awsRestjson1_deserializeOpDocumentPutSigningProfileOutput(v **PutSigningPro
 				}
 				sv.ProfileVersionArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2494,7 +2436,6 @@ func awsRestjson1_deserializeOpDocumentRemoveProfilePermissionOutput(v **RemoveP
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2874,7 +2815,6 @@ func awsRestjson1_deserializeOpDocumentSignPayloadOutput(v **SignPayloadOutput, 
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobOwner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2883,12 +2823,10 @@ func awsRestjson1_deserializeOpDocumentSignPayloadOutput(v **SignPayloadOutput, 
 				}
 				sv.JobOwner = ptr.String(jtv)
 			}
-
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
-
 		case "signature":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2901,7 +2839,6 @@ func awsRestjson1_deserializeOpDocumentSignPayloadOutput(v **SignPayloadOutput, 
 				}
 				sv.Signature = dv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3072,7 +3009,6 @@ func awsRestjson1_deserializeOpDocumentStartSigningJobOutput(v **StartSigningJob
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobOwner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3081,7 +3017,6 @@ func awsRestjson1_deserializeOpDocumentStartSigningJobOutput(v **StartSigningJob
 				}
 				sv.JobOwner = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3665,13 +3600,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -3681,8 +3610,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3690,14 +3618,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3723,13 +3647,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -3739,8 +3657,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3748,14 +3665,10 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3781,13 +3694,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -3797,8 +3704,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3806,14 +3712,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3845,7 +3747,6 @@ func awsRestjson1_deserializeDocumentEncryptionAlgorithmOptions(v **types.Encryp
 			if err := awsRestjson1_deserializeDocumentEncryptionAlgorithms(&sv.AllowedValues, value); err != nil {
 				return err
 			}
-
 		case "defaultValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3854,7 +3755,6 @@ func awsRestjson1_deserializeDocumentEncryptionAlgorithmOptions(v **types.Encryp
 				}
 				sv.DefaultValue = types.EncryptionAlgorithm(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3926,7 +3826,6 @@ func awsRestjson1_deserializeDocumentHashAlgorithmOptions(v **types.HashAlgorith
 			if err := awsRestjson1_deserializeDocumentHashAlgorithms(&sv.AllowedValues, value); err != nil {
 				return err
 			}
-
 		case "defaultValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3935,7 +3834,6 @@ func awsRestjson1_deserializeDocumentHashAlgorithmOptions(v **types.HashAlgorith
 				}
 				sv.DefaultValue = types.HashAlgorithm(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4037,13 +3935,7 @@ func awsRestjson1_deserializeDocumentInternalServiceErrorException(v **types.Int
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -4053,8 +3945,7 @@ func awsRestjson1_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4062,14 +3953,10 @@ func awsRestjson1_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4131,13 +4018,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -4147,8 +4028,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4156,14 +4036,10 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4199,7 +4075,6 @@ func awsRestjson1_deserializeDocumentPermission(v **types.Permission, value inte
 				}
 				sv.Action = ptr.String(jtv)
 			}
-
 		case "principal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4208,7 +4083,6 @@ func awsRestjson1_deserializeDocumentPermission(v **types.Permission, value inte
 				}
 				sv.Principal = ptr.String(jtv)
 			}
-
 		case "profileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4217,7 +4091,6 @@ func awsRestjson1_deserializeDocumentPermission(v **types.Permission, value inte
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "statementId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4226,7 +4099,6 @@ func awsRestjson1_deserializeDocumentPermission(v **types.Permission, value inte
 				}
 				sv.StatementId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4290,13 +4162,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -4306,8 +4172,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4315,14 +4180,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4394,7 +4255,6 @@ func awsRestjson1_deserializeDocumentS3SignedObject(v **types.S3SignedObject, va
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
-
 		case "key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4403,7 +4263,6 @@ func awsRestjson1_deserializeDocumentS3SignedObject(v **types.S3SignedObject, va
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4443,7 +4302,6 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
-
 		case "key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4452,7 +4310,6 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4461,7 +4318,6 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 				}
 				sv.Version = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4491,13 +4347,7 @@ func awsRestjson1_deserializeDocumentServiceLimitExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -4507,8 +4357,7 @@ func awsRestjson1_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4516,14 +4365,10 @@ func awsRestjson1_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4559,7 +4404,6 @@ func awsRestjson1_deserializeDocumentSignatureValidityPeriod(v **types.Signature
 				}
 				sv.Type = types.ValidityType(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4572,7 +4416,6 @@ func awsRestjson1_deserializeDocumentSignatureValidityPeriod(v **types.Signature
 				}
 				sv.Value = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4608,7 +4451,6 @@ func awsRestjson1_deserializeDocumentSignedObject(v **types.SignedObject, value 
 			if err := awsRestjson1_deserializeDocumentS3SignedObject(&sv.S3, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4644,12 +4486,10 @@ func awsRestjson1_deserializeDocumentSigningConfiguration(v **types.SigningConfi
 			if err := awsRestjson1_deserializeDocumentEncryptionAlgorithmOptions(&sv.EncryptionAlgorithmOptions, value); err != nil {
 				return err
 			}
-
 		case "hashAlgorithmOptions":
 			if err := awsRestjson1_deserializeDocumentHashAlgorithmOptions(&sv.HashAlgorithmOptions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4689,7 +4529,6 @@ func awsRestjson1_deserializeDocumentSigningConfigurationOverrides(v **types.Sig
 				}
 				sv.EncryptionAlgorithm = types.EncryptionAlgorithm(jtv)
 			}
-
 		case "hashAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4698,7 +4537,6 @@ func awsRestjson1_deserializeDocumentSigningConfigurationOverrides(v **types.Sig
 				}
 				sv.HashAlgorithm = types.HashAlgorithm(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4738,12 +4576,10 @@ func awsRestjson1_deserializeDocumentSigningImageFormat(v **types.SigningImageFo
 				}
 				sv.DefaultFormat = types.ImageFormat(jtv)
 			}
-
 		case "supportedFormats":
 			if err := awsRestjson1_deserializeDocumentImageFormats(&sv.SupportedFormats, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4790,7 +4626,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 
 				}
 			}
-
 		case "isRevoked":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4799,7 +4634,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.IsRevoked = jtv
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4808,7 +4642,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobInvoker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4817,7 +4650,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.JobInvoker = ptr.String(jtv)
 			}
-
 		case "jobOwner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4826,7 +4658,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.JobOwner = ptr.String(jtv)
 			}
-
 		case "platformDisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4835,7 +4666,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.PlatformDisplayName = ptr.String(jtv)
 			}
-
 		case "platformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4844,7 +4674,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.PlatformId = ptr.String(jtv)
 			}
-
 		case "profileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4853,7 +4682,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "profileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4862,7 +4690,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "signatureExpiresAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4878,22 +4705,18 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 
 				}
 			}
-
 		case "signedObject":
 			if err := awsRestjson1_deserializeDocumentSignedObject(&sv.SignedObject, value); err != nil {
 				return err
 			}
-
 		case "signingMaterial":
 			if err := awsRestjson1_deserializeDocumentSigningMaterial(&sv.SigningMaterial, value); err != nil {
 				return err
 			}
-
 		case "source":
 			if err := awsRestjson1_deserializeDocumentSource(&sv.Source, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4902,7 +4725,6 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				}
 				sv.Status = types.SigningStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4942,7 +4764,6 @@ func awsRestjson1_deserializeDocumentSigningJobRevocationRecord(v **types.Signin
 				}
 				sv.Reason = ptr.String(jtv)
 			}
-
 		case "revokedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4958,7 +4779,6 @@ func awsRestjson1_deserializeDocumentSigningJobRevocationRecord(v **types.Signin
 
 				}
 			}
-
 		case "revokedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4967,7 +4787,6 @@ func awsRestjson1_deserializeDocumentSigningJobRevocationRecord(v **types.Signin
 				}
 				sv.RevokedBy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5041,7 +4860,6 @@ func awsRestjson1_deserializeDocumentSigningMaterial(v **types.SigningMaterial, 
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5117,7 +4935,6 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.Category = types.Category(jtv)
 			}
-
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5126,7 +4943,6 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
-
 		case "maxSizeInMB":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5139,7 +4955,6 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.MaxSizeInMB = int32(i64)
 			}
-
 		case "partner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5148,7 +4963,6 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.Partner = ptr.String(jtv)
 			}
-
 		case "platformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5157,7 +4971,6 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.PlatformId = ptr.String(jtv)
 			}
-
 		case "revocationSupported":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5166,17 +4979,14 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.RevocationSupported = jtv
 			}
-
 		case "signingConfiguration":
 			if err := awsRestjson1_deserializeDocumentSigningConfiguration(&sv.SigningConfiguration, value); err != nil {
 				return err
 			}
-
 		case "signingImageFormat":
 			if err := awsRestjson1_deserializeDocumentSigningImageFormat(&sv.SigningImageFormat, value); err != nil {
 				return err
 			}
-
 		case "target":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5185,7 +4995,6 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				}
 				sv.Target = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5221,7 +5030,6 @@ func awsRestjson1_deserializeDocumentSigningPlatformOverrides(v **types.SigningP
 			if err := awsRestjson1_deserializeDocumentSigningConfigurationOverrides(&sv.SigningConfiguration, value); err != nil {
 				return err
 			}
-
 		case "signingImageFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5230,7 +5038,6 @@ func awsRestjson1_deserializeDocumentSigningPlatformOverrides(v **types.SigningP
 				}
 				sv.SigningImageFormat = types.ImageFormat(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5304,7 +5111,6 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "platformDisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5313,7 +5119,6 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.PlatformDisplayName = ptr.String(jtv)
 			}
-
 		case "platformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5322,7 +5127,6 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.PlatformId = ptr.String(jtv)
 			}
-
 		case "profileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5331,7 +5135,6 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "profileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5340,7 +5143,6 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "profileVersionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5349,22 +5151,18 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.ProfileVersionArn = ptr.String(jtv)
 			}
-
 		case "signatureValidityPeriod":
 			if err := awsRestjson1_deserializeDocumentSignatureValidityPeriod(&sv.SignatureValidityPeriod, value); err != nil {
 				return err
 			}
-
 		case "signingMaterial":
 			if err := awsRestjson1_deserializeDocumentSigningMaterial(&sv.SigningMaterial, value); err != nil {
 				return err
 			}
-
 		case "signingParameters":
 			if err := awsRestjson1_deserializeDocumentSigningParameters(&sv.SigningParameters, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5373,12 +5171,10 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				}
 				sv.Status = types.SigningProfileStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5425,7 +5221,6 @@ func awsRestjson1_deserializeDocumentSigningProfileRevocationRecord(v **types.Si
 
 				}
 			}
-
 		case "revokedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5441,7 +5236,6 @@ func awsRestjson1_deserializeDocumentSigningProfileRevocationRecord(v **types.Si
 
 				}
 			}
-
 		case "revokedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5450,7 +5244,6 @@ func awsRestjson1_deserializeDocumentSigningProfileRevocationRecord(v **types.Si
 				}
 				sv.RevokedBy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5520,7 +5313,6 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 			if err := awsRestjson1_deserializeDocumentS3Source(&sv.S3, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5586,13 +5378,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -5602,8 +5388,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5611,14 +5396,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5644,13 +5425,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -5660,8 +5435,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5669,14 +5443,10 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5702,13 +5472,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -5718,8 +5482,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5727,14 +5490,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

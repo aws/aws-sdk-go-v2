@@ -291,7 +291,6 @@ func awsRestjson1_deserializeOpDocumentBatchDeleteDevicePositionHistoryOutput(v 
 			if err := awsRestjson1_deserializeDocumentBatchDeleteDevicePositionHistoryErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -455,7 +454,6 @@ func awsRestjson1_deserializeOpDocumentBatchDeleteGeofenceOutput(v **BatchDelete
 			if err := awsRestjson1_deserializeDocumentBatchDeleteGeofenceErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -619,7 +617,6 @@ func awsRestjson1_deserializeOpDocumentBatchEvaluateGeofencesOutput(v **BatchEva
 			if err := awsRestjson1_deserializeDocumentBatchEvaluateGeofencesErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -783,12 +780,10 @@ func awsRestjson1_deserializeOpDocumentBatchGetDevicePositionOutput(v **BatchGet
 			if err := awsRestjson1_deserializeDocumentDevicePositionList(&sv.DevicePositions, value); err != nil {
 				return err
 			}
-
 		case "Errors":
 			if err := awsRestjson1_deserializeDocumentBatchGetDevicePositionErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -952,12 +947,10 @@ func awsRestjson1_deserializeOpDocumentBatchPutGeofenceOutput(v **BatchPutGeofen
 			if err := awsRestjson1_deserializeDocumentBatchPutGeofenceErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "Successes":
 			if err := awsRestjson1_deserializeDocumentBatchPutGeofenceSuccessList(&sv.Successes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1121,7 +1114,6 @@ func awsRestjson1_deserializeOpDocumentBatchUpdateDevicePositionOutput(v **Batch
 			if err := awsRestjson1_deserializeDocumentBatchUpdateDevicePositionErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1285,12 +1277,10 @@ func awsRestjson1_deserializeOpDocumentCalculateRouteOutput(v **CalculateRouteOu
 			if err := awsRestjson1_deserializeDocumentLegList(&sv.Legs, value); err != nil {
 				return err
 			}
-
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentCalculateRouteSummary(&sv.Summary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1454,22 +1444,18 @@ func awsRestjson1_deserializeOpDocumentCalculateRouteMatrixOutput(v **CalculateR
 			if err := awsRestjson1_deserializeDocumentRouteMatrix(&sv.RouteMatrix, value); err != nil {
 				return err
 			}
-
 		case "SnappedDeparturePositions":
 			if err := awsRestjson1_deserializeDocumentPositionList(&sv.SnappedDeparturePositions, value); err != nil {
 				return err
 			}
-
 		case "SnappedDestinationPositions":
 			if err := awsRestjson1_deserializeDocumentPositionList(&sv.SnappedDestinationPositions, value); err != nil {
 				return err
 			}
-
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentCalculateRouteMatrixSummary(&sv.Summary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1640,7 +1626,6 @@ func awsRestjson1_deserializeOpDocumentCreateGeofenceCollectionOutput(v **Create
 				}
 				sv.CollectionArn = ptr.String(jtv)
 			}
-
 		case "CollectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1649,7 +1634,6 @@ func awsRestjson1_deserializeOpDocumentCreateGeofenceCollectionOutput(v **Create
 				}
 				sv.CollectionName = ptr.String(jtv)
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1662,7 +1646,6 @@ func awsRestjson1_deserializeOpDocumentCreateGeofenceCollectionOutput(v **Create
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1837,7 +1820,6 @@ func awsRestjson1_deserializeOpDocumentCreateKeyOutput(v **CreateKeyOutput, valu
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1846,7 +1828,6 @@ func awsRestjson1_deserializeOpDocumentCreateKeyOutput(v **CreateKeyOutput, valu
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "KeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1855,7 +1836,6 @@ func awsRestjson1_deserializeOpDocumentCreateKeyOutput(v **CreateKeyOutput, valu
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
-
 		case "KeyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1864,7 +1844,6 @@ func awsRestjson1_deserializeOpDocumentCreateKeyOutput(v **CreateKeyOutput, valu
 				}
 				sv.KeyName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2039,7 +2018,6 @@ func awsRestjson1_deserializeOpDocumentCreateMapOutput(v **CreateMapOutput, valu
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "MapArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2048,7 +2026,6 @@ func awsRestjson1_deserializeOpDocumentCreateMapOutput(v **CreateMapOutput, valu
 				}
 				sv.MapArn = ptr.String(jtv)
 			}
-
 		case "MapName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2057,7 +2034,6 @@ func awsRestjson1_deserializeOpDocumentCreateMapOutput(v **CreateMapOutput, valu
 				}
 				sv.MapName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2232,7 +2208,6 @@ func awsRestjson1_deserializeOpDocumentCreatePlaceIndexOutput(v **CreatePlaceInd
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "IndexArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2241,7 +2216,6 @@ func awsRestjson1_deserializeOpDocumentCreatePlaceIndexOutput(v **CreatePlaceInd
 				}
 				sv.IndexArn = ptr.String(jtv)
 			}
-
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2250,7 +2224,6 @@ func awsRestjson1_deserializeOpDocumentCreatePlaceIndexOutput(v **CreatePlaceInd
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2421,7 +2394,6 @@ func awsRestjson1_deserializeOpDocumentCreateRouteCalculatorOutput(v **CreateRou
 				}
 				sv.CalculatorArn = ptr.String(jtv)
 			}
-
 		case "CalculatorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2430,7 +2402,6 @@ func awsRestjson1_deserializeOpDocumentCreateRouteCalculatorOutput(v **CreateRou
 				}
 				sv.CalculatorName = ptr.String(jtv)
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2443,7 +2414,6 @@ func awsRestjson1_deserializeOpDocumentCreateRouteCalculatorOutput(v **CreateRou
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2618,7 +2588,6 @@ func awsRestjson1_deserializeOpDocumentCreateTrackerOutput(v **CreateTrackerOutp
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "TrackerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2627,7 +2596,6 @@ func awsRestjson1_deserializeOpDocumentCreateTrackerOutput(v **CreateTrackerOutp
 				}
 				sv.TrackerArn = ptr.String(jtv)
 			}
-
 		case "TrackerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2636,7 +2604,6 @@ func awsRestjson1_deserializeOpDocumentCreateTrackerOutput(v **CreateTrackerOutp
 				}
 				sv.TrackerName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3404,7 +3371,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.CollectionArn = ptr.String(jtv)
 			}
-
 		case "CollectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3413,7 +3379,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.CollectionName = ptr.String(jtv)
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3426,7 +3391,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3435,7 +3399,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "GeofenceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3448,7 +3411,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.GeofenceCount = ptr.Int32(int32(i64))
 			}
-
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3457,7 +3419,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3466,7 +3427,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "PricingPlanDataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3475,12 +3435,10 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.PricingPlanDataSource = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3493,7 +3451,6 @@ func awsRestjson1_deserializeOpDocumentDescribeGeofenceCollectionOutput(v **Desc
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3665,7 +3622,6 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3674,7 +3630,6 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "ExpireTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3687,7 +3642,6 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.ExpireTime = ptr.Time(t)
 			}
-
 		case "Key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3696,7 +3650,6 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "KeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3705,7 +3658,6 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
-
 		case "KeyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3714,17 +3666,14 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.KeyName = ptr.String(jtv)
 			}
-
 		case "Restrictions":
 			if err := awsRestjson1_deserializeDocumentApiKeyRestrictions(&sv.Restrictions, value); err != nil {
 				return err
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3737,7 +3686,6 @@ func awsRestjson1_deserializeOpDocumentDescribeKeyOutput(v **DescribeKeyOutput, 
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3901,7 +3849,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 			if err := awsRestjson1_deserializeDocumentMapConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3914,7 +3861,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3923,7 +3869,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3932,7 +3877,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "MapArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3941,7 +3885,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.MapArn = ptr.String(jtv)
 			}
-
 		case "MapName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3950,7 +3893,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.MapName = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3959,12 +3901,10 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3977,7 +3917,6 @@ func awsRestjson1_deserializeOpDocumentDescribeMapOutput(v **DescribeMapOutput, 
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4149,7 +4088,6 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4158,12 +4096,10 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "DataSourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentDataSourceConfiguration(&sv.DataSourceConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4172,7 +4108,6 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "IndexArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4181,7 +4116,6 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.IndexArn = ptr.String(jtv)
 			}
-
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4190,7 +4124,6 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4199,12 +4132,10 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4217,7 +4148,6 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4385,7 +4315,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.CalculatorArn = ptr.String(jtv)
 			}
-
 		case "CalculatorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4394,7 +4323,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.CalculatorName = ptr.String(jtv)
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4407,7 +4335,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4416,7 +4343,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4425,7 +4351,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4434,12 +4359,10 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4452,7 +4375,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4624,7 +4546,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4633,7 +4554,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "EventBridgeEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4642,7 +4562,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.EventBridgeEnabled = ptr.Bool(jtv)
 			}
-
 		case "KmsKeyEnableGeospatialQueries":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4651,7 +4570,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.KmsKeyEnableGeospatialQueries = ptr.Bool(jtv)
 			}
-
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4660,7 +4578,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "PositionFiltering":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4669,7 +4586,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.PositionFiltering = types.PositionFiltering(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4678,7 +4594,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "PricingPlanDataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4687,12 +4602,10 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.PricingPlanDataSource = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "TrackerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4701,7 +4614,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.TrackerArn = ptr.String(jtv)
 			}
-
 		case "TrackerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4710,7 +4622,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.TrackerName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4723,7 +4634,6 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4991,12 +4901,10 @@ func awsRestjson1_deserializeOpDocumentForecastGeofenceEventsOutput(v **Forecast
 				}
 				sv.DistanceUnit = types.DistanceUnit(jtv)
 			}
-
 		case "ForecastedEvents":
 			if err := awsRestjson1_deserializeDocumentForecastedEventsList(&sv.ForecastedEvents, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5005,7 +4913,6 @@ func awsRestjson1_deserializeOpDocumentForecastGeofenceEventsOutput(v **Forecast
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "SpeedUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5014,7 +4921,6 @@ func awsRestjson1_deserializeOpDocumentForecastGeofenceEventsOutput(v **Forecast
 				}
 				sv.SpeedUnit = types.SpeedUnit(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5178,7 +5084,6 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionOutput(v **GetDevicePosi
 			if err := awsRestjson1_deserializeDocumentPositionalAccuracy(&sv.Accuracy, value); err != nil {
 				return err
 			}
-
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5187,17 +5092,14 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionOutput(v **GetDevicePosi
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "PositionProperties":
 			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.PositionProperties, value); err != nil {
 				return err
 			}
-
 		case "ReceivedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5210,7 +5112,6 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionOutput(v **GetDevicePosi
 				}
 				sv.ReceivedTime = ptr.Time(t)
 			}
-
 		case "SampleTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5223,7 +5124,6 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionOutput(v **GetDevicePosi
 				}
 				sv.SampleTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5387,7 +5287,6 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionHistoryOutput(v **GetDev
 			if err := awsRestjson1_deserializeDocumentDevicePositionList(&sv.DevicePositions, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5396,7 +5295,6 @@ func awsRestjson1_deserializeOpDocumentGetDevicePositionHistoryOutput(v **GetDev
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5568,7 +5466,6 @@ func awsRestjson1_deserializeOpDocumentGetGeofenceOutput(v **GetGeofenceOutput, 
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5577,17 +5474,14 @@ func awsRestjson1_deserializeOpDocumentGetGeofenceOutput(v **GetGeofenceOutput, 
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		case "GeofenceProperties":
 			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.GeofenceProperties, value); err != nil {
 				return err
 			}
-
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentGeofenceGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5596,7 +5490,6 @@ func awsRestjson1_deserializeOpDocumentGetGeofenceOutput(v **GetGeofenceOutput, 
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5609,7 +5502,6 @@ func awsRestjson1_deserializeOpDocumentGetGeofenceOutput(v **GetGeofenceOutput, 
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6369,7 +6261,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 			if err := awsRestjson1_deserializeDocumentPlace(&sv.Place, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6530,7 +6421,6 @@ func awsRestjson1_deserializeOpDocumentListDevicePositionsOutput(v **ListDeviceP
 			if err := awsRestjson1_deserializeDocumentListDevicePositionsResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6539,7 +6429,6 @@ func awsRestjson1_deserializeOpDocumentListDevicePositionsOutput(v **ListDeviceP
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6700,7 +6589,6 @@ func awsRestjson1_deserializeOpDocumentListGeofenceCollectionsOutput(v **ListGeo
 			if err := awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6709,7 +6597,6 @@ func awsRestjson1_deserializeOpDocumentListGeofenceCollectionsOutput(v **ListGeo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6873,7 +6760,6 @@ func awsRestjson1_deserializeOpDocumentListGeofencesOutput(v **ListGeofencesOutp
 			if err := awsRestjson1_deserializeDocumentListGeofenceResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6882,7 +6768,6 @@ func awsRestjson1_deserializeOpDocumentListGeofencesOutput(v **ListGeofencesOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7043,7 +6928,6 @@ func awsRestjson1_deserializeOpDocumentListKeysOutput(v **ListKeysOutput, value 
 			if err := awsRestjson1_deserializeDocumentListKeysResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7052,7 +6936,6 @@ func awsRestjson1_deserializeOpDocumentListKeysOutput(v **ListKeysOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7213,7 +7096,6 @@ func awsRestjson1_deserializeOpDocumentListMapsOutput(v **ListMapsOutput, value 
 			if err := awsRestjson1_deserializeDocumentListMapsResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7222,7 +7104,6 @@ func awsRestjson1_deserializeOpDocumentListMapsOutput(v **ListMapsOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7383,7 +7264,6 @@ func awsRestjson1_deserializeOpDocumentListPlaceIndexesOutput(v **ListPlaceIndex
 			if err := awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7392,7 +7272,6 @@ func awsRestjson1_deserializeOpDocumentListPlaceIndexesOutput(v **ListPlaceIndex
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7553,7 +7432,6 @@ func awsRestjson1_deserializeOpDocumentListRouteCalculatorsOutput(v **ListRouteC
 			if err := awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7562,7 +7440,6 @@ func awsRestjson1_deserializeOpDocumentListRouteCalculatorsOutput(v **ListRouteC
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7726,7 +7603,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7890,7 +7766,6 @@ func awsRestjson1_deserializeOpDocumentListTrackerConsumersOutput(v **ListTracke
 			if err := awsRestjson1_deserializeDocumentArnList(&sv.ConsumerArns, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7899,7 +7774,6 @@ func awsRestjson1_deserializeOpDocumentListTrackerConsumersOutput(v **ListTracke
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8060,7 +7934,6 @@ func awsRestjson1_deserializeOpDocumentListTrackersOutput(v **ListTrackersOutput
 			if err := awsRestjson1_deserializeDocumentListTrackersResponseEntryList(&sv.Entries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8069,7 +7942,6 @@ func awsRestjson1_deserializeOpDocumentListTrackersOutput(v **ListTrackersOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8244,7 +8116,6 @@ func awsRestjson1_deserializeOpDocumentPutGeofenceOutput(v **PutGeofenceOutput, 
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8253,7 +8124,6 @@ func awsRestjson1_deserializeOpDocumentPutGeofenceOutput(v **PutGeofenceOutput, 
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8266,7 +8136,6 @@ func awsRestjson1_deserializeOpDocumentPutGeofenceOutput(v **PutGeofenceOutput, 
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8430,12 +8299,10 @@ func awsRestjson1_deserializeOpDocumentSearchPlaceIndexForPositionOutput(v **Sea
 			if err := awsRestjson1_deserializeDocumentSearchForPositionResultList(&sv.Results, value); err != nil {
 				return err
 			}
-
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentSearchPlaceIndexForPositionSummary(&sv.Summary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8599,12 +8466,10 @@ func awsRestjson1_deserializeOpDocumentSearchPlaceIndexForSuggestionsOutput(v **
 			if err := awsRestjson1_deserializeDocumentSearchForSuggestionsResultList(&sv.Results, value); err != nil {
 				return err
 			}
-
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(&sv.Summary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8768,12 +8633,10 @@ func awsRestjson1_deserializeOpDocumentSearchPlaceIndexForTextOutput(v **SearchP
 			if err := awsRestjson1_deserializeDocumentSearchForTextResultList(&sv.Results, value); err != nil {
 				return err
 			}
-
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(&sv.Summary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9141,7 +9004,6 @@ func awsRestjson1_deserializeOpDocumentUpdateGeofenceCollectionOutput(v **Update
 				}
 				sv.CollectionArn = ptr.String(jtv)
 			}
-
 		case "CollectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9150,7 +9012,6 @@ func awsRestjson1_deserializeOpDocumentUpdateGeofenceCollectionOutput(v **Update
 				}
 				sv.CollectionName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9163,7 +9024,6 @@ func awsRestjson1_deserializeOpDocumentUpdateGeofenceCollectionOutput(v **Update
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9331,7 +9191,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKeyOutput(v **UpdateKeyOutput, valu
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
-
 		case "KeyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9340,7 +9199,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKeyOutput(v **UpdateKeyOutput, valu
 				}
 				sv.KeyName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9353,7 +9211,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKeyOutput(v **UpdateKeyOutput, valu
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9521,7 +9378,6 @@ func awsRestjson1_deserializeOpDocumentUpdateMapOutput(v **UpdateMapOutput, valu
 				}
 				sv.MapArn = ptr.String(jtv)
 			}
-
 		case "MapName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9530,7 +9386,6 @@ func awsRestjson1_deserializeOpDocumentUpdateMapOutput(v **UpdateMapOutput, valu
 				}
 				sv.MapName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9543,7 +9398,6 @@ func awsRestjson1_deserializeOpDocumentUpdateMapOutput(v **UpdateMapOutput, valu
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9711,7 +9565,6 @@ func awsRestjson1_deserializeOpDocumentUpdatePlaceIndexOutput(v **UpdatePlaceInd
 				}
 				sv.IndexArn = ptr.String(jtv)
 			}
-
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9720,7 +9573,6 @@ func awsRestjson1_deserializeOpDocumentUpdatePlaceIndexOutput(v **UpdatePlaceInd
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9733,7 +9585,6 @@ func awsRestjson1_deserializeOpDocumentUpdatePlaceIndexOutput(v **UpdatePlaceInd
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9901,7 +9752,6 @@ func awsRestjson1_deserializeOpDocumentUpdateRouteCalculatorOutput(v **UpdateRou
 				}
 				sv.CalculatorArn = ptr.String(jtv)
 			}
-
 		case "CalculatorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9910,7 +9760,6 @@ func awsRestjson1_deserializeOpDocumentUpdateRouteCalculatorOutput(v **UpdateRou
 				}
 				sv.CalculatorName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9923,7 +9772,6 @@ func awsRestjson1_deserializeOpDocumentUpdateRouteCalculatorOutput(v **UpdateRou
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10091,7 +9939,6 @@ func awsRestjson1_deserializeOpDocumentUpdateTrackerOutput(v **UpdateTrackerOutp
 				}
 				sv.TrackerArn = ptr.String(jtv)
 			}
-
 		case "TrackerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10100,7 +9947,6 @@ func awsRestjson1_deserializeOpDocumentUpdateTrackerOutput(v **UpdateTrackerOutp
 				}
 				sv.TrackerName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10113,7 +9959,6 @@ func awsRestjson1_deserializeOpDocumentUpdateTrackerOutput(v **UpdateTrackerOutp
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10281,7 +10126,6 @@ func awsRestjson1_deserializeOpDocumentVerifyDevicePositionOutput(v **VerifyDevi
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "DistanceUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10290,12 +10134,10 @@ func awsRestjson1_deserializeOpDocumentVerifyDevicePositionOutput(v **VerifyDevi
 				}
 				sv.DistanceUnit = types.DistanceUnit(jtv)
 			}
-
 		case "InferredState":
 			if err := awsRestjson1_deserializeDocumentInferredState(&sv.InferredState, value); err != nil {
 				return err
 			}
-
 		case "ReceivedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10308,7 +10150,6 @@ func awsRestjson1_deserializeOpDocumentVerifyDevicePositionOutput(v **VerifyDevi
 				}
 				sv.ReceivedTime = ptr.Time(t)
 			}
-
 		case "SampleTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10321,7 +10162,6 @@ func awsRestjson1_deserializeOpDocumentVerifyDevicePositionOutput(v **VerifyDevi
 				}
 				sv.SampleTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10603,15 +10443,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10619,14 +10453,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10694,17 +10524,14 @@ func awsRestjson1_deserializeDocumentApiKeyRestrictions(v **types.ApiKeyRestrict
 			if err := awsRestjson1_deserializeDocumentApiKeyActionList(&sv.AllowActions, value); err != nil {
 				return err
 			}
-
 		case "AllowReferers":
 			if err := awsRestjson1_deserializeDocumentRefererPatternList(&sv.AllowReferers, value); err != nil {
 				return err
 			}
-
 		case "AllowResources":
 			if err := awsRestjson1_deserializeDocumentGeoArnList(&sv.AllowResources, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10780,12 +10607,10 @@ func awsRestjson1_deserializeDocumentBatchDeleteDevicePositionHistoryError(v **t
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Error":
 			if err := awsRestjson1_deserializeDocumentBatchItemError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10855,7 +10680,6 @@ func awsRestjson1_deserializeDocumentBatchDeleteGeofenceError(v **types.BatchDel
 			if err := awsRestjson1_deserializeDocumentBatchItemError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10864,7 +10688,6 @@ func awsRestjson1_deserializeDocumentBatchDeleteGeofenceError(v **types.BatchDel
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10938,12 +10761,10 @@ func awsRestjson1_deserializeDocumentBatchEvaluateGeofencesError(v **types.Batch
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Error":
 			if err := awsRestjson1_deserializeDocumentBatchItemError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		case "SampleTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10956,7 +10777,6 @@ func awsRestjson1_deserializeDocumentBatchEvaluateGeofencesError(v **types.Batch
 				}
 				sv.SampleTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11030,12 +10850,10 @@ func awsRestjson1_deserializeDocumentBatchGetDevicePositionError(v **types.Batch
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Error":
 			if err := awsRestjson1_deserializeDocumentBatchItemError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11109,7 +10927,6 @@ func awsRestjson1_deserializeDocumentBatchItemError(v **types.BatchItemError, va
 				}
 				sv.Code = types.BatchItemErrorCode(jtv)
 			}
-
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11118,7 +10935,6 @@ func awsRestjson1_deserializeDocumentBatchItemError(v **types.BatchItemError, va
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11154,7 +10970,6 @@ func awsRestjson1_deserializeDocumentBatchPutGeofenceError(v **types.BatchPutGeo
 			if err := awsRestjson1_deserializeDocumentBatchItemError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11163,7 +10978,6 @@ func awsRestjson1_deserializeDocumentBatchPutGeofenceError(v **types.BatchPutGeo
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11241,7 +11055,6 @@ func awsRestjson1_deserializeDocumentBatchPutGeofenceSuccess(v **types.BatchPutG
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11250,7 +11063,6 @@ func awsRestjson1_deserializeDocumentBatchPutGeofenceSuccess(v **types.BatchPutG
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11263,7 +11075,6 @@ func awsRestjson1_deserializeDocumentBatchPutGeofenceSuccess(v **types.BatchPutG
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11337,12 +11148,10 @@ func awsRestjson1_deserializeDocumentBatchUpdateDevicePositionError(v **types.Ba
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Error":
 			if err := awsRestjson1_deserializeDocumentBatchItemError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		case "SampleTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11355,7 +11164,6 @@ func awsRestjson1_deserializeDocumentBatchUpdateDevicePositionError(v **types.Ba
 				}
 				sv.SampleTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11490,7 +11298,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteMatrixSummary(v **types.Calcu
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "DistanceUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11499,7 +11306,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteMatrixSummary(v **types.Calcu
 				}
 				sv.DistanceUnit = types.DistanceUnit(jtv)
 			}
-
 		case "ErrorCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11512,7 +11318,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteMatrixSummary(v **types.Calcu
 				}
 				sv.ErrorCount = ptr.Int32(int32(i64))
 			}
-
 		case "RouteCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11525,7 +11330,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteMatrixSummary(v **types.Calcu
 				}
 				sv.RouteCount = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11565,7 +11369,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Distance":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11599,7 +11402,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 
 				}
 			}
-
 		case "DistanceUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11608,7 +11410,6 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 				}
 				sv.DistanceUnit = types.DistanceUnit(jtv)
 			}
-
 		case "DurationSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11642,12 +11443,10 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 
 				}
 			}
-
 		case "RouteBBox":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.RouteBBox, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11683,7 +11482,6 @@ func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{})
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Center, value); err != nil {
 				return err
 			}
-
 		case "Radius":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11717,7 +11515,6 @@ func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{})
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11747,15 +11544,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11763,14 +11554,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11878,7 +11665,6 @@ func awsRestjson1_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 				}
 				sv.IntendedUse = types.IntendedUse(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11914,7 +11700,6 @@ func awsRestjson1_deserializeDocumentDevicePosition(v **types.DevicePosition, va
 			if err := awsRestjson1_deserializeDocumentPositionalAccuracy(&sv.Accuracy, value); err != nil {
 				return err
 			}
-
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11923,17 +11708,14 @@ func awsRestjson1_deserializeDocumentDevicePosition(v **types.DevicePosition, va
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "PositionProperties":
 			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.PositionProperties, value); err != nil {
 				return err
 			}
-
 		case "ReceivedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11946,7 +11728,6 @@ func awsRestjson1_deserializeDocumentDevicePosition(v **types.DevicePosition, va
 				}
 				sv.ReceivedTime = ptr.Time(t)
 			}
-
 		case "SampleTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11959,7 +11740,6 @@ func awsRestjson1_deserializeDocumentDevicePosition(v **types.DevicePosition, va
 				}
 				sv.SampleTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12069,7 +11849,6 @@ func awsRestjson1_deserializeDocumentForecastedEvent(v **types.ForecastedEvent, 
 				}
 				sv.EventId = ptr.String(jtv)
 			}
-
 		case "EventType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12078,7 +11857,6 @@ func awsRestjson1_deserializeDocumentForecastedEvent(v **types.ForecastedEvent, 
 				}
 				sv.EventType = types.ForecastedGeofenceEventType(jtv)
 			}
-
 		case "ForecastedBreachTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12091,7 +11869,6 @@ func awsRestjson1_deserializeDocumentForecastedEvent(v **types.ForecastedEvent, 
 				}
 				sv.ForecastedBreachTime = ptr.Time(t)
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12100,12 +11877,10 @@ func awsRestjson1_deserializeDocumentForecastedEvent(v **types.ForecastedEvent, 
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		case "GeofenceProperties":
 			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.GeofenceProperties, value); err != nil {
 				return err
 			}
-
 		case "IsDeviceInGeofence":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12114,7 +11889,6 @@ func awsRestjson1_deserializeDocumentForecastedEvent(v **types.ForecastedEvent, 
 				}
 				sv.IsDeviceInGeofence = ptr.Bool(jtv)
 			}
-
 		case "NearestDistance":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12148,7 +11922,6 @@ func awsRestjson1_deserializeDocumentForecastedEvent(v **types.ForecastedEvent, 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12254,7 +12027,6 @@ func awsRestjson1_deserializeDocumentGeofenceGeometry(v **types.GeofenceGeometry
 			if err := awsRestjson1_deserializeDocumentCircle(&sv.Circle, value); err != nil {
 				return err
 			}
-
 		case "Geobuf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12267,12 +12039,10 @@ func awsRestjson1_deserializeDocumentGeofenceGeometry(v **types.GeofenceGeometry
 				}
 				sv.Geobuf = dv
 			}
-
 		case "Polygon":
 			if err := awsRestjson1_deserializeDocumentLinearRings(&sv.Polygon, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12308,7 +12078,6 @@ func awsRestjson1_deserializeDocumentInferredState(v **types.InferredState, valu
 			if err := awsRestjson1_deserializeDocumentPositionalAccuracy(&sv.Accuracy, value); err != nil {
 				return err
 			}
-
 		case "DeviationDistance":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12342,12 +12111,10 @@ func awsRestjson1_deserializeDocumentInferredState(v **types.InferredState, valu
 
 				}
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "ProxyDetected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12356,7 +12123,6 @@ func awsRestjson1_deserializeDocumentInferredState(v **types.InferredState, valu
 				}
 				sv.ProxyDetected = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12386,15 +12152,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12402,14 +12162,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12470,7 +12226,6 @@ func awsRestjson1_deserializeDocumentLeg(v **types.Leg, value interface{}) error
 
 				}
 			}
-
 		case "DurationSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12504,27 +12259,22 @@ func awsRestjson1_deserializeDocumentLeg(v **types.Leg, value interface{}) error
 
 				}
 			}
-
 		case "EndPosition":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.EndPosition, value); err != nil {
 				return err
 			}
-
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentLegGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
-
 		case "StartPosition":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.StartPosition, value); err != nil {
 				return err
 			}
-
 		case "Steps":
 			if err := awsRestjson1_deserializeDocumentStepList(&sv.Steps, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12560,7 +12310,6 @@ func awsRestjson1_deserializeDocumentLegGeometry(v **types.LegGeometry, value in
 			if err := awsRestjson1_deserializeDocumentLineString(&sv.LineString, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12726,7 +12475,6 @@ func awsRestjson1_deserializeDocumentListDevicePositionsResponseEntry(v **types.
 			if err := awsRestjson1_deserializeDocumentPositionalAccuracy(&sv.Accuracy, value); err != nil {
 				return err
 			}
-
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12735,17 +12483,14 @@ func awsRestjson1_deserializeDocumentListDevicePositionsResponseEntry(v **types.
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "PositionProperties":
 			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.PositionProperties, value); err != nil {
 				return err
 			}
-
 		case "SampleTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12758,7 +12503,6 @@ func awsRestjson1_deserializeDocumentListDevicePositionsResponseEntry(v **types.
 				}
 				sv.SampleTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12832,7 +12576,6 @@ func awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntry(v **ty
 				}
 				sv.CollectionName = ptr.String(jtv)
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12845,7 +12588,6 @@ func awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntry(v **ty
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12854,7 +12596,6 @@ func awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntry(v **ty
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12863,7 +12604,6 @@ func awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntry(v **ty
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "PricingPlanDataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12872,7 +12612,6 @@ func awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntry(v **ty
 				}
 				sv.PricingPlanDataSource = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12885,7 +12624,6 @@ func awsRestjson1_deserializeDocumentListGeofenceCollectionsResponseEntry(v **ty
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12963,7 +12701,6 @@ func awsRestjson1_deserializeDocumentListGeofenceResponseEntry(v **types.ListGeo
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "GeofenceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12972,17 +12709,14 @@ func awsRestjson1_deserializeDocumentListGeofenceResponseEntry(v **types.ListGeo
 				}
 				sv.GeofenceId = ptr.String(jtv)
 			}
-
 		case "GeofenceProperties":
 			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.GeofenceProperties, value); err != nil {
 				return err
 			}
-
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentGeofenceGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12991,7 +12725,6 @@ func awsRestjson1_deserializeDocumentListGeofenceResponseEntry(v **types.ListGeo
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13004,7 +12737,6 @@ func awsRestjson1_deserializeDocumentListGeofenceResponseEntry(v **types.ListGeo
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13082,7 +12814,6 @@ func awsRestjson1_deserializeDocumentListKeysResponseEntry(v **types.ListKeysRes
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13091,7 +12822,6 @@ func awsRestjson1_deserializeDocumentListKeysResponseEntry(v **types.ListKeysRes
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "ExpireTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13104,7 +12834,6 @@ func awsRestjson1_deserializeDocumentListKeysResponseEntry(v **types.ListKeysRes
 				}
 				sv.ExpireTime = ptr.Time(t)
 			}
-
 		case "KeyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13113,12 +12842,10 @@ func awsRestjson1_deserializeDocumentListKeysResponseEntry(v **types.ListKeysRes
 				}
 				sv.KeyName = ptr.String(jtv)
 			}
-
 		case "Restrictions":
 			if err := awsRestjson1_deserializeDocumentApiKeyRestrictions(&sv.Restrictions, value); err != nil {
 				return err
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13131,7 +12858,6 @@ func awsRestjson1_deserializeDocumentListKeysResponseEntry(v **types.ListKeysRes
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13209,7 +12935,6 @@ func awsRestjson1_deserializeDocumentListMapsResponseEntry(v **types.ListMapsRes
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13218,7 +12943,6 @@ func awsRestjson1_deserializeDocumentListMapsResponseEntry(v **types.ListMapsRes
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13227,7 +12951,6 @@ func awsRestjson1_deserializeDocumentListMapsResponseEntry(v **types.ListMapsRes
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "MapName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13236,7 +12959,6 @@ func awsRestjson1_deserializeDocumentListMapsResponseEntry(v **types.ListMapsRes
 				}
 				sv.MapName = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13245,7 +12967,6 @@ func awsRestjson1_deserializeDocumentListMapsResponseEntry(v **types.ListMapsRes
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13258,7 +12979,6 @@ func awsRestjson1_deserializeDocumentListMapsResponseEntry(v **types.ListMapsRes
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13336,7 +13056,6 @@ func awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntry(v **types.Lis
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13345,7 +13064,6 @@ func awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntry(v **types.Lis
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13354,7 +13072,6 @@ func awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntry(v **types.Lis
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13363,7 +13080,6 @@ func awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntry(v **types.Lis
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13372,7 +13088,6 @@ func awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntry(v **types.Lis
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13385,7 +13100,6 @@ func awsRestjson1_deserializeDocumentListPlaceIndexesResponseEntry(v **types.Lis
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13459,7 +13173,6 @@ func awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntry(v **types
 				}
 				sv.CalculatorName = ptr.String(jtv)
 			}
-
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13472,7 +13185,6 @@ func awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntry(v **types
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13481,7 +13193,6 @@ func awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntry(v **types
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13490,7 +13201,6 @@ func awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntry(v **types
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13499,7 +13209,6 @@ func awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntry(v **types
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13512,7 +13221,6 @@ func awsRestjson1_deserializeDocumentListRouteCalculatorsResponseEntry(v **types
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13590,7 +13298,6 @@ func awsRestjson1_deserializeDocumentListTrackersResponseEntry(v **types.ListTra
 				}
 				sv.CreateTime = ptr.Time(t)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13599,7 +13306,6 @@ func awsRestjson1_deserializeDocumentListTrackersResponseEntry(v **types.ListTra
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13608,7 +13314,6 @@ func awsRestjson1_deserializeDocumentListTrackersResponseEntry(v **types.ListTra
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "PricingPlanDataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13617,7 +13322,6 @@ func awsRestjson1_deserializeDocumentListTrackersResponseEntry(v **types.ListTra
 				}
 				sv.PricingPlanDataSource = ptr.String(jtv)
 			}
-
 		case "TrackerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13626,7 +13330,6 @@ func awsRestjson1_deserializeDocumentListTrackersResponseEntry(v **types.ListTra
 				}
 				sv.TrackerName = ptr.String(jtv)
 			}
-
 		case "UpdateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13639,7 +13342,6 @@ func awsRestjson1_deserializeDocumentListTrackersResponseEntry(v **types.ListTra
 				}
 				sv.UpdateTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13709,7 +13411,6 @@ func awsRestjson1_deserializeDocumentMapConfiguration(v **types.MapConfiguration
 			if err := awsRestjson1_deserializeDocumentCustomLayerList(&sv.CustomLayers, value); err != nil {
 				return err
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13718,7 +13419,6 @@ func awsRestjson1_deserializeDocumentMapConfiguration(v **types.MapConfiguration
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Style":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13727,7 +13427,6 @@ func awsRestjson1_deserializeDocumentMapConfiguration(v **types.MapConfiguration
 				}
 				sv.Style = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13767,12 +13466,10 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.AddressNumber = ptr.String(jtv)
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentPlaceCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Country":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13781,12 +13478,10 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Country = ptr.String(jtv)
 			}
-
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentPlaceGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
-
 		case "Interpolated":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13795,7 +13490,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Interpolated = ptr.Bool(jtv)
 			}
-
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13804,7 +13498,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "Municipality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13813,7 +13506,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Municipality = ptr.String(jtv)
 			}
-
 		case "Neighborhood":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13822,7 +13514,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Neighborhood = ptr.String(jtv)
 			}
-
 		case "PostalCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13831,7 +13522,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
-
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13840,7 +13530,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "Street":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13849,7 +13538,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.Street = ptr.String(jtv)
 			}
-
 		case "SubMunicipality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13858,7 +13546,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.SubMunicipality = ptr.String(jtv)
 			}
-
 		case "SubRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13867,17 +13554,14 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.SubRegion = ptr.String(jtv)
 			}
-
 		case "SupplementalCategories":
 			if err := awsRestjson1_deserializeDocumentPlaceSupplementalCategoryList(&sv.SupplementalCategories, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		case "UnitNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13886,7 +13570,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.UnitNumber = ptr.String(jtv)
 			}
-
 		case "UnitType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13895,7 +13578,6 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				}
 				sv.UnitType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13967,7 +13649,6 @@ func awsRestjson1_deserializeDocumentPlaceGeometry(v **types.PlaceGeometry, valu
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Point, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14129,7 +13810,6 @@ func awsRestjson1_deserializeDocumentPositionalAccuracy(v **types.PositionalAccu
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14263,15 +13943,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14279,14 +13953,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14379,7 +14049,6 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 
 				}
 			}
-
 		case "DurationSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14413,12 +14082,10 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 
 				}
 			}
-
 		case "Error":
 			if err := awsRestjson1_deserializeDocumentRouteMatrixEntryError(&sv.Error, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14458,7 +14125,6 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntryError(v **types.RouteMatrix
 				}
 				sv.Code = types.RouteMatrixErrorCode(jtv)
 			}
-
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14467,7 +14133,6 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntryError(v **types.RouteMatrix
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14566,12 +14231,10 @@ func awsRestjson1_deserializeDocumentSearchForPositionResult(v **types.SearchFor
 
 				}
 			}
-
 		case "Place":
 			if err := awsRestjson1_deserializeDocumentPlace(&sv.Place, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14580,7 +14243,6 @@ func awsRestjson1_deserializeDocumentSearchForPositionResult(v **types.SearchFor
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14650,7 +14312,6 @@ func awsRestjson1_deserializeDocumentSearchForSuggestionsResult(v **types.Search
 			if err := awsRestjson1_deserializeDocumentPlaceCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14659,12 +14320,10 @@ func awsRestjson1_deserializeDocumentSearchForSuggestionsResult(v **types.Search
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "SupplementalCategories":
 			if err := awsRestjson1_deserializeDocumentPlaceSupplementalCategoryList(&sv.SupplementalCategories, value); err != nil {
 				return err
 			}
-
 		case "Text":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14673,7 +14332,6 @@ func awsRestjson1_deserializeDocumentSearchForSuggestionsResult(v **types.Search
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14772,12 +14430,10 @@ func awsRestjson1_deserializeDocumentSearchForTextResult(v **types.SearchForText
 
 				}
 			}
-
 		case "Place":
 			if err := awsRestjson1_deserializeDocumentPlace(&sv.Place, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14786,7 +14442,6 @@ func awsRestjson1_deserializeDocumentSearchForTextResult(v **types.SearchForText
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "Relevance":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14820,7 +14475,6 @@ func awsRestjson1_deserializeDocumentSearchForTextResult(v **types.SearchForText
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14894,7 +14548,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForPositionSummary(v **type
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14903,7 +14556,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForPositionSummary(v **type
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "MaxResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14916,12 +14568,10 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForPositionSummary(v **type
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14957,7 +14607,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.BiasPosition, value); err != nil {
 				return err
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14966,22 +14615,18 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "FilterBBox":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.FilterBBox, value); err != nil {
 				return err
 			}
-
 		case "FilterCategories":
 			if err := awsRestjson1_deserializeDocumentFilterPlaceCategoryList(&sv.FilterCategories, value); err != nil {
 				return err
 			}
-
 		case "FilterCountries":
 			if err := awsRestjson1_deserializeDocumentCountryCodeList(&sv.FilterCountries, value); err != nil {
 				return err
 			}
-
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14990,7 +14635,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "MaxResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15003,7 +14647,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "Text":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15012,7 +14655,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15048,7 +14690,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.BiasPosition, value); err != nil {
 				return err
 			}
-
 		case "DataSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15057,22 +14698,18 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 				}
 				sv.DataSource = ptr.String(jtv)
 			}
-
 		case "FilterBBox":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.FilterBBox, value); err != nil {
 				return err
 			}
-
 		case "FilterCategories":
 			if err := awsRestjson1_deserializeDocumentFilterPlaceCategoryList(&sv.FilterCategories, value); err != nil {
 				return err
 			}
-
 		case "FilterCountries":
 			if err := awsRestjson1_deserializeDocumentCountryCodeList(&sv.FilterCountries, value); err != nil {
 				return err
 			}
-
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15081,7 +14718,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "MaxResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15094,12 +14730,10 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "ResultBBox":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.ResultBBox, value); err != nil {
 				return err
 			}
-
 		case "Text":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15108,7 +14742,6 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15138,15 +14771,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15154,14 +14781,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15222,7 +14845,6 @@ func awsRestjson1_deserializeDocumentStep(v **types.Step, value interface{}) err
 
 				}
 			}
-
 		case "DurationSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15256,12 +14878,10 @@ func awsRestjson1_deserializeDocumentStep(v **types.Step, value interface{}) err
 
 				}
 			}
-
 		case "EndPosition":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.EndPosition, value); err != nil {
 				return err
 			}
-
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15274,12 +14894,10 @@ func awsRestjson1_deserializeDocumentStep(v **types.Step, value interface{}) err
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
-
 		case "StartPosition":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.StartPosition, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15379,15 +14997,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15395,14 +15007,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15438,7 +15046,6 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Offset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15451,7 +15058,6 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 				}
 				sv.Offset = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15481,20 +15087,13 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "fieldList":
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15502,7 +15101,6 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15511,14 +15109,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15554,7 +15148,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15563,7 +15156,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

@@ -7482,7 +7482,6 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7491,7 +7490,6 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7500,7 +7498,6 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7509,7 +7506,6 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				}
 				sv.Type = types.GatewayType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7621,7 +7617,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7630,7 +7625,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7643,7 +7637,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7652,7 +7645,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7661,7 +7653,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7670,7 +7661,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7679,7 +7669,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.BgpPeerId = ptr.String(jtv)
 			}
-
 		case "bgpPeerState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7688,7 +7677,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.BgpPeerState = types.BGPPeerState(jtv)
 			}
-
 		case "bgpStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7697,7 +7685,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.BgpStatus = types.BGPStatus(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7706,7 +7693,6 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7816,7 +7802,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7825,7 +7810,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7834,7 +7818,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7843,7 +7826,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7852,7 +7834,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7861,7 +7842,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7870,7 +7850,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7879,7 +7858,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7888,7 +7866,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7897,7 +7874,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7906,7 +7882,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7922,7 +7897,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7931,7 +7905,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7940,12 +7913,10 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7954,7 +7925,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7963,7 +7933,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7972,7 +7941,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7981,7 +7949,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7990,12 +7957,10 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8008,7 +7973,6 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8082,7 +8046,6 @@ func awsAwsjson11_deserializeDocumentCustomerAgreement(v **types.CustomerAgreeme
 				}
 				sv.AgreementName = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8091,7 +8054,6 @@ func awsAwsjson11_deserializeDocumentCustomerAgreement(v **types.CustomerAgreeme
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8121,15 +8083,9 @@ func awsAwsjson11_deserializeDocumentDirectConnectClientException(v **types.Dire
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8137,14 +8093,10 @@ func awsAwsjson11_deserializeDocumentDirectConnectClientException(v **types.Dire
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8184,7 +8136,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8193,7 +8144,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8202,7 +8152,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				}
 				sv.DirectConnectGatewayName = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8211,7 +8160,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				}
 				sv.DirectConnectGatewayState = types.DirectConnectGatewayState(jtv)
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8220,7 +8168,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "stateChangeError":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8229,7 +8176,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				}
 				sv.StateChangeError = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8265,12 +8211,10 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.AllowedPrefixesToDirectConnectGateway, value); err != nil {
 				return err
 			}
-
 		case "associatedGateway":
 			if err := awsAwsjson11_deserializeDocumentAssociatedGateway(&sv.AssociatedGateway, value); err != nil {
 				return err
 			}
-
 		case "associationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8279,7 +8223,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.AssociationId = ptr.String(jtv)
 			}
-
 		case "associationState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8288,7 +8231,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.AssociationState = types.DirectConnectGatewayAssociationState(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8297,7 +8239,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayOwnerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8306,7 +8247,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.DirectConnectGatewayOwnerAccount = ptr.String(jtv)
 			}
-
 		case "stateChangeError":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8315,7 +8255,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.StateChangeError = ptr.String(jtv)
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8324,7 +8263,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualGatewayOwnerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8333,7 +8271,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.VirtualGatewayOwnerAccount = ptr.String(jtv)
 			}
-
 		case "virtualGatewayRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8342,7 +8279,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				}
 				sv.VirtualGatewayRegion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8412,7 +8348,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 			if err := awsAwsjson11_deserializeDocumentAssociatedGateway(&sv.AssociatedGateway, value); err != nil {
 				return err
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8421,7 +8356,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayOwnerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8430,12 +8364,10 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				}
 				sv.DirectConnectGatewayOwnerAccount = ptr.String(jtv)
 			}
-
 		case "existingAllowedPrefixesToDirectConnectGateway":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.ExistingAllowedPrefixesToDirectConnectGateway, value); err != nil {
 				return err
 			}
-
 		case "proposalId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8444,7 +8376,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				}
 				sv.ProposalId = ptr.String(jtv)
 			}
-
 		case "proposalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8453,12 +8384,10 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				}
 				sv.ProposalState = types.DirectConnectGatewayAssociationProposalState(jtv)
 			}
-
 		case "requestedAllowedPrefixesToDirectConnectGateway":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RequestedAllowedPrefixesToDirectConnectGateway, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8532,7 +8461,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.AttachmentState = types.DirectConnectGatewayAttachmentState(jtv)
 			}
-
 		case "attachmentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8541,7 +8469,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.AttachmentType = types.DirectConnectGatewayAttachmentType(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8550,7 +8477,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "stateChangeError":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8559,7 +8485,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.StateChangeError = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8568,7 +8493,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceOwnerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8577,7 +8501,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.VirtualInterfaceOwnerAccount = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8586,7 +8509,6 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				}
 				sv.VirtualInterfaceRegion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8684,15 +8606,9 @@ func awsAwsjson11_deserializeDocumentDirectConnectServerException(v **types.Dire
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8700,14 +8616,10 @@ func awsAwsjson11_deserializeDocumentDirectConnectServerException(v **types.Dire
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8733,15 +8645,9 @@ func awsAwsjson11_deserializeDocumentDuplicateTagKeysException(v **types.Duplica
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8749,14 +8655,10 @@ func awsAwsjson11_deserializeDocumentDuplicateTagKeysException(v **types.Duplica
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8792,7 +8694,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8801,7 +8702,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8810,7 +8710,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8819,7 +8718,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8828,7 +8726,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "interconnectId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8837,7 +8734,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.InterconnectId = ptr.String(jtv)
 			}
-
 		case "interconnectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8846,7 +8742,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.InterconnectName = ptr.String(jtv)
 			}
-
 		case "interconnectState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8855,7 +8750,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.InterconnectState = types.InterconnectState(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8864,7 +8758,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8873,7 +8766,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8889,7 +8781,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8898,7 +8789,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8907,7 +8797,6 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8916,12 +8805,10 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8995,7 +8882,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.AllowsHostedConnections = jtv
 			}
-
 		case "awsDevice":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9004,7 +8890,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9013,7 +8898,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9022,12 +8906,10 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		case "connectionsBandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9036,7 +8918,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9045,7 +8926,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9054,7 +8934,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9063,7 +8942,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9072,7 +8950,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "lagName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9081,7 +8958,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.LagName = ptr.String(jtv)
 			}
-
 		case "lagState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9090,7 +8966,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.LagState = types.LagState(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9099,7 +8974,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9108,12 +8982,10 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "minimumLinks":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9126,7 +8998,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.MinimumLinks = int32(i64)
 			}
-
 		case "numberOfConnections":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9139,7 +9010,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.NumberOfConnections = int32(i64)
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9148,7 +9018,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9157,7 +9026,6 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9166,12 +9034,10 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9249,7 +9115,6 @@ func awsAwsjson11_deserializeDocumentLoa(v **types.Loa, value interface{}) error
 				}
 				sv.LoaContent = dv
 			}
-
 		case "loaContentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9258,7 +9123,6 @@ func awsAwsjson11_deserializeDocumentLoa(v **types.Loa, value interface{}) error
 				}
 				sv.LoaContentType = types.LoaContentType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9294,17 +9158,14 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 			if err := awsAwsjson11_deserializeDocumentAvailableMacSecPortSpeeds(&sv.AvailableMacSecPortSpeeds, value); err != nil {
 				return err
 			}
-
 		case "availablePortSpeeds":
 			if err := awsAwsjson11_deserializeDocumentAvailablePortSpeeds(&sv.AvailablePortSpeeds, value); err != nil {
 				return err
 			}
-
 		case "availableProviders":
 			if err := awsAwsjson11_deserializeDocumentProviderList(&sv.AvailableProviders, value); err != nil {
 				return err
 			}
-
 		case "locationCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9313,7 +9174,6 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 				}
 				sv.LocationCode = ptr.String(jtv)
 			}
-
 		case "locationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9322,7 +9182,6 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 				}
 				sv.LocationName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9331,7 +9190,6 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9405,7 +9263,6 @@ func awsAwsjson11_deserializeDocumentMacSecKey(v **types.MacSecKey, value interf
 				}
 				sv.Ckn = ptr.String(jtv)
 			}
-
 		case "secretARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9414,7 +9271,6 @@ func awsAwsjson11_deserializeDocumentMacSecKey(v **types.MacSecKey, value interf
 				}
 				sv.SecretARN = ptr.String(jtv)
 			}
-
 		case "startOn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9423,7 +9279,6 @@ func awsAwsjson11_deserializeDocumentMacSecKey(v **types.MacSecKey, value interf
 				}
 				sv.StartOn = ptr.String(jtv)
 			}
-
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9432,7 +9287,6 @@ func awsAwsjson11_deserializeDocumentMacSecKey(v **types.MacSecKey, value interf
 				}
 				sv.State = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9542,12 +9396,10 @@ func awsAwsjson11_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9621,7 +9473,6 @@ func awsAwsjson11_deserializeDocumentRouteFilterPrefix(v **types.RouteFilterPref
 				}
 				sv.Cidr = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9695,7 +9546,6 @@ func awsAwsjson11_deserializeDocumentRouterType(v **types.RouterType, value inte
 				}
 				sv.Platform = ptr.String(jtv)
 			}
-
 		case "routerTypeIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9704,7 +9554,6 @@ func awsAwsjson11_deserializeDocumentRouterType(v **types.RouterType, value inte
 				}
 				sv.RouterTypeIdentifier = ptr.String(jtv)
 			}
-
 		case "software":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9713,7 +9562,6 @@ func awsAwsjson11_deserializeDocumentRouterType(v **types.RouterType, value inte
 				}
 				sv.Software = ptr.String(jtv)
 			}
-
 		case "vendor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9722,7 +9570,6 @@ func awsAwsjson11_deserializeDocumentRouterType(v **types.RouterType, value inte
 				}
 				sv.Vendor = ptr.String(jtv)
 			}
-
 		case "xsltTemplateName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9731,7 +9578,6 @@ func awsAwsjson11_deserializeDocumentRouterType(v **types.RouterType, value inte
 				}
 				sv.XsltTemplateName = ptr.String(jtv)
 			}
-
 		case "xsltTemplateNameForMacSec":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9740,7 +9586,6 @@ func awsAwsjson11_deserializeDocumentRouterType(v **types.RouterType, value inte
 				}
 				sv.XsltTemplateNameForMacSec = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9780,7 +9625,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9789,7 +9633,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9853,15 +9696,9 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9869,14 +9706,10 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9912,7 +9745,6 @@ func awsAwsjson11_deserializeDocumentVirtualGateway(v **types.VirtualGateway, va
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualGatewayState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9921,7 +9753,6 @@ func awsAwsjson11_deserializeDocumentVirtualGateway(v **types.VirtualGateway, va
 				}
 				sv.VirtualGatewayState = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9995,7 +9826,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10004,7 +9834,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10017,7 +9846,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10030,7 +9858,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10039,7 +9866,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10048,7 +9874,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10057,12 +9882,10 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10071,7 +9894,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10080,7 +9902,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10089,7 +9910,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10098,7 +9918,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10107,7 +9926,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10116,7 +9934,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10129,7 +9946,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10138,7 +9954,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10147,12 +9962,10 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10161,12 +9974,10 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10175,7 +9986,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10184,7 +9994,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10193,7 +10002,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10202,7 +10010,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10211,7 +10018,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10224,7 +10030,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10294,7 +10099,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 			if err := awsAwsjson11_deserializeDocumentBGPPeerIdList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10310,7 +10114,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 
 				}
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10319,7 +10122,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10335,7 +10137,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10344,7 +10145,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		case "testDurationInMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10357,7 +10157,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				}
 				sv.TestDurationInMinutes = ptr.Int32(int32(i64))
 			}
-
 		case "testId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10366,7 +10165,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				}
 				sv.TestId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10375,7 +10173,6 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10445,7 +10242,6 @@ func awsAwsjson11_deserializeOpDocumentAcceptDirectConnectGatewayAssociationProp
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(&sv.DirectConnectGatewayAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10485,7 +10281,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10494,7 +10289,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10503,7 +10297,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10512,7 +10305,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10521,7 +10313,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10530,7 +10321,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10539,7 +10329,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10548,7 +10337,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10557,7 +10345,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10566,7 +10353,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10575,7 +10361,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10591,7 +10376,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10600,7 +10384,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10609,12 +10392,10 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10623,7 +10404,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10632,7 +10412,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10641,7 +10420,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10650,7 +10428,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10659,12 +10436,10 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10677,7 +10452,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10717,7 +10491,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10726,7 +10499,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10735,7 +10507,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10744,7 +10515,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10753,7 +10523,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10762,7 +10531,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10771,7 +10539,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10780,7 +10547,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10789,7 +10555,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10798,7 +10563,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10807,7 +10571,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10823,7 +10586,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10832,7 +10594,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10841,12 +10602,10 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10855,7 +10614,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10864,7 +10622,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10873,7 +10630,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10882,7 +10638,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10891,12 +10646,10 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10909,7 +10662,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10949,7 +10701,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10958,7 +10709,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10971,7 +10721,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10984,7 +10733,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10993,7 +10741,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11002,7 +10749,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11011,12 +10757,10 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11025,7 +10769,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11034,7 +10777,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11043,7 +10785,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11052,7 +10793,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11061,7 +10801,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11070,7 +10809,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11083,7 +10821,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11092,7 +10829,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11101,12 +10837,10 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11115,12 +10849,10 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11129,7 +10861,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11138,7 +10869,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11147,7 +10877,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11156,7 +10885,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11165,7 +10893,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11178,7 +10905,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11218,7 +10944,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11227,7 +10952,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11240,7 +10964,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11253,7 +10976,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11262,7 +10984,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11271,7 +10992,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11280,12 +11000,10 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11294,7 +11012,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11303,7 +11020,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11312,7 +11028,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11321,7 +11036,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11330,7 +11044,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11339,7 +11052,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11352,7 +11064,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11361,7 +11072,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11370,12 +11080,10 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11384,12 +11092,10 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11398,7 +11104,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11407,7 +11112,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11416,7 +11120,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11425,7 +11128,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11434,7 +11136,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11447,7 +11148,6 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11483,7 +11183,6 @@ func awsAwsjson11_deserializeOpDocumentAllocateTransitVirtualInterfaceOutput(v *
 			if err := awsAwsjson11_deserializeDocumentVirtualInterface(&sv.VirtualInterface, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11523,7 +11222,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11532,7 +11230,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11541,7 +11238,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11550,7 +11246,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11559,7 +11254,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11568,7 +11262,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11577,7 +11270,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11586,7 +11278,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11595,7 +11286,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11604,7 +11294,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11613,7 +11302,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11629,7 +11317,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11638,7 +11325,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11647,12 +11333,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11661,7 +11345,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11670,7 +11353,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11679,7 +11361,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11688,7 +11369,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11697,12 +11377,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11715,7 +11393,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11755,7 +11432,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11764,7 +11440,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11773,7 +11448,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11782,7 +11456,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11791,7 +11464,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11800,7 +11472,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11809,7 +11480,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11818,7 +11488,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11827,7 +11496,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11836,7 +11504,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11845,7 +11512,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11861,7 +11527,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11870,7 +11535,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11879,12 +11543,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11893,7 +11555,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11902,7 +11563,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11911,7 +11571,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11920,7 +11579,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11929,12 +11587,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11947,7 +11603,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11987,12 +11642,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateMacSecKeyOutput(v **AssociateMac
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12032,7 +11685,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12041,7 +11693,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12054,7 +11705,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12067,7 +11717,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12076,7 +11725,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12085,7 +11733,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12094,12 +11741,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12108,7 +11753,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12117,7 +11761,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12126,7 +11769,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12135,7 +11777,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12144,7 +11785,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12153,7 +11793,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12166,7 +11805,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12175,7 +11813,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12184,12 +11821,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12198,12 +11833,10 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12212,7 +11845,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12221,7 +11853,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12230,7 +11861,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12239,7 +11869,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12248,7 +11877,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12261,7 +11889,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12301,7 +11928,6 @@ func awsAwsjson11_deserializeOpDocumentConfirmConnectionOutput(v **ConfirmConnec
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12341,7 +11967,6 @@ func awsAwsjson11_deserializeOpDocumentConfirmCustomerAgreementOutput(v **Confir
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12381,7 +12006,6 @@ func awsAwsjson11_deserializeOpDocumentConfirmPrivateVirtualInterfaceOutput(v **
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12421,7 +12045,6 @@ func awsAwsjson11_deserializeOpDocumentConfirmPublicVirtualInterfaceOutput(v **C
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12461,7 +12084,6 @@ func awsAwsjson11_deserializeOpDocumentConfirmTransitVirtualInterfaceOutput(v **
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12497,7 +12119,6 @@ func awsAwsjson11_deserializeOpDocumentCreateBGPPeerOutput(v **CreateBGPPeerOutp
 			if err := awsAwsjson11_deserializeDocumentVirtualInterface(&sv.VirtualInterface, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12537,7 +12158,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12546,7 +12166,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12555,7 +12174,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12564,7 +12182,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12573,7 +12190,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12582,7 +12198,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12591,7 +12206,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12600,7 +12214,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12609,7 +12222,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12618,7 +12230,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12627,7 +12238,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12643,7 +12253,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12652,7 +12261,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12661,12 +12269,10 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12675,7 +12281,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12684,7 +12289,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12693,7 +12297,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12702,7 +12305,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12711,12 +12313,10 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12729,7 +12329,6 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12765,7 +12364,6 @@ func awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayAssociationOutp
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(&sv.DirectConnectGatewayAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12801,7 +12399,6 @@ func awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayAssociationProp
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(&sv.DirectConnectGatewayAssociationProposal, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12837,7 +12434,6 @@ func awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayOutput(v **Crea
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGateway(&sv.DirectConnectGateway, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12877,7 +12473,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12886,7 +12481,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12895,7 +12489,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12904,7 +12497,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12913,7 +12505,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "interconnectId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12922,7 +12513,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.InterconnectId = ptr.String(jtv)
 			}
-
 		case "interconnectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12931,7 +12521,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.InterconnectName = ptr.String(jtv)
 			}
-
 		case "interconnectState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12940,7 +12529,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.InterconnectState = types.InterconnectState(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12949,7 +12537,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12958,7 +12545,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12974,7 +12560,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12983,7 +12568,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12992,7 +12576,6 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13001,12 +12584,10 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13046,7 +12627,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.AllowsHostedConnections = jtv
 			}
-
 		case "awsDevice":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13055,7 +12635,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13064,7 +12643,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13073,12 +12651,10 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		case "connectionsBandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13087,7 +12663,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13096,7 +12671,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13105,7 +12679,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13114,7 +12687,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13123,7 +12695,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "lagName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13132,7 +12703,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.LagName = ptr.String(jtv)
 			}
-
 		case "lagState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13141,7 +12711,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.LagState = types.LagState(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13150,7 +12719,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13159,12 +12727,10 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "minimumLinks":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13177,7 +12743,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.MinimumLinks = int32(i64)
 			}
-
 		case "numberOfConnections":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13190,7 +12755,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.NumberOfConnections = int32(i64)
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13199,7 +12763,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13208,7 +12771,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13217,12 +12779,10 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13262,7 +12822,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13271,7 +12830,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13284,7 +12842,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13297,7 +12854,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13306,7 +12862,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13315,7 +12870,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13324,12 +12878,10 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13338,7 +12890,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13347,7 +12898,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13356,7 +12906,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13365,7 +12914,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13374,7 +12922,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13383,7 +12930,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13396,7 +12942,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13405,7 +12950,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13414,12 +12958,10 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13428,12 +12970,10 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13442,7 +12982,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13451,7 +12990,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13460,7 +12998,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13469,7 +13006,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13478,7 +13014,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13491,7 +13026,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13531,7 +13065,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13540,7 +13073,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13553,7 +13085,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13566,7 +13097,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13575,7 +13105,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13584,7 +13113,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13593,12 +13121,10 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13607,7 +13133,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13616,7 +13141,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13625,7 +13149,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13634,7 +13157,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13643,7 +13165,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13652,7 +13173,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13665,7 +13185,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13674,7 +13193,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13683,12 +13201,10 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13697,12 +13213,10 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13711,7 +13225,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13720,7 +13233,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13729,7 +13241,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13738,7 +13249,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13747,7 +13257,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13760,7 +13269,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13796,7 +13304,6 @@ func awsAwsjson11_deserializeOpDocumentCreateTransitVirtualInterfaceOutput(v **C
 			if err := awsAwsjson11_deserializeDocumentVirtualInterface(&sv.VirtualInterface, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13832,7 +13339,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteBGPPeerOutput(v **DeleteBGPPeerOutp
 			if err := awsAwsjson11_deserializeDocumentVirtualInterface(&sv.VirtualInterface, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13872,7 +13378,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13881,7 +13386,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13890,7 +13394,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13899,7 +13402,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13908,7 +13410,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13917,7 +13418,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13926,7 +13426,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13935,7 +13434,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13944,7 +13442,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13953,7 +13450,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13962,7 +13458,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13978,7 +13473,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13987,7 +13481,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13996,12 +13489,10 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14010,7 +13501,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14019,7 +13509,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14028,7 +13517,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14037,7 +13525,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14046,12 +13533,10 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14064,7 +13549,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14100,7 +13584,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayAssociationOutp
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(&sv.DirectConnectGatewayAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14136,7 +13619,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayAssociationProp
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(&sv.DirectConnectGatewayAssociationProposal, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14172,7 +13654,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayOutput(v **Dele
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGateway(&sv.DirectConnectGateway, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14212,7 +13693,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteInterconnectOutput(v **DeleteInterc
 				}
 				sv.InterconnectState = types.InterconnectState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14252,7 +13732,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.AllowsHostedConnections = jtv
 			}
-
 		case "awsDevice":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14261,7 +13740,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14270,7 +13748,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14279,12 +13756,10 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		case "connectionsBandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14293,7 +13768,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14302,7 +13776,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14311,7 +13784,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -14320,7 +13792,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14329,7 +13800,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "lagName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14338,7 +13808,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.LagName = ptr.String(jtv)
 			}
-
 		case "lagState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14347,7 +13816,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.LagState = types.LagState(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14356,7 +13824,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -14365,12 +13832,10 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "minimumLinks":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14383,7 +13848,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.MinimumLinks = int32(i64)
 			}
-
 		case "numberOfConnections":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14396,7 +13860,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.NumberOfConnections = int32(i64)
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14405,7 +13868,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14414,7 +13876,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14423,12 +13884,10 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14468,7 +13927,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteVirtualInterfaceOutput(v **DeleteVi
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14504,7 +13962,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeConnectionLoaOutput(v **DescribeC
 			if err := awsAwsjson11_deserializeDocumentLoa(&sv.Loa, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14540,7 +13997,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeConnectionsOnInterconnectOutput(v
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14576,7 +14032,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeConnectionsOutput(v **DescribeCon
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14612,7 +14067,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeCustomerMetadataOutput(v **Descri
 			if err := awsAwsjson11_deserializeDocumentAgreementList(&sv.Agreements, value); err != nil {
 				return err
 			}
-
 		case "nniPartnerType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14621,7 +14075,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeCustomerMetadataOutput(v **Descri
 				}
 				sv.NniPartnerType = types.NniPartnerType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14657,7 +14110,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationPr
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposalList(&sv.DirectConnectGatewayAssociationProposals, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14666,7 +14118,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationPr
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14702,7 +14153,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationsO
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationList(&sv.DirectConnectGatewayAssociations, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14711,7 +14161,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationsO
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14747,7 +14196,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAttachmentsOu
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachmentList(&sv.DirectConnectGatewayAttachments, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14756,7 +14204,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAttachmentsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14792,7 +14239,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewaysOutput(v **D
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayList(&sv.DirectConnectGateways, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14801,7 +14247,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewaysOutput(v **D
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14837,7 +14282,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHostedConnectionsOutput(v **Descr
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14873,7 +14317,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeInterconnectLoaOutput(v **Describ
 			if err := awsAwsjson11_deserializeDocumentLoa(&sv.Loa, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14909,7 +14352,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeInterconnectsOutput(v **DescribeI
 			if err := awsAwsjson11_deserializeDocumentInterconnectList(&sv.Interconnects, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14945,7 +14387,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLagsOutput(v **DescribeLagsOutput
 			if err := awsAwsjson11_deserializeDocumentLagList(&sv.Lags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14989,7 +14430,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLoaOutput(v **DescribeLoaOutput, 
 				}
 				sv.LoaContent = dv
 			}
-
 		case "loaContentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14998,7 +14438,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLoaOutput(v **DescribeLoaOutput, 
 				}
 				sv.LoaContentType = types.LoaContentType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15034,7 +14473,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationsOutput(v **DescribeLocat
 			if err := awsAwsjson11_deserializeDocumentLocationList(&sv.Locations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15074,12 +14512,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeRouterConfigurationOutput(v **Des
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "router":
 			if err := awsAwsjson11_deserializeDocumentRouterType(&sv.Router, value); err != nil {
 				return err
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15088,7 +14524,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeRouterConfigurationOutput(v **Des
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15097,7 +14532,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeRouterConfigurationOutput(v **Des
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15133,7 +14567,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeTagsOutput(v **DescribeTagsOutput
 			if err := awsAwsjson11_deserializeDocumentResourceTagList(&sv.ResourceTags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15169,7 +14602,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeVirtualGatewaysOutput(v **Describ
 			if err := awsAwsjson11_deserializeDocumentVirtualGatewayList(&sv.VirtualGateways, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15205,7 +14637,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeVirtualInterfacesOutput(v **Descr
 			if err := awsAwsjson11_deserializeDocumentVirtualInterfaceList(&sv.VirtualInterfaces, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15245,7 +14676,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15254,7 +14684,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15263,7 +14692,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15272,7 +14700,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15281,7 +14708,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15290,7 +14716,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15299,7 +14724,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15308,7 +14732,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15317,7 +14740,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15326,7 +14748,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15335,7 +14756,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15351,7 +14771,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15360,7 +14779,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15369,12 +14787,10 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15383,7 +14799,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15392,7 +14807,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15401,7 +14815,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15410,7 +14823,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15419,12 +14831,10 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15437,7 +14847,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15477,12 +14886,10 @@ func awsAwsjson11_deserializeOpDocumentDisassociateMacSecKeyOutput(v **Disassoci
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15522,12 +14929,10 @@ func awsAwsjson11_deserializeOpDocumentListVirtualInterfaceTestHistoryOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceTestHistory":
 			if err := awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistoryList(&sv.VirtualInterfaceTestHistory, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15563,7 +14968,6 @@ func awsAwsjson11_deserializeOpDocumentStartBgpFailoverTestOutput(v **StartBgpFa
 			if err := awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(&sv.VirtualInterfaceTest, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15599,7 +15003,6 @@ func awsAwsjson11_deserializeOpDocumentStopBgpFailoverTestOutput(v **StopBgpFail
 			if err := awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(&sv.VirtualInterfaceTest, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15701,7 +15104,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15710,7 +15112,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15719,7 +15120,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15728,7 +15128,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.Bandwidth = ptr.String(jtv)
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15737,7 +15136,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "connectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15746,7 +15144,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
-
 		case "connectionState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15755,7 +15152,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15764,7 +15160,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15773,7 +15168,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15782,7 +15176,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15791,7 +15184,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "loaIssueTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15807,7 +15199,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 
 				}
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15816,7 +15207,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15825,12 +15215,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15839,7 +15227,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "partnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15848,7 +15235,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.PartnerName = ptr.String(jtv)
 			}
-
 		case "portEncryptionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15857,7 +15243,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15866,7 +15251,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15875,12 +15259,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15893,7 +15275,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15929,7 +15310,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateDirectConnectGatewayAssociationOutp
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(&sv.DirectConnectGatewayAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15965,7 +15345,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateDirectConnectGatewayOutput(v **Upda
 			if err := awsAwsjson11_deserializeDocumentDirectConnectGateway(&sv.DirectConnectGateway, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16005,7 +15384,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.AllowsHostedConnections = jtv
 			}
-
 		case "awsDevice":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16014,7 +15392,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.AwsDevice = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16023,7 +15400,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16032,12 +15408,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
-
 		case "connectionsBandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16046,7 +15420,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
-
 		case "encryptionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16055,7 +15428,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.EncryptionMode = ptr.String(jtv)
 			}
-
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16064,7 +15436,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16073,7 +15444,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "lagId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16082,7 +15452,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.LagId = ptr.String(jtv)
 			}
-
 		case "lagName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16091,7 +15460,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.LagName = ptr.String(jtv)
 			}
-
 		case "lagState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16100,7 +15468,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.LagState = types.LagState(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16109,7 +15476,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "macSecCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16118,12 +15484,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.MacSecCapable = ptr.Bool(jtv)
 			}
-
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
 			}
-
 		case "minimumLinks":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16136,7 +15500,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.MinimumLinks = int32(i64)
 			}
-
 		case "numberOfConnections":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16149,7 +15512,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.NumberOfConnections = int32(i64)
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16158,7 +15520,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16167,7 +15528,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.ProviderName = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16176,12 +15536,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16221,7 +15579,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
-
 		case "amazonAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16230,7 +15587,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.AmazonAddress = ptr.String(jtv)
 			}
-
 		case "amazonSideAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16243,7 +15599,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
-
 		case "asn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16256,7 +15611,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.Asn = int32(i64)
 			}
-
 		case "authKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16265,7 +15619,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.AuthKey = ptr.String(jtv)
 			}
-
 		case "awsDeviceV2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16274,7 +15627,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
-
 		case "awsLogicalDeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16283,12 +15635,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
-
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
 			}
-
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16297,7 +15647,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
-
 		case "customerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16306,7 +15655,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.CustomerAddress = ptr.String(jtv)
 			}
-
 		case "customerRouterConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16315,7 +15663,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
-
 		case "directConnectGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16324,7 +15671,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
-
 		case "jumboFrameCapable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16333,7 +15679,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16342,7 +15687,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "mtu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16355,7 +15699,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.Mtu = ptr.Int32(int32(i64))
 			}
-
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16364,7 +15707,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.OwnerAccount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16373,12 +15715,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
 			}
-
 		case "siteLinkEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16387,12 +15727,10 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "virtualGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16401,7 +15739,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.VirtualGatewayId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16410,7 +15747,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16419,7 +15755,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
-
 		case "virtualInterfaceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16428,7 +15763,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.VirtualInterfaceState = types.VirtualInterfaceState(jtv)
 			}
-
 		case "virtualInterfaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16437,7 +15771,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
-
 		case "vlan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16450,7 +15783,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				}
 				sv.Vlan = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 

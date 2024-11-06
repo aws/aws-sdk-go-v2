@@ -184,7 +184,6 @@ func awsRestjson1_deserializeOpDocumentDeleteReportDefinitionOutput(v **DeleteRe
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -356,12 +355,10 @@ func awsRestjson1_deserializeOpDocumentGetReportDefinitionOutput(v **GetReportDe
 
 				}
 			}
-
 		case "destinationS3Location":
 			if err := awsRestjson1_deserializeDocumentS3Location(&sv.DestinationS3Location, value); err != nil {
 				return err
 			}
-
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -370,7 +367,6 @@ func awsRestjson1_deserializeOpDocumentGetReportDefinitionOutput(v **GetReportDe
 				}
 				sv.Format = types.Format(jtv)
 			}
-
 		case "lastUpdated":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -386,7 +382,6 @@ func awsRestjson1_deserializeOpDocumentGetReportDefinitionOutput(v **GetReportDe
 
 				}
 			}
-
 		case "reportDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -395,7 +390,6 @@ func awsRestjson1_deserializeOpDocumentGetReportDefinitionOutput(v **GetReportDe
 				}
 				sv.ReportDescription = ptr.String(jtv)
 			}
-
 		case "reportFrequency":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -404,7 +398,6 @@ func awsRestjson1_deserializeOpDocumentGetReportDefinitionOutput(v **GetReportDe
 				}
 				sv.ReportFrequency = types.ReportFrequency(jtv)
 			}
-
 		case "reportId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -413,7 +406,6 @@ func awsRestjson1_deserializeOpDocumentGetReportDefinitionOutput(v **GetReportDe
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -578,7 +570,6 @@ func awsRestjson1_deserializeOpDocumentImportApplicationUsageOutput(v **ImportAp
 				}
 				sv.ImportId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -743,12 +734,10 @@ func awsRestjson1_deserializeOpDocumentListReportDefinitionsOutput(v **ListRepor
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "reportDefinitions":
 			if err := awsRestjson1_deserializeDocumentReportDefinitionList(&sv.ReportDefinitions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -916,7 +905,6 @@ func awsRestjson1_deserializeOpDocumentPutReportDefinitionOutput(v **PutReportDe
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1081,7 +1069,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReportDefinitionOutput(v **UpdateRe
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1291,15 +1278,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1307,14 +1288,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1340,15 +1317,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1356,14 +1327,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1406,12 +1373,10 @@ func awsRestjson1_deserializeDocumentReportDefinition(v **types.ReportDefinition
 
 				}
 			}
-
 		case "destinationS3Location":
 			if err := awsRestjson1_deserializeDocumentS3Location(&sv.DestinationS3Location, value); err != nil {
 				return err
 			}
-
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1420,7 +1385,6 @@ func awsRestjson1_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.Format = types.Format(jtv)
 			}
-
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1436,7 +1400,6 @@ func awsRestjson1_deserializeDocumentReportDefinition(v **types.ReportDefinition
 
 				}
 			}
-
 		case "reportDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1445,7 +1408,6 @@ func awsRestjson1_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.ReportDescription = ptr.String(jtv)
 			}
-
 		case "reportFrequency":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1454,7 +1416,6 @@ func awsRestjson1_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.ReportFrequency = types.ReportFrequency(jtv)
 			}
-
 		case "reportId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1463,7 +1424,6 @@ func awsRestjson1_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1537,7 +1497,6 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.Bucket = ptr.String(jtv)
 			}
-
 		case "prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1546,7 +1505,6 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1576,15 +1534,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1592,14 +1544,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1625,15 +1573,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1641,14 +1583,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1674,15 +1612,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1690,14 +1622,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

@@ -540,7 +540,6 @@ func awsRestjson1_deserializeOpDocumentDatetimeOffsetsOutput(v **DatetimeOffsets
 				}
 				sv.Datetime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -689,7 +688,6 @@ func awsRestjson1_deserializeOpDocumentDocumentTypeOutput(v **DocumentTypeOutput
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DocumentValue, value); err != nil {
 				return err
 			}
-
 		case "stringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -698,7 +696,6 @@ func awsRestjson1_deserializeOpDocumentDocumentTypeOutput(v **DocumentTypeOutput
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -847,7 +844,6 @@ func awsRestjson1_deserializeOpDocumentDocumentTypeAsMapValueOutput(v **Document
 			if err := awsRestjson1_deserializeDocumentDocumentValuedMap(&sv.DocValuedMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -996,7 +992,6 @@ func awsRestjson1_deserializeOpDocumentDocumentTypeAsPayloadOutput(v **DocumentT
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DocumentValue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1420,7 +1415,6 @@ func awsRestjson1_deserializeOpDocumentFractionalSecondsOutput(v **FractionalSec
 				}
 				sv.Datetime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1776,7 +1770,6 @@ func awsRestjson1_deserializeOpDocumentHttpChecksumRequiredOutput(v **HttpChecks
 				}
 				sv.Foo = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2295,7 +2288,6 @@ func awsRestjson1_deserializeOpDocumentHttpPayloadWithStructureOutput(v **HttpPa
 			if err := awsRestjson1_deserializeDocumentNestedPayload(&sv.Nested, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2444,7 +2436,6 @@ func awsRestjson1_deserializeOpDocumentHttpPayloadWithUnionOutput(v **HttpPayloa
 			if err := awsRestjson1_deserializeDocumentUnionPayload(&sv.Nested, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3485,7 +3476,6 @@ func awsRestjson1_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(v **Ign
 				}
 				sv.Baz = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3959,7 +3949,6 @@ func awsRestjson1_deserializeOpDocumentJsonBlobsOutput(v **JsonBlobsOutput, valu
 				}
 				sv.Data = dv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4112,7 +4101,6 @@ func awsRestjson1_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, valu
 				}
 				sv.FooEnum1 = types.FooEnum(jtv)
 			}
-
 		case "fooEnum2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4121,7 +4109,6 @@ func awsRestjson1_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, valu
 				}
 				sv.FooEnum2 = types.FooEnum(jtv)
 			}
-
 		case "fooEnum3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4130,22 +4117,18 @@ func awsRestjson1_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, valu
 				}
 				sv.FooEnum3 = types.FooEnum(jtv)
 			}
-
 		case "fooEnumList":
 			if err := awsRestjson1_deserializeDocumentFooEnumList(&sv.FooEnumList, value); err != nil {
 				return err
 			}
-
 		case "fooEnumMap":
 			if err := awsRestjson1_deserializeDocumentFooEnumMap(&sv.FooEnumMap, value); err != nil {
 				return err
 			}
-
 		case "fooEnumSet":
 			if err := awsRestjson1_deserializeDocumentFooEnumSet(&sv.FooEnumSet, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4302,7 +4285,6 @@ func awsRestjson1_deserializeOpDocumentJsonIntEnumsOutput(v **JsonIntEnumsOutput
 				}
 				sv.IntegerEnum1 = int32(i64)
 			}
-
 		case "integerEnum2":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4315,7 +4297,6 @@ func awsRestjson1_deserializeOpDocumentJsonIntEnumsOutput(v **JsonIntEnumsOutput
 				}
 				sv.IntegerEnum2 = int32(i64)
 			}
-
 		case "integerEnum3":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4328,22 +4309,18 @@ func awsRestjson1_deserializeOpDocumentJsonIntEnumsOutput(v **JsonIntEnumsOutput
 				}
 				sv.IntegerEnum3 = int32(i64)
 			}
-
 		case "integerEnumList":
 			if err := awsRestjson1_deserializeDocumentIntegerEnumList(&sv.IntegerEnumList, value); err != nil {
 				return err
 			}
-
 		case "integerEnumMap":
 			if err := awsRestjson1_deserializeDocumentIntegerEnumMap(&sv.IntegerEnumMap, value); err != nil {
 				return err
 			}
-
 		case "integerEnumSet":
 			if err := awsRestjson1_deserializeDocumentIntegerEnumSet(&sv.IntegerEnumSet, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4492,47 +4469,38 @@ func awsRestjson1_deserializeOpDocumentJsonListsOutput(v **JsonListsOutput, valu
 			if err := awsRestjson1_deserializeDocumentBooleanList(&sv.BooleanList, value); err != nil {
 				return err
 			}
-
 		case "enumList":
 			if err := awsRestjson1_deserializeDocumentFooEnumList(&sv.EnumList, value); err != nil {
 				return err
 			}
-
 		case "integerList":
 			if err := awsRestjson1_deserializeDocumentIntegerList(&sv.IntegerList, value); err != nil {
 				return err
 			}
-
 		case "intEnumList":
 			if err := awsRestjson1_deserializeDocumentIntegerEnumList(&sv.IntEnumList, value); err != nil {
 				return err
 			}
-
 		case "nestedStringList":
 			if err := awsRestjson1_deserializeDocumentNestedStringList(&sv.NestedStringList, value); err != nil {
 				return err
 			}
-
 		case "stringList":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.StringList, value); err != nil {
 				return err
 			}
-
 		case "stringSet":
 			if err := awsRestjson1_deserializeDocumentStringSet(&sv.StringSet, value); err != nil {
 				return err
 			}
-
 		case "myStructureList":
 			if err := awsRestjson1_deserializeDocumentStructureList(&sv.StructureList, value); err != nil {
 				return err
 			}
-
 		case "timestampList":
 			if err := awsRestjson1_deserializeDocumentTimestampList(&sv.TimestampList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4681,27 +4649,22 @@ func awsRestjson1_deserializeOpDocumentJsonMapsOutput(v **JsonMapsOutput, value 
 			if err := awsRestjson1_deserializeDocumentDenseBooleanMap(&sv.DenseBooleanMap, value); err != nil {
 				return err
 			}
-
 		case "denseNumberMap":
 			if err := awsRestjson1_deserializeDocumentDenseNumberMap(&sv.DenseNumberMap, value); err != nil {
 				return err
 			}
-
 		case "denseSetMap":
 			if err := awsRestjson1_deserializeDocumentDenseSetMap(&sv.DenseSetMap, value); err != nil {
 				return err
 			}
-
 		case "denseStringMap":
 			if err := awsRestjson1_deserializeDocumentDenseStringMap(&sv.DenseStringMap, value); err != nil {
 				return err
 			}
-
 		case "denseStructMap":
 			if err := awsRestjson1_deserializeDocumentDenseStructMap(&sv.DenseStructMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4858,7 +4821,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 				}
 				sv.DateTime = ptr.Time(t)
 			}
-
 		case "dateTimeOnTarget":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4871,7 +4833,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 				}
 				sv.DateTimeOnTarget = ptr.Time(t)
 			}
-
 		case "epochSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4887,7 +4848,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 
 				}
 			}
-
 		case "epochSecondsOnTarget":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4903,7 +4863,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 
 				}
 			}
-
 		case "httpDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4916,7 +4875,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 				}
 				sv.HttpDate = ptr.Time(t)
 			}
-
 		case "httpDateOnTarget":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4929,7 +4887,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 				}
 				sv.HttpDateOnTarget = ptr.Time(t)
 			}
-
 		case "normal":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4945,7 +4902,6 @@ func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOu
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5094,7 +5050,6 @@ func awsRestjson1_deserializeOpDocumentJsonUnionsOutput(v **JsonUnionsOutput, va
 			if err := awsRestjson1_deserializeDocumentMyUnion(&sv.Contents, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5247,7 +5202,6 @@ func awsRestjson1_deserializeOpDocumentMalformedAcceptWithBodyOutput(v **Malform
 				}
 				sv.Hi = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9071,7 +9025,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultBlob = dv
 			}
-
 		case "defaultBoolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9080,7 +9033,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultBoolean = ptr.Bool(jtv)
 			}
-
 		case "defaultByte":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9093,27 +9045,22 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultByte = ptr.Int8(int8(i64))
 			}
-
 		case "defaultDocumentBoolean":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DefaultDocumentBoolean, value); err != nil {
 				return err
 			}
-
 		case "defaultDocumentList":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DefaultDocumentList, value); err != nil {
 				return err
 			}
-
 		case "defaultDocumentMap":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DefaultDocumentMap, value); err != nil {
 				return err
 			}
-
 		case "defaultDocumentString":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DefaultDocumentString, value); err != nil {
 				return err
 			}
-
 		case "defaultDouble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9147,7 +9094,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "defaultEnum":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9156,7 +9102,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultEnum = types.TestEnum(jtv)
 			}
-
 		case "defaultFloat":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9190,7 +9135,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "defaultInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9203,7 +9147,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultInteger = ptr.Int32(int32(i64))
 			}
-
 		case "defaultIntEnum":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9216,12 +9159,10 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultIntEnum = int32(i64)
 			}
-
 		case "defaultList":
 			if err := awsRestjson1_deserializeDocumentTestStringList(&sv.DefaultList, value); err != nil {
 				return err
 			}
-
 		case "defaultLong":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9234,17 +9175,14 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultLong = ptr.Int64(i64)
 			}
-
 		case "defaultMap":
 			if err := awsRestjson1_deserializeDocumentTestStringMap(&sv.DefaultMap, value); err != nil {
 				return err
 			}
-
 		case "defaultNullDocument":
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.DefaultNullDocument, value); err != nil {
 				return err
 			}
-
 		case "defaultShort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9257,7 +9195,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultShort = ptr.Int16(int16(i64))
 			}
-
 		case "defaultString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9266,7 +9203,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultString = ptr.String(jtv)
 			}
-
 		case "defaultTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9282,7 +9218,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "emptyBlob":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9295,7 +9230,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.EmptyBlob = dv
 			}
-
 		case "emptyString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9304,7 +9238,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.EmptyString = ptr.String(jtv)
 			}
-
 		case "falseBoolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9313,7 +9246,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.FalseBoolean = jtv
 			}
-
 		case "zeroByte":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9326,7 +9258,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroByte = int8(i64)
 			}
-
 		case "zeroDouble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9360,7 +9291,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "zeroFloat":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9394,7 +9324,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "zeroInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9407,7 +9336,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroInteger = int32(i64)
 			}
-
 		case "zeroLong":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9420,7 +9348,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroLong = i64
 			}
-
 		case "zeroShort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9433,7 +9360,6 @@ func awsRestjson1_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroShort = int16(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9582,17 +9508,14 @@ func awsRestjson1_deserializeOpDocumentOperationWithNestedStructureOutput(v **Op
 			if err := awsRestjson1_deserializeDocumentDialog(&sv.Dialog, value); err != nil {
 				return err
 			}
-
 		case "dialogList":
 			if err := awsRestjson1_deserializeDocumentDialogList(&sv.DialogList, value); err != nil {
 				return err
 			}
-
 		case "dialogMap":
 			if err := awsRestjson1_deserializeDocumentDialogMap(&sv.DialogMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9741,7 +9664,6 @@ func awsRestjson1_deserializeOpDocumentPostPlayerActionOutput(v **PostPlayerActi
 			if err := awsRestjson1_deserializeDocumentPlayerAction(&sv.Action, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9890,7 +9812,6 @@ func awsRestjson1_deserializeOpDocumentPostUnionWithJsonNameOutput(v **PostUnion
 			if err := awsRestjson1_deserializeDocumentUnionWithJsonName(&sv.Value, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10403,7 +10324,6 @@ func awsRestjson1_deserializeOpDocumentRecursiveShapesOutput(v **RecursiveShapes
 			if err := awsRestjson1_deserializeDocumentRecursiveShapesInputOutputNested1(&sv.Nested, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10762,7 +10682,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.ByteValue = ptr.Int8(int8(i64))
 			}
-
 		case "DoubleDribble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10796,7 +10715,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 
 				}
 			}
-
 		case "falseBooleanValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10805,7 +10723,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.FalseBooleanValue = ptr.Bool(jtv)
 			}
-
 		case "floatValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10839,7 +10756,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 
 				}
 			}
-
 		case "integerValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10852,7 +10768,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.IntegerValue = ptr.Int32(int32(i64))
 			}
-
 		case "longValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10865,7 +10780,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.LongValue = ptr.Int64(i64)
 			}
-
 		case "shortValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10878,7 +10792,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.ShortValue = ptr.Int16(int16(i64))
 			}
-
 		case "stringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10887,7 +10800,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
-
 		case "trueBooleanValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10896,7 +10808,6 @@ func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 				}
 				sv.TrueBooleanValue = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11045,12 +10956,10 @@ func awsRestjson1_deserializeOpDocumentSparseJsonListsOutput(v **SparseJsonLists
 			if err := awsRestjson1_deserializeDocumentSparseShortList(&sv.SparseShortList, value); err != nil {
 				return err
 			}
-
 		case "sparseStringList":
 			if err := awsRestjson1_deserializeDocumentSparseStringList(&sv.SparseStringList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11199,27 +11108,22 @@ func awsRestjson1_deserializeOpDocumentSparseJsonMapsOutput(v **SparseJsonMapsOu
 			if err := awsRestjson1_deserializeDocumentSparseBooleanMap(&sv.SparseBooleanMap, value); err != nil {
 				return err
 			}
-
 		case "sparseNumberMap":
 			if err := awsRestjson1_deserializeDocumentSparseNumberMap(&sv.SparseNumberMap, value); err != nil {
 				return err
 			}
-
 		case "sparseSetMap":
 			if err := awsRestjson1_deserializeDocumentSparseSetMap(&sv.SparseSetMap, value); err != nil {
 				return err
 			}
-
 		case "sparseStringMap":
 			if err := awsRestjson1_deserializeDocumentSparseStringMap(&sv.SparseStringMap, value); err != nil {
 				return err
 			}
-
 		case "sparseStructMap":
 			if err := awsRestjson1_deserializeDocumentSparseStructMap(&sv.SparseStructMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11708,7 +11612,6 @@ func awsRestjson1_deserializeOpDocumentTestBodyStructureOutput(v **TestBodyStruc
 			if err := awsRestjson1_deserializeDocumentTestConfig(&sv.TestConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12209,7 +12112,6 @@ func awsRestjson1_deserializeOpDocumentTestPayloadStructureOutput(v **TestPayloa
 			if err := awsRestjson1_deserializeDocumentPayloadConfig(&sv.PayloadConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12792,13 +12694,7 @@ func awsRestjson1_deserializeDocumentComplexError(v **types.ComplexError, value 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "Header":
 			if value != nil {
@@ -12808,12 +12704,10 @@ func awsRestjson1_deserializeDocumentComplexError(v **types.ComplexError, value 
 				}
 				sv.Header = ptr.String(jtv)
 			}
-
 		case "Nested":
 			if err := awsRestjson1_deserializeDocumentComplexNestedErrorData(&sv.Nested, value); err != nil {
 				return err
 			}
-
 		case "TopLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12822,14 +12716,10 @@ func awsRestjson1_deserializeDocumentComplexError(v **types.ComplexError, value 
 				}
 				sv.TopLevel = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12865,7 +12755,6 @@ func awsRestjson1_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 				}
 				sv.Foo = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13082,7 +12971,6 @@ func awsRestjson1_deserializeDocumentDialog(v **types.Dialog, value interface{})
 			if err := awsRestjson1_deserializeDocumentFarewell(&sv.Farewell, value); err != nil {
 				return err
 			}
-
 		case "greeting":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13091,7 +12979,6 @@ func awsRestjson1_deserializeDocumentDialog(v **types.Dialog, value interface{})
 				}
 				sv.Greeting = ptr.String(jtv)
 			}
-
 		case "language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13100,7 +12987,6 @@ func awsRestjson1_deserializeDocumentDialog(v **types.Dialog, value interface{})
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13251,7 +13137,6 @@ func awsRestjson1_deserializeDocumentFarewell(v **types.Farewell, value interfac
 				}
 				sv.Phrase = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13281,21 +13166,12 @@ func awsRestjson1_deserializeDocumentFooError(v **types.FooError, value interfac
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13321,15 +13197,9 @@ func awsRestjson1_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13337,14 +13207,10 @@ func awsRestjson1_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13533,7 +13399,6 @@ func awsRestjson1_deserializeDocumentNestedPayload(v **types.NestedPayload, valu
 				}
 				sv.Greeting = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13542,7 +13407,6 @@ func awsRestjson1_deserializeDocumentNestedPayload(v **types.NestedPayload, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13586,7 +13450,6 @@ func awsRestjson1_deserializeDocumentPayloadConfig(v **types.PayloadConfig, valu
 				}
 				sv.Data = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13666,12 +13529,10 @@ func awsRestjson1_deserializeDocumentRecursiveShapesInputOutputNested1(v **types
 				}
 				sv.Foo = ptr.String(jtv)
 			}
-
 		case "nested":
 			if err := awsRestjson1_deserializeDocumentRecursiveShapesInputOutputNested2(&sv.Nested, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13711,12 +13572,10 @@ func awsRestjson1_deserializeDocumentRecursiveShapesInputOutputNested2(v **types
 				}
 				sv.Bar = ptr.String(jtv)
 			}
-
 		case "recursiveMember":
 			if err := awsRestjson1_deserializeDocumentRecursiveShapesInputOutputNested1(&sv.RecursiveMember, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13934,7 +13793,6 @@ func awsRestjson1_deserializeDocumentStructureListMember(v **types.StructureList
 				}
 				sv.A = ptr.String(jtv)
 			}
-
 		case "other":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13943,7 +13801,6 @@ func awsRestjson1_deserializeDocumentStructureListMember(v **types.StructureList
 				}
 				sv.B = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13987,7 +13844,6 @@ func awsRestjson1_deserializeDocumentTestConfig(v **types.TestConfig, value inte
 				}
 				sv.Timeout = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14207,7 +14063,6 @@ func awsRestjson1_deserializeDocumentRenamedGreeting(v **types.RenamedGreeting, 
 				}
 				sv.Salutation = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14391,7 +14246,6 @@ func awsRestjson1_deserializeDocumentGreetingStruct(v **types.GreetingStruct, va
 				}
 				sv.Hi = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

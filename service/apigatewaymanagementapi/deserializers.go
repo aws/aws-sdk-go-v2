@@ -286,12 +286,10 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 				}
 				sv.ConnectedAt = ptr.Time(t)
 			}
-
 		case "identity":
 			if err := awsRestjson1_deserializeDocumentIdentity(&sv.Identity, value); err != nil {
 				return err
 			}
-
 		case "lastActiveAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -304,7 +302,6 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 				}
 				sv.LastActiveAt = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -488,21 +485,12 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -528,21 +516,12 @@ func awsRestjson1_deserializeDocumentGoneException(v **types.GoneException, valu
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -578,7 +557,6 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 				}
 				sv.SourceIp = ptr.String(jtv)
 			}
-
 		case "userAgent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -587,7 +565,6 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 				}
 				sv.UserAgent = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -617,21 +594,12 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -657,15 +625,9 @@ func awsRestjson1_deserializeDocumentPayloadTooLargeException(v **types.PayloadT
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -673,14 +635,10 @@ func awsRestjson1_deserializeDocumentPayloadTooLargeException(v **types.PayloadT
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

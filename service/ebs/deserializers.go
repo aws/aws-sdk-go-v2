@@ -191,7 +191,6 @@ func awsRestjson1_deserializeOpDocumentCompleteSnapshotOutput(v **CompleteSnapsh
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -514,12 +513,10 @@ func awsRestjson1_deserializeOpDocumentListChangedBlocksOutput(v **ListChangedBl
 				}
 				sv.BlockSize = ptr.Int32(int32(i64))
 			}
-
 		case "ChangedBlocks":
 			if err := awsRestjson1_deserializeDocumentChangedBlocks(&sv.ChangedBlocks, value); err != nil {
 				return err
 			}
-
 		case "ExpiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -535,7 +532,6 @@ func awsRestjson1_deserializeOpDocumentListChangedBlocksOutput(v **ListChangedBl
 
 				}
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -544,7 +540,6 @@ func awsRestjson1_deserializeOpDocumentListChangedBlocksOutput(v **ListChangedBl
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "VolumeSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -557,7 +552,6 @@ func awsRestjson1_deserializeOpDocumentListChangedBlocksOutput(v **ListChangedBl
 				}
 				sv.VolumeSize = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -724,7 +718,6 @@ func awsRestjson1_deserializeOpDocumentListSnapshotBlocksOutput(v **ListSnapshot
 			if err := awsRestjson1_deserializeDocumentBlocks(&sv.Blocks, value); err != nil {
 				return err
 			}
-
 		case "BlockSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -737,7 +730,6 @@ func awsRestjson1_deserializeOpDocumentListSnapshotBlocksOutput(v **ListSnapshot
 				}
 				sv.BlockSize = ptr.Int32(int32(i64))
 			}
-
 		case "ExpiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -753,7 +745,6 @@ func awsRestjson1_deserializeOpDocumentListSnapshotBlocksOutput(v **ListSnapshot
 
 				}
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -762,7 +753,6 @@ func awsRestjson1_deserializeOpDocumentListSnapshotBlocksOutput(v **ListSnapshot
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "VolumeSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -775,7 +765,6 @@ func awsRestjson1_deserializeOpDocumentListSnapshotBlocksOutput(v **ListSnapshot
 				}
 				sv.VolumeSize = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1082,7 +1071,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.BlockSize = ptr.Int32(int32(i64))
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1091,7 +1079,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "KmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1100,7 +1087,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1109,7 +1095,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ParentSnapshotId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1118,7 +1103,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.ParentSnapshotId = ptr.String(jtv)
 			}
-
 		case "SnapshotId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1127,7 +1111,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.SnapshotId = ptr.String(jtv)
 			}
-
 		case "SseType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1136,7 +1119,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.SseType = types.SSEType(jtv)
 			}
-
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1152,7 +1134,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 
 				}
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1161,12 +1142,10 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "VolumeSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1179,7 +1158,6 @@ func awsRestjson1_deserializeOpDocumentStartSnapshotOutput(v **StartSnapshotOutp
 				}
 				sv.VolumeSize = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1497,15 +1475,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1513,7 +1485,6 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1522,14 +1493,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Reason = types.AccessDeniedExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1569,7 +1536,6 @@ func awsRestjson1_deserializeDocumentBlock(v **types.Block, value interface{}) e
 				}
 				sv.BlockIndex = ptr.Int32(int32(i64))
 			}
-
 		case "BlockToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1578,7 +1544,6 @@ func awsRestjson1_deserializeDocumentBlock(v **types.Block, value interface{}) e
 				}
 				sv.BlockToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1656,7 +1621,6 @@ func awsRestjson1_deserializeDocumentChangedBlock(v **types.ChangedBlock, value 
 				}
 				sv.BlockIndex = ptr.Int32(int32(i64))
 			}
-
 		case "FirstBlockToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1665,7 +1629,6 @@ func awsRestjson1_deserializeDocumentChangedBlock(v **types.ChangedBlock, value 
 				}
 				sv.FirstBlockToken = ptr.String(jtv)
 			}
-
 		case "SecondBlockToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1674,7 +1637,6 @@ func awsRestjson1_deserializeDocumentChangedBlock(v **types.ChangedBlock, value 
 				}
 				sv.SecondBlockToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1738,15 +1700,9 @@ func awsRestjson1_deserializeDocumentConcurrentLimitExceededException(v **types.
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1754,14 +1710,10 @@ func awsRestjson1_deserializeDocumentConcurrentLimitExceededException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1787,15 +1739,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1803,14 +1749,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1836,15 +1778,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1852,14 +1788,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1885,15 +1817,9 @@ func awsRestjson1_deserializeDocumentRequestThrottledException(v **types.Request
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1901,7 +1827,6 @@ func awsRestjson1_deserializeDocumentRequestThrottledException(v **types.Request
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1910,14 +1835,10 @@ func awsRestjson1_deserializeDocumentRequestThrottledException(v **types.Request
 				}
 				sv.Reason = types.RequestThrottledExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1943,15 +1864,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1959,7 +1874,6 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1968,14 +1882,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Reason = types.ResourceNotFoundExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2001,15 +1911,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2017,7 +1921,6 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2026,14 +1929,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Reason = types.ServiceQuotaExceededExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2069,7 +1968,6 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2078,7 +1976,6 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2142,15 +2039,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2158,7 +2049,6 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2167,14 +2057,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

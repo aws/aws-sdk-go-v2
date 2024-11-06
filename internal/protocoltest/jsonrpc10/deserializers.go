@@ -1678,19 +1678,12 @@ func awsAwsjson10_deserializeDocumentComplexError(v **types.ComplexError, value 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "Nested":
 			if err := awsAwsjson10_deserializeDocumentComplexNestedErrorData(&sv.Nested, value); err != nil {
 				return err
 			}
-
 		case "TopLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1699,14 +1692,10 @@ func awsAwsjson10_deserializeDocumentComplexError(v **types.ComplexError, value 
 				}
 				sv.TopLevel = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1742,7 +1731,6 @@ func awsAwsjson10_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 				}
 				sv.Foo = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1778,7 +1766,6 @@ func awsAwsjson10_deserializeDocumentDialog(v **types.Dialog, value interface{})
 			if err := awsAwsjson10_deserializeDocumentFarewell(&sv.Farewell, value); err != nil {
 				return err
 			}
-
 		case "greeting":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1787,7 +1774,6 @@ func awsAwsjson10_deserializeDocumentDialog(v **types.Dialog, value interface{})
 				}
 				sv.Greeting = ptr.String(jtv)
 			}
-
 		case "language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1796,7 +1782,6 @@ func awsAwsjson10_deserializeDocumentDialog(v **types.Dialog, value interface{})
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1905,7 +1890,6 @@ func awsAwsjson10_deserializeDocumentFarewell(v **types.Farewell, value interfac
 				}
 				sv.Phrase = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1935,21 +1919,12 @@ func awsAwsjson10_deserializeDocumentFooError(v **types.FooError, value interfac
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1975,15 +1950,9 @@ func awsAwsjson10_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1991,14 +1960,10 @@ func awsAwsjson10_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2337,7 +2302,6 @@ func awsAwsjson10_deserializeDocumentGreetingStruct(v **types.GreetingStruct, va
 				}
 				sv.Hi = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2519,7 +2483,6 @@ func awsAwsjson10_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWith
 				}
 				sv.Greeting = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2555,7 +2518,6 @@ func awsAwsjson10_deserializeOpDocumentJsonUnionsOutput(v **JsonUnionsOutput, va
 			if err := awsAwsjson10_deserializeDocumentMyUnion(&sv.Contents, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2630,7 +2592,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultBlob = dv
 			}
-
 		case "defaultBoolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2639,7 +2600,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultBoolean = ptr.Bool(jtv)
 			}
-
 		case "defaultByte":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2652,27 +2612,22 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultByte = ptr.Int8(int8(i64))
 			}
-
 		case "defaultDocumentBoolean":
 			if err := awsAwsjson10_deserializeDocumentDocument(&sv.DefaultDocumentBoolean, value); err != nil {
 				return err
 			}
-
 		case "defaultDocumentList":
 			if err := awsAwsjson10_deserializeDocumentDocument(&sv.DefaultDocumentList, value); err != nil {
 				return err
 			}
-
 		case "defaultDocumentMap":
 			if err := awsAwsjson10_deserializeDocumentDocument(&sv.DefaultDocumentMap, value); err != nil {
 				return err
 			}
-
 		case "defaultDocumentString":
 			if err := awsAwsjson10_deserializeDocumentDocument(&sv.DefaultDocumentString, value); err != nil {
 				return err
 			}
-
 		case "defaultDouble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2706,7 +2661,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "defaultEnum":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2715,7 +2669,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultEnum = types.TestEnum(jtv)
 			}
-
 		case "defaultFloat":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2749,7 +2702,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "defaultInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2762,7 +2714,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultInteger = ptr.Int32(int32(i64))
 			}
-
 		case "defaultIntEnum":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2775,12 +2726,10 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultIntEnum = int32(i64)
 			}
-
 		case "defaultList":
 			if err := awsAwsjson10_deserializeDocumentTestStringList(&sv.DefaultList, value); err != nil {
 				return err
 			}
-
 		case "defaultLong":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2793,17 +2742,14 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultLong = ptr.Int64(i64)
 			}
-
 		case "defaultMap":
 			if err := awsAwsjson10_deserializeDocumentTestStringMap(&sv.DefaultMap, value); err != nil {
 				return err
 			}
-
 		case "defaultNullDocument":
 			if err := awsAwsjson10_deserializeDocumentDocument(&sv.DefaultNullDocument, value); err != nil {
 				return err
 			}
-
 		case "defaultShort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2816,7 +2762,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultShort = ptr.Int16(int16(i64))
 			}
-
 		case "defaultString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2825,7 +2770,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.DefaultString = ptr.String(jtv)
 			}
-
 		case "defaultTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2841,7 +2785,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "emptyBlob":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2854,7 +2797,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.EmptyBlob = dv
 			}
-
 		case "emptyString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2863,7 +2805,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.EmptyString = ptr.String(jtv)
 			}
-
 		case "falseBoolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2872,7 +2813,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.FalseBoolean = jtv
 			}
-
 		case "zeroByte":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2885,7 +2825,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroByte = int8(i64)
 			}
-
 		case "zeroDouble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2919,7 +2858,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "zeroFloat":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2953,7 +2891,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 
 				}
 			}
-
 		case "zeroInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2966,7 +2903,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroInteger = int32(i64)
 			}
-
 		case "zeroLong":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2979,7 +2915,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroLong = i64
 			}
-
 		case "zeroShort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2992,7 +2927,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithDefaultsOutput(v **Operation
 				}
 				sv.ZeroShort = int16(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3028,17 +2962,14 @@ func awsAwsjson10_deserializeOpDocumentOperationWithNestedStructureOutput(v **Op
 			if err := awsAwsjson10_deserializeDocumentDialog(&sv.Dialog, value); err != nil {
 				return err
 			}
-
 		case "dialogList":
 			if err := awsAwsjson10_deserializeDocumentDialogList(&sv.DialogList, value); err != nil {
 				return err
 			}
-
 		case "dialogMap":
 			if err := awsAwsjson10_deserializeDocumentDialogMap(&sv.DialogMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3082,7 +3013,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredBlob = dv
 			}
-
 		case "requiredBoolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3091,7 +3021,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredBoolean = ptr.Bool(jtv)
 			}
-
 		case "requiredByte":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3104,7 +3033,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredByte = ptr.Int8(int8(i64))
 			}
-
 		case "requiredDouble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3138,7 +3066,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 
 				}
 			}
-
 		case "requiredFloat":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3172,7 +3099,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 
 				}
 			}
-
 		case "requiredInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3185,12 +3111,10 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredInteger = ptr.Int32(int32(i64))
 			}
-
 		case "requiredList":
 			if err := awsAwsjson10_deserializeDocumentRequiredStringList(&sv.RequiredList, value); err != nil {
 				return err
 			}
-
 		case "requiredLong":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3203,12 +3127,10 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredLong = ptr.Int64(i64)
 			}
-
 		case "requiredMap":
 			if err := awsAwsjson10_deserializeDocumentRequiredStringMap(&sv.RequiredMap, value); err != nil {
 				return err
 			}
-
 		case "requiredShort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3221,7 +3143,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredShort = ptr.Int16(int16(i64))
 			}
-
 		case "requiredString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3230,7 +3151,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 				}
 				sv.RequiredString = ptr.String(jtv)
 			}
-
 		case "requiredTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3246,7 +3166,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersOutput(v **Op
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3290,7 +3209,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredBlob = dv
 			}
-
 		case "requiredBoolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3299,7 +3217,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredBoolean = ptr.Bool(jtv)
 			}
-
 		case "requiredByte":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3312,7 +3229,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredByte = ptr.Int8(int8(i64))
 			}
-
 		case "requiredDouble":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3346,7 +3262,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 
 				}
 			}
-
 		case "requiredEnum":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3355,7 +3270,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredEnum = types.RequiredEnum(jtv)
 			}
-
 		case "requiredFloat":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3389,7 +3303,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 
 				}
 			}
-
 		case "requiredInteger":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3402,7 +3315,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredInteger = ptr.Int32(int32(i64))
 			}
-
 		case "requiredIntEnum":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3415,12 +3327,10 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredIntEnum = int32(i64)
 			}
-
 		case "requiredList":
 			if err := awsAwsjson10_deserializeDocumentRequiredStringList(&sv.RequiredList, value); err != nil {
 				return err
 			}
-
 		case "requiredLong":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3433,12 +3343,10 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredLong = ptr.Int64(i64)
 			}
-
 		case "requiredMap":
 			if err := awsAwsjson10_deserializeDocumentRequiredStringMap(&sv.RequiredMap, value); err != nil {
 				return err
 			}
-
 		case "requiredShort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3451,7 +3359,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredShort = ptr.Int16(int16(i64))
 			}
-
 		case "requiredString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3460,7 +3367,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 				}
 				sv.RequiredString = ptr.String(jtv)
 			}
-
 		case "requiredTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3476,7 +3382,6 @@ func awsAwsjson10_deserializeOpDocumentOperationWithRequiredMembersWithDefaultsO
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3541,7 +3446,6 @@ func awsAwsjson10_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 
 				}
 			}
-
 		case "floatValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3575,7 +3479,6 @@ func awsAwsjson10_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 

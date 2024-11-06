@@ -3837,15 +3837,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3853,14 +3847,10 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3900,7 +3890,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationConfiguration(v **types.Authe
 				}
 				sv.AcceptanceThreshold = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3947,7 +3936,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 
 				}
 			}
-
 		case "AudioAggregationStartedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3963,7 +3951,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 
 				}
 			}
-
 		case "AuthenticationResultId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3972,12 +3959,10 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 				}
 				sv.AuthenticationResultId = ptr.String(jtv)
 			}
-
 		case "Configuration":
 			if err := awsAwsjson10_deserializeDocumentAuthenticationConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "CustomerSpeakerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3986,7 +3971,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 				}
 				sv.CustomerSpeakerId = ptr.String(jtv)
 			}
-
 		case "Decision":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3995,7 +3979,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 				}
 				sv.Decision = types.AuthenticationDecision(jtv)
 			}
-
 		case "GeneratedSpeakerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4004,7 +3987,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 				}
 				sv.GeneratedSpeakerId = ptr.String(jtv)
 			}
-
 		case "Score":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4017,7 +3999,6 @@ func awsAwsjson10_deserializeDocumentAuthenticationResult(v **types.Authenticati
 				}
 				sv.Score = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4047,13 +4028,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "ConflictType":
 			if value != nil {
@@ -4063,8 +4038,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ConflictType = types.ConflictType(jtv)
 			}
-
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4072,14 +4046,10 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4115,7 +4085,6 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4131,7 +4100,6 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 
 				}
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4140,7 +4108,6 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4149,7 +4116,6 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "DomainStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4158,7 +4124,6 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.DomainStatus = types.DomainStatus(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4167,17 +4132,14 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "ServerSideEncryptionConfiguration":
 			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ServerSideEncryptionUpdateDetails":
 			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(&sv.ServerSideEncryptionUpdateDetails, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4193,12 +4155,10 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 
 				}
 			}
-
 		case "WatchlistDetails":
 			if err := awsAwsjson10_deserializeDocumentWatchlistDetails(&sv.WatchlistDetails, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4272,7 +4232,6 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4288,7 +4247,6 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 
 				}
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4297,7 +4255,6 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4306,7 +4263,6 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "DomainStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4315,7 +4271,6 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.DomainStatus = types.DomainStatus(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4324,17 +4279,14 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "ServerSideEncryptionConfiguration":
 			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ServerSideEncryptionUpdateDetails":
 			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(&sv.ServerSideEncryptionUpdateDetails, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4350,12 +4302,10 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 
 				}
 			}
-
 		case "WatchlistDetails":
 			if err := awsAwsjson10_deserializeDocumentWatchlistDetails(&sv.WatchlistDetails, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4395,12 +4345,10 @@ func awsAwsjson10_deserializeDocumentEnrollmentConfig(v **types.EnrollmentConfig
 				}
 				sv.ExistingEnrollmentAction = types.ExistingEnrollmentAction(jtv)
 			}
-
 		case "FraudDetectionConfig":
 			if err := awsAwsjson10_deserializeDocumentEnrollmentJobFraudDetectionConfig(&sv.FraudDetectionConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4440,7 +4388,6 @@ func awsAwsjson10_deserializeDocumentEnrollmentJobFraudDetectionConfig(v **types
 				}
 				sv.FraudDetectionAction = types.FraudDetectionAction(jtv)
 			}
-
 		case "RiskThreshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4453,12 +4400,10 @@ func awsAwsjson10_deserializeDocumentEnrollmentJobFraudDetectionConfig(v **types
 				}
 				sv.RiskThreshold = ptr.Int32(int32(i64))
 			}
-
 		case "WatchlistIds":
 			if err := awsAwsjson10_deserializeDocumentEnrollmentJobFraudDetectionConfigWatchlistIds(&sv.WatchlistIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4534,7 +4479,6 @@ func awsAwsjson10_deserializeDocumentFailureDetails(v **types.FailureDetails, va
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "StatusCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4547,7 +4491,6 @@ func awsAwsjson10_deserializeDocumentFailureDetails(v **types.FailureDetails, va
 				}
 				sv.StatusCode = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4591,7 +4534,6 @@ func awsAwsjson10_deserializeDocumentFraudDetectionConfiguration(v **types.Fraud
 				}
 				sv.RiskThreshold = ptr.Int32(int32(i64))
 			}
-
 		case "WatchlistId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4600,7 +4542,6 @@ func awsAwsjson10_deserializeDocumentFraudDetectionConfiguration(v **types.Fraud
 				}
 				sv.WatchlistId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4683,7 +4624,6 @@ func awsAwsjson10_deserializeDocumentFraudDetectionResult(v **types.FraudDetecti
 
 				}
 			}
-
 		case "AudioAggregationStartedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4699,12 +4639,10 @@ func awsAwsjson10_deserializeDocumentFraudDetectionResult(v **types.FraudDetecti
 
 				}
 			}
-
 		case "Configuration":
 			if err := awsAwsjson10_deserializeDocumentFraudDetectionConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "Decision":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4713,7 +4651,6 @@ func awsAwsjson10_deserializeDocumentFraudDetectionResult(v **types.FraudDetecti
 				}
 				sv.Decision = types.FraudDetectionDecision(jtv)
 			}
-
 		case "FraudDetectionResultId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4722,17 +4659,14 @@ func awsAwsjson10_deserializeDocumentFraudDetectionResult(v **types.FraudDetecti
 				}
 				sv.FraudDetectionResultId = ptr.String(jtv)
 			}
-
 		case "Reasons":
 			if err := awsAwsjson10_deserializeDocumentFraudDetectionReasons(&sv.Reasons, value); err != nil {
 				return err
 			}
-
 		case "RiskDetails":
 			if err := awsAwsjson10_deserializeDocumentFraudRiskDetails(&sv.RiskDetails, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4768,12 +4702,10 @@ func awsAwsjson10_deserializeDocumentFraudRiskDetails(v **types.FraudRiskDetails
 			if err := awsAwsjson10_deserializeDocumentKnownFraudsterRisk(&sv.KnownFraudsterRisk, value); err != nil {
 				return err
 			}
-
 		case "VoiceSpoofingRisk":
 			if err := awsAwsjson10_deserializeDocumentVoiceSpoofingRisk(&sv.VoiceSpoofingRisk, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4820,7 +4752,6 @@ func awsAwsjson10_deserializeDocumentFraudster(v **types.Fraudster, value interf
 
 				}
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4829,7 +4760,6 @@ func awsAwsjson10_deserializeDocumentFraudster(v **types.Fraudster, value interf
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "GeneratedFraudsterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4838,12 +4768,10 @@ func awsAwsjson10_deserializeDocumentFraudster(v **types.Fraudster, value interf
 				}
 				sv.GeneratedFraudsterId = ptr.String(jtv)
 			}
-
 		case "WatchlistIds":
 			if err := awsAwsjson10_deserializeDocumentResponseWatchlistIds(&sv.WatchlistIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4890,7 +4818,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 
 				}
 			}
-
 		case "DataAccessRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4899,7 +4826,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4908,7 +4834,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "EndedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4924,17 +4849,14 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 
 				}
 			}
-
 		case "FailureDetails":
 			if err := awsAwsjson10_deserializeDocumentFailureDetails(&sv.FailureDetails, value); err != nil {
 				return err
 			}
-
 		case "InputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
 			}
-
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4943,7 +4865,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4952,12 +4873,10 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 				}
 				sv.JobName = ptr.String(jtv)
 			}
-
 		case "JobProgress":
 			if err := awsAwsjson10_deserializeDocumentJobProgress(&sv.JobProgress, value); err != nil {
 				return err
 			}
-
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4966,17 +4885,14 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(v **types.Fraudste
 				}
 				sv.JobStatus = types.FraudsterRegistrationJobStatus(jtv)
 			}
-
 		case "OutputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
 			}
-
 		case "RegistrationConfig":
 			if err := awsAwsjson10_deserializeDocumentRegistrationConfig(&sv.RegistrationConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5057,7 +4973,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummary(v **types.F
 
 				}
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5066,7 +4981,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummary(v **types.F
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "EndedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5082,12 +4996,10 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummary(v **types.F
 
 				}
 			}
-
 		case "FailureDetails":
 			if err := awsAwsjson10_deserializeDocumentFailureDetails(&sv.FailureDetails, value); err != nil {
 				return err
 			}
-
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5096,7 +5008,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummary(v **types.F
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5105,12 +5016,10 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummary(v **types.F
 				}
 				sv.JobName = ptr.String(jtv)
 			}
-
 		case "JobProgress":
 			if err := awsAwsjson10_deserializeDocumentJobProgress(&sv.JobProgress, value); err != nil {
 				return err
 			}
-
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5119,7 +5028,6 @@ func awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummary(v **types.F
 				}
 				sv.JobStatus = types.FraudsterRegistrationJobStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5200,7 +5108,6 @@ func awsAwsjson10_deserializeDocumentFraudsterSummary(v **types.FraudsterSummary
 
 				}
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5209,7 +5116,6 @@ func awsAwsjson10_deserializeDocumentFraudsterSummary(v **types.FraudsterSummary
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "GeneratedFraudsterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5218,12 +5124,10 @@ func awsAwsjson10_deserializeDocumentFraudsterSummary(v **types.FraudsterSummary
 				}
 				sv.GeneratedFraudsterId = ptr.String(jtv)
 			}
-
 		case "WatchlistIds":
 			if err := awsAwsjson10_deserializeDocumentResponseWatchlistIds(&sv.WatchlistIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5263,7 +5167,6 @@ func awsAwsjson10_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5293,15 +5196,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5309,14 +5206,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5356,7 +5249,6 @@ func awsAwsjson10_deserializeDocumentJobProgress(v **types.JobProgress, value in
 				}
 				sv.PercentComplete = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5396,7 +5288,6 @@ func awsAwsjson10_deserializeDocumentKnownFraudsterRisk(v **types.KnownFraudster
 				}
 				sv.GeneratedFraudsterId = ptr.String(jtv)
 			}
-
 		case "RiskScore":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5409,7 +5300,6 @@ func awsAwsjson10_deserializeDocumentKnownFraudsterRisk(v **types.KnownFraudster
 				}
 				sv.RiskScore = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5449,7 +5339,6 @@ func awsAwsjson10_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5458,7 +5347,6 @@ func awsAwsjson10_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5498,7 +5386,6 @@ func awsAwsjson10_deserializeDocumentRegistrationConfig(v **types.RegistrationCo
 				}
 				sv.DuplicateRegistrationAction = types.DuplicateRegistrationAction(jtv)
 			}
-
 		case "FraudsterSimilarityThreshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5511,12 +5398,10 @@ func awsAwsjson10_deserializeDocumentRegistrationConfig(v **types.RegistrationCo
 				}
 				sv.FraudsterSimilarityThreshold = ptr.Int32(int32(i64))
 			}
-
 		case "WatchlistIds":
 			if err := awsAwsjson10_deserializeDocumentRegistrationConfigWatchlistIds(&sv.WatchlistIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5582,15 +5467,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5598,7 +5477,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5607,14 +5485,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5686,7 +5560,6 @@ func awsAwsjson10_deserializeDocumentServerSideEncryptionConfiguration(v **types
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5726,7 +5599,6 @@ func awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "OldKmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5735,7 +5607,6 @@ func awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(v **types
 				}
 				sv.OldKmsKeyId = ptr.String(jtv)
 			}
-
 		case "UpdateStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5744,7 +5615,6 @@ func awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(v **types
 				}
 				sv.UpdateStatus = types.ServerSideEncryptionUpdateStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5774,15 +5644,9 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5790,14 +5654,10 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5840,7 +5700,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 
 				}
 			}
-
 		case "CustomerSpeakerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5849,7 +5708,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 				}
 				sv.CustomerSpeakerId = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5858,7 +5716,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "GeneratedSpeakerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5867,7 +5724,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 				}
 				sv.GeneratedSpeakerId = ptr.String(jtv)
 			}
-
 		case "LastAccessedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5883,7 +5739,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 
 				}
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5892,7 +5747,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 				}
 				sv.Status = types.SpeakerStatus(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5908,7 +5762,6 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5955,7 +5808,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 
 				}
 			}
-
 		case "DataAccessRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5964,7 +5816,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5973,7 +5824,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "EndedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5989,22 +5839,18 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 
 				}
 			}
-
 		case "EnrollmentConfig":
 			if err := awsAwsjson10_deserializeDocumentEnrollmentConfig(&sv.EnrollmentConfig, value); err != nil {
 				return err
 			}
-
 		case "FailureDetails":
 			if err := awsAwsjson10_deserializeDocumentFailureDetails(&sv.FailureDetails, value); err != nil {
 				return err
 			}
-
 		case "InputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
 			}
-
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6013,7 +5859,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6022,12 +5867,10 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 				}
 				sv.JobName = ptr.String(jtv)
 			}
-
 		case "JobProgress":
 			if err := awsAwsjson10_deserializeDocumentJobProgress(&sv.JobProgress, value); err != nil {
 				return err
 			}
-
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6036,12 +5879,10 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(v **types.SpeakerEnrol
 				}
 				sv.JobStatus = types.SpeakerEnrollmentJobStatus(jtv)
 			}
-
 		case "OutputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6122,7 +5963,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummary(v **types.Speak
 
 				}
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6131,7 +5971,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummary(v **types.Speak
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "EndedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6147,12 +5986,10 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummary(v **types.Speak
 
 				}
 			}
-
 		case "FailureDetails":
 			if err := awsAwsjson10_deserializeDocumentFailureDetails(&sv.FailureDetails, value); err != nil {
 				return err
 			}
-
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6161,7 +5998,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummary(v **types.Speak
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6170,12 +6006,10 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummary(v **types.Speak
 				}
 				sv.JobName = ptr.String(jtv)
 			}
-
 		case "JobProgress":
 			if err := awsAwsjson10_deserializeDocumentJobProgress(&sv.JobProgress, value); err != nil {
 				return err
 			}
-
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6184,7 +6018,6 @@ func awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummary(v **types.Speak
 				}
 				sv.JobStatus = types.SpeakerEnrollmentJobStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6265,7 +6098,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 
 				}
 			}
-
 		case "CustomerSpeakerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6274,7 +6106,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 				}
 				sv.CustomerSpeakerId = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6283,7 +6114,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "GeneratedSpeakerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6292,7 +6122,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 				}
 				sv.GeneratedSpeakerId = ptr.String(jtv)
 			}
-
 		case "LastAccessedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6308,7 +6137,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 
 				}
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6317,7 +6145,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 				}
 				sv.Status = types.SpeakerStatus(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6333,7 +6160,6 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6373,7 +6199,6 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6382,7 +6207,6 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6446,15 +6270,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6462,14 +6280,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6495,15 +6309,9 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6511,14 +6319,10 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6558,7 +6362,6 @@ func awsAwsjson10_deserializeDocumentVoiceSpoofingRisk(v **types.VoiceSpoofingRi
 				}
 				sv.RiskScore = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6605,7 +6408,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 
 				}
 			}
-
 		case "DefaultWatchlist":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6614,7 +6416,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 				}
 				sv.DefaultWatchlist = jtv
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6623,7 +6424,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6632,7 +6432,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6641,7 +6440,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6657,7 +6455,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 
 				}
 			}
-
 		case "WatchlistId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6666,7 +6463,6 @@ func awsAwsjson10_deserializeDocumentWatchlist(v **types.Watchlist, value interf
 				}
 				sv.WatchlistId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6706,7 +6502,6 @@ func awsAwsjson10_deserializeDocumentWatchlistDetails(v **types.WatchlistDetails
 				}
 				sv.DefaultWatchlistId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6787,7 +6582,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 
 				}
 			}
-
 		case "DefaultWatchlist":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6796,7 +6590,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 				}
 				sv.DefaultWatchlist = jtv
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6805,7 +6598,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6814,7 +6606,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6823,7 +6614,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6839,7 +6629,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 
 				}
 			}
-
 		case "WatchlistId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6848,7 +6637,6 @@ func awsAwsjson10_deserializeDocumentWatchlistSummary(v **types.WatchlistSummary
 				}
 				sv.WatchlistId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6884,7 +6672,6 @@ func awsAwsjson10_deserializeOpDocumentAssociateFraudsterOutput(v **AssociateFra
 			if err := awsAwsjson10_deserializeDocumentFraudster(&sv.Fraudster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6920,7 +6707,6 @@ func awsAwsjson10_deserializeOpDocumentCreateDomainOutput(v **CreateDomainOutput
 			if err := awsAwsjson10_deserializeDocumentDomain(&sv.Domain, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6956,7 +6742,6 @@ func awsAwsjson10_deserializeOpDocumentCreateWatchlistOutput(v **CreateWatchlist
 			if err := awsAwsjson10_deserializeDocumentWatchlist(&sv.Watchlist, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6992,7 +6777,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOu
 			if err := awsAwsjson10_deserializeDocumentDomain(&sv.Domain, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7028,7 +6812,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeFraudsterOutput(v **DescribeFraud
 			if err := awsAwsjson10_deserializeDocumentFraudster(&sv.Fraudster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7064,7 +6847,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeFraudsterRegistrationJobOutput(v 
 			if err := awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(&sv.Job, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7100,7 +6882,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeSpeakerEnrollmentJobOutput(v **De
 			if err := awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(&sv.Job, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7136,7 +6917,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeSpeakerOutput(v **DescribeSpeaker
 			if err := awsAwsjson10_deserializeDocumentSpeaker(&sv.Speaker, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7172,7 +6952,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeWatchlistOutput(v **DescribeWatch
 			if err := awsAwsjson10_deserializeDocumentWatchlist(&sv.Watchlist, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7208,7 +6987,6 @@ func awsAwsjson10_deserializeOpDocumentDisassociateFraudsterOutput(v **Disassoci
 			if err := awsAwsjson10_deserializeDocumentFraudster(&sv.Fraudster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7244,7 +7022,6 @@ func awsAwsjson10_deserializeOpDocumentEvaluateSessionOutput(v **EvaluateSession
 			if err := awsAwsjson10_deserializeDocumentAuthenticationResult(&sv.AuthenticationResult, value); err != nil {
 				return err
 			}
-
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7253,12 +7030,10 @@ func awsAwsjson10_deserializeOpDocumentEvaluateSessionOutput(v **EvaluateSession
 				}
 				sv.DomainId = ptr.String(jtv)
 			}
-
 		case "FraudDetectionResult":
 			if err := awsAwsjson10_deserializeDocumentFraudDetectionResult(&sv.FraudDetectionResult, value); err != nil {
 				return err
 			}
-
 		case "SessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7267,7 +7042,6 @@ func awsAwsjson10_deserializeOpDocumentEvaluateSessionOutput(v **EvaluateSession
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		case "SessionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7276,7 +7050,6 @@ func awsAwsjson10_deserializeOpDocumentEvaluateSessionOutput(v **EvaluateSession
 				}
 				sv.SessionName = ptr.String(jtv)
 			}
-
 		case "StreamingStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7285,7 +7058,6 @@ func awsAwsjson10_deserializeOpDocumentEvaluateSessionOutput(v **EvaluateSession
 				}
 				sv.StreamingStatus = types.StreamingStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7321,7 +7093,6 @@ func awsAwsjson10_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, 
 			if err := awsAwsjson10_deserializeDocumentDomainSummaries(&sv.DomainSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7330,7 +7101,6 @@ func awsAwsjson10_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7366,7 +7136,6 @@ func awsAwsjson10_deserializeOpDocumentListFraudsterRegistrationJobsOutput(v **L
 			if err := awsAwsjson10_deserializeDocumentFraudsterRegistrationJobSummaries(&sv.JobSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7375,7 +7144,6 @@ func awsAwsjson10_deserializeOpDocumentListFraudsterRegistrationJobsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7411,7 +7179,6 @@ func awsAwsjson10_deserializeOpDocumentListFraudstersOutput(v **ListFraudstersOu
 			if err := awsAwsjson10_deserializeDocumentFraudsterSummaries(&sv.FraudsterSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7420,7 +7187,6 @@ func awsAwsjson10_deserializeOpDocumentListFraudstersOutput(v **ListFraudstersOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7456,7 +7222,6 @@ func awsAwsjson10_deserializeOpDocumentListSpeakerEnrollmentJobsOutput(v **ListS
 			if err := awsAwsjson10_deserializeDocumentSpeakerEnrollmentJobSummaries(&sv.JobSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7465,7 +7230,6 @@ func awsAwsjson10_deserializeOpDocumentListSpeakerEnrollmentJobsOutput(v **ListS
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7505,12 +7269,10 @@ func awsAwsjson10_deserializeOpDocumentListSpeakersOutput(v **ListSpeakersOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "SpeakerSummaries":
 			if err := awsAwsjson10_deserializeDocumentSpeakerSummaries(&sv.SpeakerSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7546,7 +7308,6 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7586,12 +7347,10 @@ func awsAwsjson10_deserializeOpDocumentListWatchlistsOutput(v **ListWatchlistsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WatchlistSummaries":
 			if err := awsAwsjson10_deserializeDocumentWatchlistSummaries(&sv.WatchlistSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7627,7 +7386,6 @@ func awsAwsjson10_deserializeOpDocumentOptOutSpeakerOutput(v **OptOutSpeakerOutp
 			if err := awsAwsjson10_deserializeDocumentSpeaker(&sv.Speaker, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7663,7 +7421,6 @@ func awsAwsjson10_deserializeOpDocumentStartFraudsterRegistrationJobOutput(v **S
 			if err := awsAwsjson10_deserializeDocumentFraudsterRegistrationJob(&sv.Job, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7699,7 +7456,6 @@ func awsAwsjson10_deserializeOpDocumentStartSpeakerEnrollmentJobOutput(v **Start
 			if err := awsAwsjson10_deserializeDocumentSpeakerEnrollmentJob(&sv.Job, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7797,7 +7553,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateDomainOutput(v **UpdateDomainOutput
 			if err := awsAwsjson10_deserializeDocumentDomain(&sv.Domain, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7833,7 +7588,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateWatchlistOutput(v **UpdateWatchlist
 			if err := awsAwsjson10_deserializeDocumentWatchlist(&sv.Watchlist, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

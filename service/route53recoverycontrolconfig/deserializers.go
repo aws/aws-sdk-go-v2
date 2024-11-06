@@ -189,7 +189,6 @@ func awsRestjson1_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -359,7 +358,6 @@ func awsRestjson1_deserializeOpDocumentCreateControlPanelOutput(v **CreateContro
 			if err := awsRestjson1_deserializeDocumentControlPanel(&sv.ControlPanel, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -529,7 +527,6 @@ func awsRestjson1_deserializeOpDocumentCreateRoutingControlOutput(v **CreateRout
 			if err := awsRestjson1_deserializeDocumentRoutingControl(&sv.RoutingControl, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -684,12 +681,10 @@ func awsRestjson1_deserializeOpDocumentCreateSafetyRuleOutput(v **CreateSafetyRu
 			if err := awsRestjson1_deserializeDocumentAssertionRule(&sv.AssertionRule, value); err != nil {
 				return err
 			}
-
 		case "GatingRule":
 			if err := awsRestjson1_deserializeDocumentGatingRule(&sv.GatingRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1259,7 +1254,6 @@ func awsRestjson1_deserializeOpDocumentDescribeClusterOutput(v **DescribeCluster
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1426,7 +1420,6 @@ func awsRestjson1_deserializeOpDocumentDescribeControlPanelOutput(v **DescribeCo
 			if err := awsRestjson1_deserializeDocumentControlPanel(&sv.ControlPanel, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1593,7 +1586,6 @@ func awsRestjson1_deserializeOpDocumentDescribeRoutingControlOutput(v **Describe
 			if err := awsRestjson1_deserializeDocumentRoutingControl(&sv.RoutingControl, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1748,12 +1740,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSafetyRuleOutput(v **DescribeSafe
 			if err := awsRestjson1_deserializeDocumentAssertionRule(&sv.AssertionRule, value); err != nil {
 				return err
 			}
-
 		case "GatingRule":
 			if err := awsRestjson1_deserializeDocumentGatingRule(&sv.GatingRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1912,7 +1902,6 @@ func awsRestjson1_deserializeOpDocumentGetResourcePolicyOutput(v **GetResourcePo
 				}
 				sv.Policy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2070,7 +2059,6 @@ func awsRestjson1_deserializeOpDocumentListAssociatedRoute53HealthChecksOutput(v
 			if err := awsRestjson1_deserializeDocument__listOf__stringMax36PatternS(&sv.HealthCheckIds, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2079,7 +2067,6 @@ func awsRestjson1_deserializeOpDocumentListAssociatedRoute53HealthChecksOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2243,7 +2230,6 @@ func awsRestjson1_deserializeOpDocumentListClustersOutput(v **ListClustersOutput
 			if err := awsRestjson1_deserializeDocument__listOfCluster(&sv.Clusters, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2252,7 +2238,6 @@ func awsRestjson1_deserializeOpDocumentListClustersOutput(v **ListClustersOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2416,7 +2401,6 @@ func awsRestjson1_deserializeOpDocumentListControlPanelsOutput(v **ListControlPa
 			if err := awsRestjson1_deserializeDocument__listOfControlPanel(&sv.ControlPanels, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2425,7 +2409,6 @@ func awsRestjson1_deserializeOpDocumentListControlPanelsOutput(v **ListControlPa
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2593,12 +2576,10 @@ func awsRestjson1_deserializeOpDocumentListRoutingControlsOutput(v **ListRouting
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "RoutingControls":
 			if err := awsRestjson1_deserializeDocument__listOfRoutingControl(&sv.RoutingControls, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2766,12 +2747,10 @@ func awsRestjson1_deserializeOpDocumentListSafetyRulesOutput(v **ListSafetyRules
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "SafetyRules":
 			if err := awsRestjson1_deserializeDocument__listOfRule(&sv.SafetyRules, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2929,7 +2908,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocument__mapOf__stringMin0Max256PatternS(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3284,7 +3262,6 @@ func awsRestjson1_deserializeOpDocumentUpdateControlPanelOutput(v **UpdateContro
 			if err := awsRestjson1_deserializeDocumentControlPanel(&sv.ControlPanel, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3451,7 +3428,6 @@ func awsRestjson1_deserializeOpDocumentUpdateRoutingControlOutput(v **UpdateRout
 			if err := awsRestjson1_deserializeDocumentRoutingControl(&sv.RoutingControl, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3609,12 +3585,10 @@ func awsRestjson1_deserializeOpDocumentUpdateSafetyRuleOutput(v **UpdateSafetyRu
 			if err := awsRestjson1_deserializeDocumentAssertionRule(&sv.AssertionRule, value); err != nil {
 				return err
 			}
-
 		case "GatingRule":
 			if err := awsRestjson1_deserializeDocumentGatingRule(&sv.GatingRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4174,15 +4148,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4190,14 +4158,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4229,7 +4193,6 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1Max256PatternAZaZ09(&sv.AssertedControls, value); err != nil {
 				return err
 			}
-
 		case "ControlPanelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4238,7 +4201,6 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				}
 				sv.ControlPanelArn = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4247,7 +4209,6 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4256,12 +4217,10 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "RuleConfig":
 			if err := awsRestjson1_deserializeDocumentRuleConfig(&sv.RuleConfig, value); err != nil {
 				return err
 			}
-
 		case "SafetyRuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4270,7 +4229,6 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				}
 				sv.SafetyRuleArn = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4279,7 +4237,6 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "WaitPeriodMs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4292,7 +4249,6 @@ func awsRestjson1_deserializeDocumentAssertionRule(v **types.AssertionRule, valu
 				}
 				sv.WaitPeriodMs = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4332,12 +4288,10 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ClusterArn = ptr.String(jtv)
 			}
-
 		case "ClusterEndpoints":
 			if err := awsRestjson1_deserializeDocument__listOfClusterEndpoint(&sv.ClusterEndpoints, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4346,7 +4300,6 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4355,7 +4308,6 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4364,7 +4316,6 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4404,7 +4355,6 @@ func awsRestjson1_deserializeDocumentClusterEndpoint(v **types.ClusterEndpoint, 
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
-
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4413,7 +4363,6 @@ func awsRestjson1_deserializeDocumentClusterEndpoint(v **types.ClusterEndpoint, 
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4443,15 +4392,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4459,14 +4402,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4502,7 +4441,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.ClusterArn = ptr.String(jtv)
 			}
-
 		case "ControlPanelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4511,7 +4449,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.ControlPanelArn = ptr.String(jtv)
 			}
-
 		case "DefaultControlPanel":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4520,7 +4457,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.DefaultControlPanel = ptr.Bool(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4529,7 +4465,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4538,7 +4473,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "RoutingControlCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4551,7 +4485,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.RoutingControlCount = ptr.Int32(int32(i64))
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4560,7 +4493,6 @@ func awsRestjson1_deserializeDocumentControlPanel(v **types.ControlPanel, value 
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4600,12 +4532,10 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				}
 				sv.ControlPanelArn = ptr.String(jtv)
 			}
-
 		case "GatingControls":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1Max256PatternAZaZ09(&sv.GatingControls, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4614,7 +4544,6 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4623,12 +4552,10 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "RuleConfig":
 			if err := awsRestjson1_deserializeDocumentRuleConfig(&sv.RuleConfig, value); err != nil {
 				return err
 			}
-
 		case "SafetyRuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4637,7 +4564,6 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				}
 				sv.SafetyRuleArn = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4646,12 +4572,10 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "TargetControls":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1Max256PatternAZaZ09(&sv.TargetControls, value); err != nil {
 				return err
 			}
-
 		case "WaitPeriodMs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4664,7 +4588,6 @@ func awsRestjson1_deserializeDocumentGatingRule(v **types.GatingRule, value inte
 				}
 				sv.WaitPeriodMs = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4694,15 +4617,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4710,14 +4627,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4743,15 +4656,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4759,14 +4666,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4802,7 +4705,6 @@ func awsRestjson1_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.ControlPanelArn = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4811,7 +4713,6 @@ func awsRestjson1_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4820,7 +4721,6 @@ func awsRestjson1_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "RoutingControlArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4829,7 +4729,6 @@ func awsRestjson1_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.RoutingControlArn = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4838,7 +4737,6 @@ func awsRestjson1_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4874,12 +4772,10 @@ func awsRestjson1_deserializeDocumentRule(v **types.Rule, value interface{}) err
 			if err := awsRestjson1_deserializeDocumentAssertionRule(&sv.ASSERTION, value); err != nil {
 				return err
 			}
-
 		case "GATING":
 			if err := awsRestjson1_deserializeDocumentGatingRule(&sv.GATING, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4919,7 +4815,6 @@ func awsRestjson1_deserializeDocumentRuleConfig(v **types.RuleConfig, value inte
 				}
 				sv.Inverted = ptr.Bool(jtv)
 			}
-
 		case "Threshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4932,7 +4827,6 @@ func awsRestjson1_deserializeDocumentRuleConfig(v **types.RuleConfig, value inte
 				}
 				sv.Threshold = ptr.Int32(int32(i64))
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4941,7 +4835,6 @@ func awsRestjson1_deserializeDocumentRuleConfig(v **types.RuleConfig, value inte
 				}
 				sv.Type = types.RuleType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4971,15 +4864,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4987,14 +4874,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5020,15 +4903,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5036,14 +4913,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5069,15 +4942,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5085,14 +4952,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

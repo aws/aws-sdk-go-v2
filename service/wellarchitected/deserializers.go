@@ -412,7 +412,6 @@ func awsRestjson1_deserializeOpDocumentCreateLensShareOutput(v **CreateLensShare
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -586,7 +585,6 @@ func awsRestjson1_deserializeOpDocumentCreateLensVersionOutput(v **CreateLensVer
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -595,7 +593,6 @@ func awsRestjson1_deserializeOpDocumentCreateLensVersionOutput(v **CreateLensVer
 				}
 				sv.LensVersion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -773,7 +770,6 @@ func awsRestjson1_deserializeOpDocumentCreateMilestoneOutput(v **CreateMilestone
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -782,7 +778,6 @@ func awsRestjson1_deserializeOpDocumentCreateMilestoneOutput(v **CreateMilestone
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -953,7 +948,6 @@ func awsRestjson1_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ProfileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -962,7 +956,6 @@ func awsRestjson1_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1136,7 +1129,6 @@ func awsRestjson1_deserializeOpDocumentCreateProfileShareOutput(v **CreateProfil
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ShareId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1145,7 +1137,6 @@ func awsRestjson1_deserializeOpDocumentCreateProfileShareOutput(v **CreateProfil
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1319,7 +1310,6 @@ func awsRestjson1_deserializeOpDocumentCreateReviewTemplateOutput(v **CreateRevi
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1493,7 +1483,6 @@ func awsRestjson1_deserializeOpDocumentCreateTemplateShareOutput(v **CreateTempl
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1502,7 +1491,6 @@ func awsRestjson1_deserializeOpDocumentCreateTemplateShareOutput(v **CreateTempl
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1676,7 +1664,6 @@ func awsRestjson1_deserializeOpDocumentCreateWorkloadOutput(v **CreateWorkloadOu
 				}
 				sv.WorkloadArn = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1685,7 +1672,6 @@ func awsRestjson1_deserializeOpDocumentCreateWorkloadOutput(v **CreateWorkloadOu
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1859,7 +1845,6 @@ func awsRestjson1_deserializeOpDocumentCreateWorkloadShareOutput(v **CreateWorkl
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1868,7 +1853,6 @@ func awsRestjson1_deserializeOpDocumentCreateWorkloadShareOutput(v **CreateWorkl
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3126,7 +3110,6 @@ func awsRestjson1_deserializeOpDocumentExportLensOutput(v **ExportLensOutput, va
 				}
 				sv.LensJSON = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3290,7 +3273,6 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 			if err := awsRestjson1_deserializeDocumentAnswer(&sv.Answer, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3299,7 +3281,6 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3308,7 +3289,6 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3321,7 +3301,6 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3330,7 +3309,6 @@ func awsRestjson1_deserializeOpDocumentGetAnswerOutput(v **GetAnswerOutput, valu
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3498,12 +3476,10 @@ func awsRestjson1_deserializeOpDocumentGetConsolidatedReportOutput(v **GetConsol
 				}
 				sv.Base64String = ptr.String(jtv)
 			}
-
 		case "Metrics":
 			if err := awsRestjson1_deserializeDocumentConsolidatedReportMetrics(&sv.Metrics, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3512,7 +3488,6 @@ func awsRestjson1_deserializeOpDocumentGetConsolidatedReportOutput(v **GetConsol
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3677,12 +3652,10 @@ func awsRestjson1_deserializeOpDocumentGetGlobalSettingsOutput(v **GetGlobalSett
 				}
 				sv.DiscoveryIntegrationStatus = types.DiscoveryIntegrationStatus(jtv)
 			}
-
 		case "JiraConfiguration":
 			if err := awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(&sv.JiraConfiguration, value); err != nil {
 				return err
 			}
-
 		case "OrganizationSharingStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3691,7 +3664,6 @@ func awsRestjson1_deserializeOpDocumentGetGlobalSettingsOutput(v **GetGlobalSett
 				}
 				sv.OrganizationSharingStatus = types.OrganizationSharingStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3855,7 +3827,6 @@ func awsRestjson1_deserializeOpDocumentGetLensOutput(v **GetLensOutput, value in
 			if err := awsRestjson1_deserializeDocumentLens(&sv.Lens, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4019,7 +3990,6 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewOutput(v **GetLensReviewOutp
 			if err := awsRestjson1_deserializeDocumentLensReview(&sv.LensReview, value); err != nil {
 				return err
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4032,7 +4002,6 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewOutput(v **GetLensReviewOutp
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4041,7 +4010,6 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewOutput(v **GetLensReviewOutp
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4205,7 +4173,6 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewReportOutput(v **GetLensRevi
 			if err := awsRestjson1_deserializeDocumentLensReviewReport(&sv.LensReviewReport, value); err != nil {
 				return err
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4218,7 +4185,6 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewReportOutput(v **GetLensRevi
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4227,7 +4193,6 @@ func awsRestjson1_deserializeOpDocumentGetLensReviewReportOutput(v **GetLensRevi
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4395,7 +4360,6 @@ func awsRestjson1_deserializeOpDocumentGetLensVersionDifferenceOutput(v **GetLen
 				}
 				sv.BaseLensVersion = ptr.String(jtv)
 			}
-
 		case "LatestLensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4404,7 +4368,6 @@ func awsRestjson1_deserializeOpDocumentGetLensVersionDifferenceOutput(v **GetLen
 				}
 				sv.LatestLensVersion = ptr.String(jtv)
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4413,7 +4376,6 @@ func awsRestjson1_deserializeOpDocumentGetLensVersionDifferenceOutput(v **GetLen
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4422,7 +4384,6 @@ func awsRestjson1_deserializeOpDocumentGetLensVersionDifferenceOutput(v **GetLen
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "TargetLensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4431,12 +4392,10 @@ func awsRestjson1_deserializeOpDocumentGetLensVersionDifferenceOutput(v **GetLen
 				}
 				sv.TargetLensVersion = ptr.String(jtv)
 			}
-
 		case "VersionDifferences":
 			if err := awsRestjson1_deserializeDocumentVersionDifferences(&sv.VersionDifferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4600,7 +4559,6 @@ func awsRestjson1_deserializeOpDocumentGetMilestoneOutput(v **GetMilestoneOutput
 			if err := awsRestjson1_deserializeDocumentMilestone(&sv.Milestone, value); err != nil {
 				return err
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4609,7 +4567,6 @@ func awsRestjson1_deserializeOpDocumentGetMilestoneOutput(v **GetMilestoneOutput
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4773,7 +4730,6 @@ func awsRestjson1_deserializeOpDocumentGetProfileOutput(v **GetProfileOutput, va
 			if err := awsRestjson1_deserializeDocumentProfile(&sv.Profile, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4937,7 +4893,6 @@ func awsRestjson1_deserializeOpDocumentGetProfileTemplateOutput(v **GetProfileTe
 			if err := awsRestjson1_deserializeDocumentProfileTemplate(&sv.ProfileTemplate, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5101,7 +5056,6 @@ func awsRestjson1_deserializeOpDocumentGetReviewTemplateOutput(v **GetReviewTemp
 			if err := awsRestjson1_deserializeDocumentReviewTemplate(&sv.ReviewTemplate, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5265,7 +5219,6 @@ func awsRestjson1_deserializeOpDocumentGetReviewTemplateAnswerOutput(v **GetRevi
 			if err := awsRestjson1_deserializeDocumentReviewTemplateAnswer(&sv.Answer, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5274,7 +5227,6 @@ func awsRestjson1_deserializeOpDocumentGetReviewTemplateAnswerOutput(v **GetRevi
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5283,7 +5235,6 @@ func awsRestjson1_deserializeOpDocumentGetReviewTemplateAnswerOutput(v **GetRevi
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5447,7 +5398,6 @@ func awsRestjson1_deserializeOpDocumentGetReviewTemplateLensReviewOutput(v **Get
 			if err := awsRestjson1_deserializeDocumentReviewTemplateLensReview(&sv.LensReview, value); err != nil {
 				return err
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5456,7 +5406,6 @@ func awsRestjson1_deserializeOpDocumentGetReviewTemplateLensReviewOutput(v **Get
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5620,7 +5569,6 @@ func awsRestjson1_deserializeOpDocumentGetWorkloadOutput(v **GetWorkloadOutput, 
 			if err := awsRestjson1_deserializeDocumentWorkload(&sv.Workload, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5794,7 +5742,6 @@ func awsRestjson1_deserializeOpDocumentImportLensOutput(v **ImportLensOutput, va
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5803,7 +5750,6 @@ func awsRestjson1_deserializeOpDocumentImportLensOutput(v **ImportLensOutput, va
 				}
 				sv.Status = types.ImportLensStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5967,7 +5913,6 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 			if err := awsRestjson1_deserializeDocumentAnswerSummaries(&sv.AnswerSummaries, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5976,7 +5921,6 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5985,7 +5929,6 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5998,7 +5941,6 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6007,7 +5949,6 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6016,7 +5957,6 @@ func awsRestjson1_deserializeOpDocumentListAnswersOutput(v **ListAnswersOutput, 
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6180,7 +6120,6 @@ func awsRestjson1_deserializeOpDocumentListCheckDetailsOutput(v **ListCheckDetai
 			if err := awsRestjson1_deserializeDocumentCheckDetails(&sv.CheckDetails, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6189,7 +6128,6 @@ func awsRestjson1_deserializeOpDocumentListCheckDetailsOutput(v **ListCheckDetai
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6353,7 +6291,6 @@ func awsRestjson1_deserializeOpDocumentListCheckSummariesOutput(v **ListCheckSum
 			if err := awsRestjson1_deserializeDocumentCheckSummaries(&sv.CheckSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6362,7 +6299,6 @@ func awsRestjson1_deserializeOpDocumentListCheckSummariesOutput(v **ListCheckSum
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6523,7 +6459,6 @@ func awsRestjson1_deserializeOpDocumentListLensesOutput(v **ListLensesOutput, va
 			if err := awsRestjson1_deserializeDocumentLensSummaries(&sv.LensSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6532,7 +6467,6 @@ func awsRestjson1_deserializeOpDocumentListLensesOutput(v **ListLensesOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6696,7 +6630,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 			if err := awsRestjson1_deserializeDocumentImprovementSummaries(&sv.ImprovementSummaries, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6705,7 +6638,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6714,7 +6646,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6727,7 +6658,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6736,7 +6666,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6745,7 +6674,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewImprovementsOutput(v **List
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6909,7 +6837,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewsOutput(v **ListLensReviews
 			if err := awsRestjson1_deserializeDocumentLensReviewSummaries(&sv.LensReviewSummaries, value); err != nil {
 				return err
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6922,7 +6849,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewsOutput(v **ListLensReviews
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6931,7 +6857,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewsOutput(v **ListLensReviews
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6940,7 +6865,6 @@ func awsRestjson1_deserializeOpDocumentListLensReviewsOutput(v **ListLensReviews
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7104,7 +7028,6 @@ func awsRestjson1_deserializeOpDocumentListLensSharesOutput(v **ListLensSharesOu
 			if err := awsRestjson1_deserializeDocumentLensShareSummaries(&sv.LensShareSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7113,7 +7036,6 @@ func awsRestjson1_deserializeOpDocumentListLensSharesOutput(v **ListLensSharesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7277,7 +7199,6 @@ func awsRestjson1_deserializeOpDocumentListMilestonesOutput(v **ListMilestonesOu
 			if err := awsRestjson1_deserializeDocumentMilestoneSummaries(&sv.MilestoneSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7286,7 +7207,6 @@ func awsRestjson1_deserializeOpDocumentListMilestonesOutput(v **ListMilestonesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7295,7 +7215,6 @@ func awsRestjson1_deserializeOpDocumentListMilestonesOutput(v **ListMilestonesOu
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7460,12 +7379,10 @@ func awsRestjson1_deserializeOpDocumentListNotificationsOutput(v **ListNotificat
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "NotificationSummaries":
 			if err := awsRestjson1_deserializeDocumentNotificationSummaries(&sv.NotificationSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7630,12 +7547,10 @@ func awsRestjson1_deserializeOpDocumentListProfileNotificationsOutput(v **ListPr
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "NotificationSummaries":
 			if err := awsRestjson1_deserializeDocumentProfileNotificationSummaries(&sv.NotificationSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7800,12 +7715,10 @@ func awsRestjson1_deserializeOpDocumentListProfilesOutput(v **ListProfilesOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ProfileSummaries":
 			if err := awsRestjson1_deserializeDocumentProfileSummaries(&sv.ProfileSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7973,12 +7886,10 @@ func awsRestjson1_deserializeOpDocumentListProfileSharesOutput(v **ListProfileSh
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ProfileShareSummaries":
 			if err := awsRestjson1_deserializeDocumentProfileShareSummaries(&sv.ProfileShareSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8142,7 +8053,6 @@ func awsRestjson1_deserializeOpDocumentListReviewTemplateAnswersOutput(v **ListR
 			if err := awsRestjson1_deserializeDocumentReviewTemplateAnswerSummaries(&sv.AnswerSummaries, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8151,7 +8061,6 @@ func awsRestjson1_deserializeOpDocumentListReviewTemplateAnswersOutput(v **ListR
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8160,7 +8069,6 @@ func awsRestjson1_deserializeOpDocumentListReviewTemplateAnswersOutput(v **ListR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8169,7 +8077,6 @@ func awsRestjson1_deserializeOpDocumentListReviewTemplateAnswersOutput(v **ListR
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8334,12 +8241,10 @@ func awsRestjson1_deserializeOpDocumentListReviewTemplatesOutput(v **ListReviewT
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ReviewTemplates":
 			if err := awsRestjson1_deserializeDocumentReviewTemplates(&sv.ReviewTemplates, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8504,12 +8409,10 @@ func awsRestjson1_deserializeOpDocumentListShareInvitationsOutput(v **ListShareI
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ShareInvitationSummaries":
 			if err := awsRestjson1_deserializeDocumentShareInvitationSummaries(&sv.ShareInvitationSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8664,7 +8567,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8832,7 +8734,6 @@ func awsRestjson1_deserializeOpDocumentListTemplateSharesOutput(v **ListTemplate
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8841,12 +8742,10 @@ func awsRestjson1_deserializeOpDocumentListTemplateSharesOutput(v **ListTemplate
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		case "TemplateShareSummaries":
 			if err := awsRestjson1_deserializeDocumentTemplateShareSummaries(&sv.TemplateShareSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9011,12 +8910,10 @@ func awsRestjson1_deserializeOpDocumentListWorkloadsOutput(v **ListWorkloadsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WorkloadSummaries":
 			if err := awsRestjson1_deserializeDocumentWorkloadSummaries(&sv.WorkloadSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9184,7 +9081,6 @@ func awsRestjson1_deserializeOpDocumentListWorkloadSharesOutput(v **ListWorkload
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9193,12 +9089,10 @@ func awsRestjson1_deserializeOpDocumentListWorkloadSharesOutput(v **ListWorkload
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadShareSummaries":
 			if err := awsRestjson1_deserializeDocumentWorkloadShareSummaries(&sv.WorkloadShareSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9547,7 +9441,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAnswerOutput(v **UpdateAnswerOutput
 			if err := awsRestjson1_deserializeDocumentAnswer(&sv.Answer, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9556,7 +9449,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAnswerOutput(v **UpdateAnswerOutput
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9565,7 +9457,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAnswerOutput(v **UpdateAnswerOutput
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9574,7 +9465,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAnswerOutput(v **UpdateAnswerOutput
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9956,7 +9846,6 @@ func awsRestjson1_deserializeOpDocumentUpdateLensReviewOutput(v **UpdateLensRevi
 			if err := awsRestjson1_deserializeDocumentLensReview(&sv.LensReview, value); err != nil {
 				return err
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9965,7 +9854,6 @@ func awsRestjson1_deserializeOpDocumentUpdateLensReviewOutput(v **UpdateLensRevi
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10132,7 +10020,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProfileOutput(v **UpdateProfileOutp
 			if err := awsRestjson1_deserializeDocumentProfile(&sv.Profile, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10299,7 +10186,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReviewTemplateOutput(v **UpdateRevi
 			if err := awsRestjson1_deserializeDocumentReviewTemplate(&sv.ReviewTemplate, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10466,7 +10352,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReviewTemplateAnswerOutput(v **Upda
 			if err := awsRestjson1_deserializeDocumentReviewTemplateAnswer(&sv.Answer, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10475,7 +10360,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReviewTemplateAnswerOutput(v **Upda
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10484,7 +10368,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReviewTemplateAnswerOutput(v **Upda
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10651,7 +10534,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReviewTemplateLensReviewOutput(v **
 			if err := awsRestjson1_deserializeDocumentReviewTemplateLensReview(&sv.LensReview, value); err != nil {
 				return err
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10660,7 +10542,6 @@ func awsRestjson1_deserializeOpDocumentUpdateReviewTemplateLensReviewOutput(v **
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10827,7 +10708,6 @@ func awsRestjson1_deserializeOpDocumentUpdateShareInvitationOutput(v **UpdateSha
 			if err := awsRestjson1_deserializeDocumentShareInvitation(&sv.ShareInvitation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10994,7 +10874,6 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkloadOutput(v **UpdateWorkloadOu
 			if err := awsRestjson1_deserializeDocumentWorkload(&sv.Workload, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11165,12 +11044,10 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkloadShareOutput(v **UpdateWorkl
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadShare":
 			if err := awsRestjson1_deserializeDocumentWorkloadShare(&sv.WorkloadShare, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11785,15 +11662,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11801,14 +11672,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11844,7 +11711,6 @@ func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.Ac
 				}
 				sv.IntegrationStatus = types.IntegrationStatus(jtv)
 			}
-
 		case "IssueManagementStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11853,7 +11719,6 @@ func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.Ac
 				}
 				sv.IssueManagementStatus = types.AccountJiraIssueManagementStatus(jtv)
 			}
-
 		case "IssueManagementType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11862,7 +11727,6 @@ func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.Ac
 				}
 				sv.IssueManagementType = types.IssueManagementType(jtv)
 			}
-
 		case "JiraProjectKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11871,7 +11735,6 @@ func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.Ac
 				}
 				sv.JiraProjectKey = ptr.String(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11880,7 +11743,6 @@ func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.Ac
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		case "Subdomain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11889,7 +11751,6 @@ func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.Ac
 				}
 				sv.Subdomain = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11965,7 +11826,6 @@ func awsRestjson1_deserializeDocumentAdditionalResources(v **types.AdditionalRes
 			if err := awsRestjson1_deserializeDocumentUrls(&sv.Content, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11974,7 +11834,6 @@ func awsRestjson1_deserializeDocumentAdditionalResources(v **types.AdditionalRes
 				}
 				sv.Type = types.AdditionalResourceType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12044,12 +11903,10 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 			if err := awsRestjson1_deserializeDocumentChoiceAnswers(&sv.ChoiceAnswers, value); err != nil {
 				return err
 			}
-
 		case "Choices":
 			if err := awsRestjson1_deserializeDocumentChoices(&sv.Choices, value); err != nil {
 				return err
 			}
-
 		case "HelpfulResourceDisplayText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12058,7 +11915,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.HelpfulResourceDisplayText = ptr.String(jtv)
 			}
-
 		case "HelpfulResourceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12067,7 +11923,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.HelpfulResourceUrl = ptr.String(jtv)
 			}
-
 		case "ImprovementPlanUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12076,7 +11931,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.ImprovementPlanUrl = ptr.String(jtv)
 			}
-
 		case "IsApplicable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12085,12 +11939,10 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.IsApplicable = ptr.Bool(jtv)
 			}
-
 		case "JiraConfiguration":
 			if err := awsRestjson1_deserializeDocumentJiraConfiguration(&sv.JiraConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12099,7 +11951,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12108,7 +11959,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "QuestionDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12117,7 +11967,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.QuestionDescription = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12126,7 +11975,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12135,7 +11983,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12144,7 +11991,6 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.Reason = types.AnswerReason(jtv)
 			}
-
 		case "Risk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12153,12 +11999,10 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				}
 				sv.Risk = types.Risk(jtv)
 			}
-
 		case "SelectedChoices":
 			if err := awsRestjson1_deserializeDocumentSelectedChoices(&sv.SelectedChoices, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12228,12 +12072,10 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 			if err := awsRestjson1_deserializeDocumentChoiceAnswerSummaries(&sv.ChoiceAnswerSummaries, value); err != nil {
 				return err
 			}
-
 		case "Choices":
 			if err := awsRestjson1_deserializeDocumentChoices(&sv.Choices, value); err != nil {
 				return err
 			}
-
 		case "IsApplicable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12242,12 +12084,10 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.IsApplicable = ptr.Bool(jtv)
 			}
-
 		case "JiraConfiguration":
 			if err := awsRestjson1_deserializeDocumentJiraConfiguration(&sv.JiraConfiguration, value); err != nil {
 				return err
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12256,7 +12096,6 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12265,7 +12104,6 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12274,7 +12112,6 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		case "QuestionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12283,7 +12120,6 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.QuestionType = types.QuestionType(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12292,7 +12128,6 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.Reason = types.AnswerReason(jtv)
 			}
-
 		case "Risk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12301,12 +12136,10 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 				}
 				sv.Risk = types.Risk(jtv)
 			}
-
 		case "SelectedChoices":
 			if err := awsRestjson1_deserializeDocumentSelectedChoices(&sv.SelectedChoices, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12346,7 +12179,6 @@ func awsRestjson1_deserializeDocumentBestPractice(v **types.BestPractice, value 
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "ChoiceTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12355,7 +12187,6 @@ func awsRestjson1_deserializeDocumentBestPractice(v **types.BestPractice, value 
 				}
 				sv.ChoiceTitle = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12429,7 +12260,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "ChoiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12438,7 +12268,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12447,7 +12276,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "FlaggedResources":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12460,7 +12288,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.FlaggedResources = ptr.Int32(int32(i64))
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12469,7 +12296,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12478,7 +12304,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12487,7 +12312,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12496,7 +12320,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "Provider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12505,7 +12328,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.Provider = types.CheckProvider(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12514,7 +12336,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12523,7 +12344,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.Reason = types.CheckFailureReason(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12532,7 +12352,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 				}
 				sv.Status = types.CheckStatus(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12548,7 +12367,6 @@ func awsRestjson1_deserializeDocumentCheckDetail(v **types.CheckDetail, value in
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12652,7 +12470,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 			if err := awsRestjson1_deserializeDocumentAccountSummary(&sv.AccountSummary, value); err != nil {
 				return err
 			}
-
 		case "ChoiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12661,7 +12478,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12670,7 +12486,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12679,7 +12494,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12688,7 +12502,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12697,7 +12510,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12706,7 +12518,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "Provider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12715,7 +12526,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Provider = types.CheckProvider(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12724,7 +12534,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12733,7 +12542,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Status = types.CheckStatus(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12749,7 +12557,6 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12785,7 +12592,6 @@ func awsRestjson1_deserializeDocumentChoice(v **types.Choice, value interface{})
 			if err := awsRestjson1_deserializeDocumentAdditionalResourcesList(&sv.AdditionalResources, value); err != nil {
 				return err
 			}
-
 		case "ChoiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12794,7 +12600,6 @@ func awsRestjson1_deserializeDocumentChoice(v **types.Choice, value interface{})
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12803,17 +12608,14 @@ func awsRestjson1_deserializeDocumentChoice(v **types.Choice, value interface{})
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "HelpfulResource":
 			if err := awsRestjson1_deserializeDocumentChoiceContent(&sv.HelpfulResource, value); err != nil {
 				return err
 			}
-
 		case "ImprovementPlan":
 			if err := awsRestjson1_deserializeDocumentChoiceContent(&sv.ImprovementPlan, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12822,7 +12624,6 @@ func awsRestjson1_deserializeDocumentChoice(v **types.Choice, value interface{})
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12862,7 +12663,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswer(v **types.ChoiceAnswer, value 
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12871,7 +12671,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswer(v **types.ChoiceAnswer, value 
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12880,7 +12679,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswer(v **types.ChoiceAnswer, value 
 				}
 				sv.Reason = types.ChoiceReason(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12889,7 +12687,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswer(v **types.ChoiceAnswer, value 
 				}
 				sv.Status = types.ChoiceStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12997,7 +12794,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswerSummary(v **types.ChoiceAnswerS
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13006,7 +12802,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswerSummary(v **types.ChoiceAnswerS
 				}
 				sv.Reason = types.ChoiceReason(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13015,7 +12810,6 @@ func awsRestjson1_deserializeDocumentChoiceAnswerSummary(v **types.ChoiceAnswerS
 				}
 				sv.Status = types.ChoiceStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13055,7 +12849,6 @@ func awsRestjson1_deserializeDocumentChoiceContent(v **types.ChoiceContent, valu
 				}
 				sv.DisplayText = ptr.String(jtv)
 			}
-
 		case "Url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13064,7 +12857,6 @@ func awsRestjson1_deserializeDocumentChoiceContent(v **types.ChoiceContent, valu
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13104,7 +12896,6 @@ func awsRestjson1_deserializeDocumentChoiceImprovementPlan(v **types.ChoiceImpro
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "DisplayText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13113,7 +12904,6 @@ func awsRestjson1_deserializeDocumentChoiceImprovementPlan(v **types.ChoiceImpro
 				}
 				sv.DisplayText = ptr.String(jtv)
 			}
-
 		case "ImprovementPlanUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13122,7 +12912,6 @@ func awsRestjson1_deserializeDocumentChoiceImprovementPlan(v **types.ChoiceImpro
 				}
 				sv.ImprovementPlanUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13220,15 +13009,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13236,7 +13019,6 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13245,7 +13027,6 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13254,14 +13035,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13293,7 +13070,6 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 			if err := awsRestjson1_deserializeDocumentLensMetrics(&sv.Lenses, value); err != nil {
 				return err
 			}
-
 		case "LensesAppliedCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13306,7 +13082,6 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 				}
 				sv.LensesAppliedCount = ptr.Int32(int32(i64))
 			}
-
 		case "MetricType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13315,12 +13090,10 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 				}
 				sv.MetricType = types.MetricType(jtv)
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13336,7 +13109,6 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 
 				}
 			}
-
 		case "WorkloadArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13345,7 +13117,6 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 				}
 				sv.WorkloadArn = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13354,7 +13125,6 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13363,7 +13133,6 @@ func awsRestjson1_deserializeDocumentConsolidatedReportMetric(v **types.Consolid
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13467,7 +13236,6 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 			if err := awsRestjson1_deserializeDocumentChoiceImprovementPlans(&sv.ImprovementPlans, value); err != nil {
 				return err
 			}
-
 		case "ImprovementPlanUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13476,12 +13244,10 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 				}
 				sv.ImprovementPlanUrl = ptr.String(jtv)
 			}
-
 		case "JiraConfiguration":
 			if err := awsRestjson1_deserializeDocumentJiraConfiguration(&sv.JiraConfiguration, value); err != nil {
 				return err
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13490,7 +13256,6 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13499,7 +13264,6 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13508,7 +13272,6 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		case "Risk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13517,7 +13280,6 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 				}
 				sv.Risk = types.Risk(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13547,15 +13309,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13563,14 +13319,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13606,7 +13358,6 @@ func awsRestjson1_deserializeDocumentJiraConfiguration(v **types.JiraConfigurati
 				}
 				sv.JiraIssueUrl = ptr.String(jtv)
 			}
-
 		case "LastSyncedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13622,7 +13373,6 @@ func awsRestjson1_deserializeDocumentJiraConfiguration(v **types.JiraConfigurati
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13658,7 +13408,6 @@ func awsRestjson1_deserializeDocumentJiraSelectedQuestionConfiguration(v **types
 			if err := awsRestjson1_deserializeDocumentSelectedPillars(&sv.SelectedPillars, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13698,7 +13447,6 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13707,7 +13455,6 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13716,7 +13463,6 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 				}
 				sv.LensVersion = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13725,7 +13471,6 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13734,7 +13479,6 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "ShareInvitationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13743,12 +13487,10 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13788,17 +13530,14 @@ func awsRestjson1_deserializeDocumentLensMetric(v **types.LensMetric, value inte
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "Pillars":
 			if err := awsRestjson1_deserializeDocumentPillarMetrics(&sv.Pillars, value); err != nil {
 				return err
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13868,7 +13607,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 			if err := awsRestjson1_deserializeDocumentJiraSelectedQuestionConfiguration(&sv.JiraConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13877,7 +13615,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13886,7 +13623,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13895,7 +13631,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.LensName = ptr.String(jtv)
 			}
-
 		case "LensStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13904,7 +13639,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.LensStatus = types.LensStatus(jtv)
 			}
-
 		case "LensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13913,7 +13647,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.LensVersion = ptr.String(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13922,7 +13655,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13931,27 +13663,22 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "PillarReviewSummaries":
 			if err := awsRestjson1_deserializeDocumentPillarReviewSummaries(&sv.PillarReviewSummaries, value); err != nil {
 				return err
 			}
-
 		case "PrioritizedRiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.PrioritizedRiskCounts, value); err != nil {
 				return err
 			}
-
 		case "Profiles":
 			if err := awsRestjson1_deserializeDocumentWorkloadProfiles(&sv.Profiles, value); err != nil {
 				return err
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13967,7 +13694,6 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14007,7 +13733,6 @@ func awsRestjson1_deserializeDocumentLensReviewReport(v **types.LensReviewReport
 				}
 				sv.Base64String = ptr.String(jtv)
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14016,7 +13741,6 @@ func awsRestjson1_deserializeDocumentLensReviewReport(v **types.LensReviewReport
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14025,7 +13749,6 @@ func awsRestjson1_deserializeDocumentLensReviewReport(v **types.LensReviewReport
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14099,7 +13822,6 @@ func awsRestjson1_deserializeDocumentLensReviewSummary(v **types.LensReviewSumma
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14108,7 +13830,6 @@ func awsRestjson1_deserializeDocumentLensReviewSummary(v **types.LensReviewSumma
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14117,7 +13838,6 @@ func awsRestjson1_deserializeDocumentLensReviewSummary(v **types.LensReviewSumma
 				}
 				sv.LensName = ptr.String(jtv)
 			}
-
 		case "LensStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14126,7 +13846,6 @@ func awsRestjson1_deserializeDocumentLensReviewSummary(v **types.LensReviewSumma
 				}
 				sv.LensStatus = types.LensStatus(jtv)
 			}
-
 		case "LensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14135,22 +13854,18 @@ func awsRestjson1_deserializeDocumentLensReviewSummary(v **types.LensReviewSumma
 				}
 				sv.LensVersion = ptr.String(jtv)
 			}
-
 		case "PrioritizedRiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.PrioritizedRiskCounts, value); err != nil {
 				return err
 			}
-
 		case "Profiles":
 			if err := awsRestjson1_deserializeDocumentWorkloadProfiles(&sv.Profiles, value); err != nil {
 				return err
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14166,7 +13881,6 @@ func awsRestjson1_deserializeDocumentLensReviewSummary(v **types.LensReviewSumma
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14240,7 +13954,6 @@ func awsRestjson1_deserializeDocumentLensShareSummary(v **types.LensShareSummary
 				}
 				sv.SharedWith = ptr.String(jtv)
 			}
-
 		case "ShareId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14249,7 +13962,6 @@ func awsRestjson1_deserializeDocumentLensShareSummary(v **types.LensShareSummary
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14258,7 +13970,6 @@ func awsRestjson1_deserializeDocumentLensShareSummary(v **types.LensShareSummary
 				}
 				sv.Status = types.ShareStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14267,7 +13978,6 @@ func awsRestjson1_deserializeDocumentLensShareSummary(v **types.LensShareSummary
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14348,7 +14058,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 
 				}
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14357,7 +14066,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14366,7 +14074,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14375,7 +14082,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14384,7 +14090,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.LensName = ptr.String(jtv)
 			}
-
 		case "LensStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14393,7 +14098,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.LensStatus = types.LensStatus(jtv)
 			}
-
 		case "LensType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14402,7 +14106,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.LensType = types.LensType(jtv)
 			}
-
 		case "LensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14411,7 +14114,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.LensVersion = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14420,7 +14122,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14436,7 +14137,6 @@ func awsRestjson1_deserializeDocumentLensSummary(v **types.LensSummary, value in
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14476,7 +14176,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.CurrentLensVersion = ptr.String(jtv)
 			}
-
 		case "LatestLensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14485,7 +14184,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.LatestLensVersion = ptr.String(jtv)
 			}
-
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14494,7 +14192,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14503,7 +14200,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14512,7 +14208,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14521,7 +14216,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14530,7 +14224,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14539,7 +14232,6 @@ func awsRestjson1_deserializeDocumentLensUpgradeSummary(v **types.LensUpgradeSum
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14579,7 +14271,6 @@ func awsRestjson1_deserializeDocumentMilestone(v **types.Milestone, value interf
 				}
 				sv.MilestoneName = ptr.String(jtv)
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14592,7 +14283,6 @@ func awsRestjson1_deserializeDocumentMilestone(v **types.Milestone, value interf
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "RecordedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14608,12 +14298,10 @@ func awsRestjson1_deserializeDocumentMilestone(v **types.Milestone, value interf
 
 				}
 			}
-
 		case "Workload":
 			if err := awsRestjson1_deserializeDocumentWorkload(&sv.Workload, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14687,7 +14375,6 @@ func awsRestjson1_deserializeDocumentMilestoneSummary(v **types.MilestoneSummary
 				}
 				sv.MilestoneName = ptr.String(jtv)
 			}
-
 		case "MilestoneNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14700,7 +14387,6 @@ func awsRestjson1_deserializeDocumentMilestoneSummary(v **types.MilestoneSummary
 				}
 				sv.MilestoneNumber = ptr.Int32(int32(i64))
 			}
-
 		case "RecordedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14716,12 +14402,10 @@ func awsRestjson1_deserializeDocumentMilestoneSummary(v **types.MilestoneSummary
 
 				}
 			}
-
 		case "WorkloadSummary":
 			if err := awsRestjson1_deserializeDocumentWorkloadSummary(&sv.WorkloadSummary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14791,7 +14475,6 @@ func awsRestjson1_deserializeDocumentNotificationSummary(v **types.NotificationS
 			if err := awsRestjson1_deserializeDocumentLensUpgradeSummary(&sv.LensUpgradeSummary, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14800,7 +14483,6 @@ func awsRestjson1_deserializeDocumentNotificationSummary(v **types.NotificationS
 				}
 				sv.Type = types.NotificationType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14840,7 +14522,6 @@ func awsRestjson1_deserializeDocumentPillarDifference(v **types.PillarDifference
 				}
 				sv.DifferenceStatus = types.DifferenceStatus(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14849,7 +14530,6 @@ func awsRestjson1_deserializeDocumentPillarDifference(v **types.PillarDifference
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "PillarName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14858,12 +14538,10 @@ func awsRestjson1_deserializeDocumentPillarDifference(v **types.PillarDifference
 				}
 				sv.PillarName = ptr.String(jtv)
 			}
-
 		case "QuestionDifferences":
 			if err := awsRestjson1_deserializeDocumentQuestionDifferences(&sv.QuestionDifferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14937,17 +14615,14 @@ func awsRestjson1_deserializeDocumentPillarMetric(v **types.PillarMetric, value 
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "Questions":
 			if err := awsRestjson1_deserializeDocumentQuestionMetrics(&sv.Questions, value); err != nil {
 				return err
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15055,7 +14730,6 @@ func awsRestjson1_deserializeDocumentPillarReviewSummary(v **types.PillarReviewS
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15064,7 +14738,6 @@ func awsRestjson1_deserializeDocumentPillarReviewSummary(v **types.PillarReviewS
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "PillarName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15073,17 +14746,14 @@ func awsRestjson1_deserializeDocumentPillarReviewSummary(v **types.PillarReviewS
 				}
 				sv.PillarName = ptr.String(jtv)
 			}
-
 		case "PrioritizedRiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.PrioritizedRiskCounts, value); err != nil {
 				return err
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15130,7 +14800,6 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 
 				}
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15139,7 +14808,6 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "ProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15148,7 +14816,6 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ProfileDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15157,7 +14824,6 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				}
 				sv.ProfileDescription = ptr.String(jtv)
 			}
-
 		case "ProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15166,12 +14832,10 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "ProfileQuestions":
 			if err := awsRestjson1_deserializeDocumentProfileQuestions(&sv.ProfileQuestions, value); err != nil {
 				return err
 			}
-
 		case "ProfileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15180,7 +14844,6 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "ShareInvitationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15189,12 +14852,10 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15210,7 +14871,6 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15250,7 +14910,6 @@ func awsRestjson1_deserializeDocumentProfileChoice(v **types.ProfileChoice, valu
 				}
 				sv.ChoiceDescription = ptr.String(jtv)
 			}
-
 		case "ChoiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15259,7 +14918,6 @@ func awsRestjson1_deserializeDocumentProfileChoice(v **types.ProfileChoice, valu
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "ChoiceTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15268,7 +14926,6 @@ func awsRestjson1_deserializeDocumentProfileChoice(v **types.ProfileChoice, valu
 				}
 				sv.ChoiceTitle = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15342,7 +14999,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.CurrentProfileVersion = ptr.String(jtv)
 			}
-
 		case "LatestProfileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15351,7 +15007,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.LatestProfileVersion = ptr.String(jtv)
 			}
-
 		case "ProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15360,7 +15015,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15369,7 +15023,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15378,7 +15031,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.Type = types.ProfileNotificationType(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15387,7 +15039,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15396,7 +15047,6 @@ func awsRestjson1_deserializeDocumentProfileNotificationSummary(v **types.Profil
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15440,7 +15090,6 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				}
 				sv.MaxSelectedChoices = ptr.Int32(int32(i64))
 			}
-
 		case "MinSelectedChoices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15453,12 +15102,10 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				}
 				sv.MinSelectedChoices = ptr.Int32(int32(i64))
 			}
-
 		case "QuestionChoices":
 			if err := awsRestjson1_deserializeDocumentProfileQuestionChoices(&sv.QuestionChoices, value); err != nil {
 				return err
 			}
-
 		case "QuestionDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15467,7 +15114,6 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				}
 				sv.QuestionDescription = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15476,7 +15122,6 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15485,12 +15130,10 @@ func awsRestjson1_deserializeDocumentProfileQuestion(v **types.ProfileQuestion, 
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		case "SelectedChoiceIds":
 			if err := awsRestjson1_deserializeDocumentSelectedChoiceIds(&sv.SelectedChoiceIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15632,7 +15275,6 @@ func awsRestjson1_deserializeDocumentProfileShareSummary(v **types.ProfileShareS
 				}
 				sv.SharedWith = ptr.String(jtv)
 			}
-
 		case "ShareId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15641,7 +15283,6 @@ func awsRestjson1_deserializeDocumentProfileShareSummary(v **types.ProfileShareS
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15650,7 +15291,6 @@ func awsRestjson1_deserializeDocumentProfileShareSummary(v **types.ProfileShareS
 				}
 				sv.Status = types.ShareStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15659,7 +15299,6 @@ func awsRestjson1_deserializeDocumentProfileShareSummary(v **types.ProfileShareS
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15740,7 +15379,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 
 				}
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15749,7 +15387,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "ProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15758,7 +15395,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ProfileDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15767,7 +15403,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.ProfileDescription = ptr.String(jtv)
 			}
-
 		case "ProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15776,7 +15411,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "ProfileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15785,7 +15419,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15801,7 +15434,6 @@ func awsRestjson1_deserializeDocumentProfileSummary(v **types.ProfileSummary, va
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15848,7 +15480,6 @@ func awsRestjson1_deserializeDocumentProfileTemplate(v **types.ProfileTemplate, 
 
 				}
 			}
-
 		case "TemplateName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15857,12 +15488,10 @@ func awsRestjson1_deserializeDocumentProfileTemplate(v **types.ProfileTemplate, 
 				}
 				sv.TemplateName = ptr.String(jtv)
 			}
-
 		case "TemplateQuestions":
 			if err := awsRestjson1_deserializeDocumentTemplateQuestions(&sv.TemplateQuestions, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15878,7 +15507,6 @@ func awsRestjson1_deserializeDocumentProfileTemplate(v **types.ProfileTemplate, 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15918,7 +15546,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateChoice(v **types.ProfileTemp
 				}
 				sv.ChoiceDescription = ptr.String(jtv)
 			}
-
 		case "ChoiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15927,7 +15554,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateChoice(v **types.ProfileTemp
 				}
 				sv.ChoiceId = ptr.String(jtv)
 			}
-
 		case "ChoiceTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15936,7 +15562,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateChoice(v **types.ProfileTemp
 				}
 				sv.ChoiceTitle = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15980,7 +15605,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				}
 				sv.MaxSelectedChoices = ptr.Int32(int32(i64))
 			}
-
 		case "MinSelectedChoices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15993,12 +15617,10 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				}
 				sv.MinSelectedChoices = ptr.Int32(int32(i64))
 			}
-
 		case "QuestionChoices":
 			if err := awsRestjson1_deserializeDocumentProfileTemplateQuestionChoices(&sv.QuestionChoices, value); err != nil {
 				return err
 			}
-
 		case "QuestionDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16007,7 +15629,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				}
 				sv.QuestionDescription = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16016,7 +15637,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16025,7 +15645,6 @@ func awsRestjson1_deserializeDocumentProfileTemplateQuestion(v **types.ProfileTe
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16139,7 +15758,6 @@ func awsRestjson1_deserializeDocumentQuestionDifference(v **types.QuestionDiffer
 				}
 				sv.DifferenceStatus = types.DifferenceStatus(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16148,7 +15766,6 @@ func awsRestjson1_deserializeDocumentQuestionDifference(v **types.QuestionDiffer
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16157,7 +15774,6 @@ func awsRestjson1_deserializeDocumentQuestionDifference(v **types.QuestionDiffer
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16227,7 +15843,6 @@ func awsRestjson1_deserializeDocumentQuestionMetric(v **types.QuestionMetric, va
 			if err := awsRestjson1_deserializeDocumentBestPractices(&sv.BestPractices, value); err != nil {
 				return err
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16236,7 +15851,6 @@ func awsRestjson1_deserializeDocumentQuestionMetric(v **types.QuestionMetric, va
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "Risk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16245,7 +15859,6 @@ func awsRestjson1_deserializeDocumentQuestionMetric(v **types.QuestionMetric, va
 				}
 				sv.Risk = types.Risk(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16309,15 +15922,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16325,7 +15932,6 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16334,7 +15940,6 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16343,14 +15948,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16386,12 +15987,10 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "Lenses":
 			if err := awsRestjson1_deserializeDocumentReviewTemplateLenses(&sv.Lenses, value); err != nil {
 				return err
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16400,7 +15999,6 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16409,12 +16007,10 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "QuestionCounts":
 			if err := awsRestjson1_deserializeDocumentQuestionCounts(&sv.QuestionCounts, value); err != nil {
 				return err
 			}
-
 		case "ShareInvitationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16423,12 +16019,10 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16437,7 +16031,6 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		case "TemplateName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16446,7 +16039,6 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.TemplateName = ptr.String(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16462,7 +16054,6 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 
 				}
 			}
-
 		case "UpdateStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16471,7 +16062,6 @@ func awsRestjson1_deserializeDocumentReviewTemplate(v **types.ReviewTemplate, va
 				}
 				sv.UpdateStatus = types.ReviewTemplateUpdateStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16511,17 +16101,14 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.AnswerStatus = types.ReviewTemplateAnswerStatus(jtv)
 			}
-
 		case "ChoiceAnswers":
 			if err := awsRestjson1_deserializeDocumentChoiceAnswers(&sv.ChoiceAnswers, value); err != nil {
 				return err
 			}
-
 		case "Choices":
 			if err := awsRestjson1_deserializeDocumentChoices(&sv.Choices, value); err != nil {
 				return err
 			}
-
 		case "HelpfulResourceDisplayText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16530,7 +16117,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.HelpfulResourceDisplayText = ptr.String(jtv)
 			}
-
 		case "HelpfulResourceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16539,7 +16125,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.HelpfulResourceUrl = ptr.String(jtv)
 			}
-
 		case "ImprovementPlanUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16548,7 +16133,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.ImprovementPlanUrl = ptr.String(jtv)
 			}
-
 		case "IsApplicable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16557,7 +16141,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.IsApplicable = ptr.Bool(jtv)
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16566,7 +16149,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16575,7 +16157,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "QuestionDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16584,7 +16165,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.QuestionDescription = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16593,7 +16173,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16602,7 +16181,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16611,12 +16189,10 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswer(v **types.ReviewTempla
 				}
 				sv.Reason = types.AnswerReason(jtv)
 			}
-
 		case "SelectedChoices":
 			if err := awsRestjson1_deserializeDocumentSelectedChoices(&sv.SelectedChoices, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16690,17 +16266,14 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.AnswerStatus = types.ReviewTemplateAnswerStatus(jtv)
 			}
-
 		case "ChoiceAnswerSummaries":
 			if err := awsRestjson1_deserializeDocumentChoiceAnswerSummaries(&sv.ChoiceAnswerSummaries, value); err != nil {
 				return err
 			}
-
 		case "Choices":
 			if err := awsRestjson1_deserializeDocumentChoices(&sv.Choices, value); err != nil {
 				return err
 			}
-
 		case "IsApplicable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16709,7 +16282,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.IsApplicable = ptr.Bool(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16718,7 +16290,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "QuestionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16727,7 +16298,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.QuestionId = ptr.String(jtv)
 			}
-
 		case "QuestionTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16736,7 +16306,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.QuestionTitle = ptr.String(jtv)
 			}
-
 		case "QuestionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16745,7 +16314,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.QuestionType = types.QuestionType(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16754,12 +16322,10 @@ func awsRestjson1_deserializeDocumentReviewTemplateAnswerSummary(v **types.Revie
 				}
 				sv.Reason = types.AnswerReason(jtv)
 			}
-
 		case "SelectedChoices":
 			if err := awsRestjson1_deserializeDocumentSelectedChoices(&sv.SelectedChoices, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16835,7 +16401,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16844,7 +16409,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16853,7 +16417,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.LensName = ptr.String(jtv)
 			}
-
 		case "LensStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16862,7 +16425,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.LensStatus = types.LensStatus(jtv)
 			}
-
 		case "LensVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16871,7 +16433,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.LensVersion = ptr.String(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16880,7 +16441,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16889,17 +16449,14 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "PillarReviewSummaries":
 			if err := awsRestjson1_deserializeDocumentReviewTemplatePillarReviewSummaries(&sv.PillarReviewSummaries, value); err != nil {
 				return err
 			}
-
 		case "QuestionCounts":
 			if err := awsRestjson1_deserializeDocumentQuestionCounts(&sv.QuestionCounts, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16915,7 +16472,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateLensReview(v **types.ReviewTe
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16989,7 +16545,6 @@ func awsRestjson1_deserializeDocumentReviewTemplatePillarReviewSummary(v **types
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16998,7 +16553,6 @@ func awsRestjson1_deserializeDocumentReviewTemplatePillarReviewSummary(v **types
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "PillarName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17007,12 +16561,10 @@ func awsRestjson1_deserializeDocumentReviewTemplatePillarReviewSummary(v **types
 				}
 				sv.PillarName = ptr.String(jtv)
 			}
-
 		case "QuestionCounts":
 			if err := awsRestjson1_deserializeDocumentQuestionCounts(&sv.QuestionCounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17086,12 +16638,10 @@ func awsRestjson1_deserializeDocumentReviewTemplateSummary(v **types.ReviewTempl
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "Lenses":
 			if err := awsRestjson1_deserializeDocumentReviewTemplateLenses(&sv.Lenses, value); err != nil {
 				return err
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17100,7 +16650,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateSummary(v **types.ReviewTempl
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17109,7 +16658,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateSummary(v **types.ReviewTempl
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		case "TemplateName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17118,7 +16666,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateSummary(v **types.ReviewTempl
 				}
 				sv.TemplateName = ptr.String(jtv)
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17134,7 +16681,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateSummary(v **types.ReviewTempl
 
 				}
 			}
-
 		case "UpdateStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17143,7 +16689,6 @@ func awsRestjson1_deserializeDocumentReviewTemplateSummary(v **types.ReviewTempl
 				}
 				sv.UpdateStatus = types.ReviewTemplateUpdateStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17295,12 +16840,10 @@ func awsRestjson1_deserializeDocumentSelectedPillar(v **types.SelectedPillar, va
 				}
 				sv.PillarId = ptr.String(jtv)
 			}
-
 		case "SelectedQuestionIds":
 			if err := awsRestjson1_deserializeDocumentSelectedQuestionIds(&sv.SelectedQuestionIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17400,15 +16943,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17416,7 +16953,6 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "QuotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17425,7 +16961,6 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17434,7 +16969,6 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17443,7 +16977,6 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17452,14 +16985,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -17495,7 +17024,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.LensAlias = ptr.String(jtv)
 			}
-
 		case "LensArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17504,7 +17032,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "ProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17513,7 +17040,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ShareInvitationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17522,7 +17048,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
 			}
-
 		case "ShareResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17531,7 +17056,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.ShareResourceType = types.ShareResourceType(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17540,7 +17064,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17549,7 +17072,6 @@ func awsRestjson1_deserializeDocumentShareInvitation(v **types.ShareInvitation, 
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17623,7 +17145,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.LensArn = ptr.String(jtv)
 			}
-
 		case "LensName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17632,7 +17153,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.LensName = ptr.String(jtv)
 			}
-
 		case "PermissionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17641,7 +17161,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.PermissionType = types.PermissionType(jtv)
 			}
-
 		case "ProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17650,7 +17169,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17659,7 +17177,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.ProfileName = ptr.String(jtv)
 			}
-
 		case "SharedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17668,7 +17185,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.SharedBy = ptr.String(jtv)
 			}
-
 		case "SharedWith":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17677,7 +17193,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.SharedWith = ptr.String(jtv)
 			}
-
 		case "ShareInvitationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17686,7 +17201,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
 			}
-
 		case "ShareResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17695,7 +17209,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.ShareResourceType = types.ShareResourceType(jtv)
 			}
-
 		case "TemplateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17704,7 +17217,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
-
 		case "TemplateName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17713,7 +17225,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.TemplateName = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17722,7 +17233,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17731,7 +17241,6 @@ func awsRestjson1_deserializeDocumentShareInvitationSummary(v **types.ShareInvit
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17875,7 +17384,6 @@ func awsRestjson1_deserializeDocumentTemplateShareSummary(v **types.TemplateShar
 				}
 				sv.SharedWith = ptr.String(jtv)
 			}
-
 		case "ShareId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17884,7 +17392,6 @@ func awsRestjson1_deserializeDocumentTemplateShareSummary(v **types.TemplateShar
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17893,7 +17400,6 @@ func awsRestjson1_deserializeDocumentTemplateShareSummary(v **types.TemplateShar
 				}
 				sv.Status = types.ShareStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17902,7 +17408,6 @@ func awsRestjson1_deserializeDocumentTemplateShareSummary(v **types.TemplateShar
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17932,15 +17437,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17948,7 +17447,6 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "QuotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17957,7 +17455,6 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
-
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17966,14 +17463,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18033,20 +17526,13 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "Fields":
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
-
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18054,7 +17540,6 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18063,14 +17548,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18106,7 +17587,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18115,7 +17595,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18185,7 +17664,6 @@ func awsRestjson1_deserializeDocumentVersionDifferences(v **types.VersionDiffere
 			if err := awsRestjson1_deserializeDocumentPillarDifferences(&sv.PillarDifferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18221,12 +17699,10 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 			if err := awsRestjson1_deserializeDocumentWorkloadAccountIds(&sv.AccountIds, value); err != nil {
 				return err
 			}
-
 		case "Applications":
 			if err := awsRestjson1_deserializeDocumentWorkloadApplications(&sv.Applications, value); err != nil {
 				return err
 			}
-
 		case "ArchitecturalDesign":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18235,12 +17711,10 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.ArchitecturalDesign = ptr.String(jtv)
 			}
-
 		case "AwsRegions":
 			if err := awsRestjson1_deserializeDocumentWorkloadAwsRegions(&sv.AwsRegions, value); err != nil {
 				return err
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18249,12 +17723,10 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DiscoveryConfig":
 			if err := awsRestjson1_deserializeDocumentWorkloadDiscoveryConfig(&sv.DiscoveryConfig, value); err != nil {
 				return err
 			}
-
 		case "Environment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18263,7 +17735,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.Environment = types.WorkloadEnvironment(jtv)
 			}
-
 		case "ImprovementStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18272,7 +17743,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.ImprovementStatus = types.WorkloadImprovementStatus(jtv)
 			}
-
 		case "Industry":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18281,7 +17751,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.Industry = ptr.String(jtv)
 			}
-
 		case "IndustryType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18290,7 +17759,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.IndustryType = ptr.String(jtv)
 			}
-
 		case "IsReviewOwnerUpdateAcknowledged":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -18299,22 +17767,18 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.IsReviewOwnerUpdateAcknowledged = ptr.Bool(jtv)
 			}
-
 		case "JiraConfiguration":
 			if err := awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(&sv.JiraConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Lenses":
 			if err := awsRestjson1_deserializeDocumentWorkloadLenses(&sv.Lenses, value); err != nil {
 				return err
 			}
-
 		case "NonAwsRegions":
 			if err := awsRestjson1_deserializeDocumentWorkloadNonAwsRegions(&sv.NonAwsRegions, value); err != nil {
 				return err
 			}
-
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18323,7 +17787,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.Notes = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18332,22 +17795,18 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "PillarPriorities":
 			if err := awsRestjson1_deserializeDocumentWorkloadPillarPriorities(&sv.PillarPriorities, value); err != nil {
 				return err
 			}
-
 		case "PrioritizedRiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.PrioritizedRiskCounts, value); err != nil {
 				return err
 			}
-
 		case "Profiles":
 			if err := awsRestjson1_deserializeDocumentWorkloadProfiles(&sv.Profiles, value); err != nil {
 				return err
 			}
-
 		case "ReviewOwner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18356,7 +17815,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.ReviewOwner = ptr.String(jtv)
 			}
-
 		case "ReviewRestrictionDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -18372,12 +17830,10 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 
 				}
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		case "ShareInvitationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18386,12 +17842,10 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -18407,7 +17861,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 
 				}
 			}
-
 		case "WorkloadArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18416,7 +17869,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.WorkloadArn = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18425,7 +17877,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18434,7 +17885,6 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18582,12 +18032,10 @@ func awsRestjson1_deserializeDocumentWorkloadDiscoveryConfig(v **types.WorkloadD
 				}
 				sv.TrustedAdvisorIntegrationStatus = types.TrustedAdvisorIntegrationStatus(jtv)
 			}
-
 		case "WorkloadResourceDefinition":
 			if err := awsRestjson1_deserializeDocumentWorkloadResourceDefinition(&sv.WorkloadResourceDefinition, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18627,7 +18075,6 @@ func awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(v **types.W
 				}
 				sv.IssueManagementStatus = types.WorkloadIssueManagementStatus(jtv)
 			}
-
 		case "IssueManagementType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18636,7 +18083,6 @@ func awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(v **types.W
 				}
 				sv.IssueManagementType = types.IssueManagementType(jtv)
 			}
-
 		case "JiraProjectKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18645,7 +18091,6 @@ func awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(v **types.W
 				}
 				sv.JiraProjectKey = ptr.String(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18654,7 +18099,6 @@ func awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(v **types.W
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18802,7 +18246,6 @@ func awsRestjson1_deserializeDocumentWorkloadProfile(v **types.WorkloadProfile, 
 				}
 				sv.ProfileArn = ptr.String(jtv)
 			}
-
 		case "ProfileVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18811,7 +18254,6 @@ func awsRestjson1_deserializeDocumentWorkloadProfile(v **types.WorkloadProfile, 
 				}
 				sv.ProfileVersion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18921,7 +18363,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.PermissionType = types.PermissionType(jtv)
 			}
-
 		case "SharedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18930,7 +18371,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.SharedBy = ptr.String(jtv)
 			}
-
 		case "SharedWith":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18939,7 +18379,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.SharedWith = ptr.String(jtv)
 			}
-
 		case "ShareId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18948,7 +18387,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18957,7 +18395,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.Status = types.ShareStatus(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18966,7 +18403,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18975,7 +18411,6 @@ func awsRestjson1_deserializeDocumentWorkloadShare(v **types.WorkloadShare, valu
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19049,7 +18484,6 @@ func awsRestjson1_deserializeDocumentWorkloadShareSummary(v **types.WorkloadShar
 				}
 				sv.PermissionType = types.PermissionType(jtv)
 			}
-
 		case "SharedWith":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19058,7 +18492,6 @@ func awsRestjson1_deserializeDocumentWorkloadShareSummary(v **types.WorkloadShar
 				}
 				sv.SharedWith = ptr.String(jtv)
 			}
-
 		case "ShareId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19067,7 +18500,6 @@ func awsRestjson1_deserializeDocumentWorkloadShareSummary(v **types.WorkloadShar
 				}
 				sv.ShareId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19076,7 +18508,6 @@ func awsRestjson1_deserializeDocumentWorkloadShareSummary(v **types.WorkloadShar
 				}
 				sv.Status = types.ShareStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19085,7 +18516,6 @@ func awsRestjson1_deserializeDocumentWorkloadShareSummary(v **types.WorkloadShar
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19159,12 +18589,10 @@ func awsRestjson1_deserializeDocumentWorkloadSummary(v **types.WorkloadSummary, 
 				}
 				sv.ImprovementStatus = types.WorkloadImprovementStatus(jtv)
 			}
-
 		case "Lenses":
 			if err := awsRestjson1_deserializeDocumentWorkloadLenses(&sv.Lenses, value); err != nil {
 				return err
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19173,22 +18601,18 @@ func awsRestjson1_deserializeDocumentWorkloadSummary(v **types.WorkloadSummary, 
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "PrioritizedRiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.PrioritizedRiskCounts, value); err != nil {
 				return err
 			}
-
 		case "Profiles":
 			if err := awsRestjson1_deserializeDocumentWorkloadProfiles(&sv.Profiles, value); err != nil {
 				return err
 			}
-
 		case "RiskCounts":
 			if err := awsRestjson1_deserializeDocumentRiskCounts(&sv.RiskCounts, value); err != nil {
 				return err
 			}
-
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -19204,7 +18628,6 @@ func awsRestjson1_deserializeDocumentWorkloadSummary(v **types.WorkloadSummary, 
 
 				}
 			}
-
 		case "WorkloadArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19213,7 +18636,6 @@ func awsRestjson1_deserializeDocumentWorkloadSummary(v **types.WorkloadSummary, 
 				}
 				sv.WorkloadArn = ptr.String(jtv)
 			}
-
 		case "WorkloadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19222,7 +18644,6 @@ func awsRestjson1_deserializeDocumentWorkloadSummary(v **types.WorkloadSummary, 
 				}
 				sv.WorkloadId = ptr.String(jtv)
 			}
-
 		case "WorkloadName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19231,7 +18652,6 @@ func awsRestjson1_deserializeDocumentWorkloadSummary(v **types.WorkloadSummary, 
 				}
 				sv.WorkloadName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

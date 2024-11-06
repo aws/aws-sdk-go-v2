@@ -193,17 +193,14 @@ func awsRestjson1_deserializeOpDocumentCopyImageSetOutput(v **CopyImageSetOutput
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "destinationImageSetProperties":
 			if err := awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(&sv.DestinationImageSetProperties, value); err != nil {
 				return err
 			}
-
 		case "sourceImageSetProperties":
 			if err := awsRestjson1_deserializeDocumentCopySourceImageSetProperties(&sv.SourceImageSetProperties, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -374,7 +371,6 @@ func awsRestjson1_deserializeOpDocumentCreateDatastoreOutput(v **CreateDatastore
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "datastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -383,7 +379,6 @@ func awsRestjson1_deserializeOpDocumentCreateDatastoreOutput(v **CreateDatastore
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -554,7 +549,6 @@ func awsRestjson1_deserializeOpDocumentDeleteDatastoreOutput(v **DeleteDatastore
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "datastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -563,7 +557,6 @@ func awsRestjson1_deserializeOpDocumentDeleteDatastoreOutput(v **DeleteDatastore
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -734,7 +727,6 @@ func awsRestjson1_deserializeOpDocumentDeleteImageSetOutput(v **DeleteImageSetOu
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -743,7 +735,6 @@ func awsRestjson1_deserializeOpDocumentDeleteImageSetOutput(v **DeleteImageSetOu
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "imageSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -752,7 +743,6 @@ func awsRestjson1_deserializeOpDocumentDeleteImageSetOutput(v **DeleteImageSetOu
 				}
 				sv.ImageSetState = types.ImageSetState(jtv)
 			}
-
 		case "imageSetWorkflowStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -761,7 +751,6 @@ func awsRestjson1_deserializeOpDocumentDeleteImageSetOutput(v **DeleteImageSetOu
 				}
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -925,7 +914,6 @@ func awsRestjson1_deserializeOpDocumentGetDatastoreOutput(v **GetDatastoreOutput
 			if err := awsRestjson1_deserializeDocumentDatastoreProperties(&sv.DatastoreProperties, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1092,7 +1080,6 @@ func awsRestjson1_deserializeOpDocumentGetDICOMImportJobOutput(v **GetDICOMImpor
 			if err := awsRestjson1_deserializeDocumentDICOMImportJobProperties(&sv.JobProperties, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1404,7 +1391,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 
 				}
 			}
-
 		case "datastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1413,7 +1399,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "deletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1429,7 +1414,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 
 				}
 			}
-
 		case "imageSetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1438,7 +1422,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.ImageSetArn = ptr.String(jtv)
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1447,7 +1430,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "imageSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1456,7 +1438,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.ImageSetState = types.ImageSetState(jtv)
 			}
-
 		case "imageSetWorkflowStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1465,7 +1446,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1474,12 +1454,10 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "overrides":
 			if err := awsRestjson1_deserializeDocumentOverrides(&sv.Overrides, value); err != nil {
 				return err
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1495,7 +1473,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 
 				}
 			}
-
 		case "versionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1504,7 +1481,6 @@ func awsRestjson1_deserializeOpDocumentGetImageSetOutput(v **GetImageSetOutput, 
 				}
 				sv.VersionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1804,7 +1780,6 @@ func awsRestjson1_deserializeOpDocumentListDatastoresOutput(v **ListDatastoresOu
 			if err := awsRestjson1_deserializeDocumentDatastoreSummaries(&sv.DatastoreSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1813,7 +1788,6 @@ func awsRestjson1_deserializeOpDocumentListDatastoresOutput(v **ListDatastoresOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1980,7 +1954,6 @@ func awsRestjson1_deserializeOpDocumentListDICOMImportJobsOutput(v **ListDICOMIm
 			if err := awsRestjson1_deserializeDocumentDICOMImportJobSummaries(&sv.JobSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1989,7 +1962,6 @@ func awsRestjson1_deserializeOpDocumentListDICOMImportJobsOutput(v **ListDICOMIm
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2156,7 +2128,6 @@ func awsRestjson1_deserializeOpDocumentListImageSetVersionsOutput(v **ListImageS
 			if err := awsRestjson1_deserializeDocumentImageSetPropertiesList(&sv.ImageSetPropertiesList, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2165,7 +2136,6 @@ func awsRestjson1_deserializeOpDocumentListImageSetVersionsOutput(v **ListImageS
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2329,7 +2299,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2496,7 +2465,6 @@ func awsRestjson1_deserializeOpDocumentSearchImageSetsOutput(v **SearchImageSets
 			if err := awsRestjson1_deserializeDocumentImageSetsMetadataSummaries(&sv.ImageSetsMetadataSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2505,12 +2473,10 @@ func awsRestjson1_deserializeOpDocumentSearchImageSetsOutput(v **SearchImageSets
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "sort":
 			if err := awsRestjson1_deserializeDocumentSort(&sv.Sort, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2684,7 +2650,6 @@ func awsRestjson1_deserializeOpDocumentStartDICOMImportJobOutput(v **StartDICOMI
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2693,7 +2658,6 @@ func awsRestjson1_deserializeOpDocumentStartDICOMImportJobOutput(v **StartDICOMI
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2702,7 +2666,6 @@ func awsRestjson1_deserializeOpDocumentStartDICOMImportJobOutput(v **StartDICOMI
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
-
 		case "submittedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2718,7 +2681,6 @@ func awsRestjson1_deserializeOpDocumentStartDICOMImportJobOutput(v **StartDICOMI
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3099,7 +3061,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 
 				}
 			}
-
 		case "datastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3108,7 +3069,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3117,7 +3077,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "imageSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3126,7 +3085,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 				}
 				sv.ImageSetState = types.ImageSetState(jtv)
 			}
-
 		case "imageSetWorkflowStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3135,7 +3093,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 				}
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
-
 		case "latestVersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3144,7 +3101,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 				}
 				sv.LatestVersionId = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3153,7 +3109,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3169,7 +3124,6 @@ func awsRestjson1_deserializeOpDocumentUpdateImageSetMetadataOutput(v **UpdateIm
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3451,15 +3405,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3467,14 +3415,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3500,15 +3444,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3516,14 +3454,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3566,7 +3500,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 
 				}
 			}
-
 		case "imageSetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3575,7 +3508,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 				}
 				sv.ImageSetArn = ptr.String(jtv)
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3584,7 +3516,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "imageSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3593,7 +3524,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 				}
 				sv.ImageSetState = types.ImageSetState(jtv)
 			}
-
 		case "imageSetWorkflowStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3602,7 +3532,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 				}
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
-
 		case "latestVersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3611,7 +3540,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 				}
 				sv.LatestVersionId = ptr.String(jtv)
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3627,7 +3555,6 @@ func awsRestjson1_deserializeDocumentCopyDestinationImageSetProperties(v **types
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3674,7 +3601,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 
 				}
 			}
-
 		case "imageSetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3683,7 +3609,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 				}
 				sv.ImageSetArn = ptr.String(jtv)
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3692,7 +3617,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "imageSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3701,7 +3625,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 				}
 				sv.ImageSetState = types.ImageSetState(jtv)
 			}
-
 		case "imageSetWorkflowStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3710,7 +3633,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 				}
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
-
 		case "latestVersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3719,7 +3641,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 				}
 				sv.LatestVersionId = ptr.String(jtv)
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3735,7 +3656,6 @@ func awsRestjson1_deserializeDocumentCopySourceImageSetProperties(v **types.Copy
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3782,7 +3702,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 
 				}
 			}
-
 		case "datastoreArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3791,7 +3710,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreArn = ptr.String(jtv)
 			}
-
 		case "datastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3800,7 +3718,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "datastoreName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3809,7 +3726,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreName = ptr.String(jtv)
 			}
-
 		case "datastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3818,7 +3734,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
-
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3827,7 +3742,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3843,7 +3757,6 @@ func awsRestjson1_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3924,7 +3837,6 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 
 				}
 			}
-
 		case "datastoreArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3933,7 +3845,6 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 				}
 				sv.DatastoreArn = ptr.String(jtv)
 			}
-
 		case "datastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3942,7 +3853,6 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "datastoreName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3951,7 +3861,6 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 				}
 				sv.DatastoreName = ptr.String(jtv)
 			}
-
 		case "datastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3960,7 +3869,6 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3976,7 +3884,6 @@ func awsRestjson1_deserializeDocumentDatastoreSummary(v **types.DatastoreSummary
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4016,7 +3923,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
-
 		case "datastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4025,7 +3931,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "endedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4041,7 +3946,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 
 				}
 			}
-
 		case "inputS3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4050,7 +3954,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.InputS3Uri = ptr.String(jtv)
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4059,7 +3962,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4068,7 +3970,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.JobName = ptr.String(jtv)
 			}
-
 		case "jobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4077,7 +3978,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4086,7 +3986,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "outputS3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4095,7 +3994,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 				}
 				sv.OutputS3Uri = ptr.String(jtv)
 			}
-
 		case "submittedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4111,7 +4009,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobProperties(v **types.DICOMImp
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4185,7 +4082,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
-
 		case "datastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4194,7 +4090,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
-
 		case "endedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4210,7 +4105,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 
 				}
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4219,7 +4113,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "jobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4228,7 +4121,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 				}
 				sv.JobName = ptr.String(jtv)
 			}
-
 		case "jobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4237,7 +4129,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4246,7 +4137,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "submittedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4262,7 +4152,6 @@ func awsRestjson1_deserializeDocumentDICOMImportJobSummary(v **types.DICOMImport
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4302,7 +4191,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMAccessionNumber = ptr.String(jtv)
 			}
-
 		case "DICOMNumberOfStudyRelatedInstances":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4315,7 +4203,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMNumberOfStudyRelatedInstances = int32(i64)
 			}
-
 		case "DICOMNumberOfStudyRelatedSeries":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4328,7 +4215,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMNumberOfStudyRelatedSeries = int32(i64)
 			}
-
 		case "DICOMPatientBirthDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4337,7 +4223,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMPatientBirthDate = ptr.String(jtv)
 			}
-
 		case "DICOMPatientId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4346,7 +4231,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMPatientId = ptr.String(jtv)
 			}
-
 		case "DICOMPatientName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4355,7 +4239,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMPatientName = ptr.String(jtv)
 			}
-
 		case "DICOMPatientSex":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4364,7 +4247,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMPatientSex = ptr.String(jtv)
 			}
-
 		case "DICOMSeriesBodyPart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4373,7 +4255,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMSeriesBodyPart = ptr.String(jtv)
 			}
-
 		case "DICOMSeriesInstanceUID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4382,7 +4263,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMSeriesInstanceUID = ptr.String(jtv)
 			}
-
 		case "DICOMSeriesModality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4391,7 +4271,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMSeriesModality = ptr.String(jtv)
 			}
-
 		case "DICOMSeriesNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4404,7 +4283,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMSeriesNumber = ptr.Int32(int32(i64))
 			}
-
 		case "DICOMStudyDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4413,7 +4291,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMStudyDate = ptr.String(jtv)
 			}
-
 		case "DICOMStudyDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4422,7 +4299,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMStudyDescription = ptr.String(jtv)
 			}
-
 		case "DICOMStudyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4431,7 +4307,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMStudyId = ptr.String(jtv)
 			}
-
 		case "DICOMStudyInstanceUID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4440,7 +4315,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMStudyInstanceUID = ptr.String(jtv)
 			}
-
 		case "DICOMStudyTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4449,7 +4323,6 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				}
 				sv.DICOMStudyTime = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4496,7 +4369,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 
 				}
 			}
-
 		case "deletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4512,7 +4384,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 
 				}
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4521,7 +4392,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "imageSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4530,7 +4400,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				}
 				sv.ImageSetState = types.ImageSetState(jtv)
 			}
-
 		case "ImageSetWorkflowStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4539,7 +4408,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				}
 				sv.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4548,12 +4416,10 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "overrides":
 			if err := awsRestjson1_deserializeDocumentOverrides(&sv.Overrides, value); err != nil {
 				return err
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4569,7 +4435,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 
 				}
 			}
-
 		case "versionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4578,7 +4443,6 @@ func awsRestjson1_deserializeDocumentImageSetProperties(v **types.ImageSetProper
 				}
 				sv.VersionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4693,12 +4557,10 @@ func awsRestjson1_deserializeDocumentImageSetsMetadataSummary(v **types.ImageSet
 
 				}
 			}
-
 		case "DICOMTags":
 			if err := awsRestjson1_deserializeDocumentDICOMTags(&sv.DICOMTags, value); err != nil {
 				return err
 			}
-
 		case "imageSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4707,7 +4569,6 @@ func awsRestjson1_deserializeDocumentImageSetsMetadataSummary(v **types.ImageSet
 				}
 				sv.ImageSetId = ptr.String(jtv)
 			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4723,7 +4584,6 @@ func awsRestjson1_deserializeDocumentImageSetsMetadataSummary(v **types.ImageSet
 
 				}
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4736,7 +4596,6 @@ func awsRestjson1_deserializeDocumentImageSetsMetadataSummary(v **types.ImageSet
 				}
 				sv.Version = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4766,15 +4625,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4782,14 +4635,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4825,7 +4674,6 @@ func awsRestjson1_deserializeDocumentOverrides(v **types.Overrides, value interf
 				}
 				sv.Forced = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4855,15 +4703,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4871,14 +4713,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4904,15 +4742,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4920,14 +4752,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4963,7 +4791,6 @@ func awsRestjson1_deserializeDocumentSort(v **types.Sort, value interface{}) err
 				}
 				sv.SortField = types.SortField(jtv)
 			}
-
 		case "sortOrder":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4972,7 +4799,6 @@ func awsRestjson1_deserializeDocumentSort(v **types.Sort, value interface{}) err
 				}
 				sv.SortOrder = types.SortOrder(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5038,15 +4864,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5054,14 +4874,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5087,15 +4903,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5103,14 +4913,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

@@ -209,7 +209,6 @@ func awsRestjson1_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExec
 			if err := awsRestjson1_deserializeDocumentUpdateResults(&sv.UpdateResults, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -401,7 +400,6 @@ func awsRestjson1_deserializeOpDocumentBeginTransactionOutput(v **BeginTransacti
 				}
 				sv.TransactionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -596,7 +594,6 @@ func awsRestjson1_deserializeOpDocumentCommitTransactionOutput(v **CommitTransac
 				}
 				sv.TransactionStatus = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -760,7 +757,6 @@ func awsRestjson1_deserializeOpDocumentExecuteSqlOutput(v **ExecuteSqlOutput, va
 			if err := awsRestjson1_deserializeDocumentSqlStatementResults(&sv.SqlStatementResults, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -951,7 +947,6 @@ func awsRestjson1_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 			if err := awsRestjson1_deserializeDocumentMetadata(&sv.ColumnMetadata, value); err != nil {
 				return err
 			}
-
 		case "formattedRecords":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -960,12 +955,10 @@ func awsRestjson1_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 				}
 				sv.FormattedRecords = ptr.String(jtv)
 			}
-
 		case "generatedFields":
 			if err := awsRestjson1_deserializeDocumentFieldList(&sv.GeneratedFields, value); err != nil {
 				return err
 			}
-
 		case "numberOfRecordsUpdated":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -978,12 +971,10 @@ func awsRestjson1_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 				}
 				sv.NumberOfRecordsUpdated = i64
 			}
-
 		case "records":
 			if err := awsRestjson1_deserializeDocumentSqlRecords(&sv.Records, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1178,7 +1169,6 @@ func awsRestjson1_deserializeOpDocumentRollbackTransactionOutput(v **RollbackTra
 				}
 				sv.TransactionStatus = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1655,15 +1645,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1671,14 +1655,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1838,15 +1818,9 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1854,14 +1828,10 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1937,7 +1907,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.ArrayBaseColumnType = int32(i64)
 			}
-
 		case "isAutoIncrement":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1946,7 +1915,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.IsAutoIncrement = jtv
 			}
-
 		case "isCaseSensitive":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1955,7 +1923,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.IsCaseSensitive = jtv
 			}
-
 		case "isCurrency":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1964,7 +1931,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.IsCurrency = jtv
 			}
-
 		case "isSigned":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1973,7 +1939,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.IsSigned = jtv
 			}
-
 		case "label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1982,7 +1947,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1991,7 +1955,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "nullable":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2004,7 +1967,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.Nullable = int32(i64)
 			}
-
 		case "precision":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2017,7 +1979,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.Precision = int32(i64)
 			}
-
 		case "scale":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2030,7 +1991,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.Scale = int32(i64)
 			}
-
 		case "schemaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2039,7 +1999,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.SchemaName = ptr.String(jtv)
 			}
-
 		case "tableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2048,7 +2007,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.TableName = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2061,7 +2019,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.Type = int32(i64)
 			}
-
 		case "typeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2070,7 +2027,6 @@ func awsRestjson1_deserializeDocumentColumnMetadata(v **types.ColumnMetadata, va
 				}
 				sv.TypeName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2100,15 +2056,9 @@ func awsRestjson1_deserializeDocumentDatabaseErrorException(v **types.DatabaseEr
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2116,14 +2066,10 @@ func awsRestjson1_deserializeDocumentDatabaseErrorException(v **types.DatabaseEr
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2149,15 +2095,9 @@ func awsRestjson1_deserializeDocumentDatabaseNotFoundException(v **types.Databas
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2165,14 +2105,10 @@ func awsRestjson1_deserializeDocumentDatabaseNotFoundException(v **types.Databas
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2198,21 +2134,12 @@ func awsRestjson1_deserializeDocumentDatabaseUnavailableException(v **types.Data
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2474,15 +2401,9 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2490,14 +2411,10 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2523,15 +2440,9 @@ func awsRestjson1_deserializeDocumentHttpEndpointNotEnabledException(v **types.H
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2539,14 +2450,10 @@ func awsRestjson1_deserializeDocumentHttpEndpointNotEnabledException(v **types.H
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2572,21 +2479,12 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2612,15 +2510,9 @@ func awsRestjson1_deserializeDocumentInvalidSecretException(v **types.InvalidSec
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2628,14 +2520,10 @@ func awsRestjson1_deserializeDocumentInvalidSecretException(v **types.InvalidSec
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2735,15 +2623,9 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2751,14 +2633,10 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2790,7 +2668,6 @@ func awsRestjson1_deserializeDocumentRecord(v **types.Record, value interface{})
 			if err := awsRestjson1_deserializeDocumentRow(&sv.Values, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2860,12 +2737,10 @@ func awsRestjson1_deserializeDocumentResultFrame(v **types.ResultFrame, value in
 			if err := awsRestjson1_deserializeDocumentRecords(&sv.Records, value); err != nil {
 				return err
 			}
-
 		case "resultSetMetadata":
 			if err := awsRestjson1_deserializeDocumentResultSetMetadata(&sv.ResultSetMetadata, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2909,12 +2784,10 @@ func awsRestjson1_deserializeDocumentResultSetMetadata(v **types.ResultSetMetada
 				}
 				sv.ColumnCount = i64
 			}
-
 		case "columnMetadata":
 			if err := awsRestjson1_deserializeDocumentMetadata(&sv.ColumnMetadata, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2976,15 +2849,9 @@ func awsRestjson1_deserializeDocumentSecretsErrorException(v **types.SecretsErro
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2992,14 +2859,10 @@ func awsRestjson1_deserializeDocumentSecretsErrorException(v **types.SecretsErro
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3025,21 +2888,12 @@ func awsRestjson1_deserializeDocumentServiceUnavailableError(v **types.ServiceUn
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3111,12 +2965,10 @@ func awsRestjson1_deserializeDocumentSqlStatementResult(v **types.SqlStatementRe
 				}
 				sv.NumberOfRecordsUpdated = i64
 			}
-
 		case "resultFrame":
 			if err := awsRestjson1_deserializeDocumentResultFrame(&sv.ResultFrame, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3180,13 +3032,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "dbConnectionId":
 			if value != nil {
@@ -3200,8 +3046,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 				}
 				sv.DbConnectionId = i64
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3209,14 +3054,10 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3284,7 +3125,6 @@ func awsRestjson1_deserializeDocumentStructValue(v **types.StructValue, value in
 			if err := awsRestjson1_deserializeDocumentArrayValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3314,15 +3154,9 @@ func awsRestjson1_deserializeDocumentTransactionNotFoundException(v **types.Tran
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3330,14 +3164,10 @@ func awsRestjson1_deserializeDocumentTransactionNotFoundException(v **types.Tran
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3363,15 +3193,9 @@ func awsRestjson1_deserializeDocumentUnsupportedResultException(v **types.Unsupp
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3379,14 +3203,10 @@ func awsRestjson1_deserializeDocumentUnsupportedResultException(v **types.Unsupp
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3418,7 +3238,6 @@ func awsRestjson1_deserializeDocumentUpdateResult(v **types.UpdateResult, value 
 			if err := awsRestjson1_deserializeDocumentFieldList(&sv.GeneratedFields, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

@@ -198,7 +198,6 @@ func awsRestjson1_deserializeOpDocumentAutocompleteOutput(v **AutocompleteOutput
 			if err := awsRestjson1_deserializeDocumentAutocompleteResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -376,7 +375,6 @@ func awsRestjson1_deserializeOpDocumentGeocodeOutput(v **GeocodeOutput, value in
 			if err := awsRestjson1_deserializeDocumentGeocodeResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -554,17 +552,14 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
 				return err
 			}
-
 		case "AccessRestrictions":
 			if err := awsRestjson1_deserializeDocumentAccessRestrictionList(&sv.AccessRestrictions, value); err != nil {
 				return err
 			}
-
 		case "Address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "AddressNumberCorrected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -573,42 +568,34 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
-
 		case "BusinessChains":
 			if err := awsRestjson1_deserializeDocumentBusinessChainList(&sv.BusinessChains, value); err != nil {
 				return err
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Contacts":
 			if err := awsRestjson1_deserializeDocumentContacts(&sv.Contacts, value); err != nil {
 				return err
 			}
-
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
 			}
-
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
 			}
-
 		case "OpeningHours":
 			if err := awsRestjson1_deserializeDocumentOpeningHoursList(&sv.OpeningHours, value); err != nil {
 				return err
 			}
-
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -617,7 +604,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -626,7 +612,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -635,22 +620,18 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "PostalCodeDetails":
 			if err := awsRestjson1_deserializeDocumentPostalCodeDetailsList(&sv.PostalCodeDetails, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -659,7 +640,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -837,7 +817,6 @@ func awsRestjson1_deserializeOpDocumentReverseGeocodeOutput(v **ReverseGeocodeOu
 			if err := awsRestjson1_deserializeDocumentReverseGeocodeResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1019,12 +998,10 @@ func awsRestjson1_deserializeOpDocumentSearchNearbyOutput(v **SearchNearbyOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResultItems":
 			if err := awsRestjson1_deserializeDocumentSearchNearbyResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1206,12 +1183,10 @@ func awsRestjson1_deserializeOpDocumentSearchTextOutput(v **SearchTextOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResultItems":
 			if err := awsRestjson1_deserializeDocumentSearchTextResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1389,12 +1364,10 @@ func awsRestjson1_deserializeOpDocumentSuggestOutput(v **SuggestOutput, value in
 			if err := awsRestjson1_deserializeDocumentQueryRefinementList(&sv.QueryRefinements, value); err != nil {
 				return err
 			}
-
 		case "ResultItems":
 			if err := awsRestjson1_deserializeDocumentSuggestResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1568,15 +1541,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1584,14 +1551,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1623,7 +1586,6 @@ func awsRestjson1_deserializeDocumentAccessPoint(v **types.AccessPoint, value in
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1693,7 +1655,6 @@ func awsRestjson1_deserializeDocumentAccessRestriction(v **types.AccessRestricti
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Restricted":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1702,7 +1663,6 @@ func awsRestjson1_deserializeDocumentAccessRestriction(v **types.AccessRestricti
 				}
 				sv.Restricted = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1776,7 +1736,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.AddressNumber = ptr.String(jtv)
 			}
-
 		case "Block":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1785,7 +1744,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.Block = ptr.String(jtv)
 			}
-
 		case "Building":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1794,12 +1752,10 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.Building = ptr.String(jtv)
 			}
-
 		case "Country":
 			if err := awsRestjson1_deserializeDocumentCountry(&sv.Country, value); err != nil {
 				return err
 			}
-
 		case "District":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1808,12 +1764,10 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.District = ptr.String(jtv)
 			}
-
 		case "Intersection":
 			if err := awsRestjson1_deserializeDocumentIntersectionList(&sv.Intersection, value); err != nil {
 				return err
 			}
-
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1822,7 +1776,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "Locality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1831,7 +1784,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.Locality = ptr.String(jtv)
 			}
-
 		case "PostalCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1840,12 +1792,10 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
-
 		case "Region":
 			if err := awsRestjson1_deserializeDocumentRegion(&sv.Region, value); err != nil {
 				return err
 			}
-
 		case "Street":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1854,12 +1804,10 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.Street = ptr.String(jtv)
 			}
-
 		case "StreetComponents":
 			if err := awsRestjson1_deserializeDocumentStreetComponentsList(&sv.StreetComponents, value); err != nil {
 				return err
 			}
-
 		case "SubBlock":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1868,7 +1816,6 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.SubBlock = ptr.String(jtv)
 			}
-
 		case "SubDistrict":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1877,12 +1824,10 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				}
 				sv.SubDistrict = ptr.String(jtv)
 			}
-
 		case "SubRegion":
 			if err := awsRestjson1_deserializeDocumentSubRegion(&sv.SubRegion, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1947,7 +1892,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "Block":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1981,7 +1925,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "Building":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2015,7 +1958,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "Country":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2049,7 +1991,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "District":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2083,12 +2024,10 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "Intersection":
 			if err := awsRestjson1_deserializeDocumentMatchScoreList(&sv.Intersection, value); err != nil {
 				return err
 			}
-
 		case "Locality":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2122,7 +2061,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "PostalCode":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2156,7 +2094,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "Region":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2190,7 +2127,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "SubBlock":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2224,7 +2160,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "SubDistrict":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2258,7 +2193,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		case "SubRegion":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2292,7 +2226,6 @@ func awsRestjson1_deserializeDocumentAddressComponentMatchScores(v **types.Addre
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2328,47 +2261,38 @@ func awsRestjson1_deserializeDocumentAddressComponentPhonemes(v **types.AddressC
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.Block, value); err != nil {
 				return err
 			}
-
 		case "Country":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.Country, value); err != nil {
 				return err
 			}
-
 		case "District":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.District, value); err != nil {
 				return err
 			}
-
 		case "Locality":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.Locality, value); err != nil {
 				return err
 			}
-
 		case "Region":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.Region, value); err != nil {
 				return err
 			}
-
 		case "Street":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.Street, value); err != nil {
 				return err
 			}
-
 		case "SubBlock":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.SubBlock, value); err != nil {
 				return err
 			}
-
 		case "SubDistrict":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.SubDistrict, value); err != nil {
 				return err
 			}
-
 		case "SubRegion":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.SubRegion, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2404,72 +2328,58 @@ func awsRestjson1_deserializeDocumentAutocompleteAddressHighlights(v **types.Aut
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.AddressNumber, value); err != nil {
 				return err
 			}
-
 		case "Block":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Block, value); err != nil {
 				return err
 			}
-
 		case "Building":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Building, value); err != nil {
 				return err
 			}
-
 		case "Country":
 			if err := awsRestjson1_deserializeDocumentCountryHighlights(&sv.Country, value); err != nil {
 				return err
 			}
-
 		case "District":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.District, value); err != nil {
 				return err
 			}
-
 		case "Intersection":
 			if err := awsRestjson1_deserializeDocumentIntersectionHighlightsList(&sv.Intersection, value); err != nil {
 				return err
 			}
-
 		case "Label":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Label, value); err != nil {
 				return err
 			}
-
 		case "Locality":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Locality, value); err != nil {
 				return err
 			}
-
 		case "PostalCode":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.PostalCode, value); err != nil {
 				return err
 			}
-
 		case "Region":
 			if err := awsRestjson1_deserializeDocumentRegionHighlights(&sv.Region, value); err != nil {
 				return err
 			}
-
 		case "Street":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Street, value); err != nil {
 				return err
 			}
-
 		case "SubBlock":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.SubBlock, value); err != nil {
 				return err
 			}
-
 		case "SubDistrict":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.SubDistrict, value); err != nil {
 				return err
 			}
-
 		case "SubRegion":
 			if err := awsRestjson1_deserializeDocumentSubRegionHighlights(&sv.SubRegion, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2505,12 +2415,10 @@ func awsRestjson1_deserializeDocumentAutocompleteHighlights(v **types.Autocomple
 			if err := awsRestjson1_deserializeDocumentAutocompleteAddressHighlights(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Title, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2546,7 +2454,6 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2559,12 +2466,10 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 				}
 				sv.Distance = i64
 			}
-
 		case "Highlights":
 			if err := awsRestjson1_deserializeDocumentAutocompleteHighlights(&sv.Highlights, value); err != nil {
 				return err
 			}
-
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2573,7 +2478,6 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2582,7 +2486,6 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2591,7 +2494,6 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2600,7 +2502,6 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2609,7 +2510,6 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2744,7 +2644,6 @@ func awsRestjson1_deserializeDocumentBusinessChain(v **types.BusinessChain, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2753,7 +2652,6 @@ func awsRestjson1_deserializeDocumentBusinessChain(v **types.BusinessChain, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2827,7 +2725,6 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "LocalizedName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2836,7 +2733,6 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 				}
 				sv.LocalizedName = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2845,7 +2741,6 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Primary":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2854,7 +2749,6 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 				}
 				sv.Primary = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2924,7 +2818,6 @@ func awsRestjson1_deserializeDocumentComponentMatchScores(v **types.ComponentMat
 			if err := awsRestjson1_deserializeDocumentAddressComponentMatchScores(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2958,7 +2851,6 @@ func awsRestjson1_deserializeDocumentComponentMatchScores(v **types.ComponentMat
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2994,7 +2886,6 @@ func awsRestjson1_deserializeDocumentContactDetails(v **types.ContactDetails, va
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3003,7 +2894,6 @@ func awsRestjson1_deserializeDocumentContactDetails(v **types.ContactDetails, va
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3012,7 +2902,6 @@ func awsRestjson1_deserializeDocumentContactDetails(v **types.ContactDetails, va
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3082,22 +2971,18 @@ func awsRestjson1_deserializeDocumentContacts(v **types.Contacts, value interfac
 			if err := awsRestjson1_deserializeDocumentContactDetailsList(&sv.Emails, value); err != nil {
 				return err
 			}
-
 		case "Faxes":
 			if err := awsRestjson1_deserializeDocumentContactDetailsList(&sv.Faxes, value); err != nil {
 				return err
 			}
-
 		case "Phones":
 			if err := awsRestjson1_deserializeDocumentContactDetailsList(&sv.Phones, value); err != nil {
 				return err
 			}
-
 		case "Websites":
 			if err := awsRestjson1_deserializeDocumentContactDetailsList(&sv.Websites, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3137,7 +3022,6 @@ func awsRestjson1_deserializeDocumentCountry(v **types.Country, value interface{
 				}
 				sv.Code2 = ptr.String(jtv)
 			}
-
 		case "Code3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3146,7 +3030,6 @@ func awsRestjson1_deserializeDocumentCountry(v **types.Country, value interface{
 				}
 				sv.Code3 = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3155,7 +3038,6 @@ func awsRestjson1_deserializeDocumentCountry(v **types.Country, value interface{
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3191,12 +3073,10 @@ func awsRestjson1_deserializeDocumentCountryHighlights(v **types.CountryHighligh
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Code, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Name, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3236,7 +3116,6 @@ func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interfac
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "LocalizedName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3245,7 +3124,6 @@ func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interfac
 				}
 				sv.LocalizedName = ptr.String(jtv)
 			}
-
 		case "Primary":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3254,7 +3132,6 @@ func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interfac
 				}
 				sv.Primary = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3324,12 +3201,10 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
 				return err
 			}
-
 		case "Address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "AddressNumberCorrected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3338,12 +3213,10 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3356,22 +3229,18 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				}
 				sv.Distance = i64
 			}
-
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
 			}
-
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
 			}
-
 		case "MatchScores":
 			if err := awsRestjson1_deserializeDocumentMatchScoreDetails(&sv.MatchScores, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3380,7 +3249,6 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3389,7 +3257,6 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3398,22 +3265,18 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "PostalCodeDetails":
 			if err := awsRestjson1_deserializeDocumentPostalCodeDetailsList(&sv.PostalCodeDetails, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3422,7 +3285,6 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3500,7 +3362,6 @@ func awsRestjson1_deserializeDocumentHighlight(v **types.Highlight, value interf
 				}
 				sv.EndIndex = ptr.Int32(int32(i64))
 			}
-
 		case "StartIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3513,7 +3374,6 @@ func awsRestjson1_deserializeDocumentHighlight(v **types.Highlight, value interf
 				}
 				sv.StartIndex = ptr.Int32(int32(i64))
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3522,7 +3382,6 @@ func awsRestjson1_deserializeDocumentHighlight(v **types.Highlight, value interf
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3586,15 +3445,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3602,14 +3455,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3709,7 +3558,6 @@ func awsRestjson1_deserializeDocumentMatchScoreDetails(v **types.MatchScoreDetai
 			if err := awsRestjson1_deserializeDocumentComponentMatchScores(&sv.Components, value); err != nil {
 				return err
 			}
-
 		case "Overall":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3743,7 +3591,6 @@ func awsRestjson1_deserializeDocumentMatchScoreDetails(v **types.MatchScoreDetai
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3840,17 +3687,14 @@ func awsRestjson1_deserializeDocumentOpeningHours(v **types.OpeningHours, value 
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Components":
 			if err := awsRestjson1_deserializeDocumentOpeningHoursComponentsList(&sv.Components, value); err != nil {
 				return err
 			}
-
 		case "Display":
 			if err := awsRestjson1_deserializeDocumentOpeningHoursDisplayList(&sv.Display, value); err != nil {
 				return err
 			}
-
 		case "OpenNow":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3859,7 +3703,6 @@ func awsRestjson1_deserializeDocumentOpeningHours(v **types.OpeningHours, value 
 				}
 				sv.OpenNow = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3899,7 +3742,6 @@ func awsRestjson1_deserializeDocumentOpeningHoursComponents(v **types.OpeningHou
 				}
 				sv.OpenDuration = ptr.String(jtv)
 			}
-
 		case "OpenTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3908,7 +3750,6 @@ func awsRestjson1_deserializeDocumentOpeningHoursComponents(v **types.OpeningHou
 				}
 				sv.OpenTime = ptr.String(jtv)
 			}
-
 		case "Recurrence":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3917,7 +3758,6 @@ func awsRestjson1_deserializeDocumentOpeningHoursComponents(v **types.OpeningHou
 				}
 				sv.Recurrence = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4057,12 +3897,10 @@ func awsRestjson1_deserializeDocumentPhonemeDetails(v **types.PhonemeDetails, va
 			if err := awsRestjson1_deserializeDocumentAddressComponentPhonemes(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentPhonemeTranscriptionList(&sv.Title, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4102,7 +3940,6 @@ func awsRestjson1_deserializeDocumentPhonemeTranscription(v **types.PhonemeTrans
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "Preferred":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4111,7 +3948,6 @@ func awsRestjson1_deserializeDocumentPhonemeTranscription(v **types.PhonemeTrans
 				}
 				sv.Preferred = ptr.Bool(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4120,7 +3956,6 @@ func awsRestjson1_deserializeDocumentPhonemeTranscription(v **types.PhonemeTrans
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4255,7 +4090,6 @@ func awsRestjson1_deserializeDocumentPostalCodeDetails(v **types.PostalCodeDetai
 				}
 				sv.PostalAuthority = types.PostalAuthority(jtv)
 			}
-
 		case "PostalCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4264,7 +4098,6 @@ func awsRestjson1_deserializeDocumentPostalCodeDetails(v **types.PostalCodeDetai
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
-
 		case "PostalCodeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4273,17 +4106,14 @@ func awsRestjson1_deserializeDocumentPostalCodeDetails(v **types.PostalCodeDetai
 				}
 				sv.PostalCodeType = types.PostalCodeType(jtv)
 			}
-
 		case "UspsZip":
 			if err := awsRestjson1_deserializeDocumentUspsZip(&sv.UspsZip, value); err != nil {
 				return err
 			}
-
 		case "UspsZipPlus4":
 			if err := awsRestjson1_deserializeDocumentUspsZipPlus4(&sv.UspsZipPlus4, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4361,7 +4191,6 @@ func awsRestjson1_deserializeDocumentQueryRefinement(v **types.QueryRefinement, 
 				}
 				sv.EndIndex = ptr.Int32(int32(i64))
 			}
-
 		case "OriginalTerm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4370,7 +4199,6 @@ func awsRestjson1_deserializeDocumentQueryRefinement(v **types.QueryRefinement, 
 				}
 				sv.OriginalTerm = ptr.String(jtv)
 			}
-
 		case "RefinedTerm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4379,7 +4207,6 @@ func awsRestjson1_deserializeDocumentQueryRefinement(v **types.QueryRefinement, 
 				}
 				sv.RefinedTerm = ptr.String(jtv)
 			}
-
 		case "StartIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4392,7 +4219,6 @@ func awsRestjson1_deserializeDocumentQueryRefinement(v **types.QueryRefinement, 
 				}
 				sv.StartIndex = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4466,7 +4292,6 @@ func awsRestjson1_deserializeDocumentRegion(v **types.Region, value interface{})
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4475,7 +4300,6 @@ func awsRestjson1_deserializeDocumentRegion(v **types.Region, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4511,12 +4335,10 @@ func awsRestjson1_deserializeDocumentRegionHighlights(v **types.RegionHighlights
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Code, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Name, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4552,12 +4374,10 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
 				return err
 			}
-
 		case "Address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "AddressNumberCorrected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4566,12 +4386,10 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4584,17 +4402,14 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				}
 				sv.Distance = i64
 			}
-
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
 			}
-
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4603,7 +4418,6 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4612,7 +4426,6 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4621,22 +4434,18 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "PostalCodeDetails":
 			if err := awsRestjson1_deserializeDocumentPostalCodeDetailsList(&sv.PostalCodeDetails, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4645,7 +4454,6 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4715,17 +4523,14 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
 				return err
 			}
-
 		case "AccessRestrictions":
 			if err := awsRestjson1_deserializeDocumentAccessRestrictionList(&sv.AccessRestrictions, value); err != nil {
 				return err
 			}
-
 		case "Address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "AddressNumberCorrected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4734,22 +4539,18 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
-
 		case "BusinessChains":
 			if err := awsRestjson1_deserializeDocumentBusinessChainList(&sv.BusinessChains, value); err != nil {
 				return err
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Contacts":
 			if err := awsRestjson1_deserializeDocumentContacts(&sv.Contacts, value); err != nil {
 				return err
 			}
-
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4762,27 +4563,22 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				}
 				sv.Distance = i64
 			}
-
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
 			}
-
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
 			}
-
 		case "OpeningHours":
 			if err := awsRestjson1_deserializeDocumentOpeningHoursList(&sv.OpeningHours, value); err != nil {
 				return err
 			}
-
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4791,7 +4587,6 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4800,7 +4595,6 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4809,17 +4603,14 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4828,7 +4619,6 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4898,17 +4688,14 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
 				return err
 			}
-
 		case "AccessRestrictions":
 			if err := awsRestjson1_deserializeDocumentAccessRestrictionList(&sv.AccessRestrictions, value); err != nil {
 				return err
 			}
-
 		case "Address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "AddressNumberCorrected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4917,22 +4704,18 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				}
 				sv.AddressNumberCorrected = ptr.Bool(jtv)
 			}
-
 		case "BusinessChains":
 			if err := awsRestjson1_deserializeDocumentBusinessChainList(&sv.BusinessChains, value); err != nil {
 				return err
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Contacts":
 			if err := awsRestjson1_deserializeDocumentContacts(&sv.Contacts, value); err != nil {
 				return err
 			}
-
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4945,27 +4728,22 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				}
 				sv.Distance = i64
 			}
-
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
 			}
-
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
 			}
-
 		case "OpeningHours":
 			if err := awsRestjson1_deserializeDocumentOpeningHoursList(&sv.OpeningHours, value); err != nil {
 				return err
 			}
-
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4974,7 +4752,6 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4983,7 +4760,6 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4992,17 +4768,14 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5011,7 +4784,6 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5085,7 +4857,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.BaseName = ptr.String(jtv)
 			}
-
 		case "Direction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5094,7 +4865,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.Direction = ptr.String(jtv)
 			}
-
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5103,7 +4873,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.Language = ptr.String(jtv)
 			}
-
 		case "Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5112,7 +4881,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
-
 		case "Suffix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5121,7 +4889,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.Suffix = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5130,7 +4897,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		case "TypePlacement":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5139,7 +4905,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.TypePlacement = types.TypePlacement(jtv)
 			}
-
 		case "TypeSeparator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5148,7 +4913,6 @@ func awsRestjson1_deserializeDocumentStreetComponents(v **types.StreetComponents
 				}
 				sv.TypeSeparator = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5222,7 +4986,6 @@ func awsRestjson1_deserializeDocumentSubRegion(v **types.SubRegion, value interf
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5231,7 +4994,6 @@ func awsRestjson1_deserializeDocumentSubRegion(v **types.SubRegion, value interf
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5267,12 +5029,10 @@ func awsRestjson1_deserializeDocumentSubRegionHighlights(v **types.SubRegionHigh
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Code, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Name, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5308,7 +5068,6 @@ func awsRestjson1_deserializeDocumentSuggestAddressHighlights(v **types.SuggestA
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Label, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5344,12 +5103,10 @@ func awsRestjson1_deserializeDocumentSuggestHighlights(v **types.SuggestHighligh
 			if err := awsRestjson1_deserializeDocumentSuggestAddressHighlights(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentHighlightList(&sv.Title, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5385,27 +5142,22 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 			if err := awsRestjson1_deserializeDocumentAccessPointList(&sv.AccessPoints, value); err != nil {
 				return err
 			}
-
 		case "AccessRestrictions":
 			if err := awsRestjson1_deserializeDocumentAccessRestrictionList(&sv.AccessRestrictions, value); err != nil {
 				return err
 			}
-
 		case "Address":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
 				return err
 			}
-
 		case "BusinessChains":
 			if err := awsRestjson1_deserializeDocumentBusinessChainList(&sv.BusinessChains, value); err != nil {
 				return err
 			}
-
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
-
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5418,22 +5170,18 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 				}
 				sv.Distance = i64
 			}
-
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
 			}
-
 		case "MapView":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.MapView, value); err != nil {
 				return err
 			}
-
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
 				return err
 			}
-
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5442,7 +5190,6 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 				}
 				sv.PlaceId = ptr.String(jtv)
 			}
-
 		case "PlaceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5451,7 +5198,6 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 				}
 				sv.PlaceType = types.PlaceType(jtv)
 			}
-
 		case "PoliticalView":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5460,17 +5206,14 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 				}
 				sv.PoliticalView = ptr.String(jtv)
 			}
-
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5510,7 +5253,6 @@ func awsRestjson1_deserializeDocumentSuggestQueryResult(v **types.SuggestQueryRe
 				}
 				sv.QueryId = ptr.String(jtv)
 			}
-
 		case "QueryType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5519,7 +5261,6 @@ func awsRestjson1_deserializeDocumentSuggestQueryResult(v **types.SuggestQueryRe
 				}
 				sv.QueryType = types.QueryType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5555,17 +5296,14 @@ func awsRestjson1_deserializeDocumentSuggestResultItem(v **types.SuggestResultIt
 			if err := awsRestjson1_deserializeDocumentSuggestHighlights(&sv.Highlights, value); err != nil {
 				return err
 			}
-
 		case "Place":
 			if err := awsRestjson1_deserializeDocumentSuggestPlaceResult(&sv.Place, value); err != nil {
 				return err
 			}
-
 		case "Query":
 			if err := awsRestjson1_deserializeDocumentSuggestQueryResult(&sv.Query, value); err != nil {
 				return err
 			}
-
 		case "SuggestResultItemType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5574,7 +5312,6 @@ func awsRestjson1_deserializeDocumentSuggestResultItem(v **types.SuggestResultIt
 				}
 				sv.SuggestResultItemType = types.SuggestResultItemType(jtv)
 			}
-
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5583,7 +5320,6 @@ func awsRestjson1_deserializeDocumentSuggestResultItem(v **types.SuggestResultIt
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5647,15 +5383,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5663,14 +5393,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5706,7 +5432,6 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Offset":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5715,7 +5440,6 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 				}
 				sv.Offset = ptr.String(jtv)
 			}
-
 		case "OffsetSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5728,7 +5452,6 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 				}
 				sv.OffsetSeconds = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5768,7 +5491,6 @@ func awsRestjson1_deserializeDocumentUspsZip(v **types.UspsZip, value interface{
 				}
 				sv.ZipClassificationCode = types.ZipClassificationCode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5808,7 +5530,6 @@ func awsRestjson1_deserializeDocumentUspsZipPlus4(v **types.UspsZipPlus4, value 
 				}
 				sv.RecordTypeCode = types.RecordTypeCode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5838,20 +5559,13 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "fieldList":
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5859,7 +5573,6 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5868,14 +5581,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5911,7 +5620,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5920,7 +5628,6 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

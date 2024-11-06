@@ -2504,7 +2504,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.BackupArn = ptr.String(jtv)
 			}
-
 		case "BackupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2513,7 +2512,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.BackupId = ptr.String(jtv)
 			}
-
 		case "BackupState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2522,7 +2520,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.BackupState = types.BackupState(jtv)
 			}
-
 		case "ClusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2531,7 +2528,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "CopyTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2547,7 +2543,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 
 				}
 			}
-
 		case "CreateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2563,7 +2558,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 
 				}
 			}
-
 		case "DeleteTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2579,7 +2573,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 
 				}
 			}
-
 		case "HsmType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2588,7 +2581,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.HsmType = ptr.String(jtv)
 			}
-
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2597,7 +2589,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.Mode = types.ClusterMode(jtv)
 			}
-
 		case "NeverExpires":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2606,7 +2597,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.NeverExpires = ptr.Bool(jtv)
 			}
-
 		case "SourceBackup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2615,7 +2605,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.SourceBackup = ptr.String(jtv)
 			}
-
 		case "SourceCluster":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2624,7 +2613,6 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.SourceCluster = ptr.String(jtv)
 			}
-
 		case "SourceRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2633,12 +2621,10 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				}
 				sv.SourceRegion = ptr.String(jtv)
 			}
-
 		case "TagList":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.TagList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2678,7 +2664,6 @@ func awsAwsjson11_deserializeDocumentBackupRetentionPolicy(v **types.BackupReten
 				}
 				sv.Type = types.BackupRetentionType(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2687,7 +2672,6 @@ func awsAwsjson11_deserializeDocumentBackupRetentionPolicy(v **types.BackupReten
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2761,7 +2745,6 @@ func awsAwsjson11_deserializeDocumentCertificates(v **types.Certificates, value 
 				}
 				sv.AwsHardwareCertificate = ptr.String(jtv)
 			}
-
 		case "ClusterCertificate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2770,7 +2753,6 @@ func awsAwsjson11_deserializeDocumentCertificates(v **types.Certificates, value 
 				}
 				sv.ClusterCertificate = ptr.String(jtv)
 			}
-
 		case "ClusterCsr":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2779,7 +2761,6 @@ func awsAwsjson11_deserializeDocumentCertificates(v **types.Certificates, value 
 				}
 				sv.ClusterCsr = ptr.String(jtv)
 			}
-
 		case "HsmCertificate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2788,7 +2769,6 @@ func awsAwsjson11_deserializeDocumentCertificates(v **types.Certificates, value 
 				}
 				sv.HsmCertificate = ptr.String(jtv)
 			}
-
 		case "ManufacturerHardwareCertificate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2797,7 +2777,6 @@ func awsAwsjson11_deserializeDocumentCertificates(v **types.Certificates, value 
 				}
 				sv.ManufacturerHardwareCertificate = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2827,15 +2806,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmAccessDeniedException(v **types.Clo
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2843,14 +2816,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmAccessDeniedException(v **types.Clo
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2876,15 +2845,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalFailureException(v **types.
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2892,14 +2855,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalFailureException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2925,15 +2884,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmInvalidRequestException(v **types.C
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2941,14 +2894,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmInvalidRequestException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2974,15 +2923,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmResourceNotFoundException(v **types
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2990,14 +2933,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmResourceNotFoundException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3023,15 +2962,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3039,14 +2972,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3072,15 +3001,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmTagException(v **types.CloudHsmTagE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3088,14 +3011,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmTagException(v **types.CloudHsmTagE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3131,17 +3050,14 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.BackupPolicy = types.BackupPolicy(jtv)
 			}
-
 		case "BackupRetentionPolicy":
 			if err := awsAwsjson11_deserializeDocumentBackupRetentionPolicy(&sv.BackupRetentionPolicy, value); err != nil {
 				return err
 			}
-
 		case "Certificates":
 			if err := awsAwsjson11_deserializeDocumentCertificates(&sv.Certificates, value); err != nil {
 				return err
 			}
-
 		case "ClusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3150,7 +3066,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "CreateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3166,12 +3081,10 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 
 				}
 			}
-
 		case "Hsms":
 			if err := awsAwsjson11_deserializeDocumentHsms(&sv.Hsms, value); err != nil {
 				return err
 			}
-
 		case "HsmType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3180,7 +3093,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.HsmType = ptr.String(jtv)
 			}
-
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3189,7 +3101,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Mode = types.ClusterMode(jtv)
 			}
-
 		case "PreCoPassword":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3198,7 +3109,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.PreCoPassword = ptr.String(jtv)
 			}
-
 		case "SecurityGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3207,7 +3117,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.SecurityGroup = ptr.String(jtv)
 			}
-
 		case "SourceBackupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3216,7 +3125,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.SourceBackupId = ptr.String(jtv)
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3225,7 +3133,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.State = types.ClusterState(jtv)
 			}
-
 		case "StateMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3234,17 +3141,14 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.StateMessage = ptr.String(jtv)
 			}
-
 		case "SubnetMapping":
 			if err := awsAwsjson11_deserializeDocumentExternalSubnetMapping(&sv.SubnetMapping, value); err != nil {
 				return err
 			}
-
 		case "TagList":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.TagList, value); err != nil {
 				return err
 			}
-
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3253,7 +3157,6 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3334,7 +3237,6 @@ func awsAwsjson11_deserializeDocumentDestinationBackup(v **types.DestinationBack
 
 				}
 			}
-
 		case "SourceBackup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3343,7 +3245,6 @@ func awsAwsjson11_deserializeDocumentDestinationBackup(v **types.DestinationBack
 				}
 				sv.SourceBackup = ptr.String(jtv)
 			}
-
 		case "SourceCluster":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3352,7 +3253,6 @@ func awsAwsjson11_deserializeDocumentDestinationBackup(v **types.DestinationBack
 				}
 				sv.SourceCluster = ptr.String(jtv)
 			}
-
 		case "SourceRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3361,7 +3261,6 @@ func awsAwsjson11_deserializeDocumentDestinationBackup(v **types.DestinationBack
 				}
 				sv.SourceRegion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3437,7 +3336,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.AvailabilityZone = ptr.String(jtv)
 			}
-
 		case "ClusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3446,7 +3344,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "EniId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3455,7 +3352,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.EniId = ptr.String(jtv)
 			}
-
 		case "EniIp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3464,7 +3360,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.EniIp = ptr.String(jtv)
 			}
-
 		case "HsmId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3473,7 +3368,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.HsmId = ptr.String(jtv)
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3482,7 +3376,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.State = types.HsmState(jtv)
 			}
-
 		case "StateMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3491,7 +3384,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.StateMessage = ptr.String(jtv)
 			}
-
 		case "SubnetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3500,7 +3392,6 @@ func awsAwsjson11_deserializeDocumentHsm(v **types.Hsm, value interface{}) error
 				}
 				sv.SubnetId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3574,7 +3465,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3583,7 +3473,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3653,7 +3542,6 @@ func awsAwsjson11_deserializeOpDocumentCopyBackupToRegionOutput(v **CopyBackupTo
 			if err := awsAwsjson11_deserializeDocumentDestinationBackup(&sv.DestinationBackup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3689,7 +3577,6 @@ func awsAwsjson11_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 			if err := awsAwsjson11_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3725,7 +3612,6 @@ func awsAwsjson11_deserializeOpDocumentCreateHsmOutput(v **CreateHsmOutput, valu
 			if err := awsAwsjson11_deserializeDocumentHsm(&sv.Hsm, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3761,7 +3647,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteBackupOutput(v **DeleteBackupOutput
 			if err := awsAwsjson11_deserializeDocumentBackup(&sv.Backup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3797,7 +3682,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteClusterOutput(v **DeleteClusterOutp
 			if err := awsAwsjson11_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3837,7 +3721,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteHsmOutput(v **DeleteHsmOutput, valu
 				}
 				sv.HsmId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3877,7 +3760,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteResourcePolicyOutput(v **DeleteReso
 				}
 				sv.Policy = ptr.String(jtv)
 			}
-
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3886,7 +3768,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteResourcePolicyOutput(v **DeleteReso
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3922,7 +3803,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeBackupsOutput(v **DescribeBackups
 			if err := awsAwsjson11_deserializeDocumentBackups(&sv.Backups, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3931,7 +3811,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeBackupsOutput(v **DescribeBackups
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3967,7 +3846,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeClustersOutput(v **DescribeCluste
 			if err := awsAwsjson11_deserializeDocumentClusters(&sv.Clusters, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3976,7 +3854,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeClustersOutput(v **DescribeCluste
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4016,7 +3893,6 @@ func awsAwsjson11_deserializeOpDocumentGetResourcePolicyOutput(v **GetResourcePo
 				}
 				sv.Policy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4056,7 +3932,6 @@ func awsAwsjson11_deserializeOpDocumentInitializeClusterOutput(v **InitializeClu
 				}
 				sv.State = types.ClusterState(jtv)
 			}
-
 		case "StateMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4065,7 +3940,6 @@ func awsAwsjson11_deserializeOpDocumentInitializeClusterOutput(v **InitializeClu
 				}
 				sv.StateMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4105,12 +3979,10 @@ func awsAwsjson11_deserializeOpDocumentListTagsOutput(v **ListTagsOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "TagList":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.TagList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4146,7 +4018,6 @@ func awsAwsjson11_deserializeOpDocumentModifyBackupAttributesOutput(v **ModifyBa
 			if err := awsAwsjson11_deserializeDocumentBackup(&sv.Backup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4182,7 +4053,6 @@ func awsAwsjson11_deserializeOpDocumentModifyClusterOutput(v **ModifyClusterOutp
 			if err := awsAwsjson11_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4222,7 +4092,6 @@ func awsAwsjson11_deserializeOpDocumentPutResourcePolicyOutput(v **PutResourcePo
 				}
 				sv.Policy = ptr.String(jtv)
 			}
-
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4231,7 +4100,6 @@ func awsAwsjson11_deserializeOpDocumentPutResourcePolicyOutput(v **PutResourcePo
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4267,7 +4135,6 @@ func awsAwsjson11_deserializeOpDocumentRestoreBackupOutput(v **RestoreBackupOutp
 			if err := awsAwsjson11_deserializeDocumentBackup(&sv.Backup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

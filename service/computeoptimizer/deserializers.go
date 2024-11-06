@@ -3776,15 +3776,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3792,14 +3786,10 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3835,7 +3825,6 @@ func awsAwsjson10_deserializeDocumentAccountEnrollmentStatus(v **types.AccountEn
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "lastUpdatedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3851,7 +3840,6 @@ func awsAwsjson10_deserializeDocumentAccountEnrollmentStatus(v **types.AccountEn
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3860,7 +3848,6 @@ func awsAwsjson10_deserializeDocumentAccountEnrollmentStatus(v **types.AccountEn
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3869,7 +3856,6 @@ func awsAwsjson10_deserializeDocumentAccountEnrollmentStatus(v **types.AccountEn
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3947,7 +3933,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				}
 				sv.DesiredCapacity = int32(i64)
 			}
-
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3956,7 +3941,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
-
 		case "maxSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3969,7 +3953,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				}
 				sv.MaxSize = int32(i64)
 			}
-
 		case "minSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3982,7 +3965,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				}
 				sv.MinSize = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4022,7 +4004,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupEstimatedMonthlySavings(v *
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4056,7 +4037,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupEstimatedMonthlySavings(v *
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4096,7 +4076,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "autoScalingGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4105,7 +4084,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				}
 				sv.AutoScalingGroupArn = ptr.String(jtv)
 			}
-
 		case "autoScalingGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4114,17 +4092,14 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				}
 				sv.AutoScalingGroupName = ptr.String(jtv)
 			}
-
 		case "currentConfiguration":
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(&sv.CurrentConfiguration, value); err != nil {
 				return err
 			}
-
 		case "currentInstanceGpuInfo":
 			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.CurrentInstanceGpuInfo, value); err != nil {
 				return err
 			}
-
 		case "currentPerformanceRisk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4133,12 +4108,10 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
 			}
-
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
 				return err
 			}
-
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4147,12 +4120,10 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				}
 				sv.Finding = types.Finding(jtv)
 			}
-
 		case "inferredWorkloadTypes":
 			if err := awsAwsjson10_deserializeDocumentInferredWorkloadTypes(&sv.InferredWorkloadTypes, value); err != nil {
 				return err
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4168,7 +4139,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 
 				}
 			}
-
 		case "lookBackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4202,17 +4172,14 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 
 				}
 			}
-
 		case "recommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOptions(&sv.RecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4248,12 +4215,10 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "instanceGpuInfo":
 			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.InstanceGpuInfo, value); err != nil {
 				return err
 			}
-
 		case "migrationEffort":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4262,7 +4227,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 				}
 				sv.MigrationEffort = types.MigrationEffort(jtv)
 			}
-
 		case "performanceRisk":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4296,12 +4260,10 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 
 				}
 			}
-
 		case "projectedUtilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentProjectedUtilizationMetrics(&sv.ProjectedUtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4314,17 +4276,14 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4428,7 +4387,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupSavingsOpportunityAfterDisc
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4462,7 +4420,6 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupSavingsOpportunityAfterDisc
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4502,7 +4459,6 @@ func awsAwsjson10_deserializeDocumentContainerConfiguration(v **types.ContainerC
 				}
 				sv.ContainerName = ptr.String(jtv)
 			}
-
 		case "cpu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4515,12 +4471,10 @@ func awsAwsjson10_deserializeDocumentContainerConfiguration(v **types.ContainerC
 				}
 				sv.Cpu = ptr.Int32(int32(i64))
 			}
-
 		case "memorySizeConfiguration":
 			if err := awsAwsjson10_deserializeDocumentMemorySizeConfiguration(&sv.MemorySizeConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4594,7 +4548,6 @@ func awsAwsjson10_deserializeDocumentContainerRecommendation(v **types.Container
 				}
 				sv.ContainerName = ptr.String(jtv)
 			}
-
 		case "cpu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4607,12 +4560,10 @@ func awsAwsjson10_deserializeDocumentContainerRecommendation(v **types.Container
 				}
 				sv.Cpu = ptr.Int32(int32(i64))
 			}
-
 		case "memorySizeConfiguration":
 			if err := awsAwsjson10_deserializeDocumentMemorySizeConfiguration(&sv.MemorySizeConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4726,7 +4677,6 @@ func awsAwsjson10_deserializeDocumentCurrentPerformanceRiskRatings(v **types.Cur
 				}
 				sv.High = i64
 			}
-
 		case "low":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4739,7 +4689,6 @@ func awsAwsjson10_deserializeDocumentCurrentPerformanceRiskRatings(v **types.Cur
 				}
 				sv.Low = i64
 			}
-
 		case "medium":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4752,7 +4701,6 @@ func awsAwsjson10_deserializeDocumentCurrentPerformanceRiskRatings(v **types.Cur
 				}
 				sv.Medium = i64
 			}
-
 		case "veryLow":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4765,7 +4713,6 @@ func awsAwsjson10_deserializeDocumentCurrentPerformanceRiskRatings(v **types.Cur
 				}
 				sv.VeryLow = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4805,7 +4752,6 @@ func awsAwsjson10_deserializeDocumentCustomizableMetricParameters(v **types.Cust
 				}
 				sv.Headroom = types.CustomizableMetricHeadroom(jtv)
 			}
-
 		case "threshold":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4814,7 +4760,6 @@ func awsAwsjson10_deserializeDocumentCustomizableMetricParameters(v **types.Cust
 				}
 				sv.Threshold = types.CustomizableMetricThreshold(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4858,7 +4803,6 @@ func awsAwsjson10_deserializeDocumentDBStorageConfiguration(v **types.DBStorageC
 				}
 				sv.AllocatedStorage = int32(i64)
 			}
-
 		case "iops":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4871,7 +4815,6 @@ func awsAwsjson10_deserializeDocumentDBStorageConfiguration(v **types.DBStorageC
 				}
 				sv.Iops = ptr.Int32(int32(i64))
 			}
-
 		case "maxAllocatedStorage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4884,7 +4827,6 @@ func awsAwsjson10_deserializeDocumentDBStorageConfiguration(v **types.DBStorageC
 				}
 				sv.MaxAllocatedStorage = ptr.Int32(int32(i64))
 			}
-
 		case "storageThroughput":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4897,7 +4839,6 @@ func awsAwsjson10_deserializeDocumentDBStorageConfiguration(v **types.DBStorageC
 				}
 				sv.StorageThroughput = ptr.Int32(int32(i64))
 			}
-
 		case "storageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4906,7 +4847,6 @@ func awsAwsjson10_deserializeDocumentDBStorageConfiguration(v **types.DBStorageC
 				}
 				sv.StorageType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4942,7 +4882,6 @@ func awsAwsjson10_deserializeDocumentEBSEffectiveRecommendationPreferences(v **t
 			if err := awsAwsjson10_deserializeDocumentEBSSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4982,7 +4921,6 @@ func awsAwsjson10_deserializeDocumentEBSEstimatedMonthlySavings(v **types.EBSEst
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5016,7 +4954,6 @@ func awsAwsjson10_deserializeDocumentEBSEstimatedMonthlySavings(v **types.EBSEst
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5056,7 +4993,6 @@ func awsAwsjson10_deserializeDocumentEBSSavingsEstimationMode(v **types.EBSSavin
 				}
 				sv.Source = types.EBSSavingsEstimationModeSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5092,7 +5028,6 @@ func awsAwsjson10_deserializeDocumentEBSSavingsOpportunityAfterDiscounts(v **typ
 			if err := awsAwsjson10_deserializeDocumentEBSEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5126,7 +5061,6 @@ func awsAwsjson10_deserializeDocumentEBSSavingsOpportunityAfterDiscounts(v **typ
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5166,7 +5100,6 @@ func awsAwsjson10_deserializeDocumentEBSUtilizationMetric(v **types.EBSUtilizati
 				}
 				sv.Name = types.EBSMetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5175,7 +5108,6 @@ func awsAwsjson10_deserializeDocumentEBSUtilizationMetric(v **types.EBSUtilizati
 				}
 				sv.Statistic = types.MetricStatistic(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5209,7 +5141,6 @@ func awsAwsjson10_deserializeDocumentEBSUtilizationMetric(v **types.EBSUtilizati
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5279,7 +5210,6 @@ func awsAwsjson10_deserializeDocumentECSEffectiveRecommendationPreferences(v **t
 			if err := awsAwsjson10_deserializeDocumentECSSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5319,7 +5249,6 @@ func awsAwsjson10_deserializeDocumentECSEstimatedMonthlySavings(v **types.ECSEst
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5353,7 +5282,6 @@ func awsAwsjson10_deserializeDocumentECSEstimatedMonthlySavings(v **types.ECSEst
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5393,7 +5321,6 @@ func awsAwsjson10_deserializeDocumentECSSavingsEstimationMode(v **types.ECSSavin
 				}
 				sv.Source = types.ECSSavingsEstimationModeSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5429,7 +5356,6 @@ func awsAwsjson10_deserializeDocumentECSSavingsOpportunityAfterDiscounts(v **typ
 			if err := awsAwsjson10_deserializeDocumentECSEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5463,7 +5389,6 @@ func awsAwsjson10_deserializeDocumentECSSavingsOpportunityAfterDiscounts(v **typ
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5499,7 +5424,6 @@ func awsAwsjson10_deserializeDocumentECSServiceProjectedMetric(v **types.ECSServ
 			if err := awsAwsjson10_deserializeDocumentMetricValues(&sv.LowerBoundValues, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5508,17 +5432,14 @@ func awsAwsjson10_deserializeDocumentECSServiceProjectedMetric(v **types.ECSServ
 				}
 				sv.Name = types.ECSServiceMetricName(jtv)
 			}
-
 		case "timestamps":
 			if err := awsAwsjson10_deserializeDocumentTimestamps(&sv.Timestamps, value); err != nil {
 				return err
 			}
-
 		case "upperBoundValues":
 			if err := awsAwsjson10_deserializeDocumentMetricValues(&sv.UpperBoundValues, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5617,7 +5538,6 @@ func awsAwsjson10_deserializeDocumentECSServiceProjectedUtilizationMetric(v **ty
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5626,7 +5546,6 @@ func awsAwsjson10_deserializeDocumentECSServiceProjectedUtilizationMetric(v **ty
 				}
 				sv.Name = types.ECSServiceMetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5635,7 +5554,6 @@ func awsAwsjson10_deserializeDocumentECSServiceProjectedUtilizationMetric(v **ty
 				}
 				sv.Statistic = types.ECSServiceMetricStatistic(jtv)
 			}
-
 		case "upperBoundValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5669,7 +5587,6 @@ func awsAwsjson10_deserializeDocumentECSServiceProjectedUtilizationMetric(v **ty
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5743,7 +5660,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentPerformanceRisk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5752,17 +5668,14 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
 			}
-
 		case "currentServiceConfiguration":
 			if err := awsAwsjson10_deserializeDocumentServiceConfiguration(&sv.CurrentServiceConfiguration, value); err != nil {
 				return err
 			}
-
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentECSEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
 				return err
 			}
-
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5771,12 +5684,10 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				}
 				sv.Finding = types.ECSServiceRecommendationFinding(jtv)
 			}
-
 		case "findingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentECSServiceRecommendationFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5792,7 +5703,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 
 				}
 			}
-
 		case "launchType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5801,7 +5711,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				}
 				sv.LaunchType = types.ECSServiceLaunchType(jtv)
 			}
-
 		case "lookbackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5835,7 +5744,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 
 				}
 			}
-
 		case "serviceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5844,22 +5752,18 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendation(v **types.ECSServi
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
-
 		case "serviceRecommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentECSServiceRecommendationOptions(&sv.ServiceRecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentECSServiceUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5931,7 +5835,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendationOption(v **types.EC
 			if err := awsAwsjson10_deserializeDocumentContainerRecommendations(&sv.ContainerRecommendations, value); err != nil {
 				return err
 			}
-
 		case "cpu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5944,7 +5847,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendationOption(v **types.EC
 				}
 				sv.Cpu = ptr.Int32(int32(i64))
 			}
-
 		case "memory":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5957,22 +5859,18 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendationOption(v **types.EC
 				}
 				sv.Memory = ptr.Int32(int32(i64))
 			}
-
 		case "projectedUtilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentECSServiceProjectedUtilizationMetrics(&sv.ProjectedUtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentECSSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6076,7 +5974,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendedOptionProjectedMetric(
 			if err := awsAwsjson10_deserializeDocumentECSServiceProjectedMetrics(&sv.ProjectedMetrics, value); err != nil {
 				return err
 			}
-
 		case "recommendedCpuUnits":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6089,7 +5986,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendedOptionProjectedMetric(
 				}
 				sv.RecommendedCpuUnits = int32(i64)
 			}
-
 		case "recommendedMemorySize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6102,7 +5998,6 @@ func awsAwsjson10_deserializeDocumentECSServiceRecommendedOptionProjectedMetric(
 				}
 				sv.RecommendedMemorySize = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6176,7 +6071,6 @@ func awsAwsjson10_deserializeDocumentECSServiceUtilizationMetric(v **types.ECSSe
 				}
 				sv.Name = types.ECSServiceMetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6185,7 +6079,6 @@ func awsAwsjson10_deserializeDocumentECSServiceUtilizationMetric(v **types.ECSSe
 				}
 				sv.Statistic = types.ECSServiceMetricStatistic(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6219,7 +6112,6 @@ func awsAwsjson10_deserializeDocumentECSServiceUtilizationMetric(v **types.ECSSe
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6289,17 +6181,14 @@ func awsAwsjson10_deserializeDocumentEffectivePreferredResource(v **types.Effect
 			if err := awsAwsjson10_deserializeDocumentPreferredResourceValues(&sv.EffectiveIncludeList, value); err != nil {
 				return err
 			}
-
 		case "excludeList":
 			if err := awsAwsjson10_deserializeDocumentPreferredResourceValues(&sv.ExcludeList, value); err != nil {
 				return err
 			}
-
 		case "includeList":
 			if err := awsAwsjson10_deserializeDocumentPreferredResourceValues(&sv.IncludeList, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6308,7 +6197,6 @@ func awsAwsjson10_deserializeDocumentEffectivePreferredResource(v **types.Effect
 				}
 				sv.Name = types.PreferredResourceName(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6378,7 +6266,6 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 			if err := awsAwsjson10_deserializeDocumentCpuVendorArchitectures(&sv.CpuVendorArchitectures, value); err != nil {
 				return err
 			}
-
 		case "enhancedInfrastructureMetrics":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6387,12 +6274,10 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 				}
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
-
 		case "externalMetricsPreference":
 			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
 				return err
 			}
-
 		case "inferredWorkloadTypes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6401,7 +6286,6 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 				}
 				sv.InferredWorkloadTypes = types.InferredWorkloadTypesPreference(jtv)
 			}
-
 		case "lookBackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6410,22 +6294,18 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 				}
 				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
 			}
-
 		case "preferredResources":
 			if err := awsAwsjson10_deserializeDocumentEffectivePreferredResources(&sv.PreferredResources, value); err != nil {
 				return err
 			}
-
 		case "savingsEstimationMode":
 			if err := awsAwsjson10_deserializeDocumentInstanceSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
 				return err
 			}
-
 		case "utilizationPreferences":
 			if err := awsAwsjson10_deserializeDocumentUtilizationPreferences(&sv.UtilizationPreferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6465,7 +6345,6 @@ func awsAwsjson10_deserializeDocumentEstimatedMonthlySavings(v **types.Estimated
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6499,7 +6378,6 @@ func awsAwsjson10_deserializeDocumentEstimatedMonthlySavings(v **types.Estimated
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6535,7 +6413,6 @@ func awsAwsjson10_deserializeDocumentExportDestination(v **types.ExportDestinati
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6575,7 +6452,6 @@ func awsAwsjson10_deserializeDocumentExternalMetricsPreference(v **types.Externa
 				}
 				sv.Source = types.ExternalMetricsSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6615,7 +6491,6 @@ func awsAwsjson10_deserializeDocumentExternalMetricStatus(v **types.ExternalMetr
 				}
 				sv.StatusCode = types.ExternalMetricStatusCode(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6624,7 +6499,6 @@ func awsAwsjson10_deserializeDocumentExternalMetricStatus(v **types.ExternalMetr
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6664,7 +6538,6 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6673,7 +6546,6 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6682,7 +6554,6 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6760,7 +6631,6 @@ func awsAwsjson10_deserializeDocumentGpu(v **types.Gpu, value interface{}) error
 				}
 				sv.GpuCount = int32(i64)
 			}
-
 		case "gpuMemorySizeInMiB":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6773,7 +6643,6 @@ func awsAwsjson10_deserializeDocumentGpu(v **types.Gpu, value interface{}) error
 				}
 				sv.GpuMemorySizeInMiB = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6809,7 +6678,6 @@ func awsAwsjson10_deserializeDocumentGpuInfo(v **types.GpuInfo, value interface{
 			if err := awsAwsjson10_deserializeDocumentGpus(&sv.Gpus, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6879,12 +6747,10 @@ func awsAwsjson10_deserializeDocumentInferredWorkloadSaving(v **types.InferredWo
 			if err := awsAwsjson10_deserializeDocumentEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "inferredWorkloadTypes":
 			if err := awsAwsjson10_deserializeDocumentInferredWorkloadTypes(&sv.InferredWorkloadTypes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6994,7 +6860,6 @@ func awsAwsjson10_deserializeDocumentInstanceEstimatedMonthlySavings(v **types.I
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7028,7 +6893,6 @@ func awsAwsjson10_deserializeDocumentInstanceEstimatedMonthlySavings(v **types.I
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7068,12 +6932,10 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentInstanceGpuInfo":
 			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.CurrentInstanceGpuInfo, value); err != nil {
 				return err
 			}
-
 		case "currentInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7082,7 +6944,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.CurrentInstanceType = ptr.String(jtv)
 			}
-
 		case "currentPerformanceRisk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7091,17 +6952,14 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
 			}
-
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
 				return err
 			}
-
 		case "externalMetricStatus":
 			if err := awsAwsjson10_deserializeDocumentExternalMetricStatus(&sv.ExternalMetricStatus, value); err != nil {
 				return err
 			}
-
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7110,12 +6968,10 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.Finding = types.Finding(jtv)
 			}
-
 		case "findingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentInstanceRecommendationFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
 			}
-
 		case "idle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7124,12 +6980,10 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.Idle = types.InstanceIdle(jtv)
 			}
-
 		case "inferredWorkloadTypes":
 			if err := awsAwsjson10_deserializeDocumentInferredWorkloadTypes(&sv.InferredWorkloadTypes, value); err != nil {
 				return err
 			}
-
 		case "instanceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7138,7 +6992,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.InstanceArn = ptr.String(jtv)
 			}
-
 		case "instanceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7147,7 +7000,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.InstanceName = ptr.String(jtv)
 			}
-
 		case "instanceState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7156,7 +7008,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				}
 				sv.InstanceState = types.InstanceState(jtv)
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7172,7 +7023,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 
 				}
 			}
-
 		case "lookBackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7206,27 +7056,22 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 
 				}
 			}
-
 		case "recommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentRecommendationOptions(&sv.RecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "recommendationSources":
 			if err := awsAwsjson10_deserializeDocumentRecommendationSources(&sv.RecommendationSources, value); err != nil {
 				return err
 			}
-
 		case "tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7298,7 +7143,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 			if err := awsAwsjson10_deserializeDocumentGpuInfo(&sv.InstanceGpuInfo, value); err != nil {
 				return err
 			}
-
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7307,7 +7151,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
-
 		case "migrationEffort":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7316,7 +7159,6 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				}
 				sv.MigrationEffort = types.MigrationEffort(jtv)
 			}
-
 		case "performanceRisk":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7350,17 +7192,14 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 
 				}
 			}
-
 		case "platformDifferences":
 			if err := awsAwsjson10_deserializeDocumentPlatformDifferences(&sv.PlatformDifferences, value); err != nil {
 				return err
 			}
-
 		case "projectedUtilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentProjectedUtilizationMetrics(&sv.ProjectedUtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7373,17 +7212,14 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentInstanceSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7457,7 +7293,6 @@ func awsAwsjson10_deserializeDocumentInstanceSavingsEstimationMode(v **types.Ins
 				}
 				sv.Source = types.InstanceSavingsEstimationModeSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7493,7 +7328,6 @@ func awsAwsjson10_deserializeDocumentInstanceSavingsOpportunityAfterDiscounts(v 
 			if err := awsAwsjson10_deserializeDocumentInstanceEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7527,7 +7361,6 @@ func awsAwsjson10_deserializeDocumentInstanceSavingsOpportunityAfterDiscounts(v 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7557,15 +7390,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7573,14 +7400,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7606,15 +7429,9 @@ func awsAwsjson10_deserializeDocumentInvalidParameterValueException(v **types.In
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7622,14 +7439,10 @@ func awsAwsjson10_deserializeDocumentInvalidParameterValueException(v **types.In
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7661,7 +7474,6 @@ func awsAwsjson10_deserializeDocumentLambdaEffectiveRecommendationPreferences(v 
 			if err := awsAwsjson10_deserializeDocumentLambdaSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7701,7 +7513,6 @@ func awsAwsjson10_deserializeDocumentLambdaEstimatedMonthlySavings(v **types.Lam
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7735,7 +7546,6 @@ func awsAwsjson10_deserializeDocumentLambdaEstimatedMonthlySavings(v **types.Lam
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7775,7 +7585,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionMemoryProjectedMetric(v **typ
 				}
 				sv.Name = types.LambdaFunctionMemoryMetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7784,7 +7593,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionMemoryProjectedMetric(v **typ
 				}
 				sv.Statistic = types.LambdaFunctionMemoryMetricStatistic(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7818,7 +7626,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionMemoryProjectedMetric(v **typ
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7896,12 +7703,10 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionMemoryRecommendationOption(v 
 				}
 				sv.MemorySize = int32(i64)
 			}
-
 		case "projectedUtilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentLambdaFunctionMemoryProjectedMetrics(&sv.ProjectedUtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7914,17 +7719,14 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionMemoryRecommendationOption(v 
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentLambdaSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7998,7 +7800,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentMemorySize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8011,7 +7812,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.CurrentMemorySize = int32(i64)
 			}
-
 		case "currentPerformanceRisk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8020,12 +7820,10 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
 			}
-
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentLambdaEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
 				return err
 			}
-
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8034,12 +7832,10 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.Finding = types.LambdaFunctionRecommendationFinding(jtv)
 			}
-
 		case "findingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentLambdaFunctionRecommendationFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
 			}
-
 		case "functionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8048,7 +7844,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.FunctionArn = ptr.String(jtv)
 			}
-
 		case "functionVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8057,7 +7852,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.FunctionVersion = ptr.String(jtv)
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8073,7 +7867,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 
 				}
 			}
-
 		case "lookbackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8107,12 +7900,10 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 
 				}
 			}
-
 		case "memorySizeRecommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentLambdaFunctionMemoryRecommendationOptions(&sv.MemorySizeRecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "numberOfInvocations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8125,17 +7916,14 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionRecommendation(v **types.Lamb
 				}
 				sv.NumberOfInvocations = i64
 			}
-
 		case "tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentLambdaFunctionUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8245,7 +8033,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionUtilizationMetric(v **types.L
 				}
 				sv.Name = types.LambdaFunctionMetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8254,7 +8041,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionUtilizationMetric(v **types.L
 				}
 				sv.Statistic = types.LambdaFunctionMetricStatistic(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8288,7 +8074,6 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionUtilizationMetric(v **types.L
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8362,7 +8147,6 @@ func awsAwsjson10_deserializeDocumentLambdaSavingsEstimationMode(v **types.Lambd
 				}
 				sv.Source = types.LambdaSavingsEstimationModeSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8398,7 +8182,6 @@ func awsAwsjson10_deserializeDocumentLambdaSavingsOpportunityAfterDiscounts(v **
 			if err := awsAwsjson10_deserializeDocumentLambdaEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8432,7 +8215,6 @@ func awsAwsjson10_deserializeDocumentLambdaSavingsOpportunityAfterDiscounts(v **
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8472,7 +8254,6 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
-
 		case "licenseEdition":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8481,7 +8262,6 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseEdition = types.LicenseEdition(jtv)
 			}
-
 		case "licenseModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8490,7 +8270,6 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseModel = types.LicenseModel(jtv)
 			}
-
 		case "licenseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8499,7 +8278,6 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseName = types.LicenseName(jtv)
 			}
-
 		case "licenseVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8508,12 +8286,10 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseVersion = ptr.String(jtv)
 			}
-
 		case "metricsSource":
 			if err := awsAwsjson10_deserializeDocumentMetricsSource(&sv.MetricsSource, value); err != nil {
 				return err
 			}
-
 		case "numberOfCores":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8526,7 +8302,6 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.NumberOfCores = int32(i64)
 			}
-
 		case "operatingSystem":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8535,7 +8310,6 @@ func awsAwsjson10_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.OperatingSystem = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8611,12 +8385,10 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendation(v **types.LicenseReco
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentLicenseConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLicenseConfiguration(&sv.CurrentLicenseConfiguration, value); err != nil {
 				return err
 			}
-
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8625,12 +8397,10 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendation(v **types.LicenseReco
 				}
 				sv.Finding = types.LicenseFinding(jtv)
 			}
-
 		case "findingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentLicenseFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8646,12 +8416,10 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendation(v **types.LicenseReco
 
 				}
 			}
-
 		case "licenseRecommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentLicenseRecommendationOptions(&sv.LicenseRecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "lookbackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8685,7 +8453,6 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendation(v **types.LicenseReco
 
 				}
 			}
-
 		case "resourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8694,12 +8461,10 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendation(v **types.LicenseReco
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8739,7 +8504,6 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendationOption(v **types.Licen
 				}
 				sv.LicenseEdition = types.LicenseEdition(jtv)
 			}
-
 		case "licenseModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8748,7 +8512,6 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendationOption(v **types.Licen
 				}
 				sv.LicenseModel = types.LicenseModel(jtv)
 			}
-
 		case "operatingSystem":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8757,7 +8520,6 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendationOption(v **types.Licen
 				}
 				sv.OperatingSystem = ptr.String(jtv)
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8770,12 +8532,10 @@ func awsAwsjson10_deserializeDocumentLicenseRecommendationOption(v **types.Licen
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8873,15 +8633,9 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8889,14 +8643,10 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8936,7 +8686,6 @@ func awsAwsjson10_deserializeDocumentMemorySizeConfiguration(v **types.MemorySiz
 				}
 				sv.Memory = ptr.Int32(int32(i64))
 			}
-
 		case "memoryReservation":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8949,7 +8698,6 @@ func awsAwsjson10_deserializeDocumentMemorySizeConfiguration(v **types.MemorySiz
 				}
 				sv.MemoryReservation = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8989,7 +8737,6 @@ func awsAwsjson10_deserializeDocumentMetricSource(v **types.MetricSource, value 
 				}
 				sv.Provider = types.MetricSourceProvider(jtv)
 			}
-
 		case "providerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8998,7 +8745,6 @@ func awsAwsjson10_deserializeDocumentMetricSource(v **types.MetricSource, value 
 				}
 				sv.ProviderArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9123,15 +8869,9 @@ func awsAwsjson10_deserializeDocumentMissingAuthenticationToken(v **types.Missin
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9139,14 +8879,10 @@ func awsAwsjson10_deserializeDocumentMissingAuthenticationToken(v **types.Missin
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9172,15 +8908,9 @@ func awsAwsjson10_deserializeDocumentOptInRequiredException(v **types.OptInRequi
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9188,14 +8918,10 @@ func awsAwsjson10_deserializeDocumentOptInRequiredException(v **types.OptInRequi
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9303,17 +9029,14 @@ func awsAwsjson10_deserializeDocumentProjectedMetric(v **types.ProjectedMetric, 
 				}
 				sv.Name = types.MetricName(jtv)
 			}
-
 		case "timestamps":
 			if err := awsAwsjson10_deserializeDocumentTimestamps(&sv.Timestamps, value); err != nil {
 				return err
 			}
-
 		case "values":
 			if err := awsAwsjson10_deserializeDocumentMetricValues(&sv.Values, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9421,17 +9144,14 @@ func awsAwsjson10_deserializeDocumentRDSDatabaseProjectedMetric(v **types.RDSDat
 				}
 				sv.Name = types.RDSDBMetricName(jtv)
 			}
-
 		case "timestamps":
 			if err := awsAwsjson10_deserializeDocumentTimestamps(&sv.Timestamps, value); err != nil {
 				return err
 			}
-
 		case "values":
 			if err := awsAwsjson10_deserializeDocumentMetricValues(&sv.Values, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9501,7 +9221,6 @@ func awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetric
 			if err := awsAwsjson10_deserializeDocumentRDSDatabaseProjectedMetrics(&sv.ProjectedMetrics, value); err != nil {
 				return err
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9514,7 +9233,6 @@ func awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetric
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "recommendedDBInstanceClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9523,7 +9241,6 @@ func awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetric
 				}
 				sv.RecommendedDBInstanceClass = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9597,7 +9314,6 @@ func awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOption(v **types
 				}
 				sv.DbInstanceClass = ptr.String(jtv)
 			}
-
 		case "performanceRisk":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9631,12 +9347,10 @@ func awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOption(v **types
 
 				}
 			}
-
 		case "projectedUtilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentRDSDBProjectedUtilizationMetrics(&sv.ProjectedUtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9649,17 +9363,14 @@ func awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOption(v **types
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentRDSInstanceSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9767,7 +9478,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentDBInstanceClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9776,17 +9486,14 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.CurrentDBInstanceClass = ptr.String(jtv)
 			}
-
 		case "currentStorageConfiguration":
 			if err := awsAwsjson10_deserializeDocumentDBStorageConfiguration(&sv.CurrentStorageConfiguration, value); err != nil {
 				return err
 			}
-
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentRDSEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
 				return err
 			}
-
 		case "engine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9795,7 +9502,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.Engine = ptr.String(jtv)
 			}
-
 		case "engineVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9804,7 +9510,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.EngineVersion = ptr.String(jtv)
 			}
-
 		case "idle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9813,7 +9518,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.Idle = types.Idle(jtv)
 			}
-
 		case "instanceFinding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9822,17 +9526,14 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.InstanceFinding = types.RDSInstanceFinding(jtv)
 			}
-
 		case "instanceFindingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentRDSInstanceFindingReasonCodes(&sv.InstanceFindingReasonCodes, value); err != nil {
 				return err
 			}
-
 		case "instanceRecommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentRDSDBInstanceRecommendationOptions(&sv.InstanceRecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9848,7 +9549,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 
 				}
 			}
-
 		case "lookbackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9882,7 +9582,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 
 				}
 			}
-
 		case "resourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9891,7 +9590,6 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		case "storageFinding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9900,27 +9598,22 @@ func awsAwsjson10_deserializeDocumentRDSDBRecommendation(v **types.RDSDBRecommen
 				}
 				sv.StorageFinding = types.RDSStorageFinding(jtv)
 			}
-
 		case "storageFindingReasonCodes":
 			if err := awsAwsjson10_deserializeDocumentRDSStorageFindingReasonCodes(&sv.StorageFindingReasonCodes, value); err != nil {
 				return err
 			}
-
 		case "storageRecommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOptions(&sv.StorageRecommendationOptions, value); err != nil {
 				return err
 			}
-
 		case "tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentRDSDBUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9998,22 +9691,18 @@ func awsAwsjson10_deserializeDocumentRDSDBStorageRecommendationOption(v **types.
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentRDSStorageSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		case "storageConfiguration":
 			if err := awsAwsjson10_deserializeDocumentDBStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10087,7 +9776,6 @@ func awsAwsjson10_deserializeDocumentRDSDBUtilizationMetric(v **types.RDSDBUtili
 				}
 				sv.Name = types.RDSDBMetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10096,7 +9784,6 @@ func awsAwsjson10_deserializeDocumentRDSDBUtilizationMetric(v **types.RDSDBUtili
 				}
 				sv.Statistic = types.RDSDBMetricStatistic(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10130,7 +9817,6 @@ func awsAwsjson10_deserializeDocumentRDSDBUtilizationMetric(v **types.RDSDBUtili
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10200,7 +9886,6 @@ func awsAwsjson10_deserializeDocumentRDSEffectiveRecommendationPreferences(v **t
 			if err := awsAwsjson10_deserializeDocumentCpuVendorArchitectures(&sv.CpuVendorArchitectures, value); err != nil {
 				return err
 			}
-
 		case "enhancedInfrastructureMetrics":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10209,7 +9894,6 @@ func awsAwsjson10_deserializeDocumentRDSEffectiveRecommendationPreferences(v **t
 				}
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
-
 		case "lookBackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10218,12 +9902,10 @@ func awsAwsjson10_deserializeDocumentRDSEffectiveRecommendationPreferences(v **t
 				}
 				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
 			}
-
 		case "savingsEstimationMode":
 			if err := awsAwsjson10_deserializeDocumentRDSSavingsEstimationMode(&sv.SavingsEstimationMode, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10263,7 +9945,6 @@ func awsAwsjson10_deserializeDocumentRDSInstanceEstimatedMonthlySavings(v **type
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10297,7 +9978,6 @@ func awsAwsjson10_deserializeDocumentRDSInstanceEstimatedMonthlySavings(v **type
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10369,7 +10049,6 @@ func awsAwsjson10_deserializeDocumentRDSInstanceSavingsOpportunityAfterDiscounts
 			if err := awsAwsjson10_deserializeDocumentRDSInstanceEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10403,7 +10082,6 @@ func awsAwsjson10_deserializeDocumentRDSInstanceSavingsOpportunityAfterDiscounts
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10443,7 +10121,6 @@ func awsAwsjson10_deserializeDocumentRDSSavingsEstimationMode(v **types.RDSSavin
 				}
 				sv.Source = types.RDSSavingsEstimationModeSource(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10483,7 +10160,6 @@ func awsAwsjson10_deserializeDocumentRDSStorageEstimatedMonthlySavings(v **types
 				}
 				sv.Currency = types.Currency(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10517,7 +10193,6 @@ func awsAwsjson10_deserializeDocumentRDSStorageEstimatedMonthlySavings(v **types
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10589,7 +10264,6 @@ func awsAwsjson10_deserializeDocumentRDSStorageSavingsOpportunityAfterDiscounts(
 			if err := awsAwsjson10_deserializeDocumentRDSStorageEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10623,7 +10297,6 @@ func awsAwsjson10_deserializeDocumentRDSStorageSavingsOpportunityAfterDiscounts(
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10697,7 +10370,6 @@ func awsAwsjson10_deserializeDocumentReasonCodeSummary(v **types.ReasonCodeSumma
 				}
 				sv.Name = types.FindingReasonCode(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10731,7 +10403,6 @@ func awsAwsjson10_deserializeDocumentReasonCodeSummary(v **types.ReasonCodeSumma
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10778,12 +10449,10 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 
 				}
 			}
-
 		case "destination":
 			if err := awsAwsjson10_deserializeDocumentExportDestination(&sv.Destination, value); err != nil {
 				return err
 			}
-
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10792,7 +10461,6 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
-
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10801,7 +10469,6 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "lastUpdatedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10817,7 +10484,6 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 
 				}
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10826,7 +10492,6 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10835,7 +10500,6 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 				}
 				sv.Status = types.JobStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10943,12 +10607,10 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				}
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
-
 		case "externalMetricsPreference":
 			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
 				return err
 			}
-
 		case "inferredWorkloadTypes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10957,7 +10619,6 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				}
 				sv.InferredWorkloadTypes = types.InferredWorkloadTypesPreference(jtv)
 			}
-
 		case "lookBackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10966,12 +10627,10 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				}
 				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
 			}
-
 		case "preferredResources":
 			if err := awsAwsjson10_deserializeDocumentEffectivePreferredResources(&sv.PreferredResources, value); err != nil {
 				return err
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10980,7 +10639,6 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
-
 		case "savingsEstimationMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10989,17 +10647,14 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				}
 				sv.SavingsEstimationMode = types.SavingsEstimationMode(jtv)
 			}
-
 		case "scope":
 			if err := awsAwsjson10_deserializeDocumentScope(&sv.Scope, value); err != nil {
 				return err
 			}
-
 		case "utilizationPreferences":
 			if err := awsAwsjson10_deserializeDocumentUtilizationPreferences(&sv.UtilizationPreferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11073,7 +10728,6 @@ func awsAwsjson10_deserializeDocumentRecommendationSource(v **types.Recommendati
 				}
 				sv.RecommendationSourceArn = ptr.String(jtv)
 			}
-
 		case "recommendationSourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11082,7 +10736,6 @@ func awsAwsjson10_deserializeDocumentRecommendationSource(v **types.Recommendati
 				}
 				sv.RecommendationSourceType = types.RecommendationSourceType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11190,17 +10843,14 @@ func awsAwsjson10_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentPerformanceRiskRatings":
 			if err := awsAwsjson10_deserializeDocumentCurrentPerformanceRiskRatings(&sv.CurrentPerformanceRiskRatings, value); err != nil {
 				return err
 			}
-
 		case "inferredWorkloadSavings":
 			if err := awsAwsjson10_deserializeDocumentInferredWorkloadSavings(&sv.InferredWorkloadSavings, value); err != nil {
 				return err
 			}
-
 		case "recommendationResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11209,17 +10859,14 @@ func awsAwsjson10_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.RecommendationResourceType = types.RecommendationSourceType(jtv)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "summaries":
 			if err := awsAwsjson10_deserializeDocumentSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11255,7 +10902,6 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(v **types.
 			if err := awsAwsjson10_deserializeDocumentProjectedMetrics(&sv.ProjectedMetrics, value); err != nil {
 				return err
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11268,7 +10914,6 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(v **types.
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "recommendedInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11277,7 +10922,6 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(v **types.
 				}
 				sv.RecommendedInstanceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11341,15 +10985,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11357,14 +10995,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11400,7 +11034,6 @@ func awsAwsjson10_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				}
 				sv.Bucket = ptr.String(jtv)
 			}
-
 		case "key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11409,7 +11042,6 @@ func awsAwsjson10_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "metadataKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11418,7 +11050,6 @@ func awsAwsjson10_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				}
 				sv.MetadataKey = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11454,7 +11085,6 @@ func awsAwsjson10_deserializeDocumentSavingsOpportunity(v **types.SavingsOpportu
 			if err := awsAwsjson10_deserializeDocumentEstimatedMonthlySavings(&sv.EstimatedMonthlySavings, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11488,7 +11118,6 @@ func awsAwsjson10_deserializeDocumentSavingsOpportunity(v **types.SavingsOpportu
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11528,7 +11157,6 @@ func awsAwsjson10_deserializeDocumentScope(v **types.Scope, value interface{}) e
 				}
 				sv.Name = types.ScopeName(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11537,7 +11165,6 @@ func awsAwsjson10_deserializeDocumentScope(v **types.Scope, value interface{}) e
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11577,12 +11204,10 @@ func awsAwsjson10_deserializeDocumentServiceConfiguration(v **types.ServiceConfi
 				}
 				sv.AutoScalingConfiguration = types.AutoScalingConfiguration(jtv)
 			}
-
 		case "containerConfigurations":
 			if err := awsAwsjson10_deserializeDocumentContainerConfigurations(&sv.ContainerConfigurations, value); err != nil {
 				return err
 			}
-
 		case "cpu":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11595,7 +11220,6 @@ func awsAwsjson10_deserializeDocumentServiceConfiguration(v **types.ServiceConfi
 				}
 				sv.Cpu = ptr.Int32(int32(i64))
 			}
-
 		case "memory":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11608,7 +11232,6 @@ func awsAwsjson10_deserializeDocumentServiceConfiguration(v **types.ServiceConfi
 				}
 				sv.Memory = ptr.Int32(int32(i64))
 			}
-
 		case "taskDefinitionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11617,7 +11240,6 @@ func awsAwsjson10_deserializeDocumentServiceConfiguration(v **types.ServiceConfi
 				}
 				sv.TaskDefinitionArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11647,15 +11269,9 @@ func awsAwsjson10_deserializeDocumentServiceUnavailableException(v **types.Servi
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11663,14 +11279,10 @@ func awsAwsjson10_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11740,12 +11352,10 @@ func awsAwsjson10_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.Name = types.Finding(jtv)
 			}
-
 		case "reasonCodeSummaries":
 			if err := awsAwsjson10_deserializeDocumentReasonCodeSummaries(&sv.ReasonCodeSummaries, value); err != nil {
 				return err
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11779,7 +11389,6 @@ func awsAwsjson10_deserializeDocumentSummary(v **types.Summary, value interface{
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11819,7 +11428,6 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11828,7 +11436,6 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11892,15 +11499,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11908,14 +11509,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11994,7 +11591,6 @@ func awsAwsjson10_deserializeDocumentUtilizationMetric(v **types.UtilizationMetr
 				}
 				sv.Name = types.MetricName(jtv)
 			}
-
 		case "statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12003,7 +11599,6 @@ func awsAwsjson10_deserializeDocumentUtilizationMetric(v **types.UtilizationMetr
 				}
 				sv.Statistic = types.MetricStatistic(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12037,7 +11632,6 @@ func awsAwsjson10_deserializeDocumentUtilizationMetric(v **types.UtilizationMetr
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12111,12 +11705,10 @@ func awsAwsjson10_deserializeDocumentUtilizationPreference(v **types.Utilization
 				}
 				sv.MetricName = types.CustomizableMetricName(jtv)
 			}
-
 		case "metricParameters":
 			if err := awsAwsjson10_deserializeDocumentCustomizableMetricParameters(&sv.MetricParameters, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12190,7 +11782,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.RootVolume = ptr.Bool(jtv)
 			}
-
 		case "volumeBaselineIOPS":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12203,7 +11794,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.VolumeBaselineIOPS = int32(i64)
 			}
-
 		case "volumeBaselineThroughput":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12216,7 +11806,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.VolumeBaselineThroughput = int32(i64)
 			}
-
 		case "volumeBurstIOPS":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12229,7 +11818,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.VolumeBurstIOPS = int32(i64)
 			}
-
 		case "volumeBurstThroughput":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12242,7 +11830,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.VolumeBurstThroughput = int32(i64)
 			}
-
 		case "volumeSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12255,7 +11842,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.VolumeSize = int32(i64)
 			}
-
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12264,7 +11850,6 @@ func awsAwsjson10_deserializeDocumentVolumeConfiguration(v **types.VolumeConfigu
 				}
 				sv.VolumeType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12304,12 +11889,10 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "currentConfiguration":
 			if err := awsAwsjson10_deserializeDocumentVolumeConfiguration(&sv.CurrentConfiguration, value); err != nil {
 				return err
 			}
-
 		case "currentPerformanceRisk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12318,12 +11901,10 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 				}
 				sv.CurrentPerformanceRisk = types.CurrentPerformanceRisk(jtv)
 			}
-
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentEBSEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
 				return err
 			}
-
 		case "finding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12332,7 +11913,6 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 				}
 				sv.Finding = types.EBSFinding(jtv)
 			}
-
 		case "lastRefreshTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12348,7 +11928,6 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 
 				}
 			}
-
 		case "lookBackPeriodInDays":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12382,17 +11961,14 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 
 				}
 			}
-
 		case "tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "utilizationMetrics":
 			if err := awsAwsjson10_deserializeDocumentEBSUtilizationMetrics(&sv.UtilizationMetrics, value); err != nil {
 				return err
 			}
-
 		case "volumeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12401,12 +11977,10 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendation(v **types.VolumeRecomm
 				}
 				sv.VolumeArn = ptr.String(jtv)
 			}
-
 		case "volumeRecommendationOptions":
 			if err := awsAwsjson10_deserializeDocumentVolumeRecommendationOptions(&sv.VolumeRecommendationOptions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12442,7 +12016,6 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendationOption(v **types.Volume
 			if err := awsAwsjson10_deserializeDocumentVolumeConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "performanceRisk":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12476,7 +12049,6 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendationOption(v **types.Volume
 
 				}
 			}
-
 		case "rank":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12489,17 +12061,14 @@ func awsAwsjson10_deserializeDocumentVolumeRecommendationOption(v **types.Volume
 				}
 				sv.Rank = int32(i64)
 			}
-
 		case "savingsOpportunity":
 			if err := awsAwsjson10_deserializeDocumentSavingsOpportunity(&sv.SavingsOpportunity, value); err != nil {
 				return err
 			}
-
 		case "savingsOpportunityAfterDiscounts":
 			if err := awsAwsjson10_deserializeDocumentEBSSavingsOpportunityAfterDiscounts(&sv.SavingsOpportunityAfterDiscounts, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12638,12 +12207,10 @@ func awsAwsjson10_deserializeOpDocumentDescribeRecommendationExportJobsOutput(v 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "recommendationExportJobs":
 			if err := awsAwsjson10_deserializeDocumentRecommendationExportJobs(&sv.RecommendationExportJobs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12683,12 +12250,10 @@ func awsAwsjson10_deserializeOpDocumentExportAutoScalingGroupRecommendationsOutp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12728,12 +12293,10 @@ func awsAwsjson10_deserializeOpDocumentExportEBSVolumeRecommendationsOutput(v **
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12773,12 +12336,10 @@ func awsAwsjson10_deserializeOpDocumentExportEC2InstanceRecommendationsOutput(v 
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12818,12 +12379,10 @@ func awsAwsjson10_deserializeOpDocumentExportECSServiceRecommendationsOutput(v *
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12863,12 +12422,10 @@ func awsAwsjson10_deserializeOpDocumentExportLambdaFunctionRecommendationsOutput
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12908,12 +12465,10 @@ func awsAwsjson10_deserializeOpDocumentExportLicenseRecommendationsOutput(v **Ex
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12953,12 +12508,10 @@ func awsAwsjson10_deserializeOpDocumentExportRDSDatabaseRecommendationsOutput(v 
 				}
 				sv.JobId = ptr.String(jtv)
 			}
-
 		case "s3Destination":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12994,12 +12547,10 @@ func awsAwsjson10_deserializeOpDocumentGetAutoScalingGroupRecommendationsOutput(
 			if err := awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendations(&sv.AutoScalingGroupRecommendations, value); err != nil {
 				return err
 			}
-
 		case "errors":
 			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13008,7 +12559,6 @@ func awsAwsjson10_deserializeOpDocumentGetAutoScalingGroupRecommendationsOutput(
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13044,7 +12594,6 @@ func awsAwsjson10_deserializeOpDocumentGetEBSVolumeRecommendationsOutput(v **Get
 			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13053,12 +12602,10 @@ func awsAwsjson10_deserializeOpDocumentGetEBSVolumeRecommendationsOutput(v **Get
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "volumeRecommendations":
 			if err := awsAwsjson10_deserializeDocumentVolumeRecommendations(&sv.VolumeRecommendations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13094,12 +12641,10 @@ func awsAwsjson10_deserializeOpDocumentGetEC2InstanceRecommendationsOutput(v **G
 			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "instanceRecommendations":
 			if err := awsAwsjson10_deserializeDocumentInstanceRecommendations(&sv.InstanceRecommendations, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13108,7 +12653,6 @@ func awsAwsjson10_deserializeOpDocumentGetEC2InstanceRecommendationsOutput(v **G
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13144,7 +12688,6 @@ func awsAwsjson10_deserializeOpDocumentGetEC2RecommendationProjectedMetricsOutpu
 			if err := awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetrics(&sv.RecommendedOptionProjectedMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13180,7 +12723,6 @@ func awsAwsjson10_deserializeOpDocumentGetECSServiceRecommendationProjectedMetri
 			if err := awsAwsjson10_deserializeDocumentECSServiceRecommendedOptionProjectedMetrics(&sv.RecommendedOptionProjectedMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13216,12 +12758,10 @@ func awsAwsjson10_deserializeOpDocumentGetECSServiceRecommendationsOutput(v **Ge
 			if err := awsAwsjson10_deserializeDocumentECSServiceRecommendations(&sv.EcsServiceRecommendations, value); err != nil {
 				return err
 			}
-
 		case "errors":
 			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13230,7 +12770,6 @@ func awsAwsjson10_deserializeOpDocumentGetECSServiceRecommendationsOutput(v **Ge
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13270,12 +12809,10 @@ func awsAwsjson10_deserializeOpDocumentGetEffectiveRecommendationPreferencesOutp
 				}
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
-
 		case "externalMetricsPreference":
 			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
 				return err
 			}
-
 		case "lookBackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13284,17 +12821,14 @@ func awsAwsjson10_deserializeOpDocumentGetEffectiveRecommendationPreferencesOutp
 				}
 				sv.LookBackPeriod = types.LookBackPeriodPreference(jtv)
 			}
-
 		case "preferredResources":
 			if err := awsAwsjson10_deserializeDocumentEffectivePreferredResources(&sv.PreferredResources, value); err != nil {
 				return err
 			}
-
 		case "utilizationPreferences":
 			if err := awsAwsjson10_deserializeDocumentUtilizationPreferences(&sv.UtilizationPreferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13330,7 +12864,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusesForOrganizationOutpu
 			if err := awsAwsjson10_deserializeDocumentAccountEnrollmentStatuses(&sv.AccountEnrollmentStatuses, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13339,7 +12872,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusesForOrganizationOutpu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13386,7 +12918,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 
 				}
 			}
-
 		case "memberAccountsEnrolled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13395,7 +12926,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 				}
 				sv.MemberAccountsEnrolled = jtv
 			}
-
 		case "numberOfMemberAccountsOptedIn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13408,7 +12938,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 				}
 				sv.NumberOfMemberAccountsOptedIn = ptr.Int32(int32(i64))
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13417,7 +12946,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13426,7 +12954,6 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13462,7 +12989,6 @@ func awsAwsjson10_deserializeOpDocumentGetLambdaFunctionRecommendationsOutput(v 
 			if err := awsAwsjson10_deserializeDocumentLambdaFunctionRecommendations(&sv.LambdaFunctionRecommendations, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13471,7 +12997,6 @@ func awsAwsjson10_deserializeOpDocumentGetLambdaFunctionRecommendationsOutput(v 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13507,12 +13032,10 @@ func awsAwsjson10_deserializeOpDocumentGetLicenseRecommendationsOutput(v **GetLi
 			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "licenseRecommendations":
 			if err := awsAwsjson10_deserializeDocumentLicenseRecommendations(&sv.LicenseRecommendations, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13521,7 +13044,6 @@ func awsAwsjson10_deserializeOpDocumentGetLicenseRecommendationsOutput(v **GetLi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13557,7 +13079,6 @@ func awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationProjectedMetr
 			if err := awsAwsjson10_deserializeDocumentRDSDatabaseRecommendedOptionProjectedMetrics(&sv.RecommendedOptionProjectedMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13593,7 +13114,6 @@ func awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationsOutput(v **G
 			if err := awsAwsjson10_deserializeDocumentGetRecommendationErrors(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13602,12 +13122,10 @@ func awsAwsjson10_deserializeOpDocumentGetRDSDatabaseRecommendationsOutput(v **G
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "rdsDBRecommendations":
 			if err := awsAwsjson10_deserializeDocumentRDSDBRecommendations(&sv.RdsDBRecommendations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13647,12 +13165,10 @@ func awsAwsjson10_deserializeOpDocumentGetRecommendationPreferencesOutput(v **Ge
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "recommendationPreferencesDetails":
 			if err := awsAwsjson10_deserializeDocumentRecommendationPreferencesDetails(&sv.RecommendationPreferencesDetails, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13692,12 +13208,10 @@ func awsAwsjson10_deserializeOpDocumentGetRecommendationSummariesOutput(v **GetR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "recommendationSummaries":
 			if err := awsAwsjson10_deserializeDocumentRecommendationSummaries(&sv.RecommendationSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13768,7 +13282,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateEnrollmentStatusOutput(v **UpdateEn
 				}
 				sv.Status = types.Status(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13777,7 +13290,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateEnrollmentStatusOutput(v **UpdateEn
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

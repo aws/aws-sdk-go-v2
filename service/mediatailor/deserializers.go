@@ -173,12 +173,10 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsForChannelOutput(v **Configu
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "LogTypes":
 			if err := awsRestjson1_deserializeDocumentLogTypes(&sv.LogTypes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -335,7 +333,6 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsForPlaybackConfigurationOutp
 				}
 				sv.PercentEnabled = int32(i64)
 			}
-
 		case "PlaybackConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -344,7 +341,6 @@ func awsRestjson1_deserializeOpDocumentConfigureLogsForPlaybackConfigurationOutp
 				}
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -497,12 +493,10 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Audiences":
 			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -511,7 +505,6 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ChannelState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -520,7 +513,6 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				}
 				sv.ChannelState = types.ChannelState(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -536,12 +528,10 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 
 				}
 			}
-
 		case "FillerSlate":
 			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -557,12 +547,10 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 
 				}
 			}
-
 		case "Outputs":
 			if err := awsRestjson1_deserializeDocumentResponseOutputs(&sv.Outputs, value); err != nil {
 				return err
 			}
-
 		case "PlaybackMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -571,12 +559,10 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				}
 				sv.PlaybackMode = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Tier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -585,12 +571,10 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				}
 				sv.Tier = ptr.String(jtv)
 			}
-
 		case "TimeShiftConfiguration":
 			if err := awsRestjson1_deserializeDocumentTimeShiftConfiguration(&sv.TimeShiftConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -743,7 +727,6 @@ func awsRestjson1_deserializeOpDocumentCreateLiveSourceOutput(v **CreateLiveSour
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -759,12 +742,10 @@ func awsRestjson1_deserializeOpDocumentCreateLiveSourceOutput(v **CreateLiveSour
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -780,7 +761,6 @@ func awsRestjson1_deserializeOpDocumentCreateLiveSourceOutput(v **CreateLiveSour
 
 				}
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -789,7 +769,6 @@ func awsRestjson1_deserializeOpDocumentCreateLiveSourceOutput(v **CreateLiveSour
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -798,12 +777,10 @@ func awsRestjson1_deserializeOpDocumentCreateLiveSourceOutput(v **CreateLiveSour
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -956,12 +933,10 @@ func awsRestjson1_deserializeOpDocumentCreatePrefetchScheduleOutput(v **CreatePr
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Consumption":
 			if err := awsRestjson1_deserializeDocumentPrefetchConsumption(&sv.Consumption, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -970,7 +945,6 @@ func awsRestjson1_deserializeOpDocumentCreatePrefetchScheduleOutput(v **CreatePr
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PlaybackConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -979,12 +953,10 @@ func awsRestjson1_deserializeOpDocumentCreatePrefetchScheduleOutput(v **CreatePr
 				}
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
-
 		case "Retrieval":
 			if err := awsRestjson1_deserializeDocumentPrefetchRetrieval(&sv.Retrieval, value); err != nil {
 				return err
 			}
-
 		case "StreamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -993,7 +965,6 @@ func awsRestjson1_deserializeOpDocumentCreatePrefetchScheduleOutput(v **CreatePr
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1142,7 +1113,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 			if err := awsRestjson1_deserializeDocument__listOfAdBreak(&sv.AdBreaks, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1151,12 +1121,10 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "AudienceMedia":
 			if err := awsRestjson1_deserializeDocument__listOfAudienceMedia(&sv.AudienceMedia, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1165,12 +1133,10 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ClipRange":
 			if err := awsRestjson1_deserializeDocumentClipRange(&sv.ClipRange, value); err != nil {
 				return err
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1186,7 +1152,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 
 				}
 			}
-
 		case "DurationMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1199,7 +1164,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.DurationMillis = ptr.Int64(i64)
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1208,7 +1172,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "ProgramName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1217,7 +1180,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.ProgramName = ptr.String(jtv)
 			}
-
 		case "ScheduledStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1233,7 +1195,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1242,7 +1203,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1251,7 +1211,6 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1400,7 +1359,6 @@ func awsRestjson1_deserializeOpDocumentCreateSourceLocationOutput(v **CreateSour
 			if err := awsRestjson1_deserializeDocumentAccessConfiguration(&sv.AccessConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1409,7 +1367,6 @@ func awsRestjson1_deserializeOpDocumentCreateSourceLocationOutput(v **CreateSour
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1425,17 +1382,14 @@ func awsRestjson1_deserializeOpDocumentCreateSourceLocationOutput(v **CreateSour
 
 				}
 			}
-
 		case "DefaultSegmentDeliveryConfiguration":
 			if err := awsRestjson1_deserializeDocumentDefaultSegmentDeliveryConfiguration(&sv.DefaultSegmentDeliveryConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HttpConfiguration":
 			if err := awsRestjson1_deserializeDocumentHttpConfiguration(&sv.HttpConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1451,12 +1405,10 @@ func awsRestjson1_deserializeOpDocumentCreateSourceLocationOutput(v **CreateSour
 
 				}
 			}
-
 		case "SegmentDeliveryConfigurations":
 			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
 				return err
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1465,12 +1417,10 @@ func awsRestjson1_deserializeOpDocumentCreateSourceLocationOutput(v **CreateSour
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1623,7 +1573,6 @@ func awsRestjson1_deserializeOpDocumentCreateVodSourceOutput(v **CreateVodSource
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1639,12 +1588,10 @@ func awsRestjson1_deserializeOpDocumentCreateVodSourceOutput(v **CreateVodSource
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1660,7 +1607,6 @@ func awsRestjson1_deserializeOpDocumentCreateVodSourceOutput(v **CreateVodSource
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1669,12 +1615,10 @@ func awsRestjson1_deserializeOpDocumentCreateVodSourceOutput(v **CreateVodSource
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1683,7 +1627,6 @@ func awsRestjson1_deserializeOpDocumentCreateVodSourceOutput(v **CreateVodSource
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2516,12 +2459,10 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Audiences":
 			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2530,7 +2471,6 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ChannelState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2539,7 +2479,6 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				}
 				sv.ChannelState = types.ChannelState(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2555,12 +2494,10 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 
 				}
 			}
-
 		case "FillerSlate":
 			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2576,17 +2513,14 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 
 				}
 			}
-
 		case "LogConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogConfigurationForChannel(&sv.LogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Outputs":
 			if err := awsRestjson1_deserializeDocumentResponseOutputs(&sv.Outputs, value); err != nil {
 				return err
 			}
-
 		case "PlaybackMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2595,12 +2529,10 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				}
 				sv.PlaybackMode = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Tier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2609,12 +2541,10 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				}
 				sv.Tier = ptr.String(jtv)
 			}
-
 		case "TimeShiftConfiguration":
 			if err := awsRestjson1_deserializeDocumentTimeShiftConfiguration(&sv.TimeShiftConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2767,7 +2697,6 @@ func awsRestjson1_deserializeOpDocumentDescribeLiveSourceOutput(v **DescribeLive
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2783,12 +2712,10 @@ func awsRestjson1_deserializeOpDocumentDescribeLiveSourceOutput(v **DescribeLive
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2804,7 +2731,6 @@ func awsRestjson1_deserializeOpDocumentDescribeLiveSourceOutput(v **DescribeLive
 
 				}
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2813,7 +2739,6 @@ func awsRestjson1_deserializeOpDocumentDescribeLiveSourceOutput(v **DescribeLive
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2822,12 +2747,10 @@ func awsRestjson1_deserializeOpDocumentDescribeLiveSourceOutput(v **DescribeLive
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2976,7 +2899,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 			if err := awsRestjson1_deserializeDocument__listOfAdBreak(&sv.AdBreaks, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2985,12 +2907,10 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "AudienceMedia":
 			if err := awsRestjson1_deserializeDocument__listOfAudienceMedia(&sv.AudienceMedia, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2999,12 +2919,10 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ClipRange":
 			if err := awsRestjson1_deserializeDocumentClipRange(&sv.ClipRange, value); err != nil {
 				return err
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3020,7 +2938,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 
 				}
 			}
-
 		case "DurationMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3033,7 +2950,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.DurationMillis = ptr.Int64(i64)
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3042,7 +2958,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "ProgramName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3051,7 +2966,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.ProgramName = ptr.String(jtv)
 			}
-
 		case "ScheduledStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3067,7 +2981,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3076,7 +2989,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3085,7 +2997,6 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3234,7 +3145,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSourceLocationOutput(v **Describe
 			if err := awsRestjson1_deserializeDocumentAccessConfiguration(&sv.AccessConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3243,7 +3153,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSourceLocationOutput(v **Describe
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3259,17 +3168,14 @@ func awsRestjson1_deserializeOpDocumentDescribeSourceLocationOutput(v **Describe
 
 				}
 			}
-
 		case "DefaultSegmentDeliveryConfiguration":
 			if err := awsRestjson1_deserializeDocumentDefaultSegmentDeliveryConfiguration(&sv.DefaultSegmentDeliveryConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HttpConfiguration":
 			if err := awsRestjson1_deserializeDocumentHttpConfiguration(&sv.HttpConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3285,12 +3191,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSourceLocationOutput(v **Describe
 
 				}
 			}
-
 		case "SegmentDeliveryConfigurations":
 			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
 				return err
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3299,12 +3203,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSourceLocationOutput(v **Describe
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3453,7 +3355,6 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 			if err := awsRestjson1_deserializeDocumentAdBreakOpportunities(&sv.AdBreakOpportunities, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3462,7 +3363,6 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3478,12 +3378,10 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3499,7 +3397,6 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3508,12 +3405,10 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3522,7 +3417,6 @@ func awsRestjson1_deserializeOpDocumentDescribeVodSourceOutput(v **DescribeVodSo
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3675,7 +3569,6 @@ func awsRestjson1_deserializeOpDocumentGetChannelPolicyOutput(v **GetChannelPoli
 				}
 				sv.Policy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3824,7 +3717,6 @@ func awsRestjson1_deserializeOpDocumentGetChannelScheduleOutput(v **GetChannelSc
 			if err := awsRestjson1_deserializeDocument__listOfScheduleEntry(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3833,7 +3725,6 @@ func awsRestjson1_deserializeOpDocumentGetChannelScheduleOutput(v **GetChannelSc
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3986,37 +3877,30 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
-
 		case "AvailSuppression":
 			if err := awsRestjson1_deserializeDocumentAvailSuppression(&sv.AvailSuppression, value); err != nil {
 				return err
 			}
-
 		case "Bumper":
 			if err := awsRestjson1_deserializeDocumentBumper(&sv.Bumper, value); err != nil {
 				return err
 			}
-
 		case "CdnConfiguration":
 			if err := awsRestjson1_deserializeDocumentCdnConfiguration(&sv.CdnConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ConfigurationAliases":
 			if err := awsRestjson1_deserializeDocumentConfigurationAliasesResponse(&sv.ConfigurationAliases, value); err != nil {
 				return err
 			}
-
 		case "DashConfiguration":
 			if err := awsRestjson1_deserializeDocumentDashConfiguration(&sv.DashConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HlsConfiguration":
 			if err := awsRestjson1_deserializeDocumentHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
 				return err
 			}
-
 		case "InsertionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4025,22 +3909,18 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.InsertionMode = types.InsertionMode(jtv)
 			}
-
 		case "LivePreRollConfiguration":
 			if err := awsRestjson1_deserializeDocumentLivePreRollConfiguration(&sv.LivePreRollConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LogConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogConfiguration(&sv.LogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ManifestProcessingRules":
 			if err := awsRestjson1_deserializeDocumentManifestProcessingRules(&sv.ManifestProcessingRules, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4049,7 +3929,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PersonalizationThresholdSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4062,7 +3941,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "PlaybackConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4071,7 +3949,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.PlaybackConfigurationArn = ptr.String(jtv)
 			}
-
 		case "PlaybackEndpointPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4080,7 +3957,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.PlaybackEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "SessionInitializationEndpointPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4089,7 +3965,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.SessionInitializationEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "SlateAdUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4098,12 +3973,10 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.SlateAdUrl = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "TranscodeProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4112,7 +3985,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.TranscodeProfileName = ptr.String(jtv)
 			}
-
 		case "VideoContentSourceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4121,7 +3993,6 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				}
 				sv.VideoContentSourceUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4274,12 +4145,10 @@ func awsRestjson1_deserializeOpDocumentGetPrefetchScheduleOutput(v **GetPrefetch
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Consumption":
 			if err := awsRestjson1_deserializeDocumentPrefetchConsumption(&sv.Consumption, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4288,7 +4157,6 @@ func awsRestjson1_deserializeOpDocumentGetPrefetchScheduleOutput(v **GetPrefetch
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PlaybackConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4297,12 +4165,10 @@ func awsRestjson1_deserializeOpDocumentGetPrefetchScheduleOutput(v **GetPrefetch
 				}
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
-
 		case "Retrieval":
 			if err := awsRestjson1_deserializeDocumentPrefetchRetrieval(&sv.Retrieval, value); err != nil {
 				return err
 			}
-
 		case "StreamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4311,7 +4177,6 @@ func awsRestjson1_deserializeOpDocumentGetPrefetchScheduleOutput(v **GetPrefetch
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4460,7 +4325,6 @@ func awsRestjson1_deserializeOpDocumentListAlertsOutput(v **ListAlertsOutput, va
 			if err := awsRestjson1_deserializeDocument__listOfAlert(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4469,7 +4333,6 @@ func awsRestjson1_deserializeOpDocumentListAlertsOutput(v **ListAlertsOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4618,7 +4481,6 @@ func awsRestjson1_deserializeOpDocumentListChannelsOutput(v **ListChannelsOutput
 			if err := awsRestjson1_deserializeDocument__listOfChannel(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4627,7 +4489,6 @@ func awsRestjson1_deserializeOpDocumentListChannelsOutput(v **ListChannelsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4776,7 +4637,6 @@ func awsRestjson1_deserializeOpDocumentListLiveSourcesOutput(v **ListLiveSources
 			if err := awsRestjson1_deserializeDocument__listOfLiveSource(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4785,7 +4645,6 @@ func awsRestjson1_deserializeOpDocumentListLiveSourcesOutput(v **ListLiveSources
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4934,7 +4793,6 @@ func awsRestjson1_deserializeOpDocumentListPlaybackConfigurationsOutput(v **List
 			if err := awsRestjson1_deserializeDocument__listOfPlaybackConfiguration(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4943,7 +4801,6 @@ func awsRestjson1_deserializeOpDocumentListPlaybackConfigurationsOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5092,7 +4949,6 @@ func awsRestjson1_deserializeOpDocumentListPrefetchSchedulesOutput(v **ListPrefe
 			if err := awsRestjson1_deserializeDocument__listOfPrefetchSchedule(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5101,7 +4957,6 @@ func awsRestjson1_deserializeOpDocumentListPrefetchSchedulesOutput(v **ListPrefe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5250,7 +5105,6 @@ func awsRestjson1_deserializeOpDocumentListSourceLocationsOutput(v **ListSourceL
 			if err := awsRestjson1_deserializeDocument__listOfSourceLocation(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5259,7 +5113,6 @@ func awsRestjson1_deserializeOpDocumentListSourceLocationsOutput(v **ListSourceL
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5411,7 +5264,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5560,7 +5412,6 @@ func awsRestjson1_deserializeOpDocumentListVodSourcesOutput(v **ListVodSourcesOu
 			if err := awsRestjson1_deserializeDocument__listOfVodSource(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5569,7 +5420,6 @@ func awsRestjson1_deserializeOpDocumentListVodSourcesOutput(v **ListVodSourcesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5807,37 +5657,30 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
-
 		case "AvailSuppression":
 			if err := awsRestjson1_deserializeDocumentAvailSuppression(&sv.AvailSuppression, value); err != nil {
 				return err
 			}
-
 		case "Bumper":
 			if err := awsRestjson1_deserializeDocumentBumper(&sv.Bumper, value); err != nil {
 				return err
 			}
-
 		case "CdnConfiguration":
 			if err := awsRestjson1_deserializeDocumentCdnConfiguration(&sv.CdnConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ConfigurationAliases":
 			if err := awsRestjson1_deserializeDocumentConfigurationAliasesResponse(&sv.ConfigurationAliases, value); err != nil {
 				return err
 			}
-
 		case "DashConfiguration":
 			if err := awsRestjson1_deserializeDocumentDashConfiguration(&sv.DashConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HlsConfiguration":
 			if err := awsRestjson1_deserializeDocumentHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
 				return err
 			}
-
 		case "InsertionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5846,22 +5689,18 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.InsertionMode = types.InsertionMode(jtv)
 			}
-
 		case "LivePreRollConfiguration":
 			if err := awsRestjson1_deserializeDocumentLivePreRollConfiguration(&sv.LivePreRollConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LogConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogConfiguration(&sv.LogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ManifestProcessingRules":
 			if err := awsRestjson1_deserializeDocumentManifestProcessingRules(&sv.ManifestProcessingRules, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5870,7 +5709,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PersonalizationThresholdSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5883,7 +5721,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "PlaybackConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5892,7 +5729,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.PlaybackConfigurationArn = ptr.String(jtv)
 			}
-
 		case "PlaybackEndpointPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5901,7 +5737,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.PlaybackEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "SessionInitializationEndpointPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5910,7 +5745,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.SessionInitializationEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "SlateAdUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5919,12 +5753,10 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.SlateAdUrl = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "TranscodeProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5933,7 +5765,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.TranscodeProfileName = ptr.String(jtv)
 			}
-
 		case "VideoContentSourceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5942,7 +5773,6 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				}
 				sv.VideoContentSourceUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6453,12 +6283,10 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Audiences":
 			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6467,7 +6295,6 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ChannelState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6476,7 +6303,6 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				}
 				sv.ChannelState = types.ChannelState(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6492,12 +6318,10 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 
 				}
 			}
-
 		case "FillerSlate":
 			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6513,12 +6337,10 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 
 				}
 			}
-
 		case "Outputs":
 			if err := awsRestjson1_deserializeDocumentResponseOutputs(&sv.Outputs, value); err != nil {
 				return err
 			}
-
 		case "PlaybackMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6527,12 +6349,10 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				}
 				sv.PlaybackMode = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Tier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6541,12 +6361,10 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				}
 				sv.Tier = ptr.String(jtv)
 			}
-
 		case "TimeShiftConfiguration":
 			if err := awsRestjson1_deserializeDocumentTimeShiftConfiguration(&sv.TimeShiftConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6699,7 +6517,6 @@ func awsRestjson1_deserializeOpDocumentUpdateLiveSourceOutput(v **UpdateLiveSour
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6715,12 +6532,10 @@ func awsRestjson1_deserializeOpDocumentUpdateLiveSourceOutput(v **UpdateLiveSour
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6736,7 +6551,6 @@ func awsRestjson1_deserializeOpDocumentUpdateLiveSourceOutput(v **UpdateLiveSour
 
 				}
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6745,7 +6559,6 @@ func awsRestjson1_deserializeOpDocumentUpdateLiveSourceOutput(v **UpdateLiveSour
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6754,12 +6567,10 @@ func awsRestjson1_deserializeOpDocumentUpdateLiveSourceOutput(v **UpdateLiveSour
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6908,7 +6719,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 			if err := awsRestjson1_deserializeDocument__listOfAdBreak(&sv.AdBreaks, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6917,12 +6727,10 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "AudienceMedia":
 			if err := awsRestjson1_deserializeDocument__listOfAudienceMedia(&sv.AudienceMedia, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6931,12 +6739,10 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ClipRange":
 			if err := awsRestjson1_deserializeDocumentClipRange(&sv.ClipRange, value); err != nil {
 				return err
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6952,7 +6758,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 
 				}
 			}
-
 		case "DurationMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6965,7 +6770,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.DurationMillis = ptr.Int64(i64)
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6974,7 +6778,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "ProgramName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6983,7 +6786,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.ProgramName = ptr.String(jtv)
 			}
-
 		case "ScheduledStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6999,7 +6801,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7008,7 +6809,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7017,7 +6817,6 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7166,7 +6965,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSourceLocationOutput(v **UpdateSour
 			if err := awsRestjson1_deserializeDocumentAccessConfiguration(&sv.AccessConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7175,7 +6973,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSourceLocationOutput(v **UpdateSour
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7191,17 +6988,14 @@ func awsRestjson1_deserializeOpDocumentUpdateSourceLocationOutput(v **UpdateSour
 
 				}
 			}
-
 		case "DefaultSegmentDeliveryConfiguration":
 			if err := awsRestjson1_deserializeDocumentDefaultSegmentDeliveryConfiguration(&sv.DefaultSegmentDeliveryConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HttpConfiguration":
 			if err := awsRestjson1_deserializeDocumentHttpConfiguration(&sv.HttpConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7217,12 +7011,10 @@ func awsRestjson1_deserializeOpDocumentUpdateSourceLocationOutput(v **UpdateSour
 
 				}
 			}
-
 		case "SegmentDeliveryConfigurations":
 			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
 				return err
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7231,12 +7023,10 @@ func awsRestjson1_deserializeOpDocumentUpdateSourceLocationOutput(v **UpdateSour
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7389,7 +7179,6 @@ func awsRestjson1_deserializeOpDocumentUpdateVodSourceOutput(v **UpdateVodSource
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7405,12 +7194,10 @@ func awsRestjson1_deserializeOpDocumentUpdateVodSourceOutput(v **UpdateVodSource
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7426,7 +7213,6 @@ func awsRestjson1_deserializeOpDocumentUpdateVodSourceOutput(v **UpdateVodSource
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7435,12 +7221,10 @@ func awsRestjson1_deserializeOpDocumentUpdateVodSourceOutput(v **UpdateVodSource
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7449,7 +7233,6 @@ func awsRestjson1_deserializeOpDocumentUpdateVodSourceOutput(v **UpdateVodSource
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8073,12 +7856,10 @@ func awsRestjson1_deserializeDocumentAccessConfiguration(v **types.AccessConfigu
 				}
 				sv.AccessType = types.AccessType(jtv)
 			}
-
 		case "SecretsManagerAccessTokenConfiguration":
 			if err := awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(&sv.SecretsManagerAccessTokenConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8114,7 +7895,6 @@ func awsRestjson1_deserializeDocumentAdBreak(v **types.AdBreak, value interface{
 			if err := awsRestjson1_deserializeDocumentAdBreakMetadataList(&sv.AdBreakMetadata, value); err != nil {
 				return err
 			}
-
 		case "MessageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8123,7 +7903,6 @@ func awsRestjson1_deserializeDocumentAdBreak(v **types.AdBreak, value interface{
 				}
 				sv.MessageType = types.MessageType(jtv)
 			}
-
 		case "OffsetMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8136,22 +7915,18 @@ func awsRestjson1_deserializeDocumentAdBreak(v **types.AdBreak, value interface{
 				}
 				sv.OffsetMillis = i64
 			}
-
 		case "Slate":
 			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.Slate, value); err != nil {
 				return err
 			}
-
 		case "SpliceInsertMessage":
 			if err := awsRestjson1_deserializeDocumentSpliceInsertMessage(&sv.SpliceInsertMessage, value); err != nil {
 				return err
 			}
-
 		case "TimeSignalMessage":
 			if err := awsRestjson1_deserializeDocumentTimeSignalMessage(&sv.TimeSignalMessage, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8263,7 +8038,6 @@ func awsRestjson1_deserializeDocumentAdBreakOpportunity(v **types.AdBreakOpportu
 				}
 				sv.OffsetMillis = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8303,7 +8077,6 @@ func awsRestjson1_deserializeDocumentAdMarkerPassthrough(v **types.AdMarkerPasst
 				}
 				sv.Enabled = jtv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8379,7 +8152,6 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 				}
 				sv.AlertCode = ptr.String(jtv)
 			}
-
 		case "AlertMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8388,7 +8160,6 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 				}
 				sv.AlertMessage = ptr.String(jtv)
 			}
-
 		case "Category":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8397,7 +8168,6 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 				}
 				sv.Category = types.AlertCategory(jtv)
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8413,12 +8183,10 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 
 				}
 			}
-
 		case "RelatedResourceArns":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.RelatedResourceArns, value); err != nil {
 				return err
 			}
-
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8427,7 +8195,6 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8463,12 +8230,10 @@ func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, va
 			if err := awsRestjson1_deserializeDocument__listOfAdBreak(&sv.AdBreaks, value); err != nil {
 				return err
 			}
-
 		case "ClipRange":
 			if err := awsRestjson1_deserializeDocumentClipRange(&sv.ClipRange, value); err != nil {
 				return err
 			}
-
 		case "DurationMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8481,7 +8246,6 @@ func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, va
 				}
 				sv.DurationMillis = ptr.Int64(i64)
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8490,7 +8254,6 @@ func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, va
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "ScheduledStartTimeMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8503,7 +8266,6 @@ func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, va
 				}
 				sv.ScheduledStartTimeMillis = ptr.Int64(i64)
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8512,7 +8274,6 @@ func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, va
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8521,7 +8282,6 @@ func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, va
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8557,7 +8317,6 @@ func awsRestjson1_deserializeDocumentAudienceMedia(v **types.AudienceMedia, valu
 			if err := awsRestjson1_deserializeDocument__listOfAlternateMedia(&sv.AlternateMedia, value); err != nil {
 				return err
 			}
-
 		case "Audience":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8566,7 +8325,6 @@ func awsRestjson1_deserializeDocumentAudienceMedia(v **types.AudienceMedia, valu
 				}
 				sv.Audience = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8642,7 +8400,6 @@ func awsRestjson1_deserializeDocumentAvailMatchingCriteria(v **types.AvailMatchi
 				}
 				sv.DynamicVariable = ptr.String(jtv)
 			}
-
 		case "Operator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8651,7 +8408,6 @@ func awsRestjson1_deserializeDocumentAvailMatchingCriteria(v **types.AvailMatchi
 				}
 				sv.Operator = types.Operator(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8691,7 +8447,6 @@ func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression
 				}
 				sv.FillPolicy = types.FillPolicy(jtv)
 			}
-
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8700,7 +8455,6 @@ func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression
 				}
 				sv.Mode = types.Mode(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8709,7 +8463,6 @@ func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8739,15 +8492,9 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8755,14 +8502,10 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8798,7 +8541,6 @@ func awsRestjson1_deserializeDocumentBumper(v **types.Bumper, value interface{})
 				}
 				sv.EndUrl = ptr.String(jtv)
 			}
-
 		case "StartUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8807,7 +8549,6 @@ func awsRestjson1_deserializeDocumentBumper(v **types.Bumper, value interface{})
 				}
 				sv.StartUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8847,7 +8588,6 @@ func awsRestjson1_deserializeDocumentCdnConfiguration(v **types.CdnConfiguration
 				}
 				sv.AdSegmentUrlPrefix = ptr.String(jtv)
 			}
-
 		case "ContentSegmentUrlPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8856,7 +8596,6 @@ func awsRestjson1_deserializeDocumentCdnConfiguration(v **types.CdnConfiguration
 				}
 				sv.ContentSegmentUrlPrefix = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8896,12 +8635,10 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Audiences":
 			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8910,7 +8647,6 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ChannelState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8919,7 +8655,6 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				}
 				sv.ChannelState = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8935,12 +8670,10 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 
 				}
 			}
-
 		case "FillerSlate":
 			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8956,17 +8689,14 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 
 				}
 			}
-
 		case "LogConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogConfigurationForChannel(&sv.LogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Outputs":
 			if err := awsRestjson1_deserializeDocumentResponseOutputs(&sv.Outputs, value); err != nil {
 				return err
 			}
-
 		case "PlaybackMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8975,12 +8705,10 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				}
 				sv.PlaybackMode = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Tier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8989,7 +8717,6 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				}
 				sv.Tier = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9033,7 +8760,6 @@ func awsRestjson1_deserializeDocumentClipRange(v **types.ClipRange, value interf
 				}
 				sv.EndOffsetMillis = ptr.Int64(i64)
 			}
-
 		case "StartOffsetMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9046,7 +8772,6 @@ func awsRestjson1_deserializeDocumentClipRange(v **types.ClipRange, value interf
 				}
 				sv.StartOffsetMillis = ptr.Int64(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9120,7 +8845,6 @@ func awsRestjson1_deserializeDocumentDashConfiguration(v **types.DashConfigurati
 				}
 				sv.ManifestEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "MpdLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9129,7 +8853,6 @@ func awsRestjson1_deserializeDocumentDashConfiguration(v **types.DashConfigurati
 				}
 				sv.MpdLocation = ptr.String(jtv)
 			}
-
 		case "OriginManifestType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9138,7 +8861,6 @@ func awsRestjson1_deserializeDocumentDashConfiguration(v **types.DashConfigurati
 				}
 				sv.OriginManifestType = types.OriginManifestType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9182,7 +8904,6 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				}
 				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "MinBufferTimeSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9195,7 +8916,6 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				}
 				sv.MinBufferTimeSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "MinUpdatePeriodSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9208,7 +8928,6 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				}
 				sv.MinUpdatePeriodSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "SuggestedPresentationDelaySeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9221,7 +8940,6 @@ func awsRestjson1_deserializeDocumentDashPlaylistSettings(v **types.DashPlaylist
 				}
 				sv.SuggestedPresentationDelaySeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9261,7 +8979,6 @@ func awsRestjson1_deserializeDocumentDefaultSegmentDeliveryConfiguration(v **typ
 				}
 				sv.BaseUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9301,7 +9018,6 @@ func awsRestjson1_deserializeDocumentHlsConfiguration(v **types.HlsConfiguration
 				}
 				sv.ManifestEndpointPrefix = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9337,7 +9053,6 @@ func awsRestjson1_deserializeDocumentHlsPlaylistSettings(v **types.HlsPlaylistSe
 			if err := awsRestjson1_deserializeDocumentAdMarkupTypes(&sv.AdMarkupType, value); err != nil {
 				return err
 			}
-
 		case "ManifestWindowSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9350,7 +9065,6 @@ func awsRestjson1_deserializeDocumentHlsPlaylistSettings(v **types.HlsPlaylistSe
 				}
 				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9390,7 +9104,6 @@ func awsRestjson1_deserializeDocumentHttpConfiguration(v **types.HttpConfigurati
 				}
 				sv.BaseUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9430,7 +9143,6 @@ func awsRestjson1_deserializeDocumentHttpPackageConfiguration(v **types.HttpPack
 				}
 				sv.Path = ptr.String(jtv)
 			}
-
 		case "SourceGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9439,7 +9151,6 @@ func awsRestjson1_deserializeDocumentHttpPackageConfiguration(v **types.HttpPack
 				}
 				sv.SourceGroup = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9448,7 +9159,6 @@ func awsRestjson1_deserializeDocumentHttpPackageConfiguration(v **types.HttpPack
 				}
 				sv.Type = types.Type(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9522,7 +9232,6 @@ func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value 
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9531,7 +9240,6 @@ func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value 
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9571,7 +9279,6 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 				}
 				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
-
 		case "MaxDurationSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9584,7 +9291,6 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 				}
 				sv.MaxDurationSeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9624,7 +9330,6 @@ func awsRestjson1_deserializeDocumentLiveSource(v **types.LiveSource, value inte
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9640,12 +9345,10 @@ func awsRestjson1_deserializeDocumentLiveSource(v **types.LiveSource, value inte
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9661,7 +9364,6 @@ func awsRestjson1_deserializeDocumentLiveSource(v **types.LiveSource, value inte
 
 				}
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9670,7 +9372,6 @@ func awsRestjson1_deserializeDocumentLiveSource(v **types.LiveSource, value inte
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9679,12 +9380,10 @@ func awsRestjson1_deserializeDocumentLiveSource(v **types.LiveSource, value inte
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9728,7 +9427,6 @@ func awsRestjson1_deserializeDocumentLogConfiguration(v **types.LogConfiguration
 				}
 				sv.PercentEnabled = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9764,7 +9462,6 @@ func awsRestjson1_deserializeDocumentLogConfigurationForChannel(v **types.LogCon
 			if err := awsRestjson1_deserializeDocumentLogTypes(&sv.LogTypes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9836,7 +9533,6 @@ func awsRestjson1_deserializeDocumentManifestProcessingRules(v **types.ManifestP
 			if err := awsRestjson1_deserializeDocumentAdMarkerPassthrough(&sv.AdMarkerPassthrough, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9876,37 +9572,30 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
-
 		case "AvailSuppression":
 			if err := awsRestjson1_deserializeDocumentAvailSuppression(&sv.AvailSuppression, value); err != nil {
 				return err
 			}
-
 		case "Bumper":
 			if err := awsRestjson1_deserializeDocumentBumper(&sv.Bumper, value); err != nil {
 				return err
 			}
-
 		case "CdnConfiguration":
 			if err := awsRestjson1_deserializeDocumentCdnConfiguration(&sv.CdnConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ConfigurationAliases":
 			if err := awsRestjson1_deserializeDocumentConfigurationAliasesResponse(&sv.ConfigurationAliases, value); err != nil {
 				return err
 			}
-
 		case "DashConfiguration":
 			if err := awsRestjson1_deserializeDocumentDashConfiguration(&sv.DashConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HlsConfiguration":
 			if err := awsRestjson1_deserializeDocumentHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
 				return err
 			}
-
 		case "InsertionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9915,22 +9604,18 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.InsertionMode = types.InsertionMode(jtv)
 			}
-
 		case "LivePreRollConfiguration":
 			if err := awsRestjson1_deserializeDocumentLivePreRollConfiguration(&sv.LivePreRollConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LogConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogConfiguration(&sv.LogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "ManifestProcessingRules":
 			if err := awsRestjson1_deserializeDocumentManifestProcessingRules(&sv.ManifestProcessingRules, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9939,7 +9624,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PersonalizationThresholdSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9952,7 +9636,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "PlaybackConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9961,7 +9644,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.PlaybackConfigurationArn = ptr.String(jtv)
 			}
-
 		case "PlaybackEndpointPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9970,7 +9652,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.PlaybackEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "SessionInitializationEndpointPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9979,7 +9660,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.SessionInitializationEndpointPrefix = ptr.String(jtv)
 			}
-
 		case "SlateAdUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9988,12 +9668,10 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.SlateAdUrl = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "TranscodeProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10002,7 +9680,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.TranscodeProfileName = ptr.String(jtv)
 			}
-
 		case "VideoContentSourceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10011,7 +9688,6 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				}
 				sv.VideoContentSourceUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10047,7 +9723,6 @@ func awsRestjson1_deserializeDocumentPrefetchConsumption(v **types.PrefetchConsu
 			if err := awsRestjson1_deserializeDocument__listOfAvailMatchingCriteria(&sv.AvailMatchingCriteria, value); err != nil {
 				return err
 			}
-
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10063,7 +9738,6 @@ func awsRestjson1_deserializeDocumentPrefetchConsumption(v **types.PrefetchConsu
 
 				}
 			}
-
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10079,7 +9753,6 @@ func awsRestjson1_deserializeDocumentPrefetchConsumption(v **types.PrefetchConsu
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10115,7 +9788,6 @@ func awsRestjson1_deserializeDocumentPrefetchRetrieval(v **types.PrefetchRetriev
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.DynamicVariables, value); err != nil {
 				return err
 			}
-
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10131,7 +9803,6 @@ func awsRestjson1_deserializeDocumentPrefetchRetrieval(v **types.PrefetchRetriev
 
 				}
 			}
-
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10147,7 +9818,6 @@ func awsRestjson1_deserializeDocumentPrefetchRetrieval(v **types.PrefetchRetriev
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10187,12 +9857,10 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Consumption":
 			if err := awsRestjson1_deserializeDocumentPrefetchConsumption(&sv.Consumption, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10201,7 +9869,6 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "PlaybackConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10210,12 +9877,10 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 				}
 				sv.PlaybackConfigurationName = ptr.String(jtv)
 			}
-
 		case "Retrieval":
 			if err := awsRestjson1_deserializeDocumentPrefetchRetrieval(&sv.Retrieval, value); err != nil {
 				return err
 			}
-
 		case "StreamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10224,7 +9889,6 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10260,12 +9924,10 @@ func awsRestjson1_deserializeDocumentResponseOutputItem(v **types.ResponseOutput
 			if err := awsRestjson1_deserializeDocumentDashPlaylistSettings(&sv.DashPlaylistSettings, value); err != nil {
 				return err
 			}
-
 		case "HlsPlaylistSettings":
 			if err := awsRestjson1_deserializeDocumentHlsPlaylistSettings(&sv.HlsPlaylistSettings, value); err != nil {
 				return err
 			}
-
 		case "ManifestName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10274,7 +9936,6 @@ func awsRestjson1_deserializeDocumentResponseOutputItem(v **types.ResponseOutput
 				}
 				sv.ManifestName = ptr.String(jtv)
 			}
-
 		case "PlaybackUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10283,7 +9944,6 @@ func awsRestjson1_deserializeDocumentResponseOutputItem(v **types.ResponseOutput
 				}
 				sv.PlaybackUrl = ptr.String(jtv)
 			}
-
 		case "SourceGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10292,7 +9952,6 @@ func awsRestjson1_deserializeDocumentResponseOutputItem(v **types.ResponseOutput
 				}
 				sv.SourceGroup = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10370,7 +10029,6 @@ func awsRestjson1_deserializeDocumentScheduleAdBreak(v **types.ScheduleAdBreak, 
 				}
 				sv.ApproximateDurationSeconds = ptr.Int64(i64)
 			}
-
 		case "ApproximateStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10386,7 +10044,6 @@ func awsRestjson1_deserializeDocumentScheduleAdBreak(v **types.ScheduleAdBreak, 
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10395,7 +10052,6 @@ func awsRestjson1_deserializeDocumentScheduleAdBreak(v **types.ScheduleAdBreak, 
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10404,7 +10060,6 @@ func awsRestjson1_deserializeDocumentScheduleAdBreak(v **types.ScheduleAdBreak, 
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10448,7 +10103,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.ApproximateDurationSeconds = ptr.Int64(i64)
 			}
-
 		case "ApproximateStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10464,7 +10118,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 
 				}
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10473,12 +10126,10 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Audiences":
 			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
 				return err
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10487,7 +10138,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "LiveSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10496,7 +10146,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.LiveSourceName = ptr.String(jtv)
 			}
-
 		case "ProgramName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10505,12 +10154,10 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.ProgramName = ptr.String(jtv)
 			}
-
 		case "ScheduleAdBreaks":
 			if err := awsRestjson1_deserializeDocument__listOfScheduleAdBreak(&sv.ScheduleAdBreaks, value); err != nil {
 				return err
 			}
-
 		case "ScheduleEntryType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10519,7 +10166,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.ScheduleEntryType = types.ScheduleEntryType(jtv)
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10528,7 +10174,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10537,7 +10182,6 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10577,7 +10221,6 @@ func awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(v **
 				}
 				sv.HeaderName = ptr.String(jtv)
 			}
-
 		case "SecretArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10586,7 +10229,6 @@ func awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(v **
 				}
 				sv.SecretArn = ptr.String(jtv)
 			}
-
 		case "SecretStringKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10595,7 +10237,6 @@ func awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(v **
 				}
 				sv.SecretStringKey = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10639,7 +10280,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SegmentationEventId = ptr.Int32(int32(i64))
 			}
-
 		case "SegmentationTypeId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10652,7 +10292,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SegmentationTypeId = ptr.Int32(int32(i64))
 			}
-
 		case "SegmentationUpid":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10661,7 +10300,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SegmentationUpid = ptr.String(jtv)
 			}
-
 		case "SegmentationUpidType":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10674,7 +10312,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SegmentationUpidType = ptr.Int32(int32(i64))
 			}
-
 		case "SegmentNum":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10687,7 +10324,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SegmentNum = ptr.Int32(int32(i64))
 			}
-
 		case "SegmentsExpected":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10700,7 +10336,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SegmentsExpected = ptr.Int32(int32(i64))
 			}
-
 		case "SubSegmentNum":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10713,7 +10348,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SubSegmentNum = ptr.Int32(int32(i64))
 			}
-
 		case "SubSegmentsExpected":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10726,7 +10360,6 @@ func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.Segmentati
 				}
 				sv.SubSegmentsExpected = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10800,7 +10433,6 @@ func awsRestjson1_deserializeDocumentSegmentDeliveryConfiguration(v **types.Segm
 				}
 				sv.BaseUrl = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10809,7 +10441,6 @@ func awsRestjson1_deserializeDocumentSegmentDeliveryConfiguration(v **types.Segm
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10849,7 +10480,6 @@ func awsRestjson1_deserializeDocumentSlateSource(v **types.SlateSource, value in
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10858,7 +10488,6 @@ func awsRestjson1_deserializeDocumentSlateSource(v **types.SlateSource, value in
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10894,7 +10523,6 @@ func awsRestjson1_deserializeDocumentSourceLocation(v **types.SourceLocation, va
 			if err := awsRestjson1_deserializeDocumentAccessConfiguration(&sv.AccessConfiguration, value); err != nil {
 				return err
 			}
-
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10903,7 +10531,6 @@ func awsRestjson1_deserializeDocumentSourceLocation(v **types.SourceLocation, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10919,17 +10546,14 @@ func awsRestjson1_deserializeDocumentSourceLocation(v **types.SourceLocation, va
 
 				}
 			}
-
 		case "DefaultSegmentDeliveryConfiguration":
 			if err := awsRestjson1_deserializeDocumentDefaultSegmentDeliveryConfiguration(&sv.DefaultSegmentDeliveryConfiguration, value); err != nil {
 				return err
 			}
-
 		case "HttpConfiguration":
 			if err := awsRestjson1_deserializeDocumentHttpConfiguration(&sv.HttpConfiguration, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10945,12 +10569,10 @@ func awsRestjson1_deserializeDocumentSourceLocation(v **types.SourceLocation, va
 
 				}
 			}
-
 		case "SegmentDeliveryConfigurations":
 			if err := awsRestjson1_deserializeDocument__listOfSegmentDeliveryConfiguration(&sv.SegmentDeliveryConfigurations, value); err != nil {
 				return err
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10959,12 +10581,10 @@ func awsRestjson1_deserializeDocumentSourceLocation(v **types.SourceLocation, va
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11008,7 +10628,6 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				}
 				sv.AvailNum = ptr.Int32(int32(i64))
 			}
-
 		case "AvailsExpected":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11021,7 +10640,6 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				}
 				sv.AvailsExpected = ptr.Int32(int32(i64))
 			}
-
 		case "SpliceEventId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11034,7 +10652,6 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				}
 				sv.SpliceEventId = ptr.Int32(int32(i64))
 			}
-
 		case "UniqueProgramId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11047,7 +10664,6 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 				}
 				sv.UniqueProgramId = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11091,7 +10707,6 @@ func awsRestjson1_deserializeDocumentTimeShiftConfiguration(v **types.TimeShiftC
 				}
 				sv.MaxTimeDelaySeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11127,7 +10742,6 @@ func awsRestjson1_deserializeDocumentTimeSignalMessage(v **types.TimeSignalMessa
 			if err := awsRestjson1_deserializeDocumentSegmentationDescriptorList(&sv.SegmentationDescriptors, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11167,7 +10781,6 @@ func awsRestjson1_deserializeDocumentVodSource(v **types.VodSource, value interf
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11183,12 +10796,10 @@ func awsRestjson1_deserializeDocumentVodSource(v **types.VodSource, value interf
 
 				}
 			}
-
 		case "HttpPackageConfigurations":
 			if err := awsRestjson1_deserializeDocumentHttpPackageConfigurations(&sv.HttpPackageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11204,7 +10815,6 @@ func awsRestjson1_deserializeDocumentVodSource(v **types.VodSource, value interf
 
 				}
 			}
-
 		case "SourceLocationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11213,12 +10823,10 @@ func awsRestjson1_deserializeDocumentVodSource(v **types.VodSource, value interf
 				}
 				sv.SourceLocationName = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11227,7 +10835,6 @@ func awsRestjson1_deserializeDocumentVodSource(v **types.VodSource, value interf
 				}
 				sv.VodSourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

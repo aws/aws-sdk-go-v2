@@ -189,7 +189,6 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.BotAlias = ptr.String(jtv)
 			}
-
 		case "botName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -198,7 +197,6 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.BotName = ptr.String(jtv)
 			}
-
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -207,7 +205,6 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		case "userId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -216,7 +213,6 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.UserId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -377,22 +373,18 @@ func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, va
 			if err := awsRestjson1_deserializeDocumentActiveContextsList(&sv.ActiveContexts, value); err != nil {
 				return err
 			}
-
 		case "dialogAction":
 			if err := awsRestjson1_deserializeDocumentDialogAction(&sv.DialogAction, value); err != nil {
 				return err
 			}
-
 		case "recentIntentSummaryView":
 			if err := awsRestjson1_deserializeDocumentIntentSummaryList(&sv.RecentIntentSummaryView, value); err != nil {
 				return err
 			}
-
 		case "sessionAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, value); err != nil {
 				return err
 			}
-
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -401,7 +393,6 @@ func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, va
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -823,12 +814,10 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 			if err := awsRestjson1_deserializeDocumentActiveContextsList(&sv.ActiveContexts, value); err != nil {
 				return err
 			}
-
 		case "alternativeIntents":
 			if err := awsRestjson1_deserializeDocumentIntentList(&sv.AlternativeIntents, value); err != nil {
 				return err
 			}
-
 		case "botVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -837,7 +826,6 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.BotVersion = ptr.String(jtv)
 			}
-
 		case "dialogState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -846,7 +834,6 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.DialogState = types.DialogState(jtv)
 			}
-
 		case "intentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -855,7 +842,6 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.IntentName = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -864,7 +850,6 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "messageFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -873,27 +858,22 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.MessageFormat = types.MessageFormatType(jtv)
 			}
-
 		case "nluIntentConfidence":
 			if err := awsRestjson1_deserializeDocumentIntentConfidence(&sv.NluIntentConfidence, value); err != nil {
 				return err
 			}
-
 		case "responseCard":
 			if err := awsRestjson1_deserializeDocumentResponseCard(&sv.ResponseCard, value); err != nil {
 				return err
 			}
-
 		case "sentimentResponse":
 			if err := awsRestjson1_deserializeDocumentSentimentResponse(&sv.SentimentResponse, value); err != nil {
 				return err
 			}
-
 		case "sessionAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, value); err != nil {
 				return err
 			}
-
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -902,12 +882,10 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
-
 		case "slots":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Slots, value); err != nil {
 				return err
 			}
-
 		case "slotToElicit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -916,7 +894,6 @@ func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, value 
 				}
 				sv.SlotToElicit = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1570,17 +1547,14 @@ func awsRestjson1_deserializeDocumentActiveContext(v **types.ActiveContext, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "parameters":
 			if err := awsRestjson1_deserializeDocumentActiveContextParametersMap(&sv.Parameters, value); err != nil {
 				return err
 			}
-
 		case "timeToLive":
 			if err := awsRestjson1_deserializeDocumentActiveContextTimeToLive(&sv.TimeToLive, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1694,7 +1668,6 @@ func awsRestjson1_deserializeDocumentActiveContextTimeToLive(v **types.ActiveCon
 				}
 				sv.TimeToLiveInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "turnsToLive":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1707,7 +1680,6 @@ func awsRestjson1_deserializeDocumentActiveContextTimeToLive(v **types.ActiveCon
 				}
 				sv.TurnsToLive = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1737,15 +1709,9 @@ func awsRestjson1_deserializeDocumentBadGatewayException(v **types.BadGatewayExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1753,14 +1719,10 @@ func awsRestjson1_deserializeDocumentBadGatewayException(v **types.BadGatewayExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1786,15 +1748,9 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1802,14 +1758,10 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1845,7 +1797,6 @@ func awsRestjson1_deserializeDocumentButton(v **types.Button, value interface{})
 				}
 				sv.Text = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1854,7 +1805,6 @@ func awsRestjson1_deserializeDocumentButton(v **types.Button, value interface{})
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1884,15 +1834,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1900,14 +1844,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1933,15 +1873,9 @@ func awsRestjson1_deserializeDocumentDependencyFailedException(v **types.Depende
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1949,14 +1883,10 @@ func awsRestjson1_deserializeDocumentDependencyFailedException(v **types.Depende
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1992,7 +1922,6 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.FulfillmentState = types.FulfillmentState(jtv)
 			}
-
 		case "intentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2001,7 +1930,6 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.IntentName = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2010,7 +1938,6 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "messageFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2019,12 +1946,10 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.MessageFormat = types.MessageFormatType(jtv)
 			}
-
 		case "slots":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Slots, value); err != nil {
 				return err
 			}
-
 		case "slotToElicit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2033,7 +1958,6 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.SlotToElicit = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2042,7 +1966,6 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.Type = types.DialogActionType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2082,12 +2005,10 @@ func awsRestjson1_deserializeDocumentGenericAttachment(v **types.GenericAttachme
 				}
 				sv.AttachmentLinkUrl = ptr.String(jtv)
 			}
-
 		case "buttons":
 			if err := awsRestjson1_deserializeDocumentListOfButtons(&sv.Buttons, value); err != nil {
 				return err
 			}
-
 		case "imageUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2096,7 +2017,6 @@ func awsRestjson1_deserializeDocumentGenericAttachment(v **types.GenericAttachme
 				}
 				sv.ImageUrl = ptr.String(jtv)
 			}
-
 		case "subTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2105,7 +2025,6 @@ func awsRestjson1_deserializeDocumentGenericAttachment(v **types.GenericAttachme
 				}
 				sv.SubTitle = ptr.String(jtv)
 			}
-
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2114,7 +2033,6 @@ func awsRestjson1_deserializeDocumentGenericAttachment(v **types.GenericAttachme
 				}
 				sv.Title = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2213,7 +2131,6 @@ func awsRestjson1_deserializeDocumentIntentConfidence(v **types.IntentConfidence
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2287,7 +2204,6 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, valu
 				}
 				sv.CheckpointLabel = ptr.String(jtv)
 			}
-
 		case "confirmationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2296,7 +2212,6 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, valu
 				}
 				sv.ConfirmationStatus = types.ConfirmationStatus(jtv)
 			}
-
 		case "dialogActionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2305,7 +2220,6 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, valu
 				}
 				sv.DialogActionType = types.DialogActionType(jtv)
 			}
-
 		case "fulfillmentState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2314,7 +2228,6 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, valu
 				}
 				sv.FulfillmentState = types.FulfillmentState(jtv)
 			}
-
 		case "intentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2323,12 +2236,10 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, valu
 				}
 				sv.IntentName = ptr.String(jtv)
 			}
-
 		case "slots":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Slots, value); err != nil {
 				return err
 			}
-
 		case "slotToElicit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2337,7 +2248,6 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, valu
 				}
 				sv.SlotToElicit = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2401,15 +2311,9 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2417,14 +2321,10 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2450,15 +2350,9 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2466,7 +2360,6 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2475,14 +2368,10 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.RetryAfterSeconds = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2542,15 +2431,9 @@ func awsRestjson1_deserializeDocumentLoopDetectedException(v **types.LoopDetecte
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2558,14 +2441,10 @@ func awsRestjson1_deserializeDocumentLoopDetectedException(v **types.LoopDetecte
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2591,15 +2470,9 @@ func awsRestjson1_deserializeDocumentNotAcceptableException(v **types.NotAccepta
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2607,14 +2480,10 @@ func awsRestjson1_deserializeDocumentNotAcceptableException(v **types.NotAccepta
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2640,15 +2509,9 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2656,14 +2519,10 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2699,17 +2558,14 @@ func awsRestjson1_deserializeDocumentPredictedIntent(v **types.PredictedIntent, 
 				}
 				sv.IntentName = ptr.String(jtv)
 			}
-
 		case "nluIntentConfidence":
 			if err := awsRestjson1_deserializeDocumentIntentConfidence(&sv.NluIntentConfidence, value); err != nil {
 				return err
 			}
-
 		case "slots":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Slots, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2739,15 +2595,9 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2755,14 +2605,10 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2798,12 +2644,10 @@ func awsRestjson1_deserializeDocumentResponseCard(v **types.ResponseCard, value 
 				}
 				sv.ContentType = types.ContentType(jtv)
 			}
-
 		case "genericAttachments":
 			if err := awsRestjson1_deserializeDocumentGenericAttachmentList(&sv.GenericAttachments, value); err != nil {
 				return err
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2812,7 +2656,6 @@ func awsRestjson1_deserializeDocumentResponseCard(v **types.ResponseCard, value 
 				}
 				sv.Version = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2852,7 +2695,6 @@ func awsRestjson1_deserializeDocumentSentimentResponse(v **types.SentimentRespon
 				}
 				sv.SentimentLabel = ptr.String(jtv)
 			}
-
 		case "sentimentScore":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2861,7 +2703,6 @@ func awsRestjson1_deserializeDocumentSentimentResponse(v **types.SentimentRespon
 				}
 				sv.SentimentScore = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2927,15 +2768,9 @@ func awsRestjson1_deserializeDocumentUnsupportedMediaTypeException(v **types.Uns
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2943,14 +2778,10 @@ func awsRestjson1_deserializeDocumentUnsupportedMediaTypeException(v **types.Uns
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

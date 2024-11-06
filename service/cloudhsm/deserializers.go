@@ -2560,15 +2560,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalException(v **types.CloudHs
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2576,7 +2570,6 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalException(v **types.CloudHs
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2585,14 +2578,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalException(v **types.CloudHs
 				}
 				sv.Retryable = jtv
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2618,15 +2607,9 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2634,7 +2617,6 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2643,14 +2625,10 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 				}
 				sv.Retryable = jtv
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2748,15 +2726,9 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2764,7 +2736,6 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2773,14 +2744,10 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Retryable = jtv
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2888,7 +2855,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2897,7 +2863,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2971,7 +2936,6 @@ func awsAwsjson11_deserializeOpDocumentAddTagsToResourceOutput(v **AddTagsToReso
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3011,7 +2975,6 @@ func awsAwsjson11_deserializeOpDocumentCreateHapgOutput(v **CreateHapgOutput, va
 				}
 				sv.HapgArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3051,7 +3014,6 @@ func awsAwsjson11_deserializeOpDocumentCreateHsmOutput(v **CreateHsmOutput, valu
 				}
 				sv.HsmArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3091,7 +3053,6 @@ func awsAwsjson11_deserializeOpDocumentCreateLunaClientOutput(v **CreateLunaClie
 				}
 				sv.ClientArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3131,7 +3092,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteHapgOutput(v **DeleteHapgOutput, va
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3171,7 +3131,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteHsmOutput(v **DeleteHsmOutput, valu
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3211,7 +3170,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteLunaClientOutput(v **DeleteLunaClie
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3251,7 +3209,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(v **DescribeHapgOutput
 				}
 				sv.HapgArn = ptr.String(jtv)
 			}
-
 		case "HapgSerial":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3260,22 +3217,18 @@ func awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(v **DescribeHapgOutput
 				}
 				sv.HapgSerial = ptr.String(jtv)
 			}
-
 		case "HsmsLastActionFailed":
 			if err := awsAwsjson11_deserializeDocumentHsmList(&sv.HsmsLastActionFailed, value); err != nil {
 				return err
 			}
-
 		case "HsmsPendingDeletion":
 			if err := awsAwsjson11_deserializeDocumentHsmList(&sv.HsmsPendingDeletion, value); err != nil {
 				return err
 			}
-
 		case "HsmsPendingRegistration":
 			if err := awsAwsjson11_deserializeDocumentHsmList(&sv.HsmsPendingRegistration, value); err != nil {
 				return err
 			}
-
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3284,7 +3237,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(v **DescribeHapgOutput
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "LastModifiedTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3293,12 +3245,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(v **DescribeHapgOutput
 				}
 				sv.LastModifiedTimestamp = ptr.String(jtv)
 			}
-
 		case "PartitionSerialList":
 			if err := awsAwsjson11_deserializeDocumentPartitionSerialList(&sv.PartitionSerialList, value); err != nil {
 				return err
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3307,7 +3257,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(v **DescribeHapgOutput
 				}
 				sv.State = types.CloudHsmObjectState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3347,7 +3296,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.AvailabilityZone = ptr.String(jtv)
 			}
-
 		case "EniId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3356,7 +3304,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.EniId = ptr.String(jtv)
 			}
-
 		case "EniIp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3365,7 +3312,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.EniIp = ptr.String(jtv)
 			}
-
 		case "HsmArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3374,7 +3320,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.HsmArn = ptr.String(jtv)
 			}
-
 		case "HsmType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3383,7 +3328,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.HsmType = ptr.String(jtv)
 			}
-
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3392,12 +3336,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
-
 		case "Partitions":
 			if err := awsAwsjson11_deserializeDocumentPartitionList(&sv.Partitions, value); err != nil {
 				return err
 			}
-
 		case "SerialNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3406,7 +3348,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SerialNumber = ptr.String(jtv)
 			}
-
 		case "ServerCertLastUpdated":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3415,7 +3356,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.ServerCertLastUpdated = ptr.String(jtv)
 			}
-
 		case "ServerCertUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3424,7 +3364,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.ServerCertUri = ptr.String(jtv)
 			}
-
 		case "SoftwareVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3433,7 +3372,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SoftwareVersion = ptr.String(jtv)
 			}
-
 		case "SshKeyLastUpdated":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3442,7 +3380,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SshKeyLastUpdated = ptr.String(jtv)
 			}
-
 		case "SshPublicKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3451,7 +3388,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SshPublicKey = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3460,7 +3396,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.Status = types.HsmStatus(jtv)
 			}
-
 		case "StatusDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3469,7 +3404,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.StatusDetails = ptr.String(jtv)
 			}
-
 		case "SubnetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3478,7 +3412,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SubnetId = ptr.String(jtv)
 			}
-
 		case "SubscriptionEndDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3487,7 +3420,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SubscriptionEndDate = ptr.String(jtv)
 			}
-
 		case "SubscriptionStartDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3496,7 +3428,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SubscriptionStartDate = ptr.String(jtv)
 			}
-
 		case "SubscriptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3505,7 +3436,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.SubscriptionType = types.SubscriptionType(jtv)
 			}
-
 		case "VendorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3514,7 +3444,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.VendorName = ptr.String(jtv)
 			}
-
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3523,7 +3452,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, 
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3563,7 +3491,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(v **DescribeLuna
 				}
 				sv.Certificate = ptr.String(jtv)
 			}
-
 		case "CertificateFingerprint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3572,7 +3499,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(v **DescribeLuna
 				}
 				sv.CertificateFingerprint = ptr.String(jtv)
 			}
-
 		case "ClientArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3581,7 +3507,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(v **DescribeLuna
 				}
 				sv.ClientArn = ptr.String(jtv)
 			}
-
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3590,7 +3515,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(v **DescribeLuna
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "LastModifiedTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3599,7 +3523,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(v **DescribeLuna
 				}
 				sv.LastModifiedTimestamp = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3639,7 +3562,6 @@ func awsAwsjson11_deserializeOpDocumentGetConfigOutput(v **GetConfigOutput, valu
 				}
 				sv.ConfigCred = ptr.String(jtv)
 			}
-
 		case "ConfigFile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3648,7 +3570,6 @@ func awsAwsjson11_deserializeOpDocumentGetConfigOutput(v **GetConfigOutput, valu
 				}
 				sv.ConfigFile = ptr.String(jtv)
 			}
-
 		case "ConfigType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3657,7 +3578,6 @@ func awsAwsjson11_deserializeOpDocumentGetConfigOutput(v **GetConfigOutput, valu
 				}
 				sv.ConfigType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3693,7 +3613,6 @@ func awsAwsjson11_deserializeOpDocumentListAvailableZonesOutput(v **ListAvailabl
 			if err := awsAwsjson11_deserializeDocumentAZList(&sv.AZList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3729,7 +3648,6 @@ func awsAwsjson11_deserializeOpDocumentListHapgsOutput(v **ListHapgsOutput, valu
 			if err := awsAwsjson11_deserializeDocumentHapgList(&sv.HapgList, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3738,7 +3656,6 @@ func awsAwsjson11_deserializeOpDocumentListHapgsOutput(v **ListHapgsOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3774,7 +3691,6 @@ func awsAwsjson11_deserializeOpDocumentListHsmsOutput(v **ListHsmsOutput, value 
 			if err := awsAwsjson11_deserializeDocumentHsmList(&sv.HsmList, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3783,7 +3699,6 @@ func awsAwsjson11_deserializeOpDocumentListHsmsOutput(v **ListHsmsOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3819,7 +3734,6 @@ func awsAwsjson11_deserializeOpDocumentListLunaClientsOutput(v **ListLunaClients
 			if err := awsAwsjson11_deserializeDocumentClientList(&sv.ClientList, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3828,7 +3742,6 @@ func awsAwsjson11_deserializeOpDocumentListLunaClientsOutput(v **ListLunaClients
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3864,7 +3777,6 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.TagList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3904,7 +3816,6 @@ func awsAwsjson11_deserializeOpDocumentModifyHapgOutput(v **ModifyHapgOutput, va
 				}
 				sv.HapgArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3944,7 +3855,6 @@ func awsAwsjson11_deserializeOpDocumentModifyHsmOutput(v **ModifyHsmOutput, valu
 				}
 				sv.HsmArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3984,7 +3894,6 @@ func awsAwsjson11_deserializeOpDocumentModifyLunaClientOutput(v **ModifyLunaClie
 				}
 				sv.ClientArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4024,7 +3933,6 @@ func awsAwsjson11_deserializeOpDocumentRemoveTagsFromResourceOutput(v **RemoveTa
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

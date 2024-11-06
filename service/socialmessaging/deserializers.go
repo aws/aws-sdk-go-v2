@@ -183,7 +183,6 @@ func awsRestjson1_deserializeOpDocumentAssociateWhatsAppBusinessAccountOutput(v 
 			if err := awsRestjson1_deserializeDocumentWhatsAppSignupCallbackResult(&sv.SignupCallbackResult, value); err != nil {
 				return err
 			}
-
 		case "statusCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -196,7 +195,6 @@ func awsRestjson1_deserializeOpDocumentAssociateWhatsAppBusinessAccountOutput(v 
 				}
 				sv.StatusCode = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -373,7 +371,6 @@ func awsRestjson1_deserializeOpDocumentDeleteWhatsAppMessageMediaOutput(v **Dele
 				}
 				sv.Success = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -646,7 +643,6 @@ func awsRestjson1_deserializeOpDocumentGetLinkedWhatsAppBusinessAccountOutput(v 
 			if err := awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(&sv.Account, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -820,12 +816,10 @@ func awsRestjson1_deserializeOpDocumentGetLinkedWhatsAppBusinessAccountPhoneNumb
 				}
 				sv.LinkedWhatsAppBusinessAccountId = ptr.String(jtv)
 			}
-
 		case "phoneNumber":
 			if err := awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(&sv.PhoneNumber, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1006,7 +1000,6 @@ func awsRestjson1_deserializeOpDocumentGetWhatsAppMessageMediaOutput(v **GetWhat
 				}
 				sv.FileSize = ptr.Int64(i64)
 			}
-
 		case "mimeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1015,7 +1008,6 @@ func awsRestjson1_deserializeOpDocumentGetWhatsAppMessageMediaOutput(v **GetWhat
 				}
 				sv.MimeType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1182,7 +1174,6 @@ func awsRestjson1_deserializeOpDocumentListLinkedWhatsAppBusinessAccountsOutput(
 			if err := awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummaryList(&sv.LinkedAccounts, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1191,7 +1182,6 @@ func awsRestjson1_deserializeOpDocumentListLinkedWhatsAppBusinessAccountsOutput(
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1363,12 +1353,10 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.StatusCode = ptr.Int32(int32(i64))
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1545,7 +1533,6 @@ func awsRestjson1_deserializeOpDocumentPostWhatsAppMessageMediaOutput(v **PostWh
 				}
 				sv.MediaId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1819,7 +1806,6 @@ func awsRestjson1_deserializeOpDocumentSendWhatsAppMessageOutput(v **SendWhatsAp
 				}
 				sv.MessageId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1991,7 +1977,6 @@ func awsRestjson1_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, 
 				}
 				sv.StatusCode = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2163,7 +2148,6 @@ func awsRestjson1_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutp
 				}
 				sv.StatusCode = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2481,15 +2465,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedByMetaException(v **types.Acces
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2497,14 +2475,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedByMetaException(v **types.Acces
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2530,15 +2504,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2546,14 +2514,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2579,15 +2543,9 @@ func awsRestjson1_deserializeDocumentDependencyException(v **types.DependencyExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2595,14 +2553,10 @@ func awsRestjson1_deserializeDocumentDependencyException(v **types.DependencyExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2628,15 +2582,9 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2644,14 +2592,10 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2677,15 +2621,9 @@ func awsRestjson1_deserializeDocumentInvalidParametersException(v **types.Invali
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2693,14 +2631,10 @@ func awsRestjson1_deserializeDocumentInvalidParametersException(v **types.Invali
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2771,12 +2705,10 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "eventDestinations":
 			if err := awsRestjson1_deserializeDocumentWhatsAppBusinessAccountEventDestinations(&sv.EventDestinations, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2785,7 +2717,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "linkDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2801,12 +2732,10 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 
 				}
 			}
-
 		case "phoneNumbers":
 			if err := awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummaryList(&sv.PhoneNumbers, value); err != nil {
 				return err
 			}
-
 		case "registrationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2815,7 +2744,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				}
 				sv.RegistrationStatus = types.RegistrationStatus(jtv)
 			}
-
 		case "wabaId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2824,7 +2752,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				}
 				sv.WabaId = ptr.String(jtv)
 			}
-
 		case "wabaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2833,7 +2760,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				}
 				sv.WabaName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2873,7 +2799,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountIdMetaData(v *
 				}
 				sv.AccountName = ptr.String(jtv)
 			}
-
 		case "registrationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2882,12 +2807,10 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountIdMetaData(v *
 				}
 				sv.RegistrationStatus = types.RegistrationStatus(jtv)
 			}
-
 		case "unregisteredWhatsAppPhoneNumbers":
 			if err := awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetailList(&sv.UnregisteredWhatsAppPhoneNumbers, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2927,12 +2850,10 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "eventDestinations":
 			if err := awsRestjson1_deserializeDocumentWhatsAppBusinessAccountEventDestinations(&sv.EventDestinations, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2941,7 +2862,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "linkDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2957,7 +2877,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 
 				}
 			}
-
 		case "registrationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2966,7 +2885,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 				}
 				sv.RegistrationStatus = types.RegistrationStatus(jtv)
 			}
-
 		case "wabaId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2975,7 +2893,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 				}
 				sv.WabaId = ptr.String(jtv)
 			}
-
 		case "wabaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2984,7 +2901,6 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 				}
 				sv.WabaName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3048,15 +2964,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3064,14 +2974,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3107,7 +3013,6 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3116,7 +3021,6 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3180,15 +3084,9 @@ func awsRestjson1_deserializeDocumentThrottledRequestException(v **types.Throttl
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3196,14 +3094,10 @@ func awsRestjson1_deserializeDocumentThrottledRequestException(v **types.Throttl
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3229,15 +3123,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3245,14 +3133,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3288,7 +3172,6 @@ func awsRestjson1_deserializeDocumentWhatsAppBusinessAccountEventDestination(v *
 				}
 				sv.EventDestinationArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3362,7 +3245,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "displayPhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3371,7 +3253,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.DisplayPhoneNumber = ptr.String(jtv)
 			}
-
 		case "displayPhoneNumberName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3380,7 +3261,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.DisplayPhoneNumberName = ptr.String(jtv)
 			}
-
 		case "metaPhoneNumberId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3389,7 +3269,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.MetaPhoneNumberId = ptr.String(jtv)
 			}
-
 		case "phoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3398,7 +3277,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.PhoneNumber = ptr.String(jtv)
 			}
-
 		case "phoneNumberId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3407,7 +3285,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.PhoneNumberId = ptr.String(jtv)
 			}
-
 		case "qualityRating":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3416,7 +3293,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAp
 				}
 				sv.QualityRating = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3490,7 +3366,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "displayPhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3499,7 +3374,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.DisplayPhoneNumber = ptr.String(jtv)
 			}
-
 		case "displayPhoneNumberName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3508,7 +3382,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.DisplayPhoneNumberName = ptr.String(jtv)
 			}
-
 		case "metaPhoneNumberId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3517,7 +3390,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.MetaPhoneNumberId = ptr.String(jtv)
 			}
-
 		case "phoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3526,7 +3398,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.PhoneNumber = ptr.String(jtv)
 			}
-
 		case "phoneNumberId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3535,7 +3406,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.PhoneNumberId = ptr.String(jtv)
 			}
-
 		case "qualityRating":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3544,7 +3414,6 @@ func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummary(v **types.WhatsA
 				}
 				sv.QualityRating = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3618,12 +3487,10 @@ func awsRestjson1_deserializeDocumentWhatsAppSignupCallbackResult(v **types.What
 				}
 				sv.AssociateInProgressToken = ptr.String(jtv)
 			}
-
 		case "linkedAccountsWithIncompleteSetup":
 			if err := awsRestjson1_deserializeDocumentLinkedAccountWithIncompleteSetup(&sv.LinkedAccountsWithIncompleteSetup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

@@ -1226,17 +1226,14 @@ func awsAwsjson11_deserializeDocumentComplianceDetails(v **types.ComplianceDetai
 				}
 				sv.ComplianceStatus = ptr.Bool(jtv)
 			}
-
 		case "KeysWithNoncompliantValues":
 			if err := awsAwsjson11_deserializeDocumentTagKeyList(&sv.KeysWithNoncompliantValues, value); err != nil {
 				return err
 			}
-
 		case "NoncompliantKeys":
 			if err := awsAwsjson11_deserializeDocumentTagKeyList(&sv.NoncompliantKeys, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1266,15 +1263,9 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1282,14 +1273,10 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1315,15 +1302,9 @@ func awsAwsjson11_deserializeDocumentConstraintViolationException(v **types.Cons
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1331,14 +1312,10 @@ func awsAwsjson11_deserializeDocumentConstraintViolationException(v **types.Cons
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1409,7 +1386,6 @@ func awsAwsjson11_deserializeDocumentFailureInfo(v **types.FailureInfo, value in
 				}
 				sv.ErrorCode = types.ErrorCode(jtv)
 			}
-
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1418,7 +1394,6 @@ func awsAwsjson11_deserializeDocumentFailureInfo(v **types.FailureInfo, value in
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "StatusCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1431,7 +1406,6 @@ func awsAwsjson11_deserializeDocumentFailureInfo(v **types.FailureInfo, value in
 				}
 				sv.StatusCode = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1461,15 +1435,9 @@ func awsAwsjson11_deserializeDocumentInternalServiceException(v **types.Internal
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1477,14 +1445,10 @@ func awsAwsjson11_deserializeDocumentInternalServiceException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1510,15 +1474,9 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1526,14 +1484,10 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1559,15 +1513,9 @@ func awsAwsjson11_deserializeDocumentPaginationTokenExpiredException(v **types.P
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1575,14 +1523,10 @@ func awsAwsjson11_deserializeDocumentPaginationTokenExpiredException(v **types.P
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1614,7 +1558,6 @@ func awsAwsjson11_deserializeDocumentResourceTagMapping(v **types.ResourceTagMap
 			if err := awsAwsjson11_deserializeDocumentComplianceDetails(&sv.ComplianceDetails, value); err != nil {
 				return err
 			}
-
 		case "ResourceARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1623,12 +1566,10 @@ func awsAwsjson11_deserializeDocumentResourceTagMapping(v **types.ResourceTagMap
 				}
 				sv.ResourceARN = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1702,7 +1643,6 @@ func awsAwsjson11_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.LastUpdated = ptr.String(jtv)
 			}
-
 		case "NonCompliantResources":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1715,7 +1655,6 @@ func awsAwsjson11_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.NonCompliantResources = i64
 			}
-
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1724,7 +1663,6 @@ func awsAwsjson11_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1733,7 +1671,6 @@ func awsAwsjson11_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		case "TargetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1742,7 +1679,6 @@ func awsAwsjson11_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.TargetId = ptr.String(jtv)
 			}
-
 		case "TargetIdType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1751,7 +1687,6 @@ func awsAwsjson11_deserializeDocumentSummary(v **types.Summary, value interface{
 				}
 				sv.TargetIdType = types.TargetIdType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1825,7 +1760,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1834,7 +1768,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1970,15 +1903,9 @@ func awsAwsjson11_deserializeDocumentThrottledException(v **types.ThrottledExcep
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1986,14 +1913,10 @@ func awsAwsjson11_deserializeDocumentThrottledException(v **types.ThrottledExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2029,7 +1952,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeReportCreationOutput(v **Describe
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "S3Location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2038,7 +1960,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeReportCreationOutput(v **Describe
 				}
 				sv.S3Location = ptr.String(jtv)
 			}
-
 		case "StartDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2047,7 +1968,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeReportCreationOutput(v **Describe
 				}
 				sv.StartDate = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2056,7 +1976,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeReportCreationOutput(v **Describe
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2096,12 +2015,10 @@ func awsAwsjson11_deserializeOpDocumentGetComplianceSummaryOutput(v **GetComplia
 				}
 				sv.PaginationToken = ptr.String(jtv)
 			}
-
 		case "SummaryList":
 			if err := awsAwsjson11_deserializeDocumentSummaryList(&sv.SummaryList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2141,12 +2058,10 @@ func awsAwsjson11_deserializeOpDocumentGetResourcesOutput(v **GetResourcesOutput
 				}
 				sv.PaginationToken = ptr.String(jtv)
 			}
-
 		case "ResourceTagMappingList":
 			if err := awsAwsjson11_deserializeDocumentResourceTagMappingList(&sv.ResourceTagMappingList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2186,12 +2101,10 @@ func awsAwsjson11_deserializeOpDocumentGetTagKeysOutput(v **GetTagKeysOutput, va
 				}
 				sv.PaginationToken = ptr.String(jtv)
 			}
-
 		case "TagKeys":
 			if err := awsAwsjson11_deserializeDocumentTagKeyList(&sv.TagKeys, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2231,12 +2144,10 @@ func awsAwsjson11_deserializeOpDocumentGetTagValuesOutput(v **GetTagValuesOutput
 				}
 				sv.PaginationToken = ptr.String(jtv)
 			}
-
 		case "TagValues":
 			if err := awsAwsjson11_deserializeDocumentTagValuesOutputList(&sv.TagValues, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2303,7 +2214,6 @@ func awsAwsjson11_deserializeOpDocumentTagResourcesOutput(v **TagResourcesOutput
 			if err := awsAwsjson11_deserializeDocumentFailedResourcesMap(&sv.FailedResourcesMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2339,7 +2249,6 @@ func awsAwsjson11_deserializeOpDocumentUntagResourcesOutput(v **UntagResourcesOu
 			if err := awsAwsjson11_deserializeDocumentFailedResourcesMap(&sv.FailedResourcesMap, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

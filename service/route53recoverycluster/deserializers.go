@@ -842,15 +842,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -858,14 +852,10 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -891,15 +881,9 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -907,7 +891,6 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -916,7 +899,6 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -925,14 +907,10 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -958,15 +936,9 @@ func awsAwsjson10_deserializeDocumentEndpointTemporarilyUnavailableException(v *
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -974,14 +946,10 @@ func awsAwsjson10_deserializeDocumentEndpointTemporarilyUnavailableException(v *
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1007,15 +975,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1023,7 +985,6 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1036,14 +997,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1069,15 +1026,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1085,7 +1036,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1094,7 +1044,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1103,14 +1052,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1146,7 +1091,6 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.ControlPanelArn = ptr.String(jtv)
 			}
-
 		case "ControlPanelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1155,7 +1099,6 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.ControlPanelName = ptr.String(jtv)
 			}
-
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1164,7 +1107,6 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.Owner = ptr.String(jtv)
 			}
-
 		case "RoutingControlArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1173,7 +1115,6 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.RoutingControlArn = ptr.String(jtv)
 			}
-
 		case "RoutingControlName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1182,7 +1123,6 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.RoutingControlName = ptr.String(jtv)
 			}
-
 		case "RoutingControlState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1191,7 +1131,6 @@ func awsAwsjson10_deserializeDocumentRoutingControl(v **types.RoutingControl, va
 				}
 				sv.RoutingControlState = types.RoutingControlState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1255,13 +1194,7 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "limitCode":
 			if value != nil {
@@ -1271,8 +1204,7 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.LimitCode = ptr.String(jtv)
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1280,7 +1212,6 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1289,7 +1220,6 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1298,7 +1228,6 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1307,14 +1236,10 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1340,15 +1265,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1356,7 +1275,6 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1369,14 +1287,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1402,20 +1316,13 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "fields":
 			if err := awsAwsjson10_deserializeDocumentValidationExceptionFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1423,7 +1330,6 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1432,14 +1338,10 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1475,7 +1377,6 @@ func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1484,7 +1385,6 @@ func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1558,7 +1458,6 @@ func awsAwsjson10_deserializeOpDocumentGetRoutingControlStateOutput(v **GetRouti
 				}
 				sv.RoutingControlArn = ptr.String(jtv)
 			}
-
 		case "RoutingControlName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1567,7 +1466,6 @@ func awsAwsjson10_deserializeOpDocumentGetRoutingControlStateOutput(v **GetRouti
 				}
 				sv.RoutingControlName = ptr.String(jtv)
 			}
-
 		case "RoutingControlState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1576,7 +1474,6 @@ func awsAwsjson10_deserializeOpDocumentGetRoutingControlStateOutput(v **GetRouti
 				}
 				sv.RoutingControlState = types.RoutingControlState(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1616,12 +1513,10 @@ func awsAwsjson10_deserializeOpDocumentListRoutingControlsOutput(v **ListRouting
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "RoutingControls":
 			if err := awsAwsjson10_deserializeDocumentRoutingControls(&sv.RoutingControls, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

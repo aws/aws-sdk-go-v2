@@ -307,7 +307,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -316,7 +315,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "forecastedUsageAmount":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -350,7 +348,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 
 				}
 			}
-
 		case "freeTierType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -359,7 +356,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.FreeTierType = ptr.String(jtv)
 			}
-
 		case "limit":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -393,7 +389,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 
 				}
 			}
-
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -402,7 +397,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.Operation = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -411,7 +405,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -420,7 +413,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.Service = ptr.String(jtv)
 			}
-
 		case "unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -429,7 +421,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.Unit = ptr.String(jtv)
 			}
-
 		case "usageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -438,7 +429,6 @@ func awsAwsjson10_deserializeDocumentFreeTierUsage(v **types.FreeTierUsage, valu
 				}
 				sv.UsageType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -502,15 +492,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -518,14 +502,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -551,15 +531,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -567,14 +541,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -600,15 +570,9 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -616,14 +580,10 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -655,7 +615,6 @@ func awsAwsjson10_deserializeOpDocumentGetFreeTierUsageOutput(v **GetFreeTierUsa
 			if err := awsAwsjson10_deserializeDocumentFreeTierUsages(&sv.FreeTierUsages, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -664,7 +623,6 @@ func awsAwsjson10_deserializeOpDocumentGetFreeTierUsageOutput(v **GetFreeTierUsa
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

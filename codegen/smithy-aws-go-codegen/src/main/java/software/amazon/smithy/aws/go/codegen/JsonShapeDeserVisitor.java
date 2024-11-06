@@ -181,20 +181,8 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
             });
         });
 
-        boolean isErrorStructure = shape.hasTrait(ErrorTrait.class);
-        if (isErrorStructure) {
-            writer.write("var errorMessage string");
-        }
-
         // Iterate through the decoder. The member visitor will handle popping tokens.
         writer.openBlock("for key, value := range shape {", "}", () -> {
-            if (isErrorStructure) {
-                writer.write("keyLower := strings.ToLower(key)");
-                writer.write("if keyLower == \"message\" {");
-                writer.write("    errorMessage = value.(string)");
-                writer.write("    continue");
-                writer.write("}");
-            }
 
             writer.openBlock("switch key {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
@@ -204,10 +192,16 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                     }
                     String memberName = symbolProvider.toMemberName(member);
                     String serializedMemberName = getSerializedMemberName(member);
-                    writer.openBlock("case $S:", "", serializedMemberName, () -> {
-                        String dest = "sv." + memberName;
-                        context.getModel().expectShape(member.getTarget()).accept(getMemberDeserVisitor(member, dest));
-                    });
+
+                    boolean isErrorStructure = shape.hasTrait(ErrorTrait.class);
+
+                    if(isErrorStructure && memberName.equals("Message")){
+                        writer.write("case \"message\", \"Message\":");
+                    } else {
+                        writer.write("case $S:",serializedMemberName);
+                    }
+                    String dest = "sv." + memberName;
+                    context.getModel().expectShape(member.getTarget()).accept(getMemberDeserVisitor(member, dest));
                 }
 
                 writer.openBlock("default:", "", () -> {
@@ -216,11 +210,6 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
             });
         });
 
-        if (isErrorStructure) {
-            writer.write("if errorMessage != \"\" {");
-            writer.write("    sv.Message = &errorMessage");
-            writer.write("}");
-        }
 
         writer.write("*v = sv");
         writer.write("return nil");

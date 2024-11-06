@@ -9143,15 +9143,9 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9159,14 +9153,10 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9192,15 +9182,9 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9208,14 +9192,10 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9251,7 +9231,6 @@ func awsAwsjson11_deserializeDocumentFirewallConfig(v **types.FirewallConfig, va
 				}
 				sv.FirewallFailOpen = types.FirewallFailOpenStatus(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9260,7 +9239,6 @@ func awsAwsjson11_deserializeDocumentFirewallConfig(v **types.FirewallConfig, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9269,7 +9247,6 @@ func awsAwsjson11_deserializeDocumentFirewallConfig(v **types.FirewallConfig, va
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9278,7 +9255,6 @@ func awsAwsjson11_deserializeDocumentFirewallConfig(v **types.FirewallConfig, va
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9352,7 +9328,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9361,7 +9336,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9370,7 +9344,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "DomainCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9383,7 +9356,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.DomainCount = ptr.Int32(int32(i64))
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9392,7 +9364,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ManagedOwnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9401,7 +9372,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.ManagedOwnerName = ptr.String(jtv)
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9410,7 +9380,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9419,7 +9388,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9428,7 +9396,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.Status = types.FirewallDomainListStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9437,7 +9404,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainList(v **types.FirewallDomain
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9477,7 +9443,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainListMetadata(v **types.Firewa
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9486,7 +9451,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainListMetadata(v **types.Firewa
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9495,7 +9459,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainListMetadata(v **types.Firewa
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ManagedOwnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9504,7 +9467,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainListMetadata(v **types.Firewa
 				}
 				sv.ManagedOwnerName = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9513,7 +9475,6 @@ func awsAwsjson11_deserializeDocumentFirewallDomainListMetadata(v **types.Firewa
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9623,7 +9584,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.Action = types.Action(jtv)
 			}
-
 		case "BlockOverrideDnsType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9632,7 +9592,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.BlockOverrideDnsType = types.BlockOverrideDnsType(jtv)
 			}
-
 		case "BlockOverrideDomain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9641,7 +9600,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.BlockOverrideDomain = ptr.String(jtv)
 			}
-
 		case "BlockOverrideTtl":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9654,7 +9612,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.BlockOverrideTtl = ptr.Int32(int32(i64))
 			}
-
 		case "BlockResponse":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9663,7 +9620,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.BlockResponse = types.BlockResponse(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9672,7 +9628,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9681,7 +9636,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "FirewallDomainListId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9690,7 +9644,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.FirewallDomainListId = ptr.String(jtv)
 			}
-
 		case "FirewallDomainRedirectionAction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9699,7 +9652,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.FirewallDomainRedirectionAction = types.FirewallDomainRedirectionAction(jtv)
 			}
-
 		case "FirewallRuleGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9708,7 +9660,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.FirewallRuleGroupId = ptr.String(jtv)
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9717,7 +9668,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9726,7 +9676,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9739,7 +9688,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.Priority = ptr.Int32(int32(i64))
 			}
-
 		case "Qtype":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9748,7 +9696,6 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				}
 				sv.Qtype = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9788,7 +9735,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9797,7 +9743,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9806,7 +9751,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9815,7 +9759,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9824,7 +9767,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9833,7 +9775,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9842,7 +9783,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "RuleCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9855,7 +9795,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.RuleCount = ptr.Int32(int32(i64))
 			}
-
 		case "ShareStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9864,7 +9803,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.ShareStatus = types.ShareStatus(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9873,7 +9811,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.Status = types.FirewallRuleGroupStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9882,7 +9819,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroup(v **types.FirewallRuleGro
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9922,7 +9858,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9931,7 +9866,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9940,7 +9874,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "FirewallRuleGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9949,7 +9882,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.FirewallRuleGroupId = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9958,7 +9890,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ManagedOwnerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9967,7 +9898,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.ManagedOwnerName = ptr.String(jtv)
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9976,7 +9906,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "MutationProtection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9985,7 +9914,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.MutationProtection = types.MutationProtectionStatus(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9994,7 +9922,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10007,7 +9934,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.Priority = ptr.Int32(int32(i64))
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10016,7 +9942,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.Status = types.FirewallRuleGroupAssociationStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10025,7 +9950,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10034,7 +9958,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(v **types.Fire
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10108,7 +10031,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadata(v **types.Firewal
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10117,7 +10039,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadata(v **types.Firewal
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10126,7 +10047,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadata(v **types.Firewal
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10135,7 +10055,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadata(v **types.Firewal
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10144,7 +10063,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadata(v **types.Firewal
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ShareStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10153,7 +10071,6 @@ func awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadata(v **types.Firewal
 				}
 				sv.ShareStatus = types.ShareStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10251,15 +10168,9 @@ func awsAwsjson11_deserializeDocumentInternalServiceErrorException(v **types.Int
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10267,14 +10178,10 @@ func awsAwsjson11_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10300,15 +10207,9 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10316,14 +10217,10 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10349,13 +10246,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "FieldName":
 			if value != nil {
@@ -10365,8 +10256,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.FieldName = ptr.String(jtv)
 			}
-
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10374,14 +10264,10 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10407,15 +10293,9 @@ func awsAwsjson11_deserializeDocumentInvalidPolicyDocument(v **types.InvalidPoli
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10423,14 +10303,10 @@ func awsAwsjson11_deserializeDocumentInvalidPolicyDocument(v **types.InvalidPoli
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10456,15 +10332,9 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10472,14 +10342,10 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10505,15 +10371,9 @@ func awsAwsjson11_deserializeDocumentInvalidTagException(v **types.InvalidTagExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10521,14 +10381,10 @@ func awsAwsjson11_deserializeDocumentInvalidTagException(v **types.InvalidTagExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10598,7 +10454,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "Ip":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10607,7 +10462,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.Ip = ptr.String(jtv)
 			}
-
 		case "IpId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10616,7 +10470,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.IpId = ptr.String(jtv)
 			}
-
 		case "Ipv6":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10625,7 +10478,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.Ipv6 = ptr.String(jtv)
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10634,7 +10486,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10643,7 +10494,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.Status = types.IpAddressStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10652,7 +10502,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		case "SubnetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10661,7 +10510,6 @@ func awsAwsjson11_deserializeDocumentIpAddressResponse(v **types.IpAddressRespon
 				}
 				sv.SubnetId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10691,15 +10539,9 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10707,7 +10549,6 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10716,14 +10557,10 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10759,7 +10596,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10768,7 +10604,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10777,7 +10612,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10786,7 +10620,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "InstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10799,7 +10632,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10808,7 +10640,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10817,7 +10648,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OutpostArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10826,7 +10656,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.OutpostArn = ptr.String(jtv)
 			}
-
 		case "PreferredInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10835,7 +10664,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.PreferredInstanceType = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10844,7 +10672,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.Status = types.OutpostResolverStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10853,7 +10680,6 @@ func awsAwsjson11_deserializeDocumentOutpostResolver(v **types.OutpostResolver, 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10963,7 +10789,6 @@ func awsAwsjson11_deserializeDocumentResolverConfig(v **types.ResolverConfig, va
 				}
 				sv.AutodefinedReverse = types.ResolverAutodefinedReverseStatus(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10972,7 +10797,6 @@ func awsAwsjson11_deserializeDocumentResolverConfig(v **types.ResolverConfig, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10981,7 +10805,6 @@ func awsAwsjson11_deserializeDocumentResolverConfig(v **types.ResolverConfig, va
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10990,7 +10813,6 @@ func awsAwsjson11_deserializeDocumentResolverConfig(v **types.ResolverConfig, va
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11064,7 +10886,6 @@ func awsAwsjson11_deserializeDocumentResolverDnssecConfig(v **types.ResolverDnss
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11073,7 +10894,6 @@ func awsAwsjson11_deserializeDocumentResolverDnssecConfig(v **types.ResolverDnss
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11082,7 +10902,6 @@ func awsAwsjson11_deserializeDocumentResolverDnssecConfig(v **types.ResolverDnss
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ValidationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11091,7 +10910,6 @@ func awsAwsjson11_deserializeDocumentResolverDnssecConfig(v **types.ResolverDnss
 				}
 				sv.ValidationStatus = types.ResolverDNSSECValidationStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11165,7 +10983,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11174,7 +10991,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11183,7 +10999,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "Direction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11192,7 +11007,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.Direction = types.ResolverEndpointDirection(jtv)
 			}
-
 		case "HostVPCId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11201,7 +11015,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.HostVPCId = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11210,7 +11023,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "IpAddressCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11223,7 +11035,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.IpAddressCount = ptr.Int32(int32(i64))
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11232,7 +11043,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11241,7 +11051,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OutpostArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11250,7 +11059,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.OutpostArn = ptr.String(jtv)
 			}
-
 		case "PreferredInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11259,12 +11067,10 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.PreferredInstanceType = ptr.String(jtv)
 			}
-
 		case "Protocols":
 			if err := awsAwsjson11_deserializeDocumentProtocolList(&sv.Protocols, value); err != nil {
 				return err
 			}
-
 		case "ResolverEndpointType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11273,12 +11079,10 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.ResolverEndpointType = types.ResolverEndpointType(jtv)
 			}
-
 		case "SecurityGroupIds":
 			if err := awsAwsjson11_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
 				return err
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11287,7 +11091,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.Status = types.ResolverEndpointStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11296,7 +11099,6 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11370,7 +11172,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "AssociationCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11383,7 +11184,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.AssociationCount = int32(i64)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11392,7 +11192,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11401,7 +11200,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "DestinationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11410,7 +11208,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.DestinationArn = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11419,7 +11216,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11428,7 +11224,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11437,7 +11232,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ShareStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11446,7 +11240,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.ShareStatus = types.ShareStatus(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11455,7 +11248,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfig(v **types.ResolverQu
 				}
 				sv.Status = types.ResolverQueryLogConfigStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11495,7 +11287,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "Error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11504,7 +11295,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.Error = types.ResolverQueryLogConfigAssociationError(jtv)
 			}
-
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11513,7 +11303,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11522,7 +11311,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ResolverQueryLogConfigId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11531,7 +11319,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.ResolverQueryLogConfigId = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11540,7 +11327,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11549,7 +11335,6 @@ func awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(v **types
 				}
 				sv.Status = types.ResolverQueryLogConfigAssociationStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11657,7 +11442,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11666,7 +11450,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
-
 		case "CreatorRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11675,7 +11458,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
-
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11684,7 +11466,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11693,7 +11474,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "ModificationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11702,7 +11482,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.ModificationTime = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11711,7 +11490,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11720,7 +11498,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
-
 		case "ResolverEndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11729,7 +11506,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.ResolverEndpointId = ptr.String(jtv)
 			}
-
 		case "RuleType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11738,7 +11514,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.RuleType = types.RuleTypeOption(jtv)
 			}
-
 		case "ShareStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11747,7 +11522,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.ShareStatus = types.ShareStatus(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11756,7 +11530,6 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.Status = types.ResolverRuleStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11765,12 +11538,10 @@ func awsAwsjson11_deserializeDocumentResolverRule(v **types.ResolverRule, value 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		case "TargetIps":
 			if err := awsAwsjson11_deserializeDocumentTargetList(&sv.TargetIps, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11810,7 +11581,6 @@ func awsAwsjson11_deserializeDocumentResolverRuleAssociation(v **types.ResolverR
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11819,7 +11589,6 @@ func awsAwsjson11_deserializeDocumentResolverRuleAssociation(v **types.ResolverR
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "ResolverRuleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11828,7 +11597,6 @@ func awsAwsjson11_deserializeDocumentResolverRuleAssociation(v **types.ResolverR
 				}
 				sv.ResolverRuleId = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11837,7 +11605,6 @@ func awsAwsjson11_deserializeDocumentResolverRuleAssociation(v **types.ResolverR
 				}
 				sv.Status = types.ResolverRuleAssociationStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11846,7 +11613,6 @@ func awsAwsjson11_deserializeDocumentResolverRuleAssociation(v **types.ResolverR
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		case "VPCId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11855,7 +11621,6 @@ func awsAwsjson11_deserializeDocumentResolverRuleAssociation(v **types.ResolverR
 				}
 				sv.VPCId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11953,15 +11718,9 @@ func awsAwsjson11_deserializeDocumentResourceExistsException(v **types.ResourceE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11969,7 +11728,6 @@ func awsAwsjson11_deserializeDocumentResourceExistsException(v **types.ResourceE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11978,14 +11736,10 @@ func awsAwsjson11_deserializeDocumentResourceExistsException(v **types.ResourceE
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12011,15 +11765,9 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12027,7 +11775,6 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12036,14 +11783,10 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12069,15 +11812,9 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12085,7 +11822,6 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12094,14 +11830,10 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12127,15 +11859,9 @@ func awsAwsjson11_deserializeDocumentResourceUnavailableException(v **types.Reso
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12143,7 +11869,6 @@ func awsAwsjson11_deserializeDocumentResourceUnavailableException(v **types.Reso
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12152,14 +11877,10 @@ func awsAwsjson11_deserializeDocumentResourceUnavailableException(v **types.Reso
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12221,15 +11942,9 @@ func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12237,14 +11952,10 @@ func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12280,7 +11991,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12289,7 +11999,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12363,7 +12072,6 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 				}
 				sv.Ip = ptr.String(jtv)
 			}
-
 		case "Ipv6":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12372,7 +12080,6 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 				}
 				sv.Ipv6 = ptr.String(jtv)
 			}
-
 		case "Port":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12385,7 +12092,6 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 				}
 				sv.Port = ptr.Int32(int32(i64))
 			}
-
 		case "Protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12394,7 +12100,6 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 				}
 				sv.Protocol = types.Protocol(jtv)
 			}
-
 		case "ServerNameIndication":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12403,7 +12108,6 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 				}
 				sv.ServerNameIndication = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12467,15 +12171,9 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12483,14 +12181,10 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12516,15 +12210,9 @@ func awsAwsjson11_deserializeDocumentUnknownResourceException(v **types.UnknownR
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12532,14 +12220,10 @@ func awsAwsjson11_deserializeDocumentUnknownResourceException(v **types.UnknownR
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12565,15 +12249,9 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12581,14 +12259,10 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12620,7 +12294,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateFirewallRuleGroupOutput(v **Asso
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(&sv.FirewallRuleGroupAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12656,7 +12329,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateResolverEndpointIpAddressOutput(
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoint(&sv.ResolverEndpoint, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12692,7 +12364,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateResolverQueryLogConfigOutput(v *
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(&sv.ResolverQueryLogConfigAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12728,7 +12399,6 @@ func awsAwsjson11_deserializeOpDocumentAssociateResolverRuleOutput(v **Associate
 			if err := awsAwsjson11_deserializeDocumentResolverRuleAssociation(&sv.ResolverRuleAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12764,7 +12434,6 @@ func awsAwsjson11_deserializeOpDocumentCreateFirewallDomainListOutput(v **Create
 			if err := awsAwsjson11_deserializeDocumentFirewallDomainList(&sv.FirewallDomainList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12800,7 +12469,6 @@ func awsAwsjson11_deserializeOpDocumentCreateFirewallRuleGroupOutput(v **CreateF
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroup(&sv.FirewallRuleGroup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12836,7 +12504,6 @@ func awsAwsjson11_deserializeOpDocumentCreateFirewallRuleOutput(v **CreateFirewa
 			if err := awsAwsjson11_deserializeDocumentFirewallRule(&sv.FirewallRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12872,7 +12539,6 @@ func awsAwsjson11_deserializeOpDocumentCreateOutpostResolverOutput(v **CreateOut
 			if err := awsAwsjson11_deserializeDocumentOutpostResolver(&sv.OutpostResolver, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12908,7 +12574,6 @@ func awsAwsjson11_deserializeOpDocumentCreateResolverEndpointOutput(v **CreateRe
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoint(&sv.ResolverEndpoint, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12944,7 +12609,6 @@ func awsAwsjson11_deserializeOpDocumentCreateResolverQueryLogConfigOutput(v **Cr
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfig(&sv.ResolverQueryLogConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12980,7 +12644,6 @@ func awsAwsjson11_deserializeOpDocumentCreateResolverRuleOutput(v **CreateResolv
 			if err := awsAwsjson11_deserializeDocumentResolverRule(&sv.ResolverRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13016,7 +12679,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteFirewallDomainListOutput(v **Delete
 			if err := awsAwsjson11_deserializeDocumentFirewallDomainList(&sv.FirewallDomainList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13052,7 +12714,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteFirewallRuleGroupOutput(v **DeleteF
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroup(&sv.FirewallRuleGroup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13088,7 +12749,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteFirewallRuleOutput(v **DeleteFirewa
 			if err := awsAwsjson11_deserializeDocumentFirewallRule(&sv.FirewallRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13124,7 +12784,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteOutpostResolverOutput(v **DeleteOut
 			if err := awsAwsjson11_deserializeDocumentOutpostResolver(&sv.OutpostResolver, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13160,7 +12819,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteResolverEndpointOutput(v **DeleteRe
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoint(&sv.ResolverEndpoint, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13196,7 +12854,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteResolverQueryLogConfigOutput(v **De
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfig(&sv.ResolverQueryLogConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13232,7 +12889,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteResolverRuleOutput(v **DeleteResolv
 			if err := awsAwsjson11_deserializeDocumentResolverRule(&sv.ResolverRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13268,7 +12924,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateFirewallRuleGroupOutput(v **D
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(&sv.FirewallRuleGroupAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13304,7 +12959,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateResolverEndpointIpAddressOutp
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoint(&sv.ResolverEndpoint, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13340,7 +12994,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateResolverQueryLogConfigOutput(
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(&sv.ResolverQueryLogConfigAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13376,7 +13029,6 @@ func awsAwsjson11_deserializeOpDocumentDisassociateResolverRuleOutput(v **Disass
 			if err := awsAwsjson11_deserializeDocumentResolverRuleAssociation(&sv.ResolverRuleAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13412,7 +13064,6 @@ func awsAwsjson11_deserializeOpDocumentGetFirewallConfigOutput(v **GetFirewallCo
 			if err := awsAwsjson11_deserializeDocumentFirewallConfig(&sv.FirewallConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13448,7 +13099,6 @@ func awsAwsjson11_deserializeOpDocumentGetFirewallDomainListOutput(v **GetFirewa
 			if err := awsAwsjson11_deserializeDocumentFirewallDomainList(&sv.FirewallDomainList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13484,7 +13134,6 @@ func awsAwsjson11_deserializeOpDocumentGetFirewallRuleGroupAssociationOutput(v *
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(&sv.FirewallRuleGroupAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13520,7 +13169,6 @@ func awsAwsjson11_deserializeOpDocumentGetFirewallRuleGroupOutput(v **GetFirewal
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroup(&sv.FirewallRuleGroup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13560,7 +13208,6 @@ func awsAwsjson11_deserializeOpDocumentGetFirewallRuleGroupPolicyOutput(v **GetF
 				}
 				sv.FirewallRuleGroupPolicy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13596,7 +13243,6 @@ func awsAwsjson11_deserializeOpDocumentGetOutpostResolverOutput(v **GetOutpostRe
 			if err := awsAwsjson11_deserializeDocumentOutpostResolver(&sv.OutpostResolver, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13632,7 +13278,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverConfigOutput(v **GetResolverCo
 			if err := awsAwsjson11_deserializeDocumentResolverConfig(&sv.ResolverConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13668,7 +13313,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverDnssecConfigOutput(v **GetReso
 			if err := awsAwsjson11_deserializeDocumentResolverDnssecConfig(&sv.ResolverDNSSECConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13704,7 +13348,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverEndpointOutput(v **GetResolver
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoint(&sv.ResolverEndpoint, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13740,7 +13383,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverQueryLogConfigAssociationOutpu
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociation(&sv.ResolverQueryLogConfigAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13776,7 +13418,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverQueryLogConfigOutput(v **GetRe
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfig(&sv.ResolverQueryLogConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13816,7 +13457,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverQueryLogConfigPolicyOutput(v *
 				}
 				sv.ResolverQueryLogConfigPolicy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13852,7 +13492,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverRuleAssociationOutput(v **GetR
 			if err := awsAwsjson11_deserializeDocumentResolverRuleAssociation(&sv.ResolverRuleAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13888,7 +13527,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverRuleOutput(v **GetResolverRule
 			if err := awsAwsjson11_deserializeDocumentResolverRule(&sv.ResolverRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13928,7 +13566,6 @@ func awsAwsjson11_deserializeOpDocumentGetResolverRulePolicyOutput(v **GetResolv
 				}
 				sv.ResolverRulePolicy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13968,7 +13605,6 @@ func awsAwsjson11_deserializeOpDocumentImportFirewallDomainsOutput(v **ImportFir
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13977,7 +13613,6 @@ func awsAwsjson11_deserializeOpDocumentImportFirewallDomainsOutput(v **ImportFir
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13986,7 +13621,6 @@ func awsAwsjson11_deserializeOpDocumentImportFirewallDomainsOutput(v **ImportFir
 				}
 				sv.Status = types.FirewallDomainListStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13995,7 +13629,6 @@ func awsAwsjson11_deserializeOpDocumentImportFirewallDomainsOutput(v **ImportFir
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14031,7 +13664,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallConfigsOutput(v **ListFirewal
 			if err := awsAwsjson11_deserializeDocumentFirewallConfigList(&sv.FirewallConfigs, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14040,7 +13672,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallConfigsOutput(v **ListFirewal
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14076,7 +13707,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallDomainListsOutput(v **ListFir
 			if err := awsAwsjson11_deserializeDocumentFirewallDomainListMetadataList(&sv.FirewallDomainLists, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14085,7 +13715,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallDomainListsOutput(v **ListFir
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14121,7 +13750,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallDomainsOutput(v **ListFirewal
 			if err := awsAwsjson11_deserializeDocumentFirewallDomains(&sv.Domains, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14130,7 +13758,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallDomainsOutput(v **ListFirewal
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14166,7 +13793,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallRuleGroupAssociationsOutput(v
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociations(&sv.FirewallRuleGroupAssociations, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14175,7 +13801,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallRuleGroupAssociationsOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14211,7 +13836,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallRuleGroupsOutput(v **ListFire
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroupMetadataList(&sv.FirewallRuleGroups, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14220,7 +13844,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallRuleGroupsOutput(v **ListFire
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14256,7 +13879,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallRulesOutput(v **ListFirewallR
 			if err := awsAwsjson11_deserializeDocumentFirewallRules(&sv.FirewallRules, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14265,7 +13887,6 @@ func awsAwsjson11_deserializeOpDocumentListFirewallRulesOutput(v **ListFirewallR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14305,12 +13926,10 @@ func awsAwsjson11_deserializeOpDocumentListOutpostResolversOutput(v **ListOutpos
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "OutpostResolvers":
 			if err := awsAwsjson11_deserializeDocumentOutpostResolverList(&sv.OutpostResolvers, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14350,12 +13969,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverConfigsOutput(v **ListResolve
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverConfigs":
 			if err := awsAwsjson11_deserializeDocumentResolverConfigList(&sv.ResolverConfigs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14395,12 +14012,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverDnssecConfigsOutput(v **ListR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverDnssecConfigs":
 			if err := awsAwsjson11_deserializeDocumentResolverDnssecConfigList(&sv.ResolverDnssecConfigs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14436,7 +14051,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverEndpointIpAddressesOutput(v *
 			if err := awsAwsjson11_deserializeDocumentIpAddressesResponse(&sv.IpAddresses, value); err != nil {
 				return err
 			}
-
 		case "MaxResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14449,7 +14063,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverEndpointIpAddressesOutput(v *
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14458,7 +14071,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverEndpointIpAddressesOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14502,7 +14114,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverEndpointsOutput(v **ListResol
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14511,12 +14122,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverEndpointsOutput(v **ListResol
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverEndpoints":
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoints(&sv.ResolverEndpoints, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14556,12 +14165,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverQueryLogConfigAssociationsOut
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverQueryLogConfigAssociations":
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfigAssociationList(&sv.ResolverQueryLogConfigAssociations, value); err != nil {
 				return err
 			}
-
 		case "TotalCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14574,7 +14181,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverQueryLogConfigAssociationsOut
 				}
 				sv.TotalCount = int32(i64)
 			}
-
 		case "TotalFilteredCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14587,7 +14193,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverQueryLogConfigAssociationsOut
 				}
 				sv.TotalFilteredCount = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14627,12 +14232,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverQueryLogConfigsOutput(v **Lis
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverQueryLogConfigs":
 			if err := awsAwsjson11_deserializeDocumentResolverQueryLogConfigList(&sv.ResolverQueryLogConfigs, value); err != nil {
 				return err
 			}
-
 		case "TotalCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14645,7 +14248,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverQueryLogConfigsOutput(v **Lis
 				}
 				sv.TotalCount = int32(i64)
 			}
-
 		case "TotalFilteredCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14658,7 +14260,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverQueryLogConfigsOutput(v **Lis
 				}
 				sv.TotalFilteredCount = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14702,7 +14303,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverRuleAssociationsOutput(v **Li
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14711,12 +14311,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverRuleAssociationsOutput(v **Li
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverRuleAssociations":
 			if err := awsAwsjson11_deserializeDocumentResolverRuleAssociations(&sv.ResolverRuleAssociations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14760,7 +14358,6 @@ func awsAwsjson11_deserializeOpDocumentListResolverRulesOutput(v **ListResolverR
 				}
 				sv.MaxResults = ptr.Int32(int32(i64))
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14769,12 +14366,10 @@ func awsAwsjson11_deserializeOpDocumentListResolverRulesOutput(v **ListResolverR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ResolverRules":
 			if err := awsAwsjson11_deserializeDocumentResolverRules(&sv.ResolverRules, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14814,12 +14409,10 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14859,7 +14452,6 @@ func awsAwsjson11_deserializeOpDocumentPutFirewallRuleGroupPolicyOutput(v **PutF
 				}
 				sv.ReturnValue = jtv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14899,7 +14491,6 @@ func awsAwsjson11_deserializeOpDocumentPutResolverQueryLogConfigPolicyOutput(v *
 				}
 				sv.ReturnValue = jtv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14939,7 +14530,6 @@ func awsAwsjson11_deserializeOpDocumentPutResolverRulePolicyOutput(v **PutResolv
 				}
 				sv.ReturnValue = jtv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15037,7 +14627,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallConfigOutput(v **UpdateFire
 			if err := awsAwsjson11_deserializeDocumentFirewallConfig(&sv.FirewallConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15077,7 +14666,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallDomainsOutput(v **UpdateFir
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15086,7 +14674,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallDomainsOutput(v **UpdateFir
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15095,7 +14682,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallDomainsOutput(v **UpdateFir
 				}
 				sv.Status = types.FirewallDomainListStatus(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15104,7 +14690,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallDomainsOutput(v **UpdateFir
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15140,7 +14725,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallRuleGroupAssociationOutput(
 			if err := awsAwsjson11_deserializeDocumentFirewallRuleGroupAssociation(&sv.FirewallRuleGroupAssociation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15176,7 +14760,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateFirewallRuleOutput(v **UpdateFirewa
 			if err := awsAwsjson11_deserializeDocumentFirewallRule(&sv.FirewallRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15212,7 +14795,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateOutpostResolverOutput(v **UpdateOut
 			if err := awsAwsjson11_deserializeDocumentOutpostResolver(&sv.OutpostResolver, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15248,7 +14830,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateResolverConfigOutput(v **UpdateReso
 			if err := awsAwsjson11_deserializeDocumentResolverConfig(&sv.ResolverConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15284,7 +14865,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateResolverDnssecConfigOutput(v **Upda
 			if err := awsAwsjson11_deserializeDocumentResolverDnssecConfig(&sv.ResolverDNSSECConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15320,7 +14900,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateResolverEndpointOutput(v **UpdateRe
 			if err := awsAwsjson11_deserializeDocumentResolverEndpoint(&sv.ResolverEndpoint, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15356,7 +14935,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateResolverRuleOutput(v **UpdateResolv
 			if err := awsAwsjson11_deserializeDocumentResolverRule(&sv.ResolverRule, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

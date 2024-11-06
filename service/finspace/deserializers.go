@@ -191,7 +191,6 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentOutput(v **CreateEnviron
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -200,7 +199,6 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentOutput(v **CreateEnviron
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "environmentUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -209,7 +207,6 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentOutput(v **CreateEnviron
 				}
 				sv.EnvironmentUrl = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -379,7 +376,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 			if err := awsRestjson1_deserializeDocumentChangeRequests(&sv.ChangeRequests, value); err != nil {
 				return err
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -388,7 +384,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -404,7 +399,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -413,7 +407,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -422,12 +415,10 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "errorInfo":
 			if err := awsRestjson1_deserializeDocumentErrorInfo(&sv.ErrorInfo, value); err != nil {
 				return err
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -443,7 +434,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -452,7 +442,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxChangesetOutput(v **CreateKxChang
 				}
 				sv.Status = types.ChangesetStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -622,7 +611,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 			if err := awsRestjson1_deserializeDocumentAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "availabilityZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -631,7 +619,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -640,17 +627,14 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "cacheStorageConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxCacheStorageConfigurations(&sv.CacheStorageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "capacityConfiguration":
 			if err := awsRestjson1_deserializeDocumentCapacityConfiguration(&sv.CapacityConfiguration, value); err != nil {
 				return err
 			}
-
 		case "clusterDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -659,7 +643,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.ClusterDescription = ptr.String(jtv)
 			}
-
 		case "clusterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -668,7 +651,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.ClusterName = ptr.String(jtv)
 			}
-
 		case "clusterType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -677,17 +659,14 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.ClusterType = types.KxClusterType(jtv)
 			}
-
 		case "code":
 			if err := awsRestjson1_deserializeDocumentCodeConfiguration(&sv.Code, value); err != nil {
 				return err
 			}
-
 		case "commandLineArguments":
 			if err := awsRestjson1_deserializeDocumentKxCommandLineArguments(&sv.CommandLineArguments, value); err != nil {
 				return err
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -703,12 +682,10 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 
 				}
 			}
-
 		case "databases":
 			if err := awsRestjson1_deserializeDocumentKxDatabaseConfigurations(&sv.Databases, value); err != nil {
 				return err
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -717,7 +694,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -726,7 +702,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
-
 		case "initializationScript":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -735,7 +710,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.InitializationScript = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -751,7 +725,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 
 				}
 			}
-
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -760,17 +733,14 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
-
 		case "savedownStorageConfiguration":
 			if err := awsRestjson1_deserializeDocumentKxSavedownStorageConfiguration(&sv.SavedownStorageConfiguration, value); err != nil {
 				return err
 			}
-
 		case "scalingGroupConfiguration":
 			if err := awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(&sv.ScalingGroupConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -779,7 +749,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.Status = types.KxClusterStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -788,22 +757,18 @@ func awsRestjson1_deserializeOpDocumentCreateKxClusterOutput(v **CreateKxCluster
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "tickerplantLogConfiguration":
 			if err := awsRestjson1_deserializeDocumentTickerplantLogConfiguration(&sv.TickerplantLogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "volumes":
 			if err := awsRestjson1_deserializeDocumentVolumes(&sv.Volumes, value); err != nil {
 				return err
 			}
-
 		case "vpcConfiguration":
 			if err := awsRestjson1_deserializeDocumentVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -987,7 +952,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDatabaseOutput(v **CreateKxDataba
 
 				}
 			}
-
 		case "databaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -996,7 +960,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDatabaseOutput(v **CreateKxDataba
 				}
 				sv.DatabaseArn = ptr.String(jtv)
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1005,7 +968,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDatabaseOutput(v **CreateKxDataba
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1014,7 +976,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDatabaseOutput(v **CreateKxDataba
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1023,7 +984,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDatabaseOutput(v **CreateKxDataba
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1039,7 +999,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDatabaseOutput(v **CreateKxDataba
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1216,7 +1175,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.AutoUpdate = jtv
 			}
-
 		case "availabilityZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1225,7 +1183,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1234,7 +1191,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1243,7 +1199,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1259,7 +1214,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1268,7 +1222,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1277,7 +1230,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1286,7 +1238,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1295,7 +1246,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1311,7 +1261,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 
 				}
 			}
-
 		case "readWrite":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1320,12 +1269,10 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.ReadWrite = jtv
 			}
-
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1334,7 +1281,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 				sv.Status = types.KxDataviewStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1515,7 +1461,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1524,7 +1469,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1533,7 +1477,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1542,7 +1485,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1551,7 +1493,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1560,7 +1501,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1569,7 +1509,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxEnvironmentOutput(v **CreateKxEnv
 				}
 				sv.Status = types.EnvironmentStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1743,7 +1682,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1759,7 +1697,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 
 				}
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1768,7 +1705,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "hostType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1777,7 +1713,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 				}
 				sv.HostType = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1793,7 +1728,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 
 				}
 			}
-
 		case "scalingGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1802,7 +1736,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 				}
 				sv.ScalingGroupName = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1811,7 +1744,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxScalingGroupOutput(v **CreateKxSc
 				}
 				sv.Status = types.KxScalingGroupStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1988,7 +1920,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxUserOutput(v **CreateKxUserOutput
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "iamRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1997,7 +1928,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxUserOutput(v **CreateKxUserOutput
 				}
 				sv.IamRole = ptr.String(jtv)
 			}
-
 		case "userArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2006,7 +1936,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxUserOutput(v **CreateKxUserOutput
 				}
 				sv.UserArn = ptr.String(jtv)
 			}
-
 		case "userName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2015,7 +1944,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxUserOutput(v **CreateKxUserOutput
 				}
 				sv.UserName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2188,7 +2116,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2197,7 +2124,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2213,7 +2139,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2222,7 +2147,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2231,12 +2155,10 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "nas1Configuration":
 			if err := awsRestjson1_deserializeDocumentKxNAS1Configuration(&sv.Nas1Configuration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2245,7 +2167,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.Status = types.KxVolumeStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2254,7 +2175,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "volumeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2263,7 +2183,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.VolumeArn = ptr.String(jtv)
 			}
-
 		case "volumeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2272,7 +2191,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2281,7 +2199,6 @@ func awsRestjson1_deserializeOpDocumentCreateKxVolumeOutput(v **CreateKxVolumeOu
 				}
 				sv.VolumeType = types.KxVolumeType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3372,7 +3289,6 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentOutput(v **GetEnvironmentOu
 			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3547,12 +3463,10 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 
 				}
 			}
-
 		case "changeRequests":
 			if err := awsRestjson1_deserializeDocumentChangeRequests(&sv.ChangeRequests, value); err != nil {
 				return err
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3561,7 +3475,6 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3577,7 +3490,6 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3586,7 +3498,6 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3595,12 +3506,10 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "errorInfo":
 			if err := awsRestjson1_deserializeDocumentErrorInfo(&sv.ErrorInfo, value); err != nil {
 				return err
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3616,7 +3525,6 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3625,7 +3533,6 @@ func awsRestjson1_deserializeOpDocumentGetKxChangesetOutput(v **GetKxChangesetOu
 				}
 				sv.Status = types.ChangesetStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3795,7 +3702,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 			if err := awsRestjson1_deserializeDocumentAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "availabilityZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3804,7 +3710,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3813,17 +3718,14 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "cacheStorageConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxCacheStorageConfigurations(&sv.CacheStorageConfigurations, value); err != nil {
 				return err
 			}
-
 		case "capacityConfiguration":
 			if err := awsRestjson1_deserializeDocumentCapacityConfiguration(&sv.CapacityConfiguration, value); err != nil {
 				return err
 			}
-
 		case "clusterDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3832,7 +3734,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.ClusterDescription = ptr.String(jtv)
 			}
-
 		case "clusterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3841,7 +3742,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.ClusterName = ptr.String(jtv)
 			}
-
 		case "clusterType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3850,17 +3750,14 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.ClusterType = types.KxClusterType(jtv)
 			}
-
 		case "code":
 			if err := awsRestjson1_deserializeDocumentCodeConfiguration(&sv.Code, value); err != nil {
 				return err
 			}
-
 		case "commandLineArguments":
 			if err := awsRestjson1_deserializeDocumentKxCommandLineArguments(&sv.CommandLineArguments, value); err != nil {
 				return err
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3876,12 +3773,10 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 
 				}
 			}
-
 		case "databases":
 			if err := awsRestjson1_deserializeDocumentKxDatabaseConfigurations(&sv.Databases, value); err != nil {
 				return err
 			}
-
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3890,7 +3785,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
-
 		case "initializationScript":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3899,7 +3793,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.InitializationScript = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3915,7 +3808,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 
 				}
 			}
-
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3924,17 +3816,14 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
-
 		case "savedownStorageConfiguration":
 			if err := awsRestjson1_deserializeDocumentKxSavedownStorageConfiguration(&sv.SavedownStorageConfiguration, value); err != nil {
 				return err
 			}
-
 		case "scalingGroupConfiguration":
 			if err := awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(&sv.ScalingGroupConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3943,7 +3832,6 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.Status = types.KxClusterStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3952,22 +3840,18 @@ func awsRestjson1_deserializeOpDocumentGetKxClusterOutput(v **GetKxClusterOutput
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "tickerplantLogConfiguration":
 			if err := awsRestjson1_deserializeDocumentTickerplantLogConfiguration(&sv.TickerplantLogConfiguration, value); err != nil {
 				return err
 			}
-
 		case "volumes":
 			if err := awsRestjson1_deserializeDocumentVolumes(&sv.Volumes, value); err != nil {
 				return err
 			}
-
 		case "vpcConfiguration":
 			if err := awsRestjson1_deserializeDocumentVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4135,7 +4019,6 @@ func awsRestjson1_deserializeOpDocumentGetKxConnectionStringOutput(v **GetKxConn
 				}
 				sv.SignedConnectionString = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4310,7 +4193,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 
 				}
 			}
-
 		case "databaseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4319,7 +4201,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.DatabaseArn = ptr.String(jtv)
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4328,7 +4209,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4337,7 +4217,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4346,7 +4225,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastCompletedChangesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4355,7 +4233,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.LastCompletedChangesetId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4371,7 +4248,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 
 				}
 			}
-
 		case "numBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4384,7 +4260,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.NumBytes = i64
 			}
-
 		case "numChangesets":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4397,7 +4272,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.NumChangesets = int32(i64)
 			}
-
 		case "numFiles":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4410,7 +4284,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDatabaseOutput(v **GetKxDatabaseOutp
 				}
 				sv.NumFiles = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4574,7 +4447,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 			if err := awsRestjson1_deserializeDocumentKxDataviewActiveVersionList(&sv.ActiveVersions, value); err != nil {
 				return err
 			}
-
 		case "autoUpdate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4583,7 +4455,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.AutoUpdate = jtv
 			}
-
 		case "availabilityZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4592,7 +4463,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4601,7 +4471,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4610,7 +4479,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4626,7 +4494,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4635,7 +4502,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4644,7 +4510,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4653,7 +4518,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4662,7 +4526,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4678,7 +4541,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 
 				}
 			}
-
 		case "readWrite":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4687,12 +4549,10 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.ReadWrite = jtv
 			}
-
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4701,7 +4561,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.Status = types.KxDataviewStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4710,7 +4569,6 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4874,7 +4732,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "awsAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4883,7 +4740,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "certificateAuthorityArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4892,7 +4748,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.CertificateAuthorityArn = ptr.String(jtv)
 			}
-
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4908,12 +4763,10 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 
 				}
 			}
-
 		case "customDNSConfiguration":
 			if err := awsRestjson1_deserializeDocumentCustomDNSConfiguration(&sv.CustomDNSConfiguration, value); err != nil {
 				return err
 			}
-
 		case "dedicatedServiceAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4922,7 +4775,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.DedicatedServiceAccountId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4931,7 +4783,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "dnsStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4940,7 +4791,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.DnsStatus = types.DnsStatus(jtv)
 			}
-
 		case "environmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4949,7 +4799,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4958,7 +4807,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4967,7 +4815,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4976,7 +4823,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4985,7 +4831,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4994,7 +4839,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.Status = types.EnvironmentStatus(jtv)
 			}
-
 		case "tgwStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5003,12 +4847,10 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 				}
 				sv.TgwStatus = types.TgwStatus(jtv)
 			}
-
 		case "transitGatewayConfiguration":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConfiguration(&sv.TransitGatewayConfiguration, value); err != nil {
 				return err
 			}
-
 		case "updateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5024,7 +4866,6 @@ func awsRestjson1_deserializeOpDocumentGetKxEnvironmentOutput(v **GetKxEnvironme
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5198,12 +5039,10 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "clusters":
 			if err := awsRestjson1_deserializeDocumentKxClusterNameList(&sv.Clusters, value); err != nil {
 				return err
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5219,7 +5058,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 
 				}
 			}
-
 		case "hostType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5228,7 +5066,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 				}
 				sv.HostType = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5244,7 +5081,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 
 				}
 			}
-
 		case "scalingGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5253,7 +5089,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 				}
 				sv.ScalingGroupArn = ptr.String(jtv)
 			}
-
 		case "scalingGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5262,7 +5097,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 				}
 				sv.ScalingGroupName = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5271,7 +5105,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 				}
 				sv.Status = types.KxScalingGroupStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5280,7 +5113,6 @@ func awsRestjson1_deserializeOpDocumentGetKxScalingGroupOutput(v **GetKxScalingG
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5448,7 +5280,6 @@ func awsRestjson1_deserializeOpDocumentGetKxUserOutput(v **GetKxUserOutput, valu
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "iamRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5457,7 +5288,6 @@ func awsRestjson1_deserializeOpDocumentGetKxUserOutput(v **GetKxUserOutput, valu
 				}
 				sv.IamRole = ptr.String(jtv)
 			}
-
 		case "userArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5466,7 +5296,6 @@ func awsRestjson1_deserializeOpDocumentGetKxUserOutput(v **GetKxUserOutput, valu
 				}
 				sv.UserArn = ptr.String(jtv)
 			}
-
 		case "userName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5475,7 +5304,6 @@ func awsRestjson1_deserializeOpDocumentGetKxUserOutput(v **GetKxUserOutput, valu
 				}
 				sv.UserName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5645,12 +5473,10 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 			if err := awsRestjson1_deserializeDocumentKxAttachedClusters(&sv.AttachedClusters, value); err != nil {
 				return err
 			}
-
 		case "availabilityZoneIds":
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5659,7 +5485,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5675,7 +5500,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5684,7 +5508,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5693,7 +5516,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5709,12 +5531,10 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 
 				}
 			}
-
 		case "nas1Configuration":
 			if err := awsRestjson1_deserializeDocumentKxNAS1Configuration(&sv.Nas1Configuration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5723,7 +5543,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.Status = types.KxVolumeStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5732,7 +5551,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "volumeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5741,7 +5559,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.VolumeArn = ptr.String(jtv)
 			}
-
 		case "volumeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5750,7 +5567,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5759,7 +5575,6 @@ func awsRestjson1_deserializeOpDocumentGetKxVolumeOutput(v **GetKxVolumeOutput, 
 				}
 				sv.VolumeType = types.KxVolumeType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5917,7 +5732,6 @@ func awsRestjson1_deserializeOpDocumentListEnvironmentsOutput(v **ListEnvironmen
 			if err := awsRestjson1_deserializeDocumentEnvironmentList(&sv.Environments, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5926,7 +5740,6 @@ func awsRestjson1_deserializeOpDocumentListEnvironmentsOutput(v **ListEnvironmen
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6090,7 +5903,6 @@ func awsRestjson1_deserializeOpDocumentListKxChangesetsOutput(v **ListKxChangese
 			if err := awsRestjson1_deserializeDocumentKxChangesets(&sv.KxChangesets, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6099,7 +5911,6 @@ func awsRestjson1_deserializeOpDocumentListKxChangesetsOutput(v **ListKxChangese
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6270,12 +6081,10 @@ func awsRestjson1_deserializeOpDocumentListKxClusterNodesOutput(v **ListKxCluste
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "nodes":
 			if err := awsRestjson1_deserializeDocumentKxNodeSummaries(&sv.Nodes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6445,7 +6254,6 @@ func awsRestjson1_deserializeOpDocumentListKxClustersOutput(v **ListKxClustersOu
 			if err := awsRestjson1_deserializeDocumentKxClusters(&sv.KxClusterSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6454,7 +6262,6 @@ func awsRestjson1_deserializeOpDocumentListKxClustersOutput(v **ListKxClustersOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6618,7 +6425,6 @@ func awsRestjson1_deserializeOpDocumentListKxDatabasesOutput(v **ListKxDatabases
 			if err := awsRestjson1_deserializeDocumentKxDatabases(&sv.KxDatabases, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6627,7 +6433,6 @@ func awsRestjson1_deserializeOpDocumentListKxDatabasesOutput(v **ListKxDatabases
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6791,7 +6596,6 @@ func awsRestjson1_deserializeOpDocumentListKxDataviewsOutput(v **ListKxDataviews
 			if err := awsRestjson1_deserializeDocumentKxDataviews(&sv.KxDataviews, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6800,7 +6604,6 @@ func awsRestjson1_deserializeOpDocumentListKxDataviewsOutput(v **ListKxDataviews
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6958,7 +6761,6 @@ func awsRestjson1_deserializeOpDocumentListKxEnvironmentsOutput(v **ListKxEnviro
 			if err := awsRestjson1_deserializeDocumentKxEnvironmentList(&sv.Environments, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6967,7 +6769,6 @@ func awsRestjson1_deserializeOpDocumentListKxEnvironmentsOutput(v **ListKxEnviro
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7141,12 +6942,10 @@ func awsRestjson1_deserializeOpDocumentListKxScalingGroupsOutput(v **ListKxScali
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "scalingGroups":
 			if err := awsRestjson1_deserializeDocumentKxScalingGroupList(&sv.ScalingGroups, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7314,12 +7113,10 @@ func awsRestjson1_deserializeOpDocumentListKxUsersOutput(v **ListKxUsersOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "users":
 			if err := awsRestjson1_deserializeDocumentKxUserList(&sv.Users, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7489,7 +7286,6 @@ func awsRestjson1_deserializeOpDocumentListKxVolumesOutput(v **ListKxVolumesOutp
 			if err := awsRestjson1_deserializeDocumentKxVolumes(&sv.KxVolumeSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7498,7 +7294,6 @@ func awsRestjson1_deserializeOpDocumentListKxVolumesOutput(v **ListKxVolumesOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7656,7 +7451,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8008,7 +7802,6 @@ func awsRestjson1_deserializeOpDocumentUpdateEnvironmentOutput(v **UpdateEnviron
 			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8391,7 +8184,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDatabaseOutput(v **UpdateKxDataba
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8400,7 +8192,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDatabaseOutput(v **UpdateKxDataba
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8409,7 +8200,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDatabaseOutput(v **UpdateKxDataba
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8425,7 +8215,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDatabaseOutput(v **UpdateKxDataba
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8595,7 +8384,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 			if err := awsRestjson1_deserializeDocumentKxDataviewActiveVersionList(&sv.ActiveVersions, value); err != nil {
 				return err
 			}
-
 		case "autoUpdate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8604,7 +8392,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.AutoUpdate = jtv
 			}
-
 		case "availabilityZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8613,7 +8400,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8622,7 +8408,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8631,7 +8416,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8647,7 +8431,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8656,7 +8439,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8665,7 +8447,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8674,7 +8455,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8683,7 +8463,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8699,7 +8478,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 
 				}
 			}
-
 		case "readWrite":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8708,12 +8486,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.ReadWrite = jtv
 			}
-
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8722,7 +8498,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 				sv.Status = types.KxDataviewStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8889,7 +8664,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "awsAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8898,7 +8672,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8914,12 +8687,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 
 				}
 			}
-
 		case "customDNSConfiguration":
 			if err := awsRestjson1_deserializeDocumentCustomDNSConfiguration(&sv.CustomDNSConfiguration, value); err != nil {
 				return err
 			}
-
 		case "dedicatedServiceAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8928,7 +8699,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.DedicatedServiceAccountId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8937,7 +8707,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "dnsStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8946,7 +8715,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.DnsStatus = types.DnsStatus(jtv)
 			}
-
 		case "environmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8955,7 +8723,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8964,7 +8731,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8973,7 +8739,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8982,7 +8747,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8991,7 +8755,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9000,7 +8763,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.Status = types.EnvironmentStatus(jtv)
 			}
-
 		case "tgwStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9009,12 +8771,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 				}
 				sv.TgwStatus = types.TgwStatus(jtv)
 			}
-
 		case "transitGatewayConfiguration":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConfiguration(&sv.TransitGatewayConfiguration, value); err != nil {
 				return err
 			}
-
 		case "updateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9030,7 +8790,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentOutput(v **UpdateKxEnv
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9197,7 +8956,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "awsAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9206,7 +8964,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9222,12 +8979,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 
 				}
 			}
-
 		case "customDNSConfiguration":
 			if err := awsRestjson1_deserializeDocumentCustomDNSConfiguration(&sv.CustomDNSConfiguration, value); err != nil {
 				return err
 			}
-
 		case "dedicatedServiceAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9236,7 +8991,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.DedicatedServiceAccountId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9245,7 +8999,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "dnsStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9254,7 +9007,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.DnsStatus = types.DnsStatus(jtv)
 			}
-
 		case "environmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9263,7 +9015,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9272,7 +9023,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9281,7 +9031,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9290,7 +9039,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9299,7 +9047,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9308,7 +9055,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.Status = types.EnvironmentStatus(jtv)
 			}
-
 		case "tgwStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9317,12 +9063,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 				}
 				sv.TgwStatus = types.TgwStatus(jtv)
 			}
-
 		case "transitGatewayConfiguration":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConfiguration(&sv.TransitGatewayConfiguration, value); err != nil {
 				return err
 			}
-
 		case "updateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9338,7 +9082,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxEnvironmentNetworkOutput(v **Upda
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9512,7 +9255,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxUserOutput(v **UpdateKxUserOutput
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "iamRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9521,7 +9263,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxUserOutput(v **UpdateKxUserOutput
 				}
 				sv.IamRole = ptr.String(jtv)
 			}
-
 		case "userArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9530,7 +9271,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxUserOutput(v **UpdateKxUserOutput
 				}
 				sv.UserArn = ptr.String(jtv)
 			}
-
 		case "userName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9539,7 +9279,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxUserOutput(v **UpdateKxUserOutput
 				}
 				sv.UserName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9709,12 +9448,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 			if err := awsRestjson1_deserializeDocumentKxAttachedClusters(&sv.AttachedClusters, value); err != nil {
 				return err
 			}
-
 		case "availabilityZoneIds":
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9723,7 +9460,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9739,7 +9475,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9748,7 +9483,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9757,7 +9491,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9773,12 +9506,10 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 
 				}
 			}
-
 		case "nas1Configuration":
 			if err := awsRestjson1_deserializeDocumentKxNAS1Configuration(&sv.Nas1Configuration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9787,7 +9518,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.Status = types.KxVolumeStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9796,7 +9526,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "volumeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9805,7 +9534,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.VolumeArn = ptr.String(jtv)
 			}
-
 		case "volumeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9814,7 +9542,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9823,7 +9550,6 @@ func awsRestjson1_deserializeOpDocumentUpdateKxVolumeOutput(v **UpdateKxVolumeOu
 				}
 				sv.VolumeType = types.KxVolumeType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10213,15 +9939,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10229,14 +9949,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10344,7 +10060,6 @@ func awsRestjson1_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.AutoScalingMetric = types.AutoScalingMetric(jtv)
 			}
-
 		case "maxNodeCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10357,7 +10072,6 @@ func awsRestjson1_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.MaxNodeCount = ptr.Int32(int32(i64))
 			}
-
 		case "metricTarget":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10391,7 +10105,6 @@ func awsRestjson1_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 
 				}
 			}
-
 		case "minNodeCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10404,7 +10117,6 @@ func awsRestjson1_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.MinNodeCount = ptr.Int32(int32(i64))
 			}
-
 		case "scaleInCooldownSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10438,7 +10150,6 @@ func awsRestjson1_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 
 				}
 			}
-
 		case "scaleOutCooldownSeconds":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10472,7 +10183,6 @@ func awsRestjson1_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10552,7 +10262,6 @@ func awsRestjson1_deserializeDocumentCapacityConfiguration(v **types.CapacityCon
 				}
 				sv.NodeCount = ptr.Int32(int32(i64))
 			}
-
 		case "nodeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10561,7 +10270,6 @@ func awsRestjson1_deserializeDocumentCapacityConfiguration(v **types.CapacityCon
 				}
 				sv.NodeType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10601,7 +10309,6 @@ func awsRestjson1_deserializeDocumentChangeRequest(v **types.ChangeRequest, valu
 				}
 				sv.ChangeType = types.ChangeType(jtv)
 			}
-
 		case "dbPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10610,7 +10317,6 @@ func awsRestjson1_deserializeDocumentChangeRequest(v **types.ChangeRequest, valu
 				}
 				sv.DbPath = ptr.String(jtv)
 			}
-
 		case "s3Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10619,7 +10325,6 @@ func awsRestjson1_deserializeDocumentChangeRequest(v **types.ChangeRequest, valu
 				}
 				sv.S3Path = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10693,7 +10398,6 @@ func awsRestjson1_deserializeDocumentCodeConfiguration(v **types.CodeConfigurati
 				}
 				sv.S3Bucket = ptr.String(jtv)
 			}
-
 		case "s3Key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10702,7 +10406,6 @@ func awsRestjson1_deserializeDocumentCodeConfiguration(v **types.CodeConfigurati
 				}
 				sv.S3Key = ptr.String(jtv)
 			}
-
 		case "s3ObjectVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10711,7 +10414,6 @@ func awsRestjson1_deserializeDocumentCodeConfiguration(v **types.CodeConfigurati
 				}
 				sv.S3ObjectVersion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10741,15 +10443,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10757,7 +10453,6 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10766,14 +10461,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Reason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10843,7 +10534,6 @@ func awsRestjson1_deserializeDocumentCustomDNSServer(v **types.CustomDNSServer, 
 				}
 				sv.CustomDNSServerIP = ptr.String(jtv)
 			}
-
 		case "customDNSServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10852,7 +10542,6 @@ func awsRestjson1_deserializeDocumentCustomDNSServer(v **types.CustomDNSServer, 
 				}
 				sv.CustomDNSServerName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10928,7 +10617,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "dedicatedServiceAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10937,7 +10625,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.DedicatedServiceAccountId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10946,7 +10633,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10955,7 +10641,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10964,7 +10649,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "environmentUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10973,7 +10657,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.EnvironmentUrl = ptr.String(jtv)
 			}
-
 		case "federationMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10982,12 +10665,10 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.FederationMode = types.FederationMode(jtv)
 			}
-
 		case "federationParameters":
 			if err := awsRestjson1_deserializeDocumentFederationParameters(&sv.FederationParameters, value); err != nil {
 				return err
 			}
-
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10996,7 +10677,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11005,7 +10685,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "sageMakerStudioDomainUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11014,7 +10693,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.SageMakerStudioDomainUrl = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11023,7 +10701,6 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.Status = types.EnvironmentStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11097,7 +10774,6 @@ func awsRestjson1_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "errorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11106,7 +10782,6 @@ func awsRestjson1_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 				}
 				sv.ErrorType = types.ErrorDetails(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11146,12 +10821,10 @@ func awsRestjson1_deserializeDocumentFederationParameters(v **types.FederationPa
 				}
 				sv.ApplicationCallBackURL = ptr.String(jtv)
 			}
-
 		case "attributeMap":
 			if err := awsRestjson1_deserializeDocumentAttributeMap(&sv.AttributeMap, value); err != nil {
 				return err
 			}
-
 		case "federationProviderName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11160,7 +10833,6 @@ func awsRestjson1_deserializeDocumentFederationParameters(v **types.FederationPa
 				}
 				sv.FederationProviderName = ptr.String(jtv)
 			}
-
 		case "federationURN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11169,7 +10841,6 @@ func awsRestjson1_deserializeDocumentFederationParameters(v **types.FederationPa
 				}
 				sv.FederationURN = ptr.String(jtv)
 			}
-
 		case "samlMetadataDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11178,7 +10849,6 @@ func awsRestjson1_deserializeDocumentFederationParameters(v **types.FederationPa
 				}
 				sv.SamlMetadataDocument = ptr.String(jtv)
 			}
-
 		case "samlMetadataURL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11187,7 +10857,6 @@ func awsRestjson1_deserializeDocumentFederationParameters(v **types.FederationPa
 				}
 				sv.SamlMetadataURL = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11231,7 +10900,6 @@ func awsRestjson1_deserializeDocumentIcmpTypeCode(v **types.IcmpTypeCode, value 
 				}
 				sv.Code = int32(i64)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11244,7 +10912,6 @@ func awsRestjson1_deserializeDocumentIcmpTypeCode(v **types.IcmpTypeCode, value 
 				}
 				sv.Type = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11274,15 +10941,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11290,14 +10951,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11323,15 +10980,9 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11339,14 +10990,10 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11382,7 +11029,6 @@ func awsRestjson1_deserializeDocumentKxAttachedCluster(v **types.KxAttachedClust
 				}
 				sv.ClusterName = ptr.String(jtv)
 			}
-
 		case "clusterStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11391,7 +11037,6 @@ func awsRestjson1_deserializeDocumentKxAttachedCluster(v **types.KxAttachedClust
 				}
 				sv.ClusterStatus = types.KxClusterStatus(jtv)
 			}
-
 		case "clusterType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11400,7 +11045,6 @@ func awsRestjson1_deserializeDocumentKxAttachedCluster(v **types.KxAttachedClust
 				}
 				sv.ClusterType = types.KxClusterType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11478,7 +11122,6 @@ func awsRestjson1_deserializeDocumentKxCacheStorageConfiguration(v **types.KxCac
 				}
 				sv.Size = ptr.Int32(int32(i64))
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11487,7 +11130,6 @@ func awsRestjson1_deserializeDocumentKxCacheStorageConfiguration(v **types.KxCac
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11568,7 +11210,6 @@ func awsRestjson1_deserializeDocumentKxChangesetListEntry(v **types.KxChangesetL
 
 				}
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11577,7 +11218,6 @@ func awsRestjson1_deserializeDocumentKxChangesetListEntry(v **types.KxChangesetL
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11593,7 +11233,6 @@ func awsRestjson1_deserializeDocumentKxChangesetListEntry(v **types.KxChangesetL
 
 				}
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11609,7 +11248,6 @@ func awsRestjson1_deserializeDocumentKxChangesetListEntry(v **types.KxChangesetL
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11618,7 +11256,6 @@ func awsRestjson1_deserializeDocumentKxChangesetListEntry(v **types.KxChangesetL
 				}
 				sv.Status = types.ChangesetStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11692,7 +11329,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11701,7 +11337,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "clusterDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11710,7 +11345,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.ClusterDescription = ptr.String(jtv)
 			}
-
 		case "clusterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11719,7 +11353,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.ClusterName = ptr.String(jtv)
 			}
-
 		case "clusterType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11728,7 +11361,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.ClusterType = types.KxClusterType(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11744,7 +11376,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 
 				}
 			}
-
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11753,7 +11384,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
-
 		case "initializationScript":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11762,7 +11392,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.InitializationScript = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11778,7 +11407,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 
 				}
 			}
-
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11787,7 +11415,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11796,7 +11423,6 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.Status = types.KxClusterStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11805,12 +11431,10 @@ func awsRestjson1_deserializeDocumentKxCluster(v **types.KxCluster, value interf
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "volumes":
 			if err := awsRestjson1_deserializeDocumentVolumes(&sv.Volumes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11920,7 +11544,6 @@ func awsRestjson1_deserializeDocumentKxCommandLineArgument(v **types.KxCommandLi
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11929,7 +11552,6 @@ func awsRestjson1_deserializeDocumentKxCommandLineArgument(v **types.KxCommandLi
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12003,7 +11625,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseCacheConfiguration(v **types.KxDa
 				}
 				sv.CacheType = ptr.String(jtv)
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12012,12 +11633,10 @@ func awsRestjson1_deserializeDocumentKxDatabaseCacheConfiguration(v **types.KxDa
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		case "dbPaths":
 			if err := awsRestjson1_deserializeDocumentDbPaths(&sv.DbPaths, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12087,7 +11706,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseConfiguration(v **types.KxDatabas
 			if err := awsRestjson1_deserializeDocumentKxDatabaseCacheConfigurations(&sv.CacheConfigurations, value); err != nil {
 				return err
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12096,7 +11714,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseConfiguration(v **types.KxDatabas
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12105,12 +11722,10 @@ func awsRestjson1_deserializeDocumentKxDatabaseConfiguration(v **types.KxDatabas
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "dataviewConfiguration":
 			if err := awsRestjson1_deserializeDocumentKxDataviewConfiguration(&sv.DataviewConfiguration, value); err != nil {
 				return err
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12119,7 +11734,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseConfiguration(v **types.KxDatabas
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12200,7 +11814,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseListEntry(v **types.KxDatabaseLis
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12209,7 +11822,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseListEntry(v **types.KxDatabaseLis
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12225,7 +11837,6 @@ func awsRestjson1_deserializeDocumentKxDatabaseListEntry(v **types.KxDatabaseLis
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12295,7 +11906,6 @@ func awsRestjson1_deserializeDocumentKxDataviewActiveVersion(v **types.KxDatavie
 			if err := awsRestjson1_deserializeDocumentAttachedClusterList(&sv.AttachedClusters, value); err != nil {
 				return err
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12304,7 +11914,6 @@ func awsRestjson1_deserializeDocumentKxDataviewActiveVersion(v **types.KxDatavie
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12320,12 +11929,10 @@ func awsRestjson1_deserializeDocumentKxDataviewActiveVersion(v **types.KxDatavie
 
 				}
 			}
-
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
 			}
-
 		case "versionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12334,7 +11941,6 @@ func awsRestjson1_deserializeDocumentKxDataviewActiveVersion(v **types.KxDatavie
 				}
 				sv.VersionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12408,7 +12014,6 @@ func awsRestjson1_deserializeDocumentKxDataviewConfiguration(v **types.KxDatavie
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12417,7 +12022,6 @@ func awsRestjson1_deserializeDocumentKxDataviewConfiguration(v **types.KxDatavie
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		case "dataviewVersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12426,12 +12030,10 @@ func awsRestjson1_deserializeDocumentKxDataviewConfiguration(v **types.KxDatavie
 				}
 				sv.DataviewVersionId = ptr.String(jtv)
 			}
-
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12467,7 +12069,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 			if err := awsRestjson1_deserializeDocumentKxDataviewActiveVersionList(&sv.ActiveVersions, value); err != nil {
 				return err
 			}
-
 		case "autoUpdate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12476,7 +12077,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.AutoUpdate = jtv
 			}
-
 		case "availabilityZoneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12485,7 +12085,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12494,7 +12093,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "changesetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12503,7 +12101,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.ChangesetId = ptr.String(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12519,7 +12116,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 
 				}
 			}
-
 		case "databaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12528,7 +12124,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
-
 		case "dataviewName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12537,7 +12132,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.DataviewName = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12546,7 +12140,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12555,7 +12148,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12571,7 +12163,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 
 				}
 			}
-
 		case "readWrite":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12580,12 +12171,10 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.ReadWrite = jtv
 			}
-
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12594,7 +12183,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.Status = types.KxDataviewStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12603,7 +12191,6 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12673,7 +12260,6 @@ func awsRestjson1_deserializeDocumentKxDataviewSegmentConfiguration(v **types.Kx
 			if err := awsRestjson1_deserializeDocumentSegmentConfigurationDbPathList(&sv.DbPaths, value); err != nil {
 				return err
 			}
-
 		case "onDemand":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12682,7 +12268,6 @@ func awsRestjson1_deserializeDocumentKxDataviewSegmentConfiguration(v **types.Kx
 				}
 				sv.OnDemand = jtv
 			}
-
 		case "volumeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12691,7 +12276,6 @@ func awsRestjson1_deserializeDocumentKxDataviewSegmentConfiguration(v **types.Kx
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12761,7 +12345,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "awsAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12770,7 +12353,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "certificateAuthorityArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12779,7 +12361,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.CertificateAuthorityArn = ptr.String(jtv)
 			}
-
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12795,12 +12376,10 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 
 				}
 			}
-
 		case "customDNSConfiguration":
 			if err := awsRestjson1_deserializeDocumentCustomDNSConfiguration(&sv.CustomDNSConfiguration, value); err != nil {
 				return err
 			}
-
 		case "dedicatedServiceAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12809,7 +12388,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.DedicatedServiceAccountId = ptr.String(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12818,7 +12396,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "dnsStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12827,7 +12404,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.DnsStatus = types.DnsStatus(jtv)
 			}
-
 		case "environmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12836,7 +12412,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.EnvironmentArn = ptr.String(jtv)
 			}
-
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12845,7 +12420,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12854,7 +12428,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12863,7 +12436,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12872,7 +12444,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12881,7 +12452,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.Status = types.EnvironmentStatus(jtv)
 			}
-
 		case "tgwStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12890,12 +12460,10 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 				}
 				sv.TgwStatus = types.TgwStatus(jtv)
 			}
-
 		case "transitGatewayConfiguration":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConfiguration(&sv.TransitGatewayConfiguration, value); err != nil {
 				return err
 			}
-
 		case "updateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12911,7 +12479,6 @@ func awsRestjson1_deserializeDocumentKxEnvironment(v **types.KxEnvironment, valu
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12989,7 +12556,6 @@ func awsRestjson1_deserializeDocumentKxNAS1Configuration(v **types.KxNAS1Configu
 				}
 				sv.Size = ptr.Int32(int32(i64))
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12998,7 +12564,6 @@ func awsRestjson1_deserializeDocumentKxNAS1Configuration(v **types.KxNAS1Configu
 				}
 				sv.Type = types.KxNAS1Type(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13038,7 +12603,6 @@ func awsRestjson1_deserializeDocumentKxNode(v **types.KxNode, value interface{})
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "launchTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13054,7 +12618,6 @@ func awsRestjson1_deserializeDocumentKxNode(v **types.KxNode, value interface{})
 
 				}
 			}
-
 		case "nodeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13063,7 +12626,6 @@ func awsRestjson1_deserializeDocumentKxNode(v **types.KxNode, value interface{})
 				}
 				sv.NodeId = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13072,7 +12634,6 @@ func awsRestjson1_deserializeDocumentKxNode(v **types.KxNode, value interface{})
 				}
 				sv.Status = types.KxNodeStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13150,7 +12711,6 @@ func awsRestjson1_deserializeDocumentKxSavedownStorageConfiguration(v **types.Kx
 				}
 				sv.Size = ptr.Int32(int32(i64))
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13159,7 +12719,6 @@ func awsRestjson1_deserializeDocumentKxSavedownStorageConfiguration(v **types.Kx
 				}
 				sv.Type = types.KxSavedownStorageType(jtv)
 			}
-
 		case "volumeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13168,7 +12727,6 @@ func awsRestjson1_deserializeDocumentKxSavedownStorageConfiguration(v **types.Kx
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13208,12 +12766,10 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 				}
 				sv.AvailabilityZoneId = ptr.String(jtv)
 			}
-
 		case "clusters":
 			if err := awsRestjson1_deserializeDocumentKxClusterNameList(&sv.Clusters, value); err != nil {
 				return err
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13229,7 +12785,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 
 				}
 			}
-
 		case "hostType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13238,7 +12793,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 				}
 				sv.HostType = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13254,7 +12808,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 
 				}
 			}
-
 		case "scalingGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13263,7 +12816,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 				}
 				sv.ScalingGroupName = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13272,7 +12824,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 				}
 				sv.Status = types.KxScalingGroupStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13281,7 +12832,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroup(v **types.KxScalingGroup, va
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13346,7 +12896,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(v **types.KxSca
 
 				}
 			}
-
 		case "memoryLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13359,7 +12908,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(v **types.KxSca
 				}
 				sv.MemoryLimit = ptr.Int32(int32(i64))
 			}
-
 		case "memoryReservation":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13372,7 +12920,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(v **types.KxSca
 				}
 				sv.MemoryReservation = ptr.Int32(int32(i64))
 			}
-
 		case "nodeCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13385,7 +12932,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(v **types.KxSca
 				}
 				sv.NodeCount = ptr.Int32(int32(i64))
 			}
-
 		case "scalingGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13394,7 +12940,6 @@ func awsRestjson1_deserializeDocumentKxScalingGroupConfiguration(v **types.KxSca
 				}
 				sv.ScalingGroupName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13475,7 +13020,6 @@ func awsRestjson1_deserializeDocumentKxUser(v **types.KxUser, value interface{})
 
 				}
 			}
-
 		case "iamRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13484,7 +13028,6 @@ func awsRestjson1_deserializeDocumentKxUser(v **types.KxUser, value interface{})
 				}
 				sv.IamRole = ptr.String(jtv)
 			}
-
 		case "updateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13500,7 +13043,6 @@ func awsRestjson1_deserializeDocumentKxUser(v **types.KxUser, value interface{})
 
 				}
 			}
-
 		case "userArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13509,7 +13051,6 @@ func awsRestjson1_deserializeDocumentKxUser(v **types.KxUser, value interface{})
 				}
 				sv.UserArn = ptr.String(jtv)
 			}
-
 		case "userName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13518,7 +13059,6 @@ func awsRestjson1_deserializeDocumentKxUser(v **types.KxUser, value interface{})
 				}
 				sv.UserName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13588,7 +13128,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneIds(&sv.AvailabilityZoneIds, value); err != nil {
 				return err
 			}
-
 		case "azMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13597,7 +13136,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 				}
 				sv.AzMode = types.KxAzMode(jtv)
 			}
-
 		case "createdTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13613,7 +13151,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13622,7 +13159,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "lastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13638,7 +13174,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13647,7 +13182,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 				}
 				sv.Status = types.KxVolumeStatus(jtv)
 			}
-
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13656,7 +13190,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
-
 		case "volumeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13665,7 +13198,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13674,7 +13206,6 @@ func awsRestjson1_deserializeDocumentKxVolume(v **types.KxVolume, value interfac
 				}
 				sv.VolumeType = types.KxVolumeType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13738,15 +13269,9 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13754,14 +13279,10 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13831,17 +13352,14 @@ func awsRestjson1_deserializeDocumentNetworkACLEntry(v **types.NetworkACLEntry, 
 				}
 				sv.CidrBlock = ptr.String(jtv)
 			}
-
 		case "icmpTypeCode":
 			if err := awsRestjson1_deserializeDocumentIcmpTypeCode(&sv.IcmpTypeCode, value); err != nil {
 				return err
 			}
-
 		case "portRange":
 			if err := awsRestjson1_deserializeDocumentPortRange(&sv.PortRange, value); err != nil {
 				return err
 			}
-
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13850,7 +13368,6 @@ func awsRestjson1_deserializeDocumentNetworkACLEntry(v **types.NetworkACLEntry, 
 				}
 				sv.Protocol = ptr.String(jtv)
 			}
-
 		case "ruleAction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13859,7 +13376,6 @@ func awsRestjson1_deserializeDocumentNetworkACLEntry(v **types.NetworkACLEntry, 
 				}
 				sv.RuleAction = types.RuleAction(jtv)
 			}
-
 		case "ruleNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13872,7 +13388,6 @@ func awsRestjson1_deserializeDocumentNetworkACLEntry(v **types.NetworkACLEntry, 
 				}
 				sv.RuleNumber = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13916,7 +13431,6 @@ func awsRestjson1_deserializeDocumentPortRange(v **types.PortRange, value interf
 				}
 				sv.From = int32(i64)
 			}
-
 		case "to":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13929,7 +13443,6 @@ func awsRestjson1_deserializeDocumentPortRange(v **types.PortRange, value interf
 				}
 				sv.To = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13959,15 +13472,9 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13975,14 +13482,10 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14008,15 +13511,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14024,14 +13521,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14129,15 +13622,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14145,14 +13632,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14250,15 +13733,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14266,14 +13743,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14305,7 +13778,6 @@ func awsRestjson1_deserializeDocumentTickerplantLogConfiguration(v **types.Ticke
 			if err := awsRestjson1_deserializeDocumentTickerplantLogVolumes(&sv.TickerplantLogVolumes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14377,7 +13849,6 @@ func awsRestjson1_deserializeDocumentTransitGatewayConfiguration(v **types.Trans
 			if err := awsRestjson1_deserializeDocumentNetworkACLConfiguration(&sv.AttachmentNetworkAclConfiguration, value); err != nil {
 				return err
 			}
-
 		case "routableCIDRSpace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14386,7 +13857,6 @@ func awsRestjson1_deserializeDocumentTransitGatewayConfiguration(v **types.Trans
 				}
 				sv.RoutableCIDRSpace = ptr.String(jtv)
 			}
-
 		case "transitGatewayID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14395,7 +13865,6 @@ func awsRestjson1_deserializeDocumentTransitGatewayConfiguration(v **types.Trans
 				}
 				sv.TransitGatewayID = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14425,15 +13894,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14441,14 +13904,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14484,7 +13943,6 @@ func awsRestjson1_deserializeDocumentVolume(v **types.Volume, value interface{})
 				}
 				sv.VolumeName = ptr.String(jtv)
 			}
-
 		case "volumeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14493,7 +13951,6 @@ func awsRestjson1_deserializeDocumentVolume(v **types.Volume, value interface{})
 				}
 				sv.VolumeType = types.VolumeType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14567,17 +14024,14 @@ func awsRestjson1_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration
 				}
 				sv.IpAddressType = types.IPAddressType(jtv)
 			}
-
 		case "securityGroupIds":
 			if err := awsRestjson1_deserializeDocumentSecurityGroupIdList(&sv.SecurityGroupIds, value); err != nil {
 				return err
 			}
-
 		case "subnetIds":
 			if err := awsRestjson1_deserializeDocumentSubnetIdList(&sv.SubnetIds, value); err != nil {
 				return err
 			}
-
 		case "vpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14586,7 +14040,6 @@ func awsRestjson1_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

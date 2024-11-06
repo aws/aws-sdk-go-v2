@@ -2456,7 +2456,6 @@ func awsAwsjson11_deserializeDocumentField(v **types.Field, value interface{}) e
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "refValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2465,7 +2464,6 @@ func awsAwsjson11_deserializeDocumentField(v **types.Field, value interface{}) e
 				}
 				sv.RefValue = ptr.String(jtv)
 			}
-
 		case "stringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2474,7 +2472,6 @@ func awsAwsjson11_deserializeDocumentField(v **types.Field, value interface{}) e
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2574,15 +2571,9 @@ func awsAwsjson11_deserializeDocumentInternalServiceError(v **types.InternalServ
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2590,14 +2581,10 @@ func awsAwsjson11_deserializeDocumentInternalServiceError(v **types.InternalServ
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2623,15 +2610,9 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2639,14 +2620,10 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2682,7 +2659,6 @@ func awsAwsjson11_deserializeDocumentParameterAttribute(v **types.ParameterAttri
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "stringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2691,7 +2667,6 @@ func awsAwsjson11_deserializeDocumentParameterAttribute(v **types.ParameterAttri
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2761,7 +2736,6 @@ func awsAwsjson11_deserializeDocumentParameterObject(v **types.ParameterObject, 
 			if err := awsAwsjson11_deserializeDocumentParameterAttributeList(&sv.Attributes, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2770,7 +2744,6 @@ func awsAwsjson11_deserializeDocumentParameterObject(v **types.ParameterObject, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2844,7 +2817,6 @@ func awsAwsjson11_deserializeDocumentParameterValue(v **types.ParameterValue, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "stringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2853,7 +2825,6 @@ func awsAwsjson11_deserializeDocumentParameterValue(v **types.ParameterValue, va
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2917,15 +2888,9 @@ func awsAwsjson11_deserializeDocumentPipelineDeletedException(v **types.Pipeline
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2933,14 +2898,10 @@ func awsAwsjson11_deserializeDocumentPipelineDeletedException(v **types.Pipeline
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2976,12 +2937,10 @@ func awsAwsjson11_deserializeDocumentPipelineDescription(v **types.PipelineDescr
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "fields":
 			if err := awsAwsjson11_deserializeDocumentFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2990,7 +2949,6 @@ func awsAwsjson11_deserializeDocumentPipelineDescription(v **types.PipelineDescr
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "pipelineId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2999,12 +2957,10 @@ func awsAwsjson11_deserializeDocumentPipelineDescription(v **types.PipelineDescr
 				}
 				sv.PipelineId = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3078,7 +3034,6 @@ func awsAwsjson11_deserializeDocumentPipelineIdName(v **types.PipelineIdName, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3087,7 +3042,6 @@ func awsAwsjson11_deserializeDocumentPipelineIdName(v **types.PipelineIdName, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3151,15 +3105,9 @@ func awsAwsjson11_deserializeDocumentPipelineNotFoundException(v **types.Pipelin
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3167,14 +3115,10 @@ func awsAwsjson11_deserializeDocumentPipelineNotFoundException(v **types.Pipelin
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3206,7 +3150,6 @@ func awsAwsjson11_deserializeDocumentPipelineObject(v **types.PipelineObject, va
 			if err := awsAwsjson11_deserializeDocumentFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3215,7 +3158,6 @@ func awsAwsjson11_deserializeDocumentPipelineObject(v **types.PipelineObject, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3224,7 +3166,6 @@ func awsAwsjson11_deserializeDocumentPipelineObject(v **types.PipelineObject, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3333,7 +3274,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3342,7 +3282,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3406,15 +3345,9 @@ func awsAwsjson11_deserializeDocumentTaskNotFoundException(v **types.TaskNotFoun
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3422,14 +3355,10 @@ func awsAwsjson11_deserializeDocumentTaskNotFoundException(v **types.TaskNotFoun
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3465,12 +3394,10 @@ func awsAwsjson11_deserializeDocumentTaskObject(v **types.TaskObject, value inte
 				}
 				sv.AttemptId = ptr.String(jtv)
 			}
-
 		case "objects":
 			if err := awsAwsjson11_deserializeDocumentPipelineObjectMap(&sv.Objects, value); err != nil {
 				return err
 			}
-
 		case "pipelineId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3479,7 +3406,6 @@ func awsAwsjson11_deserializeDocumentTaskObject(v **types.TaskObject, value inte
 				}
 				sv.PipelineId = ptr.String(jtv)
 			}
-
 		case "taskId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3488,7 +3414,6 @@ func awsAwsjson11_deserializeDocumentTaskObject(v **types.TaskObject, value inte
 				}
 				sv.TaskId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3524,7 +3449,6 @@ func awsAwsjson11_deserializeDocumentValidationError(v **types.ValidationError, 
 			if err := awsAwsjson11_deserializeDocumentValidationMessages(&sv.Errors, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3533,7 +3457,6 @@ func awsAwsjson11_deserializeDocumentValidationError(v **types.ValidationError, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3643,12 +3566,10 @@ func awsAwsjson11_deserializeDocumentValidationWarning(v **types.ValidationWarni
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "warnings":
 			if err := awsAwsjson11_deserializeDocumentValidationMessages(&sv.Warnings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3784,7 +3705,6 @@ func awsAwsjson11_deserializeOpDocumentCreatePipelineOutput(v **CreatePipelineOu
 				}
 				sv.PipelineId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3855,7 +3775,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeObjectsOutput(v **DescribeObjects
 				}
 				sv.HasMoreResults = jtv
 			}
-
 		case "marker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3864,12 +3783,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeObjectsOutput(v **DescribeObjects
 				}
 				sv.Marker = ptr.String(jtv)
 			}
-
 		case "pipelineObjects":
 			if err := awsAwsjson11_deserializeDocumentPipelineObjectList(&sv.PipelineObjects, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3905,7 +3822,6 @@ func awsAwsjson11_deserializeOpDocumentDescribePipelinesOutput(v **DescribePipel
 			if err := awsAwsjson11_deserializeDocumentPipelineDescriptionList(&sv.PipelineDescriptionList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3945,7 +3861,6 @@ func awsAwsjson11_deserializeOpDocumentEvaluateExpressionOutput(v **EvaluateExpr
 				}
 				sv.EvaluatedExpression = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3981,17 +3896,14 @@ func awsAwsjson11_deserializeOpDocumentGetPipelineDefinitionOutput(v **GetPipeli
 			if err := awsAwsjson11_deserializeDocumentParameterObjectList(&sv.ParameterObjects, value); err != nil {
 				return err
 			}
-
 		case "parameterValues":
 			if err := awsAwsjson11_deserializeDocumentParameterValueList(&sv.ParameterValues, value); err != nil {
 				return err
 			}
-
 		case "pipelineObjects":
 			if err := awsAwsjson11_deserializeDocumentPipelineObjectList(&sv.PipelineObjects, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4031,7 +3943,6 @@ func awsAwsjson11_deserializeOpDocumentListPipelinesOutput(v **ListPipelinesOutp
 				}
 				sv.HasMoreResults = jtv
 			}
-
 		case "marker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4040,12 +3951,10 @@ func awsAwsjson11_deserializeOpDocumentListPipelinesOutput(v **ListPipelinesOutp
 				}
 				sv.Marker = ptr.String(jtv)
 			}
-
 		case "pipelineIdList":
 			if err := awsAwsjson11_deserializeDocumentPipelineList(&sv.PipelineIdList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4081,7 +3990,6 @@ func awsAwsjson11_deserializeOpDocumentPollForTaskOutput(v **PollForTaskOutput, 
 			if err := awsAwsjson11_deserializeDocumentTaskObject(&sv.TaskObject, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4121,17 +4029,14 @@ func awsAwsjson11_deserializeOpDocumentPutPipelineDefinitionOutput(v **PutPipeli
 				}
 				sv.Errored = jtv
 			}
-
 		case "validationErrors":
 			if err := awsAwsjson11_deserializeDocumentValidationErrors(&sv.ValidationErrors, value); err != nil {
 				return err
 			}
-
 		case "validationWarnings":
 			if err := awsAwsjson11_deserializeDocumentValidationWarnings(&sv.ValidationWarnings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4171,12 +4076,10 @@ func awsAwsjson11_deserializeOpDocumentQueryObjectsOutput(v **QueryObjectsOutput
 				}
 				sv.HasMoreResults = jtv
 			}
-
 		case "ids":
 			if err := awsAwsjson11_deserializeDocumentIdList(&sv.Ids, value); err != nil {
 				return err
 			}
-
 		case "marker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4185,7 +4088,6 @@ func awsAwsjson11_deserializeOpDocumentQueryObjectsOutput(v **QueryObjectsOutput
 				}
 				sv.Marker = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4256,7 +4158,6 @@ func awsAwsjson11_deserializeOpDocumentReportTaskProgressOutput(v **ReportTaskPr
 				}
 				sv.Canceled = jtv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4296,7 +4197,6 @@ func awsAwsjson11_deserializeOpDocumentReportTaskRunnerHeartbeatOutput(v **Repor
 				}
 				sv.Terminate = jtv
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4367,17 +4267,14 @@ func awsAwsjson11_deserializeOpDocumentValidatePipelineDefinitionOutput(v **Vali
 				}
 				sv.Errored = jtv
 			}
-
 		case "validationErrors":
 			if err := awsAwsjson11_deserializeDocumentValidationErrors(&sv.ValidationErrors, value); err != nil {
 				return err
 			}
-
 		case "validationWarnings":
 			if err := awsAwsjson11_deserializeDocumentValidationWarnings(&sv.ValidationWarnings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

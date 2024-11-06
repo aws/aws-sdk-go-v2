@@ -2474,15 +2474,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2490,14 +2484,10 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2533,7 +2523,6 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2546,17 +2535,14 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "endpoints":
 			if err := awsAwsjson10_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
 			}
-
 		case "errorInfo":
 			if err := awsAwsjson10_deserializeDocumentErrorInfoList(&sv.ErrorInfo, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2565,7 +2551,6 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2578,7 +2563,6 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2587,17 +2571,14 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "networking":
 			if err := awsAwsjson10_deserializeDocumentNetworking(&sv.Networking, value); err != nil {
 				return err
 			}
-
 		case "scheduler":
 			if err := awsAwsjson10_deserializeDocumentScheduler(&sv.Scheduler, value); err != nil {
 				return err
 			}
-
 		case "size":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2606,12 +2587,10 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Size = types.Size(jtv)
 			}
-
 		case "slurmConfiguration":
 			if err := awsAwsjson10_deserializeDocumentClusterSlurmConfiguration(&sv.SlurmConfiguration, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2620,7 +2599,6 @@ func awsAwsjson10_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Status = types.ClusterStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2690,7 +2668,6 @@ func awsAwsjson10_deserializeDocumentClusterSlurmConfiguration(v **types.Cluster
 			if err := awsAwsjson10_deserializeDocumentSlurmAuthKey(&sv.AuthKey, value); err != nil {
 				return err
 			}
-
 		case "scaleDownIdleTimeInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2703,12 +2680,10 @@ func awsAwsjson10_deserializeDocumentClusterSlurmConfiguration(v **types.Cluster
 				}
 				sv.ScaleDownIdleTimeInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "slurmCustomSettings":
 			if err := awsAwsjson10_deserializeDocumentSlurmCustomSettings(&sv.SlurmCustomSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2748,7 +2723,6 @@ func awsAwsjson10_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2761,7 +2735,6 @@ func awsAwsjson10_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2770,7 +2743,6 @@ func awsAwsjson10_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2783,7 +2755,6 @@ func awsAwsjson10_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2792,7 +2763,6 @@ func awsAwsjson10_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2801,7 +2771,6 @@ func awsAwsjson10_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 				}
 				sv.Status = types.ClusterStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2841,7 +2810,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.AmiId = ptr.String(jtv)
 			}
-
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2850,7 +2818,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "clusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2859,7 +2826,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2872,17 +2838,14 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "customLaunchTemplate":
 			if err := awsAwsjson10_deserializeDocumentCustomLaunchTemplate(&sv.CustomLaunchTemplate, value); err != nil {
 				return err
 			}
-
 		case "errorInfo":
 			if err := awsAwsjson10_deserializeDocumentErrorInfoList(&sv.ErrorInfo, value); err != nil {
 				return err
 			}
-
 		case "iamInstanceProfileArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2891,7 +2854,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.IamInstanceProfileArn = ptr.String(jtv)
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2900,12 +2862,10 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "instanceConfigs":
 			if err := awsAwsjson10_deserializeDocumentInstanceList(&sv.InstanceConfigs, value); err != nil {
 				return err
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2918,7 +2878,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2927,7 +2886,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "purchaseOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2936,22 +2894,18 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.PurchaseOption = types.PurchaseOption(jtv)
 			}
-
 		case "scalingConfiguration":
 			if err := awsAwsjson10_deserializeDocumentScalingConfiguration(&sv.ScalingConfiguration, value); err != nil {
 				return err
 			}
-
 		case "slurmConfiguration":
 			if err := awsAwsjson10_deserializeDocumentComputeNodeGroupSlurmConfiguration(&sv.SlurmConfiguration, value); err != nil {
 				return err
 			}
-
 		case "spotOptions":
 			if err := awsAwsjson10_deserializeDocumentSpotOptions(&sv.SpotOptions, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2960,12 +2914,10 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroup(v **types.ComputeNodeGroup
 				}
 				sv.Status = types.ComputeNodeGroupStatus(jtv)
 			}
-
 		case "subnetIds":
 			if err := awsAwsjson10_deserializeDocumentSubnetIdList(&sv.SubnetIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3005,7 +2957,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupConfiguration(v **types.Com
 				}
 				sv.ComputeNodeGroupId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3109,7 +3060,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSlurmConfiguration(v **type
 			if err := awsAwsjson10_deserializeDocumentSlurmCustomSettings(&sv.SlurmCustomSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3149,7 +3099,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "clusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3158,7 +3107,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3171,7 +3119,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3180,7 +3127,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3193,7 +3139,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3202,7 +3147,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3211,7 +3155,6 @@ func awsAwsjson10_deserializeDocumentComputeNodeGroupSummary(v **types.ComputeNo
 				}
 				sv.Status = types.ComputeNodeGroupStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3241,15 +3184,9 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3257,7 +3194,6 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3266,7 +3202,6 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3275,14 +3210,10 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3318,7 +3249,6 @@ func awsAwsjson10_deserializeDocumentCustomLaunchTemplate(v **types.CustomLaunch
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3327,7 +3257,6 @@ func awsAwsjson10_deserializeDocumentCustomLaunchTemplate(v **types.CustomLaunch
 				}
 				sv.Version = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3367,7 +3296,6 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.Port = ptr.String(jtv)
 			}
-
 		case "privateIpAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3376,7 +3304,6 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.PrivateIpAddress = ptr.String(jtv)
 			}
-
 		case "publicIpAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3385,7 +3312,6 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.PublicIpAddress = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3394,7 +3320,6 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.Type = types.EndpointType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3468,7 +3393,6 @@ func awsAwsjson10_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3477,7 +3401,6 @@ func awsAwsjson10_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3551,7 +3474,6 @@ func awsAwsjson10_deserializeDocumentInstanceConfig(v **types.InstanceConfig, va
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3615,15 +3537,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3631,14 +3547,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3670,12 +3582,10 @@ func awsAwsjson10_deserializeDocumentNetworking(v **types.Networking, value inte
 			if err := awsAwsjson10_deserializeDocumentSecurityGroupIdList(&sv.SecurityGroupIds, value); err != nil {
 				return err
 			}
-
 		case "subnetIds":
 			if err := awsAwsjson10_deserializeDocumentSubnetIdList(&sv.SubnetIds, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3715,7 +3625,6 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "clusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3724,12 +3633,10 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "computeNodeGroupConfigurations":
 			if err := awsAwsjson10_deserializeDocumentComputeNodeGroupConfigurationList(&sv.ComputeNodeGroupConfigurations, value); err != nil {
 				return err
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3742,12 +3649,10 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "errorInfo":
 			if err := awsAwsjson10_deserializeDocumentErrorInfoList(&sv.ErrorInfo, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3756,7 +3661,6 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3769,7 +3673,6 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3778,7 +3681,6 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3787,7 +3689,6 @@ func awsAwsjson10_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Status = types.QueueStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3861,7 +3762,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "clusterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3870,7 +3770,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.ClusterId = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3883,7 +3782,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3892,7 +3790,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "modifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3905,7 +3802,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.ModifiedAt = ptr.Time(t)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3914,7 +3810,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3923,7 +3818,6 @@ func awsAwsjson10_deserializeDocumentQueueSummary(v **types.QueueSummary, value 
 				}
 				sv.Status = types.QueueStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3953,15 +3847,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3969,7 +3857,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3978,7 +3865,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3987,14 +3873,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4070,7 +3952,6 @@ func awsAwsjson10_deserializeDocumentScalingConfiguration(v **types.ScalingConfi
 				}
 				sv.MaxInstanceCount = int32(i64)
 			}
-
 		case "minInstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4083,7 +3964,6 @@ func awsAwsjson10_deserializeDocumentScalingConfiguration(v **types.ScalingConfi
 				}
 				sv.MinInstanceCount = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4123,7 +4003,6 @@ func awsAwsjson10_deserializeDocumentScheduler(v **types.Scheduler, value interf
 				}
 				sv.Type = types.SchedulerType(jtv)
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4132,7 +4011,6 @@ func awsAwsjson10_deserializeDocumentScheduler(v **types.Scheduler, value interf
 				}
 				sv.Version = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4198,15 +4076,9 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4214,7 +4086,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4223,7 +4094,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4232,7 +4102,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4241,7 +4110,6 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
-
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4250,14 +4118,10 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4293,7 +4157,6 @@ func awsAwsjson10_deserializeDocumentSlurmAuthKey(v **types.SlurmAuthKey, value 
 				}
 				sv.SecretArn = ptr.String(jtv)
 			}
-
 		case "secretVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4302,7 +4165,6 @@ func awsAwsjson10_deserializeDocumentSlurmAuthKey(v **types.SlurmAuthKey, value 
 				}
 				sv.SecretVersion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4342,7 +4204,6 @@ func awsAwsjson10_deserializeDocumentSlurmCustomSetting(v **types.SlurmCustomSet
 				}
 				sv.ParameterName = ptr.String(jtv)
 			}
-
 		case "parameterValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4351,7 +4212,6 @@ func awsAwsjson10_deserializeDocumentSlurmCustomSetting(v **types.SlurmCustomSet
 				}
 				sv.ParameterValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4425,7 +4285,6 @@ func awsAwsjson10_deserializeDocumentSpotOptions(v **types.SpotOptions, value in
 				}
 				sv.AllocationStrategy = types.SpotAllocationStrategy(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4491,15 +4350,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4507,7 +4360,6 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4520,14 +4372,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4553,20 +4401,13 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "fieldList":
 			if err := awsAwsjson10_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4574,7 +4415,6 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4583,14 +4423,10 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4626,7 +4462,6 @@ func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4635,7 +4470,6 @@ func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4705,7 +4539,6 @@ func awsAwsjson10_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 			if err := awsAwsjson10_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4741,7 +4574,6 @@ func awsAwsjson10_deserializeOpDocumentCreateComputeNodeGroupOutput(v **CreateCo
 			if err := awsAwsjson10_deserializeDocumentComputeNodeGroup(&sv.ComputeNodeGroup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4777,7 +4609,6 @@ func awsAwsjson10_deserializeOpDocumentCreateQueueOutput(v **CreateQueueOutput, 
 			if err := awsAwsjson10_deserializeDocumentQueue(&sv.Queue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4906,7 +4737,6 @@ func awsAwsjson10_deserializeOpDocumentGetClusterOutput(v **GetClusterOutput, va
 			if err := awsAwsjson10_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4942,7 +4772,6 @@ func awsAwsjson10_deserializeOpDocumentGetComputeNodeGroupOutput(v **GetComputeN
 			if err := awsAwsjson10_deserializeDocumentComputeNodeGroup(&sv.ComputeNodeGroup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4978,7 +4807,6 @@ func awsAwsjson10_deserializeOpDocumentGetQueueOutput(v **GetQueueOutput, value 
 			if err := awsAwsjson10_deserializeDocumentQueue(&sv.Queue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5014,7 +4842,6 @@ func awsAwsjson10_deserializeOpDocumentListClustersOutput(v **ListClustersOutput
 			if err := awsAwsjson10_deserializeDocumentClusterList(&sv.Clusters, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5023,7 +4850,6 @@ func awsAwsjson10_deserializeOpDocumentListClustersOutput(v **ListClustersOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5059,7 +4885,6 @@ func awsAwsjson10_deserializeOpDocumentListComputeNodeGroupsOutput(v **ListCompu
 			if err := awsAwsjson10_deserializeDocumentComputeNodeGroupList(&sv.ComputeNodeGroups, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5068,7 +4893,6 @@ func awsAwsjson10_deserializeOpDocumentListComputeNodeGroupsOutput(v **ListCompu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5108,12 +4932,10 @@ func awsAwsjson10_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "queues":
 			if err := awsAwsjson10_deserializeDocumentQueueList(&sv.Queues, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5149,7 +4971,6 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson10_deserializeDocumentResponseTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5185,7 +5006,6 @@ func awsAwsjson10_deserializeOpDocumentRegisterComputeNodeGroupInstanceOutput(v 
 			if err := awsAwsjson10_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
 			}
-
 		case "nodeID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5194,7 +5014,6 @@ func awsAwsjson10_deserializeOpDocumentRegisterComputeNodeGroupInstanceOutput(v 
 				}
 				sv.NodeID = ptr.String(jtv)
 			}
-
 		case "sharedSecret":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5203,7 +5022,6 @@ func awsAwsjson10_deserializeOpDocumentRegisterComputeNodeGroupInstanceOutput(v 
 				}
 				sv.SharedSecret = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5239,7 +5057,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateComputeNodeGroupOutput(v **UpdateCo
 			if err := awsAwsjson10_deserializeDocumentComputeNodeGroup(&sv.ComputeNodeGroup, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5275,7 +5092,6 @@ func awsAwsjson10_deserializeOpDocumentUpdateQueueOutput(v **UpdateQueueOutput, 
 			if err := awsAwsjson10_deserializeDocumentQueue(&sv.Queue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

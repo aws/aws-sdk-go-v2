@@ -4131,12 +4131,10 @@ func awsAwsjson11_deserializeDocumentChildShard(v **types.ChildShard, value inte
 			if err := awsAwsjson11_deserializeDocumentHashKeyRange(&sv.HashKeyRange, value); err != nil {
 				return err
 			}
-
 		case "ParentShards":
 			if err := awsAwsjson11_deserializeDocumentShardIdList(&sv.ParentShards, value); err != nil {
 				return err
 			}
-
 		case "ShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4145,7 +4143,6 @@ func awsAwsjson11_deserializeDocumentChildShard(v **types.ChildShard, value inte
 				}
 				sv.ShardId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4219,7 +4216,6 @@ func awsAwsjson11_deserializeDocumentHashKeyRange(v **types.HashKeyRange, value 
 				}
 				sv.EndingHashKey = ptr.String(jtv)
 			}
-
 		case "StartingHashKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4228,7 +4224,6 @@ func awsAwsjson11_deserializeDocumentHashKeyRange(v **types.HashKeyRange, value 
 				}
 				sv.StartingHashKey = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4258,15 +4253,9 @@ func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.Internal
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4274,14 +4263,10 @@ func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4307,15 +4292,9 @@ func awsAwsjson11_deserializeDocumentKMSAccessDeniedException(v **types.KMSAcces
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4323,14 +4302,10 @@ func awsAwsjson11_deserializeDocumentKMSAccessDeniedException(v **types.KMSAcces
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4356,15 +4331,9 @@ func awsAwsjson11_deserializeDocumentKMSDisabledException(v **types.KMSDisabledE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4372,14 +4341,10 @@ func awsAwsjson11_deserializeDocumentKMSDisabledException(v **types.KMSDisabledE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4405,15 +4370,9 @@ func awsAwsjson11_deserializeDocumentKMSInvalidStateException(v **types.KMSInval
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4421,14 +4380,10 @@ func awsAwsjson11_deserializeDocumentKMSInvalidStateException(v **types.KMSInval
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4454,15 +4409,9 @@ func awsAwsjson11_deserializeDocumentKMSNotFoundException(v **types.KMSNotFoundE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4470,14 +4419,10 @@ func awsAwsjson11_deserializeDocumentKMSNotFoundException(v **types.KMSNotFoundE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4503,15 +4448,9 @@ func awsAwsjson11_deserializeDocumentKMSOptInRequired(v **types.KMSOptInRequired
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4519,14 +4458,10 @@ func awsAwsjson11_deserializeDocumentKMSOptInRequired(v **types.KMSOptInRequired
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4552,15 +4487,9 @@ func awsAwsjson11_deserializeDocumentKMSThrottlingException(v **types.KMSThrottl
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4568,14 +4497,10 @@ func awsAwsjson11_deserializeDocumentKMSThrottlingException(v **types.KMSThrottl
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4618,7 +4543,6 @@ func awsAwsjson11_deserializeDocumentRecord(v **types.Record, value interface{})
 
 				}
 			}
-
 		case "Data":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4631,7 +4555,6 @@ func awsAwsjson11_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.Data = dv
 			}
-
 		case "EncryptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4640,7 +4563,6 @@ func awsAwsjson11_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
-
 		case "PartitionKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4649,7 +4571,6 @@ func awsAwsjson11_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.PartitionKey = ptr.String(jtv)
 			}
-
 		case "SequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4658,7 +4579,6 @@ func awsAwsjson11_deserializeDocumentRecord(v **types.Record, value interface{})
 				}
 				sv.SequenceNumber = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4722,15 +4642,9 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4738,14 +4652,10 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4771,15 +4681,9 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4787,14 +4691,10 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4862,7 +4762,6 @@ func awsAwsjson11_deserializeDocumentSubscribeToShardEvent(v **types.SubscribeTo
 			if err := awsAwsjson11_deserializeDocumentChildShardList(&sv.ChildShards, value); err != nil {
 				return err
 			}
-
 		case "ContinuationSequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4871,7 +4770,6 @@ func awsAwsjson11_deserializeDocumentSubscribeToShardEvent(v **types.SubscribeTo
 				}
 				sv.ContinuationSequenceNumber = ptr.String(jtv)
 			}
-
 		case "MillisBehindLatest":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4884,12 +4782,10 @@ func awsAwsjson11_deserializeDocumentSubscribeToShardEvent(v **types.SubscribeTo
 				}
 				sv.MillisBehindLatest = ptr.Int64(i64)
 			}
-
 		case "Records":
 			if err := awsAwsjson11_deserializeDocumentRecordList(&sv.Records, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5511,15 +5407,9 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5527,14 +5417,10 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5570,7 +5456,6 @@ func awsAwsjson11_deserializeDocumentConsumer(v **types.Consumer, value interfac
 				}
 				sv.ConsumerARN = ptr.String(jtv)
 			}
-
 		case "ConsumerCreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5586,7 +5471,6 @@ func awsAwsjson11_deserializeDocumentConsumer(v **types.Consumer, value interfac
 
 				}
 			}
-
 		case "ConsumerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5595,7 +5479,6 @@ func awsAwsjson11_deserializeDocumentConsumer(v **types.Consumer, value interfac
 				}
 				sv.ConsumerName = ptr.String(jtv)
 			}
-
 		case "ConsumerStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5604,7 +5487,6 @@ func awsAwsjson11_deserializeDocumentConsumer(v **types.Consumer, value interfac
 				}
 				sv.ConsumerStatus = types.ConsumerStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5644,7 +5526,6 @@ func awsAwsjson11_deserializeDocumentConsumerDescription(v **types.ConsumerDescr
 				}
 				sv.ConsumerARN = ptr.String(jtv)
 			}
-
 		case "ConsumerCreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5660,7 +5541,6 @@ func awsAwsjson11_deserializeDocumentConsumerDescription(v **types.ConsumerDescr
 
 				}
 			}
-
 		case "ConsumerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5669,7 +5549,6 @@ func awsAwsjson11_deserializeDocumentConsumerDescription(v **types.ConsumerDescr
 				}
 				sv.ConsumerName = ptr.String(jtv)
 			}
-
 		case "ConsumerStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5678,7 +5557,6 @@ func awsAwsjson11_deserializeDocumentConsumerDescription(v **types.ConsumerDescr
 				}
 				sv.ConsumerStatus = types.ConsumerStatus(jtv)
 			}
-
 		case "StreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5687,7 +5565,6 @@ func awsAwsjson11_deserializeDocumentConsumerDescription(v **types.ConsumerDescr
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5757,7 +5634,6 @@ func awsAwsjson11_deserializeDocumentEnhancedMetrics(v **types.EnhancedMetrics, 
 			if err := awsAwsjson11_deserializeDocumentMetricsNameList(&sv.ShardLevelMetrics, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5821,15 +5697,9 @@ func awsAwsjson11_deserializeDocumentExpiredIteratorException(v **types.ExpiredI
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5837,14 +5707,10 @@ func awsAwsjson11_deserializeDocumentExpiredIteratorException(v **types.ExpiredI
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5870,15 +5736,9 @@ func awsAwsjson11_deserializeDocumentExpiredNextTokenException(v **types.Expired
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5886,14 +5746,10 @@ func awsAwsjson11_deserializeDocumentExpiredNextTokenException(v **types.Expired
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5919,15 +5775,9 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5935,14 +5785,10 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5968,15 +5814,9 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5984,14 +5824,10 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6053,15 +5889,9 @@ func awsAwsjson11_deserializeDocumentProvisionedThroughputExceededException(v **
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6069,14 +5899,10 @@ func awsAwsjson11_deserializeDocumentProvisionedThroughputExceededException(v **
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6112,7 +5938,6 @@ func awsAwsjson11_deserializeDocumentPutRecordsResultEntry(v **types.PutRecordsR
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
-
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6121,7 +5946,6 @@ func awsAwsjson11_deserializeDocumentPutRecordsResultEntry(v **types.PutRecordsR
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "SequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6130,7 +5954,6 @@ func awsAwsjson11_deserializeDocumentPutRecordsResultEntry(v **types.PutRecordsR
 				}
 				sv.SequenceNumber = ptr.String(jtv)
 			}
-
 		case "ShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6139,7 +5962,6 @@ func awsAwsjson11_deserializeDocumentPutRecordsResultEntry(v **types.PutRecordsR
 				}
 				sv.ShardId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6213,7 +6035,6 @@ func awsAwsjson11_deserializeDocumentSequenceNumberRange(v **types.SequenceNumbe
 				}
 				sv.EndingSequenceNumber = ptr.String(jtv)
 			}
-
 		case "StartingSequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6222,7 +6043,6 @@ func awsAwsjson11_deserializeDocumentSequenceNumberRange(v **types.SequenceNumbe
 				}
 				sv.StartingSequenceNumber = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6262,12 +6082,10 @@ func awsAwsjson11_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.AdjacentParentShardId = ptr.String(jtv)
 			}
-
 		case "HashKeyRange":
 			if err := awsAwsjson11_deserializeDocumentHashKeyRange(&sv.HashKeyRange, value); err != nil {
 				return err
 			}
-
 		case "ParentShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6276,12 +6094,10 @@ func awsAwsjson11_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.ParentShardId = ptr.String(jtv)
 			}
-
 		case "SequenceNumberRange":
 			if err := awsAwsjson11_deserializeDocumentSequenceNumberRange(&sv.SequenceNumberRange, value); err != nil {
 				return err
 			}
-
 		case "ShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6290,7 +6106,6 @@ func awsAwsjson11_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.ShardId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6364,12 +6179,10 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
-
 		case "EnhancedMonitoring":
 			if err := awsAwsjson11_deserializeDocumentEnhancedMonitoringList(&sv.EnhancedMonitoring, value); err != nil {
 				return err
 			}
-
 		case "HasMoreShards":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6378,7 +6191,6 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.HasMoreShards = ptr.Bool(jtv)
 			}
-
 		case "KeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6387,7 +6199,6 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.KeyId = ptr.String(jtv)
 			}
-
 		case "RetentionPeriodHours":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6400,12 +6211,10 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.RetentionPeriodHours = ptr.Int32(int32(i64))
 			}
-
 		case "Shards":
 			if err := awsAwsjson11_deserializeDocumentShardList(&sv.Shards, value); err != nil {
 				return err
 			}
-
 		case "StreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6414,7 +6223,6 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		case "StreamCreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6430,12 +6238,10 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 
 				}
 			}
-
 		case "StreamModeDetails":
 			if err := awsAwsjson11_deserializeDocumentStreamModeDetails(&sv.StreamModeDetails, value); err != nil {
 				return err
 			}
-
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6444,7 +6250,6 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		case "StreamStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6453,7 +6258,6 @@ func awsAwsjson11_deserializeDocumentStreamDescription(v **types.StreamDescripti
 				}
 				sv.StreamStatus = types.StreamStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6497,7 +6301,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.ConsumerCount = ptr.Int32(int32(i64))
 			}
-
 		case "EncryptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6506,12 +6309,10 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
-
 		case "EnhancedMonitoring":
 			if err := awsAwsjson11_deserializeDocumentEnhancedMonitoringList(&sv.EnhancedMonitoring, value); err != nil {
 				return err
 			}
-
 		case "KeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6520,7 +6321,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.KeyId = ptr.String(jtv)
 			}
-
 		case "OpenShardCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6533,7 +6333,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.OpenShardCount = ptr.Int32(int32(i64))
 			}
-
 		case "RetentionPeriodHours":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6546,7 +6345,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.RetentionPeriodHours = ptr.Int32(int32(i64))
 			}
-
 		case "StreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6555,7 +6353,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		case "StreamCreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6571,12 +6368,10 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 
 				}
 			}
-
 		case "StreamModeDetails":
 			if err := awsAwsjson11_deserializeDocumentStreamModeDetails(&sv.StreamModeDetails, value); err != nil {
 				return err
 			}
-
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6585,7 +6380,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		case "StreamStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6594,7 +6388,6 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 				}
 				sv.StreamStatus = types.StreamStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6634,7 +6427,6 @@ func awsAwsjson11_deserializeDocumentStreamModeDetails(v **types.StreamModeDetai
 				}
 				sv.StreamMode = types.StreamMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6710,7 +6502,6 @@ func awsAwsjson11_deserializeDocumentStreamSummary(v **types.StreamSummary, valu
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		case "StreamCreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6726,12 +6517,10 @@ func awsAwsjson11_deserializeDocumentStreamSummary(v **types.StreamSummary, valu
 
 				}
 			}
-
 		case "StreamModeDetails":
 			if err := awsAwsjson11_deserializeDocumentStreamModeDetails(&sv.StreamModeDetails, value); err != nil {
 				return err
 			}
-
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6740,7 +6529,6 @@ func awsAwsjson11_deserializeDocumentStreamSummary(v **types.StreamSummary, valu
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		case "StreamStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6749,7 +6537,6 @@ func awsAwsjson11_deserializeDocumentStreamSummary(v **types.StreamSummary, valu
 				}
 				sv.StreamStatus = types.StreamStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6823,7 +6610,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6832,7 +6618,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6896,15 +6681,9 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6912,14 +6691,10 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6959,7 +6734,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLimitsOutput(v **DescribeLimitsOu
 				}
 				sv.OnDemandStreamCount = ptr.Int32(int32(i64))
 			}
-
 		case "OnDemandStreamCountLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6972,7 +6746,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLimitsOutput(v **DescribeLimitsOu
 				}
 				sv.OnDemandStreamCountLimit = ptr.Int32(int32(i64))
 			}
-
 		case "OpenShardCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6985,7 +6758,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLimitsOutput(v **DescribeLimitsOu
 				}
 				sv.OpenShardCount = ptr.Int32(int32(i64))
 			}
-
 		case "ShardLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6998,7 +6770,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeLimitsOutput(v **DescribeLimitsOu
 				}
 				sv.ShardLimit = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7034,7 +6805,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeStreamConsumerOutput(v **Describe
 			if err := awsAwsjson11_deserializeDocumentConsumerDescription(&sv.ConsumerDescription, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7070,7 +6840,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeStreamOutput(v **DescribeStreamOu
 			if err := awsAwsjson11_deserializeDocumentStreamDescription(&sv.StreamDescription, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7106,7 +6875,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeStreamSummaryOutput(v **DescribeS
 			if err := awsAwsjson11_deserializeDocumentStreamDescriptionSummary(&sv.StreamDescriptionSummary, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7142,12 +6910,10 @@ func awsAwsjson11_deserializeOpDocumentDisableEnhancedMonitoringOutput(v **Disab
 			if err := awsAwsjson11_deserializeDocumentMetricsNameList(&sv.CurrentShardLevelMetrics, value); err != nil {
 				return err
 			}
-
 		case "DesiredShardLevelMetrics":
 			if err := awsAwsjson11_deserializeDocumentMetricsNameList(&sv.DesiredShardLevelMetrics, value); err != nil {
 				return err
 			}
-
 		case "StreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7156,7 +6922,6 @@ func awsAwsjson11_deserializeOpDocumentDisableEnhancedMonitoringOutput(v **Disab
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7165,7 +6930,6 @@ func awsAwsjson11_deserializeOpDocumentDisableEnhancedMonitoringOutput(v **Disab
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7201,12 +6965,10 @@ func awsAwsjson11_deserializeOpDocumentEnableEnhancedMonitoringOutput(v **Enable
 			if err := awsAwsjson11_deserializeDocumentMetricsNameList(&sv.CurrentShardLevelMetrics, value); err != nil {
 				return err
 			}
-
 		case "DesiredShardLevelMetrics":
 			if err := awsAwsjson11_deserializeDocumentMetricsNameList(&sv.DesiredShardLevelMetrics, value); err != nil {
 				return err
 			}
-
 		case "StreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7215,7 +6977,6 @@ func awsAwsjson11_deserializeOpDocumentEnableEnhancedMonitoringOutput(v **Enable
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7224,7 +6985,6 @@ func awsAwsjson11_deserializeOpDocumentEnableEnhancedMonitoringOutput(v **Enable
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7260,7 +7020,6 @@ func awsAwsjson11_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, va
 			if err := awsAwsjson11_deserializeDocumentChildShardList(&sv.ChildShards, value); err != nil {
 				return err
 			}
-
 		case "MillisBehindLatest":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7273,7 +7032,6 @@ func awsAwsjson11_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, va
 				}
 				sv.MillisBehindLatest = ptr.Int64(i64)
 			}
-
 		case "NextShardIterator":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7282,12 +7040,10 @@ func awsAwsjson11_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, va
 				}
 				sv.NextShardIterator = ptr.String(jtv)
 			}
-
 		case "Records":
 			if err := awsAwsjson11_deserializeDocumentRecordList(&sv.Records, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7327,7 +7083,6 @@ func awsAwsjson11_deserializeOpDocumentGetResourcePolicyOutput(v **GetResourcePo
 				}
 				sv.Policy = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7367,7 +7122,6 @@ func awsAwsjson11_deserializeOpDocumentGetShardIteratorOutput(v **GetShardIterat
 				}
 				sv.ShardIterator = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7407,12 +7161,10 @@ func awsAwsjson11_deserializeOpDocumentListShardsOutput(v **ListShardsOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "Shards":
 			if err := awsAwsjson11_deserializeDocumentShardList(&sv.Shards, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7448,7 +7200,6 @@ func awsAwsjson11_deserializeOpDocumentListStreamConsumersOutput(v **ListStreamC
 			if err := awsAwsjson11_deserializeDocumentConsumerList(&sv.Consumers, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7457,7 +7208,6 @@ func awsAwsjson11_deserializeOpDocumentListStreamConsumersOutput(v **ListStreamC
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7497,7 +7247,6 @@ func awsAwsjson11_deserializeOpDocumentListStreamsOutput(v **ListStreamsOutput, 
 				}
 				sv.HasMoreStreams = ptr.Bool(jtv)
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7506,17 +7255,14 @@ func awsAwsjson11_deserializeOpDocumentListStreamsOutput(v **ListStreamsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "StreamNames":
 			if err := awsAwsjson11_deserializeDocumentStreamNameList(&sv.StreamNames, value); err != nil {
 				return err
 			}
-
 		case "StreamSummaries":
 			if err := awsAwsjson11_deserializeDocumentStreamSummaryList(&sv.StreamSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7556,12 +7302,10 @@ func awsAwsjson11_deserializeOpDocumentListTagsForStreamOutput(v **ListTagsForSt
 				}
 				sv.HasMoreTags = ptr.Bool(jtv)
 			}
-
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7601,7 +7345,6 @@ func awsAwsjson11_deserializeOpDocumentPutRecordOutput(v **PutRecordOutput, valu
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
-
 		case "SequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7610,7 +7353,6 @@ func awsAwsjson11_deserializeOpDocumentPutRecordOutput(v **PutRecordOutput, valu
 				}
 				sv.SequenceNumber = ptr.String(jtv)
 			}
-
 		case "ShardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7619,7 +7361,6 @@ func awsAwsjson11_deserializeOpDocumentPutRecordOutput(v **PutRecordOutput, valu
 				}
 				sv.ShardId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7659,7 +7400,6 @@ func awsAwsjson11_deserializeOpDocumentPutRecordsOutput(v **PutRecordsOutput, va
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
-
 		case "FailedRecordCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7672,12 +7412,10 @@ func awsAwsjson11_deserializeOpDocumentPutRecordsOutput(v **PutRecordsOutput, va
 				}
 				sv.FailedRecordCount = ptr.Int32(int32(i64))
 			}
-
 		case "Records":
 			if err := awsAwsjson11_deserializeDocumentPutRecordsResultEntryList(&sv.Records, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7713,7 +7451,6 @@ func awsAwsjson11_deserializeOpDocumentRegisterStreamConsumerOutput(v **Register
 			if err := awsAwsjson11_deserializeDocumentConsumer(&sv.Consumer, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7757,7 +7494,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateShardCountOutput(v **UpdateShardCou
 				}
 				sv.CurrentShardCount = ptr.Int32(int32(i64))
 			}
-
 		case "StreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7766,7 +7502,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateShardCountOutput(v **UpdateShardCou
 				}
 				sv.StreamARN = ptr.String(jtv)
 			}
-
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7775,7 +7510,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateShardCountOutput(v **UpdateShardCou
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		case "TargetShardCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7788,7 +7522,6 @@ func awsAwsjson11_deserializeOpDocumentUpdateShardCountOutput(v **UpdateShardCou
 				}
 				sv.TargetShardCount = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 

@@ -393,7 +393,6 @@ func awsRestjson1_deserializeOpDocumentCreateJobOutput(v **CreateJobOutput, valu
 			if err := awsRestjson1_deserializeDocumentJob(&sv.Job, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -560,7 +559,6 @@ func awsRestjson1_deserializeOpDocumentCreateJobTemplateOutput(v **CreateJobTemp
 			if err := awsRestjson1_deserializeDocumentJobTemplate(&sv.JobTemplate, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -727,7 +725,6 @@ func awsRestjson1_deserializeOpDocumentCreatePresetOutput(v **CreatePresetOutput
 			if err := awsRestjson1_deserializeDocumentPreset(&sv.Preset, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -894,7 +891,6 @@ func awsRestjson1_deserializeOpDocumentCreateQueueOutput(v **CreateQueueOutput, 
 			if err := awsRestjson1_deserializeDocumentQueue(&sv.Queue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1473,7 +1469,6 @@ func awsRestjson1_deserializeOpDocumentDescribeEndpointsOutput(v **DescribeEndpo
 			if err := awsRestjson1_deserializeDocument__listOfEndpoint(&sv.Endpoints, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1482,7 +1477,6 @@ func awsRestjson1_deserializeOpDocumentDescribeEndpointsOutput(v **DescribeEndpo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1752,7 +1746,6 @@ func awsRestjson1_deserializeOpDocumentGetJobOutput(v **GetJobOutput, value inte
 			if err := awsRestjson1_deserializeDocumentJob(&sv.Job, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1919,7 +1912,6 @@ func awsRestjson1_deserializeOpDocumentGetJobTemplateOutput(v **GetJobTemplateOu
 			if err := awsRestjson1_deserializeDocumentJobTemplate(&sv.JobTemplate, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2086,7 +2078,6 @@ func awsRestjson1_deserializeOpDocumentGetPolicyOutput(v **GetPolicyOutput, valu
 			if err := awsRestjson1_deserializeDocumentPolicy(&sv.Policy, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2253,7 +2244,6 @@ func awsRestjson1_deserializeOpDocumentGetPresetOutput(v **GetPresetOutput, valu
 			if err := awsRestjson1_deserializeDocumentPreset(&sv.Preset, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2420,7 +2410,6 @@ func awsRestjson1_deserializeOpDocumentGetQueueOutput(v **GetQueueOutput, value 
 			if err := awsRestjson1_deserializeDocumentQueue(&sv.Queue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2587,7 +2576,6 @@ func awsRestjson1_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, value 
 			if err := awsRestjson1_deserializeDocument__listOfJob(&sv.Jobs, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2596,7 +2584,6 @@ func awsRestjson1_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2763,7 +2750,6 @@ func awsRestjson1_deserializeOpDocumentListJobTemplatesOutput(v **ListJobTemplat
 			if err := awsRestjson1_deserializeDocument__listOfJobTemplate(&sv.JobTemplates, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2772,7 +2758,6 @@ func awsRestjson1_deserializeOpDocumentListJobTemplatesOutput(v **ListJobTemplat
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2943,12 +2928,10 @@ func awsRestjson1_deserializeOpDocumentListPresetsOutput(v **ListPresetsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "presets":
 			if err := awsRestjson1_deserializeDocument__listOfPreset(&sv.Presets, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3119,12 +3102,10 @@ func awsRestjson1_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "queues":
 			if err := awsRestjson1_deserializeDocument__listOfQueue(&sv.Queues, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3291,7 +3272,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3462,12 +3442,10 @@ func awsRestjson1_deserializeOpDocumentListVersionsOutput(v **ListVersionsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "versions":
 			if err := awsRestjson1_deserializeDocument__listOfJobEngineVersion(&sv.Versions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3634,7 +3612,6 @@ func awsRestjson1_deserializeOpDocumentPutPolicyOutput(v **PutPolicyOutput, valu
 			if err := awsRestjson1_deserializeDocumentPolicy(&sv.Policy, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3801,7 +3778,6 @@ func awsRestjson1_deserializeOpDocumentSearchJobsOutput(v **SearchJobsOutput, va
 			if err := awsRestjson1_deserializeDocument__listOfJob(&sv.Jobs, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3810,7 +3786,6 @@ func awsRestjson1_deserializeOpDocumentSearchJobsOutput(v **SearchJobsOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4183,7 +4158,6 @@ func awsRestjson1_deserializeOpDocumentUpdateJobTemplateOutput(v **UpdateJobTemp
 			if err := awsRestjson1_deserializeDocumentJobTemplate(&sv.JobTemplate, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4350,7 +4324,6 @@ func awsRestjson1_deserializeOpDocumentUpdatePresetOutput(v **UpdatePresetOutput
 			if err := awsRestjson1_deserializeDocumentPreset(&sv.Preset, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4517,7 +4490,6 @@ func awsRestjson1_deserializeOpDocumentUpdateQueueOutput(v **UpdateQueueOutput, 
 			if err := awsRestjson1_deserializeDocumentQueue(&sv.Queue, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6539,7 +6511,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.AudioDescriptionBroadcasterMix = types.AacAudioDescriptionBroadcasterMix(jtv)
 			}
-
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6552,7 +6523,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6561,7 +6531,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.CodecProfile = types.AacCodecProfile(jtv)
 			}
-
 		case "codingMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6570,7 +6539,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.CodingMode = types.AacCodingMode(jtv)
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6579,7 +6547,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.RateControlMode = types.AacRateControlMode(jtv)
 			}
-
 		case "rawFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6588,7 +6555,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.RawFormat = types.AacRawFormat(jtv)
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6601,7 +6567,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		case "specification":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6610,7 +6575,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.Specification = types.AacSpecification(jtv)
 			}
-
 		case "vbrQuality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6619,7 +6583,6 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				}
 				sv.VbrQuality = types.AacVbrQuality(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6663,7 +6626,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "bitstreamMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6672,7 +6634,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.BitstreamMode = types.Ac3BitstreamMode(jtv)
 			}
-
 		case "codingMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6681,7 +6642,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.CodingMode = types.Ac3CodingMode(jtv)
 			}
-
 		case "dialnorm":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6694,7 +6654,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.Dialnorm = ptr.Int32(int32(i64))
 			}
-
 		case "dynamicRangeCompressionLine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6703,7 +6662,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.DynamicRangeCompressionLine = types.Ac3DynamicRangeCompressionLine(jtv)
 			}
-
 		case "dynamicRangeCompressionProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6712,7 +6670,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.DynamicRangeCompressionProfile = types.Ac3DynamicRangeCompressionProfile(jtv)
 			}
-
 		case "dynamicRangeCompressionRf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6721,7 +6678,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.DynamicRangeCompressionRf = types.Ac3DynamicRangeCompressionRf(jtv)
 			}
-
 		case "lfeFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6730,7 +6686,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.LfeFilter = types.Ac3LfeFilter(jtv)
 			}
-
 		case "metadataControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6739,7 +6694,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.MetadataControl = types.Ac3MetadataControl(jtv)
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6752,7 +6706,6 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6792,7 +6745,6 @@ func awsRestjson1_deserializeDocumentAccelerationSettings(v **types.Acceleration
 				}
 				sv.Mode = types.AccelerationMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6832,7 +6784,6 @@ func awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(v **types.Advan
 				}
 				sv.AddTexture = types.AdvancedInputFilterAddTexture(jtv)
 			}
-
 		case "sharpening":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6841,7 +6792,6 @@ func awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(v **types.Advan
 				}
 				sv.Sharpening = types.AdvancedInputFilterSharpen(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6885,7 +6835,6 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 				}
 				sv.BitDepth = ptr.Int32(int32(i64))
 			}
-
 		case "channels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6898,7 +6847,6 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6911,7 +6859,6 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6955,7 +6902,6 @@ func awsRestjson1_deserializeDocumentAllowedRenditionSize(v **types.AllowedRendi
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "required":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6964,7 +6910,6 @@ func awsRestjson1_deserializeDocumentAllowedRenditionSize(v **types.AllowedRendi
 				}
 				sv.Required = types.RequiredFlag(jtv)
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6977,7 +6922,6 @@ func awsRestjson1_deserializeDocumentAllowedRenditionSize(v **types.AllowedRendi
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7017,7 +6961,6 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 				}
 				sv.Convert608To708 = types.AncillaryConvert608To708(jtv)
 			}
-
 		case "sourceAncillaryChannelNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7030,7 +6973,6 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 				}
 				sv.SourceAncillaryChannelNumber = ptr.Int32(int32(i64))
 			}
-
 		case "terminateCaptions":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7039,7 +6981,6 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 				}
 				sv.TerminateCaptions = types.AncillaryTerminateCaptions(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7079,12 +7020,10 @@ func awsRestjson1_deserializeDocumentAudioChannelTaggingSettings(v **types.Audio
 				}
 				sv.ChannelTag = types.AudioChannelTag(jtv)
 			}
-
 		case "channelTags":
 			if err := awsRestjson1_deserializeDocument__listOfAudioChannelTag(&sv.ChannelTags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7120,17 +7059,14 @@ func awsRestjson1_deserializeDocumentAudioCodecSettings(v **types.AudioCodecSett
 			if err := awsRestjson1_deserializeDocumentAacSettings(&sv.AacSettings, value); err != nil {
 				return err
 			}
-
 		case "ac3Settings":
 			if err := awsRestjson1_deserializeDocumentAc3Settings(&sv.Ac3Settings, value); err != nil {
 				return err
 			}
-
 		case "aiffSettings":
 			if err := awsRestjson1_deserializeDocumentAiffSettings(&sv.AiffSettings, value); err != nil {
 				return err
 			}
-
 		case "codec":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7139,47 +7075,38 @@ func awsRestjson1_deserializeDocumentAudioCodecSettings(v **types.AudioCodecSett
 				}
 				sv.Codec = types.AudioCodec(jtv)
 			}
-
 		case "eac3AtmosSettings":
 			if err := awsRestjson1_deserializeDocumentEac3AtmosSettings(&sv.Eac3AtmosSettings, value); err != nil {
 				return err
 			}
-
 		case "eac3Settings":
 			if err := awsRestjson1_deserializeDocumentEac3Settings(&sv.Eac3Settings, value); err != nil {
 				return err
 			}
-
 		case "flacSettings":
 			if err := awsRestjson1_deserializeDocumentFlacSettings(&sv.FlacSettings, value); err != nil {
 				return err
 			}
-
 		case "mp2Settings":
 			if err := awsRestjson1_deserializeDocumentMp2Settings(&sv.Mp2Settings, value); err != nil {
 				return err
 			}
-
 		case "mp3Settings":
 			if err := awsRestjson1_deserializeDocumentMp3Settings(&sv.Mp3Settings, value); err != nil {
 				return err
 			}
-
 		case "opusSettings":
 			if err := awsRestjson1_deserializeDocumentOpusSettings(&sv.OpusSettings, value); err != nil {
 				return err
 			}
-
 		case "vorbisSettings":
 			if err := awsRestjson1_deserializeDocumentVorbisSettings(&sv.VorbisSettings, value); err != nil {
 				return err
 			}
-
 		case "wavSettings":
 			if err := awsRestjson1_deserializeDocumentWavSettings(&sv.WavSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7215,12 +7142,10 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 			if err := awsRestjson1_deserializeDocumentAudioChannelTaggingSettings(&sv.AudioChannelTaggingSettings, value); err != nil {
 				return err
 			}
-
 		case "audioNormalizationSettings":
 			if err := awsRestjson1_deserializeDocumentAudioNormalizationSettings(&sv.AudioNormalizationSettings, value); err != nil {
 				return err
 			}
-
 		case "audioSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7229,7 +7154,6 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.AudioSourceName = ptr.String(jtv)
 			}
-
 		case "audioType":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7242,7 +7166,6 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.AudioType = ptr.Int32(int32(i64))
 			}
-
 		case "audioTypeControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7251,12 +7174,10 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.AudioTypeControl = types.AudioTypeControl(jtv)
 			}
-
 		case "codecSettings":
 			if err := awsRestjson1_deserializeDocumentAudioCodecSettings(&sv.CodecSettings, value); err != nil {
 				return err
 			}
-
 		case "customLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7265,7 +7186,6 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
-
 		case "languageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7274,7 +7194,6 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "languageCodeControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7283,12 +7202,10 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.LanguageCodeControl = types.AudioLanguageCodeControl(jtv)
 			}
-
 		case "remixSettings":
 			if err := awsRestjson1_deserializeDocumentRemixSettings(&sv.RemixSettings, value); err != nil {
 				return err
 			}
-
 		case "streamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7297,7 +7214,6 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7337,7 +7253,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				}
 				sv.Algorithm = types.AudioNormalizationAlgorithm(jtv)
 			}
-
 		case "algorithmControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7346,7 +7261,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				}
 				sv.AlgorithmControl = types.AudioNormalizationAlgorithmControl(jtv)
 			}
-
 		case "correctionGateLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7359,7 +7273,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				}
 				sv.CorrectionGateLevel = ptr.Int32(int32(i64))
 			}
-
 		case "loudnessLogging":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7368,7 +7281,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				}
 				sv.LoudnessLogging = types.AudioNormalizationLoudnessLogging(jtv)
 			}
-
 		case "peakCalculation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7377,7 +7289,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				}
 				sv.PeakCalculation = types.AudioNormalizationPeakCalculation(jtv)
 			}
-
 		case "targetLkfs":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7411,7 +7322,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 
 				}
 			}
-
 		case "truePeakLimiterThreshold":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7445,7 +7355,6 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7485,7 +7394,6 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.AudioDurationCorrection = types.AudioDurationCorrection(jtv)
 			}
-
 		case "customLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7494,7 +7402,6 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
-
 		case "defaultSelection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7503,7 +7410,6 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.DefaultSelection = types.AudioDefaultSelection(jtv)
 			}
-
 		case "externalAudioFileInput":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7512,12 +7418,10 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.ExternalAudioFileInput = ptr.String(jtv)
 			}
-
 		case "hlsRenditionGroupSettings":
 			if err := awsRestjson1_deserializeDocumentHlsRenditionGroupSettings(&sv.HlsRenditionGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "languageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7526,7 +7430,6 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "offset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7539,12 +7442,10 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.Offset = ptr.Int32(int32(i64))
 			}
-
 		case "pids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(&sv.Pids, value); err != nil {
 				return err
 			}
-
 		case "programSelection":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7557,12 +7458,10 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.ProgramSelection = ptr.Int32(int32(i64))
 			}
-
 		case "remixSettings":
 			if err := awsRestjson1_deserializeDocumentRemixSettings(&sv.RemixSettings, value); err != nil {
 				return err
 			}
-
 		case "selectorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7571,12 +7470,10 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				}
 				sv.SelectorType = types.AudioSelectorType(jtv)
 			}
-
 		case "tracks":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(&sv.Tracks, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7612,7 +7509,6 @@ func awsRestjson1_deserializeDocumentAudioSelectorGroup(v **types.AudioSelectorG
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1(&sv.AudioSelectorNames, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7648,22 +7544,18 @@ func awsRestjson1_deserializeDocumentAutomatedAbrRule(v **types.AutomatedAbrRule
 			if err := awsRestjson1_deserializeDocument__listOfAllowedRenditionSize(&sv.AllowedRenditions, value); err != nil {
 				return err
 			}
-
 		case "forceIncludeRenditions":
 			if err := awsRestjson1_deserializeDocument__listOfForceIncludeRenditionSize(&sv.ForceIncludeRenditions, value); err != nil {
 				return err
 			}
-
 		case "minBottomRenditionSize":
 			if err := awsRestjson1_deserializeDocumentMinBottomRenditionSize(&sv.MinBottomRenditionSize, value); err != nil {
 				return err
 			}
-
 		case "minTopRenditionSize":
 			if err := awsRestjson1_deserializeDocumentMinTopRenditionSize(&sv.MinTopRenditionSize, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7672,7 +7564,6 @@ func awsRestjson1_deserializeDocumentAutomatedAbrRule(v **types.AutomatedAbrRule
 				}
 				sv.Type = types.RuleType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7716,7 +7607,6 @@ func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbr
 				}
 				sv.MaxAbrBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "maxRenditions":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7729,7 +7619,6 @@ func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbr
 				}
 				sv.MaxRenditions = ptr.Int32(int32(i64))
 			}
-
 		case "minAbrBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7742,12 +7631,10 @@ func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbr
 				}
 				sv.MinAbrBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "rules":
 			if err := awsRestjson1_deserializeDocument__listOfAutomatedAbrRule(&sv.Rules, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7783,7 +7670,6 @@ func awsRestjson1_deserializeDocumentAutomatedEncodingSettings(v **types.Automat
 			if err := awsRestjson1_deserializeDocumentAutomatedAbrSettings(&sv.AbrSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7827,7 +7713,6 @@ func awsRestjson1_deserializeDocumentAv1QvbrSettings(v **types.Av1QvbrSettings, 
 				}
 				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
 			}
-
 		case "qvbrQualityLevelFineTune":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7861,7 +7746,6 @@ func awsRestjson1_deserializeDocumentAv1QvbrSettings(v **types.Av1QvbrSettings, 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7901,7 +7785,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.AdaptiveQuantization = types.Av1AdaptiveQuantization(jtv)
 			}
-
 		case "bitDepth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7910,7 +7793,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.BitDepth = types.Av1BitDepth(jtv)
 			}
-
 		case "filmGrainSynthesis":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7919,7 +7801,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.FilmGrainSynthesis = types.Av1FilmGrainSynthesis(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7928,7 +7809,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.FramerateControl = types.Av1FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7937,7 +7817,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.FramerateConversionAlgorithm = types.Av1FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7950,7 +7829,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7963,7 +7841,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "gopSize":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7997,7 +7874,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 
 				}
 			}
-
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8010,7 +7886,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "numberBFramesBetweenReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8023,12 +7898,10 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
 			}
-
 		case "qvbrSettings":
 			if err := awsRestjson1_deserializeDocumentAv1QvbrSettings(&sv.QvbrSettings, value); err != nil {
 				return err
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8037,7 +7910,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.RateControlMode = types.Av1RateControlMode(jtv)
 			}
-
 		case "slices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8050,7 +7922,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.Slices = ptr.Int32(int32(i64))
 			}
-
 		case "spatialAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8059,7 +7930,6 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				}
 				sv.SpatialAdaptiveQuantization = types.Av1SpatialAdaptiveQuantization(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8099,7 +7969,6 @@ func awsRestjson1_deserializeDocumentAvailBlanking(v **types.AvailBlanking, valu
 				}
 				sv.AvailBlankingImage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8139,12 +8008,10 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.AvcIntraClass = types.AvcIntraClass(jtv)
 			}
-
 		case "avcIntraUhdSettings":
 			if err := awsRestjson1_deserializeDocumentAvcIntraUhdSettings(&sv.AvcIntraUhdSettings, value); err != nil {
 				return err
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8153,7 +8020,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.FramerateControl = types.AvcIntraFramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8162,7 +8028,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.FramerateConversionAlgorithm = types.AvcIntraFramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8175,7 +8040,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8188,7 +8052,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8197,7 +8060,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.InterlaceMode = types.AvcIntraInterlaceMode(jtv)
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8206,7 +8068,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.ScanTypeConversionMode = types.AvcIntraScanTypeConversionMode(jtv)
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8215,7 +8076,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.SlowPal = types.AvcIntraSlowPal(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8224,7 +8084,6 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				}
 				sv.Telecine = types.AvcIntraTelecine(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8264,7 +8123,6 @@ func awsRestjson1_deserializeDocumentAvcIntraUhdSettings(v **types.AvcIntraUhdSe
 				}
 				sv.QualityTuningLevel = types.AvcIntraUhdQualityTuningLevel(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8294,15 +8152,9 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8310,14 +8162,10 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8353,7 +8201,6 @@ func awsRestjson1_deserializeDocumentBandwidthReductionFilter(v **types.Bandwidt
 				}
 				sv.Sharpening = types.BandwidthReductionFilterSharpening(jtv)
 			}
-
 		case "strength":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8362,7 +8209,6 @@ func awsRestjson1_deserializeDocumentBandwidthReductionFilter(v **types.Bandwidt
 				}
 				sv.Strength = types.BandwidthReductionFilterStrength(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8402,7 +8248,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.Alignment = types.BurninSubtitleAlignment(jtv)
 			}
-
 		case "applyFontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8411,7 +8256,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.ApplyFontColor = types.BurninSubtitleApplyFontColor(jtv)
 			}
-
 		case "backgroundColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8420,7 +8264,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.BackgroundColor = types.BurninSubtitleBackgroundColor(jtv)
 			}
-
 		case "backgroundOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8433,7 +8276,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.BackgroundOpacity = ptr.Int32(int32(i64))
 			}
-
 		case "fallbackFont":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8442,7 +8284,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FallbackFont = types.BurninSubtitleFallbackFont(jtv)
 			}
-
 		case "fontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8451,7 +8292,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontColor = types.BurninSubtitleFontColor(jtv)
 			}
-
 		case "fontFileBold":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8460,7 +8300,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontFileBold = ptr.String(jtv)
 			}
-
 		case "fontFileBoldItalic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8469,7 +8308,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontFileBoldItalic = ptr.String(jtv)
 			}
-
 		case "fontFileItalic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8478,7 +8316,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontFileItalic = ptr.String(jtv)
 			}
-
 		case "fontFileRegular":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8487,7 +8324,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontFileRegular = ptr.String(jtv)
 			}
-
 		case "fontOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8500,7 +8336,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontOpacity = ptr.Int32(int32(i64))
 			}
-
 		case "fontResolution":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8513,7 +8348,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontResolution = ptr.Int32(int32(i64))
 			}
-
 		case "fontScript":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8522,7 +8356,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontScript = types.FontScript(jtv)
 			}
-
 		case "fontSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8535,7 +8368,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.FontSize = ptr.Int32(int32(i64))
 			}
-
 		case "hexFontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8544,7 +8376,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.HexFontColor = ptr.String(jtv)
 			}
-
 		case "outlineColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8553,7 +8384,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.OutlineColor = types.BurninSubtitleOutlineColor(jtv)
 			}
-
 		case "outlineSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8566,7 +8396,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.OutlineSize = ptr.Int32(int32(i64))
 			}
-
 		case "shadowColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8575,7 +8404,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.ShadowColor = types.BurninSubtitleShadowColor(jtv)
 			}
-
 		case "shadowOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8588,7 +8416,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.ShadowOpacity = ptr.Int32(int32(i64))
 			}
-
 		case "shadowXOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8601,7 +8428,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.ShadowXOffset = ptr.Int32(int32(i64))
 			}
-
 		case "shadowYOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8614,7 +8440,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.ShadowYOffset = ptr.Int32(int32(i64))
 			}
-
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8623,7 +8448,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.StylePassthrough = types.BurnInSubtitleStylePassthrough(jtv)
 			}
-
 		case "teletextSpacing":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8632,7 +8456,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.TeletextSpacing = types.BurninSubtitleTeletextSpacing(jtv)
 			}
-
 		case "xPosition":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8645,7 +8468,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.XPosition = ptr.Int32(int32(i64))
 			}
-
 		case "yPosition":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8658,7 +8480,6 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				}
 				sv.YPosition = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8698,7 +8519,6 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				}
 				sv.CaptionSelectorName = ptr.String(jtv)
 			}
-
 		case "customLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8707,12 +8527,10 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentCaptionDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "languageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8721,7 +8539,6 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "languageDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8730,7 +8547,6 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				}
 				sv.LanguageDescription = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8770,12 +8586,10 @@ func awsRestjson1_deserializeDocumentCaptionDescriptionPreset(v **types.CaptionD
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentCaptionDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "languageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8784,7 +8598,6 @@ func awsRestjson1_deserializeDocumentCaptionDescriptionPreset(v **types.CaptionD
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "languageDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8793,7 +8606,6 @@ func awsRestjson1_deserializeDocumentCaptionDescriptionPreset(v **types.CaptionD
 				}
 				sv.LanguageDescription = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8829,7 +8641,6 @@ func awsRestjson1_deserializeDocumentCaptionDestinationSettings(v **types.Captio
 			if err := awsRestjson1_deserializeDocumentBurninDestinationSettings(&sv.BurninDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "destinationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8838,47 +8649,38 @@ func awsRestjson1_deserializeDocumentCaptionDestinationSettings(v **types.Captio
 				}
 				sv.DestinationType = types.CaptionDestinationType(jtv)
 			}
-
 		case "dvbSubDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentDvbSubDestinationSettings(&sv.DvbSubDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "embeddedDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(&sv.EmbeddedDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "imscDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentImscDestinationSettings(&sv.ImscDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "sccDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentSccDestinationSettings(&sv.SccDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "srtDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentSrtDestinationSettings(&sv.SrtDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "teletextDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentTeletextDestinationSettings(&sv.TeletextDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "ttmlDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentTtmlDestinationSettings(&sv.TtmlDestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "webvttDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentWebvttDestinationSettings(&sv.WebvttDestinationSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8918,7 +8720,6 @@ func awsRestjson1_deserializeDocumentCaptionSelector(v **types.CaptionSelector, 
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
-
 		case "languageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8927,12 +8728,10 @@ func awsRestjson1_deserializeDocumentCaptionSelector(v **types.CaptionSelector, 
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "sourceSettings":
 			if err := awsRestjson1_deserializeDocumentCaptionSourceSettings(&sv.SourceSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -8976,7 +8775,6 @@ func awsRestjson1_deserializeDocumentCaptionSourceFramerate(v **types.CaptionSou
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8989,7 +8787,6 @@ func awsRestjson1_deserializeDocumentCaptionSourceFramerate(v **types.CaptionSou
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9025,22 +8822,18 @@ func awsRestjson1_deserializeDocumentCaptionSourceSettings(v **types.CaptionSour
 			if err := awsRestjson1_deserializeDocumentAncillarySourceSettings(&sv.AncillarySourceSettings, value); err != nil {
 				return err
 			}
-
 		case "dvbSubSourceSettings":
 			if err := awsRestjson1_deserializeDocumentDvbSubSourceSettings(&sv.DvbSubSourceSettings, value); err != nil {
 				return err
 			}
-
 		case "embeddedSourceSettings":
 			if err := awsRestjson1_deserializeDocumentEmbeddedSourceSettings(&sv.EmbeddedSourceSettings, value); err != nil {
 				return err
 			}
-
 		case "fileSourceSettings":
 			if err := awsRestjson1_deserializeDocumentFileSourceSettings(&sv.FileSourceSettings, value); err != nil {
 				return err
 			}
-
 		case "sourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9049,22 +8842,18 @@ func awsRestjson1_deserializeDocumentCaptionSourceSettings(v **types.CaptionSour
 				}
 				sv.SourceType = types.CaptionSourceType(jtv)
 			}
-
 		case "teletextSourceSettings":
 			if err := awsRestjson1_deserializeDocumentTeletextSourceSettings(&sv.TeletextSourceSettings, value); err != nil {
 				return err
 			}
-
 		case "trackSourceSettings":
 			if err := awsRestjson1_deserializeDocumentTrackSourceSettings(&sv.TrackSourceSettings, value); err != nil {
 				return err
 			}
-
 		case "webvttHlsSourceSettings":
 			if err := awsRestjson1_deserializeDocumentWebvttHlsSourceSettings(&sv.WebvttHlsSourceSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9100,7 +8889,6 @@ func awsRestjson1_deserializeDocumentChannelMapping(v **types.ChannelMapping, va
 			if err := awsRestjson1_deserializeDocument__listOfOutputChannelMapping(&sv.OutputChannels, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9144,7 +8932,6 @@ func awsRestjson1_deserializeDocumentClipLimits(v **types.ClipLimits, value inte
 				}
 				sv.MaximumRGBTolerance = ptr.Int32(int32(i64))
 			}
-
 		case "maximumYUV":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9157,7 +8944,6 @@ func awsRestjson1_deserializeDocumentClipLimits(v **types.ClipLimits, value inte
 				}
 				sv.MaximumYUV = ptr.Int32(int32(i64))
 			}
-
 		case "minimumRGBTolerance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9170,7 +8956,6 @@ func awsRestjson1_deserializeDocumentClipLimits(v **types.ClipLimits, value inte
 				}
 				sv.MinimumRGBTolerance = ptr.Int32(int32(i64))
 			}
-
 		case "minimumYUV":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9183,7 +8968,6 @@ func awsRestjson1_deserializeDocumentClipLimits(v **types.ClipLimits, value inte
 				}
 				sv.MinimumYUV = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9223,12 +9007,10 @@ func awsRestjson1_deserializeDocumentCmafAdditionalManifest(v **types.CmafAdditi
 				}
 				sv.ManifestNameModifier = ptr.String(jtv)
 			}
-
 		case "selectedOutputs":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1(&sv.SelectedOutputs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9268,7 +9050,6 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 				}
 				sv.ConstantInitializationVector = ptr.String(jtv)
 			}
-
 		case "encryptionMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9277,7 +9058,6 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 				}
 				sv.EncryptionMethod = types.CmafEncryptionType(jtv)
 			}
-
 		case "initializationVectorInManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9286,17 +9066,14 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 				}
 				sv.InitializationVectorInManifest = types.CmafInitializationVectorInManifest(jtv)
 			}
-
 		case "spekeKeyProvider":
 			if err := awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(&sv.SpekeKeyProvider, value); err != nil {
 				return err
 			}
-
 		case "staticKeyProvider":
 			if err := awsRestjson1_deserializeDocumentStaticKeyProvider(&sv.StaticKeyProvider, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9305,7 +9082,6 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 				}
 				sv.Type = types.CmafKeyProviderType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9341,7 +9117,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 			if err := awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(&sv.AdditionalManifests, value); err != nil {
 				return err
 			}
-
 		case "baseUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9350,7 +9125,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.BaseUrl = ptr.String(jtv)
 			}
-
 		case "clientCache":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9359,7 +9133,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.ClientCache = types.CmafClientCache(jtv)
 			}
-
 		case "codecSpecification":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9368,7 +9141,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.CodecSpecification = types.CmafCodecSpecification(jtv)
 			}
-
 		case "dashIFrameTrickPlayNameModifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9377,7 +9149,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.DashIFrameTrickPlayNameModifier = ptr.String(jtv)
 			}
-
 		case "dashManifestStyle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9386,7 +9157,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.DashManifestStyle = types.DashManifestStyle(jtv)
 			}
-
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9395,17 +9165,14 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.Destination = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentCmafEncryptionSettings(&sv.Encryption, value); err != nil {
 				return err
 			}
-
 		case "fragmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9418,7 +9185,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.FragmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "imageBasedTrickPlay":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9427,12 +9193,10 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.ImageBasedTrickPlay = types.CmafImageBasedTrickPlay(jtv)
 			}
-
 		case "imageBasedTrickPlaySettings":
 			if err := awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
 				return err
 			}
-
 		case "manifestCompression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9441,7 +9205,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.ManifestCompression = types.CmafManifestCompression(jtv)
 			}
-
 		case "manifestDurationFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9450,7 +9213,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.ManifestDurationFormat = types.CmafManifestDurationFormat(jtv)
 			}
-
 		case "minBufferTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9463,7 +9225,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.MinBufferTime = ptr.Int32(int32(i64))
 			}
-
 		case "minFinalSegmentLength":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9497,7 +9258,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 
 				}
 			}
-
 		case "mpdManifestBandwidthType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9506,7 +9266,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.MpdManifestBandwidthType = types.CmafMpdManifestBandwidthType(jtv)
 			}
-
 		case "mpdProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9515,7 +9274,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.MpdProfile = types.CmafMpdProfile(jtv)
 			}
-
 		case "ptsOffsetHandlingForBFrames":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9524,7 +9282,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.PtsOffsetHandlingForBFrames = types.CmafPtsOffsetHandlingForBFrames(jtv)
 			}
-
 		case "segmentControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9533,7 +9290,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.SegmentControl = types.CmafSegmentControl(jtv)
 			}
-
 		case "segmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9546,7 +9302,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.SegmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "segmentLengthControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9555,7 +9310,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.SegmentLengthControl = types.CmafSegmentLengthControl(jtv)
 			}
-
 		case "streamInfResolution":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9564,7 +9318,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.StreamInfResolution = types.CmafStreamInfResolution(jtv)
 			}
-
 		case "targetDurationCompatibilityMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9573,7 +9326,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.TargetDurationCompatibilityMode = types.CmafTargetDurationCompatibilityMode(jtv)
 			}
-
 		case "videoCompositionOffsets":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9582,7 +9334,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.VideoCompositionOffsets = types.CmafVideoCompositionOffsets(jtv)
 			}
-
 		case "writeDashManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9591,7 +9342,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.WriteDashManifest = types.CmafWriteDASHManifest(jtv)
 			}
-
 		case "writeHlsManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9600,7 +9350,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.WriteHlsManifest = types.CmafWriteHLSManifest(jtv)
 			}
-
 		case "writeSegmentTimelineInRepresentation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9609,7 +9358,6 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 				sv.WriteSegmentTimelineInRepresentation = types.CmafWriteSegmentTimelineInRepresentation(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9649,7 +9397,6 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 				}
 				sv.IntervalCadence = types.CmafIntervalCadence(jtv)
 			}
-
 		case "thumbnailHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9662,7 +9409,6 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 				}
 				sv.ThumbnailHeight = ptr.Int32(int32(i64))
 			}
-
 		case "thumbnailInterval":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9696,7 +9442,6 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 
 				}
 			}
-
 		case "thumbnailWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9709,7 +9454,6 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 				}
 				sv.ThumbnailWidth = ptr.Int32(int32(i64))
 			}
-
 		case "tileHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9722,7 +9466,6 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 				}
 				sv.TileHeight = ptr.Int32(int32(i64))
 			}
-
 		case "tileWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9735,7 +9478,6 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 				}
 				sv.TileWidth = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9775,7 +9517,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.AudioDuration = types.CmfcAudioDuration(jtv)
 			}
-
 		case "audioGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9784,7 +9525,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.AudioGroupId = ptr.String(jtv)
 			}
-
 		case "audioRenditionSets":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9793,7 +9533,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.AudioRenditionSets = ptr.String(jtv)
 			}
-
 		case "audioTrackType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9802,7 +9541,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.AudioTrackType = types.CmfcAudioTrackType(jtv)
 			}
-
 		case "descriptiveVideoServiceFlag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9811,7 +9549,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.DescriptiveVideoServiceFlag = types.CmfcDescriptiveVideoServiceFlag(jtv)
 			}
-
 		case "iFrameOnlyManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9820,7 +9557,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.IFrameOnlyManifest = types.CmfcIFrameOnlyManifest(jtv)
 			}
-
 		case "klvMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9829,7 +9565,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.KlvMetadata = types.CmfcKlvMetadata(jtv)
 			}
-
 		case "manifestMetadataSignaling":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9838,7 +9573,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.ManifestMetadataSignaling = types.CmfcManifestMetadataSignaling(jtv)
 			}
-
 		case "scte35Esam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9847,7 +9581,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.Scte35Esam = types.CmfcScte35Esam(jtv)
 			}
-
 		case "scte35Source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9856,7 +9589,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.Scte35Source = types.CmfcScte35Source(jtv)
 			}
-
 		case "timedMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9865,7 +9597,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.TimedMetadata = types.CmfcTimedMetadata(jtv)
 			}
-
 		case "timedMetadataBoxVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9874,7 +9605,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.TimedMetadataBoxVersion = types.CmfcTimedMetadataBoxVersion(jtv)
 			}
-
 		case "timedMetadataSchemeIdUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9883,7 +9613,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.TimedMetadataSchemeIdUri = ptr.String(jtv)
 			}
-
 		case "timedMetadataValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9892,7 +9621,6 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				}
 				sv.TimedMetadataValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -9932,7 +9660,6 @@ func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.Color
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
-
 		case "inputColorSpace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9941,7 +9668,6 @@ func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.Color
 				}
 				sv.InputColorSpace = types.ColorSpace(jtv)
 			}
-
 		case "inputMasteringLuminance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9954,7 +9680,6 @@ func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.Color
 				}
 				sv.InputMasteringLuminance = ptr.Int32(int32(i64))
 			}
-
 		case "outputColorSpace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9963,7 +9688,6 @@ func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.Color
 				}
 				sv.OutputColorSpace = types.ColorSpace(jtv)
 			}
-
 		case "outputMasteringLuminance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9976,7 +9700,6 @@ func awsRestjson1_deserializeDocumentColorConversion3DLUTSetting(v **types.Color
 				}
 				sv.OutputMasteringLuminance = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10020,12 +9743,10 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.Brightness = ptr.Int32(int32(i64))
 			}
-
 		case "clipLimits":
 			if err := awsRestjson1_deserializeDocumentClipLimits(&sv.ClipLimits, value); err != nil {
 				return err
 			}
-
 		case "colorSpaceConversion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10034,7 +9755,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.ColorSpaceConversion = types.ColorSpaceConversion(jtv)
 			}
-
 		case "contrast":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10047,12 +9767,10 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.Contrast = ptr.Int32(int32(i64))
 			}
-
 		case "hdr10Metadata":
 			if err := awsRestjson1_deserializeDocumentHdr10Metadata(&sv.Hdr10Metadata, value); err != nil {
 				return err
 			}
-
 		case "hdrToSdrToneMapper":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10061,7 +9779,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.HdrToSdrToneMapper = types.HDRToSDRToneMapper(jtv)
 			}
-
 		case "hue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10074,7 +9791,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.Hue = ptr.Int32(int32(i64))
 			}
-
 		case "maxLuminance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10087,7 +9803,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.MaxLuminance = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRangeConversion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10096,7 +9811,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.SampleRangeConversion = types.SampleRangeConversion(jtv)
 			}
-
 		case "saturation":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10109,7 +9823,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.Saturation = ptr.Int32(int32(i64))
 			}
-
 		case "sdrReferenceWhiteLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10122,7 +9835,6 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				}
 				sv.SdrReferenceWhiteLevel = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10152,15 +9864,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10168,14 +9874,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10207,7 +9909,6 @@ func awsRestjson1_deserializeDocumentContainerSettings(v **types.ContainerSettin
 			if err := awsRestjson1_deserializeDocumentCmfcSettings(&sv.CmfcSettings, value); err != nil {
 				return err
 			}
-
 		case "container":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10216,42 +9917,34 @@ func awsRestjson1_deserializeDocumentContainerSettings(v **types.ContainerSettin
 				}
 				sv.Container = types.ContainerType(jtv)
 			}
-
 		case "f4vSettings":
 			if err := awsRestjson1_deserializeDocumentF4vSettings(&sv.F4vSettings, value); err != nil {
 				return err
 			}
-
 		case "m2tsSettings":
 			if err := awsRestjson1_deserializeDocumentM2tsSettings(&sv.M2tsSettings, value); err != nil {
 				return err
 			}
-
 		case "m3u8Settings":
 			if err := awsRestjson1_deserializeDocumentM3u8Settings(&sv.M3u8Settings, value); err != nil {
 				return err
 			}
-
 		case "movSettings":
 			if err := awsRestjson1_deserializeDocumentMovSettings(&sv.MovSettings, value); err != nil {
 				return err
 			}
-
 		case "mp4Settings":
 			if err := awsRestjson1_deserializeDocumentMp4Settings(&sv.Mp4Settings, value); err != nil {
 				return err
 			}
-
 		case "mpdSettings":
 			if err := awsRestjson1_deserializeDocumentMpdSettings(&sv.MpdSettings, value); err != nil {
 				return err
 			}
-
 		case "mxfSettings":
 			if err := awsRestjson1_deserializeDocumentMxfSettings(&sv.MxfSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10291,12 +9984,10 @@ func awsRestjson1_deserializeDocumentDashAdditionalManifest(v **types.DashAdditi
 				}
 				sv.ManifestNameModifier = ptr.String(jtv)
 			}
-
 		case "selectedOutputs":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1(&sv.SelectedOutputs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10336,12 +10027,10 @@ func awsRestjson1_deserializeDocumentDashIsoEncryptionSettings(v **types.DashIso
 				}
 				sv.PlaybackDeviceCompatibility = types.DashIsoPlaybackDeviceCompatibility(jtv)
 			}
-
 		case "spekeKeyProvider":
 			if err := awsRestjson1_deserializeDocumentSpekeKeyProvider(&sv.SpekeKeyProvider, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10377,7 +10066,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 			if err := awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(&sv.AdditionalManifests, value); err != nil {
 				return err
 			}
-
 		case "audioChannelConfigSchemeIdUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10386,7 +10074,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.AudioChannelConfigSchemeIdUri = types.DashIsoGroupAudioChannelConfigSchemeIdUri(jtv)
 			}
-
 		case "baseUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10395,7 +10082,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.BaseUrl = ptr.String(jtv)
 			}
-
 		case "dashIFrameTrickPlayNameModifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10404,7 +10090,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.DashIFrameTrickPlayNameModifier = ptr.String(jtv)
 			}
-
 		case "dashManifestStyle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10413,7 +10098,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.DashManifestStyle = types.DashManifestStyle(jtv)
 			}
-
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10422,17 +10106,14 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.Destination = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentDashIsoEncryptionSettings(&sv.Encryption, value); err != nil {
 				return err
 			}
-
 		case "fragmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10445,7 +10126,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.FragmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "hbbtvCompliance":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10454,7 +10134,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.HbbtvCompliance = types.DashIsoHbbtvCompliance(jtv)
 			}
-
 		case "imageBasedTrickPlay":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10463,12 +10142,10 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.ImageBasedTrickPlay = types.DashIsoImageBasedTrickPlay(jtv)
 			}
-
 		case "imageBasedTrickPlaySettings":
 			if err := awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
 				return err
 			}
-
 		case "minBufferTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10481,7 +10158,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.MinBufferTime = ptr.Int32(int32(i64))
 			}
-
 		case "minFinalSegmentLength":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10515,7 +10191,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 
 				}
 			}
-
 		case "mpdManifestBandwidthType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10524,7 +10199,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.MpdManifestBandwidthType = types.DashIsoMpdManifestBandwidthType(jtv)
 			}
-
 		case "mpdProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10533,7 +10207,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.MpdProfile = types.DashIsoMpdProfile(jtv)
 			}
-
 		case "ptsOffsetHandlingForBFrames":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10542,7 +10215,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.PtsOffsetHandlingForBFrames = types.DashIsoPtsOffsetHandlingForBFrames(jtv)
 			}
-
 		case "segmentControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10551,7 +10223,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.SegmentControl = types.DashIsoSegmentControl(jtv)
 			}
-
 		case "segmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10564,7 +10235,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.SegmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "segmentLengthControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10573,7 +10243,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.SegmentLengthControl = types.DashIsoSegmentLengthControl(jtv)
 			}
-
 		case "videoCompositionOffsets":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10582,7 +10251,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.VideoCompositionOffsets = types.DashIsoVideoCompositionOffsets(jtv)
 			}
-
 		case "writeSegmentTimelineInRepresentation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10591,7 +10259,6 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 				sv.WriteSegmentTimelineInRepresentation = types.DashIsoWriteSegmentTimelineInRepresentation(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10631,7 +10298,6 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 				}
 				sv.IntervalCadence = types.DashIsoIntervalCadence(jtv)
 			}
-
 		case "thumbnailHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10644,7 +10310,6 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 				}
 				sv.ThumbnailHeight = ptr.Int32(int32(i64))
 			}
-
 		case "thumbnailInterval":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10678,7 +10343,6 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 
 				}
 			}
-
 		case "thumbnailWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10691,7 +10355,6 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 				}
 				sv.ThumbnailWidth = ptr.Int32(int32(i64))
 			}
-
 		case "tileHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10704,7 +10367,6 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 				}
 				sv.TileHeight = ptr.Int32(int32(i64))
 			}
-
 		case "tileWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10717,7 +10379,6 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 				}
 				sv.TileWidth = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10757,7 +10418,6 @@ func awsRestjson1_deserializeDocumentDeinterlacer(v **types.Deinterlacer, value 
 				}
 				sv.Algorithm = types.DeinterlaceAlgorithm(jtv)
 			}
-
 		case "control":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10766,7 +10426,6 @@ func awsRestjson1_deserializeDocumentDeinterlacer(v **types.Deinterlacer, value 
 				}
 				sv.Control = types.DeinterlacerControl(jtv)
 			}
-
 		case "mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10775,7 +10434,6 @@ func awsRestjson1_deserializeDocumentDeinterlacer(v **types.Deinterlacer, value 
 				}
 				sv.Mode = types.DeinterlacerMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10811,7 +10469,6 @@ func awsRestjson1_deserializeDocumentDestinationSettings(v **types.DestinationSe
 			if err := awsRestjson1_deserializeDocumentS3DestinationSettings(&sv.S3Settings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10847,7 +10504,6 @@ func awsRestjson1_deserializeDocumentDolbyVision(v **types.DolbyVision, value in
 			if err := awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(&sv.L6Metadata, value); err != nil {
 				return err
 			}
-
 		case "l6Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10856,7 +10512,6 @@ func awsRestjson1_deserializeDocumentDolbyVision(v **types.DolbyVision, value in
 				}
 				sv.L6Mode = types.DolbyVisionLevel6Mode(jtv)
 			}
-
 		case "mapping":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10865,7 +10520,6 @@ func awsRestjson1_deserializeDocumentDolbyVision(v **types.DolbyVision, value in
 				}
 				sv.Mapping = types.DolbyVisionMapping(jtv)
 			}
-
 		case "profile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10874,7 +10528,6 @@ func awsRestjson1_deserializeDocumentDolbyVision(v **types.DolbyVision, value in
 				}
 				sv.Profile = types.DolbyVisionProfile(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10918,7 +10571,6 @@ func awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(v **types.DolbyVi
 				}
 				sv.MaxCll = ptr.Int32(int32(i64))
 			}
-
 		case "maxFall":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10931,7 +10583,6 @@ func awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(v **types.DolbyVi
 				}
 				sv.MaxFall = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -10975,7 +10626,6 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				}
 				sv.NetworkId = ptr.Int32(int32(i64))
 			}
-
 		case "networkName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10984,7 +10634,6 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				}
 				sv.NetworkName = ptr.String(jtv)
 			}
-
 		case "nitInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10997,7 +10646,6 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				}
 				sv.NitInterval = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11037,7 +10685,6 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				}
 				sv.OutputSdt = types.OutputSdt(jtv)
 			}
-
 		case "sdtInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11050,7 +10697,6 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				}
 				sv.SdtInterval = ptr.Int32(int32(i64))
 			}
-
 		case "serviceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11059,7 +10705,6 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
-
 		case "serviceProviderName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11068,7 +10713,6 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				}
 				sv.ServiceProviderName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11108,7 +10752,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.Alignment = types.DvbSubtitleAlignment(jtv)
 			}
-
 		case "applyFontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11117,7 +10760,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.ApplyFontColor = types.DvbSubtitleApplyFontColor(jtv)
 			}
-
 		case "backgroundColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11126,7 +10768,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.BackgroundColor = types.DvbSubtitleBackgroundColor(jtv)
 			}
-
 		case "backgroundOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11139,7 +10780,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.BackgroundOpacity = ptr.Int32(int32(i64))
 			}
-
 		case "ddsHandling":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11148,7 +10788,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.DdsHandling = types.DvbddsHandling(jtv)
 			}
-
 		case "ddsXCoordinate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11161,7 +10800,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.DdsXCoordinate = ptr.Int32(int32(i64))
 			}
-
 		case "ddsYCoordinate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11174,7 +10812,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.DdsYCoordinate = ptr.Int32(int32(i64))
 			}
-
 		case "fallbackFont":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11183,7 +10820,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FallbackFont = types.DvbSubSubtitleFallbackFont(jtv)
 			}
-
 		case "fontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11192,7 +10828,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontColor = types.DvbSubtitleFontColor(jtv)
 			}
-
 		case "fontFileBold":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11201,7 +10836,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontFileBold = ptr.String(jtv)
 			}
-
 		case "fontFileBoldItalic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11210,7 +10844,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontFileBoldItalic = ptr.String(jtv)
 			}
-
 		case "fontFileItalic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11219,7 +10852,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontFileItalic = ptr.String(jtv)
 			}
-
 		case "fontFileRegular":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11228,7 +10860,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontFileRegular = ptr.String(jtv)
 			}
-
 		case "fontOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11241,7 +10872,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontOpacity = ptr.Int32(int32(i64))
 			}
-
 		case "fontResolution":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11254,7 +10884,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontResolution = ptr.Int32(int32(i64))
 			}
-
 		case "fontScript":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11263,7 +10892,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontScript = types.FontScript(jtv)
 			}
-
 		case "fontSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11276,7 +10904,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.FontSize = ptr.Int32(int32(i64))
 			}
-
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11289,7 +10916,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "hexFontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11298,7 +10924,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.HexFontColor = ptr.String(jtv)
 			}
-
 		case "outlineColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11307,7 +10932,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.OutlineColor = types.DvbSubtitleOutlineColor(jtv)
 			}
-
 		case "outlineSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11320,7 +10944,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.OutlineSize = ptr.Int32(int32(i64))
 			}
-
 		case "shadowColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11329,7 +10952,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.ShadowColor = types.DvbSubtitleShadowColor(jtv)
 			}
-
 		case "shadowOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11342,7 +10964,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.ShadowOpacity = ptr.Int32(int32(i64))
 			}
-
 		case "shadowXOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11355,7 +10976,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.ShadowXOffset = ptr.Int32(int32(i64))
 			}
-
 		case "shadowYOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11368,7 +10988,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.ShadowYOffset = ptr.Int32(int32(i64))
 			}
-
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11377,7 +10996,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.StylePassthrough = types.DvbSubtitleStylePassthrough(jtv)
 			}
-
 		case "subtitlingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11386,7 +11004,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.SubtitlingType = types.DvbSubtitlingType(jtv)
 			}
-
 		case "teletextSpacing":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11395,7 +11012,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.TeletextSpacing = types.DvbSubtitleTeletextSpacing(jtv)
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11408,7 +11024,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		case "xPosition":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11421,7 +11036,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.XPosition = ptr.Int32(int32(i64))
 			}
-
 		case "yPosition":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11434,7 +11048,6 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				}
 				sv.YPosition = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11478,7 +11091,6 @@ func awsRestjson1_deserializeDocumentDvbSubSourceSettings(v **types.DvbSubSource
 				}
 				sv.Pid = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11522,7 +11134,6 @@ func awsRestjson1_deserializeDocumentDvbTdtSettings(v **types.DvbTdtSettings, va
 				}
 				sv.TdtInterval = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11566,7 +11177,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "bitstreamMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11575,7 +11185,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.BitstreamMode = types.Eac3AtmosBitstreamMode(jtv)
 			}
-
 		case "codingMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11584,7 +11193,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.CodingMode = types.Eac3AtmosCodingMode(jtv)
 			}
-
 		case "dialogueIntelligence":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11593,7 +11201,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.DialogueIntelligence = types.Eac3AtmosDialogueIntelligence(jtv)
 			}
-
 		case "downmixControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11602,7 +11209,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.DownmixControl = types.Eac3AtmosDownmixControl(jtv)
 			}
-
 		case "dynamicRangeCompressionLine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11611,7 +11217,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.DynamicRangeCompressionLine = types.Eac3AtmosDynamicRangeCompressionLine(jtv)
 			}
-
 		case "dynamicRangeCompressionRf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11620,7 +11225,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.DynamicRangeCompressionRf = types.Eac3AtmosDynamicRangeCompressionRf(jtv)
 			}
-
 		case "dynamicRangeControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11629,7 +11233,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.DynamicRangeControl = types.Eac3AtmosDynamicRangeControl(jtv)
 			}
-
 		case "loRoCenterMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11663,7 +11266,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 
 				}
 			}
-
 		case "loRoSurroundMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11697,7 +11299,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 
 				}
 			}
-
 		case "ltRtCenterMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11731,7 +11332,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 
 				}
 			}
-
 		case "ltRtSurroundMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11765,7 +11365,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 
 				}
 			}
-
 		case "meteringMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11774,7 +11373,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.MeteringMode = types.Eac3AtmosMeteringMode(jtv)
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11787,7 +11385,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		case "speechThreshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11800,7 +11397,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.SpeechThreshold = ptr.Int32(int32(i64))
 			}
-
 		case "stereoDownmix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11809,7 +11405,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.StereoDownmix = types.Eac3AtmosStereoDownmix(jtv)
 			}
-
 		case "surroundExMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11818,7 +11413,6 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				}
 				sv.SurroundExMode = types.Eac3AtmosSurroundExMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -11858,7 +11452,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.AttenuationControl = types.Eac3AttenuationControl(jtv)
 			}
-
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11871,7 +11464,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "bitstreamMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11880,7 +11472,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.BitstreamMode = types.Eac3BitstreamMode(jtv)
 			}
-
 		case "codingMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11889,7 +11480,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.CodingMode = types.Eac3CodingMode(jtv)
 			}
-
 		case "dcFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11898,7 +11488,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.DcFilter = types.Eac3DcFilter(jtv)
 			}
-
 		case "dialnorm":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11911,7 +11500,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.Dialnorm = ptr.Int32(int32(i64))
 			}
-
 		case "dynamicRangeCompressionLine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11920,7 +11508,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.DynamicRangeCompressionLine = types.Eac3DynamicRangeCompressionLine(jtv)
 			}
-
 		case "dynamicRangeCompressionRf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11929,7 +11516,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.DynamicRangeCompressionRf = types.Eac3DynamicRangeCompressionRf(jtv)
 			}
-
 		case "lfeControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11938,7 +11524,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.LfeControl = types.Eac3LfeControl(jtv)
 			}
-
 		case "lfeFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11947,7 +11532,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.LfeFilter = types.Eac3LfeFilter(jtv)
 			}
-
 		case "loRoCenterMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11981,7 +11565,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 
 				}
 			}
-
 		case "loRoSurroundMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12015,7 +11598,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 
 				}
 			}
-
 		case "ltRtCenterMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12049,7 +11631,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 
 				}
 			}
-
 		case "ltRtSurroundMixLevel":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12083,7 +11664,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 
 				}
 			}
-
 		case "metadataControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12092,7 +11672,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.MetadataControl = types.Eac3MetadataControl(jtv)
 			}
-
 		case "passthroughControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12101,7 +11680,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.PassthroughControl = types.Eac3PassthroughControl(jtv)
 			}
-
 		case "phaseControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12110,7 +11688,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.PhaseControl = types.Eac3PhaseControl(jtv)
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12123,7 +11700,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		case "stereoDownmix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12132,7 +11708,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.StereoDownmix = types.Eac3StereoDownmix(jtv)
 			}
-
 		case "surroundExMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12141,7 +11716,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.SurroundExMode = types.Eac3SurroundExMode(jtv)
 			}
-
 		case "surroundMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12150,7 +11724,6 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				}
 				sv.SurroundMode = types.Eac3SurroundMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12194,7 +11767,6 @@ func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.Embed
 				}
 				sv.Destination608ChannelNumber = ptr.Int32(int32(i64))
 			}
-
 		case "destination708ServiceNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12207,7 +11779,6 @@ func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.Embed
 				}
 				sv.Destination708ServiceNumber = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12247,7 +11818,6 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				}
 				sv.Convert608To708 = types.EmbeddedConvert608To708(jtv)
 			}
-
 		case "source608ChannelNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12260,7 +11830,6 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				}
 				sv.Source608ChannelNumber = ptr.Int32(int32(i64))
 			}
-
 		case "source608TrackNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12273,7 +11842,6 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				}
 				sv.Source608TrackNumber = ptr.Int32(int32(i64))
 			}
-
 		case "terminateCaptions":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12282,7 +11850,6 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				}
 				sv.TerminateCaptions = types.EmbeddedTerminateCaptions(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12322,7 +11889,6 @@ func awsRestjson1_deserializeDocumentEncryptionContractConfiguration(v **types.E
 				}
 				sv.SpekeAudioPreset = types.PresetSpeke20Audio(jtv)
 			}
-
 		case "spekeVideoPreset":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12331,7 +11897,6 @@ func awsRestjson1_deserializeDocumentEncryptionContractConfiguration(v **types.E
 				}
 				sv.SpekeVideoPreset = types.PresetSpeke20Video(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12371,7 +11936,6 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12411,7 +11975,6 @@ func awsRestjson1_deserializeDocumentEsamManifestConfirmConditionNotification(v 
 				}
 				sv.MccXml = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12447,7 +12010,6 @@ func awsRestjson1_deserializeDocumentEsamSettings(v **types.EsamSettings, value 
 			if err := awsRestjson1_deserializeDocumentEsamManifestConfirmConditionNotification(&sv.ManifestConfirmConditionNotification, value); err != nil {
 				return err
 			}
-
 		case "responseSignalPreroll":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12460,12 +12022,10 @@ func awsRestjson1_deserializeDocumentEsamSettings(v **types.EsamSettings, value 
 				}
 				sv.ResponseSignalPreroll = ptr.Int32(int32(i64))
 			}
-
 		case "signalProcessingNotification":
 			if err := awsRestjson1_deserializeDocumentEsamSignalProcessingNotification(&sv.SignalProcessingNotification, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12505,7 +12065,6 @@ func awsRestjson1_deserializeDocumentEsamSignalProcessingNotification(v **types.
 				}
 				sv.SccXml = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12545,7 +12104,6 @@ func awsRestjson1_deserializeDocumentExtendedDataServices(v **types.ExtendedData
 				}
 				sv.CopyProtectionAction = types.CopyProtectionAction(jtv)
 			}
-
 		case "vchipAction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12554,7 +12112,6 @@ func awsRestjson1_deserializeDocumentExtendedDataServices(v **types.ExtendedData
 				}
 				sv.VchipAction = types.VchipAction(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12594,7 +12151,6 @@ func awsRestjson1_deserializeDocumentF4vSettings(v **types.F4vSettings, value in
 				}
 				sv.MoovPlacement = types.F4vMoovPlacement(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12634,12 +12190,10 @@ func awsRestjson1_deserializeDocumentFileGroupSettings(v **types.FileGroupSettin
 				}
 				sv.Destination = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12679,7 +12233,6 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				}
 				sv.ByteRateLimit = types.CaptionSourceByteRateLimit(jtv)
 			}
-
 		case "convert608To708":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12688,7 +12241,6 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				}
 				sv.Convert608To708 = types.FileSourceConvert608To708(jtv)
 			}
-
 		case "convertPaintToPop":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12697,12 +12249,10 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				}
 				sv.ConvertPaintToPop = types.CaptionSourceConvertPaintOnToPopOn(jtv)
 			}
-
 		case "framerate":
 			if err := awsRestjson1_deserializeDocumentCaptionSourceFramerate(&sv.Framerate, value); err != nil {
 				return err
 			}
-
 		case "sourceFile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12711,7 +12261,6 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				}
 				sv.SourceFile = ptr.String(jtv)
 			}
-
 		case "timeDelta":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12724,7 +12273,6 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				}
 				sv.TimeDelta = ptr.Int32(int32(i64))
 			}
-
 		case "timeDeltaUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12733,7 +12281,6 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				}
 				sv.TimeDeltaUnits = types.FileSourceTimeDeltaUnits(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12777,7 +12324,6 @@ func awsRestjson1_deserializeDocumentFlacSettings(v **types.FlacSettings, value 
 				}
 				sv.BitDepth = ptr.Int32(int32(i64))
 			}
-
 		case "channels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12790,7 +12336,6 @@ func awsRestjson1_deserializeDocumentFlacSettings(v **types.FlacSettings, value 
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12803,7 +12348,6 @@ func awsRestjson1_deserializeDocumentFlacSettings(v **types.FlacSettings, value 
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12833,15 +12377,9 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12849,14 +12387,10 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12896,7 +12430,6 @@ func awsRestjson1_deserializeDocumentForceIncludeRenditionSize(v **types.ForceIn
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12909,7 +12442,6 @@ func awsRestjson1_deserializeDocumentForceIncludeRenditionSize(v **types.ForceIn
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -12953,7 +12485,6 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12966,7 +12497,6 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "maxCaptures":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12979,7 +12509,6 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				}
 				sv.MaxCaptures = ptr.Int32(int32(i64))
 			}
-
 		case "quality":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12992,7 +12521,6 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				}
 				sv.Quality = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13036,7 +12564,6 @@ func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings
 				}
 				sv.MaxAverageBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "qvbrQualityLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13049,7 +12576,6 @@ func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings
 				}
 				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
 			}
-
 		case "qvbrQualityLevelFineTune":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13083,7 +12609,6 @@ func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13123,12 +12648,10 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.AdaptiveQuantization = types.H264AdaptiveQuantization(jtv)
 			}
-
 		case "bandwidthReductionFilter":
 			if err := awsRestjson1_deserializeDocumentBandwidthReductionFilter(&sv.BandwidthReductionFilter, value); err != nil {
 				return err
 			}
-
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13141,7 +12664,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "codecLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13150,7 +12672,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.CodecLevel = types.H264CodecLevel(jtv)
 			}
-
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13159,7 +12680,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.CodecProfile = types.H264CodecProfile(jtv)
 			}
-
 		case "dynamicSubGop":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13168,7 +12688,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.DynamicSubGop = types.H264DynamicSubGop(jtv)
 			}
-
 		case "endOfStreamMarkers":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13177,7 +12696,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.EndOfStreamMarkers = types.H264EndOfStreamMarkers(jtv)
 			}
-
 		case "entropyEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13186,7 +12704,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.EntropyEncoding = types.H264EntropyEncoding(jtv)
 			}
-
 		case "fieldEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13195,7 +12712,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.FieldEncoding = types.H264FieldEncoding(jtv)
 			}
-
 		case "flickerAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13204,7 +12720,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.FlickerAdaptiveQuantization = types.H264FlickerAdaptiveQuantization(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13213,7 +12728,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.FramerateControl = types.H264FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13222,7 +12736,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.FramerateConversionAlgorithm = types.H264FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13235,7 +12748,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13248,7 +12760,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "gopBReference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13257,7 +12768,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.GopBReference = types.H264GopBReference(jtv)
 			}
-
 		case "gopClosedCadence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13270,7 +12780,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
-
 		case "gopSize":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13304,7 +12813,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 
 				}
 			}
-
 		case "gopSizeUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13313,7 +12821,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.GopSizeUnits = types.H264GopSizeUnits(jtv)
 			}
-
 		case "hrdBufferFinalFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13326,7 +12833,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.HrdBufferFinalFillPercentage = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferInitialFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13339,7 +12845,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.HrdBufferInitialFillPercentage = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13352,7 +12857,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13361,7 +12865,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.InterlaceMode = types.H264InterlaceMode(jtv)
 			}
-
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13374,7 +12877,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "minIInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13387,7 +12889,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
-
 		case "numberBFramesBetweenReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13400,7 +12901,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
 			}
-
 		case "numberReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13413,7 +12913,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.NumberReferenceFrames = ptr.Int32(int32(i64))
 			}
-
 		case "parControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13422,7 +12921,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.ParControl = types.H264ParControl(jtv)
 			}
-
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13435,7 +12933,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "parNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13448,7 +12945,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13457,12 +12953,10 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.QualityTuningLevel = types.H264QualityTuningLevel(jtv)
 			}
-
 		case "qvbrSettings":
 			if err := awsRestjson1_deserializeDocumentH264QvbrSettings(&sv.QvbrSettings, value); err != nil {
 				return err
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13471,7 +12965,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.RateControlMode = types.H264RateControlMode(jtv)
 			}
-
 		case "repeatPps":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13480,7 +12973,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.RepeatPps = types.H264RepeatPps(jtv)
 			}
-
 		case "saliencyAwareEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13489,7 +12981,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.SaliencyAwareEncoding = types.H264SaliencyAwareEncoding(jtv)
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13498,7 +12989,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.ScanTypeConversionMode = types.H264ScanTypeConversionMode(jtv)
 			}
-
 		case "sceneChangeDetect":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13507,7 +12997,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.SceneChangeDetect = types.H264SceneChangeDetect(jtv)
 			}
-
 		case "slices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13520,7 +13009,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.Slices = ptr.Int32(int32(i64))
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13529,7 +13017,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.SlowPal = types.H264SlowPal(jtv)
 			}
-
 		case "softness":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13542,7 +13029,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.Softness = ptr.Int32(int32(i64))
 			}
-
 		case "spatialAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13551,7 +13037,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.SpatialAdaptiveQuantization = types.H264SpatialAdaptiveQuantization(jtv)
 			}
-
 		case "syntax":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13560,7 +13045,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.Syntax = types.H264Syntax(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13569,7 +13053,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.Telecine = types.H264Telecine(jtv)
 			}
-
 		case "temporalAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13578,7 +13061,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.TemporalAdaptiveQuantization = types.H264TemporalAdaptiveQuantization(jtv)
 			}
-
 		case "unregisteredSeiTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13587,7 +13069,6 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				}
 				sv.UnregisteredSeiTimecode = types.H264UnregisteredSeiTimecode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13631,7 +13112,6 @@ func awsRestjson1_deserializeDocumentH265QvbrSettings(v **types.H265QvbrSettings
 				}
 				sv.MaxAverageBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "qvbrQualityLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13644,7 +13124,6 @@ func awsRestjson1_deserializeDocumentH265QvbrSettings(v **types.H265QvbrSettings
 				}
 				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
 			}
-
 		case "qvbrQualityLevelFineTune":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13678,7 +13157,6 @@ func awsRestjson1_deserializeDocumentH265QvbrSettings(v **types.H265QvbrSettings
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -13718,7 +13196,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.AdaptiveQuantization = types.H265AdaptiveQuantization(jtv)
 			}
-
 		case "alternateTransferFunctionSei":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13727,12 +13204,10 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.AlternateTransferFunctionSei = types.H265AlternateTransferFunctionSei(jtv)
 			}
-
 		case "bandwidthReductionFilter":
 			if err := awsRestjson1_deserializeDocumentBandwidthReductionFilter(&sv.BandwidthReductionFilter, value); err != nil {
 				return err
 			}
-
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13745,7 +13220,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "codecLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13754,7 +13228,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.CodecLevel = types.H265CodecLevel(jtv)
 			}
-
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13763,7 +13236,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.CodecProfile = types.H265CodecProfile(jtv)
 			}
-
 		case "dynamicSubGop":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13772,7 +13244,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.DynamicSubGop = types.H265DynamicSubGop(jtv)
 			}
-
 		case "endOfStreamMarkers":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13781,7 +13252,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.EndOfStreamMarkers = types.H265EndOfStreamMarkers(jtv)
 			}
-
 		case "flickerAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13790,7 +13260,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.FlickerAdaptiveQuantization = types.H265FlickerAdaptiveQuantization(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13799,7 +13268,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.FramerateControl = types.H265FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13808,7 +13276,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.FramerateConversionAlgorithm = types.H265FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13821,7 +13288,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13834,7 +13300,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "gopBReference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13843,7 +13308,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.GopBReference = types.H265GopBReference(jtv)
 			}
-
 		case "gopClosedCadence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13856,7 +13320,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
-
 		case "gopSize":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13890,7 +13353,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 
 				}
 			}
-
 		case "gopSizeUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13899,7 +13361,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.GopSizeUnits = types.H265GopSizeUnits(jtv)
 			}
-
 		case "hrdBufferFinalFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13912,7 +13373,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.HrdBufferFinalFillPercentage = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferInitialFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13925,7 +13385,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.HrdBufferInitialFillPercentage = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13938,7 +13397,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13947,7 +13405,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.InterlaceMode = types.H265InterlaceMode(jtv)
 			}
-
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13960,7 +13417,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "minIInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13973,7 +13429,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
-
 		case "numberBFramesBetweenReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13986,7 +13441,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
 			}
-
 		case "numberReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13999,7 +13453,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.NumberReferenceFrames = ptr.Int32(int32(i64))
 			}
-
 		case "parControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14008,7 +13461,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.ParControl = types.H265ParControl(jtv)
 			}
-
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14021,7 +13473,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "parNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14034,7 +13485,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14043,12 +13493,10 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.QualityTuningLevel = types.H265QualityTuningLevel(jtv)
 			}
-
 		case "qvbrSettings":
 			if err := awsRestjson1_deserializeDocumentH265QvbrSettings(&sv.QvbrSettings, value); err != nil {
 				return err
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14057,7 +13505,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.RateControlMode = types.H265RateControlMode(jtv)
 			}
-
 		case "sampleAdaptiveOffsetFilterMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14066,7 +13513,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.SampleAdaptiveOffsetFilterMode = types.H265SampleAdaptiveOffsetFilterMode(jtv)
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14075,7 +13521,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.ScanTypeConversionMode = types.H265ScanTypeConversionMode(jtv)
 			}
-
 		case "sceneChangeDetect":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14084,7 +13529,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.SceneChangeDetect = types.H265SceneChangeDetect(jtv)
 			}
-
 		case "slices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14097,7 +13541,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.Slices = ptr.Int32(int32(i64))
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14106,7 +13549,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.SlowPal = types.H265SlowPal(jtv)
 			}
-
 		case "spatialAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14115,7 +13557,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.SpatialAdaptiveQuantization = types.H265SpatialAdaptiveQuantization(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14124,7 +13565,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.Telecine = types.H265Telecine(jtv)
 			}
-
 		case "temporalAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14133,7 +13573,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.TemporalAdaptiveQuantization = types.H265TemporalAdaptiveQuantization(jtv)
 			}
-
 		case "temporalIds":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14142,7 +13581,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.TemporalIds = types.H265TemporalIds(jtv)
 			}
-
 		case "tiles":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14151,7 +13589,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.Tiles = types.H265Tiles(jtv)
 			}
-
 		case "unregisteredSeiTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14160,7 +13597,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.UnregisteredSeiTimecode = types.H265UnregisteredSeiTimecode(jtv)
 			}
-
 		case "writeMp4PackagingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14169,7 +13605,6 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				}
 				sv.WriteMp4PackagingType = types.H265WriteMp4PackagingType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14213,7 +13648,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.BluePrimaryX = ptr.Int32(int32(i64))
 			}
-
 		case "bluePrimaryY":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14226,7 +13660,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.BluePrimaryY = ptr.Int32(int32(i64))
 			}
-
 		case "greenPrimaryX":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14239,7 +13672,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.GreenPrimaryX = ptr.Int32(int32(i64))
 			}
-
 		case "greenPrimaryY":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14252,7 +13684,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.GreenPrimaryY = ptr.Int32(int32(i64))
 			}
-
 		case "maxContentLightLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14265,7 +13696,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.MaxContentLightLevel = ptr.Int32(int32(i64))
 			}
-
 		case "maxFrameAverageLightLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14278,7 +13708,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.MaxFrameAverageLightLevel = ptr.Int32(int32(i64))
 			}
-
 		case "maxLuminance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14291,7 +13720,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.MaxLuminance = ptr.Int32(int32(i64))
 			}
-
 		case "minLuminance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14304,7 +13732,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.MinLuminance = ptr.Int32(int32(i64))
 			}
-
 		case "redPrimaryX":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14317,7 +13744,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.RedPrimaryX = ptr.Int32(int32(i64))
 			}
-
 		case "redPrimaryY":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14330,7 +13756,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.RedPrimaryY = ptr.Int32(int32(i64))
 			}
-
 		case "whitePointX":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14343,7 +13768,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.WhitePointX = ptr.Int32(int32(i64))
 			}
-
 		case "whitePointY":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14356,7 +13780,6 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				}
 				sv.WhitePointY = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14400,7 +13823,6 @@ func awsRestjson1_deserializeDocumentHdr10Plus(v **types.Hdr10Plus, value interf
 				}
 				sv.MasteringMonitorNits = ptr.Int32(int32(i64))
 			}
-
 		case "targetMonitorNits":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14413,7 +13835,6 @@ func awsRestjson1_deserializeDocumentHdr10Plus(v **types.Hdr10Plus, value interf
 				}
 				sv.TargetMonitorNits = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14453,12 +13874,10 @@ func awsRestjson1_deserializeDocumentHlsAdditionalManifest(v **types.HlsAddition
 				}
 				sv.ManifestNameModifier = ptr.String(jtv)
 			}
-
 		case "selectedOutputs":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1(&sv.SelectedOutputs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14502,7 +13921,6 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				}
 				sv.CaptionChannel = ptr.Int32(int32(i64))
 			}
-
 		case "customLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14511,7 +13929,6 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				}
 				sv.CustomLanguageCode = ptr.String(jtv)
 			}
-
 		case "languageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14520,7 +13937,6 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "languageDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14529,7 +13945,6 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				}
 				sv.LanguageDescription = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14569,7 +13984,6 @@ func awsRestjson1_deserializeDocumentHlsEncryptionSettings(v **types.HlsEncrypti
 				}
 				sv.ConstantInitializationVector = ptr.String(jtv)
 			}
-
 		case "encryptionMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14578,7 +13992,6 @@ func awsRestjson1_deserializeDocumentHlsEncryptionSettings(v **types.HlsEncrypti
 				}
 				sv.EncryptionMethod = types.HlsEncryptionType(jtv)
 			}
-
 		case "initializationVectorInManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14587,7 +14000,6 @@ func awsRestjson1_deserializeDocumentHlsEncryptionSettings(v **types.HlsEncrypti
 				}
 				sv.InitializationVectorInManifest = types.HlsInitializationVectorInManifest(jtv)
 			}
-
 		case "offlineEncrypted":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14596,17 +14008,14 @@ func awsRestjson1_deserializeDocumentHlsEncryptionSettings(v **types.HlsEncrypti
 				}
 				sv.OfflineEncrypted = types.HlsOfflineEncrypted(jtv)
 			}
-
 		case "spekeKeyProvider":
 			if err := awsRestjson1_deserializeDocumentSpekeKeyProvider(&sv.SpekeKeyProvider, value); err != nil {
 				return err
 			}
-
 		case "staticKeyProvider":
 			if err := awsRestjson1_deserializeDocumentStaticKeyProvider(&sv.StaticKeyProvider, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14615,7 +14024,6 @@ func awsRestjson1_deserializeDocumentHlsEncryptionSettings(v **types.HlsEncrypti
 				}
 				sv.Type = types.HlsKeyProviderType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14651,12 +14059,10 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 			if err := awsRestjson1_deserializeDocument__listOfHlsAdditionalManifest(&sv.AdditionalManifests, value); err != nil {
 				return err
 			}
-
 		case "adMarkers":
 			if err := awsRestjson1_deserializeDocument__listOfHlsAdMarkers(&sv.AdMarkers, value); err != nil {
 				return err
 			}
-
 		case "audioOnlyHeader":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14665,7 +14071,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.AudioOnlyHeader = types.HlsAudioOnlyHeader(jtv)
 			}
-
 		case "baseUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14674,12 +14079,10 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.BaseUrl = ptr.String(jtv)
 			}
-
 		case "captionLanguageMappings":
 			if err := awsRestjson1_deserializeDocument__listOfHlsCaptionLanguageMapping(&sv.CaptionLanguageMappings, value); err != nil {
 				return err
 			}
-
 		case "captionLanguageSetting":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14688,7 +14091,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.CaptionLanguageSetting = types.HlsCaptionLanguageSetting(jtv)
 			}
-
 		case "captionSegmentLengthControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14697,7 +14099,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.CaptionSegmentLengthControl = types.HlsCaptionSegmentLengthControl(jtv)
 			}
-
 		case "clientCache":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14706,7 +14107,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ClientCache = types.HlsClientCache(jtv)
 			}
-
 		case "codecSpecification":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14715,7 +14115,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.CodecSpecification = types.HlsCodecSpecification(jtv)
 			}
-
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14724,12 +14123,10 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.Destination = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "directoryStructure":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14738,12 +14135,10 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.DirectoryStructure = types.HlsDirectoryStructure(jtv)
 			}
-
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentHlsEncryptionSettings(&sv.Encryption, value); err != nil {
 				return err
 			}
-
 		case "imageBasedTrickPlay":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14752,12 +14147,10 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ImageBasedTrickPlay = types.HlsImageBasedTrickPlay(jtv)
 			}
-
 		case "imageBasedTrickPlaySettings":
 			if err := awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
 				return err
 			}
-
 		case "manifestCompression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14766,7 +14159,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ManifestCompression = types.HlsManifestCompression(jtv)
 			}
-
 		case "manifestDurationFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14775,7 +14167,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ManifestDurationFormat = types.HlsManifestDurationFormat(jtv)
 			}
-
 		case "minFinalSegmentLength":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14809,7 +14200,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 
 				}
 			}
-
 		case "minSegmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14822,7 +14212,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.MinSegmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "outputSelection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14831,7 +14220,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.OutputSelection = types.HlsOutputSelection(jtv)
 			}
-
 		case "programDateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14840,7 +14228,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ProgramDateTime = types.HlsProgramDateTime(jtv)
 			}
-
 		case "programDateTimePeriod":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14853,7 +14240,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ProgramDateTimePeriod = ptr.Int32(int32(i64))
 			}
-
 		case "progressiveWriteHlsManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14862,7 +14248,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.ProgressiveWriteHlsManifest = types.HlsProgressiveWriteHlsManifest(jtv)
 			}
-
 		case "segmentControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14871,7 +14256,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.SegmentControl = types.HlsSegmentControl(jtv)
 			}
-
 		case "segmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14884,7 +14268,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.SegmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "segmentLengthControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14893,7 +14276,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.SegmentLengthControl = types.HlsSegmentLengthControl(jtv)
 			}
-
 		case "segmentsPerSubdirectory":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14906,7 +14288,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.SegmentsPerSubdirectory = ptr.Int32(int32(i64))
 			}
-
 		case "streamInfResolution":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14915,7 +14296,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.StreamInfResolution = types.HlsStreamInfResolution(jtv)
 			}
-
 		case "targetDurationCompatibilityMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14924,7 +14304,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.TargetDurationCompatibilityMode = types.HlsTargetDurationCompatibilityMode(jtv)
 			}
-
 		case "timedMetadataId3Frame":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14933,7 +14312,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.TimedMetadataId3Frame = types.HlsTimedMetadataId3Frame(jtv)
 			}
-
 		case "timedMetadataId3Period":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14946,7 +14324,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.TimedMetadataId3Period = ptr.Int32(int32(i64))
 			}
-
 		case "timestampDeltaMilliseconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14959,7 +14336,6 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				}
 				sv.TimestampDeltaMilliseconds = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -14999,7 +14375,6 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 				}
 				sv.IntervalCadence = types.HlsIntervalCadence(jtv)
 			}
-
 		case "thumbnailHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15012,7 +14387,6 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 				}
 				sv.ThumbnailHeight = ptr.Int32(int32(i64))
 			}
-
 		case "thumbnailInterval":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15046,7 +14420,6 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 
 				}
 			}
-
 		case "thumbnailWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15059,7 +14432,6 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 				}
 				sv.ThumbnailWidth = ptr.Int32(int32(i64))
 			}
-
 		case "tileHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15072,7 +14444,6 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 				}
 				sv.TileHeight = ptr.Int32(int32(i64))
 			}
-
 		case "tileWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15085,7 +14456,6 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 				}
 				sv.TileWidth = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15125,7 +14495,6 @@ func awsRestjson1_deserializeDocumentHlsRenditionGroupSettings(v **types.HlsRend
 				}
 				sv.RenditionGroupId = ptr.String(jtv)
 			}
-
 		case "renditionLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15134,7 +14503,6 @@ func awsRestjson1_deserializeDocumentHlsRenditionGroupSettings(v **types.HlsRend
 				}
 				sv.RenditionLanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "renditionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15143,7 +14511,6 @@ func awsRestjson1_deserializeDocumentHlsRenditionGroupSettings(v **types.HlsRend
 				}
 				sv.RenditionName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15183,7 +14550,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.AudioGroupId = ptr.String(jtv)
 			}
-
 		case "audioOnlyContainer":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15192,7 +14558,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.AudioOnlyContainer = types.HlsAudioOnlyContainer(jtv)
 			}
-
 		case "audioRenditionSets":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15201,7 +14566,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.AudioRenditionSets = ptr.String(jtv)
 			}
-
 		case "audioTrackType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15210,7 +14574,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.AudioTrackType = types.HlsAudioTrackType(jtv)
 			}
-
 		case "descriptiveVideoServiceFlag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15219,7 +14582,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.DescriptiveVideoServiceFlag = types.HlsDescriptiveVideoServiceFlag(jtv)
 			}
-
 		case "iFrameOnlyManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15228,7 +14590,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.IFrameOnlyManifest = types.HlsIFrameOnlyManifest(jtv)
 			}
-
 		case "segmentModifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15237,7 +14598,6 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				}
 				sv.SegmentModifier = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15281,7 +14641,6 @@ func awsRestjson1_deserializeDocumentHopDestination(v **types.HopDestination, va
 				}
 				sv.Priority = ptr.Int32(int32(i64))
 			}
-
 		case "queue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15290,7 +14649,6 @@ func awsRestjson1_deserializeDocumentHopDestination(v **types.HopDestination, va
 				}
 				sv.Queue = ptr.String(jtv)
 			}
-
 		case "waitMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15303,7 +14661,6 @@ func awsRestjson1_deserializeDocumentHopDestination(v **types.HopDestination, va
 				}
 				sv.WaitMinutes = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15343,7 +14700,6 @@ func awsRestjson1_deserializeDocumentId3Insertion(v **types.Id3Insertion, value 
 				}
 				sv.Id3 = ptr.String(jtv)
 			}
-
 		case "timecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15352,7 +14708,6 @@ func awsRestjson1_deserializeDocumentId3Insertion(v **types.Id3Insertion, value 
 				}
 				sv.Timecode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15388,7 +14743,6 @@ func awsRestjson1_deserializeDocumentImageInserter(v **types.ImageInserter, valu
 			if err := awsRestjson1_deserializeDocument__listOfInsertableImage(&sv.InsertableImages, value); err != nil {
 				return err
 			}
-
 		case "sdrReferenceWhiteLevel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15401,7 +14755,6 @@ func awsRestjson1_deserializeDocumentImageInserter(v **types.ImageInserter, valu
 				}
 				sv.SdrReferenceWhiteLevel = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15441,7 +14794,6 @@ func awsRestjson1_deserializeDocumentImscDestinationSettings(v **types.ImscDesti
 				}
 				sv.Accessibility = types.ImscAccessibilitySubs(jtv)
 			}
-
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15450,7 +14802,6 @@ func awsRestjson1_deserializeDocumentImscDestinationSettings(v **types.ImscDesti
 				}
 				sv.StylePassthrough = types.ImscStylePassthrough(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15490,32 +14841,26 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.AdvancedInputFilter = types.AdvancedInputFilter(jtv)
 			}
-
 		case "advancedInputFilterSettings":
 			if err := awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(&sv.AdvancedInputFilterSettings, value); err != nil {
 				return err
 			}
-
 		case "audioSelectorGroups":
 			if err := awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(&sv.AudioSelectorGroups, value); err != nil {
 				return err
 			}
-
 		case "audioSelectors":
 			if err := awsRestjson1_deserializeDocument__mapOfAudioSelector(&sv.AudioSelectors, value); err != nil {
 				return err
 			}
-
 		case "captionSelectors":
 			if err := awsRestjson1_deserializeDocument__mapOfCaptionSelector(&sv.CaptionSelectors, value); err != nil {
 				return err
 			}
-
 		case "crop":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Crop, value); err != nil {
 				return err
 			}
-
 		case "deblockFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15524,12 +14869,10 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.DeblockFilter = types.InputDeblockFilter(jtv)
 			}
-
 		case "decryptionSettings":
 			if err := awsRestjson1_deserializeDocumentInputDecryptionSettings(&sv.DecryptionSettings, value); err != nil {
 				return err
 			}
-
 		case "denoiseFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15538,7 +14881,6 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.DenoiseFilter = types.InputDenoiseFilter(jtv)
 			}
-
 		case "dolbyVisionMetadataXml":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15547,7 +14889,6 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.DolbyVisionMetadataXml = ptr.String(jtv)
 			}
-
 		case "fileInput":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15556,7 +14897,6 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
-
 		case "filterEnable":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15565,7 +14905,6 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.FilterEnable = types.InputFilterEnable(jtv)
 			}
-
 		case "filterStrength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15578,17 +14917,14 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.FilterStrength = ptr.Int32(int32(i64))
 			}
-
 		case "imageInserter":
 			if err := awsRestjson1_deserializeDocumentImageInserter(&sv.ImageInserter, value); err != nil {
 				return err
 			}
-
 		case "inputClippings":
 			if err := awsRestjson1_deserializeDocument__listOfInputClipping(&sv.InputClippings, value); err != nil {
 				return err
 			}
-
 		case "inputScanType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15597,12 +14933,10 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.InputScanType = types.InputScanType(jtv)
 			}
-
 		case "position":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "programNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15615,7 +14949,6 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.ProgramNumber = ptr.Int32(int32(i64))
 			}
-
 		case "psiControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15624,12 +14957,10 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.PsiControl = types.InputPsiControl(jtv)
 			}
-
 		case "supplementalImps":
 			if err := awsRestjson1_deserializeDocument__listOf__stringPatternS3ASSETMAPXml(&sv.SupplementalImps, value); err != nil {
 				return err
 			}
-
 		case "timecodeSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15638,7 +14969,6 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.TimecodeSource = types.InputTimecodeSource(jtv)
 			}
-
 		case "timecodeStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15647,22 +14977,18 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				}
 				sv.TimecodeStart = ptr.String(jtv)
 			}
-
 		case "videoGenerator":
 			if err := awsRestjson1_deserializeDocumentInputVideoGenerator(&sv.VideoGenerator, value); err != nil {
 				return err
 			}
-
 		case "videoOverlays":
 			if err := awsRestjson1_deserializeDocument__listOfVideoOverlay(&sv.VideoOverlays, value); err != nil {
 				return err
 			}
-
 		case "videoSelector":
 			if err := awsRestjson1_deserializeDocumentVideoSelector(&sv.VideoSelector, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15702,7 +15028,6 @@ func awsRestjson1_deserializeDocumentInputClipping(v **types.InputClipping, valu
 				}
 				sv.EndTimecode = ptr.String(jtv)
 			}
-
 		case "startTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15711,7 +15036,6 @@ func awsRestjson1_deserializeDocumentInputClipping(v **types.InputClipping, valu
 				}
 				sv.StartTimecode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15751,7 +15075,6 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				}
 				sv.DecryptionMode = types.DecryptionMode(jtv)
 			}
-
 		case "encryptedDecryptionKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15760,7 +15083,6 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				}
 				sv.EncryptedDecryptionKey = ptr.String(jtv)
 			}
-
 		case "initializationVector":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15769,7 +15091,6 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				}
 				sv.InitializationVector = ptr.String(jtv)
 			}
-
 		case "kmsKeyRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15778,7 +15099,6 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				}
 				sv.KmsKeyRegion = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -15818,32 +15138,26 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.AdvancedInputFilter = types.AdvancedInputFilter(jtv)
 			}
-
 		case "advancedInputFilterSettings":
 			if err := awsRestjson1_deserializeDocumentAdvancedInputFilterSettings(&sv.AdvancedInputFilterSettings, value); err != nil {
 				return err
 			}
-
 		case "audioSelectorGroups":
 			if err := awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(&sv.AudioSelectorGroups, value); err != nil {
 				return err
 			}
-
 		case "audioSelectors":
 			if err := awsRestjson1_deserializeDocument__mapOfAudioSelector(&sv.AudioSelectors, value); err != nil {
 				return err
 			}
-
 		case "captionSelectors":
 			if err := awsRestjson1_deserializeDocument__mapOfCaptionSelector(&sv.CaptionSelectors, value); err != nil {
 				return err
 			}
-
 		case "crop":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Crop, value); err != nil {
 				return err
 			}
-
 		case "deblockFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15852,7 +15166,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.DeblockFilter = types.InputDeblockFilter(jtv)
 			}
-
 		case "denoiseFilter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15861,7 +15174,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.DenoiseFilter = types.InputDenoiseFilter(jtv)
 			}
-
 		case "dolbyVisionMetadataXml":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15870,7 +15182,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.DolbyVisionMetadataXml = ptr.String(jtv)
 			}
-
 		case "filterEnable":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15879,7 +15190,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.FilterEnable = types.InputFilterEnable(jtv)
 			}
-
 		case "filterStrength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15892,17 +15202,14 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.FilterStrength = ptr.Int32(int32(i64))
 			}
-
 		case "imageInserter":
 			if err := awsRestjson1_deserializeDocumentImageInserter(&sv.ImageInserter, value); err != nil {
 				return err
 			}
-
 		case "inputClippings":
 			if err := awsRestjson1_deserializeDocument__listOfInputClipping(&sv.InputClippings, value); err != nil {
 				return err
 			}
-
 		case "inputScanType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15911,12 +15218,10 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.InputScanType = types.InputScanType(jtv)
 			}
-
 		case "position":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "programNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15929,7 +15234,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.ProgramNumber = ptr.Int32(int32(i64))
 			}
-
 		case "psiControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15938,7 +15242,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.PsiControl = types.InputPsiControl(jtv)
 			}
-
 		case "timecodeSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15947,7 +15250,6 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.TimecodeSource = types.InputTimecodeSource(jtv)
 			}
-
 		case "timecodeStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15956,17 +15258,14 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				}
 				sv.TimecodeStart = ptr.String(jtv)
 			}
-
 		case "videoOverlays":
 			if err := awsRestjson1_deserializeDocument__listOfVideoOverlay(&sv.VideoOverlays, value); err != nil {
 				return err
 			}
-
 		case "videoSelector":
 			if err := awsRestjson1_deserializeDocumentVideoSelector(&sv.VideoSelector, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16010,7 +15309,6 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16023,7 +15321,6 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 				}
 				sv.Duration = ptr.Int32(int32(i64))
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16036,7 +15333,6 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16049,7 +15345,6 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16062,7 +15357,6 @@ func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGen
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16106,7 +15400,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.Duration = ptr.Int32(int32(i64))
 			}
-
 		case "fadeIn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16119,7 +15412,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.FadeIn = ptr.Int32(int32(i64))
 			}
-
 		case "fadeOut":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16132,7 +15424,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.FadeOut = ptr.Int32(int32(i64))
 			}
-
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16145,7 +15436,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "imageInserterInput":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16154,7 +15444,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.ImageInserterInput = ptr.String(jtv)
 			}
-
 		case "imageX":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16167,7 +15456,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.ImageX = ptr.Int32(int32(i64))
 			}
-
 		case "imageY":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16180,7 +15468,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.ImageY = ptr.Int32(int32(i64))
 			}
-
 		case "layer":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16193,7 +15480,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.Layer = ptr.Int32(int32(i64))
 			}
-
 		case "opacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16206,7 +15492,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.Opacity = ptr.Int32(int32(i64))
 			}
-
 		case "startTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16215,7 +15500,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.StartTime = ptr.String(jtv)
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16228,7 +15512,6 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16258,15 +15541,9 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16274,14 +15551,10 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16313,7 +15586,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 			if err := awsRestjson1_deserializeDocumentAccelerationSettings(&sv.AccelerationSettings, value); err != nil {
 				return err
 			}
-
 		case "accelerationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16322,7 +15594,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.AccelerationStatus = types.AccelerationStatus(jtv)
 			}
-
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16331,7 +15602,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "billingTagsSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16340,7 +15610,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.BillingTagsSource = types.BillingTagsSource(jtv)
 			}
-
 		case "clientRequestToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16349,7 +15618,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.ClientRequestToken = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16365,7 +15633,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 
 				}
 			}
-
 		case "currentPhase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16374,7 +15641,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.CurrentPhase = types.JobPhase(jtv)
 			}
-
 		case "errorCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16387,7 +15653,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.ErrorCode = ptr.Int32(int32(i64))
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16396,12 +15661,10 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "hopDestinations":
 			if err := awsRestjson1_deserializeDocument__listOfHopDestination(&sv.HopDestinations, value); err != nil {
 				return err
 			}
-
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16410,7 +15673,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "jobEngineVersionRequested":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16419,7 +15681,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.JobEngineVersionRequested = ptr.String(jtv)
 			}
-
 		case "jobEngineVersionUsed":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16428,7 +15689,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.JobEngineVersionUsed = ptr.String(jtv)
 			}
-
 		case "jobPercentComplete":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16441,7 +15701,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.JobPercentComplete = ptr.Int32(int32(i64))
 			}
-
 		case "jobTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16450,17 +15709,14 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.JobTemplate = ptr.String(jtv)
 			}
-
 		case "messages":
 			if err := awsRestjson1_deserializeDocumentJobMessages(&sv.Messages, value); err != nil {
 				return err
 			}
-
 		case "outputGroupDetails":
 			if err := awsRestjson1_deserializeDocument__listOfOutputGroupDetail(&sv.OutputGroupDetails, value); err != nil {
 				return err
 			}
-
 		case "priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16473,7 +15729,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.Priority = ptr.Int32(int32(i64))
 			}
-
 		case "queue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16482,12 +15737,10 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.Queue = ptr.String(jtv)
 			}
-
 		case "queueTransitions":
 			if err := awsRestjson1_deserializeDocument__listOfQueueTransition(&sv.QueueTransitions, value); err != nil {
 				return err
 			}
-
 		case "retryCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16500,7 +15753,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.RetryCount = ptr.Int32(int32(i64))
 			}
-
 		case "role":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16509,12 +15761,10 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.Role = ptr.String(jtv)
 			}
-
 		case "settings":
 			if err := awsRestjson1_deserializeDocumentJobSettings(&sv.Settings, value); err != nil {
 				return err
 			}
-
 		case "simulateReservedQueue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16523,7 +15773,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.SimulateReservedQueue = types.SimulateReservedQueue(jtv)
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16532,7 +15781,6 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.Status = types.JobStatus(jtv)
 			}
-
 		case "statusUpdateInterval":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16541,22 +15789,18 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				}
 				sv.StatusUpdateInterval = types.StatusUpdateInterval(jtv)
 			}
-
 		case "timing":
 			if err := awsRestjson1_deserializeDocumentTiming(&sv.Timing, value); err != nil {
 				return err
 			}
-
 		case "userMetadata":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.UserMetadata, value); err != nil {
 				return err
 			}
-
 		case "warnings":
 			if err := awsRestjson1_deserializeDocument__listOfWarningGroup(&sv.Warnings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16603,7 +15847,6 @@ func awsRestjson1_deserializeDocumentJobEngineVersion(v **types.JobEngineVersion
 
 				}
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16612,7 +15855,6 @@ func awsRestjson1_deserializeDocumentJobEngineVersion(v **types.JobEngineVersion
 				}
 				sv.Version = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16648,12 +15890,10 @@ func awsRestjson1_deserializeDocumentJobMessages(v **types.JobMessages, value in
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.Info, value); err != nil {
 				return err
 			}
-
 		case "warning":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.Warning, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16697,27 +15937,22 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				}
 				sv.AdAvailOffset = ptr.Int32(int32(i64))
 			}
-
 		case "availBlanking":
 			if err := awsRestjson1_deserializeDocumentAvailBlanking(&sv.AvailBlanking, value); err != nil {
 				return err
 			}
-
 		case "colorConversion3DLUTSettings":
 			if err := awsRestjson1_deserializeDocument__listOfColorConversion3DLUTSetting(&sv.ColorConversion3DLUTSettings, value); err != nil {
 				return err
 			}
-
 		case "esam":
 			if err := awsRestjson1_deserializeDocumentEsamSettings(&sv.Esam, value); err != nil {
 				return err
 			}
-
 		case "extendedDataServices":
 			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
 				return err
 			}
-
 		case "followSource":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16730,47 +15965,38 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				}
 				sv.FollowSource = ptr.Int32(int32(i64))
 			}
-
 		case "inputs":
 			if err := awsRestjson1_deserializeDocument__listOfInput(&sv.Inputs, value); err != nil {
 				return err
 			}
-
 		case "kantarWatermark":
 			if err := awsRestjson1_deserializeDocumentKantarWatermarkSettings(&sv.KantarWatermark, value); err != nil {
 				return err
 			}
-
 		case "motionImageInserter":
 			if err := awsRestjson1_deserializeDocumentMotionImageInserter(&sv.MotionImageInserter, value); err != nil {
 				return err
 			}
-
 		case "nielsenConfiguration":
 			if err := awsRestjson1_deserializeDocumentNielsenConfiguration(&sv.NielsenConfiguration, value); err != nil {
 				return err
 			}
-
 		case "nielsenNonLinearWatermark":
 			if err := awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(&sv.NielsenNonLinearWatermark, value); err != nil {
 				return err
 			}
-
 		case "outputGroups":
 			if err := awsRestjson1_deserializeDocument__listOfOutputGroup(&sv.OutputGroups, value); err != nil {
 				return err
 			}
-
 		case "timecodeConfig":
 			if err := awsRestjson1_deserializeDocumentTimecodeConfig(&sv.TimecodeConfig, value); err != nil {
 				return err
 			}
-
 		case "timedMetadataInsertion":
 			if err := awsRestjson1_deserializeDocumentTimedMetadataInsertion(&sv.TimedMetadataInsertion, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16806,7 +16032,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 			if err := awsRestjson1_deserializeDocumentAccelerationSettings(&sv.AccelerationSettings, value); err != nil {
 				return err
 			}
-
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16815,7 +16040,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "category":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16824,7 +16048,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Category = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16840,7 +16063,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16849,12 +16071,10 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "hopDestinations":
 			if err := awsRestjson1_deserializeDocument__listOfHopDestination(&sv.HopDestinations, value); err != nil {
 				return err
 			}
-
 		case "lastUpdated":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16870,7 +16090,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16879,7 +16098,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16892,7 +16110,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Priority = ptr.Int32(int32(i64))
 			}
-
 		case "queue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16901,12 +16118,10 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Queue = ptr.String(jtv)
 			}
-
 		case "settings":
 			if err := awsRestjson1_deserializeDocumentJobTemplateSettings(&sv.Settings, value); err != nil {
 				return err
 			}
-
 		case "statusUpdateInterval":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16915,7 +16130,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.StatusUpdateInterval = types.StatusUpdateInterval(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16924,7 +16138,6 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				}
 				sv.Type = types.Type(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -16968,27 +16181,22 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 				}
 				sv.AdAvailOffset = ptr.Int32(int32(i64))
 			}
-
 		case "availBlanking":
 			if err := awsRestjson1_deserializeDocumentAvailBlanking(&sv.AvailBlanking, value); err != nil {
 				return err
 			}
-
 		case "colorConversion3DLUTSettings":
 			if err := awsRestjson1_deserializeDocument__listOfColorConversion3DLUTSetting(&sv.ColorConversion3DLUTSettings, value); err != nil {
 				return err
 			}
-
 		case "esam":
 			if err := awsRestjson1_deserializeDocumentEsamSettings(&sv.Esam, value); err != nil {
 				return err
 			}
-
 		case "extendedDataServices":
 			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
 				return err
 			}
-
 		case "followSource":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17001,47 +16209,38 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 				}
 				sv.FollowSource = ptr.Int32(int32(i64))
 			}
-
 		case "inputs":
 			if err := awsRestjson1_deserializeDocument__listOfInputTemplate(&sv.Inputs, value); err != nil {
 				return err
 			}
-
 		case "kantarWatermark":
 			if err := awsRestjson1_deserializeDocumentKantarWatermarkSettings(&sv.KantarWatermark, value); err != nil {
 				return err
 			}
-
 		case "motionImageInserter":
 			if err := awsRestjson1_deserializeDocumentMotionImageInserter(&sv.MotionImageInserter, value); err != nil {
 				return err
 			}
-
 		case "nielsenConfiguration":
 			if err := awsRestjson1_deserializeDocumentNielsenConfiguration(&sv.NielsenConfiguration, value); err != nil {
 				return err
 			}
-
 		case "nielsenNonLinearWatermark":
 			if err := awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(&sv.NielsenNonLinearWatermark, value); err != nil {
 				return err
 			}
-
 		case "outputGroups":
 			if err := awsRestjson1_deserializeDocument__listOfOutputGroup(&sv.OutputGroups, value); err != nil {
 				return err
 			}
-
 		case "timecodeConfig":
 			if err := awsRestjson1_deserializeDocumentTimecodeConfig(&sv.TimecodeConfig, value); err != nil {
 				return err
 			}
-
 		case "timedMetadataInsertion":
 			if err := awsRestjson1_deserializeDocumentTimedMetadataInsertion(&sv.TimedMetadataInsertion, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17081,7 +16280,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "contentReference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17090,7 +16288,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.ContentReference = ptr.String(jtv)
 			}
-
 		case "credentialsSecretName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17099,7 +16296,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.CredentialsSecretName = ptr.String(jtv)
 			}
-
 		case "fileOffset":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17133,7 +16329,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 
 				}
 			}
-
 		case "kantarLicenseId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17146,7 +16341,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.KantarLicenseId = ptr.Int32(int32(i64))
 			}
-
 		case "kantarServerUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17155,7 +16349,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.KantarServerUrl = ptr.String(jtv)
 			}
-
 		case "logDestination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17164,7 +16357,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.LogDestination = ptr.String(jtv)
 			}
-
 		case "metadata3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17173,7 +16365,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.Metadata3 = ptr.String(jtv)
 			}
-
 		case "metadata4":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17182,7 +16373,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.Metadata4 = ptr.String(jtv)
 			}
-
 		case "metadata5":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17191,7 +16381,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.Metadata5 = ptr.String(jtv)
 			}
-
 		case "metadata6":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17200,7 +16389,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.Metadata6 = ptr.String(jtv)
 			}
-
 		case "metadata7":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17209,7 +16397,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.Metadata7 = ptr.String(jtv)
 			}
-
 		case "metadata8":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17218,7 +16405,6 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 				}
 				sv.Metadata8 = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17262,7 +16448,6 @@ func awsRestjson1_deserializeDocumentM2tsScte35Esam(v **types.M2tsScte35Esam, va
 				}
 				sv.Scte35EsamPid = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17302,7 +16487,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.AudioBufferModel = types.M2tsAudioBufferModel(jtv)
 			}
-
 		case "audioDuration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17311,7 +16495,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.AudioDuration = types.M2tsAudioDuration(jtv)
 			}
-
 		case "audioFramesPerPes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17324,12 +16507,10 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
 			}
-
 		case "audioPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(&sv.AudioPids, value); err != nil {
 				return err
 			}
-
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17342,7 +16523,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "bufferModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17351,7 +16531,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.BufferModel = types.M2tsBufferModel(jtv)
 			}
-
 		case "dataPTSControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17360,27 +16539,22 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.DataPTSControl = types.M2tsDataPtsControl(jtv)
 			}
-
 		case "dvbNitSettings":
 			if err := awsRestjson1_deserializeDocumentDvbNitSettings(&sv.DvbNitSettings, value); err != nil {
 				return err
 			}
-
 		case "dvbSdtSettings":
 			if err := awsRestjson1_deserializeDocumentDvbSdtSettings(&sv.DvbSdtSettings, value); err != nil {
 				return err
 			}
-
 		case "dvbSubPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(&sv.DvbSubPids, value); err != nil {
 				return err
 			}
-
 		case "dvbTdtSettings":
 			if err := awsRestjson1_deserializeDocumentDvbTdtSettings(&sv.DvbTdtSettings, value); err != nil {
 				return err
 			}
-
 		case "dvbTeletextPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17393,7 +16567,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.DvbTeletextPid = ptr.Int32(int32(i64))
 			}
-
 		case "ebpAudioInterval":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17402,7 +16575,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.EbpAudioInterval = types.M2tsEbpAudioInterval(jtv)
 			}
-
 		case "ebpPlacement":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17411,7 +16583,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.EbpPlacement = types.M2tsEbpPlacement(jtv)
 			}
-
 		case "esRateInPes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17420,7 +16591,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.EsRateInPes = types.M2tsEsRateInPes(jtv)
 			}
-
 		case "forceTsVideoEbpOrder":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17429,7 +16599,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.ForceTsVideoEbpOrder = types.M2tsForceTsVideoEbpOrder(jtv)
 			}
-
 		case "fragmentTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17463,7 +16632,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 
 				}
 			}
-
 		case "klvMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17472,7 +16640,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.KlvMetadata = types.M2tsKlvMetadata(jtv)
 			}
-
 		case "maxPcrInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17485,7 +16652,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.MaxPcrInterval = ptr.Int32(int32(i64))
 			}
-
 		case "minEbpInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17498,7 +16664,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.MinEbpInterval = ptr.Int32(int32(i64))
 			}
-
 		case "nielsenId3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17507,7 +16672,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.NielsenId3 = types.M2tsNielsenId3(jtv)
 			}
-
 		case "nullPacketBitrate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17541,7 +16705,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 
 				}
 			}
-
 		case "patInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17554,7 +16717,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PatInterval = ptr.Int32(int32(i64))
 			}
-
 		case "pcrControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17563,7 +16725,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PcrControl = types.M2tsPcrControl(jtv)
 			}
-
 		case "pcrPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17576,7 +16737,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PcrPid = ptr.Int32(int32(i64))
 			}
-
 		case "pmtInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17589,7 +16749,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PmtInterval = ptr.Int32(int32(i64))
 			}
-
 		case "pmtPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17602,7 +16761,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PmtPid = ptr.Int32(int32(i64))
 			}
-
 		case "preventBufferUnderflow":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17611,7 +16769,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PreventBufferUnderflow = types.M2tsPreventBufferUnderflow(jtv)
 			}
-
 		case "privateMetadataPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17624,7 +16781,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PrivateMetadataPid = ptr.Int32(int32(i64))
 			}
-
 		case "programNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17637,7 +16793,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.ProgramNumber = ptr.Int32(int32(i64))
 			}
-
 		case "ptsOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17650,7 +16805,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PtsOffset = ptr.Int32(int32(i64))
 			}
-
 		case "ptsOffsetMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17659,7 +16813,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.PtsOffsetMode = types.TsPtsOffset(jtv)
 			}
-
 		case "rateMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17668,12 +16821,10 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.RateMode = types.M2tsRateMode(jtv)
 			}
-
 		case "scte35Esam":
 			if err := awsRestjson1_deserializeDocumentM2tsScte35Esam(&sv.Scte35Esam, value); err != nil {
 				return err
 			}
-
 		case "scte35Pid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17686,7 +16837,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.Scte35Pid = ptr.Int32(int32(i64))
 			}
-
 		case "scte35Source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17695,7 +16845,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.Scte35Source = types.M2tsScte35Source(jtv)
 			}
-
 		case "segmentationMarkers":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17704,7 +16853,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.SegmentationMarkers = types.M2tsSegmentationMarkers(jtv)
 			}
-
 		case "segmentationStyle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17713,7 +16861,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.SegmentationStyle = types.M2tsSegmentationStyle(jtv)
 			}
-
 		case "segmentationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17747,7 +16894,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 
 				}
 			}
-
 		case "timedMetadataPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17760,7 +16906,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.TimedMetadataPid = ptr.Int32(int32(i64))
 			}
-
 		case "transportStreamId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17773,7 +16918,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.TransportStreamId = ptr.Int32(int32(i64))
 			}
-
 		case "videoPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17786,7 +16930,6 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				}
 				sv.VideoPid = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -17826,7 +16969,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.AudioDuration = types.M3u8AudioDuration(jtv)
 			}
-
 		case "audioFramesPerPes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17839,12 +16981,10 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
 			}
-
 		case "audioPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(&sv.AudioPids, value); err != nil {
 				return err
 			}
-
 		case "dataPTSControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17853,7 +16993,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.DataPTSControl = types.M3u8DataPtsControl(jtv)
 			}
-
 		case "maxPcrInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17866,7 +17005,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.MaxPcrInterval = ptr.Int32(int32(i64))
 			}
-
 		case "nielsenId3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17875,7 +17013,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.NielsenId3 = types.M3u8NielsenId3(jtv)
 			}
-
 		case "patInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17888,7 +17025,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PatInterval = ptr.Int32(int32(i64))
 			}
-
 		case "pcrControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17897,7 +17033,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PcrControl = types.M3u8PcrControl(jtv)
 			}
-
 		case "pcrPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17910,7 +17045,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PcrPid = ptr.Int32(int32(i64))
 			}
-
 		case "pmtInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17923,7 +17057,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PmtInterval = ptr.Int32(int32(i64))
 			}
-
 		case "pmtPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17936,7 +17069,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PmtPid = ptr.Int32(int32(i64))
 			}
-
 		case "privateMetadataPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17949,7 +17081,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PrivateMetadataPid = ptr.Int32(int32(i64))
 			}
-
 		case "programNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17962,7 +17093,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.ProgramNumber = ptr.Int32(int32(i64))
 			}
-
 		case "ptsOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17975,7 +17105,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PtsOffset = ptr.Int32(int32(i64))
 			}
-
 		case "ptsOffsetMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17984,7 +17113,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.PtsOffsetMode = types.TsPtsOffset(jtv)
 			}
-
 		case "scte35Pid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17997,7 +17125,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.Scte35Pid = ptr.Int32(int32(i64))
 			}
-
 		case "scte35Source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18006,7 +17133,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.Scte35Source = types.M3u8Scte35Source(jtv)
 			}
-
 		case "timedMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18015,7 +17141,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.TimedMetadata = types.TimedMetadata(jtv)
 			}
-
 		case "timedMetadataPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18028,7 +17153,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.TimedMetadataPid = ptr.Int32(int32(i64))
 			}
-
 		case "transportStreamId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18041,7 +17165,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.TransportStreamId = ptr.Int32(int32(i64))
 			}
-
 		case "videoPid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18054,7 +17177,6 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				}
 				sv.VideoPid = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18098,7 +17220,6 @@ func awsRestjson1_deserializeDocumentMinBottomRenditionSize(v **types.MinBottomR
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18111,7 +17232,6 @@ func awsRestjson1_deserializeDocumentMinBottomRenditionSize(v **types.MinBottomR
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18155,7 +17275,6 @@ func awsRestjson1_deserializeDocumentMinTopRenditionSize(v **types.MinTopRenditi
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18168,7 +17287,6 @@ func awsRestjson1_deserializeDocumentMinTopRenditionSize(v **types.MinTopRenditi
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18204,7 +17322,6 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 			if err := awsRestjson1_deserializeDocumentMotionImageInsertionFramerate(&sv.Framerate, value); err != nil {
 				return err
 			}
-
 		case "input":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18213,7 +17330,6 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 				}
 				sv.Input = ptr.String(jtv)
 			}
-
 		case "insertionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18222,12 +17338,10 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 				}
 				sv.InsertionMode = types.MotionImageInsertionMode(jtv)
 			}
-
 		case "offset":
 			if err := awsRestjson1_deserializeDocumentMotionImageInsertionOffset(&sv.Offset, value); err != nil {
 				return err
 			}
-
 		case "playback":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18236,7 +17350,6 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 				}
 				sv.Playback = types.MotionImagePlayback(jtv)
 			}
-
 		case "startTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18245,7 +17358,6 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 				}
 				sv.StartTime = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18289,7 +17401,6 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionFramerate(v **types.Mot
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18302,7 +17413,6 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionFramerate(v **types.Mot
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18346,7 +17456,6 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionOffset(v **types.Motion
 				}
 				sv.ImageX = ptr.Int32(int32(i64))
 			}
-
 		case "imageY":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18359,7 +17468,6 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionOffset(v **types.Motion
 				}
 				sv.ImageY = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18399,7 +17507,6 @@ func awsRestjson1_deserializeDocumentMovSettings(v **types.MovSettings, value in
 				}
 				sv.ClapAtom = types.MovClapAtom(jtv)
 			}
-
 		case "cslgAtom":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18408,7 +17515,6 @@ func awsRestjson1_deserializeDocumentMovSettings(v **types.MovSettings, value in
 				}
 				sv.CslgAtom = types.MovCslgAtom(jtv)
 			}
-
 		case "mpeg2FourCCControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18417,7 +17523,6 @@ func awsRestjson1_deserializeDocumentMovSettings(v **types.MovSettings, value in
 				}
 				sv.Mpeg2FourCCControl = types.MovMpeg2FourCCControl(jtv)
 			}
-
 		case "paddingControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18426,7 +17531,6 @@ func awsRestjson1_deserializeDocumentMovSettings(v **types.MovSettings, value in
 				}
 				sv.PaddingControl = types.MovPaddingControl(jtv)
 			}
-
 		case "reference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18435,7 +17539,6 @@ func awsRestjson1_deserializeDocumentMovSettings(v **types.MovSettings, value in
 				}
 				sv.Reference = types.MovReference(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18479,7 +17582,6 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "channels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18492,7 +17594,6 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18505,7 +17606,6 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18549,7 +17649,6 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "channels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18562,7 +17661,6 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18571,7 +17669,6 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				}
 				sv.RateControlMode = types.Mp3RateControlMode(jtv)
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18584,7 +17681,6 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		case "vbrQuality":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18597,7 +17693,6 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				}
 				sv.VbrQuality = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18637,7 +17732,6 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				}
 				sv.AudioDuration = types.CmfcAudioDuration(jtv)
 			}
-
 		case "cslgAtom":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18646,7 +17740,6 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				}
 				sv.CslgAtom = types.Mp4CslgAtom(jtv)
 			}
-
 		case "cttsVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18659,7 +17752,6 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				}
 				sv.CttsVersion = ptr.Int32(int32(i64))
 			}
-
 		case "freeSpaceBox":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18668,7 +17760,6 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				}
 				sv.FreeSpaceBox = types.Mp4FreeSpaceBox(jtv)
 			}
-
 		case "moovPlacement":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18677,7 +17768,6 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				}
 				sv.MoovPlacement = types.Mp4MoovPlacement(jtv)
 			}
-
 		case "mp4MajorBrand":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18686,7 +17776,6 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				}
 				sv.Mp4MajorBrand = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18726,7 +17815,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.AccessibilityCaptionHints = types.MpdAccessibilityCaptionHints(jtv)
 			}
-
 		case "audioDuration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18735,7 +17823,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.AudioDuration = types.MpdAudioDuration(jtv)
 			}
-
 		case "captionContainerType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18744,7 +17831,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.CaptionContainerType = types.MpdCaptionContainerType(jtv)
 			}
-
 		case "klvMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18753,7 +17839,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.KlvMetadata = types.MpdKlvMetadata(jtv)
 			}
-
 		case "manifestMetadataSignaling":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18762,7 +17847,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.ManifestMetadataSignaling = types.MpdManifestMetadataSignaling(jtv)
 			}
-
 		case "scte35Esam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18771,7 +17855,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.Scte35Esam = types.MpdScte35Esam(jtv)
 			}
-
 		case "scte35Source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18780,7 +17863,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.Scte35Source = types.MpdScte35Source(jtv)
 			}
-
 		case "timedMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18789,7 +17871,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.TimedMetadata = types.MpdTimedMetadata(jtv)
 			}
-
 		case "timedMetadataBoxVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18798,7 +17879,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.TimedMetadataBoxVersion = types.MpdTimedMetadataBoxVersion(jtv)
 			}
-
 		case "timedMetadataSchemeIdUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18807,7 +17887,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.TimedMetadataSchemeIdUri = ptr.String(jtv)
 			}
-
 		case "timedMetadataValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18816,7 +17895,6 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				}
 				sv.TimedMetadataValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -18856,7 +17934,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.AdaptiveQuantization = types.Mpeg2AdaptiveQuantization(jtv)
 			}
-
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18869,7 +17946,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "codecLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18878,7 +17954,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.CodecLevel = types.Mpeg2CodecLevel(jtv)
 			}
-
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18887,7 +17962,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.CodecProfile = types.Mpeg2CodecProfile(jtv)
 			}
-
 		case "dynamicSubGop":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18896,7 +17970,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.DynamicSubGop = types.Mpeg2DynamicSubGop(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18905,7 +17978,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.FramerateControl = types.Mpeg2FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18914,7 +17986,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.FramerateConversionAlgorithm = types.Mpeg2FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18927,7 +17998,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18940,7 +18010,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "gopClosedCadence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18953,7 +18022,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
-
 		case "gopSize":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -18987,7 +18055,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 
 				}
 			}
-
 		case "gopSizeUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18996,7 +18063,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.GopSizeUnits = types.Mpeg2GopSizeUnits(jtv)
 			}
-
 		case "hrdBufferFinalFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19009,7 +18075,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.HrdBufferFinalFillPercentage = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferInitialFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19022,7 +18087,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.HrdBufferInitialFillPercentage = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19035,7 +18099,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19044,7 +18107,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.InterlaceMode = types.Mpeg2InterlaceMode(jtv)
 			}
-
 		case "intraDcPrecision":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19053,7 +18115,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.IntraDcPrecision = types.Mpeg2IntraDcPrecision(jtv)
 			}
-
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19066,7 +18127,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "minIInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19079,7 +18139,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
-
 		case "numberBFramesBetweenReferenceFrames":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19092,7 +18151,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
 			}
-
 		case "parControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19101,7 +18159,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.ParControl = types.Mpeg2ParControl(jtv)
 			}
-
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19114,7 +18171,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "parNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19127,7 +18183,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19136,7 +18191,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.QualityTuningLevel = types.Mpeg2QualityTuningLevel(jtv)
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19145,7 +18199,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.RateControlMode = types.Mpeg2RateControlMode(jtv)
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19154,7 +18207,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.ScanTypeConversionMode = types.Mpeg2ScanTypeConversionMode(jtv)
 			}
-
 		case "sceneChangeDetect":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19163,7 +18215,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.SceneChangeDetect = types.Mpeg2SceneChangeDetect(jtv)
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19172,7 +18223,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.SlowPal = types.Mpeg2SlowPal(jtv)
 			}
-
 		case "softness":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19185,7 +18235,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.Softness = ptr.Int32(int32(i64))
 			}
-
 		case "spatialAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19194,7 +18243,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.SpatialAdaptiveQuantization = types.Mpeg2SpatialAdaptiveQuantization(jtv)
 			}
-
 		case "syntax":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19203,7 +18251,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.Syntax = types.Mpeg2Syntax(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19212,7 +18259,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.Telecine = types.Mpeg2Telecine(jtv)
 			}
-
 		case "temporalAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19221,7 +18267,6 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				}
 				sv.TemporalAdaptiveQuantization = types.Mpeg2TemporalAdaptiveQuantization(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19261,12 +18306,10 @@ func awsRestjson1_deserializeDocumentMsSmoothAdditionalManifest(v **types.MsSmoo
 				}
 				sv.ManifestNameModifier = ptr.String(jtv)
 			}
-
 		case "selectedOutputs":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin1(&sv.SelectedOutputs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19302,7 +18345,6 @@ func awsRestjson1_deserializeDocumentMsSmoothEncryptionSettings(v **types.MsSmoo
 			if err := awsRestjson1_deserializeDocumentSpekeKeyProvider(&sv.SpekeKeyProvider, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19338,7 +18380,6 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 			if err := awsRestjson1_deserializeDocument__listOfMsSmoothAdditionalManifest(&sv.AdditionalManifests, value); err != nil {
 				return err
 			}
-
 		case "audioDeduplication":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19347,7 +18388,6 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				}
 				sv.AudioDeduplication = types.MsSmoothAudioDeduplication(jtv)
 			}
-
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19356,17 +18396,14 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				}
 				sv.Destination = ptr.String(jtv)
 			}
-
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
 			}
-
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentMsSmoothEncryptionSettings(&sv.Encryption, value); err != nil {
 				return err
 			}
-
 		case "fragmentLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19379,7 +18416,6 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				}
 				sv.FragmentLength = ptr.Int32(int32(i64))
 			}
-
 		case "fragmentLengthControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19388,7 +18424,6 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				}
 				sv.FragmentLengthControl = types.MsSmoothFragmentLengthControl(jtv)
 			}
-
 		case "manifestEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19397,7 +18432,6 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				}
 				sv.ManifestEncoding = types.MsSmoothManifestEncoding(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19437,7 +18471,6 @@ func awsRestjson1_deserializeDocumentMxfSettings(v **types.MxfSettings, value in
 				}
 				sv.AfdSignaling = types.MxfAfdSignaling(jtv)
 			}
-
 		case "profile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19446,12 +18479,10 @@ func awsRestjson1_deserializeDocumentMxfSettings(v **types.MxfSettings, value in
 				}
 				sv.Profile = types.MxfProfile(jtv)
 			}
-
 		case "xavcProfileSettings":
 			if err := awsRestjson1_deserializeDocumentMxfXavcProfileSettings(&sv.XavcProfileSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19491,7 +18522,6 @@ func awsRestjson1_deserializeDocumentMxfXavcProfileSettings(v **types.MxfXavcPro
 				}
 				sv.DurationMode = types.MxfXavcDurationMode(jtv)
 			}
-
 		case "maxAncDataSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19504,7 +18534,6 @@ func awsRestjson1_deserializeDocumentMxfXavcProfileSettings(v **types.MxfXavcPro
 				}
 				sv.MaxAncDataSize = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19544,7 +18573,6 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				}
 				sv.License = ptr.String(jtv)
 			}
-
 		case "payload":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19557,7 +18585,6 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				}
 				sv.Payload = ptr.Int32(int32(i64))
 			}
-
 		case "preset":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19566,7 +18593,6 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				}
 				sv.Preset = ptr.String(jtv)
 			}
-
 		case "strength":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19575,7 +18601,6 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				}
 				sv.Strength = types.WatermarkingStrength(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19619,7 +18644,6 @@ func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfi
 				}
 				sv.BreakoutCode = ptr.Int32(int32(i64))
 			}
-
 		case "distributorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19628,7 +18652,6 @@ func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfi
 				}
 				sv.DistributorId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19668,7 +18691,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.ActiveWatermarkProcess = types.NielsenActiveWatermarkProcessType(jtv)
 			}
-
 		case "adiFilename":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19677,7 +18699,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.AdiFilename = ptr.String(jtv)
 			}
-
 		case "assetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19686,7 +18707,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.AssetId = ptr.String(jtv)
 			}
-
 		case "assetName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19695,7 +18715,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.AssetName = ptr.String(jtv)
 			}
-
 		case "cbetSourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19704,7 +18723,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.CbetSourceId = ptr.String(jtv)
 			}
-
 		case "episodeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19713,7 +18731,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.EpisodeId = ptr.String(jtv)
 			}
-
 		case "metadataDestination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19722,7 +18739,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.MetadataDestination = ptr.String(jtv)
 			}
-
 		case "sourceId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19735,7 +18751,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.SourceId = ptr.Int32(int32(i64))
 			}
-
 		case "sourceWatermarkStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19744,7 +18759,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.SourceWatermarkStatus = types.NielsenSourceWatermarkStatusType(jtv)
 			}
-
 		case "ticServerUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19753,7 +18767,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.TicServerUrl = ptr.String(jtv)
 			}
-
 		case "uniqueTicPerAudioTrack":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19762,7 +18775,6 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				}
 				sv.UniqueTicPerAudioTrack = types.NielsenUniqueTicPerAudioTrackType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19802,22 +18814,18 @@ func awsRestjson1_deserializeDocumentNoiseReducer(v **types.NoiseReducer, value 
 				}
 				sv.Filter = types.NoiseReducerFilter(jtv)
 			}
-
 		case "filterSettings":
 			if err := awsRestjson1_deserializeDocumentNoiseReducerFilterSettings(&sv.FilterSettings, value); err != nil {
 				return err
 			}
-
 		case "spatialFilterSettings":
 			if err := awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(&sv.SpatialFilterSettings, value); err != nil {
 				return err
 			}
-
 		case "temporalFilterSettings":
 			if err := awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(&sv.TemporalFilterSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19861,7 +18869,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerFilterSettings(v **types.NoiseR
 				}
 				sv.Strength = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19905,7 +18912,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(v **types
 				}
 				sv.PostFilterSharpenStrength = ptr.Int32(int32(i64))
 			}
-
 		case "speed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19918,7 +18924,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(v **types
 				}
 				sv.Speed = ptr.Int32(int32(i64))
 			}
-
 		case "strength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -19931,7 +18936,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(v **types
 				}
 				sv.Strength = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -19975,7 +18979,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				}
 				sv.AggressiveMode = ptr.Int32(int32(i64))
 			}
-
 		case "postTemporalSharpening":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19984,7 +18987,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				}
 				sv.PostTemporalSharpening = types.NoiseFilterPostTemporalSharpening(jtv)
 			}
-
 		case "postTemporalSharpeningStrength":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19993,7 +18995,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				}
 				sv.PostTemporalSharpeningStrength = types.NoiseFilterPostTemporalSharpeningStrength(jtv)
 			}
-
 		case "speed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20006,7 +19007,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				}
 				sv.Speed = ptr.Int32(int32(i64))
 			}
-
 		case "strength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20019,7 +19019,6 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				}
 				sv.Strength = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20049,15 +19048,9 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20065,14 +19058,10 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20112,7 +19101,6 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "channels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20125,7 +19113,6 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20138,7 +19125,6 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20174,17 +19160,14 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 			if err := awsRestjson1_deserializeDocument__listOfAudioDescription(&sv.AudioDescriptions, value); err != nil {
 				return err
 			}
-
 		case "captionDescriptions":
 			if err := awsRestjson1_deserializeDocument__listOfCaptionDescription(&sv.CaptionDescriptions, value); err != nil {
 				return err
 			}
-
 		case "containerSettings":
 			if err := awsRestjson1_deserializeDocumentContainerSettings(&sv.ContainerSettings, value); err != nil {
 				return err
 			}
-
 		case "extension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20193,7 +19176,6 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				}
 				sv.Extension = ptr.String(jtv)
 			}
-
 		case "nameModifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20202,12 +19184,10 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				}
 				sv.NameModifier = ptr.String(jtv)
 			}
-
 		case "outputSettings":
 			if err := awsRestjson1_deserializeDocumentOutputSettings(&sv.OutputSettings, value); err != nil {
 				return err
 			}
-
 		case "preset":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20216,12 +19196,10 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				}
 				sv.Preset = ptr.String(jtv)
 			}
-
 		case "videoDescription":
 			if err := awsRestjson1_deserializeDocumentVideoDescription(&sv.VideoDescription, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20257,12 +19235,10 @@ func awsRestjson1_deserializeDocumentOutputChannelMapping(v **types.OutputChanne
 			if err := awsRestjson1_deserializeDocument__listOf__integerMinNegative60Max6(&sv.InputChannels, value); err != nil {
 				return err
 			}
-
 		case "inputChannelsFineTune":
 			if err := awsRestjson1_deserializeDocument__listOf__doubleMinNegative60Max6(&sv.InputChannelsFineTune, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20306,12 +19282,10 @@ func awsRestjson1_deserializeDocumentOutputDetail(v **types.OutputDetail, value 
 				}
 				sv.DurationInMs = ptr.Int32(int32(i64))
 			}
-
 		case "videoDetails":
 			if err := awsRestjson1_deserializeDocumentVideoDetail(&sv.VideoDetails, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20347,7 +19321,6 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 			if err := awsRestjson1_deserializeDocumentAutomatedEncodingSettings(&sv.AutomatedEncodingSettings, value); err != nil {
 				return err
 			}
-
 		case "customName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20356,7 +19329,6 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 				}
 				sv.CustomName = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20365,17 +19337,14 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "outputGroupSettings":
 			if err := awsRestjson1_deserializeDocumentOutputGroupSettings(&sv.OutputGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "outputs":
 			if err := awsRestjson1_deserializeDocument__listOfOutput(&sv.Outputs, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20411,7 +19380,6 @@ func awsRestjson1_deserializeDocumentOutputGroupDetail(v **types.OutputGroupDeta
 			if err := awsRestjson1_deserializeDocument__listOfOutputDetail(&sv.OutputDetails, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20447,27 +19415,22 @@ func awsRestjson1_deserializeDocumentOutputGroupSettings(v **types.OutputGroupSe
 			if err := awsRestjson1_deserializeDocumentCmafGroupSettings(&sv.CmafGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "dashIsoGroupSettings":
 			if err := awsRestjson1_deserializeDocumentDashIsoGroupSettings(&sv.DashIsoGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "fileGroupSettings":
 			if err := awsRestjson1_deserializeDocumentFileGroupSettings(&sv.FileGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "hlsGroupSettings":
 			if err := awsRestjson1_deserializeDocumentHlsGroupSettings(&sv.HlsGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "msSmoothGroupSettings":
 			if err := awsRestjson1_deserializeDocumentMsSmoothGroupSettings(&sv.MsSmoothGroupSettings, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20476,7 +19439,6 @@ func awsRestjson1_deserializeDocumentOutputGroupSettings(v **types.OutputGroupSe
 				}
 				sv.Type = types.OutputGroupType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20512,7 +19474,6 @@ func awsRestjson1_deserializeDocumentOutputSettings(v **types.OutputSettings, va
 			if err := awsRestjson1_deserializeDocumentHlsSettings(&sv.HlsSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20548,7 +19509,6 @@ func awsRestjson1_deserializeDocumentPartnerWatermarking(v **types.PartnerWaterm
 			if err := awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(&sv.NexguardFileMarkerSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20588,7 +19548,6 @@ func awsRestjson1_deserializeDocumentPolicy(v **types.Policy, value interface{})
 				}
 				sv.HttpInputs = types.InputPolicy(jtv)
 			}
-
 		case "httpsInputs":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20597,7 +19556,6 @@ func awsRestjson1_deserializeDocumentPolicy(v **types.Policy, value interface{})
 				}
 				sv.HttpsInputs = types.InputPolicy(jtv)
 			}
-
 		case "s3Inputs":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20606,7 +19564,6 @@ func awsRestjson1_deserializeDocumentPolicy(v **types.Policy, value interface{})
 				}
 				sv.S3Inputs = types.InputPolicy(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20646,7 +19603,6 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "category":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20655,7 +19611,6 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				}
 				sv.Category = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -20671,7 +19626,6 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20680,7 +19634,6 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "lastUpdated":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -20696,7 +19649,6 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20705,12 +19657,10 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "settings":
 			if err := awsRestjson1_deserializeDocumentPresetSettings(&sv.Settings, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20719,7 +19669,6 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				}
 				sv.Type = types.Type(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20755,22 +19704,18 @@ func awsRestjson1_deserializeDocumentPresetSettings(v **types.PresetSettings, va
 			if err := awsRestjson1_deserializeDocument__listOfAudioDescription(&sv.AudioDescriptions, value); err != nil {
 				return err
 			}
-
 		case "captionDescriptions":
 			if err := awsRestjson1_deserializeDocument__listOfCaptionDescriptionPreset(&sv.CaptionDescriptions, value); err != nil {
 				return err
 			}
-
 		case "containerSettings":
 			if err := awsRestjson1_deserializeDocumentContainerSettings(&sv.ContainerSettings, value); err != nil {
 				return err
 			}
-
 		case "videoDescription":
 			if err := awsRestjson1_deserializeDocumentVideoDescription(&sv.VideoDescription, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20810,7 +19755,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.ChromaSampling = types.ProresChromaSampling(jtv)
 			}
-
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20819,7 +19763,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.CodecProfile = types.ProresCodecProfile(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20828,7 +19771,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.FramerateControl = types.ProresFramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20837,7 +19779,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.FramerateConversionAlgorithm = types.ProresFramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20850,7 +19791,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20863,7 +19803,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20872,7 +19811,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.InterlaceMode = types.ProresInterlaceMode(jtv)
 			}
-
 		case "parControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20881,7 +19819,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.ParControl = types.ProresParControl(jtv)
 			}
-
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20894,7 +19831,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "parNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20907,7 +19843,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20916,7 +19851,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.ScanTypeConversionMode = types.ProresScanTypeConversionMode(jtv)
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20925,7 +19859,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.SlowPal = types.ProresSlowPal(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20934,7 +19867,6 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				}
 				sv.Telecine = types.ProresTelecine(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -20974,7 +19906,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -20990,7 +19921,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20999,7 +19929,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "lastUpdated":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21015,7 +19944,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 
 				}
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21024,7 +19952,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "pricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21033,7 +19960,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.PricingPlan = types.PricingPlan(jtv)
 			}
-
 		case "progressingJobsCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21046,12 +19972,10 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.ProgressingJobsCount = ptr.Int32(int32(i64))
 			}
-
 		case "reservationPlan":
 			if err := awsRestjson1_deserializeDocumentReservationPlan(&sv.ReservationPlan, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21060,7 +19984,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Status = types.QueueStatus(jtv)
 			}
-
 		case "submittedJobsCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21073,7 +19996,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.SubmittedJobsCount = ptr.Int32(int32(i64))
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21082,7 +20004,6 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				}
 				sv.Type = types.Type(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21122,7 +20043,6 @@ func awsRestjson1_deserializeDocumentQueueTransition(v **types.QueueTransition, 
 				}
 				sv.DestinationQueue = ptr.String(jtv)
 			}
-
 		case "sourceQueue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21131,7 +20051,6 @@ func awsRestjson1_deserializeDocumentQueueTransition(v **types.QueueTransition, 
 				}
 				sv.SourceQueue = ptr.String(jtv)
 			}
-
 		case "timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21147,7 +20066,6 @@ func awsRestjson1_deserializeDocumentQueueTransition(v **types.QueueTransition, 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21191,7 +20109,6 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21204,7 +20121,6 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		case "x":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21217,7 +20133,6 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				}
 				sv.X = ptr.Int32(int32(i64))
 			}
-
 		case "y":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21230,7 +20145,6 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				}
 				sv.Y = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21274,7 +20188,6 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				}
 				sv.AudioDescriptionAudioChannel = ptr.Int32(int32(i64))
 			}
-
 		case "audioDescriptionDataChannel":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21287,12 +20200,10 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				}
 				sv.AudioDescriptionDataChannel = ptr.Int32(int32(i64))
 			}
-
 		case "channelMapping":
 			if err := awsRestjson1_deserializeDocumentChannelMapping(&sv.ChannelMapping, value); err != nil {
 				return err
 			}
-
 		case "channelsIn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21305,7 +20216,6 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				}
 				sv.ChannelsIn = ptr.Int32(int32(i64))
 			}
-
 		case "channelsOut":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21318,7 +20228,6 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				}
 				sv.ChannelsOut = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21358,7 +20267,6 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 				}
 				sv.Commitment = types.Commitment(jtv)
 			}
-
 		case "expiresAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21374,7 +20282,6 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 
 				}
 			}
-
 		case "purchasedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21390,7 +20297,6 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 
 				}
 			}
-
 		case "renewalType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21399,7 +20305,6 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 				}
 				sv.RenewalType = types.RenewalType(jtv)
 			}
-
 		case "reservedSlots":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21412,7 +20317,6 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 				}
 				sv.ReservedSlots = ptr.Int32(int32(i64))
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21421,7 +20325,6 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 				}
 				sv.Status = types.ReservationPlanStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21461,12 +20364,10 @@ func awsRestjson1_deserializeDocumentResourceTags(v **types.ResourceTags, value 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21506,7 +20407,6 @@ func awsRestjson1_deserializeDocumentS3DestinationAccessControl(v **types.S3Dest
 				}
 				sv.CannedAcl = types.S3ObjectCannedAcl(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21542,12 +20442,10 @@ func awsRestjson1_deserializeDocumentS3DestinationSettings(v **types.S3Destinati
 			if err := awsRestjson1_deserializeDocumentS3DestinationAccessControl(&sv.AccessControl, value); err != nil {
 				return err
 			}
-
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentS3EncryptionSettings(&sv.Encryption, value); err != nil {
 				return err
 			}
-
 		case "storageClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21556,7 +20454,6 @@ func awsRestjson1_deserializeDocumentS3DestinationSettings(v **types.S3Destinati
 				}
 				sv.StorageClass = types.S3StorageClass(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21596,7 +20493,6 @@ func awsRestjson1_deserializeDocumentS3EncryptionSettings(v **types.S3Encryption
 				}
 				sv.EncryptionType = types.S3ServerSideEncryptionType(jtv)
 			}
-
 		case "kmsEncryptionContext":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21605,7 +20501,6 @@ func awsRestjson1_deserializeDocumentS3EncryptionSettings(v **types.S3Encryption
 				}
 				sv.KmsEncryptionContext = ptr.String(jtv)
 			}
-
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21614,7 +20509,6 @@ func awsRestjson1_deserializeDocumentS3EncryptionSettings(v **types.S3Encryption
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21654,7 +20548,6 @@ func awsRestjson1_deserializeDocumentSccDestinationSettings(v **types.SccDestina
 				}
 				sv.Framerate = types.SccDestinationFramerate(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21694,12 +20587,10 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
-
 		case "encryptionContractConfiguration":
 			if err := awsRestjson1_deserializeDocumentEncryptionContractConfiguration(&sv.EncryptionContractConfiguration, value); err != nil {
 				return err
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21708,12 +20599,10 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "systemIds":
 			if err := awsRestjson1_deserializeDocument__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12(&sv.SystemIds, value); err != nil {
 				return err
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21722,7 +20611,6 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21762,22 +20650,18 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
-
 		case "dashSignaledSystemIds":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(&sv.DashSignaledSystemIds, value); err != nil {
 				return err
 			}
-
 		case "encryptionContractConfiguration":
 			if err := awsRestjson1_deserializeDocumentEncryptionContractConfiguration(&sv.EncryptionContractConfiguration, value); err != nil {
 				return err
 			}
-
 		case "hlsSignaledSystemIds":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(&sv.HlsSignaledSystemIds, value); err != nil {
 				return err
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21786,7 +20670,6 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21795,7 +20678,6 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21835,7 +20717,6 @@ func awsRestjson1_deserializeDocumentSrtDestinationSettings(v **types.SrtDestina
 				}
 				sv.StylePassthrough = types.SrtStylePassthrough(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21875,7 +20756,6 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				}
 				sv.KeyFormat = ptr.String(jtv)
 			}
-
 		case "keyFormatVersions":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21884,7 +20764,6 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				}
 				sv.KeyFormatVersions = ptr.String(jtv)
 			}
-
 		case "staticKeyValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21893,7 +20772,6 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				}
 				sv.StaticKeyValue = ptr.String(jtv)
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21902,7 +20780,6 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21942,12 +20819,10 @@ func awsRestjson1_deserializeDocumentTeletextDestinationSettings(v **types.Telet
 				}
 				sv.PageNumber = ptr.String(jtv)
 			}
-
 		case "pageTypes":
 			if err := awsRestjson1_deserializeDocument__listOfTeletextPageType(&sv.PageTypes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -21987,7 +20862,6 @@ func awsRestjson1_deserializeDocumentTeletextSourceSettings(v **types.TeletextSo
 				}
 				sv.PageNumber = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22031,7 +20905,6 @@ func awsRestjson1_deserializeDocumentTimecodeBurnin(v **types.TimecodeBurnin, va
 				}
 				sv.FontSize = ptr.Int32(int32(i64))
 			}
-
 		case "position":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22040,7 +20913,6 @@ func awsRestjson1_deserializeDocumentTimecodeBurnin(v **types.TimecodeBurnin, va
 				}
 				sv.Position = types.TimecodeBurninPosition(jtv)
 			}
-
 		case "prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22049,7 +20921,6 @@ func awsRestjson1_deserializeDocumentTimecodeBurnin(v **types.TimecodeBurnin, va
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22089,7 +20960,6 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				}
 				sv.Anchor = ptr.String(jtv)
 			}
-
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22098,7 +20968,6 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				}
 				sv.Source = types.TimecodeSource(jtv)
 			}
-
 		case "start":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22107,7 +20976,6 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				}
 				sv.Start = ptr.String(jtv)
 			}
-
 		case "timestampOffset":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22116,7 +20984,6 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				}
 				sv.TimestampOffset = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22152,7 +21019,6 @@ func awsRestjson1_deserializeDocumentTimedMetadataInsertion(v **types.TimedMetad
 			if err := awsRestjson1_deserializeDocument__listOfId3Insertion(&sv.Id3Insertions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22199,7 +21065,6 @@ func awsRestjson1_deserializeDocumentTiming(v **types.Timing, value interface{})
 
 				}
 			}
-
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -22215,7 +21080,6 @@ func awsRestjson1_deserializeDocumentTiming(v **types.Timing, value interface{})
 
 				}
 			}
-
 		case "submitTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -22231,7 +21095,6 @@ func awsRestjson1_deserializeDocumentTiming(v **types.Timing, value interface{})
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22261,15 +21124,9 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -22277,14 +21134,10 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -22324,7 +21177,6 @@ func awsRestjson1_deserializeDocumentTrackSourceSettings(v **types.TrackSourceSe
 				}
 				sv.TrackNumber = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22364,7 +21216,6 @@ func awsRestjson1_deserializeDocumentTtmlDestinationSettings(v **types.TtmlDesti
 				}
 				sv.StylePassthrough = types.TtmlStylePassthrough(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22404,7 +21255,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.Fourcc = types.UncompressedFourcc(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22413,7 +21263,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.FramerateControl = types.UncompressedFramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22422,7 +21271,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.FramerateConversionAlgorithm = types.UncompressedFramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22435,7 +21283,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22448,7 +21295,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22457,7 +21303,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.InterlaceMode = types.UncompressedInterlaceMode(jtv)
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22466,7 +21311,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.ScanTypeConversionMode = types.UncompressedScanTypeConversionMode(jtv)
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22475,7 +21319,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.SlowPal = types.UncompressedSlowPal(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22484,7 +21327,6 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 				}
 				sv.Telecine = types.UncompressedTelecine(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22524,7 +21366,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.FramerateControl = types.Vc3FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22533,7 +21374,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.FramerateConversionAlgorithm = types.Vc3FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22546,7 +21386,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22559,7 +21398,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22568,7 +21406,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.InterlaceMode = types.Vc3InterlaceMode(jtv)
 			}
-
 		case "scanTypeConversionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22577,7 +21414,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.ScanTypeConversionMode = types.Vc3ScanTypeConversionMode(jtv)
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22586,7 +21422,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.SlowPal = types.Vc3SlowPal(jtv)
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22595,7 +21430,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.Telecine = types.Vc3Telecine(jtv)
 			}
-
 		case "vc3Class":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22604,7 +21438,6 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				}
 				sv.Vc3Class = types.Vc3Class(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22640,12 +21473,10 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 			if err := awsRestjson1_deserializeDocumentAv1Settings(&sv.Av1Settings, value); err != nil {
 				return err
 			}
-
 		case "avcIntraSettings":
 			if err := awsRestjson1_deserializeDocumentAvcIntraSettings(&sv.AvcIntraSettings, value); err != nil {
 				return err
 			}
-
 		case "codec":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22654,57 +21485,46 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 				}
 				sv.Codec = types.VideoCodec(jtv)
 			}
-
 		case "frameCaptureSettings":
 			if err := awsRestjson1_deserializeDocumentFrameCaptureSettings(&sv.FrameCaptureSettings, value); err != nil {
 				return err
 			}
-
 		case "h264Settings":
 			if err := awsRestjson1_deserializeDocumentH264Settings(&sv.H264Settings, value); err != nil {
 				return err
 			}
-
 		case "h265Settings":
 			if err := awsRestjson1_deserializeDocumentH265Settings(&sv.H265Settings, value); err != nil {
 				return err
 			}
-
 		case "mpeg2Settings":
 			if err := awsRestjson1_deserializeDocumentMpeg2Settings(&sv.Mpeg2Settings, value); err != nil {
 				return err
 			}
-
 		case "proresSettings":
 			if err := awsRestjson1_deserializeDocumentProresSettings(&sv.ProresSettings, value); err != nil {
 				return err
 			}
-
 		case "uncompressedSettings":
 			if err := awsRestjson1_deserializeDocumentUncompressedSettings(&sv.UncompressedSettings, value); err != nil {
 				return err
 			}
-
 		case "vc3Settings":
 			if err := awsRestjson1_deserializeDocumentVc3Settings(&sv.Vc3Settings, value); err != nil {
 				return err
 			}
-
 		case "vp8Settings":
 			if err := awsRestjson1_deserializeDocumentVp8Settings(&sv.Vp8Settings, value); err != nil {
 				return err
 			}
-
 		case "vp9Settings":
 			if err := awsRestjson1_deserializeDocumentVp9Settings(&sv.Vp9Settings, value); err != nil {
 				return err
 			}
-
 		case "xavcSettings":
 			if err := awsRestjson1_deserializeDocumentXavcSettings(&sv.XavcSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22744,7 +21564,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.AfdSignaling = types.AfdSignaling(jtv)
 			}
-
 		case "antiAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22753,12 +21572,10 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.AntiAlias = types.AntiAlias(jtv)
 			}
-
 		case "codecSettings":
 			if err := awsRestjson1_deserializeDocumentVideoCodecSettings(&sv.CodecSettings, value); err != nil {
 				return err
 			}
-
 		case "colorMetadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22767,12 +21584,10 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.ColorMetadata = types.ColorMetadata(jtv)
 			}
-
 		case "crop":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Crop, value); err != nil {
 				return err
 			}
-
 		case "dropFrameTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22781,7 +21596,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.DropFrameTimecode = types.DropFrameTimecode(jtv)
 			}
-
 		case "fixedAfd":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22794,7 +21608,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.FixedAfd = ptr.Int32(int32(i64))
 			}
-
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22807,12 +21620,10 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "position":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Position, value); err != nil {
 				return err
 			}
-
 		case "respondToAfd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22821,7 +21632,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.RespondToAfd = types.RespondToAfd(jtv)
 			}
-
 		case "scalingBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22830,7 +21640,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.ScalingBehavior = types.ScalingBehavior(jtv)
 			}
-
 		case "sharpness":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22843,7 +21652,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.Sharpness = ptr.Int32(int32(i64))
 			}
-
 		case "timecodeInsertion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22852,12 +21660,10 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.TimecodeInsertion = types.VideoTimecodeInsertion(jtv)
 			}
-
 		case "videoPreprocessors":
 			if err := awsRestjson1_deserializeDocumentVideoPreprocessor(&sv.VideoPreprocessors, value); err != nil {
 				return err
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22870,7 +21676,6 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22914,7 +21719,6 @@ func awsRestjson1_deserializeDocumentVideoDetail(v **types.VideoDetail, value in
 				}
 				sv.HeightInPx = ptr.Int32(int32(i64))
 			}
-
 		case "widthInPx":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -22927,7 +21731,6 @@ func awsRestjson1_deserializeDocumentVideoDetail(v **types.VideoDetail, value in
 				}
 				sv.WidthInPx = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -22967,17 +21770,14 @@ func awsRestjson1_deserializeDocumentVideoOverlay(v **types.VideoOverlay, value 
 				}
 				sv.EndTimecode = ptr.String(jtv)
 			}
-
 		case "initialPosition":
 			if err := awsRestjson1_deserializeDocumentVideoOverlayPosition(&sv.InitialPosition, value); err != nil {
 				return err
 			}
-
 		case "input":
 			if err := awsRestjson1_deserializeDocumentVideoOverlayInput(&sv.Input, value); err != nil {
 				return err
 			}
-
 		case "playback":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22986,7 +21786,6 @@ func awsRestjson1_deserializeDocumentVideoOverlay(v **types.VideoOverlay, value 
 				}
 				sv.Playback = types.VideoOverlayPlayBackMode(jtv)
 			}
-
 		case "startTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22995,12 +21794,10 @@ func awsRestjson1_deserializeDocumentVideoOverlay(v **types.VideoOverlay, value 
 				}
 				sv.StartTimecode = ptr.String(jtv)
 			}
-
 		case "transitions":
 			if err := awsRestjson1_deserializeDocument__listOfVideoOverlayTransition(&sv.Transitions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23040,12 +21837,10 @@ func awsRestjson1_deserializeDocumentVideoOverlayInput(v **types.VideoOverlayInp
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
-
 		case "inputClippings":
 			if err := awsRestjson1_deserializeDocument__listOfVideoOverlayInputClipping(&sv.InputClippings, value); err != nil {
 				return err
 			}
-
 		case "timecodeSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23054,7 +21849,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayInput(v **types.VideoOverlayInp
 				}
 				sv.TimecodeSource = types.InputTimecodeSource(jtv)
 			}
-
 		case "timecodeStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23063,7 +21857,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayInput(v **types.VideoOverlayInp
 				}
 				sv.TimecodeStart = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23103,7 +21896,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayInputClipping(v **types.VideoOv
 				}
 				sv.EndTimecode = ptr.String(jtv)
 			}
-
 		case "startTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23112,7 +21904,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayInputClipping(v **types.VideoOv
 				}
 				sv.StartTimecode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23156,7 +21947,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayPosition(v **types.VideoOverlay
 				}
 				sv.Height = ptr.Int32(int32(i64))
 			}
-
 		case "unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23165,7 +21955,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayPosition(v **types.VideoOverlay
 				}
 				sv.Unit = types.VideoOverlayUnit(jtv)
 			}
-
 		case "width":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23178,7 +21967,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayPosition(v **types.VideoOverlay
 				}
 				sv.Width = ptr.Int32(int32(i64))
 			}
-
 		case "xPosition":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23191,7 +21979,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayPosition(v **types.VideoOverlay
 				}
 				sv.XPosition = ptr.Int32(int32(i64))
 			}
-
 		case "yPosition":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23204,7 +21991,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayPosition(v **types.VideoOverlay
 				}
 				sv.YPosition = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23240,7 +22026,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayTransition(v **types.VideoOverl
 			if err := awsRestjson1_deserializeDocumentVideoOverlayPosition(&sv.EndPosition, value); err != nil {
 				return err
 			}
-
 		case "endTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23249,7 +22034,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayTransition(v **types.VideoOverl
 				}
 				sv.EndTimecode = ptr.String(jtv)
 			}
-
 		case "startTimecode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23258,7 +22042,6 @@ func awsRestjson1_deserializeDocumentVideoOverlayTransition(v **types.VideoOverl
 				}
 				sv.StartTimecode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23294,42 +22077,34 @@ func awsRestjson1_deserializeDocumentVideoPreprocessor(v **types.VideoPreprocess
 			if err := awsRestjson1_deserializeDocumentColorCorrector(&sv.ColorCorrector, value); err != nil {
 				return err
 			}
-
 		case "deinterlacer":
 			if err := awsRestjson1_deserializeDocumentDeinterlacer(&sv.Deinterlacer, value); err != nil {
 				return err
 			}
-
 		case "dolbyVision":
 			if err := awsRestjson1_deserializeDocumentDolbyVision(&sv.DolbyVision, value); err != nil {
 				return err
 			}
-
 		case "hdr10Plus":
 			if err := awsRestjson1_deserializeDocumentHdr10Plus(&sv.Hdr10Plus, value); err != nil {
 				return err
 			}
-
 		case "imageInserter":
 			if err := awsRestjson1_deserializeDocumentImageInserter(&sv.ImageInserter, value); err != nil {
 				return err
 			}
-
 		case "noiseReducer":
 			if err := awsRestjson1_deserializeDocumentNoiseReducer(&sv.NoiseReducer, value); err != nil {
 				return err
 			}
-
 		case "partnerWatermarking":
 			if err := awsRestjson1_deserializeDocumentPartnerWatermarking(&sv.PartnerWatermarking, value); err != nil {
 				return err
 			}
-
 		case "timecodeBurnin":
 			if err := awsRestjson1_deserializeDocumentTimecodeBurnin(&sv.TimecodeBurnin, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23369,7 +22144,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.AlphaBehavior = types.AlphaBehavior(jtv)
 			}
-
 		case "colorSpace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23378,7 +22152,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.ColorSpace = types.ColorSpace(jtv)
 			}
-
 		case "colorSpaceUsage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23387,7 +22160,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.ColorSpaceUsage = types.ColorSpaceUsage(jtv)
 			}
-
 		case "embeddedTimecodeOverride":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23396,12 +22168,10 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.EmbeddedTimecodeOverride = types.EmbeddedTimecodeOverride(jtv)
 			}
-
 		case "hdr10Metadata":
 			if err := awsRestjson1_deserializeDocumentHdr10Metadata(&sv.Hdr10Metadata, value); err != nil {
 				return err
 			}
-
 		case "maxLuminance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23414,7 +22184,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.MaxLuminance = ptr.Int32(int32(i64))
 			}
-
 		case "padVideo":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23423,7 +22192,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.PadVideo = types.PadVideo(jtv)
 			}
-
 		case "pid":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23436,7 +22204,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.Pid = ptr.Int32(int32(i64))
 			}
-
 		case "programNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23449,7 +22216,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.ProgramNumber = ptr.Int32(int32(i64))
 			}
-
 		case "rotate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23458,7 +22224,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.Rotate = types.InputRotate(jtv)
 			}
-
 		case "sampleRange":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23467,7 +22232,6 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				}
 				sv.SampleRange = types.InputSampleRange(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23511,7 +22275,6 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23524,7 +22287,6 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		case "vbrQuality":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23537,7 +22299,6 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 				}
 				sv.VbrQuality = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23581,7 +22342,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23590,7 +22350,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.FramerateControl = types.Vp8FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23599,7 +22358,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.FramerateConversionAlgorithm = types.Vp8FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23612,7 +22370,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23625,7 +22382,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "gopSize":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -23659,7 +22415,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 
 				}
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23672,7 +22427,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23685,7 +22439,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "parControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23694,7 +22447,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.ParControl = types.Vp8ParControl(jtv)
 			}
-
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23707,7 +22459,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "parNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23720,7 +22471,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23729,7 +22479,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.QualityTuningLevel = types.Vp8QualityTuningLevel(jtv)
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23738,7 +22487,6 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				}
 				sv.RateControlMode = types.Vp8RateControlMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23782,7 +22530,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.Bitrate = ptr.Int32(int32(i64))
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23791,7 +22538,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.FramerateControl = types.Vp9FramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23800,7 +22546,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.FramerateConversionAlgorithm = types.Vp9FramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23813,7 +22558,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23826,7 +22570,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "gopSize":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -23860,7 +22603,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 
 				}
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23873,7 +22615,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23886,7 +22627,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.MaxBitrate = ptr.Int32(int32(i64))
 			}
-
 		case "parControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23895,7 +22635,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.ParControl = types.Vp9ParControl(jtv)
 			}
-
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23908,7 +22647,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.ParDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "parNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23921,7 +22659,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.ParNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23930,7 +22667,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.QualityTuningLevel = types.Vp9QualityTuningLevel(jtv)
 			}
-
 		case "rateControlMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23939,7 +22675,6 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				}
 				sv.RateControlMode = types.Vp9RateControlMode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -23983,7 +22718,6 @@ func awsRestjson1_deserializeDocumentWarningGroup(v **types.WarningGroup, value 
 				}
 				sv.Code = ptr.Int32(int32(i64))
 			}
-
 		case "count":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23996,7 +22730,6 @@ func awsRestjson1_deserializeDocumentWarningGroup(v **types.WarningGroup, value 
 				}
 				sv.Count = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24040,7 +22773,6 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				}
 				sv.BitDepth = ptr.Int32(int32(i64))
 			}
-
 		case "channels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24053,7 +22785,6 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				}
 				sv.Channels = ptr.Int32(int32(i64))
 			}
-
 		case "format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24062,7 +22793,6 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				}
 				sv.Format = types.WavFormat(jtv)
 			}
-
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24075,7 +22805,6 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				}
 				sv.SampleRate = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24115,7 +22844,6 @@ func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttD
 				}
 				sv.Accessibility = types.WebvttAccessibilitySubs(jtv)
 			}
-
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24124,7 +22852,6 @@ func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttD
 				}
 				sv.StylePassthrough = types.WebvttStylePassthrough(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24164,7 +22891,6 @@ func awsRestjson1_deserializeDocumentWebvttHlsSourceSettings(v **types.WebvttHls
 				}
 				sv.RenditionGroupId = ptr.String(jtv)
 			}
-
 		case "renditionLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24173,7 +22899,6 @@ func awsRestjson1_deserializeDocumentWebvttHlsSourceSettings(v **types.WebvttHls
 				}
 				sv.RenditionLanguageCode = types.LanguageCode(jtv)
 			}
-
 		case "renditionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24182,7 +22907,6 @@ func awsRestjson1_deserializeDocumentWebvttHlsSourceSettings(v **types.WebvttHls
 				}
 				sv.RenditionName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24222,7 +22946,6 @@ func awsRestjson1_deserializeDocumentXavc4kIntraCbgProfileSettings(v **types.Xav
 				}
 				sv.XavcClass = types.Xavc4kIntraCbgProfileClass(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24262,7 +22985,6 @@ func awsRestjson1_deserializeDocumentXavc4kIntraVbrProfileSettings(v **types.Xav
 				}
 				sv.XavcClass = types.Xavc4kIntraVbrProfileClass(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24302,7 +23024,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.BitrateClass = types.Xavc4kProfileBitrateClass(jtv)
 			}
-
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24311,7 +23032,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.CodecProfile = types.Xavc4kProfileCodecProfile(jtv)
 			}
-
 		case "flickerAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24320,7 +23040,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.FlickerAdaptiveQuantization = types.XavcFlickerAdaptiveQuantization(jtv)
 			}
-
 		case "gopBReference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24329,7 +23048,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.GopBReference = types.XavcGopBReference(jtv)
 			}
-
 		case "gopClosedCadence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24342,7 +23060,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24355,7 +23072,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24364,7 +23080,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.QualityTuningLevel = types.Xavc4kProfileQualityTuningLevel(jtv)
 			}
-
 		case "slices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24377,7 +23092,6 @@ func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfi
 				}
 				sv.Slices = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24417,7 +23131,6 @@ func awsRestjson1_deserializeDocumentXavcHdIntraCbgProfileSettings(v **types.Xav
 				}
 				sv.XavcClass = types.XavcHdIntraCbgProfileClass(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24457,7 +23170,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.BitrateClass = types.XavcHdProfileBitrateClass(jtv)
 			}
-
 		case "flickerAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24466,7 +23178,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.FlickerAdaptiveQuantization = types.XavcFlickerAdaptiveQuantization(jtv)
 			}
-
 		case "gopBReference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24475,7 +23186,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.GopBReference = types.XavcGopBReference(jtv)
 			}
-
 		case "gopClosedCadence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24488,7 +23198,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.GopClosedCadence = ptr.Int32(int32(i64))
 			}
-
 		case "hrdBufferSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24501,7 +23210,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.HrdBufferSize = ptr.Int32(int32(i64))
 			}
-
 		case "interlaceMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24510,7 +23218,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.InterlaceMode = types.XavcInterlaceMode(jtv)
 			}
-
 		case "qualityTuningLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24519,7 +23226,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.QualityTuningLevel = types.XavcHdProfileQualityTuningLevel(jtv)
 			}
-
 		case "slices":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24532,7 +23238,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.Slices = ptr.Int32(int32(i64))
 			}
-
 		case "telecine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24541,7 +23246,6 @@ func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfi
 				}
 				sv.Telecine = types.XavcHdProfileTelecine(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -24581,7 +23285,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.AdaptiveQuantization = types.XavcAdaptiveQuantization(jtv)
 			}
-
 		case "entropyEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24590,7 +23293,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.EntropyEncoding = types.XavcEntropyEncoding(jtv)
 			}
-
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24599,7 +23301,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.FramerateControl = types.XavcFramerateControl(jtv)
 			}
-
 		case "framerateConversionAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24608,7 +23309,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.FramerateConversionAlgorithm = types.XavcFramerateConversionAlgorithm(jtv)
 			}
-
 		case "framerateDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24621,7 +23321,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.FramerateDenominator = ptr.Int32(int32(i64))
 			}
-
 		case "framerateNumerator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24634,7 +23333,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.FramerateNumerator = ptr.Int32(int32(i64))
 			}
-
 		case "profile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24643,7 +23341,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.Profile = types.XavcProfile(jtv)
 			}
-
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24652,7 +23349,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.SlowPal = types.XavcSlowPal(jtv)
 			}
-
 		case "softness":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24665,7 +23361,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.Softness = ptr.Int32(int32(i64))
 			}
-
 		case "spatialAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24674,7 +23369,6 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.SpatialAdaptiveQuantization = types.XavcSpatialAdaptiveQuantization(jtv)
 			}
-
 		case "temporalAdaptiveQuantization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24683,32 +23377,26 @@ func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value 
 				}
 				sv.TemporalAdaptiveQuantization = types.XavcTemporalAdaptiveQuantization(jtv)
 			}
-
 		case "xavc4kIntraCbgProfileSettings":
 			if err := awsRestjson1_deserializeDocumentXavc4kIntraCbgProfileSettings(&sv.Xavc4kIntraCbgProfileSettings, value); err != nil {
 				return err
 			}
-
 		case "xavc4kIntraVbrProfileSettings":
 			if err := awsRestjson1_deserializeDocumentXavc4kIntraVbrProfileSettings(&sv.Xavc4kIntraVbrProfileSettings, value); err != nil {
 				return err
 			}
-
 		case "xavc4kProfileSettings":
 			if err := awsRestjson1_deserializeDocumentXavc4kProfileSettings(&sv.Xavc4kProfileSettings, value); err != nil {
 				return err
 			}
-
 		case "xavcHdIntraCbgProfileSettings":
 			if err := awsRestjson1_deserializeDocumentXavcHdIntraCbgProfileSettings(&sv.XavcHdIntraCbgProfileSettings, value); err != nil {
 				return err
 			}
-
 		case "xavcHdProfileSettings":
 			if err := awsRestjson1_deserializeDocumentXavcHdProfileSettings(&sv.XavcHdProfileSettings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

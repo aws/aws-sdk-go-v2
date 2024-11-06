@@ -1681,7 +1681,6 @@ func awsAwsjson11_deserializeDocumentAccountEntityAggregate(v **types.AccountEnt
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "count":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1694,12 +1693,10 @@ func awsAwsjson11_deserializeDocumentAccountEntityAggregate(v **types.AccountEnt
 				}
 				sv.Count = int32(i64)
 			}
-
 		case "statuses":
 			if err := awsAwsjson11_deserializeDocumentEntityStatuses(&sv.Statuses, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1809,7 +1806,6 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "entityArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1818,7 +1814,6 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 				}
 				sv.EntityArn = ptr.String(jtv)
 			}
-
 		case "entityUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1827,7 +1822,6 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 				}
 				sv.EntityUrl = ptr.String(jtv)
 			}
-
 		case "entityValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1836,7 +1830,6 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 				}
 				sv.EntityValue = ptr.String(jtv)
 			}
-
 		case "eventArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1845,7 +1838,6 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 				}
 				sv.EventArn = ptr.String(jtv)
 			}
-
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1861,7 +1853,6 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 
 				}
 			}
-
 		case "statusCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1870,12 +1861,10 @@ func awsAwsjson11_deserializeDocumentAffectedEntity(v **types.AffectedEntity, va
 				}
 				sv.StatusCode = types.EntityStatusCode(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagSet(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1905,15 +1894,9 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1921,14 +1904,10 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2138,7 +2117,6 @@ func awsAwsjson11_deserializeDocumentEntityAggregate(v **types.EntityAggregate, 
 				}
 				sv.Count = int32(i64)
 			}
-
 		case "eventArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2147,12 +2125,10 @@ func awsAwsjson11_deserializeDocumentEntityAggregate(v **types.EntityAggregate, 
 				}
 				sv.EventArn = ptr.String(jtv)
 			}
-
 		case "statuses":
 			if err := awsAwsjson11_deserializeDocumentEntityStatuses(&sv.Statuses, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2300,7 +2276,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "availabilityZone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2309,7 +2284,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.AvailabilityZone = ptr.String(jtv)
 			}
-
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2325,7 +2299,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 
 				}
 			}
-
 		case "eventScopeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2334,7 +2307,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.EventScopeCode = types.EventScopeCode(jtv)
 			}
-
 		case "eventTypeCategory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2343,7 +2315,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.EventTypeCategory = types.EventTypeCategory(jtv)
 			}
-
 		case "eventTypeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2352,7 +2323,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.EventTypeCode = ptr.String(jtv)
 			}
-
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2368,7 +2338,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 
 				}
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2377,7 +2346,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2386,7 +2354,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.Service = ptr.String(jtv)
 			}
-
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2402,7 +2369,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 
 				}
 			}
-
 		case "statusCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2411,7 +2377,6 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 				}
 				sv.StatusCode = types.EventStatusCode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2451,7 +2416,6 @@ func awsAwsjson11_deserializeDocumentEventAggregate(v **types.EventAggregate, va
 				}
 				sv.AggregateValue = ptr.String(jtv)
 			}
-
 		case "count":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2464,7 +2428,6 @@ func awsAwsjson11_deserializeDocumentEventAggregate(v **types.EventAggregate, va
 				}
 				sv.Count = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2538,7 +2501,6 @@ func awsAwsjson11_deserializeDocumentEventDescription(v **types.EventDescription
 				}
 				sv.LatestDescription = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2574,17 +2536,14 @@ func awsAwsjson11_deserializeDocumentEventDetails(v **types.EventDetails, value 
 			if err := awsAwsjson11_deserializeDocumentEvent(&sv.Event, value); err != nil {
 				return err
 			}
-
 		case "eventDescription":
 			if err := awsAwsjson11_deserializeDocumentEventDescription(&sv.EventDescription, value); err != nil {
 				return err
 			}
-
 		case "eventMetadata":
 			if err := awsAwsjson11_deserializeDocumentEventMetadata(&sv.EventMetadata, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2624,7 +2583,6 @@ func awsAwsjson11_deserializeDocumentEventDetailsErrorItem(v **types.EventDetail
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "errorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2633,7 +2591,6 @@ func awsAwsjson11_deserializeDocumentEventDetailsErrorItem(v **types.EventDetail
 				}
 				sv.ErrorName = ptr.String(jtv)
 			}
-
 		case "eventArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2642,7 +2599,6 @@ func awsAwsjson11_deserializeDocumentEventDetailsErrorItem(v **types.EventDetail
 				}
 				sv.EventArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2752,7 +2708,6 @@ func awsAwsjson11_deserializeDocumentEventType(v **types.EventType, value interf
 				}
 				sv.Category = types.EventTypeCategory(jtv)
 			}
-
 		case "code":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2761,7 +2716,6 @@ func awsAwsjson11_deserializeDocumentEventType(v **types.EventType, value interf
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2770,7 +2724,6 @@ func awsAwsjson11_deserializeDocumentEventType(v **types.EventType, value interf
 				}
 				sv.Service = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2834,15 +2787,9 @@ func awsAwsjson11_deserializeDocumentInvalidPaginationToken(v **types.InvalidPag
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2850,14 +2797,10 @@ func awsAwsjson11_deserializeDocumentInvalidPaginationToken(v **types.InvalidPag
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2893,7 +2836,6 @@ func awsAwsjson11_deserializeDocumentOrganizationAffectedEntitiesErrorItem(v **t
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2902,7 +2844,6 @@ func awsAwsjson11_deserializeDocumentOrganizationAffectedEntitiesErrorItem(v **t
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "errorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2911,7 +2852,6 @@ func awsAwsjson11_deserializeDocumentOrganizationAffectedEntitiesErrorItem(v **t
 				}
 				sv.ErrorName = ptr.String(jtv)
 			}
-
 		case "eventArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2920,7 +2860,6 @@ func awsAwsjson11_deserializeDocumentOrganizationAffectedEntitiesErrorItem(v **t
 				}
 				sv.EventArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2956,7 +2895,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEntityAggregate(v **types.Organ
 			if err := awsAwsjson11_deserializeDocumentAccountEntityAggregatesList(&sv.Accounts, value); err != nil {
 				return err
 			}
-
 		case "count":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2969,7 +2907,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEntityAggregate(v **types.Organ
 				}
 				sv.Count = int32(i64)
 			}
-
 		case "eventArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2978,12 +2915,10 @@ func awsAwsjson11_deserializeDocumentOrganizationEntityAggregate(v **types.Organ
 				}
 				sv.EventArn = ptr.String(jtv)
 			}
-
 		case "statuses":
 			if err := awsAwsjson11_deserializeDocumentEntityStatuses(&sv.Statuses, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3057,7 +2992,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3073,7 +3007,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 
 				}
 			}
-
 		case "eventScopeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3082,7 +3015,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.EventScopeCode = types.EventScopeCode(jtv)
 			}
-
 		case "eventTypeCategory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3091,7 +3023,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.EventTypeCategory = types.EventTypeCategory(jtv)
 			}
-
 		case "eventTypeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3100,7 +3031,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.EventTypeCode = ptr.String(jtv)
 			}
-
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3116,7 +3046,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 
 				}
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3125,7 +3054,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3134,7 +3062,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.Service = ptr.String(jtv)
 			}
-
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3150,7 +3077,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 
 				}
 			}
-
 		case "statusCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3159,7 +3085,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEvent(v **types.OrganizationEve
 				}
 				sv.StatusCode = types.EventStatusCode(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3199,22 +3124,18 @@ func awsAwsjson11_deserializeDocumentOrganizationEventDetails(v **types.Organiza
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "event":
 			if err := awsAwsjson11_deserializeDocumentEvent(&sv.Event, value); err != nil {
 				return err
 			}
-
 		case "eventDescription":
 			if err := awsAwsjson11_deserializeDocumentEventDescription(&sv.EventDescription, value); err != nil {
 				return err
 			}
-
 		case "eventMetadata":
 			if err := awsAwsjson11_deserializeDocumentEventMetadata(&sv.EventMetadata, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3254,7 +3175,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEventDetailsErrorItem(v **types
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
-
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3263,7 +3183,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEventDetailsErrorItem(v **types
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "errorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3272,7 +3191,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEventDetailsErrorItem(v **types
 				}
 				sv.ErrorName = ptr.String(jtv)
 			}
-
 		case "eventArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3281,7 +3199,6 @@ func awsAwsjson11_deserializeDocumentOrganizationEventDetailsErrorItem(v **types
 				}
 				sv.EventArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3381,15 +3298,9 @@ func awsAwsjson11_deserializeDocumentUnsupportedLocale(v **types.UnsupportedLoca
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3397,14 +3308,10 @@ func awsAwsjson11_deserializeDocumentUnsupportedLocale(v **types.UnsupportedLoca
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3436,7 +3343,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedAccountsForOrganizationOu
 			if err := awsAwsjson11_deserializeDocumentAffectedAccountsList(&sv.AffectedAccounts, value); err != nil {
 				return err
 			}
-
 		case "eventScopeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3445,7 +3351,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedAccountsForOrganizationOu
 				}
 				sv.EventScopeCode = types.EventScopeCode(jtv)
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3454,7 +3359,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedAccountsForOrganizationOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3490,12 +3394,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesForOrganizationOu
 			if err := awsAwsjson11_deserializeDocumentEntityList(&sv.Entities, value); err != nil {
 				return err
 			}
-
 		case "failedSet":
 			if err := awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesForOrganizationFailedSet(&sv.FailedSet, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3504,7 +3406,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesForOrganizationOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3540,7 +3441,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesOutput(v **Descri
 			if err := awsAwsjson11_deserializeDocumentEntityList(&sv.Entities, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3549,7 +3449,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesOutput(v **Descri
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3585,7 +3484,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEntityAggregatesForOrganizationOu
 			if err := awsAwsjson11_deserializeDocumentOrganizationEntityAggregatesList(&sv.OrganizationEntityAggregates, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3621,7 +3519,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEntityAggregatesOutput(v **Descri
 			if err := awsAwsjson11_deserializeDocumentEntityAggregateList(&sv.EntityAggregates, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3657,7 +3554,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventAggregatesOutput(v **Describ
 			if err := awsAwsjson11_deserializeDocumentEventAggregateList(&sv.EventAggregates, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3666,7 +3562,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventAggregatesOutput(v **Describ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3702,12 +3597,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventDetailsForOrganizationOutput
 			if err := awsAwsjson11_deserializeDocumentDescribeEventDetailsForOrganizationFailedSet(&sv.FailedSet, value); err != nil {
 				return err
 			}
-
 		case "successfulSet":
 			if err := awsAwsjson11_deserializeDocumentDescribeEventDetailsForOrganizationSuccessfulSet(&sv.SuccessfulSet, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3743,12 +3636,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventDetailsOutput(v **DescribeEv
 			if err := awsAwsjson11_deserializeDocumentDescribeEventDetailsFailedSet(&sv.FailedSet, value); err != nil {
 				return err
 			}
-
 		case "successfulSet":
 			if err := awsAwsjson11_deserializeDocumentDescribeEventDetailsSuccessfulSet(&sv.SuccessfulSet, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3784,7 +3675,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventsForOrganizationOutput(v **D
 			if err := awsAwsjson11_deserializeDocumentOrganizationEventList(&sv.Events, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3793,7 +3683,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventsForOrganizationOutput(v **D
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3829,7 +3718,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventsOutput(v **DescribeEventsOu
 			if err := awsAwsjson11_deserializeDocumentEventList(&sv.Events, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3838,7 +3726,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventsOutput(v **DescribeEventsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3874,7 +3761,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventTypesOutput(v **DescribeEven
 			if err := awsAwsjson11_deserializeDocumentEventTypeList(&sv.EventTypes, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3883,7 +3769,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeEventTypesOutput(v **DescribeEven
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3923,7 +3808,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeHealthServiceStatusForOrganizatio
 				}
 				sv.HealthServiceAccessStatusForOrganization = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

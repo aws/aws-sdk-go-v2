@@ -183,7 +183,6 @@ func awsRestjson1_deserializeOpDocumentCreateChimeWebhookConfigurationOutput(v *
 			if err := awsRestjson1_deserializeDocumentChimeWebhookConfiguration(&sv.WebhookConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -347,7 +346,6 @@ func awsRestjson1_deserializeOpDocumentCreateMicrosoftTeamsChannelConfigurationO
 			if err := awsRestjson1_deserializeDocumentTeamsChannelConfiguration(&sv.ChannelConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -511,7 +509,6 @@ func awsRestjson1_deserializeOpDocumentCreateSlackChannelConfigurationOutput(v *
 			if err := awsRestjson1_deserializeDocumentSlackChannelConfiguration(&sv.ChannelConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1334,12 +1331,10 @@ func awsRestjson1_deserializeOpDocumentDescribeChimeWebhookConfigurationsOutput(
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "WebhookConfigurations":
 			if err := awsRestjson1_deserializeDocumentChimeWebhookConfigurationList(&sv.WebhookConfigurations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1501,12 +1496,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSlackChannelConfigurationsOutput(
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "SlackChannelConfigurations":
 			if err := awsRestjson1_deserializeDocumentSlackChannelConfigurationList(&sv.SlackChannelConfigurations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1668,12 +1661,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSlackUserIdentitiesOutput(v **Des
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "SlackUserIdentities":
 			if err := awsRestjson1_deserializeDocumentSlackUserIdentitiesList(&sv.SlackUserIdentities, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1835,12 +1826,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSlackWorkspacesOutput(v **Describ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "SlackWorkspaces":
 			if err := awsRestjson1_deserializeDocumentSlackWorkspacesList(&sv.SlackWorkspaces, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1995,7 +1984,6 @@ func awsRestjson1_deserializeOpDocumentGetAccountPreferencesOutput(v **GetAccoun
 			if err := awsRestjson1_deserializeDocumentAccountPreferences(&sv.AccountPreferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2153,7 +2141,6 @@ func awsRestjson1_deserializeOpDocumentGetMicrosoftTeamsChannelConfigurationOutp
 			if err := awsRestjson1_deserializeDocumentTeamsChannelConfiguration(&sv.ChannelConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2315,12 +2302,10 @@ func awsRestjson1_deserializeOpDocumentListMicrosoftTeamsChannelConfigurationsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "TeamChannelConfigurations":
 			if err := awsRestjson1_deserializeDocumentTeamChannelConfigurationsList(&sv.TeamChannelConfigurations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2478,7 +2463,6 @@ func awsRestjson1_deserializeOpDocumentListMicrosoftTeamsConfiguredTeamsOutput(v
 			if err := awsRestjson1_deserializeDocumentConfiguredTeamsList(&sv.ConfiguredTeams, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2487,7 +2471,6 @@ func awsRestjson1_deserializeOpDocumentListMicrosoftTeamsConfiguredTeamsOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2649,12 +2632,10 @@ func awsRestjson1_deserializeOpDocumentListMicrosoftTeamsUserIdentitiesOutput(v 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "TeamsUserIdentities":
 			if err := awsRestjson1_deserializeDocumentTeamsUserIdentitiesList(&sv.TeamsUserIdentities, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2812,7 +2793,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3161,7 +3141,6 @@ func awsRestjson1_deserializeOpDocumentUpdateAccountPreferencesOutput(v **Update
 			if err := awsRestjson1_deserializeDocumentAccountPreferences(&sv.AccountPreferences, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3322,7 +3301,6 @@ func awsRestjson1_deserializeOpDocumentUpdateChimeWebhookConfigurationOutput(v *
 			if err := awsRestjson1_deserializeDocumentChimeWebhookConfiguration(&sv.WebhookConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3483,7 +3461,6 @@ func awsRestjson1_deserializeOpDocumentUpdateMicrosoftTeamsChannelConfigurationO
 			if err := awsRestjson1_deserializeDocumentTeamsChannelConfiguration(&sv.ChannelConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3644,7 +3621,6 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 			if err := awsRestjson1_deserializeDocumentSlackChannelConfiguration(&sv.ChannelConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4800,7 +4776,6 @@ func awsRestjson1_deserializeDocumentAccountPreferences(v **types.AccountPrefere
 				}
 				sv.TrainingDataCollectionEnabled = ptr.Bool(jtv)
 			}
-
 		case "UserAuthorizationRequired":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4809,7 +4784,6 @@ func awsRestjson1_deserializeDocumentAccountPreferences(v **types.AccountPrefere
 				}
 				sv.UserAuthorizationRequired = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4849,7 +4823,6 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.ChatConfigurationArn = ptr.String(jtv)
 			}
-
 		case "ConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4858,7 +4831,6 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.ConfigurationName = ptr.String(jtv)
 			}
-
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4867,7 +4839,6 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
-
 		case "LoggingLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4876,12 +4847,10 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.LoggingLevel = ptr.String(jtv)
 			}
-
 		case "SnsTopicArns":
 			if err := awsRestjson1_deserializeDocumentSnsTopicArnList(&sv.SnsTopicArns, value); err != nil {
 				return err
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4890,7 +4859,6 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.State = ptr.String(jtv)
 			}
-
 		case "StateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4899,12 +4867,10 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.StateReason = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "WebhookDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4913,7 +4879,6 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				}
 				sv.WebhookDescription = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4987,7 +4952,6 @@ func awsRestjson1_deserializeDocumentConfiguredTeam(v **types.ConfiguredTeam, va
 				}
 				sv.State = ptr.String(jtv)
 			}
-
 		case "StateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4996,7 +4960,6 @@ func awsRestjson1_deserializeDocumentConfiguredTeam(v **types.ConfiguredTeam, va
 				}
 				sv.StateReason = ptr.String(jtv)
 			}
-
 		case "TeamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5005,7 +4968,6 @@ func awsRestjson1_deserializeDocumentConfiguredTeam(v **types.ConfiguredTeam, va
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
-
 		case "TeamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5014,7 +4976,6 @@ func awsRestjson1_deserializeDocumentConfiguredTeam(v **types.ConfiguredTeam, va
 				}
 				sv.TeamName = ptr.String(jtv)
 			}
-
 		case "TenantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5023,7 +4984,6 @@ func awsRestjson1_deserializeDocumentConfiguredTeam(v **types.ConfiguredTeam, va
 				}
 				sv.TenantId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5087,15 +5047,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5103,14 +5057,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5136,15 +5086,9 @@ func awsRestjson1_deserializeDocumentCreateChimeWebhookConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5152,14 +5096,10 @@ func awsRestjson1_deserializeDocumentCreateChimeWebhookConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5185,15 +5125,9 @@ func awsRestjson1_deserializeDocumentCreateSlackChannelConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5201,14 +5135,10 @@ func awsRestjson1_deserializeDocumentCreateSlackChannelConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5234,15 +5164,9 @@ func awsRestjson1_deserializeDocumentCreateTeamsChannelConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5250,14 +5174,10 @@ func awsRestjson1_deserializeDocumentCreateTeamsChannelConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5283,15 +5203,9 @@ func awsRestjson1_deserializeDocumentDeleteChimeWebhookConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5299,14 +5213,10 @@ func awsRestjson1_deserializeDocumentDeleteChimeWebhookConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5332,15 +5242,9 @@ func awsRestjson1_deserializeDocumentDeleteMicrosoftTeamsUserIdentityException(v
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5348,14 +5252,10 @@ func awsRestjson1_deserializeDocumentDeleteMicrosoftTeamsUserIdentityException(v
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5381,15 +5281,9 @@ func awsRestjson1_deserializeDocumentDeleteSlackChannelConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5397,14 +5291,10 @@ func awsRestjson1_deserializeDocumentDeleteSlackChannelConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5430,15 +5320,9 @@ func awsRestjson1_deserializeDocumentDeleteSlackUserIdentityException(v **types.
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5446,14 +5330,10 @@ func awsRestjson1_deserializeDocumentDeleteSlackUserIdentityException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5479,15 +5359,9 @@ func awsRestjson1_deserializeDocumentDeleteSlackWorkspaceAuthorizationFault(v **
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5495,14 +5369,10 @@ func awsRestjson1_deserializeDocumentDeleteSlackWorkspaceAuthorizationFault(v **
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5528,15 +5398,9 @@ func awsRestjson1_deserializeDocumentDeleteTeamsChannelConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5544,14 +5408,10 @@ func awsRestjson1_deserializeDocumentDeleteTeamsChannelConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5577,15 +5437,9 @@ func awsRestjson1_deserializeDocumentDeleteTeamsConfiguredTeamException(v **type
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5593,14 +5447,10 @@ func awsRestjson1_deserializeDocumentDeleteTeamsConfiguredTeamException(v **type
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5626,15 +5476,9 @@ func awsRestjson1_deserializeDocumentDescribeChimeWebhookConfigurationsException
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5642,14 +5486,10 @@ func awsRestjson1_deserializeDocumentDescribeChimeWebhookConfigurationsException
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5675,15 +5515,9 @@ func awsRestjson1_deserializeDocumentDescribeSlackChannelConfigurationsException
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5691,14 +5525,10 @@ func awsRestjson1_deserializeDocumentDescribeSlackChannelConfigurationsException
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5724,15 +5554,9 @@ func awsRestjson1_deserializeDocumentDescribeSlackUserIdentitiesException(v **ty
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5740,14 +5564,10 @@ func awsRestjson1_deserializeDocumentDescribeSlackUserIdentitiesException(v **ty
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5773,15 +5593,9 @@ func awsRestjson1_deserializeDocumentDescribeSlackWorkspacesException(v **types.
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5789,14 +5603,10 @@ func awsRestjson1_deserializeDocumentDescribeSlackWorkspacesException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5822,15 +5632,9 @@ func awsRestjson1_deserializeDocumentGetAccountPreferencesException(v **types.Ge
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5838,14 +5642,10 @@ func awsRestjson1_deserializeDocumentGetAccountPreferencesException(v **types.Ge
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5871,15 +5671,9 @@ func awsRestjson1_deserializeDocumentGetTeamsChannelConfigurationException(v **t
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5887,14 +5681,10 @@ func awsRestjson1_deserializeDocumentGetTeamsChannelConfigurationException(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5956,15 +5746,9 @@ func awsRestjson1_deserializeDocumentInternalServiceError(v **types.InternalServ
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5972,14 +5756,10 @@ func awsRestjson1_deserializeDocumentInternalServiceError(v **types.InternalServ
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6005,15 +5785,9 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6021,14 +5795,10 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6054,15 +5824,9 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6070,14 +5834,10 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6103,15 +5863,9 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6119,14 +5873,10 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6152,15 +5902,9 @@ func awsRestjson1_deserializeDocumentListMicrosoftTeamsConfiguredTeamsException(
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6168,14 +5912,10 @@ func awsRestjson1_deserializeDocumentListMicrosoftTeamsConfiguredTeamsException(
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6201,15 +5941,9 @@ func awsRestjson1_deserializeDocumentListMicrosoftTeamsUserIdentitiesException(v
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6217,14 +5951,10 @@ func awsRestjson1_deserializeDocumentListMicrosoftTeamsUserIdentitiesException(v
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6250,15 +5980,9 @@ func awsRestjson1_deserializeDocumentListTeamsChannelConfigurationsException(v *
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6266,14 +5990,10 @@ func awsRestjson1_deserializeDocumentListTeamsChannelConfigurationsException(v *
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6299,15 +6019,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6315,14 +6029,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6348,15 +6058,9 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6364,14 +6068,10 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6407,7 +6107,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.ChatConfigurationArn = ptr.String(jtv)
 			}
-
 		case "ConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6416,12 +6115,10 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.ConfigurationName = ptr.String(jtv)
 			}
-
 		case "GuardrailPolicyArns":
 			if err := awsRestjson1_deserializeDocumentGuardrailPolicyArnList(&sv.GuardrailPolicyArns, value); err != nil {
 				return err
 			}
-
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6430,7 +6127,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
-
 		case "LoggingLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6439,7 +6135,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.LoggingLevel = ptr.String(jtv)
 			}
-
 		case "SlackChannelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6448,7 +6143,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.SlackChannelId = ptr.String(jtv)
 			}
-
 		case "SlackChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6457,7 +6151,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.SlackChannelName = ptr.String(jtv)
 			}
-
 		case "SlackTeamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6466,7 +6159,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.SlackTeamId = ptr.String(jtv)
 			}
-
 		case "SlackTeamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6475,12 +6167,10 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.SlackTeamName = ptr.String(jtv)
 			}
-
 		case "SnsTopicArns":
 			if err := awsRestjson1_deserializeDocumentSnsTopicArnList(&sv.SnsTopicArns, value); err != nil {
 				return err
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6489,7 +6179,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.State = ptr.String(jtv)
 			}
-
 		case "StateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6498,12 +6187,10 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.StateReason = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "UserAuthorizationRequired":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6512,7 +6199,6 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.UserAuthorizationRequired = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6620,7 +6306,6 @@ func awsRestjson1_deserializeDocumentSlackUserIdentity(v **types.SlackUserIdenti
 				}
 				sv.AwsUserIdentity = ptr.String(jtv)
 			}
-
 		case "ChatConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6629,7 +6314,6 @@ func awsRestjson1_deserializeDocumentSlackUserIdentity(v **types.SlackUserIdenti
 				}
 				sv.ChatConfigurationArn = ptr.String(jtv)
 			}
-
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6638,7 +6322,6 @@ func awsRestjson1_deserializeDocumentSlackUserIdentity(v **types.SlackUserIdenti
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
-
 		case "SlackTeamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6647,7 +6330,6 @@ func awsRestjson1_deserializeDocumentSlackUserIdentity(v **types.SlackUserIdenti
 				}
 				sv.SlackTeamId = ptr.String(jtv)
 			}
-
 		case "SlackUserId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6656,7 +6338,6 @@ func awsRestjson1_deserializeDocumentSlackUserIdentity(v **types.SlackUserIdenti
 				}
 				sv.SlackUserId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6696,7 +6377,6 @@ func awsRestjson1_deserializeDocumentSlackWorkspace(v **types.SlackWorkspace, va
 				}
 				sv.SlackTeamId = ptr.String(jtv)
 			}
-
 		case "SlackTeamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6705,7 +6385,6 @@ func awsRestjson1_deserializeDocumentSlackWorkspace(v **types.SlackWorkspace, va
 				}
 				sv.SlackTeamName = ptr.String(jtv)
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6714,7 +6393,6 @@ func awsRestjson1_deserializeDocumentSlackWorkspace(v **types.SlackWorkspace, va
 				}
 				sv.State = ptr.String(jtv)
 			}
-
 		case "StateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6723,7 +6401,6 @@ func awsRestjson1_deserializeDocumentSlackWorkspace(v **types.SlackWorkspace, va
 				}
 				sv.StateReason = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6833,7 +6510,6 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.TagKey = ptr.String(jtv)
 			}
-
 		case "TagValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6842,7 +6518,6 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.TagValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6984,7 +6659,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.ChannelId = ptr.String(jtv)
 			}
-
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6993,7 +6667,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
-
 		case "ChatConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7002,7 +6675,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.ChatConfigurationArn = ptr.String(jtv)
 			}
-
 		case "ConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7011,12 +6683,10 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.ConfigurationName = ptr.String(jtv)
 			}
-
 		case "GuardrailPolicyArns":
 			if err := awsRestjson1_deserializeDocumentGuardrailPolicyArnList(&sv.GuardrailPolicyArns, value); err != nil {
 				return err
 			}
-
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7025,7 +6695,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
-
 		case "LoggingLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7034,12 +6703,10 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.LoggingLevel = ptr.String(jtv)
 			}
-
 		case "SnsTopicArns":
 			if err := awsRestjson1_deserializeDocumentSnsTopicArnList(&sv.SnsTopicArns, value); err != nil {
 				return err
 			}
-
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7048,7 +6715,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.State = ptr.String(jtv)
 			}
-
 		case "StateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7057,12 +6723,10 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.StateReason = ptr.String(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "TeamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7071,7 +6735,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
-
 		case "TeamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7080,7 +6743,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.TeamName = ptr.String(jtv)
 			}
-
 		case "TenantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7089,7 +6751,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.TenantId = ptr.String(jtv)
 			}
-
 		case "UserAuthorizationRequired":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7098,7 +6759,6 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 				}
 				sv.UserAuthorizationRequired = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7172,7 +6832,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.AwsUserIdentity = ptr.String(jtv)
 			}
-
 		case "ChatConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7181,7 +6840,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.ChatConfigurationArn = ptr.String(jtv)
 			}
-
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7190,7 +6848,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
-
 		case "TeamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7199,7 +6856,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
-
 		case "TeamsChannelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7208,7 +6864,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.TeamsChannelId = ptr.String(jtv)
 			}
-
 		case "TeamsTenantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7217,7 +6872,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.TeamsTenantId = ptr.String(jtv)
 			}
-
 		case "UserId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7226,7 +6880,6 @@ func awsRestjson1_deserializeDocumentTeamsUserIdentity(v **types.TeamsUserIdenti
 				}
 				sv.UserId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7256,15 +6909,9 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7272,14 +6919,10 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7305,15 +6948,9 @@ func awsRestjson1_deserializeDocumentUpdateAccountPreferencesException(v **types
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7321,14 +6958,10 @@ func awsRestjson1_deserializeDocumentUpdateAccountPreferencesException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7354,15 +6987,9 @@ func awsRestjson1_deserializeDocumentUpdateChimeWebhookConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7370,14 +6997,10 @@ func awsRestjson1_deserializeDocumentUpdateChimeWebhookConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7403,15 +7026,9 @@ func awsRestjson1_deserializeDocumentUpdateSlackChannelConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7419,14 +7036,10 @@ func awsRestjson1_deserializeDocumentUpdateSlackChannelConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7452,15 +7065,9 @@ func awsRestjson1_deserializeDocumentUpdateTeamsChannelConfigurationException(v 
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7468,14 +7075,10 @@ func awsRestjson1_deserializeDocumentUpdateTeamsChannelConfigurationException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

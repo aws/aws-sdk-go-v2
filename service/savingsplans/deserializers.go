@@ -184,7 +184,6 @@ func awsRestjson1_deserializeOpDocumentCreateSavingsPlanOutput(v **CreateSavings
 				}
 				sv.SavingsPlanId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -440,7 +439,6 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlanRatesOutput(v **Descri
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "savingsPlanId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -449,12 +447,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlanRatesOutput(v **Descri
 				}
 				sv.SavingsPlanId = ptr.String(jtv)
 			}
-
 		case "searchResults":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanRateList(&sv.SearchResults, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -613,12 +609,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOutput(v **DescribeSa
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "savingsPlans":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanList(&sv.SavingsPlans, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -777,12 +771,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingRatesOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "searchResults":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingRatesList(&sv.SearchResults, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -941,12 +933,10 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingsOutput(v **D
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "searchResults":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingsList(&sv.SearchResults, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1104,7 +1094,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1269,7 +1258,6 @@ func awsRestjson1_deserializeOpDocumentReturnSavingsPlanOutput(v **ReturnSavings
 				}
 				sv.SavingsPlanId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1634,15 +1622,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1650,14 +1632,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1693,7 +1671,6 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				}
 				sv.Currency = types.CurrencyCode(jtv)
 			}
-
 		case "durationSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1706,7 +1683,6 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				}
 				sv.DurationSeconds = i64
 			}
-
 		case "offeringId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1715,7 +1691,6 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				}
 				sv.OfferingId = ptr.String(jtv)
 			}
-
 		case "paymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1724,7 +1699,6 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				}
 				sv.PaymentOption = types.SavingsPlanPaymentOption(jtv)
 			}
-
 		case "planDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1733,7 +1707,6 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				}
 				sv.PlanDescription = ptr.String(jtv)
 			}
-
 		case "planType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1742,7 +1715,6 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				}
 				sv.PlanType = types.SavingsPlanType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1772,15 +1744,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1788,14 +1754,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1831,7 +1793,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.Commitment = ptr.String(jtv)
 			}
-
 		case "currency":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1840,7 +1801,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.Currency = types.CurrencyCode(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1849,7 +1809,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "ec2InstanceFamily":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1858,7 +1817,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.Ec2InstanceFamily = ptr.String(jtv)
 			}
-
 		case "end":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1867,7 +1825,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.End = ptr.String(jtv)
 			}
-
 		case "offeringId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1876,7 +1833,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.OfferingId = ptr.String(jtv)
 			}
-
 		case "paymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1885,12 +1841,10 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.PaymentOption = types.SavingsPlanPaymentOption(jtv)
 			}
-
 		case "productTypes":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanProductTypeList(&sv.ProductTypes, value); err != nil {
 				return err
 			}
-
 		case "recurringPaymentAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1899,7 +1853,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.RecurringPaymentAmount = ptr.String(jtv)
 			}
-
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1908,7 +1861,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.Region = ptr.String(jtv)
 			}
-
 		case "returnableUntil":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1917,7 +1869,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.ReturnableUntil = ptr.String(jtv)
 			}
-
 		case "savingsPlanArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1926,7 +1877,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.SavingsPlanArn = ptr.String(jtv)
 			}
-
 		case "savingsPlanId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1935,7 +1885,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.SavingsPlanId = ptr.String(jtv)
 			}
-
 		case "savingsPlanType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1944,7 +1893,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.SavingsPlanType = types.SavingsPlanType(jtv)
 			}
-
 		case "start":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1953,7 +1901,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.Start = ptr.String(jtv)
 			}
-
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1962,12 +1909,10 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.State = types.SavingsPlanState(jtv)
 			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "termDurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1980,7 +1925,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.TermDurationInSeconds = i64
 			}
-
 		case "upfrontPaymentAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1989,7 +1933,6 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				}
 				sv.UpfrontPaymentAmount = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2063,7 +2006,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.Currency = types.CurrencyCode(jtv)
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2072,7 +2014,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "durationSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2085,7 +2026,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.DurationSeconds = i64
 			}
-
 		case "offeringId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2094,7 +2034,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.OfferingId = ptr.String(jtv)
 			}
-
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2103,7 +2042,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.Operation = ptr.String(jtv)
 			}
-
 		case "paymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2112,7 +2050,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.PaymentOption = types.SavingsPlanPaymentOption(jtv)
 			}
-
 		case "planType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2121,17 +2058,14 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.PlanType = types.SavingsPlanType(jtv)
 			}
-
 		case "productTypes":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanProductTypeList(&sv.ProductTypes, value); err != nil {
 				return err
 			}
-
 		case "properties":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingPropertyList(&sv.Properties, value); err != nil {
 				return err
 			}
-
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2140,7 +2074,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
-
 		case "usageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2149,7 +2082,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				}
 				sv.UsageType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2189,7 +2121,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingProperty(v **types.Savin
 				}
 				sv.Name = types.SavingsPlanOfferingPropertyKey(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2198,7 +2129,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingProperty(v **types.Savin
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2272,7 +2202,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				}
 				sv.Operation = ptr.String(jtv)
 			}
-
 		case "productType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2281,12 +2210,10 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				}
 				sv.ProductType = types.SavingsPlanProductType(jtv)
 			}
-
 		case "properties":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingRatePropertyList(&sv.Properties, value); err != nil {
 				return err
 			}
-
 		case "rate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2295,12 +2222,10 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				}
 				sv.Rate = ptr.String(jtv)
 			}
-
 		case "savingsPlanOffering":
 			if err := awsRestjson1_deserializeDocumentParentSavingsPlanOffering(&sv.SavingsPlanOffering, value); err != nil {
 				return err
 			}
-
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2309,7 +2234,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				}
 				sv.ServiceCode = types.SavingsPlanRateServiceCode(jtv)
 			}
-
 		case "unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2318,7 +2242,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				}
 				sv.Unit = types.SavingsPlanRateUnit(jtv)
 			}
-
 		case "usageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2327,7 +2250,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				}
 				sv.UsageType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2367,7 +2289,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(v **types.S
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2376,7 +2297,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(v **types.S
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2554,7 +2474,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.Currency = types.CurrencyCode(jtv)
 			}
-
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2563,7 +2482,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.Operation = ptr.String(jtv)
 			}
-
 		case "productType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2572,12 +2490,10 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.ProductType = types.SavingsPlanProductType(jtv)
 			}
-
 		case "properties":
 			if err := awsRestjson1_deserializeDocumentSavingsPlanRatePropertyList(&sv.Properties, value); err != nil {
 				return err
 			}
-
 		case "rate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2586,7 +2502,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.Rate = ptr.String(jtv)
 			}
-
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2595,7 +2510,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.ServiceCode = types.SavingsPlanRateServiceCode(jtv)
 			}
-
 		case "unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2604,7 +2518,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.Unit = types.SavingsPlanRateUnit(jtv)
 			}
-
 		case "usageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2613,7 +2526,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				}
 				sv.UsageType = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2687,7 +2599,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRateProperty(v **types.SavingsPl
 				}
 				sv.Name = types.SavingsPlanRatePropertyKey(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2696,7 +2607,6 @@ func awsRestjson1_deserializeDocumentSavingsPlanRateProperty(v **types.SavingsPl
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2760,15 +2670,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2776,14 +2680,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2845,15 +2745,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2861,14 +2755,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

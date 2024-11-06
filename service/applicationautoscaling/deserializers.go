@@ -1929,7 +1929,6 @@ func awsAwsjson11_deserializeDocumentAlarm(v **types.Alarm, value interface{}) e
 				}
 				sv.AlarmARN = ptr.String(jtv)
 			}
-
 		case "AlarmName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1938,7 +1937,6 @@ func awsAwsjson11_deserializeDocumentAlarm(v **types.Alarm, value interface{}) e
 				}
 				sv.AlarmName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2002,15 +2000,9 @@ func awsAwsjson11_deserializeDocumentConcurrentUpdateException(v **types.Concurr
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2018,14 +2010,10 @@ func awsAwsjson11_deserializeDocumentConcurrentUpdateException(v **types.Concurr
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2057,7 +2045,6 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 			if err := awsAwsjson11_deserializeDocumentMetricDimensions(&sv.Dimensions, value); err != nil {
 				return err
 			}
-
 		case "MetricName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2066,12 +2053,10 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
-
 		case "Metrics":
 			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQueries(&sv.Metrics, value); err != nil {
 				return err
 			}
-
 		case "Namespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2080,7 +2065,6 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 				}
 				sv.Namespace = ptr.String(jtv)
 			}
-
 		case "Statistic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2089,7 +2073,6 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 				}
 				sv.Statistic = types.MetricStatistic(jtv)
 			}
-
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2098,7 +2081,6 @@ func awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(v **types.Cus
 				}
 				sv.Unit = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2128,15 +2110,9 @@ func awsAwsjson11_deserializeDocumentFailedResourceAccessException(v **types.Fai
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2144,14 +2120,10 @@ func awsAwsjson11_deserializeDocumentFailedResourceAccessException(v **types.Fai
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2177,15 +2149,9 @@ func awsAwsjson11_deserializeDocumentInternalServiceException(v **types.Internal
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2193,14 +2159,10 @@ func awsAwsjson11_deserializeDocumentInternalServiceException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2226,15 +2188,9 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2242,14 +2198,10 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2275,15 +2227,9 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2291,14 +2237,10 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2334,7 +2276,6 @@ func awsAwsjson11_deserializeDocumentMetricDimension(v **types.MetricDimension, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2343,7 +2284,6 @@ func awsAwsjson11_deserializeDocumentMetricDimension(v **types.MetricDimension, 
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2417,7 +2357,6 @@ func awsAwsjson11_deserializeDocumentNotScaledReason(v **types.NotScaledReason, 
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
 		case "CurrentCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2430,7 +2369,6 @@ func awsAwsjson11_deserializeDocumentNotScaledReason(v **types.NotScaledReason, 
 				}
 				sv.CurrentCapacity = ptr.Int32(int32(i64))
 			}
-
 		case "MaxCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2443,7 +2381,6 @@ func awsAwsjson11_deserializeDocumentNotScaledReason(v **types.NotScaledReason, 
 				}
 				sv.MaxCapacity = ptr.Int32(int32(i64))
 			}
-
 		case "MinCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2456,7 +2393,6 @@ func awsAwsjson11_deserializeDocumentNotScaledReason(v **types.NotScaledReason, 
 				}
 				sv.MinCapacity = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2520,15 +2456,9 @@ func awsAwsjson11_deserializeDocumentObjectNotFoundException(v **types.ObjectNot
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2536,14 +2466,10 @@ func awsAwsjson11_deserializeDocumentObjectNotFoundException(v **types.ObjectNot
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2579,7 +2505,6 @@ func awsAwsjson11_deserializeDocumentPredefinedMetricSpecification(v **types.Pre
 				}
 				sv.PredefinedMetricType = types.MetricType(jtv)
 			}
-
 		case "ResourceLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2588,7 +2513,6 @@ func awsAwsjson11_deserializeDocumentPredefinedMetricSpecification(v **types.Pre
 				}
 				sv.ResourceLabel = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2618,15 +2542,9 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2634,7 +2552,6 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2643,14 +2560,10 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2693,7 +2606,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 
 				}
 			}
-
 		case "MaxCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2706,7 +2618,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.MaxCapacity = ptr.Int32(int32(i64))
 			}
-
 		case "MinCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2719,7 +2630,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.MinCapacity = ptr.Int32(int32(i64))
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2728,7 +2638,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2737,7 +2646,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
-
 		case "ScalableDimension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2746,7 +2654,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.ScalableDimension = types.ScalableDimension(jtv)
 			}
-
 		case "ScalableTargetARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2755,7 +2662,6 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.ScalableTargetARN = ptr.String(jtv)
 			}
-
 		case "ServiceNamespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2764,12 +2670,10 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 				}
 				sv.ServiceNamespace = types.ServiceNamespace(jtv)
 			}
-
 		case "SuspendedState":
 			if err := awsAwsjson11_deserializeDocumentSuspendedState(&sv.SuspendedState, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2813,7 +2717,6 @@ func awsAwsjson11_deserializeDocumentScalableTargetAction(v **types.ScalableTarg
 				}
 				sv.MaxCapacity = ptr.Int32(int32(i64))
 			}
-
 		case "MinCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2826,7 +2729,6 @@ func awsAwsjson11_deserializeDocumentScalableTargetAction(v **types.ScalableTarg
 				}
 				sv.MinCapacity = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2934,7 +2836,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.ActivityId = ptr.String(jtv)
 			}
-
 		case "Cause":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2943,7 +2844,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.Cause = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2952,7 +2852,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "Details":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2961,7 +2860,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.Details = ptr.String(jtv)
 			}
-
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2977,12 +2875,10 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 
 				}
 			}
-
 		case "NotScaledReasons":
 			if err := awsAwsjson11_deserializeDocumentNotScaledReasons(&sv.NotScaledReasons, value); err != nil {
 				return err
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2991,7 +2887,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ScalableDimension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3000,7 +2895,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.ScalableDimension = types.ScalableDimension(jtv)
 			}
-
 		case "ServiceNamespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3009,7 +2903,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.ServiceNamespace = types.ServiceNamespace(jtv)
 			}
-
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3025,7 +2918,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 
 				}
 			}
-
 		case "StatusCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3034,7 +2926,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.StatusCode = types.ScalingActivityStatusCode(jtv)
 			}
-
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3043,7 +2934,6 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3113,7 +3003,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 			if err := awsAwsjson11_deserializeDocumentAlarms(&sv.Alarms, value); err != nil {
 				return err
 			}
-
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3129,7 +3018,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 
 				}
 			}
-
 		case "PolicyARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3138,7 +3026,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				}
 				sv.PolicyARN = ptr.String(jtv)
 			}
-
 		case "PolicyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3147,7 +3034,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				}
 				sv.PolicyName = ptr.String(jtv)
 			}
-
 		case "PolicyType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3156,7 +3042,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				}
 				sv.PolicyType = types.PolicyType(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3165,7 +3050,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ScalableDimension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3174,7 +3058,6 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				}
 				sv.ScalableDimension = types.ScalableDimension(jtv)
 			}
-
 		case "ServiceNamespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3183,17 +3066,14 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 				}
 				sv.ServiceNamespace = types.ServiceNamespace(jtv)
 			}
-
 		case "StepScalingPolicyConfiguration":
 			if err := awsAwsjson11_deserializeDocumentStepScalingPolicyConfiguration(&sv.StepScalingPolicyConfiguration, value); err != nil {
 				return err
 			}
-
 		case "TargetTrackingScalingPolicyConfiguration":
 			if err := awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(&sv.TargetTrackingScalingPolicyConfiguration, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3240,7 +3120,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 
 				}
 			}
-
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3256,7 +3135,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 
 				}
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3265,7 +3143,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "ScalableDimension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3274,12 +3151,10 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.ScalableDimension = types.ScalableDimension(jtv)
 			}
-
 		case "ScalableTargetAction":
 			if err := awsAwsjson11_deserializeDocumentScalableTargetAction(&sv.ScalableTargetAction, value); err != nil {
 				return err
 			}
-
 		case "Schedule":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3288,7 +3163,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.Schedule = ptr.String(jtv)
 			}
-
 		case "ScheduledActionARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3297,7 +3171,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.ScheduledActionARN = ptr.String(jtv)
 			}
-
 		case "ScheduledActionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3306,7 +3179,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.ScheduledActionName = ptr.String(jtv)
 			}
-
 		case "ServiceNamespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3315,7 +3187,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.ServiceNamespace = types.ServiceNamespace(jtv)
 			}
-
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3331,7 +3202,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 
 				}
 			}
-
 		case "Timezone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3340,7 +3210,6 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				}
 				sv.Timezone = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3439,7 +3308,6 @@ func awsAwsjson11_deserializeDocumentStepAdjustment(v **types.StepAdjustment, va
 
 				}
 			}
-
 		case "MetricIntervalUpperBound":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3473,7 +3341,6 @@ func awsAwsjson11_deserializeDocumentStepAdjustment(v **types.StepAdjustment, va
 
 				}
 			}
-
 		case "ScalingAdjustment":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3486,7 +3353,6 @@ func awsAwsjson11_deserializeDocumentStepAdjustment(v **types.StepAdjustment, va
 				}
 				sv.ScalingAdjustment = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3560,7 +3426,6 @@ func awsAwsjson11_deserializeDocumentStepScalingPolicyConfiguration(v **types.St
 				}
 				sv.AdjustmentType = types.AdjustmentType(jtv)
 			}
-
 		case "Cooldown":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3573,7 +3438,6 @@ func awsAwsjson11_deserializeDocumentStepScalingPolicyConfiguration(v **types.St
 				}
 				sv.Cooldown = ptr.Int32(int32(i64))
 			}
-
 		case "MetricAggregationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3582,7 +3446,6 @@ func awsAwsjson11_deserializeDocumentStepScalingPolicyConfiguration(v **types.St
 				}
 				sv.MetricAggregationType = types.MetricAggregationType(jtv)
 			}
-
 		case "MinAdjustmentMagnitude":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3595,12 +3458,10 @@ func awsAwsjson11_deserializeDocumentStepScalingPolicyConfiguration(v **types.St
 				}
 				sv.MinAdjustmentMagnitude = ptr.Int32(int32(i64))
 			}
-
 		case "StepAdjustments":
 			if err := awsAwsjson11_deserializeDocumentStepAdjustments(&sv.StepAdjustments, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3640,7 +3501,6 @@ func awsAwsjson11_deserializeDocumentSuspendedState(v **types.SuspendedState, va
 				}
 				sv.DynamicScalingInSuspended = ptr.Bool(jtv)
 			}
-
 		case "DynamicScalingOutSuspended":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3649,7 +3509,6 @@ func awsAwsjson11_deserializeDocumentSuspendedState(v **types.SuspendedState, va
 				}
 				sv.DynamicScalingOutSuspended = ptr.Bool(jtv)
 			}
-
 		case "ScheduledScalingSuspended":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3658,7 +3517,6 @@ func awsAwsjson11_deserializeDocumentSuspendedState(v **types.SuspendedState, va
 				}
 				sv.ScheduledScalingSuspended = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3730,7 +3588,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetric(v **types.TargetTracki
 			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricDimensions(&sv.Dimensions, value); err != nil {
 				return err
 			}
-
 		case "MetricName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3739,7 +3596,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetric(v **types.TargetTracki
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
-
 		case "Namespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3748,7 +3604,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetric(v **types.TargetTracki
 				}
 				sv.Namespace = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3822,7 +3677,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQuery(v **types.Tar
 				}
 				sv.Expression = ptr.String(jtv)
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3831,7 +3685,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQuery(v **types.Tar
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3840,12 +3693,10 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQuery(v **types.Tar
 				}
 				sv.Label = ptr.String(jtv)
 			}
-
 		case "MetricStat":
 			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetricStat(&sv.MetricStat, value); err != nil {
 				return err
 			}
-
 		case "ReturnData":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3854,7 +3705,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricDataQuery(v **types.Tar
 				}
 				sv.ReturnData = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3894,7 +3744,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricDimension(v **types.Tar
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3903,7 +3752,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricDimension(v **types.Tar
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3973,7 +3821,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricStat(v **types.TargetTr
 			if err := awsAwsjson11_deserializeDocumentTargetTrackingMetric(&sv.Metric, value); err != nil {
 				return err
 			}
-
 		case "Stat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3982,7 +3829,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricStat(v **types.TargetTr
 				}
 				sv.Stat = ptr.String(jtv)
 			}
-
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3991,7 +3837,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingMetricStat(v **types.TargetTr
 				}
 				sv.Unit = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4027,7 +3872,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 			if err := awsAwsjson11_deserializeDocumentCustomizedMetricSpecification(&sv.CustomizedMetricSpecification, value); err != nil {
 				return err
 			}
-
 		case "DisableScaleIn":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4036,12 +3880,10 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 				}
 				sv.DisableScaleIn = ptr.Bool(jtv)
 			}
-
 		case "PredefinedMetricSpecification":
 			if err := awsAwsjson11_deserializeDocumentPredefinedMetricSpecification(&sv.PredefinedMetricSpecification, value); err != nil {
 				return err
 			}
-
 		case "ScaleInCooldown":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4054,7 +3896,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 				}
 				sv.ScaleInCooldown = ptr.Int32(int32(i64))
 			}
-
 		case "ScaleOutCooldown":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4067,7 +3908,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 				}
 				sv.ScaleOutCooldown = ptr.Int32(int32(i64))
 			}
-
 		case "TargetValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4101,7 +3941,6 @@ func awsAwsjson11_deserializeDocumentTargetTrackingScalingPolicyConfiguration(v 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4131,15 +3970,9 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4147,7 +3980,6 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4156,14 +3988,10 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4189,15 +4017,9 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4205,14 +4027,10 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4341,12 +4159,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeScalableTargetsOutput(v **Describ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ScalableTargets":
 			if err := awsAwsjson11_deserializeDocumentScalableTargets(&sv.ScalableTargets, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4386,12 +4202,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeScalingActivitiesOutput(v **Descr
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ScalingActivities":
 			if err := awsAwsjson11_deserializeDocumentScalingActivities(&sv.ScalingActivities, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4431,12 +4245,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeScalingPoliciesOutput(v **Describ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ScalingPolicies":
 			if err := awsAwsjson11_deserializeDocumentScalingPolicies(&sv.ScalingPolicies, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4476,12 +4288,10 @@ func awsAwsjson11_deserializeOpDocumentDescribeScheduledActionsOutput(v **Descri
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "ScheduledActions":
 			if err := awsAwsjson11_deserializeDocumentScheduledActions(&sv.ScheduledActions, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4517,7 +4327,6 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4553,7 +4362,6 @@ func awsAwsjson11_deserializeOpDocumentPutScalingPolicyOutput(v **PutScalingPoli
 			if err := awsAwsjson11_deserializeDocumentAlarms(&sv.Alarms, value); err != nil {
 				return err
 			}
-
 		case "PolicyARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4562,7 +4370,6 @@ func awsAwsjson11_deserializeOpDocumentPutScalingPolicyOutput(v **PutScalingPoli
 				}
 				sv.PolicyARN = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4633,7 +4440,6 @@ func awsAwsjson11_deserializeOpDocumentRegisterScalableTargetOutput(v **Register
 				}
 				sv.ScalableTargetARN = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

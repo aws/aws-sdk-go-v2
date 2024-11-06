@@ -306,15 +306,9 @@ func awsAwsjson11_deserializeDocumentMarketplaceCommerceAnalyticsException(v **t
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -322,14 +316,10 @@ func awsAwsjson11_deserializeDocumentMarketplaceCommerceAnalyticsException(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -365,7 +355,6 @@ func awsAwsjson11_deserializeOpDocumentGenerateDataSetOutput(v **GenerateDataSet
 				}
 				sv.DataSetRequestId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -405,7 +394,6 @@ func awsAwsjson11_deserializeOpDocumentStartSupportDataExportOutput(v **StartSup
 				}
 				sv.DataSetRequestId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

@@ -392,7 +392,6 @@ func awsAwsjson10_deserializeDocumentAbortTransactionResult(v **types.AbortTrans
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -422,13 +421,7 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "Code":
 			if value != nil {
@@ -438,8 +431,7 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -447,14 +439,10 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -480,15 +468,9 @@ func awsAwsjson10_deserializeDocumentCapacityExceededException(v **types.Capacit
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -496,14 +478,10 @@ func awsAwsjson10_deserializeDocumentCapacityExceededException(v **types.Capacit
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -543,17 +521,14 @@ func awsAwsjson10_deserializeDocumentCommitTransactionResult(v **types.CommitTra
 				}
 				sv.CommitDigest = dv
 			}
-
 		case "ConsumedIOs":
 			if err := awsAwsjson10_deserializeDocumentIOUsage(&sv.ConsumedIOs, value); err != nil {
 				return err
 			}
-
 		case "TimingInformation":
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		case "TransactionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -562,7 +537,6 @@ func awsAwsjson10_deserializeDocumentCommitTransactionResult(v **types.CommitTra
 				}
 				sv.TransactionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -598,7 +572,6 @@ func awsAwsjson10_deserializeDocumentEndSessionResult(v **types.EndSessionResult
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -634,17 +607,14 @@ func awsAwsjson10_deserializeDocumentExecuteStatementResult(v **types.ExecuteSta
 			if err := awsAwsjson10_deserializeDocumentIOUsage(&sv.ConsumedIOs, value); err != nil {
 				return err
 			}
-
 		case "FirstPage":
 			if err := awsAwsjson10_deserializeDocumentPage(&sv.FirstPage, value); err != nil {
 				return err
 			}
-
 		case "TimingInformation":
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -680,17 +650,14 @@ func awsAwsjson10_deserializeDocumentFetchPageResult(v **types.FetchPageResult, 
 			if err := awsAwsjson10_deserializeDocumentIOUsage(&sv.ConsumedIOs, value); err != nil {
 				return err
 			}
-
 		case "Page":
 			if err := awsAwsjson10_deserializeDocumentPage(&sv.Page, value); err != nil {
 				return err
 			}
-
 		case "TimingInformation":
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -720,13 +687,7 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "Code":
 			if value != nil {
@@ -736,8 +697,7 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 				}
 				sv.Code = ptr.String(jtv)
 			}
-
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -745,14 +705,10 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -792,7 +748,6 @@ func awsAwsjson10_deserializeDocumentIOUsage(v **types.IOUsage, value interface{
 				}
 				sv.ReadIOs = i64
 			}
-
 		case "WriteIOs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -805,7 +760,6 @@ func awsAwsjson10_deserializeDocumentIOUsage(v **types.IOUsage, value interface{
 				}
 				sv.WriteIOs = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -835,15 +789,9 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -851,14 +799,10 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -884,15 +828,9 @@ func awsAwsjson10_deserializeDocumentOccConflictException(v **types.OccConflictE
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -900,14 +838,10 @@ func awsAwsjson10_deserializeDocumentOccConflictException(v **types.OccConflictE
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -943,12 +877,10 @@ func awsAwsjson10_deserializeDocumentPage(v **types.Page, value interface{}) err
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
-
 		case "Values":
 			if err := awsAwsjson10_deserializeDocumentValueHolders(&sv.Values, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -978,15 +910,9 @@ func awsAwsjson10_deserializeDocumentRateExceededException(v **types.RateExceede
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -994,14 +920,10 @@ func awsAwsjson10_deserializeDocumentRateExceededException(v **types.RateExceede
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1037,12 +959,10 @@ func awsAwsjson10_deserializeDocumentStartSessionResult(v **types.StartSessionRe
 				}
 				sv.SessionToken = ptr.String(jtv)
 			}
-
 		case "TimingInformation":
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1078,7 +998,6 @@ func awsAwsjson10_deserializeDocumentStartTransactionResult(v **types.StartTrans
 			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
-
 		case "TransactionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1087,7 +1006,6 @@ func awsAwsjson10_deserializeDocumentStartTransactionResult(v **types.StartTrans
 				}
 				sv.TransactionId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1131,7 +1049,6 @@ func awsAwsjson10_deserializeDocumentTimingInformation(v **types.TimingInformati
 				}
 				sv.ProcessingTimeMilliseconds = i64
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1175,7 +1092,6 @@ func awsAwsjson10_deserializeDocumentValueHolder(v **types.ValueHolder, value in
 				}
 				sv.IonBinary = dv
 			}
-
 		case "IonText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1184,7 +1100,6 @@ func awsAwsjson10_deserializeDocumentValueHolder(v **types.ValueHolder, value in
 				}
 				sv.IonText = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1254,37 +1169,30 @@ func awsAwsjson10_deserializeOpDocumentSendCommandOutput(v **SendCommandOutput, 
 			if err := awsAwsjson10_deserializeDocumentAbortTransactionResult(&sv.AbortTransaction, value); err != nil {
 				return err
 			}
-
 		case "CommitTransaction":
 			if err := awsAwsjson10_deserializeDocumentCommitTransactionResult(&sv.CommitTransaction, value); err != nil {
 				return err
 			}
-
 		case "EndSession":
 			if err := awsAwsjson10_deserializeDocumentEndSessionResult(&sv.EndSession, value); err != nil {
 				return err
 			}
-
 		case "ExecuteStatement":
 			if err := awsAwsjson10_deserializeDocumentExecuteStatementResult(&sv.ExecuteStatement, value); err != nil {
 				return err
 			}
-
 		case "FetchPage":
 			if err := awsAwsjson10_deserializeDocumentFetchPageResult(&sv.FetchPage, value); err != nil {
 				return err
 			}
-
 		case "StartSession":
 			if err := awsAwsjson10_deserializeDocumentStartSessionResult(&sv.StartSession, value); err != nil {
 				return err
 			}
-
 		case "StartTransaction":
 			if err := awsAwsjson10_deserializeDocumentStartTransactionResult(&sv.StartTransaction, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 

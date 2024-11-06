@@ -772,7 +772,6 @@ func awsAwsjson10_deserializeDocumentAcceptor(v **types.Acceptor, value interfac
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -802,15 +801,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -818,7 +811,6 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "requestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -827,14 +819,10 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -877,12 +865,10 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 
 				}
 			}
-
 		case "acceptor":
 			if err := awsAwsjson10_deserializeDocumentAcceptor(&sv.Acceptor, value); err != nil {
 				return err
 			}
-
 		case "agreementId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -891,7 +877,6 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 				}
 				sv.AgreementId = ptr.String(jtv)
 			}
-
 		case "agreementType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -900,7 +885,6 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 				}
 				sv.AgreementType = ptr.String(jtv)
 			}
-
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -916,17 +900,14 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 
 				}
 			}
-
 		case "proposalSummary":
 			if err := awsAwsjson10_deserializeDocumentProposalSummary(&sv.ProposalSummary, value); err != nil {
 				return err
 			}
-
 		case "proposer":
 			if err := awsAwsjson10_deserializeDocumentProposer(&sv.Proposer, value); err != nil {
 				return err
 			}
-
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -942,7 +923,6 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -951,7 +931,6 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 				}
 				sv.Status = types.AgreementStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1025,7 +1004,6 @@ func awsAwsjson10_deserializeDocumentByolPricingTerm(v **types.ByolPricingTerm, 
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1061,7 +1039,6 @@ func awsAwsjson10_deserializeDocumentConfigurableUpfrontPricingTerm(v **types.Co
 			if err := awsAwsjson10_deserializeDocumentConfigurableUpfrontPricingTermConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "currencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1070,12 +1047,10 @@ func awsAwsjson10_deserializeDocumentConfigurableUpfrontPricingTerm(v **types.Co
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
-
 		case "rateCards":
 			if err := awsAwsjson10_deserializeDocumentConfigurableUpfrontRateCardList(&sv.RateCards, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1084,7 +1059,6 @@ func awsAwsjson10_deserializeDocumentConfigurableUpfrontPricingTerm(v **types.Co
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1120,7 +1094,6 @@ func awsAwsjson10_deserializeDocumentConfigurableUpfrontPricingTermConfiguration
 			if err := awsAwsjson10_deserializeDocumentDimensionList(&sv.Dimensions, value); err != nil {
 				return err
 			}
-
 		case "selectorValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1129,7 +1102,6 @@ func awsAwsjson10_deserializeDocumentConfigurableUpfrontPricingTermConfiguration
 				}
 				sv.SelectorValue = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1165,17 +1137,14 @@ func awsAwsjson10_deserializeDocumentConfigurableUpfrontRateCardItem(v **types.C
 			if err := awsAwsjson10_deserializeDocumentConstraints(&sv.Constraints, value); err != nil {
 				return err
 			}
-
 		case "rateCard":
 			if err := awsAwsjson10_deserializeDocumentRateCardList(&sv.RateCard, value); err != nil {
 				return err
 			}
-
 		case "selector":
 			if err := awsAwsjson10_deserializeDocumentSelector(&sv.Selector, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1249,7 +1218,6 @@ func awsAwsjson10_deserializeDocumentConstraints(v **types.Constraints, value in
 				}
 				sv.MultipleDimensionSelection = ptr.String(jtv)
 			}
-
 		case "quantityConfiguration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1258,7 +1226,6 @@ func awsAwsjson10_deserializeDocumentConstraints(v **types.Constraints, value in
 				}
 				sv.QuantityConfiguration = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1298,7 +1265,6 @@ func awsAwsjson10_deserializeDocumentDimension(v **types.Dimension, value interf
 				}
 				sv.DimensionKey = ptr.String(jtv)
 			}
-
 		case "dimensionValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1311,7 +1277,6 @@ func awsAwsjson10_deserializeDocumentDimension(v **types.Dimension, value interf
 				}
 				sv.DimensionValue = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1385,7 +1350,6 @@ func awsAwsjson10_deserializeDocumentDocumentItem(v **types.DocumentItem, value 
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1394,7 +1358,6 @@ func awsAwsjson10_deserializeDocumentDocumentItem(v **types.DocumentItem, value 
 				}
 				sv.Url = ptr.String(jtv)
 			}
-
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1403,7 +1366,6 @@ func awsAwsjson10_deserializeDocumentDocumentItem(v **types.DocumentItem, value 
 				}
 				sv.Version = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1477,7 +1439,6 @@ func awsAwsjson10_deserializeDocumentEstimatedCharges(v **types.EstimatedCharges
 				}
 				sv.AgreementValue = ptr.String(jtv)
 			}
-
 		case "currencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1486,7 +1447,6 @@ func awsAwsjson10_deserializeDocumentEstimatedCharges(v **types.EstimatedCharges
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1526,7 +1486,6 @@ func awsAwsjson10_deserializeDocumentFixedUpfrontPricingTerm(v **types.FixedUpfr
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
-
 		case "duration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1535,12 +1494,10 @@ func awsAwsjson10_deserializeDocumentFixedUpfrontPricingTerm(v **types.FixedUpfr
 				}
 				sv.Duration = ptr.String(jtv)
 			}
-
 		case "grants":
 			if err := awsAwsjson10_deserializeDocumentGrantList(&sv.Grants, value); err != nil {
 				return err
 			}
-
 		case "price":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1549,7 +1506,6 @@ func awsAwsjson10_deserializeDocumentFixedUpfrontPricingTerm(v **types.FixedUpfr
 				}
 				sv.Price = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1558,7 +1514,6 @@ func awsAwsjson10_deserializeDocumentFixedUpfrontPricingTerm(v **types.FixedUpfr
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1598,12 +1553,10 @@ func awsAwsjson10_deserializeDocumentFreeTrialPricingTerm(v **types.FreeTrialPri
 				}
 				sv.Duration = ptr.String(jtv)
 			}
-
 		case "grants":
 			if err := awsAwsjson10_deserializeDocumentGrantList(&sv.Grants, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1612,7 +1565,6 @@ func awsAwsjson10_deserializeDocumentFreeTrialPricingTerm(v **types.FreeTrialPri
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1652,7 +1604,6 @@ func awsAwsjson10_deserializeDocumentGrantItem(v **types.GrantItem, value interf
 				}
 				sv.DimensionKey = ptr.String(jtv)
 			}
-
 		case "maxQuantity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1665,7 +1616,6 @@ func awsAwsjson10_deserializeDocumentGrantItem(v **types.GrantItem, value interf
 				}
 				sv.MaxQuantity = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1729,15 +1679,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1745,7 +1689,6 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "requestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1754,14 +1697,10 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1793,7 +1732,6 @@ func awsAwsjson10_deserializeDocumentLegalTerm(v **types.LegalTerm, value interf
 			if err := awsAwsjson10_deserializeDocumentDocumentList(&sv.Documents, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1802,7 +1740,6 @@ func awsAwsjson10_deserializeDocumentLegalTerm(v **types.LegalTerm, value interf
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1842,12 +1779,10 @@ func awsAwsjson10_deserializeDocumentPaymentScheduleTerm(v **types.PaymentSchedu
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
-
 		case "schedule":
 			if err := awsAwsjson10_deserializeDocumentScheduleList(&sv.Schedule, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1856,7 +1791,6 @@ func awsAwsjson10_deserializeDocumentPaymentScheduleTerm(v **types.PaymentSchedu
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1896,12 +1830,10 @@ func awsAwsjson10_deserializeDocumentProposalSummary(v **types.ProposalSummary, 
 				}
 				sv.OfferId = ptr.String(jtv)
 			}
-
 		case "resources":
 			if err := awsAwsjson10_deserializeDocumentResources(&sv.Resources, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1941,7 +1873,6 @@ func awsAwsjson10_deserializeDocumentProposer(v **types.Proposer, value interfac
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1981,7 +1912,6 @@ func awsAwsjson10_deserializeDocumentRateCardItem(v **types.RateCardItem, value 
 				}
 				sv.DimensionKey = ptr.String(jtv)
 			}
-
 		case "price":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1990,7 +1920,6 @@ func awsAwsjson10_deserializeDocumentRateCardItem(v **types.RateCardItem, value 
 				}
 				sv.Price = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2064,7 +1993,6 @@ func awsAwsjson10_deserializeDocumentRecurringPaymentTerm(v **types.RecurringPay
 				}
 				sv.BillingPeriod = ptr.String(jtv)
 			}
-
 		case "currencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2073,7 +2001,6 @@ func awsAwsjson10_deserializeDocumentRecurringPaymentTerm(v **types.RecurringPay
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
-
 		case "price":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2082,7 +2009,6 @@ func awsAwsjson10_deserializeDocumentRecurringPaymentTerm(v **types.RecurringPay
 				}
 				sv.Price = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2091,7 +2017,6 @@ func awsAwsjson10_deserializeDocumentRecurringPaymentTerm(v **types.RecurringPay
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2127,7 +2052,6 @@ func awsAwsjson10_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value in
 			if err := awsAwsjson10_deserializeDocumentRenewalTermConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2136,7 +2060,6 @@ func awsAwsjson10_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value in
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2176,7 +2099,6 @@ func awsAwsjson10_deserializeDocumentRenewalTermConfiguration(v **types.RenewalT
 				}
 				sv.EnableAutoRenew = ptr.Bool(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2216,7 +2138,6 @@ func awsAwsjson10_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2225,7 +2146,6 @@ func awsAwsjson10_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2255,15 +2175,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2271,7 +2185,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "requestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2280,7 +2193,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
-
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2289,7 +2201,6 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2298,14 +2209,10 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2375,7 +2282,6 @@ func awsAwsjson10_deserializeDocumentScheduleItem(v **types.ScheduleItem, value 
 				}
 				sv.ChargeAmount = ptr.String(jtv)
 			}
-
 		case "chargeDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2391,7 +2297,6 @@ func awsAwsjson10_deserializeDocumentScheduleItem(v **types.ScheduleItem, value 
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2465,7 +2370,6 @@ func awsAwsjson10_deserializeDocumentSelector(v **types.Selector, value interfac
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2474,7 +2378,6 @@ func awsAwsjson10_deserializeDocumentSelector(v **types.Selector, value interfac
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2514,7 +2417,6 @@ func awsAwsjson10_deserializeDocumentSupportTerm(v **types.SupportTerm, value in
 				}
 				sv.RefundPolicy = ptr.String(jtv)
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2523,7 +2425,6 @@ func awsAwsjson10_deserializeDocumentSupportTerm(v **types.SupportTerm, value in
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2553,15 +2454,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2569,7 +2464,6 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "requestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2578,14 +2472,10 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2621,12 +2511,10 @@ func awsAwsjson10_deserializeDocumentUsageBasedPricingTerm(v **types.UsageBasedP
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
-
 		case "rateCards":
 			if err := awsAwsjson10_deserializeDocumentUsageBasedRateCardList(&sv.RateCards, value); err != nil {
 				return err
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2635,7 +2523,6 @@ func awsAwsjson10_deserializeDocumentUsageBasedPricingTerm(v **types.UsageBasedP
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2671,7 +2558,6 @@ func awsAwsjson10_deserializeDocumentUsageBasedRateCardItem(v **types.UsageBased
 			if err := awsAwsjson10_deserializeDocumentRateCardList(&sv.RateCard, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2735,20 +2621,13 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
 		case "fields":
 			if err := awsAwsjson10_deserializeDocumentValidationExceptionFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
-
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2756,7 +2635,6 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2765,7 +2643,6 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
-
 		case "requestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2774,14 +2651,10 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2817,7 +2690,6 @@ func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2826,7 +2698,6 @@ func awsAwsjson10_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2900,7 +2771,6 @@ func awsAwsjson10_deserializeDocumentValidityTerm(v **types.ValidityTerm, value 
 				}
 				sv.AgreementDuration = ptr.String(jtv)
 			}
-
 		case "agreementEndDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2916,7 +2786,6 @@ func awsAwsjson10_deserializeDocumentValidityTerm(v **types.ValidityTerm, value 
 
 				}
 			}
-
 		case "agreementStartDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2932,7 +2801,6 @@ func awsAwsjson10_deserializeDocumentValidityTerm(v **types.ValidityTerm, value 
 
 				}
 			}
-
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2941,7 +2809,6 @@ func awsAwsjson10_deserializeDocumentValidityTerm(v **types.ValidityTerm, value 
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2988,12 +2855,10 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 
 				}
 			}
-
 		case "acceptor":
 			if err := awsAwsjson10_deserializeDocumentAcceptor(&sv.Acceptor, value); err != nil {
 				return err
 			}
-
 		case "agreementId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3002,7 +2867,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 				}
 				sv.AgreementId = ptr.String(jtv)
 			}
-
 		case "agreementType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3011,7 +2875,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 				}
 				sv.AgreementType = ptr.String(jtv)
 			}
-
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3027,22 +2890,18 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 
 				}
 			}
-
 		case "estimatedCharges":
 			if err := awsAwsjson10_deserializeDocumentEstimatedCharges(&sv.EstimatedCharges, value); err != nil {
 				return err
 			}
-
 		case "proposalSummary":
 			if err := awsAwsjson10_deserializeDocumentProposalSummary(&sv.ProposalSummary, value); err != nil {
 				return err
 			}
-
 		case "proposer":
 			if err := awsAwsjson10_deserializeDocumentProposer(&sv.Proposer, value); err != nil {
 				return err
 			}
-
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3058,7 +2917,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3067,7 +2925,6 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 				}
 				sv.Status = types.AgreementStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3103,7 +2960,6 @@ func awsAwsjson10_deserializeOpDocumentGetAgreementTermsOutput(v **GetAgreementT
 			if err := awsAwsjson10_deserializeDocumentAcceptedTermList(&sv.AcceptedTerms, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3112,7 +2968,6 @@ func awsAwsjson10_deserializeOpDocumentGetAgreementTermsOutput(v **GetAgreementT
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3148,7 +3003,6 @@ func awsAwsjson10_deserializeOpDocumentSearchAgreementsOutput(v **SearchAgreemen
 			if err := awsAwsjson10_deserializeDocumentAgreementViewSummaryList(&sv.AgreementViewSummaries, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3157,7 +3011,6 @@ func awsAwsjson10_deserializeOpDocumentSearchAgreementsOutput(v **SearchAgreemen
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

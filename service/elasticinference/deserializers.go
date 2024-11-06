@@ -177,7 +177,6 @@ func awsRestjson1_deserializeOpDocumentDescribeAcceleratorOfferingsOutput(v **De
 			if err := awsRestjson1_deserializeDocumentAcceleratorTypeOfferingList(&sv.AcceleratorTypeOfferings, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -335,7 +334,6 @@ func awsRestjson1_deserializeOpDocumentDescribeAcceleratorsOutput(v **DescribeAc
 			if err := awsRestjson1_deserializeDocumentElasticInferenceAcceleratorSet(&sv.AcceleratorSet, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -344,7 +342,6 @@ func awsRestjson1_deserializeOpDocumentDescribeAcceleratorsOutput(v **DescribeAc
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -496,7 +493,6 @@ func awsRestjson1_deserializeOpDocumentDescribeAcceleratorTypesOutput(v **Descri
 			if err := awsRestjson1_deserializeDocumentAcceleratorTypeList(&sv.AcceleratorTypes, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -654,7 +650,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -990,17 +985,14 @@ func awsRestjson1_deserializeDocumentAcceleratorType(v **types.AcceleratorType, 
 				}
 				sv.AcceleratorTypeName = ptr.String(jtv)
 			}
-
 		case "memoryInfo":
 			if err := awsRestjson1_deserializeDocumentMemoryInfo(&sv.MemoryInfo, value); err != nil {
 				return err
 			}
-
 		case "throughputInfo":
 			if err := awsRestjson1_deserializeDocumentThroughputInfoList(&sv.ThroughputInfo, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1074,7 +1066,6 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOffering(v **types.Accelerat
 				}
 				sv.AcceleratorType = ptr.String(jtv)
 			}
-
 		case "location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1083,7 +1074,6 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOffering(v **types.Accelerat
 				}
 				sv.Location = ptr.String(jtv)
 			}
-
 		case "locationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1092,7 +1082,6 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOffering(v **types.Accelerat
 				}
 				sv.LocationType = types.LocationType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1156,15 +1145,9 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1172,14 +1155,10 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1211,7 +1190,6 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 			if err := awsRestjson1_deserializeDocumentElasticInferenceAcceleratorHealth(&sv.AcceleratorHealth, value); err != nil {
 				return err
 			}
-
 		case "acceleratorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1220,7 +1198,6 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				}
 				sv.AcceleratorId = ptr.String(jtv)
 			}
-
 		case "acceleratorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1229,7 +1206,6 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				}
 				sv.AcceleratorType = ptr.String(jtv)
 			}
-
 		case "attachedResource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1238,7 +1214,6 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				}
 				sv.AttachedResource = ptr.String(jtv)
 			}
-
 		case "availabilityZone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1247,7 +1222,6 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				}
 				sv.AvailabilityZone = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1287,7 +1261,6 @@ func awsRestjson1_deserializeDocumentElasticInferenceAcceleratorHealth(v **types
 				}
 				sv.Status = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1351,15 +1324,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1367,14 +1334,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1410,7 +1373,6 @@ func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value 
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1423,7 +1385,6 @@ func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value 
 				}
 				sv.Value = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1467,7 +1428,6 @@ func awsRestjson1_deserializeDocumentMemoryInfo(v **types.MemoryInfo, value inte
 				}
 				sv.SizeInMiB = int32(i64)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1497,15 +1457,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1513,14 +1467,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

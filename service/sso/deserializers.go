@@ -181,7 +181,6 @@ func awsRestjson1_deserializeOpDocumentGetRoleCredentialsOutput(v **GetRoleCrede
 			if err := awsRestjson1_deserializeDocumentRoleCredentials(&sv.RoleCredentials, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -346,12 +345,10 @@ func awsRestjson1_deserializeOpDocumentListAccountRolesOutput(v **ListAccountRol
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "roleList":
 			if err := awsRestjson1_deserializeDocumentRoleListType(&sv.RoleList, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -512,7 +509,6 @@ func awsRestjson1_deserializeOpDocumentListAccountsOutput(v **ListAccountsOutput
 			if err := awsRestjson1_deserializeDocumentAccountListType(&sv.AccountList, value); err != nil {
 				return err
 			}
-
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -521,7 +517,6 @@ func awsRestjson1_deserializeOpDocumentListAccountsOutput(v **ListAccountsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -805,7 +800,6 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "accountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -814,7 +808,6 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				}
 				sv.AccountName = ptr.String(jtv)
 			}
-
 		case "emailAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -823,7 +816,6 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				}
 				sv.EmailAddress = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -887,15 +879,9 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -903,14 +889,10 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -936,15 +918,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -952,14 +928,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -995,7 +967,6 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				}
 				sv.AccessKeyId = ptr.String(jtv)
 			}
-
 		case "expiration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1008,7 +979,6 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				}
 				sv.Expiration = i64
 			}
-
 		case "secretAccessKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1017,7 +987,6 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				}
 				sv.SecretAccessKey = ptr.String(jtv)
 			}
-
 		case "sessionToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1026,7 +995,6 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				}
 				sv.SessionToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1066,7 +1034,6 @@ func awsRestjson1_deserializeDocumentRoleInfo(v **types.RoleInfo, value interfac
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
-
 		case "roleName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1075,7 +1042,6 @@ func awsRestjson1_deserializeDocumentRoleInfo(v **types.RoleInfo, value interfac
 				}
 				sv.RoleName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1139,15 +1105,9 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1155,14 +1115,10 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1188,15 +1144,9 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1204,14 +1154,10 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

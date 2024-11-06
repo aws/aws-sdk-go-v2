@@ -400,7 +400,6 @@ func awsRestjson1_deserializeOpDocumentExportEarthObservationJobOutput(v **Expor
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -413,7 +412,6 @@ func awsRestjson1_deserializeOpDocumentExportEarthObservationJobOutput(v **Expor
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -422,7 +420,6 @@ func awsRestjson1_deserializeOpDocumentExportEarthObservationJobOutput(v **Expor
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
-
 		case "ExportSourceImages":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -431,7 +428,6 @@ func awsRestjson1_deserializeOpDocumentExportEarthObservationJobOutput(v **Expor
 				}
 				sv.ExportSourceImages = ptr.Bool(jtv)
 			}
-
 		case "ExportStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -440,12 +436,10 @@ func awsRestjson1_deserializeOpDocumentExportEarthObservationJobOutput(v **Expor
 				}
 				sv.ExportStatus = types.EarthObservationJobExportStatus(jtv)
 			}
-
 		case "OutputConfig":
 			if err := awsRestjson1_deserializeDocumentOutputConfigInput(&sv.OutputConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -619,7 +613,6 @@ func awsRestjson1_deserializeOpDocumentExportVectorEnrichmentJobOutput(v **Expor
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -632,7 +625,6 @@ func awsRestjson1_deserializeOpDocumentExportVectorEnrichmentJobOutput(v **Expor
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -641,7 +633,6 @@ func awsRestjson1_deserializeOpDocumentExportVectorEnrichmentJobOutput(v **Expor
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
-
 		case "ExportStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -650,12 +641,10 @@ func awsRestjson1_deserializeOpDocumentExportVectorEnrichmentJobOutput(v **Expor
 				}
 				sv.ExportStatus = types.VectorEnrichmentJobExportStatus(jtv)
 			}
-
 		case "OutputConfig":
 			if err := awsRestjson1_deserializeDocumentExportVectorEnrichmentJobOutputConfig(&sv.OutputConfig, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -823,7 +812,6 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -836,7 +824,6 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "DurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -849,12 +836,10 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "ErrorDetails":
 			if err := awsRestjson1_deserializeDocumentEarthObservationJobErrorDetails(&sv.ErrorDetails, value); err != nil {
 				return err
 			}
-
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -863,12 +848,10 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
-
 		case "ExportErrorDetails":
 			if err := awsRestjson1_deserializeDocumentExportErrorDetails(&sv.ExportErrorDetails, value); err != nil {
 				return err
 			}
-
 		case "ExportStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -877,17 +860,14 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.ExportStatus = types.EarthObservationJobExportStatus(jtv)
 			}
-
 		case "InputConfig":
 			if err := awsRestjson1_deserializeDocumentInputConfigOutput(&sv.InputConfig, value); err != nil {
 				return err
 			}
-
 		case "JobConfig":
 			if err := awsRestjson1_deserializeDocumentJobConfigInput(&sv.JobConfig, value); err != nil {
 				return err
 			}
-
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -896,7 +876,6 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -905,12 +884,10 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OutputBands":
 			if err := awsRestjson1_deserializeDocumentEarthObservationJobOutputBands(&sv.OutputBands, value); err != nil {
 				return err
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -919,12 +896,10 @@ func awsRestjson1_deserializeOpDocumentGetEarthObservationJobOutput(v **GetEarth
 				}
 				sv.Status = types.EarthObservationJobStatus(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1092,7 +1067,6 @@ func awsRestjson1_deserializeOpDocumentGetRasterDataCollectionOutput(v **GetRast
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1101,7 +1075,6 @@ func awsRestjson1_deserializeOpDocumentGetRasterDataCollectionOutput(v **GetRast
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DescriptionPageUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1110,12 +1083,10 @@ func awsRestjson1_deserializeOpDocumentGetRasterDataCollectionOutput(v **GetRast
 				}
 				sv.DescriptionPageUrl = ptr.String(jtv)
 			}
-
 		case "ImageSourceBands":
 			if err := awsRestjson1_deserializeDocumentImageSourceBandList(&sv.ImageSourceBands, value); err != nil {
 				return err
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1124,17 +1095,14 @@ func awsRestjson1_deserializeOpDocumentGetRasterDataCollectionOutput(v **GetRast
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "SupportedFilters":
 			if err := awsRestjson1_deserializeDocumentFilterList(&sv.SupportedFilters, value); err != nil {
 				return err
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1143,7 +1111,6 @@ func awsRestjson1_deserializeOpDocumentGetRasterDataCollectionOutput(v **GetRast
 				}
 				sv.Type = types.DataCollectionType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1425,7 +1392,6 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1438,7 +1404,6 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "DurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1451,12 +1416,10 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "ErrorDetails":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobErrorDetails(&sv.ErrorDetails, value); err != nil {
 				return err
 			}
-
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1465,12 +1428,10 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
-
 		case "ExportErrorDetails":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobExportErrorDetails(&sv.ExportErrorDetails, value); err != nil {
 				return err
 			}
-
 		case "ExportStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1479,17 +1440,14 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.ExportStatus = types.VectorEnrichmentJobExportStatus(jtv)
 			}
-
 		case "InputConfig":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobInputConfig(&sv.InputConfig, value); err != nil {
 				return err
 			}
-
 		case "JobConfig":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobConfig(&sv.JobConfig, value); err != nil {
 				return err
 			}
-
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1498,7 +1456,6 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1507,7 +1464,6 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1516,12 +1472,10 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.Status = types.VectorEnrichmentJobStatus(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1530,7 +1484,6 @@ func awsRestjson1_deserializeOpDocumentGetVectorEnrichmentJobOutput(v **GetVecto
 				}
 				sv.Type = types.VectorEnrichmentJobType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1694,7 +1647,6 @@ func awsRestjson1_deserializeOpDocumentListEarthObservationJobsOutput(v **ListEa
 			if err := awsRestjson1_deserializeDocumentEarthObservationJobList(&sv.EarthObservationJobSummaries, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1703,7 +1655,6 @@ func awsRestjson1_deserializeOpDocumentListEarthObservationJobsOutput(v **ListEa
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1871,12 +1822,10 @@ func awsRestjson1_deserializeOpDocumentListRasterDataCollectionsOutput(v **ListR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "RasterDataCollectionSummaries":
 			if err := awsRestjson1_deserializeDocumentDataCollectionsList(&sv.RasterDataCollectionSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2040,7 +1989,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2208,12 +2156,10 @@ func awsRestjson1_deserializeOpDocumentListVectorEnrichmentJobsOutput(v **ListVe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "VectorEnrichmentJobSummaries":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobList(&sv.VectorEnrichmentJobSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2385,12 +2331,10 @@ func awsRestjson1_deserializeOpDocumentSearchRasterDataCollectionOutput(v **Sear
 				}
 				sv.ApproximateResultCount = ptr.Int32(int32(i64))
 			}
-
 		case "Items":
 			if err := awsRestjson1_deserializeDocumentItemSourceList(&sv.Items, value); err != nil {
 				return err
 			}
-
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2399,7 +2343,6 @@ func awsRestjson1_deserializeOpDocumentSearchRasterDataCollectionOutput(v **Sear
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2573,7 +2516,6 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2586,7 +2528,6 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "DurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2599,7 +2540,6 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2608,17 +2548,14 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
-
 		case "InputConfig":
 			if err := awsRestjson1_deserializeDocumentInputConfigOutput(&sv.InputConfig, value); err != nil {
 				return err
 			}
-
 		case "JobConfig":
 			if err := awsRestjson1_deserializeDocumentJobConfigInput(&sv.JobConfig, value); err != nil {
 				return err
 			}
-
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2627,7 +2564,6 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2636,7 +2572,6 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2645,12 +2580,10 @@ func awsRestjson1_deserializeOpDocumentStartEarthObservationJobOutput(v **StartE
 				}
 				sv.Status = types.EarthObservationJobStatus(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -2824,7 +2757,6 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2837,7 +2769,6 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "DurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2850,7 +2781,6 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2859,17 +2789,14 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
-
 		case "InputConfig":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobInputConfig(&sv.InputConfig, value); err != nil {
 				return err
 			}
-
 		case "JobConfig":
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobConfig(&sv.JobConfig, value); err != nil {
 				return err
 			}
-
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2878,7 +2805,6 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2887,7 +2813,6 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2896,12 +2821,10 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.Status = types.VectorEnrichmentJobStatus(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2910,7 +2833,6 @@ func awsRestjson1_deserializeOpDocumentStartVectorEnrichmentJobOutput(v **StartV
 				}
 				sv.Type = types.VectorEnrichmentJobType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3598,15 +3520,9 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3614,14 +3530,10 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3780,7 +3692,6 @@ func awsRestjson1_deserializeDocumentAssetValue(v **types.AssetValue, value inte
 				}
 				sv.Href = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3816,12 +3727,10 @@ func awsRestjson1_deserializeDocumentBandMathConfigInput(v **types.BandMathConfi
 			if err := awsRestjson1_deserializeDocumentCustomIndicesInput(&sv.CustomIndices, value); err != nil {
 				return err
 			}
-
 		case "PredefinedIndices":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.PredefinedIndices, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3892,7 +3801,6 @@ func awsRestjson1_deserializeDocumentCloudRemovalConfigInput(v **types.CloudRemo
 				}
 				sv.AlgorithmName = types.AlgorithmNameCloudRemoval(jtv)
 			}
-
 		case "InterpolationValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3901,12 +3809,10 @@ func awsRestjson1_deserializeDocumentCloudRemovalConfigInput(v **types.CloudRemo
 				}
 				sv.InterpolationValue = ptr.String(jtv)
 			}
-
 		case "TargetBands":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.TargetBands, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -3936,15 +3842,9 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3952,7 +3852,6 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3961,14 +3860,10 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4000,7 +3895,6 @@ func awsRestjson1_deserializeDocumentCustomIndicesInput(v **types.CustomIndicesI
 			if err := awsRestjson1_deserializeDocumentOperationsListInput(&sv.Operations, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4074,7 +3968,6 @@ func awsRestjson1_deserializeDocumentEarthObservationJobErrorDetails(v **types.E
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4083,7 +3976,6 @@ func awsRestjson1_deserializeDocumentEarthObservationJobErrorDetails(v **types.E
 				}
 				sv.Type = types.EarthObservationJobErrorType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4216,7 +4108,6 @@ func awsRestjson1_deserializeDocumentEoCloudCoverInput(v **types.EoCloudCoverInp
 
 				}
 			}
-
 		case "UpperBound":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4250,7 +4141,6 @@ func awsRestjson1_deserializeDocumentEoCloudCoverInput(v **types.EoCloudCoverInp
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4286,12 +4176,10 @@ func awsRestjson1_deserializeDocumentExportErrorDetails(v **types.ExportErrorDet
 			if err := awsRestjson1_deserializeDocumentExportErrorDetailsOutput(&sv.ExportResults, value); err != nil {
 				return err
 			}
-
 		case "ExportSourceImages":
 			if err := awsRestjson1_deserializeDocumentExportErrorDetailsOutput(&sv.ExportSourceImages, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4331,7 +4219,6 @@ func awsRestjson1_deserializeDocumentExportErrorDetailsOutput(v **types.ExportEr
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4340,7 +4227,6 @@ func awsRestjson1_deserializeDocumentExportErrorDetailsOutput(v **types.ExportEr
 				}
 				sv.Type = types.ExportErrorType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4380,7 +4266,6 @@ func awsRestjson1_deserializeDocumentExportS3DataInput(v **types.ExportS3DataInp
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4389,7 +4274,6 @@ func awsRestjson1_deserializeDocumentExportS3DataInput(v **types.ExportS3DataInp
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4425,7 +4309,6 @@ func awsRestjson1_deserializeDocumentExportVectorEnrichmentJobOutputConfig(v **t
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobS3Data(&sv.S3Data, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4490,7 +4373,6 @@ func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{})
 
 				}
 			}
-
 		case "Minimum":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4524,7 +4406,6 @@ func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{})
 
 				}
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4533,7 +4414,6 @@ func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4542,7 +4422,6 @@ func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{})
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4612,7 +4491,6 @@ func awsRestjson1_deserializeDocumentGeometry(v **types.Geometry, value interfac
 			if err := awsRestjson1_deserializeDocumentLinearRings(&sv.Coordinates, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4621,7 +4499,6 @@ func awsRestjson1_deserializeDocumentGeometry(v **types.Geometry, value interfac
 				}
 				sv.Type = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4661,12 +4538,10 @@ func awsRestjson1_deserializeDocumentGeoMosaicConfigInput(v **types.GeoMosaicCon
 				}
 				sv.AlgorithmName = types.AlgorithmNameGeoMosaic(jtv)
 			}
-
 		case "TargetBands":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.TargetBands, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4742,12 +4617,10 @@ func awsRestjson1_deserializeDocumentInputConfigOutput(v **types.InputConfigOutp
 				}
 				sv.PreviousEarthObservationJobArn = ptr.String(jtv)
 			}
-
 		case "RasterDataCollectionQuery":
 			if err := awsRestjson1_deserializeDocumentRasterDataCollectionQueryOutput(&sv.RasterDataCollectionQuery, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -4777,15 +4650,9 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4793,7 +4660,6 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4802,14 +4668,10 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4841,7 +4703,6 @@ func awsRestjson1_deserializeDocumentItemSource(v **types.ItemSource, value inte
 			if err := awsRestjson1_deserializeDocumentAssetsMap(&sv.Assets, value); err != nil {
 				return err
 			}
-
 		case "DateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4857,12 +4718,10 @@ func awsRestjson1_deserializeDocumentItemSource(v **types.ItemSource, value inte
 
 				}
 			}
-
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
-
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4871,12 +4730,10 @@ func awsRestjson1_deserializeDocumentItemSource(v **types.ItemSource, value inte
 				}
 				sv.Id = ptr.String(jtv)
 			}
-
 		case "Properties":
 			if err := awsRestjson1_deserializeDocumentProperties(&sv.Properties, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5126,7 +4983,6 @@ func awsRestjson1_deserializeDocumentLandsatCloudCoverLandInput(v **types.Landsa
 
 				}
 			}
-
 		case "UpperBound":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5160,7 +5016,6 @@ func awsRestjson1_deserializeDocumentLandsatCloudCoverLandInput(v **types.Landsa
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5296,7 +5151,6 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5309,7 +5163,6 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "DurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5322,7 +5175,6 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5331,7 +5183,6 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OperationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5340,7 +5191,6 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 				}
 				sv.OperationType = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5349,12 +5199,10 @@ func awsRestjson1_deserializeDocumentListEarthObservationJobOutputConfig(v **typ
 				}
 				sv.Status = types.EarthObservationJobStatus(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5394,7 +5242,6 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5407,7 +5254,6 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
-
 		case "DurationInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5420,7 +5266,6 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5429,7 +5274,6 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5438,12 +5282,10 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 				}
 				sv.Status = types.VectorEnrichmentJobStatus(jtv)
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5452,7 +5294,6 @@ func awsRestjson1_deserializeDocumentListVectorEnrichmentJobOutputConfig(v **typ
 				}
 				sv.Type = types.VectorEnrichmentJobType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5492,7 +5333,6 @@ func awsRestjson1_deserializeDocumentMapMatchingConfig(v **types.MapMatchingConf
 				}
 				sv.IdAttributeName = ptr.String(jtv)
 			}
-
 		case "TimestampAttributeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5501,7 +5341,6 @@ func awsRestjson1_deserializeDocumentMapMatchingConfig(v **types.MapMatchingConf
 				}
 				sv.TimestampAttributeName = ptr.String(jtv)
 			}
-
 		case "XAttributeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5510,7 +5349,6 @@ func awsRestjson1_deserializeDocumentMapMatchingConfig(v **types.MapMatchingConf
 				}
 				sv.XAttributeName = ptr.String(jtv)
 			}
-
 		case "YAttributeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5519,7 +5357,6 @@ func awsRestjson1_deserializeDocumentMapMatchingConfig(v **types.MapMatchingConf
 				}
 				sv.YAttributeName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5555,7 +5392,6 @@ func awsRestjson1_deserializeDocumentMultiPolygonGeometryInput(v **types.MultiPo
 			if err := awsRestjson1_deserializeDocumentLinearRingsList(&sv.Coordinates, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5595,7 +5431,6 @@ func awsRestjson1_deserializeDocumentOperation(v **types.Operation, value interf
 				}
 				sv.Equation = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5604,7 +5439,6 @@ func awsRestjson1_deserializeDocumentOperation(v **types.Operation, value interf
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "OutputType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5613,7 +5447,6 @@ func awsRestjson1_deserializeDocumentOperation(v **types.Operation, value interf
 				}
 				sv.OutputType = types.OutputType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5687,7 +5520,6 @@ func awsRestjson1_deserializeDocumentOutputBand(v **types.OutputBand, value inte
 				}
 				sv.BandName = ptr.String(jtv)
 			}
-
 		case "OutputDataType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5696,7 +5528,6 @@ func awsRestjson1_deserializeDocumentOutputBand(v **types.OutputBand, value inte
 				}
 				sv.OutputDataType = types.OutputType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5732,7 +5563,6 @@ func awsRestjson1_deserializeDocumentOutputConfigInput(v **types.OutputConfigInp
 			if err := awsRestjson1_deserializeDocumentExportS3DataInput(&sv.S3Data, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5768,7 +5598,6 @@ func awsRestjson1_deserializeDocumentOutputResolutionResamplingInput(v **types.O
 			if err := awsRestjson1_deserializeDocumentUserDefined(&sv.UserDefined, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5808,12 +5637,10 @@ func awsRestjson1_deserializeDocumentOutputResolutionStackInput(v **types.Output
 				}
 				sv.Predefined = types.PredefinedResolution(jtv)
 			}
-
 		case "UserDefined":
 			if err := awsRestjson1_deserializeDocumentUserDefined(&sv.UserDefined, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5853,7 +5680,6 @@ func awsRestjson1_deserializeDocumentPlatformInput(v **types.PlatformInput, valu
 				}
 				sv.ComparisonOperator = types.ComparisonOperator(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5862,7 +5688,6 @@ func awsRestjson1_deserializeDocumentPlatformInput(v **types.PlatformInput, valu
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -5898,7 +5723,6 @@ func awsRestjson1_deserializeDocumentPolygonGeometryInput(v **types.PolygonGeome
 			if err := awsRestjson1_deserializeDocumentLinearRings(&sv.Coordinates, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6024,7 +5848,6 @@ func awsRestjson1_deserializeDocumentProperties(v **types.Properties, value inte
 
 				}
 			}
-
 		case "LandsatCloudCoverLand":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6058,7 +5881,6 @@ func awsRestjson1_deserializeDocumentProperties(v **types.Properties, value inte
 
 				}
 			}
-
 		case "Platform":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6067,7 +5889,6 @@ func awsRestjson1_deserializeDocumentProperties(v **types.Properties, value inte
 				}
 				sv.Platform = ptr.String(jtv)
 			}
-
 		case "ViewOffNadir":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6101,7 +5922,6 @@ func awsRestjson1_deserializeDocumentProperties(v **types.Properties, value inte
 
 				}
 			}
-
 		case "ViewSunAzimuth":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6135,7 +5955,6 @@ func awsRestjson1_deserializeDocumentProperties(v **types.Properties, value inte
 
 				}
 			}
-
 		case "ViewSunElevation":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6169,7 +5988,6 @@ func awsRestjson1_deserializeDocumentProperties(v **types.Properties, value inte
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6295,7 +6113,6 @@ func awsRestjson1_deserializeDocumentPropertyFilter(v **types.PropertyFilter, va
 			if err := awsRestjson1_deserializeDocumentProperty(&sv.Property, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6335,12 +6152,10 @@ func awsRestjson1_deserializeDocumentPropertyFilters(v **types.PropertyFilters, 
 				}
 				sv.LogicalOperator = types.LogicalOperator(jtv)
 			}
-
 		case "Properties":
 			if err := awsRestjson1_deserializeDocumentPropertyFiltersList(&sv.Properties, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6414,7 +6229,6 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionMetadata(v **types.Rast
 				}
 				sv.Arn = ptr.String(jtv)
 			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6423,7 +6237,6 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionMetadata(v **types.Rast
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "DescriptionPageUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6432,7 +6245,6 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionMetadata(v **types.Rast
 				}
 				sv.DescriptionPageUrl = ptr.String(jtv)
 			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6441,17 +6253,14 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionMetadata(v **types.Rast
 				}
 				sv.Name = ptr.String(jtv)
 			}
-
 		case "SupportedFilters":
 			if err := awsRestjson1_deserializeDocumentFilterList(&sv.SupportedFilters, value); err != nil {
 				return err
 			}
-
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6460,7 +6269,6 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionMetadata(v **types.Rast
 				}
 				sv.Type = types.DataCollectionType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6496,12 +6304,10 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionQueryOutput(v **types.R
 			if err := awsRestjson1_deserializeDocumentAreaOfInterest(&sv.AreaOfInterest, value); err != nil {
 				return err
 			}
-
 		case "PropertyFilters":
 			if err := awsRestjson1_deserializeDocumentPropertyFilters(&sv.PropertyFilters, value); err != nil {
 				return err
 			}
-
 		case "RasterDataCollectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6510,7 +6316,6 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionQueryOutput(v **types.R
 				}
 				sv.RasterDataCollectionArn = ptr.String(jtv)
 			}
-
 		case "RasterDataCollectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6519,12 +6324,10 @@ func awsRestjson1_deserializeDocumentRasterDataCollectionQueryOutput(v **types.R
 				}
 				sv.RasterDataCollectionName = ptr.String(jtv)
 			}
-
 		case "TimeRangeFilter":
 			if err := awsRestjson1_deserializeDocumentTimeRangeFilterOutput(&sv.TimeRangeFilter, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6564,17 +6367,14 @@ func awsRestjson1_deserializeDocumentResamplingConfigInput(v **types.ResamplingC
 				}
 				sv.AlgorithmName = types.AlgorithmNameResampling(jtv)
 			}
-
 		case "OutputResolution":
 			if err := awsRestjson1_deserializeDocumentOutputResolutionResamplingInput(&sv.OutputResolution, value); err != nil {
 				return err
 			}
-
 		case "TargetBands":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.TargetBands, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6604,15 +6404,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6620,7 +6414,6 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6629,14 +6422,10 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6672,7 +6461,6 @@ func awsRestjson1_deserializeDocumentReverseGeocodingConfig(v **types.ReverseGeo
 				}
 				sv.XAttributeName = ptr.String(jtv)
 			}
-
 		case "YAttributeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6681,7 +6469,6 @@ func awsRestjson1_deserializeDocumentReverseGeocodingConfig(v **types.ReverseGeo
 				}
 				sv.YAttributeName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6711,15 +6498,9 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6727,7 +6508,6 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6736,14 +6516,10 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6775,12 +6551,10 @@ func awsRestjson1_deserializeDocumentStackConfigInput(v **types.StackConfigInput
 			if err := awsRestjson1_deserializeDocumentOutputResolutionStackInput(&sv.OutputResolution, value); err != nil {
 				return err
 			}
-
 		case "TargetBands":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.TargetBands, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6892,17 +6666,14 @@ func awsRestjson1_deserializeDocumentTemporalStatisticsConfigInput(v **types.Tem
 				}
 				sv.GroupBy = types.GroupBy(jtv)
 			}
-
 		case "Statistics":
 			if err := awsRestjson1_deserializeDocumentTemporalStatisticsListInput(&sv.Statistics, value); err != nil {
 				return err
 			}
-
 		case "TargetBands":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.TargetBands, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -6968,15 +6739,9 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6984,7 +6749,6 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6993,14 +6757,10 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7040,7 +6800,6 @@ func awsRestjson1_deserializeDocumentTimeRangeFilterOutput(v **types.TimeRangeFi
 				}
 				sv.EndTime = ptr.Time(t)
 			}
-
 		case "StartTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7053,7 +6812,6 @@ func awsRestjson1_deserializeDocumentTimeRangeFilterOutput(v **types.TimeRangeFi
 				}
 				sv.StartTime = ptr.Time(t)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7093,7 +6851,6 @@ func awsRestjson1_deserializeDocumentUserDefined(v **types.UserDefined, value in
 				}
 				sv.Unit = types.Unit(jtv)
 			}
-
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7127,7 +6884,6 @@ func awsRestjson1_deserializeDocumentUserDefined(v **types.UserDefined, value in
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7157,15 +6913,9 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7173,7 +6923,6 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7182,14 +6931,10 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7315,7 +7060,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobErrorDetails(v **types.V
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
-
 		case "ErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7324,7 +7068,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobErrorDetails(v **types.V
 				}
 				sv.ErrorType = types.VectorEnrichmentJobErrorType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7364,7 +7107,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobExportErrorDetails(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7373,7 +7115,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobExportErrorDetails(v **t
 				}
 				sv.Type = types.VectorEnrichmentJobExportErrorType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7409,7 +7150,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobInputConfig(v **types.Ve
 			if err := awsRestjson1_deserializeDocumentVectorEnrichmentJobDataSourceConfigInput(&sv.DataSourceConfig, value); err != nil {
 				return err
 			}
-
 		case "DocumentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7418,7 +7158,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobInputConfig(v **types.Ve
 				}
 				sv.DocumentType = types.VectorEnrichmentJobDocumentType(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7492,7 +7231,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobS3Data(v **types.VectorE
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
-
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7501,7 +7239,6 @@ func awsRestjson1_deserializeDocumentVectorEnrichmentJobS3Data(v **types.VectorE
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7566,7 +7303,6 @@ func awsRestjson1_deserializeDocumentViewOffNadirInput(v **types.ViewOffNadirInp
 
 				}
 			}
-
 		case "UpperBound":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7600,7 +7336,6 @@ func awsRestjson1_deserializeDocumentViewOffNadirInput(v **types.ViewOffNadirInp
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7665,7 +7400,6 @@ func awsRestjson1_deserializeDocumentViewSunAzimuthInput(v **types.ViewSunAzimut
 
 				}
 			}
-
 		case "UpperBound":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7699,7 +7433,6 @@ func awsRestjson1_deserializeDocumentViewSunAzimuthInput(v **types.ViewSunAzimut
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7764,7 +7497,6 @@ func awsRestjson1_deserializeDocumentViewSunElevationInput(v **types.ViewSunElev
 
 				}
 			}
-
 		case "UpperBound":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7798,7 +7530,6 @@ func awsRestjson1_deserializeDocumentViewSunElevationInput(v **types.ViewSunElev
 
 				}
 			}
-
 		default:
 			_, _ = key, value
 
@@ -7834,12 +7565,10 @@ func awsRestjson1_deserializeDocumentZonalStatisticsConfigInput(v **types.ZonalS
 			if err := awsRestjson1_deserializeDocumentZonalStatisticsListInput(&sv.Statistics, value); err != nil {
 				return err
 			}
-
 		case "TargetBands":
 			if err := awsRestjson1_deserializeDocumentStringListInput(&sv.TargetBands, value); err != nil {
 				return err
 			}
-
 		case "ZoneS3Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7848,7 +7577,6 @@ func awsRestjson1_deserializeDocumentZonalStatisticsConfigInput(v **types.ZonalS
 				}
 				sv.ZoneS3Path = ptr.String(jtv)
 			}
-
 		case "ZoneS3PathKmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7857,7 +7585,6 @@ func awsRestjson1_deserializeDocumentZonalStatisticsConfigInput(v **types.ZonalS
 				}
 				sv.ZoneS3PathKmsKeyId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 

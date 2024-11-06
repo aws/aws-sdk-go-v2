@@ -1021,7 +1021,6 @@ func awsAwsjson11_deserializeDocumentConnectionState(v **types.ConnectionState, 
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1030,7 +1029,6 @@ func awsAwsjson11_deserializeDocumentConnectionState(v **types.ConnectionState, 
 				}
 				sv.Status = types.ConnectionStatus(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1066,7 +1064,6 @@ func awsAwsjson11_deserializeDocumentDestinationConfig(v **types.DestinationConf
 			if err := awsAwsjson11_deserializeDocumentServiceList(&sv.Services, value); err != nil {
 				return err
 			}
-
 		case "thingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1075,7 +1072,6 @@ func awsAwsjson11_deserializeDocumentDestinationConfig(v **types.DestinationConf
 				}
 				sv.ThingName = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1105,15 +1101,9 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1121,14 +1111,10 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1154,15 +1140,9 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	var errorMessage string
 	for key, value := range shape {
-		keyLower := strings.ToLower(key)
-		if keyLower == "message" {
-			errorMessage = value.(string)
-			continue
-		}
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1170,14 +1150,10 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
 		}
-	}
-	if errorMessage != "" {
-		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1249,7 +1225,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
-
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1258,7 +1233,6 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1336,7 +1310,6 @@ func awsAwsjson11_deserializeDocumentTimeoutConfig(v **types.TimeoutConfig, valu
 				}
 				sv.MaxLifetimeTimeoutMinutes = ptr.Int32(int32(i64))
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1383,7 +1356,6 @@ func awsAwsjson11_deserializeDocumentTunnel(v **types.Tunnel, value interface{})
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1392,17 +1364,14 @@ func awsAwsjson11_deserializeDocumentTunnel(v **types.Tunnel, value interface{})
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "destinationConfig":
 			if err := awsAwsjson11_deserializeDocumentDestinationConfig(&sv.DestinationConfig, value); err != nil {
 				return err
 			}
-
 		case "destinationConnectionState":
 			if err := awsAwsjson11_deserializeDocumentConnectionState(&sv.DestinationConnectionState, value); err != nil {
 				return err
 			}
-
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1418,12 +1387,10 @@ func awsAwsjson11_deserializeDocumentTunnel(v **types.Tunnel, value interface{})
 
 				}
 			}
-
 		case "sourceConnectionState":
 			if err := awsAwsjson11_deserializeDocumentConnectionState(&sv.SourceConnectionState, value); err != nil {
 				return err
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1432,17 +1399,14 @@ func awsAwsjson11_deserializeDocumentTunnel(v **types.Tunnel, value interface{})
 				}
 				sv.Status = types.TunnelStatus(jtv)
 			}
-
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		case "timeoutConfig":
 			if err := awsAwsjson11_deserializeDocumentTimeoutConfig(&sv.TimeoutConfig, value); err != nil {
 				return err
 			}
-
 		case "tunnelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1451,7 +1415,6 @@ func awsAwsjson11_deserializeDocumentTunnel(v **types.Tunnel, value interface{})
 				}
 				sv.TunnelArn = ptr.String(jtv)
 			}
-
 		case "tunnelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1460,7 +1423,6 @@ func awsAwsjson11_deserializeDocumentTunnel(v **types.Tunnel, value interface{})
 				}
 				sv.TunnelId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1507,7 +1469,6 @@ func awsAwsjson11_deserializeDocumentTunnelSummary(v **types.TunnelSummary, valu
 
 				}
 			}
-
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1516,7 +1477,6 @@ func awsAwsjson11_deserializeDocumentTunnelSummary(v **types.TunnelSummary, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
-
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1532,7 +1492,6 @@ func awsAwsjson11_deserializeDocumentTunnelSummary(v **types.TunnelSummary, valu
 
 				}
 			}
-
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1541,7 +1500,6 @@ func awsAwsjson11_deserializeDocumentTunnelSummary(v **types.TunnelSummary, valu
 				}
 				sv.Status = types.TunnelStatus(jtv)
 			}
-
 		case "tunnelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1550,7 +1508,6 @@ func awsAwsjson11_deserializeDocumentTunnelSummary(v **types.TunnelSummary, valu
 				}
 				sv.TunnelArn = ptr.String(jtv)
 			}
-
 		case "tunnelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1559,7 +1516,6 @@ func awsAwsjson11_deserializeDocumentTunnelSummary(v **types.TunnelSummary, valu
 				}
 				sv.TunnelId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1660,7 +1616,6 @@ func awsAwsjson11_deserializeOpDocumentDescribeTunnelOutput(v **DescribeTunnelOu
 			if err := awsAwsjson11_deserializeDocumentTunnel(&sv.Tunnel, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1696,7 +1651,6 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1736,12 +1690,10 @@ func awsAwsjson11_deserializeOpDocumentListTunnelsOutput(v **ListTunnelsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
-
 		case "tunnelSummaries":
 			if err := awsAwsjson11_deserializeDocumentTunnelSummaryList(&sv.TunnelSummaries, value); err != nil {
 				return err
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1781,7 +1733,6 @@ func awsAwsjson11_deserializeOpDocumentOpenTunnelOutput(v **OpenTunnelOutput, va
 				}
 				sv.DestinationAccessToken = ptr.String(jtv)
 			}
-
 		case "sourceAccessToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1790,7 +1741,6 @@ func awsAwsjson11_deserializeOpDocumentOpenTunnelOutput(v **OpenTunnelOutput, va
 				}
 				sv.SourceAccessToken = ptr.String(jtv)
 			}
-
 		case "tunnelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1799,7 +1749,6 @@ func awsAwsjson11_deserializeOpDocumentOpenTunnelOutput(v **OpenTunnelOutput, va
 				}
 				sv.TunnelArn = ptr.String(jtv)
 			}
-
 		case "tunnelId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1808,7 +1757,6 @@ func awsAwsjson11_deserializeOpDocumentOpenTunnelOutput(v **OpenTunnelOutput, va
 				}
 				sv.TunnelId = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
@@ -1848,7 +1796,6 @@ func awsAwsjson11_deserializeOpDocumentRotateTunnelAccessTokenOutput(v **RotateT
 				}
 				sv.DestinationAccessToken = ptr.String(jtv)
 			}
-
 		case "sourceAccessToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1857,7 +1804,6 @@ func awsAwsjson11_deserializeOpDocumentRotateTunnelAccessTokenOutput(v **RotateT
 				}
 				sv.SourceAccessToken = ptr.String(jtv)
 			}
-
 		case "tunnelArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1866,7 +1812,6 @@ func awsAwsjson11_deserializeOpDocumentRotateTunnelAccessTokenOutput(v **RotateT
 				}
 				sv.TunnelArn = ptr.String(jtv)
 			}
-
 		default:
 			_, _ = key, value
 
