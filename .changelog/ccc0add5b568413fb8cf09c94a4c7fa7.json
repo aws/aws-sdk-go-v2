@@ -1,0 +1,8 @@
+{
+    "id": "ccc0add5-b568-413f-b8cf-09c94a4c7fa7",
+    "type": "feature",
+    "description": "Send opt-in query-compatible header for applicable services.",
+    "modules": [
+        "service/sqs"
+    ]
+}
