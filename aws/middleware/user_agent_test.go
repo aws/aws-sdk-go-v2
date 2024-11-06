@@ -15,7 +15,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go#" + languageVersion + " md/GOOS#" + runtime.GOOS + " md/GOARCH#" + runtime.GOARCH
+var expectedAgent = aws.SDKName + "/" + aws.SDKVersion +
+	" os/" + getNormalizedOSName() +
+	" lang/go#" + strings.Map(rules, languageVersion) + // normalize as the user-agent builder will
+	" md/GOOS#" + runtime.GOOS +
+	" md/GOARCH#" + runtime.GOARCH
 
 func TestRequestUserAgent_HandleBuild(t *testing.T) {
 	cases := map[string]struct {
@@ -172,7 +176,7 @@ func TestAddUserAgentKey(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Error("User-Agent did not match expected")
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
@@ -225,7 +229,7 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Error("User-Agent did not match expected")
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
@@ -290,7 +294,7 @@ func TestAddUserAgentFeature(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Errorf("User-Agent did not match expected, %v != %v", c.Expect, ua[0])
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
@@ -343,7 +347,7 @@ func TestAddSDKAgentKey(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Error("User-Agent did not match expected")
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
@@ -399,7 +403,7 @@ func TestAddSDKAgentKeyValue(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Error("User-Agent did not match expected")
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
@@ -446,7 +450,7 @@ func TestAddUserAgentKey_AddToStack(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Error("User-Agent did not match expected")
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
@@ -496,7 +500,7 @@ func TestAddUserAgentKeyValue_AddToStack(t *testing.T) {
 				t.Fatalf("expect User-Agent to be present")
 			}
 			if ua[0] != c.Expect {
-				t.Error("User-Agent did not match expected")
+				t.Errorf("User-Agent: %q != %q", c.Expect, ua[0])
 			}
 		})
 	}
