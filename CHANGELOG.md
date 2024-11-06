@@ -1,3 +1,26 @@
+# Release (2024-11-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.4
+  * **Bug Fix**: Fix potential for user agent language mismatch in tests.
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.8.0](feature/cloudfront/sign/CHANGELOG.md#v180-2024-11-06)
+  * **Feature**: Add Expires field to CookieOptions.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.48.0](service/codebuild/CHANGELOG.md#v1480-2024-11-06)
+  * **Feature**: AWS CodeBuild now adds additional compute types for reserved capacity fleet.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.51.0](service/guardduty/CHANGELOG.md#v1510-2024-11-06)
+  * **Feature**: GuardDuty RDS Protection expands support for Amazon Aurora PostgreSQL Limitless Databases.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.38.0](service/lakeformation/CHANGELOG.md#v1380-2024-11-06)
+  * **Feature**: API changes for new named tag expressions feature.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.4.0](service/qapps/CHANGELOG.md#v140-2024-11-06)
+  * **Feature**: Introduces category apis in AmazonQApps. Web experience users use Categories to tag and filter library items.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.50.0](service/s3control/CHANGELOG.md#v1500-2024-11-06)
+  * **Feature**: Fix ListStorageLensConfigurations and ListStorageLensGroups deserialization for Smithy SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.20.0](service/verifiedpermissions/CHANGELOG.md#v1200-2024-11-06)
+  * **Feature**: Adding BatchGetPolicy API which supports the retrieval of multiple policies across multiple policy stores within a single request.
+
 # Release (2024-11-01)
 
 ## Module Highlights

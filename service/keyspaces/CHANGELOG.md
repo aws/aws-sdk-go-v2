@@ -1,3 +1,7 @@
+# v1.15.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2024-10-30)
 
 * **Feature**: Adds support for interacting with user-defined types (UDTs) through the following new operations: Create-Type, Delete-Type, List-Types, Get-Type.

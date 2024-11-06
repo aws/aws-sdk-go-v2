@@ -1,3 +1,8 @@
+# v1.51.0 (2024-11-06)
+
+* **Feature**: GuardDuty RDS Protection expands support for Amazon Aurora PostgreSQL Limitless Databases.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.1 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

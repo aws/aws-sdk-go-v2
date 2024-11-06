@@ -1,3 +1,8 @@
+# v1.50.0 (2024-11-06)
+
+* **Feature**: Fix ListStorageLensConfigurations and ListStorageLensGroups deserialization for Smithy SDKs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

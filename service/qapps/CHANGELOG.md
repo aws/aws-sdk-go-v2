@@ -1,3 +1,8 @@
+# v1.4.0 (2024-11-06)
+
+* **Feature**: Introduces category apis in AmazonQApps. Web experience users use Categories to tag and filter library items.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

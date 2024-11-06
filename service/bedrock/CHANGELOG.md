@@ -1,3 +1,7 @@
+# v1.22.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2024-10-29)
 
 * **Feature**: Update Application Inference Profile

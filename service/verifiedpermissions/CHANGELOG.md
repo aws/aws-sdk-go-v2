@@ -1,3 +1,8 @@
+# v1.20.0 (2024-11-06)
+
+* **Feature**: Adding BatchGetPolicy API which supports the retrieval of multiple policies across multiple policy stores within a single request.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

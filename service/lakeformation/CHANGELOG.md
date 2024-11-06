@@ -1,3 +1,8 @@
+# v1.38.0 (2024-11-06)
+
+* **Feature**: API changes for new named tag expressions feature.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

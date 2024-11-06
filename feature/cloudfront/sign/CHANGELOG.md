@@ -1,3 +1,8 @@
+# v1.8.0 (2024-11-06)
+
+* **Feature**: Add Expires field to CookieOptions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.20 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

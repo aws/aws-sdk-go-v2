@@ -1,3 +1,7 @@
+# v1.34.4 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.3 (2024-10-28)
 
 * **Documentation**: Documentation update: Amazon FSx File Gateway will no longer be available to new customers.

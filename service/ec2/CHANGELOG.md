@@ -1,3 +1,7 @@
+# v1.187.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.187.0 (2024-10-30)
 
 * **Feature**: This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups.

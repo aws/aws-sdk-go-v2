@@ -1,3 +1,7 @@
+# v1.46.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.0 (2024-10-30)
 
 * **Feature**: This release adds support for TLSA, SSHFP, SVCB, and HTTPS record types.

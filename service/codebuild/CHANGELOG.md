@@ -1,3 +1,8 @@
+# v1.48.0 (2024-11-06)
+
+* **Feature**: AWS CodeBuild now adds additional compute types for reserved capacity fleet.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

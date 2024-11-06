@@ -1,3 +1,7 @@
+# v1.26.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2024-11-01)
 
 * **Feature**: Amazon Bedrock Knowledge Bases now supports using application inference profiles to increase throughput and improve resilience.
