@@ -1,3 +1,7 @@
+# v1.48.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.48.0 (2024-11-06)
 
 * **Feature**: AWS CodeBuild now adds additional compute types for reserved capacity fleet.

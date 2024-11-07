@@ -1,3 +1,7 @@
+# v1.51.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.51.0 (2024-11-06)
 
 * **Feature**: GuardDuty RDS Protection expands support for Amazon Aurora PostgreSQL Limitless Databases.

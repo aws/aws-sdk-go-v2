@@ -1,8 +1,0 @@
-{
-    "id": "c3388c85-f11b-47ec-9dc6-568ab3f292ae",
-    "type": "feature",
-    "description": "Auto Scaling groups now support the ability to strictly balance instances across Availability Zones by configuring the AvailabilityZoneDistribution parameter. If balanced-only is configured for a group, launches will always be attempted in the under scaled Availability Zone even if it is unhealthy.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

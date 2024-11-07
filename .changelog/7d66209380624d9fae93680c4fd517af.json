@@ -1,8 +1,0 @@
-{
-    "id": "7d662093-8062-4d9f-ae93-680c4fd517af",
-    "type": "feature",
-    "description": "Add GetManagedView, ListManagedViews APIs.",
-    "modules": [
-        "service/resourceexplorer2"
-    ]
-}

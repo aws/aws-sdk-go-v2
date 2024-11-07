@@ -1,3 +1,746 @@
+# Release (2024-11-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.34.5](service/accessanalyzer/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.21.5](service/account/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.30.5](service/acm/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.37.6](service/acmpca/CHANGELOG.md#v1376-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.30.2](service/amp/CHANGELOG.md#v1302-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.27.3](service/amplify/CHANGELOG.md#v1273-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.27.5](service/amplifybackend/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.23.5](service/amplifyuibuilder/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.27.5](service/apigateway/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.23.5](service/apigatewaymanagementapi/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.24.5](service/apigatewayv2/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.35.3](service/appconfig/CHANGELOG.md#v1353-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.18.5](service/appconfigdata/CHANGELOG.md#v1185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.11.5](service/appfabric/CHANGELOG.md#v1115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.45.6](service/appflow/CHANGELOG.md#v1456-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.30.5](service/appintegrations/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.33.5](service/applicationautoscaling/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.21.5](service/applicationcostprofiler/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.28.5](service/applicationdiscoveryservice/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.29.3](service/applicationinsights/CHANGELOG.md#v1293-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.6.5](service/applicationsignals/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.29.5](service/appmesh/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.32.5](service/apprunner/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.41.5](service/appstream/CHANGELOG.md#v1415-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.39.2](service/appsync/CHANGELOG.md#v1392-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apptest`: [v1.4.5](service/apptest/CHANGELOG.md#v145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.14.5](service/arczonalshift/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.6.5](service/artifact/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.48.3](service/athena/CHANGELOG.md#v1483-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.37.5](service/auditmanager/CHANGELOG.md#v1375-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.48.0](service/autoscaling/CHANGELOG.md#v1480-2024-11-07)
+  * **Feature**: Auto Scaling groups now support the ability to strictly balance instances across Availability Zones by configuring the AvailabilityZoneDistribution parameter. If balanced-only is configured for a group, launches will always be attempted in the under scaled Availability Zone even if it is unhealthy.
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.24.5](service/autoscalingplans/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.51](service/b2bi/CHANGELOG.md#v100-preview51-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.39.6](service/backup/CHANGELOG.md#v1396-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.20.5](service/backupgateway/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.47.2](service/batch/CHANGELOG.md#v1472-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.7.5](service/bcmdataexports/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.22.2](service/bedrock/CHANGELOG.md#v1222-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.27.0](service/bedrockagent/CHANGELOG.md#v1270-2024-11-07)
+  * **Feature**: Add prompt support for chat template configuration and agent generative AI resource. Add support for configuring an optional guardrail in Prompt and Knowledge Base nodes in Prompt Flows. Add API to validate flow definition
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.23.3](service/bedrockagentruntime/CHANGELOG.md#v1233-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.20.0](service/bedrockruntime/CHANGELOG.md#v1200-2024-11-07)
+  * **Feature**: Add Prompt management support to Bedrock runtime APIs: Converse, ConverseStream, InvokeModel, InvokeModelWithStreamingResponse
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.20.5](service/billingconductor/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.31.5](service/braket/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.28.5](service/budgets/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.8.5](service/chatbot/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.34.5](service/chime/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.22.5](service/chimesdkidentity/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.20.5](service/chimesdkmediapipelines/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.27.5](service/chimesdkmeetings/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.26.5](service/chimesdkmessaging/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.19.5](service/chimesdkvoice/CHANGELOG.md#v1195-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.20.0](service/cleanrooms/CHANGELOG.md#v1200-2024-11-07)
+  * **Feature**: This release introduces support for Custom Models in AWS Clean Rooms ML.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.10.0](service/cleanroomsml/CHANGELOG.md#v1100-2024-11-07)
+  * **Feature**: This release introduces support for Custom Models in AWS Clean Rooms ML.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.28.5](service/cloud9/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.22.5](service/cloudcontrol/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.24.5](service/clouddirectory/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.8.5](service/cloudfrontkeyvaluestore/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.24.5](service/cloudhsm/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.27.6](service/cloudhsmv2/CHANGELOG.md#v1276-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.23.5](service/cloudsearchdomain/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.44.5](service/cloudtrail/CHANGELOG.md#v1445-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.11.5](service/cloudtraildata/CHANGELOG.md#v1115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.27.5](service/cloudwatchevents/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.43.2](service/cloudwatchlogs/CHANGELOG.md#v1432-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.33.5](service/codeartifact/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.48.1](service/codebuild/CHANGELOG.md#v1481-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.17.5](service/codecatalyst/CHANGELOG.md#v1175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.27.5](service/codecommit/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.5.5](service/codeconnections/CHANGELOG.md#v155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.29.5](service/codedeploy/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.24.5](service/codeguruprofiler/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.29.5](service/codegurureviewer/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.12.5](service/codegurusecurity/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.36.3](service/codepipeline/CHANGELOG.md#v1363-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.29.5](service/codestarconnections/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.26.5](service/codestarnotifications/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.27.5](service/cognitoidentity/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.46.5](service/cognitoidentityprovider/CHANGELOG.md#v1465-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.23.5](service/cognitosync/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.35.5](service/comprehend/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.26.5](service/comprehendmedical/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.39.5](service/computeoptimizer/CHANGELOG.md#v1395-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.50.5](service/configservice/CHANGELOG.md#v1505-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.115.2](service/connect/CHANGELOG.md#v11152-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.15.5](service/connectcampaigns/CHANGELOG.md#v1155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.21.5](service/connectcases/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.26.5](service/connectcontactlens/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.27.5](service/connectparticipant/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.5.5](service/controlcatalog/CHANGELOG.md#v155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.18.6](service/controltower/CHANGELOG.md#v1186-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.28.5](service/costandusagereportservice/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.43.5](service/costexplorer/CHANGELOG.md#v1435-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.10.5](service/costoptimizationhub/CHANGELOG.md#v1105-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.42.5](service/customerprofiles/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.44.3](service/databasemigrationservice/CHANGELOG.md#v1443-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.33.5](service/databrew/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.33.3](service/dataexchange/CHANGELOG.md#v1333-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.25.5](service/datapipeline/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.43.2](service/datasync/CHANGELOG.md#v1432-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.23.3](service/datazone/CHANGELOG.md#v1233-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.23.5](service/dax/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.6.4](service/deadline/CHANGELOG.md#v164-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.31.5](service/detective/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.28.5](service/devicefarm/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.34.5](service/devopsguru/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.29.5](service/directconnect/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.30.5](service/directoryservice/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.2.5](service/directoryservicedata/CHANGELOG.md#v125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.28.5](service/dlm/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.14.2](service/docdbelastic/CHANGELOG.md#v1142-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.30.5](service/drs/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.36.5](service/dynamodb/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.24.5](service/dynamodbstreams/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.27.5](service/ebs/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.27.5](service/ec2instanceconnect/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.36.5](service/ecr/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.27.5](service/ecrpublic/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.49.2](service/ecs/CHANGELOG.md#v1492-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.33.5](service/efs/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.51.3](service/eks/CHANGELOG.md#v1513-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.7.5](service/eksauth/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.23.6](service/elasticinference/CHANGELOG.md#v1236-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.32.5](service/elasticsearchservice/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/elastictranscoder`: [v1.27.5](service/elastictranscoder/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.46.3](service/emr/CHANGELOG.md#v1463-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.33.5](service/emrcontainers/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.26.5](service/emrserverless/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.15.5](service/entityresolution/CHANGELOG.md#v1155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.35.5](service/eventbridge/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.23.5](service/evidently/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.28.5](service/finspace/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.28.5](service/finspacedata/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.34.5](service/firehose/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.30.5](service/fis/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.38.3](service/fms/CHANGELOG.md#v1383-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.36.5](service/forecast/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.24.5](service/forecastquery/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.35.5](service/frauddetector/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.7.5](service/freetier/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.49.5](service/fsx/CHANGELOG.md#v1495-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.36.5](service/gamelift/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.0.2](service/geomaps/CHANGELOG.md#v102-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.0.2](service/geoplaces/CHANGELOG.md#v102-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.0.2](service/georoutes/CHANGELOG.md#v102-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.26.5](service/glacier/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.29.5](service/globalaccelerator/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.101.2](service/glue/CHANGELOG.md#v11012-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.26.5](service/grafana/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.27.5](service/greengrass/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.35.5](service/greengrassv2/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.31.5](service/groundstation/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.51.1](service/guardduty/CHANGELOG.md#v1511-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.28.5](service/health/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.28.5](service/healthlake/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.27.5](service/identitystore/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.38.3](service/imagebuilder/CHANGELOG.md#v1383-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.25.5](service/inspector/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.32.5](service/inspector2/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.7.5](service/inspectorscan/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.19.5](service/internetmonitor/CHANGELOG.md#v1195-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.59.5](service/iot/CHANGELOG.md#v1595-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice`: [v1.23.5](service/iot1clickdevicesservice/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickprojects`: [v1.23.5](service/iot1clickprojects/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.26.5](service/iotanalytics/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.26.5](service/iotdataplane/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.31.5](service/iotdeviceadvisor/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.27.5](service/iotevents/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.24.5](service/ioteventsdata/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.24.5](service/iotfleethub/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.21.2](service/iotfleetwise/CHANGELOG.md#v1212-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.23.5](service/iotjobsdataplane/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.27.5](service/iotsecuretunneling/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.43.5](service/iotsitewise/CHANGELOG.md#v1435-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.25.5](service/iotthingsgraph/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.24.5](service/iottwinmaker/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.44.5](service/iotwireless/CHANGELOG.md#v1445-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.16.5](service/ivschat/CHANGELOG.md#v1165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.38.5](service/kafka/CHANGELOG.md#v1385-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.21.5](service/kafkaconnect/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.54.5](service/kendra/CHANGELOG.md#v1545-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.11.5](service/kendraranking/CHANGELOG.md#v1115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.15.2](service/keyspaces/CHANGELOG.md#v1152-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.32.5](service/kinesis/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.25.5](service/kinesisanalytics/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.31.5](service/kinesisanalyticsv2/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.27.5](service/kinesisvideo/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.27.5](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.22.5](service/kinesisvideomedia/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.23.5](service/kinesisvideosignaling/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.14.5](service/kinesisvideowebrtcstorage/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.37.5](service/kms/CHANGELOG.md#v1375-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.38.1](service/lakeformation/CHANGELOG.md#v1381-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.64.3](service/lambda/CHANGELOG.md#v1643-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.8.5](service/launchwizard/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.28.5](service/lexmodelbuildingservice/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.49.5](service/lexmodelsv2/CHANGELOG.md#v1495-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.24.5](service/lexruntimeservice/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.29.5](service/lexruntimev2/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.29.5](service/licensemanager/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.14.5](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.13.5](service/licensemanagerusersubscriptions/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.42.5](service/lightsail/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.42.5](service/location/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.30.5](service/lookoutequipment/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.31.5](service/lookoutmetrics/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.27.5](service/lookoutvision/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.18.3](service/m2/CHANGELOG.md#v1183-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.28.5](service/machinelearning/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.43.5](service/macie2/CHANGELOG.md#v1435-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.6.3](service/mailmanager/CHANGELOG.md#v163-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.26.5](service/managedblockchain/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.16.5](service/managedblockchainquery/CHANGELOG.md#v1165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.6.5](service/marketplaceagreement/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.30.5](service/marketplacecatalog/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.24.5](service/marketplacecommerceanalytics/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.6.5](service/marketplacedeployment/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.25.5](service/marketplaceentitlementservice/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.25.5](service/marketplacemetering/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.1.5](service/marketplacereporting/CHANGELOG.md#v115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.35.5](service/mediaconnect/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.61.5](service/mediaconvert/CHANGELOG.md#v1615-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.62.5](service/medialive/CHANGELOG.md#v1625-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.34.5](service/mediapackage/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.19.2](service/mediapackagev2/CHANGELOG.md#v1192-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.34.6](service/mediapackagevod/CHANGELOG.md#v1346-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.24.5](service/mediastore/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.24.5](service/mediastoredata/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.42.5](service/mediatailor/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.14.5](service/medicalimaging/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.24.4](service/memorydb/CHANGELOG.md#v1244-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.32.5](service/mgn/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.24.5](service/migrationhub/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.25.5](service/migrationhubconfig/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.13.5](service/migrationhuborchestrator/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.20.5](service/migrationhubrefactorspaces/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.21.5](service/migrationhubstrategy/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.27.5](service/mq/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.25.5](service/mturk/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.32.3](service/mwaa/CHANGELOG.md#v1323-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.14.3](service/neptunegraph/CHANGELOG.md#v1143-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.44.2](service/networkfirewall/CHANGELOG.md#v1442-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.31.5](service/networkmanager/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.7.5](service/networkmonitor/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.15.5](service/oam/CHANGELOG.md#v1155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.26.5](service/omics/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.43.2](service/opensearch/CHANGELOG.md#v1432-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.17.2](service/opensearchserverless/CHANGELOG.md#v1172-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opsworks`: [v1.26.5](service/opsworks/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.27.5](service/opsworkscm/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.34.5](service/organizations/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.14.5](service/osis/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.45.3](service/outposts/CHANGELOG.md#v1453-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.22.5](service/panorama/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.15.3](service/paymentcryptography/CHANGELOG.md#v1153-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.16.3](service/paymentcryptographydata/CHANGELOG.md#v1163-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.9.5](service/pcaconnectorad/CHANGELOG.md#v195-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.4.5](service/pcaconnectorscep/CHANGELOG.md#v145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.2.6](service/pcs/CHANGELOG.md#v126-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.39.5](service/personalize/CHANGELOG.md#v1395-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.25.5](service/personalizeevents/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.27.5](service/personalizeruntime/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.29.5](service/pi/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.34.5](service/pinpoint/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.23.5](service/pinpointemail/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.23.5](service/pinpointsmsvoice/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.16.3](service/pinpointsmsvoicev2/CHANGELOG.md#v1163-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.18.3](service/pipes/CHANGELOG.md#v1183-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.45.5](service/polly/CHANGELOG.md#v1455-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.32.5](service/pricing/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.13.5](service/privatenetworks/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.33.5](service/proton/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.4.1](service/qapps/CHANGELOG.md#v141-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.15.3](service/qbusiness/CHANGELOG.md#v1153-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.12.5](service/qconnect/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.25.5](service/qldb/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qldbsession`: [v1.25.5](service/qldbsession/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.78.0](service/quicksight/CHANGELOG.md#v1780-2024-11-07)
+  * **Feature**: Add Client Credentials based OAuth support for Snowflake and Starburst
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.29.5](service/ram/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.20.5](service/rbin/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.25.5](service/rdsdata/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.31.2](service/redshiftdata/CHANGELOG.md#v1312-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.24.2](service/redshiftserverless/CHANGELOG.md#v1242-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.45.6](service/rekognition/CHANGELOG.md#v1456-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.8.3](service/repostspace/CHANGELOG.md#v183-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.27.3](service/resiliencehub/CHANGELOG.md#v1273-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.16.0](service/resourceexplorer2/CHANGELOG.md#v1160-2024-11-07)
+  * **Feature**: Add GetManagedView, ListManagedViews APIs.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.27.5](service/resourcegroups/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.25.5](service/resourcegroupstaggingapi/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.30.6](service/robomaker/CHANGELOG.md#v1306-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.16.5](service/rolesanywhere/CHANGELOG.md#v1165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.27.5](service/route53domains/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.4.5](service/route53profiles/CHANGELOG.md#v145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.23.5](service/route53recoverycluster/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.25.5](service/route53recoverycontrolconfig/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.21.5](service/route53recoveryreadiness/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.33.3](service/route53resolver/CHANGELOG.md#v1333-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.21.5](service/rum/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.28.5](service/s3outposts/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.166.2](service/sagemaker/CHANGELOG.md#v11662-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.27.5](service/sagemakera2iruntime/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.25.5](service/sagemakeredge/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.29.5](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.14.5](service/sagemakergeospatial/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.32.5](service/sagemakerruntime/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.23.5](service/savingsplans/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.12.5](service/scheduler/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.28.6](service/schemas/CHANGELOG.md#v1286-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.34.5](service/secretsmanager/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.54.6](service/securityhub/CHANGELOG.md#v1546-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.19.3](service/securitylake/CHANGELOG.md#v1193-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.24.5](service/serverlessapplicationrepository/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.32.5](service/servicecatalog/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.30.5](service/servicecatalogappregistry/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.33.5](service/servicediscovery/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.25.5](service/servicequotas/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.38.2](service/sesv2/CHANGELOG.md#v1382-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.33.5](service/sfn/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.29.5](service/shield/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.26.5](service/signer/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.14.5](service/simspaceweaver/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.24.5](service/sms/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.30.5](service/snowball/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.20.5](service/snowdevicemanagement/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.0.3](service/socialmessaging/CHANGELOG.md#v103-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.37.0](service/sqs/CHANGELOG.md#v1370-2024-11-07)
+  * **Feature**: Send opt-in query-compatible header for applicable services.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.55.5](service/ssm/CHANGELOG.md#v1555-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.26.5](service/ssmcontacts/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.34.5](service/ssmincidents/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.2.6](service/ssmquicksetup/CHANGELOG.md#v126-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.18.5](service/ssmsap/CHANGELOG.md#v1185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.24.5](service/sso/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.29.5](service/ssoadmin/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.34.5](service/storagegateway/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.10.3](service/supplychain/CHANGELOG.md#v1103-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.26.5](service/support/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.13.5](service/supportapp/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.27.5](service/swf/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.30.0](service/synthetics/CHANGELOG.md#v1300-2024-11-07)
+  * **Feature**: Add support to toggle if a canary will automatically delete provisioned canary resources such as Lambda functions and layers when a canary is deleted.  This behavior can be controlled via the new ProvisionedResourceCleanup property exposed in the CreateCanary and UpdateCanary APIs.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.6.2](service/taxsettings/CHANGELOG.md#v162-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.34.7](service/textract/CHANGELOG.md#v1347-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.6.5](service/timestreaminfluxdb/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.28.3](service/timestreamquery/CHANGELOG.md#v1283-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.29.5](service/timestreamwrite/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.13.5](service/tnb/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.41.5](service/transcribe/CHANGELOG.md#v1415-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.22.3](service/transcribestreaming/CHANGELOG.md#v1223-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.53.3](service/transfer/CHANGELOG.md#v1533-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.28.5](service/translate/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.8.5](service/trustedadvisor/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.20.1](service/verifiedpermissions/CHANGELOG.md#v1201-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.24.5](service/voiceid/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.12.5](service/vpclattice/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.25.5](service/waf/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.25.5](service/wafregional/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.55.4](service/wafv2/CHANGELOG.md#v1554-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.34.5](service/wellarchitected/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.27.6](service/wisdom/CHANGELOG.md#v1276-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.25.5](service/workdocs/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.30.2](service/workmail/CHANGELOG.md#v1302-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.23.5](service/workmailmessageflow/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.48.5](service/workspaces/CHANGELOG.md#v1485-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.10.5](service/workspacesthinclient/CHANGELOG.md#v1105-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.24.5](service/workspacesweb/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.29.5](service/xray/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # Release (2024-11-06)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.38.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.38.0 (2024-11-06)
 
 * **Feature**: API changes for new named tag expressions feature.

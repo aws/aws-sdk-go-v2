@@ -1,3 +1,8 @@
+# v1.27.0 (2024-11-07)
+
+* **Feature**: Add prompt support for chat template configuration and agent generative AI resource. Add support for configuring an optional guardrail in Prompt and Knowledge Base nodes in Prompt Flows. Add API to validate flow definition
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.26.1 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

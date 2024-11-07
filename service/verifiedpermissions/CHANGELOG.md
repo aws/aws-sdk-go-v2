@@ -1,3 +1,7 @@
+# v1.20.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.20.0 (2024-11-06)
 
 * **Feature**: Adding BatchGetPolicy API which supports the retrieval of multiple policies across multiple policy stores within a single request.

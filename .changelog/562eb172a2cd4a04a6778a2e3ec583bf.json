@@ -1,8 +1,0 @@
-{
-    "id": "562eb172-a2cd-4a04-a677-8a2e3ec583bf",
-    "type": "feature",
-    "description": "Add Client Credentials based OAuth support for Snowflake and Starburst",
-    "modules": [
-        "service/quicksight"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.48.0 (2024-11-07)
+
+* **Feature**: Auto Scaling groups now support the ability to strictly balance instances across Availability Zones by configuring the AvailabilityZoneDistribution parameter. If balanced-only is configured for a group, launches will always be attempted in the under scaled Availability Zone even if it is unhealthy.
+
 # v1.47.1 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "9caf133a-a4e0-4a46-9436-805639b85c19",
-    "type": "feature",
-    "description": "Add Prompt management support to Bedrock runtime APIs: Converse, ConverseStream, InvokeModel, InvokeModelWithStreamingResponse",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.20.0 (2024-11-07)
+
+* **Feature**: This release introduces support for Custom Models in AWS Clean Rooms ML.
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.19.1 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

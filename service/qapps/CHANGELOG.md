@@ -1,3 +1,7 @@
+# v1.4.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
 # v1.4.0 (2024-11-06)
 
 * **Feature**: Introduces category apis in AmazonQApps. Web experience users use Categories to tag and filter library items.
