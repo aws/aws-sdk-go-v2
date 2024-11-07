@@ -12213,7 +12213,7 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12258,7 +12258,7 @@ func awsAwsjson11_deserializeDocumentInvalidGatewayRequestException(v **types.In
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12869,7 +12869,7 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableError(v **types.ServiceUn
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

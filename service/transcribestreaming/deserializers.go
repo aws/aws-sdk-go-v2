@@ -1032,7 +1032,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1483,7 +1483,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1523,7 +1523,7 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1633,7 +1633,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1744,7 +1744,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

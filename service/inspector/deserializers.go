@@ -4734,7 +4734,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				sv.ErrorCode_ = types.AccessDeniedErrorCode(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5017,7 +5017,7 @@ func awsAwsjson11_deserializeDocumentAgentsAlreadyRunningAssessmentException(v *
 				sv.CanRetry = ptr.Bool(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5494,7 +5494,7 @@ func awsAwsjson11_deserializeDocumentAssessmentRunInProgressException(v **types.
 				sv.CanRetry = ptr.Bool(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6992,7 +6992,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				sv.CanRetry = ptr.Bool(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7050,7 +7050,7 @@ func awsAwsjson11_deserializeDocumentInvalidCrossAccountRoleException(v **types.
 				sv.ErrorCode_ = types.InvalidCrossAccountRoleErrorCode(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7108,7 +7108,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				sv.ErrorCode_ = types.InvalidInputErrorCode(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7238,7 +7238,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				sv.ErrorCode_ = types.LimitExceededErrorCode(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7475,7 +7475,7 @@ func awsAwsjson11_deserializeDocumentNoSuchEntityException(v **types.NoSuchEntit
 				sv.ErrorCode_ = types.NoSuchEntityErrorCode(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7515,7 +7515,7 @@ func awsAwsjson11_deserializeDocumentPreviewGenerationInProgressException(v **ty
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8101,7 +8101,7 @@ func awsAwsjson11_deserializeDocumentServiceTemporarilyUnavailableException(v **
 				sv.CanRetry = ptr.Bool(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8455,7 +8455,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedFeatureException(v **types.Unsup
 				sv.CanRetry = ptr.Bool(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

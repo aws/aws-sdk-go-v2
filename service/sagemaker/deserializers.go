@@ -44435,7 +44435,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -74667,7 +74667,7 @@ func awsAwsjson11_deserializeDocumentResourceInUse(v **types.ResourceInUse, valu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -74707,7 +74707,7 @@ func awsAwsjson11_deserializeDocumentResourceLimitExceeded(v **types.ResourceLim
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -74817,7 +74817,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

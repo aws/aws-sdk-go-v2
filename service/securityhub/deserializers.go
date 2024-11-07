@@ -12579,7 +12579,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -58742,7 +58742,7 @@ func awsRestjson1_deserializeDocumentInternalException(v **types.InternalExcepti
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -58791,7 +58791,7 @@ func awsRestjson1_deserializeDocumentInvalidAccessException(v **types.InvalidAcc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -58840,7 +58840,7 @@ func awsRestjson1_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -59305,7 +59305,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -62327,7 +62327,7 @@ func awsRestjson1_deserializeDocumentResourceConflictException(v **types.Resourc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -62902,7 +62902,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -62985,7 +62985,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

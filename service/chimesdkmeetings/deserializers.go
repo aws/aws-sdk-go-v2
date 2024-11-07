@@ -3119,7 +3119,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3211,7 +3211,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3367,7 +3367,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3425,7 +3425,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3737,7 +3737,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3795,7 +3795,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3862,7 +3862,7 @@ func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFa
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3920,7 +3920,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4106,7 +4106,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4164,7 +4164,7 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4231,7 +4231,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4289,7 +4289,7 @@ func awsRestjson1_deserializeDocumentUnprocessableEntityException(v **types.Unpr
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

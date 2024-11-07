@@ -20793,7 +20793,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21195,7 +21195,7 @@ func awsAwsjson11_deserializeDocumentAccountSetupInProgressException(v **types.A
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -28398,7 +28398,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -30378,7 +30378,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -30630,7 +30630,7 @@ func awsAwsjson11_deserializeDocumentOperationFailureException(v **types.Operati
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -32961,7 +32961,7 @@ func awsAwsjson11_deserializeDocumentServiceException(v **types.ServiceException
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -33889,7 +33889,7 @@ func awsAwsjson11_deserializeDocumentUnauthenticatedException(v **types.Unauthen
 				sv.Docs = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

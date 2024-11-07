@@ -1679,7 +1679,7 @@ func awsAwsjson11_deserializeDocumentActiveSessionsExceededException(v **types.A
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1719,7 +1719,7 @@ func awsAwsjson11_deserializeDocumentActiveStatementsExceededException(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1759,7 +1759,7 @@ func awsAwsjson11_deserializeDocumentBatchExecuteStatementException(v **types.Ba
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2040,7 +2040,7 @@ func awsAwsjson11_deserializeDocumentDatabaseConnectionException(v **types.Datab
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2152,7 +2152,7 @@ func awsAwsjson11_deserializeDocumentExecuteStatementException(v **types.Execute
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2400,7 +2400,7 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2482,7 +2482,7 @@ func awsAwsjson11_deserializeDocumentQueryTimeoutException(v **types.QueryTimeou
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2522,7 +2522,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3223,7 +3223,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

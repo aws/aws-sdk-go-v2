@@ -14358,7 +14358,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16433,7 +16433,7 @@ func awsAwsjson11_deserializeDocumentFleetCapacityExceededException(v **types.Fl
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17650,7 +17650,7 @@ func awsAwsjson11_deserializeDocumentGameSessionFullException(v **types.GameSess
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18135,7 +18135,7 @@ func awsAwsjson11_deserializeDocumentIdempotentParameterMismatchException(v **ty
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18541,7 +18541,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceException(v **types.Internal
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18581,7 +18581,7 @@ func awsAwsjson11_deserializeDocumentInvalidFleetStatusException(v **types.Inval
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18621,7 +18621,7 @@ func awsAwsjson11_deserializeDocumentInvalidGameSessionStatusException(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18661,7 +18661,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18850,7 +18850,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19806,7 +19806,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19846,7 +19846,7 @@ func awsAwsjson11_deserializeDocumentNotReadyException(v **types.NotReadyExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19886,7 +19886,7 @@ func awsAwsjson11_deserializeDocumentOutOfCapacityException(v **types.OutOfCapac
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21609,7 +21609,7 @@ func awsAwsjson11_deserializeDocumentTaggingFailedException(v **types.TaggingFai
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21748,7 +21748,7 @@ func awsAwsjson11_deserializeDocumentTerminalRoutingStrategyException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21788,7 +21788,7 @@ func awsAwsjson11_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21828,7 +21828,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedRegionException(v **types.Unsupp
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

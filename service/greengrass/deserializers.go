@@ -15365,7 +15365,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				return err
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17090,7 +17090,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 				return err
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

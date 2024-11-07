@@ -1907,7 +1907,7 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2827,7 +2827,7 @@ func awsAwsjson11_deserializeDocumentInvalidPaginationToken(v **types.InvalidPag
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3365,7 +3365,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedLocale(v **types.UnsupportedLoca
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

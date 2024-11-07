@@ -2848,7 +2848,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceError(v **types.InternalServ
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2888,7 +2888,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3143,7 +3143,7 @@ func awsAwsjson11_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

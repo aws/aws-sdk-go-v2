@@ -12696,7 +12696,7 @@ func awsAwsjson11_deserializeDocumentDirectoryInUseException(v **types.Directory
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12736,7 +12736,7 @@ func awsAwsjson11_deserializeDocumentDirectoryServiceAuthenticationFailedExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12776,7 +12776,7 @@ func awsAwsjson11_deserializeDocumentDirectoryUnavailableException(v **types.Dir
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12908,7 +12908,7 @@ func awsAwsjson11_deserializeDocumentEmailAddressInUseException(v **types.EmailA
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12948,7 +12948,7 @@ func awsAwsjson11_deserializeDocumentEntityAlreadyRegisteredException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12988,7 +12988,7 @@ func awsAwsjson11_deserializeDocumentEntityNotFoundException(v **types.EntityNot
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13028,7 +13028,7 @@ func awsAwsjson11_deserializeDocumentEntityStateException(v **types.EntityStateE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13783,7 +13783,7 @@ func awsAwsjson11_deserializeDocumentInvalidConfigurationException(v **types.Inv
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13823,7 +13823,7 @@ func awsAwsjson11_deserializeDocumentInvalidCustomSesConfigurationException(v **
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13863,7 +13863,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13903,7 +13903,7 @@ func awsAwsjson11_deserializeDocumentInvalidPasswordException(v **types.InvalidP
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14053,7 +14053,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14223,7 +14223,7 @@ func awsAwsjson11_deserializeDocumentMailDomainInUseException(v **types.MailDoma
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14263,7 +14263,7 @@ func awsAwsjson11_deserializeDocumentMailDomainNotFoundException(v **types.MailD
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14337,7 +14337,7 @@ func awsAwsjson11_deserializeDocumentMailDomainStateException(v **types.MailDoma
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14948,7 +14948,7 @@ func awsAwsjson11_deserializeDocumentNameAvailabilityException(v **types.NameAva
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14988,7 +14988,7 @@ func awsAwsjson11_deserializeDocumentOrganizationNotFoundException(v **types.Org
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15028,7 +15028,7 @@ func awsAwsjson11_deserializeDocumentOrganizationStateException(v **types.Organi
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15585,7 +15585,7 @@ func awsAwsjson11_deserializeDocumentReservedNameException(v **types.ReservedNam
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15776,7 +15776,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15969,7 +15969,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16009,7 +16009,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperationException(v **types.Uns
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

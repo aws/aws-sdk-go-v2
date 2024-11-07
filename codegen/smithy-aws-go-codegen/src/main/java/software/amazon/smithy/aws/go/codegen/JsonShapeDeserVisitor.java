@@ -39,6 +39,7 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
+import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
@@ -182,6 +183,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
         // Iterate through the decoder. The member visitor will handle popping tokens.
         writer.openBlock("for key, value := range shape {", "}", () -> {
+
             writer.openBlock("switch key {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
                 for (MemberShape member : members) {
@@ -190,10 +192,19 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                     }
                     String memberName = symbolProvider.toMemberName(member);
                     String serializedMemberName = getSerializedMemberName(member);
-                    writer.openBlock("case $S:", "", serializedMemberName, () -> {
-                        String dest = "sv." + memberName;
-                        context.getModel().expectShape(member.getTarget()).accept(getMemberDeserVisitor(member, dest));
-                    });
+
+                    // The 'message' field in JSON protocol errors is known to not always match its over-the-wire casing with what is modeled.
+                    // See https://github.com/aws/aws-sdk-go-v2/issues/2859
+                    boolean isErrorStructure = shape.hasTrait(ErrorTrait.class);
+
+                    if(isErrorStructure && memberName.equalsIgnoreCase("Message")){
+                        writer.write("case \"message\", \"Message\":");
+                    } else {
+                        writer.write("case $S:",serializedMemberName);
+                    }
+                    String dest = "sv." + memberName;
+                    context.getModel().expectShape(member.getTarget()).accept(getMemberDeserVisitor(member, dest));
+                    writer.write("");
                 }
 
                 writer.openBlock("default:", "", () -> {

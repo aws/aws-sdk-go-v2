@@ -2241,7 +2241,7 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 				return err
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2352,7 +2352,7 @@ func awsAwsjson11_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

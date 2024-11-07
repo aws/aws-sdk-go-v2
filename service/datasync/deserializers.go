@@ -7823,7 +7823,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7881,7 +7881,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

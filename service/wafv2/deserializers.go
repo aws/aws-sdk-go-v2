@@ -15471,7 +15471,7 @@ func awsAwsjson11_deserializeDocumentWAFAssociatedItemException(v **types.WAFAss
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15511,7 +15511,7 @@ func awsAwsjson11_deserializeDocumentWAFConfigurationWarningException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15551,7 +15551,7 @@ func awsAwsjson11_deserializeDocumentWAFDuplicateItemException(v **types.WAFDupl
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15591,7 +15591,7 @@ func awsAwsjson11_deserializeDocumentWAFExpiredManagedRuleGroupVersionException(
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15631,7 +15631,7 @@ func awsAwsjson11_deserializeDocumentWAFInternalErrorException(v **types.WAFInte
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15671,7 +15671,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidOperationException(v **types.WAFI
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15720,7 +15720,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidParameterException(v **types.WAFI
 				sv.Field = types.ParameterExceptionField(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15778,7 +15778,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidPermissionPolicyException(v **typ
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15818,7 +15818,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidResourceException(v **types.WAFIn
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15858,7 +15858,7 @@ func awsAwsjson11_deserializeDocumentWAFLimitsExceededException(v **types.WAFLim
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15907,7 +15907,7 @@ func awsAwsjson11_deserializeDocumentWAFLogDestinationPermissionIssueException(v
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15947,7 +15947,7 @@ func awsAwsjson11_deserializeDocumentWAFNonexistentItemException(v **types.WAFNo
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15987,7 +15987,7 @@ func awsAwsjson11_deserializeDocumentWAFOptimisticLockException(v **types.WAFOpt
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16027,7 +16027,7 @@ func awsAwsjson11_deserializeDocumentWAFServiceLinkedRoleErrorException(v **type
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16067,7 +16067,7 @@ func awsAwsjson11_deserializeDocumentWAFSubscriptionNotFoundException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16107,7 +16107,7 @@ func awsAwsjson11_deserializeDocumentWAFTagOperationException(v **types.WAFTagOp
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16147,7 +16147,7 @@ func awsAwsjson11_deserializeDocumentWAFTagOperationInternalErrorException(v **t
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16187,7 +16187,7 @@ func awsAwsjson11_deserializeDocumentWAFUnavailableEntityException(v **types.WAF
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16227,7 +16227,7 @@ func awsAwsjson11_deserializeDocumentWAFUnsupportedAggregateKeyTypeException(v *
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

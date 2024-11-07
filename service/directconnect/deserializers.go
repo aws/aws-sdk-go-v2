@@ -8123,7 +8123,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectClientException(v **types.Dire
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8677,7 +8677,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectServerException(v **types.Dire
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8717,7 +8717,7 @@ func awsAwsjson11_deserializeDocumentDuplicateTagKeysException(v **types.Duplica
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9828,7 +9828,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

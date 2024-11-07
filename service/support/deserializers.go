@@ -2344,7 +2344,7 @@ func awsAwsjson11_deserializeDocumentAttachmentIdNotFound(v **types.AttachmentId
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2384,7 +2384,7 @@ func awsAwsjson11_deserializeDocumentAttachmentLimitExceeded(v **types.Attachmen
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2458,7 +2458,7 @@ func awsAwsjson11_deserializeDocumentAttachmentSetExpired(v **types.AttachmentSe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2498,7 +2498,7 @@ func awsAwsjson11_deserializeDocumentAttachmentSetIdNotFound(v **types.Attachmen
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2538,7 +2538,7 @@ func awsAwsjson11_deserializeDocumentAttachmentSetSizeLimitExceeded(v **types.At
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2578,7 +2578,7 @@ func awsAwsjson11_deserializeDocumentCaseCreationLimitExceeded(v **types.CaseCre
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2749,7 +2749,7 @@ func awsAwsjson11_deserializeDocumentCaseIdNotFound(v **types.CaseIdNotFound, va
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3215,7 +3215,7 @@ func awsAwsjson11_deserializeDocumentDescribeAttachmentLimitExceeded(v **types.D
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3255,7 +3255,7 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3722,7 +3722,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

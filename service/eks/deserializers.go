@@ -9612,7 +9612,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10699,7 +10699,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10797,7 +10797,7 @@ func awsRestjson1_deserializeDocumentClientException(v **types.ClientException, 
 				sv.ClusterName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12984,7 +12984,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				sv.FargateProfileName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13060,7 +13060,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				sv.ClusterName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13978,7 +13978,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14628,7 +14628,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				sv.ClusterName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14686,7 +14686,7 @@ func awsRestjson1_deserializeDocumentResourceLimitExceededException(v **types.Re
 				sv.ClusterName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14771,7 +14771,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				sv.FargateProfileName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14829,7 +14829,7 @@ func awsRestjson1_deserializeDocumentResourcePropagationDelayException(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14887,7 +14887,7 @@ func awsRestjson1_deserializeDocumentServerException(v **types.ServerException, 
 				sv.ClusterName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14945,7 +14945,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15158,7 +15158,7 @@ func awsRestjson1_deserializeDocumentUnsupportedAvailabilityZoneException(v **ty
 				sv.ClusterName = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

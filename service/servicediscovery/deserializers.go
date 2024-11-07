@@ -3736,7 +3736,7 @@ func awsAwsjson11_deserializeDocumentCustomHealthNotFound(v **types.CustomHealth
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3971,7 +3971,7 @@ func awsAwsjson11_deserializeDocumentDuplicateRequest(v **types.DuplicateRequest
 				sv.DuplicateOperationId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4353,7 +4353,7 @@ func awsAwsjson11_deserializeDocumentInstanceNotFound(v **types.InstanceNotFound
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4472,7 +4472,7 @@ func awsAwsjson11_deserializeDocumentInvalidInput(v **types.InvalidInput, value 
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4640,7 +4640,7 @@ func awsAwsjson11_deserializeDocumentNamespaceAlreadyExists(v **types.NamespaceA
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4689,7 +4689,7 @@ func awsAwsjson11_deserializeDocumentNamespaceNotFound(v **types.NamespaceNotFou
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5027,7 +5027,7 @@ func awsAwsjson11_deserializeDocumentOperationNotFound(v **types.OperationNotFou
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5186,7 +5186,7 @@ func awsAwsjson11_deserializeDocumentRequestLimitExceeded(v **types.RequestLimit
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5226,7 +5226,7 @@ func awsAwsjson11_deserializeDocumentResourceInUse(v **types.ResourceInUse, valu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5266,7 +5266,7 @@ func awsAwsjson11_deserializeDocumentResourceLimitExceeded(v **types.ResourceLim
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5306,7 +5306,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5493,7 +5493,7 @@ func awsAwsjson11_deserializeDocumentServiceAlreadyExists(v **types.ServiceAlrea
 				sv.CreatorRequestId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5542,7 +5542,7 @@ func awsAwsjson11_deserializeDocumentServiceNotFound(v **types.ServiceNotFound, 
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5863,7 +5863,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

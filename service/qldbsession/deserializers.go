@@ -433,7 +433,7 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -473,7 +473,7 @@ func awsAwsjson10_deserializeDocumentCapacityExceededException(v **types.Capacit
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -713,7 +713,7 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 				sv.Code = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -810,7 +810,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -850,7 +850,7 @@ func awsAwsjson10_deserializeDocumentOccConflictException(v **types.OccConflictE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -935,7 +935,7 @@ func awsAwsjson10_deserializeDocumentRateExceededException(v **types.RateExceede
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -8840,7 +8840,7 @@ func awsAwsjson10_deserializeDocumentBackupInUseException(v **types.BackupInUseE
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8880,7 +8880,7 @@ func awsAwsjson10_deserializeDocumentBackupNotFoundException(v **types.BackupNot
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9622,7 +9622,7 @@ func awsAwsjson10_deserializeDocumentConditionalCheckFailedException(v **types.C
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9898,7 +9898,7 @@ func awsAwsjson10_deserializeDocumentContinuousBackupsUnavailableException(v **t
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10183,7 +10183,7 @@ func awsAwsjson10_deserializeDocumentDuplicateItemException(v **types.DuplicateI
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10350,7 +10350,7 @@ func awsAwsjson10_deserializeDocumentExportConflictException(v **types.ExportCon
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10635,7 +10635,7 @@ func awsAwsjson10_deserializeDocumentExportNotFoundException(v **types.ExportNot
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11232,7 +11232,7 @@ func awsAwsjson10_deserializeDocumentGlobalTableAlreadyExistsException(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11385,7 +11385,7 @@ func awsAwsjson10_deserializeDocumentGlobalTableNotFoundException(v **types.Glob
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11425,7 +11425,7 @@ func awsAwsjson10_deserializeDocumentIdempotentParameterMismatchException(v **ty
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11465,7 +11465,7 @@ func awsAwsjson10_deserializeDocumentImportConflictException(v **types.ImportCon
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11505,7 +11505,7 @@ func awsAwsjson10_deserializeDocumentImportNotFoundException(v **types.ImportNot
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11984,7 +11984,7 @@ func awsAwsjson10_deserializeDocumentIndexNotFoundException(v **types.IndexNotFo
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12060,7 +12060,7 @@ func awsAwsjson10_deserializeDocumentInternalServerError(v **types.InternalServe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12100,7 +12100,7 @@ func awsAwsjson10_deserializeDocumentInvalidEndpointException(v **types.InvalidE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12140,7 +12140,7 @@ func awsAwsjson10_deserializeDocumentInvalidExportTimeException(v **types.Invali
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12180,7 +12180,7 @@ func awsAwsjson10_deserializeDocumentInvalidRestoreTimeException(v **types.Inval
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12424,7 +12424,7 @@ func awsAwsjson10_deserializeDocumentItemCollectionSizeLimitExceededException(v 
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12880,7 +12880,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13468,7 +13468,7 @@ func awsAwsjson10_deserializeDocumentPointInTimeRecoveryUnavailableException(v *
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13508,7 +13508,7 @@ func awsAwsjson10_deserializeDocumentPolicyNotFoundException(v **types.PolicyNot
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13752,7 +13752,7 @@ func awsAwsjson10_deserializeDocumentProvisionedThroughputExceededException(v **
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13946,7 +13946,7 @@ func awsAwsjson10_deserializeDocumentReplicaAlreadyExistsException(v **types.Rep
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14560,7 +14560,7 @@ func awsAwsjson10_deserializeDocumentReplicaNotFoundException(v **types.ReplicaN
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14734,7 +14734,7 @@ func awsAwsjson10_deserializeDocumentRequestLimitExceeded(v **types.RequestLimit
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14774,7 +14774,7 @@ func awsAwsjson10_deserializeDocumentResourceInUseException(v **types.ResourceIn
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14814,7 +14814,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15418,7 +15418,7 @@ func awsAwsjson10_deserializeDocumentTableAlreadyExistsException(v **types.Table
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15857,7 +15857,7 @@ func awsAwsjson10_deserializeDocumentTableInUseException(v **types.TableInUseExc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15933,7 +15933,7 @@ func awsAwsjson10_deserializeDocumentTableNotFoundException(v **types.TableNotFo
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16159,7 +16159,7 @@ func awsAwsjson10_deserializeDocumentTransactionCanceledException(v **types.Tran
 				return err
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16199,7 +16199,7 @@ func awsAwsjson10_deserializeDocumentTransactionConflictException(v **types.Tran
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16239,7 +16239,7 @@ func awsAwsjson10_deserializeDocumentTransactionInProgressException(v **types.Tr
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

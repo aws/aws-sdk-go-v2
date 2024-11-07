@@ -14084,7 +14084,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedFault(v **types.AccessDeniedFau
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14679,7 +14679,7 @@ func awsAwsjson11_deserializeDocumentCollectorNotFoundFault(v **types.CollectorN
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17890,7 +17890,7 @@ func awsAwsjson11_deserializeDocumentFailedDependencyFault(v **types.FailedDepen
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18710,7 +18710,7 @@ func awsAwsjson11_deserializeDocumentInsufficientResourceCapacityFault(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18790,7 +18790,7 @@ func awsAwsjson11_deserializeDocumentInvalidCertificateFault(v **types.InvalidCe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18830,7 +18830,7 @@ func awsAwsjson11_deserializeDocumentInvalidOperationFault(v **types.InvalidOper
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18870,7 +18870,7 @@ func awsAwsjson11_deserializeDocumentInvalidResourceStateFault(v **types.Invalid
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18910,7 +18910,7 @@ func awsAwsjson11_deserializeDocumentInvalidSubnet(v **types.InvalidSubnet, valu
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19343,7 +19343,7 @@ func awsAwsjson11_deserializeDocumentKMSAccessDeniedFault(v **types.KMSAccessDen
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19383,7 +19383,7 @@ func awsAwsjson11_deserializeDocumentKMSDisabledFault(v **types.KMSDisabledFault
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19423,7 +19423,7 @@ func awsAwsjson11_deserializeDocumentKMSFault(v **types.KMSFault, value interfac
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19463,7 +19463,7 @@ func awsAwsjson11_deserializeDocumentKMSInvalidStateFault(v **types.KMSInvalidSt
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19503,7 +19503,7 @@ func awsAwsjson11_deserializeDocumentKMSKeyNotAccessibleFault(v **types.KMSKeyNo
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19543,7 +19543,7 @@ func awsAwsjson11_deserializeDocumentKMSNotFoundFault(v **types.KMSNotFoundFault
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19583,7 +19583,7 @@ func awsAwsjson11_deserializeDocumentKMSThrottlingFault(v **types.KMSThrottlingF
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -24682,7 +24682,7 @@ func awsAwsjson11_deserializeDocumentReplicationSubnetGroupDoesNotCoverEnoughAZs
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -25820,7 +25820,7 @@ func awsAwsjson11_deserializeDocumentResourceAlreadyExistsFault(v **types.Resour
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -25869,7 +25869,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundFault(v **types.ResourceNot
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -25954,7 +25954,7 @@ func awsAwsjson11_deserializeDocumentResourceQuotaExceededFault(v **types.Resour
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -25994,7 +25994,7 @@ func awsAwsjson11_deserializeDocumentS3AccessDeniedFault(v **types.S3AccessDenie
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -26034,7 +26034,7 @@ func awsAwsjson11_deserializeDocumentS3ResourceNotFoundFault(v **types.S3Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -26956,7 +26956,7 @@ func awsAwsjson11_deserializeDocumentSNSInvalidTopicFault(v **types.SNSInvalidTo
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -26996,7 +26996,7 @@ func awsAwsjson11_deserializeDocumentSNSNoAuthorizationFault(v **types.SNSNoAuth
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -27181,7 +27181,7 @@ func awsAwsjson11_deserializeDocumentStorageQuotaExceededFault(v **types.Storage
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -27311,7 +27311,7 @@ func awsAwsjson11_deserializeDocumentSubnetAlreadyInUse(v **types.SubnetAlreadyI
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -28118,7 +28118,7 @@ func awsAwsjson11_deserializeDocumentUpgradeDependencyFailureFault(v **types.Upg
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -934,7 +934,7 @@ func awsRestjson1_deserializeDocumentContainerNotFoundException(v **types.Contai
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -974,7 +974,7 @@ func awsRestjson1_deserializeDocumentInternalServerError(v **types.InternalServe
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1144,7 +1144,7 @@ func awsRestjson1_deserializeDocumentObjectNotFoundException(v **types.ObjectNot
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1184,7 +1184,7 @@ func awsRestjson1_deserializeDocumentRequestedRangeNotSatisfiableException(v **t
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -6206,7 +6206,7 @@ func awsAwsjson10_deserializeDocumentDefaultUndefinedFault(v **types.DefaultUnde
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6246,7 +6246,7 @@ func awsAwsjson10_deserializeDocumentDomainAlreadyExistsFault(v **types.DomainAl
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6326,7 +6326,7 @@ func awsAwsjson10_deserializeDocumentDomainDeprecatedFault(v **types.DomainDepre
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7331,7 +7331,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededFault(v **types.LimitExceededF
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7433,7 +7433,7 @@ func awsAwsjson10_deserializeDocumentOperationNotPermittedFault(v **types.Operat
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8774,7 +8774,7 @@ func awsAwsjson10_deserializeDocumentTooManyTagsFault(v **types.TooManyTagsFault
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8814,7 +8814,7 @@ func awsAwsjson10_deserializeDocumentTypeAlreadyExistsFault(v **types.TypeAlread
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8854,7 +8854,7 @@ func awsAwsjson10_deserializeDocumentTypeDeprecatedFault(v **types.TypeDeprecate
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8894,7 +8894,7 @@ func awsAwsjson10_deserializeDocumentTypeNotDeprecatedFault(v **types.TypeNotDep
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8934,7 +8934,7 @@ func awsAwsjson10_deserializeDocumentUnknownResourceFault(v **types.UnknownResou
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9023,7 +9023,7 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionAlreadyStartedFault(v **ty
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

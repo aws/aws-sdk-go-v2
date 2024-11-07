@@ -3739,7 +3739,7 @@ func awsAwsjson11_deserializeDocumentClusterLimitExceededException(v **types.Clu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4136,7 +4136,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.ConflictResource = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4457,7 +4457,7 @@ func awsAwsjson11_deserializeDocumentEc2RequestFailedException(v **types.Ec2Requ
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4660,7 +4660,7 @@ func awsAwsjson11_deserializeDocumentInvalidAddressException(v **types.InvalidAd
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4700,7 +4700,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputCombinationException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4740,7 +4740,7 @@ func awsAwsjson11_deserializeDocumentInvalidJobStateException(v **types.InvalidJ
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4780,7 +4780,7 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4820,7 +4820,7 @@ func awsAwsjson11_deserializeDocumentInvalidResourceException(v **types.InvalidR
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5454,7 +5454,7 @@ func awsAwsjson11_deserializeDocumentKMSRequestFailedException(v **types.KMSRequ
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6042,7 +6042,7 @@ func awsAwsjson11_deserializeDocumentReturnShippingLabelAlreadyExistsException(v
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6647,7 +6647,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedAddressException(v **types.Unsup
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

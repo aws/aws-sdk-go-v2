@@ -10698,7 +10698,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12124,7 +12124,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15518,7 +15518,7 @@ func awsAwsjson11_deserializeDocumentHumanLoopQuotaExceededException(v **types.H
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15603,7 +15603,7 @@ func awsAwsjson11_deserializeDocumentIdempotentParameterMismatchException(v **ty
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15760,7 +15760,7 @@ func awsAwsjson11_deserializeDocumentImageTooLargeException(v **types.ImageTooLa
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15927,7 +15927,7 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -15985,7 +15985,7 @@ func awsAwsjson11_deserializeDocumentInvalidImageFormatException(v **types.Inval
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16043,7 +16043,7 @@ func awsAwsjson11_deserializeDocumentInvalidManifestException(v **types.InvalidM
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16101,7 +16101,7 @@ func awsAwsjson11_deserializeDocumentInvalidPaginationTokenException(v **types.I
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16159,7 +16159,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16217,7 +16217,7 @@ func awsAwsjson11_deserializeDocumentInvalidPolicyRevisionIdException(v **types.
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16275,7 +16275,7 @@ func awsAwsjson11_deserializeDocumentInvalidS3ObjectException(v **types.InvalidS
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16993,7 +16993,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17051,7 +17051,7 @@ func awsAwsjson11_deserializeDocumentMalformedPolicyDocumentException(v **types.
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19354,7 +19354,7 @@ func awsAwsjson11_deserializeDocumentProvisionedThroughputExceededException(v **
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19523,7 +19523,7 @@ func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19581,7 +19581,7 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19639,7 +19639,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19697,7 +19697,7 @@ func awsAwsjson11_deserializeDocumentResourceNotReadyException(v **types.Resourc
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20250,7 +20250,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20308,7 +20308,7 @@ func awsAwsjson11_deserializeDocumentSessionNotFoundException(v **types.SessionN
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21341,7 +21341,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -22533,7 +22533,7 @@ func awsAwsjson11_deserializeDocumentVideoTooLargeException(v **types.VideoTooLa
 				sv.Logref = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

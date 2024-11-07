@@ -2000,7 +2000,7 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2062,7 +2062,7 @@ func awsAwsjson11_deserializeDocumentConcurrentAccessException(v **types.Concurr
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2124,7 +2124,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2539,7 +2539,7 @@ func awsAwsjson11_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2601,7 +2601,7 @@ func awsAwsjson11_deserializeDocumentInternalServerErrorException(v **types.Inte
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2663,7 +2663,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2725,7 +2725,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2870,7 +2870,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				sv.Code = int32(i64)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

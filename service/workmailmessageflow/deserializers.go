@@ -394,7 +394,7 @@ func awsRestjson1_deserializeDocumentInvalidContentLocation(v **types.InvalidCon
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -434,7 +434,7 @@ func awsRestjson1_deserializeDocumentMessageFrozen(v **types.MessageFrozen, valu
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -474,7 +474,7 @@ func awsRestjson1_deserializeDocumentMessageRejected(v **types.MessageRejected, 
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -514,7 +514,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

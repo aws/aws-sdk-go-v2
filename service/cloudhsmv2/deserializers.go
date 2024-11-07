@@ -2829,7 +2829,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmAccessDeniedException(v **types.Clo
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2869,7 +2869,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalFailureException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2909,7 +2909,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmInvalidRequestException(v **types.C
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2949,7 +2949,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmResourceNotFoundException(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2989,7 +2989,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3029,7 +3029,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmTagException(v **types.CloudHsmTagE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -2413,7 +2413,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2582,7 +2582,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2975,7 +2975,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3761,7 +3761,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

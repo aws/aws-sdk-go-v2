@@ -4698,7 +4698,7 @@ func awsAwsjson11_deserializeDocumentDnssecLimitExceeded(v **types.DnssecLimitEx
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -4738,7 +4738,7 @@ func awsAwsjson11_deserializeDocumentDomainLimitExceeded(v **types.DomainLimitEx
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5144,7 +5144,7 @@ func awsAwsjson11_deserializeDocumentDuplicateRequest(v **types.DuplicateRequest
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5312,7 +5312,7 @@ func awsAwsjson11_deserializeDocumentInvalidInput(v **types.InvalidInput, value 
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5431,7 +5431,7 @@ func awsAwsjson11_deserializeDocumentOperationLimitExceeded(v **types.OperationL
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5779,7 +5779,7 @@ func awsAwsjson11_deserializeDocumentTLDRulesViolation(v **types.TLDRulesViolati
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5819,7 +5819,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedTLD(v **types.UnsupportedTLD, va
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

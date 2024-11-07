@@ -2562,7 +2562,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmInternalException(v **types.CloudHs
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2611,7 +2611,7 @@ func awsAwsjson11_deserializeDocumentCloudHsmServiceException(v **types.CloudHsm
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2732,7 +2732,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

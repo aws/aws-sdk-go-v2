@@ -2576,7 +2576,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceError(v **types.InternalServ
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2616,7 +2616,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2901,7 +2901,7 @@ func awsAwsjson11_deserializeDocumentPipelineDeletedException(v **types.Pipeline
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3126,7 +3126,7 @@ func awsAwsjson11_deserializeDocumentPipelineNotFoundException(v **types.Pipelin
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3372,7 +3372,7 @@ func awsAwsjson11_deserializeDocumentTaskNotFoundException(v **types.TaskNotFoun
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
