@@ -1,0 +1,8 @@
+{
+    "id": "74119712-032f-430a-87f2-74ab0e735009",
+    "type": "feature",
+    "description": "Add prompt support for chat template configuration and agent generative AI resource. Add support for configuring an optional guardrail in Prompt and Knowledge Base nodes in Prompt Flows. Add API to validate flow definition",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

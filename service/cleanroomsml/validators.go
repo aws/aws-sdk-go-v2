@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCancelTrainedModelInferenceJob struct {
+}
+
+func (*validateOpCancelTrainedModelInferenceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelTrainedModelInferenceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelTrainedModelInferenceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelTrainedModelInferenceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelTrainedModel struct {
+}
+
+func (*validateOpCancelTrainedModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelTrainedModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelTrainedModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelTrainedModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAudienceModel struct {
 }
 
@@ -45,6 +85,86 @@ func (m *validateOpCreateConfiguredAudienceModel) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateConfiguredAudienceModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConfiguredModelAlgorithmAssociation struct {
+}
+
+func (*validateOpCreateConfiguredModelAlgorithmAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguredModelAlgorithmAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfiguredModelAlgorithmAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfiguredModelAlgorithmAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConfiguredModelAlgorithm struct {
+}
+
+func (*validateOpCreateConfiguredModelAlgorithm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguredModelAlgorithm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfiguredModelAlgorithmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfiguredModelAlgorithmInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMLInputChannel struct {
+}
+
+func (*validateOpCreateMLInputChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMLInputChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMLInputChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMLInputChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateTrainedModel struct {
+}
+
+func (*validateOpCreateTrainedModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrainedModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrainedModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrainedModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +270,106 @@ func (m *validateOpDeleteConfiguredAudienceModelPolicy) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConfiguredModelAlgorithmAssociation struct {
+}
+
+func (*validateOpDeleteConfiguredModelAlgorithmAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguredModelAlgorithmAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfiguredModelAlgorithmAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfiguredModelAlgorithmAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfiguredModelAlgorithm struct {
+}
+
+func (*validateOpDeleteConfiguredModelAlgorithm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguredModelAlgorithm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfiguredModelAlgorithmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfiguredModelAlgorithmInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMLConfiguration struct {
+}
+
+func (*validateOpDeleteMLConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMLConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMLConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMLConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMLInputChannelData struct {
+}
+
+func (*validateOpDeleteMLInputChannelData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMLInputChannelData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMLInputChannelDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMLInputChannelDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrainedModelOutput struct {
+}
+
+func (*validateOpDeleteTrainedModelOutput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrainedModelOutput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrainedModelOutputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrainedModelOutputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTrainingDataset struct {
 }
 
@@ -210,6 +430,66 @@ func (m *validateOpGetAudienceModel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCollaborationConfiguredModelAlgorithmAssociation struct {
+}
+
+func (*validateOpGetCollaborationConfiguredModelAlgorithmAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationConfiguredModelAlgorithmAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationConfiguredModelAlgorithmAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationConfiguredModelAlgorithmAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCollaborationMLInputChannel struct {
+}
+
+func (*validateOpGetCollaborationMLInputChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationMLInputChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationMLInputChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationMLInputChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCollaborationTrainedModel struct {
+}
+
+func (*validateOpGetCollaborationTrainedModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCollaborationTrainedModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCollaborationTrainedModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCollaborationTrainedModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetConfiguredAudienceModel struct {
 }
 
@@ -250,6 +530,126 @@ func (m *validateOpGetConfiguredAudienceModelPolicy) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConfiguredModelAlgorithmAssociation struct {
+}
+
+func (*validateOpGetConfiguredModelAlgorithmAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguredModelAlgorithmAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfiguredModelAlgorithmAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfiguredModelAlgorithmAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfiguredModelAlgorithm struct {
+}
+
+func (*validateOpGetConfiguredModelAlgorithm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguredModelAlgorithm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfiguredModelAlgorithmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfiguredModelAlgorithmInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMLConfiguration struct {
+}
+
+func (*validateOpGetMLConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMLConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMLConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMLConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMLInputChannel struct {
+}
+
+func (*validateOpGetMLInputChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMLInputChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMLInputChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMLInputChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrainedModelInferenceJob struct {
+}
+
+func (*validateOpGetTrainedModelInferenceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrainedModelInferenceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrainedModelInferenceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrainedModelInferenceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrainedModel struct {
+}
+
+func (*validateOpGetTrainedModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrainedModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrainedModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrainedModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTrainingDataset struct {
 }
 
@@ -265,6 +665,146 @@ func (m *validateOpGetTrainingDataset) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTrainingDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationConfiguredModelAlgorithmAssociations struct {
+}
+
+func (*validateOpListCollaborationConfiguredModelAlgorithmAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationConfiguredModelAlgorithmAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationConfiguredModelAlgorithmAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationConfiguredModelAlgorithmAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationMLInputChannels struct {
+}
+
+func (*validateOpListCollaborationMLInputChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationMLInputChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationMLInputChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationMLInputChannelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationTrainedModelExportJobs struct {
+}
+
+func (*validateOpListCollaborationTrainedModelExportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationTrainedModelExportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationTrainedModelExportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationTrainedModelExportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationTrainedModelInferenceJobs struct {
+}
+
+func (*validateOpListCollaborationTrainedModelInferenceJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationTrainedModelInferenceJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationTrainedModelInferenceJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationTrainedModelInferenceJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCollaborationTrainedModels struct {
+}
+
+func (*validateOpListCollaborationTrainedModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCollaborationTrainedModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCollaborationTrainedModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCollaborationTrainedModelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListConfiguredModelAlgorithmAssociations struct {
+}
+
+func (*validateOpListConfiguredModelAlgorithmAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConfiguredModelAlgorithmAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConfiguredModelAlgorithmAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConfiguredModelAlgorithmAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMLInputChannels struct {
+}
+
+func (*validateOpListMLInputChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMLInputChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMLInputChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMLInputChannelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +830,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTrainedModelInferenceJobs struct {
+}
+
+func (*validateOpListTrainedModelInferenceJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTrainedModelInferenceJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTrainedModelInferenceJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTrainedModelInferenceJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTrainedModels struct {
+}
+
+func (*validateOpListTrainedModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTrainedModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTrainedModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTrainedModelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutConfiguredAudienceModelPolicy struct {
 }
 
@@ -305,6 +885,26 @@ func (m *validateOpPutConfiguredAudienceModelPolicy) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutConfiguredAudienceModelPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutMLConfiguration struct {
+}
+
+func (*validateOpPutMLConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMLConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMLConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMLConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -345,6 +945,46 @@ func (m *validateOpStartAudienceGenerationJob) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartAudienceGenerationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTrainedModelExportJob struct {
+}
+
+func (*validateOpStartTrainedModelExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTrainedModelExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTrainedModelExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTrainedModelExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTrainedModelInferenceJob struct {
+}
+
+func (*validateOpStartTrainedModelInferenceJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTrainedModelInferenceJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTrainedModelInferenceJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTrainedModelInferenceJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,12 +1050,36 @@ func (m *validateOpUpdateConfiguredAudienceModel) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCancelTrainedModelInferenceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelTrainedModelInferenceJob{}, middleware.After)
+}
+
+func addOpCancelTrainedModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelTrainedModel{}, middleware.After)
+}
+
 func addOpCreateAudienceModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAudienceModel{}, middleware.After)
 }
 
 func addOpCreateConfiguredAudienceModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfiguredAudienceModel{}, middleware.After)
+}
+
+func addOpCreateConfiguredModelAlgorithmAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguredModelAlgorithmAssociation{}, middleware.After)
+}
+
+func addOpCreateConfiguredModelAlgorithmValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguredModelAlgorithm{}, middleware.After)
+}
+
+func addOpCreateMLInputChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMLInputChannel{}, middleware.After)
+}
+
+func addOpCreateTrainedModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrainedModel{}, middleware.After)
 }
 
 func addOpCreateTrainingDatasetValidationMiddleware(stack *middleware.Stack) error {
@@ -438,6 +1102,26 @@ func addOpDeleteConfiguredAudienceModelPolicyValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDeleteConfiguredAudienceModelPolicy{}, middleware.After)
 }
 
+func addOpDeleteConfiguredModelAlgorithmAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguredModelAlgorithmAssociation{}, middleware.After)
+}
+
+func addOpDeleteConfiguredModelAlgorithmValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguredModelAlgorithm{}, middleware.After)
+}
+
+func addOpDeleteMLConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMLConfiguration{}, middleware.After)
+}
+
+func addOpDeleteMLInputChannelDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMLInputChannelData{}, middleware.After)
+}
+
+func addOpDeleteTrainedModelOutputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrainedModelOutput{}, middleware.After)
+}
+
 func addOpDeleteTrainingDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrainingDataset{}, middleware.After)
 }
@@ -450,6 +1134,18 @@ func addOpGetAudienceModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAudienceModel{}, middleware.After)
 }
 
+func addOpGetCollaborationConfiguredModelAlgorithmAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationConfiguredModelAlgorithmAssociation{}, middleware.After)
+}
+
+func addOpGetCollaborationMLInputChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationMLInputChannel{}, middleware.After)
+}
+
+func addOpGetCollaborationTrainedModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCollaborationTrainedModel{}, middleware.After)
+}
+
 func addOpGetConfiguredAudienceModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfiguredAudienceModel{}, middleware.After)
 }
@@ -458,16 +1154,80 @@ func addOpGetConfiguredAudienceModelPolicyValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpGetConfiguredAudienceModelPolicy{}, middleware.After)
 }
 
+func addOpGetConfiguredModelAlgorithmAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguredModelAlgorithmAssociation{}, middleware.After)
+}
+
+func addOpGetConfiguredModelAlgorithmValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguredModelAlgorithm{}, middleware.After)
+}
+
+func addOpGetMLConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMLConfiguration{}, middleware.After)
+}
+
+func addOpGetMLInputChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMLInputChannel{}, middleware.After)
+}
+
+func addOpGetTrainedModelInferenceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrainedModelInferenceJob{}, middleware.After)
+}
+
+func addOpGetTrainedModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrainedModel{}, middleware.After)
+}
+
 func addOpGetTrainingDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrainingDataset{}, middleware.After)
+}
+
+func addOpListCollaborationConfiguredModelAlgorithmAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationConfiguredModelAlgorithmAssociations{}, middleware.After)
+}
+
+func addOpListCollaborationMLInputChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationMLInputChannels{}, middleware.After)
+}
+
+func addOpListCollaborationTrainedModelExportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationTrainedModelExportJobs{}, middleware.After)
+}
+
+func addOpListCollaborationTrainedModelInferenceJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationTrainedModelInferenceJobs{}, middleware.After)
+}
+
+func addOpListCollaborationTrainedModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCollaborationTrainedModels{}, middleware.After)
+}
+
+func addOpListConfiguredModelAlgorithmAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConfiguredModelAlgorithmAssociations{}, middleware.After)
+}
+
+func addOpListMLInputChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMLInputChannels{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListTrainedModelInferenceJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTrainedModelInferenceJobs{}, middleware.After)
+}
+
+func addOpListTrainedModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTrainedModels{}, middleware.After)
+}
+
 func addOpPutConfiguredAudienceModelPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutConfiguredAudienceModelPolicy{}, middleware.After)
+}
+
+func addOpPutMLConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMLConfiguration{}, middleware.After)
 }
 
 func addOpStartAudienceExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -476,6 +1236,14 @@ func addOpStartAudienceExportJobValidationMiddleware(stack *middleware.Stack) er
 
 func addOpStartAudienceGenerationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAudienceGenerationJob{}, middleware.After)
+}
+
+func addOpStartTrainedModelExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTrainedModelExportJob{}, middleware.After)
+}
+
+func addOpStartTrainedModelInferenceJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTrainedModelInferenceJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -605,6 +1373,26 @@ func validateConfiguredAudienceModelOutputConfig(v *types.ConfiguredAudienceMode
 	}
 }
 
+func validateContainerConfig(v *types.ContainerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerConfig"}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if v.MetricDefinitions != nil {
+		if err := validateMetricDefinitionList(v.MetricDefinitions); err != nil {
+			invalidParams.AddNested("MetricDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataset(v *types.Dataset) error {
 	if v == nil {
 		return nil
@@ -706,6 +1494,25 @@ func validateDataSource(v *types.DataSource) error {
 	}
 }
 
+func validateDestination(v *types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Destination"}
+	if v.S3Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Destination"))
+	} else if v.S3Destination != nil {
+		if err := validateS3ConfigMap(v.S3Destination); err != nil {
+			invalidParams.AddNested("S3Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGlueDataSource(v *types.GlueDataSource) error {
 	if v == nil {
 		return nil
@@ -724,6 +1531,359 @@ func validateGlueDataSource(v *types.GlueDataSource) error {
 	}
 }
 
+func validateInferenceContainerConfig(v *types.InferenceContainerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceContainerConfig"}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceOutputConfiguration(v *types.InferenceOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceOutputConfiguration"}
+	if v.Members == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Members"))
+	} else if v.Members != nil {
+		if err := validateInferenceReceiverMembers(v.Members); err != nil {
+			invalidParams.AddNested("Members", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceReceiverMember(v *types.InferenceReceiverMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceReceiverMember"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceReceiverMembers(v []types.InferenceReceiverMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceReceiverMembers"}
+	for i := range v {
+		if err := validateInferenceReceiverMember(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceResourceConfig(v *types.InferenceResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceResourceConfig"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputChannel(v *types.InputChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputChannel"}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateInputChannelDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputChannelDataSource(v types.InputChannelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputChannelDataSource"}
+	switch uv := v.(type) {
+	case *types.InputChannelDataSourceMemberProtectedQueryInputParameters:
+		if err := validateProtectedQueryInputParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[protectedQueryInputParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogsConfigurationPolicy(v *types.LogsConfigurationPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogsConfigurationPolicy"}
+	if v.AllowedAccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedAccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogsConfigurationPolicyList(v []types.LogsConfigurationPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogsConfigurationPolicyList"}
+	for i := range v {
+		if err := validateLogsConfigurationPolicy(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricDefinition(v *types.MetricDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Regex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regex"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricDefinitionList(v []types.MetricDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinitionList"}
+	for i := range v {
+		if err := validateMetricDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsConfigurationPolicy(v *types.MetricsConfigurationPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsConfigurationPolicy"}
+	if len(v.NoiseLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NoiseLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMLOutputConfiguration(v *types.MLOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MLOutputConfiguration"}
+	if v.Destination != nil {
+		if err := validateDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelInferenceDataSource(v *types.ModelInferenceDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelInferenceDataSource"}
+	if v.MlInputChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlInputChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelTrainingDataChannel(v *types.ModelTrainingDataChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelTrainingDataChannel"}
+	if v.MlInputChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlInputChannelArn"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelTrainingDataChannels(v []types.ModelTrainingDataChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelTrainingDataChannels"}
+	for i := range v {
+		if err := validateModelTrainingDataChannel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivacyConfiguration(v *types.PrivacyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivacyConfiguration"}
+	if v.Policies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policies"))
+	} else if v.Policies != nil {
+		if err := validatePrivacyConfigurationPolicies(v.Policies); err != nil {
+			invalidParams.AddNested("Policies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivacyConfigurationPolicies(v *types.PrivacyConfigurationPolicies) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivacyConfigurationPolicies"}
+	if v.TrainedModels != nil {
+		if err := validateTrainedModelsConfigurationPolicy(v.TrainedModels); err != nil {
+			invalidParams.AddNested("TrainedModels", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TrainedModelExports != nil {
+		if err := validateTrainedModelExportsConfigurationPolicy(v.TrainedModelExports); err != nil {
+			invalidParams.AddNested("TrainedModelExports", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TrainedModelInferenceJobs != nil {
+		if err := validateTrainedModelInferenceJobsConfigurationPolicy(v.TrainedModelInferenceJobs); err != nil {
+			invalidParams.AddNested("TrainedModelInferenceJobs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectedQueryInputParameters(v *types.ProtectedQueryInputParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQueryInputParameters"}
+	if v.SqlParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqlParameters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceConfig(v *types.ResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfig"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.VolumeSizeInGB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3ConfigMap(v *types.S3ConfigMap) error {
 	if v == nil {
 		return nil
@@ -731,6 +1891,195 @@ func validateS3ConfigMap(v *types.S3ConfigMap) error {
 	invalidParams := smithy.InvalidParamsError{Context: "S3ConfigMap"}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelExportOutputConfiguration(v *types.TrainedModelExportOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelExportOutputConfiguration"}
+	if v.Members == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Members"))
+	} else if v.Members != nil {
+		if err := validateTrainedModelExportReceiverMembers(v.Members); err != nil {
+			invalidParams.AddNested("Members", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelExportReceiverMember(v *types.TrainedModelExportReceiverMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelExportReceiverMember"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelExportReceiverMembers(v []types.TrainedModelExportReceiverMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelExportReceiverMembers"}
+	for i := range v {
+		if err := validateTrainedModelExportReceiverMember(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelExportsConfigurationPolicy(v *types.TrainedModelExportsConfigurationPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelExportsConfigurationPolicy"}
+	if v.MaxSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxSize"))
+	} else if v.MaxSize != nil {
+		if err := validateTrainedModelExportsMaxSize(v.MaxSize); err != nil {
+			invalidParams.AddNested("MaxSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilesToExport == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilesToExport"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelExportsMaxSize(v *types.TrainedModelExportsMaxSize) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelExportsMaxSize"}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelInferenceJobsConfigurationPolicy(v *types.TrainedModelInferenceJobsConfigurationPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelInferenceJobsConfigurationPolicy"}
+	if v.ContainerLogs != nil {
+		if err := validateLogsConfigurationPolicyList(v.ContainerLogs); err != nil {
+			invalidParams.AddNested("ContainerLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaxOutputSize != nil {
+		if err := validateTrainedModelInferenceMaxOutputSize(v.MaxOutputSize); err != nil {
+			invalidParams.AddNested("MaxOutputSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelInferenceMaxOutputSize(v *types.TrainedModelInferenceMaxOutputSize) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelInferenceMaxOutputSize"}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainedModelsConfigurationPolicy(v *types.TrainedModelsConfigurationPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainedModelsConfigurationPolicy"}
+	if v.ContainerLogs != nil {
+		if err := validateLogsConfigurationPolicyList(v.ContainerLogs); err != nil {
+			invalidParams.AddNested("ContainerLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainerMetrics != nil {
+		if err := validateMetricsConfigurationPolicy(v.ContainerMetrics); err != nil {
+			invalidParams.AddNested("ContainerMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelTrainedModelInferenceJobInput(v *CancelTrainedModelInferenceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelTrainedModelInferenceJobInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.TrainedModelInferenceJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelInferenceJobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelTrainedModelInput(v *CancelTrainedModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelTrainedModelInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -781,6 +2130,126 @@ func validateOpCreateConfiguredAudienceModelInput(v *CreateConfiguredAudienceMod
 	if v.AudienceSizeConfig != nil {
 		if err := validateAudienceSizeConfig(v.AudienceSizeConfig); err != nil {
 			invalidParams.AddNested("AudienceSizeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConfiguredModelAlgorithmAssociationInput(v *CreateConfiguredModelAlgorithmAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfiguredModelAlgorithmAssociationInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredModelAlgorithmArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PrivacyConfiguration != nil {
+		if err := validatePrivacyConfiguration(v.PrivacyConfiguration); err != nil {
+			invalidParams.AddNested("PrivacyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConfiguredModelAlgorithmInput(v *CreateConfiguredModelAlgorithmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfiguredModelAlgorithmInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.TrainingContainerConfig != nil {
+		if err := validateContainerConfig(v.TrainingContainerConfig); err != nil {
+			invalidParams.AddNested("TrainingContainerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InferenceContainerConfig != nil {
+		if err := validateInferenceContainerConfig(v.InferenceContainerConfig); err != nil {
+			invalidParams.AddNested("InferenceContainerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMLInputChannelInput(v *CreateMLInputChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMLInputChannelInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ConfiguredModelAlgorithmAssociations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmAssociations"))
+	}
+	if v.InputChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputChannel"))
+	} else if v.InputChannel != nil {
+		if err := validateInputChannel(v.InputChannel); err != nil {
+			invalidParams.AddNested("InputChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RetentionInDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionInDays"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTrainedModelInput(v *CreateTrainedModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrainedModelInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConfiguredModelAlgorithmAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmAssociationArn"))
+	}
+	if v.ResourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfig"))
+	} else if v.ResourceConfig != nil {
+		if err := validateResourceConfig(v.ResourceConfig); err != nil {
+			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataChannels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataChannels"))
+	} else if v.DataChannels != nil {
+		if err := validateModelTrainingDataChannels(v.DataChannels); err != nil {
+			invalidParams.AddNested("DataChannels", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -875,6 +2344,90 @@ func validateOpDeleteConfiguredAudienceModelPolicyInput(v *DeleteConfiguredAudie
 	}
 }
 
+func validateOpDeleteConfiguredModelAlgorithmAssociationInput(v *DeleteConfiguredModelAlgorithmAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfiguredModelAlgorithmAssociationInput"}
+	if v.ConfiguredModelAlgorithmAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmAssociationArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfiguredModelAlgorithmInput(v *DeleteConfiguredModelAlgorithmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfiguredModelAlgorithmInput"}
+	if v.ConfiguredModelAlgorithmArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMLConfigurationInput(v *DeleteMLConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMLConfigurationInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMLInputChannelDataInput(v *DeleteMLInputChannelDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMLInputChannelDataInput"}
+	if v.MlInputChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlInputChannelArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTrainedModelOutputInput(v *DeleteTrainedModelOutputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrainedModelOutputInput"}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTrainingDatasetInput(v *DeleteTrainingDatasetInput) error {
 	if v == nil {
 		return nil
@@ -920,6 +2473,60 @@ func validateOpGetAudienceModelInput(v *GetAudienceModelInput) error {
 	}
 }
 
+func validateOpGetCollaborationConfiguredModelAlgorithmAssociationInput(v *GetCollaborationConfiguredModelAlgorithmAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationConfiguredModelAlgorithmAssociationInput"}
+	if v.ConfiguredModelAlgorithmAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmAssociationArn"))
+	}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCollaborationMLInputChannelInput(v *GetCollaborationMLInputChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationMLInputChannelInput"}
+	if v.MlInputChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlInputChannelArn"))
+	}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCollaborationTrainedModelInput(v *GetCollaborationTrainedModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCollaborationTrainedModelInput"}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetConfiguredAudienceModelInput(v *GetConfiguredAudienceModelInput) error {
 	if v == nil {
 		return nil
@@ -950,6 +2557,108 @@ func validateOpGetConfiguredAudienceModelPolicyInput(v *GetConfiguredAudienceMod
 	}
 }
 
+func validateOpGetConfiguredModelAlgorithmAssociationInput(v *GetConfiguredModelAlgorithmAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfiguredModelAlgorithmAssociationInput"}
+	if v.ConfiguredModelAlgorithmAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmAssociationArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfiguredModelAlgorithmInput(v *GetConfiguredModelAlgorithmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfiguredModelAlgorithmInput"}
+	if v.ConfiguredModelAlgorithmArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredModelAlgorithmArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMLConfigurationInput(v *GetMLConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMLConfigurationInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMLInputChannelInput(v *GetMLInputChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMLInputChannelInput"}
+	if v.MlInputChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlInputChannelArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrainedModelInferenceJobInput(v *GetTrainedModelInferenceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrainedModelInferenceJobInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.TrainedModelInferenceJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelInferenceJobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrainedModelInput(v *GetTrainedModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrainedModelInput"}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTrainingDatasetInput(v *GetTrainingDatasetInput) error {
 	if v == nil {
 		return nil
@@ -957,6 +2666,114 @@ func validateOpGetTrainingDatasetInput(v *GetTrainingDatasetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTrainingDatasetInput"}
 	if v.TrainingDatasetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingDatasetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationConfiguredModelAlgorithmAssociationsInput(v *ListCollaborationConfiguredModelAlgorithmAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationConfiguredModelAlgorithmAssociationsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationMLInputChannelsInput(v *ListCollaborationMLInputChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationMLInputChannelsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationTrainedModelExportJobsInput(v *ListCollaborationTrainedModelExportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationTrainedModelExportJobsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationTrainedModelInferenceJobsInput(v *ListCollaborationTrainedModelInferenceJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationTrainedModelInferenceJobsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCollaborationTrainedModelsInput(v *ListCollaborationTrainedModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCollaborationTrainedModelsInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConfiguredModelAlgorithmAssociationsInput(v *ListConfiguredModelAlgorithmAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConfiguredModelAlgorithmAssociationsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMLInputChannelsInput(v *ListMLInputChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMLInputChannelsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,6 +2797,36 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListTrainedModelInferenceJobsInput(v *ListTrainedModelInferenceJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTrainedModelInferenceJobsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTrainedModelsInput(v *ListTrainedModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTrainedModelsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutConfiguredAudienceModelPolicyInput(v *PutConfiguredAudienceModelPolicyInput) error {
 	if v == nil {
 		return nil
@@ -990,6 +2837,28 @@ func validateOpPutConfiguredAudienceModelPolicyInput(v *PutConfiguredAudienceMod
 	}
 	if v.ConfiguredAudienceModelPolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfiguredAudienceModelPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutMLConfigurationInput(v *PutMLConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMLConfigurationInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.DefaultOutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultOutputLocation"))
+	} else if v.DefaultOutputLocation != nil {
+		if err := validateMLOutputConfiguration(v.DefaultOutputLocation); err != nil {
+			invalidParams.AddNested("DefaultOutputLocation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1039,6 +2908,76 @@ func validateOpStartAudienceGenerationJobInput(v *StartAudienceGenerationJobInpu
 	} else if v.SeedAudience != nil {
 		if err := validateAudienceGenerationJobDataSource(v.SeedAudience); err != nil {
 			invalidParams.AddNested("SeedAudience", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTrainedModelExportJobInput(v *StartTrainedModelExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTrainedModelExportJobInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateTrainedModelExportOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTrainedModelInferenceJobInput(v *StartTrainedModelInferenceJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTrainedModelInferenceJobInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TrainedModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainedModelArn"))
+	}
+	if v.ResourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfig"))
+	} else if v.ResourceConfig != nil {
+		if err := validateInferenceResourceConfig(v.ResourceConfig); err != nil {
+			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateInferenceOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateModelInferenceDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

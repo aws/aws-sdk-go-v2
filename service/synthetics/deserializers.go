@@ -3582,6 +3582,15 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "ProvisionedResourceCleanup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisionedResourceCleanupSetting to be of type string, got %T instead", value)
+				}
+				sv.ProvisionedResourceCleanup = types.ProvisionedResourceCleanupSetting(jtv)
+			}
+
 		case "RunConfig":
 			if err := awsRestjson1_deserializeDocumentCanaryRunConfigOutput(&sv.RunConfig, value); err != nil {
 				return err

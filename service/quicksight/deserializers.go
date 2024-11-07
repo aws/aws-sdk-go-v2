@@ -70429,6 +70429,69 @@ func awsRestjson1_deserializeDocumentNumericSeparatorConfiguration(v **types.Num
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOAuthParameters(v **types.OAuthParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuthParameters
+	if *v == nil {
+		sv = &types.OAuthParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IdentityProviderResourceUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityProviderResourceUri to be of type string, got %T instead", value)
+				}
+				sv.IdentityProviderResourceUri = ptr.String(jtv)
+			}
+
+		case "IdentityProviderVpcConnectionProperties":
+			if err := awsRestjson1_deserializeDocumentVpcConnectionProperties(&sv.IdentityProviderVpcConnectionProperties, value); err != nil {
+				return err
+			}
+
+		case "OAuthScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OAuthScope to be of type string, got %T instead", value)
+				}
+				sv.OAuthScope = ptr.String(jtv)
+			}
+
+		case "TokenProviderUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TokenProviderUrl to be of type string, got %T instead", value)
+				}
+				sv.TokenProviderUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOperandList(v *[]types.Identifier, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -81230,6 +81293,15 @@ func awsRestjson1_deserializeDocumentSnowflakeParameters(v **types.SnowflakePara
 
 	for key, value := range shape {
 		switch key {
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
 		case "Database":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -81239,6 +81311,15 @@ func awsRestjson1_deserializeDocumentSnowflakeParameters(v **types.SnowflakePara
 				sv.Database = ptr.String(jtv)
 			}
 
+		case "DatabaseAccessControlRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseAccessControlRole to be of type string, got %T instead", value)
+				}
+				sv.DatabaseAccessControlRole = ptr.String(jtv)
+			}
+
 		case "Host":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -81246,6 +81327,11 @@ func awsRestjson1_deserializeDocumentSnowflakeParameters(v **types.SnowflakePara
 					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
 				}
 				sv.Host = ptr.String(jtv)
+			}
+
+		case "OAuthParameters":
+			if err := awsRestjson1_deserializeDocumentOAuthParameters(&sv.OAuthParameters, value); err != nil {
+				return err
 			}
 
 		case "Warehouse":
@@ -81510,6 +81596,15 @@ func awsRestjson1_deserializeDocumentStarburstParameters(v **types.StarburstPara
 
 	for key, value := range shape {
 		switch key {
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
 		case "Catalog":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -81519,6 +81614,15 @@ func awsRestjson1_deserializeDocumentStarburstParameters(v **types.StarburstPara
 				sv.Catalog = ptr.String(jtv)
 			}
 
+		case "DatabaseAccessControlRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseAccessControlRole to be of type string, got %T instead", value)
+				}
+				sv.DatabaseAccessControlRole = ptr.String(jtv)
+			}
+
 		case "Host":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -81526,6 +81630,11 @@ func awsRestjson1_deserializeDocumentStarburstParameters(v **types.StarburstPara
 					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
 				}
 				sv.Host = ptr.String(jtv)
+			}
+
+		case "OAuthParameters":
+			if err := awsRestjson1_deserializeDocumentOAuthParameters(&sv.OAuthParameters, value); err != nil {
+				return err
 			}
 
 		case "Port":

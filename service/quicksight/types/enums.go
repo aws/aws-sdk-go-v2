@@ -554,6 +554,27 @@ func (AuthenticationMethodOption) Values() []AuthenticationMethodOption {
 	}
 }
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypePassword AuthenticationType = "PASSWORD"
+	AuthenticationTypeToken    AuthenticationType = "TOKEN"
+	AuthenticationTypeX509     AuthenticationType = "X509"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"PASSWORD",
+		"TOKEN",
+		"X509",
+	}
+}
+
 type AuthorSpecifiedAggregation string
 
 // Enum values for AuthorSpecifiedAggregation

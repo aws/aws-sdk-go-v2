@@ -117,6 +117,26 @@ func (BurstablePerformance) Values() []BurstablePerformance {
 	}
 }
 
+type CapacityDistributionStrategy string
+
+// Enum values for CapacityDistributionStrategy
+const (
+	CapacityDistributionStrategyBalancedOnly       CapacityDistributionStrategy = "balanced-only"
+	CapacityDistributionStrategyBalancedBestEffort CapacityDistributionStrategy = "balanced-best-effort"
+)
+
+// Values returns all known values for CapacityDistributionStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityDistributionStrategy) Values() []CapacityDistributionStrategy {
+	return []CapacityDistributionStrategy{
+		"balanced-only",
+		"balanced-best-effort",
+	}
+}
+
 type CpuManufacturer string
 
 // Enum values for CpuManufacturer

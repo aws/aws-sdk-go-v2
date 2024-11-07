@@ -21,6 +21,18 @@ import (
 // Amazon Bedrock doesn't store any text, images, or documents that you provide as
 // content. The data is only used to generate the response.
 //
+// You can submit a prompt by including it in the messages field, specifying the
+// modelId of a foundation model or inference profile to run inference on it, and
+// including any other fields that are relevant to your use case.
+//
+// You can also submit a prompt from Prompt management by specifying the ARN of
+// the prompt version and including a map of variables to values in the
+// promptVariables field. You can append more messages to the prompt by using the
+// messages field. If you use a prompt from Prompt management, you can't include
+// the following fields in the request: additionalModelRequestFields ,
+// inferenceConfig , system , or toolConfig . Instead, these fields must be defined
+// through Prompt management. For more information, see [Use a prompt from Prompt management].
+//
 // For information about the Converse API, see Use the Converse API in the Amazon
 // Bedrock User Guide. To use a guardrail, see Use a guardrail with the Converse
 // API in the Amazon Bedrock User Guide. To use a tool with a model, see Tool use
@@ -29,6 +41,8 @@ import (
 // For example code, see Converse API examples in the Amazon Bedrock User Guide.
 //
 // This operation requires permission for the bedrock:InvokeModel action.
+//
+// [Use a prompt from Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-use.html
 func (c *Client) Converse(ctx context.Context, params *ConverseInput, optFns ...func(*Options)) (*ConverseOutput, error) {
 	if params == nil {
 		params = &ConverseInput{}
@@ -46,14 +60,8 @@ func (c *Client) Converse(ctx context.Context, params *ConverseInput, optFns ...
 
 type ConverseInput struct {
 
-	// The messages that you want to send to the model.
-	//
-	// This member is required.
-	Messages []types.Message
-
-	// The identifier for the model that you want to call.
-	//
-	// The modelId to provide depends on the type of model or throughput that you use:
+	// Specifies the model or throughput with which to run inference, or the prompt
+	// resource to use in inference. The value depends on the resource that you use:
 	//
 	//   - If you use a base model, specify the model ID or its ARN. For a list of
 	//   model IDs for base models, see [Amazon Bedrock base model IDs (on-demand throughput)]in the Amazon Bedrock User Guide.
@@ -69,6 +77,9 @@ type ConverseInput struct {
 	//   Then specify the ARN of the resulting provisioned model. For more information,
 	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
 	//
+	//   - To include a prompt that was defined in Prompt management, specify the ARN
+	//   of the prompt version to use.
+	//
 	// The Converse API doesn't support [imported models].
 	//
 	// [Run inference using a Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
@@ -81,14 +92,14 @@ type ConverseInput struct {
 	ModelId *string
 
 	// Additional inference parameters that the model supports, beyond the base set of
-	// inference parameters that Converse supports in the inferenceConfig field. For
-	// more information, see [Model parameters].
+	// inference parameters that Converse and ConverseStream support in the
+	// inferenceConfig field. For more information, see [Model parameters].
 	//
 	// [Model parameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 	AdditionalModelRequestFields document.Interface
 
-	// Additional model parameters field paths to return in the response. Converse
-	// returns the requested fields as a JSON Pointer object in the
+	// Additional model parameters field paths to return in the response. Converse and
+	// ConverseStream return the requested fields as a JSON Pointer object in the
 	// additionalModelResponseFields field. The following is example JSON for
 	// additionalModelResponseFieldPaths .
 	//
@@ -96,22 +107,35 @@ type ConverseInput struct {
 	//
 	// For information about the JSON Pointer syntax, see the [Internet Engineering Task Force (IETF)] documentation.
 	//
-	// Converse rejects an empty JSON Pointer or incorrectly structured JSON Pointer
-	// with a 400 error code. if the JSON Pointer is valid, but the requested field is
-	// not in the model response, it is ignored by Converse .
+	// Converse and ConverseStream reject an empty JSON Pointer or incorrectly
+	// structured JSON Pointer with a 400 error code. if the JSON Pointer is valid,
+	// but the requested field is not in the model response, it is ignored by Converse .
 	//
 	// [Internet Engineering Task Force (IETF)]: https://datatracker.ietf.org/doc/html/rfc6901
 	AdditionalModelResponseFieldPaths []string
 
 	// Configuration information for a guardrail that you want to use in the request.
+	// If you include guardContent blocks in the content field in the messages field,
+	// the guardrail operates only on those messages. If you include no guardContent
+	// blocks, the guardrail operates on all messages in the request body and in any
+	// included prompt resource.
 	GuardrailConfig *types.GuardrailConfiguration
 
-	// Inference parameters to pass to the model. Converse supports a base set of
-	// inference parameters. If you need to pass additional parameters that the model
-	// supports, use the additionalModelRequestFields request field.
+	// Inference parameters to pass to the model. Converse and ConverseStream support
+	// a base set of inference parameters. If you need to pass additional parameters
+	// that the model supports, use the additionalModelRequestFields request field.
 	InferenceConfig *types.InferenceConfiguration
 
-	// A system prompt to pass to the model.
+	// The messages that you want to send to the model.
+	Messages []types.Message
+
+	// Contains a map of variables in a prompt from Prompt management to objects
+	// containing the values to fill in for them when running model invocation. This
+	// field is ignored if you don't specify a prompt resource in the modelId field.
+	PromptVariables map[string]types.PromptVariableValues
+
+	// A prompt that provides instructions or context to the model about the task it
+	// should perform, or the persona it should adopt during the conversation.
 	System []types.SystemContentBlock
 
 	// Configuration information for the tools that the model can use when generating

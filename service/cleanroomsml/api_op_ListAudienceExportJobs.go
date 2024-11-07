@@ -50,8 +50,7 @@ type ListAudienceExportJobsOutput struct {
 	// This member is required.
 	AudienceExportJobs []types.AudienceExportJobSummary
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The token value used to access the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

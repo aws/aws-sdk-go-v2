@@ -36,17 +36,6 @@ func (c *Client) InvokeModel(ctx context.Context, params *InvokeModelInput, optF
 
 type InvokeModelInput struct {
 
-	// The prompt and inference parameters in the format specified in the contentType
-	// in the header. You must provide the body in JSON format. To see the format and
-	// content of the request and response bodies for different models, refer to [Inference parameters]. For
-	// more information, see [Run inference]in the Bedrock User Guide.
-	//
-	// [Inference parameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
-	// [Run inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
-	//
-	// This member is required.
-	Body []byte
-
 	// The unique identifier of the model to invoke to run inference.
 	//
 	// The modelId to provide depends on the type of model that you use:
@@ -77,6 +66,15 @@ type InvokeModelInput struct {
 	// The desired MIME type of the inference body in the response. The default value
 	// is application/json .
 	Accept *string
+
+	// The prompt and inference parameters in the format specified in the contentType
+	// in the header. You must provide the body in JSON format. To see the format and
+	// content of the request and response bodies for different models, refer to [Inference parameters]. For
+	// more information, see [Run inference]in the Bedrock User Guide.
+	//
+	// [Inference parameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	// [Run inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
+	Body []byte
 
 	// The MIME type of the input data in the request. You must specify
 	// application/json .

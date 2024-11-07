@@ -4667,6 +4667,18 @@ func awsAwsquery_serializeDocumentAutoScalingNotificationTypes(v []string, value
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v *types.AvailabilityZoneDistribution, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.CapacityDistributionStrategy) > 0 {
+		objectKey := object.Key("CapacityDistributionStrategy")
+		objectKey.String(string(v.CapacityDistributionStrategy))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -6557,6 +6569,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.AvailabilityZoneDistribution != nil {
+		objectKey := object.Key("AvailabilityZoneDistribution")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v.AvailabilityZoneDistribution, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityZones != nil {
 		objectKey := object.Key("AvailabilityZones")
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
@@ -8043,6 +8062,13 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.AutoScalingGroupName != nil {
 		objectKey := object.Key("AutoScalingGroupName")
 		objectKey.String(*v.AutoScalingGroupName)
+	}
+
+	if v.AvailabilityZoneDistribution != nil {
+		objectKey := object.Key("AvailabilityZoneDistribution")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v.AvailabilityZoneDistribution, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.AvailabilityZones != nil {

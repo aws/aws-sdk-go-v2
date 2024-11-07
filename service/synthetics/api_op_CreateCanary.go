@@ -118,6 +118,18 @@ type CreateCanaryInput struct {
 	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
 	FailureRetentionPeriodInDays *int32
 
+	// Specifies whether to also delete the Lambda functions and layers used by this
+	// canary when the canary is deleted. If you omit this parameter, the default of
+	// AUTOMATIC is used, which means that the Lambda functions and layers will be
+	// deleted when the canary is deleted.
+	//
+	// If the value of this parameter is OFF , then the value of the DeleteLambda
+	// parameter of the [DeleteCanary]operation determines whether the Lambda functions and layers
+	// will be deleted.
+	//
+	// [DeleteCanary]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+	ProvisionedResourceCleanup types.ProvisionedResourceCleanupSetting
+
 	// To have the tags that you apply to this canary also be applied to the Lambda
 	// function that the canary uses, specify this parameter with the value
 	// lambda-function .

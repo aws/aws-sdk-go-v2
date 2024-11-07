@@ -31721,6 +31721,35 @@ func awsRestjson1_serializeDocumentNumericSeparatorConfiguration(v *types.Numeri
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOAuthParameters(v *types.OAuthParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityProviderResourceUri != nil {
+		ok := object.Key("IdentityProviderResourceUri")
+		ok.String(*v.IdentityProviderResourceUri)
+	}
+
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		ok := object.Key("IdentityProviderVpcConnectionProperties")
+		if err := awsRestjson1_serializeDocumentVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OAuthScope != nil {
+		ok := object.Key("OAuthScope")
+		ok.String(*v.OAuthScope)
+	}
+
+	if v.TokenProviderUrl != nil {
+		ok := object.Key("TokenProviderUrl")
+		ok.String(*v.TokenProviderUrl)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOperandList(v []types.Identifier, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -36555,14 +36584,31 @@ func awsRestjson1_serializeDocumentSnowflakeParameters(v *types.SnowflakeParamet
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.Database != nil {
 		ok := object.Key("Database")
 		ok.String(*v.Database)
 	}
 
+	if v.DatabaseAccessControlRole != nil {
+		ok := object.Key("DatabaseAccessControlRole")
+		ok.String(*v.DatabaseAccessControlRole)
+	}
+
 	if v.Host != nil {
 		ok := object.Key("Host")
 		ok.String(*v.Host)
+	}
+
+	if v.OAuthParameters != nil {
+		ok := object.Key("OAuthParameters")
+		if err := awsRestjson1_serializeDocumentOAuthParameters(v.OAuthParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Warehouse != nil {
@@ -36655,14 +36701,31 @@ func awsRestjson1_serializeDocumentStarburstParameters(v *types.StarburstParamet
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.Catalog != nil {
 		ok := object.Key("Catalog")
 		ok.String(*v.Catalog)
 	}
 
+	if v.DatabaseAccessControlRole != nil {
+		ok := object.Key("DatabaseAccessControlRole")
+		ok.String(*v.DatabaseAccessControlRole)
+	}
+
 	if v.Host != nil {
 		ok := object.Key("Host")
 		ok.String(*v.Host)
+	}
+
+	if v.OAuthParameters != nil {
+		ok := object.Key("OAuthParameters")
+		if err := awsRestjson1_serializeDocumentOAuthParameters(v.OAuthParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Port != nil {

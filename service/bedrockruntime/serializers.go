@@ -249,6 +249,13 @@ func awsRestjson1_serializeOpDocumentConverseInput(v *ConverseInput, value smith
 		}
 	}
 
+	if v.PromptVariables != nil {
+		ok := object.Key("promptVariables")
+		if err := awsRestjson1_serializeDocumentPromptVariableMap(v.PromptVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.System != nil {
 		ok := object.Key("system")
 		if err := awsRestjson1_serializeDocumentSystemContentBlocks(v.System, ok); err != nil {
@@ -383,6 +390,13 @@ func awsRestjson1_serializeOpDocumentConverseStreamInput(v *ConverseStreamInput,
 	if v.Messages != nil {
 		ok := object.Key("messages")
 		if err := awsRestjson1_serializeDocumentMessages(v.Messages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PromptVariables != nil {
+		ok := object.Key("promptVariables")
+		if err := awsRestjson1_serializeDocumentPromptVariableMap(v.PromptVariables, ok); err != nil {
 			return err
 		}
 	}
@@ -1037,6 +1051,38 @@ func awsRestjson1_serializeDocumentNonEmptyStringList(v []string, value smithyjs
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptVariableMap(v map[string]types.PromptVariableValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentPromptVariableValues(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptVariableValues(v types.PromptVariableValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PromptVariableValuesMemberText:
+		av := object.Key("text")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

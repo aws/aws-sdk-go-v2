@@ -2281,6 +2281,58 @@ func validateMemberList(v []types.MemberSpecification) error {
 	}
 }
 
+func validateMembershipMLPaymentConfig(v *types.MembershipMLPaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipMLPaymentConfig"}
+	if v.ModelTraining != nil {
+		if err := validateMembershipModelTrainingPaymentConfig(v.ModelTraining); err != nil {
+			invalidParams.AddNested("ModelTraining", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelInference != nil {
+		if err := validateMembershipModelInferencePaymentConfig(v.ModelInference); err != nil {
+			invalidParams.AddNested("ModelInference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMembershipModelInferencePaymentConfig(v *types.MembershipModelInferencePaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipModelInferencePaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMembershipModelTrainingPaymentConfig(v *types.MembershipModelTrainingPaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MembershipModelTrainingPaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMembershipPaymentConfiguration(v *types.MembershipPaymentConfiguration) error {
 	if v == nil {
 		return nil
@@ -2291,6 +2343,11 @@ func validateMembershipPaymentConfiguration(v *types.MembershipPaymentConfigurat
 	} else if v.QueryCompute != nil {
 		if err := validateMembershipQueryComputePaymentConfig(v.QueryCompute); err != nil {
 			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MachineLearning != nil {
+		if err := validateMembershipMLPaymentConfig(v.MachineLearning); err != nil {
+			invalidParams.AddNested("MachineLearning", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2364,6 +2421,11 @@ func validateMemberSpecification(v *types.MemberSpecification) error {
 	if v.MemberAbilities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberAbilities"))
 	}
+	if v.MlMemberAbilities != nil {
+		if err := validateMLMemberAbilities(v.MlMemberAbilities); err != nil {
+			invalidParams.AddNested("MlMemberAbilities", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
@@ -2371,6 +2433,73 @@ func validateMemberSpecification(v *types.MemberSpecification) error {
 		if err := validatePaymentConfiguration(v.PaymentConfiguration); err != nil {
 			invalidParams.AddNested("PaymentConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMLMemberAbilities(v *types.MLMemberAbilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MLMemberAbilities"}
+	if v.CustomMLMemberAbilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomMLMemberAbilities"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMLPaymentConfig(v *types.MLPaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MLPaymentConfig"}
+	if v.ModelTraining != nil {
+		if err := validateModelTrainingPaymentConfig(v.ModelTraining); err != nil {
+			invalidParams.AddNested("ModelTraining", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelInference != nil {
+		if err := validateModelInferencePaymentConfig(v.ModelInference); err != nil {
+			invalidParams.AddNested("ModelInference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelInferencePaymentConfig(v *types.ModelInferencePaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelInferencePaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelTrainingPaymentConfig(v *types.ModelTrainingPaymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelTrainingPaymentConfig"}
+	if v.IsResponsible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2389,6 +2518,11 @@ func validatePaymentConfiguration(v *types.PaymentConfiguration) error {
 	} else if v.QueryCompute != nil {
 		if err := validateQueryComputePaymentConfig(v.QueryCompute); err != nil {
 			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MachineLearning != nil {
+		if err := validateMLPaymentConfig(v.MachineLearning); err != nil {
+			invalidParams.AddNested("MachineLearning", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2688,6 +2822,11 @@ func validateOpCreateCollaborationInput(v *CreateCollaborationInput) error {
 	}
 	if v.CreatorMemberAbilities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatorMemberAbilities"))
+	}
+	if v.CreatorMLMemberAbilities != nil {
+		if err := validateMLMemberAbilities(v.CreatorMLMemberAbilities); err != nil {
+			invalidParams.AddNested("CreatorMLMemberAbilities", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.CreatorDisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatorDisplayName"))

@@ -12,12 +12,12 @@ import (
 
 // Permanently deletes the specified canary.
 //
-// If you specify DeleteLambda to true , CloudWatch Synthetics also deletes the
-// Lambda functions and layers that are used by the canary.
+// If the canary's ProvisionedResourceCleanup field is set to AUTOMATIC or you
+// specify DeleteLambda in this operation as true , CloudWatch Synthetics also
+// deletes the Lambda functions and layers that are used by the canary.
 //
 // Other resources used and created by the canary are not automatically deleted.
-// After you delete a canary that you do not intend to use again, you should also
-// delete the following:
+// After you delete a canary, you should also delete the following:
 //
 //   - The CloudWatch alarms created for this canary. These alarms have a name of
 //     Synthetics-Alarm-first-198-characters-of-canary-name-canaryId-alarm number
@@ -60,7 +60,12 @@ type DeleteCanaryInput struct {
 	Name *string
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
-	// canary. The default is false.
+	// canary. The default is false .
+	//
+	// Your setting for this parameter is used only if the canary doesn't have
+	// AUTOMATIC for its ProvisionedResourceCleanup field. If that field is set to
+	// AUTOMATIC , then the Lambda functions and layers will be deleted when this
+	// canary is deleted.
 	//
 	// Type: Boolean
 	DeleteLambda bool

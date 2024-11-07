@@ -90,6 +90,26 @@ func (m *validateOpDeleteView) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetManagedView struct {
+}
+
+func (*validateOpGetManagedView) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedView) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedViewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetView struct {
 }
 
@@ -286,6 +306,10 @@ func addOpDeleteViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteView{}, middleware.After)
 }
 
+func addOpGetManagedViewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedView{}, middleware.After)
+}
+
 func addOpGetViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetView{}, middleware.After)
 }
@@ -431,6 +455,21 @@ func validateOpDeleteViewInput(v *DeleteViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteViewInput"}
 	if v.ViewArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ViewArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetManagedViewInput(v *GetManagedViewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedViewInput"}
+	if v.ManagedViewArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedViewArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

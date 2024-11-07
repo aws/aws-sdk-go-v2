@@ -2642,6 +2642,77 @@ type Membership struct {
 	// can receive results.
 	DefaultResultConfiguration *MembershipProtectedQueryResultConfiguration
 
+	// Specifies the ML member abilities that are granted to a collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlMemberAbilities *MLMemberAbilities
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's machine learning payment
+// responsibilities set by the collaboration creator.
+type MembershipMLPaymentConfig struct {
+
+	// The payment responsibilities accepted by the member for model inference.
+	ModelInference *MembershipModelInferencePaymentConfig
+
+	// The payment responsibilities accepted by the member for model training.
+	ModelTraining *MembershipModelTrainingPaymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model inference payment
+// responsibilities set by the collaboration creator.
+type MembershipModelInferencePaymentConfig struct {
+
+	// Indicates whether the collaboration member has accepted to pay for model
+	// inference costs ( TRUE ) or has not accepted to pay for model inference costs (
+	// FALSE ).
+	//
+	// If the collaboration creator has not specified anyone to pay for model
+	// inference costs, then the member who can query is the default payer.
+	//
+	// An error message is returned for the following reasons:
+	//
+	//   - If you set the value to FALSE but you are responsible to pay for model
+	//   inference costs.
+	//
+	//   - If you set the value to TRUE but you are not responsible to pay for model
+	//   inference costs.
+	//
+	// This member is required.
+	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model training payment
+// responsibilities set by the collaboration creator.
+type MembershipModelTrainingPaymentConfig struct {
+
+	// Indicates whether the collaboration member has accepted to pay for model
+	// training costs ( TRUE ) or has not accepted to pay for model training costs (
+	// FALSE ).
+	//
+	// If the collaboration creator has not specified anyone to pay for model training
+	// costs, then the member who can query is the default payer.
+	//
+	// An error message is returned for the following reasons:
+	//
+	//   - If you set the value to FALSE but you are responsible to pay for model
+	//   training costs.
+	//
+	//   - If you set the value to TRUE but you are not responsible to pay for model
+	//   training costs.
+	//
+	// This member is required.
+	IsResponsible *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2654,6 +2725,10 @@ type MembershipPaymentConfiguration struct {
 	//
 	// This member is required.
 	QueryCompute *MembershipQueryComputePaymentConfig
+
+	// The payment responsibilities accepted by the collaboration member for machine
+	// learning costs.
+	MachineLearning *MembershipMLPaymentConfig
 
 	noSmithyDocumentSerde
 }
@@ -2782,6 +2857,14 @@ type MembershipSummary struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// Provides a summary of the ML abilities for the collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlMemberAbilities *MLMemberAbilities
+
 	noSmithyDocumentSerde
 }
 
@@ -2803,6 +2886,14 @@ type MemberSpecification struct {
 	//
 	// This member is required.
 	MemberAbilities []MemberAbility
+
+	// The ML abilities granted to the collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlMemberAbilities *MLMemberAbilities
 
 	// The collaboration member's payment responsibilities set by the collaboration
 	// creator.
@@ -2860,6 +2951,95 @@ type MemberSummary struct {
 	// The unique ID for the member's associated membership, if present.
 	MembershipId *string
 
+	// Provides a summary of the ML abilities for the collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlAbilities *MLMemberAbilities
+
+	noSmithyDocumentSerde
+}
+
+// The ML member abilities for a collaboration member.
+//
+// Custom ML modeling is in beta release and is subject to change. For beta terms
+// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+type MLMemberAbilities struct {
+
+	// The custom ML member abilities for a collaboration member. The inference
+	// feature is not available in the custom ML modeling beta.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	//
+	// This member is required.
+	CustomMLMemberAbilities []CustomMLMemberAbility
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's machine learning payment
+// responsibilities set by the collaboration creator.
+type MLPaymentConfig struct {
+
+	// The payment responsibilities accepted by the member for model inference.
+	ModelInference *ModelInferencePaymentConfig
+
+	// The payment responsibilities accepted by the member for model training.
+	ModelTraining *ModelTrainingPaymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model inference payment
+// responsibilities set by the collaboration creator.
+type ModelInferencePaymentConfig struct {
+
+	// Indicates whether the collaboration creator has configured the collaboration
+	// member to pay for model inference costs ( TRUE ) or has not configured the
+	// collaboration member to pay for model inference costs ( FALSE ).
+	//
+	// Exactly one member can be configured to pay for model inference costs. An error
+	// is returned if the collaboration creator sets a TRUE value for more than one
+	// member in the collaboration.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// model inference costs, then the member who can query is the default payer. An
+	// error is returned if the collaboration creator sets a FALSE value for the
+	// member who can query.
+	//
+	// This member is required.
+	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model training payment
+// responsibilities set by the collaboration creator.
+type ModelTrainingPaymentConfig struct {
+
+	// Indicates whether the collaboration creator has configured the collaboration
+	// member to pay for model training costs ( TRUE ) or has not configured the
+	// collaboration member to pay for model training costs ( FALSE ).
+	//
+	// Exactly one member can be configured to pay for model training costs. An error
+	// is returned if the collaboration creator sets a TRUE value for more than one
+	// member in the collaboration.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// model training costs, then the member who can query is the default payer. An
+	// error is returned if the collaboration creator sets a FALSE value for the
+	// member who can query.
+	//
+	// This member is required.
+	IsResponsible *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2872,6 +3052,10 @@ type PaymentConfiguration struct {
 	//
 	// This member is required.
 	QueryCompute *QueryComputePaymentConfig
+
+	// An object representing the collaboration member's machine learning payment
+	// responsibilities set by the collaboration creator.
+	MachineLearning *MLPaymentConfig
 
 	noSmithyDocumentSerde
 }

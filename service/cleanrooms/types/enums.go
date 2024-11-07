@@ -301,6 +301,25 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	}
 }
 
+type CustomMLMemberAbility string
+
+// Enum values for CustomMLMemberAbility
+const (
+	CustomMLMemberAbilityCanReceiveModelOutput     CustomMLMemberAbility = "CAN_RECEIVE_MODEL_OUTPUT"
+	CustomMLMemberAbilityCanReceiveInferenceOutput CustomMLMemberAbility = "CAN_RECEIVE_INFERENCE_OUTPUT"
+)
+
+// Values returns all known values for CustomMLMemberAbility. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomMLMemberAbility) Values() []CustomMLMemberAbility {
+	return []CustomMLMemberAbility{
+		"CAN_RECEIVE_MODEL_OUTPUT",
+		"CAN_RECEIVE_INFERENCE_OUTPUT",
+	}
+}
+
 type DifferentialPrivacyAggregationType string
 
 // Enum values for DifferentialPrivacyAggregationType

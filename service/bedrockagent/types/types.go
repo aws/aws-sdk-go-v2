@@ -657,6 +657,15 @@ type AgentVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines tools, at least one of which must be requested by the model. No text is
+// generated but the results of tool use are sent back to the model to help
+// generate a response. For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type AnyToolChoice struct {
+	noSmithyDocumentSerde
+}
+
 // Contains details about the OpenAPI schema for the action group. For more
 // information, see [Action group OpenAPI schemas]. You can either include the schema directly in the payload
 // field or you can upload it to an S3 bucket and specify the S3 bucket location in
@@ -696,6 +705,14 @@ type APISchemaMemberS3 struct {
 
 func (*APISchemaMemberS3) isAPISchema() {}
 
+// Defines tools. The model automatically decides whether to call a tool or to
+// generate text instead. For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type AutoToolChoice struct {
+	noSmithyDocumentSerde
+}
+
 // The vector configuration details for the Bedrock embeddings model.
 type BedrockEmbeddingModelConfiguration struct {
 
@@ -720,6 +737,31 @@ type BedrockFoundationModelConfiguration struct {
 
 	// Instructions for interpreting the contents of a document.
 	ParsingPrompt *ParsingPrompt
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations to use a prompt in a conversational format. For more
+// information, see [Create a prompt using Prompt management].
+//
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type ChatPromptTemplateConfiguration struct {
+
+	// Contains messages in the chat for the prompt.
+	//
+	// This member is required.
+	Messages []Message
+
+	// An array of the variables in the prompt template.
+	InputVariables []PromptInputVariable
+
+	// Contains system prompts to provide context to the model or to describe how it
+	// should behave.
+	System []SystemContentBlock
+
+	// Configuration information for the tools that the model can use when generating
+	// a response.
+	ToolConfiguration *ToolConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -853,6 +895,27 @@ type ConfluenceSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the content for the message you pass to, or receive from a model. For
+// more information, see [Create a prompt using Prompt management].
+//
+// The following types satisfy this interface:
+//
+//	ContentBlockMemberText
+//
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type ContentBlock interface {
+	isContentBlock()
+}
+
+// The text in the message.
+type ContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberText) isContentBlock() {}
+
 // The configuration of filtering the data source content. For example,
 // configuring regular expression patterns to include or exclude certain content.
 type CrawlFilterConfiguration struct {
@@ -893,6 +956,17 @@ type CustomTransformationConfiguration struct {
 	//
 	// This member is required.
 	Transformations []Transformation
+
+	noSmithyDocumentSerde
+}
+
+// Details about a cyclic connection detected in the flow.
+type CyclicConnectionFlowValidationDetails struct {
+
+	// The name of the connection that causes the cycle in the flow.
+	//
+	// This member is required.
+	Connection *string
 
 	noSmithyDocumentSerde
 }
@@ -1024,6 +1098,38 @@ type DataSourceSummary struct {
 
 	// The description of the data source.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about duplicate condition expressions found in a condition node.
+type DuplicateConditionExpressionFlowValidationDetails struct {
+
+	// The duplicated condition expression.
+	//
+	// This member is required.
+	Expression *string
+
+	// The name of the node containing the duplicate condition expressions.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about duplicate connections found between two nodes in the flow.
+type DuplicateConnectionsFlowValidationDetails struct {
+
+	// The name of the source node where the duplicate connection starts.
+	//
+	// This member is required.
+	Source *string
+
+	// The name of the target node where the duplicate connection ends.
+	//
+	// This member is required.
+	Target *string
 
 	noSmithyDocumentSerde
 }
@@ -1536,8 +1642,272 @@ type FlowValidation struct {
 	// This member is required.
 	Severity FlowValidationSeverity
 
+	// Specific details about the validation issue encountered in the flow.
+	Details FlowValidationDetails
+
+	// The type of validation issue encountered in the flow.
+	Type FlowValidationType
+
 	noSmithyDocumentSerde
 }
+
+// A union type containing various possible validation issues in the flow.
+//
+// The following types satisfy this interface:
+//
+//	FlowValidationDetailsMemberCyclicConnection
+//	FlowValidationDetailsMemberDuplicateConditionExpression
+//	FlowValidationDetailsMemberDuplicateConnections
+//	FlowValidationDetailsMemberIncompatibleConnectionDataType
+//	FlowValidationDetailsMemberMalformedConditionExpression
+//	FlowValidationDetailsMemberMalformedNodeInputExpression
+//	FlowValidationDetailsMemberMismatchedNodeInputType
+//	FlowValidationDetailsMemberMismatchedNodeOutputType
+//	FlowValidationDetailsMemberMissingConnectionConfiguration
+//	FlowValidationDetailsMemberMissingDefaultCondition
+//	FlowValidationDetailsMemberMissingEndingNodes
+//	FlowValidationDetailsMemberMissingNodeConfiguration
+//	FlowValidationDetailsMemberMissingNodeInput
+//	FlowValidationDetailsMemberMissingNodeOutput
+//	FlowValidationDetailsMemberMissingStartingNodes
+//	FlowValidationDetailsMemberMultipleNodeInputConnections
+//	FlowValidationDetailsMemberUnfulfilledNodeInput
+//	FlowValidationDetailsMemberUnknownConnectionCondition
+//	FlowValidationDetailsMemberUnknownConnectionSource
+//	FlowValidationDetailsMemberUnknownConnectionSourceOutput
+//	FlowValidationDetailsMemberUnknownConnectionTarget
+//	FlowValidationDetailsMemberUnknownConnectionTargetInput
+//	FlowValidationDetailsMemberUnreachableNode
+//	FlowValidationDetailsMemberUnsatisfiedConnectionConditions
+//	FlowValidationDetailsMemberUnspecified
+type FlowValidationDetails interface {
+	isFlowValidationDetails()
+}
+
+// Details about a cyclic connection in the flow.
+type FlowValidationDetailsMemberCyclicConnection struct {
+	Value CyclicConnectionFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberCyclicConnection) isFlowValidationDetails() {}
+
+// Details about duplicate condition expressions in a node.
+type FlowValidationDetailsMemberDuplicateConditionExpression struct {
+	Value DuplicateConditionExpressionFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberDuplicateConditionExpression) isFlowValidationDetails() {}
+
+// Details about duplicate connections between nodes.
+type FlowValidationDetailsMemberDuplicateConnections struct {
+	Value DuplicateConnectionsFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberDuplicateConnections) isFlowValidationDetails() {}
+
+// Details about incompatible data types in a connection.
+type FlowValidationDetailsMemberIncompatibleConnectionDataType struct {
+	Value IncompatibleConnectionDataTypeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberIncompatibleConnectionDataType) isFlowValidationDetails() {}
+
+// Details about a malformed condition expression in a node.
+type FlowValidationDetailsMemberMalformedConditionExpression struct {
+	Value MalformedConditionExpressionFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMalformedConditionExpression) isFlowValidationDetails() {}
+
+// Details about a malformed input expression in a node.
+type FlowValidationDetailsMemberMalformedNodeInputExpression struct {
+	Value MalformedNodeInputExpressionFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMalformedNodeInputExpression) isFlowValidationDetails() {}
+
+// Details about mismatched input data types in a node.
+type FlowValidationDetailsMemberMismatchedNodeInputType struct {
+	Value MismatchedNodeInputTypeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMismatchedNodeInputType) isFlowValidationDetails() {}
+
+// Details about mismatched output data types in a node.
+type FlowValidationDetailsMemberMismatchedNodeOutputType struct {
+	Value MismatchedNodeOutputTypeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMismatchedNodeOutputType) isFlowValidationDetails() {}
+
+// Details about missing configuration for a connection.
+type FlowValidationDetailsMemberMissingConnectionConfiguration struct {
+	Value MissingConnectionConfigurationFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingConnectionConfiguration) isFlowValidationDetails() {}
+
+// Details about a missing default condition in a conditional node.
+type FlowValidationDetailsMemberMissingDefaultCondition struct {
+	Value MissingDefaultConditionFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingDefaultCondition) isFlowValidationDetails() {}
+
+// Details about missing ending nodes in the flow.
+type FlowValidationDetailsMemberMissingEndingNodes struct {
+	Value MissingEndingNodesFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingEndingNodes) isFlowValidationDetails() {}
+
+// Details about missing configuration for a node.
+type FlowValidationDetailsMemberMissingNodeConfiguration struct {
+	Value MissingNodeConfigurationFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingNodeConfiguration) isFlowValidationDetails() {}
+
+// Details about a missing required input in a node.
+type FlowValidationDetailsMemberMissingNodeInput struct {
+	Value MissingNodeInputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingNodeInput) isFlowValidationDetails() {}
+
+// Details about a missing required output in a node.
+type FlowValidationDetailsMemberMissingNodeOutput struct {
+	Value MissingNodeOutputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingNodeOutput) isFlowValidationDetails() {}
+
+// Details about missing starting nodes in the flow.
+type FlowValidationDetailsMemberMissingStartingNodes struct {
+	Value MissingStartingNodesFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMissingStartingNodes) isFlowValidationDetails() {}
+
+// Details about multiple connections to a single node input.
+type FlowValidationDetailsMemberMultipleNodeInputConnections struct {
+	Value MultipleNodeInputConnectionsFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberMultipleNodeInputConnections) isFlowValidationDetails() {}
+
+// Details about an unfulfilled node input with no valid connections.
+type FlowValidationDetailsMemberUnfulfilledNodeInput struct {
+	Value UnfulfilledNodeInputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnfulfilledNodeInput) isFlowValidationDetails() {}
+
+// Details about an unknown condition for a connection.
+type FlowValidationDetailsMemberUnknownConnectionCondition struct {
+	Value UnknownConnectionConditionFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownConnectionCondition) isFlowValidationDetails() {}
+
+// Details about an unknown source node for a connection.
+type FlowValidationDetailsMemberUnknownConnectionSource struct {
+	Value UnknownConnectionSourceFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownConnectionSource) isFlowValidationDetails() {}
+
+// Details about an unknown source output for a connection.
+type FlowValidationDetailsMemberUnknownConnectionSourceOutput struct {
+	Value UnknownConnectionSourceOutputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownConnectionSourceOutput) isFlowValidationDetails() {}
+
+// Details about an unknown target node for a connection.
+type FlowValidationDetailsMemberUnknownConnectionTarget struct {
+	Value UnknownConnectionTargetFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownConnectionTarget) isFlowValidationDetails() {}
+
+// Details about an unknown target input for a connection.
+type FlowValidationDetailsMemberUnknownConnectionTargetInput struct {
+	Value UnknownConnectionTargetInputFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnknownConnectionTargetInput) isFlowValidationDetails() {}
+
+// Details about an unreachable node in the flow.
+type FlowValidationDetailsMemberUnreachableNode struct {
+	Value UnreachableNodeFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnreachableNode) isFlowValidationDetails() {}
+
+// Details about unsatisfied conditions for a connection.
+type FlowValidationDetailsMemberUnsatisfiedConnectionConditions struct {
+	Value UnsatisfiedConnectionConditionsFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnsatisfiedConnectionConditions) isFlowValidationDetails() {}
+
+// Details about an unspecified validation.
+type FlowValidationDetailsMemberUnspecified struct {
+	Value UnspecifiedFlowValidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowValidationDetailsMemberUnspecified) isFlowValidationDetails() {}
 
 // Contains information about a version of a flow.
 //
@@ -1652,7 +2022,7 @@ type FunctionSchemaMemberFunctions struct {
 
 func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
 
-// Details about the guardrail associated with an agent.
+// Details about a guardrail associated with a resource.
 type GuardrailConfiguration struct {
 
 	// The unique identifier of the guardrail.
@@ -1695,6 +2065,17 @@ type HierarchicalChunkingLevelConfiguration struct {
 	//
 	// This member is required.
 	MaxTokens *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about incompatible data types in a connection between nodes.
+type IncompatibleConnectionDataTypeFlowValidationDetails struct {
+
+	// The name of the connection with incompatible data types.
+	//
+	// This member is required.
+	Connection *string
 
 	noSmithyDocumentSerde
 }
@@ -2038,6 +2419,10 @@ type KnowledgeBaseFlowNodeConfiguration struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
+	// Contains configurations for a guardrail to apply during query and response
+	// generation for the knowledge base in this configuration.
+	GuardrailConfiguration *GuardrailConfiguration
+
 	// The unique identifier of the model or [inference profile] to use to generate a response from the
 	// query results. Omit this field if you want to return the retrieved results as an
 	// array.
@@ -2114,6 +2499,48 @@ type LexFlowNodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a malformed condition expression in a node.
+type MalformedConditionExpressionFlowValidationDetails struct {
+
+	// The error message describing why the condition expression is malformed.
+	//
+	// This member is required.
+	Cause *string
+
+	// The name of the malformed condition.
+	//
+	// This member is required.
+	Condition *string
+
+	// The name of the node containing the malformed condition expression.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a malformed input expression in a node.
+type MalformedNodeInputExpressionFlowValidationDetails struct {
+
+	// The error message describing why the input expression is malformed.
+	//
+	// This member is required.
+	Cause *string
+
+	// The name of the input with the malformed expression.
+	//
+	// This member is required.
+	Input *string
+
+	// The name of the node containing the malformed input expression.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of the memory configuration.
 type MemoryConfiguration struct {
 
@@ -2125,6 +2552,141 @@ type MemoryConfiguration struct {
 	// The number of days the agent is configured to retain the conversational context.
 	StorageDays *int32
 
+	noSmithyDocumentSerde
+}
+
+// A message input or response from a model. For more information, see [Create a prompt using Prompt management].
+//
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type Message struct {
+
+	// The content in the message.
+	//
+	// This member is required.
+	Content []ContentBlock
+
+	// The role that the message belongs to.
+	//
+	// This member is required.
+	Role ConversationRole
+
+	noSmithyDocumentSerde
+}
+
+// Details about mismatched input data types in a node.
+type MismatchedNodeInputTypeFlowValidationDetails struct {
+
+	// The expected data type for the node input.
+	//
+	// This member is required.
+	ExpectedType FlowNodeIODataType
+
+	// The name of the input with the mismatched data type.
+	//
+	// This member is required.
+	Input *string
+
+	// The name of the node containing the input with the mismatched data type.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about mismatched output data types in a node.
+type MismatchedNodeOutputTypeFlowValidationDetails struct {
+
+	// The expected data type for the node output.
+	//
+	// This member is required.
+	ExpectedType FlowNodeIODataType
+
+	// The name of the node containing the output with the mismatched data type.
+	//
+	// This member is required.
+	Node *string
+
+	// The name of the output with the mismatched data type.
+	//
+	// This member is required.
+	Output *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a connection missing required configuration.
+type MissingConnectionConfigurationFlowValidationDetails struct {
+
+	// The name of the connection missing configuration.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a missing default condition in a conditional node.
+type MissingDefaultConditionFlowValidationDetails struct {
+
+	// The name of the node missing the default condition.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about missing ending nodes (such as FlowOutputNode) in the flow.
+type MissingEndingNodesFlowValidationDetails struct {
+	noSmithyDocumentSerde
+}
+
+// Details about a node missing required configuration.
+type MissingNodeConfigurationFlowValidationDetails struct {
+
+	// The name of the node missing configuration.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a missing required input in a node.
+type MissingNodeInputFlowValidationDetails struct {
+
+	// The name of the missing input.
+	//
+	// This member is required.
+	Input *string
+
+	// The name of the node missing the required input.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a missing required output in a node.
+type MissingNodeOutputFlowValidationDetails struct {
+
+	// The name of the node missing the required output.
+	//
+	// This member is required.
+	Node *string
+
+	// The name of the missing output.
+	//
+	// This member is required.
+	Output *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about missing starting nodes (such as FlowInputNode) in the flow.
+type MissingStartingNodesFlowValidationDetails struct {
 	noSmithyDocumentSerde
 }
 
@@ -2192,6 +2754,22 @@ type MongoDbAtlasFieldMapping struct {
 	//
 	// This member is required.
 	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about multiple connections to a single node input.
+type MultipleNodeInputConnectionsFlowValidationDetails struct {
+
+	// The name of the input with multiple connections to it.
+	//
+	// This member is required.
+	Input *string
+
+	// The name of the node containing the input with multiple connections.
+	//
+	// This member is required.
+	Node *string
 
 	noSmithyDocumentSerde
 }
@@ -2419,6 +2997,21 @@ type PineconeFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
+// Contains specifications for an Amazon Bedrock agent with which to use the
+// prompt. For more information, see [Create a prompt using Prompt management]and [Automate tasks in your application using conversational agents].
+//
+// [Automate tasks in your application using conversational agents]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type PromptAgentResource struct {
+
+	// The ARN of the agent with which to use the prompt.
+	//
+	// This member is required.
+	AgentIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configurations to override a prompt template in one part of an agent
 // sequence. For more information, see [Advanced prompts].
 //
@@ -2487,6 +3080,10 @@ type PromptFlowNodeConfiguration struct {
 	// This member is required.
 	SourceConfiguration PromptFlowNodeSourceConfiguration
 
+	// Contains configurations for a guardrail to apply to the prompt in this node and
+	// the response generated from it.
+	GuardrailConfiguration *GuardrailConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2511,10 +3108,7 @@ type PromptFlowNodeInlineConfiguration struct {
 	// This member is required.
 	TemplateType PromptTemplateType
 
-	// Contains model-specific inference configurations that aren't in the
-	// inferenceConfiguration field. To see model-specific inference parameters, see [Inference request parameters and response fields for foundation models].
-	//
-	// [Inference request parameters and response fields for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	// Additional fields to be included in the model request for the Prompt node.
 	AdditionalModelRequestFields document.Interface
 
 	// Contains inference configurations for the prompt.
@@ -2562,6 +3156,27 @@ type PromptFlowNodeSourceConfigurationMemberResource struct {
 }
 
 func (*PromptFlowNodeSourceConfigurationMemberResource) isPromptFlowNodeSourceConfiguration() {}
+
+// Contains specifications for a generative AI resource with which to use the
+// prompt. For more information, see [Create a prompt using Prompt management].
+//
+// The following types satisfy this interface:
+//
+//	PromptGenAiResourceMemberAgent
+//
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type PromptGenAiResource interface {
+	isPromptGenAiResource()
+}
+
+// Specifies an Amazon Bedrock agent with which to use the prompt.
+type PromptGenAiResourceMemberAgent struct {
+	Value PromptAgentResource
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptGenAiResourceMemberAgent) isPromptGenAiResource() {}
 
 // Contains inference configurations for the prompt.
 //
@@ -2704,16 +3319,26 @@ type PromptSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the message for a prompt. For more information, see [Prompt management in Amazon Bedrock].
+// Contains the message for a prompt. For more information, see [Construct and store reusable prompts with Prompt management in Amazon Bedrock].
 //
 // The following types satisfy this interface:
 //
+//	PromptTemplateConfigurationMemberChat
 //	PromptTemplateConfigurationMemberText
 //
-// [Prompt management in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
+// [Construct and store reusable prompts with Prompt management in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
 type PromptTemplateConfiguration interface {
 	isPromptTemplateConfiguration()
 }
+
+// Contains configurations to use the prompt in a conversational format.
+type PromptTemplateConfigurationMemberChat struct {
+	Value ChatPromptTemplateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptTemplateConfigurationMemberChat) isPromptTemplateConfiguration() {}
 
 // Contains configurations for the text in a message for a prompt.
 type PromptTemplateConfigurationMemberText struct {
@@ -2748,13 +3373,14 @@ type PromptVariant struct {
 	// [Inference request parameters and response fields for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 	AdditionalModelRequestFields document.Interface
 
+	// Specifies a generative AI resource with which to use the prompt.
+	GenAiResource PromptGenAiResource
+
 	// Contains inference configurations for the prompt variant.
 	InferenceConfiguration PromptInferenceConfiguration
 
 	// An array of objects, each containing a key-value pair that defines a metadata
-	// tag and value to attach to a prompt variant. For more information, see [Create a prompt using Prompt management].
-	//
-	// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+	// tag and value to attach to a prompt variant.
 	Metadata []PromptMetadataEntry
 
 	// The unique identifier of the model or [inference profile] with which to run inference on the
@@ -3150,6 +3776,21 @@ type SharePointSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a specific tool that the model must request. No text is generated but
+// the results of tool use are sent back to the model to help generate a response.
+// For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type SpecificToolChoice struct {
+
+	// The name of the tool.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the storage configuration of the knowledge base.
 type StorageConfiguration struct {
 
@@ -3226,6 +3867,27 @@ type StorageFlowNodeServiceConfigurationMemberS3 struct {
 
 func (*StorageFlowNodeServiceConfigurationMemberS3) isStorageFlowNodeServiceConfiguration() {}
 
+// Contains a system prompt to provide context to the model or to describe how it
+// should behave. For more information, see [Create a prompt using Prompt management].
+//
+// The following types satisfy this interface:
+//
+//	SystemContentBlockMemberText
+//
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type SystemContentBlock interface {
+	isSystemContentBlock()
+}
+
+// The text in the system prompt.
+type SystemContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemContentBlockMemberText) isSystemContentBlock() {}
+
 // Contains configurations for a text prompt template. To include a variable,
 // enclose a word in double curly braces as in {{variable}} .
 type TextPromptTemplateConfiguration struct {
@@ -3237,6 +3899,130 @@ type TextPromptTemplateConfiguration struct {
 
 	// An array of the variables in the prompt template.
 	InputVariables []PromptInputVariable
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations for a tool that a model can use when generating a
+// response. For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// The following types satisfy this interface:
+//
+//	ToolMemberToolSpec
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type Tool interface {
+	isTool()
+}
+
+// The specification for the tool.
+type ToolMemberToolSpec struct {
+	Value ToolSpecification
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolMemberToolSpec) isTool() {}
+
+// Defines which tools the model should request when invoked. For more
+// information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// The following types satisfy this interface:
+//
+//	ToolChoiceMemberAny
+//	ToolChoiceMemberAuto
+//	ToolChoiceMemberTool
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type ToolChoice interface {
+	isToolChoice()
+}
+
+// Defines tools, at least one of which must be requested by the model. No text is
+// generated but the results of tool use are sent back to the model to help
+// generate a response.
+type ToolChoiceMemberAny struct {
+	Value AnyToolChoice
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolChoiceMemberAny) isToolChoice() {}
+
+// Defines tools. The model automatically decides whether to call a tool or to
+// generate text instead.
+type ToolChoiceMemberAuto struct {
+	Value AutoToolChoice
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolChoiceMemberAuto) isToolChoice() {}
+
+// Defines a specific tool that the model must request. No text is generated but
+// the results of tool use are sent back to the model to help generate a response.
+type ToolChoiceMemberTool struct {
+	Value SpecificToolChoice
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolChoiceMemberTool) isToolChoice() {}
+
+// Configuration information for the tools that the model can use when generating
+// a response. For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type ToolConfiguration struct {
+
+	// An array of tools to pass to a model.
+	//
+	// This member is required.
+	Tools []Tool
+
+	// Defines which tools the model should request when invoked.
+	ToolChoice ToolChoice
+
+	noSmithyDocumentSerde
+}
+
+// The input schema for the tool. For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// The following types satisfy this interface:
+//
+//	ToolInputSchemaMemberJson
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type ToolInputSchema interface {
+	isToolInputSchema()
+}
+
+// A JSON object defining the input schema for the tool.
+type ToolInputSchemaMemberJson struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolInputSchemaMemberJson) isToolInputSchema() {}
+
+// Contains a specification for a tool. For more information, see [Use a tool to complete an Amazon Bedrock model response].
+//
+// [Use a tool to complete an Amazon Bedrock model response]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+type ToolSpecification struct {
+
+	// The input schema for the tool.
+	//
+	// This member is required.
+	InputSchema ToolInputSchema
+
+	// The name of the tool.
+	//
+	// This member is required.
+	Name *string
+
+	// The description of the tool.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -3278,6 +4064,108 @@ type TransformationLambdaConfiguration struct {
 	// This member is required.
 	LambdaArn *string
 
+	noSmithyDocumentSerde
+}
+
+// Details about an unfulfilled node input with no valid connections.
+type UnfulfilledNodeInputFlowValidationDetails struct {
+
+	// The name of the unfulfilled input. An input is unfulfilled if there are no data
+	// connections to it.
+	//
+	// This member is required.
+	Input *string
+
+	// The name of the node containing the unfulfilled input.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown condition for a connection.
+type UnknownConnectionConditionFlowValidationDetails struct {
+
+	// The name of the connection with the unknown condition.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown source node for a connection.
+type UnknownConnectionSourceFlowValidationDetails struct {
+
+	// The name of the connection with the unknown source.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown source output for a connection.
+type UnknownConnectionSourceOutputFlowValidationDetails struct {
+
+	// The name of the connection with the unknown source output.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown target node for a connection.
+type UnknownConnectionTargetFlowValidationDetails struct {
+
+	// The name of the connection with the unknown target.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unknown target input for a connection.
+type UnknownConnectionTargetInputFlowValidationDetails struct {
+
+	// The name of the connection with the unknown target input.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unreachable node in the flow. A node is unreachable when there
+// are no paths to it from any starting node.
+type UnreachableNodeFlowValidationDetails struct {
+
+	// The name of the unreachable node.
+	//
+	// This member is required.
+	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about unsatisfied conditions for a connection. A condition is
+// unsatisfied if it can never be true, for example two branches of condition node
+// cannot be simultaneously true.
+type UnsatisfiedConnectionConditionsFlowValidationDetails struct {
+
+	// The name of the connection with unsatisfied conditions.
+	//
+	// This member is required.
+	Connection *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an unspecified validation that doesn't fit other categories.
+type UnspecifiedFlowValidationDetails struct {
 	noSmithyDocumentSerde
 }
 
@@ -3423,11 +4311,18 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isActionGroupExecutor()                   {}
 func (*UnknownUnionMember) isAPISchema()                             {}
+func (*UnknownUnionMember) isContentBlock()                          {}
 func (*UnknownUnionMember) isFlowConnectionConfiguration()           {}
 func (*UnknownUnionMember) isFlowNodeConfiguration()                 {}
+func (*UnknownUnionMember) isFlowValidationDetails()                 {}
 func (*UnknownUnionMember) isFunctionSchema()                        {}
 func (*UnknownUnionMember) isPromptFlowNodeSourceConfiguration()     {}
+func (*UnknownUnionMember) isPromptGenAiResource()                   {}
 func (*UnknownUnionMember) isPromptInferenceConfiguration()          {}
 func (*UnknownUnionMember) isPromptTemplateConfiguration()           {}
 func (*UnknownUnionMember) isRetrievalFlowNodeServiceConfiguration() {}
 func (*UnknownUnionMember) isStorageFlowNodeServiceConfiguration()   {}
+func (*UnknownUnionMember) isSystemContentBlock()                    {}
+func (*UnknownUnionMember) isTool()                                  {}
+func (*UnknownUnionMember) isToolChoice()                            {}
+func (*UnknownUnionMember) isToolInputSchema()                       {}

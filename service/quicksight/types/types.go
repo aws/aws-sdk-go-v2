@@ -9788,6 +9788,28 @@ type NumericSeparatorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains information needed to create a data source connection
+// that uses OAuth client credentials. This option is available for data source
+// connections that are made with Snowflake and Starburst.
+type OAuthParameters struct {
+
+	// The token endpoint URL of the identity provider.
+	//
+	// This member is required.
+	TokenProviderUrl *string
+
+	// The resource uri of the identity provider.
+	IdentityProviderResourceUri *string
+
+	// VPC connection properties.
+	IdentityProviderVpcConnectionProperties *VpcConnectionProperties
+
+	// The OAuth scope.
+	OAuthScope *string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for Oracle.
 type OracleParameters struct {
 
@@ -13135,6 +13157,17 @@ type SnowflakeParameters struct {
 	// This member is required.
 	Warehouse *string
 
+	// The authentication type that you want to use for your connection. This
+	// parameter accepts OAuth and non-OAuth authentication types.
+	AuthenticationType AuthenticationType
+
+	// The database access control role.
+	DatabaseAccessControlRole *string
+
+	// An object that contains information needed to create a data source connection
+	// between an Amazon QuickSight account and Snowflake.
+	OAuthParameters *OAuthParameters
+
 	noSmithyDocumentSerde
 }
 
@@ -13220,6 +13253,17 @@ type StarburstParameters struct {
 	//
 	// This member is required.
 	Port *int32
+
+	// The authentication type that you want to use for your connection. This
+	// parameter accepts OAuth and non-OAuth authentication types.
+	AuthenticationType AuthenticationType
+
+	// The database access control role.
+	DatabaseAccessControlRole *string
+
+	// An object that contains information needed to create a data source connection
+	// between an Amazon QuickSight account and Starburst.
+	OAuthParameters *OAuthParameters
 
 	// The product type for the Starburst data source.
 	ProductType StarburstProductType

@@ -18172,6 +18172,42 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomMLMemberAbilities(v *[]types.CustomMLMemberAbility, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomMLMemberAbility
+	if *v == nil {
+		cv = []types.CustomMLMemberAbility{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomMLMemberAbility
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomMLMemberAbility to be of type string, got %T instead", value)
+			}
+			col = types.CustomMLMemberAbility(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataEncryptionMetadata(v **types.DataEncryptionMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20253,6 +20289,11 @@ func awsRestjson1_deserializeDocumentMembership(v **types.Membership, value inte
 				return err
 			}
 
+		case "mlMemberAbilities":
+			if err := awsRestjson1_deserializeDocumentMLMemberAbilities(&sv.MlMemberAbilities, value); err != nil {
+				return err
+			}
+
 		case "paymentConfiguration":
 			if err := awsRestjson1_deserializeDocumentMembershipPaymentConfiguration(&sv.PaymentConfiguration, value); err != nil {
 				return err
@@ -20301,6 +20342,127 @@ func awsRestjson1_deserializeDocumentMembership(v **types.Membership, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMembershipMLPaymentConfig(v **types.MembershipMLPaymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MembershipMLPaymentConfig
+	if *v == nil {
+		sv = &types.MembershipMLPaymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modelInference":
+			if err := awsRestjson1_deserializeDocumentMembershipModelInferencePaymentConfig(&sv.ModelInference, value); err != nil {
+				return err
+			}
+
+		case "modelTraining":
+			if err := awsRestjson1_deserializeDocumentMembershipModelTrainingPaymentConfig(&sv.ModelTraining, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMembershipModelInferencePaymentConfig(v **types.MembershipModelInferencePaymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MembershipModelInferencePaymentConfig
+	if *v == nil {
+		sv = &types.MembershipModelInferencePaymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isResponsible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResponsible = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMembershipModelTrainingPaymentConfig(v **types.MembershipModelTrainingPaymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MembershipModelTrainingPaymentConfig
+	if *v == nil {
+		sv = &types.MembershipModelTrainingPaymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isResponsible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResponsible = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMembershipPaymentConfiguration(v **types.MembershipPaymentConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20323,6 +20485,11 @@ func awsRestjson1_deserializeDocumentMembershipPaymentConfiguration(v **types.Me
 
 	for key, value := range shape {
 		switch key {
+		case "machineLearning":
+			if err := awsRestjson1_deserializeDocumentMembershipMLPaymentConfig(&sv.MachineLearning, value); err != nil {
+				return err
+			}
+
 		case "queryCompute":
 			if err := awsRestjson1_deserializeDocumentMembershipQueryComputePaymentConfig(&sv.QueryCompute, value); err != nil {
 				return err
@@ -20568,6 +20735,11 @@ func awsRestjson1_deserializeDocumentMembershipSummary(v **types.MembershipSumma
 				return err
 			}
 
+		case "mlMemberAbilities":
+			if err := awsRestjson1_deserializeDocumentMLMemberAbilities(&sv.MlMemberAbilities, value); err != nil {
+				return err
+			}
+
 		case "paymentConfiguration":
 			if err := awsRestjson1_deserializeDocumentMembershipPaymentConfiguration(&sv.PaymentConfiguration, value); err != nil {
 				return err
@@ -20720,6 +20892,11 @@ func awsRestjson1_deserializeDocumentMemberSummary(v **types.MemberSummary, valu
 				sv.MembershipId = ptr.String(jtv)
 			}
 
+		case "mlAbilities":
+			if err := awsRestjson1_deserializeDocumentMLMemberAbilities(&sv.MlAbilities, value); err != nil {
+				return err
+			}
+
 		case "paymentConfiguration":
 			if err := awsRestjson1_deserializeDocumentPaymentConfiguration(&sv.PaymentConfiguration, value); err != nil {
 				return err
@@ -20793,6 +20970,163 @@ func awsRestjson1_deserializeDocumentMemberSummaryList(v *[]types.MemberSummary,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMLMemberAbilities(v **types.MLMemberAbilities, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MLMemberAbilities
+	if *v == nil {
+		sv = &types.MLMemberAbilities{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customMLMemberAbilities":
+			if err := awsRestjson1_deserializeDocumentCustomMLMemberAbilities(&sv.CustomMLMemberAbilities, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMLPaymentConfig(v **types.MLPaymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MLPaymentConfig
+	if *v == nil {
+		sv = &types.MLPaymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "modelInference":
+			if err := awsRestjson1_deserializeDocumentModelInferencePaymentConfig(&sv.ModelInference, value); err != nil {
+				return err
+			}
+
+		case "modelTraining":
+			if err := awsRestjson1_deserializeDocumentModelTrainingPaymentConfig(&sv.ModelTraining, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelInferencePaymentConfig(v **types.ModelInferencePaymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelInferencePaymentConfig
+	if *v == nil {
+		sv = &types.ModelInferencePaymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isResponsible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResponsible = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentModelTrainingPaymentConfig(v **types.ModelTrainingPaymentConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelTrainingPaymentConfig
+	if *v == nil {
+		sv = &types.ModelTrainingPaymentConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isResponsible":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsResponsible = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentParameterMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20851,6 +21185,11 @@ func awsRestjson1_deserializeDocumentPaymentConfiguration(v **types.PaymentConfi
 
 	for key, value := range shape {
 		switch key {
+		case "machineLearning":
+			if err := awsRestjson1_deserializeDocumentMLPaymentConfig(&sv.MachineLearning, value); err != nil {
+				return err
+			}
+
 		case "queryCompute":
 			if err := awsRestjson1_deserializeDocumentQueryComputePaymentConfig(&sv.QueryCompute, value); err != nil {
 				return err

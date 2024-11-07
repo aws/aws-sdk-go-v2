@@ -63,6 +63,14 @@ type CreateCollaborationInput struct {
 	//  The analytics engine.
 	AnalyticsEngine types.AnalyticsEngine
 
+	// The ML abilities granted to the collaboration creator.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	CreatorMLMemberAbilities *types.MLMemberAbilities
+
 	// The collaboration creator's payment responsibilities set by the collaboration
 	// creator.
 	//

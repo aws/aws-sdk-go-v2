@@ -80,6 +80,57 @@ type Index struct {
 	noSmithyDocumentSerde
 }
 
+// An Amazon Web Services-managed view is how other Amazon Web Services services
+// can access resource information indexed by Resource Explorer for your Amazon Web
+// Services account or organization with your consent. For more information, see [Managed views].
+//
+// [Managed views]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html
+type ManagedView struct {
+
+	// A search filter defines which resources can be part of a search query result
+	// set.
+	Filters *SearchFilter
+
+	// A structure that contains additional information about the managed view.
+	IncludedProperties []IncludedProperty
+
+	// The date and time when this managed view was last modified.
+	LastUpdatedAt *time.Time
+
+	// The [Amazon resource name (ARN)] of the managed view.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ManagedViewArn *string
+
+	// The name of the managed view.
+	ManagedViewName *string
+
+	// The Amazon Web Services account that owns this managed view.
+	Owner *string
+
+	// The resource policy that defines access to the managed view. To learn more
+	// about this policy, review [Managed views].
+	//
+	// [Managed views]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html
+	ResourcePolicy *string
+
+	// An [Amazon resource name (ARN)] of an Amazon Web Services account or organization that specifies whether
+	// this managed view includes resources from only the specified Amazon Web Services
+	// account or all accounts in the specified organization.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	Scope *string
+
+	// The service principal of the Amazon Web Services service that created and
+	// manages the managed view.
+	TrustedService *string
+
+	// The version of the managed view.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // An index is the data store used by Amazon Web Services Resource Explorer to
 // hold information about your Amazon Web Services resources that the service
 // discovers.
@@ -157,7 +208,7 @@ type Resource struct {
 	// The type of the resource.
 	ResourceType *string
 
-	// The Amazon Web Servicesservice that owns the resource and is responsible for
+	// The Amazon Web Services service that owns the resource and is responsible for
 	// creating and updating it.
 	Service *string
 
@@ -230,7 +281,7 @@ type SupportedResourceType struct {
 	// The unique identifier of the resource type.
 	ResourceType *string
 
-	// The Amazon Web Servicesservice that is associated with the resource type. This
+	// The Amazon Web Services service that is associated with the resource type. This
 	// is the primary service that lets you create and interact with resources of this
 	// type.
 	Service *string

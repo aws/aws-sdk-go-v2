@@ -169,6 +169,9 @@ type AutoScalingGroup struct {
 	// The Amazon Resource Name (ARN) of the Auto Scaling group.
 	AutoScalingGroupARN *string
 
+	//  The instance capacity distribution across Availability Zones.
+	AvailabilityZoneDistribution *AvailabilityZoneDistribution
+
 	// Indicates whether Capacity Rebalancing is enabled.
 	CapacityRebalance *bool
 
@@ -319,6 +322,23 @@ type AutoScalingInstanceDetails struct {
 	//
 	// Valid Range: Minimum value of 1. Maximum value of 999.
 	WeightedCapacity *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Availability Zone distribution.
+type AvailabilityZoneDistribution struct {
+
+	//  If launches fail in an Availability Zone, the following strategies are
+	// available. The default is balanced-best-effort .
+	//
+	//   - balanced-only - If launches fail in an Availability Zone, Auto Scaling will
+	//   continue to attempt to launch in the unhealthy zone to preserve a balanced
+	//   distribution.
+	//
+	//   - balanced-best-effort - If launches fail in an Availability Zone, Auto
+	//   Scaling will attempt to launch in another healthy Availability Zone instead.
+	CapacityDistributionStrategy CapacityDistributionStrategy
 
 	noSmithyDocumentSerde
 }

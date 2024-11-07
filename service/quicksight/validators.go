@@ -13051,6 +13051,26 @@ func validateNumericRangeFilter(v *types.NumericRangeFilter) error {
 	}
 }
 
+func validateOAuthParameters(v *types.OAuthParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OAuthParameters"}
+	if v.TokenProviderUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenProviderUrl"))
+	}
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		if err := validateVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties); err != nil {
+			invalidParams.AddNested("IdentityProviderVpcConnectionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOperandList(v []types.Identifier) error {
 	if v == nil {
 		return nil
@@ -16133,6 +16153,11 @@ func validateSnowflakeParameters(v *types.SnowflakeParameters) error {
 	if v.Warehouse == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Warehouse"))
 	}
+	if v.OAuthParameters != nil {
+		if err := validateOAuthParameters(v.OAuthParameters); err != nil {
+			invalidParams.AddNested("OAuthParameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16192,6 +16217,11 @@ func validateStarburstParameters(v *types.StarburstParameters) error {
 	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.OAuthParameters != nil {
+		if err := validateOAuthParameters(v.OAuthParameters); err != nil {
+			invalidParams.AddNested("OAuthParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -77,6 +77,9 @@ type CreateAutoScalingGroupInput struct {
 	// This member is required.
 	MinSize *int32
 
+	// The instance capacity distribution across Availability Zones.
+	AvailabilityZoneDistribution *types.AvailabilityZoneDistribution
+
 	// A list of Availability Zones where instances in the Auto Scaling group can be
 	// created. Used for launching into the default VPC subnet in each Availability
 	// Zone when not using the VPCZoneIdentifier property, or for attaching a network

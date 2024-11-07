@@ -216,6 +216,11 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 		ok.String(*v.Name)
 	}
 
+	if len(v.ProvisionedResourceCleanup) > 0 {
+		ok := object.Key("ProvisionedResourceCleanup")
+		ok.String(string(v.ProvisionedResourceCleanup))
+	}
+
 	if v.ResourcesToReplicateTags != nil {
 		ok := object.Key("ResourcesToReplicateTags")
 		if err := awsRestjson1_serializeDocumentResourceList(v.ResourcesToReplicateTags, ok); err != nil {
@@ -1888,6 +1893,11 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 	if v.FailureRetentionPeriodInDays != nil {
 		ok := object.Key("FailureRetentionPeriodInDays")
 		ok.Integer(*v.FailureRetentionPeriodInDays)
+	}
+
+	if len(v.ProvisionedResourceCleanup) > 0 {
+		ok := object.Key("ProvisionedResourceCleanup")
+		ok.String(string(v.ProvisionedResourceCleanup))
 	}
 
 	if v.RunConfig != nil {

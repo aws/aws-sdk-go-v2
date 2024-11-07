@@ -78,6 +78,9 @@ type UpdateAutoScalingGroupInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
+	//  The instance capacity distribution across Availability Zones.
+	AvailabilityZoneDistribution *types.AvailabilityZoneDistribution
+
 	// One or more Availability Zones for the group.
 	AvailabilityZones []string
 

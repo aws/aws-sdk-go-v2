@@ -1,0 +1,8 @@
+{
+    "id": "bea8bf40-3cc9-445e-8840-505a39a388e7",
+    "type": "feature",
+    "description": "This release introduces support for Custom Models in AWS Clean Rooms ML.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

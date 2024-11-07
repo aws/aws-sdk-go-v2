@@ -214,6 +214,24 @@ func ExampleImageSource_outputUsage() {
 
 var _ []byte
 
+func ExamplePromptVariableValues_outputUsage() {
+	var union types.PromptVariableValues
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PromptVariableValuesMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleResponseStream_outputUsage() {
 	var union types.ResponseStream
 	// type switches can be used to check the union value
