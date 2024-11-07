@@ -1158,6 +1158,11 @@
         "com.amazonaws.bedrockagent#AmazonBedrockAgentBuildTimeLambda": {
             "type": "service",
             "version": "2023-06-05",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidateFlowDefinition"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.bedrockagent#ActionGroupResource"
@@ -1885,6 +1890,13 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#AnyToolChoice": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#AssociateAgentKnowledgeBase": {
             "type": "operation",
             "input": {
@@ -1988,6 +2000,13 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#AutoToolChoice": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Defines tools. The model automatically decides whether to call a tool or to generate text instead. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#BasePromptTemplate": {
             "type": "string",
             "traits": {
@@ -2061,6 +2080,40 @@
                     "max": 12
                 },
                 "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.bedrockagent#ChatPromptTemplateConfiguration": {
+            "type": "structure",
+            "members": {
+                "messages": {
+                    "target": "com.amazonaws.bedrockagent#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains messages in the chat for the prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "system": {
+                    "target": "com.amazonaws.bedrockagent#SystemContentBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains system prompts to provide context to the model or to describe how it should behave.</p>"
+                    }
+                },
+                "inputVariables": {
+                    "target": "com.amazonaws.bedrockagent#PromptInputVariablesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the variables in the prompt template.</p>"
+                    }
+                },
+                "toolConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#ToolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations to use a prompt in a conversational format. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagent#ChunkingConfiguration": {
@@ -2276,6 +2329,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The endpoint information to connect to your Confluence data source.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ContentBlock": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text in the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the content for the message you pass to, or receive from a model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#ContentBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#ContentBlock"
+            }
+        },
+        "com.amazonaws.bedrockagent#ConversationRole": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "user"
+                    }
+                },
+                "ASSISTANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "assistant"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagent#CrawlFilterConfiguration": {
@@ -3773,6 +3864,21 @@
                 "smithy.api#documentation": "<p>Settings for customizing steps in the data source content ingestion pipeline.</p>\n         <p>You can configure the data source to process documents with a Lambda function after\n    they are parsed and converted into chunks. When you add a post-chunking transformation,\n    the service stores chunked documents in an S3 bucket and invokes a Lambda function to process\n    them.</p>\n         <p>To process chunked documents with a Lambda function, define an S3 bucket path for input\n    and output objects, and a transformation that specifies the Lambda function to invoke. You can\n    use the Lambda function to customize how chunks are split, and the metadata for each chunk.\n    </p>"
             }
         },
+        "com.amazonaws.bedrockagent#CyclicConnectionFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection that causes the cycle in the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a cyclic connection detected in the flow.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#DataDeletionPolicy": {
             "type": "enum",
             "members": {
@@ -5057,6 +5163,50 @@
                 "smithy.api#pattern": "^DRAFT$"
             }
         },
+        "com.amazonaws.bedrockagent#DuplicateConditionExpressionFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the duplicate condition expressions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expression": {
+                    "target": "com.amazonaws.bedrockagent#FlowConditionExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duplicated condition expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about duplicate condition expressions found in a condition node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#DuplicateConnectionsFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source node where the duplicate connection starts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target node where the duplicate connection ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about duplicate connections found between two nodes in the flow.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#EmbeddingModelConfiguration": {
             "type": "structure",
             "members": {
@@ -5080,6 +5230,14 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#ErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
                 }
             }
         },
@@ -6074,10 +6232,180 @@
                         "smithy.api#documentation": "<p>The severity of the issue described in the message.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "details": {
+                    "target": "com.amazonaws.bedrockagent#FlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific details about the validation issue encountered in the flow.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#FlowValidationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of validation issue encountered in the flow.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about validation of the flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html#API_agent_GetFlow_ResponseSyntax\">GetFlow response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlowVersion.html#API_agent_GetFlowVersion_ResponseSyntax\">GetFlowVersion response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowValidationDetails": {
+            "type": "union",
+            "members": {
+                "cyclicConnection": {
+                    "target": "com.amazonaws.bedrockagent#CyclicConnectionFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a cyclic connection in the flow.</p>"
+                    }
+                },
+                "duplicateConnections": {
+                    "target": "com.amazonaws.bedrockagent#DuplicateConnectionsFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about duplicate connections between nodes.</p>"
+                    }
+                },
+                "duplicateConditionExpression": {
+                    "target": "com.amazonaws.bedrockagent#DuplicateConditionExpressionFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about duplicate condition expressions in a node.</p>"
+                    }
+                },
+                "unreachableNode": {
+                    "target": "com.amazonaws.bedrockagent#UnreachableNodeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unreachable node in the flow.</p>"
+                    }
+                },
+                "unknownConnectionSource": {
+                    "target": "com.amazonaws.bedrockagent#UnknownConnectionSourceFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown source node for a connection.</p>"
+                    }
+                },
+                "unknownConnectionSourceOutput": {
+                    "target": "com.amazonaws.bedrockagent#UnknownConnectionSourceOutputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown source output for a connection.</p>"
+                    }
+                },
+                "unknownConnectionTarget": {
+                    "target": "com.amazonaws.bedrockagent#UnknownConnectionTargetFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown target node for a connection.</p>"
+                    }
+                },
+                "unknownConnectionTargetInput": {
+                    "target": "com.amazonaws.bedrockagent#UnknownConnectionTargetInputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown target input for a connection.</p>"
+                    }
+                },
+                "unknownConnectionCondition": {
+                    "target": "com.amazonaws.bedrockagent#UnknownConnectionConditionFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unknown condition for a connection.</p>"
+                    }
+                },
+                "malformedConditionExpression": {
+                    "target": "com.amazonaws.bedrockagent#MalformedConditionExpressionFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a malformed condition expression in a node.</p>"
+                    }
+                },
+                "malformedNodeInputExpression": {
+                    "target": "com.amazonaws.bedrockagent#MalformedNodeInputExpressionFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a malformed input expression in a node.</p>"
+                    }
+                },
+                "mismatchedNodeInputType": {
+                    "target": "com.amazonaws.bedrockagent#MismatchedNodeInputTypeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about mismatched input data types in a node.</p>"
+                    }
+                },
+                "mismatchedNodeOutputType": {
+                    "target": "com.amazonaws.bedrockagent#MismatchedNodeOutputTypeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about mismatched output data types in a node.</p>"
+                    }
+                },
+                "incompatibleConnectionDataType": {
+                    "target": "com.amazonaws.bedrockagent#IncompatibleConnectionDataTypeFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about incompatible data types in a connection.</p>"
+                    }
+                },
+                "missingConnectionConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#MissingConnectionConfigurationFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about missing configuration for a connection.</p>"
+                    }
+                },
+                "missingDefaultCondition": {
+                    "target": "com.amazonaws.bedrockagent#MissingDefaultConditionFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a missing default condition in a conditional node.</p>"
+                    }
+                },
+                "missingEndingNodes": {
+                    "target": "com.amazonaws.bedrockagent#MissingEndingNodesFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about missing ending nodes in the flow.</p>"
+                    }
+                },
+                "missingNodeConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#MissingNodeConfigurationFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about missing configuration for a node.</p>"
+                    }
+                },
+                "missingNodeInput": {
+                    "target": "com.amazonaws.bedrockagent#MissingNodeInputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a missing required input in a node.</p>"
+                    }
+                },
+                "missingNodeOutput": {
+                    "target": "com.amazonaws.bedrockagent#MissingNodeOutputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a missing required output in a node.</p>"
+                    }
+                },
+                "missingStartingNodes": {
+                    "target": "com.amazonaws.bedrockagent#MissingStartingNodesFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about missing starting nodes in the flow.</p>"
+                    }
+                },
+                "multipleNodeInputConnections": {
+                    "target": "com.amazonaws.bedrockagent#MultipleNodeInputConnectionsFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about multiple connections to a single node input.</p>"
+                    }
+                },
+                "unfulfilledNodeInput": {
+                    "target": "com.amazonaws.bedrockagent#UnfulfilledNodeInputFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unfulfilled node input with no valid connections.</p>"
+                    }
+                },
+                "unsatisfiedConnectionConditions": {
+                    "target": "com.amazonaws.bedrockagent#UnsatisfiedConnectionConditionsFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about unsatisfied conditions for a connection.</p>"
+                    }
+                },
+                "unspecified": {
+                    "target": "com.amazonaws.bedrockagent#UnspecifiedFlowValidationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an unspecified validation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union type containing various possible validation issues in the flow.</p>"
             }
         },
         "com.amazonaws.bedrockagent#FlowValidationSeverity": {
@@ -6093,6 +6421,161 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Error"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#FlowValidationType": {
+            "type": "enum",
+            "members": {
+                "CYCLIC_CONNECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CyclicConnection"
+                    }
+                },
+                "DUPLICATE_CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DuplicateConnections"
+                    }
+                },
+                "DUPLICATE_CONDITION_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DuplicateConditionExpression"
+                    }
+                },
+                "UNREACHABLE_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnreachableNode"
+                    }
+                },
+                "UNKNOWN_CONNECTION_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownConnectionSource"
+                    }
+                },
+                "UNKNOWN_CONNECTION_SOURCE_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownConnectionSourceOutput"
+                    }
+                },
+                "UNKNOWN_CONNECTION_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownConnectionTarget"
+                    }
+                },
+                "UNKNOWN_CONNECTION_TARGET_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownConnectionTargetInput"
+                    }
+                },
+                "UNKNOWN_CONNECTION_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownConnectionCondition"
+                    }
+                },
+                "MALFORMED_CONDITION_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MalformedConditionExpression"
+                    }
+                },
+                "MALFORMED_NODE_INPUT_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MalformedNodeInputExpression"
+                    }
+                },
+                "MISMATCHED_NODE_INPUT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MismatchedNodeInputType"
+                    }
+                },
+                "MISMATCHED_NODE_OUTPUT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MismatchedNodeOutputType"
+                    }
+                },
+                "INCOMPATIBLE_CONNECTION_DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IncompatibleConnectionDataType"
+                    }
+                },
+                "MISSING_CONNECTION_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingConnectionConfiguration"
+                    }
+                },
+                "MISSING_DEFAULT_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingDefaultCondition"
+                    }
+                },
+                "MISSING_ENDING_NODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingEndingNodes"
+                    }
+                },
+                "MISSING_NODE_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingNodeConfiguration"
+                    }
+                },
+                "MISSING_NODE_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingNodeInput"
+                    }
+                },
+                "MISSING_NODE_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingNodeOutput"
+                    }
+                },
+                "MISSING_STARTING_NODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingStartingNodes"
+                    }
+                },
+                "MULTIPLE_NODE_INPUT_CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultipleNodeInputConnections"
+                    }
+                },
+                "UNFULFILLED_NODE_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnfulfilledNodeInput"
+                    }
+                },
+                "UNSATISFIED_CONNECTION_CONDITIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsatisfiedConnectionConditions"
+                    }
+                },
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unspecified"
                     }
                 }
             }
@@ -7432,7 +7915,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the guardrail associated with an agent.</p>"
+                "smithy.api#documentation": "<p>Details about a guardrail associated with a resource.</p>"
             }
         },
         "com.amazonaws.bedrockagent#GuardrailIdentifier": {
@@ -7516,6 +7999,21 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[0-9a-zA-Z]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagent#IncompatibleConnectionDataTypeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with incompatible data types.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about incompatible data types in a connection between nodes.</p>"
             }
         },
         "com.amazonaws.bedrockagent#InferenceConfiguration": {
@@ -8121,6 +8619,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> to use to generate a response from the query results. Omit this field if you want to return the retrieved results as an array.</p>"
                     }
+                },
+                "guardrailConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#GuardrailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for a guardrail to apply during query and response generation for the knowledge base in this configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8139,12 +8643,11 @@
         "com.amazonaws.bedrockagent#KnowledgeBaseModelIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a jumpstart model or imported model, or a provisioned throughput ARN for custom models.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)|([a-zA-Z0-9-:.]+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
             }
         },
         "com.amazonaws.bedrockagent#KnowledgeBaseResource": {
@@ -9598,6 +10101,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#MalformedConditionExpressionFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the malformed condition expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.bedrockagent#FlowConditionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the malformed condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cause": {
+                    "target": "com.amazonaws.bedrockagent#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message describing why the condition expression is malformed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a malformed condition expression in a node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MalformedNodeInputExpressionFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the malformed input expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the input with the malformed expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cause": {
+                    "target": "com.amazonaws.bedrockagent#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message describing why the input expression is malformed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a malformed input expression in a node.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#MaxResults": {
             "type": "integer",
             "traits": {
@@ -9649,6 +10210,34 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#Message": {
+            "type": "structure",
+            "members": {
+                "role": {
+                    "target": "com.amazonaws.bedrockagent#ConversationRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that the message belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrockagent#ContentBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content in the message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A message input or response from a model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#Messages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#Message"
+            }
+        },
         "com.amazonaws.bedrockagent#Microsoft365TenantId": {
             "type": "string",
             "traits": {
@@ -9659,10 +10248,170 @@
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
+        "com.amazonaws.bedrockagent#MismatchedNodeInputTypeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the input with the mismatched data type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the input with the mismatched data type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedType": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeIODataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected data type for the node input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about mismatched input data types in a node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MismatchedNodeOutputTypeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the output with the mismatched data type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "output": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeOutputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the output with the mismatched data type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedType": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeIODataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected data type for the node output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about mismatched output data types in a node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingConnectionConfigurationFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection missing configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a connection missing required configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingDefaultConditionFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node missing the default condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a missing default condition in a conditional node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingEndingNodesFlowValidationDetails": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Details about missing ending nodes (such as FlowOutputNode) in the flow.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingNodeConfigurationFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node missing configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a node missing required configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingNodeInputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node missing the required input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the missing input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a missing required input in a node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingNodeOutputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node missing the required output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "output": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeOutputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the missing output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a missing required output in a node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MissingStartingNodesFlowValidationDetails": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Details about missing starting nodes (such as FlowInputNode) in the flow.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#ModelIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a jumpstart model or imported model, or a provisioned throughput ARN for custom models.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -9801,6 +10550,28 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#MultipleNodeInputConnectionsFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the input with multiple connections.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the input with multiple connections to it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about multiple connections to a single node input.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#Name": {
             "type": "string",
             "traits": {
@@ -9821,6 +10592,14 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.bedrockagent#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.bedrockagent#NumericalVersion": {
@@ -10325,6 +11104,22 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagent#PromptAgentResource": {
+            "type": "structure",
+            "members": {
+                "agentIdentifier": {
+                    "target": "com.amazonaws.bedrockagent#AgentAliasArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the agent with which to use the prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications for an Amazon Bedrock agent with which to use the prompt. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html\">Automate tasks in your application using conversational agents</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#PromptArn": {
             "type": "string",
             "traits": {
@@ -10404,6 +11199,12 @@
                         "smithy.api#documentation": "<p>Specifies whether the prompt is from Prompt management or defined inline.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "guardrailConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#GuardrailConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for a guardrail to apply to the prompt in this node and the response generated from it.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10443,7 +11244,7 @@
                 "additionalModelRequestFields": {
                     "target": "smithy.api#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains model-specific inference configurations that aren't in the <code>inferenceConfiguration</code> field. To see model-specific inference parameters, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference request parameters and response fields for foundation models</a>.</p>"
+                        "smithy.api#documentation": "<p>Additional fields to be included in the model request for the Prompt node.</p>"
                     }
                 }
             },
@@ -10484,6 +11285,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configurations for a prompt and whether it is from Prompt management or defined inline.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#PromptGenAiResource": {
+            "type": "union",
+            "members": {
+                "agent": {
+                    "target": "com.amazonaws.bedrockagent#PromptAgentResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an Amazon Bedrock agent with which to use the prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains specifications for a generative AI resource with which to use the prompt. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagent#PromptId": {
@@ -10604,12 +11420,11 @@
         "com.amazonaws.bedrockagent#PromptModelIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a jumpstart model or imported model, or a provisioned throughput ARN for custom models.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)|([a-zA-Z0-9-:.]+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
             }
         },
         "com.amazonaws.bedrockagent#PromptModelInferenceConfiguration": {
@@ -10797,10 +11612,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configurations for the text in a message for a prompt.</p>"
                     }
+                },
+                "chat": {
+                    "target": "com.amazonaws.bedrockagent#ChatPromptTemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations to use the prompt in a conversational format.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the message for a prompt. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Prompt management in Amazon Bedrock</a>.</p>"
+                "smithy.api#documentation": "<p>Contains the message for a prompt. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html\">Construct and store reusable prompts with Prompt management in Amazon Bedrock</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagent#PromptTemplateType": {
@@ -10810,6 +11631,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TEXT"
+                    }
+                },
+                "CHAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAT"
                     }
                 }
             }
@@ -10882,13 +11709,19 @@
                 "metadata": {
                     "target": "com.amazonaws.bedrockagent#PromptMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant.</p>"
                     }
                 },
                 "additionalModelRequestFields": {
                     "target": "smithy.api#Document",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains model-specific inference configurations that aren't in the <code>inferenceConfiguration</code> field. To see model-specific inference parameters, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference request parameters and response fields for foundation models</a>.</p>"
+                    }
+                },
+                "genAiResource": {
+                    "target": "com.amazonaws.bedrockagent#PromptGenAiResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a generative AI resource with which to use the prompt.</p>"
                     }
                 }
             },
@@ -11658,6 +12491,21 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#SpecificToolChoice": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#ToolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tool.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagent#StartIngestionJob": {
             "type": "operation",
             "input": {
@@ -11964,6 +12812,27 @@
                 "smithy.api#documentation": "<p>Contains configurations for the service to use for storing the input into the node.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#SystemContentBlock": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.bedrockagent#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text in the system prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a system prompt to provide context to the model or to describe how it should behave. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#SystemContentBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#SystemContentBlock"
+            }
+        },
         "com.amazonaws.bedrockagent#TagKey": {
             "type": "string",
             "traits": {
@@ -12150,6 +13019,132 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.bedrockagent#Tool": {
+            "type": "union",
+            "members": {
+                "toolSpec": {
+                    "target": "com.amazonaws.bedrockagent#ToolSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specification for the tool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for a tool that a model can use when generating a response. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ToolChoice": {
+            "type": "union",
+            "members": {
+                "auto": {
+                    "target": "com.amazonaws.bedrockagent#AutoToolChoice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tools. The model automatically decides whether to call a tool or to generate text instead.</p>"
+                    }
+                },
+                "any": {
+                    "target": "com.amazonaws.bedrockagent#AnyToolChoice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response.</p>"
+                    }
+                },
+                "tool": {
+                    "target": "com.amazonaws.bedrockagent#SpecificToolChoice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines which tools the model should request when invoked. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#ToolConfiguration": {
+            "type": "structure",
+            "members": {
+                "tools": {
+                    "target": "com.amazonaws.bedrockagent#Tools",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tools to pass to a model.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "toolChoice": {
+                    "target": "com.amazonaws.bedrockagent#ToolChoice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines which tools the model should request when invoked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the tools that the model can use when generating a response. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ToolInputSchema": {
+            "type": "union",
+            "members": {
+                "json": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object defining the input schema for the tool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input schema for the tool. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ToolName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#ToolSpecification": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#ToolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the tool.</p>"
+                    }
+                },
+                "inputSchema": {
+                    "target": "com.amazonaws.bedrockagent#ToolInputSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input schema for the tool.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a specification for a tool. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Use a tool to complete an Amazon Bedrock model response</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#Tools": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#Tool"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagent#TopK": {
             "type": "integer",
             "traits": {
@@ -12265,6 +13260,140 @@
                         "smithy.api#enumValue": "array"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#UnfulfilledNodeInputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node containing the unfulfilled input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "input": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the unfulfilled input. An input is unfulfilled if there are no data connections to it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unfulfilled node input with no valid connections.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownConnectionConditionFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with the unknown condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown condition for a connection.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownConnectionSourceFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with the unknown source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown source node for a connection.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownConnectionSourceOutputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with the unknown source output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown source output for a connection.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownConnectionTargetFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with the unknown target.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown target node for a connection.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnknownConnectionTargetInputFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with the unknown target input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unknown target input for a connection.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnreachableNodeFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "node": {
+                    "target": "com.amazonaws.bedrockagent#FlowNodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the unreachable node.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unreachable node in the flow. A node is unreachable when there are no paths to it from any starting node.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnsatisfiedConnectionConditionsFlowValidationDetails": {
+            "type": "structure",
+            "members": {
+                "connection": {
+                    "target": "com.amazonaws.bedrockagent#FlowConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection with unsatisfied conditions.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about unsatisfied conditions for a connection. A condition is unsatisfied if it can never be true, for example two branches of condition node cannot be simultaneously true.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#UnspecifiedFlowValidationDetails": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an unspecified validation that doesn't fit other categories.</p>"
             }
         },
         "com.amazonaws.bedrockagent#UntagResource": {
@@ -13540,6 +14669,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of web URLs that you want to crawl. \n            You should be authorized to crawl the URLs.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ValidateFlowDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagent#ValidateFlowDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagent#ValidateFlowDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Validates the definition of a flow.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/flows/validate-definition"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "console"
+                ]
+            }
+        },
+        "com.amazonaws.bedrockagent#ValidateFlowDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "definition": {
+                    "target": "com.amazonaws.bedrockagent#FlowDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of a flow to validate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagent#ValidateFlowDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "validations": {
+                    "target": "com.amazonaws.bedrockagent#FlowValidations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an array of objects, each of which contains an error identified by validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrockagent#ValidationException": {

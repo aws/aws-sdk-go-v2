@@ -818,7 +818,7 @@
                 "smithy.api#length": {
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership/[\\*\\d\\w-]+/configuredaudiencemodelassociation/[\\*\\d\\w-]+$"
+                "smithy.api#pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$"
             }
         },
         "com.amazonaws.cleanrooms#AggregateColumn": {
@@ -4579,6 +4579,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "creatorMLMemberAbilities": {
+                    "target": "com.amazonaws.cleanrooms#MLMemberAbilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ML abilities granted to the collaboration creator.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>"
+                    }
+                },
                 "creatorDisplayName": {
                     "target": "com.amazonaws.cleanrooms#DisplayName",
                     "traits": {
@@ -5509,6 +5515,35 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#CustomMLMemberAbilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#CustomMLMemberAbility"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#CustomMLMemberAbility": {
+            "type": "enum",
+            "members": {
+                "CAN_RECEIVE_MODEL_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_RECEIVE_MODEL_OUTPUT"
+                    }
+                },
+                "CAN_RECEIVE_INFERENCE_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAN_RECEIVE_INFERENCE_OUTPUT"
+                    }
+                }
             }
         },
         "com.amazonaws.cleanrooms#DataEncryptionMetadata": {
@@ -10527,6 +10562,41 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cleanrooms#MLMemberAbilities": {
+            "type": "structure",
+            "members": {
+                "customMLMemberAbilities": {
+                    "target": "com.amazonaws.cleanrooms#CustomMLMemberAbilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom ML member abilities for a collaboration member. The inference feature is not available in the custom ML modeling beta.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ML member abilities for a collaboration member.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#MLPaymentConfig": {
+            "type": "structure",
+            "members": {
+                "modelTraining": {
+                    "target": "com.amazonaws.cleanrooms#ModelTrainingPaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment responsibilities accepted by the member for model training.</p>"
+                    }
+                },
+                "modelInference": {
+                    "target": "com.amazonaws.cleanrooms#ModelInferencePaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment responsibilities accepted by the member for model inference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the collaboration member's machine learning payment responsibilities set by the\n         collaboration creator.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#MaxResults": {
             "type": "integer",
             "traits": {
@@ -10589,6 +10659,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The abilities granted to the collaboration member.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "mlMemberAbilities": {
+                    "target": "com.amazonaws.cleanrooms#MLMemberAbilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ML abilities granted to the collaboration member.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>"
                     }
                 },
                 "displayName": {
@@ -10662,6 +10738,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The abilities granted to the collaboration member.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "mlAbilities": {
+                    "target": "com.amazonaws.cleanrooms#MLMemberAbilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a summary of the ML abilities for the collaboration member.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>"
                     }
                 },
                 "createTime": {
@@ -10789,6 +10871,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "mlMemberAbilities": {
+                    "target": "com.amazonaws.cleanrooms#MLMemberAbilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ML member abilities that are granted to a collaboration member.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>"
+                    }
+                },
                 "queryLogStatus": {
                     "target": "com.amazonaws.cleanrooms#MembershipQueryLogStatus",
                     "traits": {
@@ -10833,6 +10921,56 @@
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
+        "com.amazonaws.cleanrooms#MembershipMLPaymentConfig": {
+            "type": "structure",
+            "members": {
+                "modelTraining": {
+                    "target": "com.amazonaws.cleanrooms#MembershipModelTrainingPaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment responsibilities accepted by the member for model training.</p>"
+                    }
+                },
+                "modelInference": {
+                    "target": "com.amazonaws.cleanrooms#MembershipModelInferencePaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment responsibilities accepted by the member for model inference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the collaboration member's machine learning payment responsibilities set by the\n         collaboration creator.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#MembershipModelInferencePaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the collaboration member has accepted to pay for model inference costs\n         (<code>TRUE</code>) or has not accepted to pay for model inference costs\n         (<code>FALSE</code>).</p>\n         <p>If the collaboration creator has not specified anyone to pay for model inference costs,\n         then the member who can query is the default payer. </p>\n         <p>An error message is returned for the following reasons: </p>\n         <ul>\n            <li>\n               <p>If you set the value to <code>FALSE</code> but you are responsible to pay for\n               model inference costs. </p>\n            </li>\n            <li>\n               <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for\n               model inference costs. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the collaboration member's model inference payment responsibilities set by the\n         collaboration creator.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#MembershipModelTrainingPaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the collaboration member has accepted to pay for model training costs\n         (<code>TRUE</code>) or has not accepted to pay for model training costs\n         (<code>FALSE</code>).</p>\n         <p>If the collaboration creator has not specified anyone to pay for model training costs,\n         then the member who can query is the default payer. </p>\n         <p>An error message is returned for the following reasons: </p>\n         <ul>\n            <li>\n               <p>If you set the value to <code>FALSE</code> but you are responsible to pay for\n               model training costs. </p>\n            </li>\n            <li>\n               <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for\n               model training costs. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the collaboration member's model training payment responsibilities set by the\n         collaboration creator.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#MembershipPaymentConfiguration": {
             "type": "structure",
             "members": {
@@ -10841,6 +10979,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The payment responsibilities accepted by the collaboration member for query compute\n         costs.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "machineLearning": {
+                    "target": "com.amazonaws.cleanrooms#MembershipMLPaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment responsibilities accepted by the collaboration member for machine learning\n         costs.</p>"
                     }
                 }
             },
@@ -11063,6 +11207,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "mlMemberAbilities": {
+                    "target": "com.amazonaws.cleanrooms#MLMemberAbilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a summary of the ML abilities for the collaboration member.</p>\n         <p>Custom ML modeling is in beta release and is subject to change. For beta terms and conditions, see <i>Betas and Previews</i> in the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a>.</p>"
+                    }
+                },
                 "paymentConfiguration": {
                     "target": "com.amazonaws.cleanrooms#MembershipPaymentConfiguration",
                     "traits": {
@@ -11079,6 +11229,36 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cleanrooms#MembershipSummary"
+            }
+        },
+        "com.amazonaws.cleanrooms#ModelInferencePaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the collaboration creator has configured the collaboration member to\n         pay for model inference costs (<code>TRUE</code>) or has not configured the collaboration\n         member to pay for model inference costs (<code>FALSE</code>).</p>\n         <p>Exactly one member can be configured to pay for model inference costs. An error is\n         returned if the collaboration creator sets a <code>TRUE</code> value for more than one\n         member in the collaboration. </p>\n         <p>If the collaboration creator hasn't specified anyone as the member paying for model inference costs, then the member who can query is the default payer. An error is returned if\n         the collaboration creator sets a <code>FALSE</code> value for the member who can\n         query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the collaboration member's model inference payment responsibilities set by the\n         collaboration creator.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#ModelTrainingPaymentConfig": {
+            "type": "structure",
+            "members": {
+                "isResponsible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the collaboration creator has configured the collaboration member to\n         pay for model training costs (<code>TRUE</code>) or has not configured the collaboration\n         member to pay for model training costs (<code>FALSE</code>).</p>\n         <p>Exactly one member can be configured to pay for model training costs. An error is\n         returned if the collaboration creator sets a <code>TRUE</code> value for more than one\n         member in the collaboration. </p>\n         <p>If the collaboration creator hasn't specified anyone as the member paying for model training costs, then the member who can query is the default payer. An error is returned if\n         the collaboration creator sets a <code>FALSE</code> value for the member who can\n         query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the collaboration member's model training payment responsibilities set by the\n         collaboration creator.</p>"
             }
         },
         "com.amazonaws.cleanrooms#PaginationToken": {
@@ -11298,6 +11478,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The collaboration member's payment responsibilities set by the collaboration creator for\n         query compute costs.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "machineLearning": {
+                    "target": "com.amazonaws.cleanrooms#MLPaymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the collaboration member's machine learning payment responsibilities set by the\n         collaboration creator.</p>"
                     }
                 }
             },

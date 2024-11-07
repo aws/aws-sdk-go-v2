@@ -805,6 +805,76 @@
                 }
             }
         },
+        "com.amazonaws.resourceexplorer2#GetManagedView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#GetManagedViewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#GetManagedViewOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details of the specified <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Amazon Web Services-managed view</a>. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetManagedView"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetManagedViewInput": {
+            "type": "structure",
+            "members": {
+                "ManagedViewArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the managed view.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1011
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#GetManagedViewOutput": {
+            "type": "structure",
+            "members": {
+                "ManagedView": {
+                    "target": "com.amazonaws.resourceexplorer2#ManagedView",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the specified managed view. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourceexplorer2#GetView": {
             "type": "operation",
             "input": {
@@ -1186,6 +1256,103 @@
                 }
             }
         },
+        "com.amazonaws.resourceexplorer2#ListManagedViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#ListManagedViewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#ListManagedViewsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Amazon resource names (ARNs) of the \n            <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Amazon Web Services-managed views</a> available \n            in the Amazon Web Services Region in which you call this operation. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListManagedViews"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ManagedViews"
+                }
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListManagedViewsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                },
+                "ServicePrincipal": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a service principal name. If specified, then the \n            operation only returns the managed views that are managed by the input service. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListManagedViewsOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>"
+                    }
+                },
+                "ManagedViews": {
+                    "target": "com.amazonaws.resourceexplorer2#ManagedViewArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of managed views available in the Amazon Web Services Region in which you called this operation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourceexplorer2#ListResources": {
             "type": "operation",
             "input": {
@@ -1515,6 +1682,78 @@
                 }
             }
         },
+        "com.amazonaws.resourceexplorer2#ManagedView": {
+            "type": "structure",
+            "members": {
+                "ManagedViewArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of the managed view.</p>"
+                    }
+                },
+                "ManagedViewName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed view. </p>"
+                    }
+                },
+                "TrustedService": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service that created and manages the managed view. </p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when this managed view was last modified.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "Owner": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account that owns this managed view.</p>"
+                    }
+                },
+                "Scope": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of an Amazon Web Services account or organization that specifies whether this managed view \n    includes resources from only the specified Amazon Web Services account or all accounts in the specified organization. </p>"
+                    }
+                },
+                "IncludedProperties": {
+                    "target": "com.amazonaws.resourceexplorer2#IncludedPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains additional information about the managed view.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.resourceexplorer2#SearchFilter"
+                },
+                "ResourcePolicy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy that defines access to the managed view. To learn more about this policy, review \n            <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Managed views</a>.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the managed view. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Web Services-managed view is how other Amazon Web Services services can access \n            resource information indexed by Resource Explorer for your Amazon Web Services account or organization \n            with your consent. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html\">Managed views</a>. </p>"
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ManagedViewArnList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.resourceexplorer2#MemberIndex": {
             "type": "structure",
             "members": {
@@ -1620,7 +1859,7 @@
                 "Service": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice that owns the resource and is responsible for creating and updating\n            it.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that owns the resource and is responsible for creating and updating\n            it.</p>"
                     }
                 },
                 "LastReportedAt": {
@@ -1681,7 +1920,13 @@
                     "target": "com.amazonaws.resourceexplorer2#GetIndex"
                 },
                 {
+                    "target": "com.amazonaws.resourceexplorer2#GetManagedView"
+                },
+                {
                     "target": "com.amazonaws.resourceexplorer2#ListIndexesForMembers"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ListManagedViews"
                 },
                 {
                     "target": "com.amazonaws.resourceexplorer2#ListResources"
@@ -2611,7 +2856,7 @@
                 "Service": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice that is associated with the resource type. This is the primary\n            service that lets you create and interact with resources of this type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that is associated with the resource type. This is the primary\n            service that lets you create and interact with resources of this type.</p>"
                     }
                 },
                 "ResourceType": {

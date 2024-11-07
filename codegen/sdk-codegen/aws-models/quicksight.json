@@ -3694,6 +3694,29 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#AuthenticationType": {
+            "type": "enum",
+            "members": {
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN"
+                    }
+                },
+                "X509": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X509"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#AuthorSpecifiedAggregation": {
             "type": "enum",
             "members": {
@@ -13643,6 +13666,15 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DatabaseAccessControlRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
                     "max": 128
                 }
             }
@@ -27877,6 +27909,15 @@
                 "target": "com.amazonaws.quicksight#IdentityName"
             }
         },
+        "com.amazonaws.quicksight#IdentityProviderResourceUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.quicksight#IdentityStore": {
             "type": "enum",
             "members": {
@@ -35736,6 +35777,45 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The measure type field with numerical type columns.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthParameters": {
+            "type": "structure",
+            "members": {
+                "TokenProviderUrl": {
+                    "target": "com.amazonaws.quicksight#TokenProviderUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL of the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthScope": {
+                    "target": "com.amazonaws.quicksight#OAuthScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth scope.</p>"
+                    }
+                },
+                "IdentityProviderVpcConnectionProperties": {
+                    "target": "com.amazonaws.quicksight#VpcConnectionProperties"
+                },
+                "IdentityProviderResourceUri": {
+                    "target": "com.amazonaws.quicksight#IdentityProviderResourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource uri of the identity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake and Starburst.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthScope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.quicksight#OnClause": {
@@ -45278,6 +45358,24 @@
                         "smithy.api#documentation": "<p>Warehouse.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.quicksight#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>"
+                    }
+                },
+                "DatabaseAccessControlRole": {
+                    "target": "com.amazonaws.quicksight#DatabaseAccessControlRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database access control role.</p>"
+                    }
+                },
+                "OAuthParameters": {
+                    "target": "com.amazonaws.quicksight#OAuthParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information needed to create a data source connection between an Amazon QuickSight account and Snowflake.</p>"
+                    }
                 }
             },
             "traits": {
@@ -45468,6 +45566,24 @@
                     "target": "com.amazonaws.quicksight#StarburstProductType",
                     "traits": {
                         "smithy.api#documentation": "<p>The product type for the Starburst data source.</p>"
+                    }
+                },
+                "DatabaseAccessControlRole": {
+                    "target": "com.amazonaws.quicksight#DatabaseAccessControlRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database access control role.</p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.quicksight#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>"
+                    }
+                },
+                "OAuthParameters": {
+                    "target": "com.amazonaws.quicksight#OAuthParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information needed to create a data source connection between an Amazon QuickSight account and Starburst.</p>"
                     }
                 }
             },
@@ -48789,6 +48905,15 @@
         },
         "com.amazonaws.quicksight#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.quicksight#TokenProviderUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.quicksight#TooltipItem": {
             "type": "structure",

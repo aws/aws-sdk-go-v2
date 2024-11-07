@@ -922,6 +922,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An instance maintenance policy.</p>"
                     }
+                },
+                "AvailabilityZoneDistribution": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneDistribution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The instance capacity distribution across Availability Zones.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -2303,6 +2309,20 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#AvailabilityZoneDistribution": {
+            "type": "structure",
+            "members": {
+                "CapacityDistributionStrategy": {
+                    "target": "com.amazonaws.autoscaling#CapacityDistributionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If launches fail in an Availability Zone, the following strategies are available. The default is <code>balanced-best-effort</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>balanced-only</code> - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>balanced-best-effort</code> - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes an Availability Zone distribution.\n        </p>"
+            }
+        },
         "com.amazonaws.autoscaling#AvailabilityZones": {
             "type": "list",
             "member": {
@@ -2625,6 +2645,23 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#CapacityDistributionStrategy": {
+            "type": "enum",
+            "members": {
+                "BALANCED_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "balanced-only"
+                    }
+                },
+                "BALANCED_BEST_EFFORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "balanced-best-effort"
                     }
                 }
             }
@@ -3103,6 +3140,12 @@
                     "target": "com.amazonaws.autoscaling#InstanceMaintenancePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>An instance maintenance policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html\">Set instance maintenance policy</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                    }
+                },
+                "AvailabilityZoneDistribution": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneDistribution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance capacity distribution across Availability Zones.</p>"
                     }
                 }
             }
@@ -10962,6 +11005,12 @@
                     "target": "com.amazonaws.autoscaling#InstanceMaintenancePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>An instance maintenance policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html\">Set instance maintenance policy</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                    }
+                },
+                "AvailabilityZoneDistribution": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneDistribution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The instance capacity distribution across Availability Zones.\n        </p>"
                     }
                 }
             }
