@@ -62,6 +62,14 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
     }
 
     @Override
+    protected void writeDefaultHeaders(GenerationContext context, OperationShape operation, GoWriter writer) {
+        super.writeDefaultHeaders(context, operation, writer);
+        if (isAwsQueryCompatibleTraitFound(context)) {
+            writer.write("httpBindingEncoder.SetHeader(\"X-Amzn-Query-Mode\").Boolean(true)");
+        }
+    }
+
+    @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
         GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
