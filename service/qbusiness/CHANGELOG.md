@@ -1,3 +1,7 @@
+# v1.16.0 (2024-11-08)
+
+* **Feature**: Adds S3 path option to pass group member list for PutGroup API.
+
 # v1.15.3 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

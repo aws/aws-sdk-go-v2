@@ -1,3 +1,7 @@
+# v1.17.0 (2024-11-08)
+
+* **Feature**: Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.
+
 # v1.16.3 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

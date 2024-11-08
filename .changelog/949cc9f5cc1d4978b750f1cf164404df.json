@@ -1,8 +1,0 @@
-{
-    "id": "949cc9f5-cc1d-4978-b750-f1cf164404df",
-    "type": "feature",
-    "description": "This release adds trace functionality to Bedrock Prompt Flows",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

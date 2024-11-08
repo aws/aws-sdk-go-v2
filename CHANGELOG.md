@@ -1,3 +1,25 @@
+# Release (2024-11-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.48.0](service/batch/CHANGELOG.md#v1480-2024-11-08)
+  * **Feature**: This feature allows override LaunchTemplates to be specified in an AWS Batch Compute Environment.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.24.0](service/bedrockagentruntime/CHANGELOG.md#v1240-2024-11-08)
+  * **Feature**: This release adds trace functionality to Bedrock Prompt Flows
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.21.0](service/chimesdkmediapipelines/CHANGELOG.md#v1210-2024-11-08)
+  * **Feature**: Added support for Media Capture Pipeline and Media Concatenation Pipeline for customer managed server side encryption. Now Media Capture Pipeline can use IAM sink role to get access to KMS key and encrypt/decrypt recorded artifacts. KMS key ID can also be supplied with encryption context.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.6.0](service/controlcatalog/CHANGELOG.md#v160-2024-11-08)
+  * **Feature**: AWS Control Catalog GetControl public API returns additional data in output, including Implementation and Parameters
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.52.0](service/eks/CHANGELOG.md#v1520-2024-11-08)
+  * **Feature**: Adds new error code `Ec2InstanceTypeDoesNotExist` for Amazon EKS managed node groups
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.35.0](service/firehose/CHANGELOG.md#v1350-2024-11-08)
+  * **Feature**: Amazon Data Firehose / Features : Adds support for a new DeliveryStreamType, DatabaseAsSource. DatabaseAsSource hoses allow customers to stream CDC events from their RDS and Amazon EC2 hosted databases, running MySQL and PostgreSQL database engines, to Iceberg Table destinations.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.65.0](service/lambda/CHANGELOG.md#v1650-2024-11-08)
+  * **Feature**: This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.17.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1170-2024-11-08)
+  * **Feature**: Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.16.0](service/qbusiness/CHANGELOG.md#v1160-2024-11-08)
+  * **Feature**: Adds S3 path option to pass group member list for PutGroup API.
+
 # Release (2024-11-07)
 
 ## General Highlights

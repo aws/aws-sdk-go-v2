@@ -1,8 +1,0 @@
-{
-    "id": "b05c2cd1-79bc-4342-ac46-6002dfa0359a",
-    "type": "feature",
-    "description": "This feature allows override LaunchTemplates to be specified in an AWS Batch Compute Environment.",
-    "modules": [
-        "service/batch"
-    ]
-}

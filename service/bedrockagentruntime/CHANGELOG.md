@@ -1,3 +1,7 @@
+# v1.24.0 (2024-11-08)
+
+* **Feature**: This release adds trace functionality to Bedrock Prompt Flows
+
 # v1.23.3 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

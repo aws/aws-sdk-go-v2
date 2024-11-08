@@ -1,8 +1,0 @@
-{
-    "id": "4209d78c-6706-4127-94b2-fd436e7e82d3",
-    "type": "feature",
-    "description": "Amazon Data Firehose / Features : Adds support for a new DeliveryStreamType, DatabaseAsSource. DatabaseAsSource hoses allow customers to stream CDC events from their RDS and Amazon EC2 hosted databases, running MySQL and PostgreSQL database engines, to Iceberg Table destinations.",
-    "modules": [
-        "service/firehose"
-    ]
-}

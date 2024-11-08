@@ -1,3 +1,7 @@
+# v1.6.0 (2024-11-08)
+
+* **Feature**: AWS Control Catalog GetControl public API returns additional data in output, including Implementation and Parameters
+
 # v1.5.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

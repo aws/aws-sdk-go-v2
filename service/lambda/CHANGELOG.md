@@ -1,3 +1,7 @@
+# v1.65.0 (2024-11-08)
+
+* **Feature**: This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.
+
 # v1.64.3 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

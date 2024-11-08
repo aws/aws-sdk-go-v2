@@ -1,3 +1,7 @@
+# v1.48.0 (2024-11-08)
+
+* **Feature**: This feature allows override LaunchTemplates to be specified in an AWS Batch Compute Environment.
+
 # v1.47.2 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

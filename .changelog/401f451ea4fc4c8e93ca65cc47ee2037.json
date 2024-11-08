@@ -1,8 +1,0 @@
-{
-    "id": "401f451e-a4fc-4c8e-93ca-65cc47ee2037",
-    "type": "feature",
-    "description": "Adds S3 path option to pass group member list for PutGroup API.",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

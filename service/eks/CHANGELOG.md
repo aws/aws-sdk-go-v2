@@ -1,3 +1,7 @@
+# v1.52.0 (2024-11-08)
+
+* **Feature**: Adds new error code `Ec2InstanceTypeDoesNotExist` for Amazon EKS managed node groups
+
 # v1.51.3 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

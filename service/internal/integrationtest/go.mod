@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.41.5
 	github.com/aws/aws-sdk-go-v2/service/athena v1.48.3
-	github.com/aws/aws-sdk-go-v2/service/batch v1.47.2
+	github.com/aws/aws-sdk-go-v2/service/batch v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.55.5
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.40.4
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.27.6
@@ -26,7 +26,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.29.5
-	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.5
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.4
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.36.5
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.187.1
@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/emr v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.35.5
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.34.5
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.36.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.26.5
 	github.com/aws/aws-sdk-go-v2/service/glue v1.101.2
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.59.5
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.37.5
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.64.3
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.65.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.42.5
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.4

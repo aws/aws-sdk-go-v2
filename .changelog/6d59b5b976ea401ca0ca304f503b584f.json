@@ -1,8 +1,0 @@
-{
-    "id": "6d59b5b9-76ea-401c-a0ca-304f503b584f",
-    "type": "feature",
-    "description": "Adds new error code `Ec2InstanceTypeDoesNotExist` for Amazon EKS managed node groups",
-    "modules": [
-        "service/eks"
-    ]
-}
