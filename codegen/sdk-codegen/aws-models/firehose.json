@@ -36,7 +36,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:kms:[a-zA-Z0-9\\-]+:\\d{12}:(key|alias)/[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.firehose#AmazonOpenSearchServerlessBufferingHints": {
@@ -51,7 +51,7 @@
                 "SizeInMBs": {
                     "target": "com.amazonaws.firehose#AmazonOpenSearchServerlessBufferingSizeInMBs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5. </p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>"
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5. </p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the Firehose stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>"
                     }
                 }
             },
@@ -313,7 +313,7 @@
                 "SizeInMBs": {
                     "target": "com.amazonaws.firehose#AmazonopensearchserviceBufferingSizeInMBs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>"
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the Firehose stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>"
                     }
                 }
             },
@@ -544,7 +544,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.firehose#AmazonopensearchserviceTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be only one\n         type per index. If you try to specify a new type for an existing index that already has\n         another type, Firehose returns an error during runtime. </p>\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,\n         Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your delivery stream with a new index name, provide an empty\n         string for TypeName. </p>"
+                        "smithy.api#documentation": "<p>The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be only one\n         type per index. If you try to specify a new type for an existing index that already has\n         another type, Firehose returns an error during runtime. </p>\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your Firehose stream,\n         Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your Firehose stream with a new index name, provide an empty\n         string for TypeName. </p>"
                     }
                 },
                 "IndexRotationPeriod": {
@@ -592,7 +592,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:es:[a-zA-Z0-9\\-]+:\\d{12}:domain/[a-z][-0-9a-z]{2,27}$"
             }
         },
         "com.amazonaws.firehose#AmazonopensearchserviceIndexName": {
@@ -730,7 +730,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:s3:::[\\w\\.\\-]{1,255}$"
             }
         },
         "com.amazonaws.firehose#BufferingHints": {
@@ -739,7 +739,7 @@
                 "SizeInMBs": {
                     "target": "com.amazonaws.firehose#SizeInMBs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MiBs, before delivering it to the\n         destination. The default value is 5. This parameter is optional but if you specify a value\n         for it, you must also specify a value for <code>IntervalInSeconds</code>, and vice\n         versa.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MiB/sec, the value should be 10 MiB or higher.</p>"
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MiBs, before delivering it to the\n         destination. The default value is 5. This parameter is optional but if you specify a value\n         for it, you must also specify a value for <code>IntervalInSeconds</code>, and vice\n         versa.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the Firehose stream in 10 seconds. For example, if you typically\n         ingest data at 1 MiB/sec, the value should be 10 MiB or higher.</p>"
                     }
                 },
                 "IntervalInSeconds": {
@@ -759,12 +759,18 @@
                 "CatalogARN": {
                     "target": "com.amazonaws.firehose#GlueDataCatalogARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies the Glue catalog ARN indentifier of the destination Apache Iceberg Tables. You must specify the ARN in the format <code>arn:aws:glue:region:account-id:catalog</code>.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         Specifies the Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format <code>arn:aws:glue:region:account-id:catalog</code>.\n      </p>"
+                    }
+                },
+                "WarehouseLocation": {
+                    "target": "com.amazonaws.firehose#WarehouseLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Describes the containers where the destination Apache Iceberg Tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n         Describes the containers where the destination Apache Iceberg Tables are persisted.\n      </p>"
             }
         },
         "com.amazonaws.firehose#CloudWatchLoggingOptions": {
@@ -790,7 +796,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>"
+                "smithy.api#documentation": "<p>Describes the Amazon CloudWatch logging options for your Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#ClusterJDBCURL": {
@@ -800,7 +806,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+(redshift(-serverless)?)\\.([a-zA-Z0-9\\.]+):\\d{1,5}/[a-zA-Z0-9_$-]+$"
+                "smithy.api#pattern": "^jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+(redshift(-serverless)?)\\.([a-zA-Z0-9\\.\\-]+):\\d{1,5}/[a-zA-Z0-9_$-]+$"
             }
         },
         "com.amazonaws.firehose#ColumnToJsonKeyMappings": {
@@ -928,7 +934,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 204800
+                    "max": 10240
                 },
                 "smithy.api#pattern": ".*"
             }
@@ -956,7 +962,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Firehose delivery stream.</p>\n         <p>By default, you can create up to 50 delivery streams per Amazon Web Services\n         Region.</p>\n         <p>This is an asynchronous operation that immediately returns. The initial status of the\n         delivery stream is <code>CREATING</code>. After the delivery stream is created, its status\n         is <code>ACTIVE</code> and it now accepts data. If the delivery stream creation fails, the\n         status transitions to <code>CREATING_FAILED</code>. Attempts to send data to a delivery\n         stream that is not in the <code>ACTIVE</code> state cause an exception. To check the state\n         of a delivery stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>If the status of a delivery stream is <code>CREATING_FAILED</code>, this status\n         doesn't change, and you can't invoke <code>CreateDeliveryStream</code> again on it.\n         However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete\n         it.</p>\n         <p>A Firehose delivery stream can be configured to receive records directly\n         from providers using <a>PutRecord</a> or <a>PutRecordBatch</a>, or it\n         can be configured to use an existing Kinesis stream as its source. To specify a Kinesis\n         data stream as input, set the <code>DeliveryStreamType</code> parameter to\n            <code>KinesisStreamAsSource</code>, and provide the Kinesis stream Amazon Resource Name\n         (ARN) and role ARN in the <code>KinesisStreamSourceConfiguration</code>\n         parameter.</p>\n         <p>To create a delivery stream with server-side encryption (SSE) enabled, include <a>DeliveryStreamEncryptionConfigurationInput</a> in your request. This is\n         optional. You can also invoke <a>StartDeliveryStreamEncryption</a> to turn on\n         SSE for an existing delivery stream that doesn't have SSE enabled.</p>\n         <p>A delivery stream is configured with a single destination, such as Amazon Simple\n         Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service, Amazon OpenSearch\n         Serverless, Splunk, and any custom HTTP endpoint or HTTP endpoints owned by or supported by\n         third-party service providers, including Datadog, Dynatrace, LogicMonitor, MongoDB, New\n         Relic, and Sumo Logic. You must specify only one of the following destination configuration\n         parameters: <code>ExtendedS3DestinationConfiguration</code>,\n            <code>S3DestinationConfiguration</code>,\n            <code>ElasticsearchDestinationConfiguration</code>,\n            <code>RedshiftDestinationConfiguration</code>, or\n            <code>SplunkDestinationConfiguration</code>.</p>\n         <p>When you specify <code>S3DestinationConfiguration</code>, you can also provide the\n         following optional values: BufferingHints, <code>EncryptionConfiguration</code>, and\n            <code>CompressionFormat</code>. By default, if no <code>BufferingHints</code> value is\n         provided, Firehose buffers data up to 5 MB or for 5 minutes, whichever\n         condition is satisfied first. <code>BufferingHints</code> is a hint, so there are some\n         cases where the service cannot adhere to these conditions strictly. For example, record\n         boundaries might be such that the size is a little over or under the configured buffering\n         size. By default, no encryption is performed. We strongly recommend that you enable\n         encryption to ensure secure data storage in Amazon S3.</p>\n         <p>A few notes about Amazon Redshift as a destination:</p>\n         <ul>\n            <li>\n               <p>An Amazon Redshift destination requires an S3 bucket as intermediate location.\n               Firehose first delivers data to Amazon S3 and then uses\n                  <code>COPY</code> syntax to load data into an Amazon Redshift table. This is\n               specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>\n               parameter.</p>\n            </li>\n            <li>\n               <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be\n               specified in <code>RedshiftDestinationConfiguration.S3Configuration</code> because\n               the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't\n               support these compression formats.</p>\n            </li>\n            <li>\n               <p>We strongly recommend that you use the user name and password you provide\n               exclusively with Firehose, and that the permissions for the account are\n               restricted for Amazon Redshift <code>INSERT</code> permissions.</p>\n            </li>\n         </ul>\n         <p>Firehose assumes the IAM role that is configured as part of the\n         destination. The role should allow the Firehose principal to assume the role,\n         and the role should have permissions that allow the service to deliver the data. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Firehose Access to an Amazon S3 Destination</a> in the <i>Amazon Firehose Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a Firehose stream.</p>\n         <p>By default, you can create up to 50 Firehose streams per Amazon Web Services\n         Region.</p>\n         <p>This is an asynchronous operation that immediately returns. The initial status of the\n         Firehose stream is <code>CREATING</code>. After the Firehose stream is created, its status\n         is <code>ACTIVE</code> and it now accepts data. If the Firehose stream creation fails, the\n         status transitions to <code>CREATING_FAILED</code>. Attempts to send data to a delivery\n         stream that is not in the <code>ACTIVE</code> state cause an exception. To check the state\n         of a Firehose stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>If the status of a Firehose stream is <code>CREATING_FAILED</code>, this status\n         doesn't change, and you can't invoke <code>CreateDeliveryStream</code> again on it.\n         However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete\n         it.</p>\n         <p>A Firehose stream can be configured to receive records directly\n         from providers using <a>PutRecord</a> or <a>PutRecordBatch</a>, or it\n         can be configured to use an existing Kinesis stream as its source. To specify a Kinesis\n         data stream as input, set the <code>DeliveryStreamType</code> parameter to\n            <code>KinesisStreamAsSource</code>, and provide the Kinesis stream Amazon Resource Name\n         (ARN) and role ARN in the <code>KinesisStreamSourceConfiguration</code>\n         parameter.</p>\n         <p>To create a Firehose stream with server-side encryption (SSE) enabled, include <a>DeliveryStreamEncryptionConfigurationInput</a> in your request. This is\n         optional. You can also invoke <a>StartDeliveryStreamEncryption</a> to turn on\n         SSE for an existing Firehose stream that doesn't have SSE enabled.</p>\n         <p>A Firehose stream is configured with a single destination, such as Amazon Simple\n         Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service, Amazon OpenSearch\n         Serverless, Splunk, and any custom HTTP endpoint or HTTP endpoints owned by or supported by\n         third-party service providers, including Datadog, Dynatrace, LogicMonitor, MongoDB, New\n         Relic, and Sumo Logic. You must specify only one of the following destination configuration\n         parameters: <code>ExtendedS3DestinationConfiguration</code>,\n            <code>S3DestinationConfiguration</code>,\n            <code>ElasticsearchDestinationConfiguration</code>,\n            <code>RedshiftDestinationConfiguration</code>, or\n            <code>SplunkDestinationConfiguration</code>.</p>\n         <p>When you specify <code>S3DestinationConfiguration</code>, you can also provide the\n         following optional values: BufferingHints, <code>EncryptionConfiguration</code>, and\n            <code>CompressionFormat</code>. By default, if no <code>BufferingHints</code> value is\n         provided, Firehose buffers data up to 5 MB or for 5 minutes, whichever\n         condition is satisfied first. <code>BufferingHints</code> is a hint, so there are some\n         cases where the service cannot adhere to these conditions strictly. For example, record\n         boundaries might be such that the size is a little over or under the configured buffering\n         size. By default, no encryption is performed. We strongly recommend that you enable\n         encryption to ensure secure data storage in Amazon S3.</p>\n         <p>A few notes about Amazon Redshift as a destination:</p>\n         <ul>\n            <li>\n               <p>An Amazon Redshift destination requires an S3 bucket as intermediate location.\n               Firehose first delivers data to Amazon S3 and then uses\n                  <code>COPY</code> syntax to load data into an Amazon Redshift table. This is\n               specified in the <code>RedshiftDestinationConfiguration.S3Configuration</code>\n               parameter.</p>\n            </li>\n            <li>\n               <p>The compression formats <code>SNAPPY</code> or <code>ZIP</code> cannot be\n               specified in <code>RedshiftDestinationConfiguration.S3Configuration</code> because\n               the Amazon Redshift <code>COPY</code> operation that reads from the S3 bucket doesn't\n               support these compression formats.</p>\n            </li>\n            <li>\n               <p>We strongly recommend that you use the user name and password you provide\n               exclusively with Firehose, and that the permissions for the account are\n               restricted for Amazon Redshift <code>INSERT</code> permissions.</p>\n            </li>\n         </ul>\n         <p>Firehose assumes the IAM role that is configured as part of the\n         destination. The role should allow the Firehose principal to assume the role,\n         and the role should have permissions that allow the service to deliver the data. For more\n         information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Firehose Access to an Amazon S3 Destination</a> in the <i>Amazon Firehose Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.firehose#CreateDeliveryStreamInput": {
@@ -965,20 +971,20 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream. This name must be unique per Amazon Web Services\n         account in the same Amazon Web Services Region. If the delivery streams are in different\n         accounts or different Regions, you can have multiple delivery streams with the same\n         name.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream. This name must be unique per Amazon Web Services\n         account in the same Amazon Web Services Region. If the Firehose streams are in different\n         accounts or different Regions, you can have multiple Firehose streams with the same\n         name.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DeliveryStreamType": {
                     "target": "com.amazonaws.firehose#DeliveryStreamType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The delivery stream type. This parameter can be one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Firehose stream type. This parameter can be one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the Firehose stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The Firehose stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "KinesisStreamSourceConfiguration": {
                     "target": "com.amazonaws.firehose#KinesisStreamSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>When a Kinesis data stream is used as the source for the delivery stream, a <a>KinesisStreamSourceConfiguration</a> containing the Kinesis data stream Amazon\n         Resource Name (ARN) and the role ARN for the source stream.</p>"
+                        "smithy.api#documentation": "<p>When a Kinesis data stream is used as the source for the Firehose stream, a <a>KinesisStreamSourceConfiguration</a> containing the Kinesis data stream Amazon\n         Resource Name (ARN) and the role ARN for the source stream.</p>"
                     }
                 },
                 "DeliveryStreamEncryptionConfigurationInput": {
@@ -1033,7 +1039,7 @@
                 "Tags": {
                     "target": "com.amazonaws.firehose#TagDeliveryStreamInputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can\n         define and assign to Amazon Web Services resources. Tags are metadata. For example, you can\n         add friendly names and descriptions or other types of information that can help you\n         distinguish the delivery stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n            Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User\n         Guide.</p>\n         <p>You can specify up to 50 tags when creating a delivery stream.</p>\n         <p>If you specify tags in the <code>CreateDeliveryStream</code> action, Amazon Data\n         Firehose performs an additional authorization on the\n            <code>firehose:TagDeliveryStream</code> action to verify if users have permissions to\n         create tags. If you do not provide this permission, requests to create new Firehose\n         delivery streams with IAM resource tags will fail with an\n         <code>AccessDeniedException</code> such as following.</p>\n         <p>\n            <b>AccessDeniedException</b>\n         </p>\n         <p>User: arn:aws:sts::x:assumed-role/x/x is not authorized to perform: firehose:TagDeliveryStream on resource: arn:aws:firehose:us-east-1:x:deliverystream/x with an explicit deny in an identity-based policy.</p>\n         <p>For an example IAM policy, see <a href=\"https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples\">Tag example.</a>\n         </p>"
+                        "smithy.api#documentation": "<p>A set of tags to assign to the Firehose stream. A tag is a key-value pair that you can\n         define and assign to Amazon Web Services resources. Tags are metadata. For example, you can\n         add friendly names and descriptions or other types of information that can help you\n         distinguish the Firehose stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n            Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User\n         Guide.</p>\n         <p>You can specify up to 50 tags when creating a Firehose stream.</p>\n         <p>If you specify tags in the <code>CreateDeliveryStream</code> action, Amazon Data\n         Firehose performs an additional authorization on the\n            <code>firehose:TagDeliveryStream</code> action to verify if users have permissions to\n         create tags. If you do not provide this permission, requests to create new Firehose\n         Firehose streams with IAM resource tags will fail with an\n         <code>AccessDeniedException</code> such as following.</p>\n         <p>\n            <b>AccessDeniedException</b>\n         </p>\n         <p>User: arn:aws:sts::x:assumed-role/x/x is not authorized to perform: firehose:TagDeliveryStream on resource: arn:aws:firehose:us-east-1:x:deliverystream/x with an explicit deny in an identity-based policy.</p>\n         <p>For an example IAM policy, see <a href=\"https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples\">Tag example.</a>\n         </p>"
                     }
                 },
                 "AmazonOpenSearchServerlessDestinationConfiguration": {
@@ -1054,7 +1060,13 @@
                 "IcebergDestinationConfiguration": {
                     "target": "com.amazonaws.firehose#IcebergDestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Configure Apache Iceberg Tables destination.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         Configure Apache Iceberg Tables destination.\n      </p>"
+                    }
+                },
+                "DatabaseSourceConfiguration": {
+                    "target": "com.amazonaws.firehose#DatabaseSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 }
             },
@@ -1068,7 +1080,7 @@
                 "DeliveryStreamARN": {
                     "target": "com.amazonaws.firehose#DeliveryStreamARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Firehose stream.</p>"
                     }
                 }
             },
@@ -1082,7 +1094,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^$|[a-zA-Z/_]+$"
             }
         },
         "com.amazonaws.firehose#Data": {
@@ -1131,7 +1144,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 204800
+                    "max": 10240
                 },
                 "smithy.api#pattern": ".*"
             }
@@ -1144,6 +1157,399 @@
                     "max": 512
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#DatabaseColumnName"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseColumnList": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Exclude": {
+                    "target": "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 194
+                },
+                "smithy.api#pattern": "^[\\u0001-\\uFFFF]*$"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+$"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseIncludeOrExcludeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#DatabaseName"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseList": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.firehose#DatabaseIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Exclude": {
+                    "target": "com.amazonaws.firehose#DatabaseIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\u0001-\\uFFFF]*$"
+            }
+        },
+        "com.amazonaws.firehose#DatabasePort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSnapshotInfo": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Table": {
+                    "target": "com.amazonaws.firehose#DatabaseTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestTimestamp": {
+                    "target": "com.amazonaws.firehose#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestedBy": {
+                    "target": "com.amazonaws.firehose#SnapshotRequestedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.firehose#SnapshotStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureDescription": {
+                    "target": "com.amazonaws.firehose#FailureDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSnapshotInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#DatabaseSnapshotInfo"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSourceAuthenticationConfiguration": {
+            "type": "structure",
+            "members": {
+                "SecretsManagerConfiguration": {
+                    "target": "com.amazonaws.firehose#SecretsManagerConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.firehose#DatabaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.firehose#DatabaseEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.firehose#DatabasePort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SSLMode": {
+                    "target": "com.amazonaws.firehose#SSLMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Databases": {
+                    "target": "com.amazonaws.firehose#DatabaseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tables": {
+                    "target": "com.amazonaws.firehose#DatabaseTableList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Columns": {
+                    "target": "com.amazonaws.firehose#DatabaseColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "SurrogateKeys": {
+                    "target": "com.amazonaws.firehose#DatabaseSurrogateKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "SnapshotWatermarkTable": {
+                    "target": "com.amazonaws.firehose#DatabaseTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseSourceAuthenticationConfiguration": {
+                    "target": "com.amazonaws.firehose#DatabaseSourceAuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseSourceVPCConfiguration": {
+                    "target": "com.amazonaws.firehose#DatabaseSourceVPCConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSourceDescription": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.firehose#DatabaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.firehose#DatabaseEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.firehose#DatabasePort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "SSLMode": {
+                    "target": "com.amazonaws.firehose#SSLMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Databases": {
+                    "target": "com.amazonaws.firehose#DatabaseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Tables": {
+                    "target": "com.amazonaws.firehose#DatabaseTableList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Columns": {
+                    "target": "com.amazonaws.firehose#DatabaseColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "SurrogateKeys": {
+                    "target": "com.amazonaws.firehose#DatabaseColumnIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "SnapshotWatermarkTable": {
+                    "target": "com.amazonaws.firehose#DatabaseTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "SnapshotInfo": {
+                    "target": "com.amazonaws.firehose#DatabaseSnapshotInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "DatabaseSourceAuthenticationConfiguration": {
+                    "target": "com.amazonaws.firehose#DatabaseSourceAuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "DatabaseSourceVPCConfiguration": {
+                    "target": "com.amazonaws.firehose#DatabaseSourceVPCConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSourceVPCConfiguration": {
+            "type": "structure",
+            "members": {
+                "VpcEndpointServiceName": {
+                    "target": "com.amazonaws.firehose#VpcEndpointServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseSurrogateKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseTableIncludeOrExcludeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#DatabaseTableName"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseTableList": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.firehose#DatabaseTableIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "Exclude": {
+                    "target": "com.amazonaws.firehose#DatabaseTableIncludeOrExcludeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseTableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 129
+                },
+                "smithy.api#pattern": "^[\\u0001-\\uFFFF]*$"
+            }
+        },
+        "com.amazonaws.firehose#DatabaseType": {
+            "type": "enum",
+            "members": {
+                "MySQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MySQL"
+                    }
+                },
+                "PostgreSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostgreSQL"
+                    }
+                }
             }
         },
         "com.amazonaws.firehose#DefaultDocumentIdFormat": {
@@ -1180,7 +1586,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a delivery stream and its data.</p>\n         <p>You can delete a delivery stream only if it is in one of the following states:\n            <code>ACTIVE</code>, <code>DELETING</code>, <code>CREATING_FAILED</code>, or\n            <code>DELETING_FAILED</code>. You can't delete a delivery stream that is in the\n         <code>CREATING</code> state. To check the state of a delivery stream, use <a>DescribeDeliveryStream</a>. </p>\n         <p>DeleteDeliveryStream is an asynchronous API. When an API request to DeleteDeliveryStream succeeds, the delivery stream is marked for deletion, and it goes into the \n         <code>DELETING</code> state.While the delivery stream is in the <code>DELETING</code> state, the service might\n         continue to accept records, but it doesn't make any guarantees with respect to delivering\n         the data. Therefore, as a best practice, first stop any applications that are sending\n         records before you delete a delivery stream.</p>\n         <p>Removal of a delivery stream that is in the <code>DELETING</code> state is a low priority operation for the service. A stream may remain in the \n         <code>DELETING</code> state for several minutes. Therefore, as a best practice, applications should not wait for streams in the <code>DELETING</code> state \n         to be removed. </p>"
+                "smithy.api#documentation": "<p>Deletes a Firehose stream and its data.</p>\n         <p>You can delete a Firehose stream only if it is in one of the following states:\n            <code>ACTIVE</code>, <code>DELETING</code>, <code>CREATING_FAILED</code>, or\n            <code>DELETING_FAILED</code>. You can't delete a Firehose stream that is in the\n         <code>CREATING</code> state. To check the state of a Firehose stream, use <a>DescribeDeliveryStream</a>. </p>\n         <p>DeleteDeliveryStream is an asynchronous API. When an API request to DeleteDeliveryStream succeeds, the Firehose stream is marked for deletion, and it goes into the \n         <code>DELETING</code> state.While the Firehose stream is in the <code>DELETING</code> state, the service might\n         continue to accept records, but it doesn't make any guarantees with respect to delivering\n         the data. Therefore, as a best practice, first stop any applications that are sending\n         records before you delete a Firehose stream.</p>\n         <p>Removal of a Firehose stream that is in the <code>DELETING</code> state is a low priority operation for the service. A stream may remain in the \n         <code>DELETING</code> state for several minutes. Therefore, as a best practice, applications should not wait for streams in the <code>DELETING</code> state \n         to be removed. </p>"
             }
         },
         "com.amazonaws.firehose#DeleteDeliveryStreamInput": {
@@ -1189,14 +1595,14 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AllowForceDelete": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this to true if you want to delete the delivery stream even if Firehose\n         is unable to retire the grant for the CMK. Firehose might be unable to retire\n         the grant due to a customer error, such as when the CMK or the grant are in an invalid\n         state. If you force deletion, you can then use the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> operation to\n         revoke the grant you gave to Firehose. If a failure to retire the grant\n         happens due to an Amazon Web Services KMS issue, Firehose keeps retrying the\n         delete operation.</p>\n         <p>The default value is false.</p>"
+                        "smithy.api#documentation": "<p>Set this to true if you want to delete the Firehose stream even if Firehose\n         is unable to retire the grant for the CMK. Firehose might be unable to retire\n         the grant due to a customer error, such as when the CMK or the grant are in an invalid\n         state. If you force deletion, you can then use the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> operation to\n         revoke the grant you gave to Firehose. If a failure to retire the grant\n         happens due to an Amazon Web Services KMS issue, Firehose keeps retrying the\n         delete operation.</p>\n         <p>The default value is false.</p>"
                     }
                 }
             },
@@ -1221,7 +1627,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:firehose:[a-zA-Z0-9\\-]+:\\d{12}:deliverystream/[a-zA-Z0-9._-]+$"
             }
         },
         "com.amazonaws.firehose#DeliveryStreamDescription": {
@@ -1230,21 +1636,21 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DeliveryStreamARN": {
                     "target": "com.amazonaws.firehose#DeliveryStreamARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the delivery stream. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Firehose stream. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n            Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DeliveryStreamStatus": {
                     "target": "com.amazonaws.firehose#DeliveryStreamStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the delivery stream. If the status of a delivery stream is\n            <code>CREATING_FAILED</code>, this status doesn't change, and you can't invoke\n            <code>CreateDeliveryStream</code> again on it. However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it.</p>",
+                        "smithy.api#documentation": "<p>The status of the Firehose stream. If the status of a Firehose stream is\n            <code>CREATING_FAILED</code>, this status doesn't change, and you can't invoke\n            <code>CreateDeliveryStream</code> again on it. However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1257,33 +1663,33 @@
                 "DeliveryStreamEncryptionConfiguration": {
                     "target": "com.amazonaws.firehose#DeliveryStreamEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the server-side encryption (SSE) status for the delivery stream.</p>"
+                        "smithy.api#documentation": "<p>Indicates the server-side encryption (SSE) status for the Firehose stream.</p>"
                     }
                 },
                 "DeliveryStreamType": {
                     "target": "com.amazonaws.firehose#DeliveryStreamType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The delivery stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Firehose stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the Firehose stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The Firehose stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "VersionId": {
                     "target": "com.amazonaws.firehose#DeliveryStreamVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each time the destination is updated for a delivery stream, the version ID is\n         changed, and the current version ID is required when updating the destination. This is so\n         that the service knows it is applying the changes to the correct version of the delivery\n         stream.</p>",
+                        "smithy.api#documentation": "<p>Each time the destination is updated for a Firehose stream, the version ID is\n         changed, and the current version ID is required when updating the destination. This is so\n         that the service knows it is applying the changes to the correct version of the delivery\n         stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CreateTimestamp": {
                     "target": "com.amazonaws.firehose#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the delivery stream was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the Firehose stream was created.</p>"
                     }
                 },
                 "LastUpdateTimestamp": {
                     "target": "com.amazonaws.firehose#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the delivery stream was last updated.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the Firehose stream was last updated.</p>"
                     }
                 },
                 "Source": {
@@ -1308,7 +1714,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a delivery stream.</p>"
+                "smithy.api#documentation": "<p>Contains information about a Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#DeliveryStreamEncryptionConfiguration": {
@@ -1329,7 +1735,7 @@
                 "Status": {
                     "target": "com.amazonaws.firehose#DeliveryStreamEncryptionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the server-side encryption (SSE) status for the delivery stream. For a full\n         description of the different values of this status, see <a>StartDeliveryStreamEncryption</a> and <a>StopDeliveryStreamEncryption</a>. If this status is <code>ENABLING_FAILED</code>\n         or <code>DISABLING_FAILED</code>, it is the status of the most recent attempt to enable or\n         disable SSE, respectively.</p>"
+                        "smithy.api#documentation": "<p>This is the server-side encryption (SSE) status for the Firehose stream. For a full\n         description of the different values of this status, see <a>StartDeliveryStreamEncryption</a> and <a>StopDeliveryStreamEncryption</a>. If this status is <code>ENABLING_FAILED</code>\n         or <code>DISABLING_FAILED</code>, it is the status of the most recent attempt to enable or\n         disable SSE, respectively.</p>"
                     }
                 },
                 "FailureDescription": {
@@ -1355,7 +1761,7 @@
                 "KeyType": {
                     "target": "com.amazonaws.firehose#KeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of customer master key (CMK) to use for encryption. The default\n         setting is <code>Amazon Web Services_OWNED_CMK</code>. For more information about CMKs, see\n            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with\n            <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Firehose invokes the\n         Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant\n         that allows the Firehose service to use the customer managed CMK to perform\n         encryption and decryption. Firehose manages that grant. </p>\n         <p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a\n         delivery stream that is encrypted with a customer managed CMK, Firehose\n         schedules the grant it had on the old CMK for retirement.</p>\n         <p>You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If\n         a <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a>\n         operation exceeds this limit, Firehose throws a\n            <code>LimitExceededException</code>. </p>\n         <important>\n            <p>To encrypt your delivery stream, use symmetric CMKs. Firehose doesn't\n            support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html\">About\n               Symmetric and Asymmetric CMKs</a> in the Amazon Web Services Key Management\n            Service developer guide.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Indicates the type of customer master key (CMK) to use for encryption. The default\n         setting is <code>Amazon Web Services_OWNED_CMK</code>. For more information about CMKs, see\n            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with\n            <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Firehose invokes the\n         Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant\n         that allows the Firehose service to use the customer managed CMK to perform\n         encryption and decryption. Firehose manages that grant. </p>\n         <p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a\n         Firehose stream that is encrypted with a customer managed CMK, Firehose\n         schedules the grant it had on the old CMK for retirement.</p>\n         <p>You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 Firehose streams. If\n         a <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a>\n         operation exceeds this limit, Firehose throws a\n            <code>LimitExceededException</code>. </p>\n         <important>\n            <p>To encrypt your Firehose stream, use symmetric CMKs. Firehose doesn't\n            support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html\">About\n               Symmetric and Asymmetric CMKs</a> in the Amazon Web Services Key Management\n            Service developer guide.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1408,6 +1814,18 @@
         "com.amazonaws.firehose#DeliveryStreamFailureType": {
             "type": "enum",
             "members": {
+                "VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND"
+                    }
+                },
+                "VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED"
+                    }
+                },
                 "RETIRE_KMS_GRANT_FAILED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1571,6 +1989,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MSKAsSource"
                     }
+                },
+                "DatabaseAsSource": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DatabaseAsSource"
+                    }
                 }
             }
         },
@@ -1598,7 +2022,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified delivery stream and its status. For example, after your\n         delivery stream is created, call <code>DescribeDeliveryStream</code> to see whether the\n         delivery stream is <code>ACTIVE</code> and therefore ready for data to be sent to it. </p>\n         <p>If the status of a delivery stream is <code>CREATING_FAILED</code>, this status\n         doesn't change, and you can't invoke <a>CreateDeliveryStream</a> again on it.\n         However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it.\n         If the status is <code>DELETING_FAILED</code>, you can force deletion by invoking <a>DeleteDeliveryStream</a> again but with <a>DeleteDeliveryStreamInput$AllowForceDelete</a> set to true.</p>"
+                "smithy.api#documentation": "<p>Describes the specified Firehose stream and its status. For example, after your\n         Firehose stream is created, call <code>DescribeDeliveryStream</code> to see whether the\n         Firehose stream is <code>ACTIVE</code> and therefore ready for data to be sent to it. </p>\n         <p>If the status of a Firehose stream is <code>CREATING_FAILED</code>, this status\n         doesn't change, and you can't invoke <a>CreateDeliveryStream</a> again on it.\n         However, you can invoke the <a>DeleteDeliveryStream</a> operation to delete it.\n         If the status is <code>DELETING_FAILED</code>, you can force deletion by invoking <a>DeleteDeliveryStream</a> again but with <a>DeleteDeliveryStreamInput$AllowForceDelete</a> set to true.</p>"
             }
         },
         "com.amazonaws.firehose#DescribeDeliveryStreamInput": {
@@ -1607,20 +2031,20 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Limit": {
                     "target": "com.amazonaws.firehose#DescribeDeliveryStreamInputLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The limit on the number of destinations to return. You can have one destination per\n         delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The limit on the number of destinations to return. You can have one destination per\n         Firehose stream.</p>"
                     }
                 },
                 "ExclusiveStartDestinationId": {
                     "target": "com.amazonaws.firehose#DestinationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the destination to start returning the destination information. Firehose supports one destination per delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The ID of the destination to start returning the destination information. Firehose supports one destination per Firehose stream.</p>"
                     }
                 }
             },
@@ -1643,7 +2067,7 @@
                 "DeliveryStreamDescription": {
                     "target": "com.amazonaws.firehose#DeliveryStreamDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>Information about the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1739,12 +2163,12 @@
                 "IcebergDestinationDescription": {
                     "target": "com.amazonaws.firehose#IcebergDestinationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Describes a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         Describes a destination in Apache Iceberg Tables.\n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the destination for a delivery stream.</p>"
+                "smithy.api#documentation": "<p>Describes the destination for a Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#DestinationDescriptionList": {
@@ -1767,34 +2191,40 @@
             "type": "structure",
             "members": {
                 "DestinationTableName": {
-                    "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+                    "target": "com.amazonaws.firehose#StringWithLettersDigitsUnderscoresDots",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        Specifies the name of the Apache Iceberg Table.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n        Specifies the name of the Apache Iceberg Table.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationDatabaseName": {
-                    "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+                    "target": "com.amazonaws.firehose#StringWithLettersDigitsUnderscoresDots",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the Apache Iceberg database.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n         The name of the Apache Iceberg database.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UniqueKeys": {
                     "target": "com.amazonaws.firehose#ListOfNonEmptyStringsWithoutWhitespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create/Update/Delete operations on the given Iceberg table. \n         \n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table. \n         \n      </p>"
+                    }
+                },
+                "PartitionSpec": {
+                    "target": "com.amazonaws.firehose#PartitionSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "S3ErrorOutputPrefix": {
                     "target": "com.amazonaws.firehose#ErrorOutputPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination. \n       </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n        The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination. \n       </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Describes the configuration of a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n         Describes the configuration of a destination in Apache Iceberg Tables.\n      </p>"
             }
         },
         "com.amazonaws.firehose#DestinationTableConfigurationList": {
@@ -1830,7 +2260,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the dynamic partitioning is enabled for this Firehose\n         delivery stream.</p>"
+                        "smithy.api#documentation": "<p>Specifies that the dynamic partitioning is enabled for this Firehose\n         Firehose stream.</p>"
                     }
                 }
             },
@@ -1850,7 +2280,7 @@
                 "SizeInMBs": {
                     "target": "com.amazonaws.firehose#ElasticsearchBufferingSizeInMBs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>"
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5.</p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the Firehose stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>"
                     }
                 }
             },
@@ -1942,7 +2372,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#ElasticsearchS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When it is set to\n            <code>FailedDocumentsOnly</code>, Firehose writes any documents that could\n         not be indexed to the configured Amazon S3 destination, with\n            <code>AmazonOpenSearchService-failed/</code> appended to the key prefix. When set to\n            <code>AllDocuments</code>, Firehose delivers all incoming records to Amazon\n         S3, and also writes failed documents with <code>AmazonOpenSearchService-failed/</code>\n         appended to the prefix. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup\">Amazon S3 Backup for the\n            Amazon ES Destination</a>. Default value is\n         <code>FailedDocumentsOnly</code>.</p>\n         <p>You can't change this backup mode after you create the delivery stream. </p>"
+                        "smithy.api#documentation": "<p>Defines how documents should be delivered to Amazon S3. When it is set to\n            <code>FailedDocumentsOnly</code>, Firehose writes any documents that could\n         not be indexed to the configured Amazon S3 destination, with\n            <code>AmazonOpenSearchService-failed/</code> appended to the key prefix. When set to\n            <code>AllDocuments</code>, Firehose delivers all incoming records to Amazon\n         S3, and also writes failed documents with <code>AmazonOpenSearchService-failed/</code>\n         appended to the prefix. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup\">Amazon S3 Backup for the\n            Amazon ES Destination</a>. Default value is\n         <code>FailedDocumentsOnly</code>.</p>\n         <p>You can't change this backup mode after you create the Firehose stream. </p>"
                     }
                 },
                 "S3Configuration": {
@@ -1961,7 +2391,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "VpcConfiguration": {
@@ -2103,7 +2533,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.firehose#ElasticsearchTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Firehose returns an error during runtime.</p>\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,\n         Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your delivery stream with a new index name, provide an empty\n         string for <code>TypeName</code>. </p>"
+                        "smithy.api#documentation": "<p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per\n         index. If you try to specify a new type for an existing index that already has another\n         type, Firehose returns an error during runtime.</p>\n         <p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your Firehose stream,\n         Firehose still delivers data to Elasticsearch with the old index name and type\n         name. If you want to update your Firehose stream with a new index name, provide an empty\n         string for <code>TypeName</code>. </p>"
                     }
                 },
                 "IndexRotationPeriod": {
@@ -2139,7 +2569,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "DocumentIdOptions": {
@@ -2160,7 +2590,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:es:[a-zA-Z0-9\\-]+:\\d{12}:domain/[a-z][-0-9a-z]{2,27}$"
             }
         },
         "com.amazonaws.firehose#ElasticsearchIndexName": {
@@ -2344,7 +2774,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "ProcessingConfiguration": {
@@ -2356,7 +2786,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#S3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         delivery stream to disable it. </p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a Firehose stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         Firehose stream to disable it. </p>"
                     }
                 },
                 "S3BackupConfiguration": {
@@ -2447,7 +2877,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "ProcessingConfiguration": {
@@ -2545,7 +2975,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "ProcessingConfiguration": {
@@ -2557,7 +2987,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#S3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the delivery stream to disable it. </p>"
+                        "smithy.api#documentation": "<p>You can update a Firehose stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the Firehose stream to disable it. </p>"
                     }
                 },
                 "S3BackupUpdate": {
@@ -3673,7 +4103,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:glue:.*:\\d{12}:catalog$"
             }
         },
         "com.amazonaws.firehose#HECAcknowledgmentTimeoutInSeconds": {
@@ -3775,7 +4205,7 @@
                 "SizeInMBs": {
                     "target": "com.amazonaws.firehose#HttpEndpointBufferingSizeInMBs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5. </p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the delivery stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>"
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 5. </p>\n         <p>We recommend setting this parameter to a value greater than the amount of data you\n         typically ingest into the Firehose stream in 10 seconds. For example, if you typically\n         ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>"
                     }
                 },
                 "IntervalInSeconds": {
@@ -4156,7 +4586,19 @@
                 "DestinationTableConfigurationList": {
                     "target": "com.amazonaws.firehose#DestinationTableConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg tables. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided here.</p>"
+                    }
+                },
+                "SchemaEvolutionConfiguration": {
+                    "target": "com.amazonaws.firehose#SchemaEvolutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "TableCreationConfiguration": {
+                    "target": "com.amazonaws.firehose#TableCreationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -4171,7 +4613,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#IcebergS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n            <code>FailedDataOnly</code> for preview. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,S3 backup only supports\n            <code>FailedDataOnly</code>. </p>"
                     }
                 },
                 "RetryOptions": {
@@ -4180,14 +4622,14 @@
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the Apache Iceberg tables role.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CatalogConfiguration": {
                     "target": "com.amazonaws.firehose#CatalogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Apache Iceberg Tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Apache Iceberg Tables are persisted.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4199,7 +4641,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Specifies the destination configure settings for  Apache Iceberg Table.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n         Specifies the destination configure settings for  Apache Iceberg Table.\n      </p>"
             }
         },
         "com.amazonaws.firehose#IcebergDestinationDescription": {
@@ -4208,7 +4650,19 @@
                 "DestinationTableConfigurationList": {
                     "target": "com.amazonaws.firehose#DestinationTableConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg tables. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided here.</p>"
+                    }
+                },
+                "SchemaEvolutionConfiguration": {
+                    "target": "com.amazonaws.firehose#SchemaEvolutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "TableCreationConfiguration": {
+                    "target": "com.amazonaws.firehose#TableCreationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -4223,7 +4677,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#IcebergS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n         <code>FailedDataOnly</code> for preview. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n         <code>FailedDataOnly</code>. </p>"
                     }
                 },
                 "RetryOptions": {
@@ -4232,13 +4686,13 @@
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.\n      </p>"
                     }
                 },
                 "CatalogConfiguration": {
                     "target": "com.amazonaws.firehose#CatalogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Iceberg tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Iceberg tables are persisted.\n      </p>"
                     }
                 },
                 "S3DestinationDescription": {
@@ -4246,7 +4700,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Describes a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n         Describes a destination in Apache Iceberg Tables.\n      </p>"
             }
         },
         "com.amazonaws.firehose#IcebergDestinationUpdate": {
@@ -4255,7 +4709,19 @@
                 "DestinationTableConfigurationList": {
                     "target": "com.amazonaws.firehose#DestinationTableConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg tables. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> Provides a list of <code>DestinationTableConfigurations</code> which Firehose uses\n         to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided here.</p>"
+                    }
+                },
+                "SchemaEvolutionConfiguration": {
+                    "target": "com.amazonaws.firehose#SchemaEvolutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                },
+                "TableCreationConfiguration": {
+                    "target": "com.amazonaws.firehose#TableCreationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -4270,7 +4736,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#IcebergS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n         <code>FailedDataOnly</code> for preview. </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p> Describes how Firehose will backup records. Currently,Firehose only supports\n         <code>FailedDataOnly</code>. </p>"
                     }
                 },
                 "RetryOptions": {
@@ -4279,13 +4745,13 @@
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.\n      </p>"
                     }
                 },
                 "CatalogConfiguration": {
                     "target": "com.amazonaws.firehose#CatalogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Iceberg tables are persisted.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         Configuration describing where the destination Iceberg tables are persisted.\n      </p>"
                     }
                 },
                 "S3Configuration": {
@@ -4293,7 +4759,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Describes an update for a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                "smithy.api#documentation": "<p>\n         Describes an update for a destination in Apache Iceberg Tables.\n      </p>"
             }
         },
         "com.amazonaws.firehose#IcebergS3BackupMode": {
@@ -4362,7 +4828,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Firehose throws this exception when an attempt to put records or to start\n         or stop delivery stream encryption fails. This happens when the KMS service throws one of\n         the following exception types: <code>AccessDeniedException</code>,\n            <code>InvalidStateException</code>, <code>DisabledException</code>, or\n            <code>NotFoundException</code>.</p>",
+                "smithy.api#documentation": "<p>Firehose throws this exception when an attempt to put records or to start\n         or stop Firehose stream encryption fails. This happens when the KMS service throws one of\n         the following exception types: <code>AccessDeniedException</code>,\n            <code>InvalidStateException</code>, <code>DisabledException</code>, or\n            <code>NotFoundException</code>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4420,7 +4886,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:kinesis:[a-zA-Z0-9\\-]+:\\d{12}:stream/[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.firehose#KinesisStreamSourceConfiguration": {
@@ -4442,7 +4908,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as\n         the source for a delivery stream.</p>"
+                "smithy.api#documentation": "<p>The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as\n         the source for a Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#KinesisStreamSourceDescription": {
@@ -4468,7 +4934,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         delivery stream.</p>"
+                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#LimitExceededException": {
@@ -4495,7 +4961,7 @@
                 "target": "com.amazonaws.firehose#ListDeliveryStreamsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists your delivery streams in alphabetical order of their names.</p>\n         <p>The number of delivery streams might be too large to return using a single call to\n            <code>ListDeliveryStreams</code>. You can limit the number of delivery streams returned,\n         using the <code>Limit</code> parameter. To determine whether there are more delivery\n         streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If\n         there are more delivery streams to list, you can request them by calling this operation\n         again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name\n         of the last delivery stream returned in the last call.</p>"
+                "smithy.api#documentation": "<p>Lists your Firehose streams in alphabetical order of their names.</p>\n         <p>The number of Firehose streams might be too large to return using a single call to\n            <code>ListDeliveryStreams</code>. You can limit the number of Firehose streams returned,\n         using the <code>Limit</code> parameter. To determine whether there are more delivery\n         streams to list, check the value of <code>HasMoreDeliveryStreams</code> in the output. If\n         there are more Firehose streams to list, you can request them by calling this operation\n         again and setting the <code>ExclusiveStartDeliveryStreamName</code> parameter to the name\n         of the last Firehose stream returned in the last call.</p>"
             }
         },
         "com.amazonaws.firehose#ListDeliveryStreamsInput": {
@@ -4504,19 +4970,19 @@
                 "Limit": {
                     "target": "com.amazonaws.firehose#ListDeliveryStreamsInputLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of delivery streams to list. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Firehose streams to list. The default value is 10.</p>"
                     }
                 },
                 "DeliveryStreamType": {
                     "target": "com.amazonaws.firehose#DeliveryStreamType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The delivery stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the delivery stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The delivery stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>\n         <p>This parameter is optional. If this parameter is omitted, delivery streams of all\n         types are returned.</p>"
+                        "smithy.api#documentation": "<p>The Firehose stream type. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DirectPut</code>: Provider applications access the Firehose stream\n               directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KinesisStreamAsSource</code>: The Firehose stream uses a Kinesis data\n               stream as a source.</p>\n            </li>\n         </ul>\n         <p>This parameter is optional. If this parameter is omitted, Firehose streams of all\n         types are returned.</p>"
                     }
                 },
                 "ExclusiveStartDeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of delivery streams returned by this call to\n            <code>ListDeliveryStreams</code> will start with the delivery stream whose name comes\n         alphabetically immediately after the name you specify in\n            <code>ExclusiveStartDeliveryStreamName</code>.</p>"
+                        "smithy.api#documentation": "<p>The list of Firehose streams returned by this call to\n            <code>ListDeliveryStreams</code> will start with the Firehose stream whose name comes\n         alphabetically immediately after the name you specify in\n            <code>ExclusiveStartDeliveryStreamName</code>.</p>"
                     }
                 }
             },
@@ -4539,14 +5005,14 @@
                 "DeliveryStreamNames": {
                     "target": "com.amazonaws.firehose#DeliveryStreamNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the delivery streams.</p>",
+                        "smithy.api#documentation": "<p>The names of the Firehose streams.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HasMoreDeliveryStreams": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether there are more delivery streams available to list.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether there are more Firehose streams available to list.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4587,7 +5053,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for the specified delivery stream. This operation has a limit of five\n         transactions per second per account. </p>"
+                "smithy.api#documentation": "<p>Lists the tags for the specified Firehose stream. This operation has a limit of five\n         transactions per second per account. </p>"
             }
         },
         "com.amazonaws.firehose#ListTagsForDeliveryStreamInput": {
@@ -4596,7 +5062,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream whose tags you want to list.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream whose tags you want to list.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4609,7 +5075,7 @@
                 "Limit": {
                     "target": "com.amazonaws.firehose#ListTagsForDeliveryStreamInputLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of tags to return. If this number is less than the total number of tags\n         associated with the delivery stream, <code>HasMoreTags</code> is set to <code>true</code>\n         in the response. To list additional tags, set <code>ExclusiveStartTagKey</code> to the last\n         key in the response. </p>"
+                        "smithy.api#documentation": "<p>The number of tags to return. If this number is less than the total number of tags\n         associated with the Firehose stream, <code>HasMoreTags</code> is set to <code>true</code>\n         in the response. To list additional tags, set <code>ExclusiveStartTagKey</code> to the last\n         key in the response. </p>"
                     }
                 }
             },
@@ -4760,7 +5226,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Amazon MSK cluster used as the source for a Firehose\n         delivery stream.</p>"
+                "smithy.api#documentation": "<p>Details about the Amazon MSK cluster used as the source for a Firehose\n         Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#NoEncryptionConfig": {
@@ -5058,6 +5524,41 @@
                 }
             }
         },
+        "com.amazonaws.firehose#PartitionField": {
+            "type": "structure",
+            "members": {
+                "SourceName": {
+                    "target": "com.amazonaws.firehose#NonEmptyStringWithoutWhitespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
+        "com.amazonaws.firehose#PartitionFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.firehose#PartitionField"
+            }
+        },
+        "com.amazonaws.firehose#PartitionSpec": {
+            "type": "structure",
+            "members": {
+                "Identity": {
+                    "target": "com.amazonaws.firehose#PartitionFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
         "com.amazonaws.firehose#Password": {
             "type": "string",
             "traits": {
@@ -5311,7 +5812,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Writes a single data record into an Amazon Firehose delivery stream. To\n         write multiple data records into a delivery stream, use <a>PutRecordBatch</a>.\n         Applications using these operations are referred to as producers.</p>\n         <p>By default, each delivery stream can take in up to 2,000 transactions per second,\n         5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and\n            <a>PutRecordBatch</a>, the limits are an aggregate across these two\n         operations for each delivery stream. For more information about limits and how to request\n         an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon\n            Firehose Limits</a>. </p>\n         <p>Firehose accumulates and publishes a particular metric for a customer account in one minute intervals. It is possible that the bursts of incoming bytes/records ingested to a delivery stream last only for a few seconds. Due to this, the actual spikes in the traffic might not be fully visible in the customer's 1 minute CloudWatch metrics.</p>\n         <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KiB in size, and any kind of data. For example, it can be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a\n         unique string assigned to each record. Producer applications can use this ID for purposes\n         such as auditability and investigation.</p>\n         <p>If the <code>PutRecord</code> operation throws a\n            <code>ServiceUnavailableException</code>, the API is automatically reinvoked (retried) 3\n         times. If the exception persists, it is possible that the throughput limits have been\n         exceeded for the delivery stream. </p>\n         <p>Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch) can\n         result in data duplicates. For larger data assets, allow for a longer time out before\n         retrying Put API operations.</p>\n         <p>Data records sent to Firehose are stored for 24 hours from the time they\n         are added to a delivery stream as it tries to send the records to the destination. If the\n         destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Writes a single data record into an Firehose stream. To\n         write multiple data records into a Firehose stream, use <a>PutRecordBatch</a>.\n         Applications using these operations are referred to as producers.</p>\n         <p>By default, each Firehose stream can take in up to 2,000 transactions per second,\n         5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and\n            <a>PutRecordBatch</a>, the limits are an aggregate across these two\n         operations for each Firehose stream. For more information about limits and how to request\n         an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon\n            Firehose Limits</a>. </p>\n         <p>Firehose accumulates and publishes a particular metric for a customer account in one minute intervals. It is possible that the bursts of incoming bytes/records ingested to a Firehose stream last only for a few seconds. Due to this, the actual spikes in the traffic might not be fully visible in the customer's 1 minute CloudWatch metrics.</p>\n         <p>You must specify the name of the Firehose stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KiB in size, and any kind of data. For example, it can be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>For multi record de-aggregation, you can not put more than 500 records even if the\n         data blob length is less than 1000 KiB. If you include more than 500 records, the request\n         succeeds but the record de-aggregation doesn't work as expected and transformation lambda\n         is invoked with the complete base64 encoded data blob instead of de-aggregated base64\n         decoded records.</p>\n         <p>Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a\n         unique string assigned to each record. Producer applications can use this ID for purposes\n         such as auditability and investigation.</p>\n         <p>If the <code>PutRecord</code> operation throws a\n            <code>ServiceUnavailableException</code>, the API is automatically reinvoked (retried) 3\n         times. If the exception persists, it is possible that the throughput limits have been\n         exceeded for the Firehose stream. </p>\n         <p>Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch) can\n         result in data duplicates. For larger data assets, allow for a longer time out before\n         retrying Put API operations.</p>\n         <p>Data records sent to Firehose are stored for 24 hours from the time they\n         are added to a Firehose stream as it tries to send the records to the destination. If the\n         destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
             }
         },
         "com.amazonaws.firehose#PutRecordBatch": {
@@ -5340,7 +5841,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Writes multiple data records into a delivery stream in a single call, which can\n         achieve higher throughput per producer than when writing single records. To write single\n         data records into a delivery stream, use <a>PutRecord</a>. Applications using\n         these operations are referred to as producers.</p>\n         <p>Firehose accumulates and publishes a particular metric for a customer account in one minute intervals. It is possible that the bursts of incoming bytes/records ingested to a delivery stream last only for a few seconds. Due to this, the actual spikes in the traffic might not be fully visible in the customer's 1 minute CloudWatch metrics.</p>\n         <p>For information about service quota, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Firehose\n         Quota</a>.</p>\n         <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record\n         in the request can be as large as 1,000 KB (before base64 encoding), up to a limit of 4 MB\n         for the entire request. These limits cannot be changed.</p>\n         <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KB in size, and any kind of data. For example, it could be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <a>PutRecordBatch</a> response includes a count of failed records,\n            <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>.\n         Even if the <a>PutRecordBatch</a> call succeeds, the value of\n            <code>FailedPutCount</code> may be greater than 0, indicating that there are records for\n         which the operation didn't succeed. Each entry in the <code>RequestResponses</code> array\n         provides additional information about the processed record. It directly correlates with a\n         record in the request array using the same ordering, from the top to the bottom. The\n         response array always includes the same number of records as the request array.\n            <code>RequestResponses</code> includes both successfully and unsuccessfully processed\n         records. Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing\n         of subsequent records. </p>\n         <p>A successfully processed record includes a <code>RecordId</code> value, which is\n         unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code>\n         and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error,\n         and is one of the following values: <code>ServiceUnavailableException</code> or\n            <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed\n         information about the error.</p>\n         <p>If there is an internal server error or a timeout, the write might have completed or\n         it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request,\n         resending only those records that might have failed processing. This minimizes the possible\n         duplicate records and also reduces the total bytes sent (and corresponding charges). We\n         recommend that you handle any duplicates at the destination.</p>\n         <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>,\n         the API is automatically reinvoked (retried) 3 times. If the exception persists, it is\n         possible that the throughput limits have been exceeded for the delivery stream.</p>\n         <p>Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch) can\n         result in data duplicates. For larger data assets, allow for a longer time out before\n         retrying Put API operations.</p>\n         <p>Data records sent to Firehose are stored for 24 hours from the time they\n         are added to a delivery stream as it attempts to send the records to the destination. If\n         the destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Writes multiple data records into a Firehose stream in a single call, which can\n         achieve higher throughput per producer than when writing single records. To write single\n         data records into a Firehose stream, use <a>PutRecord</a>. Applications using\n         these operations are referred to as producers.</p>\n         <p>Firehose accumulates and publishes a particular metric for a customer account in one minute intervals. It is possible that the bursts of incoming bytes/records ingested to a Firehose stream last only for a few seconds. Due to this, the actual spikes in the traffic might not be fully visible in the customer's 1 minute CloudWatch metrics.</p>\n         <p>For information about service quota, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Firehose\n         Quota</a>.</p>\n         <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record\n         in the request can be as large as 1,000 KB (before base64 encoding), up to a limit of 4 MB\n         for the entire request. These limits cannot be changed.</p>\n         <p>You must specify the name of the Firehose stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000\n         KB in size, and any kind of data. For example, it could be a segment from a log file,\n         geographic location data, website clickstream data, and so on.</p>\n         <p>For multi record de-aggregation, you can not put more than 500 records even if the\n         data blob length is less than 1000 KiB. If you include more than 500 records, the request\n         succeeds but the record de-aggregation doesn't work as expected and transformation lambda\n         is invoked with the complete base64 encoded data blob instead of de-aggregated base64\n         decoded records.</p>\n         <p>Firehose buffers records before delivering them to the destination. To\n         disambiguate the data blobs at the destination, a common solution is to use delimiters in\n         the data, such as a newline (<code>\\n</code>) or some other character unique within the\n         data. This allows the consumer application to parse individual data items when reading the\n         data from the destination.</p>\n         <p>The <a>PutRecordBatch</a> response includes a count of failed records,\n            <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>.\n         Even if the <a>PutRecordBatch</a> call succeeds, the value of\n            <code>FailedPutCount</code> may be greater than 0, indicating that there are records for\n         which the operation didn't succeed. Each entry in the <code>RequestResponses</code> array\n         provides additional information about the processed record. It directly correlates with a\n         record in the request array using the same ordering, from the top to the bottom. The\n         response array always includes the same number of records as the request array.\n            <code>RequestResponses</code> includes both successfully and unsuccessfully processed\n         records. Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing\n         of subsequent records. </p>\n         <p>A successfully processed record includes a <code>RecordId</code> value, which is\n         unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code>\n         and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error,\n         and is one of the following values: <code>ServiceUnavailableException</code> or\n            <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed\n         information about the error.</p>\n         <p>If there is an internal server error or a timeout, the write might have completed or\n         it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request,\n         resending only those records that might have failed processing. This minimizes the possible\n         duplicate records and also reduces the total bytes sent (and corresponding charges). We\n         recommend that you handle any duplicates at the destination.</p>\n         <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>,\n         the API is automatically reinvoked (retried) 3 times. If the exception persists, it is\n         possible that the throughput limits have been exceeded for the Firehose stream.</p>\n         <p>Re-invoking the Put API operations (for example, PutRecord and PutRecordBatch) can\n         result in data duplicates. For larger data assets, allow for a longer time out before\n         retrying Put API operations.</p>\n         <p>Data records sent to Firehose are stored for 24 hours from the time they\n         are added to a Firehose stream as it attempts to send the records to the destination. If\n         the destination is unreachable for more than 24 hours, the data is no longer\n         available.</p>\n         <important>\n            <p>Don't concatenate two or more base64 strings to form the data fields of your records.\n            Instead, concatenate the raw data, then perform base64 encoding.</p>\n         </important>"
             }
         },
         "com.amazonaws.firehose#PutRecordBatchInput": {
@@ -5349,7 +5850,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5428,7 +5929,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the result for an individual record from a <a>PutRecordBatch</a>\n         request. If the record is successfully added to your delivery stream, it receives a record\n         ID. If the record fails to be added to your delivery stream, the result includes an error\n         code and an error message.</p>"
+                "smithy.api#documentation": "<p>Contains the result for an individual record from a <a>PutRecordBatch</a>\n         request. If the record is successfully added to your Firehose stream, it receives a record\n         ID. If the record fails to be added to your Firehose stream, the result includes an error\n         code and an error message.</p>"
             }
         },
         "com.amazonaws.firehose#PutRecordBatchResponseEntryList": {
@@ -5449,7 +5950,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5509,7 +6010,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The unit of data in a delivery stream.</p>"
+                "smithy.api#documentation": "<p>The unit of data in a Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#RedshiftDestinationConfiguration": {
@@ -5570,7 +6071,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         delivery stream to disable it. </p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 backup mode. After you create a Firehose stream, you can update it to\n         enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the\n         Firehose stream to disable it. </p>"
                     }
                 },
                 "S3BackupConfiguration": {
@@ -5582,7 +6083,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "SecretsManagerConfiguration": {
@@ -5660,7 +6161,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "SecretsManagerConfiguration": {
@@ -5728,7 +6229,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#RedshiftS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the delivery stream to disable it. </p>"
+                        "smithy.api#documentation": "<p>You can update a Firehose stream to enable Amazon S3 backup if it is disabled. If\n         backup is enabled, you can't update the Firehose stream to disable it. </p>"
                     }
                 },
                 "S3BackupUpdate": {
@@ -5740,7 +6241,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "SecretsManagerConfiguration": {
@@ -5839,12 +6340,12 @@
                 "DurationInSeconds": {
                     "target": "com.amazonaws.firehose#RetryDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time during which Firehose retries to deliver data to the\n         specified Amazon S3 prefix.</p>"
+                        "smithy.api#documentation": "<p>The period of time during which Firehose retries to deliver data to the\n         specified destination.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The retry behavior in case Firehose is unable to deliver data to an Amazon\n         S3 prefix.</p>"
+                "smithy.api#documentation": "<p> The retry behavior in case Firehose is unable to deliver data to a destination.</p>"
             }
         },
         "com.amazonaws.firehose#RoleARN": {
@@ -5854,7 +6355,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.firehose#S3BackupMode": {
@@ -5924,7 +6425,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The CloudWatch logging options for your Firehose stream.</p>"
                     }
                 }
             },
@@ -5985,7 +6486,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 }
             },
@@ -6041,12 +6542,29 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The CloudWatch logging options for your Firehose stream.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an update for a destination in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.firehose#SSLMode": {
+            "type": "enum",
+            "members": {
+                "Disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                }
             }
         },
         "com.amazonaws.firehose#SchemaConfiguration": {
@@ -6093,6 +6611,21 @@
                 "smithy.api#documentation": "<p>Specifies the schema to which you want Firehose to configure your data\n         before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set\n         to true.</p>"
             }
         },
+        "com.amazonaws.firehose#SchemaEvolutionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.firehose#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+            }
+        },
         "com.amazonaws.firehose#SecretARN": {
             "type": "string",
             "traits": {
@@ -6100,7 +6633,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:"
+                "smithy.api#pattern": "^arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+$"
             }
         },
         "com.amazonaws.firehose#SecretsManagerConfiguration": {
@@ -6109,7 +6642,7 @@
                 "SecretARN": {
                     "target": "com.amazonaws.firehose#SecretARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that stores your credentials. It must be in the same region as the\n         Firehose stream and the role. The secret ARN can reside in a different account than the delivery stream and role as Firehose supports cross-account secret access. This parameter is required when <b>Enabled</b> is set to <code>True</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the secret that stores your credentials. It must be in the same region as the\n         Firehose stream and the role. The secret ARN can reside in a different account than the Firehose stream and role as Firehose supports cross-account secret access. This parameter is required when <b>Enabled</b> is set to <code>True</code>.</p>"
                     }
                 },
                 "RoleARN": {
@@ -6121,7 +6654,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.firehose#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether you want to use the the secrets manager feature. When set as\n            <code>True</code> the secrets manager configuration overwrites the existing secrets in\n         the destination configuration. When it's set to <code>False</code> Firehose falls back to\n         the credentials in the destination configuration.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether you want to use the secrets manager feature. When set as\n            <code>True</code> the secrets manager configuration overwrites the existing secrets in\n         the destination configuration. When it's set to <code>False</code> Firehose falls back to\n         the credentials in the destination configuration.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6173,7 +6706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation. If you continue to see\n         the exception, throughput limits for the delivery stream may have been exceeded. For more\n         information about limits and how to request an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Firehose\n         Limits</a>.</p>",
+                "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation. If you continue to see\n         the exception, throughput limits for the Firehose stream may have been exceeded. For more\n         information about limits and how to request an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Firehose\n         Limits</a>.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -6184,6 +6717,46 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.firehose#SnapshotRequestedBy": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                },
+                "FIREHOSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIREHOSE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.firehose#SnapshotStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
                 }
             }
         },
@@ -6204,7 +6777,7 @@
                 "SizeInMBs": {
                     "target": "com.amazonaws.firehose#SnowflakeBufferingSizeInMBs",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 1.\n      </p>"
+                        "smithy.api#documentation": "<p>Buffer incoming data to the specified size, in MBs, before delivering it to the\n         destination. The default value is 128. </p>"
                     }
                 },
                 "IntervalInSeconds": {
@@ -6603,7 +7176,7 @@
                 "S3BackupMode": {
                     "target": "com.amazonaws.firehose#SnowflakeS3BackupMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Choose an S3 backup mode</p>"
+                        "smithy.api#documentation": "<p>Choose an S3 backup mode. Once you set the mode as <code>AllData</code>, you can not\n         change it to <code>FailedDataOnly</code>.</p>"
                     }
                 },
                 "S3Update": {
@@ -6797,10 +7370,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration description for the Amazon MSK cluster to be used as the source for a delivery\n         stream.</p>"
                     }
+                },
+                "DatabaseSourceDescription": {
+                    "target": "com.amazonaws.firehose#DatabaseSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         delivery stream.</p>"
+                "smithy.api#documentation": "<p>Details about a Kinesis data stream used as the source for a Firehose\n         Firehose stream.</p>"
             }
         },
         "com.amazonaws.firehose#SplunkBufferingHints": {
@@ -6898,7 +7477,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -6972,7 +7551,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -7046,7 +7625,7 @@
                 "CloudWatchLoggingOptions": {
                     "target": "com.amazonaws.firehose#CloudWatchLoggingOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch logging options for your Firehose stream.</p>"
                     }
                 },
                 "BufferingHints": {
@@ -7132,7 +7711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables server-side encryption (SSE) for the delivery stream. </p>\n         <p>This operation is asynchronous. It returns immediately. When you invoke it, Firehose first sets the encryption status of the stream to <code>ENABLING</code>, and then\n         to <code>ENABLED</code>. The encryption status of a delivery stream is the\n            <code>Status</code> property in <a>DeliveryStreamEncryptionConfiguration</a>.\n         If the operation fails, the encryption status changes to <code>ENABLING_FAILED</code>. You\n         can continue to read and write data to your delivery stream while the encryption status is\n            <code>ENABLING</code>, but the data is not encrypted. It can take up to 5 seconds after\n         the encryption status changes to <code>ENABLED</code> before all records written to the\n         delivery stream are encrypted. To find out whether a record or a batch of records was\n         encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and\n            <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p>\n         <p>To check the encryption status of a delivery stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>Even if encryption is currently enabled for a delivery stream, you can still invoke this\n         operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this\n         method to change the CMK, and the old CMK is of type <code>CUSTOMER_MANAGED_CMK</code>,\n         Firehose schedules the grant it had on the old CMK for retirement. If the new\n         CMK is of type <code>CUSTOMER_MANAGED_CMK</code>, Firehose creates a grant\n         that enables it to use the new CMK to encrypt and decrypt data and to manage the\n         grant.</p>\n         <p>For the KMS grant creation to be successful, the Firehose API operations\n            <code>StartDeliveryStreamEncryption</code> and <code>CreateDeliveryStream</code> should\n         not be called with session credentials that are more than 6 hours old.</p>\n         <p>If a delivery stream already has encryption enabled and then you invoke this operation\n         to change the ARN of the CMK or both its type and ARN and you get\n            <code>ENABLING_FAILED</code>, this only means that the attempt to change the CMK failed.\n         In this case, encryption remains enabled with the old CMK.</p>\n         <p>If the encryption status of your delivery stream is <code>ENABLING_FAILED</code>, you\n         can invoke this operation again with a valid CMK. The CMK must be enabled and the key\n         policy mustn't explicitly deny the permission for Firehose to invoke KMS\n         encrypt and decrypt operations.</p>\n         <p>You can enable SSE for a delivery stream only if it's a delivery stream that uses\n            <code>DirectPut</code> as its source. </p>\n         <p>The <code>StartDeliveryStreamEncryption</code> and\n            <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls\n         per delivery stream per 24 hours. For example, you reach the limit if you call\n            <code>StartDeliveryStreamEncryption</code> 13 times and\n            <code>StopDeliveryStreamEncryption</code> 12 times for the same delivery stream in a\n         24-hour period.</p>"
+                "smithy.api#documentation": "<p>Enables server-side encryption (SSE) for the Firehose stream. </p>\n         <p>This operation is asynchronous. It returns immediately. When you invoke it, Firehose first sets the encryption status of the stream to <code>ENABLING</code>, and then\n         to <code>ENABLED</code>. The encryption status of a Firehose stream is the\n            <code>Status</code> property in <a>DeliveryStreamEncryptionConfiguration</a>.\n         If the operation fails, the encryption status changes to <code>ENABLING_FAILED</code>. You\n         can continue to read and write data to your Firehose stream while the encryption status is\n            <code>ENABLING</code>, but the data is not encrypted. It can take up to 5 seconds after\n         the encryption status changes to <code>ENABLED</code> before all records written to the\n         Firehose stream are encrypted. To find out whether a record or a batch of records was\n         encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and\n            <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p>\n         <p>To check the encryption status of a Firehose stream, use <a>DescribeDeliveryStream</a>.</p>\n         <p>Even if encryption is currently enabled for a Firehose stream, you can still invoke this\n         operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this\n         method to change the CMK, and the old CMK is of type <code>CUSTOMER_MANAGED_CMK</code>,\n         Firehose schedules the grant it had on the old CMK for retirement. If the new\n         CMK is of type <code>CUSTOMER_MANAGED_CMK</code>, Firehose creates a grant\n         that enables it to use the new CMK to encrypt and decrypt data and to manage the\n         grant.</p>\n         <p>For the KMS grant creation to be successful, the Firehose API operations\n            <code>StartDeliveryStreamEncryption</code> and <code>CreateDeliveryStream</code> should\n         not be called with session credentials that are more than 6 hours old.</p>\n         <p>If a Firehose stream already has encryption enabled and then you invoke this operation\n         to change the ARN of the CMK or both its type and ARN and you get\n            <code>ENABLING_FAILED</code>, this only means that the attempt to change the CMK failed.\n         In this case, encryption remains enabled with the old CMK.</p>\n         <p>If the encryption status of your Firehose stream is <code>ENABLING_FAILED</code>, you\n         can invoke this operation again with a valid CMK. The CMK must be enabled and the key\n         policy mustn't explicitly deny the permission for Firehose to invoke KMS\n         encrypt and decrypt operations.</p>\n         <p>You can enable SSE for a Firehose stream only if it's a Firehose stream that uses\n            <code>DirectPut</code> as its source. </p>\n         <p>The <code>StartDeliveryStreamEncryption</code> and\n            <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls\n         per Firehose stream per 24 hours. For example, you reach the limit if you call\n            <code>StartDeliveryStreamEncryption</code> 13 times and\n            <code>StopDeliveryStreamEncryption</code> 12 times for the same Firehose stream in a\n         24-hour period.</p>"
             }
         },
         "com.amazonaws.firehose#StartDeliveryStreamEncryptionInput": {
@@ -7141,7 +7720,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream for which you want to enable server-side encryption\n         (SSE).</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream for which you want to enable server-side encryption\n         (SSE).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7186,7 +7765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables server-side encryption (SSE) for the delivery stream. </p>\n         <p>This operation is asynchronous. It returns immediately. When you invoke it, Firehose first sets the encryption status of the stream to <code>DISABLING</code>, and then\n         to <code>DISABLED</code>. You can continue to read and write data to your stream while its\n         status is <code>DISABLING</code>. It can take up to 5 seconds after the encryption status\n         changes to <code>DISABLED</code> before all records written to the delivery stream are no\n         longer subject to encryption. To find out whether a record or a batch of records was\n         encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and\n            <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p>\n         <p>To check the encryption state of a delivery stream, use <a>DescribeDeliveryStream</a>. </p>\n         <p>If SSE is enabled using a customer managed CMK and then you invoke\n            <code>StopDeliveryStreamEncryption</code>, Firehose schedules the related\n         KMS grant for retirement and then retires it after it ensures that it is finished\n         delivering records to the destination.</p>\n         <p>The <code>StartDeliveryStreamEncryption</code> and\n            <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls\n         per delivery stream per 24 hours. For example, you reach the limit if you call\n            <code>StartDeliveryStreamEncryption</code> 13 times and\n            <code>StopDeliveryStreamEncryption</code> 12 times for the same delivery stream in a\n         24-hour period.</p>"
+                "smithy.api#documentation": "<p>Disables server-side encryption (SSE) for the Firehose stream. </p>\n         <p>This operation is asynchronous. It returns immediately. When you invoke it, Firehose first sets the encryption status of the stream to <code>DISABLING</code>, and then\n         to <code>DISABLED</code>. You can continue to read and write data to your stream while its\n         status is <code>DISABLING</code>. It can take up to 5 seconds after the encryption status\n         changes to <code>DISABLED</code> before all records written to the Firehose stream are no\n         longer subject to encryption. To find out whether a record or a batch of records was\n         encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and\n            <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p>\n         <p>To check the encryption state of a Firehose stream, use <a>DescribeDeliveryStream</a>. </p>\n         <p>If SSE is enabled using a customer managed CMK and then you invoke\n            <code>StopDeliveryStreamEncryption</code>, Firehose schedules the related\n         KMS grant for retirement and then retires it after it ensures that it is finished\n         delivering records to the destination.</p>\n         <p>The <code>StartDeliveryStreamEncryption</code> and\n            <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls\n         per Firehose stream per 24 hours. For example, you reach the limit if you call\n            <code>StartDeliveryStreamEncryption</code> 13 times and\n            <code>StopDeliveryStreamEncryption</code> 12 times for the same Firehose stream in a\n         24-hour period.</p>"
             }
         },
         "com.amazonaws.firehose#StopDeliveryStreamEncryptionInput": {
@@ -7195,7 +7774,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream for which you want to disable server-side encryption\n         (SSE).</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream for which you want to disable server-side encryption\n         (SSE).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7211,6 +7790,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.firehose#StringWithLettersDigitsUnderscoresDots": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\_]+$"
+            }
+        },
         "com.amazonaws.firehose#SubnetIdList": {
             "type": "list",
             "member": {
@@ -7221,6 +7810,21 @@
                     "min": 1,
                     "max": 16
                 }
+            }
+        },
+        "com.amazonaws.firehose#TableCreationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.firehose#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
             }
         },
         "com.amazonaws.firehose#Tag": {
@@ -7241,7 +7845,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata that you can assign to a delivery stream, consisting of a key-value\n         pair.</p>"
+                "smithy.api#documentation": "<p>Metadata that you can assign to a Firehose stream, consisting of a key-value\n         pair.</p>"
             }
         },
         "com.amazonaws.firehose#TagDeliveryStream": {
@@ -7267,7 +7871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates tags for the specified delivery stream. A tag is a key-value pair\n         that you can define and assign to Amazon Web Services resources. If you specify a tag that\n         already exists, the tag value is replaced with the value that you specify in the request.\n         Tags are metadata. For example, you can add friendly names and descriptions or other types\n         of information that can help you distinguish the delivery stream. For more information\n         about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n            Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n            Guide</i>. </p>\n         <p>Each delivery stream can have up to 50 tags. </p>\n         <p>This operation has a limit of five transactions per second per account. </p>"
+                "smithy.api#documentation": "<p>Adds or updates tags for the specified Firehose stream. A tag is a key-value pair\n         that you can define and assign to Amazon Web Services resources. If you specify a tag that\n         already exists, the tag value is replaced with the value that you specify in the request.\n         Tags are metadata. For example, you can add friendly names and descriptions or other types\n         of information that can help you distinguish the Firehose stream. For more information\n         about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n            Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n            Guide</i>. </p>\n         <p>Each Firehose stream can have up to 50 tags. </p>\n         <p>This operation has a limit of five transactions per second per account. </p>"
             }
         },
         "com.amazonaws.firehose#TagDeliveryStreamInput": {
@@ -7276,7 +7880,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream to which you want to add the tags.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream to which you want to add the tags.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7379,7 +7983,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from the specified delivery stream. Removed tags are deleted, and you\n         can't recover them after this operation successfully completes.</p>\n         <p>If you specify a tag that doesn't exist, the operation ignores it.</p>\n         <p>This operation has a limit of five transactions per second per account. </p>"
+                "smithy.api#documentation": "<p>Removes tags from the specified Firehose stream. Removed tags are deleted, and you\n         can't recover them after this operation successfully completes.</p>\n         <p>If you specify a tag that doesn't exist, the operation ignores it.</p>\n         <p>This operation has a limit of five transactions per second per account. </p>"
             }
         },
         "com.amazonaws.firehose#UntagDeliveryStreamInput": {
@@ -7388,7 +7992,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7434,7 +8038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified destination of the specified delivery stream.</p>\n         <p>Use this operation to change the destination type (for example, to replace the Amazon\n         S3 destination with Amazon Redshift) or change the parameters associated with a destination\n         (for example, to change the bucket name of the Amazon S3 destination). The update might not\n         occur immediately. The target delivery stream remains active while the configurations are\n         updated, so data writes to the delivery stream can continue during this process. The\n         updated configurations are usually effective within a few minutes.</p>\n         <p>Switching between Amazon OpenSearch Service and other services is not supported. For\n         an Amazon OpenSearch Service destination, you can only update to another Amazon OpenSearch\n         Service destination.</p>\n         <p>If the destination type is the same, Firehose merges the configuration\n         parameters specified with the destination configuration that already exists on the delivery\n         stream. If any of the parameters are not specified in the call, the existing values are\n         retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing\n            <code>EncryptionConfiguration</code> is maintained on the destination.</p>\n         <p>If the destination type is not the same, for example, changing the destination from\n         Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this\n         case, all parameters must be specified.</p>\n         <p>Firehose uses <code>CurrentDeliveryStreamVersionId</code> to avoid race\n         conditions and conflicting merges. This is a required field, and the service updates the\n         configuration only if the existing configuration has a version ID that matches. After the\n         update is applied successfully, the version ID is updated, and can be retrieved using <a>DescribeDeliveryStream</a>. Use the new version ID to set\n            <code>CurrentDeliveryStreamVersionId</code> in the next call.</p>"
+                "smithy.api#documentation": "<p>Updates the specified destination of the specified Firehose stream.</p>\n         <p>Use this operation to change the destination type (for example, to replace the Amazon\n         S3 destination with Amazon Redshift) or change the parameters associated with a destination\n         (for example, to change the bucket name of the Amazon S3 destination). The update might not\n         occur immediately. The target Firehose stream remains active while the configurations are\n         updated, so data writes to the Firehose stream can continue during this process. The\n         updated configurations are usually effective within a few minutes.</p>\n         <p>Switching between Amazon OpenSearch Service and other services is not supported. For\n         an Amazon OpenSearch Service destination, you can only update to another Amazon OpenSearch\n         Service destination.</p>\n         <p>If the destination type is the same, Firehose merges the configuration\n         parameters specified with the destination configuration that already exists on the delivery\n         stream. If any of the parameters are not specified in the call, the existing values are\n         retained. For example, in the Amazon S3 destination, if <a>EncryptionConfiguration</a> is not specified, then the existing\n            <code>EncryptionConfiguration</code> is maintained on the destination.</p>\n         <p>If the destination type is not the same, for example, changing the destination from\n         Amazon S3 to Amazon Redshift, Firehose does not merge any parameters. In this\n         case, all parameters must be specified.</p>\n         <p>Firehose uses <code>CurrentDeliveryStreamVersionId</code> to avoid race\n         conditions and conflicting merges. This is a required field, and the service updates the\n         configuration only if the existing configuration has a version ID that matches. After the\n         update is applied successfully, the version ID is updated, and can be retrieved using <a>DescribeDeliveryStream</a>. Use the new version ID to set\n            <code>CurrentDeliveryStreamVersionId</code> in the next call.</p>"
             }
         },
         "com.amazonaws.firehose#UpdateDestinationInput": {
@@ -7443,7 +8047,7 @@
                 "DeliveryStreamName": {
                     "target": "com.amazonaws.firehose#DeliveryStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the Firehose stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7519,7 +8123,7 @@
                 "IcebergDestinationUpdate": {
                     "target": "com.amazonaws.firehose#IcebergDestinationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Describes an update for a destination in Apache Iceberg Tables.\n      </p>\n         <p>Amazon Data Firehose is in preview release and is subject to change.</p>"
+                        "smithy.api#documentation": "<p>\n         Describes an update for a destination in Apache Iceberg Tables.\n      </p>"
                     }
                 }
             },
@@ -7551,14 +8155,14 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.firehose#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the subnets that you want Firehose to use to create ENIs in the\n         VPC of the Amazon ES destination. Make sure that the routing tables and inbound and\n         outbound rules allow traffic to flow from the subnets whose IDs are specified here to the\n         subnets that have the destination Amazon ES endpoints. Firehose creates at\n         least one ENI in each of the subnets that are specified here. Do not delete or modify these\n         ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this delivery stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the subnets that you want Firehose to use to create ENIs in the\n         VPC of the Amazon ES destination. Make sure that the routing tables and inbound and\n         outbound rules allow traffic to flow from the subnets whose IDs are specified here to the\n         subnets that have the destination Amazon ES endpoints. Firehose creates at\n         least one ENI in each of the subnets that are specified here. Do not delete or modify these\n         ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this Firehose stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that you want the delivery stream to use to create endpoints in\n         the destination VPC. You can use your existing Firehose delivery role or you\n         can specify a new role. In either case, make sure that the role trusts the Firehose service principal and that it grants the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcAttribute</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSecurityGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterfacePermission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>When you specify subnets for delivering data to the destination in a private VPC, make sure you have enough number of free IP addresses in chosen subnets. If there is no available free IP address in a specified subnet, Firehose cannot create or add ENIs for the data delivery in the private VPC, and the delivery will be degraded or fail.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that you want the Firehose stream to use to create endpoints in\n         the destination VPC. You can use your existing Firehose delivery role or you\n         can specify a new role. In either case, make sure that the role trusts the Firehose service principal and that it grants the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcAttribute</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSecurityGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterfacePermission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>When you specify subnets for delivering data to the destination in a private VPC, make sure you have enough number of free IP addresses in chosen subnets. If there is no available free IP address in a specified subnet, Firehose cannot create or add ENIs for the data delivery in the private VPC, and the delivery will be degraded or fail.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7580,21 +8184,21 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.firehose#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the subnets that Firehose uses to create ENIs in the VPC of the\n         Amazon ES destination. Make sure that the routing tables and inbound and outbound rules\n         allow traffic to flow from the subnets whose IDs are specified here to the subnets that\n         have the destination Amazon ES endpoints. Firehose creates at least one ENI in\n         each of the subnets that are specified here. Do not delete or modify these ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this delivery stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the subnets that Firehose uses to create ENIs in the VPC of the\n         Amazon ES destination. Make sure that the routing tables and inbound and outbound rules\n         allow traffic to flow from the subnets whose IDs are specified here to the subnets that\n         have the destination Amazon ES endpoints. Firehose creates at least one ENI in\n         each of the subnets that are specified here. Do not delete or modify these ENIs.</p>\n         <p>The number of ENIs that Firehose creates in the subnets specified here\n         scales up and down automatically based on throughput. To enable Firehose to\n         scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To\n         help you calculate the quota you need, assume that Firehose can create up to\n         three ENIs for this Firehose stream for each of the subnets specified here. For more\n         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces\n         </a> in the Amazon VPC Quotas topic.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.firehose#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that the delivery stream uses to create endpoints in the\n         destination VPC. You can use your existing Firehose delivery role or you can\n         specify a new role. In either case, make sure that the role trusts the Firehose service principal and that it grants the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcAttribute</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSecurityGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterfacePermission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you revoke these permissions after you create the delivery stream, Firehose can't scale out by creating more ENIs when necessary. You might therefore see a\n         degradation in performance.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that the Firehose stream uses to create endpoints in the\n         destination VPC. You can use your existing Firehose delivery role or you can\n         specify a new role. In either case, make sure that the role trusts the Firehose service principal and that it grants the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeVpcAttribute</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeSecurityGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterfacePermission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DeleteNetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you revoke these permissions after you create the Firehose stream, Firehose can't scale out by creating more ENIs when necessary. You might therefore see a\n         degradation in performance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.firehose#SecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups that Firehose uses when it creates ENIs in\n         the VPC of the Amazon ES destination. You can use the same security group that the Amazon\n         ES domain uses or different ones. If you specify different security groups, ensure that\n         they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure\n         that the Amazon ES domain's security group allows HTTPS traffic from the security groups\n         specified here. If you use the same security group for both your delivery stream and the\n         Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more\n         information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group\n            rules</a> in the Amazon VPC documentation.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups that Firehose uses when it creates ENIs in\n         the VPC of the Amazon ES destination. You can use the same security group that the Amazon\n         ES domain uses or different ones. If you specify different security groups, ensure that\n         they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure\n         that the Amazon ES domain's security group allows HTTPS traffic from the security groups\n         specified here. If you use the same security group for both your Firehose stream and the\n         Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more\n         information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group\n            rules</a> in the Amazon VPC documentation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7608,6 +8212,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+            }
+        },
+        "com.amazonaws.firehose#VpcEndpointServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 47,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$"
+            }
+        },
+        "com.amazonaws.firehose#WarehouseLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^s3:\\/\\/"
             }
         }
     }

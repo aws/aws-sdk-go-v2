@@ -917,6 +917,27 @@
                 }
             }
         },
+        "com.amazonaws.controlcatalog#ControlParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name. This name is the parameter <code>key</code> when you call <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html\">\n               <code>EnableControl</code>\n            </a> or <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html\">\n               <code>UpdateEnabledControl</code>\n            </a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Four types of control parameters are supported.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the\n          control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p>\n               <p>Example: <code>[\"us-east-1\",\"us-west-2\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted\n          from the control. Each string is expected to be an IAM action.</p>\n               <p>Example:\n          <code>[\"logs:DescribeLogGroups\",\"logs:StartQuery\",\"logs:GetQueryResults\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs\n          exempted from the control. Each string is expected to be an IAM principal that follows\n          the pattern <code>^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$</code>\n               </p>\n               <p>Example:\n          <code>[\"arn:aws:iam::*:role/ReadOnly\",\"arn:aws:sts::*:assumed-role/ReadOnly/*\"]</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExemptedResourceArns</b>: List of resource ARNs exempted\n          from the control. Each string is expected to be a resource ARN.</p>\n               <p>Example: <code>[\"arn:aws:s3:::my-bucket-name\"]</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ControlParameter"
+            }
+        },
         "com.amazonaws.controlcatalog#ControlResource": {
             "type": "resource",
             "identifiers": {
@@ -1177,7 +1198,7 @@
                 "Behavior": {
                     "target": "com.amazonaws.controlcatalog#ControlBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>A term that identifies the control's functional behavior. One of <code>Preventive</code>, <code>Deteictive</code>, <code>Proactive</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A term that identifies the control's functional behavior. One of <code>Preventive</code>, <code>Detective</code>, <code>Proactive</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1186,10 +1207,47 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "Implementation": {
+                    "target": "com.amazonaws.controlcatalog#ImplementationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the control, as an <code>ImplementationDetails</code> object that shows the underlying implementation type for a control.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.controlcatalog#ControlParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an array of <code>ControlParameter</code> objects that specify the parameters a control supports. An empty list is returned for controls that don’t support parameters.\n    </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ImplementationDetails": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.controlcatalog#ImplementationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that describes a control's implementation type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the implementation type for a control.</p>\n         <p>Our <code>ImplementationDetails</code>\n            <code>Type</code> format has three required segments:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME</code>\n               </p>\n            </li>\n         </ul>\n         <p>For example, <code>AWS::Config::ConfigRule</code>\n            <b>or</b>\n            <code>AWS::SecurityHub::SecurityControl</code> resources have the format with three required segments.</p>\n         <p>Our <code>ImplementationDetails</code>\n            <code>Type</code> format has an optional fourth segment, which is present for applicable \n      implementation types. The format is as follows: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME::RESOURCE-TYPE-DESCRIPTION</code>\n               </p>\n            </li>\n         </ul>\n         <p>For example, <code>AWS::Organizations::Policy::SERVICE_CONTROL_POLICY</code>\n            <b>or</b>\n            <code>AWS::CloudFormation::Type::HOOK</code> have the format with four segments.</p>\n         <p>Although the format is similar, the values for the <code>Type</code> field do not match any Amazon Web Services CloudFormation values, and we do not use CloudFormation to implement these controls.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ImplementationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+(::[A-Za-z0-9_]+){2,3}$"
             }
         },
         "com.amazonaws.controlcatalog#InternalServerException": {
@@ -1732,7 +1790,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control currently is available for deployment.</p>\n         <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>"
+                "smithy.api#documentation": "<p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control currently is available for deployment. For more information about scope, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html\">Global services</a>.</p>\n         <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>"
             }
         },
         "com.amazonaws.controlcatalog#ResourceNotFoundException": {

@@ -5851,12 +5851,56 @@
                 "version": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the launch template, <code>$Latest</code>, or\n   <code>$Default</code>.</p>\n         <p>If the value is <code>$Latest</code>, the latest version of the launch template is used. If\n   the value is <code>$Default</code>, the default version of the launch template is used.</p>\n         <important>\n            <p>If the AMI ID that's used in a compute environment is from the launch template, the AMI\n    isn't changed when the compute environment is updated. It's only changed if the\n     <code>updateToLatestImageVersion</code> parameter for the compute environment is set to\n     <code>true</code>. During an infrastructure update, if either <code>$Latest</code> or\n     <code>$Default</code> is specified, Batch re-evaluates the launch template version, and it\n    might use a different version of the launch template. This is the case even if the launch\n    template isn't specified in the update. When updating a compute environment, changing the launch\n    template requires an infrastructure update of the compute environment. For more information, see\n     <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n     environments</a> in the <i>Batch User Guide</i>.</p>\n         </important>\n         <p>Default: <code>$Default</code>.</p>"
+                        "smithy.api#documentation": "<p>The version number of the launch template, \n   <code>$Default</code>, or <code>$Latest</code>.</p>\n         <p>If the value is <code>$Default</code>, the default version of the launch template is used. If the value is <code>$Latest</code>, the latest version of the launch template is used. </p>\n         <important>\n            <p>If the AMI ID that's used in a compute environment is from the launch template, the AMI\n    isn't changed when the compute environment is updated. It's only changed if the\n     <code>updateToLatestImageVersion</code> parameter for the compute environment is set to\n     <code>true</code>. During an infrastructure update, if either <code>$Default</code> or\n     <code>$Latest</code> is specified, Batch re-evaluates the launch template version, and it\n    might use a different version of the launch template. This is the case even if the launch\n    template isn't specified in the update. When updating a compute environment, changing the launch\n    template requires an infrastructure update of the compute environment. For more information, see\n     <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n     environments</a> in the <i>Batch User Guide</i>.</p>\n         </important>\n         <p>Default: <code>$Default</code>\n         </p>\n         <p>Latest: <code>$Latest</code>\n         </p>"
+                    }
+                },
+                "overrides": {
+                    "target": "com.amazonaws.batch#LaunchTemplateSpecificationOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A launch template to use in place of the default launch template. You must specify either the launch template ID or launch template name in the request, but not both.</p>\n         <p>You can specify up to ten (10) launch template overrides that are associated to unique instance types or families for each compute environment.</p>\n         <note>\n            <p>To unset all override templates for a compute environment, you can pass an empty array to the <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html\">UpdateComputeEnvironment.overrides</a> parameter, or not include the <code>overrides</code> parameter when submitting the <code>UpdateComputeEnvironment</code> API operation.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents a launch template that's associated with a compute resource. You\n   must specify either the launch template ID or launch template name in the request, but not\n   both.</p>\n         <p>If security groups are specified using both the <code>securityGroupIds</code> parameter of\n    <code>CreateComputeEnvironment</code> and the launch template, the values in the\n    <code>securityGroupIds</code> parameter of <code>CreateComputeEnvironment</code> will be\n   used.</p>\n         <note>\n            <p>This object isn't applicable to jobs that are running on Fargate resources.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.batch#LaunchTemplateSpecificationOverride": {
+            "type": "structure",
+            "members": {
+                "launchTemplateId": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the launch template.</p>\n         <p>\n            <b>Note:</b> If you specify the <code>launchTemplateId</code> you can't specify the <code>launchTemplateName</code> as well.</p>"
+                    }
+                },
+                "launchTemplateName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the launch template.</p>\n         <p>\n            <b>Note:</b> If you specify the <code>launchTemplateName</code> you can't specify the <code>launchTemplateId</code> as well.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the launch template, \n   <code>$Default</code>, or <code>$Latest</code>.</p>\n         <p>If the value is <code>$Default</code>, the default version of the launch template is used. If the value is <code>$Latest</code>, the latest version of the launch template is used. </p>\n         <important>\n            <p>If the AMI ID that's used in a compute environment is from the launch template, the AMI\n    isn't changed when the compute environment is updated. It's only changed if the\n     <code>updateToLatestImageVersion</code> parameter for the compute environment is set to\n     <code>true</code>. During an infrastructure update, if either <code>$Default</code> or <code>$Latest</code> is specified, Batch re-evaluates the launch template version, and it\n    might use a different version of the launch template. This is the case even if the launch\n    template isn't specified in the update. When updating a compute environment, changing the launch\n    template requires an infrastructure update of the compute environment. For more information, see\n     <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n     environments</a> in the <i>Batch User Guide</i>.</p>\n         </important>\n         <p>Default: <code>$Default</code>\n         </p>\n         <p>Latest: <code>$Latest</code>\n         </p>"
+                    }
+                },
+                "targetInstanceTypes": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type or family that this this override launch template should be applied to.</p>\n         <p>This parameter is required when defining a launch template override.</p>\n         <p>Information included in this parameter must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Must be a valid Amazon EC2 instance type or family.</p>\n            </li>\n            <li>\n               <p>\n                  <code>optimal</code> isn't allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>targetInstanceTypes</code> can target only instance types and families that are included within the <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_ComputeResource.html#Batch-Type-ComputeResource-instanceTypes\">\n                     <code>ComputeResource.instanceTypes</code>\n                  </a> set. <code>targetInstanceTypes</code> doesn't need to include all of the instances from the <code>instanceType</code> set, but at least a subset. For example, if <code>ComputeResource.instanceTypes</code> includes <code>[m5, g5]</code>, <code>targetInstanceTypes</code> can include <code>[m5.2xlarge]</code> and <code>[m5.large]</code> but not <code>[c5.large]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>targetInstanceTypes</code> included within the same launch template override or across launch template overrides can't overlap for the same compute environment. For example, you can't define one launch template override to target an instance family and another define an instance type within this same family.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents a launch template to use in place of the default launch template. You must specify either the launch template ID or launch template name in the request, but not\n   both.</p>\n         <p>If security groups are specified using both the <code>securityGroupIds</code> parameter of\n    <code>CreateComputeEnvironment</code> and the launch template, the values in the\n    <code>securityGroupIds</code> parameter of <code>CreateComputeEnvironment</code> will be\n   used.</p>\n         <p>You can define up to ten (10) overrides for each compute environment.</p>\n         <note>\n            <p>This object isn't applicable to jobs that are running on Fargate resources.</p>\n         </note>\n         <note>\n            <p>To unset all override templates for a compute environment, you can pass an empty array to the <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html\">UpdateComputeEnvironment.overrides</a> parameter, or not include the <code>overrides</code> parameter when submitting the <code>UpdateComputeEnvironment</code> API operation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.batch#LaunchTemplateSpecificationOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#LaunchTemplateSpecificationOverride"
             }
         },
         "com.amazonaws.batch#LinuxParameters": {

@@ -1064,7 +1064,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]{1,10})?:bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]{1,20}/)?)?([a-z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
             }
         },
         "com.amazonaws.bedrockagentruntime#ByteContentBlob": {
@@ -1718,7 +1718,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about why a flow completed.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax\">InvokeFlow response</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Contains information about why a flow completed.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1768,7 +1768,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an input into the prompt flow and where to send it.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about an input into the prompt flow and where to send it.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowInputContent": {
@@ -1782,7 +1782,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an input into the flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Contains information about an input into the flow.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1809,7 +1809,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the content in an output from prompt flow invocation.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax\">InvokeFlow request</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information about the content in an output from prompt flow invocation.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FlowOutputEvent": {
@@ -1838,7 +1838,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an output from prompt flow invoction.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax\">InvokeFlow response</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Contains information about an output from prompt flow invoction.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1863,6 +1863,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#FlowCompletionEvent",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about why the flow completed.</p>"
+                    }
+                },
+                "flowTraceEvent": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about a trace, which tracks an input or output for a node in the flow.</p>"
                     }
                 },
                 "internalServerException": {
@@ -1921,8 +1927,267 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The output of the flow.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax\">InvokeFlow response</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The output of the flow.</p>",
                 "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTrace": {
+            "type": "union",
+            "members": {
+                "nodeInputTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the input into a node.</p>"
+                    }
+                },
+                "nodeOutputTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the output from a node.</p>"
+                    }
+                },
+                "conditionNodeResultTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceConditionNodeResultEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about an output from a condition node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an input or output for a node in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceCondition": {
+            "type": "structure",
+            "members": {
+                "conditionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a condition that was satisfied. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceConditionNodeResultEvent": {
+            "type": "structure",
+            "members": {
+                "nodeName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the condition node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the trace was returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "satisfiedConditions": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects containing information about the conditions that were satisfied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an output from a condition node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#FlowTraceCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceEvent": {
+            "type": "structure",
+            "members": {
+                "trace": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTrace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace object containing information about an input or output for a node in the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a trace, which tracks an input or output for a node in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputContent": {
+            "type": "union",
+            "members": {
+                "document": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the node input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the content of the node input. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputEvent": {
+            "type": "structure",
+            "members": {
+                "nodeName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node that received the input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the trace was returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects containing information about each field in the input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the input into a node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputField": {
+            "type": "structure",
+            "members": {
+                "nodeInputName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NodeInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the node input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a field in the input into a node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeInputField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputContent": {
+            "type": "union",
+            "members": {
+                "document": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the node output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the content of the node output. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputEvent": {
+            "type": "structure",
+            "members": {
+                "nodeName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node that yielded the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.bedrockagentruntime#DateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the trace was returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects containing information about each field in the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the output from a node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputField": {
+            "type": "structure",
+            "members": {
+                "nodeOutputName": {
+                    "target": "com.amazonaws.bedrockagentruntime#NodeOutputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the node output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the node output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a field in the output from a node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.bedrockagentruntime#Function": {
@@ -2055,7 +2320,7 @@
                 "promptTemplate": {
                     "target": "com.amazonaws.bedrockagentruntime#PromptTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation.</p>"
+                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation. Generation prompts must include the <code>$search_results$</code> variable. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html\">Use placeholder variables</a> in the user guide.</p>"
                     }
                 },
                 "guardrailConfiguration": {
@@ -3431,6 +3696,12 @@
                         "smithy.api#documentation": "<p>A list of objects, each containing information about an input into the flow.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "enableTrace": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to return the trace for the flow or not. Traces track inputs and outputs for nodes in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3853,12 +4124,6 @@
                         "smithy.api#documentation": "<p>The step in the agent sequence.</p>"
                     }
                 },
-                "inferenceConfiguration": {
-                    "target": "com.amazonaws.bedrockagentruntime#InferenceConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifications about the inference parameters that were provided alongside the prompt. These are specified in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> object that was set when the agent was created or updated. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>"
-                    }
-                },
                 "overrideLambda": {
                     "target": "com.amazonaws.bedrockagentruntime#LambdaArn",
                     "traits": {
@@ -3869,6 +4134,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#CreationMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the default prompt template was <code>OVERRIDDEN</code>. If it was, the <code>basePromptTemplate</code> that was set in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> object when the agent was created or updated is used instead.</p>"
+                    }
+                },
+                "inferenceConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#InferenceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications about the inference parameters that were provided alongside the prompt. These are specified in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html\">PromptOverrideConfiguration</a> object that was set when the agent was created or updated. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>"
                     }
                 },
                 "parserMode": {
@@ -3891,6 +4162,12 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^\\S*$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#NodeInputName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z]([_]?[0-9a-zA-Z]){0,99}$"
             }
         },
         "com.amazonaws.bedrockagentruntime#NodeName": {
@@ -4015,7 +4292,7 @@
                 "promptTemplate": {
                     "target": "com.amazonaws.bedrockagentruntime#PromptTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation.</p>"
+                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model. Orchestration prompts must include the <code>$conversation_history$</code> and <code>$output_format_instructions$</code> variables. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html\">Use placeholder variables</a> in the user guide.</p>"
                     }
                 },
                 "inferenceConfig": {
