@@ -39,7 +39,7 @@ jobs:
       run: go install golang.org/x/lint/golint@latest
 
     - name: Test
-      run: make ci-test-no-generate
+      run: make ci-test-no-generate -j 4
 
   x86-tests:
     name: Unix x86 SDK tests
@@ -67,7 +67,7 @@ jobs:
       run: go install golang.org/x/lint/golint@latest
 
     - name: Test
-      run: make unit
+      run: make unit -j 4
 
   windows-tests:
     name: Windows SDK Tests
@@ -93,4 +93,4 @@ jobs:
       run: ./ci-find-smithy-go.sh
 
     - name: Test
-      run: make vet build unit-test
+      run: make vet build unit-test -j 4

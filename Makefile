@@ -265,7 +265,7 @@ unit-race-modules-%:
 		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
-		"go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
+		"go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=1 ./..."
 
 unit-modules-%:
 	@# unit command that uses the pattern to define the root path that the
