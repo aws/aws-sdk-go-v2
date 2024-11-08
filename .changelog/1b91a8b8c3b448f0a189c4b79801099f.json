@@ -1,0 +1,8 @@
+{
+    "id": "1b91a8b8-c3b4-48f0-a189-c4b79801099f",
+    "type": "feature",
+    "description": "AWS Control Catalog GetControl public API returns additional data in output, including Implementation and Parameters",
+    "modules": [
+        "service/controlcatalog"
+    ]
+}

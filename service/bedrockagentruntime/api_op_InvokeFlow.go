@@ -52,6 +52,12 @@ type InvokeFlowInput struct {
 	// This member is required.
 	Inputs []types.FlowInput
 
+	// Specifies whether to return the trace for the flow or not. Traces track inputs
+	// and outputs for nodes in the flow. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+	//
+	// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+	EnableTrace *bool
+
 	noSmithyDocumentSerde
 }
 

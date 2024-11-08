@@ -131,6 +131,25 @@ func (ContentEncoding) Values() []ContentEncoding {
 	}
 }
 
+type DatabaseType string
+
+// Enum values for DatabaseType
+const (
+	DatabaseTypeMySQL      DatabaseType = "MySQL"
+	DatabaseTypePostgreSQL DatabaseType = "PostgreSQL"
+)
+
+// Values returns all known values for DatabaseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseType) Values() []DatabaseType {
+	return []DatabaseType{
+		"MySQL",
+		"PostgreSQL",
+	}
+}
+
 type DefaultDocumentIdFormat string
 
 // Enum values for DefaultDocumentIdFormat
@@ -182,21 +201,23 @@ type DeliveryStreamFailureType string
 
 // Enum values for DeliveryStreamFailureType
 const (
-	DeliveryStreamFailureTypeRetireKmsGrantFailed      DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"
-	DeliveryStreamFailureTypeCreateKmsGrantFailed      DeliveryStreamFailureType = "CREATE_KMS_GRANT_FAILED"
-	DeliveryStreamFailureTypeKmsAccessDenied           DeliveryStreamFailureType = "KMS_ACCESS_DENIED"
-	DeliveryStreamFailureTypeDisabledKmsKey            DeliveryStreamFailureType = "DISABLED_KMS_KEY"
-	DeliveryStreamFailureTypeInvalidKmsKey             DeliveryStreamFailureType = "INVALID_KMS_KEY"
-	DeliveryStreamFailureTypeKmsKeyNotFound            DeliveryStreamFailureType = "KMS_KEY_NOT_FOUND"
-	DeliveryStreamFailureTypeKmsOptInRequired          DeliveryStreamFailureType = "KMS_OPT_IN_REQUIRED"
-	DeliveryStreamFailureTypeCreateEniFailed           DeliveryStreamFailureType = "CREATE_ENI_FAILED"
-	DeliveryStreamFailureTypeDeleteEniFailed           DeliveryStreamFailureType = "DELETE_ENI_FAILED"
-	DeliveryStreamFailureTypeSubnetNotFound            DeliveryStreamFailureType = "SUBNET_NOT_FOUND"
-	DeliveryStreamFailureTypeSecurityGroupNotFound     DeliveryStreamFailureType = "SECURITY_GROUP_NOT_FOUND"
-	DeliveryStreamFailureTypeEniAccessDenied           DeliveryStreamFailureType = "ENI_ACCESS_DENIED"
-	DeliveryStreamFailureTypeSubnetAccessDenied        DeliveryStreamFailureType = "SUBNET_ACCESS_DENIED"
-	DeliveryStreamFailureTypeSecurityGroupAccessDenied DeliveryStreamFailureType = "SECURITY_GROUP_ACCESS_DENIED"
-	DeliveryStreamFailureTypeUnknownError              DeliveryStreamFailureType = "UNKNOWN_ERROR"
+	DeliveryStreamFailureTypeVpcEndpointServiceNameNotFound          DeliveryStreamFailureType = "VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND"
+	DeliveryStreamFailureTypeVpcInterfaceEndpointServiceAccessDenied DeliveryStreamFailureType = "VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED"
+	DeliveryStreamFailureTypeRetireKmsGrantFailed                    DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"
+	DeliveryStreamFailureTypeCreateKmsGrantFailed                    DeliveryStreamFailureType = "CREATE_KMS_GRANT_FAILED"
+	DeliveryStreamFailureTypeKmsAccessDenied                         DeliveryStreamFailureType = "KMS_ACCESS_DENIED"
+	DeliveryStreamFailureTypeDisabledKmsKey                          DeliveryStreamFailureType = "DISABLED_KMS_KEY"
+	DeliveryStreamFailureTypeInvalidKmsKey                           DeliveryStreamFailureType = "INVALID_KMS_KEY"
+	DeliveryStreamFailureTypeKmsKeyNotFound                          DeliveryStreamFailureType = "KMS_KEY_NOT_FOUND"
+	DeliveryStreamFailureTypeKmsOptInRequired                        DeliveryStreamFailureType = "KMS_OPT_IN_REQUIRED"
+	DeliveryStreamFailureTypeCreateEniFailed                         DeliveryStreamFailureType = "CREATE_ENI_FAILED"
+	DeliveryStreamFailureTypeDeleteEniFailed                         DeliveryStreamFailureType = "DELETE_ENI_FAILED"
+	DeliveryStreamFailureTypeSubnetNotFound                          DeliveryStreamFailureType = "SUBNET_NOT_FOUND"
+	DeliveryStreamFailureTypeSecurityGroupNotFound                   DeliveryStreamFailureType = "SECURITY_GROUP_NOT_FOUND"
+	DeliveryStreamFailureTypeEniAccessDenied                         DeliveryStreamFailureType = "ENI_ACCESS_DENIED"
+	DeliveryStreamFailureTypeSubnetAccessDenied                      DeliveryStreamFailureType = "SUBNET_ACCESS_DENIED"
+	DeliveryStreamFailureTypeSecurityGroupAccessDenied               DeliveryStreamFailureType = "SECURITY_GROUP_ACCESS_DENIED"
+	DeliveryStreamFailureTypeUnknownError                            DeliveryStreamFailureType = "UNKNOWN_ERROR"
 )
 
 // Values returns all known values for DeliveryStreamFailureType. Note that this
@@ -205,6 +226,8 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStreamFailureType) Values() []DeliveryStreamFailureType {
 	return []DeliveryStreamFailureType{
+		"VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND",
+		"VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED",
 		"RETIRE_KMS_GRANT_FAILED",
 		"CREATE_KMS_GRANT_FAILED",
 		"KMS_ACCESS_DENIED",
@@ -255,6 +278,7 @@ const (
 	DeliveryStreamTypeDirectPut             DeliveryStreamType = "DirectPut"
 	DeliveryStreamTypeKinesisStreamAsSource DeliveryStreamType = "KinesisStreamAsSource"
 	DeliveryStreamTypeMSKAsSource           DeliveryStreamType = "MSKAsSource"
+	DeliveryStreamTypeDatabaseAsSource      DeliveryStreamType = "DatabaseAsSource"
 )
 
 // Values returns all known values for DeliveryStreamType. Note that this can be
@@ -266,6 +290,7 @@ func (DeliveryStreamType) Values() []DeliveryStreamType {
 		"DirectPut",
 		"KinesisStreamAsSource",
 		"MSKAsSource",
+		"DatabaseAsSource",
 	}
 }
 
@@ -589,6 +614,46 @@ func (S3BackupMode) Values() []S3BackupMode {
 	}
 }
 
+type SnapshotRequestedBy string
+
+// Enum values for SnapshotRequestedBy
+const (
+	SnapshotRequestedByUser     SnapshotRequestedBy = "USER"
+	SnapshotRequestedByFirehose SnapshotRequestedBy = "FIREHOSE"
+)
+
+// Values returns all known values for SnapshotRequestedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotRequestedBy) Values() []SnapshotRequestedBy {
+	return []SnapshotRequestedBy{
+		"USER",
+		"FIREHOSE",
+	}
+}
+
+type SnapshotStatus string
+
+// Enum values for SnapshotStatus
+const (
+	SnapshotStatusInProgress SnapshotStatus = "IN_PROGRESS"
+	SnapshotStatusComplete   SnapshotStatus = "COMPLETE"
+	SnapshotStatusSuspended  SnapshotStatus = "SUSPENDED"
+)
+
+// Values returns all known values for SnapshotStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotStatus) Values() []SnapshotStatus {
+	return []SnapshotStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"SUSPENDED",
+	}
+}
+
 type SnowflakeDataLoadingOption string
 
 // Enum values for SnowflakeDataLoadingOption
@@ -645,5 +710,24 @@ func (SplunkS3BackupMode) Values() []SplunkS3BackupMode {
 	return []SplunkS3BackupMode{
 		"FailedEventsOnly",
 		"AllEvents",
+	}
+}
+
+type SSLMode string
+
+// Enum values for SSLMode
+const (
+	SSLModeDisabled SSLMode = "Disabled"
+	SSLModeEnabled  SSLMode = "Enabled"
+)
+
+// Values returns all known values for SSLMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SSLMode) Values() []SSLMode {
+	return []SSLMode{
+		"Disabled",
+		"Enabled",
 	}
 }

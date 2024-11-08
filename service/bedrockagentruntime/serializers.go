@@ -427,6 +427,11 @@ func awsRestjson1_serializeOpDocumentInvokeFlowInput(v *InvokeFlowInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableTrace != nil {
+		ok := object.Key("enableTrace")
+		ok.Boolean(*v.EnableTrace)
+	}
+
 	if v.Inputs != nil {
 		ok := object.Key("inputs")
 		if err := awsRestjson1_serializeDocumentFlowInputs(v.Inputs, ok); err != nil {

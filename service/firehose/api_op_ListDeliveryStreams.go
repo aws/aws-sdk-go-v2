@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your delivery streams in alphabetical order of their names.
+// Lists your Firehose streams in alphabetical order of their names.
 //
-// The number of delivery streams might be too large to return using a single call
-// to ListDeliveryStreams . You can limit the number of delivery streams returned,
+// The number of Firehose streams might be too large to return using a single call
+// to ListDeliveryStreams . You can limit the number of Firehose streams returned,
 // using the Limit parameter. To determine whether there are more delivery streams
 // to list, check the value of HasMoreDeliveryStreams in the output. If there are
-// more delivery streams to list, you can request them by calling this operation
+// more Firehose streams to list, you can request them by calling this operation
 // again and setting the ExclusiveStartDeliveryStreamName parameter to the name of
-// the last delivery stream returned in the last call.
+// the last Firehose stream returned in the last call.
 func (c *Client) ListDeliveryStreams(ctx context.Context, params *ListDeliveryStreamsInput, optFns ...func(*Options)) (*ListDeliveryStreamsOutput, error) {
 	if params == nil {
 		params = &ListDeliveryStreamsInput{}
@@ -37,23 +37,23 @@ func (c *Client) ListDeliveryStreams(ctx context.Context, params *ListDeliverySt
 
 type ListDeliveryStreamsInput struct {
 
-	// The delivery stream type. This can be one of the following values:
+	// The Firehose stream type. This can be one of the following values:
 	//
-	//   - DirectPut : Provider applications access the delivery stream directly.
+	//   - DirectPut : Provider applications access the Firehose stream directly.
 	//
-	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
+	//   - KinesisStreamAsSource : The Firehose stream uses a Kinesis data stream as a
 	//   source.
 	//
-	// This parameter is optional. If this parameter is omitted, delivery streams of
+	// This parameter is optional. If this parameter is omitted, Firehose streams of
 	// all types are returned.
 	DeliveryStreamType types.DeliveryStreamType
 
-	// The list of delivery streams returned by this call to ListDeliveryStreams will
-	// start with the delivery stream whose name comes alphabetically immediately after
+	// The list of Firehose streams returned by this call to ListDeliveryStreams will
+	// start with the Firehose stream whose name comes alphabetically immediately after
 	// the name you specify in ExclusiveStartDeliveryStreamName .
 	ExclusiveStartDeliveryStreamName *string
 
-	// The maximum number of delivery streams to list. The default value is 10.
+	// The maximum number of Firehose streams to list. The default value is 10.
 	Limit *int32
 
 	noSmithyDocumentSerde
@@ -61,12 +61,12 @@ type ListDeliveryStreamsInput struct {
 
 type ListDeliveryStreamsOutput struct {
 
-	// The names of the delivery streams.
+	// The names of the Firehose streams.
 	//
 	// This member is required.
 	DeliveryStreamNames []string
 
-	// Indicates whether there are more delivery streams available to list.
+	// Indicates whether there are more Firehose streams available to list.
 	//
 	// This member is required.
 	HasMoreDeliveryStreams *bool

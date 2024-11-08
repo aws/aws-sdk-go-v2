@@ -1412,6 +1412,10 @@ type GroupMembers struct {
 	// belong to the "Interns" group.
 	MemberUsers []MemberUser
 
+	// Information required for Amazon Q Business to find a specific file in an Amazon
+	// S3 bucket.
+	S3PathForGroupMembers *S3
+
 	noSmithyDocumentSerde
 }
 

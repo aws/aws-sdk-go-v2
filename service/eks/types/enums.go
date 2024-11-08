@@ -594,6 +594,7 @@ const (
 	NodegroupIssueCodeAutoScalingGroupInstanceRefreshActive    NodegroupIssueCode = "AutoScalingGroupInstanceRefreshActive"
 	NodegroupIssueCodeKubernetesLabelInvalid                   NodegroupIssueCode = "KubernetesLabelInvalid"
 	NodegroupIssueCodeEc2LaunchTemplateVersionMaxLimitExceeded NodegroupIssueCode = "Ec2LaunchTemplateVersionMaxLimitExceeded"
+	NodegroupIssueCodeEc2InstanceTypeDoesNotExist              NodegroupIssueCode = "Ec2InstanceTypeDoesNotExist"
 )
 
 // Values returns all known values for NodegroupIssueCode. Note that this can be
@@ -637,6 +638,7 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 		"AutoScalingGroupInstanceRefreshActive",
 		"KubernetesLabelInvalid",
 		"Ec2LaunchTemplateVersionMaxLimitExceeded",
+		"Ec2InstanceTypeDoesNotExist",
 	}
 }
 

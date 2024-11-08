@@ -4219,6 +4219,11 @@ func awsRestjson1_serializeOpDocumentPutGroupInput(v *PutGroupInput, value smith
 		ok.String(*v.GroupName)
 	}
 
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -6769,6 +6774,13 @@ func awsRestjson1_serializeDocumentGroupMembers(v *types.GroupMembers, value smi
 	if v.MemberUsers != nil {
 		ok := object.Key("memberUsers")
 		if err := awsRestjson1_serializeDocumentMemberUsers(v.MemberUsers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3PathForGroupMembers != nil {
+		ok := object.Key("s3PathForGroupMembers")
+		if err := awsRestjson1_serializeDocumentS3(v.S3PathForGroupMembers, ok); err != nil {
 			return err
 		}
 	}

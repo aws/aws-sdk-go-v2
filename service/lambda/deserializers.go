@@ -17920,6 +17920,15 @@ func awsRestjson1_deserializeDocumentFunctionCodeLocation(v **types.FunctionCode
 				sv.ResolvedImageUri = ptr.String(jtv)
 			}
 
+		case "SourceKMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceKMSKeyArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

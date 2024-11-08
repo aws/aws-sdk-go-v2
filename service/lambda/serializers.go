@@ -5970,6 +5970,11 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionCodeInput(v *UpdateFunctionCo
 		ok.String(*v.S3ObjectVersion)
 	}
 
+	if v.SourceKMSKeyArn != nil {
+		ok := object.Key("SourceKMSKeyArn")
+		ok.String(*v.SourceKMSKeyArn)
+	}
+
 	if v.ZipFile != nil {
 		ok := object.Key("ZipFile")
 		ok.Base64EncodeBytes(v.ZipFile)
@@ -6783,6 +6788,11 @@ func awsRestjson1_serializeDocumentFunctionCode(v *types.FunctionCode, value smi
 	if v.S3ObjectVersion != nil {
 		ok := object.Key("S3ObjectVersion")
 		ok.String(*v.S3ObjectVersion)
+	}
+
+	if v.SourceKMSKeyArn != nil {
+		ok := object.Key("SourceKMSKeyArn")
+		ok.String(*v.SourceKMSKeyArn)
 	}
 
 	if v.ZipFile != nil {

@@ -206,6 +206,11 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "Implementation":
+			if err := awsRestjson1_deserializeDocumentImplementationDetails(&sv.Implementation, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -213,6 +218,11 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Parameters":
+			if err := awsRestjson1_deserializeDocumentControlParameters(&sv.Parameters, value); err != nil {
+				return err
 			}
 
 		case "RegionConfiguration":
@@ -1361,6 +1371,80 @@ func awsRestjson1_deserializeDocumentCommonControlSummaryList(v *[]types.CommonC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentControlParameter(v **types.ControlParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlParameter
+	if *v == nil {
+		sv = &types.ControlParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlParameters(v *[]types.ControlParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ControlParameter
+	if *v == nil {
+		cv = []types.ControlParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ControlParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentControlParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentControls(v *[]types.ControlSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1610,6 +1694,46 @@ func awsRestjson1_deserializeDocumentDomainSummaryList(v *[]types.DomainSummary,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImplementationDetails(v **types.ImplementationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImplementationDetails
+	if *v == nil {
+		sv = &types.ImplementationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImplementationType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -1578,6 +1578,21 @@ func validateSentimentConfiguration(v *types.SentimentConfiguration) error {
 	}
 }
 
+func validateSseAwsKeyManagementParams(v *types.SseAwsKeyManagementParams) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SseAwsKeyManagementParams"}
+	if v.AwsKmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsKmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStreamChannelDefinition(v *types.StreamChannelDefinition) error {
 	if v == nil {
 		return nil
@@ -1755,6 +1770,11 @@ func validateOpCreateMediaCapturePipelineInput(v *CreateMediaCapturePipelineInpu
 	if v.ChimeSdkMeetingConfiguration != nil {
 		if err := validateChimeSdkMeetingConfiguration(v.ChimeSdkMeetingConfiguration); err != nil {
 			invalidParams.AddNested("ChimeSdkMeetingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SseAwsKeyManagementParams != nil {
+		if err := validateSseAwsKeyManagementParams(v.SseAwsKeyManagementParams); err != nil {
+			invalidParams.AddNested("SseAwsKeyManagementParams", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {

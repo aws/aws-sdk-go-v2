@@ -1,0 +1,8 @@
+{
+    "id": "f3ed028b-64c5-4f20-8bb6-8593d8d9e0b2",
+    "type": "feature",
+    "description": "Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

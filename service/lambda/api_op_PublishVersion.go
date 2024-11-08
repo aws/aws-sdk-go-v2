@@ -121,12 +121,29 @@ type PublishVersionOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's [environment variables]. When [Lambda SnapStart] is activated, this
-	// key is also used to encrypt the function's snapshot. This key is returned only
-	// if you've configured a customer managed key.
+	// The ARN of the Key Management Service (KMS) customer managed key that's used to
+	// encrypt the following resources:
 	//
+	//   - The function's [environment variables].
+	//
+	//   - The function's [Lambda SnapStart]snapshots.
+	//
+	//   - When used with SourceKMSKeyArn , the unzipped version of the .zip deployment
+	//   package that's used for function invocations. For more information, see [Specifying a customer managed key for Lambda].
+	//
+	//   - The optimized version of the container image that's used for function
+	//   invocations. Note that this is not the same key that's used to protect your
+	//   container image in the Amazon Elastic Container Registry (Amazon ECR). For more
+	//   information, see [Function lifecycle].
+	//
+	// If you don't provide a customer managed key, Lambda uses an [Amazon Web Services owned key] or an [Amazon Web Services managed key].
+	//
+	// [Amazon Web Services owned key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+	// [Specifying a customer managed key for Lambda]: https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption
 	// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
 	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
+	// [Function lifecycle]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle
+	// [Amazon Web Services managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in [ISO-8601 format]

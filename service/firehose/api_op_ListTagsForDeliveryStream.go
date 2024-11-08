@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified delivery stream. This operation has a limit of
+// Lists the tags for the specified Firehose stream. This operation has a limit of
 // five transactions per second per account.
 func (c *Client) ListTagsForDeliveryStream(ctx context.Context, params *ListTagsForDeliveryStreamInput, optFns ...func(*Options)) (*ListTagsForDeliveryStreamOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) ListTagsForDeliveryStream(ctx context.Context, params *ListTags
 
 type ListTagsForDeliveryStreamInput struct {
 
-	// The name of the delivery stream whose tags you want to list.
+	// The name of the Firehose stream whose tags you want to list.
 	//
 	// This member is required.
 	DeliveryStreamName *string
@@ -41,7 +41,7 @@ type ListTagsForDeliveryStreamInput struct {
 	ExclusiveStartTagKey *string
 
 	// The number of tags to return. If this number is less than the total number of
-	// tags associated with the delivery stream, HasMoreTags is set to true in the
+	// tags associated with the Firehose stream, HasMoreTags is set to true in the
 	// response. To list additional tags, set ExclusiveStartTagKey to the last key in
 	// the response.
 	Limit *int32

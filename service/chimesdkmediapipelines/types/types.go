@@ -202,6 +202,10 @@ type AmazonTranscribeProcessorConfiguration struct {
 	IdentifyLanguage bool
 
 	// Turns language identification on or off for multiple languages.
+	//
+	// Calls to this API must include a LanguageCode , IdentifyLanguage , or
+	// IdentifyMultipleLanguages parameter. If you include more than one of those
+	// parameters, your transcription job fails.
 	IdentifyMultipleLanguages bool
 
 	// The language code that represents the language spoken in your audio.
@@ -898,6 +902,10 @@ type MediaCapturePipeline struct {
 	// ARN of the destination to which the media artifacts are saved.
 	SinkArn *string
 
+	// The Amazon Resource Name (ARN) of the sink role to be used with AwsKmsKeyId in
+	// SseAwsKeyManagementParams .
+	SinkIamRoleArn *string
+
 	// Destination type to which the media artifacts are saved. You must use an S3
 	// Bucket.
 	SinkType MediaPipelineSinkType
@@ -907,6 +915,11 @@ type MediaCapturePipeline struct {
 
 	// Source type from which media artifacts are saved. You must use ChimeMeeting .
 	SourceType MediaPipelineSourceType
+
+	// An object that contains server side encryption parameters to be used by media
+	// capture pipeline. The parameters can also be used by media concatenation
+	// pipeline taking media capture pipeline as a media source.
+	SseAwsKeyManagementParams *SseAwsKeyManagementParams
 
 	// The status of the media pipeline.
 	Status MediaPipelineStatus
@@ -1468,6 +1481,57 @@ type SqsQueueSinkConfiguration struct {
 
 	// The ARN of the SQS sink.
 	InsightsTarget *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains server side encryption parameters to be used by media capture
+// pipeline. The parameters can also be used by media concatenation pipeline taking
+// media capture pipeline as a media source.
+type SseAwsKeyManagementParams struct {
+
+	// The KMS key you want to use to encrypt your media pipeline output. Decryption
+	// is required for concatenation pipeline. If using a key located in the current
+	// Amazon Web Services account, you can specify your KMS key in one of four ways:
+	//
+	//   - Use the KMS key ID itself. For example, 1234abcd-12ab-34cd-56ef-1234567890ab
+	//   .
+	//
+	//   - Use an alias for the KMS key ID. For example, alias/ExampleAlias .
+	//
+	//   - Use the Amazon Resource Name (ARN) for the KMS key ID. For example,
+	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
+	//   - Use the ARN for the KMS key alias. For example,
+	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
+	//
+	// If using a key located in a different Amazon Web Services account than the
+	// current Amazon Web Services account, you can specify your KMS key in one of two
+	// ways:
+	//
+	//   - Use the ARN for the KMS key ID. For example,
+	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
+	//   - Use the ARN for the KMS key alias. For example,
+	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
+	//
+	// If you don't specify an encryption key, your output is encrypted with the
+	// default Amazon S3 key (SSE-S3).
+	//
+	// Note that the role specified in the SinkIamRoleArn request parameter must have
+	// permission to use the specified KMS key.
+	//
+	// This member is required.
+	AwsKmsKeyId *string
+
+	// Base64-encoded string of a UTF-8 encoded JSON, which contains the encryption
+	// context as non-secret key-value pair known as encryption context pairs, that
+	// provides an added layer of security for your data. For more information, see [KMS encryption context]
+	// and [Asymmetric keys in KMS]in the Key Management Service Developer Guide.
+	//
+	// [Asymmetric keys in KMS]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+	// [KMS encryption context]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
+	AwsKmsEncryptionContext *string
 
 	noSmithyDocumentSerde
 }

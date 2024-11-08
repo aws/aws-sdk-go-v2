@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified delivery stream and its status. For example, after your
-// delivery stream is created, call DescribeDeliveryStream to see whether the
-// delivery stream is ACTIVE and therefore ready for data to be sent to it.
+// Describes the specified Firehose stream and its status. For example, after your
+// Firehose stream is created, call DescribeDeliveryStream to see whether the
+// Firehose stream is ACTIVE and therefore ready for data to be sent to it.
 //
-// If the status of a delivery stream is CREATING_FAILED , this status doesn't
+// If the status of a Firehose stream is CREATING_FAILED , this status doesn't
 // change, and you can't invoke CreateDeliveryStreamagain on it. However, you can invoke the DeleteDeliveryStream
 // operation to delete it. If the status is DELETING_FAILED , you can force
 // deletion by invoking DeleteDeliveryStreamagain but with DeleteDeliveryStreamInput$AllowForceDelete set to true.
@@ -36,17 +36,17 @@ func (c *Client) DescribeDeliveryStream(ctx context.Context, params *DescribeDel
 
 type DescribeDeliveryStreamInput struct {
 
-	// The name of the delivery stream.
+	// The name of the Firehose stream.
 	//
 	// This member is required.
 	DeliveryStreamName *string
 
 	// The ID of the destination to start returning the destination information.
-	// Firehose supports one destination per delivery stream.
+	// Firehose supports one destination per Firehose stream.
 	ExclusiveStartDestinationId *string
 
 	// The limit on the number of destinations to return. You can have one destination
-	// per delivery stream.
+	// per Firehose stream.
 	Limit *int32
 
 	noSmithyDocumentSerde
@@ -54,7 +54,7 @@ type DescribeDeliveryStreamInput struct {
 
 type DescribeDeliveryStreamOutput struct {
 
-	// Information about the delivery stream.
+	// Information about the Firehose stream.
 	//
 	// This member is required.
 	DeliveryStreamDescription *types.DeliveryStreamDescription

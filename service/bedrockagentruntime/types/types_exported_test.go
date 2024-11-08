@@ -54,6 +54,9 @@ func ExampleFlowResponseStream_outputUsage() {
 	case *types.FlowResponseStreamMemberFlowOutputEvent:
 		_ = v.Value // Value is types.FlowOutputEvent
 
+	case *types.FlowResponseStreamMemberFlowTraceEvent:
+		_ = v.Value // Value is types.FlowTraceEvent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -64,7 +67,70 @@ func ExampleFlowResponseStream_outputUsage() {
 }
 
 var _ *types.FlowOutputEvent
+var _ *types.FlowTraceEvent
 var _ *types.FlowCompletionEvent
+
+func ExampleFlowTrace_outputUsage() {
+	var union types.FlowTrace
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowTraceMemberConditionNodeResultTrace:
+		_ = v.Value // Value is types.FlowTraceConditionNodeResultEvent
+
+	case *types.FlowTraceMemberNodeInputTrace:
+		_ = v.Value // Value is types.FlowTraceNodeInputEvent
+
+	case *types.FlowTraceMemberNodeOutputTrace:
+		_ = v.Value // Value is types.FlowTraceNodeOutputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FlowTraceNodeInputEvent
+var _ *types.FlowTraceConditionNodeResultEvent
+var _ *types.FlowTraceNodeOutputEvent
+
+func ExampleFlowTraceNodeInputContent_outputUsage() {
+	var union types.FlowTraceNodeInputContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowTraceNodeInputContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
+
+func ExampleFlowTraceNodeOutputContent_outputUsage() {
+	var union types.FlowTraceNodeOutputContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowTraceNodeOutputContentMemberDocument:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface
 
 func ExampleInvocationInputMember_outputUsage() {
 	var union types.InvocationInputMember

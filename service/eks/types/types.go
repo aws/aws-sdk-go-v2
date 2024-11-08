@@ -953,6 +953,10 @@ type Issue struct {
 	//   happen if there are network disruptions or if API servers are timing out
 	//   processing requests.
 	//
+	//   - Ec2InstanceTypeDoesNotExist: One or more of the supplied Amazon EC2
+	//   instance types do not exist. Amazon EKS checked for the instance types that you
+	//   provided in this Amazon Web Services Region, and one or more aren't available.
+	//
 	//   - Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template
 	//   for your managed node group. You may be able to recreate a launch template with
 	//   the same settings to recover.

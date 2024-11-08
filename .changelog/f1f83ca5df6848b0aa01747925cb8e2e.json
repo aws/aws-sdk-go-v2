@@ -1,0 +1,8 @@
+{
+    "id": "f1f83ca5-df68-48b0-aa01-747925cb8e2e",
+    "type": "feature",
+    "description": "This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.",
+    "modules": [
+        "service/lambda"
+    ]
+}

@@ -11,34 +11,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Firehose delivery stream.
+// Creates a Firehose stream.
 //
-// By default, you can create up to 50 delivery streams per Amazon Web Services
+// By default, you can create up to 50 Firehose streams per Amazon Web Services
 // Region.
 //
 // This is an asynchronous operation that immediately returns. The initial status
-// of the delivery stream is CREATING . After the delivery stream is created, its
-// status is ACTIVE and it now accepts data. If the delivery stream creation
+// of the Firehose stream is CREATING . After the Firehose stream is created, its
+// status is ACTIVE and it now accepts data. If the Firehose stream creation
 // fails, the status transitions to CREATING_FAILED . Attempts to send data to a
 // delivery stream that is not in the ACTIVE state cause an exception. To check
-// the state of a delivery stream, use DescribeDeliveryStream.
+// the state of a Firehose stream, use DescribeDeliveryStream.
 //
-// If the status of a delivery stream is CREATING_FAILED , this status doesn't
+// If the status of a Firehose stream is CREATING_FAILED , this status doesn't
 // change, and you can't invoke CreateDeliveryStream again on it. However, you can
 // invoke the DeleteDeliveryStreamoperation to delete it.
 //
-// A Firehose delivery stream can be configured to receive records directly from
-// providers using PutRecordor PutRecordBatch, or it can be configured to use an existing Kinesis stream
-// as its source. To specify a Kinesis data stream as input, set the
-// DeliveryStreamType parameter to KinesisStreamAsSource , and provide the Kinesis
-// stream Amazon Resource Name (ARN) and role ARN in the
-// KinesisStreamSourceConfiguration parameter.
+// A Firehose stream can be configured to receive records directly from providers
+// using PutRecordor PutRecordBatch, or it can be configured to use an existing Kinesis stream as its
+// source. To specify a Kinesis data stream as input, set the DeliveryStreamType
+// parameter to KinesisStreamAsSource , and provide the Kinesis stream Amazon
+// Resource Name (ARN) and role ARN in the KinesisStreamSourceConfiguration
+// parameter.
 //
-// To create a delivery stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput
+// To create a Firehose stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput
 // in your request. This is optional. You can also invoke StartDeliveryStreamEncryptionto turn on SSE for an
-// existing delivery stream that doesn't have SSE enabled.
+// existing Firehose stream that doesn't have SSE enabled.
 //
-// A delivery stream is configured with a single destination, such as Amazon
+// A Firehose stream is configured with a single destination, such as Amazon
 // Simple Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service,
 // Amazon OpenSearch Serverless, Splunk, and any custom HTTP endpoint or HTTP
 // endpoints owned by or supported by third-party service providers, including
@@ -97,9 +97,9 @@ func (c *Client) CreateDeliveryStream(ctx context.Context, params *CreateDeliver
 
 type CreateDeliveryStreamInput struct {
 
-	// The name of the delivery stream. This name must be unique per Amazon Web
-	// Services account in the same Amazon Web Services Region. If the delivery streams
-	// are in different accounts or different Regions, you can have multiple delivery
+	// The name of the Firehose stream. This name must be unique per Amazon Web
+	// Services account in the same Amazon Web Services Region. If the Firehose streams
+	// are in different accounts or different Regions, you can have multiple Firehose
 	// streams with the same name.
 	//
 	// This member is required.
@@ -113,15 +113,18 @@ type CreateDeliveryStreamInput struct {
 	// destination.
 	AmazonopensearchserviceDestinationConfiguration *types.AmazonopensearchserviceDestinationConfiguration
 
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DatabaseSourceConfiguration *types.DatabaseSourceConfiguration
+
 	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
 	// for Server-Side Encryption (SSE).
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput
 
-	// The delivery stream type. This parameter can be one of the following values:
+	// The Firehose stream type. This parameter can be one of the following values:
 	//
-	//   - DirectPut : Provider applications access the delivery stream directly.
+	//   - DirectPut : Provider applications access the Firehose stream directly.
 	//
-	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
+	//   - KinesisStreamAsSource : The Firehose stream uses a Kinesis data stream as a
 	//   source.
 	DeliveryStreamType types.DeliveryStreamType
 
@@ -136,11 +139,9 @@ type CreateDeliveryStreamInput struct {
 	HttpEndpointDestinationConfiguration *types.HttpEndpointDestinationConfiguration
 
 	//  Configure Apache Iceberg Tables destination.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	IcebergDestinationConfiguration *types.IcebergDestinationConfiguration
 
-	// When a Kinesis data stream is used as the source for the delivery stream, a KinesisStreamSourceConfiguration
+	// When a Kinesis data stream is used as the source for the Firehose stream, a KinesisStreamSourceConfiguration
 	// containing the Kinesis data stream Amazon Resource Name (ARN) and the role ARN
 	// for the source stream.
 	KinesisStreamSourceConfiguration *types.KinesisStreamSourceConfiguration
@@ -163,19 +164,19 @@ type CreateDeliveryStreamInput struct {
 	// The destination in Splunk. You can specify only one destination.
 	SplunkDestinationConfiguration *types.SplunkDestinationConfiguration
 
-	// A set of tags to assign to the delivery stream. A tag is a key-value pair that
+	// A set of tags to assign to the Firehose stream. A tag is a key-value pair that
 	// you can define and assign to Amazon Web Services resources. Tags are metadata.
 	// For example, you can add friendly names and descriptions or other types of
-	// information that can help you distinguish the delivery stream. For more
+	// information that can help you distinguish the Firehose stream. For more
 	// information about tags, see [Using Cost Allocation Tags]in the Amazon Web Services Billing and Cost
 	// Management User Guide.
 	//
-	// You can specify up to 50 tags when creating a delivery stream.
+	// You can specify up to 50 tags when creating a Firehose stream.
 	//
 	// If you specify tags in the CreateDeliveryStream action, Amazon Data Firehose
 	// performs an additional authorization on the firehose:TagDeliveryStream action
 	// to verify if users have permissions to create tags. If you do not provide this
-	// permission, requests to create new Firehose delivery streams with IAM resource
+	// permission, requests to create new Firehose Firehose streams with IAM resource
 	// tags will fail with an AccessDeniedException such as following.
 	//
 	// AccessDeniedException
@@ -196,7 +197,7 @@ type CreateDeliveryStreamInput struct {
 
 type CreateDeliveryStreamOutput struct {
 
-	// The ARN of the delivery stream.
+	// The ARN of the Firehose stream.
 	DeliveryStreamARN *string
 
 	// Metadata pertaining to the operation's result.

@@ -76,7 +76,7 @@ type GetFunctionOutput struct {
 	// The function's [tags]. Lambda returns tag data only if you have explicit allow
 	// permissions for [lambda:ListTags].
 	//
-	// [lambda:ListTags]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/lambda/latest/api/API_ListTags.html
+	// [lambda:ListTags]: https://docs.aws.amazon.com/lambda/latest/api/API_ListTags.html
 	// [tags]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
 	Tags map[string]string
 

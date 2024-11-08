@@ -12,6 +12,12 @@ import (
 )
 
 // Updates an existing Amazon Q Business application.
+//
+// A Amazon Q Apps service-linked role will be created if it's absent in the
+// Amazon Web Services account when the QAppsConfiguration is enabled in the
+// request. For more information, see [Using service-linked roles for Q Apps]
+//
+// [Using service-linked roles for Q Apps]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles-qapps.html
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}

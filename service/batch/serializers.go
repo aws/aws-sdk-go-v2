@@ -3952,11 +3952,60 @@ func awsRestjson1_serializeDocumentLaunchTemplateSpecification(v *types.LaunchTe
 		ok.String(*v.LaunchTemplateName)
 	}
 
+	if v.Overrides != nil {
+		ok := object.Key("overrides")
+		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecificationOverrideList(v.Overrides, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchTemplateSpecificationOverride(v *types.LaunchTemplateSpecificationOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LaunchTemplateId != nil {
+		ok := object.Key("launchTemplateId")
+		ok.String(*v.LaunchTemplateId)
+	}
+
+	if v.LaunchTemplateName != nil {
+		ok := object.Key("launchTemplateName")
+		ok.String(*v.LaunchTemplateName)
+	}
+
+	if v.TargetInstanceTypes != nil {
+		ok := object.Key("targetInstanceTypes")
+		if err := awsRestjson1_serializeDocumentStringList(v.TargetInstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Version != nil {
+		ok := object.Key("version")
+		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchTemplateSpecificationOverrideList(v []types.LaunchTemplateSpecificationOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecificationOverride(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

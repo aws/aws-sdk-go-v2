@@ -13962,6 +13962,22 @@ func awsAwsjson10_deserializeDocumentRegistrationVersionStatusHistory(v **types.
 				}
 			}
 
+		case "RequiresAuthenticationTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequiresAuthenticationTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "ReviewingTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
