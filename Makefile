@@ -274,15 +274,15 @@ unit-race-modules-%:
 # Doing this needs a `go.work` file that there's a hot debate on whether it should be included into VCS or not
 # So, before exploring this, ensure that the benefits are there
 experimental-module:
-	go list -f '{{.Dir}}/...' -m | xargs go vet ${BUILD_TAGS} --all && \
-    go list -f '{{.Dir}}/...' -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
-    go list -f '{{.Dir}}/...' -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=1
+	go list -f "{{.Dir}}/..." -m | xargs go vet ${BUILD_TAGS} --all && \
+    go list -f "{{.Dir}}/..." -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
+    go list -f "{{.Dir}}/..." -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -race
 
 # same as regular but no race test
 experimental-module-no-race:
-	go list -f '{{.Dir}}/...' -m | xargs go vet ${BUILD_TAGS} --all && \
-    go list -f '{{.Dir}}/...' -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
-    go list -f '{{.Dir}}/...' -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -cpu=1
+	go list -f "{{.Dir}}/..." -m | xargs go vet ${BUILD_TAGS} --all && \
+    go list -f "{{.Dir}}/..." -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
+    go list -f "{{.Dir}}/..." -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS}
 
 
 unit-modules-%:
