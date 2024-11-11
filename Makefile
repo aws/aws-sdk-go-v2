@@ -267,6 +267,24 @@ unit-race-modules-%:
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=1 ./..."
 
+# EXPERIMENT will explore more if the results are good
+# Basically instead of invoking "go test" n times per module (we have around 400 of them)
+# call "go test" will all modules as arguments. This however is not as straightforward since
+# this is a monorepo, so we have multiple modules that are not visible from root.
+# Doing this needs a `go.work` file that there's a hot debate on whether it should be included into VCS or not
+# So, before exploring this, ensure that the benefits are there
+experimental-module:
+	go list -f '{{.Dir}}/...' -m | xargs go vet ${BUILD_TAGS} --all && \
+    go list -f '{{.Dir}}/...' -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
+    go list -f '{{.Dir}}/...' -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=1
+
+# same as regular but no race test
+experimental-module-no-race:
+	go list -f '{{.Dir}}/...' -m | xargs go vet ${BUILD_TAGS} --all && \
+    go list -f '{{.Dir}}/...' -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
+    go list -f '{{.Dir}}/...' -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -cpu=1
+
+
 unit-modules-%:
 	@# unit command that uses the pattern to define the root path that the
 	@# module testing will start from. Strips off the "unit-modules-" and
@@ -509,6 +527,10 @@ vet-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..."
+
+experimental-vet:
+	go list -f '{{.Dir}}/...' -m | xargs go vet ${BUILD_TAGS} --all
+
 
 sdkv1check:
 	@echo "Checking for usage of AWS SDK for Go v1"
