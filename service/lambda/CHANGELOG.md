@@ -1,3 +1,7 @@
+# v1.66.0 (2024-11-11)
+
+* **Feature**: Add Python 3.13 (python3.13) support to AWS Lambda
+
 # v1.65.0 (2024-11-08)
 
 * **Feature**: This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.

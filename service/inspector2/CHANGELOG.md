@@ -1,3 +1,7 @@
+# v1.33.0 (2024-11-11)
+
+* **Feature**: Adds support for filePath filter.
+
 # v1.32.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

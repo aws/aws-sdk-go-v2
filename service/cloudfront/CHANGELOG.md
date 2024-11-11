@@ -1,3 +1,7 @@
+# v1.41.0 (2024-11-11)
+
+* **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
 # v1.40.4 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

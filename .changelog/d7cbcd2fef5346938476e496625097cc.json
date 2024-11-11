@@ -1,8 +1,0 @@
-{
-    "id": "d7cbcd2f-ef53-4693-8476-e496625097cc",
-    "type": "feature",
-    "description": "No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

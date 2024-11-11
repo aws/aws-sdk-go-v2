@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.48.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.55.5
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.40.4
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.27.6
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.44.5
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.42.4
@@ -51,7 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.59.5
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.37.5
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.65.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.66.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.42.5
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.4

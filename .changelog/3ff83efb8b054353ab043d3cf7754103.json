@@ -1,8 +1,0 @@
-{
-    "id": "3ff83efb-8b05-4353-ab04-3d3cf7754103",
-    "type": "feature",
-    "description": "Add Python 3.13 (python3.13) support to AWS Lambda",
-    "modules": [
-        "service/lambda"
-    ]
-}

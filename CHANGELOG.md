@@ -1,3 +1,17 @@
+# Release (2024-11-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.41.0](service/cloudfront/CHANGELOG.md#v1410-2024-11-11)
+  * **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.33.0](service/inspector2/CHANGELOG.md#v1330-2024-11-11)
+  * **Feature**: Adds support for filePath filter.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.66.0](service/lambda/CHANGELOG.md#v1660-2024-11-11)
+  * **Feature**: Add Python 3.13 (python3.13) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.44.0](service/opensearch/CHANGELOG.md#v1440-2024-11-11)
+  * **Feature**: Adds Support for new AssociatePackages and DissociatePackages API in Amazon OpenSearch Service that allows association and dissociation operations to be carried out on multiple packages at the same time.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.46.0](service/outposts/CHANGELOG.md#v1460-2024-11-11)
+  * **Feature**: This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.
+
 # Release (2024-11-08)
 
 ## Module Highlights

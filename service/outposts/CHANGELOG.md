@@ -1,3 +1,7 @@
+# v1.46.0 (2024-11-11)
+
+* **Feature**: This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.
+
 # v1.45.3 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
