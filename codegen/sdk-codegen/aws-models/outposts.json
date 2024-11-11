@@ -29,6 +29,53 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.outposts#AWSServiceName": {
+            "type": "enum",
+            "members": {
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS"
+                    }
+                },
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
+                    }
+                },
+                "ELASTICACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELASTICACHE"
+                    }
+                },
+                "ELB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELB"
+                    }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS"
+                    }
+                },
+                "ROUTE53": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE53"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#AWSServiceNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AWSServiceName"
+            }
+        },
         "com.amazonaws.outposts#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -51,6 +98,12 @@
                     "max": 12
                 },
                 "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.outposts#AccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AccountId"
             }
         },
         "com.amazonaws.outposts#Address": {
@@ -199,6 +252,12 @@
                 "smithy.api#pattern": "^(\\w+)$"
             }
         },
+        "com.amazonaws.outposts#AssetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AssetId"
+            }
+        },
         "com.amazonaws.outposts#AssetInfo": {
             "type": "structure",
             "members": {
@@ -235,6 +294,76 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Information about hardware assets. </p>"
+            }
+        },
+        "com.amazonaws.outposts#AssetInstance": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.outposts#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.outposts#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instance.</p>"
+                    }
+                },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.outposts#AccountId"
+                },
+                "AwsServiceName": {
+                    "target": "com.amazonaws.outposts#AWSServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service name of the instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon EC2 instance.</p>"
+            }
+        },
+        "com.amazonaws.outposts#AssetInstanceCapacityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AssetInstanceTypeCapacity"
+            }
+        },
+        "com.amazonaws.outposts#AssetInstanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AssetInstance"
+            }
+        },
+        "com.amazonaws.outposts#AssetInstanceTypeCapacity": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.outposts#InstanceTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.outposts#InstanceTypeCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of each instance type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity for each instance type.</p>"
             }
         },
         "com.amazonaws.outposts#AssetListDefinition": {
@@ -335,6 +464,35 @@
                     "min": 1,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.outposts#BlockingInstance": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.outposts#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the blocking instance.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.outposts#AccountId"
+                },
+                "AwsServiceName": {
+                    "target": "com.amazonaws.outposts#AWSServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service name that owns the specified blocking instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A running Amazon EC2 instance that can be stopped to free up capacity needed to run the\n      capacity task.</p>"
+            }
+        },
+        "com.amazonaws.outposts#BlockingInstancesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#BlockingInstance"
             }
         },
         "com.amazonaws.outposts#CIDR": {
@@ -504,6 +662,30 @@
                     "traits": {
                         "smithy.api#enumValue": "UNSUPPORTED_CAPACITY_CONFIGURATION"
                     }
+                },
+                "UNEXPECTED_ASSET_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNEXPECTED_ASSET_STATE"
+                    }
+                },
+                "BLOCKING_INSTANCES_NOT_EVACUATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKING_INSTANCES_NOT_EVACUATED"
+                    }
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_ERROR"
+                    }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
+                    }
                 }
             }
         },
@@ -548,6 +730,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "WAITING_FOR_EVACUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAITING_FOR_EVACUATION"
+                    }
+                },
+                "CANCELLATION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLATION_IN_PROGRESS"
                     }
                 },
                 "CANCELLED": {
@@ -783,6 +977,18 @@
                     "target": "com.amazonaws.outposts#InstanceFamilies",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the names of instance families that are currently associated with a given\n      asset.</p>"
+                    }
+                },
+                "InstanceTypeCapacities": {
+                    "target": "com.amazonaws.outposts#AssetInstanceCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type capacities configured for this asset. This can be changed through a\n      capacity task.</p>"
+                    }
+                },
+                "MaxVcpus": {
+                    "target": "com.amazonaws.outposts#VCPUCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs possible for the specified asset.</p>"
                     }
                 }
             },
@@ -1470,6 +1676,12 @@
                         "smithy.api#documentation": "<p>List of instance pools requested in the capacity task.</p>"
                     }
                 },
+                "InstancesToExclude": {
+                    "target": "com.amazonaws.outposts#InstancesToExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instances that the user specified they cannot stop in order to free up the capacity needed\n      to run the capacity task.</p>"
+                    }
+                },
                 "DryRun": {
                     "target": "com.amazonaws.outposts#DryRun",
                     "traits": {
@@ -1505,6 +1717,12 @@
                     "target": "com.amazonaws.outposts#ISO8601Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date the capacity task was last modified.</p>"
+                    }
+                },
+                "TaskActionOnBlockingInstances": {
+                    "target": "com.amazonaws.outposts#TaskActionOnBlockingInstances",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-specified option in case an instance is blocking the capacity task from running.\n      Shows one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WAIT_FOR_EVACUATION</code> - Checks every 10 minutes over 48 hours to determine\n          if instances have stopped and capacity is available to complete the task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAIL_TASK</code> - The capacity task fails.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1861,7 +2079,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the instance types that an\n      Outpost can support in <code>InstanceTypeCapacity</code>. This will generally include instance types that\n      are not currently configured and therefore cannot be launched with the current Outpost\n      capacity configuration.</p>",
+                "smithy.api#documentation": "<p>Gets the instance types that an Outpost can support in <code>InstanceTypeCapacity</code>.\n      This will generally include instance types that are not currently configured and therefore\n      cannot be launched with the current Outpost capacity configuration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/outposts/{OutpostIdentifier}/supportedInstanceTypes",
@@ -1890,8 +2108,7 @@
                     "target": "com.amazonaws.outposts#OrderId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID for the Amazon Web Services Outposts order.</p>",
-                        "smithy.api#httpQuery": "OrderId",
-                        "smithy.api#required": {}
+                        "smithy.api#httpQuery": "OrderId"
                     }
                 },
                 "MaxResults": {
@@ -2096,6 +2313,22 @@
                 "smithy.api#pattern": "^(?:.{1,200}/)?(?:[a-z0-9-_A-Z])+$"
             }
         },
+        "com.amazonaws.outposts#InstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 11,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^i-[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.outposts#InstanceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#InstanceId"
+            }
+        },
         "com.amazonaws.outposts#InstanceType": {
             "type": "string",
             "traits": {
@@ -2169,6 +2402,32 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-z0-9\\-]+\\.[a-z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.outposts#InstancesToExclude": {
+            "type": "structure",
+            "members": {
+                "Instances": {
+                    "target": "com.amazonaws.outposts#InstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of user-specified instances that must not be stopped.</p>"
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.outposts#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IDs of the accounts that own each instance that must not be stopped.</p>"
+                    }
+                },
+                "Services": {
+                    "target": "com.amazonaws.outposts#AWSServiceNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Names of the services that own each instance that must not be stopped in order to free up\n      the capacity needed to run the capacity task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>User-specified instances that must not be stopped. These instances will not appear in the\n      list of instances that Amazon Web Services recommends to stop in order to free up capacity.</p>"
             }
         },
         "com.amazonaws.outposts#InternalServerException": {
@@ -2409,6 +2668,116 @@
                 "target": "com.amazonaws.outposts#LineItemQuantity"
             }
         },
+        "com.amazonaws.outposts#ListAssetInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#ListAssetInstancesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#ListAssetInstancesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Amazon EC2 instances, belonging to all accounts, running on the specified Outpost.\n      Does not include Amazon EBS or Amazon S3 instances.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/outposts/{OutpostIdentifier}/assetInstances",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AssetInstances",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListAssetInstancesInput": {
+            "type": "structure",
+            "members": {
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Outpost.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetIdFilter": {
+                    "target": "com.amazonaws.outposts#AssetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results by asset ID.</p>",
+                        "smithy.api#httpQuery": "AssetIdFilter"
+                    }
+                },
+                "InstanceTypeFilter": {
+                    "target": "com.amazonaws.outposts#OutpostInstanceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results by instance ID.</p>",
+                        "smithy.api#httpQuery": "InstanceTypeFilter"
+                    }
+                },
+                "AccountIdFilter": {
+                    "target": "com.amazonaws.outposts#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results by account ID.</p>",
+                        "smithy.api#httpQuery": "AccountIdFilter"
+                    }
+                },
+                "AwsServiceFilter": {
+                    "target": "com.amazonaws.outposts#AWSServiceNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results by Amazon Web Services service.</p>",
+                        "smithy.api#httpQuery": "AwsServiceFilter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.outposts#MaxResults1000",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#ListAssetInstancesOutput": {
+            "type": "structure",
+            "members": {
+                "AssetInstances": {
+                    "target": "com.amazonaws.outposts#AssetInstanceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of instances owned by all accounts on the Outpost. Does not include Amazon EBS or Amazon S3\n      instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#ListAssets": {
             "type": "operation",
             "input": {
@@ -2505,6 +2874,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#ListBlockingInstancesForCapacityTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#ListBlockingInstancesForCapacityTaskInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#ListBlockingInstancesForCapacityTaskOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Amazon EC2 instances running on the Outpost and belonging to the account that\n      initiated the capacity task. Use this list to specify the instances you cannot stop to free up\n      capacity to run the capacity task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/outposts/{OutpostIdentifier}/capacity/{CapacityTaskId}/blockingInstances",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "BlockingInstances",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListBlockingInstancesForCapacityTaskInput": {
+            "type": "structure",
+            "members": {
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Outpost associated with the specified capacity task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityTaskId": {
+                    "target": "com.amazonaws.outposts#CapacityTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the capacity task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.outposts#MaxResults1000",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#ListBlockingInstancesForCapacityTaskOutput": {
+            "type": "structure",
+            "members": {
+                "BlockingInstances": {
+                    "target": "com.amazonaws.outposts#BlockingInstancesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all running Amazon EC2 instances on the Outpost. Stopping one or more of these\n      instances can free up the capacity needed to run the capacity task.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#ListCapacityTasks": {
             "type": "operation",
             "input": {
@@ -2567,7 +3026,7 @@
                 "CapacityTaskStatusFilter": {
                     "target": "com.amazonaws.outposts#CapacityTaskStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of statuses. For example,\n        <code>REQUESTED</code> or <code>WAITING_FOR_EVACUATION</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of statuses. For example, <code>REQUESTED</code> or\n        <code>WAITING_FOR_EVACUATION</code>.</p>",
                         "smithy.api#httpQuery": "CapacityTaskStatusFilter"
                     }
                 }
@@ -3200,7 +3659,7 @@
                 "Status": {
                     "target": "com.amazonaws.outposts#OrderStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the order.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PREPARING</code> - Order is received and being prepared.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Order is either being built or shipped. To get\n          more details, see the line item status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERED</code> - Order was delivered to the Outpost site.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - Order is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Order is cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - Customer should contact support.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The following status are deprecated: <code>RECEIVED</code>, <code>PENDING</code>,\n          <code>PROCESSING</code>, <code>INSTALLING</code>, and <code>FULFILLED</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the order.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PREPARING</code> - Order is received and being prepared.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Order is either being built or shipped. To get more\n          details, see the line item status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERED</code> - Order was delivered to the Outpost site.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - Order is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Order is cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - Customer should contact support.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The following status are deprecated: <code>RECEIVED</code>, <code>PENDING</code>,\n          <code>PROCESSING</code>, <code>INSTALLING</code>, and <code>FULFILLED</code>. </p>\n         </note>"
                     }
                 },
                 "LineItems": {
@@ -3503,6 +3962,22 @@
                 "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/)?op-[a-f0-9]{17}$"
             }
         },
+        "com.amazonaws.outposts#OutpostInstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-z0-9\\-\\.]+$"
+            }
+        },
+        "com.amazonaws.outposts#OutpostInstanceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#OutpostInstanceType"
+            }
+        },
         "com.amazonaws.outposts#OutpostName": {
             "type": "string",
             "traits": {
@@ -3567,7 +4042,13 @@
                     "target": "com.amazonaws.outposts#GetSiteAddress"
                 },
                 {
+                    "target": "com.amazonaws.outposts#ListAssetInstances"
+                },
+                {
                     "target": "com.amazonaws.outposts#ListAssets"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ListBlockingInstancesForCapacityTask"
                 },
                 {
                     "target": "com.amazonaws.outposts#ListCapacityTasks"
@@ -5106,7 +5587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the specified capacity task. You can have one active capacity task for an order.</p>",
+                "smithy.api#documentation": "<p>Starts the specified capacity task. You can have one active capacity task per order or Outpost.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/outposts/{OutpostIdentifier}/capacity",
@@ -5128,8 +5609,7 @@
                 "OrderId": {
                     "target": "com.amazonaws.outposts#OrderId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Outposts order associated with the specified capacity task.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Outposts order associated with the specified capacity task.</p>"
                     }
                 },
                 "InstancePools": {
@@ -5139,11 +5619,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "InstancesToExclude": {
+                    "target": "com.amazonaws.outposts#InstancesToExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of user-specified running instances that must not be stopped in order to free up the\n      capacity needed to run the capacity task.</p>"
+                    }
+                },
                 "DryRun": {
                     "target": "com.amazonaws.outposts#DryRun",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>You can request a dry run to determine if the instance type and instance size changes is above or below available instance\n      capacity. Requesting a dry run does not make any changes to your plan.</p>"
+                        "smithy.api#documentation": "<p>You can request a dry run to determine if the instance type and instance size changes is\n      above or below available instance capacity. Requesting a dry run does not make any changes to\n      your plan.</p>"
+                    }
+                },
+                "TaskActionOnBlockingInstances": {
+                    "target": "com.amazonaws.outposts#TaskActionOnBlockingInstances",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify one of the following options in case an instance is blocking the capacity task\n      from running.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WAIT_FOR_EVACUATION</code> - Checks every 10 minutes over 48 hours to determine\n          if instances have stopped and capacity is available to complete the task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAIL_TASK</code> - The capacity task fails.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5176,6 +5668,12 @@
                     "target": "com.amazonaws.outposts#RequestedInstancePools",
                     "traits": {
                         "smithy.api#documentation": "<p>List of the instance pools requested in the specified capacity task.</p>"
+                    }
+                },
+                "InstancesToExclude": {
+                    "target": "com.amazonaws.outposts#InstancesToExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-specified instances that must not be stopped in order to free up the capacity needed\n      to run the capacity task.</p>"
                     }
                 },
                 "DryRun": {
@@ -5213,6 +5711,12 @@
                     "target": "com.amazonaws.outposts#ISO8601Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Date that the specified capacity task was last modified.</p>"
+                    }
+                },
+                "TaskActionOnBlockingInstances": {
+                    "target": "com.amazonaws.outposts#TaskActionOnBlockingInstances",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-specified option in case an instance is blocking the capacity task from\n      running.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WAIT_FOR_EVACUATION</code> - Checks every 10 minutes over 48 hours to determine\n          if instances have stopped and capacity is available to complete the task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAIL_TASK</code> - The capacity task fails.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5500,6 +6004,23 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[\\S \\n]+$"
+            }
+        },
+        "com.amazonaws.outposts#TaskActionOnBlockingInstances": {
+            "type": "enum",
+            "members": {
+                "WAIT_FOR_EVACUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAIT_FOR_EVACUATION"
+                    }
+                },
+                "FAIL_TASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL_TASK"
+                    }
+                }
             }
         },
         "com.amazonaws.outposts#Token": {

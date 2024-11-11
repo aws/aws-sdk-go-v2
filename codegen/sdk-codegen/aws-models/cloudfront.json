@@ -1,33 +1,5 @@
 {
     "smithy": "2.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.cloudfront#AccessControlAllowHeadersList": {
             "type": "list",
@@ -3914,6 +3886,54 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a CloudFront function.</p>\n         <p>To create a function, you provide the function code and some configuration information\n\t\t\tabout the function. The response contains an Amazon Resource Name (ARN) that uniquely\n\t\t\tidentifies the function.</p>\n         <p>When you create a function, it's in the <code>DEVELOPMENT</code> stage. In this stage,\n\t\t\tyou can test the function with <code>TestFunction</code>, and update it with\n\t\t\t\t<code>UpdateFunction</code>.</p>\n         <p>When you're ready to use your function with a CloudFront distribution, use\n\t\t\t\t<code>PublishFunction</code> to copy the function from the <code>DEVELOPMENT</code>\n\t\t\tstage to <code>LIVE</code>. When it's live, you can attach the function to a\n\t\t\tdistribution's cache behavior, using the function's ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a function",
+                        "documentation": "Use the following command to create a function.",
+                        "input": {
+                            "Name": "my-function-name",
+                            "FunctionConfig": {
+                                "Comment": "my-function-comment",
+                                "Runtime": "cloudfront-js-2.0",
+                                "KeyValueStoreAssociations": {
+                                    "Quantity": 1,
+                                    "Items": [
+                                        {
+                                            "KeyValueStoreARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889"
+                                        }
+                                    ]
+                                }
+                            },
+                            "FunctionCode": "function-code.js"
+                        },
+                        "output": {
+                            "FunctionSummary": {
+                                "Name": "my-function-name",
+                                "Status": "UNPUBLISHED",
+                                "FunctionConfig": {
+                                    "Comment": "my-function-comment",
+                                    "Runtime": "cloudfront-js-2.0",
+                                    "KeyValueStoreAssociations": {
+                                        "Quantity": 1,
+                                        "Items": [
+                                            {
+                                                "KeyValueStoreARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "FunctionMetadata": {
+                                    "FunctionARN": "arn:aws:cloudfront::123456789012:function/my-function-name",
+                                    "Stage": "DEVELOPMENT",
+                                    "CreatedTime": "2023-11-07T19:53:50.334Z",
+                                    "LastModifiedTime": "2023-11-07T19:53:50.334Z"
+                                }
+                            },
+                            "Location": "https://cloudfront.amazonaws.com/2020-05-31/function/arn:aws:cloudfront::123456789012:function/my-function-name",
+                            "ETag": "ETVPDKIKX0DER"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/function",
@@ -4175,6 +4195,32 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the key value store resource to add to your account. In your account, the key value store names must be unique. You can also import key value store data in JSON format from an S3 bucket by providing a valid <code>ImportSource</code> that you own.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a KeyValueStore",
+                        "documentation": "Use the following command to create a KeyValueStore.",
+                        "input": {
+                            "Name": "my-keyvaluestore-name",
+                            "Comment": "my-key-valuestore-comment",
+                            "ImportSource": {
+                                "SourceType": "S3",
+                                "SourceARN": "arn:aws:s3:::my-bucket/validJSON.json"
+                            }
+                        },
+                        "output": {
+                            "KeyValueStore": {
+                                "Name": "my-keyvaluestore-name",
+                                "Id": "54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                "Comment": "my-key-valuestore-comment",
+                                "ARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                "Status": "PROVISIONING",
+                                "LastModifiedTime": "2023-11-07T18:15:52.042Z"
+                            },
+                            "ETag": "ETVPDKIKX0DER",
+                            "Location": "https://cloudfront.amazonaws.com/2020-05-31/key-value-store/arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/key-value-store",
@@ -5673,6 +5719,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the key value store to delete.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a KeyValueStore",
+                        "documentation": "Use the following command to delete a KeyValueStore.",
+                        "input": {
+                            "Name": "my-keyvaluestore-name",
+                            "IfMatch": "ETVPDKIKX0DER"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2020-05-31/key-value-store/{Name}",
@@ -6196,6 +6252,26 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the key value store and its configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a KeyValueStore",
+                        "documentation": "Use the following command to describe a KeyValueStore.",
+                        "input": {
+                            "Name": "my-keyvaluestore-name"
+                        },
+                        "output": {
+                            "KeyValueStore": {
+                                "Name": "my-keyvaluestore-name",
+                                "Id": "54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                "Comment": "my-key-valuestore-comment",
+                                "ARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                "Status": "READY",
+                                "LastModifiedTime": "2023-11-07T18:20:33.056Z"
+                            },
+                            "ETag": "ETVPDKIKX0DER"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-05-31/key-value-store/{Name}",
@@ -8169,7 +8245,8 @@
                                 }
                             }
                         ],
-                        "minDelay": 60
+                        "minDelay": 60,
+                        "maxDelay": 2100
                     }
                 }
             }
@@ -8649,7 +8726,8 @@
                                 }
                             }
                         ],
-                        "minDelay": 20
+                        "minDelay": 20,
+                        "maxDelay": 600
                     }
                 }
             }
@@ -9481,7 +9559,8 @@
                                 }
                             }
                         ],
-                        "minDelay": 60
+                        "minDelay": 60,
+                        "maxDelay": 1500
                     }
                 }
             }
@@ -11833,6 +11912,32 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the key value stores to list.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a list of KeyValueStores",
+                        "documentation": "The following command retrieves a list of KeyValueStores with READY status.",
+                        "input": {
+                            "Status": "READY"
+                        },
+                        "output": {
+                            "KeyValueStoreList": {
+                                "NextMarker": "",
+                                "MaxItems": 100,
+                                "Quantity": 1,
+                                "Items": [
+                                    {
+                                        "Name": "my-keyvaluestore-name",
+                                        "Id": "54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                        "Comment": "",
+                                        "ARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                        "Status": "READY",
+                                        "LastModifiedTime": "2023-11-07T18:45:21.069Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-05-31/key-value-store",
@@ -11904,7 +12009,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the list of CloudFront origin access controls in this Amazon Web Services account.</p>\n         <p>You can optionally specify the maximum number of items to receive in the response. If\n\t\t\tthe total number of items in the list exceeds the maximum that you specify, or the\n\t\t\tdefault maximum, the response is paginated. To get the next page of items, send another\n\t\t\trequest that specifies the <code>NextMarker</code> value from the current response as\n\t\t\tthe <code>Marker</code> value in the next request.</p>",
+                "smithy.api#documentation": "<p>Gets the list of CloudFront origin access controls (OACs) in this Amazon Web Services account.</p>\n         <p>You can optionally specify the maximum number of items to receive in the response. If\n\t\t\tthe total number of items in the list exceeds the maximum that you specify, or the\n\t\t\tdefault maximum, the response is paginated. To get the next page of items, send another\n\t\t\trequest that specifies the <code>NextMarker</code> value from the current response as\n\t\t\tthe <code>Marker</code> value in the next request.</p>\n         <note>\n            <p>If you're not using origin access controls for your Amazon Web Services account, the\n\t\t\t\t\t<code>ListOriginAccessControls</code> operation doesn't return the\n\t\t\t\t\t<code>Items</code> element in the response.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-05-31/origin-access-control",
@@ -12040,6 +12145,12 @@
                     "method": "GET",
                     "uri": "/2020-05-31/public-key",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "PublicKeyList.NextMarker",
+                    "items": "PublicKeyList.Items",
+                    "pageSize": "MaxItems"
                 }
             }
         },
@@ -17377,7 +17488,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration for a CloudFront distribution.</p>\n         <p>The update process includes getting the current distribution configuration, updating\n\t\t\tit to make your changes, and then submitting an <code>UpdateDistribution</code> request\n\t\t\tto make the updates.</p>\n         <p>\n            <b>To update a web distribution using the CloudFront\n\t\t\tAPI</b>\n         </p>\n         <ol>\n            <li>\n               <p>Use <code>GetDistributionConfig</code> to get the current configuration,\n\t\t\t\t\tincluding the version identifier (<code>ETag</code>).</p>\n            </li>\n            <li>\n               <p>Update the distribution configuration that was returned in the response. Note\n\t\t\t\t\tthe following important requirements and restrictions:</p>\n               <ul>\n                  <li>\n                     <p>You must rename the <code>ETag</code> field to <code>IfMatch</code>,\n\t\t\t\t\t\t\tleaving the value unchanged. (Set the value of <code>IfMatch</code> to\n\t\t\t\t\t\t\tthe value of <code>ETag</code>, then remove the <code>ETag</code>\n\t\t\t\t\t\t\tfield.)</p>\n                  </li>\n                  <li>\n                     <p>You can't change the value of <code>CallerReference</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Submit an <code>UpdateDistribution</code> request, providing the distribution\n\t\t\t\t\tconfiguration. The new configuration replaces the existing configuration. The\n\t\t\t\t\tvalues that you specify in an <code>UpdateDistribution</code> request are not\n\t\t\t\t\tmerged into your existing configuration. Make sure to include all fields: the\n\t\t\t\t\tones that you modified and also the ones that you didn't.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>Updates the configuration for a CloudFront distribution.</p>\n         <p>The update process includes getting the current distribution configuration, updating\n\t\t\tit to make your changes, and then submitting an <code>UpdateDistribution</code> request\n\t\t\tto make the updates.</p>\n         <p>\n            <b>To update a web distribution using the CloudFront\n\t\t\tAPI</b>\n         </p>\n         <ol>\n            <li>\n               <p>Use <code>GetDistributionConfig</code> to get the current configuration,\n\t\t\t\t\tincluding the version identifier (<code>ETag</code>).</p>\n            </li>\n            <li>\n               <p>Update the distribution configuration that was returned in the response. Note\n\t\t\t\t\tthe following important requirements and restrictions:</p>\n               <ul>\n                  <li>\n                     <p>You must copy the <code>ETag</code> field value from the response. (You'll use it for the <code>IfMatch</code> parameter in your request.) Then, remove the <code>ETag</code>\n\t\t\t\t\t\t\tfield from the distribution configuration.</p>\n                  </li>\n                  <li>\n                     <p>You can't change the value of <code>CallerReference</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Submit an <code>UpdateDistribution</code> request, providing the updated distribution\n\t\t\t\t\tconfiguration. The new configuration replaces the existing configuration. The\n\t\t\t\t\tvalues that you specify in an <code>UpdateDistribution</code> request are not\n\t\t\t\t\tmerged into your existing configuration. Make sure to include all fields: the\n\t\t\t\t\tones that you modified and also the ones that you didn't.</p>\n            </li>\n         </ol>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2020-05-31/distribution/{Id}/config",
@@ -17664,7 +17775,7 @@
                 "IfMatch": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current versions (<code>ETag</code> values) of both primary and staging distributions.\n\t\t\tProvide these in the following format:</p>\n         <p>\n            <code><primary ETag>, <staging ETag></code>\n         </p>",
+                        "smithy.api#documentation": "<p>The current versions (<code>ETag</code> values) of both primary and staging distributions.\n\t\t\tProvide these in the following format:</p>\n         <p>\n            <code>&lt;primary ETag&gt;, &lt;staging ETag&gt;</code>\n         </p>",
                         "smithy.api#httpHeader": "If-Match"
                     }
                 }
@@ -17939,6 +18050,54 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates a CloudFront function.</p>\n         <p>You can update a function's code or the comment that describes the function. You\n\t\t\tcannot update a function's name.</p>\n         <p>To update a function, you provide the function's name and version (<code>ETag</code>\n\t\t\tvalue) along with the updated function code. To get the name and version, you can use\n\t\t\t\t<code>ListFunctions</code> and <code>DescribeFunction</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a function",
+                        "documentation": "Use the following command to update a function.",
+                        "input": {
+                            "Name": "my-function-name",
+                            "FunctionConfig": {
+                                "Comment": "my-changed-comment",
+                                "Runtime": "cloudfront-js-2.0",
+                                "KeyValueStoreAssociations": {
+                                    "Quantity": 1,
+                                    "Items": [
+                                        {
+                                            "KeyValueStoreARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889"
+                                        }
+                                    ]
+                                }
+                            },
+                            "FunctionCode": "function-code-changed.js",
+                            "IfMatch": "ETVPDKIKX0DER"
+                        },
+                        "output": {
+                            "FunctionSummary": {
+                                "Name": "my-function-name",
+                                "Status": "UNPUBLISHED",
+                                "FunctionConfig": {
+                                    "Comment": "my-changed-comment",
+                                    "Runtime": "cloudfront-js-2.0",
+                                    "KeyValueStoreAssociations": {
+                                        "Quantity": 1,
+                                        "Items": [
+                                            {
+                                                "KeyValueStoreARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "FunctionMetadata": {
+                                    "FunctionARN": "arn:aws:cloudfront::123456789012:function/my-function-name",
+                                    "Stage": "DEVELOPMENT",
+                                    "CreatedTime": "2023-11-07T19:53:50.334Z",
+                                    "LastModifiedTime": "2023-11-07T20:01:37.174Z"
+                                }
+                            },
+                            "ETag": "E3UN6WX5RRO2AG"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2020-05-31/function/{Name}",
@@ -18127,6 +18286,28 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the key value store to update.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a KeyValueStore",
+                        "documentation": "Use the following command to update a KeyValueStore.",
+                        "input": {
+                            "Name": "my-keyvaluestore-name",
+                            "Comment": "my-changed-comment",
+                            "IfMatch": "ETVPDKIKX0DER"
+                        },
+                        "output": {
+                            "KeyValueStore": {
+                                "Name": "my-keyvaluestore-name",
+                                "Id": "54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                "Comment": "my-changed-comment",
+                                "ARN": "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889",
+                                "Status": "READY",
+                                "LastModifiedTime": "2023-11-07T18:45:21.069Z"
+                            },
+                            "ETag": "E3UN6WX5RRO2AG"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2020-05-31/key-value-store/{Name}",

@@ -647,6 +647,9 @@
                     "target": "com.amazonaws.opensearch#AssociatePackage"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#AssociatePackages"
+                },
+                {
                     "target": "com.amazonaws.opensearch#AuthorizeVpcEndpointAccess"
                 },
                 {
@@ -740,6 +743,9 @@
                     "target": "com.amazonaws.opensearch#DissociatePackage"
                 },
                 {
+                    "target": "com.amazonaws.opensearch#DissociatePackages"
+                },
+                {
                     "target": "com.amazonaws.opensearch#GetApplication"
                 },
                 {
@@ -828,6 +834,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearch#UpdatePackage"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#UpdatePackageScope"
                 },
                 {
                     "target": "com.amazonaws.opensearch#UpdateScheduledAction"
@@ -2142,6 +2151,18 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "PrerequisitePackageIDList": {
+                    "target": "com.amazonaws.opensearch#PackageIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of package IDs that must be associated with the domain before the package specified in the request can be associated.</p>"
+                    }
+                },
+                "AssociationConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageAssociationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for associating a package with an Amazon OpenSearch Service domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2161,6 +2182,78 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Container for the response returned by the <code>AssociatePackage</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#AssociatePackages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#AssociatePackagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#AssociatePackagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Operation in the Amazon OpenSearch Service API for associating  multiple packages with a domain simultaneously.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/packages/associateMultiple",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#AssociatePackagesRequest": {
+            "type": "structure",
+            "members": {
+                "PackageList": {
+                    "target": "com.amazonaws.opensearch#PackageDetailsForAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of packages and their prerequisites to be associated with a domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#AssociatePackagesResponse": {
+            "type": "structure",
+            "members": {
+                "DomainPackageDetailsList": {
+                    "target": "com.amazonaws.opensearch#DomainPackageDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of information about packages that are associated with a domain. </p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -3918,6 +4011,30 @@
                         "smithy.api#documentation": "<p>The Amazon S3 location from which to import the package.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PackageConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The configuration parameters for the package being created.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.opensearch#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Amazon OpenSearch Service engine for which is compatible with the package. This can only be specified for package type <code>ZIP-PLUGIN</code>\n         </p>"
+                    }
+                },
+                "PackageVendingOptions": {
+                    "target": "com.amazonaws.opensearch#PackageVendingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The vending options for the package being created. They determine if the package can be vended to other users.</p>"
+                    }
+                },
+                "PackageEncryptionOptions": {
+                    "target": "com.amazonaws.opensearch#PackageEncryptionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption parameters for the package being created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5644,6 +5761,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EngineVersion"
                     }
+                },
+                "PackageOwner": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageOwner"
+                    }
                 }
             }
         },
@@ -6053,6 +6176,78 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Container for the response returned by an <code>DissociatePackage</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#DissociatePackages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#DissociatePackagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#DissociatePackagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Dissociates multiple packages from a domain simulatneously.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/packages/dissociateMultiple",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#DissociatePackagesRequest": {
+            "type": "structure",
+            "members": {
+                "PackageList": {
+                    "target": "com.amazonaws.opensearch#PackageIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of package IDs to be dissociated from a domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.opensearch#DomainName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#DissociatePackagesResponse": {
+            "type": "structure",
+            "members": {
+                "DomainPackageDetailsList": {
+                    "target": "com.amazonaws.opensearch#DomainPackageDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of package details for the packages that were dissociated from the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -6544,6 +6739,12 @@
                         "smithy.api#documentation": "<p>The current version of the package.</p>"
                     }
                 },
+                "PrerequisitePackageIDList": {
+                    "target": "com.amazonaws.opensearch#PackageIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of package IDs that must be associated with the domain before or with the package can be associated.</p>"
+                    }
+                },
                 "ReferencePath": {
                     "target": "com.amazonaws.opensearch#ReferencePath",
                     "traits": {
@@ -6554,6 +6755,12 @@
                     "target": "com.amazonaws.opensearch#ErrorDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information if the package is in an error state. Null otherwise.</p>"
+                    }
+                },
+                "AssociationConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageAssociationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for associating a package with an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -8514,6 +8721,27 @@
                 "smithy.api#documentation": "<p>Describes the JWT options configured for the domain.</p>"
             }
         },
+        "com.amazonaws.opensearch#KeyStoreAccessOption": {
+            "type": "structure",
+            "members": {
+                "KeyAccessRoleArn": {
+                    "target": "com.amazonaws.opensearch#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Role ARN to access the KeyStore Key</p>"
+                    }
+                },
+                "KeyStoreAccessEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This indicates whether Key Store access is enabled </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration parameters to enable access to the key store required by the package.</p>"
+            }
+        },
         "com.amazonaws.opensearch#KmsKeyId": {
             "type": "string",
             "traits": {
@@ -8526,6 +8754,16 @@
         },
         "com.amazonaws.opensearch#LastUpdated": {
             "type": "timestamp"
+        },
+        "com.amazonaws.opensearch#LicenseFilepath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?!.*\\/\\.{2,})(?!.*\\.\\.)[a-zA-Z0-9_.-]+(?:\\/[a-zA-Z0-9_.-]+)*$"
+            }
         },
         "com.amazonaws.opensearch#LimitExceededException": {
             "type": "structure",
@@ -11158,6 +11396,54 @@
                 "smithy.api#pattern": "^[0-9]+$"
             }
         },
+        "com.amazonaws.opensearch#PackageAssociationConfiguration": {
+            "type": "structure",
+            "members": {
+                "KeyStoreAccessOption": {
+                    "target": "com.amazonaws.opensearch#KeyStoreAccessOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters to enable accessing the key store required by the package.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for associating a package with a domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#PackageConfiguration": {
+            "type": "structure",
+            "members": {
+                "LicenseRequirement": {
+                    "target": "com.amazonaws.opensearch#RequirementLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The license requirements for the package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LicenseFilepath": {
+                    "target": "com.amazonaws.opensearch#LicenseFilepath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative file path for the license associated with the package.</p>"
+                    }
+                },
+                "ConfigurationRequirement": {
+                    "target": "com.amazonaws.opensearch#RequirementLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration requirements for the package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequiresRestartForConfigurationUpdate": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This indicates whether a B/G deployment is required for updating the configuration that the plugin is prerequisite for.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The configuration parameters for a package.</p>"
+            }
+        },
         "com.amazonaws.opensearch#PackageDescription": {
             "type": "string",
             "traits": {
@@ -11235,10 +11521,73 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the package is a <code>ZIP-PLUGIN</code> package, additional information about plugin properties.</p>"
                     }
+                },
+                "AvailablePackageConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This represents the available configuration parameters for the package.</p>"
+                    }
+                },
+                "AllowListedUserList": {
+                    "target": "com.amazonaws.opensearch#PackageUserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of users who are allowed to view and associate the package. This field is only visible to the owner of a package.</p>"
+                    }
+                },
+                "PackageOwner": {
+                    "target": "com.amazonaws.opensearch#PackageOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the package who is allowed to create/update a package and add users to the package scope.</p>"
+                    }
+                },
+                "PackageVendingOptions": {
+                    "target": "com.amazonaws.opensearch#PackageVendingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Package Vending Options for a package.</p>"
+                    }
+                },
+                "PackageEncryptionOptions": {
+                    "target": "com.amazonaws.opensearch#PackageEncryptionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Package Encryption Options for a package.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Basic information about a package.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#PackageDetailsForAssociation": {
+            "type": "structure",
+            "members": {
+                "PackageID": {
+                    "target": "com.amazonaws.opensearch#PackageID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal ID of the package that you want to associate with a domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrerequisitePackageIDList": {
+                    "target": "com.amazonaws.opensearch#PackageIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of package IDs that must be associated with the domain with or before the package can be associated.</p>"
+                    }
+                },
+                "AssociationConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageAssociationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters for associating the package with a domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Details of a package that is associated with a domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#PackageDetailsForAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#PackageDetailsForAssociation"
             }
         },
         "com.amazonaws.opensearch#PackageDetailsList": {
@@ -11247,10 +11596,37 @@
                 "target": "com.amazonaws.opensearch#PackageDetails"
             }
         },
+        "com.amazonaws.opensearch#PackageEncryptionOptions": {
+            "type": "structure",
+            "members": {
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.opensearch#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> KMS key ID for encrypting the package.</p>"
+                    }
+                },
+                "EncryptionEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This indicates whether encryption is enabled for the package.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Encryption options for a package.</p>"
+            }
+        },
         "com.amazonaws.opensearch#PackageID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([FG][0-9]+)$"
+                "smithy.api#pattern": "^([FG][0-9]+)$|^(pkg-[a-f0-9]+)$"
+            }
+        },
+        "com.amazonaws.opensearch#PackageIDList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#PackageID"
             }
         },
         "com.amazonaws.opensearch#PackageName": {
@@ -11261,6 +11637,38 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.opensearch#PackageOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.opensearch#PackageScopeOperationEnum": {
+            "type": "enum",
+            "members": {
+                "ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD"
+                    }
+                },
+                "OVERRIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDE"
+                    }
+                },
+                "REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#PackageSource": {
@@ -11350,7 +11758,50 @@
                     "traits": {
                         "smithy.api#enumValue": "ZIP-PLUGIN"
                     }
+                },
+                "PACKAGE_LICENSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PACKAGE-LICENSE"
+                    }
+                },
+                "PACKAGE_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PACKAGE-CONFIG"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.opensearch#PackageUser": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$|^GLOBAL$"
+            }
+        },
+        "com.amazonaws.opensearch#PackageUserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#PackageUser"
+            }
+        },
+        "com.amazonaws.opensearch#PackageVendingOptions": {
+            "type": "structure",
+            "members": {
+                "VendingEnabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This indicates whether vending is enabled for the package to determine if package can be used by other users.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The vending options for a package to determine if the package can be used by other users.\n  </p>"
             }
         },
         "com.amazonaws.opensearch#PackageVersion": {
@@ -11381,6 +11832,12 @@
                     "target": "com.amazonaws.opensearch#PluginProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about plugin properties if the package is a <code>ZIP-PLUGIN</code> package.</p>"
+                    }
+                },
+                "PackageConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for a specific version of a package.</p>"
                     }
                 }
             },
@@ -11769,6 +12226,29 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^([\\s\\S]*)$"
+            }
+        },
+        "com.amazonaws.opensearch#RequirementLevel": {
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.opensearch#ReservationToken": {
@@ -13545,6 +14025,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Commit message for the updated file, which is shown as part of\n    <code>GetPackageVersionHistoryResponse</code>.</p>"
                     }
+                },
+                "PackageConfiguration": {
+                    "target": "com.amazonaws.opensearch#PackageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration details for a package.</p>"
+                    }
+                },
+                "PackageEncryptionOptions": {
+                    "target": "com.amazonaws.opensearch#PackageEncryptionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption options for a package.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13564,6 +14056,95 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Container for the response returned by the <code>UpdatePackage</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.opensearch#UpdatePackageScope": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#UpdatePackageScopeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.opensearch#UpdatePackageScopeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.opensearch#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#DisabledOperationException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearch#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the scope of a package. Scope of the package defines users who can view and associate a package.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-01-01/packages/updateScope",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.opensearch#UpdatePackageScopeRequest": {
+            "type": "structure",
+            "members": {
+                "PackageID": {
+                    "target": "com.amazonaws.opensearch#PackageID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the package whose scope is being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.opensearch#PackageScopeOperationEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The operation to perform on the package scope (e.g., add/remove/override users).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PackageUserList": {
+                    "target": "com.amazonaws.opensearch#PackageUserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> List of users to be added or removed from the package scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.opensearch#UpdatePackageScopeResponse": {
+            "type": "structure",
+            "members": {
+                "PackageID": {
+                    "target": "com.amazonaws.opensearch#PackageID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> ID of the package whose scope was updated.</p>"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.opensearch#PackageScopeOperationEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation that was performed on the package scope.</p>"
+                    }
+                },
+                "PackageUserList": {
+                    "target": "com.amazonaws.opensearch#PackageUserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> List of users who have access to the package after the scope update.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },

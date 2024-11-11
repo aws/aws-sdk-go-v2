@@ -11256,6 +11256,12 @@
                     "traits": {
                         "smithy.api#enumValue": "java21"
                     }
+                },
+                "python313": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python3.13"
+                    }
                 }
             }
         },

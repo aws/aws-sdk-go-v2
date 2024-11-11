@@ -12,7 +12,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>\n         <p>\n         For <code>Enable</code>, you receive this error if you attempt to use a feature in an unsupported Amazon Web Services Region.\n      </p>",
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -3562,7 +3562,7 @@
                 "scanMode": {
                     "target": "com.amazonaws.inspector2#CoverageStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter to search for Amazon EC2 instance coverage by scan mode. Valid values are <code>EC2_SSM_AGENT_BASED</code> and <code>EC2_HYBRID</code>.</p>"
+                        "smithy.api#documentation": "<p>The filter to search for Amazon EC2 instance coverage by scan mode. Valid values are <code>EC2_SSM_AGENT_BASED</code> and <code>EC2_AGENTLESS</code>.</p>"
                     }
                 },
                 "imagePulledAt": {
@@ -4130,6 +4130,7 @@
                 "s3Destination": {
                     "target": "com.amazonaws.inspector2#Destination",
                     "traits": {
+                        "smithy.api#documentation": "<p>Contains details of the Amazon S3 bucket and KMS key used to export findings.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6566,7 +6567,10 @@
                     }
                 },
                 "cisaData": {
-                    "target": "com.amazonaws.inspector2#CisaData"
+                    "target": "com.amazonaws.inspector2#CisaData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cybersecurity and Infrastructure Security Agency (CISA) details for a specific vulnerability.</p>"
+                    }
                 },
                 "riskScore": {
                     "target": "com.amazonaws.inspector2#RiskScore",
@@ -6593,7 +6597,10 @@
                     }
                 },
                 "exploitObserved": {
-                    "target": "com.amazonaws.inspector2#ExploitObserved"
+                    "target": "com.amazonaws.inspector2#ExploitObserved",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information on when this exploit was observed.</p>"
+                    }
                 },
                 "referenceUrls": {
                     "target": "com.amazonaws.inspector2#VulnerabilityReferenceUrls",
@@ -7731,7 +7738,10 @@
                     }
                 },
                 "s3Destination": {
-                    "target": "com.amazonaws.inspector2#Destination"
+                    "target": "com.amazonaws.inspector2#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details of the Amazon S3 bucket and KMS key used to export findings</p>"
+                    }
                 },
                 "filterCriteria": {
                     "target": "com.amazonaws.inspector2#ResourceFilterCriteria",
@@ -9104,7 +9114,10 @@
                     }
                 },
                 "severityCounts": {
-                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                    "target": "com.amazonaws.inspector2#SeverityCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the counts of aggregated finding per severity.</p>"
+                    }
                 },
                 "lastModifiedAt": {
                     "target": "com.amazonaws.inspector2#DateTimeTimestamp",
@@ -9238,7 +9251,10 @@
                     }
                 },
                 "severityCounts": {
-                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                    "target": "com.amazonaws.inspector2#SeverityCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the counts of aggregated finding per severity.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10116,7 +10132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists coverage details for you environment.</p>",
+                "smithy.api#documentation": "<p>Lists coverage details for your environment.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -11359,7 +11375,16 @@
                     }
                 },
                 "sourceLambdaLayerArn": {
-                    "target": "com.amazonaws.inspector2#StringFilter"
+                    "target": "com.amazonaws.inspector2#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the details of a string filter.</p>"
+                    }
+                },
+                "filePath": {
+                    "target": "com.amazonaws.inspector2#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the package file path to filter on.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11449,6 +11474,10 @@
                     {
                         "value": "GEMSPEC",
                         "name": "GEMSPEC"
+                    },
+                    {
+                        "value": "DOTNET_CORE",
+                        "name": "DOTNET_CORE"
                     }
                 ]
             }
@@ -12380,10 +12409,16 @@
                     }
                 },
                 "lambda": {
-                    "target": "com.amazonaws.inspector2#State"
+                    "target": "com.amazonaws.inspector2#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that described the state of Amazon Inspector scans for an account.</p>"
+                    }
                 },
                 "lambdaCode": {
-                    "target": "com.amazonaws.inspector2#State"
+                    "target": "com.amazonaws.inspector2#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that described the state of Amazon Inspector scans for an account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12592,6 +12627,30 @@
                     {
                         "value": "PYTHON_3_10",
                         "name": "PYTHON_3_10"
+                    },
+                    {
+                        "value": "PYTHON_3_11",
+                        "name": "PYTHON_3_11"
+                    },
+                    {
+                        "value": "DOTNETCORE_3_1",
+                        "name": "DOTNETCORE_3_1"
+                    },
+                    {
+                        "value": "DOTNET_6",
+                        "name": "DOTNET_6"
+                    },
+                    {
+                        "value": "DOTNET_7",
+                        "name": "DOTNET_7"
+                    },
+                    {
+                        "value": "RUBY_2_7",
+                        "name": "RUBY_2_7"
+                    },
+                    {
+                        "value": "RUBY_3_2",
+                        "name": "RUBY_3_2"
                     }
                 ]
             }
@@ -13630,7 +13689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Stops a CIS session. \n         This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. \n         The Amazon Inspector SSM plugin calls this API to start a CIS scan session for the scan ID supplied by the service.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Stops a CIS session. \n         This API is used by the Amazon Inspector SSM plugin to communicate with the Amazon Inspector service. \n         The Amazon Inspector SSM plugin calls this API to stop a CIS scan session for the scan ID supplied by the service.\n      </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample StopCisSession Call",
