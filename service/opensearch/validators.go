@@ -90,6 +90,26 @@ func (m *validateOpAssociatePackage) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociatePackages struct {
+}
+
+func (*validateOpAssociatePackages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociatePackages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociatePackagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociatePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAuthorizeVpcEndpointAccess struct {
 }
 
@@ -610,6 +630,26 @@ func (m *validateOpDissociatePackage) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDissociatePackages struct {
+}
+
+func (*validateOpDissociatePackages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDissociatePackages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DissociatePackagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDissociatePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetApplication struct {
 }
 
@@ -1110,6 +1150,26 @@ func (m *validateOpUpdatePackage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePackageScope struct {
+}
+
+func (*validateOpUpdatePackageScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePackageScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePackageScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePackageScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateScheduledAction struct {
 }
 
@@ -1184,6 +1244,10 @@ func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpAssociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociatePackage{}, middleware.After)
+}
+
+func addOpAssociatePackagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociatePackages{}, middleware.After)
 }
 
 func addOpAuthorizeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -1290,6 +1354,10 @@ func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackage{}, middleware.After)
 }
 
+func addOpDissociatePackagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDissociatePackages{}, middleware.After)
+}
+
 func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetApplication{}, middleware.After)
 }
@@ -1390,6 +1458,10 @@ func addOpUpdatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePackage{}, middleware.After)
 }
 
+func addOpUpdatePackageScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePackageScope{}, middleware.After)
+}
+
 func addOpUpdateScheduledActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateScheduledAction{}, middleware.After)
 }
@@ -1483,6 +1555,21 @@ func validateDomainInformationContainer(v *types.DomainInformationContainer) err
 	}
 }
 
+func validateKeyStoreAccessOption(v *types.KeyStoreAccessOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyStoreAccessOption"}
+	if v.KeyStoreAccessEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyStoreAccessEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOffPeakWindow(v *types.OffPeakWindow) error {
 	if v == nil {
 		return nil
@@ -1509,6 +1596,108 @@ func validateOffPeakWindowOptions(v *types.OffPeakWindowOptions) error {
 		if err := validateOffPeakWindow(v.OffPeakWindow); err != nil {
 			invalidParams.AddNested("OffPeakWindow", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageAssociationConfiguration(v *types.PackageAssociationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageAssociationConfiguration"}
+	if v.KeyStoreAccessOption != nil {
+		if err := validateKeyStoreAccessOption(v.KeyStoreAccessOption); err != nil {
+			invalidParams.AddNested("KeyStoreAccessOption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageConfiguration(v *types.PackageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageConfiguration"}
+	if len(v.LicenseRequirement) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseRequirement"))
+	}
+	if len(v.ConfigurationRequirement) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRequirement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageDetailsForAssociation(v *types.PackageDetailsForAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageDetailsForAssociation"}
+	if v.PackageID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if v.AssociationConfiguration != nil {
+		if err := validatePackageAssociationConfiguration(v.AssociationConfiguration); err != nil {
+			invalidParams.AddNested("AssociationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageDetailsForAssociationList(v []types.PackageDetailsForAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageDetailsForAssociationList"}
+	for i := range v {
+		if err := validatePackageDetailsForAssociation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageEncryptionOptions(v *types.PackageEncryptionOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageEncryptionOptions"}
+	if v.EncryptionEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePackageVendingOptions(v *types.PackageVendingOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageVendingOptions"}
+	if v.VendingEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VendingEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1668,6 +1857,33 @@ func validateOpAssociatePackageInput(v *AssociatePackageInput) error {
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
+	if v.AssociationConfiguration != nil {
+		if err := validatePackageAssociationConfiguration(v.AssociationConfiguration); err != nil {
+			invalidParams.AddNested("AssociationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociatePackagesInput(v *AssociatePackagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociatePackagesInput"}
+	if v.PackageList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageList"))
+	} else if v.PackageList != nil {
+		if err := validatePackageDetailsForAssociationList(v.PackageList); err != nil {
+			invalidParams.AddNested("PackageList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1817,6 +2033,21 @@ func validateOpCreatePackageInput(v *CreatePackageInput) error {
 	}
 	if v.PackageSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
+	}
+	if v.PackageConfiguration != nil {
+		if err := validatePackageConfiguration(v.PackageConfiguration); err != nil {
+			invalidParams.AddNested("PackageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PackageVendingOptions != nil {
+		if err := validatePackageVendingOptions(v.PackageVendingOptions); err != nil {
+			invalidParams.AddNested("PackageVendingOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PackageEncryptionOptions != nil {
+		if err := validatePackageEncryptionOptions(v.PackageEncryptionOptions); err != nil {
+			invalidParams.AddNested("PackageEncryptionOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2111,6 +2342,24 @@ func validateOpDissociatePackageInput(v *DissociatePackageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DissociatePackageInput"}
 	if v.PackageID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDissociatePackagesInput(v *DissociatePackagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DissociatePackagesInput"}
+	if v.PackageList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageList"))
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
@@ -2528,6 +2777,37 @@ func validateOpUpdatePackageInput(v *UpdatePackageInput) error {
 	}
 	if v.PackageSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
+	}
+	if v.PackageConfiguration != nil {
+		if err := validatePackageConfiguration(v.PackageConfiguration); err != nil {
+			invalidParams.AddNested("PackageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PackageEncryptionOptions != nil {
+		if err := validatePackageEncryptionOptions(v.PackageEncryptionOptions); err != nil {
+			invalidParams.AddNested("PackageEncryptionOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePackageScopeInput(v *UpdatePackageScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageScopeInput"}
+	if v.PackageID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if v.PackageUserList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageUserList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

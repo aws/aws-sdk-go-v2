@@ -1,0 +1,8 @@
+{
+    "id": "148bcacd-6af0-47c1-b60f-14b336341a9c",
+    "type": "feature",
+    "description": "This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.",
+    "modules": [
+        "service/outposts"
+    ]
+}

@@ -48,8 +48,22 @@ type CreatePackageInput struct {
 	// This member is required.
 	PackageType types.PackageType
 
+	// The version of the Amazon OpenSearch Service engine for which is compatible
+	// with the package. This can only be specified for package type ZIP-PLUGIN
+	EngineVersion *string
+
+	//  The configuration parameters for the package being created.
+	PackageConfiguration *types.PackageConfiguration
+
 	// Description of the package.
 	PackageDescription *string
+
+	// The encryption parameters for the package being created.
+	PackageEncryptionOptions *types.PackageEncryptionOptions
+
+	//  The vending options for the package being created. They determine if the
+	// package can be vended to other users.
+	PackageVendingOptions *types.PackageVendingOptions
 
 	noSmithyDocumentSerde
 }

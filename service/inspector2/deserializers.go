@@ -17049,6 +17049,11 @@ func awsRestjson1_deserializeDocumentPackageFilter(v **types.PackageFilter, valu
 				return err
 			}
 
+		case "filePath":
+			if err := awsRestjson1_deserializeDocumentStringFilter(&sv.FilePath, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if err := awsRestjson1_deserializeDocumentStringFilter(&sv.Name, value); err != nil {
 				return err

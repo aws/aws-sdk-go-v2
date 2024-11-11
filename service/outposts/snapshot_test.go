@@ -254,11 +254,35 @@ func TestCheckSnapshot_GetSiteAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAssetInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAssets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBlockingInstancesForCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBlockingInstancesForCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBlockingInstancesForCapacityTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -625,11 +649,35 @@ func TestUpdateSnapshot_GetSiteAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAssetInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAssets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBlockingInstancesForCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBlockingInstancesForCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBlockingInstancesForCapacityTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

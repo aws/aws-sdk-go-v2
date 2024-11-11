@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Starts the specified capacity task. You can have one active capacity task for
-// an order.
+// Starts the specified capacity task. You can have one active capacity task per
+// order or Outpost.
 func (c *Client) StartCapacityTask(ctx context.Context, params *StartCapacityTaskInput, optFns ...func(*Options)) (*StartCapacityTaskOutput, error) {
 	if params == nil {
 		params = &StartCapacityTaskInput{}
@@ -36,12 +36,6 @@ type StartCapacityTaskInput struct {
 	// This member is required.
 	InstancePools []types.InstanceTypeCapacity
 
-	// The ID of the Amazon Web Services Outposts order associated with the specified
-	// capacity task.
-	//
-	// This member is required.
-	OrderId *string
-
 	// The ID or ARN of the Outposts associated with the specified capacity task.
 	//
 	// This member is required.
@@ -51,6 +45,23 @@ type StartCapacityTaskInput struct {
 	// changes is above or below available instance capacity. Requesting a dry run does
 	// not make any changes to your plan.
 	DryRun bool
+
+	// List of user-specified running instances that must not be stopped in order to
+	// free up the capacity needed to run the capacity task.
+	InstancesToExclude *types.InstancesToExclude
+
+	// The ID of the Amazon Web Services Outposts order associated with the specified
+	// capacity task.
+	OrderId *string
+
+	// Specify one of the following options in case an instance is blocking the
+	// capacity task from running.
+	//
+	//   - WAIT_FOR_EVACUATION - Checks every 10 minutes over 48 hours to determine if
+	//   instances have stopped and capacity is available to complete the task.
+	//
+	//   - FAIL_TASK - The capacity task fails.
+	TaskActionOnBlockingInstances types.TaskActionOnBlockingInstances
 
 	noSmithyDocumentSerde
 }
@@ -76,6 +87,10 @@ type StartCapacityTaskOutput struct {
 	// Reason that the specified capacity task failed.
 	Failed *types.CapacityTaskFailure
 
+	// User-specified instances that must not be stopped in order to free up the
+	// capacity needed to run the capacity task.
+	InstancesToExclude *types.InstancesToExclude
+
 	// Date that the specified capacity task was last modified.
 	LastModifiedDate *time.Time
 
@@ -88,6 +103,15 @@ type StartCapacityTaskOutput struct {
 
 	// List of the instance pools requested in the specified capacity task.
 	RequestedInstancePools []types.InstanceTypeCapacity
+
+	// User-specified option in case an instance is blocking the capacity task from
+	// running.
+	//
+	//   - WAIT_FOR_EVACUATION - Checks every 10 minutes over 48 hours to determine if
+	//   instances have stopped and capacity is available to complete the task.
+	//
+	//   - FAIL_TASK - The capacity task fails.
+	TaskActionOnBlockingInstances types.TaskActionOnBlockingInstances
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -330,6 +330,26 @@ func (m *validateOpGetSite) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAssetInstances struct {
+}
+
+func (*validateOpListAssetInstances) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetInstances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetInstancesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssets struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpListAssets) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBlockingInstancesForCapacityTask struct {
+}
+
+func (*validateOpListBlockingInstancesForCapacityTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBlockingInstancesForCapacityTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBlockingInstancesForCapacityTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBlockingInstancesForCapacityTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -594,8 +634,16 @@ func addOpGetSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSite{}, middleware.After)
 }
 
+func addOpListAssetInstancesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetInstances{}, middleware.After)
+}
+
 func addOpListAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssets{}, middleware.After)
+}
+
+func addOpListBlockingInstancesForCapacityTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBlockingInstancesForCapacityTask{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -921,9 +969,6 @@ func validateOpGetOutpostSupportedInstanceTypesInput(v *GetOutpostSupportedInsta
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
 	}
-	if v.OrderId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrderId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -964,6 +1009,21 @@ func validateOpGetSiteInput(v *GetSiteInput) error {
 	}
 }
 
+func validateOpListAssetInstancesInput(v *ListAssetInstancesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetInstancesInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAssetsInput(v *ListAssetsInput) error {
 	if v == nil {
 		return nil
@@ -971,6 +1031,24 @@ func validateOpListAssetsInput(v *ListAssetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssetsInput"}
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBlockingInstancesForCapacityTaskInput(v *ListBlockingInstancesForCapacityTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBlockingInstancesForCapacityTaskInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if v.CapacityTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityTaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1001,9 +1079,6 @@ func validateOpStartCapacityTaskInput(v *StartCapacityTaskInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartCapacityTaskInput"}
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
-	}
-	if v.OrderId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrderId"))
 	}
 	if v.InstancePools == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstancePools"))

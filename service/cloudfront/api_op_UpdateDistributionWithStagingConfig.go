@@ -58,7 +58,7 @@ type UpdateDistributionWithStagingConfigInput struct {
 	// The current versions ( ETag values) of both primary and staging distributions.
 	// Provide these in the following format:
 	//
-	//     ,
+	//     <primary ETag>, <staging ETag>
 	IfMatch *string
 
 	// The identifier of the staging distribution whose configuration you are copying

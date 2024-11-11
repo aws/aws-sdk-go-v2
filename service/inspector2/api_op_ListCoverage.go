@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists coverage details for you environment.
+// Lists coverage details for your environment.
 func (c *Client) ListCoverage(ctx context.Context, params *ListCoverageInput, optFns ...func(*Options)) (*ListCoverageOutput, error) {
 	if params == nil {
 		params = &ListCoverageInput{}

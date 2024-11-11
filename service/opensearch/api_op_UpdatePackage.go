@@ -47,8 +47,14 @@ type UpdatePackageInput struct {
 	// GetPackageVersionHistoryResponse .
 	CommitMessage *string
 
+	// The updated configuration details for a package.
+	PackageConfiguration *types.PackageConfiguration
+
 	// A new description of the package.
 	PackageDescription *string
+
+	// Encryption options for a package.
+	PackageEncryptionOptions *types.PackageEncryptionOptions
 
 	noSmithyDocumentSerde
 }

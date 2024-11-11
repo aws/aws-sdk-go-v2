@@ -1394,23 +1394,24 @@ type PackageManager string
 
 // Enum values for PackageManager
 const (
-	PackageManagerBundler   PackageManager = "BUNDLER"
-	PackageManagerCargo     PackageManager = "CARGO"
-	PackageManagerComposer  PackageManager = "COMPOSER"
-	PackageManagerNpm       PackageManager = "NPM"
-	PackageManagerNuget     PackageManager = "NUGET"
-	PackageManagerPipenv    PackageManager = "PIPENV"
-	PackageManagerPoetry    PackageManager = "POETRY"
-	PackageManagerYarn      PackageManager = "YARN"
-	PackageManagerGobinary  PackageManager = "GOBINARY"
-	PackageManagerGomod     PackageManager = "GOMOD"
-	PackageManagerJar       PackageManager = "JAR"
-	PackageManagerOs        PackageManager = "OS"
-	PackageManagerPip       PackageManager = "PIP"
-	PackageManagerPythonpkg PackageManager = "PYTHONPKG"
-	PackageManagerNodepkg   PackageManager = "NODEPKG"
-	PackageManagerPom       PackageManager = "POM"
-	PackageManagerGemspec   PackageManager = "GEMSPEC"
+	PackageManagerBundler    PackageManager = "BUNDLER"
+	PackageManagerCargo      PackageManager = "CARGO"
+	PackageManagerComposer   PackageManager = "COMPOSER"
+	PackageManagerNpm        PackageManager = "NPM"
+	PackageManagerNuget      PackageManager = "NUGET"
+	PackageManagerPipenv     PackageManager = "PIPENV"
+	PackageManagerPoetry     PackageManager = "POETRY"
+	PackageManagerYarn       PackageManager = "YARN"
+	PackageManagerGobinary   PackageManager = "GOBINARY"
+	PackageManagerGomod      PackageManager = "GOMOD"
+	PackageManagerJar        PackageManager = "JAR"
+	PackageManagerOs         PackageManager = "OS"
+	PackageManagerPip        PackageManager = "PIP"
+	PackageManagerPythonpkg  PackageManager = "PYTHONPKG"
+	PackageManagerNodepkg    PackageManager = "NODEPKG"
+	PackageManagerPom        PackageManager = "POM"
+	PackageManagerGemspec    PackageManager = "GEMSPEC"
+	PackageManagerDotnetCore PackageManager = "DOTNET_CORE"
 )
 
 // Values returns all known values for PackageManager. Note that this can be
@@ -1436,6 +1437,7 @@ func (PackageManager) Values() []PackageManager {
 		"NODEPKG",
 		"POM",
 		"GEMSPEC",
+		"DOTNET_CORE",
 	}
 }
 
@@ -1673,21 +1675,27 @@ type Runtime string
 
 // Enum values for Runtime
 const (
-	RuntimeNodejs      Runtime = "NODEJS"
-	RuntimeNodejs12X   Runtime = "NODEJS_12_X"
-	RuntimeNodejs14X   Runtime = "NODEJS_14_X"
-	RuntimeNodejs16X   Runtime = "NODEJS_16_X"
-	RuntimeJava8       Runtime = "JAVA_8"
-	RuntimeJava8Al2    Runtime = "JAVA_8_AL2"
-	RuntimeJava11      Runtime = "JAVA_11"
-	RuntimePython37    Runtime = "PYTHON_3_7"
-	RuntimePython38    Runtime = "PYTHON_3_8"
-	RuntimePython39    Runtime = "PYTHON_3_9"
-	RuntimeUnsupported Runtime = "UNSUPPORTED"
-	RuntimeNodejs18X   Runtime = "NODEJS_18_X"
-	RuntimeGo1X        Runtime = "GO_1_X"
-	RuntimeJava17      Runtime = "JAVA_17"
-	RuntimePython310   Runtime = "PYTHON_3_10"
+	RuntimeNodejs       Runtime = "NODEJS"
+	RuntimeNodejs12X    Runtime = "NODEJS_12_X"
+	RuntimeNodejs14X    Runtime = "NODEJS_14_X"
+	RuntimeNodejs16X    Runtime = "NODEJS_16_X"
+	RuntimeJava8        Runtime = "JAVA_8"
+	RuntimeJava8Al2     Runtime = "JAVA_8_AL2"
+	RuntimeJava11       Runtime = "JAVA_11"
+	RuntimePython37     Runtime = "PYTHON_3_7"
+	RuntimePython38     Runtime = "PYTHON_3_8"
+	RuntimePython39     Runtime = "PYTHON_3_9"
+	RuntimeUnsupported  Runtime = "UNSUPPORTED"
+	RuntimeNodejs18X    Runtime = "NODEJS_18_X"
+	RuntimeGo1X         Runtime = "GO_1_X"
+	RuntimeJava17       Runtime = "JAVA_17"
+	RuntimePython310    Runtime = "PYTHON_3_10"
+	RuntimePython311    Runtime = "PYTHON_3_11"
+	RuntimeDotnetcore31 Runtime = "DOTNETCORE_3_1"
+	RuntimeDotnet6      Runtime = "DOTNET_6"
+	RuntimeDotnet7      Runtime = "DOTNET_7"
+	RuntimeRuby27       Runtime = "RUBY_2_7"
+	RuntimeRuby32       Runtime = "RUBY_3_2"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -1711,6 +1719,12 @@ func (Runtime) Values() []Runtime {
 		"GO_1_X",
 		"JAVA_17",
 		"PYTHON_3_10",
+		"PYTHON_3_11",
+		"DOTNETCORE_3_1",
+		"DOTNET_6",
+		"DOTNET_7",
+		"RUBY_2_7",
+		"RUBY_3_2",
 	}
 }
 

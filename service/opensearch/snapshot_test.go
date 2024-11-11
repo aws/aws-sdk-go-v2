@@ -110,6 +110,18 @@ func TestCheckSnapshot_AssociatePackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociatePackages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociatePackages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociatePackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AuthorizeVpcEndpointAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AuthorizeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
@@ -482,6 +494,18 @@ func TestCheckSnapshot_DissociatePackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DissociatePackages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DissociatePackages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DissociatePackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
@@ -842,6 +866,18 @@ func TestCheckSnapshot_UpdatePackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePackageScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePackageScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePackageScope")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateScheduledAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateScheduledAction(context.Background(), nil, func(o *Options) {
@@ -918,6 +954,18 @@ func TestUpdateSnapshot_AssociatePackage(t *testing.T) {
 	_, err := svc.AssociatePackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociatePackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociatePackages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociatePackages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociatePackages")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1297,6 +1345,18 @@ func TestUpdateSnapshot_DissociatePackage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DissociatePackages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DissociatePackages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DissociatePackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
@@ -1650,6 +1710,18 @@ func TestUpdateSnapshot_UpdatePackage(t *testing.T) {
 	_, err := svc.UpdatePackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePackageScope(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePackageScope(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePackageScope")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

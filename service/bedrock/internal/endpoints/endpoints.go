@@ -645,11 +645,27 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "bedrock-fips-us-gov-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "bedrock-fips-us-gov-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-runtime-fips-us-gov-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
 				},
 			},
 			endpoints.EndpointKey{
@@ -661,11 +677,27 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "bedrock-runtime-us-gov-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock-runtime.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "bedrock-runtime-us-gov-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "bedrock-runtime.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "bedrock-us-gov-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "bedrock.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
 				},
 			},
 			endpoints.EndpointKey{
@@ -676,6 +708,9 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-gov-west-1",
 				},
 			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},

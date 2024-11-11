@@ -11,27 +11,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the instance types that an Outpost can support in InstanceTypeCapacity .
-// This will generally include instance types that are not currently configured and
-// therefore cannot be launched with the current Outpost capacity configuration.
-func (c *Client) GetOutpostSupportedInstanceTypes(ctx context.Context, params *GetOutpostSupportedInstanceTypesInput, optFns ...func(*Options)) (*GetOutpostSupportedInstanceTypesOutput, error) {
+// A list of Amazon EC2 instances running on the Outpost and belonging to the
+// account that initiated the capacity task. Use this list to specify the instances
+// you cannot stop to free up capacity to run the capacity task.
+func (c *Client) ListBlockingInstancesForCapacityTask(ctx context.Context, params *ListBlockingInstancesForCapacityTaskInput, optFns ...func(*Options)) (*ListBlockingInstancesForCapacityTaskOutput, error) {
 	if params == nil {
-		params = &GetOutpostSupportedInstanceTypesInput{}
+		params = &ListBlockingInstancesForCapacityTaskInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetOutpostSupportedInstanceTypes", params, optFns, c.addOperationGetOutpostSupportedInstanceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListBlockingInstancesForCapacityTask", params, optFns, c.addOperationListBlockingInstancesForCapacityTaskMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetOutpostSupportedInstanceTypesOutput)
+	out := result.(*ListBlockingInstancesForCapacityTaskOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetOutpostSupportedInstanceTypesInput struct {
+type ListBlockingInstancesForCapacityTaskInput struct {
 
-	// The ID or ARN of the Outpost.
+	// The ID of the capacity task.
+	//
+	// This member is required.
+	CapacityTaskId *string
+
+	// The ID or ARN of the Outpost associated with the specified capacity task.
 	//
 	// This member is required.
 	OutpostIdentifier *string
@@ -42,16 +47,14 @@ type GetOutpostSupportedInstanceTypesInput struct {
 	// The pagination token.
 	NextToken *string
 
-	// The ID for the Amazon Web Services Outposts order.
-	OrderId *string
-
 	noSmithyDocumentSerde
 }
 
-type GetOutpostSupportedInstanceTypesOutput struct {
+type ListBlockingInstancesForCapacityTaskOutput struct {
 
-	// Information about the instance types.
-	InstanceTypes []types.InstanceTypeItem
+	// A list of all running Amazon EC2 instances on the Outpost. Stopping one or more
+	// of these instances can free up the capacity needed to run the capacity task.
+	BlockingInstances []types.BlockingInstance
 
 	// The pagination token.
 	NextToken *string
@@ -62,19 +65,19 @@ type GetOutpostSupportedInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetOutpostSupportedInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListBlockingInstancesForCapacityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutpostSupportedInstanceTypes{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBlockingInstancesForCapacityTask{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOutpostSupportedInstanceTypes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBlockingInstancesForCapacityTask{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOutpostSupportedInstanceTypes"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBlockingInstancesForCapacityTask"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -126,10 +129,10 @@ func (c *Client) addOperationGetOutpostSupportedInstanceTypesMiddlewares(stack *
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetOutpostSupportedInstanceTypesValidationMiddleware(stack); err != nil {
+	if err = addOpListBlockingInstancesForCapacityTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOutpostSupportedInstanceTypes(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBlockingInstancesForCapacityTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -162,9 +165,9 @@ func (c *Client) addOperationGetOutpostSupportedInstanceTypesMiddlewares(stack *
 	return nil
 }
 
-// GetOutpostSupportedInstanceTypesPaginatorOptions is the paginator options for
-// GetOutpostSupportedInstanceTypes
-type GetOutpostSupportedInstanceTypesPaginatorOptions struct {
+// ListBlockingInstancesForCapacityTaskPaginatorOptions is the paginator options
+// for ListBlockingInstancesForCapacityTask
+type ListBlockingInstancesForCapacityTaskPaginatorOptions struct {
 	// The maximum page size.
 	Limit int32
 
@@ -173,24 +176,24 @@ type GetOutpostSupportedInstanceTypesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// GetOutpostSupportedInstanceTypesPaginator is a paginator for
-// GetOutpostSupportedInstanceTypes
-type GetOutpostSupportedInstanceTypesPaginator struct {
-	options   GetOutpostSupportedInstanceTypesPaginatorOptions
-	client    GetOutpostSupportedInstanceTypesAPIClient
-	params    *GetOutpostSupportedInstanceTypesInput
+// ListBlockingInstancesForCapacityTaskPaginator is a paginator for
+// ListBlockingInstancesForCapacityTask
+type ListBlockingInstancesForCapacityTaskPaginator struct {
+	options   ListBlockingInstancesForCapacityTaskPaginatorOptions
+	client    ListBlockingInstancesForCapacityTaskAPIClient
+	params    *ListBlockingInstancesForCapacityTaskInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewGetOutpostSupportedInstanceTypesPaginator returns a new
-// GetOutpostSupportedInstanceTypesPaginator
-func NewGetOutpostSupportedInstanceTypesPaginator(client GetOutpostSupportedInstanceTypesAPIClient, params *GetOutpostSupportedInstanceTypesInput, optFns ...func(*GetOutpostSupportedInstanceTypesPaginatorOptions)) *GetOutpostSupportedInstanceTypesPaginator {
+// NewListBlockingInstancesForCapacityTaskPaginator returns a new
+// ListBlockingInstancesForCapacityTaskPaginator
+func NewListBlockingInstancesForCapacityTaskPaginator(client ListBlockingInstancesForCapacityTaskAPIClient, params *ListBlockingInstancesForCapacityTaskInput, optFns ...func(*ListBlockingInstancesForCapacityTaskPaginatorOptions)) *ListBlockingInstancesForCapacityTaskPaginator {
 	if params == nil {
-		params = &GetOutpostSupportedInstanceTypesInput{}
+		params = &ListBlockingInstancesForCapacityTaskInput{}
 	}
 
-	options := GetOutpostSupportedInstanceTypesPaginatorOptions{}
+	options := ListBlockingInstancesForCapacityTaskPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -199,7 +202,7 @@ func NewGetOutpostSupportedInstanceTypesPaginator(client GetOutpostSupportedInst
 		fn(&options)
 	}
 
-	return &GetOutpostSupportedInstanceTypesPaginator{
+	return &ListBlockingInstancesForCapacityTaskPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -209,12 +212,12 @@ func NewGetOutpostSupportedInstanceTypesPaginator(client GetOutpostSupportedInst
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *GetOutpostSupportedInstanceTypesPaginator) HasMorePages() bool {
+func (p *ListBlockingInstancesForCapacityTaskPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next GetOutpostSupportedInstanceTypes page.
-func (p *GetOutpostSupportedInstanceTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetOutpostSupportedInstanceTypesOutput, error) {
+// NextPage retrieves the next ListBlockingInstancesForCapacityTask page.
+func (p *ListBlockingInstancesForCapacityTaskPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListBlockingInstancesForCapacityTaskOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -231,7 +234,7 @@ func (p *GetOutpostSupportedInstanceTypesPaginator) NextPage(ctx context.Context
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.GetOutpostSupportedInstanceTypes(ctx, &params, optFns...)
+	result, err := p.client.ListBlockingInstancesForCapacityTask(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -250,18 +253,18 @@ func (p *GetOutpostSupportedInstanceTypesPaginator) NextPage(ctx context.Context
 	return result, nil
 }
 
-// GetOutpostSupportedInstanceTypesAPIClient is a client that implements the
-// GetOutpostSupportedInstanceTypes operation.
-type GetOutpostSupportedInstanceTypesAPIClient interface {
-	GetOutpostSupportedInstanceTypes(context.Context, *GetOutpostSupportedInstanceTypesInput, ...func(*Options)) (*GetOutpostSupportedInstanceTypesOutput, error)
+// ListBlockingInstancesForCapacityTaskAPIClient is a client that implements the
+// ListBlockingInstancesForCapacityTask operation.
+type ListBlockingInstancesForCapacityTaskAPIClient interface {
+	ListBlockingInstancesForCapacityTask(context.Context, *ListBlockingInstancesForCapacityTaskInput, ...func(*Options)) (*ListBlockingInstancesForCapacityTaskOutput, error)
 }
 
-var _ GetOutpostSupportedInstanceTypesAPIClient = (*Client)(nil)
+var _ ListBlockingInstancesForCapacityTaskAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opGetOutpostSupportedInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListBlockingInstancesForCapacityTask(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetOutpostSupportedInstanceTypes",
+		OperationName: "ListBlockingInstancesForCapacityTask",
 	}
 }

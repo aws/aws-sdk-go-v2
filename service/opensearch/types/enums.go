@@ -304,6 +304,7 @@ const (
 	DescribePackagesFilterNamePackageStatus DescribePackagesFilterName = "PackageStatus"
 	DescribePackagesFilterNamePackageType   DescribePackagesFilterName = "PackageType"
 	DescribePackagesFilterNameEngineVersion DescribePackagesFilterName = "EngineVersion"
+	DescribePackagesFilterNamePackageOwner  DescribePackagesFilterName = "PackageOwner"
 )
 
 // Values returns all known values for DescribePackagesFilterName. Note that this
@@ -317,6 +318,7 @@ func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
 		"PackageStatus",
 		"PackageType",
 		"EngineVersion",
+		"PackageOwner",
 	}
 }
 
@@ -1046,6 +1048,27 @@ func (OverallChangeStatus) Values() []OverallChangeStatus {
 	}
 }
 
+type PackageScopeOperationEnum string
+
+// Enum values for PackageScopeOperationEnum
+const (
+	PackageScopeOperationEnumAdd      PackageScopeOperationEnum = "ADD"
+	PackageScopeOperationEnumOverride PackageScopeOperationEnum = "OVERRIDE"
+	PackageScopeOperationEnumRemove   PackageScopeOperationEnum = "REMOVE"
+)
+
+// Values returns all known values for PackageScopeOperationEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PackageScopeOperationEnum) Values() []PackageScopeOperationEnum {
+	return []PackageScopeOperationEnum{
+		"ADD",
+		"OVERRIDE",
+		"REMOVE",
+	}
+}
+
 type PackageStatus string
 
 // Enum values for PackageStatus
@@ -1081,8 +1104,10 @@ type PackageType string
 
 // Enum values for PackageType
 const (
-	PackageTypeTxtDictionary PackageType = "TXT-DICTIONARY"
-	PackageTypeZipPlugin     PackageType = "ZIP-PLUGIN"
+	PackageTypeTxtDictionary  PackageType = "TXT-DICTIONARY"
+	PackageTypeZipPlugin      PackageType = "ZIP-PLUGIN"
+	PackageTypePackageLicense PackageType = "PACKAGE-LICENSE"
+	PackageTypePackageConfig  PackageType = "PACKAGE-CONFIG"
 )
 
 // Values returns all known values for PackageType. Note that this can be expanded
@@ -1093,6 +1118,8 @@ func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"TXT-DICTIONARY",
 		"ZIP-PLUGIN",
+		"PACKAGE-LICENSE",
+		"PACKAGE-CONFIG",
 	}
 }
 
@@ -1131,6 +1158,27 @@ func (PropertyValueType) Values() []PropertyValueType {
 	return []PropertyValueType{
 		"PLAIN_TEXT",
 		"STRINGIFIED_JSON",
+	}
+}
+
+type RequirementLevel string
+
+// Enum values for RequirementLevel
+const (
+	RequirementLevelRequired RequirementLevel = "REQUIRED"
+	RequirementLevelOptional RequirementLevel = "OPTIONAL"
+	RequirementLevelNone     RequirementLevel = "NONE"
+)
+
+// Values returns all known values for RequirementLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RequirementLevel) Values() []RequirementLevel {
+	return []RequirementLevel{
+		"REQUIRED",
+		"OPTIONAL",
+		"NONE",
 	}
 }
 

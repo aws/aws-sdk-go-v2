@@ -2470,6 +2470,11 @@ func validatePackageFilter(v *types.PackageFilter) error {
 			invalidParams.AddNested("SourceLambdaLayerArn", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FilePath != nil {
+		if err := validateStringFilter(v.FilePath); err != nil {
+			invalidParams.AddNested("FilePath", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

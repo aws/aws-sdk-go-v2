@@ -59,11 +59,42 @@ func (AssetType) Values() []AssetType {
 	}
 }
 
+type AWSServiceName string
+
+// Enum values for AWSServiceName
+const (
+	AWSServiceNameAws         AWSServiceName = "AWS"
+	AWSServiceNameEc2         AWSServiceName = "EC2"
+	AWSServiceNameElasticache AWSServiceName = "ELASTICACHE"
+	AWSServiceNameElb         AWSServiceName = "ELB"
+	AWSServiceNameRds         AWSServiceName = "RDS"
+	AWSServiceNameRoute53     AWSServiceName = "ROUTE53"
+)
+
+// Values returns all known values for AWSServiceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AWSServiceName) Values() []AWSServiceName {
+	return []AWSServiceName{
+		"AWS",
+		"EC2",
+		"ELASTICACHE",
+		"ELB",
+		"RDS",
+		"ROUTE53",
+	}
+}
+
 type CapacityTaskFailureType string
 
 // Enum values for CapacityTaskFailureType
 const (
 	CapacityTaskFailureTypeUnsupportedCapacityConfiguration CapacityTaskFailureType = "UNSUPPORTED_CAPACITY_CONFIGURATION"
+	CapacityTaskFailureTypeUnexpectedAssetState             CapacityTaskFailureType = "UNEXPECTED_ASSET_STATE"
+	CapacityTaskFailureTypeBlockingInstancesNotEvacuated    CapacityTaskFailureType = "BLOCKING_INSTANCES_NOT_EVACUATED"
+	CapacityTaskFailureTypeInternalServerError              CapacityTaskFailureType = "INTERNAL_SERVER_ERROR"
+	CapacityTaskFailureTypeResourceNotFound                 CapacityTaskFailureType = "RESOURCE_NOT_FOUND"
 )
 
 // Values returns all known values for CapacityTaskFailureType. Note that this can
@@ -73,6 +104,10 @@ const (
 func (CapacityTaskFailureType) Values() []CapacityTaskFailureType {
 	return []CapacityTaskFailureType{
 		"UNSUPPORTED_CAPACITY_CONFIGURATION",
+		"UNEXPECTED_ASSET_STATE",
+		"BLOCKING_INSTANCES_NOT_EVACUATED",
+		"INTERNAL_SERVER_ERROR",
+		"RESOURCE_NOT_FOUND",
 	}
 }
 
@@ -80,11 +115,13 @@ type CapacityTaskStatus string
 
 // Enum values for CapacityTaskStatus
 const (
-	CapacityTaskStatusRequested  CapacityTaskStatus = "REQUESTED"
-	CapacityTaskStatusInProgress CapacityTaskStatus = "IN_PROGRESS"
-	CapacityTaskStatusFailed     CapacityTaskStatus = "FAILED"
-	CapacityTaskStatusCompleted  CapacityTaskStatus = "COMPLETED"
-	CapacityTaskStatusCancelled  CapacityTaskStatus = "CANCELLED"
+	CapacityTaskStatusRequested              CapacityTaskStatus = "REQUESTED"
+	CapacityTaskStatusInProgress             CapacityTaskStatus = "IN_PROGRESS"
+	CapacityTaskStatusFailed                 CapacityTaskStatus = "FAILED"
+	CapacityTaskStatusCompleted              CapacityTaskStatus = "COMPLETED"
+	CapacityTaskStatusWaitingForEvacuation   CapacityTaskStatus = "WAITING_FOR_EVACUATION"
+	CapacityTaskStatusCancellationInProgress CapacityTaskStatus = "CANCELLATION_IN_PROGRESS"
+	CapacityTaskStatusCancelled              CapacityTaskStatus = "CANCELLED"
 )
 
 // Values returns all known values for CapacityTaskStatus. Note that this can be
@@ -97,6 +134,8 @@ func (CapacityTaskStatus) Values() []CapacityTaskStatus {
 		"IN_PROGRESS",
 		"FAILED",
 		"COMPLETED",
+		"WAITING_FOR_EVACUATION",
+		"CANCELLATION_IN_PROGRESS",
 		"CANCELLED",
 	}
 }
@@ -537,6 +576,26 @@ func (SupportedStorageEnum) Values() []SupportedStorageEnum {
 	return []SupportedStorageEnum{
 		"EBS",
 		"S3",
+	}
+}
+
+type TaskActionOnBlockingInstances string
+
+// Enum values for TaskActionOnBlockingInstances
+const (
+	TaskActionOnBlockingInstancesWaitForEvacuation TaskActionOnBlockingInstances = "WAIT_FOR_EVACUATION"
+	TaskActionOnBlockingInstancesFailTask          TaskActionOnBlockingInstances = "FAIL_TASK"
+)
+
+// Values returns all known values for TaskActionOnBlockingInstances. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TaskActionOnBlockingInstances) Values() []TaskActionOnBlockingInstances {
+	return []TaskActionOnBlockingInstances{
+		"WAIT_FOR_EVACUATION",
+		"FAIL_TASK",
 	}
 }
 

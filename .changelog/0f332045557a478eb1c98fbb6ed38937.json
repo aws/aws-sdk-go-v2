@@ -1,0 +1,8 @@
+{
+    "id": "0f332045-557a-478e-b1c9-8fbb6ed38937",
+    "type": "feature",
+    "description": "Adds support for filePath filter.",
+    "modules": [
+        "service/inspector2"
+    ]
+}
