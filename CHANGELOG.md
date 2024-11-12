@@ -1,3 +1,19 @@
+# Release (2024-11-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.49.0](service/codebuild/CHANGELOG.md#v1490-2024-11-12)
+  * **Feature**: AWS CodeBuild now supports non-containerized Linux and Windows builds on Reserved Capacity.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.19.0](service/controltower/CHANGELOG.md#v1190-2024-11-12)
+  * **Feature**: Added ResetEnabledControl API.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.31.0](service/fis/CHANGELOG.md#v1310-2024-11-12)
+  * **Feature**: This release adds support for generating experiment reports with the experiment report configuration
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.37.0](service/gamelift/CHANGELOG.md#v1370-2024-11-12)
+  * **Feature**: Amazon GameLift releases container fleets support for general availability. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.16.0](service/paymentcryptography/CHANGELOG.md#v1160-2024-11-12)
+  * **Feature**: Updated ListAliases API with KeyArn filter.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.89.2](service/rds/CHANGELOG.md#v1892-2024-11-12)
+  * **Documentation**: Updates Amazon RDS documentation for Amazon RDS Extended Support for Amazon Aurora MySQL.
+
 # Release (2024-11-11)
 
 ## Module Highlights

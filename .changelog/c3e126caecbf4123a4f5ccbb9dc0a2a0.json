@@ -1,8 +1,0 @@
-{
-    "id": "c3e126ca-ecbf-4123-a4f5-ccbb9dc0a2a0",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports non-containerized Linux and Windows builds on Reserved Capacity.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

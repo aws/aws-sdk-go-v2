@@ -1,8 +1,0 @@
-{
-    "id": "f4da3571-4b52-4c00-8a1f-f49ac33b2961",
-    "type": "feature",
-    "description": "This release adds support for generating experiment reports with the experiment report configuration",
-    "modules": [
-        "service/fis"
-    ]
-}

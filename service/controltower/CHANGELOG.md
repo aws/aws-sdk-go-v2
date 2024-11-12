@@ -1,3 +1,7 @@
+# v1.19.0 (2024-11-12)
+
+* **Feature**: Added ResetEnabledControl API.
+
 # v1.18.6 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

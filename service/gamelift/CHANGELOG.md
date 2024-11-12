@@ -1,3 +1,7 @@
+# v1.37.0 (2024-11-12)
+
+* **Feature**: Amazon GameLift releases container fleets support for general availability. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+
 # v1.36.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

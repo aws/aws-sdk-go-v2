@@ -1,3 +1,7 @@
+# v1.89.2 (2024-11-12)
+
+* **Documentation**: Updates Amazon RDS documentation for Amazon RDS Extended Support for Amazon Aurora MySQL.
+
 # v1.89.1 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

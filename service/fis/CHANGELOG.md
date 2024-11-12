@@ -1,3 +1,7 @@
+# v1.31.0 (2024-11-12)
+
+* **Feature**: This release adds support for generating experiment reports with the experiment report configuration
+
 # v1.30.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

@@ -1,8 +1,0 @@
-{
-    "id": "b167503d-e391-4475-bd43-08d710486b13",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for Amazon RDS Extended Support for Amazon Aurora MySQL.",
-    "modules": [
-        "service/rds"
-    ]
-}
