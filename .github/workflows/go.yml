@@ -10,7 +10,7 @@ on:
       - 'feat-**'
 
 env:
-  EACHMODULE_CONCURRENCY: 1
+  EACHMODULE_CONCURRENCY: 4
   SMITHY_GO_REPOSITORY: ${{ github.event.pull_request.head.repo.owner.login }}/smithy-go
   GIT_PAT: ${{ secrets.CI_GIT_PAT}}
 

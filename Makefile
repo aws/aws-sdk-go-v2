@@ -265,7 +265,7 @@ unit-race-modules-%:
 		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
-		"go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=1 ./..."
+		"go test -timeout=2m ${UNIT_TEST_TAGS} -race ./..."
 
 # EXPERIMENT will explore more if the results are good
 # Basically instead of invoking "go test" n times per module (we have around 400 of them)
