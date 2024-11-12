@@ -2113,7 +2113,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Lists the aliases for all keys in the caller's Amazon Web Services account and Amazon Web Services Region. You can filter the list of aliases. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-managealias.html\">Using aliases</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>This is a paginated operation, which means that each response might contain only a subset of all the aliases. When the response contains only a subset of aliases, it includes a <code>NextToken</code> value.\n         Use this value in a subsequent <code>ListAliases</code> request to get more aliases. When you receive a response with no NextToken (or an empty or null value), that means there are no more aliases to get.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html\">CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html\">DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html\">GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html\">UpdateAlias</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Lists the aliases for all keys in the caller's Amazon Web Services account and Amazon Web Services Region. You can filter the aliases by <code>keyARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-managealias.html\">Using aliases</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>This is a paginated operation, which means that each response might contain only a subset of all the aliases. When the response contains only a subset of aliases, it includes a <code>NextToken</code> value.\n         Use this value in a subsequent <code>ListAliases</code> request to get more aliases. When you receive a response with no NextToken (or an empty or null value), that means there are no more aliases to get.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html\">CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html\">DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html\">GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html\">UpdateAlias</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2126,6 +2126,12 @@
         "com.amazonaws.paymentcryptography#ListAliasesInput": {
             "type": "structure",
             "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>keyARN</code> for which you want to list all aliases.</p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.paymentcryptography#NextToken",
                     "traits": {
@@ -3419,7 +3425,9 @@
                 "Value": {
                     "target": "com.amazonaws.paymentcryptography#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the tag.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The value of the tag.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3520,7 +3528,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 256
                 }
             }
@@ -3582,7 +3590,8 @@
                     "min": 2,
                     "max": 4096
                 },
-                "smithy.api#pattern": "^[0-9A-F]+$"
+                "smithy.api#pattern": "^[0-9A-F]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptography#TrustedCertificatePublicKey": {
@@ -3816,7 +3825,8 @@
                     "min": 16,
                     "max": 4096
                 },
-                "smithy.api#pattern": "^[0-9A-F]+$"
+                "smithy.api#pattern": "^[0-9A-F]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.paymentcryptography#WrappedKeyMaterialFormat": {

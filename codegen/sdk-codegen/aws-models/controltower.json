@@ -1390,6 +1390,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UPDATE_ENABLED_CONTROL"
                     }
+                },
+                "RESET_ENABLED_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESET_ENABLED_CONTROL"
+                    }
                 }
             }
         },
@@ -2357,7 +2363,12 @@
             },
             "list": {
                 "target": "com.amazonaws.controltower#ListEnabledControls"
-            }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.controltower#ResetEnabledControl"
+                }
+            ]
         },
         "com.amazonaws.controltower#EnabledControlSummary": {
             "type": "structure",
@@ -4035,6 +4046,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.controltower#ResetEnabledControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#ResetEnabledControlInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#ResetEnabledControlOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resets an enabled control.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/reset-enabled-control"
+                }
+            }
+        },
+        "com.amazonaws.controltower#ResetEnabledControlInput": {
+            "type": "structure",
+            "members": {
+                "enabledControlIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the enabled control to be reset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controltower#ResetEnabledControlOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The operation identifier for this <code>ResetEnabledControl</code> operation. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.controltower#ResetLandingZone": {
             "type": "operation",
             "input": {
@@ -4502,7 +4583,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Updates the configuration of an already enabled control.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of FAILED, Amazon Web Services Control Tower updates the control to match any valid parameters that you supply.</p>\n         <p>If the <code>DriftSummary</code> status for the control shows as DRIFTED, you cannot call this API. Instead, you can update the control by calling <code>DisableControl</code> and again calling <code>EnableControl</code>, or you can run an extending governance operation. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Updates the configuration of an already enabled control.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of SUCCEEDED, supply parameters that are different from the currently configured parameters. Otherwise, Amazon Web Services Control Tower will not accept the request.</p>\n         <p>If the enabled control shows an <code>EnablementStatus</code> of FAILED, Amazon Web Services Control Tower updates the control to match any valid parameters that you supply.</p>\n         <p>If the <code>DriftSummary</code> status for the control shows as <code>DRIFTED</code>, you cannot call this API. Instead, you can update the control by calling the <code>ResetEnabledControl</code> API. Alternatively, you can call <code>DisableControl</code> and then call <code>EnableControl</code> again. Also, you can run an extending governance operation to repair drift. For usage examples, see the <a href=\"https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html\">\n               <i>Controls Reference Guide</i>\n            </a>.\n      </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
