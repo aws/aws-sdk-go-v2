@@ -276,13 +276,13 @@ unit-race-modules-%:
 experimental-module:
 	go list -f "{{.Dir}}/..." -m | xargs go vet ${BUILD_TAGS} --all && \
     go list -f "{{.Dir}}/..." -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
-    go list -f "{{.Dir}}/..." -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -race
+    go list -f "{{.Dir}}/..." -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -race -cpu=4
 
 # same as regular but no race test
 experimental-module-no-race:
 	go list -f "{{.Dir}}/..." -m | xargs go vet ${BUILD_TAGS} --all && \
     go list -f "{{.Dir}}/..." -m | xargs go test ${BUILD_TAGS} ${RUN_NONE} && \
-    go list -f "{{.Dir}}/..." -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS}
+    go list -f "{{.Dir}}/..." -m | xargs go test -timeout=2m ${UNIT_TEST_TAGS} -cpu=4
 
 
 unit-modules-%:
