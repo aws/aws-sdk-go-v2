@@ -314,6 +314,18 @@ func TestCheckSnapshot_ResetEnabledBaseline(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ResetEnabledControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetEnabledControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResetEnabledControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ResetLandingZone(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ResetLandingZone(context.Background(), nil, func(o *Options) {
@@ -630,6 +642,18 @@ func TestUpdateSnapshot_ResetEnabledBaseline(t *testing.T) {
 	_, err := svc.ResetEnabledBaseline(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ResetEnabledBaseline")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResetEnabledControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetEnabledControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResetEnabledControl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

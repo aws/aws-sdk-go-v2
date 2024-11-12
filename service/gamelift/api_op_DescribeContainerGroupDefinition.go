@@ -11,16 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift containers feature, which is
-//
-// currently in public preview.
-//
 // Retrieves the properties of a container group definition, including all
 // container definitions in the group.
 //
-// To retrieve a container group definition, provide a resource identifier. If
-// successful, this operation returns the complete properties of the container
-// group definition.
+// Request options:
+//
+//   - Retrieve the latest version of a container group definition. Specify the
+//     container group definition name only, or use an ARN value without a version
+//     number.
+//
+//   - Retrieve a particular version. Specify the container group definition name
+//     and a version number, or use an ARN value that includes the version number.
+//
+// Results:
+//
+// If successful, this operation returns the complete properties of a container
+// group definition version.
 //
 // # Learn more
 //
@@ -49,6 +55,9 @@ type DescribeContainerGroupDefinitionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The specific version to retrieve.
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

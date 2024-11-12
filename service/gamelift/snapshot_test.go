@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateBuild(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContainerFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateContainerGroupDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContainerGroupDefinition(context.Background(), nil, func(o *Options) {
@@ -295,6 +307,18 @@ func TestCheckSnapshot_DeleteBuild(t *testing.T) {
 	_, err := svc.DeleteBuild(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContainerFleet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -506,6 +530,18 @@ func TestCheckSnapshot_DescribeCompute(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeContainerFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeContainerGroupDefinition(context.Background(), nil, func(o *Options) {
@@ -547,6 +583,18 @@ func TestCheckSnapshot_DescribeFleetCapacity(t *testing.T) {
 	_, err := svc.DescribeFleetCapacity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeFleetCapacity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeFleetDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFleetDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeFleetDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -914,11 +962,47 @@ func TestCheckSnapshot_ListCompute(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContainerFleets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContainerFleets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContainerFleets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListContainerGroupDefinitions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContainerGroupDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListContainerGroupDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContainerGroupDefinitionVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContainerGroupDefinitionVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContainerGroupDefinitionVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFleetDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFleetDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFleetDeployments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1226,6 +1310,30 @@ func TestCheckSnapshot_UpdateBuild(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateContainerFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateContainerGroupDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateFleetAttributes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFleetAttributes(context.Background(), nil, func(o *Options) {
@@ -1398,6 +1506,18 @@ func TestUpdateSnapshot_CreateBuild(t *testing.T) {
 	_, err := svc.CreateBuild(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateBuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContainerFleet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1590,6 +1710,18 @@ func TestUpdateSnapshot_DeleteBuild(t *testing.T) {
 	_, err := svc.DeleteBuild(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContainerFleet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1801,6 +1933,18 @@ func TestUpdateSnapshot_DescribeCompute(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeContainerFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeContainerGroupDefinition(context.Background(), nil, func(o *Options) {
@@ -1842,6 +1986,18 @@ func TestUpdateSnapshot_DescribeFleetCapacity(t *testing.T) {
 	_, err := svc.DescribeFleetCapacity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFleetCapacity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeFleetDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeFleetDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeFleetDeployment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2209,11 +2365,47 @@ func TestUpdateSnapshot_ListCompute(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListContainerFleets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContainerFleets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContainerFleets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListContainerGroupDefinitions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContainerGroupDefinitions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListContainerGroupDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContainerGroupDefinitionVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContainerGroupDefinitionVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContainerGroupDefinitionVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFleetDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFleetDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFleetDeployments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2514,6 +2706,30 @@ func TestUpdateSnapshot_UpdateBuild(t *testing.T) {
 	_, err := svc.UpdateBuild(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateBuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateContainerFleet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContainerFleet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateContainerFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateContainerGroupDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

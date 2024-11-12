@@ -111,9 +111,9 @@ type CreateGameSessionInput struct {
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process with a request to start a new game
-	// session (see [Start a Game Session]).
+	// session. For more information, see [Start a game session].
 	//
-	// [Start a Game Session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+	// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
 	//  This parameter is deprecated. Use IdempotencyToken instead.

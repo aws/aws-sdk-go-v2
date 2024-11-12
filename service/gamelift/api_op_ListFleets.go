@@ -10,10 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
-//
-// feature, which is currently in public preview.
-//
 // Retrieves a collection of fleet resources in an Amazon Web Services Region. You
 // can filter the result set to find only those fleets that are deployed with a
 // specific build or script. For fleets that have multiple locations, this
@@ -29,9 +25,6 @@ import (
 //
 //   - To get a list of all Realtime Servers fleets with a specific configuration
 //     script, provide the script ID.
-//
-//   - To get a list of all fleets with a specific container group definition,
-//     provide the ContainerGroupDefinition ID.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
 //
@@ -61,11 +54,6 @@ type ListFleetsInput struct {
 	// return only fleets using a specified build. Use either the build ID or ARN
 	// value.
 	BuildId *string
-
-	// The container group definition name to request fleets for. Use this parameter
-	// to return only fleets that are deployed with the specified container group
-	// definition.
-	ContainerGroupDefinitionName *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.

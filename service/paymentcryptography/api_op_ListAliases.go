@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the aliases for all keys in the caller's Amazon Web Services account and
-// Amazon Web Services Region. You can filter the list of aliases. For more
+// Amazon Web Services Region. You can filter the aliases by keyARN . For more
 // information, see [Using aliases]in the Amazon Web Services Payment Cryptography User Guide.
 //
 // This is a paginated operation, which means that each response might contain
@@ -56,6 +56,9 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 }
 
 type ListAliasesInput struct {
+
+	// The keyARN for which you want to list all aliases.
+	KeyArn *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more

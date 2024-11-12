@@ -67,13 +67,11 @@ type UpdateGameSessionQueueInput struct {
 	// [Setting up notifications for game session placement]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
 	NotificationTarget *string
 
-	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
-	// deliver low latency for most players in a game session. These policies ensure
-	// that no individual player can be placed into a game with unreasonably high
-	// latency. Use multiple policies to gradually relax latency requirements a step at
-	// a time. Multiple policies are applied based on their maximum allowed latency,
-	// starting with the lowest value. When updating policies, provide a complete
-	// collection of policies.
+	// A set of policies that enforce a sliding cap on player latency when processing
+	// game sessions placement requests. Use multiple policies to gradually relax the
+	// cap over time if Amazon GameLift can't make a placement. Policies are evaluated
+	// in order starting with the lowest maximum latency value. When updating policies,
+	// provide a complete collection of policies.
 	PlayerLatencyPolicies []types.PlayerLatencyPolicy
 
 	// Custom settings to use when prioritizing destinations and locations for game
@@ -85,7 +83,7 @@ type UpdateGameSessionQueueInput struct {
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
-	// changes to a TIMED_OUT status. By default, this property is set to 600 .
+	// changes to a TIMED_OUT status.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde

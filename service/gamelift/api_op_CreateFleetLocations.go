@@ -11,13 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
-//
-// feature, which is currently in public preview.
-//
-// Adds remote locations to an EC2 or container fleet and begins populating the
-// new locations with instances. The new instances conform to the fleet's instance
-// type, auto-scaling, and other configuration settings.
+// Adds remote locations to a managed EC2 fleet or managed container fleet and
+// begins populating the new locations with instances. The new instances conform to
+// the fleet's instance type, auto-scaling, and other configuration settings.
 //
 // You can't add remote locations to a fleet that resides in an Amazon Web
 // Services Region that doesn't support multiple locations. Fleets created prior to

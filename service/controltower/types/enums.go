@@ -74,6 +74,7 @@ const (
 	ControlOperationTypeEnableControl        ControlOperationType = "ENABLE_CONTROL"
 	ControlOperationTypeDisableControl       ControlOperationType = "DISABLE_CONTROL"
 	ControlOperationTypeUpdateEnabledControl ControlOperationType = "UPDATE_ENABLED_CONTROL"
+	ControlOperationTypeResetEnabledControl  ControlOperationType = "RESET_ENABLED_CONTROL"
 )
 
 // Values returns all known values for ControlOperationType. Note that this can be
@@ -85,6 +86,7 @@ func (ControlOperationType) Values() []ControlOperationType {
 		"ENABLE_CONTROL",
 		"DISABLE_CONTROL",
 		"UPDATE_ENABLED_CONTROL",
+		"RESET_ENABLED_CONTROL",
 	}
 }
 

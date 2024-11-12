@@ -134,6 +134,26 @@ type CreateExperimentTemplateLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration for experiment reports.
+type CreateExperimentTemplateReportConfigurationInput struct {
+
+	// The data sources for the experiment report.
+	DataSources *ExperimentTemplateReportConfigurationDataSourcesInput
+
+	// The output destinations of the experiment report.
+	Outputs *ExperimentTemplateReportConfigurationOutputsInput
+
+	// The duration after the experiment end time for the data sources to include in
+	// the report.
+	PostExperimentDuration *string
+
+	// The duration before the experiment start time for the data sources to include
+	// in the report.
+	PreExperimentDuration *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a stop condition for an experiment template.
 type CreateExperimentTemplateStopConditionInput struct {
 
@@ -214,6 +234,12 @@ type Experiment struct {
 
 	// The experiment options for the experiment.
 	ExperimentOptions *ExperimentOptions
+
+	// The experiment report for the experiment.
+	ExperimentReport *ExperimentReport
+
+	// The experiment report configuration for the experiment.
+	ExperimentReportConfiguration *ExperimentReportConfiguration
 
 	// The ID of the experiment template.
 	ExperimentTemplateId *string
@@ -343,6 +369,119 @@ type ExperimentOptions struct {
 
 	// The empty target resolution mode for an experiment.
 	EmptyTargetResolutionMode EmptyTargetResolutionMode
+
+	noSmithyDocumentSerde
+}
+
+// Describes the experiment report.
+type ExperimentReport struct {
+
+	// The S3 destination of the experiment report.
+	S3Reports []ExperimentReportS3Report
+
+	// The state of the experiment report.
+	State *ExperimentReportState
+
+	noSmithyDocumentSerde
+}
+
+// Describes the report configuration for the experiment. For more information,
+// see [Experiment report configurations for AWS FIS].
+//
+// [Experiment report configurations for AWS FIS]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration
+type ExperimentReportConfiguration struct {
+
+	// The data sources for the experiment report.
+	DataSources *ExperimentReportConfigurationDataSources
+
+	// The output destinations of the experiment report.
+	Outputs *ExperimentReportConfigurationOutputs
+
+	// The duration after the experiment end time for the data sources to include in
+	// the report.
+	PostExperimentDuration *string
+
+	// The duration before the experiment start time for the data sources to include
+	// in the report.
+	PreExperimentDuration *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the CloudWatch dashboard to include in the experiment report. The
+// dashboard widgets will be captured as snapshot graphs within the report.
+type ExperimentReportConfigurationCloudWatchDashboard struct {
+
+	// The Amazon Resource Name (ARN) of the CloudWatch dashboard to include in the
+	// experiment report.
+	DashboardIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the data sources for the experiment report.
+type ExperimentReportConfigurationDataSources struct {
+
+	// The CloudWatch dashboards to include as data sources in the experiment report.
+	CloudWatchDashboards []ExperimentReportConfigurationCloudWatchDashboard
+
+	noSmithyDocumentSerde
+}
+
+// Describes the output destinations of the experiment report.
+type ExperimentReportConfigurationOutputs struct {
+
+	// The S3 destination for the experiment report.
+	S3Configuration *ExperimentReportConfigurationOutputsS3Configuration
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the S3 destination for the experiment report.
+type ExperimentReportConfigurationOutputsS3Configuration struct {
+
+	// The name of the S3 bucket where the experiment report will be stored.
+	BucketName *string
+
+	// The prefix of the S3 bucket where the experiment report will be stored.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the error when experiment report generation has failed.
+type ExperimentReportError struct {
+
+	// The error code for the failed experiment report generation.
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the S3 destination for the report.
+type ExperimentReportS3Report struct {
+
+	// The Amazon Resource Name (ARN) of the generated report.
+	Arn *string
+
+	// The report type for the experiment report.
+	ReportType *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of the experiment report generation.
+type ExperimentReportState struct {
+
+	// The error information of the experiment when the experiment report generation
+	// has failed.
+	Error *ExperimentReportError
+
+	// The reason for the state of the experiment report generation.
+	Reason *string
+
+	// The state of the experiment report generation.
+	Status ExperimentReportStatus
 
 	noSmithyDocumentSerde
 }
@@ -497,6 +636,9 @@ type ExperimentTemplate struct {
 	// The experiment options for an experiment template.
 	ExperimentOptions *ExperimentTemplateExperimentOptions
 
+	// Describes the report configuration for the experiment template.
+	ExperimentReportConfiguration *ExperimentTemplateReportConfiguration
+
 	// The ID of the experiment template.
 	Id *string
 
@@ -590,6 +732,74 @@ type ExperimentTemplateLogConfiguration struct {
 
 	// The configuration for experiment logging to Amazon S3.
 	S3Configuration *ExperimentTemplateS3LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the experiment report configuration. For more information, see [Experiment report configurations for AWS FIS].
+//
+// [Experiment report configurations for AWS FIS]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration
+type ExperimentTemplateReportConfiguration struct {
+
+	// The data sources for the experiment report.
+	DataSources *ExperimentTemplateReportConfigurationDataSources
+
+	// Describes the output destinations of the experiment report.
+	Outputs *ExperimentTemplateReportConfigurationOutputs
+
+	// The duration after the experiment end time for the data sources to include in
+	// the report.
+	PostExperimentDuration *string
+
+	// The duration before the experiment start time for the data sources to include
+	// in the report.
+	PreExperimentDuration *string
+
+	noSmithyDocumentSerde
+}
+
+// The CloudWatch dashboards to include as data sources in the experiment report.
+type ExperimentTemplateReportConfigurationCloudWatchDashboard struct {
+
+	// The Amazon Resource Name (ARN) of the CloudWatch dashboard to include in the
+	// experiment report.
+	DashboardIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the data sources for the experiment report.
+type ExperimentTemplateReportConfigurationDataSources struct {
+
+	// The CloudWatch dashboards to include as data sources in the experiment report.
+	CloudWatchDashboards []ExperimentTemplateReportConfigurationCloudWatchDashboard
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the data sources for the experiment report.
+type ExperimentTemplateReportConfigurationDataSourcesInput struct {
+
+	// The CloudWatch dashboards to include as data sources in the experiment report.
+	CloudWatchDashboards []ReportConfigurationCloudWatchDashboardInput
+
+	noSmithyDocumentSerde
+}
+
+// The output destinations of the experiment report.
+type ExperimentTemplateReportConfigurationOutputs struct {
+
+	// The S3 destination for the experiment report.
+	S3Configuration *ReportConfigurationS3Output
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the outputs for the experiment templates.
+type ExperimentTemplateReportConfigurationOutputsInput struct {
+
+	// The S3 destination for the experiment report.
+	S3Configuration *ReportConfigurationS3OutputInput
 
 	noSmithyDocumentSerde
 }
@@ -708,6 +918,40 @@ type ExperimentTemplateTargetInputFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the CloudWatch dashboard for the experiment report.
+type ReportConfigurationCloudWatchDashboardInput struct {
+
+	// The Amazon Resource Name (ARN) of the CloudWatch dashboard to include in the
+	// experiment report.
+	DashboardIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the S3 destination for the experiment report.
+type ReportConfigurationS3Output struct {
+
+	// The name of the S3 bucket where the experiment report will be stored.
+	BucketName *string
+
+	// The prefix of the S3 bucket where the experiment report will be stored.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the S3 destination for the experiment report.
+type ReportConfigurationS3OutputInput struct {
+
+	// The name of the S3 bucket where the experiment report will be stored.
+	BucketName *string
+
+	// The prefix of the S3 bucket where the experiment report will be stored.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -875,6 +1119,26 @@ type UpdateExperimentTemplateLogConfigurationInput struct {
 
 	// The configuration for experiment logging to Amazon S3.
 	S3Configuration *ExperimentTemplateS3LogConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the input for the experiment report configuration.
+type UpdateExperimentTemplateReportConfigurationInput struct {
+
+	// The data sources for the experiment report.
+	DataSources *ExperimentTemplateReportConfigurationDataSourcesInput
+
+	// Describes the output destinations of the experiment report.
+	Outputs *ExperimentTemplateReportConfigurationOutputsInput
+
+	// The duration after the experiment end time for the data sources to include in
+	// the report.
+	PostExperimentDuration *string
+
+	// The duration before the experiment start time for the data sources to include
+	// in the report.
+	PreExperimentDuration *string
 
 	noSmithyDocumentSerde
 }

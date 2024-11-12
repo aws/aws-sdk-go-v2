@@ -299,6 +299,9 @@ const (
 	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
 	EnvironmentTypeLinuxLambdaContainer       EnvironmentType = "LINUX_LAMBDA_CONTAINER"
 	EnvironmentTypeArmLambdaContainer         EnvironmentType = "ARM_LAMBDA_CONTAINER"
+	EnvironmentTypeLinuxEc2                   EnvironmentType = "LINUX_EC2"
+	EnvironmentTypeArmEc2                     EnvironmentType = "ARM_EC2"
+	EnvironmentTypeWindowsEc2                 EnvironmentType = "WINDOWS_EC2"
 	EnvironmentTypeMacArm                     EnvironmentType = "MAC_ARM"
 )
 
@@ -315,6 +318,9 @@ func (EnvironmentType) Values() []EnvironmentType {
 		"WINDOWS_SERVER_2019_CONTAINER",
 		"LINUX_LAMBDA_CONTAINER",
 		"ARM_LAMBDA_CONTAINER",
+		"LINUX_EC2",
+		"ARM_EC2",
+		"WINDOWS_EC2",
 		"MAC_ARM",
 	}
 }

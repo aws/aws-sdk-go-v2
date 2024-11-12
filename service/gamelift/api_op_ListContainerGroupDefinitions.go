@@ -11,14 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift containers feature, which is
+// Retrieves container group definitions for the Amazon Web Services account and
+// Amazon Web Services Region. Use the pagination parameters to retrieve results in
+// a set of sequential pages.
 //
-// currently in public preview.
+// This operation returns only the latest version of each definition. To retrieve
+// all versions of a container group definition, use ListContainerGroupDefinitionVersions.
 //
-// Retrieves all container group definitions for the Amazon Web Services account
-// and Amazon Web Services Region that are currently in use. You can filter the
-// result set by the container groups' scheduling strategy. Use the pagination
-// parameters to retrieve results in a set of sequential pages.
+// Request options:
+//
+//   - Retrieve the most recent versions of all container group definitions.
+//
+//   - Retrieve the most recent versions of all container group definitions,
+//     filtered by type. Specify the container group type to filter on.
+//
+// Results:
+//
+// If successful, this operation returns the complete properties of a set of
+// container group definition versions that match the request.
 //
 // This operation returns the list of container group definitions in no particular
 // order.
@@ -45,6 +55,10 @@ func (c *Client) ListContainerGroupDefinitions(ctx context.Context, params *List
 
 type ListContainerGroupDefinitionsInput struct {
 
+	// The type of container group to retrieve. Container group type determines how
+	// Amazon GameLift deploys the container group on each fleet instance.
+	ContainerGroupType types.ContainerGroupType
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
@@ -53,16 +67,6 @@ type ListContainerGroupDefinitionsInput struct {
 	// the token that is returned with a previous call to this operation. To start at
 	// the beginning of the result set, do not specify a value.
 	NextToken *string
-
-	// The type of container group definitions to retrieve.
-	//
-	//   - DAEMON -- Daemon container groups run background processes and are deployed
-	//   once per fleet instance.
-	//
-	//   - REPLICA -- Replica container groups run your game server application and
-	//   supporting software. Replica groups might be deployed multiple times per fleet
-	//   instance.
-	SchedulingStrategy types.ContainerSchedulingStrategy
 
 	noSmithyDocumentSerde
 }

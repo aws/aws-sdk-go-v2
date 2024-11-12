@@ -11,31 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
+// Retrieves information on the compute resources in an Amazon GameLift fleet. Use
+// the pagination parameters to retrieve results in a set of sequential pages.
 //
-// feature, which is currently in public preview.
+// Request options:
 //
-// Retrieves information on the compute resources in an Amazon GameLift fleet.
+//   - Retrieve a list of all computes in a fleet. Specify a fleet ID.
 //
-// To request a list of computes, specify the fleet ID. Use the pagination
-// parameters to retrieve results in a set of sequential pages.
+//   - Retrieve a list of all computes in a specific fleet location. Specify a
+//     fleet ID and location.
 //
-// You can filter the result set by location.
+// Results:
 //
-// If successful, this operation returns information on all computes in the
-// requested fleet. Depending on the fleet's compute type, the result includes the
-// following information:
+// If successful, this operation returns information on a set of computes.
+// Depending on the type of fleet, the result includes the following information:
 //
-//   - For EC2 fleets, this operation returns information about the EC2 instance.
-//     Compute names are instance IDs.
+//   - For managed EC2 fleets (compute type EC2 ), this operation returns
+//     information about the EC2 instance. Compute names are EC2 instance IDs.
 //
-//   - For ANYWHERE fleets, this operation returns the compute names and details
-//     provided when the compute was registered with RegisterCompute . The
-//     GameLiftServiceSdkEndpoint or GameLiftAgentEndpoint is included.
-//
-//   - For CONTAINER fleets, this operation returns information about containers
-//     that are registered as computes, and the instances they're running on. Compute
-//     names are container names.
+//   - For Anywhere fleets (compute type ANYWHERE ), this operation returns compute
+//     names and details as provided when the compute was registered with
+//     RegisterCompute . This includes GameLiftServiceSdkEndpoint or
+//     GameLiftAgentEndpoint .
 func (c *Client) ListCompute(ctx context.Context, params *ListComputeInput, optFns ...func(*Options)) (*ListComputeOutput, error) {
 	if params == nil {
 		params = &ListComputeInput{}
@@ -58,14 +55,28 @@ type ListComputeInput struct {
 	// This member is required.
 	FleetId *string
 
+	// The status of computes in a managed container fleet, based on the success of
+	// the latest update deployment.
+	//
+	//   - ACTIVE -- The compute is deployed with the correct container definitions. It
+	//   is ready to process game servers and host game sessions.
+	//
+	//   - IMPAIRED -- An update deployment to the compute failed, and the compute is
+	//   deployed with incorrect container definitions.
+	ComputeStatus types.ListComputeInputStatus
+
+	// For computes in a managed container fleet, the name of the deployed container
+	// group definition.
+	ContainerGroupDefinitionName *string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
 
 	// The name of a location to retrieve compute resources for. For an Amazon
-	// GameLift Anywhere fleet, use a custom location. For a multi-location EC2 or
-	// container fleet, provide a Amazon Web Services Region or Local Zone code (for
-	// example: us-west-2 or us-west-2-lax-1 ).
+	// GameLift Anywhere fleet, use a custom location. For a managed fleet, provide a
+	// Amazon Web Services Region or Local Zone code (for example: us-west-2 or
+	// us-west-2-lax-1 ).
 	Location *string
 
 	// A token that indicates the start of the next sequential page of results. Use

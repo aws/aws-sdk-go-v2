@@ -353,7 +353,7 @@ type CreateDBClusterInput struct {
 	// version on your DB cluster past the end of standard support for that engine
 	// version. For more information, see the following sections:
 	//
-	//   - Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended Support]in the Amazon Aurora User Guide
+	//   - Amazon Aurora - [Using Amazon RDS Extended Support]in the Amazon Aurora User Guide
 	//
 	//   - Amazon RDS - [Using Amazon RDS Extended Support]in the Amazon RDS User Guide
 	//

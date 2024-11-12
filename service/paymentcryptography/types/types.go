@@ -615,6 +615,8 @@ type Tag struct {
 	Key *string
 
 	// The value of the tag.
+	//
+	// This member is required.
 	Value *string
 
 	noSmithyDocumentSerde

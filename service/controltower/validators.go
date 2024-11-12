@@ -310,6 +310,26 @@ func (m *validateOpResetEnabledBaseline) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpResetEnabledControl struct {
+}
+
+func (*validateOpResetEnabledControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetEnabledControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetEnabledControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetEnabledControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpResetLandingZone struct {
 }
 
@@ -488,6 +508,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpResetEnabledBaselineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResetEnabledBaseline{}, middleware.After)
+}
+
+func addOpResetEnabledControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetEnabledControl{}, middleware.After)
 }
 
 func addOpResetLandingZoneValidationMiddleware(stack *middleware.Stack) error {
@@ -826,6 +850,21 @@ func validateOpResetEnabledBaselineInput(v *ResetEnabledBaselineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResetEnabledBaselineInput"}
 	if v.EnabledBaselineIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnabledBaselineIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetEnabledControlInput(v *ResetEnabledControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetEnabledControlInput"}
+	if v.EnabledControlIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledControlIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

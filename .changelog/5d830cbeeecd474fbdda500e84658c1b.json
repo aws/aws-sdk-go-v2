@@ -1,0 +1,8 @@
+{
+    "id": "5d830cbe-eecd-474f-bdda-500e84658c1b",
+    "type": "feature",
+    "description": "Updated ListAliases API with KeyArn filter.",
+    "modules": [
+        "service/paymentcryptography"
+    ]
+}

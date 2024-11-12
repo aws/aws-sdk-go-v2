@@ -29,6 +29,7 @@
         "api_op_ListLandingZones.go",
         "api_op_ListTagsForResource.go",
         "api_op_ResetEnabledBaseline.go",
+        "api_op_ResetEnabledControl.go",
         "api_op_ResetLandingZone.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",

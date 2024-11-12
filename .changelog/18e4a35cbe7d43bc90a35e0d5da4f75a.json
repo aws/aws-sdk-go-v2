@@ -1,0 +1,8 @@
+{
+    "id": "18e4a35c-be7d-43bc-90a3-5e0d5da4f75a",
+    "type": "feature",
+    "description": "Added ResetEnabledControl API.",
+    "modules": [
+        "service/controltower"
+    ]
+}

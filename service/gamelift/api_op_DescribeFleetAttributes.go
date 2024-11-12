@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
-//
-// feature, which is currently in public preview.
-//
 // Retrieves core fleet-wide properties for fleets in an Amazon Web Services
 // Region. Properties include the computing hardware and deployment configuration
 // for instances in the fleet.
