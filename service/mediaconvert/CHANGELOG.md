@@ -1,3 +1,7 @@
+# v1.62.0 (2024-11-13)
+
+* **Feature**: This release adds support for ARN inputs in the Kantar credentials secrets name field and the MSPR field to the manifests for PlayReady DRM protected outputs.
+
 # v1.61.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

@@ -1,8 +1,0 @@
-{
-    "id": "866ea2c0-da87-49a0-876d-f26d4b730a01",
-    "type": "feature",
-    "description": "Today, AWS announces the general availability of ListBillingViews API in the AWS SDKs, to enable AWS Billing Conductor (ABC) users to create proforma Cost and Usage Reports (CUR) programmatically.",
-    "modules": [
-        "service/billing"
-    ]
-}

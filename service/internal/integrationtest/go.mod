@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.55.5
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.27.6
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.44.5
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.42.4
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.5
@@ -28,8 +28,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.29.5
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.4
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.36.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.187.1
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.37.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.188.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.5
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.49.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.33.5
@@ -44,7 +44,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.26.5
-	github.com/aws/aws-sdk-go-v2/service/glue v1.101.2
+	github.com/aws/aws-sdk-go-v2/service/glue v1.101.3
 	github.com/aws/aws-sdk-go-v2/service/health v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/iam v1.37.4
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.25.5

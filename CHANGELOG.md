@@ -1,3 +1,31 @@
+# Release (2024-11-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.35.0](service/accessanalyzer/CHANGELOG.md#v1350-2024-11-13)
+  * **Feature**: This release adds support for policy validation and external access findings for resource control policies (RCP). IAM Access Analyzer helps you author functional and secure RCPs and awareness that a RCP may restrict external access. Updated service API, documentation, and paginators.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.7.0](service/applicationsignals/CHANGELOG.md#v170-2024-11-13)
+  * **Feature**: Amazon CloudWatch Application Signals now supports creating Service Level Objectives with burn rates. Users can now create or update SLOs with burn rate configurations to meet their specific business requirements.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.52](service/b2bi/CHANGELOG.md#v100-preview52-2024-11-13)
+  * **Feature**: This release adds a GenerateMapping API to allow generation of JSONata or XSLT transformer code based on input and output samples.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.0.0](service/billing/CHANGELOG.md#v100-2024-11-13)
+  * **Release**: New AWS service client module
+  * **Feature**: Today, AWS announces the general availability of ListBillingViews API in the AWS SDKs, to enable AWS Billing Conductor (ABC) users to create proforma Cost and Usage Reports (CUR) programmatically.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.45.0](service/cloudtrail/CHANGELOG.md#v1450-2024-11-13)
+  * **Feature**: This release adds a new API GenerateQuery that generates a query from a natural language prompt about the event data in your event data store. This operation uses generative artificial intelligence (generative AI) to produce a ready-to-use SQL query from the prompt.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.37.0](service/dynamodb/CHANGELOG.md#v1370-2024-11-13)
+  * **Feature**: This release includes supports the new WarmThroughput feature for DynamoDB. You can now provide an optional WarmThroughput attribute for CreateTable or UpdateTable APIs to pre-warm your table or global secondary index. You can also use DescribeTable to see the latest WarmThroughput value.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.188.0](service/ec2/CHANGELOG.md#v11880-2024-11-13)
+  * **Feature**: This release adds the source AMI details in DescribeImages API
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.20.0](service/internetmonitor/CHANGELOG.md#v1200-2024-11-13)
+  * **Feature**: Add new query type Routing_Suggestions regarding querying interface
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.62.0](service/mediaconvert/CHANGELOG.md#v1620-2024-11-13)
+  * **Feature**: This release adds support for ARN inputs in the Kantar credentials secrets name field and the MSPR field to the manifests for PlayReady DRM protected outputs.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.35.0](service/organizations/CHANGELOG.md#v1350-2024-11-13)
+  * **Feature**: Add support for policy operations on the Resource Control Polices.
+
 # Release (2024-11-12)
 
 ## Module Highlights

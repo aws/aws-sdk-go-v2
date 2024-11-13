@@ -1,8 +1,0 @@
-{
-    "id": "9568ac14-ebfa-482b-9a3f-3863500e5504",
-    "type": "feature",
-    "description": "Add new query type Routing_Suggestions regarding querying interface",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

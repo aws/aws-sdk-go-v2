@@ -1,3 +1,7 @@
+# v1.0.0-preview.52 (2024-11-13)
+
+* **Feature**: This release adds a GenerateMapping API to allow generation of JSONata or XSLT transformer code based on input and output samples.
+
 # v1.0.0-preview.51 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

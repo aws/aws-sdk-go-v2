@@ -1,8 +1,0 @@
-{
-    "id": "ca0253ae-ce41-4f60-8f49-0ff7d789afe3",
-    "type": "feature",
-    "description": "This release adds a GenerateMapping API to allow generation of JSONata or XSLT transformer code based on input and output samples.",
-    "modules": [
-        "service/b2bi"
-    ]
-}

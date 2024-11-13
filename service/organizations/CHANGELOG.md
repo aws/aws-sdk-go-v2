@@ -1,3 +1,7 @@
+# v1.35.0 (2024-11-13)
+
+* **Feature**: Add support for policy operations on the Resource Control Polices.
+
 # v1.34.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

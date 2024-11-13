@@ -1,3 +1,7 @@
+# v1.7.0 (2024-11-13)
+
+* **Feature**: Amazon CloudWatch Application Signals now supports creating Service Level Objectives with burn rates. Users can now create or update SLOs with burn rate configurations to meet their specific business requirements.
+
 # v1.6.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

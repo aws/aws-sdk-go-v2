@@ -1,3 +1,7 @@
+# v1.20.0 (2024-11-13)
+
+* **Feature**: Add new query type Routing_Suggestions regarding querying interface
+
 # v1.19.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

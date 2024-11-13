@@ -1,8 +1,0 @@
-{
-    "id": "9d7ed864-744b-4db3-9856-3a2652f6479c",
-    "type": "feature",
-    "description": "Add support for policy operations on the Resource Control Polices.",
-    "modules": [
-        "service/organizations"
-    ]
-}
