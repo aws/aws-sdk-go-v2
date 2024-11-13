@@ -988,6 +988,8 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //   - INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't
 //     match the required pattern.
 //
+//   - INVALID_PRINCIPAL: You specified an invalid principal element in the policy.
+//
 //   - INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name
 //     can't begin with the reserved prefix AWSServiceRoleFor .
 //
@@ -1018,6 +1020,9 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //
 //   - MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only
 //     between entities in the same root.
+//
+//   - NON_DETACHABLE_POLICY: You can't detach this Amazon Web Services Managed
+//     Policy.
 //
 //   - TARGET_NOT_SUPPORTED: You can't perform the specified operation on that
 //     target entity.

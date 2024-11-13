@@ -91,8 +91,8 @@ type UpdateTransformerInput struct {
 	// corresponding keys used to identify the location for your sample documents.
 	SampleDocuments *types.SampleDocuments
 
-	// Specifies the transformer's status. You can update the state of the
-	// transformer, from active to inactive , or inactive to active .
+	// Specifies the transformer's status. You can update the state of the transformer
+	// from inactive to active .
 	Status types.TransformerStatus
 
 	noSmithyDocumentSerde

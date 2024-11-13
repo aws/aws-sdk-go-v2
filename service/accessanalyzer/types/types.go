@@ -16,7 +16,9 @@ type Access struct {
 	Actions []string
 
 	// A list of resources for the access permissions. Any strings that can be used as
-	// a resource in an IAM policy can be used in the list of resources to check.
+	// an Amazon Resource Name (ARN) in an IAM policy can be used in the list of
+	// resources to check. You can only use a wildcard in the portion of the ARN that
+	// specifies the resource ID.
 	Resources []string
 
 	noSmithyDocumentSerde
@@ -146,6 +148,10 @@ type AccessPreviewFinding struct {
 	// The resource that an external principal has access to. This is the resource
 	// associated with the access preview.
 	Resource *string
+
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
@@ -820,6 +826,10 @@ type ExternalAccessDetails struct {
 	// The external principal that has access to a resource within the zone of trust.
 	Principal map[string]string
 
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
+
 	// The sources of the external access finding. This indicates how the access that
 	// generated the finding is granted. It is populated for Amazon S3 bucket findings.
 	Sources []FindingSource
@@ -886,6 +896,10 @@ type Finding struct {
 
 	// The resource that an external principal has access to.
 	Resource *string
+
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
@@ -1047,6 +1061,10 @@ type FindingSummary struct {
 
 	// The resource that the external principal has access to.
 	Resource *string
+
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.

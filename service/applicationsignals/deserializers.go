@@ -2714,6 +2714,84 @@ func awsRestjson1_deserializeDocumentAttributes(v *map[string]string, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBurnRateConfiguration(v **types.BurnRateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BurnRateConfiguration
+	if *v == nil {
+		sv = &types.BurnRateConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LookBackWindowMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BurnRateLookBackWindowMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LookBackWindowMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBurnRateConfigurations(v *[]types.BurnRateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BurnRateConfiguration
+	if *v == nil {
+		cv = []types.BurnRateConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BurnRateConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBurnRateConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCalendarInterval(v **types.CalendarInterval, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4142,6 +4220,11 @@ func awsRestjson1_deserializeDocumentServiceLevelObjective(v **types.ServiceLeve
 					return fmt.Errorf("expected ServiceLevelObjectiveArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "BurnRateConfigurations":
+			if err := awsRestjson1_deserializeDocumentBurnRateConfigurations(&sv.BurnRateConfigurations, value); err != nil {
+				return err
 			}
 
 		case "CreatedTime":

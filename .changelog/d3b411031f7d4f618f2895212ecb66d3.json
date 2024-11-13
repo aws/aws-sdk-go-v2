@@ -1,0 +1,8 @@
+{
+    "id": "d3b41103-1f7d-4f61-8f28-95212ecb66d3",
+    "type": "feature",
+    "description": "This release adds support for ARN inputs in the Kantar credentials secrets name field and the MSPR field to the manifests for PlayReady DRM protected outputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

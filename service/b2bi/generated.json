@@ -17,6 +17,7 @@
         "api_op_DeletePartnership.go",
         "api_op_DeleteProfile.go",
         "api_op_DeleteTransformer.go",
+        "api_op_GenerateMapping.go",
         "api_op_GetCapability.go",
         "api_op_GetPartnership.go",
         "api_op_GetProfile.go",

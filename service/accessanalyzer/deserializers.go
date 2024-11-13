@@ -6052,6 +6052,15 @@ func awsRestjson1_deserializeDocumentAccessPreviewFinding(v **types.AccessPrevie
 				sv.Resource = ptr.String(jtv)
 			}
 
+		case "resourceControlPolicyRestriction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceControlPolicyRestriction to be of type string, got %T instead", value)
+				}
+				sv.ResourceControlPolicyRestriction = types.ResourceControlPolicyRestriction(jtv)
+			}
+
 		case "resourceOwnerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7632,6 +7641,15 @@ func awsRestjson1_deserializeDocumentExternalAccessDetails(v **types.ExternalAcc
 				return err
 			}
 
+		case "resourceControlPolicyRestriction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceControlPolicyRestriction to be of type string, got %T instead", value)
+				}
+				sv.ResourceControlPolicyRestriction = types.ResourceControlPolicyRestriction(jtv)
+			}
+
 		case "sources":
 			if err := awsRestjson1_deserializeDocumentFindingSourceList(&sv.Sources, value); err != nil {
 				return err
@@ -7778,6 +7796,15 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Resource = ptr.String(jtv)
+			}
+
+		case "resourceControlPolicyRestriction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceControlPolicyRestriction to be of type string, got %T instead", value)
+				}
+				sv.ResourceControlPolicyRestriction = types.ResourceControlPolicyRestriction(jtv)
 			}
 
 		case "resourceOwnerAccount":
@@ -8239,6 +8266,15 @@ func awsRestjson1_deserializeDocumentFindingSummary(v **types.FindingSummary, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Resource = ptr.String(jtv)
+			}
+
+		case "resourceControlPolicyRestriction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceControlPolicyRestriction to be of type string, got %T instead", value)
+				}
+				sv.ResourceControlPolicyRestriction = types.ResourceControlPolicyRestriction(jtv)
 			}
 
 		case "resourceOwnerAccount":

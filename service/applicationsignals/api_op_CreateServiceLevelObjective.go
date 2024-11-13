@@ -112,6 +112,11 @@ type CreateServiceLevelObjectiveInput struct {
 	// This member is required.
 	Name *string
 
+	// Use this array to create burn rates for this SLO. Each burn rate is a metric
+	// that indicates how fast the service is consuming the error budget, relative to
+	// the attainment goal of the SLO.
+	BurnRateConfigurations []types.BurnRateConfiguration
+
 	// An optional description for this SLO.
 	Description *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "de2569e9-5acf-4fc8-8d0e-091dd30a43a1",
+    "type": "feature",
+    "description": "This release adds the source AMI details in DescribeImages API",
+    "modules": [
+        "service/ec2"
+    ]
+}

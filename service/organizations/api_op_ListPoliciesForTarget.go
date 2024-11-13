@@ -45,6 +45,8 @@ type ListPoliciesForTargetInput struct {
 	//
 	// [SERVICE_CONTROL_POLICY]
 	//
+	// [RESOURCE_CONTROL_POLICY]
+	//
 	// [BACKUP_POLICY]
 	//
 	// [TAG_POLICY]
@@ -58,6 +60,7 @@ type ListPoliciesForTargetInput struct {
 	// [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
 	// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
+	// [RESOURCE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html
 	//
 	// This member is required.
 	Filter types.PolicyType

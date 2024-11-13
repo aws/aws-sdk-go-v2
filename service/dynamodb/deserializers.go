@@ -10881,6 +10881,11 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndex(v **types.GlobalSecond
 				return err
 			}
 
+		case "WarmThroughput":
+			if err := awsAwsjson10_deserializeDocumentWarmThroughput(&sv.WarmThroughput, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10991,6 +10996,11 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescription(v **types.G
 
 		case "ProvisionedThroughput":
 			if err := awsAwsjson10_deserializeDocumentProvisionedThroughputDescription(&sv.ProvisionedThroughput, value); err != nil {
+				return err
+			}
+
+		case "WarmThroughput":
+			if err := awsAwsjson10_deserializeDocumentGlobalSecondaryIndexWarmThroughputDescription(&sv.WarmThroughput, value); err != nil {
 				return err
 			}
 
@@ -11162,6 +11172,72 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexList(v *[]types.GlobalS
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexWarmThroughputDescription(v **types.GlobalSecondaryIndexWarmThroughputDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlobalSecondaryIndexWarmThroughputDescription
+	if *v == nil {
+		sv = &types.GlobalSecondaryIndexWarmThroughputDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReadUnitsPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLongObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadUnitsPerSecond = ptr.Int64(i64)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.IndexStatus(jtv)
+			}
+
+		case "WriteUnitsPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLongObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WriteUnitsPerSecond = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14165,6 +14241,11 @@ func awsAwsjson10_deserializeDocumentReplicaDescription(v **types.ReplicaDescrip
 				return err
 			}
 
+		case "WarmThroughput":
+			if err := awsAwsjson10_deserializeDocumentTableWarmThroughputDescription(&sv.WarmThroughput, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14339,6 +14420,11 @@ func awsAwsjson10_deserializeDocumentReplicaGlobalSecondaryIndexDescription(v **
 
 		case "ProvisionedThroughputOverride":
 			if err := awsAwsjson10_deserializeDocumentProvisionedThroughputOverride(&sv.ProvisionedThroughputOverride, value); err != nil {
+				return err
+			}
+
+		case "WarmThroughput":
+			if err := awsAwsjson10_deserializeDocumentGlobalSecondaryIndexWarmThroughputDescription(&sv.WarmThroughput, value); err != nil {
 				return err
 			}
 
@@ -15826,6 +15912,11 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 				sv.TableStatus = types.TableStatus(jtv)
 			}
 
+		case "WarmThroughput":
+			if err := awsAwsjson10_deserializeDocumentTableWarmThroughputDescription(&sv.WarmThroughput, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15940,6 +16031,72 @@ func awsAwsjson10_deserializeDocumentTableNotFoundException(v **types.TableNotFo
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTableWarmThroughputDescription(v **types.TableWarmThroughputDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableWarmThroughputDescription
+	if *v == nil {
+		sv = &types.TableWarmThroughputDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReadUnitsPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLongObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadUnitsPerSecond = ptr.Int64(i64)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TableStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.TableStatus(jtv)
+			}
+
+		case "WriteUnitsPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PositiveLongObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WriteUnitsPerSecond = ptr.Int64(i64)
 			}
 
 		default:
@@ -16286,6 +16443,63 @@ func awsAwsjson10_deserializeDocumentUpdateKinesisStreamingConfiguration(v **typ
 					return fmt.Errorf("expected ApproximateCreationDateTimePrecision to be of type string, got %T instead", value)
 				}
 				sv.ApproximateCreationDateTimePrecision = types.ApproximateCreationDateTimePrecision(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentWarmThroughput(v **types.WarmThroughput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WarmThroughput
+	if *v == nil {
+		sv = &types.WarmThroughput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReadUnitsPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadUnitsPerSecond = ptr.Int64(i64)
+			}
+
+		case "WriteUnitsPerSecond":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WriteUnitsPerSecond = ptr.Int64(i64)
 			}
 
 		default:

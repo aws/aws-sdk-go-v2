@@ -474,9 +474,10 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeIdentityPolicy       PolicyType = "IDENTITY_POLICY"
-	PolicyTypeResourcePolicy       PolicyType = "RESOURCE_POLICY"
-	PolicyTypeServiceControlPolicy PolicyType = "SERVICE_CONTROL_POLICY"
+	PolicyTypeIdentityPolicy        PolicyType = "IDENTITY_POLICY"
+	PolicyTypeResourcePolicy        PolicyType = "RESOURCE_POLICY"
+	PolicyTypeServiceControlPolicy  PolicyType = "SERVICE_CONTROL_POLICY"
+	PolicyTypeResourceControlPolicy PolicyType = "RESOURCE_CONTROL_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -488,6 +489,7 @@ func (PolicyType) Values() []PolicyType {
 		"IDENTITY_POLICY",
 		"RESOURCE_POLICY",
 		"SERVICE_CONTROL_POLICY",
+		"RESOURCE_CONTROL_POLICY",
 	}
 }
 
@@ -548,6 +550,28 @@ func (RecommendedRemediationAction) Values() []RecommendedRemediationAction {
 	return []RecommendedRemediationAction{
 		"CREATE_POLICY",
 		"DETACH_POLICY",
+	}
+}
+
+type ResourceControlPolicyRestriction string
+
+// Enum values for ResourceControlPolicyRestriction
+const (
+	ResourceControlPolicyRestrictionApplicable          ResourceControlPolicyRestriction = "APPLICABLE"
+	ResourceControlPolicyRestrictionFailedToEvaluateRcp ResourceControlPolicyRestriction = "FAILED_TO_EVALUATE_RCP"
+	ResourceControlPolicyRestrictionNotApplicable       ResourceControlPolicyRestriction = "NOT_APPLICABLE"
+)
+
+// Values returns all known values for ResourceControlPolicyRestriction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceControlPolicyRestriction) Values() []ResourceControlPolicyRestriction {
+	return []ResourceControlPolicyRestriction{
+		"APPLICABLE",
+		"FAILED_TO_EVALUATE_RCP",
+		"NOT_APPLICABLE",
 	}
 }
 

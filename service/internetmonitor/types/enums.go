@@ -224,6 +224,7 @@ const (
 	QueryTypeTopLocationDetails               QueryType = "TOP_LOCATION_DETAILS"
 	QueryTypeOverallTrafficSuggestions        QueryType = "OVERALL_TRAFFIC_SUGGESTIONS"
 	QueryTypeOverallTrafficSuggestionsDetails QueryType = "OVERALL_TRAFFIC_SUGGESTIONS_DETAILS"
+	QueryTypeRoutingSuggestions               QueryType = "ROUTING_SUGGESTIONS"
 )
 
 // Values returns all known values for QueryType. Note that this can be expanded
@@ -237,6 +238,7 @@ func (QueryType) Values() []QueryType {
 		"TOP_LOCATION_DETAILS",
 		"OVERALL_TRAFFIC_SUGGESTIONS",
 		"OVERALL_TRAFFIC_SUGGESTIONS_DETAILS",
+		"ROUTING_SUGGESTIONS",
 	}
 }
 

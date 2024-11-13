@@ -7,6 +7,30 @@ import (
 	"time"
 )
 
+// This object defines the length of the look-back window used to calculate one
+// burn rate metric for this SLO. The burn rate measures how fast the service is
+// consuming the error budget, relative to the attainment goal of the SLO. A burn
+// rate of exactly 1 indicates that the SLO goal will be met exactly.
+//
+// For example, if you specify 60 as the number of minutes in the look-back
+// window, the burn rate is calculated as the following:
+//
+// burn rate = error rate over the look-back window / (1 - attainment goal
+// percentage)
+//
+// For more information about burn rates, see [Calculate burn rates].
+//
+// [Calculate burn rates]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-burn
+type BurnRateConfiguration struct {
+
+	// The number of minutes to use as the look-back window.
+	//
+	// This member is required.
+	LookBackWindowMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // If the interval for this service level objective is a calendar interval, this
 // structure contains the interval specifications.
 type CalendarInterval struct {
@@ -867,6 +891,12 @@ type ServiceLevelObjective struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Each object in this array defines the length of the look-back window used to
+	// calculate one burn rate metric for this SLO. The burn rate measures how fast the
+	// service is consuming the error budget, relative to the attainment goal of the
+	// SLO.
+	BurnRateConfigurations []BurnRateConfiguration
 
 	// The description that you created for this SLO.
 	Description *string

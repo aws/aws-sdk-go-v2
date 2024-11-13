@@ -17059,7 +17059,7 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin1Max512PatternAZAZ09 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin1Max2048PatternArnAwsAwsUsGovAwsCnSecretsmanagerUsGovApCaCnEuSaCentralNorthSouthEastWestDD12SecretAZAZ09 to be of type string, got %T instead", value)
 				}
 				sv.CredentialsSecretName = ptr.String(jtv)
 			}
