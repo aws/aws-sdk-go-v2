@@ -19,7 +19,7 @@
                     "target": "com.amazonaws.accessanalyzer#ResourcesList",
                     "traits": {
                         "smithy.api#default": [],
-                        "smithy.api#documentation": "<p>A list of resources for the access permissions. Any strings that can be used as a\n         resource in an IAM policy can be used in the list of resources to check.</p>",
+                        "smithy.api#documentation": "<p>A list of resources for the access permissions. Any strings that can be used as an\n         Amazon Resource Name (ARN) in an IAM policy can be used in the list of resources to\n         check. You can only use a wildcard in the portion of the ARN that specifies the resource\n         ID.</p>",
                         "smithy.api#length": {
                             "max": 100
                         }
@@ -1433,6 +1433,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is\n         granted. It is populated for Amazon S3 bucket findings.</p>"
                     }
+                },
+                "resourceControlPolicyRestriction": {
+                    "target": "com.amazonaws.accessanalyzer#ResourceControlPolicyRestriction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of restriction applied to the finding by the resource owner with an Organizations\n         resource control policy (RCP).</p>"
+                    }
                 }
             },
             "traits": {
@@ -2189,7 +2195,7 @@
                 "access": {
                     "target": "com.amazonaws.accessanalyzer#AccessList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An access object containing the permissions that shouldn't be granted by the specified\n         policy. If only actions are specified, IAM Access Analyzer checks for access of the actions on\n         all resources in the policy. If only resources are specified, then IAM Access Analyzer checks\n         which actions have access to the specified resources. If both actions and resources are\n         specified, then IAM Access Analyzer checks which of the specified actions have access to the\n         specified resources.</p>",
+                        "smithy.api#documentation": "<p>An access object containing the permissions that shouldn't be granted by the specified\n         policy. If only actions are specified, IAM Access Analyzer checks for access to peform at least\n         one of the actions on any resource in the policy. If only resources are specified, then\n         IAM Access Analyzer checks for access to perform any action on at least one of the resources. If\n         both actions and resources are specified, IAM Access Analyzer checks for access to perform at\n         least one of the specified actions on at least one of the specified resources.</p>",
                         "smithy.api#length": {
                             "max": 1
                         },
@@ -2199,7 +2205,7 @@
                 "policyType": {
                     "target": "com.amazonaws.accessanalyzer#AccessCheckPolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of policy. Identity policies grant permissions to IAM principals. Identity\n         policies include managed and inline policies for IAM roles, users, and groups.</p>\n         <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust\n         policies for IAM roles and bucket policies for Amazon S3 buckets. You can provide a generic\n         input such as identity policy or resource policy or a specific input such as managed policy\n         or Amazon S3 bucket policy.</p>",
+                        "smithy.api#documentation": "<p>The type of policy. Identity policies grant permissions to IAM principals. Identity\n         policies include managed and inline policies for IAM roles, users, and groups.</p>\n         <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust\n         policies for IAM roles and bucket policies for Amazon S3 buckets.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3270,6 +3276,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sources of the external access finding. This indicates how the access that generated\n         the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
                     }
+                },
+                "resourceControlPolicyRestriction": {
+                    "target": "com.amazonaws.accessanalyzer#ResourceControlPolicyRestriction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of restriction applied to the finding by the resource owner with an Organizations\n         resource control policy (RCP).</p>"
+                    }
                 }
             },
             "traits": {
@@ -3378,6 +3390,12 @@
                     "target": "com.amazonaws.accessanalyzer#FindingSourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is\n         granted. It is populated for Amazon S3 bucket findings.</p>"
+                    }
+                },
+                "resourceControlPolicyRestriction": {
+                    "target": "com.amazonaws.accessanalyzer#ResourceControlPolicyRestriction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of restriction applied to the finding by the resource owner with an Organizations\n         resource control policy (RCP).</p>"
                     }
                 }
             },
@@ -3654,6 +3672,12 @@
                     "target": "com.amazonaws.accessanalyzer#FindingSourceList",
                     "traits": {
                         "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is\n         granted. It is populated for Amazon S3 bucket findings.</p>"
+                    }
+                },
+                "resourceControlPolicyRestriction": {
+                    "target": "com.amazonaws.accessanalyzer#ResourceControlPolicyRestriction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of restriction applied to the finding by the resource owner with an Organizations\n         resource control policy (RCP).</p>"
                     }
                 }
             },
@@ -6183,6 +6207,10 @@
                     {
                         "value": "SERVICE_CONTROL_POLICY",
                         "name": "SERVICE_CONTROL_POLICY"
+                    },
+                    {
+                        "value": "RESOURCE_CONTROL_POLICY",
+                        "name": "RESOURCE_CONTROL_POLICY"
                     }
                 ]
             }
@@ -6488,6 +6516,25 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
+            }
+        },
+        "com.amazonaws.accessanalyzer#ResourceControlPolicyRestriction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "APPLICABLE",
+                        "name": "APPLICABLE"
+                    },
+                    {
+                        "value": "FAILED_TO_EVALUATE_RCP",
+                        "name": "FAILED_TO_EVALUATE_RCP"
+                    },
+                    {
+                        "value": "NOT_APPLICABLE",
+                        "name": "NOT_APPLICABLE"
+                    }
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#ResourceNotFoundException": {

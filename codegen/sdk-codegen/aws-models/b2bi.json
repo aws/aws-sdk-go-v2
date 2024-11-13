@@ -34,6 +34,9 @@
                     "target": "com.amazonaws.b2bi#CreateStarterMappingTemplate"
                 },
                 {
+                    "target": "com.amazonaws.b2bi#GenerateMapping"
+                },
+                {
                     "target": "com.amazonaws.b2bi#GetTransformerJob"
                 },
                 {
@@ -2471,6 +2474,123 @@
                         "smithy.api#enumValue": "X12"
                     }
                 }
+            }
+        },
+        "com.amazonaws.b2bi#GenerateMapping": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.b2bi#GenerateMappingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.b2bi#GenerateMappingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Takes sample input and output documents and uses Amazon Bedrock to generate a mapping automatically. Depending on the accuracy and other factors, you can then edit the mapping for your needs.</p>\n         <note>\n            <p>Before you can use the AI-assisted feature for Amazon Web Services B2B Data Interchange you must enable models in Amazon Bedrock. For details, see <a href=\"https://docs.aws.amazon.com/b2bi/latest/userguide/ai-assisted-mapping.html#ai-assist-prereq\">AI-assisted template mapping prerequisites</a> in\n            the <i>Amazon Web Services B2B Data Interchange User guide</i>.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample GenerateMapping call",
+                        "input": {
+                            "inputFileContent": "Sample input file content",
+                            "outputFileContent": "Sample output file content",
+                            "mappingType": "JSONATA"
+                        },
+                        "output": {
+                            "mappingTemplate": "Sample mapping content",
+                            "mappingAccuracy": 0.95
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/generate-mapping",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.b2bi#GenerateMappingInputFileContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5000000
+                }
+            }
+        },
+        "com.amazonaws.b2bi#GenerateMappingOutputFileContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5000000
+                }
+            }
+        },
+        "com.amazonaws.b2bi#GenerateMappingRequest": {
+            "type": "structure",
+            "members": {
+                "inputFileContent": {
+                    "target": "com.amazonaws.b2bi#GenerateMappingInputFileContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the contents of a sample X12 EDI file (for inbound EDI) or JSON/XML file (for outbound EDI) to use as a starting point for the mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputFileContent": {
+                    "target": "com.amazonaws.b2bi#GenerateMappingOutputFileContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the contents of a sample X12 EDI file (for outbound EDI) or JSON/XML file (for inbound EDI) to use as a target for the mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mappingType": {
+                    "target": "com.amazonaws.b2bi#MappingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the mapping type: either <code>JSONATA</code> or <code>XSLT.</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.b2bi#GenerateMappingResponse": {
+            "type": "structure",
+            "members": {
+                "mappingTemplate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a mapping template based on your inputs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mappingAccuracy": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a percentage that estimates the accuracy of the generated mapping.</p>",
+                        "smithy.api#range": {
+                            "min": 0.0,
+                            "max": 1.0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.b2bi#GetCapability": {
@@ -5970,7 +6090,7 @@
                 "status": {
                     "target": "com.amazonaws.b2bi#TransformerStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the transformer's status. You can update the state of the transformer, from <code>active</code> to <code>inactive</code>, or <code>inactive</code> to <code>active</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the transformer's status. You can update the state of the transformer from <code>inactive</code> to <code>active</code>.</p>"
                     }
                 },
                 "fileFormat": {
