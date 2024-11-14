@@ -20,6 +20,8 @@ const defaultMultipartUploadThreshold = 1024 * 1024 * 16
 // using PutObject().
 const defaultTransferConcurrency = 5
 
+const defaultPartBodyMaxRetries = 3
+
 // Client provides the API client to make operations call for Amazon Simple
 // Storage Service's Transfer Manager
 // It is safe to call Client methods concurrently across goroutines.
@@ -39,6 +41,8 @@ func New(s3Client S3APIClient, opts Options, optFns ...func(*Options)) *Client {
 	resolvePartSizeBytes(&opts)
 	resolveChecksumAlgorithm(&opts)
 	resolveMultipartUploadThreshold(&opts)
+	resolveMultipartDownloadType(&opts)
+	resolvePartBodyMaxRetries(&opts)
 
 	return &Client{
 		options: opts,
