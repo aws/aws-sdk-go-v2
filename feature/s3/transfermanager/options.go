@@ -27,6 +27,12 @@ type Options struct {
 	//
 	// The concurrency pool is not shared between calls to Upload.
 	Concurrency int
+
+	// The type indicating if object is multi-downloaded in parts or ranges
+	MultipartDownloadType types.MultipartDownloadType
+
+	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
+	PartBodyMaxRetries int
 }
 
 func (o *Options) init() {
@@ -53,6 +59,18 @@ func resolveChecksumAlgorithm(o *Options) {
 func resolveMultipartUploadThreshold(o *Options) {
 	if o.MultipartUploadThreshold == 0 {
 		o.MultipartUploadThreshold = defaultMultipartUploadThreshold
+	}
+}
+
+func resolveMultipartDownloadType(o *Options) {
+	if o.MultipartDownloadType == "" {
+		o.MultipartDownloadType = types.MultipartDownloadTypePart
+	}
+}
+
+func resolvePartBodyMaxRetries(o *Options) {
+	if o.PartBodyMaxRetries == 0 {
+		o.PartBodyMaxRetries = defaultPartBodyMaxRetries
 	}
 }
 
