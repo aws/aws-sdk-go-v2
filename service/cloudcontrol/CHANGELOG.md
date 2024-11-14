@@ -1,3 +1,7 @@
+# v1.23.0 (2024-11-14)
+
+* **Feature**: Added support for CloudFormation Hooks with Cloud Control API. The GetResourceRequestStatus API response now includes an optional HooksProgressEvent and HooksRequestToken parameter for Hooks Invocation Progress as part of resource operation with Cloud Control.
+
 # v1.22.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

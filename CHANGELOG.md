@@ -1,3 +1,37 @@
+# Release (2024-11-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.36.0](service/accessanalyzer/CHANGELOG.md#v1360-2024-11-14)
+  * **Feature**: Expand analyzer configuration capabilities for unused access analyzers. Unused access analyzer configurations now support the ability to exclude accounts and resource tags from analysis providing more granular control over the scope of analysis.
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.23.0](service/cloudcontrol/CHANGELOG.md#v1230-2024-11-14)
+  * **Feature**: Added support for CloudFormation Hooks with Cloud Control API. The GetResourceRequestStatus API response now includes an optional HooksProgressEvent and HooksRequestToken parameter for Hooks Invocation Progress as part of resource operation with Cloud Control.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.7.0](service/deadline/CHANGELOG.md#v170-2024-11-14)
+  * **Feature**: Adds support for select GPU accelerated instance types when creating new service-managed fleets.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.38.0](service/iam/CHANGELOG.md#v1380-2024-11-14)
+  * **Feature**: This release includes support for five new APIs and changes to existing APIs that give AWS Organizations customers the ability to use temporary root credentials, targeted to member accounts in the organization.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.45.0](service/iotwireless/CHANGELOG.md#v1450-2024-11-14)
+  * **Feature**: New FuotaTask resource type to enable logging for your FUOTA tasks. A ParticipatingGatewaysforMulticast parameter to choose the list of gateways to receive the multicast downlink message and the transmission interval between them. Descriptor field which will be sent to devices during FUOTA transfer.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.42.0](service/ivs/CHANGELOG.md#v1420-2024-11-14)
+  * **Feature**: IVS now offers customers the ability to stream multitrack video to Channels.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.14.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v1140-2024-11-14)
+  * **Feature**: New and updated API operations to support License Included User-based Subscription of Microsoft Remote Desktop Services (RDS).
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.0.0](service/partnercentralselling/CHANGELOG.md#v100-2024-11-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Announcing AWS Partner Central API for Selling: This service launch Introduces new APIs for co-selling opportunity management and related functions. Key features include notifications, a dynamic sandbox for testing, and streamlined validations.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.79.0](service/quicksight/CHANGELOG.md#v1790-2024-11-14)
+  * **Feature**: This release adds APIs for Custom Permissions management in QuickSight, and APIs to support QuickSight Branding.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.52.0](service/redshift/CHANGELOG.md#v1520-2024-11-14)
+  * **Feature**: Adds support for Amazon Redshift S3AccessGrants
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.67.0](service/s3/CHANGELOG.md#v1670-2024-11-14)
+  * **Feature**: This release updates the ListBuckets API Reference documentation in support of the new 10,000 general purpose bucket default quota on all AWS accounts. To increase your bucket quota from 10,000 to up to 1 million buckets, simply request a quota increase via Service Quotas.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.167.0](service/sagemaker/CHANGELOG.md#v11670-2024-11-14)
+  * **Feature**: Add support for Neuron instance types [ trn1/trn1n/inf2 ] on SageMaker Notebook Instances Platform.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.33.0](service/sts/CHANGELOG.md#v1330-2024-11-14)
+  * **Feature**: This release introduces the new API 'AssumeRoot', which returns short-term credentials that you can use to perform privileged tasks.
+
 # Release (2024-11-13)
 
 ## General Highlights

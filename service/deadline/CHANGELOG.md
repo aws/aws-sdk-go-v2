@@ -1,3 +1,7 @@
+# v1.7.0 (2024-11-14)
+
+* **Feature**: Adds support for select GPU accelerated instance types when creating new service-managed fleets.
+
 # v1.6.4 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

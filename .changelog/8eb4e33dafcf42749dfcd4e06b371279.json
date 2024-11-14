@@ -1,8 +1,0 @@
-{
-    "id": "8eb4e33d-afcf-4274-9dfc-d4e06b371279",
-    "type": "feature",
-    "description": "New and updated API operations to support License Included User-based Subscription of Microsoft Remote Desktop Services (RDS).",
-    "modules": [
-        "service/licensemanagerusersubscriptions"
-    ]
-}

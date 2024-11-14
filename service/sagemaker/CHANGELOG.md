@@ -1,3 +1,7 @@
+# v1.167.0 (2024-11-14)
+
+* **Feature**: Add support for Neuron instance types [ trn1/trn1n/inf2 ] on SageMaker Notebook Instances Platform.
+
 # v1.166.2 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

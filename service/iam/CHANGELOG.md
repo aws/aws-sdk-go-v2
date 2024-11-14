@@ -1,3 +1,7 @@
+# v1.38.0 (2024-11-14)
+
+* **Feature**: This release includes support for five new APIs and changes to existing APIs that give AWS Organizations customers the ability to use temporary root credentials, targeted to member accounts in the organization.
+
 # v1.37.4 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

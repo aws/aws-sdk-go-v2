@@ -1,3 +1,7 @@
+# v1.79.0 (2024-11-14)
+
+* **Feature**: This release adds APIs for Custom Permissions management in QuickSight, and APIs to support QuickSight Branding.
+
 # v1.78.0 (2024-11-07)
 
 * **Feature**: Add Client Credentials based OAuth support for Snowflake and Starburst

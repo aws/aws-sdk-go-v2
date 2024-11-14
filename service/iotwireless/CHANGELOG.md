@@ -1,3 +1,7 @@
+# v1.45.0 (2024-11-14)
+
+* **Feature**: New FuotaTask resource type to enable logging for your FUOTA tasks. A ParticipatingGatewaysforMulticast parameter to choose the list of gateways to receive the multicast downlink message and the transmission interval between them. Descriptor field which will be sent to devices during FUOTA transfer.
+
 # v1.44.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

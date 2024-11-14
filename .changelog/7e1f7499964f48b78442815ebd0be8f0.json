@@ -1,8 +1,0 @@
-{
-    "id": "7e1f7499-964f-48b7-8442-815ebd0be8f0",
-    "type": "feature",
-    "description": "Adds support for Amazon Redshift S3AccessGrants",
-    "modules": [
-        "service/redshift"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.52.0 (2024-11-14)
+
+* **Feature**: Adds support for Amazon Redshift S3AccessGrants
+
 # v1.51.1 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

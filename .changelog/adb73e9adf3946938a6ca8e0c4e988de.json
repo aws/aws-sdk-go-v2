@@ -1,8 +1,0 @@
-{
-    "id": "adb73e9a-df39-4693-8a6c-a8e0c4e988de",
-    "type": "feature",
-    "description": "This release introduces the new API 'AssumeRoot', which returns short-term credentials that you can use to perform privileged tasks.",
-    "modules": [
-        "service/sts"
-    ]
-}

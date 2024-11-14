@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.19
 	github.com/aws/aws-sdk-go-v2/service/sso v1.24.5
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.4
-	github.com/aws/aws-sdk-go-v2/service/sts v1.32.4
+	github.com/aws/aws-sdk-go-v2/service/sts v1.33.0
 	github.com/aws/smithy-go v1.22.0
 )
 

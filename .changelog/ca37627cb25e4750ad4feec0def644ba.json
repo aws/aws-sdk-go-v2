@@ -1,8 +1,0 @@
-{
-    "id": "ca37627c-b25e-4750-ad4f-eec0def644ba",
-    "type": "feature",
-    "description": "IVS now offers customers the ability to stream multitrack video to Channels.",
-    "modules": [
-        "service/ivs"
-    ]
-}

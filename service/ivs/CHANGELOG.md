@@ -1,3 +1,7 @@
+# v1.42.0 (2024-11-14)
+
+* **Feature**: IVS now offers customers the ability to stream multitrack video to Channels.
+
 # v1.41.2 (2024-11-06)
 
 * **Dependency Update**: Updated to the latest SDK module versions

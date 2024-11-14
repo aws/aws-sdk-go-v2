@@ -1,8 +1,0 @@
-{
-    "id": "79f9753e-baf8-42a0-9034-5a87e34867df",
-    "type": "feature",
-    "description": "Add support for Neuron instance types [ trn1/trn1n/inf2 ] on SageMaker Notebook Instances Platform.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

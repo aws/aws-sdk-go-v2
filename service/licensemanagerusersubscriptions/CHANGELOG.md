@@ -1,3 +1,7 @@
+# v1.14.0 (2024-11-14)
+
+* **Feature**: New and updated API operations to support License Included User-based Subscription of Microsoft Remote Desktop Services (RDS).
+
 # v1.13.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

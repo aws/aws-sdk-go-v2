@@ -1,3 +1,7 @@
+# v1.36.0 (2024-11-14)
+
+* **Feature**: Expand analyzer configuration capabilities for unused access analyzers. Unused access analyzer configurations now support the ability to exclude accounts and resource tags from analysis providing more granular control over the scope of analysis.
+
 # v1.35.0 (2024-11-13)
 
 * **Feature**: This release adds support for policy validation and external access findings for resource control policies (RCP). IAM Access Analyzer helps you author functional and secure RCPs and awareness that a RCP may restrict external access. Updated service API, documentation, and paginators.
