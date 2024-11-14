@@ -34997,6 +34997,48 @@
                         "smithy.api#enumValue": "ml.inf1.24xlarge"
                     }
                 },
+                "ML_TRN1_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1.2xlarge"
+                    }
+                },
+                "ML_TRN1_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1.32xlarge"
+                    }
+                },
+                "ML_TRN1N_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1n.32xlarge"
+                    }
+                },
+                "ML_INF2_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.xlarge"
+                    }
+                },
+                "ML_INF2_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.8xlarge"
+                    }
+                },
+                "ML_INF2_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.24xlarge"
+                    }
+                },
+                "ML_INF2_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.48xlarge"
+                    }
+                },
                 "ML_P4D_24XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -66666,6 +66708,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g5.48xlarge"
+                    }
+                },
+                "ML_INF2_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.xlarge"
+                    }
+                },
+                "ML_INF2_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.8xlarge"
+                    }
+                },
+                "ML_INF2_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.24xlarge"
+                    }
+                },
+                "ML_INF2_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.inf2.48xlarge"
                     }
                 }
             }

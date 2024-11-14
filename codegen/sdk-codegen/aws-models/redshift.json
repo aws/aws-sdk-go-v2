@@ -13911,6 +13911,22 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshift#ReadWriteAccess": {
+            "type": "structure",
+            "members": {
+                "Authorization": {
+                    "target": "com.amazonaws.redshift#ServiceAuthorization",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Determines whether the read/write scope is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 Access Grants scope.</p>"
+            }
+        },
         "com.amazonaws.redshift#RebootCluster": {
             "type": "operation",
             "input": {
@@ -17510,6 +17526,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshift#S3AccessGrantsScopeUnion": {
+            "type": "union",
+            "members": {
+                "ReadWriteAccess": {
+                    "target": "com.amazonaws.redshift#ReadWriteAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 Access Grants scope.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of scopes set up for S3 Access Grants integration.</p>"
+            }
+        },
+        "com.amazonaws.redshift#S3AccessGrantsServiceIntegrations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#S3AccessGrantsScopeUnion"
+            }
+        },
         "com.amazonaws.redshift#S3KeyPrefixValue": {
             "type": "string",
             "traits": {
@@ -17969,6 +18005,12 @@
                     "target": "com.amazonaws.redshift#LakeFormationServiceIntegrations",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of scopes set up for Lake Formation integration.</p>"
+                    }
+                },
+                "S3AccessGrants": {
+                    "target": "com.amazonaws.redshift#S3AccessGrantsServiceIntegrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of scopes set up for S3 Access Grants integration.</p>"
                     }
                 }
             },

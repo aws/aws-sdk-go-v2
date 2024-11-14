@@ -546,6 +546,16 @@
                 "smithy.api#documentation": "<p>An empty object that represents that the <code>AllSheets</code> option is the chosen value for the <code>FilterScopeConfiguration</code> parameter. This structure applies the filter to all visuals on all sheets of an Analysis, Dashboard, or Template.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
             }
         },
+        "com.amazonaws.quicksight#AltText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[ -ÿ]+$"
+            }
+        },
         "com.amazonaws.quicksight#AmazonElasticsearchParameters": {
             "type": "structure",
             "members": {
@@ -1265,6 +1275,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#AnswerId"
+            }
+        },
+        "com.amazonaws.quicksight#ApplicationTheme": {
+            "type": "structure",
+            "members": {
+                "BrandColorPalette": {
+                    "target": "com.amazonaws.quicksight#BrandColorPalette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color palette.</p>"
+                    }
+                },
+                "BrandElementStyle": {
+                    "target": "com.amazonaws.quicksight#BrandElementStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The element style.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The application theme.</p>"
             }
         },
         "com.amazonaws.quicksight#ArcAxisConfiguration": {
@@ -5254,6 +5284,292 @@
                 "smithy.api#documentation": "<p>A box plot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html\">Using box plots</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.quicksight#BrandColorPalette": {
+            "type": "structure",
+            "members": {
+                "Primary": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary color.</p>"
+                    }
+                },
+                "Secondary": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secondary color.</p>"
+                    }
+                },
+                "Accent": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for accent elements.</p>"
+                    }
+                },
+                "Measure": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for measure elements.</p>"
+                    }
+                },
+                "Dimension": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for dimension elements.</p>"
+                    }
+                },
+                "Success": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for success elements.</p>"
+                    }
+                },
+                "Info": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for info elements.</p>"
+                    }
+                },
+                "Warning": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for warning elements.</p>"
+                    }
+                },
+                "Danger": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is used for danger elements.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color palette.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BrandDefinition": {
+            "type": "structure",
+            "members": {
+                "BrandName": {
+                    "target": "com.amazonaws.quicksight#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the brand.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the brand.</p>"
+                    }
+                },
+                "ApplicationTheme": {
+                    "target": "com.amazonaws.quicksight#ApplicationTheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application theme of the brand.</p>"
+                    }
+                },
+                "LogoConfiguration": {
+                    "target": "com.amazonaws.quicksight#LogoConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logo configuration of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of the brand.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BrandDetail": {
+            "type": "structure",
+            "members": {
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the brand.</p>"
+                    }
+                },
+                "BrandStatus": {
+                    "target": "com.amazonaws.quicksight#BrandStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the brand.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the brand was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the brand was updated.</p>"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the version.</p>"
+                    }
+                },
+                "VersionStatus": {
+                    "target": "com.amazonaws.quicksight#BrandVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the version.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.quicksight#ErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors that occurred during the most recent brand operation.</p>"
+                    }
+                },
+                "Logo": {
+                    "target": "com.amazonaws.quicksight#Logo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logo details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the brand.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BrandElementStyle": {
+            "type": "structure",
+            "members": {
+                "NavbarStyle": {
+                    "target": "com.amazonaws.quicksight#NavbarStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The navigation bar style.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The element style.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BrandStatus": {
+            "type": "enum",
+            "members": {
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_SUCCEEDED"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BrandSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the brand.</p>"
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>"
+                    }
+                },
+                "BrandName": {
+                    "target": "com.amazonaws.quicksight#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the brand.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the brand.</p>"
+                    }
+                },
+                "BrandStatus": {
+                    "target": "com.amazonaws.quicksight#BrandStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the brand.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the brand was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the brand was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the brand.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BrandSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#BrandSummary"
+            }
+        },
+        "com.amazonaws.quicksight#BrandVersionStatus": {
+            "type": "enum",
+            "members": {
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_SUCCEEDED"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#CIDR": {
             "type": "string",
             "traits": {
@@ -5487,6 +5803,127 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#Capabilities": {
+            "type": "structure",
+            "members": {
+                "ExportToCsv": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to CSV files.</p>"
+                    }
+                },
+                "ExportToExcel": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to Excel files.</p>"
+                    }
+                },
+                "CreateAndUpdateThemes": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to export to Create and Update themes.</p>"
+                    }
+                },
+                "AddOrRunAnomalyDetectionForAnalyses": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to add or run anomaly detection.</p>"
+                    }
+                },
+                "ShareAnalyses": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share analyses.</p>"
+                    }
+                },
+                "CreateAndUpdateDatasets": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update datasets.</p>"
+                    }
+                },
+                "ShareDatasets": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share datasets.</p>"
+                    }
+                },
+                "SubscribeDashboardEmailReports": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to subscribe to email reports.</p>"
+                    }
+                },
+                "CreateAndUpdateDashboardEmailReports": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update email reports.</p>"
+                    }
+                },
+                "ShareDashboards": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share dashboards.</p>"
+                    }
+                },
+                "CreateAndUpdateThresholdAlerts": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update threshold alerts.</p>"
+                    }
+                },
+                "RenameSharedFolders": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to rename shared folders.</p>"
+                    }
+                },
+                "CreateSharedFolders": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create shared folders.</p>"
+                    }
+                },
+                "CreateAndUpdateDataSources": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create and update data sources.</p>"
+                    }
+                },
+                "ShareDataSources": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to share data sources.</p>"
+                    }
+                },
+                "ViewAccountSPICECapacity": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to view account SPICE capacity.</p>"
+                    }
+                },
+                "CreateSPICEDataset": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create a SPICE dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of actions that correspond to Amazon QuickSight permissions.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CapabilityState": {
+            "type": "enum",
+            "members": {
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#CascadingControlConfiguration": {
@@ -8116,6 +8553,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#CreateBrand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateBrandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateBrandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon QuickSight brand.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/brands/{BrandId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateBrandRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandDefinition": {
+                    "target": "com.amazonaws.quicksight#BrandDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the brand.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs that are assigned to the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateBrandResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "BrandDetail": {
+                    "target": "com.amazonaws.quicksight#BrandDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the brand.</p>"
+                    }
+                },
+                "BrandDefinition": {
+                    "target": "com.amazonaws.quicksight#BrandDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#CreateColumnsOperation": {
             "type": "structure",
             "members": {
@@ -8129,6 +8665,117 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A transform operation that creates calculated columns. Columns created in one such\n            operation form a lexical closure.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CreateCustomPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateCustomPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateCustomPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a custom permissions profile.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/custom-permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateCustomPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that you want to create the custom permissions profile in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permissions profile that you want to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Capabilities": {
+                    "target": "com.amazonaws.quicksight#Capabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of actions to include in the custom permissions profile.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the custom permissions profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateCustomPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom permissions profile.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#CreateDashboard": {
@@ -11232,6 +11879,48 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The customized parameter values.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomPermissions": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom permissions profile.</p>"
+                    }
+                },
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permissions profile.</p>"
+                    }
+                },
+                "Capabilities": {
+                    "target": "com.amazonaws.quicksight#Capabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of actions in the custom permissions profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom permissions profile.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomPermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#CustomPermissions"
+            }
+        },
+        "com.amazonaws.quicksight#CustomPermissionsName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9+=,.@_-]+$"
             }
         },
         "com.amazonaws.quicksight#CustomSql": {
@@ -15361,6 +16050,247 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteBrand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteBrandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteBrandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon QuickSight brand.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/brands/{BrandId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteBrandAssignment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteBrandAssignmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteBrandAssignmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a brand assignment.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/brandassignments",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteBrandAssignmentRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand assignment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteBrandAssignmentResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteBrandRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteBrandResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteCustomPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteCustomPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteCustomPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a custom permissions profile.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/custom-permissions/{CustomPermissionsName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteCustomPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the custom permissions profile that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permissions profile that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteCustomPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom permissions profile.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteDashboard": {
             "type": "operation",
             "input": {
@@ -17462,6 +18392,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteUserCustomPermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteUserCustomPermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteUserCustomPermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a custom permissions profile from a user.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/custom-permission",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteUserCustomPermissionRequest": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.quicksight#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user that you want to remove custom permissions from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the custom permission configuration that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that the user belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteUserCustomPermissionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteUserRequest": {
             "type": "structure",
             "members": {
@@ -18554,6 +19581,351 @@
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobWarningList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of warning records that describe all permitted errors that are encountered during the import job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeBrandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeBrandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a brand.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/brands/{BrandId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandAssignment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeBrandAssignmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeBrandAssignmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a brand assignment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/brandassignments",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandAssignmentRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand assignment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandAssignmentResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "BrandArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandPublishedVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeBrandPublishedVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeBrandPublishedVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the published version of the brand.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/brands/{BrandId}/publishedversion",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandPublishedVersionRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandPublishedVersionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "BrandDetail": {
+                    "target": "com.amazonaws.quicksight#BrandDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the brand.</p>"
+                    }
+                },
+                "BrandDefinition": {
+                    "target": "com.amazonaws.quicksight#BrandDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the specific version. The default value is the latest version.</p>",
+                        "smithy.api#httpQuery": "versionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeBrandResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "BrandDetail": {
+                    "target": "com.amazonaws.quicksight#BrandDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the brand.</p>"
+                    }
+                },
+                "BrandDefinition": {
+                    "target": "com.amazonaws.quicksight#BrandDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeCustomPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeCustomPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeCustomPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a custom permissions profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/custom-permissions/{CustomPermissionsName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeCustomPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the custom permissions profile that you want described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permissions profile to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeCustomPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                },
+                "CustomPermissions": {
+                    "target": "com.amazonaws.quicksight#CustomPermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom permissions profile.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -22311,6 +23683,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[ -ÿ]+$"
+            }
+        },
         "com.amazonaws.quicksight#DestinationParameterValueConfiguration": {
             "type": "structure",
             "members": {
@@ -22822,6 +24204,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Error information for the SPICE ingestion of a dataset.</p>"
             }
+        },
+        "com.amazonaws.quicksight#ErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ErrorMessage"
+            }
+        },
+        "com.amazonaws.quicksight#ErrorMessage": {
+            "type": "string"
         },
         "com.amazonaws.quicksight#ExasolParameters": {
             "type": "structure",
@@ -27971,6 +29362,102 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.quicksight#Image": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.quicksight#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the logo image.</p>"
+                    }
+                },
+                "GeneratedImageUrl": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL that points to the generated logo image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logo image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageConfiguration": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.quicksight#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logo image configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageSet": {
+            "type": "structure",
+            "members": {
+                "Original": {
+                    "target": "com.amazonaws.quicksight#Image",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Height64": {
+                    "target": "com.amazonaws.quicksight#Image",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image with the height set to 64 pixels.</p>"
+                    }
+                },
+                "Height32": {
+                    "target": "com.amazonaws.quicksight#Image",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image with the height set to 32 pixels.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image set.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageSetConfiguration": {
+            "type": "structure",
+            "members": {
+                "Original": {
+                    "target": "com.amazonaws.quicksight#ImageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The original image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image set configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageSource": {
+            "type": "union",
+            "members": {
+                "PublicUrl": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public URL that points to the source image.</p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI that points to the source image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the image.</p>"
+            }
+        },
         "com.amazonaws.quicksight#IncludeFolderMembers": {
             "type": "enum",
             "members": {
@@ -28887,6 +30374,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An internal failure occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.quicksight#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service exception.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -30602,6 +32105,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListBrands": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListBrandsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListBrandsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all brands in an Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/brands",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Brands",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListBrandsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brands that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned in a single request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListBrandsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "Brands": {
+                    "target": "com.amazonaws.quicksight#BrandSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all brands in your Amazon Web Services account. This structure provides basic\n\t          information about each brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListControlDisplayOptions": {
             "type": "structure",
             "members": {
@@ -30660,6 +32250,116 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration of the <code>Select all</code> options in a list control.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ListCustomPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListCustomPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListCustomPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the custom permissions profiles.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/custom-permissions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CustomPermissionsList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListCustomPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the custom permissions profiles that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListCustomPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "CustomPermissionsList": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom permissions profiles.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#ListDashboardVersions": {
@@ -34029,6 +35729,92 @@
                 "smithy.api#documentation": "<p>Information about the source of a logical table. This is a variant type structure. For\n            this structure to be valid, only one of the attributes can be non-null.</p>"
             }
         },
+        "com.amazonaws.quicksight#Logo": {
+            "type": "structure",
+            "members": {
+                "AltText": {
+                    "target": "com.amazonaws.quicksight#AltText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the logo.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogoSet": {
+                    "target": "com.amazonaws.quicksight#LogoSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of configured logos.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logo configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LogoConfiguration": {
+            "type": "structure",
+            "members": {
+                "AltText": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the logo.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogoSet": {
+                    "target": "com.amazonaws.quicksight#LogoSetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of configured logos.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logo configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LogoSet": {
+            "type": "structure",
+            "members": {
+                "Primary": {
+                    "target": "com.amazonaws.quicksight#ImageSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary logo.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Favicon": {
+                    "target": "com.amazonaws.quicksight#ImageSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The favicon logo.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of logos.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LogoSetConfiguration": {
+            "type": "structure",
+            "members": {
+                "Primary": {
+                    "target": "com.amazonaws.quicksight#ImageSetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary logo.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Favicon": {
+                    "target": "com.amazonaws.quicksight#ImageSetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The favicon logo.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logo set configuration.</p>"
+            }
+        },
         "com.amazonaws.quicksight#Long": {
             "type": "long",
             "traits": {
@@ -34562,6 +36348,16 @@
                 "smithy.api#documentation": "<p>The parameters for MySQL.</p>"
             }
         },
+        "com.amazonaws.quicksight#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[ -ÿ]+$"
+            }
+        },
         "com.amazonaws.quicksight#NamedEntityAggType": {
             "type": "enum",
             "members": {
@@ -34974,6 +36770,26 @@
                     "min": 0,
                     "max": 150000
                 }
+            }
+        },
+        "com.amazonaws.quicksight#NavbarStyle": {
+            "type": "structure",
+            "members": {
+                "GlobalNavbar": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global navigation bar style.</p>"
+                    }
+                },
+                "ContextualNavbar": {
+                    "target": "com.amazonaws.quicksight#Palette",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual navigation bar style.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The navigation bar style.</p>"
             }
         },
         "com.amazonaws.quicksight#NegativeFormat": {
@@ -35989,6 +37805,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The pagination configuration for a table visual or boxplot.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#Palette": {
+            "type": "structure",
+            "members": {
+                "Foreground": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The foreground color.</p>"
+                    }
+                },
+                "Background": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background color.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color palette.</p>"
             }
         },
         "com.amazonaws.quicksight#PanelBorderStyle": {
@@ -38505,6 +40341,12 @@
                     "target": "com.amazonaws.quicksight#CreateAnalysis"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateBrand"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#CreateCustomPermissions"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateDashboard"
                 },
                 {
@@ -38569,6 +40411,15 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteBrand"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteBrandAssignment"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteCustomPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteDashboard"
@@ -38637,6 +40488,9 @@
                     "target": "com.amazonaws.quicksight#DeleteUserByPrincipalId"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteUserCustomPermission"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteVPCConnection"
                 },
                 {
@@ -38662,6 +40516,18 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeAssetBundleImportJob"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeBrand"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeBrandAssignment"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeBrandPublishedVersion"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeCustomPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeDashboard"
@@ -38791,6 +40657,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListAssetBundleImportJobs"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListBrands"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListCustomPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListDashboards"
@@ -38937,6 +40809,18 @@
                     "target": "com.amazonaws.quicksight#UpdateAnalysisPermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#UpdateBrand"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateBrandAssignment"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateBrandPublishedVersion"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateCustomPermissions"
+                },
+                {
                     "target": "com.amazonaws.quicksight#UpdateDashboard"
                 },
                 {
@@ -39025,6 +40909,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateUser"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateUserCustomPermission"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateVPCConnection"
@@ -52182,6 +54069,370 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateBrand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateBrandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateBrandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a brand.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/brands/{BrandId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandAssignment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateBrandAssignmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateBrandAssignmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a brand assignment.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/brandassignments",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandAssignmentRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand assignment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the brand.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandAssignmentResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "BrandArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandPublishedVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateBrandPublishedVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateBrandPublishedVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the published version of a brand.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/brands/{BrandId}/publishedversion",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandPublishedVersionRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the published version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandPublishedVersionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the published version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon QuickSight brand.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BrandDefinition": {
+                    "target": "com.amazonaws.quicksight#BrandDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateBrandResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "BrandDetail": {
+                    "target": "com.amazonaws.quicksight#BrandDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the brand.</p>"
+                    }
+                },
+                "BrandDefinition": {
+                    "target": "com.amazonaws.quicksight#BrandDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the brand.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateCustomPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateCustomPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateCustomPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a custom permissions profile.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/custom-permissions/{CustomPermissionsName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateCustomPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the custom permissions profile that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permissions profile that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Capabilities": {
+                    "target": "com.amazonaws.quicksight#Capabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of actions to include in the custom permissions profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateCustomPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom permissions profile.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateDashboard": {
             "type": "operation",
             "input": {
@@ -55547,6 +57798,110 @@
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateUserCustomPermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateUserCustomPermissionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateUserCustomPermissionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a custom permissions profile for a user.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/custom-permission",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateUserCustomPermissionRequest": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.quicksight#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user that you want to update custom permissions for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the custom permission configuration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that the user belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomPermissionsName": {
+                    "target": "com.amazonaws.quicksight#CustomPermissionsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom permissions that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateUserCustomPermissionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateUserRequest": {

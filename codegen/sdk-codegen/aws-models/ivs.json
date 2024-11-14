@@ -896,10 +896,22 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of audio channels.</p>"
                     }
+                },
+                "track": {
+                    "target": "com.amazonaws.ivs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the audio track (if the stream has an audio track). If multitrack is not enabled, this is track0 (the sole track).</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object specifying a stream’s audio configuration, as set up by the broadcaster (usually in\n      an encoder). This is part of the <a>IngestConfiguration</a> object and used for\n      monitoring stream health.</p>"
+                "smithy.api#documentation": "<p>Object specifying a stream’s audio configuration, as set up by the broadcaster (usually in an encoder). This is part of the <a>IngestConfigurations</a> object and the deprecated <a>IngestConfiguration</a> object. It is used for monitoring stream health.</p>"
+            }
+        },
+        "com.amazonaws.ivs#AudioConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivs#AudioConfiguration"
             }
         },
         "com.amazonaws.ivs#BatchError": {
@@ -1249,6 +1261,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables\n      playback restriction. Default: \"\" (empty string, no playback restriction policy is\n      applied).</p>"
                     }
+                },
+                "multitrackInputConfiguration": {
+                    "target": "com.amazonaws.ivs#MultitrackInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>"
+                    }
+                },
+                "containerFormat": {
+                    "target": "com.amazonaws.ivs#ContainerFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1465,6 +1489,21 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.ivs#ContainerFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TS",
+                        "name": "TS"
+                    },
+                    {
+                        "value": "FRAGMENTED_MP4",
+                        "name": "FragmentedMP4"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ivs#CreateChannel": {
             "type": "operation",
             "input": {
@@ -1555,6 +1594,18 @@
                     "target": "com.amazonaws.ivs#ChannelPlaybackRestrictionPolicyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction.\n    Default: \"\" (empty string, no playback restriction policy is applied).</p>"
+                    }
+                },
+                "multitrackInputConfiguration": {
+                    "target": "com.amazonaws.ivs#MultitrackInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>"
+                    }
+                },
+                "containerFormat": {
+                    "target": "com.amazonaws.ivs#ContainerFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>"
                     }
                 }
             }
@@ -2520,7 +2571,29 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object specifying the ingest configuration set up by the broadcaster, usually in an\n      encoder.</p>"
+                "smithy.api#documentation": "<p>Object specifying the ingest configuration set up by the broadcaster, usually in an\n      encoder.</p>\n         <p>\n            <b>Note:</b> IngestConfiguration is deprecated in favor of <a>IngestConfigurations</a> but retained to ensure backward compatibility. If multitrack is not enabled, IngestConfiguration and IngestConfigurations contain the same data, namely information about track0 (the sole track). If multitrack is enabled, IngestConfiguration contains data for only the first track (track0) and IngestConfigurations contains data for all tracks.</p>"
+            }
+        },
+        "com.amazonaws.ivs#IngestConfigurations": {
+            "type": "structure",
+            "members": {
+                "videoConfigurations": {
+                    "target": "com.amazonaws.ivs#VideoConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encoder settings for video</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "audioConfigurations": {
+                    "target": "com.amazonaws.ivs#AudioConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encoder settings for audio.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying the ingest configuration set up by the broadcaster, usually in an encoder. </p>\n         <p>\n            <b>Note:</b> Use IngestConfigurations instead of <a>IngestConfiguration</a> (which is deprecated). If multitrack is not enabled, IngestConfiguration and IngestConfigurations contain the same data, namely information about track0 (the sole track). If multitrack is enabled, IngestConfiguration contains data for only the first track (track0) and IngestConfigurations contains data for all tracks.</p>"
             }
         },
         "com.amazonaws.ivs#IngestEndpoint": {
@@ -2555,6 +2628,12 @@
             }
         },
         "com.amazonaws.ivs#IsAuthorized": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.ivs#IsMultitrackInputEnabled": {
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
@@ -3181,6 +3260,73 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ivs#MultitrackInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.ivs#IsMultitrackInputEnabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether multitrack input is enabled. Can be set to <code>true</code> only if channel type is <code>STANDARD</code>. Setting <code>enabled</code> to <code>true</code> with any other channel type will cause an exception. If <code>true</code>, then <code>policy</code>, <code>maximumResolution</code>, and <code>containerFormat</code> are required, and <code>containerFormat</code> must be set to <code>FRAGMENTED_MP4</code>. Default: <code>false</code>.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.ivs#MultitrackPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether multitrack input is allowed or required. Required if <code>enabled</code> is <code>true</code>.</p>"
+                    }
+                },
+                "maximumResolution": {
+                    "target": "com.amazonaws.ivs#MultitrackMaximumResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum resolution for multitrack input. Required if <code>enabled</code> is <code>true</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that specifies multitrack input configuration.</p>"
+            }
+        },
+        "com.amazonaws.ivs#MultitrackMaximumResolution": {
+            "type": "enum",
+            "members": {
+                "SD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SD"
+                    }
+                },
+                "HD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HD"
+                    }
+                },
+                "FULL_HD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_HD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivs#MultitrackPolicy": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "REQUIRE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRE"
+                    }
                 }
             }
         },
@@ -4041,7 +4187,7 @@
                 "code": {
                     "target": "com.amazonaws.ivs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides additional details about the stream event. There are several values; note that \n\t\t\tthe long descriptions are provided in the IVS console but not delivered through \n\t  \t    the IVS API or EventBridge:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>StreamTakeoverMediaMismatch</code> — The broadcast client attempted to take over \n\t\t\twith different media properties (e.g., codec, resolution, or video track type) from the \n\t\t\toriginal stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StreamTakeoverInvalidPriority</code> — The broadcast client attempted a takeover \n\t\t\twith either a priority integer value equal to or lower than the original stream's value or a value outside \n\t\t\tthe allowed range of 1 to 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StreamTakeoverLimitBreached</code> — The broadcast client reached the maximum allowed \n\t\t\ttakeover attempts for this stream.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Provides additional details about the stream event. There are several values; the long descriptions are provided in the IVS console but not delivered through the IVS API or EventBridge. Multitrack-related codes are used only for certain Session Ended events.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MultitrackInputNotAllowed</code> — The broadcast client attempted to connect with multitrack input, but multitrack input was not enabled on the channel. Check your broadcast software settings or set <code>MultitrackInputConfiguration.Policy</code> to <code>ALLOW</code> or <code>REQUIRE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MultitrackInputRequired</code> — The broadcast client attempted to connect with single-track video, but multitrack input is required on this channel. Enable multitrack video in your broadcast software or configure the channel’s <code>MultitrackInputConfiguration.Policy</code> to <code>ALLOW</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidGetClientConfigurationStreamKey</code> — The broadcast client attempted to connect with an invalid, expired, or corrupt stream key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetClientConfigurationStreamKeyRequired</code> — The broadcast client attempted to stream multitrack video without providing an authenticated stream key from GetClientConfiguration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidMultitrackInputTrackCount</code> — The multitrack input stream contained an invalid number of tracks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidMultitrackInputVideoTrackMediaProperties</code> — The multitrack input stream contained one or more tracks with an invalid codec, resolution, bitrate, or framerate.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StreamTakeoverMediaMismatch</code> — The broadcast client attempted to take over with different media properties (e.g., codec, resolution, or video track type) from the original stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StreamTakeoverInvalidPriority</code> — The broadcast client attempted a takeover with either a priority integer value equal to or lower than the original stream's value or a value outside the allowed range of 1 to 2,147,483,647.</p>\n               <p>\n                  <code>StreamTakeoverLimitBreached</code> — The broadcast client reached the maximum allowed takeover attempts for this stream.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4246,7 +4392,13 @@
                 "ingestConfiguration": {
                     "target": "com.amazonaws.ivs#IngestConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The properties of the incoming RTMP stream for the stream.</p>"
+                        "smithy.api#documentation": "<p>The properties of the incoming RTMP stream.</p>\n         <p>\n            <b>Note:</b>\n            <code>ingestConfiguration</code> is deprecated in favor of <code>ingestConfigurations</code> but retained to ensure backward compatibility. If multitrack is not enabled, <code>ingestConfiguration</code> and <code>ingestConfigurations</code> contain the same data, namely information about track0 (the sole track). If multitrack is enabled, <code>ingestConfiguration</code> contains data for only the first track (track0) and <code>ingestConfigurations</code> contains data for all tracks.</p>"
+                    }
+                },
+                "ingestConfigurations": {
+                    "target": "com.amazonaws.ivs#IngestConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the incoming RTMP stream. If multitrack is enabled, <code>ingestConfigurations</code> contains data for all tracks; otherwise, it contains data only for track0 (the sole track).</p>"
                     }
                 },
                 "recordingConfiguration": {
@@ -4528,7 +4680,7 @@
                 "targetIntervalSeconds": {
                     "target": "com.amazonaws.ivs#TargetIntervalSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required)\n      only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>\n         <p>\n            <b>Important:</b> For the <code>BASIC</code> channel type,\n      setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are\n      generated at the specified interval. For thumbnails to be generated at the\n        <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the\n      input video must be less than the <code>targetIntervalSeconds</code> value. See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html\"> Amazon IVS Streaming\n        Configuration</a> for information on setting <code>IDR/Keyframe</code> to the\n      recommended value in video-encoder settings.</p>"
+                        "smithy.api#documentation": "<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required)\n      only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>\n         <p>\n            <b>Important:</b> For the <code>BASIC</code> channel type,\n      or the <code>STANDARD</code> channel type with multitrack input,\n      setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are\n      generated at the specified interval. For thumbnails to be generated at the\n        <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the\n      input video must be less than the <code>targetIntervalSeconds</code> value. See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html\"> Amazon IVS Streaming\n        Configuration</a> for information on setting <code>IDR/Keyframe</code> to the\n      recommended value in video-encoder settings.</p>"
                     }
                 },
                 "resolution": {
@@ -4766,6 +4918,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction.\n     If this is set to an empty string, playback restriction policy is disabled.</p>"
                     }
+                },
+                "multitrackInputConfiguration": {
+                    "target": "com.amazonaws.ivs#MultitrackInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>"
+                    }
+                },
+                "containerFormat": {
+                    "target": "com.amazonaws.ivs#ContainerFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>"
+                    }
                 }
             }
         },
@@ -4936,10 +5100,34 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Video-resolution width in pixels.</p>"
                     }
+                },
+                "level": {
+                    "target": "com.amazonaws.ivs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. When an AVC codec is used, this field has the same value as <code>avcLevel</code>.</p>"
+                    }
+                },
+                "track": {
+                    "target": "com.amazonaws.ivs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the video track. If multitrack is not enabled, this is track0 (the sole track).</p>"
+                    }
+                },
+                "profile": {
+                    "target": "com.amazonaws.ivs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates to the decoder the requirements for decoding the stream. When an AVC codec is used, this field has the same value as <code>avcProfile</code>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object specifying a stream’s video configuration, as set up by the broadcaster (usually in\n      an encoder). This is part of the <a>IngestConfiguration</a> object and used for\n      monitoring stream health.</p>"
+                "smithy.api#documentation": "<p>Object specifying a stream’s video configuration, as set up by the broadcaster (usually in\n      an encoder). This is part of the <a>IngestConfigurations</a> object and the deprecated\n      <a>IngestConfiguration</a> object. It is used for monitoring stream health.\n      </p>"
+            }
+        },
+        "com.amazonaws.ivs#VideoConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivs#VideoConfiguration"
             }
         },
         "com.amazonaws.ivs#ViewerId": {

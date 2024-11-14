@@ -1554,6 +1554,12 @@
                 "target": "com.amazonaws.accessanalyzer#AccessPreviewSummary"
             }
         },
+        "com.amazonaws.accessanalyzer#AccountIdsList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.accessanalyzer#AclCanonicalId": {
             "type": "string"
         },
@@ -1620,6 +1626,46 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.accessanalyzer#Action"
+            }
+        },
+        "com.amazonaws.accessanalyzer#AnalysisRule": {
+            "type": "structure",
+            "members": {
+                "exclusions": {
+                    "target": "com.amazonaws.accessanalyzer#AnalysisRuleCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of rules for the analyzer containing criteria to exclude from analysis. Entities\n         that meet the rule criteria will not generate findings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about analysis rules for the analyzer. Analysis rules determine\n         which entities will generate findings based on the criteria you define when you create the\n         rule.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#AnalysisRuleCriteria": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.accessanalyzer#AccountIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs to apply to the analysis rule criteria. The accounts cannot\n         include the organization analyzer owner account. Account IDs can only be applied to the\n         analysis rule criteria for organization-level analyzers. The list cannot include more than\n         2,000 account IDs.</p>"
+                    }
+                },
+                "resourceTags": {
+                    "target": "com.amazonaws.accessanalyzer#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs to match for your resources. You can use the set of Unicode\n         letters, digits, whitespace, <code>_</code>, <code>.</code>, <code>/</code>,\n         <code>=</code>, <code>+</code>, and <code>-</code>.</p>\n         <p>For the tag key, you can specify a value that is 1 to 128 characters in length and\n         cannot be prefixed with <code>aws:</code>.</p>\n         <p>For the tag value, you can specify a value that is 0 to 256 characters in length. If the\n         specified tag value is 0 characters, the rule is applied to all principals with the\n         specified tag key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The criteria for an analysis rule for an analyzer. The criteria determine which entities\n         will generate findings.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#AnalysisRuleCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#AnalysisRuleCriteria"
             }
         },
         "com.amazonaws.accessanalyzer#AnalyzedResource": {
@@ -1751,6 +1797,9 @@
             "read": {
                 "target": "com.amazonaws.accessanalyzer#GetAnalyzer"
             },
+            "update": {
+                "target": "com.amazonaws.accessanalyzer#UpdateAnalyzer"
+            },
             "delete": {
                 "target": "com.amazonaws.accessanalyzer#DeleteAnalyzer"
             },
@@ -1781,12 +1830,12 @@
                 "unusedAccess": {
                     "target": "com.amazonaws.accessanalyzer#UnusedAccessConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration of an unused access analyzer for an Amazon Web Services organization or\n         account. External access analyzers do not support any configuration.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration of an unused access analyzer for an Amazon Web Services organization or\n         account.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the configuration of an unused access analyzer for an Amazon Web Services\n         organization or account.</p>"
+                "smithy.api#documentation": "<p>Contains information about the configuration of an analyzer for an Amazon Web Services organization or\n         account.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#AnalyzerStatus": {
@@ -2020,7 +2069,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an archive rule.</p>"
+                "smithy.api#documentation": "<p>Contains information about an archive rule. Archive rules automatically archive new\n         findings that meet the criteria you define when you create the rule.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#ArchiveRulesList": {
@@ -2857,7 +2906,7 @@
                 "tags": {
                     "target": "com.amazonaws.accessanalyzer#TagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to the analyzer.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs to apply to the analyzer. You can use the set of Unicode\n         letters, digits, whitespace, <code>_</code>, <code>.</code>, <code>/</code>,\n         <code>=</code>, <code>+</code>, and <code>-</code>.</p>\n         <p>For the tag key, you can specify a value that is 1 to 128 characters in length and\n         cannot be prefixed with <code>aws:</code>.</p>\n         <p>For the tag value, you can specify a value that is 0 to 256 characters in length.</p>"
                     }
                 },
                 "clientToken": {
@@ -2870,7 +2919,7 @@
                 "configuration": {
                     "target": "com.amazonaws.accessanalyzer#AnalyzerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration of the analyzer. If the analyzer is an unused access\n         analyzer, the specified scope of unused access is used for the configuration. If the\n         analyzer is an external access analyzer, this field is not used.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration of the analyzer. If the analyzer is an unused access\n         analyzer, the specified scope of unused access is used for the configuration.</p>"
                     }
                 }
             },
@@ -5383,7 +5432,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of resources of the specified type that have been analyzed by the\n         specified external access analyzer. This action is not supported for unused access\n         analyzers.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of resources of the specified type that have been analyzed by the\n         specified analyzer.</p>",
                 "smithy.api#http": {
                     "uri": "/analyzed-resource",
                     "method": "POST",
@@ -6634,6 +6683,10 @@
                     {
                         "value": "AWS::DynamoDB::Stream",
                         "name": "AWS_DYNAMODB_STREAM"
+                    },
+                    {
+                        "value": "AWS::IAM::User",
+                        "name": "AWS_IAM_USER"
                     }
                 ]
             }
@@ -7196,6 +7249,12 @@
                 "smithy.api#documentation": "<p>The response to the request.</p>"
             }
         },
+        "com.amazonaws.accessanalyzer#TagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.accessanalyzer#TagsMap"
+            }
+        },
         "com.amazonaws.accessanalyzer#TagsMap": {
             "type": "map",
             "key": {
@@ -7417,8 +7476,11 @@
                 "unusedAccessAge": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specified access age in days for which to generate findings for unused access. For\n         example, if you specify 90 days, the analyzer will generate findings for IAM entities\n         within the accounts of the selected organization for any access that hasn't been used in 90\n         or more days since the analyzer's last scan. You can choose a value between 1 and 180\n         days.</p>"
+                        "smithy.api#documentation": "<p>The specified access age in days for which to generate findings for unused access. For\n         example, if you specify 90 days, the analyzer will generate findings for IAM entities\n         within the accounts of the selected organization for any access that hasn't been used in 90\n         or more days since the analyzer's last scan. You can choose a value between 1 and 365\n         days.</p>"
                     }
+                },
+                "analysisRule": {
+                    "target": "com.amazonaws.accessanalyzer#AnalysisRule"
                 }
             },
             "traits": {
@@ -7559,6 +7621,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the action to take for a policy in an unused permissions\n         finding.</p>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#UpdateAnalyzer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.accessanalyzer#UpdateAnalyzerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.accessanalyzer#UpdateAnalyzerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.accessanalyzer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the configuration of an existing analyzer.</p>",
+                "smithy.api#http": {
+                    "uri": "/analyzer/{analyzerName}",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#UpdateAnalyzerRequest": {
+            "type": "structure",
+            "members": {
+                "analyzerName": {
+                    "target": "com.amazonaws.accessanalyzer#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the analyzer to modify.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.accessanalyzer#AnalyzerConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.accessanalyzer#UpdateAnalyzerResponse": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.accessanalyzer#AnalyzerConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.accessanalyzer#UpdateArchiveRule": {

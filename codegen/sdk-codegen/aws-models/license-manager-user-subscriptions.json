@@ -17,14 +17,85 @@
             "type": "structure",
             "members": {
                 "DirectoryId": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Directory",
                     "traits": {
                         "smithy.api#documentation": "<p>The directory ID for an Active Directory identity provider.</p>"
+                    }
+                },
+                "ActiveDirectorySettings": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectorySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ActiveDirectorySettings</code> resource contains details about \n\t\t\tthe Active Directory, including network access details such as domain name and IP \n\t\t\taddresses, and the credential provider for user administration.</p>"
+                    }
+                },
+                "ActiveDirectoryType": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectoryType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Active Directory – either a self-managed Active Directory or an \n\t\t\tAmazon Web Services Managed Active Directory.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about an Active Directory identity provider.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectorySettings": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name for the Active Directory.</p>"
+                    }
+                },
+                "DomainIpv4List": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IpV4List",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of domain IPv4 addresses that are used for the Active Directory.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2
+                        }
+                    }
+                },
+                "DomainCredentialsProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#CredentialsProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Points to the <code>CredentialsProvider</code> resource that contains \n\t\t\tinformation about the credential provider for user administration.</p>"
+                    }
+                },
+                "DomainNetworkSettings": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#DomainNetworkSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DomainNetworkSettings</code> resource contains an array of \n\t\t\tsubnets that apply for the Active Directory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains network access and credential details that are needed for \n\t\t\tuser administration in the Active Directory.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectoryType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SELF_MANAGED",
+                        "value": "SELF_MANAGED",
+                        "documentation": "SELF_MANAGED type of Active Directory"
+                    },
+                    {
+                        "name": "AWS_MANAGED",
+                        "value": "AWS_MANAGED",
+                        "documentation": "AWS_MANAGED type of Active Directory"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{1,63}:[a-zA-Z0-9-\\.]{1,510}/[a-zA-Z0-9-\\.]{1,510}$"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#AssociateUser": {
@@ -59,7 +130,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the user to an EC2 instance to utilize user-based subscriptions.</p>\n         <note>\n            <p>Your estimated bill for charges on the number of users and related costs will take 48\n        hours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html\">Viewing your\n          monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Associates the user to an EC2 instance to utilize user-based subscriptions.</p>\n         <note>\n            <p>Your estimated bill for charges on the number of users and related costs will take 48\n\t\t\thours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html\">Viewing your\n\t\t\t\tmonthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -74,30 +145,39 @@
                 "Username": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
+                        "smithy.api#documentation": "<p>The user name from the identity provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance that provides the user-based subscription.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider of the user.</p>",
+                        "smithy.api#documentation": "<p>The identity provider for the user.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Domain": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                        "smithy.api#documentation": "<p>The domain name of the  Active Directory that contains information for the user to associate.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that apply for the user association.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#AssociateUserResponse": {
@@ -110,6 +190,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#BoxInteger": {
@@ -123,8 +206,188 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request couldn't be completed because it conflicted with the current state of the\n      resource.</p>",
+                "smithy.api#documentation": "<p>The request couldn't be completed because it conflicted with the current state of the\n\t\t\tresource.</p>",
                 "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#CreateLicenseServerEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#CreateLicenseServerEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#CreateLicenseServerEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a network endpoint for the Remote Desktop Services (RDS) license server.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/license-server/CreateLicenseServerEndpoint"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#CreateLicenseServerEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the <code>IdentityProvider</code> resource that contains details \n\t\t\tabout a registered identity provider. In the case of Active Directory, that can be \n\t\t\ta self-managed Active Directory or an Amazon Web Services Managed Active Directory that contains user identity details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LicenseServerSettings": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>LicenseServerSettings</code> resource to create for the endpoint. The \n\t\t\tsettings include the type of license server and the Secrets Manager secret that \n\t\t\tenables administrators to add or remove users associated with the \n\t\t\tlicense server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that apply for the license server endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#CreateLicenseServerEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity provider specified in the request.</p>"
+                    }
+                },
+                "LicenseServerEndpointArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>LicenseServerEndpoint</code> resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#CredentialsProvider": {
+            "type": "union",
+            "members": {
+                "SecretsManagerCredentialsProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#SecretsManagerCredentialsProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Secrets Manager secret that contains credentials needed for \n\t\t\tuser administration in the Active Directory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the credential provider for user \n\t\t\tadministration.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DeleteLicenseServerEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#DeleteLicenseServerEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#DeleteLicenseServerEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a <code>LicenseServerEndpoint</code> resource.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/license-server/DeleteLicenseServerEndpoint"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DeleteLicenseServerEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "LicenseServerEndpointArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the <code>LicenseServerEndpoint</code> \n\t\t\tresource to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerType": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of License Server that the delete request refers to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DeleteLicenseServerEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "LicenseServerEndpoint": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows details from the <code>LicenseServerEndpoint</code> resource that was deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProvider": {
@@ -159,7 +422,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters the identity provider from providing user-based subscriptions.</p>",
+                "smithy.api#documentation": "<p>Deregisters the Active Directory identity provider from License Manager user-based subscriptions.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -174,17 +437,24 @@
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An object that specifies details for the Active Directory identity provider.</p>"
                     }
                 },
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                    }
+                },
+                "IdentityProviderArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the identity provider to deregister.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProviderResponse": {
@@ -197,6 +467,15 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#Directory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(d|sd)-[0-9a-f]{10}$"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#DisassociateUser": {
@@ -246,30 +525,36 @@
                 "Username": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user name from the Active Directory identity provider for the user.</p>"
                     }
                 },
                 "InstanceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance which provides user-based subscriptions.</p>"
                     }
                 },
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An object that specifies details for the Active Directory identity provider.</p>"
+                    }
+                },
+                "InstanceUserArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user to disassociate from the EC2 instance.</p>"
                     }
                 },
                 "Domain": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                        "smithy.api#documentation": "<p>The domain name of the  Active Directory that contains information for the user to disassociate.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#DisassociateUserResponse": {
@@ -282,6 +567,27 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DomainNetworkSettings": {
+            "type": "structure",
+            "members": {
+                "Subnets": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Subnets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of subnets that apply for the Active Directory domain.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains network settings for the Active Directory domain.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#Filter": {
@@ -307,7 +613,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter name and value pair that is used to return more specific results from a describe\n      operation. Filters can be used to match a set of resources by specific criteria, such as tags,\n      attributes, or IDs.</p>"
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to return more specific results from a describe\n\t\t\tor list operation. You can use filters can be used to match a set of resources by specific \n\t\t\tcriteria, such as tags, attributes, or IDs.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#FilterList": {
@@ -322,12 +628,12 @@
                 "ActiveDirectoryIdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectoryIdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that details an Active Directory identity provider.</p>"
+                        "smithy.api#documentation": "<p>The <code>ActiveDirectoryIdentityProvider</code> resource contains settings \n\t\t\tand other details about a specific Active Directory identity provider.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about an identity provider.</p>"
+                "smithy.api#documentation": "<p>Refers to an identity provider.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummary": {
@@ -336,14 +642,14 @@
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#documentation": "<p>The <code>IdentityProvider</code> resource contains information about \n\t\t\tan identity provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Settings": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#Settings",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that details the registered identity provider’s product related configuration\n      settings such as the subnets to provision VPC endpoints.</p>",
+                        "smithy.api#documentation": "<p>The <code>Settings</code> resource contains details about the registered \n\t\t\tidentity provider’s product related configuration settings, such as the \n\t\t\tsubnets to provision VPC endpoints.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -357,8 +663,14 @@
                 "Status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of an identity provider.</p>",
+                        "smithy.api#documentation": "<p>The status of the identity provider.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "IdentityProviderArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity provider.</p>"
                     }
                 },
                 "FailureMessage": {
@@ -438,14 +750,14 @@
                 "InstanceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance that provides user-based subscriptions.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#documentation": "<p>The <code>IdentityProvider</code> resource specifies details \n\t\t\tabout the identity provider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -454,6 +766,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of a user associated with an EC2 instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "InstanceUserArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the instance user.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -465,7 +783,7 @@
                 "Domain": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                        "smithy.api#documentation": "<p>The domain name of the  Active Directory that contains the user information for the product subscription.</p>"
                     }
                 },
                 "AssociationDate": {
@@ -500,7 +818,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An exception occurred with the service.</p>",
-                "smithy.api#error": "server"
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#IpV4": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(?:(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(\\.(?!$)|$)){4}$"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#IpV4List": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#IpV4"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#LicenseManagerUserSubscriptions": {
@@ -509,6 +840,12 @@
             "operations": [
                 {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#AssociateUser"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#CreateLicenseServerEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#DeleteLicenseServerEndpoint"
                 },
                 {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProvider"
@@ -523,7 +860,13 @@
                     "target": "com.amazonaws.licensemanagerusersubscriptions#ListInstances"
                 },
                 {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ListLicenseServerEndpoints"
+                },
+                {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptions"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ListTagsForResource"
                 },
                 {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociations"
@@ -536,6 +879,12 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscription"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#UpdateIdentityProviderSettings"
@@ -574,7 +923,7 @@
                         "x-amzn-trace-id"
                     ]
                 },
-                "smithy.api#documentation": "<p>With License Manager, you can create user-based subscriptions to utilize licensed software with\n      a per user subscription fee on Amazon EC2 instances.</p>",
+                "smithy.api#documentation": "<p>With License Manager, you can create user-based subscriptions to utilize licensed software with\n\t\ta per user subscription fee on Amazon EC2 instances.</p>",
                 "smithy.api#title": "AWS License Manager User Subscriptions",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -618,7 +967,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -661,7 +1009,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -674,7 +1023,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -688,7 +1036,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -711,7 +1058,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -746,7 +1092,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -757,14 +1102,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -778,14 +1125,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -794,11 +1139,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -809,14 +1154,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -830,7 +1177,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -850,7 +1196,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -861,14 +1206,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -879,9 +1226,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1206,6 +1555,190 @@
                 }
             }
         },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServer": {
+            "type": "structure",
+            "members": {
+                "ProvisioningStatus": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointProvisioningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the provisioning process for the RDS \n\t\t\tlicense server.</p>"
+                    }
+                },
+                "HealthStatus": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of the RDS license server.</p>"
+                    }
+                },
+                "Ipv4Address": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of domain IPv4 addresses that are used for the RDS \n\t\t\tlicense server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a Remote Desktop Services (RDS) license server.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpoint": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity provider that's associated with \n\t\t\tthe RDS license server endpoint.</p>"
+                    }
+                },
+                "ServerType": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of license server.</p>"
+                    }
+                },
+                "ServerEndpoint": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServerEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ServerEndpoint</code> resource contains the network \n\t\t\taddress of the RDS license server endpoint.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the provisioning status, if there is one.</p>"
+                    }
+                },
+                "LicenseServerEndpointId": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the license server endpoint.</p>"
+                    }
+                },
+                "LicenseServerEndpointArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>ServerEndpoint</code> resource for the RDS \n\t\t\tlicense server.</p>"
+                    }
+                },
+                "LicenseServerEndpointProvisioningStatus": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointProvisioningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the provisioning process for the RDS license \n\t\t\tserver endpoint</p>"
+                    }
+                },
+                "LicenseServers": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>LicenseServer</code> resources that represent the \n\t\t\tlicense servers that are accessed through this endpoint.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when License Manager created the license server endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a network endpoint for a Remote Desktop Services (RDS) \n\t\t\tlicense server.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointId": {
+            "type": "string"
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpoint"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointProvisioningStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "PROVISIONING",
+                        "value": "PROVISIONING",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "PROVISIONING_FAILED",
+                        "value": "PROVISIONING_FAILED",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "PROVISIONED",
+                        "value": "PROVISIONED",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "DELETION_FAILED",
+                        "value": "DELETION_FAILED",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "DELETED",
+                        "value": "DELETED",
+                        "documentation": ""
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerHealthStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "HEALTHY",
+                        "value": "HEALTHY",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "UNHEALTHY",
+                        "value": "UNHEALTHY",
+                        "documentation": ""
+                    },
+                    {
+                        "name": "NOT_APPLICABLE",
+                        "value": "NOT_APPLICABLE",
+                        "documentation": ""
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServer"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseServerSettings": {
+            "type": "structure",
+            "members": {
+                "ServerType": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of license server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerSettings": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ServerSettings</code> resource contains the settings for your \n\t\t\tserver.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings to configure your license server.</p>"
+            }
+        },
         "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProviders": {
             "type": "operation",
             "input": {
@@ -1238,7 +1771,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the identity providers for user-based subscriptions.</p>",
+                "smithy.api#documentation": "<p>Lists the Active Directory identity providers for user-based subscriptions.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1258,15 +1791,24 @@
                 "MaxResults": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return from a single request.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>Product</p>\n            </li>\n            <li>\n               <p>DirectoryId</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProvidersResponse": {
@@ -1275,16 +1817,19 @@
                 "IdentityProviderSummaries": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata that describes the list identity providers operation.</p>",
+                        "smithy.api#documentation": "<p>An array of <code>IdentityProviderSummary</code> resources that contain \n\t\t\tdetails about the Active Directory identity providers that meet the request criteria.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListInstances": {
@@ -1339,21 +1884,24 @@
                 "MaxResults": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return from a single request.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify.</p>"
+                        "smithy.api#documentation": "<p>You can use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>Status</p>\n            </li>\n            <li>\n               <p>InstanceId</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListInstancesResponse": {
@@ -1362,15 +1910,111 @@
                 "InstanceSummaries": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata that describes the list instances operation.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>InstanceSummary</code> resources that contain details \n\t\t\tabout the instances that provide user-based subscriptions and also meet the \n\t\t\trequest criteria.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListLicenseServerEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListLicenseServerEndpointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListLicenseServerEndpointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the Remote Desktop Services (RDS) License Server endpoints </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/license-server/ListLicenseServerEndpoints"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "LicenseServerEndpoints"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListLicenseServerEndpointsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return from a single request.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>IdentityProviderArn</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListLicenseServerEndpointsResponse": {
+            "type": "structure",
+            "members": {
+                "LicenseServerEndpoints": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#LicenseServerEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>LicenseServerEndpoint</code> resources that \n\t\t\tcontain detailed information about the RDS License Servers that meet \n\t\t\tthe request criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptions": {
@@ -1425,8 +2069,7 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
                     }
                 },
                 "IdentityProvider": {
@@ -1439,21 +2082,24 @@
                 "MaxResults": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return from a single request.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify.</p>"
+                        "smithy.api#documentation": "<p>You can use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>Status</p>\n            </li>\n            <li>\n               <p>Username</p>\n            </li>\n            <li>\n               <p>Domain</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptionsResponse": {
@@ -1468,9 +2114,70 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the list of tags for the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the specified resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociations": {
@@ -1539,21 +2246,24 @@
                 "MaxResults": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return from a single request.</p>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify.</p>"
+                        "smithy.api#documentation": "<p>You can use the following filters to streamline results:</p>\n         <ul>\n            <li>\n               <p>Status</p>\n            </li>\n            <li>\n               <p>Username</p>\n            </li>\n            <li>\n               <p>Domain</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociationsResponse": {
@@ -1568,9 +2278,12 @@
                 "NextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                        "smithy.api#documentation": "<p>The next token used for paginated responses. When this field isn't empty, \n\tthere are additional elements that the service hasn't included in this request. Use this token \n\t\twith the next request to retrieve additional objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummary": {
@@ -1579,7 +2292,7 @@
                 "Username": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name from the identity provider of the user.</p>",
+                        "smithy.api#documentation": "<p>The user name from the identity provider for this product user.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1600,20 +2313,26 @@
                 "Status": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a product for a user.</p>",
+                        "smithy.api#documentation": "<p>The status of a product for this user.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ProductUserArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this product user.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status message for a product for a user.</p>"
+                        "smithy.api#documentation": "<p>The status message for a product for this user.</p>"
                     }
                 },
                 "Domain": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                        "smithy.api#documentation": "<p>The domain name of the  Active Directory that contains the user information for the product subscription.</p>"
                     }
                 },
                 "SubscriptionStartDate": {
@@ -1630,13 +2349,28 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of the user-based subscription products for a user.</p>"
+                "smithy.api#documentation": "<p>A summary of the user-based subscription products for a specific user.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummaryList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummary"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#RdsSalSettings": {
+            "type": "structure",
+            "members": {
+                "RdsSalCredentialsProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#CredentialsProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>CredentialsProvider</code> resource contains a reference to \n\t\t\tthe credentials provider that's used for RDS license server user administration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Server settings that are specific to a Remote Desktop Services (RDS) license server.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProvider": {
@@ -1686,23 +2420,32 @@
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider to register.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Settings": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#Settings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registered identity provider’s product related configuration settings such as the\n      subnets to provision VPC endpoints.</p>"
+                        "smithy.api#documentation": "<p>The registered identity provider’s product related configuration \n\t\t\tsettings such as the subnets to provision VPC endpoints.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that apply to the identity provider's registration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProviderResponse": {
@@ -1715,6 +2458,15 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:([a-z0-9-\\.]{1,63}):([a-z0-9-\\.]{1,63}):([a-z0-9-\\.]{1,63}):([a-z0-9-\\.]{1,63}):([a-z0-9-\\.]{1,510})/([a-z0-9-\\.]{1,510})$"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException": {
@@ -1730,6 +2482,23 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.licensemanagerusersubscriptions#SecretsManagerCredentialsProvider": {
+            "type": "structure",
+            "members": {
+                "SecretId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Secrets Manager secret that contains credentials.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a credentials secret that's stored in Secrets Manager.</p>"
+            }
+        },
         "com.amazonaws.licensemanagerusersubscriptions#SecurityGroup": {
             "type": "string",
             "traits": {
@@ -1738,6 +2507,46 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ServerEndpoint": {
+            "type": "structure",
+            "members": {
+                "Endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network address of the endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A network endpoint through which you can access one or more servers.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ServerSettings": {
+            "type": "union",
+            "members": {
+                "RdsSalSettings": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#RdsSalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>RdsSalSettings</code> resource contains settings to configure \n\t\t\ta specific Remote Desktop Services (RDS) license server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains settings for a specific server.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ServerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "RDS_SAL",
+                        "value": "RDS_SAL",
+                        "documentation": ""
+                    }
+                ]
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException": {
@@ -1768,13 +2577,13 @@
                 "SecurityGroupId": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#SecurityGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>A security group ID that allows inbound TCP port 1688 communication between resources in\n      your VPC and the VPC endpoint for activation servers.</p>",
+                        "smithy.api#documentation": "<p>A security group ID that allows inbound TCP port 1688 communication between resources in\n\t\t\tyour VPC and the VPC endpoint for activation servers.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The registered identity provider’s product related configuration settings such as the\n      subnets to provision VPC endpoints, and the security group ID that is associated with the VPC\n      endpoints. The security group should permit inbound TCP port 1688 communication from resources\n      in the VPC.</p>"
+                "smithy.api#documentation": "<p>The registered identity provider’s product related configuration settings such as the\n\t\t\tsubnets to provision VPC endpoints, and the security group ID that is associated with the VPC\n\t\t\tendpoints. The security group should permit inbound TCP port 1688 communication from resources\n\t\t\tin the VPC.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscription": {
@@ -1809,7 +2618,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a product subscription for a user with the specified identity provider.</p>\n         <note>\n            <p>Your estimated bill for charges on the number of users and related costs will take 48\n        hours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html\">Viewing your\n          monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Starts a product subscription for a user with the specified identity provider.</p>\n         <note>\n            <p>Your estimated bill for charges on the number of users and related costs will take 48\n\t\t\thours to appear for billing periods that haven't closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html\">Viewing your\n\t\t\t\tmonthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1837,16 +2646,25 @@
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Domain": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                        "smithy.api#documentation": "<p>The domain name of the  Active Directory that contains the user for whom to start the product \n\t\t\tsubscription.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that apply to the product subscription.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscriptionResponse": {
@@ -1859,6 +2677,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscription": {
@@ -1907,30 +2728,36 @@
                 "Username": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>"
                     }
                 },
                 "IdentityProvider": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>"
                     }
                 },
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                    }
+                },
+                "ProductUserArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the product user.</p>"
                     }
                 },
                 "Domain": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                        "smithy.api#documentation": "<p>The domain name of the  Active Directory that contains the user for whom to stop the product \n\t\t\tsubscription.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscriptionResponse": {
@@ -1943,6 +2770,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#StringList": {
@@ -1954,13 +2784,100 @@
         "com.amazonaws.licensemanagerusersubscriptions#Subnet": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "subnet-[a-z0-9]{8,17}"
+                "smithy.api#pattern": "^subnet-[a-z0-9]{8,17}"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#Subnets": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.licensemanagerusersubscriptions#Subnet"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds tags to a resource.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to tag.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the specified resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#Tags": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException": {
@@ -1973,6 +2890,62 @@
             "traits": {
                 "smithy.api#documentation": "<p>The request was denied because of request throttling. Retry the request.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from a resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#UpdateIdentityProviderSettings": {
@@ -1998,7 +2971,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates additional product configuration settings for the registered identity\n      provider.</p>",
+                "smithy.api#documentation": "<p>Updates additional product configuration settings for the registered identity\n\t\t\tprovider.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2011,25 +2984,30 @@
             "type": "structure",
             "members": {
                 "IdentityProvider": {
-                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider"
                 },
                 "Product": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>\n         <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code>\n         </p>"
+                    }
+                },
+                "IdentityProviderArn": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity provider to update.</p>"
                     }
                 },
                 "UpdateSettings": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#UpdateSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the registered identity provider’s product related configuration settings. You can\n      update any combination of settings in a single operation such as the:</p>\n         <ul>\n            <li>\n               <p>Subnets which you want to add to provision VPC endpoints.</p>\n            </li>\n            <li>\n               <p>Subnets which you want to remove the VPC endpoints from.</p>\n            </li>\n            <li>\n               <p>Security group ID which permits traffic to the VPC endpoints.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Updates the registered identity provider’s product related configuration settings. You can\n\t\t\tupdate any combination of settings in a single operation such as the:</p>\n         <ul>\n            <li>\n               <p>Subnets which you want to add to provision VPC endpoints.</p>\n            </li>\n            <li>\n               <p>Subnets which you want to remove the VPC endpoints from.</p>\n            </li>\n            <li>\n               <p>Security group ID which permits traffic to the VPC endpoints.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#UpdateIdentityProviderSettingsResponse": {
@@ -2041,6 +3019,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#UpdateSettings": {
@@ -2049,7 +3030,7 @@
                 "AddSubnets": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#Subnets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of one or more subnets in which License Manager will create a VPC endpoint for products that\n      require connectivity to activation servers.</p>",
+                        "smithy.api#documentation": "<p>The ID of one or more subnets in which License Manager will create a VPC endpoint for products that\n\t\t\trequire connectivity to activation servers.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2063,12 +3044,12 @@
                 "SecurityGroupId": {
                     "target": "com.amazonaws.licensemanagerusersubscriptions#SecurityGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>A security group ID that allows inbound TCP port 1688 communication between resources in\n      your VPC and the VPC endpoints for activation servers.</p>"
+                        "smithy.api#documentation": "<p>A security group ID that allows inbound TCP port 1688 communication between resources in\n\t\t\tyour VPC and the VPC endpoints for activation servers.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the registered identity provider’s product related configuration settings such as\n      the subnets to provision VPC endpoints.</p>"
+                "smithy.api#documentation": "<p>Updates the registered identity provider’s product related configuration settings such as\n\t\t\tthe subnets to provision VPC endpoints.</p>"
             }
         },
         "com.amazonaws.licensemanagerusersubscriptions#ValidationException": {
