@@ -423,6 +423,49 @@ type FuotaTask struct {
 	noSmithyDocumentSerde
 }
 
+// The log options for a FUOTA task event and can be used to set log levels for a
+// specific fuota task event.
+//
+// For a LoRaWAN FuotaTask type, possible event for a log message is Fuota .
+type FuotaTaskEventLogOption struct {
+
+	// The event for a log message, if the log message is tied to a fuota task.
+	//
+	// This member is required.
+	Event FuotaTaskEvent
+
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
+	//
+	// This member is required.
+	LogLevel LogLevel
+
+	noSmithyDocumentSerde
+}
+
+// The log options for fuota tasks and can be used to set log levels for a
+// specific type of fuota task.
+type FuotaTaskLogOption struct {
+
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
+	//
+	// This member is required.
+	LogLevel LogLevel
+
+	// The fuota task type.
+	//
+	// This member is required.
+	Type FuotaTaskType
+
+	// The list of FUOTA task event log options.
+	Events []FuotaTaskEventLogOption
+
+	noSmithyDocumentSerde
+}
+
 // Gateway list item object that specifies the frequency and list of gateways for
 // which the downlink message should be sent.
 type GatewayListItem struct {
@@ -961,6 +1004,11 @@ type LoRaWANMulticast struct {
 	// DlClass for LoRaWAM, valid values are ClassB and ClassC.
 	DlClass DlClass
 
+	// Specify the list of gateways to which you want to send the multicast downlink
+	// messages. The multicast message will be sent to each gateway in the sequence
+	// provided in the list.
+	ParticipatingGateways *ParticipatingGatewaysMulticast
+
 	// Supported RfRegions
 	RfRegion SupportedRfRegion
 
@@ -979,6 +1027,11 @@ type LoRaWANMulticastGet struct {
 
 	// Number of devices that are requested to be associated with the multicast group.
 	NumberOfDevicesRequested *int32
+
+	// Specify the list of gateways to which you want to send the multicast downlink
+	// messages. The multicast message will be sent to each gateway in the sequence
+	// provided in the list.
+	ParticipatingGateways *ParticipatingGatewaysMulticast
 
 	// Supported RfRegions
 	RfRegion SupportedRfRegion
@@ -1382,6 +1435,24 @@ type ParticipatingGateways struct {
 	// transmitting the payload to the next gateway.
 	//
 	// This member is required.
+	TransmissionInterval *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specify the list of gateways to which you want to send the multicast downlink
+// messages. The multicast message will be sent to each gateway in the sequence
+// provided in the list.
+type ParticipatingGatewaysMulticast struct {
+
+	// The list of gateways that you want to use for sending the multicast downlink.
+	// Each downlink will be sent to all the gateways in the list with transmission
+	// interval between them. If list is empty the gateway list will be dynamically
+	// selected similar to the case of no ParticipatingGateways
+	GatewayList []string
+
+	// The duration of time for which AWS IoT Core for LoRaWAN will wait before
+	// transmitting the multicast payload to the next gateway in the list.
 	TransmissionInterval *int32
 
 	noSmithyDocumentSerde

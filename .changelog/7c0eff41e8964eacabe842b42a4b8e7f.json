@@ -1,0 +1,8 @@
+{
+    "id": "7c0eff41-e896-4eac-abe8-42b42a4b8e7f",
+    "type": "feature",
+    "description": "This release adds APIs for Custom Permissions management in QuickSight, and APIs to support QuickSight Branding.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

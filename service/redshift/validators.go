@@ -2567,6 +2567,21 @@ func validatePauseClusterMessage(v *types.PauseClusterMessage) error {
 	}
 }
 
+func validateReadWriteAccess(v *types.ReadWriteAccess) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReadWriteAccess"}
+	if len(v.Authorization) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Authorization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResizeClusterMessage(v *types.ResizeClusterMessage) error {
 	if v == nil {
 		return nil
@@ -2589,6 +2604,42 @@ func validateResumeClusterMessage(v *types.ResumeClusterMessage) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeClusterMessage"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessGrantsScopeUnion(v types.S3AccessGrantsScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessGrantsScopeUnion"}
+	switch uv := v.(type) {
+	case *types.S3AccessGrantsScopeUnionMemberReadWriteAccess:
+		if err := validateReadWriteAccess(&uv.Value); err != nil {
+			invalidParams.AddNested("[ReadWriteAccess]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessGrantsServiceIntegrations(v []types.S3AccessGrantsScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessGrantsServiceIntegrations"}
+	for i := range v {
+		if err := validateS3AccessGrantsScopeUnion(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2685,6 +2736,11 @@ func validateServiceIntegrationsUnion(v types.ServiceIntegrationsUnion) error {
 	case *types.ServiceIntegrationsUnionMemberLakeFormation:
 		if err := validateLakeFormationServiceIntegrations(uv.Value); err != nil {
 			invalidParams.AddNested("[LakeFormation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceIntegrationsUnionMemberS3AccessGrants:
+		if err := validateS3AccessGrantsServiceIntegrations(uv.Value); err != nil {
+			invalidParams.AddNested("[S3AccessGrants]", err.(smithy.InvalidParamsError))
 		}
 
 	}

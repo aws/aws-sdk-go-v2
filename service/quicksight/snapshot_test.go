@@ -134,6 +134,30 @@ func TestCheckSnapshot_CreateAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDashboard(context.Background(), nil, func(o *Options) {
@@ -391,6 +415,42 @@ func TestCheckSnapshot_DeleteAnalysis(t *testing.T) {
 	_, err := svc.DeleteAnalysis(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteBrandAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBrandAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBrandAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCustomPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -662,6 +722,18 @@ func TestCheckSnapshot_DeleteUserByPrincipalId(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteUserCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUserCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteUserCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteVPCConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVPCConnection(context.Background(), nil, func(o *Options) {
@@ -763,6 +835,54 @@ func TestCheckSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 	_, err := svc.DescribeAssetBundleImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAssetBundleImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeBrandAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBrandAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeBrandAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeBrandPublishedVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBrandPublishedVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeBrandPublishedVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCustomPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1279,6 +1399,30 @@ func TestCheckSnapshot_ListAssetBundleImportJobs(t *testing.T) {
 	_, err := svc.ListAssetBundleImportJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssetBundleImportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBrands(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBrands(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBrands")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1862,6 +2006,54 @@ func TestCheckSnapshot_UpdateAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateBrandAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBrandAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBrandAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateBrandPublishedVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBrandPublishedVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBrandPublishedVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCustomPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDashboard(context.Background(), nil, func(o *Options) {
@@ -2222,6 +2414,18 @@ func TestCheckSnapshot_UpdateUser(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateUserCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateUserCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateVPCConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateVPCConnection(context.Background(), nil, func(o *Options) {
@@ -2298,6 +2502,30 @@ func TestUpdateSnapshot_CreateAnalysis(t *testing.T) {
 	_, err := svc.CreateAnalysis(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2569,6 +2797,42 @@ func TestUpdateSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteBrandAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBrandAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBrandAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCustomPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDashboard(context.Background(), nil, func(o *Options) {
@@ -2833,6 +3097,18 @@ func TestUpdateSnapshot_DeleteUserByPrincipalId(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteUserCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUserCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteUserCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteVPCConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVPCConnection(context.Background(), nil, func(o *Options) {
@@ -2934,6 +3210,54 @@ func TestUpdateSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 	_, err := svc.DescribeAssetBundleImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAssetBundleImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeBrandAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBrandAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeBrandAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeBrandPublishedVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBrandPublishedVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeBrandPublishedVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCustomPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3450,6 +3774,30 @@ func TestUpdateSnapshot_ListAssetBundleImportJobs(t *testing.T) {
 	_, err := svc.ListAssetBundleImportJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssetBundleImportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBrands(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBrands(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBrands")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomPermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4033,6 +4381,54 @@ func TestUpdateSnapshot_UpdateAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateBrand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBrand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBrand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateBrandAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBrandAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBrandAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateBrandPublishedVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBrandPublishedVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBrandPublishedVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCustomPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCustomPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDashboard(context.Background(), nil, func(o *Options) {
@@ -4386,6 +4782,18 @@ func TestUpdateSnapshot_UpdateUser(t *testing.T) {
 	_, err := svc.UpdateUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateUserCustomPermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserCustomPermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateUserCustomPermission")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

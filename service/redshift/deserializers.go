@@ -35992,6 +35992,55 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentReadWriteAccess(v **types.ReadWriteAccess, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ReadWriteAccess
+	if *v == nil {
+		sv = &types.ReadWriteAccess{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Authorization", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Authorization = types.ServiceAuthorization(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentRecommendation(v **types.Recommendation, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38970,6 +39019,114 @@ func awsAwsquery_deserializeDocumentRevisionTargetsListUnwrapped(v *[]types.Revi
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentS3AccessGrantsScopeUnion(v *types.S3AccessGrantsScopeUnion, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var uv types.S3AccessGrantsScopeUnion
+	var memberFound bool
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if memberFound {
+			if err = decoder.Decoder.Skip(); err != nil {
+				return err
+			}
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ReadWriteAccess", t.Name.Local):
+			var mv types.ReadWriteAccess
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &mv
+			if err := awsAwsquery_deserializeDocumentReadWriteAccess(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.S3AccessGrantsScopeUnionMemberReadWriteAccess{Value: mv}
+			memberFound = true
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: t.Name.Local}
+			memberFound = true
+
+		}
+		decoder = originalDecoder
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentS3AccessGrantsServiceIntegrations(v *[]types.S3AccessGrantsScopeUnion, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.S3AccessGrantsScopeUnion
+	if *v == nil {
+		sv = make([]types.S3AccessGrantsScopeUnion, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.S3AccessGrantsScopeUnion
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentS3AccessGrantsScopeUnion(&col, nodeDecoder); err != nil {
+				return err
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentS3AccessGrantsServiceIntegrationsUnwrapped(v *[]types.S3AccessGrantsScopeUnion, decoder smithyxml.NodeDecoder) error {
+	var sv []types.S3AccessGrantsScopeUnion
+	if *v == nil {
+		sv = make([]types.S3AccessGrantsScopeUnion, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.S3AccessGrantsScopeUnion
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		if err := awsAwsquery_deserializeDocumentS3AccessGrantsScopeUnion(&mv, nodeDecoder); err != nil {
+			return err
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentScheduledAction(v **types.ScheduledAction, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39888,6 +40045,15 @@ func awsAwsquery_deserializeDocumentServiceIntegrationsUnion(v *types.ServiceInt
 				return err
 			}
 			uv = &types.ServiceIntegrationsUnionMemberLakeFormation{Value: mv}
+			memberFound = true
+
+		case strings.EqualFold("S3AccessGrants", t.Name.Local):
+			var mv []types.S3AccessGrantsScopeUnion
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentS3AccessGrantsServiceIntegrations(&mv, nodeDecoder); err != nil {
+				return err
+			}
+			uv = &types.ServiceIntegrationsUnionMemberS3AccessGrants{Value: mv}
 			memberFound = true
 
 		default:

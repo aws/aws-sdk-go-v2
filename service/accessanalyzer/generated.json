@@ -40,6 +40,7 @@
         "api_op_StartResourceScan.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateAnalyzer.go",
         "api_op_UpdateArchiveRule.go",
         "api_op_UpdateFindings.go",
         "api_op_ValidatePolicy.go",

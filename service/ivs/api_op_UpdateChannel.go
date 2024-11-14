@@ -39,12 +39,22 @@ type UpdateChannelInput struct {
 	// Whether the channel is private (enabled for playback authorization).
 	Authorized bool
 
+	// Indicates which content-packaging format is used (MPEG-TS or fMP4). If
+	// multitrackInputConfiguration is specified and enabled is true , then
+	// containerFormat is required and must be set to FRAGMENTED_MP4 . Otherwise,
+	// containerFormat may be set to TS or FRAGMENTED_MP4 . Default: TS .
+	ContainerFormat types.ContainerFormat
+
 	// Whether the channel allows insecure RTMP and SRT ingest. Default: false .
 	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
 	// HD. Use LOW for near-real-time interaction with viewers.
 	LatencyMode types.ChannelLatencyMode
+
+	// Object specifying multitrack input configuration. Default: no multitrack input
+	// configuration is specified.
+	MultitrackInputConfiguration *types.MultitrackInputConfiguration
 
 	// Channel name.
 	Name *string

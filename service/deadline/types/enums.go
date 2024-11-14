@@ -2,6 +2,29 @@
 
 package types
 
+type AcceleratorName string
+
+// Enum values for AcceleratorName
+const (
+	AcceleratorNameT4   AcceleratorName = "t4"
+	AcceleratorNameA10g AcceleratorName = "a10g"
+	AcceleratorNameL4   AcceleratorName = "l4"
+	AcceleratorNameL40s AcceleratorName = "l40s"
+)
+
+// Values returns all known values for AcceleratorName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcceleratorName) Values() []AcceleratorName {
+	return []AcceleratorName{
+		"t4",
+		"a10g",
+		"l4",
+		"l40s",
+	}
+}
+
 type AcceleratorType string
 
 // Enum values for AcceleratorType

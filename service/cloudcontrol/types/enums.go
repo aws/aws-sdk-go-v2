@@ -6,21 +6,22 @@ type HandlerErrorCode string
 
 // Enum values for HandlerErrorCode
 const (
-	HandlerErrorCodeNotUpdatable            HandlerErrorCode = "NotUpdatable"
-	HandlerErrorCodeInvalidRequest          HandlerErrorCode = "InvalidRequest"
-	HandlerErrorCodeAccessDenied            HandlerErrorCode = "AccessDenied"
-	HandlerErrorCodeInvalidCredentials      HandlerErrorCode = "InvalidCredentials"
-	HandlerErrorCodeAlreadyExists           HandlerErrorCode = "AlreadyExists"
-	HandlerErrorCodeNotFound                HandlerErrorCode = "NotFound"
-	HandlerErrorCodeResourceConflict        HandlerErrorCode = "ResourceConflict"
-	HandlerErrorCodeThrottling              HandlerErrorCode = "Throttling"
-	HandlerErrorCodeServiceLimitExceeded    HandlerErrorCode = "ServiceLimitExceeded"
-	HandlerErrorCodeNotStabilized           HandlerErrorCode = "NotStabilized"
-	HandlerErrorCodeGeneralServiceException HandlerErrorCode = "GeneralServiceException"
-	HandlerErrorCodeServiceInternalError    HandlerErrorCode = "ServiceInternalError"
-	HandlerErrorCodeServiceTimeout          HandlerErrorCode = "ServiceTimeout"
-	HandlerErrorCodeNetworkFailure          HandlerErrorCode = "NetworkFailure"
-	HandlerErrorCodeInternalFailure         HandlerErrorCode = "InternalFailure"
+	HandlerErrorCodeNotUpdatable                 HandlerErrorCode = "NotUpdatable"
+	HandlerErrorCodeInvalidRequest               HandlerErrorCode = "InvalidRequest"
+	HandlerErrorCodeAccessDenied                 HandlerErrorCode = "AccessDenied"
+	HandlerErrorCodeUnauthorizedTaggingOperation HandlerErrorCode = "UnauthorizedTaggingOperation"
+	HandlerErrorCodeInvalidCredentials           HandlerErrorCode = "InvalidCredentials"
+	HandlerErrorCodeAlreadyExists                HandlerErrorCode = "AlreadyExists"
+	HandlerErrorCodeNotFound                     HandlerErrorCode = "NotFound"
+	HandlerErrorCodeResourceConflict             HandlerErrorCode = "ResourceConflict"
+	HandlerErrorCodeThrottling                   HandlerErrorCode = "Throttling"
+	HandlerErrorCodeServiceLimitExceeded         HandlerErrorCode = "ServiceLimitExceeded"
+	HandlerErrorCodeNotStabilized                HandlerErrorCode = "NotStabilized"
+	HandlerErrorCodeGeneralServiceException      HandlerErrorCode = "GeneralServiceException"
+	HandlerErrorCodeServiceInternalError         HandlerErrorCode = "ServiceInternalError"
+	HandlerErrorCodeServiceTimeout               HandlerErrorCode = "ServiceTimeout"
+	HandlerErrorCodeNetworkFailure               HandlerErrorCode = "NetworkFailure"
+	HandlerErrorCodeInternalFailure              HandlerErrorCode = "InternalFailure"
 )
 
 // Values returns all known values for HandlerErrorCode. Note that this can be
@@ -32,6 +33,7 @@ func (HandlerErrorCode) Values() []HandlerErrorCode {
 		"NotUpdatable",
 		"InvalidRequest",
 		"AccessDenied",
+		"UnauthorizedTaggingOperation",
 		"InvalidCredentials",
 		"AlreadyExists",
 		"NotFound",

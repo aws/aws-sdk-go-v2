@@ -34,27 +34,36 @@ type ListProductSubscriptionsInput struct {
 	// This member is required.
 	IdentityProvider types.IdentityProvider
 
-	// The name of the user-based subscription product.
+	// You can use the following filters to streamline results:
 	//
-	// This member is required.
-	Product *string
-
-	// An array of structures that you can use to filter the results to those that
-	// match one or more sets of key-value pairs that you specify.
+	//   - Status
+	//
+	//   - Username
+	//
+	//   - Domain
 	Filters []types.Filter
 
-	// Maximum number of results to return in a single call.
+	// The maximum number of results to return from a single request.
 	MaxResults *int32
 
-	// Token for the next set of results.
+	// A token to specify where to start paginating. This is the nextToken from a
+	// previously truncated response.
 	NextToken *string
+
+	// The name of the user-based subscription product.
+	//
+	// Valid values: VISUAL_STUDIO_ENTERPRISE | VISUAL_STUDIO_PROFESSIONAL |
+	// OFFICE_PROFESSIONAL_PLUS
+	Product *string
 
 	noSmithyDocumentSerde
 }
 
 type ListProductSubscriptionsOutput struct {
 
-	// Token for the next set of results.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service hasn't included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// Metadata that describes the list product subscriptions operation.
@@ -169,7 +178,7 @@ func (c *Client) addOperationListProductSubscriptionsMiddlewares(stack *middlewa
 // ListProductSubscriptionsPaginatorOptions is the paginator options for
 // ListProductSubscriptions
 type ListProductSubscriptionsPaginatorOptions struct {
-	// Maximum number of results to return in a single call.
+	// The maximum number of results to return from a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,7 +11,8 @@ import (
 )
 
 // Removes the log-level override, if any, for a specific resource-ID and
-// resource-type. It can be used for a wireless device or a wireless gateway.
+// resource-type. It can be used for a wireless device, a wireless gateway, or a
+// fuota task.
 func (c *Client) ResetResourceLogLevel(ctx context.Context, params *ResetResourceLogLevelInput, optFns ...func(*Options)) (*ResetResourceLogLevelOutput, error) {
 	if params == nil {
 		params = &ResetResourceLogLevelInput{}
@@ -35,7 +36,8 @@ type ResetResourceLogLevelInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice or WirelessGateway .
+	// The type of the resource, which can be WirelessDevice , WirelessGateway , or
+	// FuotaTask .
 	//
 	// This member is required.
 	ResourceType *string

@@ -1,0 +1,8 @@
+{
+    "id": "7f7b0989-98bc-46ba-ba3d-be5b46b54bb0",
+    "type": "feature",
+    "description": "Added support for CloudFormation Hooks with Cloud Control API. The GetResourceRequestStatus API response now includes an optional HooksProgressEvent and HooksRequestToken parameter for Hooks Invocation Progress as part of resource operation with Cloud Control.",
+    "modules": [
+        "service/cloudcontrol"
+    ]
+}

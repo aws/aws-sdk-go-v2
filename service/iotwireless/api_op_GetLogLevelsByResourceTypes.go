@@ -40,6 +40,9 @@ type GetLogLevelsByResourceTypesOutput struct {
 	// more detailed logs.
 	DefaultLogLevel types.LogLevel
 
+	// The list of fuota task log options.
+	FuotaTaskLogOptions []types.FuotaTaskLogOption
+
 	// The list of wireless device log options.
 	WirelessDeviceLogOptions []types.WirelessDeviceLogOption
 

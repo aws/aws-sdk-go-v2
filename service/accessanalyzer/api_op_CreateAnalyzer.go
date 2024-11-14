@@ -52,11 +52,17 @@ type CreateAnalyzerInput struct {
 
 	// Specifies the configuration of the analyzer. If the analyzer is an unused
 	// access analyzer, the specified scope of unused access is used for the
-	// configuration. If the analyzer is an external access analyzer, this field is not
-	// used.
+	// configuration.
 	Configuration types.AnalyzerConfiguration
 
-	// An array of key-value pairs to apply to the analyzer.
+	// An array of key-value pairs to apply to the analyzer. You can use the set of
+	// Unicode letters, digits, whitespace, _ , . , / , = , + , and - .
+	//
+	// For the tag key, you can specify a value that is 1 to 128 characters in length
+	// and cannot be prefixed with aws: .
+	//
+	// For the tag value, you can specify a value that is 0 to 256 characters in
+	// length.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

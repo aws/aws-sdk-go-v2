@@ -1,0 +1,8 @@
+{
+    "id": "9ac04271-ab27-4701-9c60-52cfc12b3080",
+    "type": "feature",
+    "description": "Adds support for select GPU accelerated instance types when creating new service-managed fleets.",
+    "modules": [
+        "service/deadline"
+    ]
+}

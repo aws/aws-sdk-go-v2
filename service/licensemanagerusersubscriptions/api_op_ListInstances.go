@@ -29,14 +29,18 @@ func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, 
 
 type ListInstancesInput struct {
 
-	// An array of structures that you can use to filter the results to those that
-	// match one or more sets of key-value pairs that you specify.
+	// You can use the following filters to streamline results:
+	//
+	//   - Status
+	//
+	//   - InstanceId
 	Filters []types.Filter
 
-	// Maximum number of results to return in a single call.
+	// The maximum number of results to return from a single request.
 	MaxResults *int32
 
-	// Token for the next set of results.
+	// A token to specify where to start paginating. This is the nextToken from a
+	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +48,13 @@ type ListInstancesInput struct {
 
 type ListInstancesOutput struct {
 
-	// Metadata that describes the list instances operation.
+	// An array of InstanceSummary resources that contain details about the instances
+	// that provide user-based subscriptions and also meet the request criteria.
 	InstanceSummaries []types.InstanceSummary
 
-	// Token for the next set of results.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service hasn't included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -155,7 +162,7 @@ func (c *Client) addOperationListInstancesMiddlewares(stack *middleware.Stack, o
 
 // ListInstancesPaginatorOptions is the paginator options for ListInstances
 type ListInstancesPaginatorOptions struct {
-	// Maximum number of results to return in a single call.
+	// The maximum number of results to return from a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -29,12 +29,15 @@ func (c *Client) RegisterIdentityProvider(ctx context.Context, params *RegisterI
 
 type RegisterIdentityProviderInput struct {
 
-	// An object that specifies details for the identity provider.
+	// An object that specifies details for the identity provider to register.
 	//
 	// This member is required.
 	IdentityProvider types.IdentityProvider
 
 	// The name of the user-based subscription product.
+	//
+	// Valid values: VISUAL_STUDIO_ENTERPRISE | VISUAL_STUDIO_PROFESSIONAL |
+	// OFFICE_PROFESSIONAL_PLUS
 	//
 	// This member is required.
 	Product *string
@@ -42,6 +45,9 @@ type RegisterIdentityProviderInput struct {
 	// The registered identity provider’s product related configuration settings such
 	// as the subnets to provision VPC endpoints.
 	Settings *types.Settings
+
+	// The tags that apply to the identity provider's registration.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

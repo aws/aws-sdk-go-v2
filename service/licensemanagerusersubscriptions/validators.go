@@ -30,6 +30,46 @@ func (m *validateOpAssociateUser) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLicenseServerEndpoint struct {
+}
+
+func (*validateOpCreateLicenseServerEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicenseServerEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseServerEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseServerEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLicenseServerEndpoint struct {
+}
+
+func (*validateOpDeleteLicenseServerEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLicenseServerEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLicenseServerEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLicenseServerEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterIdentityProvider struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpListProductSubscriptions) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListProductSubscriptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +230,46 @@ func (m *validateOpStopProductSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateIdentityProviderSettings struct {
 }
 
@@ -194,6 +294,14 @@ func addOpAssociateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateUser{}, middleware.After)
 }
 
+func addOpCreateLicenseServerEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicenseServerEndpoint{}, middleware.After)
+}
+
+func addOpDeleteLicenseServerEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLicenseServerEndpoint{}, middleware.After)
+}
+
 func addOpDeregisterIdentityProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterIdentityProvider{}, middleware.After)
 }
@@ -204,6 +312,10 @@ func addOpDisassociateUserValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListProductSubscriptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProductSubscriptions{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpListUserAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -222,8 +334,140 @@ func addOpStopProductSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpStopProductSubscription{}, middleware.After)
 }
 
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
 func addOpUpdateIdentityProviderSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIdentityProviderSettings{}, middleware.After)
+}
+
+func validateActiveDirectoryIdentityProvider(v *types.ActiveDirectoryIdentityProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActiveDirectoryIdentityProvider"}
+	if v.ActiveDirectorySettings != nil {
+		if err := validateActiveDirectorySettings(v.ActiveDirectorySettings); err != nil {
+			invalidParams.AddNested("ActiveDirectorySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActiveDirectorySettings(v *types.ActiveDirectorySettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActiveDirectorySettings"}
+	if v.DomainNetworkSettings != nil {
+		if err := validateDomainNetworkSettings(v.DomainNetworkSettings); err != nil {
+			invalidParams.AddNested("DomainNetworkSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDomainNetworkSettings(v *types.DomainNetworkSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DomainNetworkSettings"}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdentityProvider(v types.IdentityProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentityProvider"}
+	switch uv := v.(type) {
+	case *types.IdentityProviderMemberActiveDirectoryIdentityProvider:
+		if err := validateActiveDirectoryIdentityProvider(&uv.Value); err != nil {
+			invalidParams.AddNested("[ActiveDirectoryIdentityProvider]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLicenseServerSettings(v *types.LicenseServerSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LicenseServerSettings"}
+	if len(v.ServerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerType"))
+	}
+	if v.ServerSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerSettings"))
+	} else if v.ServerSettings != nil {
+		if err := validateServerSettings(v.ServerSettings); err != nil {
+			invalidParams.AddNested("ServerSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRdsSalSettings(v *types.RdsSalSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsSalSettings"}
+	if v.RdsSalCredentialsProvider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RdsSalCredentialsProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerSettings(v types.ServerSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerSettings"}
+	switch uv := v.(type) {
+	case *types.ServerSettingsMemberRdsSalSettings:
+		if err := validateRdsSalSettings(&uv.Value); err != nil {
+			invalidParams.AddNested("[RdsSalSettings]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateSettings(v *types.Settings) error {
@@ -275,6 +519,50 @@ func validateOpAssociateUserInput(v *AssociateUserInput) error {
 	}
 	if v.IdentityProvider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	} else if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLicenseServerEndpointInput(v *CreateLicenseServerEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseServerEndpointInput"}
+	if v.IdentityProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderArn"))
+	}
+	if v.LicenseServerSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseServerSettings"))
+	} else if v.LicenseServerSettings != nil {
+		if err := validateLicenseServerSettings(v.LicenseServerSettings); err != nil {
+			invalidParams.AddNested("LicenseServerSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLicenseServerEndpointInput(v *DeleteLicenseServerEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLicenseServerEndpointInput"}
+	if v.LicenseServerEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseServerEndpointArn"))
+	}
+	if len(v.ServerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -288,11 +576,10 @@ func validateOpDeregisterIdentityProviderInput(v *DeregisterIdentityProviderInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterIdentityProviderInput"}
-	if v.IdentityProvider == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
-	}
-	if v.Product == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Product"))
+	if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -306,14 +593,10 @@ func validateOpDisassociateUserInput(v *DisassociateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
-	if v.IdentityProvider == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -327,11 +610,27 @@ func validateOpListProductSubscriptionsInput(v *ListProductSubscriptionsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListProductSubscriptionsInput"}
-	if v.Product == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Product"))
-	}
 	if v.IdentityProvider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	} else if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -350,6 +649,10 @@ func validateOpListUserAssociationsInput(v *ListUserAssociationsInput) error {
 	}
 	if v.IdentityProvider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	} else if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -365,6 +668,10 @@ func validateOpRegisterIdentityProviderInput(v *RegisterIdentityProviderInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterIdentityProviderInput"}
 	if v.IdentityProvider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	} else if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Product == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Product"))
@@ -391,6 +698,10 @@ func validateOpStartProductSubscriptionInput(v *StartProductSubscriptionInput) e
 	}
 	if v.IdentityProvider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	} else if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Product == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Product"))
@@ -407,14 +718,46 @@ func validateOpStopProductSubscriptionInput(v *StopProductSubscriptionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopProductSubscriptionInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
-	if v.IdentityProvider == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
 	}
-	if v.Product == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Product"))
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -428,11 +771,10 @@ func validateOpUpdateIdentityProviderSettingsInput(v *UpdateIdentityProviderSett
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdentityProviderSettingsInput"}
-	if v.IdentityProvider == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
-	}
-	if v.Product == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Product"))
+	if v.IdentityProvider != nil {
+		if err := validateIdentityProvider(v.IdentityProvider); err != nil {
+			invalidParams.AddNested("IdentityProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.UpdateSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateSettings"))

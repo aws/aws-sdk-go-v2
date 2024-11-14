@@ -595,6 +595,7 @@ const (
 	ResourceTypeAwsS3expressDirectorybucket ResourceType = "AWS::S3Express::DirectoryBucket"
 	ResourceTypeAwsDynamodbTable            ResourceType = "AWS::DynamoDB::Table"
 	ResourceTypeAwsDynamodbStream           ResourceType = "AWS::DynamoDB::Stream"
+	ResourceTypeAwsIamUser                  ResourceType = "AWS::IAM::User"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -619,6 +620,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::S3Express::DirectoryBucket",
 		"AWS::DynamoDB::Table",
 		"AWS::DynamoDB::Stream",
+		"AWS::IAM::User",
 	}
 }
 

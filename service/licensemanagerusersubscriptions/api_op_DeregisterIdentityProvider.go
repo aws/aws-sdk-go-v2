@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters the identity provider from providing user-based subscriptions.
+// Deregisters the Active Directory identity provider from License Manager
+// user-based subscriptions.
 func (c *Client) DeregisterIdentityProvider(ctx context.Context, params *DeregisterIdentityProviderInput, optFns ...func(*Options)) (*DeregisterIdentityProviderOutput, error) {
 	if params == nil {
 		params = &DeregisterIdentityProviderInput{}
@@ -29,14 +30,17 @@ func (c *Client) DeregisterIdentityProvider(ctx context.Context, params *Deregis
 
 type DeregisterIdentityProviderInput struct {
 
-	// An object that specifies details for the identity provider.
-	//
-	// This member is required.
+	// An object that specifies details for the Active Directory identity provider.
 	IdentityProvider types.IdentityProvider
+
+	// The Amazon Resource Name (ARN) that identifies the identity provider to
+	// deregister.
+	IdentityProviderArn *string
 
 	// The name of the user-based subscription product.
 	//
-	// This member is required.
+	// Valid values: VISUAL_STUDIO_ENTERPRISE | VISUAL_STUDIO_PROFESSIONAL |
+	// OFFICE_PROFESSIONAL_PLUS
 	Product *string
 
 	noSmithyDocumentSerde

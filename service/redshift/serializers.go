@@ -9949,6 +9949,18 @@ func awsAwsquery_serializeDocumentPauseClusterMessage(v *types.PauseClusterMessa
 	return nil
 }
 
+func awsAwsquery_serializeDocumentReadWriteAccess(v *types.ReadWriteAccess, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.Authorization) > 0 {
+		objectKey := object.Key("Authorization")
+		objectKey.String(string(v.Authorization))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentResizeClusterMessage(v *types.ResizeClusterMessage, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10000,6 +10012,38 @@ func awsAwsquery_serializeDocumentResumeClusterMessage(v *types.ResumeClusterMes
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
+	return nil
+}
+
+func awsAwsquery_serializeDocumentS3AccessGrantsScopeUnion(v types.S3AccessGrantsScopeUnion, value query.Value) error {
+	object := value.Object()
+
+	switch uv := v.(type) {
+	case *types.S3AccessGrantsScopeUnionMemberReadWriteAccess:
+		objectKey := object.Key("ReadWriteAccess")
+		if err := awsAwsquery_serializeDocumentReadWriteAccess(&uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentS3AccessGrantsServiceIntegrations(v []types.S3AccessGrantsScopeUnion, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentS3AccessGrantsScopeUnion(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -10094,6 +10138,12 @@ func awsAwsquery_serializeDocumentServiceIntegrationsUnion(v types.ServiceIntegr
 	case *types.ServiceIntegrationsUnionMemberLakeFormation:
 		objectKey := object.Key("LakeFormation")
 		if err := awsAwsquery_serializeDocumentLakeFormationServiceIntegrations(uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	case *types.ServiceIntegrationsUnionMemberS3AccessGrants:
+		objectKey := object.Key("S3AccessGrants")
+		if err := awsAwsquery_serializeDocumentS3AccessGrantsServiceIntegrations(uv.Value, objectKey); err != nil {
 			return err
 		}
 

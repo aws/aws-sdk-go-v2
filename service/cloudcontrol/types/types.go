@@ -7,6 +7,58 @@ import (
 	"time"
 )
 
+// Represents the current status of applicable Hooks for a resource operation
+// request. It contains list of Hook invocation information for the resource
+// specified in the request since the same target can invoke multiple Hooks. For
+// more information, see [Managing resource operation requests with Amazon Web Services Cloud Control API].
+//
+// [Managing resource operation requests with Amazon Web Services Cloud Control API]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html
+type HookProgressEvent struct {
+
+	// The failure mode of the invocation. The following are the potential statuses:
+	//
+	//   - FAIL : This will fail the Hook invocation and the request associated with it.
+	//
+	//   - WARN : This will fail the Hook invocation, but not the request associated
+	//   with it.
+	FailureMode *string
+
+	// The time that the Hook invocation request initiated.
+	HookEventTime *time.Time
+
+	// The status of the Hook invocation. The following are potential statuses:
+	//
+	//   - HOOK_PENDING : The Hook was added to the invocation plan, but not yet
+	//   invoked.
+	//
+	//   - HOOK_IN_PROGRESS : The Hook was invoked, but hasn't completed.
+	//
+	//   - HOOK_COMPLETE_SUCCEEDED : The Hook invocation is complete with a successful
+	//   result.
+	//
+	//   - HOOK_COMPLETE_FAILED : The Hook invocation is complete with a failed result.
+	//
+	//   - HOOK_FAILED : The Hook invocation didn't complete successfully.
+	HookStatus *string
+
+	// The message explaining the current Hook status.
+	HookStatusMessage *string
+
+	// The ARN of the Hook being invoked.
+	HookTypeArn *string
+
+	// The type name of the Hook being invoked.
+	HookTypeName *string
+
+	// The type version of the Hook being invoked.
+	HookTypeVersionId *string
+
+	// States whether the Hook is invoked before or after resource provisioning.
+	InvocationPoint *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the current status of a resource operation request. For more
 // information, see [Managing resource operation requests]in the Amazon Web Services Cloud Control API User Guide.
 //
@@ -23,6 +75,9 @@ type ProgressEvent struct {
 
 	// When the resource operation request was initiated.
 	EventTime *time.Time
+
+	// The unique token representing the Hooks operation for the request.
+	HooksRequestToken *string
 
 	// The primary identifier for the resource.
 	//

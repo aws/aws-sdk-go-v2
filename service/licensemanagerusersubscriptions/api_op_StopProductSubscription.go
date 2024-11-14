@@ -29,23 +29,24 @@ func (c *Client) StopProductSubscription(ctx context.Context, params *StopProduc
 
 type StopProductSubscriptionInput struct {
 
+	// The domain name of the Active Directory that contains the user for whom to stop
+	// the product subscription.
+	Domain *string
+
 	// An object that specifies details for the identity provider.
-	//
-	// This member is required.
 	IdentityProvider types.IdentityProvider
 
 	// The name of the user-based subscription product.
 	//
-	// This member is required.
+	// Valid values: VISUAL_STUDIO_ENTERPRISE | VISUAL_STUDIO_PROFESSIONAL |
+	// OFFICE_PROFESSIONAL_PLUS
 	Product *string
 
-	// The user name from the identity provider for the user.
-	//
-	// This member is required.
-	Username *string
+	// The Amazon Resource Name (ARN) of the product user.
+	ProductUserArn *string
 
-	// The domain name of the user.
-	Domain *string
+	// The user name from the identity provider for the user.
+	Username *string
 
 	noSmithyDocumentSerde
 }

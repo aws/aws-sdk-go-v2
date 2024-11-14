@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssumeRoot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssumeRoot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssumeRoot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DecodeAuthorizationMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DecodeAuthorizationMessage(context.Background(), nil, func(o *Options) {
@@ -186,6 +198,18 @@ func TestUpdateSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 	_, err := svc.AssumeRoleWithWebIdentity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssumeRoleWithWebIdentity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssumeRoot(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssumeRoot(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssumeRoot")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

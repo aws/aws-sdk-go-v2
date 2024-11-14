@@ -51,7 +51,8 @@ type GetArchiveRuleInput struct {
 // The response to the request.
 type GetArchiveRuleOutput struct {
 
-	// Contains information about an archive rule.
+	// Contains information about an archive rule. Archive rules automatically archive
+	// new findings that meet the criteria you define when you create the rule.
 	//
 	// This member is required.
 	ArchiveRule *types.ArchiveRuleSummary

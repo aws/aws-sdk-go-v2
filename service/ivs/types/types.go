@@ -8,8 +8,8 @@ import (
 )
 
 // Object specifying a stream’s audio configuration, as set up by the broadcaster
-// (usually in an encoder). This is part of the IngestConfigurationobject and used for monitoring
-// stream health.
+// (usually in an encoder). This is part of the IngestConfigurationsobject and the deprecated IngestConfiguration object.
+// It is used for monitoring stream health.
 type AudioConfiguration struct {
 
 	// Number of audio channels.
@@ -24,6 +24,10 @@ type AudioConfiguration struct {
 	// The expected ingest bitrate (bits per second). This is configured in the
 	// encoder.
 	TargetBitrate int64
+
+	// Name of the audio track (if the stream has an audio track). If multitrack is
+	// not enabled, this is track0 (the sole track).
+	Track *string
 
 	noSmithyDocumentSerde
 }
@@ -98,6 +102,12 @@ type Channel struct {
 	// false .
 	Authorized bool
 
+	// Indicates which content-packaging format is used (MPEG-TS or fMP4). If
+	// multitrackInputConfiguration is specified and enabled is true , then
+	// containerFormat is required and must be set to FRAGMENTED_MP4 . Otherwise,
+	// containerFormat may be set to TS or FRAGMENTED_MP4 . Default: TS .
+	ContainerFormat ContainerFormat
+
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
 	IngestEndpoint *string
@@ -108,6 +118,10 @@ type Channel struct {
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
 	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW .
 	LatencyMode ChannelLatencyMode
+
+	// Object specifying multitrack input configuration. Default: no multitrack input
+	// configuration is specified.
+	MultitrackInputConfiguration *MultitrackInputConfiguration
 
 	// Channel name.
 	Name *string
@@ -220,6 +234,13 @@ type DestinationConfiguration struct {
 
 // Object specifying the ingest configuration set up by the broadcaster, usually
 // in an encoder.
+//
+// Note: IngestConfiguration is deprecated in favor of IngestConfigurations but retained to ensure
+// backward compatibility. If multitrack is not enabled, IngestConfiguration and
+// IngestConfigurations contain the same data, namely information about track0 (the
+// sole track). If multitrack is enabled, IngestConfiguration contains data for
+// only the first track (track0) and IngestConfigurations contains data for all
+// tracks.
 type IngestConfiguration struct {
 
 	// Encoder settings for audio.
@@ -227,6 +248,49 @@ type IngestConfiguration struct {
 
 	// Encoder settings for video.
 	Video *VideoConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying the ingest configuration set up by the broadcaster, usually
+// in an encoder.
+//
+// Note: Use IngestConfigurations instead of IngestConfiguration (which is deprecated). If multitrack
+// is not enabled, IngestConfiguration and IngestConfigurations contain the same
+// data, namely information about track0 (the sole track). If multitrack is
+// enabled, IngestConfiguration contains data for only the first track (track0) and
+// IngestConfigurations contains data for all tracks.
+type IngestConfigurations struct {
+
+	// Encoder settings for audio.
+	//
+	// This member is required.
+	AudioConfigurations []AudioConfiguration
+
+	// Encoder settings for video
+	//
+	// This member is required.
+	VideoConfigurations []VideoConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that specifies multitrack input configuration.
+type MultitrackInputConfiguration struct {
+
+	// Indicates whether multitrack input is enabled. Can be set to true only if
+	// channel type is STANDARD . Setting enabled to true with any other channel type
+	// will cause an exception. If true , then policy , maximumResolution , and
+	// containerFormat are required, and containerFormat must be set to FRAGMENTED_MP4
+	// . Default: false .
+	Enabled bool
+
+	// Maximum resolution for multitrack input. Required if enabled is true .
+	MaximumResolution MultitrackMaximumResolution
+
+	// Indicates whether multitrack input is allowed or required. Required if enabled
+	// is true .
+	Policy MultitrackPolicy
 
 	noSmithyDocumentSerde
 }
@@ -530,8 +594,33 @@ type Stream struct {
 type StreamEvent struct {
 
 	// Provides additional details about the stream event. There are several values;
-	// note that the long descriptions are provided in the IVS console but not
-	// delivered through the IVS API or EventBridge:
+	// the long descriptions are provided in the IVS console but not delivered through
+	// the IVS API or EventBridge. Multitrack-related codes are used only for certain
+	// Session Ended events.
+	//
+	//   - MultitrackInputNotAllowed — The broadcast client attempted to connect with
+	//   multitrack input, but multitrack input was not enabled on the channel. Check
+	//   your broadcast software settings or set MultitrackInputConfiguration.Policy to
+	//   ALLOW or REQUIRE .
+	//
+	//   - MultitrackInputRequired — The broadcast client attempted to connect with
+	//   single-track video, but multitrack input is required on this channel. Enable
+	//   multitrack video in your broadcast software or configure the channel’s
+	//   MultitrackInputConfiguration.Policy to ALLOW .
+	//
+	//   - InvalidGetClientConfigurationStreamKey — The broadcast client attempted to
+	//   connect with an invalid, expired, or corrupt stream key.
+	//
+	//   - GetClientConfigurationStreamKeyRequired — The broadcast client attempted to
+	//   stream multitrack video without providing an authenticated stream key from
+	//   GetClientConfiguration.
+	//
+	//   - InvalidMultitrackInputTrackCount — The multitrack input stream contained an
+	//   invalid number of tracks.
+	//
+	//   - InvalidMultitrackInputVideoTrackMediaProperties — The multitrack input
+	//   stream contained one or more tracks with an invalid codec, resolution, bitrate,
+	//   or framerate.
 	//
 	//   - StreamTakeoverMediaMismatch — The broadcast client attempted to take over
 	//   with different media properties (e.g., codec, resolution, or video track type)
@@ -541,8 +630,8 @@ type StreamEvent struct {
 	//   with either a priority integer value equal to or lower than the original
 	//   stream's value or a value outside the allowed range of 1 to 2,147,483,647.
 	//
-	//   - StreamTakeoverLimitBreached — The broadcast client reached the maximum
-	//   allowed takeover attempts for this stream.
+	// StreamTakeoverLimitBreached — The broadcast client reached the maximum allowed
+	//   takeover attempts for this stream.
 	Code *string
 
 	// Time when the event occurred. This is an ISO 8601 timestamp; note that this is
@@ -624,8 +713,20 @@ type StreamSession struct {
 	// this is returned as a string. For live streams, this is NULL .
 	EndTime *time.Time
 
-	// The properties of the incoming RTMP stream for the stream.
+	// The properties of the incoming RTMP stream.
+	//
+	// Note: ingestConfiguration is deprecated in favor of ingestConfigurations but
+	// retained to ensure backward compatibility. If multitrack is not enabled,
+	// ingestConfiguration and ingestConfigurations contain the same data, namely
+	// information about track0 (the sole track). If multitrack is enabled,
+	// ingestConfiguration contains data for only the first track (track0) and
+	// ingestConfigurations contains data for all tracks.
 	IngestConfiguration *IngestConfiguration
+
+	// The properties of the incoming RTMP stream. If multitrack is enabled,
+	// ingestConfigurations contains data for all tracks; otherwise, it contains data
+	// only for track0 (the sole track).
+	IngestConfigurations *IngestConfigurations
 
 	// The properties of recording the live stream.
 	RecordingConfiguration *RecordingConfiguration
@@ -721,12 +822,13 @@ type ThumbnailConfiguration struct {
 	// The targeted thumbnail-generation interval in seconds. This is configurable
 	// (and required) only if recordingMode is INTERVAL . Default: 60.
 	//
-	// Important: For the BASIC channel type, setting a value for targetIntervalSeconds
-	// does not guarantee that thumbnails are generated at the specified interval. For
-	// thumbnails to be generated at the targetIntervalSeconds interval, the
-	// IDR/Keyframe value for the input video must be less than the
-	// targetIntervalSeconds value. See [Amazon IVS Streaming Configuration] for information on setting IDR/Keyframe to
-	// the recommended value in video-encoder settings.
+	// Important: For the BASIC channel type, or the STANDARD channel type with
+	// multitrack input, setting a value for targetIntervalSeconds does not guarantee
+	// that thumbnails are generated at the specified interval. For thumbnails to be
+	// generated at the targetIntervalSeconds interval, the IDR/Keyframe value for the
+	// input video must be less than the targetIntervalSeconds value. See [Amazon IVS Streaming Configuration] for
+	// information on setting IDR/Keyframe to the recommended value in video-encoder
+	// settings.
 	//
 	// [Amazon IVS Streaming Configuration]: https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html
 	TargetIntervalSeconds *int64
@@ -735,8 +837,8 @@ type ThumbnailConfiguration struct {
 }
 
 // Object specifying a stream’s video configuration, as set up by the broadcaster
-// (usually in an encoder). This is part of the IngestConfigurationobject and used for monitoring
-// stream health.
+// (usually in an encoder). This is part of the IngestConfigurationsobject and the deprecated IngestConfiguration object.
+// It is used for monitoring stream health.
 type VideoConfiguration struct {
 
 	// Indicates the degree of required decoder performance for a profile. Normally
@@ -754,12 +856,25 @@ type VideoConfiguration struct {
 	// Software or hardware used to encode the video.
 	Encoder *string
 
+	// Indicates the degree of required decoder performance for a profile. Normally
+	// this is set automatically by the encoder. When an AVC codec is used, this field
+	// has the same value as avcLevel .
+	Level *string
+
+	// Indicates to the decoder the requirements for decoding the stream. When an AVC
+	// codec is used, this field has the same value as avcProfile .
+	Profile *string
+
 	// The expected ingest bitrate (bits per second). This is configured in the
 	// encoder.
 	TargetBitrate int64
 
 	// The expected ingest framerate. This is configured in the encoder.
 	TargetFramerate int64
+
+	// Name of the video track. If multitrack is not enabled, this is track0 (the sole
+	// track).
+	Track *string
 
 	// Video-resolution height in pixels.
 	VideoHeight int64

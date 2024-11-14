@@ -44,6 +44,65 @@ func (ChannelType) Values() []ChannelType {
 	}
 }
 
+type ContainerFormat string
+
+// Enum values for ContainerFormat
+const (
+	ContainerFormatTs            ContainerFormat = "TS"
+	ContainerFormatFragmentedMP4 ContainerFormat = "FRAGMENTED_MP4"
+)
+
+// Values returns all known values for ContainerFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerFormat) Values() []ContainerFormat {
+	return []ContainerFormat{
+		"TS",
+		"FRAGMENTED_MP4",
+	}
+}
+
+type MultitrackMaximumResolution string
+
+// Enum values for MultitrackMaximumResolution
+const (
+	MultitrackMaximumResolutionSd     MultitrackMaximumResolution = "SD"
+	MultitrackMaximumResolutionHd     MultitrackMaximumResolution = "HD"
+	MultitrackMaximumResolutionFullHd MultitrackMaximumResolution = "FULL_HD"
+)
+
+// Values returns all known values for MultitrackMaximumResolution. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultitrackMaximumResolution) Values() []MultitrackMaximumResolution {
+	return []MultitrackMaximumResolution{
+		"SD",
+		"HD",
+		"FULL_HD",
+	}
+}
+
+type MultitrackPolicy string
+
+// Enum values for MultitrackPolicy
+const (
+	MultitrackPolicyAllow   MultitrackPolicy = "ALLOW"
+	MultitrackPolicyRequire MultitrackPolicy = "REQUIRE"
+)
+
+// Values returns all known values for MultitrackPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultitrackPolicy) Values() []MultitrackPolicy {
+	return []MultitrackPolicy{
+		"ALLOW",
+		"REQUIRE",
+	}
+}
+
 type RecordingConfigurationState string
 
 // Enum values for RecordingConfigurationState

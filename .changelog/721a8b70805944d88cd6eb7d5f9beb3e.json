@@ -1,0 +1,8 @@
+{
+    "id": "721a8b70-8059-44d8-8cd6-eb7d5f9beb3e",
+    "type": "feature",
+    "description": "Expand analyzer configuration capabilities for unused access analyzers. Unused access analyzer configurations now support the ability to exclude accounts and resource tags from analysis providing more granular control over the scope of analysis.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

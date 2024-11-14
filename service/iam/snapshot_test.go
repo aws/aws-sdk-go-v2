@@ -638,11 +638,59 @@ func TestCheckSnapshot_DetachUserPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableOrganizationsRootCredentialsManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableOrganizationsRootCredentialsManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableOrganizationsRootCredentialsManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisableOrganizationsRootSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableOrganizationsRootSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableOrganizationsRootSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableMFADevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableMFADevice(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableMFADevice")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableOrganizationsRootCredentialsManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableOrganizationsRootCredentialsManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableOrganizationsRootCredentialsManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableOrganizationsRootSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableOrganizationsRootSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableOrganizationsRootSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1183,6 +1231,18 @@ func TestCheckSnapshot_ListOpenIDConnectProviderTags(t *testing.T) {
 	_, err := svc.ListOpenIDConnectProviderTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListOpenIDConnectProviderTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListOrganizationsFeatures(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrganizationsFeatures(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOrganizationsFeatures")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2545,11 +2605,59 @@ func TestUpdateSnapshot_DetachUserPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableOrganizationsRootCredentialsManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableOrganizationsRootCredentialsManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableOrganizationsRootCredentialsManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisableOrganizationsRootSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableOrganizationsRootSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableOrganizationsRootSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableMFADevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableMFADevice(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableMFADevice")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableOrganizationsRootCredentialsManagement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableOrganizationsRootCredentialsManagement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableOrganizationsRootCredentialsManagement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableOrganizationsRootSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableOrganizationsRootSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableOrganizationsRootSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3090,6 +3198,18 @@ func TestUpdateSnapshot_ListOpenIDConnectProviderTags(t *testing.T) {
 	_, err := svc.ListOpenIDConnectProviderTags(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListOpenIDConnectProviderTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListOrganizationsFeatures(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrganizationsFeatures(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOrganizationsFeatures")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -130,6 +130,46 @@ func (m *validateOpCreateAnalysis) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBrand struct {
+}
+
+func (*validateOpCreateBrand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBrand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBrandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBrandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomPermissions struct {
+}
+
+func (*validateOpCreateCustomPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDashboard struct {
 }
 
@@ -570,6 +610,66 @@ func (m *validateOpDeleteAnalysis) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteBrandAssignment struct {
+}
+
+func (*validateOpDeleteBrandAssignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBrandAssignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBrandAssignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBrandAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBrand struct {
+}
+
+func (*validateOpDeleteBrand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBrand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBrandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBrandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomPermissions struct {
+}
+
+func (*validateOpDeleteCustomPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDashboard struct {
 }
 
@@ -990,6 +1090,26 @@ func (m *validateOpDeleteUserByPrincipalId) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteUserCustomPermission struct {
+}
+
+func (*validateOpDeleteUserCustomPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUserCustomPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserCustomPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserCustomPermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteUser struct {
 }
 
@@ -1185,6 +1305,86 @@ func (m *validateOpDescribeAssetBundleImportJob) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAssetBundleImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBrandAssignment struct {
+}
+
+func (*validateOpDescribeBrandAssignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBrandAssignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBrandAssignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBrandAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBrand struct {
+}
+
+func (*validateOpDescribeBrand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBrand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBrandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBrandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBrandPublishedVersion struct {
+}
+
+func (*validateOpDescribeBrandPublishedVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBrandPublishedVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBrandPublishedVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBrandPublishedVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCustomPermissions struct {
+}
+
+func (*validateOpDescribeCustomPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2045,6 +2245,46 @@ func (m *validateOpListAssetBundleImportJobs) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssetBundleImportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBrands struct {
+}
+
+func (*validateOpListBrands) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBrands) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBrandsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBrandsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomPermissions struct {
+}
+
+func (*validateOpListCustomPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3010,6 +3250,86 @@ func (m *validateOpUpdateAnalysisPermissions) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBrandAssignment struct {
+}
+
+func (*validateOpUpdateBrandAssignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBrandAssignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBrandAssignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBrandAssignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBrand struct {
+}
+
+func (*validateOpUpdateBrand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBrand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBrandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBrandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBrandPublishedVersion struct {
+}
+
+func (*validateOpUpdateBrandPublishedVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBrandPublishedVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBrandPublishedVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBrandPublishedVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCustomPermissions struct {
+}
+
+func (*validateOpUpdateCustomPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDashboard struct {
 }
 
@@ -3590,6 +3910,26 @@ func (m *validateOpUpdateTopicRefreshSchedule) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateUserCustomPermission struct {
+}
+
+func (*validateOpUpdateUserCustomPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateUserCustomPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateUserCustomPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateUserCustomPermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUser struct {
 }
 
@@ -3652,6 +3992,14 @@ func addOpCreateAccountSubscriptionValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnalysis{}, middleware.After)
+}
+
+func addOpCreateBrandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBrand{}, middleware.After)
+}
+
+func addOpCreateCustomPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomPermissions{}, middleware.After)
 }
 
 func addOpCreateDashboardValidationMiddleware(stack *middleware.Stack) error {
@@ -3742,6 +4090,18 @@ func addOpDeleteAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnalysis{}, middleware.After)
 }
 
+func addOpDeleteBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBrandAssignment{}, middleware.After)
+}
+
+func addOpDeleteBrandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBrand{}, middleware.After)
+}
+
+func addOpDeleteCustomPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomPermissions{}, middleware.After)
+}
+
 func addOpDeleteDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDashboard{}, middleware.After)
 }
@@ -3826,6 +4186,10 @@ func addOpDeleteUserByPrincipalIdValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteUserByPrincipalId{}, middleware.After)
 }
 
+func addOpDeleteUserCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUserCustomPermission{}, middleware.After)
+}
+
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
@@ -3864,6 +4228,22 @@ func addOpDescribeAssetBundleExportJobValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeAssetBundleImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAssetBundleImportJob{}, middleware.After)
+}
+
+func addOpDescribeBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBrandAssignment{}, middleware.After)
+}
+
+func addOpDescribeBrandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBrand{}, middleware.After)
+}
+
+func addOpDescribeBrandPublishedVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBrandPublishedVersion{}, middleware.After)
+}
+
+func addOpDescribeCustomPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomPermissions{}, middleware.After)
 }
 
 func addOpDescribeDashboardDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -4036,6 +4416,14 @@ func addOpListAssetBundleExportJobsValidationMiddleware(stack *middleware.Stack)
 
 func addOpListAssetBundleImportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssetBundleImportJobs{}, middleware.After)
+}
+
+func addOpListBrandsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBrands{}, middleware.After)
+}
+
+func addOpListCustomPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomPermissions{}, middleware.After)
 }
 
 func addOpListDashboardsValidationMiddleware(stack *middleware.Stack) error {
@@ -4230,6 +4618,22 @@ func addOpUpdateAnalysisPermissionsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateAnalysisPermissions{}, middleware.After)
 }
 
+func addOpUpdateBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBrandAssignment{}, middleware.After)
+}
+
+func addOpUpdateBrandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBrand{}, middleware.After)
+}
+
+func addOpUpdateBrandPublishedVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBrandPublishedVersion{}, middleware.After)
+}
+
+func addOpUpdateCustomPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomPermissions{}, middleware.After)
+}
+
 func addOpUpdateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDashboard{}, middleware.After)
 }
@@ -4344,6 +4748,10 @@ func addOpUpdateTopicPermissionsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateTopicRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTopicRefreshSchedule{}, middleware.After)
+}
+
+func addOpUpdateUserCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateUserCustomPermission{}, middleware.After)
 }
 
 func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
@@ -6621,6 +7029,26 @@ func validateBoxPlotVisual(v *types.BoxPlotVisual) error {
 	if v.ColumnHierarchies != nil {
 		if err := validateColumnHierarchyList(v.ColumnHierarchies); err != nil {
 			invalidParams.AddNested("ColumnHierarchies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBrandDefinition(v *types.BrandDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrandDefinition"}
+	if v.BrandName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandName"))
+	}
+	if v.LogoConfiguration != nil {
+		if err := validateLogoConfiguration(v.LogoConfiguration); err != nil {
+			invalidParams.AddNested("LogoConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11642,6 +12070,21 @@ func validateIdentifier(v *types.Identifier) error {
 	}
 }
 
+func validateImageSetConfiguration(v *types.ImageSetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageSetConfiguration"}
+	if v.Original == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Original"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIncrementalRefresh(v *types.IncrementalRefresh) error {
 	if v == nil {
 		return nil
@@ -12553,6 +12996,52 @@ func validateLogicalTableSource(v *types.LogicalTableSource) error {
 	if v.JoinInstruction != nil {
 		if err := validateJoinInstruction(v.JoinInstruction); err != nil {
 			invalidParams.AddNested("JoinInstruction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogoConfiguration(v *types.LogoConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogoConfiguration"}
+	if v.AltText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AltText"))
+	}
+	if v.LogoSet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogoSet"))
+	} else if v.LogoSet != nil {
+		if err := validateLogoSetConfiguration(v.LogoSet); err != nil {
+			invalidParams.AddNested("LogoSet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogoSetConfiguration(v *types.LogoSetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogoSetConfiguration"}
+	if v.Primary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Primary"))
+	} else if v.Primary != nil {
+		if err := validateImageSetConfiguration(v.Primary); err != nil {
+			invalidParams.AddNested("Primary", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Favicon != nil {
+		if err := validateImageSetConfiguration(v.Favicon); err != nil {
+			invalidParams.AddNested("Favicon", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -18954,6 +19443,57 @@ func validateOpCreateAnalysisInput(v *CreateAnalysisInput) error {
 	}
 }
 
+func validateOpCreateBrandInput(v *CreateBrandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBrandInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandId"))
+	}
+	if v.BrandDefinition != nil {
+		if err := validateBrandDefinition(v.BrandDefinition); err != nil {
+			invalidParams.AddNested("BrandDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomPermissionsInput(v *CreateCustomPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.CustomPermissionsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPermissionsName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
 	if v == nil {
 		return nil
@@ -19611,6 +20151,57 @@ func validateOpDeleteAnalysisInput(v *DeleteAnalysisInput) error {
 	}
 }
 
+func validateOpDeleteBrandAssignmentInput(v *DeleteBrandAssignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBrandAssignmentInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBrandInput(v *DeleteBrandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBrandInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomPermissionsInput(v *DeleteCustomPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.CustomPermissionsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPermissionsName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDashboardInput(v *DeleteDashboardInput) error {
 	if v == nil {
 		return nil
@@ -20031,6 +20622,27 @@ func validateOpDeleteUserByPrincipalIdInput(v *DeleteUserByPrincipalIdInput) err
 	}
 }
 
+func validateOpDeleteUserCustomPermissionInput(v *DeleteUserCustomPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserCustomPermissionInput"}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	if v == nil {
 		return nil
@@ -20197,6 +20809,75 @@ func validateOpDescribeAssetBundleImportJobInput(v *DescribeAssetBundleImportJob
 	}
 	if v.AssetBundleImportJobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssetBundleImportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBrandAssignmentInput(v *DescribeBrandAssignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBrandAssignmentInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBrandInput(v *DescribeBrandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBrandInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBrandPublishedVersionInput(v *DescribeBrandPublishedVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBrandPublishedVersionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCustomPermissionsInput(v *DescribeCustomPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.CustomPermissionsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPermissionsName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -21015,6 +21696,36 @@ func validateOpListAssetBundleImportJobsInput(v *ListAssetBundleImportJobsInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssetBundleImportJobsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBrandsInput(v *ListBrandsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBrandsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomPermissionsInput(v *ListCustomPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomPermissionsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -21994,6 +22705,86 @@ func validateOpUpdateAnalysisPermissionsInput(v *UpdateAnalysisPermissionsInput)
 	}
 }
 
+func validateOpUpdateBrandAssignmentInput(v *UpdateBrandAssignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrandAssignmentInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBrandInput(v *UpdateBrandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrandInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandId"))
+	}
+	if v.BrandDefinition != nil {
+		if err := validateBrandDefinition(v.BrandDefinition); err != nil {
+			invalidParams.AddNested("BrandDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBrandPublishedVersionInput(v *UpdateBrandPublishedVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrandPublishedVersionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.BrandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandId"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomPermissionsInput(v *UpdateCustomPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomPermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.CustomPermissionsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPermissionsName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateDashboardInput(v *UpdateDashboardInput) error {
 	if v == nil {
 		return nil
@@ -22736,6 +23527,30 @@ func validateOpUpdateTopicRefreshScheduleInput(v *UpdateTopicRefreshScheduleInpu
 		if err := validateTopicRefreshSchedule(v.RefreshSchedule); err != nil {
 			invalidParams.AddNested("RefreshSchedule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateUserCustomPermissionInput(v *UpdateUserCustomPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserCustomPermissionInput"}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.CustomPermissionsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPermissionsName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

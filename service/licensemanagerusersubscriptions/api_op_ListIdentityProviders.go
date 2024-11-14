@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the identity providers for user-based subscriptions.
+// Lists the Active Directory identity providers for user-based subscriptions.
 func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentityProvidersInput, optFns ...func(*Options)) (*ListIdentityProvidersOutput, error) {
 	if params == nil {
 		params = &ListIdentityProvidersInput{}
@@ -29,10 +29,18 @@ func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentity
 
 type ListIdentityProvidersInput struct {
 
-	// Maximum number of results to return in a single call.
+	// You can use the following filters to streamline results:
+	//
+	//   - Product
+	//
+	//   - DirectoryId
+	Filters []types.Filter
+
+	// The maximum number of results to return from a single request.
 	MaxResults *int32
 
-	// Token for the next set of results.
+	// A token to specify where to start paginating. This is the nextToken from a
+	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,12 +48,15 @@ type ListIdentityProvidersInput struct {
 
 type ListIdentityProvidersOutput struct {
 
-	// Metadata that describes the list identity providers operation.
+	// An array of IdentityProviderSummary resources that contain details about the
+	// Active Directory identity providers that meet the request criteria.
 	//
 	// This member is required.
 	IdentityProviderSummaries []types.IdentityProviderSummary
 
-	// Token for the next set of results.
+	// The next token used for paginated responses. When this field isn't empty, there
+	// are additional elements that the service hasn't included in this request. Use
+	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -154,7 +165,7 @@ func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.
 // ListIdentityProvidersPaginatorOptions is the paginator options for
 // ListIdentityProviders
 type ListIdentityProvidersPaginatorOptions struct {
-	// Maximum number of results to return in a single call.
+	// The maximum number of results to return from a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

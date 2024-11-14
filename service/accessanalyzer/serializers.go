@@ -2757,6 +2757,102 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateAnalyzer struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateAnalyzer) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateAnalyzer) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAnalyzerInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/analyzer/{analyzerName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateAnalyzerInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateAnalyzerInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateAnalyzerInput(v *UpdateAnalyzerInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AnalyzerName == nil || len(*v.AnalyzerName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analyzerName must not be empty")}
+	}
+	if v.AnalyzerName != nil {
+		if err := encoder.SetURI("analyzerName").String(*v.AnalyzerName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateAnalyzerInput(v *UpdateAnalyzerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentAnalyzerConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateArchiveRule struct {
 }
 
@@ -3112,6 +3208,17 @@ func awsRestjson1_serializeDocumentAccessList(v []types.Access, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAccountIdsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAclGrantee(v types.AclGrantee, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3139,6 +3246,54 @@ func awsRestjson1_serializeDocumentActionsList(v []string, value smithyjson.Valu
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAnalysisRule(v *types.AnalysisRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exclusions != nil {
+		ok := object.Key("exclusions")
+		if err := awsRestjson1_serializeDocumentAnalysisRuleCriteriaList(v.Exclusions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAnalysisRuleCriteria(v *types.AnalysisRuleCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountIds != nil {
+		ok := object.Key("accountIds")
+		if err := awsRestjson1_serializeDocumentAccountIdsList(v.AccountIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceTags != nil {
+		ok := object.Key("resourceTags")
+		if err := awsRestjson1_serializeDocumentTagsList(v.ResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAnalysisRuleCriteriaList(v []types.AnalysisRuleCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAnalysisRuleCriteria(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -4009,6 +4164,22 @@ func awsRestjson1_serializeDocumentSqsQueueConfiguration(v *types.SqsQueueConfig
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTagsList(v []map[string]string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentTagsMap(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTagsMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4060,6 +4231,13 @@ func awsRestjson1_serializeDocumentTrailList(v []types.Trail, value smithyjson.V
 func awsRestjson1_serializeDocumentUnusedAccessConfiguration(v *types.UnusedAccessConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AnalysisRule != nil {
+		ok := object.Key("analysisRule")
+		if err := awsRestjson1_serializeDocumentAnalysisRule(v.AnalysisRule, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.UnusedAccessAge != nil {
 		ok := object.Key("unusedAccessAge")

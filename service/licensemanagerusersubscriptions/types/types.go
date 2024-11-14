@@ -4,10 +4,20 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Details about an Active Directory identity provider.
 type ActiveDirectoryIdentityProvider struct {
+
+	// The ActiveDirectorySettings resource contains details about the Active
+	// Directory, including network access details such as domain name and IP
+	// addresses, and the credential provider for user administration.
+	ActiveDirectorySettings *ActiveDirectorySettings
+
+	// The type of Active Directory – either a self-managed Active Directory or an
+	// Amazon Web Services Managed Active Directory.
+	ActiveDirectoryType ActiveDirectoryType
 
 	// The directory ID for an Active Directory identity provider.
 	DirectoryId *string
@@ -15,9 +25,60 @@ type ActiveDirectoryIdentityProvider struct {
 	noSmithyDocumentSerde
 }
 
+// Contains network access and credential details that are needed for user
+// administration in the Active Directory.
+type ActiveDirectorySettings struct {
+
+	// Points to the CredentialsProvider resource that contains information about the
+	// credential provider for user administration.
+	DomainCredentialsProvider CredentialsProvider
+
+	// A list of domain IPv4 addresses that are used for the Active Directory.
+	DomainIpv4List []string
+
+	// The domain name for the Active Directory.
+	DomainName *string
+
+	// The DomainNetworkSettings resource contains an array of subnets that apply for
+	// the Active Directory.
+	DomainNetworkSettings *DomainNetworkSettings
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the credential provider for user administration.
+//
+// The following types satisfy this interface:
+//
+//	CredentialsProviderMemberSecretsManagerCredentialsProvider
+type CredentialsProvider interface {
+	isCredentialsProvider()
+}
+
+// Identifies the Secrets Manager secret that contains credentials needed for user
+// administration in the Active Directory.
+type CredentialsProviderMemberSecretsManagerCredentialsProvider struct {
+	Value SecretsManagerCredentialsProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsProviderMemberSecretsManagerCredentialsProvider) isCredentialsProvider() {}
+
+// Contains network settings for the Active Directory domain.
+type DomainNetworkSettings struct {
+
+	// Contains a list of subnets that apply for the Active Directory domain.
+	//
+	// This member is required.
+	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
 // A filter name and value pair that is used to return more specific results from
-// a describe operation. Filters can be used to match a set of resources by
-// specific criteria, such as tags, attributes, or IDs.
+// a describe or list operation. You can use filters can be used to match a set of
+// resources by specific criteria, such as tags, attributes, or IDs.
 type Filter struct {
 
 	// The name of an attribute to use as a filter.
@@ -32,7 +93,7 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an identity provider.
+// Refers to an identity provider.
 //
 // The following types satisfy this interface:
 //
@@ -41,7 +102,8 @@ type IdentityProvider interface {
 	isIdentityProvider()
 }
 
-// An object that details an Active Directory identity provider.
+// The ActiveDirectoryIdentityProvider resource contains settings and other
+// details about a specific Active Directory identity provider.
 type IdentityProviderMemberActiveDirectoryIdentityProvider struct {
 	Value ActiveDirectoryIdentityProvider
 
@@ -53,7 +115,7 @@ func (*IdentityProviderMemberActiveDirectoryIdentityProvider) isIdentityProvider
 // Describes an identity provider.
 type IdentityProviderSummary struct {
 
-	// An object that specifies details for the identity provider.
+	// The IdentityProvider resource contains information about an identity provider.
 	//
 	// This member is required.
 	IdentityProvider IdentityProvider
@@ -63,19 +125,23 @@ type IdentityProviderSummary struct {
 	// This member is required.
 	Product *string
 
-	// An object that details the registered identity provider’s product related
-	// configuration settings such as the subnets to provision VPC endpoints.
+	// The Settings resource contains details about the registered identity provider’s
+	// product related configuration settings, such as the subnets to provision VPC
+	// endpoints.
 	//
 	// This member is required.
 	Settings *Settings
 
-	// The status of an identity provider.
+	// The status of the identity provider.
 	//
 	// This member is required.
 	Status *string
 
 	// The failure message associated with an identity provider.
 	FailureMessage *string
+
+	// The Amazon Resource Name (ARN) of the identity provider.
+	IdentityProviderArn *string
 
 	noSmithyDocumentSerde
 }
@@ -110,12 +176,12 @@ type InstanceSummary struct {
 // Describes users of an EC2 instance providing user-based subscriptions.
 type InstanceUserSummary struct {
 
-	// An object that specifies details for the identity provider.
+	// The IdentityProvider resource specifies details about the identity provider.
 	//
 	// This member is required.
 	IdentityProvider IdentityProvider
 
-	// The ID of the EC2 instance, which provides user-based subscriptions.
+	// The ID of the EC2 instance that provides user-based subscriptions.
 	//
 	// This member is required.
 	InstanceId *string
@@ -136,8 +202,12 @@ type InstanceUserSummary struct {
 	// The date a user was disassociated from an EC2 instance.
 	DisassociationDate *string
 
-	// The domain name of the user.
+	// The domain name of the Active Directory that contains the user information for
+	// the product subscription.
 	Domain *string
+
+	// The Amazon Resource Name (ARN) that identifies the instance user.
+	InstanceUserArn *string
 
 	// The status message for users of an EC2 instance.
 	StatusMessage *string
@@ -145,7 +215,76 @@ type InstanceUserSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The summary of the user-based subscription products for a user.
+// Information about a Remote Desktop Services (RDS) license server.
+type LicenseServer struct {
+
+	// The health status of the RDS license server.
+	HealthStatus LicenseServerHealthStatus
+
+	// A list of domain IPv4 addresses that are used for the RDS license server.
+	Ipv4Address *string
+
+	// The current state of the provisioning process for the RDS license server.
+	ProvisioningStatus LicenseServerEndpointProvisioningStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a network endpoint for a Remote Desktop Services (RDS)
+// license server.
+type LicenseServerEndpoint struct {
+
+	// The timestamp when License Manager created the license server endpoint.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the identity provider that's associated with
+	// the RDS license server endpoint.
+	IdentityProviderArn *string
+
+	// The ARN of the ServerEndpoint resource for the RDS license server.
+	LicenseServerEndpointArn *string
+
+	// The ID of the license server endpoint.
+	LicenseServerEndpointId *string
+
+	// The current state of the provisioning process for the RDS license server
+	// endpoint
+	LicenseServerEndpointProvisioningStatus LicenseServerEndpointProvisioningStatus
+
+	// An array of LicenseServer resources that represent the license servers that are
+	// accessed through this endpoint.
+	LicenseServers []LicenseServer
+
+	// The ServerEndpoint resource contains the network address of the RDS license
+	// server endpoint.
+	ServerEndpoint *ServerEndpoint
+
+	// The type of license server.
+	ServerType ServerType
+
+	// The message associated with the provisioning status, if there is one.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings to configure your license server.
+type LicenseServerSettings struct {
+
+	// The ServerSettings resource contains the settings for your server.
+	//
+	// This member is required.
+	ServerSettings ServerSettings
+
+	// The type of license server.
+	//
+	// This member is required.
+	ServerType ServerType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the user-based subscription products for a specific user.
 type ProductUserSummary struct {
 
 	// An object that specifies details for the identity provider.
@@ -158,20 +297,24 @@ type ProductUserSummary struct {
 	// This member is required.
 	Product *string
 
-	// The status of a product for a user.
+	// The status of a product for this user.
 	//
 	// This member is required.
 	Status *string
 
-	// The user name from the identity provider of the user.
+	// The user name from the identity provider for this product user.
 	//
 	// This member is required.
 	Username *string
 
-	// The domain name of the user.
+	// The domain name of the Active Directory that contains the user information for
+	// the product subscription.
 	Domain *string
 
-	// The status message for a product for a user.
+	// The Amazon Resource Name (ARN) for this product user.
+	ProductUserArn *string
+
+	// The status message for a product for this user.
 	StatusMessage *string
 
 	// The end date of a subscription.
@@ -182,6 +325,56 @@ type ProductUserSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// Server settings that are specific to a Remote Desktop Services (RDS) license
+// server.
+type RdsSalSettings struct {
+
+	// The CredentialsProvider resource contains a reference to the credentials
+	// provider that's used for RDS license server user administration.
+	//
+	// This member is required.
+	RdsSalCredentialsProvider CredentialsProvider
+
+	noSmithyDocumentSerde
+}
+
+// Contains a credentials secret that's stored in Secrets Manager.
+type SecretsManagerCredentialsProvider struct {
+
+	// The ID of the Secrets Manager secret that contains credentials.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// A network endpoint through which you can access one or more servers.
+type ServerEndpoint struct {
+
+	// The network address of the endpoint.
+	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains settings for a specific server.
+//
+// The following types satisfy this interface:
+//
+//	ServerSettingsMemberRdsSalSettings
+type ServerSettings interface {
+	isServerSettings()
+}
+
+// The RdsSalSettings resource contains settings to configure a specific Remote
+// Desktop Services (RDS) license server.
+type ServerSettingsMemberRdsSalSettings struct {
+	Value RdsSalSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*ServerSettingsMemberRdsSalSettings) isServerSettings() {}
 
 // The registered identity provider’s product related configuration settings such
 // as the subnets to provision VPC endpoints, and the security group ID that is
@@ -236,4 +429,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isIdentityProvider() {}
+func (*UnknownUnionMember) isCredentialsProvider() {}
+func (*UnknownUnionMember) isIdentityProvider()    {}
+func (*UnknownUnionMember) isServerSettings()      {}

@@ -1477,6 +1477,17 @@ type PendingModifiedValues struct {
 	noSmithyDocumentSerde
 }
 
+// The S3 Access Grants scope.
+type ReadWriteAccess struct {
+
+	// Determines whether the read/write scope is enabled or disabled.
+	//
+	// This member is required.
+	Authorization ServiceAuthorization
+
+	noSmithyDocumentSerde
+}
+
 // An Amazon Redshift Advisor recommended action on the Amazon Redshift cluster.
 type Recommendation struct {
 
@@ -1880,6 +1891,24 @@ type RevisionTarget struct {
 	noSmithyDocumentSerde
 }
 
+// A list of scopes set up for S3 Access Grants integration.
+//
+// The following types satisfy this interface:
+//
+//	S3AccessGrantsScopeUnionMemberReadWriteAccess
+type S3AccessGrantsScopeUnion interface {
+	isS3AccessGrantsScopeUnion()
+}
+
+// The S3 Access Grants scope.
+type S3AccessGrantsScopeUnionMemberReadWriteAccess struct {
+	Value ReadWriteAccess
+
+	noSmithyDocumentSerde
+}
+
+func (*S3AccessGrantsScopeUnionMemberReadWriteAccess) isS3AccessGrantsScopeUnion() {}
+
 // Describes a scheduled action. You can use a scheduled action to trigger some
 // Amazon Redshift API operations on a schedule. For information about which API
 // operations can be scheduled, see ScheduledActionType.
@@ -1991,6 +2020,7 @@ type SecondaryClusterInfo struct {
 // The following types satisfy this interface:
 //
 //	ServiceIntegrationsUnionMemberLakeFormation
+//	ServiceIntegrationsUnionMemberS3AccessGrants
 type ServiceIntegrationsUnion interface {
 	isServiceIntegrationsUnion()
 }
@@ -2003,6 +2033,15 @@ type ServiceIntegrationsUnionMemberLakeFormation struct {
 }
 
 func (*ServiceIntegrationsUnionMemberLakeFormation) isServiceIntegrationsUnion() {}
+
+// A list of scopes set up for S3 Access Grants integration.
+type ServiceIntegrationsUnionMemberS3AccessGrants struct {
+	Value []S3AccessGrantsScopeUnion
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceIntegrationsUnionMemberS3AccessGrants) isServiceIntegrationsUnion() {}
 
 // Describes a snapshot.
 type Snapshot struct {
@@ -2475,4 +2514,5 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isLakeFormationScopeUnion()  {}
+func (*UnknownUnionMember) isS3AccessGrantsScopeUnion() {}
 func (*UnknownUnionMember) isServiceIntegrationsUnion() {}

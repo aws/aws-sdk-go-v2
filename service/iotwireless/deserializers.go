@@ -5578,6 +5578,15 @@ func awsRestjson1_deserializeOpDocumentGetFuotaTaskOutput(v **GetFuotaTaskOutput
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "Descriptor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileDescriptor to be of type string, got %T instead", value)
+				}
+				sv.Descriptor = ptr.String(jtv)
+			}
+
 		case "FirmwareUpdateImage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5833,6 +5842,11 @@ func awsRestjson1_deserializeOpDocumentGetLogLevelsByResourceTypesOutput(v **Get
 					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
 				}
 				sv.DefaultLogLevel = types.LogLevel(jtv)
+			}
+
+		case "FuotaTaskLogOptions":
+			if err := awsRestjson1_deserializeDocumentFuotaTaskLogOptionList(&sv.FuotaTaskLogOptions, value); err != nil {
+				return err
 			}
 
 		case "WirelessDeviceLogOptions":
@@ -18229,6 +18243,89 @@ func awsRestjson1_deserializeDocumentFuotaTask(v **types.FuotaTask, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFuotaTaskEventLogOption(v **types.FuotaTaskEventLogOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FuotaTaskEventLogOption
+	if *v == nil {
+		sv = &types.FuotaTaskEventLogOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Event":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FuotaTaskEvent to be of type string, got %T instead", value)
+				}
+				sv.Event = types.FuotaTaskEvent(jtv)
+			}
+
+		case "LogLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
+				}
+				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFuotaTaskEventLogOptionList(v *[]types.FuotaTaskEventLogOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FuotaTaskEventLogOption
+	if *v == nil {
+		cv = []types.FuotaTaskEventLogOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FuotaTaskEventLogOption
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFuotaTaskEventLogOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFuotaTaskList(v *[]types.FuotaTask, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18253,6 +18350,94 @@ func awsRestjson1_deserializeDocumentFuotaTaskList(v *[]types.FuotaTask, value i
 		var col types.FuotaTask
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentFuotaTask(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFuotaTaskLogOption(v **types.FuotaTaskLogOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FuotaTaskLogOption
+	if *v == nil {
+		sv = &types.FuotaTaskLogOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Events":
+			if err := awsRestjson1_deserializeDocumentFuotaTaskEventLogOptionList(&sv.Events, value); err != nil {
+				return err
+			}
+
+		case "LogLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
+				}
+				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FuotaTaskType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FuotaTaskType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFuotaTaskLogOptionList(v *[]types.FuotaTaskLogOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FuotaTaskLogOption
+	if *v == nil {
+		cv = []types.FuotaTaskLogOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FuotaTaskLogOption
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFuotaTaskLogOption(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -18347,6 +18532,42 @@ func awsRestjson1_deserializeDocumentGatewayListItem(v **types.GatewayListItem, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGatewayListMulticast(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected WirelessGatewayId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -19990,6 +20211,11 @@ func awsRestjson1_deserializeDocumentLoRaWANMulticastGet(v **types.LoRaWANMultic
 				sv.NumberOfDevicesRequested = ptr.Int32(int32(i64))
 			}
 
+		case "ParticipatingGateways":
+			if err := awsRestjson1_deserializeDocumentParticipatingGatewaysMulticast(&sv.ParticipatingGateways, value); err != nil {
+				return err
+			}
+
 		case "RfRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21306,6 +21532,55 @@ func awsRestjson1_deserializeDocumentParticipatingGateways(v **types.Participati
 				jtv, ok := value.(json.Number)
 				if !ok {
 					return fmt.Errorf("expected TransmissionInterval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TransmissionInterval = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParticipatingGatewaysMulticast(v **types.ParticipatingGatewaysMulticast, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParticipatingGatewaysMulticast
+	if *v == nil {
+		sv = &types.ParticipatingGatewaysMulticast{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GatewayList":
+			if err := awsRestjson1_deserializeDocumentGatewayListMulticast(&sv.GatewayList, value); err != nil {
+				return err
+			}
+
+		case "TransmissionInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TransmissionIntervalMulticast to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

@@ -29,23 +29,22 @@ func (c *Client) DisassociateUser(ctx context.Context, params *DisassociateUserI
 
 type DisassociateUserInput struct {
 
-	// An object that specifies details for the identity provider.
-	//
-	// This member is required.
+	// The domain name of the Active Directory that contains information for the user
+	// to disassociate.
+	Domain *string
+
+	// An object that specifies details for the Active Directory identity provider.
 	IdentityProvider types.IdentityProvider
 
-	// The ID of the EC2 instance, which provides user-based subscriptions.
-	//
-	// This member is required.
+	// The ID of the EC2 instance which provides user-based subscriptions.
 	InstanceId *string
 
-	// The user name from the identity provider for the user.
-	//
-	// This member is required.
-	Username *string
+	// The Amazon Resource Name (ARN) of the user to disassociate from the EC2
+	// instance.
+	InstanceUserArn *string
 
-	// The domain name of the user.
-	Domain *string
+	// The user name from the Active Directory identity provider for the user.
+	Username *string
 
 	noSmithyDocumentSerde
 }

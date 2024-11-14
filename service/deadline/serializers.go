@@ -10244,6 +10244,27 @@ func awsRestjson1_serializeOpDocumentUpdateWorkerScheduleInput(v *UpdateWorkerSc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAcceleratorCapabilities(v *types.AcceleratorCapabilities, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Count != nil {
+		ok := object.Key("count")
+		if err := awsRestjson1_serializeDocumentAcceleratorCountRange(v.Count, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Selections != nil {
+		ok := object.Key("selections")
+		if err := awsRestjson1_serializeDocumentAcceleratorSelections(v.Selections, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAcceleratorCountRange(v *types.AcceleratorCountRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10258,6 +10279,36 @@ func awsRestjson1_serializeDocumentAcceleratorCountRange(v *types.AcceleratorCou
 		ok.Integer(*v.Min)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAcceleratorSelection(v *types.AcceleratorSelection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Runtime != nil {
+		ok := object.Key("runtime")
+		ok.String(*v.Runtime)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAcceleratorSelections(v []types.AcceleratorSelection, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAcceleratorSelection(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -11368,6 +11419,13 @@ func awsRestjson1_serializeDocumentServiceManagedEc2FleetConfiguration(v *types.
 func awsRestjson1_serializeDocumentServiceManagedEc2InstanceCapabilities(v *types.ServiceManagedEc2InstanceCapabilities, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AcceleratorCapabilities != nil {
+		ok := object.Key("acceleratorCapabilities")
+		if err := awsRestjson1_serializeDocumentAcceleratorCapabilities(v.AcceleratorCapabilities, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AllowedInstanceTypes != nil {
 		ok := object.Key("allowedInstanceTypes")

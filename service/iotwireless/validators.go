@@ -2356,6 +2356,81 @@ func validateCellTowers(v *types.CellTowers) error {
 	}
 }
 
+func validateFuotaTaskEventLogOption(v *types.FuotaTaskEventLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FuotaTaskEventLogOption"}
+	if len(v.Event) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFuotaTaskEventLogOptionList(v []types.FuotaTaskEventLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FuotaTaskEventLogOptionList"}
+	for i := range v {
+		if err := validateFuotaTaskEventLogOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFuotaTaskLogOption(v *types.FuotaTaskLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FuotaTaskLogOption"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if v.Events != nil {
+		if err := validateFuotaTaskEventLogOptionList(v.Events); err != nil {
+			invalidParams.AddNested("Events", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFuotaTaskLogOptionList(v []types.FuotaTaskLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FuotaTaskLogOptionList"}
+	for i := range v {
+		if err := validateFuotaTaskLogOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGatewayList(v []types.GatewayListItem) error {
 	if v == nil {
 		return nil
@@ -4612,6 +4687,11 @@ func validateOpUpdateLogLevelsByResourceTypesInput(v *UpdateLogLevelsByResourceT
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLogLevelsByResourceTypesInput"}
+	if v.FuotaTaskLogOptions != nil {
+		if err := validateFuotaTaskLogOptionList(v.FuotaTaskLogOptions); err != nil {
+			invalidParams.AddNested("FuotaTaskLogOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.WirelessDeviceLogOptions != nil {
 		if err := validateWirelessDeviceLogOptionList(v.WirelessDeviceLogOptions); err != nil {
 			invalidParams.AddNested("WirelessDeviceLogOptions", err.(smithy.InvalidParamsError))
