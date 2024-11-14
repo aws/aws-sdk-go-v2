@@ -344,3 +344,28 @@ const (
 type Metadata struct {
 	values map[interface{}]interface{}
 }
+
+type MultipartDownloadType string
+
+const (
+	MultipartDownloadTypePart  MultipartDownloadType = "PART"
+	MultipartDownloadTypeRange                       = "RANGE"
+)
+
+type ChecksumMode string
+
+// Enum values for ChecksumMode
+const (
+	ChecksumModeEnabled ChecksumMode = "ENABLED"
+)
+
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusComplete  ReplicationStatus = "COMPLETE"
+	ReplicationStatusPending   ReplicationStatus = "PENDING"
+	ReplicationStatusFailed    ReplicationStatus = "FAILED"
+	ReplicationStatusReplica   ReplicationStatus = "REPLICA"
+	ReplicationStatusCompleted ReplicationStatus = "COMPLETED"
+)
