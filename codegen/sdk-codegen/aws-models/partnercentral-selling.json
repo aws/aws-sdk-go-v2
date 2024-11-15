@@ -31,6 +31,8 @@
                 "aws.auth#sigv4": {
                     "name": "partnercentral-selling"
                 },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {},
                 "aws.iam#defineConditionKeys": {
                     "partnercentral:RelatedEntityType": {
                         "type": "String",
@@ -50,24 +52,11 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>AWS Partner Central API for Selling</fullname>\n         <p>\n            <b>AWS Partner Central API for Selling Reference Guide</b>\n         </p>\n         <p>\n            Amazon Web Services (AWS) Partner Central API reference guide is designed to help\n            <a href=\"https://docs.aws.amazon.com/partners/programs/\">AWS Partners</a> programmatically integrate their Customer Relationship Management (CRM) systems with AWS Partner Central. Through the Partner Central APIs, partners can automate and streamline their interactions with AWS Partner Central, ensuring a more efficient and effective engagement in joint business activities.\n        </p>\n         <p>\n            The AWS Partner Central API service provides standard AWS API functionality. You can directly use the API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a>, or you can use an AWS SDK to access an API that's tailored to the programming language or platform that you're using. For more information about AWS application development, see <a href=\"https://docs.aws.amazon.com/getting-started\">Getting Started with AWS</a>. For more information about using AWS SDKs, see <a href=\"https://docs.aws.amazon.com/aws-sdk\">AWS SDKs</a>.\n        </p>\n         <p class=\"title\">\n            <b>Features offered by AWS Partner Central API</b>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <b>Opportunity management:</b> Facilitates the management of co-selling opportunities with AWS using API actions such as <code>CreateOpportunity</code>, <code>UpdateOpportunity</code>, <code>ListOpportunities</code>, <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS referral management:</b> Facilitates receiving referrals shared by AWS using actions like <code>ListEngagementInvitations</code>, <code>GetEngagementInvitation</code>, <code>StartEngagementByAcceptingInvitation</code>, and <code>RejectEngagementInvitation</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Entity association:</b> Associate related entities such as <i>AWS Products</i>, <i>Partner Solutions</i>, and <i>AWS Marketplace Private Offers</i> with opportunities using the actions <code>AssociateOpportunity</code> and <code>DisassociateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>View AWS opportunity details:</b> Use the <code>GetAWSOpportunitySummary</code> action to retrieve real-time summaries of AWS opportunities that are linked to your opportunities.</p>\n            </li>\n            <li>\n               <p>\n                  <b>List solutions:</b> Provides list APIs for listing solutions partners offer using <code>ListSolutions</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event subscription:</b> Partners can subscribe to real-time updates on opportunities by listening to events such as <i>Opportunity Created</i>, <i>Opportunity Updated</i>, <i>Engagement Invitation Accepted</i>, <i>Engagement Invitation Rejected</i> and <i>Engagement Invitation Created</i> using AWS EventBridge.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<fullname>AWS Partner Central API for Selling</fullname>\n         <p>\n            <b>AWS Partner Central API for Selling Reference Guide</b>\n         </p>\n         <p>This Amazon Web Services (AWS) Partner Central API reference is\n      designed to help <a href=\"http://aws.amazon.com/partners/programs/\">AWS\n        Partners</a> integrate Customer Relationship Management (CRM)\n      systems with AWS Partner Central. Partners can automate interactions with\n      AWS Partner Central, which helps to ensure effective engagements in joint\n      business activities.</p>\n         <p>The API provides standard AWS API functionality. Access it by\n      either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your\n      programming language or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with\n        AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p>\n         <p class=\"title\">\n            <b>Features offered by AWS Partner Central API</b>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <b>Opportunity management:</b>\n          Manages coselling opportunities through API actions such as\n            <code>CreateOpportunity</code>, <code>UpdateOpportunity</code>,\n            <code>ListOpportunities</code>, <code>GetOpportunity</code>, and\n            <code>AssignOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS referral management:</b>\n          Manages referrals shared by AWS using actions such as\n            <code>ListEngagementInvitations</code>,\n            <code>GetEngagementInvitation</code>,\n            <code>StartEngagementByAcceptingInvitation</code>, and\n            <code>RejectEngagementInvitation</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Entity association:</b>\n          Associates related entities such as <i>AWS Products</i>,\n            <i>Partner Solutions</i>, and <i>AWS\n            Marketplace Private Offers</i> with opportunities using the\n          actions <code>AssociateOpportunity</code>, and\n            <code>DisassociateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>View AWS opportunity\n            details:</b> Retrieves real-time summaries of AWS\n          opportunities using the <code>GetAWSOpportunitySummary</code>\n          action.</p>\n            </li>\n            <li>\n               <p>\n                  <b>List solutions:</b> Provides\n          list APIs for listing partner offers using\n          <code>ListSolutions</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event subscription:</b>\n          Subscribe to real-time opportunity updates through AWS EventBridge by\n          using actions such as <i>Opportunity Created</i>,\n            <i>Opportunity Updated</i>, <i>Engagement\n            Invitation Accepted</i>, <i>Engagement Invitation\n            Rejected</i>, and <i>Engagement Invitation\n            Created</i>.</p>\n            </li>\n         </ol>",
                 "smithy.api#title": "Partner Central Selling API",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
-                        "Region": {
-                            "builtIn": "AWS::Region",
-                            "required": false,
-                            "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
-                        },
-                        "UseDualStack": {
-                            "builtIn": "AWS::UseDualStack",
-                            "required": true,
-                            "default": false,
-                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
-                        },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
@@ -79,6 +68,12 @@
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         }
                     },
@@ -112,35 +107,14 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "rules": [
-                                        {
-                                            "conditions": [
-                                                {
-                                                    "fn": "booleanEquals",
-                                                    "argv": [
-                                                        {
-                                                            "ref": "UseDualStack"
-                                                        },
-                                                        true
-                                                    ]
-                                                }
-                                            ],
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error"
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
                                         },
-                                        {
-                                            "conditions": [],
-                                            "endpoint": {
-                                                "url": {
-                                                    "ref": "Endpoint"
-                                                },
-                                                "properties": {},
-                                                "headers": {}
-                                            },
-                                            "type": "endpoint"
-                                        }
-                                    ],
-                                    "type": "tree"
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
                                 }
                             ],
                             "type": "tree"
@@ -183,208 +157,23 @@
                                                                 },
                                                                 true
                                                             ]
-                                                        },
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
                                                         }
                                                     ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                },
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://partnercentral-selling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree"
-                                                                }
-                                                            ],
-                                                            "type": "tree"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                            "type": "error"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseFIPS"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsFIPS"
-                                                                            ]
-                                                                        },
-                                                                        true
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://partnercentral-selling-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree"
-                                                                }
-                                                            ],
-                                                            "type": "tree"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "FIPS is enabled but this partition does not support FIPS",
-                                                            "type": "error"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
-                                                },
-                                                {
-                                                    "conditions": [
-                                                        {
-                                                            "fn": "booleanEquals",
-                                                            "argv": [
-                                                                {
-                                                                    "ref": "UseDualStack"
-                                                                },
-                                                                true
-                                                            ]
-                                                        }
-                                                    ],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": [
-                                                                        true,
-                                                                        {
-                                                                            "fn": "getAttr",
-                                                                            "argv": [
-                                                                                {
-                                                                                    "ref": "PartitionResult"
-                                                                                },
-                                                                                "supportsDualStack"
-                                                                            ]
-                                                                        }
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "rules": [
-                                                                {
-                                                                    "conditions": [],
-                                                                    "rules": [
-                                                                        {
-                                                                            "conditions": [],
-                                                                            "endpoint": {
-                                                                                "url": "https://partnercentral-selling.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        }
-                                                                    ],
-                                                                    "type": "tree"
-                                                                }
-                                                            ],
-                                                            "type": "tree"
-                                                        },
-                                                        {
-                                                            "conditions": [],
-                                                            "error": "DualStack is enabled but this partition does not support DualStack",
-                                                            "type": "error"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
+                                                    "endpoint": {
+                                                        "url": "https://partnercentral-selling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "rules": [
-                                                        {
-                                                            "conditions": [],
-                                                            "endpoint": {
-                                                                "url": "https://partnercentral-selling.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        }
-                                                    ],
-                                                    "type": "tree"
+                                                    "endpoint": {
+                                                        "url": "https://partnercentral-selling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
                                                 }
                                             ],
                                             "type": "tree"
@@ -405,6 +194,28 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -413,21 +224,7 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://partnercentral-selling-fips.us-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -439,140 +236,59 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://partnercentral-selling.us-east-1.amazonaws.com"
+                                    "url": "https://partnercentral-selling-fips.cn-northwest-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://partnercentral-selling-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://partnercentral-selling.cn-northwest-1.api.amazonwebservices.com.cn"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://partnercentral-selling-fips.cn-north-1.amazonaws.com.cn"
+                                    "url": "https://partnercentral-selling-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://partnercentral-selling.cn-north-1.api.amazonwebservices.com.cn"
+                                    "url": "https://partnercentral-selling.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://partnercentral-selling.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://partnercentral-selling-fips.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://partnercentral-selling-fips.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://partnercentral-selling.us-gov-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://partnercentral-selling.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://partnercentral-selling-fips.us-iso-east-1.c2s.ic.gov"
@@ -580,23 +296,11 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
                             "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://partnercentral-selling.us-iso-east-1.c2s.ic.gov"
@@ -604,23 +308,11 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://partnercentral-selling-fips.us-isob-east-1.sc2s.sgov.gov"
@@ -628,23 +320,11 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
                             "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "url": "https://partnercentral-selling.us-isob-east-1.sc2s.sgov.gov"
@@ -652,59 +332,55 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://example.com"
+                                    "url": "https://partnercentral-selling-fips.eu-isoe-west-1.cloud.adc-e.uk"
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://example.com"
+                                    "url": "https://partnercentral-selling.eu-isoe-west-1.cloud.adc-e.uk"
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
                             "expect": {
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                                "endpoint": {
+                                    "url": "https://partnercentral-selling-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Endpoint": "https://example.com"
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
                             "expect": {
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                                "endpoint": {
+                                    "url": "https://partnercentral-selling.us-isof-south-1.csp.hci.ic.gov"
+                                }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Endpoint": "https://example.com"
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -737,7 +413,7 @@
                 "Industry": {
                     "target": "com.amazonaws.partnercentralselling#Industry",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the industry the end <code>Customer</code> belongs to that's associated with the <code>Opportunity</code> . It refers to the category or sector where the customer's business operates. This is a required field.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies the industry the end <code>Customer</code> belongs to that's associated with the <code>Opportunity</code>. It refers to the category or sector where the customer's business operates. This is a required field.\n        </p>"
                     }
                 },
                 "OtherIndustry": {
@@ -815,7 +491,7 @@
                 "Industry": {
                     "target": "com.amazonaws.partnercentralselling#Industry",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which industry the end <code>Customer</code> belongs to associated with the <code>Opportunity</code> .\n            It refers to the category or sector that the customer's business operates in.\n        </p>\n         <p>To submit a value outside the picklist, use\n            <code>Other</code>.\n        </p>\n         <p>Conditionally mandatory if <code>Other</code> is selected for Industry Vertical in LOVs.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies which industry the end <code>Customer</code> belongs to associated with the <code>Opportunity</code>.\n            It refers to the category or sector that the customer's business operates in.\n        </p>\n         <p>To submit a value outside the picklist, use\n            <code>Other</code>.\n        </p>\n         <p>Conditionally mandatory if <code>Other</code> is selected for Industry Vertical in LOVs.\n        </p>"
                     }
                 },
                 "OtherIndustry": {
@@ -1007,7 +683,7 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            is assigned in. Use <code>AWS</code> to assign real opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> to test in a secure and isolated environment.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            is assigned in. Use <code>AWS</code> to assign real opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> for testing in secure, isolated environments.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1044,7 +720,7 @@
                 "FirstName": {
                     "target": "com.amazonaws.partnercentralselling#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the first name of the assignee managing the opportunity.</p>",
+                        "smithy.api#documentation": "<p>Specifies the first name of the assignee managing the opportunity. The system automatically retrieves this value from the user profile by referencing the associated email address.</p>",
                         "smithy.api#length": {
                             "max": 80
                         },
@@ -1054,7 +730,7 @@
                 "LastName": {
                     "target": "com.amazonaws.partnercentralselling#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the last name of the assignee managing the opportunity.</p>",
+                        "smithy.api#documentation": "<p>Specifies the last name of the assignee managing the opportunity. The system automatically retrieves this value from the user profile by referencing the associated email address.</p>",
                         "smithy.api#length": {
                             "max": 80
                         },
@@ -1064,13 +740,13 @@
                 "BusinessTitle": {
                     "target": "com.amazonaws.partnercentralselling#JobTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the business title of the assignee managing the opportunity. This helps clarify the individual's role and responsibilities within the organization.</p>",
+                        "smithy.api#documentation": "<p>Specifies the business title of the assignee managing the opportunity. This helps clarify the individual's role and responsibilities within the organization. Use the value <code>PartnerAccountManager</code> to update details of the opportunity owner.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the contact details of the individual assigned to manage the opportunity within the partner organization. This ensures that there is a clear point of contact for the opportunity's progress and updates.</p>"
+                "smithy.api#documentation": "<p>Represents the contact details of the individual assigned to manage the opportunity within the partner organization. This helps to ensure that there is a point of contact for the opportunity's progress.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#AssociateOpportunity": {
@@ -1106,7 +782,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to associate Opportunities on AWS Partner Central with other entities"
                 },
-                "smithy.api#documentation": "<p>\n            Enables you to create a formal association between an <code>Opportunity</code> and various\n            related entities, enriching the context and details of the opportunity for better collaboration and\n            decision-making. You can associate an opportunity with the following types of entities:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Partner Solution:\n                    A software product or consulting practice created and delivered by Partners. Partner Solutions help customers address specific business challenges or achieve particular goals using Amazon Web Services services.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Amazon Web Services Product:\n                    Amazon Web Services offers a wide range of products and services designed to provide scalable, reliable, and cost-effective infrastructure solutions. For the latest list of Amazon Web Services products, refer to <a href=\"https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json\">Amazon Web Services products</a>.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Amazon Web Services Marketplace private offer:\n                    Allows Amazon Web Services Marketplace sellers to extend custom pricing and terms to individual Amazon Web Services customers. Sellers can negotiate custom prices, payment schedules, and end user license terms through private offers, enabling Amazon Web Services customers to acquire software solutions tailored to their specific needs. For more information, refer to <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-private-offers.html\">Private offers in Amazon Web Services Marketplace</a>.\n                </p>\n            </li>\n         </ul>\n         <p>To obtain identifiers for these entities, use the following methods:</p>\n         <ul>\n            <li>\n               <p>Solution: Use the <code>ListSolutions</code> operation.</p>\n            </li>\n            <li>\n               <p>\n                    AWS products: For the latest list of Amazon Web Services products, refer to\n                    the Amazon Web Services products list.</p>\n            </li>\n            <li>\n               <p>\n                    Amazon Web Services Marketplace private offer: Use the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html\">AWS Marketplace Catalog API</a> to list entities. Specifically, use the <code>ListEntities</code> operation to retrieve a list of private offers. The request to the <code>ListEntities</code> API returns the details of the private offers available to you. For more information, refer to <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html\">ListEntities</a>.\n                </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            Enables you to create a formal association between an <code>Opportunity</code> and various\n            related entities, enriching the context and details of the opportunity for better collaboration and\n            decision making. You can associate an opportunity with the following entity types:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Partner Solution:\n                    A software product or consulting practice created and delivered by Partners. Partner Solutions help customers address business challenges using Amazon Web Services services.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Amazon Web Services Products:\n                    Amazon Web Services offers many products and services that provide scalable, reliable, and cost-effective infrastructure solutions. For the latest list of Amazon Web Services products, see <a href=\"https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json\">Amazon Web Services products</a>.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Amazon Web Services Marketplace private offer:\n                    Allows Amazon Web Services Marketplace sellers to extend custom pricing and terms to individual Amazon Web Services customers. Sellers can negotiate custom prices, payment schedules, and end user license terms through private offers, enabling Amazon Web Services customers to acquire software solutions tailored to their specific needs. For more information, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-private-offers.html\">Private offers in Amazon Web Services Marketplace</a>.\n                </p>\n            </li>\n         </ul>\n         <p>To obtain identifiers for these entities, use the following methods:</p>\n         <ul>\n            <li>\n               <p>Solution: Use the <code>ListSolutions</code> operation.</p>\n            </li>\n            <li>\n               <p>\n                  AWS Products: For the latest list of Amazon Web Services products, see <a href=\"https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json\">Amazon Web Services products</a>.\n                </p>\n            </li>\n            <li>\n               <p>\n                  Amazon Web Services Marketplace private offer: Use the <a href=\"https://docs.aws.amazon.com/marketplace/latest/APIReference/catalog-apis.html\">Using the Amazon Web Services Marketplace Catalog API</a> to list entities. Specifically, use the <code>ListEntities</code> operation to retrieve a list of private offers. The request returns the details of available private offers. For more information, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html\">ListEntities</a>.\n                </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/AssociateOpportunity",
@@ -1120,7 +796,7 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines whichenvironment the opportunity\n            association is made in. Use <code>AWS</code> to associate opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> to test in a secure and isolated environment.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            association is made in. Use <code>AWS</code> to associate opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> for testing in secure, isolated environments.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1135,7 +811,7 @@
                 "RelatedEntityType": {
                     "target": "com.amazonaws.partnercentralselling#RelatedEntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of the related entity you're associating with the <code>\n            Opportunity</code>. This helps to categorize and properly process the association.\n        </p>",
+                        "smithy.api#documentation": "<p>Specifies the entity type that you're associating with the <code>\n            Opportunity</code>. This helps to categorize and properly process the association.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1538,7 +1214,7 @@
                 "Contacts": {
                     "target": "com.amazonaws.partnercentralselling#CustomerContactsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides a list of customer contacts involved in the opportunity. These contacts may include decision-makers, influencers, and other key stakeholders within the customer's organization.</p>"
+                        "smithy.api#documentation": "<p>Provides a list of customer contacts involved in the opportunity. These contacts may include decision makers, influencers, and other stakeholders within the customer's organization.</p>"
                     }
                 }
             },
@@ -1590,7 +1266,7 @@
                 "NextSteps": {
                     "target": "com.amazonaws.partnercentralselling#PiiString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the immediate next steps required to progress the opportunity. These steps are based on AWS's guidance and the current stage of the opportunity.</p>",
+                        "smithy.api#documentation": "<p>Specifies the immediate next steps required to progress the opportunity. These steps are based on AWS guidance and the current stage of the opportunity.</p>",
                         "smithy.api#length": {
                             "max": 255
                         }
@@ -1814,19 +1490,19 @@
                 "InvolvementType": {
                     "target": "com.amazonaws.partnercentralselling#SalesInvolvementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of AWS involvement in the opportunity, such as co-selling, deal support, or technical consultation. This helps categorize the nature of AWS's participation.</p>",
+                        "smithy.api#documentation": "<p>Specifies the type of AWS involvement in the opportunity, such as coselling, deal support, or technical consultation. This helps categorize the nature of AWS participation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Visibility": {
                     "target": "com.amazonaws.partnercentralselling#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines who can view AWS's involvement in the opportunity. Typically, this field is set to <code>Full</code> for most cases, but it may be restricted based on special program requirements or confidentiality needs.</p>"
+                        "smithy.api#documentation": "<p>Determines who can view AWS involvement in the opportunity. Typically, this field is set to <code>Full</code> for most cases, but it may be restricted based on special program requirements or confidentiality needs.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates the level of AWS involvement in the opportunity. This field helps track AWS's role and participation throughout the engagement, such as providing technical support, deal assistance, or sales support.</p>"
+                "smithy.api#documentation": "<p>Indicates the level of AWS involvement in the opportunity. This field helps track AWS participation throughout the engagement, such as providing technical support, deal assistance, and sales support.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#AwsTeamMember": {
@@ -1960,6 +1636,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.partnercentralselling#Channel"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[!-~]{1,64}$"
             }
         },
         "com.amazonaws.partnercentralselling#ClosedLostReason": {
@@ -2216,7 +1898,7 @@
                 "BusinessTitle": {
                     "target": "com.amazonaws.partnercentralselling#JobTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The partner contact's title (job title or role) associated with the <code>Opportunity</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>The partner contact's title (job title or role) associated with the <code>Opportunity</code>. <code>BusinessTitle</code> supports either <code>PartnerAccountManager</code> or <code>OpportunityOwner</code>.\n        </p>"
                     }
                 },
                 "Phone": {
@@ -3767,7 +3449,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create new Opportunities on AWS Partner Central"
                 },
-                "smithy.api#documentation": "<p>\n            Creates an <code>Opportunity</code> record in Partner Central. Use this operation to create\n            a potential business opportunity intended to be submitted to Amazon Web Services. Creating an opportunity sets its <code>Lifecycle.ReviewStatus</code> to\n            <code>Pending Submission</code>.\n        </p>\n         <p>\n            To fully submit an opportunity, follow these steps:\n        </p>\n         <ol>\n            <li>\n               <p>To create the opportunity, use <code>CreateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>To associate a solution with the opportunity, use <code>AssociateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>To submit the opportunity, use <code>SubmitOpportunity</code>.</p>\n            </li>\n         </ol>\n         <p>\n            After submission, you can't edit the opportunity until the review is complete. However, opportunities in the\n            <code>Pending Submission</code> state still need all details completed. You can update\n            the opportunity while it's in the <code>Pending Submission</code> state.\n        </p>\n         <p>\n            There's a set of mandatory fields required to create opportunities, but consider providing optional fields to\n            enrich the opportunity record.\n        </p>",
+                "smithy.api#documentation": "<p>\n            Creates an <code>Opportunity</code> record in Partner Central. Use this operation to create\n            a potential business opportunity for submission to Amazon Web Services. Creating an opportunity sets <code>Lifecycle.ReviewStatus</code> to\n            <code>Pending Submission</code>.\n        </p>\n         <p>\n            To submit an opportunity, follow these steps:\n        </p>\n         <ol>\n            <li>\n               <p>To create the opportunity, use <code>CreateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>To associate a solution with the opportunity, use <code>AssociateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>To submit the opportunity, use <code>StartEngagementFromOpportunityTask</code>.</p>\n            </li>\n         </ol>\n         <p>\n            After submission, you can't edit the opportunity until the review is complete. But opportunities in the\n            <code>Pending Submission</code> state must have complete details. You can update\n            the opportunity while it's in the <code>Pending Submission</code> state.\n        </p>\n         <p>\n            There's a set of mandatory fields to create opportunities, but consider providing optional fields to\n            enrich the opportunity record.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateOpportunity",
@@ -3782,14 +3464,14 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            is created in. Use <code>AWS</code> to create opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> to test in a secure and isolated environment.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            is created in. Use <code>AWS</code> to create opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> for testing in secure, isolated environments.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PrimaryNeedsFromAws": {
                     "target": "com.amazonaws.partnercentralselling#PrimaryNeedsFromAws",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Identifies the type of support the partner needs from Amazon Web Services.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Co-Sell - Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Pricing Assistance: Connect with an Amazon Web Services seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Technical Consultation: Connect with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Support for Public Tender / RFx: Opportunity related to the public sector where the partner needs Amazon Web Services RFx support.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't need support from an Amazon Web Services sales representative, and the partner solely manages the opportunity. It's possible to request co-selling support on these opportunities at any stage during their lifecycle. Also known as, for-visibility-only (FVO) opportunity.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Identifies the type of support the partner needs from Amazon Web Services.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Cosell—Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Pricing Assistance: Connect with an Amazon Web Services seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Technical Consultation: Connect with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Support for Public Tender/RFx: Opportunity related to the public sector where the partner needs Amazon Web Services RFx support.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't need support from an Amazon Web Services sales representative, and the partner solely manages the opportunity. It's possible to request coselling support on these opportunities at any stage during their lifecycles. This is also known as a for-visibility-only (FVO) opportunity.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NationalSecurity": {
@@ -3801,7 +3483,7 @@
                 "PartnerOpportunityIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the opportunity's unique identifier in the partner's CRM system. This value is essential\n            to track and reconcile because it's included in the outbound payload sent back to the partner.\n        </p>\n         <p>\n            This field allows partners to link an opportunity to their CRM, to ensure seamless integration and accurate\n            synchronization between the Partner Central API and the partner's internal systems.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the opportunity's unique identifier in the partner's CRM system. This value is essential\n            to track and reconcile because it's included in the outbound payload to the partner.\n        </p>\n         <p>\n            This field allows partners to link an opportunity to their CRM, which helps to ensure seamless integration and accurate synchronization between the Partner Central API and the partner's internal systems.\n        </p>",
                         "smithy.api#length": {
                             "max": 64
                         }
@@ -3834,13 +3516,13 @@
                 "SoftwareRevenue": {
                     "target": "com.amazonaws.partnercentralselling#SoftwareRevenue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies details of a customer's procurement terms. Required only for partners in eligible programs.</p>"
+                        "smithy.api#documentation": "<p>Specifies details of a customer's procurement terms. This is required only for partners in eligible programs.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Required to be unique, and should be unchanging, it can be randomly generated or a meaningful string.\n        </p>\n         <p>\n            Default: None\n        </p>\n         <p>\n            Best practice: To ensure uniqueness and avoid collisions, we recommend you use a UUID (Universally Unique Identifier) as the <code>ClientToken</code>. You can use standard libraries available in most programming languages to generated this. If you use the same client token, the API throws this error: \"Conflicting client token submitted for a new request body\".\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Required to be unique, and should be unchanging, it can be randomly generated or a meaningful string.\n        </p>\n         <p>\n            Default: None\n        </p>\n         <p>\n          Best practice: To help ensure uniqueness and avoid conflicts, use a Universally Unique Identifier (UUID) as the <code>ClientToken</code>. You can use standard libraries from most programming languages to generate this. If you use the same client token, the API returns the following error: \"Conflicting client token submitted for a new request body.\"\n        </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#length": {
                             "min": 1
@@ -3863,7 +3545,7 @@
                 "OpportunityTeam": {
                     "target": "com.amazonaws.partnercentralselling#PartnerOpportunityTeamMembersList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the internal team handling the opportunity. Specify the members involved in collaborating on this opportunity within the partner's organization.</p>"
+                        "smithy.api#documentation": "<p>Represents the internal team handling the opportunity. Specify collaborating members of this opportunity who are within the partner's organization.</p>"
                     }
                 }
             },
@@ -3877,7 +3559,7 @@
                 "Id": {
                     "target": "com.amazonaws.partnercentralselling#OpportunityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Read-only, system-generated <code>Opportunity</code> unique identifier. Amazon Web Services creates this identifier, and it's\n            used for all subsequent actions on the opportunity, such as updates, associations, and submissions. It ensures\n            that each opportunity can be accurately tracked and managed within the system.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Read-only, system-generated <code>Opportunity</code> unique identifier. Amazon Web Services creates this identifier, and it's used for all subsequent opportunity actions, such as updates, associations, and submissions. It helps to ensure that each opportunity is accurately tracked and managed.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3890,7 +3572,7 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.partnercentralselling#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>DateTime</code>\n            when the opportunity was last modified. When the <code>Opportunity</code> is created, its value is equal to\n            <code>CreatedDate</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            <code>DateTime</code>\n            when the opportunity was last modified. When the <code>Opportunity</code> is created, its value is <code>CreatedDate</code>.\n        </p>"
                     }
                 }
             },
@@ -4909,6 +4591,9 @@
                         "smithy.api#enumValue": "ZWL"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.partnercentralselling#Customer": {
@@ -5043,7 +4728,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to disassociate Opportunities on AWS Partner Central from other entities"
                 },
-                "smithy.api#documentation": "<p>\n            Allows you to remove an existing association between an <code>Opportunity</code> and related entities such as a Partner Solution, Amazon Web Services product, or an Amazon Web Services Marketplace offer.\n            This operation is the counterpart to <code>AssociateOpportunity</code>, and it provides flexibility to manage\n            associations as business needs change.\n        </p>\n         <p>\n            Use this operation to update the associations of an <code>Opportunity</code> due to changes in the related entities,\n            or if an association was made in error. Ensuring accurate associations helps maintain clarity and accuracy to track\n            and manage business opportunities. When you replace an entity, first attach the new entity and then disassociate the\n            one to be removed, especially if it's the last remaining related entity that's required.\n        </p>",
+                "smithy.api#documentation": "<p>\n            Allows you to remove an existing association between an <code>Opportunity</code> and related entities, such as a Partner Solution, Amazon Web Services product, or an Amazon Web Services Marketplace offer.\n            This operation is the counterpart to <code>AssociateOpportunity</code>, and it provides flexibility to manage\n            associations as business needs change.\n        </p>\n         <p>\n            Use this operation to update the associations of an <code>Opportunity</code> due to changes in the related entities,\n            or if an association was made in error. Ensuring accurate associations helps maintain clarity and accuracy to track\n            and manage business opportunities. When you replace an entity, first attach the new entity and then disassociate the\n            one to be removed, especially if it's the last remaining entity that's required.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DisassociateOpportunity",
@@ -5057,14 +4742,14 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            disassociation is made in. Use <code>AWS</code> to disassociate opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> to test in a secure and isolated environment.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            disassociation is made in. Use <code>AWS</code> to disassociate opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> for testing in secure, isolated environments.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OpportunityIdentifier": {
                     "target": "com.amazonaws.partnercentralselling#OpportunityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The opportunity's unique identifier for when you want to disassociate it from related entities. This identifier\n            is crucial to ensure the correct opportunity is updated, especially in environments with numerous\n            opportunities.\n        </p>\n         <p>Validation: Ensure that the identifier provided corresponds to an existing opportunity in the Amazon Web Services system because\n            incorrect identifiers result in an error and no changes are made.\n        </p>",
+                        "smithy.api#documentation": "<p>The opportunity's unique identifier for when you want to disassociate it from related entities. This identifier\n            helps to ensure that the correct opportunity is updated.\n        </p>\n         <p>Validation: Ensure that the provided identifier corresponds to an existing opportunity in the Amazon Web Services system because\n            incorrect identifiers result in an error and no changes are made.\n        </p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "Identifier"
                     }
@@ -5072,14 +4757,14 @@
                 "RelatedEntityType": {
                     "target": "com.amazonaws.partnercentralselling#RelatedEntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the entity that you're disassociating from the opportunity. When you specify the entity type, it helps\n            the system correctly process the disassociation request and ensures that the right connections are removed.\n        </p>\n         <p>Examples of entity types include Partner Solution, Amazon Web Services product, and Amazon Web Services Marketplace offer. Ensure that the value\n            matches one of the expected entity types.\n        </p>\n         <p>Validation: Provide a valid entity type to ensure successful disassociation. Invalid or incorrect entity\n            types result in an error.\n        </p>",
+                        "smithy.api#documentation": "<p>The type of the entity that you're disassociating from the opportunity. When you specify the entity type, it helps\n            the system correctly process the disassociation request to ensure that the right connections are removed.\n        </p>\n         <p>Examples of entity types include Partner Solution, Amazon Web Services product, and Amazon Web Services Marketplaceoffer. Ensure that the value matches one of the expected entity types.\n        </p>\n         <p>Validation: Provide a valid entity type to help ensure successful disassociation. An invalid or incorrect entity type results in an error.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RelatedEntityIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The related entity's identifier that you want to disassociate from the opportunity. Depending on the\n            type of entity, this could be a simple identifier or an Amazon Resource Name (ARN) for entities managed\n            through Amazon Web Services Marketplace.\n        </p>\n         <p>For Amazon Web Services Marketplace entities, use the Amazon Web Services Marketplace API to obtain the necessary ARNs.\n            For guidance on retrieving these ARNs, refer to <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html\">\n                Amazon Web Services Marketplace Catalog API</a> .\n        </p>\n         <p>Validation: Ensure the identifier or ARN is valid and corresponds to an existing related entity.\n            An incorrect or invalid identifier results in an error.\n        </p>",
+                        "smithy.api#documentation": "<p>The related entity's identifier that you want to disassociate from the opportunity. Depending on the\n            type of entity, this could be a simple identifier or an Amazon Resource Name (ARN) for entities managed\n            through Amazon Web Services Marketplace.\n        </p>\n         <p>For Amazon Web Services Marketplace entities, use the Amazon Web Services Marketplace API to obtain the necessary ARNs.\n            For guidance on retrieving these ARNs, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html\">\n              Amazon Web Services MarketplaceUsing the Amazon Web Services Marketplace Catalog API</a>.\n        </p>\n         <p>Validation: Ensure the identifier or ARN is valid and corresponds to an existing entity.\n            An incorrect or invalid identifier results in an error.\n        </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 255
@@ -5168,7 +4853,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the customer associated with the Engagement Invitation, including key company information and industry.</p>"
+                "smithy.api#documentation": "<p>Contains details about the customer associated with the Engagement Invitation, including company information and industry.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#EngagementCustomerBusinessProblem": {
@@ -5320,7 +5005,7 @@
                 "ExpirationDate": {
                     "target": "com.amazonaws.partnercentralselling#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the date and time when the Engagement Invitation will expire. After this date, the invitation can no longer be accepted, and the opportunity will no longer be available for the partner to engage.</p>"
+                        "smithy.api#documentation": "<p>Indicates the date and time when the Engagement Invitation will expire. After this date, the invitation can no longer be accepted, and the opportunity will be unavailable to the partner.</p>"
                     }
                 },
                 "SenderAwsAccountId": {
@@ -5353,7 +5038,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides a summarized view of the Engagement Invitation, including key details like the identifier, status, and sender information. This summary helps partners track and manage AWS-originated opportunities.</p>"
+                "smithy.api#documentation": "<p>Provides a summarized view of the Engagement Invitation, including details like the identifier, status, and sender. This summary helps partners track and manage AWS originated opportunities.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#EngagementInvitationsPayloadType": {
@@ -5401,7 +5086,6 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the estimated monthly revenue that the partner expects to earn from the opportunity. This helps in forecasting financial returns.</p>",
-                        "smithy.api#pattern": "^(0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -5525,7 +5209,7 @@
                 "RelatedOpportunityIdentifier": {
                     "target": "com.amazonaws.partnercentralselling#OpportunityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The unique identifier for the related partner opportunity. Use this field to correlate an AWS\n            opportunity with its corresponding partner opportunity in your CRM system.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The unique identifier for the related partner opportunity. Use this field to correlate an AWS\n            opportunity with its corresponding partner opportunity.\n        </p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "Identifier"
                     }
@@ -5560,7 +5244,7 @@
                 "InvolvementType": {
                     "target": "com.amazonaws.partnercentralselling#SalesInvolvementType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the type of involvement AWS has in the opportunity, such as direct co-sell or advisory support.\n            This field helps partners understand the role AWS will play in advancing the opportunity.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Specifies the type of involvement AWS has in the opportunity, such as direct cosell or advisory support.\n            This field helps partners understand the role AWS plays in advancing the opportunity.\n        </p>"
                     }
                 },
                 "Visibility": {
@@ -5578,7 +5262,7 @@
                 "OpportunityTeam": {
                     "target": "com.amazonaws.partnercentralselling#AwsOpportunityTeamMembersList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Details the AWS Opportunity team, including key members involved in the opportunity. This information\n            helps partners know who from AWS is engaged and their roles in the opportunity.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Details the AWS opportunity team, including members involved. This information\n            helps partners know who from AWS is engaged and what their role is.\n        </p>"
                     }
                 },
                 "Insights": {
@@ -5602,7 +5286,7 @@
                 "Customer": {
                     "target": "com.amazonaws.partnercentralselling#AwsOpportunityCustomer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Provides details about the customer associated with the AWS Opportunity, including account information,\n            industry, and other key customer data. These details help partners understand the business context of the\n            opportunity.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Provides details about the customer associated with the AWS Opportunity, including account information,\n            industry, and other customer data. These details help partners understand the business context of the\n            opportunity.\n        </p>"
                     }
                 },
                 "Project": {
@@ -5648,7 +5332,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to retrieve details of Engagement Invitations on AWS Partner Central"
                 },
-                "smithy.api#documentation": "<p>Retrieves the details of an engagement invitation shared by AWS with a partner. The information includes key aspects such as the customer, project details, and lifecycle information related to the engagement.</p>",
+                "smithy.api#documentation": "<p>Retrieves the details of an engagement invitation shared by AWS with a partner. The information includes aspects such as customer, project details, and lifecycle information. To connect an engagement invitation with an opportunity, match the invitation’s <code>Payload.Project.Title</code> with opportunity <code>Project.Title</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetEngagementInvitation",
@@ -5670,7 +5354,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.partnercentralselling#EngagementInvitationArnOrIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the unique identifier for the engagement invitation being retrieved.</p>",
+                        "smithy.api#documentation": "<p>Specifies the unique identifier for the retrieved engagement\n      invitation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5685,7 +5369,7 @@
                 "Arn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the engagement invitation.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the engagement\n      invitation.</p>"
                     }
                 },
                 "PayloadType": {
@@ -5704,13 +5388,13 @@
                 "EngagementTitle": {
                     "target": "com.amazonaws.partnercentralselling#EngagementTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The title of the engagement invitation, summarizing the purpose or key objectives of the opportunity shared by AWS.</p>"
+                        "smithy.api#documentation": "<p>The title of the engagement invitation, summarizing the purpose or objectives of the opportunity shared by AWS.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.partnercentralselling#InvitationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the engagement invitation (e.g., <code>Accepted</code>, <code>Pending</code>, or <code>Rejected</code>).</p>"
+                        "smithy.api#documentation": "<p>The current status of the engagement invitation.</p>"
                     }
                 },
                 "InvitationDate": {
@@ -5817,7 +5501,7 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            is fetched from. Use <code>AWS</code> to retrieve opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> to retrieve opportunities in a secure and isolated testing environment.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity\n            is fetched from. Use <code>AWS</code> to retrieve opportunities in the Amazon Web Services catalog,\n            and <code>Sandbox</code> to retrieve opportunities in a secure, isolated testing environment.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5846,7 +5530,7 @@
                 "PrimaryNeedsFromAws": {
                     "target": "com.amazonaws.partnercentralselling#PrimaryNeedsFromAws",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Identifies the type of support the partner needs from Amazon Web Services.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Co-Sell - Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Pricing Assistance: Connect with an Amazon Web Services seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Technical Consultation: Connect with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Support for Public Tender / RFx: Opportunity related to the public sector where the partner needs Amazon Web Services RFx support.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Do Not Need Support from Amazon Web Services Sales Rep: Indicates that a partner doesn't need support from an Amazon Web Services sales representative, and the partner solely manages the opportunity. It's possible to request co-selling support on these opportunities at any stage during their lifecycle. Also known as, for-visibility-only (FVO) opportunity.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Identifies the type of support the partner needs from Amazon Web Services.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Cosell—Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Pricing Assistance: Connect with an Amazon Web Services seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Technical Consultation: Connect with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Support for Public Tender/RFx: Opportunity related to the public sector where the partner needs Amazon Web Services RFx support.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Do Not Need Support from Amazon Web Services Sales Rep: Indicates that a partner doesn't need support from an Amazon Web Services sales representative, and the partner solely manages the opportunity. It's possible to request coselling support on these opportunities at any stage during their lifecycle. Also known as, for-visibility-only (FVO) opportunity.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NationalSecurity": {
@@ -5879,7 +5563,7 @@
                 "OpportunityType": {
                     "target": "com.amazonaws.partnercentralselling#OpportunityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the opportunity type as renewal, new, or expansion.\n        </p>\n         <p>\n            Opportunity types:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    New opportunity:\n                    Represents a new business opportunity with a potential customer that's not previously engaged with your solutions or services.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Renewal opportunity:\n                    Represents an opportunity to renew an existing contract or subscription with a current customer, ensuring continuity of service.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Expansion opportunity:\n                    Represents an opportunity to expand the scope of an existing contract or subscription, either by adding new services or increasing the volume of existing services for a current customer.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Specifies the opportunity type as renewal, new, or expansion.\n        </p>\n         <p>\n            Opportunity types:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    New opportunity:\n                    Represents a new business opportunity with a potential customer that's not previously engaged with your solutions or services.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Renewal opportunity:\n                    Represents an opportunity to renew an existing contract or subscription with a current customer, which helps to ensure service continuity.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Expansion opportunity:\n                    Represents an opportunity to expand the scope of a customer's contract or subscription, either by adding new services or increasing the volume of existing services.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Marketing": {
@@ -6224,19 +5908,19 @@
                 "Stage": {
                     "target": "com.amazonaws.partnercentralselling#Stage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the current stage of the <code>Opportunity</code>'s lifecycle as it maps to Amazon Web Services stages from the current stage in the partner CRM. This field provides a translated value of the stage, and offers insight into the <code>Opportunity</code>'s progression in the sales cycle, according to Amazon Web Services definitions.\n        </p>\n         <note>\n            <p>A lead and a prospect must be further matured to a <code>Qualified</code> opportunity before submission. Opportunities that were closed/lost before submission aren't suitable for submission.</p>\n         </note>\n         <p>\n            The descriptions of each sales stage are:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Prospect: Amazon Web Services identifies the opportunity. It can be active (Comes directly from the end customer through a lead) or latent (Your account team believes it exists based on research, account plans, sales plays).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Qualified: Your account team engaged with the prospect/end customer to discuss viability and understand requirements. The prospect/end customer agreed that the opportunity is real, of interest, and may solve key business/technical needs.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Technical Validation: All parties understand the implementation plan.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Business Validation: Pricing was proposed, and all parties agree to the steps to close.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Committed: The customer signed the contract, but Amazon Web Services hasn't started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Launched: The workload is complete, and Amazon Web Services has started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Closed Lost: The opportunity is lost, and there are no steps to move forward.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Specifies the current stage of the <code>Opportunity</code>'s lifecycle as it maps to Amazon Web Services stages from the current stage in the partner CRM. This field provides a translated value of the stage, and offers insight into the <code>Opportunity</code>'s progression in the sales cycle, according to Amazon Web Services definitions.\n        </p>\n         <note>\n            <p>A lead and a prospect must be further matured to a <code>Qualified</code> opportunity before submission. Opportunities that were closed/lost before submission aren't suitable for submission.</p>\n         </note>\n         <p>\n            The descriptions of each sales stage are:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Prospect: Amazon Web Services identifies the opportunity. It can be active (Comes directly from the end customer through a lead) or latent (Your account team believes it exists based on research, account plans, sales plays).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Qualified: Your account team engaged with the customer to discuss viability and requirements. The customer agreed that the opportunity is real, of interest, and may solve business/technical needs.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Technical Validation: All parties understand the implementation plan.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Business Validation: Pricing was proposed, and all parties agree to the steps to close.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Committed: The customer signed the contract, but Amazon Web Services hasn't started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Launched: The workload is complete, and Amazon Web Services has started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Closed Lost: The opportunity is lost, and there are no steps to move forward.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClosedLostReason": {
                     "target": "com.amazonaws.partnercentralselling#ClosedLostReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the reason code when an opportunity is marked as <i>Closed Lost</i>. When you select an\n            appropriate reason code, you communicate the context for closing the <code>Opportunity</code>,\n            and aid in accurate reports and analysis of opportunity outcomes. The possible values are:\n        </p>\n         <ul>\n            <li>\n               <p>Customer Deficiency: The customer lacked necessary resources or capabilities.</p>\n            </li>\n            <li>\n               <p>Delay/Cancellation of Project: The project was delayed or canceled.</p>\n            </li>\n            <li>\n               <p>Legal/Tax/Regulatory: Legal, tax, or regulatory issues prevented progress.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor - Google: The opportunity was lost to Google.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor - Microsoft: The opportunity was lost to Microsoft.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor - SoftLayer: The opportunity was lost to SoftLayer.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor - VMWare: The opportunity was lost to VMWare.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor - Other: The opportunity was lost to a competitor not listed above.</p>\n            </li>\n            <li>\n               <p>No Opportunity: There was no opportunity to pursue.</p>\n            </li>\n            <li>\n               <p>On Premises Deployment: The customer chose an on-premises solution.</p>\n            </li>\n            <li>\n               <p>Partner Gap: The partner lacked necessary resources or capabilities.</p>\n            </li>\n            <li>\n               <p>Price: The price was not competitive or acceptable to the customer.</p>\n            </li>\n            <li>\n               <p>Security/Compliance: Security or compliance issues prevented progress.</p>\n            </li>\n            <li>\n               <p>Technical Limitations: Technical limitations prevented progress.</p>\n            </li>\n            <li>\n               <p>Customer Experience: Issues related to the customer's experience impacted the decision.</p>\n            </li>\n            <li>\n               <p>Other: Any reason not covered by the other values.</p>\n            </li>\n            <li>\n               <p>People/Relationship/Governance: Issues related to people, relationships, or governance.</p>\n            </li>\n            <li>\n               <p>Product/Technology: Issues related to the product or technology.</p>\n            </li>\n            <li>\n               <p>Financial/Commercial: Financial or commercial issues impacted the decision.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Specifies the reason code when an opportunity is marked as <i>Closed Lost</i>. When you select an\n            appropriate reason code, you communicate the context for closing the <code>Opportunity</code>,\n            and aid in accurate reports and analysis of opportunity outcomes. The possible values are:\n        </p>\n         <ul>\n            <li>\n               <p>Customer Deficiency: The customer lacked necessary resources or capabilities.</p>\n            </li>\n            <li>\n               <p>Delay/Cancellation of Project: The project was delayed or canceled.</p>\n            </li>\n            <li>\n               <p>Legal/Tax/Regulatory: Legal, tax, or regulatory issues prevented progress.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor—Google: The opportunity was lost to Google.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor—Microsoft: The opportunity was lost to Microsoft.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor—SoftLayer: The opportunity was lost to SoftLayer.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor—VMWare: The opportunity was lost to VMWare.</p>\n            </li>\n            <li>\n               <p>Lost to Competitor—Other: The opportunity was lost to a competitor not listed above.</p>\n            </li>\n            <li>\n               <p>No Opportunity: There was no opportunity to pursue.</p>\n            </li>\n            <li>\n               <p>On Premises Deployment: The customer chose an on-premises solution.</p>\n            </li>\n            <li>\n               <p>Partner Gap: The partner lacked necessary resources or capabilities.</p>\n            </li>\n            <li>\n               <p>Price: The price was not competitive or acceptable to the customer.</p>\n            </li>\n            <li>\n               <p>Security/Compliance: Security or compliance issues prevented progress.</p>\n            </li>\n            <li>\n               <p>Technical Limitations: Technical limitations prevented progress.</p>\n            </li>\n            <li>\n               <p>Customer Experience: Issues related to the customer's experience impacted the decision.</p>\n            </li>\n            <li>\n               <p>Other: Any reason not covered by the other values.</p>\n            </li>\n            <li>\n               <p>People/Relationship/Governance: Issues related to people, relationships, or governance.</p>\n            </li>\n            <li>\n               <p>Product/Technology: Issues related to the product or technology.</p>\n            </li>\n            <li>\n               <p>Financial/Commercial: Financial or commercial issues impacted the decision.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextSteps": {
                     "target": "com.amazonaws.partnercentralselling#PiiString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the upcoming actions or tasks for the <code>Opportunity</code>. This field\n            is utilized to communicate to Amazon Web Services the next actions required for the <code>Opportunity</code>.\n        </p>",
+                        "smithy.api#documentation": "<p>Specifies the upcoming actions or tasks for the <code>Opportunity</code>. Use this field\n            to communicate with Amazon Web Services about the next actions required for the <code>Opportunity</code>.\n        </p>",
                         "smithy.api#length": {
                             "max": 255
                         }
@@ -6251,13 +5935,13 @@
                 "ReviewStatus": {
                     "target": "com.amazonaws.partnercentralselling#ReviewStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates the review status of an opportunity referred by a partner. This field is read-only\n            and only applicable for partner referrals. The possible values are:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Pending Submission: Not submitted for validation (editable).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Submitted: Submitted for validation, and Amazon Web Services hasn't reviewed it (read-only).\n                </p>\n            </li>\n            <li>\n               <p>\n                    In Review: Amazon Web Services is validating (read-only).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Action Required: Issues that Amazon Web Services highlights need to be addressed.\n                    Partners should use the <code>UpdateOpportunity</code> API action to update the opportunity, and ensure all required changes are made.\n                    Only these fields are editable when the <code>Lifecycle.ReviewStatus</code> is <code>Action Required</code>:\n                </p>\n               <ul>\n                  <li>\n                     <p>Customer.Account.Address.City</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.CountryCode</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.PostalCode</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.StateOrRegion</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.StreetAddress</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.WebsiteUrl</p>\n                  </li>\n                  <li>\n                     <p>LifeCycle.TargetCloseDate</p>\n                  </li>\n                  <li>\n                     <p>Project.ExpectedMonthlyAWSRevenue.Amount</p>\n                  </li>\n                  <li>\n                     <p>Project.ExpectedMonthlyAWSRevenue.CurrencyCode</p>\n                  </li>\n                  <li>\n                     <p>Project.CustomerBusinessProblem</p>\n                  </li>\n                  <li>\n                     <p>PartnerOpportunityIdentifier</p>\n                  </li>\n               </ul>\n               <p>\n                    After updates, the opportunity re-enters the validation phase. This process repeats until all issues are resolved, and the opportunity's <code>Lifecycle.ReviewStatus</code> is set to <code>Approved</code> or <code>Rejected</code>.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Approved: Validated and converted into the Amazon Web Services seller's pipeline (editable).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Rejected: Disqualified (read-only).\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Indicates the review status of an opportunity referred by a partner. This field is read-only\n            and only applicable for partner referrals. The possible values are:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Pending Submission: Not submitted for validation (editable).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Submitted: Submitted for validation, and Amazon Web Services hasn't reviewed it (read-only).\n                </p>\n            </li>\n            <li>\n               <p>\n                    In Review: Amazon Web Services is validating (read-only).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Action Required: Issues that Amazon Web Services highlights need to be addressed.\n                    Partners should use the <code>UpdateOpportunity</code> API action to update the opportunity and helps to ensure that all required changes are made.\n                    Only the following fields are editable when the <code>Lifecycle.ReviewStatus</code> is <code>Action Required</code>:\n                </p>\n               <ul>\n                  <li>\n                     <p>Customer.Account.Address.City</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.CountryCode</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.PostalCode</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.StateOrRegion</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.Address.StreetAddress</p>\n                  </li>\n                  <li>\n                     <p>Customer.Account.WebsiteUrl</p>\n                  </li>\n                  <li>\n                     <p>LifeCycle.TargetCloseDate</p>\n                  </li>\n                  <li>\n                     <p>Project.ExpectedMonthlyAWSRevenue.Amount</p>\n                  </li>\n                  <li>\n                     <p>Project.ExpectedMonthlyAWSRevenue.CurrencyCode</p>\n                  </li>\n                  <li>\n                     <p>Project.CustomerBusinessProblem</p>\n                  </li>\n                  <li>\n                     <p>PartnerOpportunityIdentifier</p>\n                  </li>\n               </ul>\n               <p>\n                    After updates, the opportunity re-enters the validation phase. This process repeats until all issues are resolved, and the opportunity's <code>Lifecycle.ReviewStatus</code> is set to <code>Approved</code> or <code>Rejected</code>.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Approved: Validated and converted into the Amazon Web Services seller's pipeline (editable).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Rejected: Disqualified (read-only).\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ReviewComments": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates why an opportuntiy was sent back for further details. Partners must take corrective action based on the <code>ReviewComments</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates why an opportunity was sent back for further details. Partners must take corrective action based on the <code>ReviewComments</code>.</p>"
                     }
                 },
                 "ReviewStatusReason": {
@@ -6286,7 +5970,7 @@
                 "Stage": {
                     "target": "com.amazonaws.partnercentralselling#Stage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the current stage of the <code>Opportunity</code>'s lifecycle as it maps to Amazon Web Services stages from the current stage in the partner CRM. This field provides a translated value of the stage, and offers insight into the <code>Opportunity</code>'s progression in the sales cycle, according to Amazon Web Services definitions.\n        </p>\n         <note>\n            <p>A lead and a prospect must be further matured to a <code>Qualified</code> opportunity before submission. Opportunities that were closed/lost before submission aren't suitable for submission.</p>\n         </note>\n         <p>\n            The descriptions of each sales stage are:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Prospect: Amazon Web Services identifies the opportunity. It can be active (Comes directly from the end customer through a lead) or latent (Your account team believes it exists based on research, account plans, sales plays).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Qualified: Your account team engaged with the prospect/end customer to discuss viability and understand requirements. The prospect/end customer agreed that the opportunity is real, of interest, and may solve key business/technical needs.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Technical Validation: All parties understand the implementation plan.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Business Validation: Pricing has been proposed, Pricing was proposed, and all parties agree to the steps to close.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Committed: The customer signed the contract, but Amazon Web Services hasn't started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Launched: The workload is complete, and Amazon Web Services has started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Closed Lost: The opportunity is lost, and there are no steps to move forward.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Specifies the current stage of the <code>Opportunity</code>'s lifecycle as it maps to Amazon Web Services stages from the current stage in the partner CRM. This field provides a translated value of the stage, and offers insight into the <code>Opportunity</code>'s progression in the sales cycle, according to Amazon Web Services definitions.\n        </p>\n         <note>\n            <p>A lead and a prospect must be further matured to a <code>Qualified</code> opportunity before submission. Opportunities that were closed/lost before submission aren't suitable for submission.</p>\n         </note>\n         <p>\n            The descriptions of each sales stage are:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Prospect: Amazon Web Services identifies the opportunity. It can be active (Comes directly from the end customer through a lead) or latent (Your account team believes it exists based on research, account plans, sales plays).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Qualified: Your account team engaged with the customer to discuss viability and understand requirements. The customer agreed that the opportunity is real, of interest, and may solve business/technical needs.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Technical Validation: All parties understand the implementation plan.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Business Validation: Pricing was proposed, and all parties agree to the steps to close.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Committed: The customer signed the contract, but Amazon Web Services hasn't started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Launched: The workload is complete, and Amazon Web Services has started billing.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Closed Lost: The opportunity is lost, and there are no steps to move forward.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClosedLostReason": {
@@ -6319,7 +6003,7 @@
                 "ReviewComments": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates why an opportuntiy was sent back for further details. Partners must take corrective action based on the <code>ReviewComments</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates why an opportunity was sent back for further details. Partners must take corrective action based on the <code>ReviewComments</code>.</p>"
                     }
                 },
                 "ReviewStatusReason": {
@@ -6432,7 +6116,7 @@
                 "EngagementInvitationSummaries": {
                     "target": "com.amazonaws.partnercentralselling#EngagementInvitationSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing summaries of engagement invitations. Each summary includes key information such as the invitation title, invitation date, and the current status of the invitation.</p>"
+                        "smithy.api#documentation": "<p>An array containing summaries of engagement invitations. Each summary includes information such as the invitation title, invitation date, and the current status of the invitation.</p>"
                     }
                 },
                 "NextToken": {
@@ -6478,7 +6162,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list Opportunities on AWS Partner Central"
                 },
-                "smithy.api#documentation": "<p>This request accepts a list of filters to use to\n            retrieve a specific subset of opportunities, as well as sort options. This feature is available to partners from\n            <a href=\"https://partnercentral.awspartner.com/\">Partner Central</a>\n            using the <code>ListOpportunities</code> API action.\n        </p>\n         <p>To synchronize your system with Amazon Web Services, only list the opportunities that were\n            newly created or updated.\n            We recommend you rely on events emitted by the service into your Amazon Web Services account’s Amazon EventBridge default\n            event bus, you can also use the <code>ListOpportunities</code> action.\n        </p>\n         <p>We recommend the following approach:</p>\n         <ol>\n            <li>\n               <p>Find the latest <code>LastModifiedDate</code> that you stored, and only use the values that came\n                    from Amazon Web Services. Don’t use values generated by your system.\n                </p>\n            </li>\n            <li>\n               <p>When you send a <code>ListOpportunities</code> request, submit the date in ISO 8601 format in the <code>AfterLastModifiedDate</code> filter.\n                </p>\n            </li>\n            <li>\n               <p>Amazon Web Services only returns opportunities created or updated on or after that date and time. Use <code>NextToken</code> to iterate over all pages.\n                </p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>This request accepts a list of filters that retrieve opportunity subsets as well as sort options. This feature is available to partners from\n            <a href=\"https://partnercentral.awspartner.com/\">Partner Central</a>\n            using the <code>ListOpportunities</code> API action.\n        </p>\n         <p>To synchronize your system with Amazon Web Services, only list the opportunities that were\n            newly created or updated.\n            We recommend you rely on events emitted by the service into your Amazon Web Services account’s Amazon EventBridge default\n            event bus, you can also use the <code>ListOpportunities</code> action.\n        </p>\n         <p>We recommend the following approach:</p>\n         <ol>\n            <li>\n               <p>Find the latest <code>LastModifiedDate</code> that you stored, and only use the values that came\n                    from Amazon Web Services. Don’t use values generated by your system.\n                </p>\n            </li>\n            <li>\n               <p>When you send a <code>ListOpportunities</code> request, submit the date in ISO 8601 format in the <code>AfterLastModifiedDate</code> filter.\n                </p>\n            </li>\n            <li>\n               <p>Amazon Web Services only returns opportunities created or updated on or after that date and time. Use <code>NextToken</code> to iterate over all pages.\n                </p>\n            </li>\n         </ol>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListOpportunities",
@@ -6512,14 +6196,14 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunities are listed in.\n            Use <code>AWS</code> for listing real opportunities in the Amazon Web Services catalog, and <code>Sandbox</code>\n            for to test in a secure and isolated environment.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunities are listed in.\n            Use <code>AWS</code> for listing real opportunities in the Amazon Web Services catalog, and <code>Sandbox</code>\n            for testing in secure, isolated environments.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.partnercentralselling#PageSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the maximum number of results to return in a single call. This limits the number of opportunities returned in the response to avoid overloading with too many results at once.\n        </p>\n         <p>\n            Default: 20\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Specifies the maximum number of results to return in a single call. This limits the number of opportunities returned in the response to avoid providing too many results at once.\n        </p>\n         <p>\n            Default: 20\n        </p>"
                     }
                 },
                 "NextToken": {
@@ -6677,7 +6361,7 @@
                 "Status": {
                     "target": "com.amazonaws.partnercentralselling#FilterStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the solutions based on their status. This filter helps retrieve solutions with statuses such as <code>Active</code>, <code>Inactive</code>, or <code>Pending Approval</code>, allowing partners to manage their solution portfolios effectively.</p>",
+                        "smithy.api#documentation": "<p>Filters solutions based on their status. This filter helps partners manage their solution portfolios effectively.</p>",
                         "smithy.api#length": {
                             "max": 10
                         }
@@ -6733,7 +6417,7 @@
                 "CampaignName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <code>Opportunity</code>'s unique marketing campaign name. The Amazon Web Services\n            campaign name serves as a reference to specific marketing initiatives, promotions, or\n            activities related to the <code>Opportunity</code>. This field captures the identifier used to track and\n            categorize the <code>Opportunity</code> within Amazon Web Services's marketing campaigns. If you don't have a campaign\n            name, reach out to your Amazon Web Services point of contact to obtain one.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies the <code>Opportunity</code> marketing campaign code. The Amazon Web Services\n            campaign code is a reference to specific marketing initiatives, promotions, or\n            activities. This field captures the identifier used to track and\n            categorize the <code>Opportunity</code> within marketing campaigns. If you don't have a campaign\n            code, contact your Amazon Web Services point of contact to obtain one.\n        </p>"
                     }
                 },
                 "Source": {
@@ -6951,7 +6635,7 @@
                 "SenderContacts": {
                     "target": "com.amazonaws.partnercentralselling#SenderContactList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the contact details of the AWS representatives involved in sending the Engagement Invitation. These contacts are key stakeholders for the opportunity.</p>"
+                        "smithy.api#documentation": "<p>Represents the contact details of the AWS representatives involved in sending the Engagement Invitation. These contacts are opportunity stakeholders.</p>"
                     }
                 },
                 "ReceiverResponsibilities": {
@@ -7326,7 +7010,7 @@
                 "CustomerBusinessProblem": {
                     "target": "com.amazonaws.partnercentralselling#PiiString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the problem the end customer has, and how the partner is helping.\n            Utilize this field to provide a clear and concise narrative that outlines the specific business challenge or\n            issue the customer has.\n            Elaborate on how the partner's solution or offerings align to resolve the customer's business problem.\n            Include relevant information about the partner's value proposition, unique selling points, and expertise to tackle the issue.\n            Offer insights on how the proposed solution meets the customer's needs and provides value. Use concise\n            language and precise descriptions to convey the context and significance of the <code>Opportunity</code>.\n            The content in this field helps Amazon Web Services understand the nature of the <code>Opportunity</code> and the strategic\n            fit of the partner's solution.\n        </p>",
+                        "smithy.api#documentation": "<p>Describes the problem the end customer has, and how the partner is helping.\n            Utilize this field to provide a concise narrative that outlines the customer's business challenge or\n            issue.\n            Elaborate on how the partner's solution or offerings align to resolve the customer's business problem.\n            Include relevant information about the partner's value proposition, unique selling points, and expertise to tackle the issue.\n            Offer insights on how the proposed solution meets the customer's needs and provides value. Use concise\n            language and precise descriptions to convey the context and significance of the <code>Opportunity</code>.\n            The content in this field helps Amazon Web Services understand the nature of the <code>Opportunity</code> and the strategic\n            fit of the partner's solution.\n        </p>",
                         "smithy.api#length": {
                             "min": 20,
                             "max": 2000
@@ -7336,7 +7020,7 @@
                 "CustomerUseCase": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the proposed solution focus or type of workload for the Opportunity. This field captures the primary use case or objective of the proposed solution, and provides context and clarity to the addressed workload.\n        </p>\n         <p>\n            Valid values: <code>AI Machine Learning and Analytics | Archiving | Big Data: Data Warehouse / Data Integration / ETL / Data Lake / BI | Blockchain | Business Applications: Mainframe Modernization | Business Applications &amp; Contact Center | Business Applications &amp; SAP Production | Centralized Operations Management | Cloud Management Tools | Cloud Management Tools &amp; DevOps with Continuous Integration &amp; Continuous Delivery (CICD) | Configuration, Compliance &amp; Auditing | Connected Services | Containers &amp; Serverless | Content Delivery &amp; Edge Services | Database | Edge Computing / End User Computing | Energy | Enterprise Governance &amp; Controls | Enterprise Resource Planning | Financial Services | Healthcare and Life Sciences | High Performance Computing | Hybrid Application Platform | Industrial Software | IOT | Manufacturing, Supply Chain and Operations | Media &amp; High performance computing (HPC) | Migration / Database Migration | Monitoring, logging and performance | Monitoring &amp; Observability | Networking | Outpost | SAP | Security &amp; Compliance | Storage &amp; Backup | Training | VMC | VMWare | Web development &amp; DevOps</code>\n         </p>"
+                        "smithy.api#documentation": "<p>\n            Specifies the proposed solution focus or type of workload for the Opportunity. This field captures the primary use case or objective of the proposed solution, and provides context and clarity to the addressed workload.\n        </p>\n         <p>\n            Valid values: <code>AI Machine Learning and Analytics | Archiving | Big Data: Data Warehouse/Data Integration/ETL/Data Lake/BI | Blockchain | Business Applications: Mainframe Modernization | Business Applications &amp; Contact Center | Business Applications &amp; SAP Production | Centralized Operations Management | Cloud Management Tools | Cloud Management Tools &amp; DevOps with Continuous Integration &amp; Continuous Delivery (CICD) | Configuration, Compliance &amp; Auditing | Connected Services | Containers &amp; Serverless | Content Delivery &amp; Edge Services | Database | Edge Computing/End User Computing | Energy | Enterprise Governance &amp; Controls | Enterprise Resource Planning | Financial Services | Healthcare and Life Sciences | High Performance Computing | Hybrid Application Platform | Industrial Software | IOT | Manufacturing, Supply Chain and Operations | Media &amp; High performance computing (HPC) | Migration/Database Migration | Monitoring, logging and performance | Monitoring &amp; Observability | Networking | Outpost | SAP | Security &amp; Compliance | Storage &amp; Backup | Training | VMC | VMWare | Web development &amp; DevOps</code>\n         </p>"
                     }
                 },
                 "RelatedOpportunityIdentifier": {
@@ -7348,7 +7032,7 @@
                 "SalesActivities": {
                     "target": "com.amazonaws.partnercentralselling#SalesActivities",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the <code>Opportunity</code>'s sales activities conducted with the end customer.\n            These activities help drive Amazon Web Services assignment priority.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Initialized discussions with customer: Initial conversations with the customer to understand their needs and introduce your solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Customer has shown interest in solution: After initial discussions, the customer is interested in your solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Conducted POC / Demo: You conducted a proof of concept (POC) or demonstration of the solution for the customer.\n                </p>\n            </li>\n            <li>\n               <p>\n                    In evaluation / planning stage: The customer is evaluating the solution and planning potential implementation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Agreed on solution to Business Problem: Both parties agree on how the solution addresses the customer's business problem.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Completed Action Plan: A detailed action plan is complete and outlines the steps for implementation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Finalized Deployment Need: Both parties agree with and finalized the deployment needs.\n                </p>\n            </li>\n            <li>\n               <p>\n                    SOW Signed: Both parties signed a statement of work (SOW), and formalize the agreement and detail the project scope and deliverables.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Specifies the <code>Opportunity</code>'s sales activities conducted with the end customer.\n            These activities help drive Amazon Web Services assignment priority.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Initialized discussions with customer: Initial conversations with the customer to understand their needs and introduce your solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Customer has shown interest in solution: After initial discussions, the customer is interested in your solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Conducted POC/demo: You conducted a proof of concept (POC) or demonstration of the solution for the customer.\n                </p>\n            </li>\n            <li>\n               <p>\n                    In evaluation/planning stage: The customer is evaluating the solution and planning potential implementation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Agreed on solution to Business Problem: Both parties agree on how the solution addresses the customer's business problem.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Completed Action Plan: A detailed action plan is complete and outlines the steps for implementation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Finalized Deployment Need: Both parties agree with and finalized the deployment needs.\n                </p>\n            </li>\n            <li>\n               <p>\n                    SOW Signed: Both parties signed a statement of work (SOW), and formalize the agreement and detail the project scope and deliverables.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompetitorName": {
@@ -7512,6 +7196,12 @@
                     "traits": {
                         "smithy.api#enumValue": "OpportunityConflict"
                     }
+                },
+                "RESOURCE_SNAPSHOT_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceSnapshotAccessDenied"
+                    }
                 }
             }
         },
@@ -7626,7 +7316,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to reject Engagement Invitations on AWS Partner Central"
                 },
-                "smithy.api#documentation": "<p>Use this action to reject an <code>EngagementInvitation</code> that has been shared by AWS. Rejecting the engagement invitation indicates that the partner does not wish to pursue the opportunity, and all related data will be inaccessible after the rejection.</p>",
+                "smithy.api#documentation": "<p>This action rejects an <code>EngagementInvitation</code> that AWS\n      shared. Rejecting an invitation indicates that the partner doesn't want to\n      pursue the opportunity, and all related data will become inaccessible\n      thereafter.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/RejectEngagementInvitation",
@@ -7640,21 +7330,21 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the catalog related to the engagement invitation. Accepted values are <code>AWS</code> and <code>Sandbox</code>, which determine the environment in which the opportunity is managed.</p>",
+                        "smithy.api#documentation": "<p>This is the catalog that's associated with the engagement\n      invitation. Acceptable values are <code>AWS</code> or\n      <code>Sandbox</code>, and these values determine the environment in which\n      the opportunity is managed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Identifier": {
                     "target": "com.amazonaws.partnercentralselling#EngagementInvitationArnOrIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the unique identifier of the <code>EngagementInvitation</code> to be rejected. Providing the correct identifier ensures that the intended invitation is rejected.</p>",
+                        "smithy.api#documentation": "<p>This is the unique identifier of the rejected\n        <code>EngagementInvitation</code>. Providing the correct identifier\n      helps to ensure that the intended invitation is rejected.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RejectionReason": {
                     "target": "com.amazonaws.partnercentralselling#RejectionReasonString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the reason for rejecting the engagement invitation. Providing a reason helps document the rationale behind the rejection and assists AWS in tracking patterns or issues. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Customer problem unclear:</i> The customer's problem is not clearly defined.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Next steps unclear:</i> The next steps required to proceed are not clear.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Unable to support:</i> The partner is unable to provide support due to resource or capability constraints.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Duplicate of Partner Referral:</i> The opportunity is a duplicate of an existing referral.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Other:</i> Any other reason not covered by the specified values.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This describes the reason for rejecting the engagement invitation,\n      which helps AWS track usage patterns. Acceptable values include the\n      following:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Customer problem unclear:</i> The\n          customer's problem isn't understood.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Next steps unclear:</i> The next steps\n          required to proceed aren't understood.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Unable to support:</i> The partner is unable to provide support due to resource or capability constraints.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Duplicate of partner referral:</i> The\n          opportunity is a duplicate of an existing referral.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Other:</i> Any reason not covered by\n          other values.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7680,7 +7370,7 @@
                 "Solutions": {
                     "target": "com.amazonaws.partnercentralselling#SolutionIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Enables partner solutions or offerings' association with an opportunity. To associate a solution, provide the solution's unique identifier, which you can obtain with the <code>ListSolutions</code> operation.\n        </p>\n         <p>\n            If the specific solution identifier is not available, you can use the value <code>Other</code> and provide details about the solution in the <code>otherSolutionOffered</code> field. However, once the opportunity reaches the <code>Committed</code> stage or beyond, the <code>Other</code> value cannot be used, and a valid solution identifier must be provided.\n        </p>\n         <p>\n            By associating the relevant solutions with the opportunity, you can clearly communicate the offerings that are being considered or implemented to address the customer's business problem.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Enables partner solutions or offerings' association with an opportunity. To associate a solution, provide the solution's unique identifier, which you can obtain with the <code>ListSolutions</code> operation.\n        </p>\n         <p>\n            If the specific solution identifier is not available, you can use the value <code>Other</code> and provide details about the solution in the <code>otherSolutionOffered</code> field. But when the opportunity reaches the <code>Committed</code> stage or beyond, the <code>Other</code> value cannot be used, and a valid solution identifier must be provided.\n        </p>\n         <p>\n            By associating the relevant solutions with the opportunity, you can communicate the offerings that are being considered or implemented to address the customer's business problem.\n        </p>"
                     }
                 },
                 "AwsProducts": {
@@ -7939,7 +7629,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This error occurs when the request would cause a service quota to be exceeded.\n            Service quotas represent the maximum allowed use of a specific resource, and this error indicates that the request would surpass that limit.\n        </p>\n         <p>Suggested action: Review the\n            <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html\">service quotas</a> for the specific resource, and reduce the usage or request a quota increase through support if necessary.\n        </p>",
+                "smithy.api#documentation": "<p>This error occurs when the request would cause a service quota to be exceeded.\n            Service quotas represent the maximum allowed use of a specific resource, and this error indicates that the request would surpass that limit.\n        </p>\n         <p>Suggested action: Review the\n          <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html\">Quotas</a> for the resource, and either reduce usage or request a quota increase.\n        </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -8258,7 +7948,7 @@
                     ],
                     "documentation": "Grants permission to initiate tasks that start Engagements on AWS Partner Central by accepting an Engagement Invitation"
                 },
-                "smithy.api#documentation": "<p>This action starts the engagement by accepting an <code>EngagementInvitation</code>. The task is asynchronous and involves several steps: accepting the invitation, creating an opportunity in the partner’s account from the AWS Opportunity, and copying over key details for tracking. Once completed, an <code>Opportunity Created</code> event is generated, indicating that the opportunity has been successfully created in the partner's account.</p>",
+                "smithy.api#documentation": "<p>This action starts the engagement by accepting an <code>EngagementInvitation</code>. The task is asynchronous and involves the following steps: accepting the invitation, creating an opportunity in the partner’s account from the AWS opportunity, and copying details for tracking. When completed, an <code>Opportunity Created</code> event is generated, indicating that the opportunity has been successfully created in the partner's account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartEngagementByAcceptingInvitationTask",
@@ -8277,9 +7967,9 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.partnercentralselling#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier provided by the client to ensure the idempotency of the request. Can be a random or meaningful string, but must be unique for each request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request. This can be a random or meaningful string but must be unique for each request.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#length": {
                             "min": 1
@@ -8290,7 +7980,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.partnercentralselling#EngagementInvitationArnOrIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the unique identifier of the <code>EngagementInvitation</code> to be accepted. Providing the correct identifier ensures the right engagement invitation is processed.</p>",
+                        "smithy.api#documentation": "<p>Specifies the unique identifier of the <code>EngagementInvitation</code> to be accepted. Providing the correct identifier helps ensure that the correct engagement is processed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8305,7 +7995,7 @@
                 "TaskId": {
                     "target": "com.amazonaws.partnercentralselling#TaskIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the task, used to track the task’s progress. This value follows a specific pattern: <code>^oit-[0-9a-z]{13}$</code>.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the task, used to track the task’s progress.</p>"
                     }
                 },
                 "TaskArn": {
@@ -8323,7 +8013,7 @@
                 "TaskStatus": {
                     "target": "com.amazonaws.partnercentralselling#TaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the current status of the task. Valid values include <code>IN_PROGRESS</code>, <code>COMPLETE</code>, and <code>FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the current status of the task.</p>"
                     }
                 },
                 "Message": {
@@ -8335,7 +8025,7 @@
                 "ReasonCode": {
                     "target": "com.amazonaws.partnercentralselling#ReasonCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the reason for task failure using an enumerated code. Possible values are: <code>ACCEPT_ENGAGEMENT_INVITATION_FAILED</code>, <code>GET_ENGAGEMENT_INVITATION_FAILED</code>, <code>CREATE_OPPORTUNITY_FAILED</code>, <code>CREATE_RESOURCE_VIEW_AUTOMATION_FAILED</code>, <code>SUBMIT_OPPORTUNITY_FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the reason for task failure using an enumerated code.</p>"
                     }
                 },
                 "OpportunityId": {
@@ -8420,9 +8110,9 @@
                     }
                 },
                 "ClientToken": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.partnercentralselling#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique token provided by the client to ensure the idempotency of the request. It helps prevent the same task from being performed multiple times.</p>",
+                        "smithy.api#documentation": "<p>A unique token provided by the client to help ensure the idempotency of the request. It helps prevent the same task from being performed multiple times.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#length": {
                             "min": 1
@@ -8433,7 +8123,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.partnercentralselling#OpportunityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the opportunity from which the engagement task is to be initiated. This ensures the task is applied to the correct opportunity.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the opportunity from which the engagement task is to be initiated. This helps ensure that the task is applied to the correct opportunity.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8484,7 +8174,7 @@
                 "ReasonCode": {
                     "target": "com.amazonaws.partnercentralselling#ReasonCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the reason for task failure using an enumerated code. Possible values are: <code>ACCEPT_ENGAGEMENT_INVITATION_FAILED</code>, <code>GET_ENGAGEMENT_INVITATION_FAILED</code>, <code>CREATE_OPPORTUNITY_FAILED</code>, <code>CREATE_RESOURCE_VIEW_AUTOMATION_FAILED</code>, <code>SUBMIT_OPPORTUNITY_FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the reason for task failure using an enumerated code.</p>"
                     }
                 },
                 "OpportunityId": {
@@ -8547,7 +8237,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This error occurs when there are too many requests sent. Review the provided quotas and adapt your\n            usage to avoid throttling.\n        </p>\n         <p>This error occurs when there are too many requests sent. Review the provided\n            <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html\">quotas</a> and retry after the provided delay.\n        </p>",
+                "smithy.api#documentation": "<p>This error occurs when there are too many requests sent. Review the provided quotas and adapt your\n            usage to avoid throttling.\n        </p>\n         <p>This error occurs when there are too many requests sent. Review the provided\n            <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html\">Quotas</a> and retry after the provided delay.\n        </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -8601,20 +8291,20 @@
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity is updated in.\n            Use <code>AWS</code> to update real opportunities in the production\n            environment, and <code>Sandbox</code> to test in a secure and isolated environment.\n            When you use the <code>Sandbox</code> catalog, it allows you to simulate and validate your interactions\n            with Amazon Web Services services without affecting live data or operations.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            Specifies the catalog associated with the request. This field takes a string value from a predefined list:\n            <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the opportunity is updated in.\n            Use <code>AWS</code> to update real opportunities in the production\n            environment, and <code>Sandbox</code> for testing in secure, isolated environments.\n            When you use the <code>Sandbox</code> catalog, it allows you to simulate and validate your interactions\n            with Amazon Web Services services without affecting live data or operations.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PrimaryNeedsFromAws": {
                     "target": "com.amazonaws.partnercentralselling#PrimaryNeedsFromAws",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Identifies the type of support the partner needs from Amazon Web Services.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Co-Sell - Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Pricing Assistance: Connect with an AWS seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Technical Consultation: Connection with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Co-Sell - Support for Public Tender / RFx: Opportunity related to the public sector where the partner needs RFx support from Amazon Web Services.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't need support from an Amazon Web Services Sales representative. The opportunity is managed solely by the partner. It's possible to request co-selling support on these opportunities at any stage during their lifecycle. Also known as, for-visibility-only (FVO) opportunity.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            Identifies the type of support the partner needs from Amazon Web Services.\n        </p>\n         <p>\n            Valid values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                    Cosell—Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Pricing Assistance: Connect with an AWS seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Technical Consultation: Connection with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).\n                </p>\n            </li>\n            <li>\n               <p>\n                    Cosell—Support for Public Tender/RFx: Opportunity related to the public sector where the partner needs RFx support from Amazon Web Services.\n                </p>\n            </li>\n            <li>\n               <p>\n                    Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't need support from an Amazon Web Services Sales representative. The opportunity is managed solely by the partner. It's possible to request coselling support on these opportunities at any stage during their lifecycle. Also known as, for-visibility-only (FVO) opportunity.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NationalSecurity": {
                     "target": "com.amazonaws.partnercentralselling#NationalSecurity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if the opportunity is associated with national security concerns. This flag is only applicable when the industry is <code>Government</code>. For national security-related opportunities, specific validation and compliance rules may apply, impacting the opportunity's visibility and processing.</p>"
+                        "smithy.api#documentation": "<p>Specifies if the opportunity is associated with national security concerns. This flag is only applicable when the industry is <code>Government</code>. For national-security-related opportunities, validation and compliance rules may apply, impacting the opportunity's visibility and processing.</p>"
                     }
                 },
                 "PartnerOpportunityIdentifier": {
@@ -8629,7 +8319,7 @@
                 "Customer": {
                     "target": "com.amazonaws.partnercentralselling#Customer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies details of the customer associated with the <code>Opportunity</code> .\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies details of the customer associated with the <code>Opportunity</code>.\n        </p>"
                     }
                 },
                 "Project": {
