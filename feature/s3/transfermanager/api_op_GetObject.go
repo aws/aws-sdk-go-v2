@@ -509,18 +509,36 @@ func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput) {
 }
 
 func (c *Client) GetObject(ctx context.Context, input *GetObjectInput, opts ...func(*Options)) (*GetObjectOutput, error) {
-	return nil, nil
+	i := downloader{in: input, options: c.options.Copy()}
+	for _, opt := range opts {
+		opt(&i.options)
+	}
+
+	return i.download(ctx)
 }
 
 func (c *Client) DownloadObject(ctx context.Context, w io.WriterAt, input *GetObjectInput, opts ...func(*Options)) (*GetObjectOutput, error) {
-	return nil, nil
+	i := downloader{in: input, options: c.options.Copy(), w: w}
+	for _, opt := range opts {
+		opt(&i.options)
+	}
+
+	return i.download(ctx)
 }
 
 type downloader struct {
 	options Options
 	in      *GetObjectInput
-	m       sync.Mutex
-	err     error
+	w       io.WriterAt
+
+	wg sync.WaitGroup
+	m  sync.Mutex
+
+	pos        int64
+	totalBytes int64
+	written    int64
+
+	err error
 }
 
 func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
