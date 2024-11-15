@@ -81,7 +81,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.55.4
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.48.5
-	github.com/aws/smithy-go v1.22.0
+	github.com/aws/smithy-go v1.22.1
 )
 
 require (
@@ -193,8 +193,6 @@ replace github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing => ../../../se
 replace github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 => ../../../service/elasticloadbalancingv2/
 
 replace github.com/aws/aws-sdk-go-v2/service/elasticsearchservice => ../../../service/elasticsearchservice/
-
-replace github.com/aws/aws-sdk-go-v2/service/elastictranscoder => ../../../service/elastictranscoder/
 
 replace github.com/aws/aws-sdk-go-v2/service/emr => ../../../service/emr/
 
