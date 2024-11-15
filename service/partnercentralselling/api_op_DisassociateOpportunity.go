@@ -13,7 +13,7 @@ import (
 
 //	Allows you to remove an existing association between an Opportunity and
 //
-// related entities such as a Partner Solution, Amazon Web Services product, or an
+// related entities, such as a Partner Solution, Amazon Web Services product, or an
 // Amazon Web Services Marketplace offer. This operation is the counterpart to
 // AssociateOpportunity , and it provides flexibility to manage associations as
 // business needs change.
@@ -23,7 +23,7 @@ import (
 // accurate associations helps maintain clarity and accuracy to track and manage
 // business opportunities. When you replace an entity, first attach the new entity
 // and then disassociate the one to be removed, especially if it's the last
-// remaining related entity that's required.
+// remaining entity that's required.
 func (c *Client) DisassociateOpportunity(ctx context.Context, params *DisassociateOpportunityInput, optFns ...func(*Options)) (*DisassociateOpportunityOutput, error) {
 	if params == nil {
 		params = &DisassociateOpportunityInput{}
@@ -44,17 +44,17 @@ type DisassociateOpportunityInput struct {
 	//  Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity disassociation is made in. Use AWS to disassociate
-	// opportunities in the Amazon Web Services catalog, and Sandbox to test in a
-	// secure and isolated environment.
+	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in
+	// secure, isolated environments.
 	//
 	// This member is required.
 	Catalog *string
 
 	// The opportunity's unique identifier for when you want to disassociate it from
-	// related entities. This identifier is crucial to ensure the correct opportunity
-	// is updated, especially in environments with numerous opportunities.
+	// related entities. This identifier helps to ensure that the correct opportunity
+	// is updated.
 	//
-	// Validation: Ensure that the identifier provided corresponds to an existing
+	// Validation: Ensure that the provided identifier corresponds to an existing
 	// opportunity in the Amazon Web Services system because incorrect identifiers
 	// result in an error and no changes are made.
 	//
@@ -68,26 +68,26 @@ type DisassociateOpportunityInput struct {
 	//
 	// For Amazon Web Services Marketplace entities, use the Amazon Web Services
 	// Marketplace API to obtain the necessary ARNs. For guidance on retrieving these
-	// ARNs, refer to [Amazon Web Services Marketplace Catalog API].
+	// ARNs, see [Amazon Web Services MarketplaceUsing the Amazon Web Services Marketplace Catalog API].
 	//
 	// Validation: Ensure the identifier or ARN is valid and corresponds to an
-	// existing related entity. An incorrect or invalid identifier results in an error.
+	// existing entity. An incorrect or invalid identifier results in an error.
 	//
-	// [Amazon Web Services Marketplace Catalog API]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html
+	// [Amazon Web Services MarketplaceUsing the Amazon Web Services Marketplace Catalog API]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html
 	//
 	// This member is required.
 	RelatedEntityIdentifier *string
 
 	// The type of the entity that you're disassociating from the opportunity. When
 	// you specify the entity type, it helps the system correctly process the
-	// disassociation request and ensures that the right connections are removed.
+	// disassociation request to ensure that the right connections are removed.
 	//
 	// Examples of entity types include Partner Solution, Amazon Web Services product,
-	// and Amazon Web Services Marketplace offer. Ensure that the value matches one of
+	// and Amazon Web Services Marketplaceoffer. Ensure that the value matches one of
 	// the expected entity types.
 	//
-	// Validation: Provide a valid entity type to ensure successful disassociation.
-	// Invalid or incorrect entity types result in an error.
+	// Validation: Provide a valid entity type to help ensure successful
+	// disassociation. An invalid or incorrect entity type results in an error.
 	//
 	// This member is required.
 	RelatedEntityType types.RelatedEntityType

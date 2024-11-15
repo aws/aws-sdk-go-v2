@@ -34,8 +34,8 @@ func (c *Client) StartEngagementFromOpportunityTask(ctx context.Context, params 
 type StartEngagementFromOpportunityTaskInput struct {
 
 	// Indicates the level of AWS involvement in the opportunity. This field helps
-	// track AWS's role and participation throughout the engagement, such as providing
-	// technical support, deal assistance, or sales support.
+	// track AWS participation throughout the engagement, such as providing technical
+	// support, deal assistance, and sales support.
 	//
 	// This member is required.
 	AwsSubmission *types.AwsSubmission
@@ -46,14 +46,15 @@ type StartEngagementFromOpportunityTaskInput struct {
 	// This member is required.
 	Catalog *string
 
-	// A unique token provided by the client to ensure the idempotency of the request.
-	// It helps prevent the same task from being performed multiple times.
+	// A unique token provided by the client to help ensure the idempotency of the
+	// request. It helps prevent the same task from being performed multiple times.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// The unique identifier of the opportunity from which the engagement task is to
-	// be initiated. This ensures the task is applied to the correct opportunity.
+	// be initiated. This helps ensure that the task is applied to the correct
+	// opportunity.
 	//
 	// This member is required.
 	Identifier *string
@@ -71,10 +72,7 @@ type StartEngagementFromOpportunityTaskOutput struct {
 	// unique identifier for the opportunity created in the partner’s system.
 	OpportunityId *string
 
-	// Indicates the reason for task failure using an enumerated code. Possible values
-	// are: ACCEPT_ENGAGEMENT_INVITATION_FAILED , GET_ENGAGEMENT_INVITATION_FAILED ,
-	// CREATE_OPPORTUNITY_FAILED , CREATE_RESOURCE_VIEW_AUTOMATION_FAILED ,
-	// SUBMIT_OPPORTUNITY_FAILED .
+	// Indicates the reason for task failure using an enumerated code.
 	ReasonCode types.ReasonCode
 
 	// The timestamp indicating when the task was initiated. The format follows RFC

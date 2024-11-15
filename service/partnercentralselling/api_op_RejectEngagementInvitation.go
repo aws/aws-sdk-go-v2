@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this action to reject an EngagementInvitation that has been shared by AWS.
-// Rejecting the engagement invitation indicates that the partner does not wish to
-// pursue the opportunity, and all related data will be inaccessible after the
-// rejection.
+// This action rejects an EngagementInvitation that AWS shared. Rejecting an
+// invitation indicates that the partner doesn't want to pursue the opportunity,
+// and all related data will become inaccessible thereafter.
 func (c *Client) RejectEngagementInvitation(ctx context.Context, params *RejectEngagementInvitationInput, optFns ...func(*Options)) (*RejectEngagementInvitationOutput, error) {
 	if params == nil {
 		params = &RejectEngagementInvitationInput{}
@@ -31,35 +30,33 @@ func (c *Client) RejectEngagementInvitation(ctx context.Context, params *RejectE
 
 type RejectEngagementInvitationInput struct {
 
-	// Specifies the catalog related to the engagement invitation. Accepted values are
-	// AWS and Sandbox , which determine the environment in which the opportunity is
-	// managed.
+	// This is the catalog that's associated with the engagement invitation.
+	// Acceptable values are AWS or Sandbox , and these values determine the
+	// environment in which the opportunity is managed.
 	//
 	// This member is required.
 	Catalog *string
 
-	// Specifies the unique identifier of the EngagementInvitation to be rejected.
-	// Providing the correct identifier ensures that the intended invitation is
-	// rejected.
+	// This is the unique identifier of the rejected EngagementInvitation . Providing
+	// the correct identifier helps to ensure that the intended invitation is rejected.
 	//
 	// This member is required.
 	Identifier *string
 
-	// Specifies the reason for rejecting the engagement invitation. Providing a
-	// reason helps document the rationale behind the rejection and assists AWS in
-	// tracking patterns or issues. Possible values include:
+	// This describes the reason for rejecting the engagement invitation, which helps
+	// AWS track usage patterns. Acceptable values include the following:
 	//
-	//   - Customer problem unclear: The customer's problem is not clearly defined.
+	//   - Customer problem unclear: The customer's problem isn't understood.
 	//
-	//   - Next steps unclear: The next steps required to proceed are not clear.
+	//   - Next steps unclear: The next steps required to proceed aren't understood.
 	//
 	//   - Unable to support: The partner is unable to provide support due to resource
 	//   or capability constraints.
 	//
-	//   - Duplicate of Partner Referral: The opportunity is a duplicate of an
+	//   - Duplicate of partner referral: The opportunity is a duplicate of an
 	//   existing referral.
 	//
-	//   - Other: Any other reason not covered by the specified values.
+	//   - Other: Any reason not covered by other values.
 	RejectionReason *string
 
 	noSmithyDocumentSerde

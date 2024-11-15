@@ -68,7 +68,7 @@ type ListEngagementInvitationsInput struct {
 type ListEngagementInvitationsOutput struct {
 
 	// An array containing summaries of engagement invitations. Each summary includes
-	// key information such as the invitation title, invitation date, and the current
+	// information such as the invitation title, invitation date, and the current
 	// status of the invitation.
 	EngagementInvitationSummaries []types.EngagementInvitationSummary
 

@@ -1598,6 +1598,7 @@ const (
 	ReasonCodeInternalError                   ReasonCode = "InternalError"
 	ReasonCodeOpportunityValidationFailed     ReasonCode = "OpportunityValidationFailed"
 	ReasonCodeOpportunityConflict             ReasonCode = "OpportunityConflict"
+	ReasonCodeResourceSnapshotAccessDenied    ReasonCode = "ResourceSnapshotAccessDenied"
 )
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
@@ -1616,6 +1617,7 @@ func (ReasonCode) Values() []ReasonCode {
 		"InternalError",
 		"OpportunityValidationFailed",
 		"OpportunityConflict",
+		"ResourceSnapshotAccessDenied",
 	}
 }
 

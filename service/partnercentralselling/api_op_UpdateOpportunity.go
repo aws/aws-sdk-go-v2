@@ -42,8 +42,8 @@ type UpdateOpportunityInput struct {
 	//  Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is updated in. Use AWS to update real opportunities
-	// in the production environment, and Sandbox to test in a secure and isolated
-	// environment. When you use the Sandbox catalog, it allows you to simulate and
+	// in the production environment, and Sandbox for testing in secure, isolated
+	// environments. When you use the Sandbox catalog, it allows you to simulate and
 	// validate your interactions with Amazon Web Services services without affecting
 	// live data or operations.
 	//
@@ -70,8 +70,8 @@ type UpdateOpportunityInput struct {
 	Marketing *types.Marketing
 
 	// Specifies if the opportunity is associated with national security concerns.
-	// This flag is only applicable when the industry is Government . For national
-	// security-related opportunities, specific validation and compliance rules may
+	// This flag is only applicable when the industry is Government . For
+	// national-security-related opportunities, validation and compliance rules may
 	// apply, impacting the opportunity's visibility and processing.
 	NationalSecurity types.NationalSecurity
 
@@ -100,38 +100,38 @@ type UpdateOpportunityInput struct {
 	//
 	// Valid values:
 	//
-	//   - Co-Sell - Architectural Validation: Confirmation from Amazon Web Services
-	//   that the partner's proposed solution architecture is aligned with Amazon Web
-	//   Services best practices and poses minimal architectural risks.
+	//   - Cosell—Architectural Validation: Confirmation from Amazon Web Services that
+	//   the partner's proposed solution architecture is aligned with Amazon Web Services
+	//   best practices and poses minimal architectural risks.
 	//
-	//   - Co-Sell - Business Presentation: Request Amazon Web Services seller's
+	//   - Cosell—Business Presentation: Request Amazon Web Services seller's
 	//   participation in a joint customer presentation.
 	//
-	//   - Co-Sell - Competitive Information: Access to Amazon Web Services
-	//   competitive resources and support for the partner's proposed solution.
+	//   - Cosell—Competitive Information: Access to Amazon Web Services competitive
+	//   resources and support for the partner's proposed solution.
 	//
-	//   - Co-Sell - Pricing Assistance: Connect with an AWS seller for support
+	//   - Cosell—Pricing Assistance: Connect with an AWS seller for support
 	//   situations where a partner may be receiving an upfront discount on a service
 	//   (for example: EDP deals).
 	//
-	//   - Co-Sell - Technical Consultation: Connection with an Amazon Web Services
+	//   - Cosell—Technical Consultation: Connection with an Amazon Web Services
 	//   Solutions Architect to address the partner's questions about the proposed
 	//   solution.
 	//
-	//   - Co-Sell - Total Cost of Ownership Evaluation: Assistance with quoting
+	//   - Cosell—Total Cost of Ownership Evaluation: Assistance with quoting
 	//   different cost savings of proposed solutions on Amazon Web Services versus
 	//   on-premises or a traditional hosting environment.
 	//
-	//   - Co-Sell - Deal Support: Request Amazon Web Services seller's support to
+	//   - Cosell—Deal Support: Request Amazon Web Services seller's support to
 	//   progress the opportunity (for example: joint customer call, strategic
 	//   positioning).
 	//
-	//   - Co-Sell - Support for Public Tender / RFx: Opportunity related to the
-	//   public sector where the partner needs RFx support from Amazon Web Services.
+	//   - Cosell—Support for Public Tender/RFx: Opportunity related to the public
+	//   sector where the partner needs RFx support from Amazon Web Services.
 	//
 	//   - Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't
 	//   need support from an Amazon Web Services Sales representative. The opportunity
-	//   is managed solely by the partner. It's possible to request co-selling support on
+	//   is managed solely by the partner. It's possible to request coselling support on
 	//   these opportunities at any stage during their lifecycle. Also known as,
 	//   for-visibility-only (FVO) opportunity.
 	PrimaryNeedsFromAws []types.PrimaryNeedFromAws

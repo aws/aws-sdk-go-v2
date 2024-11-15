@@ -132,10 +132,10 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Service quotas represent the maximum allowed use of a specific resource, and
 // this error indicates that the request would surpass that limit.
 //
-// Suggested action: Review the [service quotas] for the specific resource, and reduce the usage
-// or request a quota increase through support if necessary.
+// Suggested action: Review the [Quotas] for the resource, and either reduce usage or
+// request a quota increase.
 //
-// [service quotas]: https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html
+// [Quotas]: https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -164,10 +164,10 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // This error occurs when there are too many requests sent. Review the provided
 // quotas and adapt your usage to avoid throttling.
 //
-// This error occurs when there are too many requests sent. Review the provided [quotas]
+// This error occurs when there are too many requests sent. Review the provided [Quotas]
 // and retry after the provided delay.
 //
-// [quotas]: https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html
+// [Quotas]: https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html
 type ThrottlingException struct {
 	Message *string
 

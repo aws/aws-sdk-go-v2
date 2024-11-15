@@ -14,25 +14,23 @@ import (
 
 //	Creates an Opportunity record in Partner Central. Use this operation to create
 //
-// a potential business opportunity intended to be submitted to Amazon Web
-// Services. Creating an opportunity sets its Lifecycle.ReviewStatus to Pending
-// Submission .
+// a potential business opportunity for submission to Amazon Web Services. Creating
+// an opportunity sets Lifecycle.ReviewStatus to Pending Submission .
 //
-// To fully submit an opportunity, follow these steps:
+// To submit an opportunity, follow these steps:
 //
 //   - To create the opportunity, use CreateOpportunity .
 //
 //   - To associate a solution with the opportunity, use AssociateOpportunity .
 //
-//   - To submit the opportunity, use SubmitOpportunity .
+//   - To submit the opportunity, use StartEngagementFromOpportunityTask .
 //
 // After submission, you can't edit the opportunity until the review is complete.
-// However, opportunities in the Pending Submission state still need all details
-// completed. You can update the opportunity while it's in the Pending Submission
-// state.
+// But opportunities in the Pending Submission state must have complete details.
+// You can update the opportunity while it's in the Pending Submission state.
 //
-// There's a set of mandatory fields required to create opportunities, but
-// consider providing optional fields to enrich the opportunity record.
+// There's a set of mandatory fields to create opportunities, but consider
+// providing optional fields to enrich the opportunity record.
 func (c *Client) CreateOpportunity(ctx context.Context, params *CreateOpportunityInput, optFns ...func(*Options)) (*CreateOpportunityOutput, error) {
 	if params == nil {
 		params = &CreateOpportunityInput{}
@@ -53,8 +51,8 @@ type CreateOpportunityInput struct {
 	//  Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is created in. Use AWS to create opportunities in
-	// the Amazon Web Services catalog, and Sandbox to test in a secure and isolated
-	// environment.
+	// the Amazon Web Services catalog, and Sandbox for testing in secure, isolated
+	// environments.
 	//
 	// This member is required.
 	Catalog *string
@@ -64,11 +62,11 @@ type CreateOpportunityInput struct {
 	//
 	// Default: None
 	//
-	// Best practice: To ensure uniqueness and avoid collisions, we recommend you use
-	// a UUID (Universally Unique Identifier) as the ClientToken . You can use standard
-	// libraries available in most programming languages to generated this. If you use
-	// the same client token, the API throws this error: "Conflicting client token
-	// submitted for a new request body".
+	// Best practice: To help ensure uniqueness and avoid conflicts, use a Universally
+	// Unique Identifier (UUID) as the ClientToken . You can use standard libraries
+	// from most programming languages to generate this. If you use the same client
+	// token, the API returns the following error: "Conflicting client token submitted
+	// for a new request body."
 	//
 	// This member is required.
 	ClientToken *string
@@ -88,8 +86,8 @@ type CreateOpportunityInput struct {
 	// process for opportunities marked as NationalSecurity .
 	NationalSecurity types.NationalSecurity
 
-	// Represents the internal team handling the opportunity. Specify the members
-	// involved in collaborating on this opportunity within the partner's organization.
+	// Represents the internal team handling the opportunity. Specify collaborating
+	// members of this opportunity who are within the partner's organization.
 	OpportunityTeam []types.Contact
 
 	//  Specifies the opportunity type as a renewal, new, or expansion.
@@ -118,58 +116,58 @@ type CreateOpportunityInput struct {
 
 	//  Specifies the opportunity's unique identifier in the partner's CRM system.
 	// This value is essential to track and reconcile because it's included in the
-	// outbound payload sent back to the partner.
+	// outbound payload to the partner.
 	//
-	// This field allows partners to link an opportunity to their CRM, to ensure
-	// seamless integration and accurate synchronization between the Partner Central
-	// API and the partner's internal systems.
+	// This field allows partners to link an opportunity to their CRM, which helps to
+	// ensure seamless integration and accurate synchronization between the Partner
+	// Central API and the partner's internal systems.
 	PartnerOpportunityIdentifier *string
 
 	//  Identifies the type of support the partner needs from Amazon Web Services.
 	//
 	// Valid values:
 	//
-	//   - Co-Sell - Architectural Validation: Confirmation from Amazon Web Services
-	//   that the partner's proposed solution architecture is aligned with Amazon Web
-	//   Services best practices and poses minimal architectural risks.
+	//   - Cosell—Architectural Validation: Confirmation from Amazon Web Services that
+	//   the partner's proposed solution architecture is aligned with Amazon Web Services
+	//   best practices and poses minimal architectural risks.
 	//
-	//   - Co-Sell - Business Presentation: Request Amazon Web Services seller's
+	//   - Cosell—Business Presentation: Request Amazon Web Services seller's
 	//   participation in a joint customer presentation.
 	//
-	//   - Co-Sell - Competitive Information: Access to Amazon Web Services
-	//   competitive resources and support for the partner's proposed solution.
+	//   - Cosell—Competitive Information: Access to Amazon Web Services competitive
+	//   resources and support for the partner's proposed solution.
 	//
-	//   - Co-Sell - Pricing Assistance: Connect with an Amazon Web Services seller
-	//   for support situations where a partner may be receiving an upfront discount on a
+	//   - Cosell—Pricing Assistance: Connect with an Amazon Web Services seller for
+	//   support situations where a partner may be receiving an upfront discount on a
 	//   service (for example: EDP deals).
 	//
-	//   - Co-Sell - Technical Consultation: Connect with an Amazon Web Services
+	//   - Cosell—Technical Consultation: Connect with an Amazon Web Services
 	//   Solutions Architect to address the partner's questions about the proposed
 	//   solution.
 	//
-	//   - Co-Sell - Total Cost of Ownership Evaluation: Assistance with quoting
+	//   - Cosell—Total Cost of Ownership Evaluation: Assistance with quoting
 	//   different cost savings of proposed solutions on Amazon Web Services versus
 	//   on-premises or a traditional hosting environment.
 	//
-	//   - Co-Sell - Deal Support: Request Amazon Web Services seller's support to
+	//   - Cosell—Deal Support: Request Amazon Web Services seller's support to
 	//   progress the opportunity (for example: joint customer call, strategic
 	//   positioning).
 	//
-	//   - Co-Sell - Support for Public Tender / RFx: Opportunity related to the
-	//   public sector where the partner needs Amazon Web Services RFx support.
+	//   - Cosell—Support for Public Tender/RFx: Opportunity related to the public
+	//   sector where the partner needs Amazon Web Services RFx support.
 	//
 	//   - Do Not Need Support from AWS Sales Rep: Indicates that a partner doesn't
 	//   need support from an Amazon Web Services sales representative, and the partner
-	//   solely manages the opportunity. It's possible to request co-selling support on
-	//   these opportunities at any stage during their lifecycle. Also known as,
-	//   for-visibility-only (FVO) opportunity.
+	//   solely manages the opportunity. It's possible to request coselling support on
+	//   these opportunities at any stage during their lifecycles. This is also known as
+	//   a for-visibility-only (FVO) opportunity.
 	PrimaryNeedsFromAws []types.PrimaryNeedFromAws
 
 	// An object that contains project details for the Opportunity .
 	Project *types.Project
 
-	// Specifies details of a customer's procurement terms. Required only for partners
-	// in eligible programs.
+	// Specifies details of a customer's procurement terms. This is required only for
+	// partners in eligible programs.
 	SoftwareRevenue *types.SoftwareRevenue
 
 	noSmithyDocumentSerde
@@ -178,15 +176,15 @@ type CreateOpportunityInput struct {
 type CreateOpportunityOutput struct {
 
 	//  Read-only, system-generated Opportunity unique identifier. Amazon Web Services
-	// creates this identifier, and it's used for all subsequent actions on the
-	// opportunity, such as updates, associations, and submissions. It ensures that
-	// each opportunity can be accurately tracked and managed within the system.
+	// creates this identifier, and it's used for all subsequent opportunity actions,
+	// such as updates, associations, and submissions. It helps to ensure that each
+	// opportunity is accurately tracked and managed.
 	//
 	// This member is required.
 	Id *string
 
 	// DateTime when the opportunity was last modified. When the Opportunity is
-	// created, its value is equal to CreatedDate .
+	// created, its value is CreatedDate .
 	LastModifiedDate *time.Time
 
 	// Specifies the opportunity's unique identifier in the partner's CRM system. This

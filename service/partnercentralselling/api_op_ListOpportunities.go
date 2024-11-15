@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This request accepts a list of filters to use to retrieve a specific subset of
-// opportunities, as well as sort options. This feature is available to partners
-// from [Partner Central]using the ListOpportunities API action.
+// This request accepts a list of filters that retrieve opportunity subsets as
+// well as sort options. This feature is available to partners from [Partner Central]using the
+// ListOpportunities API action.
 //
 // To synchronize your system with Amazon Web Services, only list the
 // opportunities that were newly created or updated. We recommend you rely on
@@ -52,8 +52,8 @@ type ListOpportunitiesInput struct {
 	//  Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunities are listed in. Use AWS for listing real
-	// opportunities in the Amazon Web Services catalog, and Sandbox for to test in a
-	// secure and isolated environment.
+	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in
+	// secure, isolated environments.
 	//
 	// This member is required.
 	Catalog *string
@@ -84,8 +84,8 @@ type ListOpportunitiesInput struct {
 	LifeCycleStage []types.Stage
 
 	//  Specifies the maximum number of results to return in a single call. This
-	// limits the number of opportunities returned in the response to avoid overloading
-	// with too many results at once.
+	// limits the number of opportunities returned in the response to avoid providing
+	// too many results at once.
 	//
 	// Default: 20
 	MaxResults *int32
@@ -225,8 +225,8 @@ func (c *Client) addOperationListOpportunitiesMiddlewares(stack *middleware.Stac
 // ListOpportunitiesPaginatorOptions is the paginator options for ListOpportunities
 type ListOpportunitiesPaginatorOptions struct {
 	//  Specifies the maximum number of results to return in a single call. This
-	// limits the number of opportunities returned in the response to avoid overloading
-	// with too many results at once.
+	// limits the number of opportunities returned in the response to avoid providing
+	// too many results at once.
 	//
 	// Default: 20
 	Limit int32

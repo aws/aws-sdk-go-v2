@@ -41,8 +41,7 @@ type GetAwsOpportunitySummaryInput struct {
 	Catalog *string
 
 	//  The unique identifier for the related partner opportunity. Use this field to
-	// correlate an AWS opportunity with its corresponding partner opportunity in your
-	// CRM system.
+	// correlate an AWS opportunity with its corresponding partner opportunity.
 	//
 	// This member is required.
 	RelatedOpportunityIdentifier *string
@@ -59,8 +58,8 @@ type GetAwsOpportunitySummaryOutput struct {
 	Catalog *string
 
 	//  Provides details about the customer associated with the AWS Opportunity,
-	// including account information, industry, and other key customer data. These
-	// details help partners understand the business context of the opportunity.
+	// including account information, industry, and other customer data. These details
+	// help partners understand the business context of the opportunity.
 	Customer *types.AwsOpportunityCustomer
 
 	//  Provides insights into the AWS Opportunity, including engagement score and
@@ -68,8 +67,8 @@ type GetAwsOpportunitySummaryOutput struct {
 	Insights *types.AwsOpportunityInsights
 
 	//  Specifies the type of involvement AWS has in the opportunity, such as direct
-	// co-sell or advisory support. This field helps partners understand the role AWS
-	// will play in advancing the opportunity.
+	// cosell or advisory support. This field helps partners understand the role AWS
+	// plays in advancing the opportunity.
 	InvolvementType types.SalesInvolvementType
 
 	//  Provides a reason for any changes in the involvement type of AWS in the
@@ -83,9 +82,8 @@ type GetAwsOpportunitySummaryOutput struct {
 	// monitor the progression of the opportunity.
 	LifeCycle *types.AwsOpportunityLifeCycle
 
-	//  Details the AWS Opportunity team, including key members involved in the
-	// opportunity. This information helps partners know who from AWS is engaged and
-	// their roles in the opportunity.
+	//  Details the AWS opportunity team, including members involved. This information
+	// helps partners know who from AWS is engaged and what their role is.
 	OpportunityTeam []types.AwsTeamMember
 
 	//  Specifies whether the AWS Opportunity originated from AWS or the partner. This

@@ -7,47 +7,42 @@
 //
 // # AWS Partner Central API for Selling Reference Guide
 //
-// Amazon Web Services (AWS) Partner Central API reference guide is designed to
-// help [AWS Partners]programmatically integrate their Customer Relationship Management (CRM)
-// systems with AWS Partner Central. Through the Partner Central APIs, partners can
-// automate and streamline their interactions with AWS Partner Central, ensuring a
-// more efficient and effective engagement in joint business activities.
+// This Amazon Web Services (AWS) Partner Central API reference is designed to
+// help [AWS Partners]integrate Customer Relationship Management (CRM) systems with AWS Partner
+// Central. Partners can automate interactions with AWS Partner Central, which
+// helps to ensure effective engagements in joint business activities.
 //
-// The AWS Partner Central API service provides standard AWS API functionality.
-// You can directly use the API [Actions], or you can use an AWS SDK to access an API
-// that's tailored to the programming language or platform that you're using. For
-// more information about AWS application development, see [Getting Started with AWS]. For more information
-// about using AWS SDKs, see [AWS SDKs].
+// The API provides standard AWS API functionality. Access it by either using API [Actions]
+// or by using an AWS SDK that's tailored to your programming language or platform.
+// For more information, see [Getting Started with AWS]and [Tools to Build on AWS].
 //
 // Features offered by AWS Partner Central API
 //
-//   - Opportunity management: Facilitates the management of co-selling
-//     opportunities with AWS using API actions such as CreateOpportunity ,
-//     UpdateOpportunity , ListOpportunities , GetOpportunity , and AssignOpportunity
-//     .
+//   - Opportunity management: Manages coselling opportunities through API actions
+//     such as CreateOpportunity , UpdateOpportunity , ListOpportunities ,
+//     GetOpportunity , and AssignOpportunity .
 //
-//   - AWS referral management: Facilitates receiving referrals shared by AWS
-//     using actions like ListEngagementInvitations , GetEngagementInvitation ,
+//   - AWS referral management: Manages referrals shared by AWS using actions such
+//     as ListEngagementInvitations , GetEngagementInvitation ,
 //     StartEngagementByAcceptingInvitation , and RejectEngagementInvitation .
 //
-//   - Entity association: Associate related entities such as AWS Products,
+//   - Entity association: Associates related entities such as AWS Products,
 //     Partner Solutions, and AWS Marketplace Private Offers with opportunities using
-//     the actions AssociateOpportunity and DisassociateOpportunity .
+//     the actions AssociateOpportunity , and DisassociateOpportunity .
 //
-//   - View AWS opportunity details: Use the GetAWSOpportunitySummary action to
-//     retrieve real-time summaries of AWS opportunities that are linked to your
-//     opportunities.
+//   - View AWS opportunity details: Retrieves real-time summaries of AWS
+//     opportunities using the GetAWSOpportunitySummary action.
 //
-//   - List solutions: Provides list APIs for listing solutions partners offer
-//     using ListSolutions .
+//   - List solutions: Provides list APIs for listing partner offers using
+//     ListSolutions .
 //
-//   - Event subscription: Partners can subscribe to real-time updates on
-//     opportunities by listening to events such as Opportunity Created, Opportunity
-//     Updated, Engagement Invitation Accepted, Engagement Invitation Rejected and
-//     Engagement Invitation Created using AWS EventBridge.
+//   - Event subscription: Subscribe to real-time opportunity updates through AWS
+//     EventBridge by using actions such as Opportunity Created, Opportunity Updated,
+//     Engagement Invitation Accepted, Engagement Invitation Rejected, and Engagement
+//     Invitation Created.
 //
-// [AWS Partners]: https://docs.aws.amazon.com/partners/programs/
+// [Tools to Build on AWS]: http://aws.amazon.com/developer/tools/
+// [AWS Partners]: http://aws.amazon.com/partners/programs/
 // [Actions]: https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html
-// [AWS SDKs]: https://docs.aws.amazon.com/aws-sdk
-// [Getting Started with AWS]: https://docs.aws.amazon.com/getting-started
+// [Getting Started with AWS]: http://aws.amazon.com/getting-started
 package partnercentralselling

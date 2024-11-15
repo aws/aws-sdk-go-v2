@@ -13,11 +13,11 @@ import (
 )
 
 // This action starts the engagement by accepting an EngagementInvitation . The
-// task is asynchronous and involves several steps: accepting the invitation,
-// creating an opportunity in the partner’s account from the AWS Opportunity, and
-// copying over key details for tracking. Once completed, an Opportunity Created
-// event is generated, indicating that the opportunity has been successfully
-// created in the partner's account.
+// task is asynchronous and involves the following steps: accepting the invitation,
+// creating an opportunity in the partner’s account from the AWS opportunity, and
+// copying details for tracking. When completed, an Opportunity Created event is
+// generated, indicating that the opportunity has been successfully created in the
+// partner's account.
 func (c *Client) StartEngagementByAcceptingInvitationTask(ctx context.Context, params *StartEngagementByAcceptingInvitationTaskInput, optFns ...func(*Options)) (*StartEngagementByAcceptingInvitationTaskOutput, error) {
 	if params == nil {
 		params = &StartEngagementByAcceptingInvitationTaskInput{}
@@ -41,15 +41,15 @@ type StartEngagementByAcceptingInvitationTaskInput struct {
 	// This member is required.
 	Catalog *string
 
-	// A unique, case-sensitive identifier provided by the client to ensure the
-	// idempotency of the request. Can be a random or meaningful string, but must be
-	// unique for each request.
+	// A unique, case-sensitive identifier provided by the client that helps to ensure
+	// the idempotency of the request. This can be a random or meaningful string but
+	// must be unique for each request.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// Specifies the unique identifier of the EngagementInvitation to be accepted.
-	// Providing the correct identifier ensures the right engagement invitation is
+	// Providing the correct identifier helps ensure that the correct engagement is
 	// processed.
 	//
 	// This member is required.
@@ -72,10 +72,7 @@ type StartEngagementByAcceptingInvitationTaskOutput struct {
 	// unique identifier for the opportunity.
 	OpportunityId *string
 
-	// Indicates the reason for task failure using an enumerated code. Possible values
-	// are: ACCEPT_ENGAGEMENT_INVITATION_FAILED , GET_ENGAGEMENT_INVITATION_FAILED ,
-	// CREATE_OPPORTUNITY_FAILED , CREATE_RESOURCE_VIEW_AUTOMATION_FAILED ,
-	// SUBMIT_OPPORTUNITY_FAILED .
+	// Indicates the reason for task failure using an enumerated code.
 	ReasonCode types.ReasonCode
 
 	// The timestamp indicating when the task was initiated. The format follows RFC
@@ -86,12 +83,10 @@ type StartEngagementByAcceptingInvitationTaskOutput struct {
 	// task within AWS.
 	TaskArn *string
 
-	// The unique identifier of the task, used to track the task’s progress. This
-	// value follows a specific pattern: ^oit-[0-9a-z]{13}$ .
+	// The unique identifier of the task, used to track the task’s progress.
 	TaskId *string
 
-	// Indicates the current status of the task. Valid values include IN_PROGRESS ,
-	// COMPLETE , and FAILED .
+	// Indicates the current status of the task.
 	TaskStatus types.TaskStatus
 
 	// Metadata pertaining to the operation's result.

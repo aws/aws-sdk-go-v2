@@ -49,8 +49,8 @@ type AssignOpportunityInput struct {
 	//  Specifies the catalog associated with the request. This field takes a string
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is assigned in. Use AWS to assign real
-	// opportunities in the Amazon Web Services catalog, and Sandbox to test in a
-	// secure and isolated environment.
+	// opportunities in the Amazon Web Services catalog, and Sandbox for testing in
+	// secure, isolated environments.
 	//
 	// This member is required.
 	Catalog *string

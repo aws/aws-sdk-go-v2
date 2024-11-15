@@ -158,13 +158,14 @@ type AddressSummary struct {
 }
 
 // Represents the contact details of the individual assigned to manage the
-// opportunity within the partner organization. This ensures that there is a clear
-// point of contact for the opportunity's progress and updates.
+// opportunity within the partner organization. This helps to ensure that there is
+// a point of contact for the opportunity's progress.
 type AssigneeContact struct {
 
 	// Specifies the business title of the assignee managing the opportunity. This
 	// helps clarify the individual's role and responsibilities within the
-	// organization.
+	// organization. Use the value PartnerAccountManager to update details of the
+	// opportunity owner.
 	//
 	// This member is required.
 	BusinessTitle *string
@@ -175,12 +176,16 @@ type AssigneeContact struct {
 	// This member is required.
 	Email *string
 
-	// Specifies the first name of the assignee managing the opportunity.
+	// Specifies the first name of the assignee managing the opportunity. The system
+	// automatically retrieves this value from the user profile by referencing the
+	// associated email address.
 	//
 	// This member is required.
 	FirstName *string
 
-	// Specifies the last name of the assignee managing the opportunity.
+	// Specifies the last name of the assignee managing the opportunity. The system
+	// automatically retrieves this value from the user profile by referencing the
+	// associated email address.
 	//
 	// This member is required.
 	LastName *string
@@ -194,8 +199,8 @@ type AssigneeContact struct {
 type AwsOpportunityCustomer struct {
 
 	// Provides a list of customer contacts involved in the opportunity. These
-	// contacts may include decision-makers, influencers, and other key stakeholders
-	// within the customer's organization.
+	// contacts may include decision makers, influencers, and other stakeholders within
+	// the customer's organization.
 	Contacts []Contact
 
 	noSmithyDocumentSerde
@@ -228,7 +233,7 @@ type AwsOpportunityLifeCycle struct {
 	ClosedLostReason AwsClosedLostReason
 
 	// Specifies the immediate next steps required to progress the opportunity. These
-	// steps are based on AWS's guidance and the current stage of the opportunity.
+	// steps are based on AWS guidance and the current stage of the opportunity.
 	NextSteps *string
 
 	// Provides a historical log of previous next steps that were taken to move the
@@ -283,18 +288,18 @@ type AwsOpportunityRelatedEntities struct {
 }
 
 // Indicates the level of AWS involvement in the opportunity. This field helps
-// track AWS's role and participation throughout the engagement, such as providing
-// technical support, deal assistance, or sales support.
+// track AWS participation throughout the engagement, such as providing technical
+// support, deal assistance, and sales support.
 type AwsSubmission struct {
 
-	// Specifies the type of AWS involvement in the opportunity, such as co-selling,
-	// deal support, or technical consultation. This helps categorize the nature of
-	// AWS's participation.
+	// Specifies the type of AWS involvement in the opportunity, such as coselling,
+	// deal support, or technical consultation. This helps categorize the nature of AWS
+	// participation.
 	//
 	// This member is required.
 	InvolvementType SalesInvolvementType
 
-	// Determines who can view AWS's involvement in the opportunity. Typically, this
+	// Determines who can view AWS involvement in the opportunity. Typically, this
 	// field is set to Full for most cases, but it may be restricted based on special
 	// program requirements or confidentiality needs.
 	Visibility Visibility
@@ -327,7 +332,7 @@ type AwsTeamMember struct {
 type Contact struct {
 
 	// The partner contact's title (job title or role) associated with the Opportunity
-	// .
+	// . BusinessTitle supports either PartnerAccountManager or OpportunityOwner .
 	BusinessTitle *string
 
 	// The contact's email address associated with the Opportunity .
@@ -370,7 +375,7 @@ type CustomerSummary struct {
 }
 
 // Contains details about the customer associated with the Engagement Invitation,
-// including key company information and industry.
+// including company information and industry.
 type EngagementCustomer struct {
 
 	// Represents the name of the customer’s company associated with the Engagement
@@ -400,9 +405,9 @@ type EngagementCustomer struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a summarized view of the Engagement Invitation, including key details
-// like the identifier, status, and sender information. This summary helps partners
-// track and manage AWS-originated opportunities.
+// Provides a summarized view of the Engagement Invitation, including details like
+// the identifier, status, and sender. This summary helps partners track and manage
+// AWS originated opportunities.
 type EngagementInvitationSummary struct {
 
 	// Specifies the catalog in which the Engagement Invitation resides. This can be
@@ -430,8 +435,8 @@ type EngagementInvitationSummary struct {
 	EngagementTitle *string
 
 	// Indicates the date and time when the Engagement Invitation will expire. After
-	// this date, the invitation can no longer be accepted, and the opportunity will no
-	// longer be available for the partner to engage.
+	// this date, the invitation can no longer be accepted, and the opportunity will be
+	// unavailable to the partner.
 	ExpirationDate *time.Time
 
 	// Indicates the date when the Engagement Invitation was sent to the partner. This
@@ -533,15 +538,15 @@ type LifeCycle struct {
 	//
 	//   - Legal/Tax/Regulatory: Legal, tax, or regulatory issues prevented progress.
 	//
-	//   - Lost to Competitor - Google: The opportunity was lost to Google.
+	//   - Lost to Competitor—Google: The opportunity was lost to Google.
 	//
-	//   - Lost to Competitor - Microsoft: The opportunity was lost to Microsoft.
+	//   - Lost to Competitor—Microsoft: The opportunity was lost to Microsoft.
 	//
-	//   - Lost to Competitor - SoftLayer: The opportunity was lost to SoftLayer.
+	//   - Lost to Competitor—SoftLayer: The opportunity was lost to SoftLayer.
 	//
-	//   - Lost to Competitor - VMWare: The opportunity was lost to VMWare.
+	//   - Lost to Competitor—VMWare: The opportunity was lost to VMWare.
 	//
-	//   - Lost to Competitor - Other: The opportunity was lost to a competitor not
+	//   - Lost to Competitor—Other: The opportunity was lost to a competitor not
 	//   listed above.
 	//
 	//   - No Opportunity: There was no opportunity to pursue.
@@ -569,8 +574,8 @@ type LifeCycle struct {
 	//   - Financial/Commercial: Financial or commercial issues impacted the decision.
 	ClosedLostReason ClosedLostReason
 
-	// Specifies the upcoming actions or tasks for the Opportunity . This field is
-	// utilized to communicate to Amazon Web Services the next actions required for the
+	// Specifies the upcoming actions or tasks for the Opportunity . Use this field to
+	// communicate with Amazon Web Services about the next actions required for the
 	// Opportunity .
 	NextSteps *string
 
@@ -578,7 +583,7 @@ type LifeCycle struct {
 	// for the current opportunity, along with the timestamp.
 	NextStepsHistory []NextStepsHistory
 
-	// Indicates why an opportuntiy was sent back for further details. Partners must
+	// Indicates why an opportunity was sent back for further details. Partners must
 	// take corrective action based on the ReviewComments .
 	ReviewComments *string
 
@@ -595,8 +600,9 @@ type LifeCycle struct {
 	//
 	//   - Action Required: Issues that Amazon Web Services highlights need to be
 	//   addressed. Partners should use the UpdateOpportunity API action to update the
-	//   opportunity, and ensure all required changes are made. Only these fields are
-	//   editable when the Lifecycle.ReviewStatus is Action Required :
+	//   opportunity and helps to ensure that all required changes are made. Only the
+	//   following fields are editable when the Lifecycle.ReviewStatus is Action
+	//   Required :
 	//
 	//   - Customer.Account.Address.City
 	//
@@ -652,10 +658,9 @@ type LifeCycle struct {
 	//   (Comes directly from the end customer through a lead) or latent (Your account
 	//   team believes it exists based on research, account plans, sales plays).
 	//
-	//   - Qualified: Your account team engaged with the prospect/end customer to
-	//   discuss viability and understand requirements. The prospect/end customer agreed
-	//   that the opportunity is real, of interest, and may solve key business/technical
-	//   needs.
+	//   - Qualified: Your account team engaged with the customer to discuss viability
+	//   and requirements. The customer agreed that the opportunity is real, of interest,
+	//   and may solve business/technical needs.
 	//
 	//   - Technical Validation: All parties understand the implementation plan.
 	//
@@ -697,7 +702,7 @@ type LifeCycleSummary struct {
 	// Opportunity .
 	NextSteps *string
 
-	// Indicates why an opportuntiy was sent back for further details. Partners must
+	// Indicates why an opportunity was sent back for further details. Partners must
 	// take corrective action based on the ReviewComments .
 	ReviewComments *string
 
@@ -770,15 +775,14 @@ type LifeCycleSummary struct {
 	//   (Comes directly from the end customer through a lead) or latent (Your account
 	//   team believes it exists based on research, account plans, sales plays).
 	//
-	//   - Qualified: Your account team engaged with the prospect/end customer to
-	//   discuss viability and understand requirements. The prospect/end customer agreed
-	//   that the opportunity is real, of interest, and may solve key business/technical
-	//   needs.
+	//   - Qualified: Your account team engaged with the customer to discuss viability
+	//   and understand requirements. The customer agreed that the opportunity is real,
+	//   of interest, and may solve business/technical needs.
 	//
 	//   - Technical Validation: All parties understand the implementation plan.
 	//
-	//   - Business Validation: Pricing has been proposed, Pricing was proposed, and
-	//   all parties agree to the steps to close.
+	//   - Business Validation: Pricing was proposed, and all parties agree to the
+	//   steps to close.
 	//
 	//   - Committed: The customer signed the contract, but Amazon Web Services hasn't
 	//   started billing.
@@ -808,12 +812,11 @@ type Marketing struct {
 	// activity.
 	AwsFundingUsed AwsFundingUsed
 
-	// Specifies the Opportunity 's unique marketing campaign name. The Amazon Web
-	// Services campaign name serves as a reference to specific marketing initiatives,
-	// promotions, or activities related to the Opportunity . This field captures the
-	// identifier used to track and categorize the Opportunity within Amazon Web
-	// Services's marketing campaigns. If you don't have a campaign name, reach out to
-	// your Amazon Web Services point of contact to obtain one.
+	// Specifies the Opportunity marketing campaign code. The Amazon Web Services
+	// campaign code is a reference to specific marketing initiatives, promotions, or
+	// activities. This field captures the identifier used to track and categorize the
+	// Opportunity within marketing campaigns. If you don't have a campaign code,
+	// contact your Amazon Web Services point of contact to obtain one.
 	CampaignName *string
 
 	// Specifies the Opportunity 's channel that the marketing activity is associated
@@ -921,8 +924,7 @@ type OpportunityInvitationPayload struct {
 	ReceiverResponsibilities []ReceiverResponsibility
 
 	// Represents the contact details of the AWS representatives involved in sending
-	// the Engagement Invitation. These contacts are key stakeholders for the
-	// opportunity.
+	// the Engagement Invitation. These contacts are opportunity stakeholders.
 	SenderContacts []SenderContact
 
 	noSmithyDocumentSerde
@@ -1064,15 +1066,15 @@ type Project struct {
 	CompetitorName CompetitorName
 
 	// Describes the problem the end customer has, and how the partner is helping.
-	// Utilize this field to provide a clear and concise narrative that outlines the
-	// specific business challenge or issue the customer has. Elaborate on how the
-	// partner's solution or offerings align to resolve the customer's business
-	// problem. Include relevant information about the partner's value proposition,
-	// unique selling points, and expertise to tackle the issue. Offer insights on how
-	// the proposed solution meets the customer's needs and provides value. Use concise
-	// language and precise descriptions to convey the context and significance of the
-	// Opportunity . The content in this field helps Amazon Web Services understand the
-	// nature of the Opportunity and the strategic fit of the partner's solution.
+	// Utilize this field to provide a concise narrative that outlines the customer's
+	// business challenge or issue. Elaborate on how the partner's solution or
+	// offerings align to resolve the customer's business problem. Include relevant
+	// information about the partner's value proposition, unique selling points, and
+	// expertise to tackle the issue. Offer insights on how the proposed solution meets
+	// the customer's needs and provides value. Use concise language and precise
+	// descriptions to convey the context and significance of the Opportunity . The
+	// content in this field helps Amazon Web Services understand the nature of the
+	// Opportunity and the strategic fit of the partner's solution.
 	CustomerBusinessProblem *string
 
 	//  Specifies the proposed solution focus or type of workload for the Opportunity.
@@ -1080,17 +1082,17 @@ type Project struct {
 	// and provides context and clarity to the addressed workload.
 	//
 	// Valid values: AI Machine Learning and Analytics | Archiving | Big Data: Data
-	// Warehouse / Data Integration / ETL / Data Lake / BI | Blockchain | Business
+	// Warehouse/Data Integration/ETL/Data Lake/BI | Blockchain | Business
 	// Applications: Mainframe Modernization | Business Applications & Contact Center |
 	// Business Applications & SAP Production | Centralized Operations Management |
 	// Cloud Management Tools | Cloud Management Tools & DevOps with Continuous
 	// Integration & Continuous Delivery (CICD) | Configuration, Compliance & Auditing
 	// | Connected Services | Containers & Serverless | Content Delivery & Edge
-	// Services | Database | Edge Computing / End User Computing | Energy | Enterprise
+	// Services | Database | Edge Computing/End User Computing | Energy | Enterprise
 	// Governance & Controls | Enterprise Resource Planning | Financial Services |
 	// Healthcare and Life Sciences | High Performance Computing | Hybrid Application
 	// Platform | Industrial Software | IOT | Manufacturing, Supply Chain and
-	// Operations | Media & High performance computing (HPC) | Migration / Database
+	// Operations | Media & High performance computing (HPC) | Migration/Database
 	// Migration | Monitoring, logging and performance | Monitoring & Observability |
 	// Networking | Outpost | SAP | Security & Compliance | Storage & Backup | Training
 	// | VMC | VMWare | Web development & DevOps
@@ -1147,10 +1149,10 @@ type Project struct {
 	//   - Customer has shown interest in solution: After initial discussions, the
 	//   customer is interested in your solution.
 	//
-	//   - Conducted POC / Demo: You conducted a proof of concept (POC) or
-	//   demonstration of the solution for the customer.
+	//   - Conducted POC/demo: You conducted a proof of concept (POC) or demonstration
+	//   of the solution for the customer.
 	//
-	//   - In evaluation / planning stage: The customer is evaluating the solution and
+	//   - In evaluation/planning stage: The customer is evaluating the solution and
 	//   planning potential implementation.
 	//
 	//   - Agreed on solution to Business Problem: Both parties agree on how the
@@ -1294,12 +1296,12 @@ type RelatedEntityIdentifiers struct {
 	//
 	// If the specific solution identifier is not available, you can use the value
 	// Other and provide details about the solution in the otherSolutionOffered field.
-	// However, once the opportunity reaches the Committed stage or beyond, the Other
-	// value cannot be used, and a valid solution identifier must be provided.
+	// But when the opportunity reaches the Committed stage or beyond, the Other value
+	// cannot be used, and a valid solution identifier must be provided.
 	//
-	// By associating the relevant solutions with the opportunity, you can clearly
-	// communicate the offerings that are being considered or implemented to address
-	// the customer's business problem.
+	// By associating the relevant solutions with the opportunity, you can communicate
+	// the offerings that are being considered or implemented to address the customer's
+	// business problem.
 	Solutions []string
 
 	noSmithyDocumentSerde

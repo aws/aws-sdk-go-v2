@@ -37,7 +37,7 @@ type GetOpportunityInput struct {
 	// value from a predefined list: AWS or Sandbox . The catalog determines which
 	// environment the opportunity is fetched from. Use AWS to retrieve opportunities
 	// in the Amazon Web Services catalog, and Sandbox to retrieve opportunities in a
-	// secure and isolated testing environment.
+	// secure, isolated testing environment.
 	//
 	// This member is required.
 	Catalog *string
@@ -110,12 +110,12 @@ type GetOpportunityOutput struct {
 	//   customer that's not previously engaged with your solutions or services.
 	//
 	//   - Renewal opportunity: Represents an opportunity to renew an existing
-	//   contract or subscription with a current customer, ensuring continuity of
-	//   service.
+	//   contract or subscription with a current customer, which helps to ensure service
+	//   continuity.
 	//
-	//   - Expansion opportunity: Represents an opportunity to expand the scope of an
-	//   existing contract or subscription, either by adding new services or increasing
-	//   the volume of existing services for a current customer.
+	//   - Expansion opportunity: Represents an opportunity to expand the scope of a
+	//   customer's contract or subscription, either by adding new services or increasing
+	//   the volume of existing services.
 	OpportunityType types.OpportunityType
 
 	// Specifies the opportunity's unique identifier in the partner's CRM system. This
@@ -127,39 +127,39 @@ type GetOpportunityOutput struct {
 	//
 	// Valid values:
 	//
-	//   - Co-Sell - Architectural Validation: Confirmation from Amazon Web Services
-	//   that the partner's proposed solution architecture is aligned with Amazon Web
-	//   Services best practices and poses minimal architectural risks.
+	//   - Cosell—Architectural Validation: Confirmation from Amazon Web Services that
+	//   the partner's proposed solution architecture is aligned with Amazon Web Services
+	//   best practices and poses minimal architectural risks.
 	//
-	//   - Co-Sell - Business Presentation: Request Amazon Web Services seller's
+	//   - Cosell—Business Presentation: Request Amazon Web Services seller's
 	//   participation in a joint customer presentation.
 	//
-	//   - Co-Sell - Competitive Information: Access to Amazon Web Services
-	//   competitive resources and support for the partner's proposed solution.
+	//   - Cosell—Competitive Information: Access to Amazon Web Services competitive
+	//   resources and support for the partner's proposed solution.
 	//
-	//   - Co-Sell - Pricing Assistance: Connect with an Amazon Web Services seller
-	//   for support situations where a partner may be receiving an upfront discount on a
+	//   - Cosell—Pricing Assistance: Connect with an Amazon Web Services seller for
+	//   support situations where a partner may be receiving an upfront discount on a
 	//   service (for example: EDP deals).
 	//
-	//   - Co-Sell - Technical Consultation: Connect with an Amazon Web Services
+	//   - Cosell—Technical Consultation: Connect with an Amazon Web Services
 	//   Solutions Architect to address the partner's questions about the proposed
 	//   solution.
 	//
-	//   - Co-Sell - Total Cost of Ownership Evaluation: Assistance with quoting
+	//   - Cosell—Total Cost of Ownership Evaluation: Assistance with quoting
 	//   different cost savings of proposed solutions on Amazon Web Services versus
 	//   on-premises or a traditional hosting environment.
 	//
-	//   - Co-Sell - Deal Support: Request Amazon Web Services seller's support to
+	//   - Cosell—Deal Support: Request Amazon Web Services seller's support to
 	//   progress the opportunity (for example: joint customer call, strategic
 	//   positioning).
 	//
-	//   - Co-Sell - Support for Public Tender / RFx: Opportunity related to the
-	//   public sector where the partner needs Amazon Web Services RFx support.
+	//   - Cosell—Support for Public Tender/RFx: Opportunity related to the public
+	//   sector where the partner needs Amazon Web Services RFx support.
 	//
 	//   - Do Not Need Support from Amazon Web Services Sales Rep: Indicates that a
 	//   partner doesn't need support from an Amazon Web Services sales representative,
 	//   and the partner solely manages the opportunity. It's possible to request
-	//   co-selling support on these opportunities at any stage during their lifecycle.
+	//   coselling support on these opportunities at any stage during their lifecycle.
 	//   Also known as, for-visibility-only (FVO) opportunity.
 	PrimaryNeedsFromAws []types.PrimaryNeedFromAws
 

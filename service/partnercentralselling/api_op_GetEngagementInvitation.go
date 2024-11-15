@@ -13,8 +13,9 @@ import (
 )
 
 // Retrieves the details of an engagement invitation shared by AWS with a partner.
-// The information includes key aspects such as the customer, project details, and
-// lifecycle information related to the engagement.
+// The information includes aspects such as customer, project details, and
+// lifecycle information. To connect an engagement invitation with an opportunity,
+// match the invitation’s Payload.Project.Title with opportunity Project.Title .
 func (c *Client) GetEngagementInvitation(ctx context.Context, params *GetEngagementInvitationInput, optFns ...func(*Options)) (*GetEngagementInvitationOutput, error) {
 	if params == nil {
 		params = &GetEngagementInvitationInput{}
@@ -39,7 +40,7 @@ type GetEngagementInvitationInput struct {
 	// This member is required.
 	Catalog *string
 
-	// Specifies the unique identifier for the engagement invitation being retrieved.
+	// Specifies the unique identifier for the retrieved engagement invitation.
 	//
 	// This member is required.
 	Identifier *string
@@ -61,12 +62,11 @@ type GetEngagementInvitationOutput struct {
 	// This member is required.
 	Id *string
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the engagement
-	// invitation.
+	// The Amazon Resource Name (ARN) that identifies the engagement invitation.
 	Arn *string
 
-	// The title of the engagement invitation, summarizing the purpose or key
-	// objectives of the opportunity shared by AWS.
+	// The title of the engagement invitation, summarizing the purpose or objectives
+	// of the opportunity shared by AWS.
 	EngagementTitle *string
 
 	// Indicates the date on which the engagement invitation will expire if not
@@ -100,8 +100,7 @@ type GetEngagementInvitationOutput struct {
 	// The name of the AWS organization or team that sent the engagement invitation.
 	SenderCompanyName *string
 
-	// The current status of the engagement invitation (e.g., Accepted , Pending , or
-	// Rejected ).
+	// The current status of the engagement invitation.
 	Status types.InvitationStatus
 
 	// Metadata pertaining to the operation's result.

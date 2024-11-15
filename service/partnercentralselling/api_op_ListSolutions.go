@@ -66,9 +66,8 @@ type ListSolutionsInput struct {
 	// Identifier .
 	Sort *types.SolutionSort
 
-	// Filters the solutions based on their status. This filter helps retrieve
-	// solutions with statuses such as Active , Inactive , or Pending Approval ,
-	// allowing partners to manage their solution portfolios effectively.
+	// Filters solutions based on their status. This filter helps partners manage
+	// their solution portfolios effectively.
 	Status []types.SolutionStatus
 
 	noSmithyDocumentSerde
