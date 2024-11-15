@@ -5148,6 +5148,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ONE_YEAR"
                     }
+                },
+                "FIVE_YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIVE_YEARS"
+                    }
                 }
             }
         },
