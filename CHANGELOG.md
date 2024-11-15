@@ -1,3 +1,9 @@
+# Release (2024-11-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.1.0](service/partnercentralselling/CHANGELOG.md#v110-2024-11-15)
+  * **Feature**: Announcing AWS Partner Central API for Selling: This service launch Introduces new APIs for co-selling opportunity management and related functions. Key features include notifications, a dynamic sandbox for testing, and streamlined validations.
+
 # Release (2024-11-14)
 
 ## General Highlights
