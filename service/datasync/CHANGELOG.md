@@ -1,3 +1,7 @@
+# v1.43.3 (2024-11-15.2)
+
+* **Documentation**: Doc-only updates and enhancements related to creating DataSync tasks and describing task executions.
+
 # v1.43.2 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

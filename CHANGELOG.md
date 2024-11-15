@@ -1,3 +1,24 @@
+# Release (2024-11-15.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.43.0](service/cloudwatch/CHANGELOG.md#v1430-2024-11-152)
+  * **Feature**: Adds support for adding related Entity information to metrics ingested through PutMetricData.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.0.0](service/connectcampaignsv2/CHANGELOG.md#v100-2024-11-152)
+  * **Release**: New AWS service client module
+  * **Feature**: Added Amazon Connect Outbound Campaigns V2 SDK.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.43.3](service/datasync/CHANGELOG.md#v1433-2024-11-152)
+  * **Documentation**: Doc-only updates and enhancements related to creating DataSync tasks and describing task executions.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.189.0](service/ec2/CHANGELOG.md#v11890-2024-11-152)
+  * **Feature**: Remove non-functional enum variants for FleetCapacityReservationUsageStrategy
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.60.0](service/iot/CHANGELOG.md#v1600-2024-11-152)
+  * **Feature**: This release allows AWS IoT Core users to enrich MQTT messages with propagating attributes, to associate a thing to a connection, and to enable Online Certificate Status Protocol (OCSP) stapling for TLS X.509 server certificates through private endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.47.0](service/outposts/CHANGELOG.md#v1470-2024-11-152)
+  * **Feature**: You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.18.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1180-2024-11-152)
+  * **Feature**: Use rule overrides to always allow or always block messages to specific phone numbers. Use message feedback to monitor if a customer interacts with your message.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.34.0](service/route53resolver/CHANGELOG.md#v1340-2024-11-152)
+  * **Feature**: Route 53 Resolver DNS Firewall Advanced Rules allows you to monitor and block suspicious DNS traffic based on anomalies detected in the queries, such as DNS tunneling and Domain Generation Algorithms (DGAs).
+
 # Release (2024-11-15)
 
 ## Module Highlights

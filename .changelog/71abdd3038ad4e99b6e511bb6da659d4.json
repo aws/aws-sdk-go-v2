@@ -1,8 +1,0 @@
-{
-    "id": "71abdd30-38ad-4e99-b6e5-11bb6da659d4",
-    "type": "documentation",
-    "description": "Fixes PutLexicon usage example.",
-    "modules": [
-        "service/polly"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.47.0 (2024-11-15.2)
+
+* **Feature**: You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.
+
 # v1.46.0 (2024-11-11)
 
 * **Feature**: This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.

@@ -1,8 +1,0 @@
-{
-    "id": "6657e119-6ca0-4ef6-b789-5f379a042562",
-    "type": "feature",
-    "description": "Route 53 Resolver DNS Firewall Advanced Rules allows you to monitor and block suspicious DNS traffic based on anomalies detected in the queries, such as DNS tunneling and Domain Generation Algorithms (DGAs).",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

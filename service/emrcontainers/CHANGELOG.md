@@ -1,3 +1,7 @@
+# v1.33.6 (2024-11-15.2)
+
+* No change notes available for this release.
+
 # v1.33.5 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
