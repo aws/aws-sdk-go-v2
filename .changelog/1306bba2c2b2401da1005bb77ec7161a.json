@@ -1,0 +1,8 @@
+{
+    "id": "1306bba2-c2b2-401d-a100-5bb77ec7161a",
+    "type": "feature",
+    "description": "Remove integration test for service elastictranscoder",
+    "modules": [
+        "service/internal/integrationtest"
+    ]
+}
