@@ -1,0 +1,8 @@
+{
+    "id": "1ae49e41-47b0-40ea-9c2f-01d958d2ae1b",
+    "type": "feature",
+    "description": "Added Amazon Connect Outbound Campaigns V2 SDK.",
+    "modules": [
+        "service/connectcampaignsv2"
+    ]
+}

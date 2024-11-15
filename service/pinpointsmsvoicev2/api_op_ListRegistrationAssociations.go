@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retreive all of the origination identies that are associated with a
+// Retrieve all of the origination identities that are associated with a
 // registration.
 func (c *Client) ListRegistrationAssociations(ctx context.Context, params *ListRegistrationAssociationsInput, optFns ...func(*Options)) (*ListRegistrationAssociationsOutput, error) {
 	if params == nil {

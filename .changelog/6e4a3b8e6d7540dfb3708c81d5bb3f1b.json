@@ -1,0 +1,8 @@
+{
+    "id": "6e4a3b8e-6d75-40df-b370-8c81d5bb3f1b",
+    "type": "feature",
+    "description": "You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.",
+    "modules": [
+        "service/outposts"
+    ]
+}

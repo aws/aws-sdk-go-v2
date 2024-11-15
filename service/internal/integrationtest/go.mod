@@ -38,7 +38,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.41.1
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.32.5
-	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/emr v1.46.3
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.0

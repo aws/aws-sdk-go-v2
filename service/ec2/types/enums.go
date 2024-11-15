@@ -2257,8 +2257,6 @@ type FleetCapacityReservationUsageStrategy string
 // Enum values for FleetCapacityReservationUsageStrategy
 const (
 	FleetCapacityReservationUsageStrategyUseCapacityReservationsFirst FleetCapacityReservationUsageStrategy = "use-capacity-reservations-first"
-	FleetCapacityReservationUsageStrategyUseCapacityReservationsOnly  FleetCapacityReservationUsageStrategy = "use-capacity-reservations-only"
-	FleetCapacityReservationUsageStrategyNone                         FleetCapacityReservationUsageStrategy = "none"
 )
 
 // Values returns all known values for FleetCapacityReservationUsageStrategy. Note
@@ -2269,8 +2267,6 @@ const (
 func (FleetCapacityReservationUsageStrategy) Values() []FleetCapacityReservationUsageStrategy {
 	return []FleetCapacityReservationUsageStrategy{
 		"use-capacity-reservations-first",
-		"use-capacity-reservations-only",
-		"none",
 	}
 }
 

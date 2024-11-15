@@ -300,9 +300,11 @@ type FirewallDomainListMetadata struct {
 type FirewallRule struct {
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
-	// the domains in the rule's domain list:
+	// the domains in the rule's domain list, or a threat in a DNS Firewall Advanced
+	// rule:
 	//
-	//   - ALLOW - Permit the request to go through.
+	//   - ALLOW - Permit the request to go through. Not available for DNS Firewall
+	//   Advanced rules.
 	//
 	//   - ALERT - Permit the request to go through but send an alert to the logs.
 	//
@@ -337,6 +339,19 @@ type FirewallRule struct {
 	//   custom handling details in the rule's BlockOverride* settings.
 	BlockResponse BlockResponse
 
+	//  The confidence threshold for DNS Firewall Advanced. You must provide this
+	// value when you create a DNS Firewall Advanced rule. The confidence level values
+	// mean:
+	//
+	//   - LOW : Provides the highest detection rate for threats, but also increases
+	//   false positives.
+	//
+	//   - MEDIUM : Provides a balance between detecting threats and false positives.
+	//
+	//   - HIGH : Detects only the most well corroborated threats with a low rate of
+	//   false positives.
+	ConfidenceThreshold ConfidenceThreshold
+
 	// The date and time that the rule was created, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	CreationTime *string
@@ -346,23 +361,36 @@ type FirewallRule struct {
 	// can be any unique string, for example, a timestamp.
 	CreatorRequestId *string
 
+	//  The type of the DNS Firewall Advanced rule. Valid values are:
+	//
+	//   - DGA : Domain generation algorithms detection. DGAs are used by attackers to
+	//   generate a large number of domains to to launch malware attacks.
+	//
+	//   - DNS_TUNNELING : DNS tunneling detection. DNS tunneling is used by attackers
+	//   to exfiltrate data from the client by using the DNS tunnel without making a
+	//   network connection to the client.
+	DnsThreatProtection DnsThreatProtection
+
 	// The ID of the domain list that's used in the rule.
 	FirewallDomainListId *string
 
 	//  How you want the the rule to evaluate DNS redirection in the DNS redirection
 	// chain, such as CNAME or DNAME.
 	//
-	// Inspect_Redirection_Domain (Default) inspects all domains in the redirection
+	// INSPECT_REDIRECTION_DOMAIN : (Default) inspects all domains in the redirection
 	// chain. The individual domains in the redirection chain must be added to the
 	// domain list.
 	//
-	// Trust_Redirection_Domain  inspects only the first domain in the redirection
+	// TRUST_REDIRECTION_DOMAIN : Inspects only the first domain in the redirection
 	// chain. You don't need to add the subsequent domains in the domain in the
 	// redirection list to the domain list.
 	FirewallDomainRedirectionAction FirewallDomainRedirectionAction
 
-	// The unique identifier of the firewall rule group of the rule.
+	// The unique identifier of the Firewall rule group of the rule.
 	FirewallRuleGroupId *string
+
+	//  ID of the DNS Firewall Advanced rule.
+	FirewallThreatProtectionId *string
 
 	// The date and time that the rule was last modified, in Unix time format and
 	// Coordinated Universal Time (UTC).
@@ -983,7 +1011,7 @@ type ResolverQueryLogConfigAssociation struct {
 	//   - CREATING : Resolver is creating an association between an Amazon VPC and a
 	//   query logging configuration.
 	//
-	//   - CREATED : The association between an Amazon VPC and a query logging
+	//   - ACTIVE : The association between an Amazon VPC and a query logging
 	//   configuration was successfully created. Resolver is logging queries that
 	//   originate in the specified VPC.
 	//
@@ -1168,32 +1196,8 @@ type TargetAddress struct {
 	// The port at Ip that you want to forward DNS queries to.
 	Port *int32
 
-	//  The protocols for the Resolver endpoints. DoH-FIPS is applicable for inbound
-	// endpoints only.
-	//
-	// For an inbound endpoint you can apply the protocols as follows:
-	//
-	//   - Do53 and DoH in combination.
-	//
-	//   - Do53 and DoH-FIPS in combination.
-	//
-	//   - Do53 alone.
-	//
-	//   - DoH alone.
-	//
-	//   - DoH-FIPS alone.
-	//
-	//   - None, which is treated as Do53.
-	//
-	// For an outbound endpoint you can apply the protocols as follows:
-	//
-	//   - Do53 and DoH in combination.
-	//
-	//   - Do53 alone.
-	//
-	//   - DoH alone.
-	//
-	//   - None, which is treated as Do53.
+	//  The protocols for the target address. The protocol you choose needs to be
+	// supported by the outbound endpoint of the Resolver rule.
 	Protocol Protocol
 
 	//  The Server Name Indication of the DoH server that you want to forward queries

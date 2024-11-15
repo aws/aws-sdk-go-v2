@@ -2210,6 +2210,18 @@ func TestCheckSnapshot_ListPrincipalThings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPrincipalThingsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrincipalThingsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPrincipalThingsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListProvisioningTemplates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProvisioningTemplates(context.Background(), nil, func(o *Options) {
@@ -2383,6 +2395,18 @@ func TestCheckSnapshot_ListThingPrincipals(t *testing.T) {
 	_, err := svc.ListThingPrincipals(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListThingPrincipals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListThingPrincipalsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThingPrincipalsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListThingPrincipalsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3127,6 +3151,18 @@ func TestCheckSnapshot_UpdateThingGroupsForThing(t *testing.T) {
 	_, err := svc.UpdateThingGroupsForThing(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateThingGroupsForThing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateThingType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThingType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateThingType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5305,6 +5341,18 @@ func TestUpdateSnapshot_ListPrincipalThings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPrincipalThingsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrincipalThingsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPrincipalThingsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListProvisioningTemplates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListProvisioningTemplates(context.Background(), nil, func(o *Options) {
@@ -5478,6 +5526,18 @@ func TestUpdateSnapshot_ListThingPrincipals(t *testing.T) {
 	_, err := svc.ListThingPrincipals(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListThingPrincipals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListThingPrincipalsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThingPrincipalsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListThingPrincipalsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6222,6 +6282,18 @@ func TestUpdateSnapshot_UpdateThingGroupsForThing(t *testing.T) {
 	_, err := svc.UpdateThingGroupsForThing(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateThingGroupsForThing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateThingType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThingType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateThingType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

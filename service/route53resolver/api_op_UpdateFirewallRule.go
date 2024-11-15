@@ -29,20 +29,17 @@ func (c *Client) UpdateFirewallRule(ctx context.Context, params *UpdateFirewallR
 
 type UpdateFirewallRuleInput struct {
 
-	// The ID of the domain list to use in the rule.
-	//
-	// This member is required.
-	FirewallDomainListId *string
-
 	// The unique identifier of the firewall rule group for the rule.
 	//
 	// This member is required.
 	FirewallRuleGroupId *string
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
-	// the domains in the rule's domain list:
+	// the domains in the rule's domain list, or a threat in a DNS Firewall Advanced
+	// rule:
 	//
-	//   - ALLOW - Permit the request to go through.
+	//   - ALLOW - Permit the request to go through. Not available for DNS Firewall
+	//   Advanced rules.
 	//
 	//   - ALERT - Permit the request to go through but send an alert to the logs.
 	//
@@ -77,17 +74,46 @@ type UpdateFirewallRuleInput struct {
 	//   custom handling details in the rule's BlockOverride* settings.
 	BlockResponse types.BlockResponse
 
+	//  The confidence threshold for DNS Firewall Advanced. You must provide this
+	// value when you create a DNS Firewall Advanced rule. The confidence level values
+	// mean:
+	//
+	//   - LOW : Provides the highest detection rate for threats, but also increases
+	//   false positives.
+	//
+	//   - MEDIUM : Provides a balance between detecting threats and false positives.
+	//
+	//   - HIGH : Detects only the most well corroborated threats with a low rate of
+	//   false positives.
+	ConfidenceThreshold types.ConfidenceThreshold
+
+	//  The type of the DNS Firewall Advanced rule. Valid values are:
+	//
+	//   - DGA : Domain generation algorithms detection. DGAs are used by attackers to
+	//   generate a large number of domains to to launch malware attacks.
+	//
+	//   - DNS_TUNNELING : DNS tunneling detection. DNS tunneling is used by attackers
+	//   to exfiltrate data from the client by using the DNS tunnel without making a
+	//   network connection to the client.
+	DnsThreatProtection types.DnsThreatProtection
+
+	// The ID of the domain list to use in the rule.
+	FirewallDomainListId *string
+
 	//  How you want the the rule to evaluate DNS redirection in the DNS redirection
 	// chain, such as CNAME or DNAME.
 	//
-	// Inspect_Redirection_Domain (Default) inspects all domains in the redirection
+	// INSPECT_REDIRECTION_DOMAIN : (Default) inspects all domains in the redirection
 	// chain. The individual domains in the redirection chain must be added to the
 	// domain list.
 	//
-	// Trust_Redirection_Domain  inspects only the first domain in the redirection
+	// TRUST_REDIRECTION_DOMAIN : Inspects only the first domain in the redirection
 	// chain. You don't need to add the subsequent domains in the domain in the
 	// redirection list to the domain list.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
+
+	//  The DNS Firewall Advanced rule ID.
+	FirewallThreatProtectionId *string
 
 	// The name of the rule.
 	Name *string

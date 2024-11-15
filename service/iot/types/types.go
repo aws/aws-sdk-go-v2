@@ -2769,6 +2769,16 @@ type MitigationActionParams struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration to add user-defined properties to enrich MQTT 5 messages.
+type Mqtt5Configuration struct {
+
+	// An object that represents the propagating thing attributes and the connection
+	// attributes.
+	PropagatingAttributes []PropagatingAttribute
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the MQTT context to use for the test authorizer request
 type MqttContext struct {
 
@@ -3147,6 +3157,46 @@ type PresignedUrlConfig struct {
 	//
 	// [cross-service confused deputy prevention]: https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html
 	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the thing and the type of relation it has with the
+// principal.
+type PrincipalThingObject struct {
+
+	// The name of the thing.
+	//
+	// This member is required.
+	ThingName *string
+
+	// The type of the relation you want to specify when you attach a principal to a
+	// thing. The value defaults to NON_EXCLUSIVE_THING .
+	//
+	//   - EXCLUSIVE_THING - Attaches the specified principal to the specified thing,
+	//   exclusively. The thing will be the only thing that’s attached to the principal.
+	//
+	//   - NON_EXCLUSIVE_THING - Attaches the specified principal to the specified
+	//   thing. Multiple things can be attached to the principal.
+	ThingPrincipalType ThingPrincipalType
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the connection attribute, thing attribute, and the
+// user property key.
+type PropagatingAttribute struct {
+
+	// The attribute associated with the connection between a device and Amazon Web
+	// Services IoT Core.
+	ConnectionAttribute *string
+
+	// The user-defined thing attribute that is propagating for MQTT 5 message
+	// enrichment.
+	ThingAttribute *string
+
+	// The key of the user property key-value pair.
+	UserPropertyKey *string
 
 	noSmithyDocumentSerde
 }
@@ -3664,10 +3714,30 @@ type ServerCertificateConfig struct {
 	// A Boolean value that indicates whether Online Certificate Status Protocol
 	// (OCSP) server certificate check is enabled or not.
 	//
-	// For more information, see [Configuring OCSP server-certificate stapling in domain configuration] from Amazon Web Services IoT Core Developer Guide.
+	// For more information, see [Server certificate configuration for OCSP stapling] from Amazon Web Services IoT Core Developer Guide.
 	//
-	// [Configuring OCSP server-certificate stapling in domain configuration]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html
+	// [Server certificate configuration for OCSP stapling]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html
 	EnableOCSPCheck *bool
+
+	// The Amazon Resource Name (ARN) for an X.509 certificate stored in Amazon Web
+	// Services Certificate Manager (ACM). If provided, Amazon Web Services IoT Core
+	// will use this certificate to validate the signature of the received OCSP
+	// response. The OCSP responder must sign responses using either this authorized
+	// responder certificate or the issuing certificate, depending on whether the ARN
+	// is provided or not. The certificate must be in the same Amazon Web Services
+	// region and account as the domain configuration.
+	OcspAuthorizedResponderArn *string
+
+	// The Amazon Resource Name (ARN) for a Lambda function that acts as a Request for
+	// Comments (RFC) 6960-compliant Online Certificate Status Protocol (OCSP)
+	// responder, supporting basic OCSP responses. The Lambda function accepts a JSON
+	// string that's Base64-encoded. Therefore, you must convert your OCSP response,
+	// which is typically in the Distinguished Encoding Rules (DER) format, into a JSON
+	// string that's Base64-encoded. The Lambda function's response is also a
+	// Base64-encoded JSON string and the response payload must not exceed 8 kilobytes
+	// (KiB) in size. The Lambda function must be in the same Amazon Web Services
+	// region and account as the domain configuration.
+	OcspLambdaArn *string
 
 	noSmithyDocumentSerde
 }
@@ -4243,6 +4313,28 @@ type ThingIndexingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An object that represents the principal and the type of relation it has with
+// the thing.
+type ThingPrincipalObject struct {
+
+	// The principal of the thing principal object.
+	//
+	// This member is required.
+	Principal *string
+
+	// The type of the relation you want to specify when you attach a principal to a
+	// thing. The value defaults to NON_EXCLUSIVE_THING .
+	//
+	//   - EXCLUSIVE_THING - Attaches the specified principal to the specified thing,
+	//   exclusively. The thing will be the only thing that’s attached to the principal.
+	//
+	//   - NON_EXCLUSIVE_THING - Attaches the specified principal to the specified
+	//   thing. Multiple things can be attached to the principal.
+	ThingPrincipalType ThingPrincipalType
+
+	noSmithyDocumentSerde
+}
+
 // The definition of the thing type, including thing type name and description.
 type ThingTypeDefinition struct {
 
@@ -4284,6 +4376,9 @@ type ThingTypeMetadata struct {
 // The ThingTypeProperties contains information about the thing type including: a
 // thing type description, and a list of searchable thing attribute names.
 type ThingTypeProperties struct {
+
+	// The configuration to add user-defined properties to enrich MQTT 5 messages.
+	Mqtt5Configuration *Mqtt5Configuration
 
 	// A list of searchable thing attribute names.
 	SearchableAttributes []string

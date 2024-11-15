@@ -91,6 +91,10 @@ type SendTextMessageInput struct {
 	// The body of the text message.
 	MessageBody *string
 
+	// Set to true to enable message feedback for the message. When a user receives
+	// the message you need to update the message status using PutMessageFeedback.
+	MessageFeedbackEnabled *bool
+
 	// The type of message. Valid values are for messages that are critical or
 	// time-sensitive and PROMOTIONAL for messages that aren't critical or
 	// time-sensitive.

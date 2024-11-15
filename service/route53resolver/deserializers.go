@@ -1681,6 +1681,9 @@ func awsAwsjson11_deserializeOpErrorDeleteFirewallRule(response *smithyhttp.Resp
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -9646,6 +9649,15 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				sv.BlockResponse = types.BlockResponse(jtv)
 			}
 
+		case "ConfidenceThreshold":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfidenceThreshold to be of type string, got %T instead", value)
+				}
+				sv.ConfidenceThreshold = types.ConfidenceThreshold(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9662,6 +9674,15 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 					return fmt.Errorf("expected CreatorRequestId to be of type string, got %T instead", value)
 				}
 				sv.CreatorRequestId = ptr.String(jtv)
+			}
+
+		case "DnsThreatProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DnsThreatProtection to be of type string, got %T instead", value)
+				}
+				sv.DnsThreatProtection = types.DnsThreatProtection(jtv)
 			}
 
 		case "FirewallDomainListId":
@@ -9689,6 +9710,15 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
 				}
 				sv.FirewallRuleGroupId = ptr.String(jtv)
+			}
+
+		case "FirewallThreatProtectionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.FirewallThreatProtectionId = ptr.String(jtv)
 			}
 
 		case "ModificationTime":

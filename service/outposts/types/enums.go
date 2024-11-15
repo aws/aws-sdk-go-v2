@@ -400,6 +400,7 @@ type PaymentTerm string
 const (
 	PaymentTermThreeYears PaymentTerm = "THREE_YEARS"
 	PaymentTermOneYear    PaymentTerm = "ONE_YEAR"
+	PaymentTermFiveYears  PaymentTerm = "FIVE_YEARS"
 )
 
 // Values returns all known values for PaymentTerm. Note that this can be expanded
@@ -410,6 +411,7 @@ func (PaymentTerm) Values() []PaymentTerm {
 	return []PaymentTerm{
 		"THREE_YEARS",
 		"ONE_YEAR",
+		"FIVE_YEARS",
 	}
 }
 

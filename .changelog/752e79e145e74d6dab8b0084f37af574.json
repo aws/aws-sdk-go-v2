@@ -1,0 +1,8 @@
+{
+    "id": "752e79e1-45e7-4d6d-ab8b-0084f37af574",
+    "type": "feature",
+    "description": "Remove non-functional enum variants for FleetCapacityReservationUsageStrategy",
+    "modules": [
+        "service/ec2"
+    ]
+}

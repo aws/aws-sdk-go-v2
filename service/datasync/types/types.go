@@ -1297,7 +1297,7 @@ type TaskExecutionFilesFailedDetail struct {
 type TaskExecutionFilesListedDetail struct {
 
 	// The number of objects that DataSync finds at your destination location. This
-	// metric is only applicable if you [configure your task]to delete data in the destination that isn't
+	// counter is only applicable if you [configure your task]to delete data in the destination that isn't
 	// in the source.
 	//
 	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling

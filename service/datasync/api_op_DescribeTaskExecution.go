@@ -17,10 +17,10 @@ import (
 // results of the transfer.
 //
 // Some DescribeTaskExecution response elements are only relevant to a specific
-// task mode. For information, see [Understanding task mode differences]and [Understanding data transfer performance metrics].
+// task mode. For information, see [Understanding task mode differences]and [Understanding data transfer performance counters].
 //
 // [Understanding task mode differences]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences
-// [Understanding data transfer performance metrics]: https://docs.aws.amazon.com/datasync/latest/userguide/transfer-performance-metrics.html
+// [Understanding data transfer performance counters]: https://docs.aws.amazon.com/datasync/latest/userguide/transfer-performance-counters.html
 func (c *Client) DescribeTaskExecution(ctx context.Context, params *DescribeTaskExecutionInput, optFns ...func(*Options)) (*DescribeTaskExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeTaskExecutionInput{}
@@ -55,10 +55,7 @@ type DescribeTaskExecutionOutput struct {
 	// compression (if compression is possible). This number is typically less than [BytesTransferred]
 	// unless the data isn't compressible.
 	//
-	// Not currently supported with [Enhanced mode tasks].
-	//
 	// [BytesTransferred]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-BytesTransferred
-	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	BytesCompressed int64
 
 	// The number of bytes that DataSync sends to the network before compression (if
@@ -77,15 +74,14 @@ type DescribeTaskExecutionOutput struct {
 	EstimatedBytesToTransfer int64
 
 	// The number of files, objects, and directories that DataSync expects to delete
-	// in your destination location. If you don't [configure your task]to delete data in the destination
-	// that isn't in the source, the value is always 0 .
+	// in your destination location. If you don't configure your task to [delete data in the destination that isn't in the source], the value
+	// is always 0 .
 	//
-	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+	// [delete data in the destination that isn't in the source]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
 	EstimatedFilesToDelete int64
 
 	// The number of files, objects, and directories that DataSync expects to transfer
-	// over the network. This value is calculated during the task execution's PREPARING[step]
-	// before the TRANSFERRING step.
+	// over the network. This value is calculated while DataSync [prepares]the transfer.
 	//
 	// How this gets calculated depends primarily on your task’s [transfer mode] configuration:
 	//
@@ -106,7 +102,7 @@ type DescribeTaskExecutionOutput struct {
 	//
 	// [transfer mode]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode
 	// [OverwriteMode]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode
-	// [step]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+	// [prepares]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
 	// [PreserveDeletedFiles]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles
 	EstimatedFilesToTransfer int64
 
@@ -117,10 +113,10 @@ type DescribeTaskExecutionOutput struct {
 	Excludes []types.FilterRule
 
 	// The number of files, objects, and directories that DataSync actually deletes in
-	// your destination location. If you don't [configure your task]to delete data in the destination that
-	// isn't in the source, the value is always 0 .
+	// your destination location. If you don't configure your task to [delete data in the destination that isn't in the source], the value is
+	// always 0 .
 	//
-	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+	// [delete data in the destination that isn't in the source]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
 	FilesDeleted int64
 
 	// The number of objects that DataSync fails to prepare, transfer, verify, and
@@ -143,7 +139,7 @@ type DescribeTaskExecutionOutput struct {
 	//
 	// Applies only to [Enhanced mode tasks].
 	//
-	// This metric isn't applicable if you configure your task to [transfer all data]. In that scenario,
+	// This counter isn't applicable if you configure your task to [transfer all data]. In that scenario,
 	// DataSync copies everything from the source to the destination without comparing
 	// differences between the locations.
 	//
@@ -156,16 +152,14 @@ type DescribeTaskExecutionOutput struct {
 	FilesSkipped int64
 
 	// The number of files, objects, and directories that DataSync actually transfers
-	// over the network. This value is updated periodically during the task execution's
-	// TRANSFERRING[step] when something is read from the source and sent over the network.
+	// over the network. This value is updated periodically during your task execution
+	// when something is read from the source and sent over the network.
 	//
 	// If DataSync fails to transfer something, this value can be less than
 	// EstimatedFilesToTransfer . In some cases, this value can also be greater than
 	// EstimatedFilesToTransfer . This element is implementation-specific for some
 	// location types, so don't use it as an exact indication of what's transferring or
 	// to monitor your task execution.
-	//
-	// [step]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
 	FilesTransferred int64
 
 	// The number of files, objects, and directories that DataSync verifies during

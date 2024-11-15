@@ -74,6 +74,10 @@ type SendVoiceMessageInput struct {
 	// [speech synthesis markup language (SSML)]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
 	MessageBodyTextType types.VoiceMessageBodyTextType
 
+	// Set to true to enable message feedback for the message. When a user receives
+	// the message you need to update the message status using PutMessageFeedback.
+	MessageFeedbackEnabled *bool
+
 	// The unique identifier for the protect configuration.
 	ProtectConfigurationId *string
 

@@ -82,6 +82,46 @@ func (BlockResponse) Values() []BlockResponse {
 	}
 }
 
+type ConfidenceThreshold string
+
+// Enum values for ConfidenceThreshold
+const (
+	ConfidenceThresholdLow    ConfidenceThreshold = "LOW"
+	ConfidenceThresholdMedium ConfidenceThreshold = "MEDIUM"
+	ConfidenceThresholdHigh   ConfidenceThreshold = "HIGH"
+)
+
+// Values returns all known values for ConfidenceThreshold. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfidenceThreshold) Values() []ConfidenceThreshold {
+	return []ConfidenceThreshold{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
+type DnsThreatProtection string
+
+// Enum values for DnsThreatProtection
+const (
+	DnsThreatProtectionDga          DnsThreatProtection = "DGA"
+	DnsThreatProtectionDnsTunneling DnsThreatProtection = "DNS_TUNNELING"
+)
+
+// Values returns all known values for DnsThreatProtection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DnsThreatProtection) Values() []DnsThreatProtection {
+	return []DnsThreatProtection{
+		"DGA",
+		"DNS_TUNNELING",
+	}
+}
+
 type FirewallDomainImportOperation string
 
 // Enum values for FirewallDomainImportOperation

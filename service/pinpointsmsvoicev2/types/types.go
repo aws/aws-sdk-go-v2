@@ -105,6 +105,9 @@ type ConfigurationSetInformation struct {
 	// This member is required.
 	EventDestinations []EventDestination
 
+	// True if message feedback is enabled.
+	DefaultMessageFeedbackEnabled *bool
+
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
 	// critical or time-sensitive and PROMOTIONAL for messages that aren't critical or
 	// time-sensitive.
@@ -600,6 +603,54 @@ type ProtectConfigurationInformation struct {
 	//
 	// This member is required.
 	ProtectConfigurationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details on a RuleSetNumberOverride.
+type ProtectConfigurationRuleSetNumberOverride struct {
+
+	// The action for the rule to perform of either blocking or allowing messages to
+	// the destination phone number.
+	//
+	// This member is required.
+	Action ProtectConfigurationRuleOverrideAction
+
+	// The time when the rule was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The destination phone number in E.164 format.
+	//
+	// This member is required.
+	DestinationPhoneNumber *string
+
+	// The time the rule will expire at. If ExpirationTimestamp is not set then the
+	// rule will not expire.
+	ExpirationTimestamp *time.Time
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	IsoCountryCode *string
+
+	noSmithyDocumentSerde
+}
+
+// The information for a protect configuration rule set number override that meets
+// a specified criteria.
+type ProtectConfigurationRuleSetNumberOverrideFilterItem struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name ProtectConfigurationRuleSetNumberOverrideFilterName
+
+	// An array values to filter for.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }

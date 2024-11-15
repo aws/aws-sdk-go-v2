@@ -1,0 +1,8 @@
+{
+    "id": "91a729c9-dfeb-4b7e-af7f-ec18e6a2c4af",
+    "type": "documentation",
+    "description": "Doc-only updates and enhancements related to creating DataSync tasks and describing task executions.",
+    "modules": [
+        "service/datasync"
+    ]
+}
