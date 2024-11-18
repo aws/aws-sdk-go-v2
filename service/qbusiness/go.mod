@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.6
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.23
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.23
-	github.com/aws/smithy-go v1.22.0
+	github.com/aws/smithy-go v1.22.1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../
