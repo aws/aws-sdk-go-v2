@@ -404,7 +404,7 @@ type FilterAttribute struct {
 	// This member is required.
 	Key *string
 
-	// The value to whcih to compare the value of the metadata attribute.
+	// The value to which to compare the value of the metadata attribute.
 	//
 	// This member is required.
 	Value document.Interface
