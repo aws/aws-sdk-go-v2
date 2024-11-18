@@ -1,3 +1,8 @@
+# v1.49.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2024-11-12)
 
 * **Feature**: AWS CodeBuild now supports non-containerized Linux and Windows builds on Reserved Capacity.

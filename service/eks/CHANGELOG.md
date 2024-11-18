@@ -1,3 +1,8 @@
+# v1.52.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2024-11-08)
 
 * **Feature**: Adds new error code `Ec2InstanceTypeDoesNotExist` for Amazon EKS managed node groups

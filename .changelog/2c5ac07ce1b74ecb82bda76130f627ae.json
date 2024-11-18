@@ -1,8 +1,0 @@
-{
-    "id": "2c5ac07c-e1b7-4ecb-82bd-a76130f627ae",
-    "type": "feature",
-    "description": "This release adds a new API, ListHookResults, that allows retrieving CloudFormation Hooks invocation results for hooks invoked during a create change set operation or Cloud Control API operation",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

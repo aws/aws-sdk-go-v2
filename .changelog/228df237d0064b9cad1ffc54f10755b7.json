@@ -1,8 +1,0 @@
-{
-    "id": "228df237-d006-4b9c-ad1f-fc54f10755b7",
-    "type": "feature",
-    "description": "Amazon EC2 Auto Scaling now supports Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift to help you quickly recover an impaired application from failures in an Availability Zone (AZ).",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

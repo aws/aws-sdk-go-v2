@@ -1,3 +1,9 @@
+# v1.116.0 (2024-11-18)
+
+* **Feature**: Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.115.2 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

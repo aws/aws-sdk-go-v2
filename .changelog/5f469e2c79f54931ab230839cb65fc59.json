@@ -1,8 +1,0 @@
-{
-    "id": "5f469e2c-79f5-4931-ab23-0839cb65fc59",
-    "type": "feature",
-    "description": "Add support for the automatic pause/resume feature of Aurora Serverless v2.",
-    "modules": [
-        "service/rdsdata"
-    ]
-}

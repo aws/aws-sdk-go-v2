@@ -1,8 +1,0 @@
-{
-    "id": "8e4b29ca-82e8-4004-891e-88589bbccfe5",
-    "type": "feature",
-    "description": "The release introduces a generative AI Assistant in AWS IoT SiteWise. It includes: 1) InvokeAssistant API - Invoke the Assistant to get alarm summaries and ask questions. 2) Dataset APIs - Manage knowledge base configuration for the Assistant. 3) Portal APIs enhancement - Manage AI-aware dashboards.",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.48.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2024-11-08)
 
 * **Feature**: This feature allows override LaunchTemplates to be specified in an AWS Batch Compute Environment.

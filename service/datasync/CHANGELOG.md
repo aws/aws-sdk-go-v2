@@ -1,3 +1,8 @@
+# v1.43.4 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.3 (2024-11-15.2)
 
 * **Documentation**: Doc-only updates and enhancements related to creating DataSync tasks and describing task executions.

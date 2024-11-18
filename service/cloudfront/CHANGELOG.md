@@ -1,3 +1,8 @@
+# v1.41.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-11-11)
 
 * **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.

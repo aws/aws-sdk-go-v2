@@ -3,11 +3,11 @@ module github.com/aws/aws-sdk-go-v2/service/dynamodb
 go 1.21
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.32.4
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.23
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.23
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.0
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.10.4
+	github.com/aws/aws-sdk-go-v2 v1.32.5
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.24
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.24
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.1
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.10.5
 	github.com/aws/smithy-go v1.22.1
 	github.com/jmespath/go-jmespath v0.4.0
 )

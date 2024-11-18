@@ -1,3 +1,8 @@
+# v1.33.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2024-11-11)
 
 * **Feature**: Adds support for filePath filter.

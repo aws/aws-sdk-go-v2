@@ -1,8 +1,0 @@
-{
-    "id": "89205385-0d0d-4fc1-b7f5-adb6135db056",
-    "type": "feature",
-    "description": "This release introduces MessageTemplate as a resource in Amazon Q in Connect, along with APIs to create, read, search, update, and delete MessageTemplate resources.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

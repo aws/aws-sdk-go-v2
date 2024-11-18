@@ -1,3 +1,8 @@
+# v1.14.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2024-11-14)
 
 * **Feature**: New and updated API operations to support License Included User-based Subscription of Microsoft Remote Desktop Services (RDS).

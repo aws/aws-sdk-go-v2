@@ -1,3 +1,9 @@
+# v1.190.0 (2024-11-18)
+
+* **Feature**: Adding request and response elements for managed resources.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.189.0 (2024-11-15.2)
 
 * **Feature**: Remove non-functional enum variants for FleetCapacityReservationUsageStrategy

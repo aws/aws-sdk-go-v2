@@ -1,3 +1,9 @@
+# v1.50.0 (2024-11-18)
+
+* **Feature**: This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.2 (2024-11-07)
 
 * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses

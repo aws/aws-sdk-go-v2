@@ -1,3 +1,9 @@
+# v1.90.0 (2024-11-18)
+
+* **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.89.2 (2024-11-12)
 
 * **Documentation**: Updates Amazon RDS documentation for Amazon RDS Extended Support for Amazon Aurora MySQL.

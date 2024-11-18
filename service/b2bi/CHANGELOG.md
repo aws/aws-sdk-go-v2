@@ -1,3 +1,8 @@
+# v1.0.0-preview.53 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.52 (2024-11-13)
 
 * **Feature**: This release adds a GenerateMapping API to allow generation of JSONata or XSLT transformer code based on input and output samples.

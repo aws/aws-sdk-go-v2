@@ -1,3 +1,33 @@
+# Release (2024-11-18)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.36.0](service/appconfig/CHANGELOG.md#v1360-2024-11-18)
+  * **Feature**: AWS AppConfig has added a new extension action point, AT_DEPLOYMENT_TICK, to support third-party monitors to trigger an automatic rollback during a deployment.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.49.0](service/autoscaling/CHANGELOG.md#v1490-2024-11-18)
+  * **Feature**: Amazon EC2 Auto Scaling now supports Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift to help you quickly recover an impaired application from failures in an Availability Zone (AZ).
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.56.0](service/cloudformation/CHANGELOG.md#v1560-2024-11-18)
+  * **Feature**: This release adds a new API, ListHookResults, that allows retrieving CloudFormation Hooks invocation results for hooks invoked during a create change set operation or Cloud Control API operation
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.116.0](service/connect/CHANGELOG.md#v11160-2024-11-18)
+  * **Feature**: Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.43.0](service/customerprofiles/CHANGELOG.md#v1430-2024-11-18)
+  * **Feature**: This release introduces Segmentation APIs and new Calculated Attribute Event Filters as part of Amazon Connect Customer Profiles service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.190.0](service/ec2/CHANGELOG.md#v11900-2024-11-18)
+  * **Feature**: Adding request and response elements for managed resources.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.50.0](service/ecs/CHANGELOG.md#v1500-2024-11-18)
+  * **Feature**: This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.44.0](service/iotsitewise/CHANGELOG.md#v1440-2024-11-18)
+  * **Feature**: The release introduces a generative AI Assistant in AWS IoT SiteWise. It includes: 1) InvokeAssistant API - Invoke the Assistant to get alarm summaries and ask questions. 2) Dataset APIs - Manage knowledge base configuration for the Assistant. 3) Portal APIs enhancement - Manage AI-aware dashboards.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.13.0](service/qconnect/CHANGELOG.md#v1130-2024-11-18)
+  * **Feature**: This release introduces MessageTemplate as a resource in Amazon Q in Connect, along with APIs to create, read, search, update, and delete MessageTemplate resources.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.90.0](service/rds/CHANGELOG.md#v1900-2024-11-18)
+  * **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.26.0](service/rdsdata/CHANGELOG.md#v1260-2024-11-18)
+  * **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+
 # Release (2024-11-15.2)
 
 ## Module Highlights
