@@ -83,6 +83,9 @@ type CreateContactFlowOutput struct {
 	// The identifier of the flow.
 	ContactFlowId *string
 
+	// Indicates the checksum value of the flow content.
+	FlowContentSha256 *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

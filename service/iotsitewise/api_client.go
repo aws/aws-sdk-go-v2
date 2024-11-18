@@ -242,6 +242,8 @@ func (c *Client) invokeOperation(
 		fn(&options)
 	}
 
+	setSafeEventStreamClientLogMode(&options, opID)
+
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)

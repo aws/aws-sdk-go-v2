@@ -10905,6 +10905,11 @@ func awsAwsjson11_deserializeDocumentDeployment(v **types.Deployment, value inte
 				return err
 			}
 
+		case "vpcLatticeConfigurations":
+			if err := awsAwsjson11_deserializeDocumentVpcLatticeConfigurations(&sv.VpcLatticeConfigurations, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17026,6 +17031,11 @@ func awsAwsjson11_deserializeDocumentServiceRevision(v **types.ServiceRevision, 
 				return err
 			}
 
+		case "vpcLatticeConfigurations":
+			if err := awsAwsjson11_deserializeDocumentVpcLatticeConfigurations(&sv.VpcLatticeConfigurations, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19607,6 +19617,98 @@ func awsAwsjson11_deserializeDocumentVolumeList(v *[]types.Volume, value interfa
 		var col types.Volume
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentVolume(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVpcLatticeConfiguration(v **types.VpcLatticeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcLatticeConfiguration
+	if *v == nil {
+		sv = &types.VpcLatticeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "portName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PortName = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "targetGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TargetGroupArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVpcLatticeConfigurations(v *[]types.VpcLatticeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VpcLatticeConfiguration
+	if *v == nil {
+		cv = []types.VpcLatticeConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VpcLatticeConfiguration
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVpcLatticeConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

@@ -65,6 +65,30 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// Object that segments on Customer Profile's address object.
+type AddressDimension struct {
+
+	// The city belonging to the address.
+	City *ProfileDimension
+
+	// The country belonging to the address.
+	Country *ProfileDimension
+
+	// The county belonging to the address.
+	County *ProfileDimension
+
+	// The postal code belonging to the address.
+	PostalCode *ProfileDimension
+
+	// The province belonging to the address.
+	Province *ProfileDimension
+
+	// The state belonging to the address.
+	State *ProfileDimension
+
+	noSmithyDocumentSerde
+}
+
 // Details for workflow of type APPFLOW_INTEGRATION .
 type AppflowIntegration struct {
 
@@ -193,6 +217,22 @@ type AttributeDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Object that segments on various Customer Profile's fields.
+type AttributeDimension struct {
+
+	// The action to segment with.
+	//
+	// This member is required.
+	DimensionType AttributeDimensionType
+
+	// The values to apply the DimensionType on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a single attribute item specified in the mathematical expression.
 type AttributeItem struct {
 
@@ -269,6 +309,15 @@ type AttributeTypesSelector struct {
 	noSmithyDocumentSerde
 }
 
+// List containing the values for the given attribute.
+type AttributeValueItem struct {
+
+	// An individual value belonging to the given attribute.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for how to perform the auto-merging of profiles.
 type AutoMerging struct {
 
@@ -310,6 +359,99 @@ type Batch struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Error object describing why a specific profile and calculated attribute failed.
+type BatchGetCalculatedAttributeForProfileError struct {
+
+	// Status code for why a specific profile and calculated attribute failed.
+	//
+	// This member is required.
+	Code *string
+
+	// Message describing why a specific profile and calculated attribute failed.
+	//
+	// This member is required.
+	Message *string
+
+	// The profile id that failed.
+	//
+	// This member is required.
+	ProfileId *string
+
+	noSmithyDocumentSerde
+}
+
+// Error object describing why a specific profile failed.
+type BatchGetProfileError struct {
+
+	// Status code for why a specific profile failed.
+	//
+	// This member is required.
+	Code *string
+
+	// Message describing why a specific profile failed.
+	//
+	// This member is required.
+	Message *string
+
+	// The profile id that failed.
+	//
+	// This member is required.
+	ProfileId *string
+
+	noSmithyDocumentSerde
+}
+
+// Object that segments on Customer Profile's Calculated Attributes.
+type CalculatedAttributeDimension struct {
+
+	// The action to segment with.
+	//
+	// This member is required.
+	DimensionType AttributeDimensionType
+
+	// The values to apply the DimensionType with.
+	//
+	// This member is required.
+	Values []string
+
+	// Applies the given condition over the initial Calculated Attribute's definition.
+	ConditionOverrides *ConditionOverrides
+
+	noSmithyDocumentSerde
+}
+
+// The object containing the values of a single calculated attribute value.
+type CalculatedAttributeValue struct {
+
+	// The unique name of the calculated attribute.
+	CalculatedAttributeName *string
+
+	// The display name of the calculated attribute.
+	DisplayName *string
+
+	// Indicates whether the calculated attribute's value is based on partial data. If
+	// the data is partial, it is set to true.
+	IsDataPartial *string
+
+	// The profile id belonging to this calculated attribute value.
+	ProfileId *string
+
+	// The value of the calculated attribute.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An object to override the original condition block of a calculated attribute.
+type ConditionOverrides struct {
+
+	// The relative time period over which data is included in the aggregation for
+	// this override.
+	Range *RangeOverride
 
 	noSmithyDocumentSerde
 }
@@ -386,6 +528,22 @@ type Consolidation struct {
 	noSmithyDocumentSerde
 }
 
+// Object that segments on various Customer Profile's date fields.
+type DateDimension struct {
+
+	// The action to segment with.
+	//
+	// This member is required.
+	DimensionType DateDimensionType
+
+	// The values to apply the DimensionType on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about the Kinesis data stream
 type DestinationSummary struct {
 
@@ -420,6 +578,34 @@ type DetectedProfileObjectType struct {
 
 	noSmithyDocumentSerde
 }
+
+// Object that holds what profile and calculated attributes to segment on.
+//
+// The following types satisfy this interface:
+//
+//	DimensionMemberCalculatedAttributes
+//	DimensionMemberProfileAttributes
+type Dimension interface {
+	isDimension()
+}
+
+// Object that holds the calculated attributes to segment on.
+type DimensionMemberCalculatedAttributes struct {
+	Value map[string]CalculatedAttributeDimension
+
+	noSmithyDocumentSerde
+}
+
+func (*DimensionMemberCalculatedAttributes) isDimension() {}
+
+// Object that holds the profile attributes to segment on.
+type DimensionMemberProfileAttributes struct {
+	Value ProfileAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*DimensionMemberProfileAttributes) isDimension() {}
 
 // Usage-specific statistics about the domain.
 type DomainStats struct {
@@ -527,6 +713,23 @@ type ExportingLocation struct {
 	noSmithyDocumentSerde
 }
 
+// Object that segments on various Customer profile's fields that are larger than
+// normal.
+type ExtraLengthValueProfileDimension struct {
+
+	// The action to segment with.
+	//
+	// This member is required.
+	DimensionType StringDimensionType
+
+	// The values to apply the DimensionType on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // A duplicate customer profile that is to be merged into a main profile.
 type FieldSourceProfileIds struct {
 
@@ -596,6 +799,67 @@ type FieldSourceProfileIds struct {
 	noSmithyDocumentSerde
 }
 
+// Defines how to filter the objects coming in for calculated attributes.
+type Filter struct {
+
+	// Holds the list of Filter groups within the Filter definition.
+	//
+	// This member is required.
+	Groups []FilterGroup
+
+	// Define whether to include or exclude objects for Calculated Attributed
+	// calculation that fit the filter groups criteria.
+	//
+	// This member is required.
+	Include Include
+
+	noSmithyDocumentSerde
+}
+
+// Object that defines how to filter the incoming objects for the calculated
+// attribute.
+type FilterAttributeDimension struct {
+
+	// The action to filter with.
+	//
+	// This member is required.
+	DimensionType FilterDimensionType
+
+	// The values to apply the DimensionType on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the map of attribute names to attribute dimensions.
+type FilterDimension struct {
+
+	// Is the attribute within the FilterDimension map
+	//
+	// This member is required.
+	Attributes map[string]FilterAttributeDimension
+
+	noSmithyDocumentSerde
+}
+
+// Object that holds the dimensions to filter on.
+type FilterGroup struct {
+
+	// Object that holds the attributes to filter on.
+	//
+	// This member is required.
+	Dimensions []FilterDimension
+
+	// The type of logical relationship between the dimensions of the Filter group.
+	//
+	// This member is required.
+	Type Type
+
+	noSmithyDocumentSerde
+}
+
 // The configurations that control how Customer Profiles retrieves data from the
 // source, Amazon AppFlow. Customer Profiles uses this information to create an
 // AppFlow flow on behalf of customers.
@@ -647,6 +911,24 @@ type FoundByKeyValue struct {
 
 	// A list of key values.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains dimensions that determine what to segment on.
+type Group struct {
+
+	// Defines the attributes to segment on.
+	Dimensions []Dimension
+
+	// Defines the starting source of data.
+	SourceSegments []SourceSegment
+
+	// Defines how to interact with the source data.
+	SourceType IncludeOptions
+
+	// Defines how to interact with the profiles found in the current filtering.
+	Type IncludeOptions
 
 	noSmithyDocumentSerde
 }
@@ -868,6 +1150,22 @@ type ListIntegrationItem struct {
 
 	// Unique identifier for the workflow.
 	WorkflowId *string
+
+	noSmithyDocumentSerde
+}
+
+// Item that contains the attribute and when it was last updated.
+type ListObjectTypeAttributeItem struct {
+
+	// Name of the attribute.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// When the attribute was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1259,6 +1557,129 @@ type Profile struct {
 	noSmithyDocumentSerde
 }
 
+// The object used to segment on attributes within the customer profile.
+type ProfileAttributes struct {
+
+	// A field to describe values to segment on within account number.
+	AccountNumber *ProfileDimension
+
+	// A field to describe values to segment on within additional information.
+	AdditionalInformation *ExtraLengthValueProfileDimension
+
+	// A field to describe values to segment on within address.
+	Address *AddressDimension
+
+	// A field to describe values to segment on within attributes.
+	Attributes map[string]AttributeDimension
+
+	// A field to describe values to segment on within billing address.
+	BillingAddress *AddressDimension
+
+	// A field to describe values to segment on within birthDate.
+	BirthDate *DateDimension
+
+	// A field to describe values to segment on within business email address.
+	BusinessEmailAddress *ProfileDimension
+
+	// A field to describe values to segment on within business name.
+	BusinessName *ProfileDimension
+
+	// A field to describe values to segment on within business phone number.
+	BusinessPhoneNumber *ProfileDimension
+
+	// A field to describe values to segment on within email address.
+	EmailAddress *ProfileDimension
+
+	// A field to describe values to segment on within first name.
+	FirstName *ProfileDimension
+
+	// A field to describe values to segment on within genderString.
+	GenderString *ProfileDimension
+
+	// A field to describe values to segment on within home phone number.
+	HomePhoneNumber *ProfileDimension
+
+	// A field to describe values to segment on within last name.
+	LastName *ProfileDimension
+
+	// A field to describe values to segment on within mailing address.
+	MailingAddress *AddressDimension
+
+	// A field to describe values to segment on within middle name.
+	MiddleName *ProfileDimension
+
+	// A field to describe values to segment on within mobile phone number.
+	MobilePhoneNumber *ProfileDimension
+
+	// A field to describe values to segment on within partyTypeString.
+	PartyTypeString *ProfileDimension
+
+	// A field to describe values to segment on within personal email address.
+	PersonalEmailAddress *ProfileDimension
+
+	// A field to describe values to segment on within phone number.
+	PhoneNumber *ProfileDimension
+
+	// A field to describe values to segment on within shipping address.
+	ShippingAddress *AddressDimension
+
+	noSmithyDocumentSerde
+}
+
+// Object to hold the dimensions of a profile's fields to segment on.
+type ProfileDimension struct {
+
+	// The action to segment on.
+	//
+	// This member is required.
+	DimensionType StringDimensionType
+
+	// The values to apply the DimensionType on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Object that holds failures for membership.
+type ProfileQueryFailures struct {
+
+	// A message describing the failure.
+	//
+	// This member is required.
+	Message *string
+
+	// The profile id the failure belongs to.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The status describing the failure.
+	Status *int32
+
+	noSmithyDocumentSerde
+}
+
+// Object that holds the results for membership.
+type ProfileQueryResult struct {
+
+	// The profile id the result belongs to.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// Describes whether the profile was absent or present in the segment.
+	//
+	// This member is required.
+	QueryResult QueryResult
+
+	// The standard profile of a customer.
+	Profile *Profile
+
+	noSmithyDocumentSerde
+}
+
 // The relative time period over which data is included in the aggregation.
 type Range struct {
 
@@ -1271,6 +1692,25 @@ type Range struct {
 	//
 	// This member is required.
 	Value *int32
+
+	noSmithyDocumentSerde
+}
+
+// Overrides the original range on a calculated attribute definition.
+type RangeOverride struct {
+
+	// The start time of when to include objects.
+	//
+	// This member is required.
+	Start *int32
+
+	// The unit for start and end.
+	//
+	// This member is required.
+	Unit RangeUnit
+
+	// The end time of when to include objects.
+	End int32
 
 	noSmithyDocumentSerde
 }
@@ -1471,6 +1911,55 @@ type ScheduledTriggerProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Object holding the segment definition fields.
+type SegmentDefinitionItem struct {
+
+	// When the segment definition was created.
+	CreatedAt *time.Time
+
+	// The description of the segment definition.
+	Description *string
+
+	// Display name of the segment definition.
+	DisplayName *string
+
+	// The arn of the segment definition.
+	SegmentDefinitionArn *string
+
+	// Name of the segment definition.
+	SegmentDefinitionName *string
+
+	// The tags belonging to the segment definition.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains all groups of the segment definition.
+type SegmentGroup struct {
+
+	// Holds the list of groups within the segment definition.
+	Groups []Group
+
+	// Defines whether to include or exclude the profiles that fit the segment
+	// criteria.
+	Include IncludeOptions
+
+	noSmithyDocumentSerde
+}
+
+// Contains all groups of the segment definition.
+type SegmentGroupStructure struct {
+
+	// Holds the list of groups within the segment definition.
+	Groups []Group
+
+	// Define whether to include or exclude the profiles that fit the segment criteria.
+	Include IncludeOptions
+
+	noSmithyDocumentSerde
+}
+
 // The properties that are applied when ServiceNow is being used as a source.
 type ServiceNowSourceProperties struct {
 
@@ -1528,6 +2017,15 @@ type SourceFlowConfig struct {
 	// configuration is provided, the fields specified in the configuration are used
 	// when querying for the incremental data pull.
 	IncrementalPullConfig *IncrementalPullConfig
+
+	noSmithyDocumentSerde
+}
+
+// The source segments to build off of.
+type SourceSegment struct {
+
+	// The unique name of the segment definition.
+	SegmentDefinitionName *string
 
 	noSmithyDocumentSerde
 }
@@ -1678,3 +2176,14 @@ type ZendeskSourceProperties struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDimension() {}

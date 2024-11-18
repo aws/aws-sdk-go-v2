@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Information about an agent.
+type AgentAttributes struct {
+
+	// The agent’s first name as entered in their Amazon Connect user account.
+	FirstName *string
+
+	// The agent’s last name as entered in their Amazon Connect user account.
+	LastName *string
+
+	noSmithyDocumentSerde
+}
+
 // A typed union that specifies the configuration based on the type of AI Agent.
 //
 // The following types satisfy this interface:
@@ -1165,6 +1177,188 @@ type ContentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The customer profile attributes that are used with the message template.
+type CustomerProfileAttributes struct {
+
+	// A unique account number that you have given to the customer.
+	AccountNumber *string
+
+	// Any additional information relevant to the customer's profile.
+	AdditionalInformation *string
+
+	// The first line of a customer address.
+	Address1 *string
+
+	// The second line of a customer address.
+	Address2 *string
+
+	// The third line of a customer address.
+	Address3 *string
+
+	// The fourth line of a customer address.
+	Address4 *string
+
+	// The first line of a customer’s billing address.
+	BillingAddress1 *string
+
+	// The second line of a customer’s billing address.
+	BillingAddress2 *string
+
+	// The third line of a customer’s billing address.
+	BillingAddress3 *string
+
+	// The fourth line of a customer’s billing address.
+	BillingAddress4 *string
+
+	// The city of a customer’s billing address.
+	BillingCity *string
+
+	// The country of a customer’s billing address.
+	BillingCountry *string
+
+	// The county of a customer’s billing address.
+	BillingCounty *string
+
+	// The postal code of a customer’s billing address.
+	BillingPostalCode *string
+
+	// The province of a customer’s billing address.
+	BillingProvince *string
+
+	// The state of a customer’s billing address.
+	BillingState *string
+
+	// The customer's birth date.
+	BirthDate *string
+
+	// The customer's business email address.
+	BusinessEmailAddress *string
+
+	// The name of the customer's business.
+	BusinessName *string
+
+	// The customer's business phone number.
+	BusinessPhoneNumber *string
+
+	// The city in which a customer lives.
+	City *string
+
+	// The country in which a customer lives.
+	Country *string
+
+	// The county in which a customer lives.
+	County *string
+
+	// The custom attributes in customer profile attributes.
+	Custom map[string]string
+
+	// The customer's email address, which has not been specified as a personal or
+	// business address.
+	EmailAddress *string
+
+	// The customer's first name.
+	FirstName *string
+
+	// The customer's gender.
+	Gender *string
+
+	// The customer's mobile phone number.
+	HomePhoneNumber *string
+
+	// The customer's last name.
+	LastName *string
+
+	// The first line of a customer’s mailing address.
+	MailingAddress1 *string
+
+	// The second line of a customer’s mailing address.
+	MailingAddress2 *string
+
+	// The third line of a customer’s mailing address.
+	MailingAddress3 *string
+
+	// The fourth line of a customer’s mailing address.
+	MailingAddress4 *string
+
+	// The city of a customer’s mailing address.
+	MailingCity *string
+
+	// The country of a customer’s mailing address.
+	MailingCountry *string
+
+	// The county of a customer’s mailing address.
+	MailingCounty *string
+
+	// The postal code of a customer’s mailing address.
+	MailingPostalCode *string
+
+	// The province of a customer’s mailing address.
+	MailingProvince *string
+
+	// The state of a customer’s mailing address.
+	MailingState *string
+
+	// The customer's middle name.
+	MiddleName *string
+
+	// The customer's mobile phone number.
+	MobilePhoneNumber *string
+
+	// The customer's party type.
+	PartyType *string
+
+	// The customer's phone number, which has not been specified as a mobile, home, or
+	// business number.
+	PhoneNumber *string
+
+	// The postal code of a customer address.
+	PostalCode *string
+
+	// The ARN of a customer profile.
+	ProfileARN *string
+
+	// The unique identifier of a customer profile.
+	ProfileId *string
+
+	// The province in which a customer lives.
+	Province *string
+
+	// The first line of a customer’s shipping address.
+	ShippingAddress1 *string
+
+	// The second line of a customer’s shipping address.
+	ShippingAddress2 *string
+
+	// The third line of a customer’s shipping address.
+	ShippingAddress3 *string
+
+	// The fourth line of a customer’s shipping address.
+	ShippingAddress4 *string
+
+	// The city of a customer’s shipping address.
+	ShippingCity *string
+
+	// The country of a customer’s shipping address.
+	ShippingCountry *string
+
+	// The county of a customer’s shipping address.
+	ShippingCounty *string
+
+	// The postal code of a customer’s shipping address.
+	ShippingPostalCode *string
+
+	// The province of a customer’s shipping address.
+	ShippingProvince *string
+
+	// The state of a customer’s shipping address.
+	ShippingState *string
+
+	// The state in which a customer lives.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the data.
 //
 // The following types satisfy this interface:
@@ -1282,6 +1476,148 @@ type DocumentText struct {
 
 	// Text in the document.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// The email header to include in email messages.
+type EmailHeader struct {
+
+	// The name of the email header.
+	Name *string
+
+	// The value of the email header.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The content of the message template that applies to the email channel subtype.
+type EmailMessageTemplateContent struct {
+
+	// The body to use in email messages.
+	Body *EmailMessageTemplateContentBody
+
+	// The email headers to include in email messages.
+	Headers []EmailHeader
+
+	// The subject line, or title, to use in email messages.
+	Subject *string
+
+	noSmithyDocumentSerde
+}
+
+// The body to use in email messages.
+type EmailMessageTemplateContentBody struct {
+
+	// The message body, in HTML format, to use in email messages that are based on
+	// the message template. We recommend using HTML format for email clients that
+	// render HTML content. You can include links, formatted text, and more in an HTML
+	// message.
+	Html MessageTemplateBodyContentProvider
+
+	// The message body, in plain text format, to use in email messages that are based
+	// on the message template. We recommend using plain text format for email clients
+	// that don't render HTML content and clients that are connected to high-latency
+	// networks, such as mobile devices.
+	PlainText MessageTemplateBodyContentProvider
+
+	noSmithyDocumentSerde
+}
+
+// The extended data of a message template.
+type ExtendedMessageTemplateData struct {
+
+	// The channel subtype this message template applies to.
+	//
+	// This member is required.
+	ChannelSubtype ChannelSubtype
+
+	// The content of the message template.
+	//
+	// This member is required.
+	Content MessageTemplateContentProvider
+
+	// The timestamp when the message template was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the message
+	// template data.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp when the message template data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the message template.
+	//
+	// This member is required.
+	MessageTemplateArn *string
+
+	// The checksum value of the message template content that is referenced by the
+	// $LATEST qualifier. It can be returned in MessageTemplateData or
+	// ExtendedMessageTemplateData . It’s calculated by content, language,
+	// defaultAttributes and Attachments of the message template.
+	//
+	// This member is required.
+	MessageTemplateContentSha256 *string
+
+	// The identifier of the message template.
+	//
+	// This member is required.
+	MessageTemplateId *string
+
+	// The name of the message template.
+	//
+	// This member is required.
+	Name *string
+
+	// The message template attachments.
+	Attachments []MessageTemplateAttachment
+
+	// The types of attributes contain the message template.
+	AttributeTypes []MessageTemplateAttributeType
+
+	// An object that specifies the default values to use for variables in the message
+	// template. This object contains different categories of key-value pairs. Each key
+	// defines a variable or placeholder in the message template. The corresponding
+	// value defines the default value for that variable.
+	DefaultAttributes *MessageTemplateAttributes
+
+	// The description of the message template.
+	Description *string
+
+	// The configuration information of the grouping of Amazon Q in Connect users.
+	GroupingConfiguration *GroupingConfiguration
+
+	// Whether the version of the message template is activated.
+	IsActive *bool
+
+	// The language code value for the language in which the quick response is
+	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
+	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
+	Language *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The version number of the message template version.
+	VersionNumber *int64
 
 	noSmithyDocumentSerde
 }
@@ -1790,6 +2126,506 @@ type ManualSearchAIAgentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the message template attachment.
+type MessageTemplateAttachment struct {
+
+	// The identifier of the attachment file.
+	//
+	// This member is required.
+	AttachmentId *string
+
+	// The presentation information for the attachment file.
+	//
+	// This member is required.
+	ContentDisposition ContentDisposition
+
+	// The name of the attachment file being uploaded. The name should include the
+	// file extension.
+	//
+	// This member is required.
+	Name *string
+
+	// The timestamp when the attachment file was uploaded.
+	//
+	// This member is required.
+	UploadedTime *time.Time
+
+	// A pre-signed Amazon S3 URL that can be used to download the attachment file.
+	//
+	// This member is required.
+	Url *string
+
+	// The expiration time of the pre-signed Amazon S3 URL.
+	//
+	// This member is required.
+	UrlExpiry *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The attributes that are used with the message template.
+type MessageTemplateAttributes struct {
+
+	// The agent attributes that are used with the message template.
+	AgentAttributes *AgentAttributes
+
+	// The custom attributes that are used with the message template.
+	CustomAttributes map[string]string
+
+	// The customer profile attributes that are used with the message template.
+	CustomerProfileAttributes *CustomerProfileAttributes
+
+	// The system attributes that are used with the message template.
+	SystemAttributes *SystemAttributes
+
+	noSmithyDocumentSerde
+}
+
+// The container of the message template body.
+//
+// The following types satisfy this interface:
+//
+//	MessageTemplateBodyContentProviderMemberContent
+type MessageTemplateBodyContentProvider interface {
+	isMessageTemplateBodyContentProvider()
+}
+
+// The content of the message template.
+type MessageTemplateBodyContentProviderMemberContent struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateBodyContentProviderMemberContent) isMessageTemplateBodyContentProvider() {}
+
+// The container of message template content.
+//
+// The following types satisfy this interface:
+//
+//	MessageTemplateContentProviderMemberEmail
+//	MessageTemplateContentProviderMemberSms
+type MessageTemplateContentProvider interface {
+	isMessageTemplateContentProvider()
+}
+
+// The content of the message template that applies to the email channel subtype.
+type MessageTemplateContentProviderMemberEmail struct {
+	Value EmailMessageTemplateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateContentProviderMemberEmail) isMessageTemplateContentProvider() {}
+
+// The content of the message template that applies to the SMS channel subtype.
+type MessageTemplateContentProviderMemberSms struct {
+	Value SMSMessageTemplateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageTemplateContentProviderMemberSms) isMessageTemplateContentProvider() {}
+
+// The data of a message template.
+type MessageTemplateData struct {
+
+	// The channel subtype this message template applies to.
+	//
+	// This member is required.
+	ChannelSubtype ChannelSubtype
+
+	// The content of the message template.
+	//
+	// This member is required.
+	Content MessageTemplateContentProvider
+
+	// The timestamp when the message template was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the message
+	// template data.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp when the message template data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the message template.
+	//
+	// This member is required.
+	MessageTemplateArn *string
+
+	// The checksum value of the message template content that is referenced by the
+	// $LATEST qualifier. It can be returned in MessageTemplateData or
+	// ExtendedMessageTemplateData . It’s calculated by content, language,
+	// defaultAttributes and Attachments of the message template.
+	//
+	// This member is required.
+	MessageTemplateContentSha256 *string
+
+	// The identifier of the message template.
+	//
+	// This member is required.
+	MessageTemplateId *string
+
+	// The name of the message template.
+	//
+	// This member is required.
+	Name *string
+
+	// The types of attributes that the message template contains.
+	AttributeTypes []MessageTemplateAttributeType
+
+	// An object that specifies the default values to use for variables in the message
+	// template. This object contains different categories of key-value pairs. Each key
+	// defines a variable or placeholder in the message template. The corresponding
+	// value defines the default value for that variable.
+	DefaultAttributes *MessageTemplateAttributes
+
+	// The description of the message template.
+	Description *string
+
+	// The configuration information of the grouping of Amazon Q in Connect users.
+	GroupingConfiguration *GroupingConfiguration
+
+	// The language code value for the language in which the quick response is
+	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
+	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
+	Language *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The message template fields to filter the message template query results by.
+// The following is the list of supported field names:
+//
+//   - name
+//
+//   - description
+//
+//   - channel
+//
+//   - channelSubtype
+//
+//   - language
+//
+//   - qualifier
+//
+//   - createdTime
+//
+//   - lastModifiedTime
+//
+//   - lastModifiedBy
+//
+//   - groupingConfiguration.criteria
+//
+//   - groupingConfiguration.values
+type MessageTemplateFilterField struct {
+
+	// The name of the attribute field to filter the message templates by.
+	//
+	// This member is required.
+	Name *string
+
+	// The operator to use for filtering.
+	//
+	// This member is required.
+	Operator MessageTemplateFilterOperator
+
+	// Whether to treat null value as a match for the attribute field.
+	IncludeNoExistence *bool
+
+	// The values of attribute field to filter the message template by.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The message template fields to order the message template query results by. The
+// following is the list of supported field names:
+//
+//   - name
+//
+//   - description
+//
+//   - channel
+//
+//   - channelSubtype
+//
+//   - language
+//
+//   - qualifier
+//
+//   - createdTime
+//
+//   - lastModifiedTime
+//
+//   - lastModifiedBy
+//
+//   - groupingConfiguration.criteria
+//
+//   - groupingConfiguration.values
+type MessageTemplateOrderField struct {
+
+	// The name of the message template.
+	//
+	// This member is required.
+	Name *string
+
+	// The order at which the message templates are sorted by.
+	Order Order
+
+	noSmithyDocumentSerde
+}
+
+// The message template fields to query message templates by. The following is the
+// list of supported field names:
+//
+//   - name
+//
+//   - description
+type MessageTemplateQueryField struct {
+
+	// The name of the attribute to query the message templates by.
+	//
+	// This member is required.
+	Name *string
+
+	// The operator to use for matching attribute field values in the query.
+	//
+	// This member is required.
+	Operator MessageTemplateQueryOperator
+
+	// The values of the attribute to query the message templates by.
+	//
+	// This member is required.
+	Values []string
+
+	// Whether the query expects only exact matches on the attribute field values. The
+	// results of the query will only include exact matches if this parameter is set to
+	// false.
+	AllowFuzziness *bool
+
+	// The importance of the attribute field when calculating query result relevancy
+	// scores. The value set for this parameter affects the ordering of search results.
+	Priority Priority
+
+	noSmithyDocumentSerde
+}
+
+// The search expression of the message template.
+type MessageTemplateSearchExpression struct {
+
+	// The configuration of filtering rules applied to message template query results.
+	Filters []MessageTemplateFilterField
+
+	// The message template attribute fields on which the query results are ordered.
+	OrderOnField *MessageTemplateOrderField
+
+	// The message template query expressions.
+	Queries []MessageTemplateQueryField
+
+	noSmithyDocumentSerde
+}
+
+// The result of message template search.
+type MessageTemplateSearchResultData struct {
+
+	// The channel subtype this message template applies to.
+	//
+	// This member is required.
+	ChannelSubtype ChannelSubtype
+
+	// The timestamp when the message template was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the message
+	// template data.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp when the message template data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the message template.
+	//
+	// This member is required.
+	MessageTemplateArn *string
+
+	// The identifier of the message template.
+	//
+	// This member is required.
+	MessageTemplateId *string
+
+	// The name of the message template.
+	//
+	// This member is required.
+	Name *string
+
+	// The description of the message template.
+	Description *string
+
+	// The configuration information of the grouping of Amazon Q in Connect users.
+	GroupingConfiguration *GroupingConfiguration
+
+	// Whether the version of the message template is activated.
+	IsActive *bool
+
+	// The language code value for the language in which the quick response is
+	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
+	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
+	Language *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	// The version number of the message template version.
+	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the message template.
+type MessageTemplateSummary struct {
+
+	// The channel subtype this message template applies to.
+	//
+	// This member is required.
+	ChannelSubtype ChannelSubtype
+
+	// The timestamp when the message template was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the message
+	// template data.
+	//
+	// This member is required.
+	LastModifiedBy *string
+
+	// The timestamp when the message template data was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the message template.
+	//
+	// This member is required.
+	MessageTemplateArn *string
+
+	// The identifier of the message template.
+	//
+	// This member is required.
+	MessageTemplateId *string
+
+	// The name of the message template.
+	//
+	// This member is required.
+	Name *string
+
+	// The version number of the message template version that is activated.
+	ActiveVersionNumber *int64
+
+	// The description of the message template.
+	Description *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the message template version.
+type MessageTemplateVersionSummary struct {
+
+	// The channel subtype this message template applies to.
+	//
+	// This member is required.
+	ChannelSubtype ChannelSubtype
+
+	// Whether the version of the message template is activated.
+	//
+	// This member is required.
+	IsActive *bool
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The identifier of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The Amazon Resource Name (ARN) of the message template.
+	//
+	// This member is required.
+	MessageTemplateArn *string
+
+	// The identifier of the message template.
+	//
+	// This member is required.
+	MessageTemplateId *string
+
+	// The name of the message template.
+	//
+	// This member is required.
+	Name *string
+
+	// The version number of the message template version.
+	//
+	// This member is required.
+	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
 // An error occurred when creating a recommendation.
 type NotifyRecommendationsReceivedError struct {
 
@@ -2048,7 +2884,9 @@ type QuickResponseData struct {
 	// Whether the quick response is active.
 	IsActive *bool
 
-	// The language code value for the language in which the quick response is written.
+	// The language code value for the language in which the quick response is
+	// written. The supported language codes include de_DE , en_US , es_ES , fr_FR ,
+	// id_ID , it_IT , ja_JP , ko_KR , pt_BR , zh_CN , zh_TW
 	Language *string
 
 	// The Amazon Resource Name (ARN) of the user who last updated the quick response
@@ -2707,6 +3545,24 @@ type SessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The content of the message template that applies to the SMS channel subtype.
+type SMSMessageTemplateContent struct {
+
+	// The body to use in SMS messages.
+	Body *SMSMessageTemplateContentBody
+
+	noSmithyDocumentSerde
+}
+
+// The body to use in SMS messages.
+type SMSMessageTemplateContentBody struct {
+
+	// The message body to use in SMS messages.
+	PlainText MessageTemplateBodyContentProvider
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information about the external data source.
 //
 // The following types satisfy this interface:
@@ -2762,6 +3618,31 @@ type SourceContentDataDetails struct {
 	// Contains information about where the text with a citation begins and ends in
 	// the generated output.
 	CitationSpan *CitationSpan
+
+	noSmithyDocumentSerde
+}
+
+// The system attributes that are used with the message template.
+type SystemAttributes struct {
+
+	// The CustomerEndpoint attribute.
+	CustomerEndpoint *SystemEndpointAttributes
+
+	// The name of the task.
+	Name *string
+
+	// The SystemEndpoint attribute.
+	SystemEndpoint *SystemEndpointAttributes
+
+	noSmithyDocumentSerde
+}
+
+// The system endpoint attributes that are used with the message template.
+type SystemEndpointAttributes struct {
+
+	// The customer's phone number if used with customerEndpoint , or the number the
+	// customer dialed to call your contact center if used with systemEndpoint .
+	Address *string
 
 	noSmithyDocumentSerde
 }
@@ -2922,23 +3803,25 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAIAgentConfiguration()           {}
-func (*UnknownUnionMember) isAIPromptTemplateConfiguration()  {}
-func (*UnknownUnionMember) isAssistantAssociationInputData()  {}
-func (*UnknownUnionMember) isAssistantAssociationOutputData() {}
-func (*UnknownUnionMember) isAssociationConfigurationData()   {}
-func (*UnknownUnionMember) isConfiguration()                  {}
-func (*UnknownUnionMember) isContentAssociationContents()     {}
-func (*UnknownUnionMember) isContentFeedbackData()            {}
-func (*UnknownUnionMember) isDataDetails()                    {}
-func (*UnknownUnionMember) isDataReference()                  {}
-func (*UnknownUnionMember) isManagedSourceConfiguration()     {}
-func (*UnknownUnionMember) isOrCondition()                    {}
-func (*UnknownUnionMember) isQueryCondition()                 {}
-func (*UnknownUnionMember) isQueryInputData()                 {}
-func (*UnknownUnionMember) isQuickResponseContentProvider()   {}
-func (*UnknownUnionMember) isQuickResponseDataProvider()      {}
-func (*UnknownUnionMember) isRecommendationTriggerData()      {}
-func (*UnknownUnionMember) isRuntimeSessionDataValue()        {}
-func (*UnknownUnionMember) isSourceConfiguration()            {}
-func (*UnknownUnionMember) isTagFilter()                      {}
+func (*UnknownUnionMember) isAIAgentConfiguration()               {}
+func (*UnknownUnionMember) isAIPromptTemplateConfiguration()      {}
+func (*UnknownUnionMember) isAssistantAssociationInputData()      {}
+func (*UnknownUnionMember) isAssistantAssociationOutputData()     {}
+func (*UnknownUnionMember) isAssociationConfigurationData()       {}
+func (*UnknownUnionMember) isConfiguration()                      {}
+func (*UnknownUnionMember) isContentAssociationContents()         {}
+func (*UnknownUnionMember) isContentFeedbackData()                {}
+func (*UnknownUnionMember) isDataDetails()                        {}
+func (*UnknownUnionMember) isDataReference()                      {}
+func (*UnknownUnionMember) isManagedSourceConfiguration()         {}
+func (*UnknownUnionMember) isMessageTemplateBodyContentProvider() {}
+func (*UnknownUnionMember) isMessageTemplateContentProvider()     {}
+func (*UnknownUnionMember) isOrCondition()                        {}
+func (*UnknownUnionMember) isQueryCondition()                     {}
+func (*UnknownUnionMember) isQueryInputData()                     {}
+func (*UnknownUnionMember) isQuickResponseContentProvider()       {}
+func (*UnknownUnionMember) isQuickResponseDataProvider()          {}
+func (*UnknownUnionMember) isRecommendationTriggerData()          {}
+func (*UnknownUnionMember) isRuntimeSessionDataValue()            {}
+func (*UnknownUnionMember) isSourceConfiguration()                {}
+func (*UnknownUnionMember) isTagFilter()                          {}

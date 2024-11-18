@@ -37,6 +37,7 @@ type DeleteDBShardGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details for an Amazon RDS DB shard group.
 type DeleteDBShardGroupOutput struct {
 
 	// Specifies whether to create standby DB shard groups for the DB shard group.

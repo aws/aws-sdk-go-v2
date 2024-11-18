@@ -1050,6 +1050,7 @@ const (
 	IntegrationTypeWisdomAssistant      IntegrationType = "WISDOM_ASSISTANT"
 	IntegrationTypeWisdomKnowledgeBase  IntegrationType = "WISDOM_KNOWLEDGE_BASE"
 	IntegrationTypeWisdomQuickResponses IntegrationType = "WISDOM_QUICK_RESPONSES"
+	IntegrationTypeQMessageTemplates    IntegrationType = "Q_MESSAGE_TEMPLATES"
 	IntegrationTypeCasesDomain          IntegrationType = "CASES_DOMAIN"
 	IntegrationTypeApplication          IntegrationType = "APPLICATION"
 	IntegrationTypeFileScanner          IntegrationType = "FILE_SCANNER"
@@ -1067,6 +1068,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"WISDOM_ASSISTANT",
 		"WISDOM_KNOWLEDGE_BASE",
 		"WISDOM_QUICK_RESPONSES",
+		"Q_MESSAGE_TEMPLATES",
 		"CASES_DOMAIN",
 		"APPLICATION",
 		"FILE_SCANNER",

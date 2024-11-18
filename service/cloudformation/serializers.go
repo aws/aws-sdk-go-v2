@@ -3439,6 +3439,76 @@ func (m *awsAwsquery_serializeOpListGeneratedTemplates) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListHookResults struct {
+}
+
+func (*awsAwsquery_serializeOpListHookResults) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListHookResults) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListHookResultsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListHookResults")
+	body.Key("Version").String("2010-05-15")
+
+	if err := awsAwsquery_serializeOpDocumentListHookResultsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListImports struct {
 }
 
@@ -7774,6 +7844,28 @@ func awsAwsquery_serializeOpDocumentListGeneratedTemplatesInput(v *ListGenerated
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListHookResultsInput(v *ListHookResultsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.TargetId != nil {
+		objectKey := object.Key("TargetId")
+		objectKey.String(*v.TargetId)
+	}
+
+	if len(v.TargetType) > 0 {
+		objectKey := object.Key("TargetType")
+		objectKey.String(string(v.TargetType))
 	}
 
 	return nil

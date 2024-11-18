@@ -1020,8 +1020,21 @@ type ContactFlow struct {
 	// The description of the flow.
 	Description *string
 
+	// Indicates the checksum value of the flow content.
+	FlowContentSha256 *string
+
 	// The identifier of the flow.
 	Id *string
+
+	// Amazon Connect includes a set of default flows that have already been
+	// published. It uses them to power your contact center.
+	IsDefault bool
+
+	// The region in which the contact flow was last modified
+	LastModifiedRegion *string
+
+	// The time at which the contact flow was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the flow.
 	Name *string
@@ -1041,6 +1054,12 @@ type ContactFlow struct {
 	//
 	// [Choose a flow type]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
 	Type ContactFlowType
+
+	// The identifier of the flow version.
+	Version *int64
+
+	// The description of the flow version.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -1187,6 +1206,21 @@ type ContactFlowSummary struct {
 
 	// The name of the flow.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a contact flow version's metadata.
+type ContactFlowVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the view version.
+	Arn *string
+
+	// The identifier of the flow version.
+	Version *int64
+
+	// The description of the flow version.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }

@@ -80,6 +80,16 @@ type UpdatePortalInput struct {
 	//   - The ID of an existing image. Choose this option to keep an existing image.
 	PortalLogoImage *types.Image
 
+	// Define the type of portal. The value for IoT SiteWise Monitor (Classic) is
+	// SITEWISE_PORTAL_V1 . The value for IoT SiteWise Monitor (AI-aware) is
+	// SITEWISE_PORTAL_V2 .
+	PortalType types.PortalType
+
+	// The configuration entry associated with the specific portal type. The value for
+	// IoT SiteWise Monitor (Classic) is SITEWISE_PORTAL_V1 . The value for IoT
+	// SiteWise Monitor (AI-aware) is SITEWISE_PORTAL_V2 .
+	PortalTypeConfiguration map[string]types.PortalTypeEntry
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "3e30f724-9a4c-4048-96da-65a1ff7e102c",
+    "type": "feature",
+    "description": "Adding request and response elements for managed resources.",
+    "modules": [
+        "service/ec2"
+    ]
+}

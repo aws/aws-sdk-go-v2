@@ -4679,6 +4679,23 @@ func awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v *types.Availabi
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAvailabilityZoneImpairmentPolicy(v *types.AvailabilityZoneImpairmentPolicy, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.ImpairedZoneHealthCheckBehavior) > 0 {
+		objectKey := object.Key("ImpairedZoneHealthCheckBehavior")
+		objectKey.String(string(v.ImpairedZoneHealthCheckBehavior))
+	}
+
+	if v.ZonalShiftEnabled != nil {
+		objectKey := object.Key("ZonalShiftEnabled")
+		objectKey.Boolean(*v.ZonalShiftEnabled)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -6468,6 +6485,11 @@ func awsAwsquery_serializeOpDocumentAttachTrafficSourcesInput(v *AttachTrafficSo
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.SkipZonalShiftValidation != nil {
+		objectKey := object.Key("SkipZonalShiftValidation")
+		objectKey.Boolean(*v.SkipZonalShiftValidation)
+	}
+
 	if v.TrafficSources != nil {
 		objectKey := object.Key("TrafficSources")
 		if err := awsAwsquery_serializeDocumentTrafficSources(v.TrafficSources, objectKey); err != nil {
@@ -6572,6 +6594,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.AvailabilityZoneDistribution != nil {
 		objectKey := object.Key("AvailabilityZoneDistribution")
 		if err := awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v.AvailabilityZoneDistribution, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.AvailabilityZoneImpairmentPolicy != nil {
+		objectKey := object.Key("AvailabilityZoneImpairmentPolicy")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneImpairmentPolicy(v.AvailabilityZoneImpairmentPolicy, objectKey); err != nil {
 			return err
 		}
 	}
@@ -6696,6 +6725,11 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.ServiceLinkedRoleARN != nil {
 		objectKey := object.Key("ServiceLinkedRoleARN")
 		objectKey.String(*v.ServiceLinkedRoleARN)
+	}
+
+	if v.SkipZonalShiftValidation != nil {
+		objectKey := object.Key("SkipZonalShiftValidation")
+		objectKey.Boolean(*v.SkipZonalShiftValidation)
 	}
 
 	if v.Tags != nil {
@@ -8071,6 +8105,13 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 		}
 	}
 
+	if v.AvailabilityZoneImpairmentPolicy != nil {
+		objectKey := object.Key("AvailabilityZoneImpairmentPolicy")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneImpairmentPolicy(v.AvailabilityZoneImpairmentPolicy, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityZones != nil {
 		objectKey := object.Key("AvailabilityZones")
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
@@ -8172,6 +8213,11 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.ServiceLinkedRoleARN != nil {
 		objectKey := object.Key("ServiceLinkedRoleARN")
 		objectKey.String(*v.ServiceLinkedRoleARN)
+	}
+
+	if v.SkipZonalShiftValidation != nil {
+		objectKey := object.Key("SkipZonalShiftValidation")
+		objectKey.Boolean(*v.SkipZonalShiftValidation)
 	}
 
 	if v.TerminationPolicies != nil {

@@ -81,6 +81,9 @@ type UpdateAutoScalingGroupInput struct {
 	//  The instance capacity distribution across Availability Zones.
 	AvailabilityZoneDistribution *types.AvailabilityZoneDistribution
 
+	//  The policy for Availability Zone impairment.
+	AvailabilityZoneImpairmentPolicy *types.AvailabilityZoneImpairmentPolicy
+
 	// One or more Availability Zones for the group.
 	AvailabilityZones []string
 
@@ -230,6 +233,14 @@ type UpdateAutoScalingGroupInput struct {
 	//
 	// [Service-linked roles]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
 	ServiceLinkedRoleARN *string
+
+	//  If you enable zonal shift with cross-zone disabled load balancers, capacity
+	// could become imbalanced across Availability Zones. To skip the validation,
+	// specify true . For more information, see [Auto Scaling group zonal shift] in the Amazon EC2 Auto Scaling User
+	// Guide.
+	//
+	// [Auto Scaling group zonal shift]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+	SkipZonalShiftValidation *bool
 
 	// A policy or a list of policies that are used to select the instances to
 	// terminate. The policies are executed in the order that you list them. For more

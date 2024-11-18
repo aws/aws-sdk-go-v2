@@ -158,6 +158,26 @@ func (CpuManufacturer) Values() []CpuManufacturer {
 	}
 }
 
+type ImpairedZoneHealthCheckBehavior string
+
+// Enum values for ImpairedZoneHealthCheckBehavior
+const (
+	ImpairedZoneHealthCheckBehaviorReplaceUnhealthy ImpairedZoneHealthCheckBehavior = "ReplaceUnhealthy"
+	ImpairedZoneHealthCheckBehaviorIgnoreUnhealthy  ImpairedZoneHealthCheckBehavior = "IgnoreUnhealthy"
+)
+
+// Values returns all known values for ImpairedZoneHealthCheckBehavior. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImpairedZoneHealthCheckBehavior) Values() []ImpairedZoneHealthCheckBehavior {
+	return []ImpairedZoneHealthCheckBehavior{
+		"ReplaceUnhealthy",
+		"IgnoreUnhealthy",
+	}
+}
+
 type InstanceGeneration string
 
 // Enum values for InstanceGeneration

@@ -1,0 +1,8 @@
+{
+    "id": "e68b6199-b86e-402c-a9c0-664d4dfb2edb",
+    "type": "feature",
+    "description": "This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.",
+    "modules": [
+        "service/ecs"
+    ]
+}

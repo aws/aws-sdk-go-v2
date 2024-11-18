@@ -3501,6 +3501,9 @@ type EbsInstanceBlockDevice struct {
 	// Indicates whether the volume is deleted on instance termination.
 	DeleteOnTermination *bool
 
+	// The entity that manages the EBS volume.
+	Operator *OperatorResponse
+
 	// The attachment state.
 	Status AttachmentStatus
 
@@ -6372,6 +6375,9 @@ type Instance struct {
 	// The network interfaces for the instance.
 	NetworkInterfaces []InstanceNetworkInterface
 
+	// The entity that manages the instance.
+	Operator *OperatorResponse
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -6784,6 +6790,9 @@ type InstanceImageMetadata struct {
 	// The time the instance was launched.
 	LaunchTime *time.Time
 
+	// The entity that manages the instance.
+	Operator *OperatorResponse
+
 	// The ID of the Amazon Web Services account that owns the instance.
 	OwnerId *string
 
@@ -7062,6 +7071,9 @@ type InstanceNetworkInterface struct {
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
+
+	// The entity that manages the network interface.
+	Operator *OperatorResponse
 
 	// The ID of the Amazon Web Services account that created the network interface.
 	OwnerId *string
@@ -8123,6 +8135,9 @@ type InstanceStatus struct {
 	// Reports impaired functionality that stems from issues internal to the instance,
 	// such as impaired reachability.
 	InstanceStatus *InstanceStatusSummary
+
+	// The entity that manages the instance.
+	Operator *OperatorResponse
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
@@ -9750,6 +9765,9 @@ type LaunchTemplate struct {
 	// The name of the launch template.
 	LaunchTemplateName *string
 
+	// The entity that manages the launch template.
+	Operator *OperatorResponse
+
 	// The tags for the launch template.
 	Tags []Tag
 
@@ -10891,6 +10909,9 @@ type LaunchTemplateVersion struct {
 
 	// The name of the launch template.
 	LaunchTemplateName *string
+
+	// The entity that manages the launch template.
+	Operator *OperatorResponse
 
 	// The description for the version.
 	VersionDescription *string
@@ -12321,6 +12342,9 @@ type NetworkInterface struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
+	// The entity that manages the network interface.
+	Operator *OperatorResponse
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -12753,6 +12777,29 @@ type OnDemandOptionsRequest struct {
 	//
 	// Supported only for fleets of type instant .
 	SingleInstanceType *bool
+
+	noSmithyDocumentSerde
+}
+
+// The entity that manages the resource.
+type OperatorRequest struct {
+
+	// The entity that manages the resource.
+	Principal *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether the resource is managed by an entity and, if so, describes
+// the entity that manages it.
+type OperatorResponse struct {
+
+	// If true , the resource is managed by an entity.
+	Managed *bool
+
+	// If managed is true , then the principal is returned. The principal is the entity
+	// that manages the resource.
+	Principal *string
 
 	noSmithyDocumentSerde
 }
@@ -14065,6 +14112,9 @@ type RequestLaunchTemplateData struct {
 	// The network interfaces for the instance.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
+	// The entity that manages the launch template.
+	Operator *OperatorRequest
+
 	// The placement for the instance.
 	Placement *LaunchTemplatePlacementRequest
 
@@ -14701,6 +14751,9 @@ type ResponseLaunchTemplateData struct {
 
 	// The network interfaces.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecification
+
+	// The entity that manages the launch template.
+	Operator *OperatorResponse
 
 	// The placement of the instance.
 	Placement *LaunchTemplatePlacement
@@ -19624,6 +19677,9 @@ type Volume struct {
 
 	// Indicates whether Amazon EBS Multi-Attach is enabled.
 	MultiAttachEnabled *bool
+
+	// The entity that manages the volume.
+	Operator *OperatorResponse
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string

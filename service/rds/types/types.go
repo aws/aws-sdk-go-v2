@@ -1490,6 +1490,14 @@ type DBEngineVersion struct {
 	// The major engine version of the CEV.
 	MajorEngineVersion *string
 
+	// Specifies any Aurora Serverless v2 properties or limits that differ between
+	// Aurora engine versions. You can test the values of this attribute when deciding
+	// which Aurora version to use in a new or upgraded DB cluster. You can also
+	// retrieve the version of an existing DB cluster and check whether that version
+	// supports certain Aurora Serverless v2 features before you attempt to use those
+	// features.
+	ServerlessV2FeaturesSupport *ServerlessV2FeaturesSupport
+
 	// The status of the DB engine version, either available or deprecated .
 	Status *string
 
@@ -2671,6 +2679,7 @@ type DBSecurityGroupMembership struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details for an Amazon RDS DB shard group.
 type DBShardGroup struct {
 
 	// Specifies whether to create standby DB shard groups for the DB shard group.
@@ -4873,6 +4882,26 @@ type ScalingConfigurationInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies any Aurora Serverless v2 properties or limits that differ between
+// Aurora engine versions. You can test the values of this attribute when deciding
+// which Aurora version to use in a new or upgraded DB cluster. You can also
+// retrieve the version of an existing DB cluster and check whether that version
+// supports certain Aurora Serverless v2 features before you attempt to use those
+// features.
+type ServerlessV2FeaturesSupport struct {
+
+	//  Specifies the upper Aurora Serverless v2 capacity limit for a particular
+	// engine version. Depending on the engine version, the maximum capacity for an
+	// Aurora Serverless v2 cluster might be 256 or 128 .
+	MaxCapacity *float64
+
+	// If the minimum capacity is 0 ACUs, the engine version supports the automatic
+	// pause/resume feature of Aurora Serverless v2.
+	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
 // Contains the scaling configuration of an Aurora Serverless v2 DB cluster.
 //
 // For more information, see [Using Amazon Aurora Serverless v2] in the Amazon Aurora User Guide.
@@ -4882,15 +4911,24 @@ type ServerlessV2ScalingConfiguration struct {
 
 	// The maximum number of Aurora capacity units (ACUs) for a DB instance in an
 	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
-	// increments, such as 40, 40.5, 41, and so on. The largest value that you can use
-	// is 128.
+	// increments, such as 32, 32.5, 33, and so on. The largest value that you can use
+	// is 256 for recent Aurora versions, or 128 for older versions.
 	MaxCapacity *float64
 
 	// The minimum number of Aurora capacity units (ACUs) for a DB instance in an
 	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
-	// increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is
-	// 0.5.
+	// increments, such as 8, 8.5, 9, and so on. For Aurora versions that support the
+	// Aurora Serverless v2 auto-pause feature, the smallest value that you can use is
+	// 0. For versions that don't support Aurora Serverless v2 auto-pause, the smallest
+	// value that you can use is 0.5.
 	MinCapacity *float64
+
+	// Specifies the number of seconds an Aurora Serverless v2 DB instance must be
+	// idle before Aurora attempts to automatically pause it.
+	//
+	// Specify a value between 300 seconds (five minutes) and 86,400 seconds (one
+	// day). The default is 300 seconds.
+	SecondsUntilAutoPause *int32
 
 	noSmithyDocumentSerde
 }
@@ -4904,15 +4942,28 @@ type ServerlessV2ScalingConfigurationInfo struct {
 
 	// The maximum number of Aurora capacity units (ACUs) for a DB instance in an
 	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
-	// increments, such as 40, 40.5, 41, and so on. The largest value that you can use
-	// is 128.
+	// increments, such as 32, 32.5, 33, and so on. The largest value that you can use
+	// is 256 for recent Aurora versions, or 128 for older versions.
 	MaxCapacity *float64
 
 	// The minimum number of Aurora capacity units (ACUs) for a DB instance in an
 	// Aurora Serverless v2 cluster. You can specify ACU values in half-step
-	// increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is
-	// 0.5.
+	// increments, such as 8, 8.5, 9, and so on. For Aurora versions that support the
+	// Aurora Serverless v2 auto-pause feature, the smallest value that you can use is
+	// 0. For versions that don't support Aurora Serverless v2 auto-pause, the smallest
+	// value that you can use is 0.5.
 	MinCapacity *float64
+
+	//  The number of seconds an Aurora Serverless v2 DB instance must be idle before
+	// Aurora attempts to automatically pause it. This property is only shown when the
+	// minimum capacity for the cluster is set to 0 ACUs. Changing the minimum capacity
+	// to a nonzero value removes this property. If you later change the minimum
+	// capacity back to 0 ACUs, this property is reset to its default value unless you
+	// specify it again.
+	//
+	// This value ranges between 300 seconds (five minutes) and 86,400 seconds (one
+	// day). The default is 300 seconds.
+	SecondsUntilAutoPause *int32
 
 	noSmithyDocumentSerde
 }

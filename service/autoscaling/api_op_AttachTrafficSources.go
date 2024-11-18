@@ -62,6 +62,14 @@ type AttachTrafficSourcesInput struct {
 	// This member is required.
 	TrafficSources []types.TrafficSourceIdentifier
 
+	//  If you enable zonal shift with cross-zone disabled load balancers, capacity
+	// could become imbalanced across Availability Zones. To skip the validation,
+	// specify true . For more information, see [Auto Scaling group zonal shift] in the Amazon EC2 Auto Scaling User
+	// Guide.
+	//
+	// [Auto Scaling group zonal shift]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+	SkipZonalShiftValidation *bool
+
 	noSmithyDocumentSerde
 }
 

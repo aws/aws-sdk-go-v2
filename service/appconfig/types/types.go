@@ -8,16 +8,13 @@ import (
 )
 
 // An action defines the tasks that the extension performs during the AppConfig
-// workflow. Each action includes an action point such as
-// ON_CREATE_HOSTED_CONFIGURATION , PRE_DEPLOYMENT , or ON_DEPLOYMENT . Each action
-// also includes a name, a URI to an Lambda function, and an Amazon Resource Name
-// (ARN) for an Identity and Access Management assume role. You specify the name,
-// URI, and ARN for each action point defined in the extension. You can specify the
-// following actions for an extension:
+// workflow. Each action includes an action point, as shown in the following list:
 //
 //   - PRE_CREATE_HOSTED_CONFIGURATION_VERSION
 //
 //   - PRE_START_DEPLOYMENT
+//
+//   - AT_DEPLOYMENT_TICK
 //
 //   - ON_DEPLOYMENT_START
 //
@@ -28,6 +25,10 @@ import (
 //   - ON_DEPLOYMENT_COMPLETE
 //
 //   - ON_DEPLOYMENT_ROLLED_BACK
+//
+// Each action also includes a name, a URI to an Lambda function, and an Amazon
+// Resource Name (ARN) for an Identity and Access Management assume role. You
+// specify the name, URI, and ARN for each action point defined in the extension.
 type Action struct {
 
 	// Information about the action.

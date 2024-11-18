@@ -15,7 +15,7 @@ import (
 // cluster when you launch your first container instance. However, you can create
 // your own cluster with a unique name.
 //
-// When you call the CreateCluster API operation, Amazon ECS attempts to create the Amazon ECS
+// When you call the [CreateCluster] API operation, Amazon ECS attempts to create the Amazon ECS
 // service-linked role for your account. This is so that it can manage required
 // resources in other Amazon Web Services services on your behalf. However, if the
 // user that makes the call doesn't have permissions to create the service-linked
@@ -23,6 +23,7 @@ import (
 // Container Service Developer Guide.
 //
 // [Using service-linked roles for Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+// [CreateCluster]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}

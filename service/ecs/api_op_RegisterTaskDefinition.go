@@ -141,11 +141,10 @@ type RegisterTaskDefinitionInput struct {
 	// resources. If none is specified, then IPC resources within the containers of a
 	// task are private and not shared with other containers in a task or on the
 	// container instance. If no value is specified, then the IPC resource namespace
-	// sharing depends on the Docker daemon setting on the container instance. For more
-	// information, see [IPC settings]in the Docker run reference.
+	// sharing depends on the Docker daemon setting on the container instance.
 	//
 	// If the host IPC mode is used, be aware that there is a heightened risk of
-	// undesired IPC namespace expose. For more information, see [Docker security].
+	// undesired IPC namespace expose.
 	//
 	// If you are setting namespaced kernel parameters using systemControls for the
 	// containers in the task, the following will apply to your IPC resource namespace.
@@ -161,8 +160,6 @@ type RegisterTaskDefinitionInput struct {
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	//
 	// [System Controls]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
-	// [Docker security]: https://docs.docker.com/engine/security/security/
-	// [IPC settings]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
 	IpcMode types.IpcMode
 
 	// The amount of memory (in MiB) used by the task. It can be expressed as an
@@ -229,17 +226,15 @@ type RegisterTaskDefinitionInput struct {
 	// user (UID 0). It is considered best practice to use a non-root user.
 	//
 	// If the network mode is awsvpc , the task is allocated an elastic network
-	// interface, and you must specify a NetworkConfigurationvalue when you create a service or run a task
+	// interface, and you must specify a [NetworkConfiguration]value when you create a service or run a task
 	// with the task definition. For more information, see [Task Networking]in the Amazon Elastic
 	// Container Service Developer Guide.
 	//
 	// If the network mode is host , you cannot run multiple instantiations of the same
 	// task on a single container instance when port mappings are used.
 	//
-	// For more information, see [Network settings] in the Docker run reference.
-	//
 	// [Task Networking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-	// [Network settings]: https://docs.docker.com/engine/reference/run/#network-settings
+	// [NetworkConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
 	NetworkMode types.NetworkMode
 
 	// The process namespace to use for the containers in the task. The valid values
@@ -254,20 +249,16 @@ type RegisterTaskDefinitionInput struct {
 	// If task is specified, all containers within the specified task share the same
 	// process namespace.
 	//
-	// If no value is specified, the default is a private namespace for each
-	// container. For more information, see [PID settings]in the Docker run reference.
+	// If no value is specified, the default is a private namespace for each container.
 	//
 	// If the host PID mode is used, there's a heightened risk of undesired process
-	// namespace exposure. For more information, see [Docker security].
+	// namespace exposure.
 	//
 	// This parameter is not supported for Windows containers.
 	//
 	// This parameter is only supported for tasks that are hosted on Fargate if the
 	// tasks are using platform version 1.4.0 or later (Linux). This isn't supported
 	// for Windows containers on Fargate.
-	//
-	// [PID settings]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-	// [Docker security]: https://docs.docker.com/engine/security/security/
 	PidMode types.PidMode
 
 	// An array of placement constraint objects to use for the task. You can specify a

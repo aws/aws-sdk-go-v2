@@ -58,6 +58,7 @@
         "api_op_ListChangeSets.go",
         "api_op_ListExports.go",
         "api_op_ListGeneratedTemplates.go",
+        "api_op_ListHookResults.go",
         "api_op_ListImports.go",
         "api_op_ListResourceScanRelatedResources.go",
         "api_op_ListResourceScanResources.go",

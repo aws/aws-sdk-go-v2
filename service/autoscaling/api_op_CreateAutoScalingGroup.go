@@ -80,6 +80,9 @@ type CreateAutoScalingGroupInput struct {
 	// The instance capacity distribution across Availability Zones.
 	AvailabilityZoneDistribution *types.AvailabilityZoneDistribution
 
+	//  The policy for Availability Zone impairment.
+	AvailabilityZoneImpairmentPolicy *types.AvailabilityZoneImpairmentPolicy
+
 	// A list of Availability Zones where instances in the Auto Scaling group can be
 	// created. Used for launching into the default VPC subnet in each Availability
 	// Zone when not using the VPCZoneIdentifier property, or for attaching a network
@@ -263,6 +266,14 @@ type CreateAutoScalingGroupInput struct {
 	//
 	// [Service-linked roles]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
 	ServiceLinkedRoleARN *string
+
+	//  If you enable zonal shift with cross-zone disabled load balancers, capacity
+	// could become imbalanced across Availability Zones. To skip the validation,
+	// specify true . For more information, see [Auto Scaling group zonal shift] in the Amazon EC2 Auto Scaling User
+	// Guide.
+	//
+	// [Auto Scaling group zonal shift]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
+	SkipZonalShiftValidation *bool
 
 	// One or more tags. You can tag your Auto Scaling group and propagate the tags to
 	// the Amazon EC2 instances it launches. Tags are not propagated to Amazon EBS

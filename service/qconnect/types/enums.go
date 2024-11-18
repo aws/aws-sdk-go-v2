@@ -176,6 +176,25 @@ func (AssociationType) Values() []AssociationType {
 	}
 }
 
+type ChannelSubtype string
+
+// Enum values for ChannelSubtype
+const (
+	ChannelSubtypeEmail ChannelSubtype = "EMAIL"
+	ChannelSubtypeSms   ChannelSubtype = "SMS"
+)
+
+// Values returns all known values for ChannelSubtype. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelSubtype) Values() []ChannelSubtype {
+	return []ChannelSubtype{
+		"EMAIL",
+		"SMS",
+	}
+}
+
 type ChunkingStrategy string
 
 // Enum values for ChunkingStrategy
@@ -213,6 +232,23 @@ const (
 func (ContentAssociationType) Values() []ContentAssociationType {
 	return []ContentAssociationType{
 		"AMAZON_CONNECT_GUIDE",
+	}
+}
+
+type ContentDisposition string
+
+// Enum values for ContentDisposition
+const (
+	ContentDispositionAttachment ContentDisposition = "ATTACHMENT"
+)
+
+// Values returns all known values for ContentDisposition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentDisposition) Values() []ContentDisposition {
+	return []ContentDisposition{
+		"ATTACHMENT",
 	}
 }
 
@@ -408,6 +444,70 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 		"QUICK_RESPONSES",
 		"MESSAGE_TEMPLATES",
 		"MANAGED",
+	}
+}
+
+type MessageTemplateAttributeType string
+
+// Enum values for MessageTemplateAttributeType
+const (
+	MessageTemplateAttributeTypeSystem          MessageTemplateAttributeType = "SYSTEM"
+	MessageTemplateAttributeTypeAgent           MessageTemplateAttributeType = "AGENT"
+	MessageTemplateAttributeTypeCustomerProfile MessageTemplateAttributeType = "CUSTOMER_PROFILE"
+	MessageTemplateAttributeTypeCustom          MessageTemplateAttributeType = "CUSTOM"
+)
+
+// Values returns all known values for MessageTemplateAttributeType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageTemplateAttributeType) Values() []MessageTemplateAttributeType {
+	return []MessageTemplateAttributeType{
+		"SYSTEM",
+		"AGENT",
+		"CUSTOMER_PROFILE",
+		"CUSTOM",
+	}
+}
+
+type MessageTemplateFilterOperator string
+
+// Enum values for MessageTemplateFilterOperator
+const (
+	MessageTemplateFilterOperatorEquals MessageTemplateFilterOperator = "EQUALS"
+	MessageTemplateFilterOperatorPrefix MessageTemplateFilterOperator = "PREFIX"
+)
+
+// Values returns all known values for MessageTemplateFilterOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageTemplateFilterOperator) Values() []MessageTemplateFilterOperator {
+	return []MessageTemplateFilterOperator{
+		"EQUALS",
+		"PREFIX",
+	}
+}
+
+type MessageTemplateQueryOperator string
+
+// Enum values for MessageTemplateQueryOperator
+const (
+	MessageTemplateQueryOperatorContains          MessageTemplateQueryOperator = "CONTAINS"
+	MessageTemplateQueryOperatorContainsAndPrefix MessageTemplateQueryOperator = "CONTAINS_AND_PREFIX"
+)
+
+// Values returns all known values for MessageTemplateQueryOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageTemplateQueryOperator) Values() []MessageTemplateQueryOperator {
+	return []MessageTemplateQueryOperator{
+		"CONTAINS",
+		"CONTAINS_AND_PREFIX",
 	}
 }
 

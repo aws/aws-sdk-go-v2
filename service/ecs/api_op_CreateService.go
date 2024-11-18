@@ -14,7 +14,7 @@ import (
 // Runs and maintains your desired number of tasks from a specified task
 // definition. If the number of tasks running in a service drops below the
 // desiredCount , Amazon ECS runs another copy of the task in the specified
-// cluster. To update an existing service, see the UpdateServiceaction.
+// cluster. To update an existing service, use [UpdateService].
 //
 // On March 21, 2024, a change was made to resolve the task definition revision
 // before authorization. When a task definition revision is not specified,
@@ -159,7 +159,7 @@ type CreateServiceInput struct {
 	Cluster *string
 
 	// Optional deployment parameters that control how many tasks run during the
-	// deployment and the failure detection methods.
+	// deployment and the ordering of stopping and starting tasks.
 	DeploymentConfiguration *types.DeploymentConfiguration
 
 	// The deployment controller to use for the service. If no deployment controller
@@ -189,23 +189,16 @@ type CreateServiceInput struct {
 	EnableExecuteCommand bool
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
-	// unhealthy Elastic Load Balancing target health checks after a task has first
-	// started. This is only used when your service is configured to use a load
-	// balancer. If your service has a load balancer defined and you don't specify a
-	// health check grace period value, the default value of 0 is used.
+	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
+	// a task has first started. If you don't specify a health check grace period
+	// value, the default value of 0 is used. If you don't use any of the health
+	// checks, then healthCheckGracePeriodSeconds is unused.
 	//
-	// If you do not use an Elastic Load Balancing, we recommend that you use the
-	// startPeriod in the task definition health check parameters. For more
-	// information, see [Health check].
-	//
-	// If your service's tasks take a while to start and respond to Elastic Load
-	// Balancing health checks, you can specify a health check grace period of up to
-	// 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service
-	// scheduler ignores health check status. This grace period can prevent the service
-	// scheduler from marking tasks as unhealthy and stopping them before they have
-	// time to come up.
-	//
-	// [Health check]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
+	// If your service's tasks take a while to start and respond to health checks, you
+	// can specify a health check grace period of up to 2,147,483,647 seconds (about 69
+	// years). During that time, the Amazon ECS service scheduler ignores health check
+	// status. This grace period can prevent the service scheduler from marking tasks
+	// as unhealthy and stopping them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int32
 
 	// The infrastructure that you run your service on. For more information, see [Amazon ECS launch types] in
@@ -435,6 +428,9 @@ type CreateServiceInput struct {
 	// that is configured at launch time. Currently, the only supported volume type is
 	// an Amazon EBS volume.
 	VolumeConfigurations []types.ServiceVolumeConfiguration
+
+	// The VPC Lattice configuration for the service being created.
+	VpcLatticeConfigurations []types.VpcLatticeConfiguration
 
 	noSmithyDocumentSerde
 }

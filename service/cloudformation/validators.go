@@ -670,6 +670,26 @@ func (m *validateOpListChangeSets) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListHookResults struct {
+}
+
+func (*validateOpListHookResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHookResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHookResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHookResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListImports struct {
 }
 
@@ -1220,6 +1240,10 @@ func addOpImportStacksToStackSetValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListChangeSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListChangeSets{}, middleware.After)
+}
+
+func addOpListHookResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHookResults{}, middleware.After)
 }
 
 func addOpListImportsValidationMiddleware(stack *middleware.Stack) error {
@@ -2070,6 +2094,24 @@ func validateOpListChangeSetsInput(v *ListChangeSetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListChangeSetsInput"}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHookResultsInput(v *ListHookResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHookResultsInput"}
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if v.TargetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

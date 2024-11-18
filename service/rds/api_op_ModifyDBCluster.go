@@ -79,11 +79,10 @@ type ModifyDBClusterInput struct {
 	//   cluster's current version.
 	AllowMajorVersionUpgrade *bool
 
-	// Specifies whether the modifications in this request and any pending
-	// modifications are asynchronously applied as soon as possible, regardless of the
-	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is
-	// disabled, changes to the DB cluster are applied during the next maintenance
-	// window.
+	// Specifies whether the modifications in this request are asynchronously applied
+	// as soon as possible, regardless of the PreferredMaintenanceWindow setting for
+	// the DB cluster. If this parameter is disabled, changes to the DB cluster are
+	// applied during the next maintenance window.
 	//
 	// Most modifications can be applied immediately or during the next scheduled
 	// maintenance window. Some modifications, such as turning on deletion protection

@@ -510,6 +510,26 @@ func (m *validateOpCreateContactFlowModule) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContactFlowVersion struct {
+}
+
+func (*validateOpCreateContactFlowVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContactFlowVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContactFlowVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContactFlowVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvaluationForm struct {
 }
 
@@ -2585,6 +2605,26 @@ func (m *validateOpListContactFlows) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListContactFlowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContactFlowVersions struct {
+}
+
+func (*validateOpListContactFlowVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContactFlowVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContactFlowVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContactFlowVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5190,6 +5230,10 @@ func addOpCreateContactFlowModuleValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateContactFlowModule{}, middleware.After)
 }
 
+func addOpCreateContactFlowVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContactFlowVersion{}, middleware.After)
+}
+
 func addOpCreateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvaluationForm{}, middleware.After)
 }
@@ -5604,6 +5648,10 @@ func addOpListContactFlowModulesValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListContactFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContactFlows{}, middleware.After)
+}
+
+func addOpListContactFlowVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContactFlowVersions{}, middleware.After)
 }
 
 func addOpListContactReferencesValidationMiddleware(stack *middleware.Stack) error {
@@ -8299,6 +8347,24 @@ func validateOpCreateContactFlowModuleInput(v *CreateContactFlowModuleInput) err
 	}
 }
 
+func validateOpCreateContactFlowVersionInput(v *CreateContactFlowVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContactFlowVersionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEvaluationFormInput(v *CreateEvaluationFormInput) error {
 	if v == nil {
 		return nil
@@ -10320,6 +10386,24 @@ func validateOpListContactFlowsInput(v *ListContactFlowsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListContactFlowsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContactFlowVersionsInput(v *ListContactFlowVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContactFlowVersionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

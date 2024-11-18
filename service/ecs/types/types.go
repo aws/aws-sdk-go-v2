@@ -1731,6 +1731,9 @@ type Deployment struct {
 	// [ServiceManagedEBSVolumeConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
 	VolumeConfigurations []ServiceVolumeConfiguration
 
+	// The VPC Lattice configuration for the service deployment.
+	VpcLatticeConfigurations []VpcLatticeConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1804,8 +1807,8 @@ type DeploymentCircuitBreaker struct {
 	noSmithyDocumentSerde
 }
 
-// Optional deployment parameters that control how many tasks run during the
-// deployment and the failure detection methods.
+// Optional deployment parameters that control how many tasks run during a
+// deployment and the ordering of stopping and starting tasks.
 type DeploymentConfiguration struct {
 
 	// Information about the CloudWatch alarms.
@@ -1951,8 +1954,8 @@ type DeploymentController struct {
 // The amount of ephemeral storage to allocate for the deployment.
 type DeploymentEphemeralStorage struct {
 
-	// Specify an Amazon Web Services Key Management Service key ID to encrypt the
-	// ephemeral storage for deployment.
+	// Specify an Key Management Service key ID to encrypt the ephemeral storage for
+	// deployment.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2749,7 +2752,8 @@ type LoadBalancer struct {
 	// mapping.
 	ContainerPort *int32
 
-	// The name of the load balancer to associate with the service or task set.
+	// The name of the load balancer to associate with the Amazon ECS service or task
+	// set.
 	//
 	// If you are using an Application Load Balancer or a Network Load Balancer the
 	// load balancer name parameter should be omitted.
@@ -3072,7 +3076,8 @@ type ManagedScaling struct {
 	MaximumScalingStepSize *int32
 
 	// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at
-	// one time. If this parameter is omitted, the default value of 1 is used.
+	// one time. The scale in process is not affected by this parameter If this
+	// parameter is omitted, the default value of 1 is used.
 	//
 	// When additional capacity is required, Amazon ECS will scale up the minimum
 	// scaling step size even if the actual demand is less than the minimum scaling
@@ -3104,8 +3109,7 @@ type ManagedStorageConfiguration struct {
 	// Specify the Key Management Service key ID for the Fargate ephemeral storage.
 	FargateEphemeralStorageKmsKeyId *string
 
-	// Specify a Amazon Web Services Key Management Service key ID to encrypt the
-	// managed storage.
+	// Specify a Key Management Service key ID to encrypt the managed storage.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -3306,14 +3310,13 @@ type PlatformDevice struct {
 	noSmithyDocumentSerde
 }
 
-// Port mappings expose your container's network ports to the outside world. this
-// allows clients to access your application. It's also used for inter-container
-// communication within the same task.
+// Port mappings allow containers to access ports on the host container instance
+// to send or receive traffic. Port mappings are specified as part of the container
+// definition.
 //
-// For task definitions (both the Fargate and EC2 launch type) that use the awsvpc
-// network mode, only specify the containerPort . The hostPort is always ignored,
-// and the container port is automatically mapped to a random high-numbered port on
-// the host.
+// If you use containers in a task with the awsvpc or host network mode, specify
+// the exposed ports using containerPort . The hostPort can be left blank or it
+// must be the same value as the containerPort .
 //
 // Most fields of this parameter ( containerPort , hostPort , protocol ) maps to
 // PortBindings in the docker container create command and the --publish option to
@@ -3356,17 +3359,14 @@ type PortMapping struct {
 	// The port number on the container that's bound to the user-specified or
 	// automatically assigned host port.
 	//
-	// For tasks that use the Fargate launch type or EC2 tasks that use the awsvpc
-	// network mode, you use containerPort to specify the exposed ports.
+	// If you use containers in a task with the awsvpc or host network mode, specify
+	// the exposed ports using containerPort .
 	//
-	// For Windows containers on Fargate, you can't use port 3150 for the containerPort
-	// . This is because it's reserved.
-	//
-	// Suppose that you're using containers in a task with the EC2 launch type and you
-	// specify a container port and not a host port. Then, your container automatically
-	// receives a host port in the ephemeral port range. For more information, see
-	// hostPort . Port mappings that are automatically assigned in this way don't count
-	// toward the 100 reserved ports quota of a container instance.
+	// If you use containers in a task with the bridge network mode and you specify a
+	// container port and not a host port, your container automatically receives a host
+	// port in the ephemeral port range. For more information, see hostPort . Port
+	// mappings that are automatically assigned in this way do not count toward the 100
+	// reserved ports limit of a container instance.
 	ContainerPort *int32
 
 	// The port number range on the container that's bound to the dynamically mapped
@@ -3462,16 +3462,11 @@ type PortMapping struct {
 	// [DescribeContainerInstances]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html
 	HostPort *int32
 
-	// The name that's used for the port mapping. This parameter only applies to
-	// Service Connect. This parameter is the name that you use in the
-	// serviceConnectConfiguration of a service. The name can include up to 64
-	// characters. The characters can include lowercase letters, numbers, underscores
-	// (_), and hyphens (-). The name can't start with a hyphen.
-	//
-	// For more information, see [Service Connect] in the Amazon Elastic Container Service Developer
-	// Guide.
-	//
-	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+	// The name that's used for the port mapping. This parameter is the name that you
+	// use in the serviceConnectConfiguration and the vpcLatticeConfigurations of a
+	// service. The name can include up to 64 characters. The characters can include
+	// lowercase letters, numbers, underscores (_), and hyphens (-). The name can't
+	// start with a hyphen.
 	Name *string
 
 	// The protocol used for the port mapping. Valid values are tcp and udp . The
@@ -3672,13 +3667,9 @@ type RuntimePlatform struct {
 	// You can run your Linux tasks on an ARM-based platform by setting the value to
 	// ARM64 . This option is available for tasks that run on Linux Amazon EC2 instance
 	// or Linux containers on Fargate.
-	//
-	// The default is X86_64 .
 	CpuArchitecture CPUArchitecture
 
 	// The operating system.
-	//
-	// The default is Linux .
 	OperatingSystemFamily OSFamily
 
 	noSmithyDocumentSerde
@@ -3742,8 +3733,9 @@ type Secret struct {
 // Details on a service within a cluster.
 type Service struct {
 
-	// The capacity provider strategy the service uses. When using DescribeServices ,
-	// this field is omitted if the service was created using a launch type.
+	// The capacity provider strategy the service uses. When using the
+	// DescribeServices API, this field is omitted if the service was created using a
+	// launch type.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// The Amazon Resource Name (ARN) of the cluster that hosts the service.
@@ -3885,7 +3877,7 @@ type Service struct {
 	Status *string
 
 	// The metadata that you apply to the service to help you categorize and organize
-	// them. Each tag consists of a key and an optional value. You define both the key
+	// them. Each tag consists of a key and an optional value. You define bot the key
 	// and value.
 	//
 	// The following basic restrictions apply to tags:
@@ -4197,8 +4189,8 @@ type ServiceDeployment struct {
 	// The circuit breaker configuration that determines a service deployment failed.
 	DeploymentCircuitBreaker *ServiceDeploymentCircuitBreaker
 
-	// Optional deployment parameters that control how many tasks run during the
-	// deployment and the failure detection methods.
+	// Optional deployment parameters that control how many tasks run during a
+	// deployment and the ordering of stopping and starting tasks.
 	DeploymentConfiguration *DeploymentConfiguration
 
 	// The time the service deployment finished. The format is yyyy-MM-dd
@@ -4620,6 +4612,9 @@ type ServiceRevision struct {
 
 	// The volumes that are configured at deployment that the service revision uses.
 	VolumeConfigurations []ServiceVolumeConfiguration
+
+	// The VPC Lattice configuration for the service revision.
+	VpcLatticeConfigurations []VpcLatticeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -5144,11 +5139,10 @@ type TaskDefinition struct {
 	// resources. If none is specified, then IPC resources within the containers of a
 	// task are private and not shared with other containers in a task or on the
 	// container instance. If no value is specified, then the IPC resource namespace
-	// sharing depends on the Docker daemon setting on the container instance. For more
-	// information, see [IPC settings]in the Docker run reference.
+	// sharing depends on the Docker daemon setting on the container instance.
 	//
 	// If the host IPC mode is used, be aware that there is a heightened risk of
-	// undesired IPC namespace expose. For more information, see [Docker security].
+	// undesired IPC namespace expose.
 	//
 	// If you are setting namespaced kernel parameters using systemControls for the
 	// containers in the task, the following will apply to your IPC resource namespace.
@@ -5164,8 +5158,6 @@ type TaskDefinition struct {
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	//
 	// [System Controls]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
-	// [Docker security]: https://docs.docker.com/engine/security/security/
-	// [IPC settings]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
 	IpcMode IpcMode
 
 	// The amount (in MiB) of memory used by the task.
@@ -5229,17 +5221,15 @@ type TaskDefinition struct {
 	// user (UID 0). It is considered best practice to use a non-root user.
 	//
 	// If the network mode is awsvpc , the task is allocated an elastic network
-	// interface, and you must specify a NetworkConfigurationvalue when you create a service or run a task
+	// interface, and you must specify a [NetworkConfiguration]value when you create a service or run a task
 	// with the task definition. For more information, see [Task Networking]in the Amazon Elastic
 	// Container Service Developer Guide.
 	//
 	// If the network mode is host , you cannot run multiple instantiations of the same
 	// task on a single container instance when port mappings are used.
 	//
-	// For more information, see [Network settings] in the Docker run reference.
-	//
 	// [Task Networking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-	// [Network settings]: https://docs.docker.com/engine/reference/run/#network-settings
+	// [NetworkConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
 	NetworkMode NetworkMode
 
 	// The process namespace to use for the containers in the task. The valid values
@@ -5254,20 +5244,16 @@ type TaskDefinition struct {
 	// If task is specified, all containers within the specified task share the same
 	// process namespace.
 	//
-	// If no value is specified, the default is a private namespace for each
-	// container. For more information, see [PID settings]in the Docker run reference.
+	// If no value is specified, the default is a private namespace for each container.
 	//
 	// If the host PID mode is used, there's a heightened risk of undesired process
-	// namespace exposure. For more information, see [Docker security].
+	// namespace exposure.
 	//
 	// This parameter is not supported for Windows containers.
 	//
 	// This parameter is only supported for tasks that are hosted on Fargate if the
 	// tasks are using platform version 1.4.0 or later (Linux). This isn't supported
 	// for Windows containers on Fargate.
-	//
-	// [PID settings]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-	// [Docker security]: https://docs.docker.com/engine/security/security/
 	PidMode PidMode
 
 	// An array of placement constraint objects to use for tasks.
@@ -5377,8 +5363,8 @@ type TaskDefinitionPlacementConstraint struct {
 // The amount of ephemeral storage to allocate for the task.
 type TaskEphemeralStorage struct {
 
-	// Specify an Amazon Web Services Key Management Service key ID to encrypt the
-	// ephemeral storage for the task.
+	// Specify an Key Management Service key ID to encrypt the ephemeral storage for
+	// the task.
 	KmsKeyId *string
 
 	// The total amount, in GiB, of the ephemeral storage to set for the task. The
@@ -5948,6 +5934,33 @@ type VolumeFrom struct {
 	// The name of another container within the same task definition to mount volumes
 	// from.
 	SourceContainer *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC Lattice configuration for your service that holds the information for
+// the target group(s) Amazon ECS tasks will be registered to.
+type VpcLatticeConfiguration struct {
+
+	// The name of the port mapping to register in the VPC Lattice target group. This
+	// is the name of the portMapping you defined in your task definition.
+	//
+	// This member is required.
+	PortName *string
+
+	// The ARN of the IAM role to associate with this VPC Lattice configuration. This
+	// is the Amazon ECS  infrastructure IAM role that is used to manage your VPC
+	// Lattice infrastructure.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The full Amazon Resource Name (ARN) of the target group or groups associated
+	// with the VPC Lattice configuration that the Amazon ECS tasks will be registered
+	// to.
+	//
+	// This member is required.
+	TargetGroupArn *string
 
 	noSmithyDocumentSerde
 }

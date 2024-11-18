@@ -327,6 +327,40 @@ type Export struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a Hook invocation, its status, and the reason for its status.
+type HookResultSummary struct {
+
+	// The failure mode of the invocation. The following are potential modes:
+	//
+	//   - FAIL : If the hook invocation returns a failure, then the requested target
+	//   operation should fail.
+	//
+	//   - WARN : If the hook invocation returns a failure, then the requested target
+	//   operation should warn.
+	FailureMode HookFailureMode
+
+	// A description of the Hook results status. For example, if the Hook result is in
+	// a FAILED state, this may contain additional information for the FAILED state.
+	HookStatusReason *string
+
+	// The exact point in the provisioning logic where the Hook runs.
+	InvocationPoint HookInvocationPoint
+
+	// The state of the Hook invocation.
+	Status HookStatus
+
+	// The version of the Hook type configuration.
+	TypeConfigurationVersionId *string
+
+	// The type name of the Hook being invoked.
+	TypeName *string
+
+	// The version of the Hook being invoked.
+	TypeVersionId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains logging configuration information for an extension.
 type LoggingConfig struct {
 

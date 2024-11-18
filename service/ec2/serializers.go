@@ -50286,6 +50286,18 @@ func awsEc2query_serializeDocumentOnDemandOptionsRequest(v *types.OnDemandOption
 	return nil
 }
 
+func awsEc2query_serializeDocumentOperatorRequest(v *types.OperatorRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Principal != nil {
+		objectKey := object.Key("Principal")
+		objectKey.String(*v.Principal)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentOrganizationalUnitArnStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -51351,6 +51363,13 @@ func awsEc2query_serializeDocumentRequestLaunchTemplateData(v *types.RequestLaun
 	if v.NetworkInterfaces != nil {
 		objectKey := object.FlatKey("NetworkInterface")
 		if err := awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecificationRequestList(v.NetworkInterfaces, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsEc2query_serializeDocumentOperatorRequest(v.Operator, objectKey); err != nil {
 			return err
 		}
 	}
@@ -57457,6 +57476,13 @@ func awsEc2query_serializeOpDocumentCreateLaunchTemplateInput(v *CreateLaunchTem
 		objectKey.String(*v.LaunchTemplateName)
 	}
 
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsEc2query_serializeDocumentOperatorRequest(v.Operator, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TagSpecifications != nil {
 		objectKey := object.FlatKey("TagSpecification")
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
@@ -58025,6 +58051,13 @@ func awsEc2query_serializeOpDocumentCreateNetworkInterfaceInput(v *CreateNetwork
 	if v.Ipv6Prefixes != nil {
 		objectKey := object.FlatKey("Ipv6Prefix")
 		if err := awsEc2query_serializeDocumentIpv6PrefixList(v.Ipv6Prefixes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsEc2query_serializeDocumentOperatorRequest(v.Operator, objectKey); err != nil {
 			return err
 		}
 	}
@@ -59538,6 +59571,13 @@ func awsEc2query_serializeOpDocumentCreateVolumeInput(v *CreateVolumeInput, valu
 	if v.MultiAttachEnabled != nil {
 		objectKey := object.Key("MultiAttachEnabled")
 		objectKey.Boolean(*v.MultiAttachEnabled)
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsEc2query_serializeDocumentOperatorRequest(v.Operator, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.OutpostArn != nil {
@@ -74306,6 +74346,13 @@ func awsEc2query_serializeOpDocumentRunInstancesInput(v *RunInstancesInput, valu
 	if v.NetworkInterfaces != nil {
 		objectKey := object.FlatKey("NetworkInterface")
 		if err := awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecificationList(v.NetworkInterfaces, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsEc2query_serializeDocumentOperatorRequest(v.Operator, objectKey); err != nil {
 			return err
 		}
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "2c7daf4a-9321-458a-a055-04a3784d53f7",
+    "type": "feature",
+    "description": "Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.",
+    "modules": [
+        "service/connect"
+    ]
+}

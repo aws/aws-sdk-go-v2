@@ -195,6 +195,100 @@ func (c *Client) addOperationGetSimilarProfilesMiddlewares(stack *middleware.Sta
 	return nil
 }
 
+// GetSimilarProfilesPaginatorOptions is the paginator options for
+// GetSimilarProfiles
+type GetSimilarProfilesPaginatorOptions struct {
+	// The maximum number of objects returned per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetSimilarProfilesPaginator is a paginator for GetSimilarProfiles
+type GetSimilarProfilesPaginator struct {
+	options   GetSimilarProfilesPaginatorOptions
+	client    GetSimilarProfilesAPIClient
+	params    *GetSimilarProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetSimilarProfilesPaginator returns a new GetSimilarProfilesPaginator
+func NewGetSimilarProfilesPaginator(client GetSimilarProfilesAPIClient, params *GetSimilarProfilesInput, optFns ...func(*GetSimilarProfilesPaginatorOptions)) *GetSimilarProfilesPaginator {
+	if params == nil {
+		params = &GetSimilarProfilesInput{}
+	}
+
+	options := GetSimilarProfilesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetSimilarProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetSimilarProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetSimilarProfiles page.
+func (p *GetSimilarProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetSimilarProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetSimilarProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetSimilarProfilesAPIClient is a client that implements the GetSimilarProfiles
+// operation.
+type GetSimilarProfilesAPIClient interface {
+	GetSimilarProfiles(context.Context, *GetSimilarProfilesInput, ...func(*Options)) (*GetSimilarProfilesOutput, error)
+}
+
+var _ GetSimilarProfilesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opGetSimilarProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

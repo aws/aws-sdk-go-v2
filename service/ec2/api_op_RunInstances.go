@@ -309,6 +309,9 @@ type RunInstancesInput struct {
 	// The network interfaces to associate with the instance.
 	NetworkInterfaces []types.InstanceNetworkInterfaceSpecification
 
+	// Reserved for internal use.
+	Operator *types.OperatorRequest
+
 	// The placement for the instance.
 	Placement *types.Placement
 

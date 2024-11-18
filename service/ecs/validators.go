@@ -2419,6 +2419,44 @@ func validateVolumeList(v []types.Volume) error {
 	}
 }
 
+func validateVpcLatticeConfiguration(v *types.VpcLatticeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcLatticeConfiguration"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.TargetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupArn"))
+	}
+	if v.PortName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcLatticeConfigurations(v []types.VpcLatticeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcLatticeConfigurations"}
+	for i := range v {
+		if err := validateVpcLatticeConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCapacityProviderInput(v *CreateCapacityProviderInput) error {
 	if v == nil {
 		return nil
@@ -2499,6 +2537,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.VolumeConfigurations != nil {
 		if err := validateServiceVolumeConfigurations(v.VolumeConfigurations); err != nil {
 			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcLatticeConfigurations != nil {
+		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
+			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3309,6 +3352,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.VolumeConfigurations != nil {
 		if err := validateServiceVolumeConfigurations(v.VolumeConfigurations); err != nil {
 			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcLatticeConfigurations != nil {
+		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
+			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

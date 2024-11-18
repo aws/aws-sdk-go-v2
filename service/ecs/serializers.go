@@ -6505,6 +6505,41 @@ func awsAwsjson11_serializeDocumentVolumeList(v []types.Volume, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentVpcLatticeConfiguration(v *types.VpcLatticeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PortName != nil {
+		ok := object.Key("portName")
+		ok.String(*v.PortName)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.TargetGroupArn != nil {
+		ok := object.Key("targetGroupArn")
+		ok.String(*v.TargetGroupArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVpcLatticeConfigurations(v []types.VpcLatticeConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentVpcLatticeConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateCapacityProviderInput(v *CreateCapacityProviderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6727,6 +6762,13 @@ func awsAwsjson11_serializeOpDocumentCreateServiceInput(v *CreateServiceInput, v
 	if v.VolumeConfigurations != nil {
 		ok := object.Key("volumeConfigurations")
 		if err := awsAwsjson11_serializeDocumentServiceVolumeConfigurations(v.VolumeConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcLatticeConfigurations != nil {
+		ok := object.Key("vpcLatticeConfigurations")
+		if err := awsAwsjson11_serializeDocumentVpcLatticeConfigurations(v.VpcLatticeConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -8462,6 +8504,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.VolumeConfigurations != nil {
 		ok := object.Key("volumeConfigurations")
 		if err := awsAwsjson11_serializeDocumentServiceVolumeConfigurations(v.VolumeConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcLatticeConfigurations != nil {
+		ok := object.Key("vpcLatticeConfigurations")
+		if err := awsAwsjson11_serializeDocumentVpcLatticeConfigurations(v.VpcLatticeConfigurations, ok); err != nil {
 			return err
 		}
 	}

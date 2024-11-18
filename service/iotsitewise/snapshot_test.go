@@ -230,6 +230,18 @@ func TestCheckSnapshot_CreateDashboard(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
@@ -319,6 +331,18 @@ func TestCheckSnapshot_DeleteDashboard(t *testing.T) {
 	_, err := svc.DeleteDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -475,6 +499,18 @@ func TestCheckSnapshot_DescribeDashboard(t *testing.T) {
 	_, err := svc.DescribeDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -674,6 +710,18 @@ func TestCheckSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeAssistant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeAssistant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeAssistant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAccessPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessPolicies(context.Background(), nil, func(o *Options) {
@@ -811,6 +859,18 @@ func TestCheckSnapshot_ListDashboards(t *testing.T) {
 	_, err := svc.ListDashboards(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDashboards")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1015,6 +1075,18 @@ func TestCheckSnapshot_UpdateDashboard(t *testing.T) {
 	_, err := svc.UpdateDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1237,6 +1309,18 @@ func TestUpdateSnapshot_CreateDashboard(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1410,18 @@ func TestUpdateSnapshot_DeleteDashboard(t *testing.T) {
 	_, err := svc.DeleteDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1482,6 +1578,18 @@ func TestUpdateSnapshot_DescribeDashboard(t *testing.T) {
 	_, err := svc.DescribeDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1681,6 +1789,18 @@ func TestUpdateSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_InvokeAssistant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeAssistant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeAssistant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAccessPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessPolicies(context.Background(), nil, func(o *Options) {
@@ -1818,6 +1938,18 @@ func TestUpdateSnapshot_ListDashboards(t *testing.T) {
 	_, err := svc.ListDashboards(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDashboards")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2022,6 +2154,18 @@ func TestUpdateSnapshot_UpdateDashboard(t *testing.T) {
 	_, err := svc.UpdateDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

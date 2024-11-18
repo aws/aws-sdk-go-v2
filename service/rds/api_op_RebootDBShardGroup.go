@@ -41,6 +41,7 @@ type RebootDBShardGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details for an Amazon RDS DB shard group.
 type RebootDBShardGroupOutput struct {
 
 	// Specifies whether to create standby DB shard groups for the DB shard group.

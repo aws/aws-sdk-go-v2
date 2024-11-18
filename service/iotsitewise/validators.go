@@ -290,6 +290,26 @@ func (m *validateOpCreateDashboard) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataset struct {
+}
+
+func (*validateOpCreateDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGateway struct {
 }
 
@@ -445,6 +465,26 @@ func (m *validateOpDeleteDashboard) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataset struct {
+}
+
+func (*validateOpDeleteDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDatasetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +730,26 @@ func (m *validateOpDescribeDashboard) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDataset struct {
+}
+
+func (*validateOpDescribeDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeGatewayCapabilityConfiguration struct {
 }
 
@@ -890,6 +950,26 @@ func (m *validateOpGetInterpolatedAssetPropertyValues) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeAssistant struct {
+}
+
+func (*validateOpInvokeAssistant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeAssistant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeAssistantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeAssistantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListActions struct {
 }
 
@@ -1045,6 +1125,26 @@ func (m *validateOpListDashboards) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDashboardsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDatasets struct {
+}
+
+func (*validateOpListDatasets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDatasets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDatasetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDatasetsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +1430,26 @@ func (m *validateOpUpdateDashboard) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataset struct {
+}
+
+func (*validateOpUpdateDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateGatewayCapabilityConfiguration struct {
 }
 
@@ -1466,6 +1586,10 @@ func addOpCreateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDashboard{}, middleware.After)
 }
 
+func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
+}
+
 func addOpCreateGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGateway{}, middleware.After)
 }
@@ -1496,6 +1620,10 @@ func addOpDeleteAssetModelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDashboard{}, middleware.After)
+}
+
+func addOpDeleteDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataset{}, middleware.After)
 }
 
 func addOpDeleteGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -1546,6 +1674,10 @@ func addOpDescribeDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDashboard{}, middleware.After)
 }
 
+func addOpDescribeDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataset{}, middleware.After)
+}
+
 func addOpDescribeGatewayCapabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGatewayCapabilityConfiguration{}, middleware.After)
 }
@@ -1586,6 +1718,10 @@ func addOpGetInterpolatedAssetPropertyValuesValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpGetInterpolatedAssetPropertyValues{}, middleware.After)
 }
 
+func addOpInvokeAssistantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeAssistant{}, middleware.After)
+}
+
 func addOpListActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListActions{}, middleware.After)
 }
@@ -1616,6 +1752,10 @@ func addOpListCompositionRelationshipsValidationMiddleware(stack *middleware.Sta
 
 func addOpListDashboardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDashboards{}, middleware.After)
+}
+
+func addOpListDatasetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDatasets{}, middleware.After)
 }
 
 func addOpListProjectAssetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1672,6 +1812,10 @@ func addOpUpdateAssetPropertyValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDashboard{}, middleware.After)
+}
+
+func addOpUpdateDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataset{}, middleware.After)
 }
 
 func addOpUpdateGatewayCapabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2134,6 +2278,29 @@ func validateCustomerManagedS3Storage(v *types.CustomerManagedS3Storage) error {
 	}
 }
 
+func validateDatasetSource(v *types.DatasetSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatasetSource"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if len(v.SourceFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
+	}
+	if v.SourceDetail != nil {
+		if err := validateSourceDetail(v.SourceDetail); err != nil {
+			invalidParams.AddNested("SourceDetail", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateErrorReportLocation(v *types.ErrorReportLocation) error {
 	if v == nil {
 		return nil
@@ -2442,6 +2609,24 @@ func validateJobConfiguration(v *types.JobConfiguration) error {
 	}
 }
 
+func validateKendraSourceDetail(v *types.KendraSourceDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KendraSourceDetail"}
+	if v.KnowledgeBaseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLoggingOptions(v *types.LoggingOptions) error {
 	if v == nil {
 		return nil
@@ -2703,6 +2888,23 @@ func validateSiemensIE(v *types.SiemensIE) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SiemensIE"}
 	if v.IotCoreThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IotCoreThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceDetail(v *types.SourceDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceDetail"}
+	if v.Kendra != nil {
+		if err := validateKendraSourceDetail(v.Kendra); err != nil {
+			invalidParams.AddNested("Kendra", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3135,6 +3337,28 @@ func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
 	}
 }
 
+func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetInput"}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
+	if v.DatasetSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetSource"))
+	} else if v.DatasetSource != nil {
+		if err := validateDatasetSource(v.DatasetSource); err != nil {
+			invalidParams.AddNested("DatasetSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 	if v == nil {
 		return nil
@@ -3276,6 +3500,21 @@ func validateOpDeleteDashboardInput(v *DeleteDashboardInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDashboardInput"}
 	if v.DashboardId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDatasetInput(v *DeleteDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatasetInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3465,6 +3704,21 @@ func validateOpDescribeDashboardInput(v *DescribeDashboardInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDashboardInput"}
 	if v.DashboardId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDatasetInput(v *DescribeDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDatasetInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3673,6 +3927,21 @@ func validateOpGetInterpolatedAssetPropertyValuesInput(v *GetInterpolatedAssetPr
 	}
 }
 
+func validateOpInvokeAssistantInput(v *InvokeAssistantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeAssistantInput"}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListActionsInput(v *ListActionsInput) error {
 	if v == nil {
 		return nil
@@ -3791,6 +4060,21 @@ func validateOpListDashboardsInput(v *ListDashboardsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDashboardsInput"}
 	if v.ProjectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDatasetsInput(v *ListDatasetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDatasetsInput"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4074,6 +4358,31 @@ func validateOpUpdateDashboardInput(v *UpdateDashboardInput) error {
 	}
 	if v.DashboardDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DashboardDefinition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDatasetInput(v *UpdateDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasetInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
+	if v.DatasetSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetSource"))
+	} else if v.DatasetSource != nil {
+		if err := validateDatasetSource(v.DatasetSource); err != nil {
+			invalidParams.AddNested("DatasetSource", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

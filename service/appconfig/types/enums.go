@@ -8,6 +8,7 @@ type ActionPoint string
 const (
 	ActionPointPreCreateHostedConfigurationVersion ActionPoint = "PRE_CREATE_HOSTED_CONFIGURATION_VERSION"
 	ActionPointPreStartDeployment                  ActionPoint = "PRE_START_DEPLOYMENT"
+	ActionPointAtDeploymentTick                    ActionPoint = "AT_DEPLOYMENT_TICK"
 	ActionPointOnDeploymentStart                   ActionPoint = "ON_DEPLOYMENT_START"
 	ActionPointOnDeploymentStep                    ActionPoint = "ON_DEPLOYMENT_STEP"
 	ActionPointOnDeploymentBaking                  ActionPoint = "ON_DEPLOYMENT_BAKING"
@@ -23,6 +24,7 @@ func (ActionPoint) Values() []ActionPoint {
 	return []ActionPoint{
 		"PRE_CREATE_HOSTED_CONFIGURATION_VERSION",
 		"PRE_START_DEPLOYMENT",
+		"AT_DEPLOYMENT_TICK",
 		"ON_DEPLOYMENT_START",
 		"ON_DEPLOYMENT_STEP",
 		"ON_DEPLOYMENT_BAKING",

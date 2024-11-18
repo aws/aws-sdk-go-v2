@@ -8189,6 +8189,9 @@ func awsAwsquery_deserializeOpErrorDescribeDBLogFiles(response *smithyhttp.Respo
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("DBInstanceNotReady", errorCode):
+		return awsAwsquery_deserializeErrorDBInstanceNotReadyFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -11775,6 +11778,9 @@ func awsAwsquery_deserializeOpErrorDownloadDBLogFilePortion(response *smithyhttp
 	switch {
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBInstanceNotReady", errorCode):
+		return awsAwsquery_deserializeErrorDBInstanceNotReadyFault(response, errorBody)
 
 	case strings.EqualFold("DBLogFileNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBLogFileNotFoundFault(response, errorBody)
@@ -20620,6 +20626,50 @@ func awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response *smithyhttp.Re
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentDBInstanceNotFoundFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorDBInstanceNotReadyFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBInstanceNotReadyFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentDBInstanceNotReadyFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -32431,6 +32481,12 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				sv.MajorEngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ServerlessV2FeaturesSupport", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentServerlessV2FeaturesSupport(&sv.ServerlessV2FeaturesSupport, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -34698,6 +34754,55 @@ func awsAwsquery_deserializeDocumentDBInstanceNotFoundFault(v **types.DBInstance
 	var sv *types.DBInstanceNotFoundFault
 	if *v == nil {
 		sv = &types.DBInstanceNotFoundFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBInstanceNotReadyFault(v **types.DBInstanceNotReadyFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBInstanceNotReadyFault
+	if *v == nil {
+		sv = &types.DBInstanceNotReadyFault{}
 	} else {
 		sv = *v
 	}
@@ -52211,6 +52316,76 @@ func awsAwsquery_deserializeDocumentScalingConfigurationInfo(v **types.ScalingCo
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentServerlessV2FeaturesSupport(v **types.ServerlessV2FeaturesSupport, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ServerlessV2FeaturesSupport
+	if *v == nil {
+		sv = &types.ServerlessV2FeaturesSupport{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("MaxCapacity", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxCapacity = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("MinCapacity", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinCapacity = ptr.Float64(f64)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentServerlessV2ScalingConfigurationInfo(v **types.ServerlessV2ScalingConfigurationInfo, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52265,6 +52440,23 @@ func awsAwsquery_deserializeDocumentServerlessV2ScalingConfigurationInfo(v **typ
 					return err
 				}
 				sv.MinCapacity = ptr.Float64(f64)
+			}
+
+		case strings.EqualFold("SecondsUntilAutoPause", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.SecondsUntilAutoPause = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -56460,6 +56652,12 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				sv.MajorEngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ServerlessV2FeaturesSupport", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentServerlessV2FeaturesSupport(&sv.ServerlessV2FeaturesSupport, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -58076,6 +58274,12 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 			{
 				xtv := string(val)
 				sv.MajorEngineVersion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ServerlessV2FeaturesSupport", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentServerlessV2FeaturesSupport(&sv.ServerlessV2FeaturesSupport, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -62523,6 +62727,12 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 			{
 				xtv := string(val)
 				sv.MajorEngineVersion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ServerlessV2FeaturesSupport", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentServerlessV2FeaturesSupport(&sv.ServerlessV2FeaturesSupport, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):

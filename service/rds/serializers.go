@@ -11901,6 +11901,11 @@ func awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v *types.Serv
 		}
 	}
 
+	if v.SecondsUntilAutoPause != nil {
+		objectKey := object.Key("SecondsUntilAutoPause")
+		objectKey.Integer(*v.SecondsUntilAutoPause)
+	}
+
 	return nil
 }
 
