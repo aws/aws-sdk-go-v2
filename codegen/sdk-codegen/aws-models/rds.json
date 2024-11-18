@@ -4926,7 +4926,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <dl>\n            <dt>Amazon Aurora MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n                  created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n                  in the DB cluster.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Aurora PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n                    created. A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>It must contain 1 to 63 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits\n                          (0 to 9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created RDS Custom DB instance. If you don't specify a value, the default value is <code>ORCL</code> for non-CDBs and\n                <code>RDSCDB</code> for CDBs.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 8 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must contain a letter.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n            <dt>RDS for Db2</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If\n                        this parameter isn't specified, no database is created in the DB instance.\n                        In some cases, we recommend that you don't add a database name. For more\n                        information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations\">Additional considerations</a> in the <i>Amazon RDS User\n                            Guide</i>.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters,\n                                underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created DB instance. If you don't specify a value, \n                    the default value is <code>ORCL</code>. You can't specify the \n                    string <code>null</code>, or any other reserved word, for <code>DBName</code>.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Can't be longer than 8 characters.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <dl>\n            <dt>Amazon Aurora MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n                  created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n                  in the DB cluster.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Aurora PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n                    created. A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>It must contain 1 to 63 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits\n                          (0 to 9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created RDS Custom DB instance. If you don't specify a value, the default value is <code>ORCL</code> for non-CDBs and\n                <code>RDSCDB</code> for CDBs.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 8 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must contain a letter.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n            <dt>RDS for Db2</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If\n                        this parameter isn't specified, no database is created in the DB instance.\n                        In some cases, we recommend that you don't add a database name. For more\n                        information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations\">Additional considerations</a> in the <i>Amazon RDS User\n                            Guide</i>.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters,\n                                underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created DB instance. If you don't specify a value, \n                    the default value is <code>ORCL</code>. You can't specify the \n                    string <code>null</code>, or any other reserved word, for <code>DBName</code>.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Can't be longer than 8 characters.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "DBInstanceIdentifier": {
@@ -8954,6 +8954,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the DB engine version supports zero-ETL integrations with\n            Amazon Redshift.</p>"
                     }
+                },
+                "ServerlessV2FeaturesSupport": {
+                    "target": "com.amazonaws.rds#ServerlessV2FeaturesSupport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies any Aurora Serverless v2 properties or limits that differ between Aurora engine versions.\n        You can test the values of this attribute when deciding which Aurora version to use in a new or upgraded\n        DB cluster. You can also retrieve the version of an existing DB cluster and check whether that version\n        supports certain Aurora Serverless v2 features before you attempt to use those features.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -9854,6 +9860,23 @@
                 "smithy.api#documentation": "<p>\n            <code>DBInstanceIdentifier</code> doesn't refer to an existing DB instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#DBInstanceNotReadyFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DBInstanceNotReady",
+                    "httpResponseCode": 503
+                },
+                "smithy.api#documentation": "<p>An attempt to download or examine log files didn't succeed because an Aurora Serverless v2 instance was paused.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
             }
         },
         "com.amazonaws.rds#DBInstanceRole": {
@@ -11179,6 +11202,9 @@
                 "TagList": {
                     "target": "com.amazonaws.rds#TagList"
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details for an Amazon RDS DB shard group.</p>"
             }
         },
         "com.amazonaws.rds#DBShardGroupAlreadyExistsFault": {
@@ -15101,6 +15127,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotReadyFault"
                 }
             ],
             "traits": {
@@ -18493,6 +18522,9 @@
                     "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#DBInstanceNotReadyFault"
+                },
+                {
                     "target": "com.amazonaws.rds#DBLogFileNotFoundFault"
                 }
             ],
@@ -21606,7 +21638,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the modifications in this request and any pending modifications are \n            asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting \n            for the DB cluster. If this parameter is disabled, changes to the DB cluster are applied during the next \n            maintenance window.</p>\n         <p>Most modifications can be applied immediately or during the next scheduled maintenance window. Some \n            modifications, such as turning on deletion protection and changing the master password, are applied \n            immediately—regardless of when you choose to apply them.</p>\n         <p>By default, this parameter is disabled.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the modifications in this request are asynchronously applied as soon as possible, regardless of the \n            <code>PreferredMaintenanceWindow</code> setting for the DB cluster. If this parameter is disabled, changes to the DB cluster \n            are applied during the next maintenance window.</p>\n         <p>Most modifications can be applied immediately or during the next scheduled maintenance window. Some modifications, such as \n            turning on deletion protection and changing the master password, are applied immediately—regardless of when you choose to apply them.</p>\n         <p>By default, this parameter is disabled.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "BackupRetentionPeriod": {
@@ -29357,19 +29389,45 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.rds#ServerlessV2FeaturesSupport": {
+            "type": "structure",
+            "members": {
+                "MinCapacity": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the minimum capacity is 0 ACUs, the engine version supports the automatic pause/resume\n         feature of Aurora Serverless v2.</p>"
+                    }
+                },
+                "MaxCapacity": {
+                    "target": "com.amazonaws.rds#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies the upper Aurora Serverless v2 capacity limit for a particular engine version.\n         Depending on the engine version, the maximum capacity for an Aurora Serverless v2 cluster might be\n         <code>256</code> or <code>128</code>.\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies any Aurora Serverless v2 properties or limits that differ between Aurora engine versions.\n        You can test the values of this attribute when deciding which Aurora version to use in a new or upgraded\n        DB cluster. You can also retrieve the version of an existing DB cluster and check whether that version\n        supports certain Aurora Serverless v2 features before you attempt to use those features.\n      </p>"
+            }
+        },
         "com.amazonaws.rds#ServerlessV2ScalingConfiguration": {
             "type": "structure",
             "members": {
                 "MinCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value\n            that you can use is 0.5.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on.\n            For Aurora versions that support the Aurora Serverless v2 auto-pause feature, the smallest value that you can use is 0.\n            For versions that don't support Aurora Serverless v2 auto-pause, the smallest value that you can use is 0.5.\n        </p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value\n            that you can use is 128.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 32, 32.5, 33, and so on. The largest value\n            that you can use is 256 for recent Aurora versions, or 128 for older versions.</p>"
+                    }
+                },
+                "SecondsUntilAutoPause": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of seconds an Aurora Serverless v2 DB instance must be idle before\n         Aurora attempts to automatically pause it.\n       </p>\n         <p>Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.</p>"
                     }
                 }
             },
@@ -29383,13 +29441,19 @@
                 "MinCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value\n            that you can use is 0.5.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on.\n            For Aurora versions that support the Aurora Serverless v2 auto-pause feature, the smallest value that you can use is 0.\n            For versions that don't support Aurora Serverless v2 auto-pause, the smallest value that you can use is 0.5.\n        </p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value\n            that you can use is 128.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster.\n            You can specify ACU values in half-step increments, such as 32, 32.5, 33, and so on. The largest value\n            that you can use is 256 for recent Aurora versions, or 128 for older versions.</p>"
+                    }
+                },
+                "SecondsUntilAutoPause": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The number of seconds an Aurora Serverless v2 DB instance must be idle before\n         Aurora attempts to automatically pause it.\n         This property is only shown when the minimum capacity for the cluster is set to 0 ACUs.\n         Changing the minimum capacity to a nonzero value removes this property. If you later\n         change the minimum capacity back to 0 ACUs, this property is reset to its default value\n         unless you specify it again.\n       </p>\n         <p>This value ranges between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.</p>"
                     }
                 }
             },

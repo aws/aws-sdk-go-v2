@@ -688,6 +688,12 @@
                         "smithy.api#documentation": "<p>The unique identifiers of one or more traffic sources. You can specify up to 10\n            traffic sources.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SkipZonalShiftValidation": {
+                    "target": "com.amazonaws.autoscaling#SkipZonalShiftValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones. To skip the validation, specify <code>true</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
+                    }
                 }
             }
         },
@@ -927,6 +933,12 @@
                     "target": "com.amazonaws.autoscaling#AvailabilityZoneDistribution",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The instance capacity distribution across Availability Zones.\n        </p>"
+                    }
+                },
+                "AvailabilityZoneImpairmentPolicy": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneImpairmentPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Availability Zone impairment policy.\n        </p>"
                     }
                 }
             },
@@ -2323,6 +2335,26 @@
                 "smithy.api#documentation": "<p>\n            Describes an Availability Zone distribution.\n        </p>"
             }
         },
+        "com.amazonaws.autoscaling#AvailabilityZoneImpairmentPolicy": {
+            "type": "structure",
+            "members": {
+                "ZonalShiftEnabled": {
+                    "target": "com.amazonaws.autoscaling#ZonalShiftEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If <code>true</code>, enable zonal shift for your Auto Scaling group.\n        </p>"
+                    }
+                },
+                "ImpairedZoneHealthCheckBehavior": {
+                    "target": "com.amazonaws.autoscaling#ImpairedZoneHealthCheckBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select <code>Replace unhealthy</code>, instances that appear unhealthy will be replaced in all Availability Zones. \n            If you select <code>Ignore unhealthy</code>, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> \n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n            \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes an Availability Zone impairment policy.\n        </p>"
+            }
+        },
         "com.amazonaws.autoscaling#AvailabilityZones": {
             "type": "list",
             "member": {
@@ -3146,6 +3178,18 @@
                     "target": "com.amazonaws.autoscaling#AvailabilityZoneDistribution",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance capacity distribution across Availability Zones.</p>"
+                    }
+                },
+                "AvailabilityZoneImpairmentPolicy": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneImpairmentPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The policy for Availability Zone impairment.\n        </p>"
+                    }
+                },
+                "SkipZonalShiftValidation": {
+                    "target": "com.amazonaws.autoscaling#SkipZonalShiftValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones. To skip the validation, specify <code>true</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
                     }
                 }
             }
@@ -6271,6 +6315,23 @@
         },
         "com.amazonaws.autoscaling#HonorCooldown": {
             "type": "boolean"
+        },
+        "com.amazonaws.autoscaling#ImpairedZoneHealthCheckBehavior": {
+            "type": "enum",
+            "members": {
+                "ReplaceUnhealthy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplaceUnhealthy"
+                    }
+                },
+                "IgnoreUnhealthy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IgnoreUnhealthy"
+                    }
+                }
+            }
         },
         "com.amazonaws.autoscaling#IncludeDeletedGroups": {
             "type": "boolean"
@@ -10218,6 +10279,9 @@
         "com.amazonaws.autoscaling#SkipMatching": {
             "type": "boolean"
         },
+        "com.amazonaws.autoscaling#SkipZonalShiftValidation": {
+            "type": "boolean"
+        },
         "com.amazonaws.autoscaling#SpotInstancePools": {
             "type": "integer"
         },
@@ -11012,6 +11076,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The instance capacity distribution across Availability Zones.\n        </p>"
                     }
+                },
+                "AvailabilityZoneImpairmentPolicy": {
+                    "target": "com.amazonaws.autoscaling#AvailabilityZoneImpairmentPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The policy for Availability Zone impairment.\n        </p>"
+                    }
+                },
+                "SkipZonalShiftValidation": {
+                    "target": "com.amazonaws.autoscaling#SkipZonalShiftValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones. To skip the validation, specify <code>true</code>. For more information, see \n        <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n    </p>"
+                    }
                 }
             }
         },
@@ -11261,6 +11337,9 @@
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
+        },
+        "com.amazonaws.autoscaling#ZonalShiftEnabled": {
+            "type": "boolean"
         }
     }
 }

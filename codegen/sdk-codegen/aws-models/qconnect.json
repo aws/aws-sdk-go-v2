@@ -732,6 +732,119 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.qconnect#ActivateMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ActivateMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ActivateMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates a specific version of the Amazon Q in Connect message template. After the\n      version is activated, the previous active version will be deactivated automatically. You can\n      use the <code>$ACTIVE_VERSION</code> qualifier later to reference the version that is in\n      active status.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/activate",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#ActivateMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version to activate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ActivateMessageTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version that is activated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#AgentAttributes": {
+            "type": "structure",
+            "members": {
+                "firstName": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent’s first name as entered in their Amazon Connect user account.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent’s last name as entered in their Amazon Connect user account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an agent.</p>"
+            }
+        },
         "com.amazonaws.qconnect#AmazonConnectGuideAssociationData": {
             "type": "structure",
             "members": {
@@ -809,6 +922,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
+            }
+        },
+        "com.amazonaws.qconnect#ArnWithQualifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$"
             }
         },
         "com.amazonaws.qconnect#Assistant": {
@@ -1342,7 +1461,7 @@
                 "knowledgeBaseAssociationConfigurationData": {
                     "target": "com.amazonaws.qconnect#KnowledgeBaseAssociationConfigurationData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data of the configuration for a <code>KNOWLEDGE_BASE</code> type Amazon Q in Connect Assistant\n      Association.</p>"
+                        "smithy.api#documentation": "<p>The data of the configuration for a <code>KNOWLEDGE_BASE</code> type Amazon Q in Connect\n      Assistant Association.</p>"
                     }
                 }
             },
@@ -1365,6 +1484,17 @@
                         "name": "KNOWLEDGE_BASE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#AttachmentFileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{N}_\\s&@()+,;=\\-]+\\.[A-Za-z0-9]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#BedrockFoundationModelConfigurationForParsing": {
@@ -1406,6 +1536,21 @@
                     "max": 10
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#ChannelSubtype": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "SMS",
+                        "name": "SMS"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#Channels": {
@@ -1969,6 +2114,17 @@
                 "smithy.api#documentation": "<p>Details about the content data.</p>"
             }
         },
+        "com.amazonaws.qconnect#ContentDisposition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ATTACHMENT",
+                        "name": "ATTACHMENT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#ContentFeedbackData": {
             "type": "union",
             "members": {
@@ -2233,7 +2389,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2369,7 +2525,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2441,7 +2597,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2598,7 +2754,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2720,7 +2876,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2749,7 +2905,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2874,7 +3030,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2979,7 +3135,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3039,7 +3195,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3060,7 +3216,7 @@
                 "sourceConfiguration": {
                     "target": "com.amazonaws.qconnect#SourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the knowledge base content. Only set this argument for EXTERNAL knowledge\n      bases.</p>"
+                        "smithy.api#documentation": "<p>The source of the knowledge base content. Only set this argument for EXTERNAL or Managed\n      knowledge bases.</p>"
                     }
                 },
                 "renderingConfiguration": {
@@ -3104,6 +3260,310 @@
                         "smithy.api#documentation": "<p>The knowledge base.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect message template. The name of the message template has to\n      be unique for each knowledge base. The channel subtype of the message template is immutable\n      and cannot be modified after creation. After the message template is created, you can use the\n        <code>$LATEST</code> qualifier to reference the created message template.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplateAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplateAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Uploads an attachment file to the specified Amazon Q in Connect message template. The name\n      of the message template attachment has to be unique for each message template referenced by\n      the <code>$LATEST</code> qualifier. The body of the attachment file should be encoded using\n      base64 encoding. After the file is uploaded, you can use the pre-signed Amazon S3 URL returned\n      in response to download the uploaded file.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/attachments",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentDisposition": {
+                    "target": "com.amazonaws.qconnect#ContentDisposition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presentation information for the attachment file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#AttachmentFileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attachment file being uploaded. The name should include the file extension.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the attachment file being uploaded. It should be encoded using base64\n      encoding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "attachment": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttachment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the message template.</p>"
+                    }
+                },
+                "channelSubtype": {
+                    "target": "com.amazonaws.qconnect#ChannelSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel subtype this message template applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.qconnect#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
+                    }
+                },
+                "defaultAttributes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the default values to use for variables in the message template.\n      This object contains different categories of key-value pairs. Each key defines a variable or\n      placeholder in the message template. The corresponding value defines the default value for\n      that variable.</p>"
+                    }
+                },
+                "groupingConfiguration": {
+                    "target": "com.amazonaws.qconnect#GroupingConfiguration"
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplate": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplateVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplateVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new Amazon Q in Connect message template version from the current content and\n      configuration of a message template. Versions are immutable and monotonically increasing. Once\n      a version is created, you can reference a specific version of the message template by passing\n      in <code>&lt;message-template-id&gt;:&lt;versionNumber&gt;</code> as the message template\n      identifier. An error is displayed if the supplied <code>messageTemplateContentSha256</code> is\n      different from the <code>messageTemplateContentSha256</code> of the message template with\n        <code>$LATEST</code> qualifier. If multiple <code>CreateMessageTemplateVersion</code>\n      requests are made while the message template remains the same, only the first invocation\n      creates a new version and the succeeding requests will return the same response as the first\n      invocation.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/versions",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateVersionRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateContentSha256": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum value of the message template content that is referenced by the\n        <code>$LATEST</code> qualifier. It can be returned in <code>MessageTemplateData</code> or\n        <code>ExtendedMessageTemplateData</code>. It’s calculated by content, language,\n        <code>defaultAttributes</code> and <code>Attachments</code> of the message template. If not\n      supplied, the message template version will be created based on the message template content\n      that is referenced by the <code>$LATEST</code> qualifier by default.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateMessageTemplateVersionResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplate": {
+                    "target": "com.amazonaws.qconnect#ExtendedMessageTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#CreateQuickResponse": {
@@ -3210,7 +3670,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3276,7 +3736,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3330,6 +3790,374 @@
                         "smithy.api#documentation": "<p>The session.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qconnect#CustomAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.qconnect#MessageTemplateAttributeKey"
+            },
+            "value": {
+                "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#CustomerProfileAttributes": {
+            "type": "structure",
+            "members": {
+                "profileId": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>"
+                    }
+                },
+                "profileARN": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a customer profile.</p>"
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's first name.</p>"
+                    }
+                },
+                "middleName": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's middle name.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's last name.</p>"
+                    }
+                },
+                "accountNumber": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n      address.</p>"
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n      number.</p>"
+                    }
+                },
+                "additionalInformation": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                    }
+                },
+                "partyType": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's party type.</p>"
+                    }
+                },
+                "businessName": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the customer's business.</p>"
+                    }
+                },
+                "birthDate": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's birth date.</p>"
+                    }
+                },
+                "gender": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's gender.</p>"
+                    }
+                },
+                "mobilePhoneNumber": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's mobile phone number.</p>"
+                    }
+                },
+                "homePhoneNumber": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's mobile phone number.</p>"
+                    }
+                },
+                "businessPhoneNumber": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's business phone number.</p>"
+                    }
+                },
+                "businessEmailAddress": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's business email address.</p>"
+                    }
+                },
+                "address1": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of a customer address.</p>"
+                    }
+                },
+                "address2": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of a customer address.</p>"
+                    }
+                },
+                "address3": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of a customer address.</p>"
+                    }
+                },
+                "address4": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fourth line of a customer address.</p>"
+                    }
+                },
+                "city": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city in which a customer lives.</p>"
+                    }
+                },
+                "county": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county in which a customer lives.</p>"
+                    }
+                },
+                "country": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country in which a customer lives.</p>"
+                    }
+                },
+                "postalCode": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a customer address.</p>"
+                    }
+                },
+                "province": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province in which a customer lives.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state in which a customer lives.</p>"
+                    }
+                },
+                "shippingAddress1": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingAddress2": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingAddress3": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingAddress4": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fourth line of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingCity": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingCounty": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingCountry": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingPostalCode": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingProvince": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province of a customer’s shipping address.</p>"
+                    }
+                },
+                "shippingState": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of a customer’s shipping address.</p>"
+                    }
+                },
+                "mailingAddress1": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingAddress2": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingAddress3": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingAddress4": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fourth line of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingCity": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingCounty": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingCountry": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingPostalCode": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingProvince": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province of a customer’s mailing address.</p>"
+                    }
+                },
+                "mailingState": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of a customer’s mailing address.</p>"
+                    }
+                },
+                "billingAddress1": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of a customer’s billing address.</p>"
+                    }
+                },
+                "billingAddress2": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of a customer’s billing address.</p>"
+                    }
+                },
+                "billingAddress3": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of a customer’s billing address.</p>"
+                    }
+                },
+                "billingAddress4": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fourth line of a customer’s billing address.</p>"
+                    }
+                },
+                "billingCity": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of a customer’s billing address.</p>"
+                    }
+                },
+                "billingCounty": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county of a customer’s billing address.</p>"
+                    }
+                },
+                "billingCountry": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of a customer’s billing address.</p>"
+                    }
+                },
+                "billingPostalCode": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a customer’s billing address.</p>"
+                    }
+                },
+                "billingProvince": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province of a customer’s billing address.</p>"
+                    }
+                },
+                "billingState": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of a customer’s billing address.</p>"
+                    }
+                },
+                "custom": {
+                    "target": "com.amazonaws.qconnect#CustomAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom attributes in customer profile attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The customer profile attributes that are used with the message template.</p>"
             }
         },
         "com.amazonaws.qconnect#DataDetails": {
@@ -3407,6 +4235,99 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#DataSummary"
+            }
+        },
+        "com.amazonaws.qconnect#DeactivateMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeactivateMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeactivateMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deactivates a specific version of the Amazon Q in Connect message template . After the\n      version is deactivated, you can no longer use the <code>$ACTIVE_VERSION</code> qualifier to\n      reference the version in active status.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/deactivate",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#DeactivateMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version to deactivate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeactivateMessageTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version that has been deactivated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#DeleteAIAgent": {
@@ -4017,6 +4938,146 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.qconnect#DeleteMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Q in Connect message template entirely or a specific version of the\n      message template if version is supplied in the request. You can provide the message template\n      identifier as <code>&lt;message-template-id&gt;:&lt;versionNumber&gt;</code> to delete a\n      specific version of the message template. If it is not supplied, the message template and all\n      available versions will be deleted.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteMessageTemplateAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteMessageTemplateAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteMessageTemplateAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the attachment file from the Amazon Q in Connect message template that is\n      referenced by <code>$LATEST</code> qualifier. Attachments on available message template\n      versions will remain unchanged.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/attachments/{attachmentId}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteMessageTemplateAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "attachmentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the attachment file.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteMessageTemplateAttachmentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteMessageTemplateResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#DeleteQuickResponse": {
             "type": "operation",
             "input": {
@@ -4132,6 +5193,243 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The text of the document.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailHeader": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#EmailHeaderKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the email header.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.qconnect#EmailHeaderValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the email header.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The email header to include in email messages.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailHeaderKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 126
+                },
+                "smithy.api#pattern": "^[!-9;-@A-~]+$"
+            }
+        },
+        "com.amazonaws.qconnect#EmailHeaderValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 870
+                },
+                "smithy.api#pattern": "[ -~]*",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#EmailHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#EmailHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.qconnect#EmailMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "subject": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject line, or title, to use in email messages.</p>"
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.qconnect#EmailMessageTemplateContentBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body to use in email messages.</p>"
+                    }
+                },
+                "headers": {
+                    "target": "com.amazonaws.qconnect#EmailHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email headers to include in email messages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the message template that applies to the email channel subtype.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#EmailMessageTemplateContentBody": {
+            "type": "structure",
+            "members": {
+                "plainText": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body, in plain text format, to use in email messages that are based on the\n      message template. We recommend using plain text format for email clients that don't render\n      HTML content and clients that are connected to high-latency networks, such as mobile\n      devices.</p>"
+                    }
+                },
+                "html": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body, in HTML format, to use in email messages that are based on the message\n      template. We recommend using HTML format for email clients that render HTML content. You can\n      include links, formatted text, and more in an HTML message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The body to use in email messages.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ExtendedMessageTemplateData": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelSubtype": {
+                    "target": "com.amazonaws.qconnect#ChannelSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel subtype this message template applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template data was last modified.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedBy": {
+                    "target": "com.amazonaws.qconnect#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the message template\n      data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the message template.</p>"
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.qconnect#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
+                    }
+                },
+                "groupingConfiguration": {
+                    "target": "com.amazonaws.qconnect#GroupingConfiguration"
+                },
+                "defaultAttributes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the default values to use for variables in the message template.\n      This object contains different categories of key-value pairs. Each key defines a variable or\n      placeholder in the message template. The corresponding value defines the default value for\n      that variable.</p>"
+                    }
+                },
+                "attributeTypes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of attributes contain the message template.</p>"
+                    }
+                },
+                "attachments": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template attachments.</p>"
+                    }
+                },
+                "isActive": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the version of the message template is activated.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version.</p>"
+                    }
+                },
+                "messageTemplateContentSha256": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum value of the message template content that is referenced by the\n        <code>$LATEST</code> qualifier. It can be returned in <code>MessageTemplateData</code> or\n        <code>ExtendedMessageTemplateData</code>. It’s calculated by content, language,\n        <code>defaultAttributes</code> and <code>Attachments</code> of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The extended data of a message template.</p>"
             }
         },
         "com.amazonaws.qconnect#ExternalSource": {
@@ -4907,6 +6205,75 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#GetMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#GetMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#GetMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the Amazon Q in Connect message template. The message template identifier can\n      contain an optional qualifier, for example,\n        <code>&lt;message-template-id&gt;:&lt;qualifier&gt;</code>, which is either an actual\n      version number or an Amazon Q Connect managed qualifier <code>$ACTIVE_VERSION</code> | <code>$LATEST</code>. If it is\n      not supplied, then <code>$LATEST</code> is assumed implicitly.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetMessageTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplate": {
+                    "target": "com.amazonaws.qconnect#ExtendedMessageTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#GetQuickResponse": {
             "type": "operation",
             "input": {
@@ -5561,6 +6928,9 @@
                     "target": "com.amazonaws.qconnect#SearchContent"
                 },
                 {
+                    "target": "com.amazonaws.qconnect#SearchMessageTemplates"
+                },
+                {
                     "target": "com.amazonaws.qconnect#SearchQuickResponses"
                 },
                 {
@@ -5576,6 +6946,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.qconnect#Content"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#MessageTemplate"
                 },
                 {
                     "target": "com.amazonaws.qconnect#QuickResponse"
@@ -6772,6 +8145,190 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#ListMessageTemplateVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListMessageTemplateVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListMessageTemplateVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the available versions for the specified Amazon Q in Connect message\n      template.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/versions",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "messageTemplateVersionSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessageTemplateVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessageTemplateVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplateVersionSummaries": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the versions of a message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessageTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListMessageTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListMessageTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the available Amazon Q in Connect message templates for the specified knowledge\n      base.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "messageTemplateSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessageTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListMessageTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplateSummaries": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#ListQuickResponses": {
             "type": "operation",
             "input": {
@@ -6955,6 +8512,905 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#MessageTemplate": {
+            "type": "resource",
+            "identifiers": {
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier"
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.qconnect#CreateMessageTemplate"
+            },
+            "read": {
+                "target": "com.amazonaws.qconnect#GetMessageTemplate"
+            },
+            "update": {
+                "target": "com.amazonaws.qconnect#UpdateMessageTemplate"
+            },
+            "delete": {
+                "target": "com.amazonaws.qconnect#DeleteMessageTemplate"
+            },
+            "list": {
+                "target": "com.amazonaws.qconnect#ListMessageTemplates"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.qconnect#ActivateMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#CreateMessageTemplateAttachment"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#CreateMessageTemplateVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#DeactivateMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#DeleteMessageTemplateAttachment"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ListMessageTemplateVersions"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#RenderMessageTemplate"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#UpdateMessageTemplateMetadata"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "message-template/{knowledgeBaseId}/{messageTemplateId}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttachment": {
+            "type": "structure",
+            "members": {
+                "contentDisposition": {
+                    "target": "com.amazonaws.qconnect#ContentDisposition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presentation information for the attachment file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#AttachmentFileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attachment file being uploaded. The name should include the file extension.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the attachment file was uploaded.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.qconnect#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pre-signed Amazon S3 URL that can be used to download the attachment file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "urlExpiry": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the pre-signed Amazon S3 URL.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "attachmentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the attachment file.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the message template attachment.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateAttachment"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32767
+                }
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttributeKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateAttributeKey"
+            },
+            "traits": {
+                "smithy.api#sensitive": {},
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttributeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SYSTEM",
+                        "name": "SYSTEM"
+                    },
+                    {
+                        "value": "AGENT",
+                        "name": "AGENT"
+                    },
+                    {
+                        "value": "CUSTOMER_PROFILE",
+                        "name": "CUSTOMER_PROFILE"
+                    },
+                    {
+                        "value": "CUSTOM",
+                        "name": "CUSTOM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttributeTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateAttributeType"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32767
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateAttributes": {
+            "type": "structure",
+            "members": {
+                "systemAttributes": {
+                    "target": "com.amazonaws.qconnect#SystemAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system attributes that are used with the message template.</p>"
+                    }
+                },
+                "agentAttributes": {
+                    "target": "com.amazonaws.qconnect#AgentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent attributes that are used with the message template.</p>"
+                    }
+                },
+                "customerProfileAttributes": {
+                    "target": "com.amazonaws.qconnect#CustomerProfileAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer profile attributes that are used with the message template.</p>"
+                    }
+                },
+                "customAttributes": {
+                    "target": "com.amazonaws.qconnect#CustomAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom attributes that are used with the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attributes that are used with the message template.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateBodyContentProvider": {
+            "type": "union",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.qconnect#NonEmptyUnlimitedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container of the message template body.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateContentProvider": {
+            "type": "union",
+            "members": {
+                "email": {
+                    "target": "com.amazonaws.qconnect#EmailMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to the email channel subtype.</p>"
+                    }
+                },
+                "sms": {
+                    "target": "com.amazonaws.qconnect#SMSMessageTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template that applies to the SMS channel subtype.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container of message template content.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateContentSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateData": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelSubtype": {
+                    "target": "com.amazonaws.qconnect#ChannelSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel subtype this message template applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template data was last modified.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedBy": {
+                    "target": "com.amazonaws.qconnect#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the message template\n      data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the message template.</p>"
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.qconnect#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
+                    }
+                },
+                "groupingConfiguration": {
+                    "target": "com.amazonaws.qconnect#GroupingConfiguration"
+                },
+                "defaultAttributes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the default values to use for variables in the message template.\n      This object contains different categories of key-value pairs. Each key defines a variable or\n      placeholder in the message template. The corresponding value defines the default value for\n      that variable.</p>"
+                    }
+                },
+                "attributeTypes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of attributes that the message template contains.</p>"
+                    }
+                },
+                "messageTemplateContentSha256": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum value of the message template content that is referenced by the\n        <code>$LATEST</code> qualifier. It can be returned in <code>MessageTemplateData</code> or\n        <code>ExtendedMessageTemplateData</code>. It’s calculated by content, language,\n        <code>defaultAttributes</code> and <code>Attachments</code> of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data of a message template.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#MessageTemplate"
+                    },
+                    {
+                        "resource": "com.amazonaws.qconnect#KnowledgeBase"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateFilterField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute field to filter the message templates by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of attribute field to filter the message template by.</p>"
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use for filtering.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeNoExistence": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to treat null value as a match for the attribute field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message template fields to filter the message template query results by. The following\n      is the list of supported field names:</p>\n         <ul>\n            <li>\n               <p>name</p>\n            </li>\n            <li>\n               <p>description</p>\n            </li>\n            <li>\n               <p>channel</p>\n            </li>\n            <li>\n               <p>channelSubtype</p>\n            </li>\n            <li>\n               <p>language</p>\n            </li>\n            <li>\n               <p>qualifier</p>\n            </li>\n            <li>\n               <p>createdTime</p>\n            </li>\n            <li>\n               <p>lastModifiedTime</p>\n            </li>\n            <li>\n               <p>lastModifiedBy</p>\n            </li>\n            <li>\n               <p>groupingConfiguration.criteria</p>\n            </li>\n            <li>\n               <p>groupingConfiguration.values</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateFilterFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateFilterField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "PREFIX",
+                        "name": "PREFIX"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateOrderField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.qconnect#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order at which the message templates are sorted by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message template fields to order the message template query results by. The following\n      is the list of supported field names:</p>\n         <ul>\n            <li>\n               <p>name</p>\n            </li>\n            <li>\n               <p>description</p>\n            </li>\n            <li>\n               <p>channel</p>\n            </li>\n            <li>\n               <p>channelSubtype</p>\n            </li>\n            <li>\n               <p>language</p>\n            </li>\n            <li>\n               <p>qualifier</p>\n            </li>\n            <li>\n               <p>createdTime</p>\n            </li>\n            <li>\n               <p>lastModifiedTime</p>\n            </li>\n            <li>\n               <p>lastModifiedBy</p>\n            </li>\n            <li>\n               <p>groupingConfiguration.criteria</p>\n            </li>\n            <li>\n               <p>groupingConfiguration.values</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateQueryField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to query the message templates by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateQueryValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of the attribute to query the message templates by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateQueryOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use for matching attribute field values in the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowFuzziness": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the query expects only exact matches on the attribute field values. The results of\n      the query will only include exact matches if this parameter is set to false.</p>"
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.qconnect#Priority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The importance of the attribute field when calculating query result relevancy scores. The\n      value set for this parameter affects the ordering of search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The message template fields to query message templates by. The following is the list of\n      supported field names:</p>\n         <ul>\n            <li>\n               <p>name</p>\n            </li>\n            <li>\n               <p>description</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateQueryFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateQueryField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateQueryOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CONTAINS",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "CONTAINS_AND_PREFIX",
+                        "name": "CONTAINS_AND_PREFIX"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateQueryValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateQueryValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateQueryValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSearchExpression": {
+            "type": "structure",
+            "members": {
+                "queries": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateQueryFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template query expressions.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateFilterFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of filtering rules applied to message template query results.</p>"
+                    }
+                },
+                "orderOnField": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateOrderField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template attribute fields on which the query results are ordered.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search expression of the message template.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSearchResultData": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelSubtype": {
+                    "target": "com.amazonaws.qconnect#ChannelSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel subtype this message template applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template data was last modified.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedBy": {
+                    "target": "com.amazonaws.qconnect#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the message template\n      data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isActive": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the version of the message template is activated.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the message template.</p>"
+                    }
+                },
+                "groupingConfiguration": {
+                    "target": "com.amazonaws.qconnect#GroupingConfiguration"
+                },
+                "language": {
+                    "target": "com.amazonaws.qconnect#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of message template search.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#MessageTemplate"
+                    },
+                    {
+                        "resource": "com.amazonaws.qconnect#KnowledgeBase"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSearchResultsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateSearchResultData"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSummary": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelSubtype": {
+                    "target": "com.amazonaws.qconnect#ChannelSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel subtype this message template applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the message template data was last modified.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastModifiedBy": {
+                    "target": "com.amazonaws.qconnect#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the message template\n      data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "activeVersionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version that is activated.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the message template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the message template.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#MessageTemplate"
+                    },
+                    {
+                        "resource": "com.amazonaws.qconnect#KnowledgeBase"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateSummary"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateVersionSummary": {
+            "type": "structure",
+            "members": {
+                "messageTemplateArn": {
+                    "target": "com.amazonaws.qconnect#ArnWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelSubtype": {
+                    "target": "com.amazonaws.qconnect#ChannelSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel subtype this message template applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isActive": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the version of the message template is activated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the message template version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the message template version.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#MessageTemplateVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#MessageTemplateVersionSummary"
+            }
+        },
         "com.amazonaws.qconnect#Name": {
             "type": "string",
             "traits": {
@@ -6991,6 +9447,15 @@
                     "min": 1,
                     "max": 4096
                 }
+            }
+        },
+        "com.amazonaws.qconnect#NonEmptyUnlimitedString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#NotifyRecommendationsReceived": {
@@ -7818,7 +10283,7 @@
                 "language": {
                     "target": "com.amazonaws.qconnect#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written.</p>"
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
                     }
                 },
                 "tags": {
@@ -8789,6 +11254,94 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.qconnect#RenderMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#RenderMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#RenderMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Renders the Amazon Q in Connect message template based on the attribute values provided\n      and generates the message content. For any variable present in the message template, if the\n      attribute value is neither provided in the attribute request parameter nor the default\n      attribute of the message template, the rendered message content will keep the variable\n      placeholder as it is and return the attribute keys that are missing.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/render",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#RenderMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the values to use for variables in the message template. This\n      object contains different categories of key-value pairs. Each key defines a variable or\n      placeholder in the message template. The corresponding value defines the value for that\n      variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#RenderMessageTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributesNotInterpolated": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute keys that are not resolved.</p>"
+                    }
+                },
+                "attachments": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template attachments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#RenderingConfiguration": {
             "type": "structure",
             "members": {
@@ -8924,6 +11477,34 @@
                 "smithy.api#documentation": "<p>A union type that specifies the data stored on the session.</p>"
             }
         },
+        "com.amazonaws.qconnect#SMSMessageTemplateContent": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "com.amazonaws.qconnect#SMSMessageTemplateContentBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body to use in SMS messages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of the message template that applies to the SMS channel subtype.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SMSMessageTemplateContentBody": {
+            "type": "structure",
+            "members": {
+                "plainText": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateBodyContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body to use in SMS messages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The body to use in SMS messages.</p>"
+            }
+        },
         "com.amazonaws.qconnect#SearchContent": {
             "type": "operation",
             "input": {
@@ -9023,6 +11604,101 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The search expression.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SearchMessageTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#SearchMessageTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#SearchMessageTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for Amazon Q in Connect message templates in the specified knowledge base.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/search/messageTemplates",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "results"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#SearchMessageTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "searchExpression": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSearchExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search expression for querying the message template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#SearchMessageTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "results": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateSearchResultsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the message template search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#SearchQuickResponses": {
@@ -9531,7 +12207,7 @@
                 "citationSpan": {
                     "target": "com.amazonaws.qconnect#CitationSpan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about where the text with a citation begins and ends in the generated output.</p>"
+                        "smithy.api#documentation": "<p>Contains information about where the text with a citation begins and ends in the generated\n      output.</p>"
                     }
                 }
             },
@@ -9786,6 +12462,46 @@
                         "name": "CREATE_IN_PROGRESS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#SystemAttributes": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task.</p>"
+                    }
+                },
+                "customerEndpoint": {
+                    "target": "com.amazonaws.qconnect#SystemEndpointAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CustomerEndpoint attribute.</p>"
+                    }
+                },
+                "systemEndpoint": {
+                    "target": "com.amazonaws.qconnect#SystemEndpointAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SystemEndpoint attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The system attributes that are used with the message template.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SystemEndpointAttributes": {
+            "type": "structure",
+            "members": {
+                "address": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's phone number if used with <code>customerEndpoint</code>, or the number the customer\n      dialed to call your contact center if used with <code>systemEndpoint</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The system endpoint attributes that are used with the message template.</p>"
             }
         },
         "com.amazonaws.qconnect#TagCondition": {
@@ -10108,7 +12824,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -10206,7 +12922,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.qconnect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -10489,6 +13205,181 @@
                         "smithy.api#documentation": "<p>The knowledge base to update.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qconnect#UpdateMessageTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateMessageTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateMessageTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the Amazon Q in Connect message template. Partial update is supported. If any\n      field is not supplied, it will remain unchanged for the message template that is referenced by\n      the <code>$LATEST</code> qualifier. Any modification will only apply to the message template\n      that is referenced by the <code>$LATEST</code> qualifier. The fields for all available\n      versions will remain unchanged.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#UpdateMessageTemplateMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateMessageTemplateMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateMessageTemplateMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the Amazon Q in Connect message template metadata. Note that any modification to\n      the message template’s name, description and grouping configuration will applied to the\n      message template pointed by the <code>$LATEST</code> qualifier and all available versions.\n      Partial update is supported. If any field is not supplied, it will remain unchanged for the\n      message template.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/messageTemplates/{messageTemplateId}/metadata",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#UpdateMessageTemplateMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the message template.</p>"
+                    }
+                },
+                "groupingConfiguration": {
+                    "target": "com.amazonaws.qconnect#GroupingConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateMessageTemplateMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplate": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateMessageTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n      the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageTemplateId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message template. Can be either the ID or the ARN. It cannot contain any qualifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateContentProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the message template.</p>"
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.qconnect#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
+                    }
+                },
+                "defaultAttributes": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the default values to use for variables in the message template.\n      This object contains different categories of key-value pairs. Each key defines a variable or\n      placeholder in the message template. The corresponding value defines the default value for\n      that variable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateMessageTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "messageTemplate": {
+                    "target": "com.amazonaws.qconnect#MessageTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#UpdateQuickResponse": {

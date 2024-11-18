@@ -1249,6 +1249,9 @@
                     "target": "com.amazonaws.cloudformation#ListGeneratedTemplates"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#ListHookResults"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#ListImports"
                 },
                 {
@@ -6898,6 +6901,89 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#HookResultId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.cloudformation#HookResultNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudformation#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HookResultNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified target doesn't have any requested Hook invocations.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudformation#HookResultSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudformation#HookResultSummary"
+            }
+        },
+        "com.amazonaws.cloudformation#HookResultSummary": {
+            "type": "structure",
+            "members": {
+                "InvocationPoint": {
+                    "target": "com.amazonaws.cloudformation#HookInvocationPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact point in the provisioning logic where the Hook runs.</p>"
+                    }
+                },
+                "FailureMode": {
+                    "target": "com.amazonaws.cloudformation#HookFailureMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure mode of the invocation. The following are potential modes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAIL</code>: If the hook invocation returns a failure, then the requested target operation should fail.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARN</code>: If the hook invocation returns a failure, then the requested target operation should warn.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.cloudformation#HookTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type name of the Hook being invoked.</p>"
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudformation#HookTypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Hook being invoked.</p>"
+                    }
+                },
+                "TypeConfigurationVersionId": {
+                    "target": "com.amazonaws.cloudformation#HookTypeConfigurationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Hook type configuration.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#HookStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the Hook invocation.</p>"
+                    }
+                },
+                "HookStatusReason": {
+                    "target": "com.amazonaws.cloudformation#HookStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the Hook results status. For example, if the Hook result is in a <code>FAILED</code> state, this \n   may contain additional information for the <code>FAILED</code> state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Hook invocation, its status, and the reason for its status.</p>"
+            }
+        },
         "com.amazonaws.cloudformation#HookStatus": {
             "type": "enum",
             "members": {
@@ -7452,6 +7538,114 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListHookResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#ListHookResultsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudformation#ListHookResultsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#HookResultNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns summaries of invoked Hooks when a change set or Cloud Control API operation target is provided.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ListHookResultsInput": {
+            "type": "structure",
+            "members": {
+                "TargetType": {
+                    "target": "com.amazonaws.cloudformation#ListHookResultsTargetType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of operation being targeted by the Hook.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.cloudformation#HookResultId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The logical ID of the target the operation is acting on by the Hook. If the target is a change set, \n      it's the ARN of the change set.</p>\n         <p>If the target is a Cloud Control API operation, this will be the <code>HookRequestToken</code> returned by the Cloud Control API \n      operation request. For more information on the <code>HookRequestToken</code>, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html\">ProgressEvent</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that identifies the next page of events that you want to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListHookResultsOutput": {
+            "type": "structure",
+            "members": {
+                "TargetType": {
+                    "target": "com.amazonaws.cloudformation#ListHookResultsTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of operation being targeted by the Hook.</p>"
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.cloudformation#HookResultId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical ID of the target the operation is acting on by the Hook. If the target is a change set, \n      it's the ARN of the change set.</p>\n         <p>If the target is a Cloud Control API operation, this will be the <code>HooksRequestToken</code> returned by the Cloud Control API \n      operation request. For more information on the <code>HooksRequestToken</code>, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ProgressEvent.html\">ProgressEvent</a>.</p>"
+                    }
+                },
+                "HookResults": {
+                    "target": "com.amazonaws.cloudformation#HookResultSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>HookResultSummary</code> structures that provides the status and Hook status reason for each Hook \n      invocation for the specified target.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudformation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token, <code>null</code> or empty if no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#ListHookResultsTargetType": {
+            "type": "enum",
+            "members": {
+                "CHANGE_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHANGE_SET"
+                    }
+                },
+                "STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STACK"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                },
+                "CLOUD_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUD_CONTROL"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudformation#ListImports": {
