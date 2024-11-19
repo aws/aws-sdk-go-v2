@@ -2,14 +2,20 @@ package transfermanager
 
 import (
 	"context"
+	"fmt"
 	"io"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -542,7 +548,142 @@ type downloader struct {
 }
 
 func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
+	if err := d.init(); err != nil {
+		return nil, fmt.Errorf("unable to initialize download: %w", err)
+	}
+
+	clientOptions := []func(*s3.Options){
+		func(o *s3.Options) {
+			o.APIOptions = append(o.APIOptions,
+				middleware.AddSDKAgentKey(middleware.FeatureMetadata, userAgentKey),
+			)
+		}}
+
+	if d.in.PartNumber > 0 {
+		return d.singleDownload(ctx)
+	}
+
 	return nil, nil
+}
+
+func (d *downloader) init() error {
+	if u.options.PartSizeBytes < minPartSizeBytes {
+		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
+	}
+
+	if u.options.PartBodyMaxRetries < 0 {
+		return fmt.Error("part body retry must be non-negative")
+	}
+}
+
+func (d *downloader) singleDownload(ctx context.Context) {
+
+}
+
+// downloadChunk downloads the chunk from s3
+func (d *downloader) downloadChunk(chunk dlchunk) (*GetObjectOutput, error) {
+	var params s3.GetObjectInput
+	awsutil.Copy(&params, d.in)
+
+	// Get the next byte range of data
+	params.Range = aws.String(chunk.ByteRange())
+
+	var n int64
+	var err error
+	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
+		n, err = d.tryDownloadChunk(&params, &chunk)
+		if err == nil {
+			break
+		}
+		// Check if the returned error is an errReadingBody.
+		// If err is errReadingBody this indicates that an error
+		// occurred while copying the http response body.
+		// If this occurs we unwrap the err to set the underlying error
+		// and attempt any remaining retries.
+		if bodyErr, ok := err.(*errReadingBody); ok {
+			err = bodyErr.Unwrap()
+		} else {
+			return err
+		}
+
+		chunk.cur = 0
+
+		d.cfg.Logger.Logf(logging.Debug,
+			"object part body download interrupted %s, err, %v, retrying attempt %d",
+			aws.ToString(params.Key), err, retry)
+	}
+
+	d.incrWritten(n)
+
+	return err
+}
+
+func (d *downloader) tryDownloadChunk(params *s3.GetObjectInput, chunk dlchunk) (*GetObjectOutput, error) {
+	out, err := d.cfg.S3.GetObject(d.ctx, params, d.cfg.ClientOptions...)
+	if err != nil {
+		return 0, err
+	}
+	d.setTotalBytes(resp) // Set total if not yet set.
+
+	var output GetObjectOutput
+	output.mapFromGetObjectOutput(out)
+
+	if chunk.w != nil {
+		_, err := io.Copy(chunk, out.Body)
+		resp.Body.Close()
+		if err != nil {
+			return nil, &errReadingBody{err: err}
+		}
+	}
+
+	return &output, nil
+}
+
+// getTotalBytes is a thread-safe getter for retrieving the total byte status.
+func (d *downloader) getTotalBytes() int64 {
+	d.m.Lock()
+	defer d.m.Unlock()
+
+	return d.totalBytes
+}
+
+// setTotalBytes is a thread-safe setter for setting the total byte status.
+// Will extract the object's total bytes from the Content-Range if the file
+// will be chunked, or Content-Length. Content-Length is used when the response
+// does not include a Content-Range. Meaning the object was not chunked. This
+// occurs when the full file fits within the PartSize directive.
+func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
+	d.m.Lock()
+	defer d.m.Unlock()
+
+	if d.totalBytes >= 0 {
+		return
+	}
+
+	if resp.ContentRange == nil {
+		// ContentRange is nil when the full file contents is provided, and
+		// is not chunked. Use ContentLength instead.
+		if aws.ToInt64(resp.ContentLength) > 0 {
+			d.totalBytes = aws.ToInt64(resp.ContentLength)
+			return
+		}
+	} else {
+		parts := strings.Split(*resp.ContentRange, "/")
+
+		total := int64(-1)
+		var err error
+		totalStr := parts[len(parts)-1]
+
+		if totalStr != "*" {
+			total, err = strconv.ParseInt(totalStr, 10, 64)
+			if err != nil {
+				d.err = err
+				return
+			}
+		}
+
+		d.totalBytes = total
+	}
 }
 
 func (d *downloader) getErr() error {
