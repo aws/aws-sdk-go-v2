@@ -8,7 +8,7 @@ Do not submit pull requests that directly modify generated source files, e.g. `/
 
 Manual changes to these files will be overwritten by code generation that occurs as part of the daily SDK release process.
 
-Do not submit pull requests that directly modify files in the `/codegen/aws-models` folder. These are API model files, owned by each AWS service team, that are updated automatically as part of the daily SDK release process. Local changes to these files will not persist.
+Do not submit pull requests that directly modify files in the `/codegen/sdk-codegen/aws-models` folder. These are API model files, owned by each AWS service team, that are updated automatically as part of the daily SDK release process. Local changes to these files will not persist.
 
 If you believe the contents of any of these files need to be changed, please [open an issue](https://github.com/aws/aws-sdk-go-v2/issues/new/choose).
 
