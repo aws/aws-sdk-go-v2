@@ -518,7 +518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>CreateType</code> operation creates a new user-defined type in the specified keyspace.\n      </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html\">User-defined types (UDTs)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>. </p>"
+                "smithy.api#documentation": "<p>\n         The <code>CreateType</code> operation creates a new user-defined type in the specified keyspace.\n      </p>\n         <p>To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-create\">Permissions to create a UDT</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html\">User-defined types (UDTs)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>. </p>"
             }
         },
         "com.amazonaws.keyspaces#CreateTypeRequest": {
@@ -713,7 +713,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>DeleteType</code> operation deletes a user-defined type (UDT). You can only delete a type that is not used in a table\n         or another UDT.\n      </p>"
+                "smithy.api#documentation": "<p>\n         The <code>DeleteType</code> operation deletes a user-defined type (UDT). You can only delete a type that is not used in a table\n         or another UDT.\n      </p>\n         <p>To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-drop\">Permissions to delete a UDT</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#DeleteTypeRequest": {
@@ -874,7 +874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the name and the Amazon Resource Name (ARN) of the specified table.</p>"
+                "smithy.api#documentation": "<p>Returns the name of the specified keyspace, the Amazon Resource Name (ARN), the replication strategy, the Amazon Web Services Regions of \n         a multi-Region keyspace, and the status of newly added Regions after an <code>UpdateKeyspace</code> operation.</p>"
             }
         },
         "com.amazonaws.keyspaces#GetKeyspaceRequest": {
@@ -917,6 +917,12 @@
                     "target": "com.amazonaws.keyspaces#RegionList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. \n      </p>"
+                    }
+                },
+                "replicationGroupStatuses": {
+                    "target": "com.amazonaws.keyspaces#ReplicationGroupStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A list of all Regions the keyspace is replicated in after the update keyspace operation and their status.\n      </p>"
                     }
                 }
             }
@@ -1179,7 +1185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>GetType</code> operation returns information about the type, for example the field definitions, the timestamp when the type\n         was last modified, the level of nesting, the status, and details about if the type is used in other types and tables.\n      </p>\n         <p>To read keyspace metadata using <code>GetType</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace.</p>"
+                "smithy.api#documentation": "<p>\n         The <code>GetType</code> operation returns information about the type, for example the field definitions, the timestamp when the type\n         was last modified, the level of nesting, the status, and details about if the type is used in other types and tables.\n      </p>\n         <p>To read keyspace metadata using <code>GetType</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace. To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view\">Permissions to view a UDT</a>\n            in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#GetTypeRequest": {
@@ -1306,6 +1312,29 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"
             }
         },
+        "com.amazonaws.keyspaces#KeyspaceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.keyspaces#KeyspaceSummary": {
             "type": "structure",
             "members": {
@@ -1401,6 +1430,9 @@
                 },
                 {
                     "target": "com.amazonaws.keyspaces#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#UpdateKeyspace"
                 },
                 {
                     "target": "com.amazonaws.keyspaces#UpdateTable"
@@ -2583,7 +2615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         The <code>ListTypes</code> operation returns a list of types for a specified keyspace.\n      </p>\n         <p>To read keyspace metadata using <code>ListTypes</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace.</p>",
+                "smithy.api#documentation": "<p>\n         The <code>ListTypes</code> operation returns a list of types for a specified keyspace.\n      </p>\n         <p>To read keyspace metadata using <code>ListTypes</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace. To configure the required permissions, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view\">Permissions to view a UDT</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2850,6 +2882,46 @@
                 }
             }
         },
+        "com.amazonaws.keyspaces#ReplicationGroupStatus": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "com.amazonaws.keyspaces#region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the Region that was added to the keyspace.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyspaceStatus": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the keyspace.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tablesReplicationProgress": {
+                    "target": "com.amazonaws.keyspaces#TablesReplicationProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         This shows the replication progress of tables in the keyspace. The value is expressed as a percentage of the newly replicated tables \n         with status <code>Active</code> compared to the total number of tables in the keyspace. \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         This shows the summary status of the keyspace after a new Amazon Web Services Region was added.\n      </p>"
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicationGroupStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#ReplicationGroupStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 6
+                }
+            }
+        },
         "com.amazonaws.keyspaces#ReplicationSpecification": {
             "type": "structure",
             "members": {
@@ -2883,7 +2955,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource could't be found.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn’t be found.</p>"
                     }
                 }
             },
@@ -3192,6 +3264,16 @@
                 "target": "com.amazonaws.keyspaces#TableSummary"
             }
         },
+        "com.amazonaws.keyspaces#TablesReplicationProgress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 7
+                },
+                "smithy.api#pattern": "^[0-9]{1,3}(?:[.][0-9]{1,2})?%$"
+            }
+        },
         "com.amazonaws.keyspaces#Tag": {
             "type": "structure",
             "members": {
@@ -3472,6 +3554,77 @@
         "com.amazonaws.keyspaces#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.keyspaces#UpdateKeyspace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspaces#UpdateKeyspaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspaces#UpdateKeyspaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Adds a new Amazon Web Services Region to the keyspace.  You can add a new Region to a keyspace that is either a single or a multi-Region keyspace.\n         The new replica Region is applied to all tables in the keyspace. For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/keyspaces-multi-region-add-replica.html\">Add an Amazon Web Services Region to a keyspace in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.\n      </p>\n         <p>To change a single-Region to a multi-Region keyspace, you have to enable client-side timestamps\n         for all tables in the keyspace. For more information, see\n         <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps.html\">Client-side timestamps in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#UpdateKeyspaceRequest": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the keyspace.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicationSpecification": {
+                    "target": "com.amazonaws.keyspaces#ReplicationSpecification",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientSideTimestamps": {
+                    "target": "com.amazonaws.keyspaces#ClientSideTimestamps"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspaces#UpdateKeyspaceResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.keyspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.keyspaces#UpdateTable": {
             "type": "operation",

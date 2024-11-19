@@ -2412,6 +2412,12 @@
                         "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit\n\t\t\tnormally on its own.</p>\n         <p>For tasks using the Fargate launch type, the task or service requires the following\n\t\t\tplatforms:</p>\n         <ul>\n            <li>\n               <p>Linux platform version <code>1.3.0</code> or later.</p>\n            </li>\n            <li>\n               <p>Windows platform version <code>1.0.0</code> or later.</p>\n            </li>\n         </ul>\n         <p>For tasks that use the Fargate launch type, the max stop timeout value is 120 seconds and if the\n\t\t\tparameter is not specified, the default value of 30 seconds is used.</p>\n         <p>For tasks that use the EC2 launch type, if the <code>stopTimeout</code> parameter isn't\n\t\t\tspecified, the value set for the Amazon ECS container agent configuration variable\n\t\t\t\t<code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the <code>stopTimeout</code> parameter\n\t\t\tor the <code>ECS_CONTAINER_STOP_TIMEOUT</code> agent configuration variable are set, then the default\n\t\t\tvalues of 30 seconds for Linux containers and 30 seconds on Windows containers are used. Your container\n\t\t\tinstances require at least version 1.26.0 of the container agent to use a container stop timeout value.\n\t\t\tHowever, we recommend using the latest container agent version. For information about checking your\n\t\t\tagent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS Container\n\t\t\t\tAgent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI, your instance needs at\n\t\t\tleast version 1.26.0-1 of the <code>ecs-init</code> package. If your container instances are launched\n\t\t\tfrom version <code>20190301</code> or later, then they contain the required versions of the container\n\t\t\tagent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>The valid values for Fargate are 2-120 seconds.</p>"
                     }
                 },
+                "versionConsistency": {
+                    "target": "com.amazonaws.ecs#VersionConsistency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon ECS will resolve the container image tag\n\t\t\tprovided in the container definition to an image digest. By default, the\n\t\t\tvalue is <code>enabled</code>. If you set the value for a container as\n\t\t\t<code>disabled</code>, Amazon ECS will not resolve the provided container image tag\n\t\t\tto a digest and will use the original image URI specified in the container definition for deployment.\n\t\t\tFor more information about container image resolution, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability\">Container image resolution</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
+                    }
+                },
                 "hostname": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
@@ -14265,6 +14271,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#VersionConsistency": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#VersionInfo": {

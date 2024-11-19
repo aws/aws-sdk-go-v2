@@ -1,6 +1,22 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.taxsettings#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.taxsettings#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access is denied for the Amazon Web Services Support API.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
         "com.amazonaws.taxsettings#AccountDetails": {
             "type": "structure",
             "members": {
@@ -422,6 +438,49 @@
                 }
             }
         },
+        "com.amazonaws.taxsettings#AttachmentUploadException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.taxsettings#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Failed to upload the tax exemption document to Amazon Web Services Support case.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.taxsettings#Authorities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#Authority"
+            }
+        },
+        "com.amazonaws.taxsettings#Authority": {
+            "type": "structure",
+            "members": {
+                "country": {
+                    "target": "com.amazonaws.taxsettings#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The country code for the country that the address is in.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.taxsettings#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The state that the address is located. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The address domain associate with the tax information.\n    </p>"
+            }
+        },
         "com.amazonaws.taxsettings#BatchDeleteTaxRegistration": {
             "type": "operation",
             "input": {
@@ -510,6 +569,76 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of errors for the accounts the TRN information could not be deleted for. </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#BatchGetTaxExemptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#BatchGetTaxExemptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#BatchGetTaxExemptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:GetExemptions"
+                    ],
+                    "documentation": "Grants batch get active tax exemptions for a given list of accounts permission"
+                },
+                "smithy.api#documentation": "<p>Get the active tax exemptions for a given list of accounts.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/BatchGetTaxExemptions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#BatchGetTaxExemptionsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.taxsettings#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      List of unique account identifiers.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#BatchGetTaxExemptionsResponse": {
+            "type": "structure",
+            "members": {
+                "taxExemptionDetailsMap": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionDetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption details map of accountId and tax exemption details.\n    </p>"
+                    }
+                },
+                "failedAccounts": {
+                    "target": "com.amazonaws.taxsettings#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of accounts that failed to get tax exemptions.\n    </p>"
                     }
                 }
             },
@@ -716,6 +845,22 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^([0-9]{6}-[0-9]{1})$"
+            }
+        },
+        "com.amazonaws.taxsettings#CaseCreationLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.taxsettings#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You've exceeded the Amazon Web Services Support case creation limit for your account.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 413
             }
         },
         "com.amazonaws.taxsettings#CcmCode": {
@@ -936,6 +1081,16 @@
                 "smithy.api#documentation": "<p>The location of the Amazon S3 bucket that you specify to download your tax documents to.</p>"
             }
         },
+        "com.amazonaws.taxsettings#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
         "com.amazonaws.taxsettings#District": {
             "type": "string",
             "traits": {
@@ -944,6 +1099,35 @@
                     "max": 50
                 },
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.taxsettings#EntityExemptionAccountStatus": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "Valid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Valid"
+                    }
+                },
+                "Expired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                },
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                }
             }
         },
         "com.amazonaws.taxsettings#ErrorCode": {
@@ -982,10 +1166,60 @@
                 "smithy.api#documentation": "<p> Additional tax information associated with your TRN in Estonia.</p>"
             }
         },
+        "com.amazonaws.taxsettings#ExemptionCertificate": {
+            "type": "structure",
+            "members": {
+                "documentName": {
+                    "target": "com.amazonaws.taxsettings#ExemptionDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exemption certificate file name.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentFile": {
+                    "target": "com.amazonaws.taxsettings#ExemptionFileBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exemption certificate file content.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The exemption certificate.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#ExemptionDocumentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9-_.]+).(pdf|jpg|png)$"
+            }
+        },
+        "com.amazonaws.taxsettings#ExemptionFileBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4194304
+                }
+            }
+        },
         "com.amazonaws.taxsettings#FieldName": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.taxsettings#FileBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5242880
+                }
             }
         },
         "com.amazonaws.taxsettings#GenericString": {
@@ -1011,6 +1245,115 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n      Additional tax information associated with your TRN in Georgia.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxExemptionTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#GetTaxExemptionTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#GetTaxExemptionTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:GetExemptions"
+                    ],
+                    "documentation": "Grants get supported tax exemption types permission"
+                },
+                "smithy.api#documentation": "<p>Get supported tax exemption types.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/GetTaxExemptionTypes"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxExemptionTypesRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxExemptionTypesResponse": {
+            "type": "structure",
+            "members": {
+                "taxExemptionTypes": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported types of tax exemptions.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxInheritance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#GetTaxInheritanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#GetTaxInheritanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants get tax inheritance permission"
+                },
+                "smithy.api#documentation": "<p>The get account tax inheritance status.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/GetTaxInheritance"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxInheritanceRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxInheritanceResponse": {
+            "type": "structure",
+            "members": {
+                "heritageStatus": {
+                    "target": "com.amazonaws.taxsettings#HeritageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax inheritance status.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.taxsettings#GetTaxRegistration": {
@@ -1070,7 +1413,8 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/GetTaxRegistrationDocument"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.taxsettings#GetTaxRegistrationDocumentRequest": {
@@ -1079,8 +1423,7 @@
                 "destinationS3Location": {
                     "target": "com.amazonaws.taxsettings#DestinationS3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket that you specify to download your tax documents to.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that you specify to download your tax documents to.</p>"
                     }
                 },
                 "taxDocumentMetadata": {
@@ -1102,6 +1445,12 @@
                     "target": "com.amazonaws.taxsettings#DestinationFilePath",
                     "traits": {
                         "smithy.api#documentation": "<p>The file path of the Amazon S3 bucket where you want to download your tax document to.</p>"
+                    }
+                },
+                "presignedS3Url": {
+                    "target": "com.amazonaws.taxsettings#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 presigned URL of the tax registration document.\n    </p>"
                     }
                 }
             },
@@ -1135,6 +1484,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#HeritageStatus": {
+            "type": "enum",
+            "members": {
+                "OptIn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OptIn"
+                    }
+                },
+                "OptOut": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OptOut"
+                    }
+                }
             }
         },
         "com.amazonaws.taxsettings#IndiaAdditionalInfo": {
@@ -1475,6 +1841,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.taxsettings#ListTaxExemptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#ListTaxExemptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#ListTaxExemptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:GetExemptions"
+                    ],
+                    "documentation": "Grants list the active tax exemptions for a CB family permission"
+                },
+                "smithy.api#documentation": "<p>Retrieves the tax exemption of accounts listed in a consolidated billing family.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ListTaxExemptions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "taxExemptionDetailsMap",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListTaxExemptionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.taxsettings#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results you want in one response.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.taxsettings#PaginationTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListTaxExemptionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.taxsettings#PaginationTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. </p>"
+                    }
+                },
+                "taxExemptionDetailsMap": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionDetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption details map of <code>accountId</code> and tax exemption details.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.taxsettings#ListTaxRegistrations": {
             "type": "operation",
             "input": {
@@ -1769,6 +2216,154 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.taxsettings#PutTaxExemption": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#PutTaxExemptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#PutTaxExemptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#AttachmentUploadException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#CaseCreationLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:UpdateExemptions",
+                        "support:CreateCase",
+                        "support:AddAttachmentsToSet"
+                    ],
+                    "documentation": "Grants create customer tax exemption case permission"
+                },
+                "smithy.api#documentation": "<p>Adds the tax exemption for a single account or all accounts listed in a consolidated billing family.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/PutTaxExemption"
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxExemptionRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.taxsettings#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of unique account identifiers.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authority": {
+                    "target": "com.amazonaws.taxsettings#Authority",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "exemptionType": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exemption type.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exemptionCertificate": {
+                    "target": "com.amazonaws.taxsettings#ExemptionCertificate",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxExemptionResponse": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer support case ID.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxInheritance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#PutTaxInheritanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#PutTaxInheritanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants put tax inheritance permission"
+                },
+                "smithy.api#documentation": "<p>The updated tax inheritance status.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/PutTaxInheritance"
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxInheritanceRequest": {
+            "type": "structure",
+            "members": {
+                "heritageStatus": {
+                    "target": "com.amazonaws.taxsettings#HeritageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax inheritance status.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxInheritanceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.taxsettings#PutTaxRegistration": {
             "type": "operation",
             "input": {
@@ -1840,7 +2435,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20
+                    "max": 200
                 },
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
             }
@@ -2249,6 +2844,131 @@
                 "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
+        "com.amazonaws.taxsettings#TaxExemption": {
+            "type": "structure",
+            "members": {
+                "authority": {
+                    "target": "com.amazonaws.taxsettings#Authority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address domain associate with tax exemption.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taxExemptionType": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption type.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "effectiveDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption effective date.\n    </p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption expiration date.\n    </p>"
+                    }
+                },
+                "systemEffectiveDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption recording time in the <code>TaxSettings</code> system.\n    </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.taxsettings#EntityExemptionAccountStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption status.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax exemption.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionDetails": {
+            "type": "structure",
+            "members": {
+                "taxExemptions": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tax exemptions.\n    </p>"
+                    }
+                },
+                "heritageObtainedDetails": {
+                    "target": "com.amazonaws.taxsettings#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The indicator if the tax exemption is inherited from the consolidated billing family management account.\n    </p>"
+                    }
+                },
+                "heritageObtainedParentEntity": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The consolidated billing family management account the tax exemption inherited from.\n    </p>"
+                    }
+                },
+                "heritageObtainedReason": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason of the heritage inheritance.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax exemption details.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionDetailsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.taxsettings#AccountId"
+            },
+            "value": {
+                "target": "com.amazonaws.taxsettings#TaxExemptionDetails"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionType": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "com.amazonaws.taxsettings#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption's type display name.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption's type description.\n    </p>"
+                    }
+                },
+                "applicableJurisdictions": {
+                    "target": "com.amazonaws.taxsettings#Authorities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption's applicable jurisdictions.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax exemption type.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#TaxExemptionType"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#TaxExemption"
+            }
+        },
         "com.amazonaws.taxsettings#TaxInformationNumber": {
             "type": "string",
             "traits": {
@@ -2349,14 +3069,41 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.taxsettings#TaxRegistrationDocFile": {
+            "type": "structure",
+            "members": {
+                "fileName": {
+                    "target": "com.amazonaws.taxsettings#TaxDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration document name.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileContent": {
+                    "target": "com.amazonaws.taxsettings#FileBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration document content.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax registration document.\n    </p>"
+            }
+        },
         "com.amazonaws.taxsettings#TaxRegistrationDocument": {
             "type": "structure",
             "members": {
                 "s3Location": {
                     "target": "com.amazonaws.taxsettings#SourceS3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location where your tax registration document is stored.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon S3 location where your tax registration document is stored.</p>"
+                    }
+                },
+                "file": {
+                    "target": "com.amazonaws.taxsettings#TaxRegistrationDocFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration document.\n    </p>"
                     }
                 }
             },
@@ -2605,6 +3352,9 @@
                     "target": "com.amazonaws.taxsettings#BatchDeleteTaxRegistration"
                 },
                 {
+                    "target": "com.amazonaws.taxsettings#BatchGetTaxExemptions"
+                },
+                {
                     "target": "com.amazonaws.taxsettings#BatchPutTaxRegistration"
                 },
                 {
@@ -2612,6 +3362,12 @@
                 },
                 {
                     "target": "com.amazonaws.taxsettings#DeleteTaxRegistration"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#GetTaxExemptionTypes"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#GetTaxInheritance"
                 },
                 {
                     "target": "com.amazonaws.taxsettings#GetTaxRegistration"
@@ -2623,10 +3379,19 @@
                     "target": "com.amazonaws.taxsettings#ListSupplementalTaxRegistrations"
                 },
                 {
+                    "target": "com.amazonaws.taxsettings#ListTaxExemptions"
+                },
+                {
                     "target": "com.amazonaws.taxsettings#ListTaxRegistrations"
                 },
                 {
                     "target": "com.amazonaws.taxsettings#PutSupplementalTaxRegistration"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#PutTaxExemption"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#PutTaxInheritance"
                 },
                 {
                     "target": "com.amazonaws.taxsettings#PutTaxRegistration"
@@ -2645,6 +3410,19 @@
                     "endpointPatternType": "service_region_dnsSuffix"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type,X-Amz-Date",
+                        "Authorization",
+                        "X-Api-Key",
+                        "X-Amz-Security-Token",
+                        "Access-Control-Allow-Origin",
+                        "X-Amz-Content-Sha256",
+                        "Amz-Sdk-Invocation-Id",
+                        "Amz-Sdk-Request",
+                        "X-Amz-User-Agent"
+                    ]
+                },
                 "smithy.api#documentation": "<p>You can use the tax setting API to programmatically set, modify, and delete the tax\n      registration number (TRN), associated business legal name, and address (Collectively referred\n      to as \"TRN information\"). You can also programmatically view TRN information and tax addresses\n      (\"Tax profiles\"). </p>\n         <p>You can use this API to automate your TRN information settings instead of manually using\n      the console.</p>\n         <p>Service Endpoint</p>\n         <ul>\n            <li>\n               <p>https://tax.us-east-1.amazonaws.com</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Tax Settings",
                 "smithy.rules#endpointRuleSet": {
@@ -3635,6 +4413,16 @@
                         "smithy.api#enumValue": "Individual"
                     }
                 }
+            }
+        },
+        "com.amazonaws.taxsettings#Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^https.*\\S.*$"
             }
         },
         "com.amazonaws.taxsettings#ValidationException": {

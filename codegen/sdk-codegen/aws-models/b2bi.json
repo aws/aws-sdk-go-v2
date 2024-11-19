@@ -6574,10 +6574,328 @@
         "com.amazonaws.b2bi#X12TransactionSet": {
             "type": "enum",
             "members": {
+                "X12_100": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_100"
+                    }
+                },
+                "X12_101": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_101"
+                    }
+                },
+                "X12_102": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_102"
+                    }
+                },
+                "X12_103": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_103"
+                    }
+                },
+                "X12_104": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_104"
+                    }
+                },
+                "X12_105": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_105"
+                    }
+                },
+                "X12_106": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_106"
+                    }
+                },
+                "X12_107": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_107"
+                    }
+                },
+                "X12_108": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_108"
+                    }
+                },
+                "X12_109": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_109"
+                    }
+                },
                 "X12_110": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_110"
+                    }
+                },
+                "X12_111": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_111"
+                    }
+                },
+                "X12_112": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_112"
+                    }
+                },
+                "X12_113": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_113"
+                    }
+                },
+                "X12_120": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_120"
+                    }
+                },
+                "X12_121": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_121"
+                    }
+                },
+                "X12_124": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_124"
+                    }
+                },
+                "X12_125": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_125"
+                    }
+                },
+                "X12_126": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_126"
+                    }
+                },
+                "X12_127": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_127"
+                    }
+                },
+                "X12_128": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_128"
+                    }
+                },
+                "X12_129": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_129"
+                    }
+                },
+                "X12_130": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_130"
+                    }
+                },
+                "X12_131": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_131"
+                    }
+                },
+                "X12_132": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_132"
+                    }
+                },
+                "X12_133": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_133"
+                    }
+                },
+                "X12_135": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_135"
+                    }
+                },
+                "X12_138": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_138"
+                    }
+                },
+                "X12_139": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_139"
+                    }
+                },
+                "X12_140": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_140"
+                    }
+                },
+                "X12_141": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_141"
+                    }
+                },
+                "X12_142": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_142"
+                    }
+                },
+                "X12_143": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_143"
+                    }
+                },
+                "X12_144": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_144"
+                    }
+                },
+                "X12_146": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_146"
+                    }
+                },
+                "X12_147": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_147"
+                    }
+                },
+                "X12_148": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_148"
+                    }
+                },
+                "X12_149": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_149"
+                    }
+                },
+                "X12_150": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_150"
+                    }
+                },
+                "X12_151": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_151"
+                    }
+                },
+                "X12_152": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_152"
+                    }
+                },
+                "X12_153": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_153"
+                    }
+                },
+                "X12_154": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_154"
+                    }
+                },
+                "X12_155": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_155"
+                    }
+                },
+                "X12_157": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_157"
+                    }
+                },
+                "X12_158": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_158"
+                    }
+                },
+                "X12_159": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_159"
+                    }
+                },
+                "X12_160": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_160"
+                    }
+                },
+                "X12_161": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_161"
+                    }
+                },
+                "X12_163": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_163"
+                    }
+                },
+                "X12_170": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_170"
+                    }
+                },
+                "X12_175": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_175"
+                    }
+                },
+                "X12_176": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_176"
+                    }
+                },
+                "X12_179": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_179"
                     }
                 },
                 "X12_180": {
@@ -6586,10 +6904,124 @@
                         "smithy.api#enumValue": "X12_180"
                     }
                 },
+                "X12_185": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_185"
+                    }
+                },
+                "X12_186": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_186"
+                    }
+                },
+                "X12_187": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_187"
+                    }
+                },
+                "X12_188": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_188"
+                    }
+                },
+                "X12_189": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_189"
+                    }
+                },
+                "X12_190": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_190"
+                    }
+                },
+                "X12_191": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_191"
+                    }
+                },
+                "X12_194": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_194"
+                    }
+                },
+                "X12_195": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_195"
+                    }
+                },
+                "X12_196": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_196"
+                    }
+                },
+                "X12_197": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_197"
+                    }
+                },
+                "X12_198": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_198"
+                    }
+                },
+                "X12_199": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_199"
+                    }
+                },
+                "X12_200": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_200"
+                    }
+                },
+                "X12_201": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_201"
+                    }
+                },
+                "X12_202": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_202"
+                    }
+                },
+                "X12_203": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_203"
+                    }
+                },
                 "X12_204": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_204"
+                    }
+                },
+                "X12_205": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_205"
+                    }
+                },
+                "X12_206": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_206"
                     }
                 },
                 "X12_210": {
@@ -6604,6 +7036,18 @@
                         "smithy.api#enumValue": "X12_211"
                     }
                 },
+                "X12_212": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_212"
+                    }
+                },
+                "X12_213": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_213"
+                    }
+                },
                 "X12_214": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -6614,6 +7058,138 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_215"
+                    }
+                },
+                "X12_216": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_216"
+                    }
+                },
+                "X12_217": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_217"
+                    }
+                },
+                "X12_218": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_218"
+                    }
+                },
+                "X12_219": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_219"
+                    }
+                },
+                "X12_220": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_220"
+                    }
+                },
+                "X12_222": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_222"
+                    }
+                },
+                "X12_223": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_223"
+                    }
+                },
+                "X12_224": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_224"
+                    }
+                },
+                "X12_225": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_225"
+                    }
+                },
+                "X12_227": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_227"
+                    }
+                },
+                "X12_228": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_228"
+                    }
+                },
+                "X12_240": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_240"
+                    }
+                },
+                "X12_242": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_242"
+                    }
+                },
+                "X12_244": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_244"
+                    }
+                },
+                "X12_245": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_245"
+                    }
+                },
+                "X12_248": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_248"
+                    }
+                },
+                "X12_249": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_249"
+                    }
+                },
+                "X12_250": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_250"
+                    }
+                },
+                "X12_251": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_251"
+                    }
+                },
+                "X12_252": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_252"
+                    }
+                },
+                "X12_255": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_255"
+                    }
+                },
+                "X12_256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_256"
                     }
                 },
                 "X12_259": {
@@ -6628,10 +7204,52 @@
                         "smithy.api#enumValue": "X12_260"
                     }
                 },
+                "X12_261": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_261"
+                    }
+                },
+                "X12_262": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_262"
+                    }
+                },
+                "X12_263": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_263"
+                    }
+                },
+                "X12_264": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_264"
+                    }
+                },
+                "X12_265": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_265"
+                    }
+                },
                 "X12_266": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_266"
+                    }
+                },
+                "X12_267": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_267"
+                    }
+                },
+                "X12_268": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_268"
                     }
                 },
                 "X12_269": {
@@ -6650,6 +7268,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_271"
+                    }
+                },
+                "X12_272": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_272"
+                    }
+                },
+                "X12_273": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_273"
                     }
                 },
                 "X12_274": {
@@ -6682,10 +7312,100 @@
                         "smithy.api#enumValue": "X12_278"
                     }
                 },
+                "X12_280": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_280"
+                    }
+                },
+                "X12_283": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_283"
+                    }
+                },
+                "X12_284": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_284"
+                    }
+                },
+                "X12_285": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_285"
+                    }
+                },
+                "X12_286": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_286"
+                    }
+                },
+                "X12_288": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_288"
+                    }
+                },
+                "X12_290": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_290"
+                    }
+                },
+                "X12_300": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_300"
+                    }
+                },
+                "X12_301": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_301"
+                    }
+                },
+                "X12_303": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_303"
+                    }
+                },
+                "X12_304": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_304"
+                    }
+                },
+                "X12_309": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_309"
+                    }
+                },
                 "X12_310": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_310"
+                    }
+                },
+                "X12_311": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_311"
+                    }
+                },
+                "X12_312": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_312"
+                    }
+                },
+                "X12_313": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_313"
                     }
                 },
                 "X12_315": {
@@ -6694,10 +7414,106 @@
                         "smithy.api#enumValue": "X12_315"
                     }
                 },
+                "X12_317": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_317"
+                    }
+                },
+                "X12_319": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_319"
+                    }
+                },
                 "X12_322": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_322"
+                    }
+                },
+                "X12_323": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_323"
+                    }
+                },
+                "X12_324": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_324"
+                    }
+                },
+                "X12_325": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_325"
+                    }
+                },
+                "X12_326": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_326"
+                    }
+                },
+                "X12_350": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_350"
+                    }
+                },
+                "X12_352": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_352"
+                    }
+                },
+                "X12_353": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_353"
+                    }
+                },
+                "X12_354": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_354"
+                    }
+                },
+                "X12_355": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_355"
+                    }
+                },
+                "X12_356": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_356"
+                    }
+                },
+                "X12_357": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_357"
+                    }
+                },
+                "X12_358": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_358"
+                    }
+                },
+                "X12_361": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_361"
+                    }
+                },
+                "X12_362": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_362"
                     }
                 },
                 "X12_404": {
@@ -6712,10 +7528,40 @@
                         "smithy.api#enumValue": "X12_410"
                     }
                 },
+                "X12_412": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_412"
+                    }
+                },
+                "X12_414": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_414"
+                    }
+                },
                 "X12_417": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_417"
+                    }
+                },
+                "X12_418": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_418"
+                    }
+                },
+                "X12_419": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_419"
+                    }
+                },
+                "X12_420": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_420"
                     }
                 },
                 "X12_421": {
@@ -6724,10 +7570,322 @@
                         "smithy.api#enumValue": "X12_421"
                     }
                 },
+                "X12_422": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_422"
+                    }
+                },
+                "X12_423": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_423"
+                    }
+                },
+                "X12_424": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_424"
+                    }
+                },
+                "X12_425": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_425"
+                    }
+                },
                 "X12_426": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_426"
+                    }
+                },
+                "X12_429": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_429"
+                    }
+                },
+                "X12_431": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_431"
+                    }
+                },
+                "X12_432": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_432"
+                    }
+                },
+                "X12_433": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_433"
+                    }
+                },
+                "X12_434": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_434"
+                    }
+                },
+                "X12_435": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_435"
+                    }
+                },
+                "X12_436": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_436"
+                    }
+                },
+                "X12_437": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_437"
+                    }
+                },
+                "X12_440": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_440"
+                    }
+                },
+                "X12_451": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_451"
+                    }
+                },
+                "X12_452": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_452"
+                    }
+                },
+                "X12_453": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_453"
+                    }
+                },
+                "X12_455": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_455"
+                    }
+                },
+                "X12_456": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_456"
+                    }
+                },
+                "X12_460": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_460"
+                    }
+                },
+                "X12_463": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_463"
+                    }
+                },
+                "X12_466": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_466"
+                    }
+                },
+                "X12_468": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_468"
+                    }
+                },
+                "X12_470": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_470"
+                    }
+                },
+                "X12_475": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_475"
+                    }
+                },
+                "X12_485": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_485"
+                    }
+                },
+                "X12_486": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_486"
+                    }
+                },
+                "X12_490": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_490"
+                    }
+                },
+                "X12_492": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_492"
+                    }
+                },
+                "X12_494": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_494"
+                    }
+                },
+                "X12_500": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_500"
+                    }
+                },
+                "X12_501": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_501"
+                    }
+                },
+                "X12_503": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_503"
+                    }
+                },
+                "X12_504": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_504"
+                    }
+                },
+                "X12_511": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_511"
+                    }
+                },
+                "X12_517": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_517"
+                    }
+                },
+                "X12_521": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_521"
+                    }
+                },
+                "X12_527": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_527"
+                    }
+                },
+                "X12_536": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_536"
+                    }
+                },
+                "X12_540": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_540"
+                    }
+                },
+                "X12_561": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_561"
+                    }
+                },
+                "X12_567": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_567"
+                    }
+                },
+                "X12_568": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_568"
+                    }
+                },
+                "X12_601": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_601"
+                    }
+                },
+                "X12_602": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_602"
+                    }
+                },
+                "X12_620": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_620"
+                    }
+                },
+                "X12_625": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_625"
+                    }
+                },
+                "X12_650": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_650"
+                    }
+                },
+                "X12_715": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_715"
+                    }
+                },
+                "X12_753": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_753"
+                    }
+                },
+                "X12_754": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_754"
+                    }
+                },
+                "X12_805": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_805"
+                    }
+                },
+                "X12_806": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_806"
                     }
                 },
                 "X12_810": {
@@ -6736,10 +7894,76 @@
                         "smithy.api#enumValue": "X12_810"
                     }
                 },
+                "X12_811": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_811"
+                    }
+                },
+                "X12_812": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_812"
+                    }
+                },
+                "X12_813": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_813"
+                    }
+                },
+                "X12_814": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_814"
+                    }
+                },
+                "X12_815": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_815"
+                    }
+                },
+                "X12_816": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_816"
+                    }
+                },
+                "X12_818": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_818"
+                    }
+                },
+                "X12_819": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_819"
+                    }
+                },
                 "X12_820": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_820"
+                    }
+                },
+                "X12_821": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_821"
+                    }
+                },
+                "X12_822": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_822"
+                    }
+                },
+                "X12_823": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_823"
                     }
                 },
                 "X12_824": {
@@ -6748,16 +7972,52 @@
                         "smithy.api#enumValue": "X12_824"
                     }
                 },
+                "X12_826": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_826"
+                    }
+                },
+                "X12_827": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_827"
+                    }
+                },
+                "X12_828": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_828"
+                    }
+                },
+                "X12_829": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_829"
+                    }
+                },
                 "X12_830": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_830"
                     }
                 },
+                "X12_831": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_831"
+                    }
+                },
                 "X12_832": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_832"
+                    }
+                },
+                "X12_833": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_833"
                     }
                 },
                 "X12_834": {
@@ -6772,10 +8032,52 @@
                         "smithy.api#enumValue": "X12_835"
                     }
                 },
+                "X12_836": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_836"
+                    }
+                },
                 "X12_837": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_837"
+                    }
+                },
+                "X12_838": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_838"
+                    }
+                },
+                "X12_839": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_839"
+                    }
+                },
+                "X12_840": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_840"
+                    }
+                },
+                "X12_841": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_841"
+                    }
+                },
+                "X12_842": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_842"
+                    }
+                },
+                "X12_843": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_843"
                     }
                 },
                 "X12_844": {
@@ -6784,10 +8086,28 @@
                         "smithy.api#enumValue": "X12_844"
                     }
                 },
+                "X12_845": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_845"
+                    }
+                },
                 "X12_846": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_846"
+                    }
+                },
+                "X12_847": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_847"
+                    }
+                },
+                "X12_848": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_848"
                     }
                 },
                 "X12_849": {
@@ -6802,10 +8122,28 @@
                         "smithy.api#enumValue": "X12_850"
                     }
                 },
+                "X12_851": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_851"
+                    }
+                },
                 "X12_852": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_852"
+                    }
+                },
+                "X12_853": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_853"
+                    }
+                },
+                "X12_854": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_854"
                     }
                 },
                 "X12_855": {
@@ -6820,6 +8158,24 @@
                         "smithy.api#enumValue": "X12_856"
                     }
                 },
+                "X12_857": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_857"
+                    }
+                },
+                "X12_858": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_858"
+                    }
+                },
+                "X12_859": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_859"
+                    }
+                },
                 "X12_860": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -6830,6 +8186,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_861"
+                    }
+                },
+                "X12_862": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_862"
+                    }
+                },
+                "X12_863": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_863"
                     }
                 },
                 "X12_864": {
@@ -6844,6 +8212,24 @@
                         "smithy.api#enumValue": "X12_865"
                     }
                 },
+                "X12_866": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_866"
+                    }
+                },
+                "X12_867": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_867"
+                    }
+                },
+                "X12_868": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_868"
+                    }
+                },
                 "X12_869": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -6856,10 +8242,196 @@
                         "smithy.api#enumValue": "X12_870"
                     }
                 },
+                "X12_871": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_871"
+                    }
+                },
+                "X12_872": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_872"
+                    }
+                },
+                "X12_873": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_873"
+                    }
+                },
+                "X12_874": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_874"
+                    }
+                },
+                "X12_875": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_875"
+                    }
+                },
+                "X12_876": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_876"
+                    }
+                },
+                "X12_877": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_877"
+                    }
+                },
+                "X12_878": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_878"
+                    }
+                },
+                "X12_879": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_879"
+                    }
+                },
+                "X12_880": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_880"
+                    }
+                },
+                "X12_881": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_881"
+                    }
+                },
+                "X12_882": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_882"
+                    }
+                },
+                "X12_883": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_883"
+                    }
+                },
+                "X12_884": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_884"
+                    }
+                },
+                "X12_885": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_885"
+                    }
+                },
+                "X12_886": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_886"
+                    }
+                },
+                "X12_887": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_887"
+                    }
+                },
+                "X12_888": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_888"
+                    }
+                },
+                "X12_889": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_889"
+                    }
+                },
+                "X12_891": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_891"
+                    }
+                },
+                "X12_893": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_893"
+                    }
+                },
+                "X12_894": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_894"
+                    }
+                },
+                "X12_895": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_895"
+                    }
+                },
+                "X12_896": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_896"
+                    }
+                },
+                "X12_920": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_920"
+                    }
+                },
+                "X12_924": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_924"
+                    }
+                },
+                "X12_925": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_925"
+                    }
+                },
+                "X12_926": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_926"
+                    }
+                },
+                "X12_928": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_928"
+                    }
+                },
                 "X12_940": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_940"
+                    }
+                },
+                "X12_943": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_943"
+                    }
+                },
+                "X12_944": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_944"
                     }
                 },
                 "X12_945": {
@@ -6868,16 +8440,46 @@
                         "smithy.api#enumValue": "X12_945"
                     }
                 },
+                "X12_947": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_947"
+                    }
+                },
+                "X12_980": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_980"
+                    }
+                },
                 "X12_990": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_990"
                     }
                 },
+                "X12_993": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_993"
+                    }
+                },
+                "X12_996": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_996"
+                    }
+                },
                 "X12_997": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "X12_997"
+                    }
+                },
+                "X12_998": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12_998"
                     }
                 },
                 "X12_999": {
@@ -7052,6 +8654,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VERSION_4030"
+                    }
+                },
+                "VERSION_4050": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERSION_4050"
+                    }
+                },
+                "VERSION_4060": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERSION_4060"
                     }
                 },
                 "VERSION_5010": {

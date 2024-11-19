@@ -10478,7 +10478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new table optimizer for a specific function. <code>compaction</code> is the only currently supported optimizer type.</p>"
+                "smithy.api#documentation": "<p>Creates a new table optimizer for a specific function. </p>"
             }
         },
         "com.amazonaws.glue#CreateTableOptimizerRequest": {
@@ -10508,7 +10508,7 @@
                 "Type": {
                     "target": "com.amazonaws.glue#TableOptimizerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -26445,7 +26445,7 @@
                 "Type": {
                     "target": "com.amazonaws.glue#TableOptimizerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -36005,6 +36005,12 @@
                         "smithy.api#documentation": "<p>Whether table optimization is enabled.</p>"
                     }
                 },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.glue#TableOptimizerVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>TableOptimizerVpcConfiguration</code> object representing the VPC configuration for a table optimizer.</p>\n         <p>This configuration is necessary to perform optimization on tables that are in a customer VPC.</p>"
+                    }
+                },
                 "retentionConfiguration": {
                     "target": "com.amazonaws.glue#RetentionConfiguration",
                     "traits": {
@@ -36140,6 +36146,20 @@
                         "smithy.api#enumValue": "orphan_file_deletion"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#TableOptimizerVpcConfiguration": {
+            "type": "union",
+            "members": {
+                "glueConnectionName": {
+                    "target": "com.amazonaws.glue#glueConnectionNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue connection used for the VPC for the table optimizer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the VPC configuration for a table optimizer.</p>\n         <p>This configuration is necessary to perform optimization on tables that are in a customer VPC.</p>"
             }
         },
         "com.amazonaws.glue#TablePrefix": {
@@ -39395,7 +39415,7 @@
                 "Type": {
                     "target": "com.amazonaws.glue#TableOptimizerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of table optimizer.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -40771,6 +40791,14 @@
             "type": "double",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.glue#glueConnectionNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.glue#metricCounts": {
