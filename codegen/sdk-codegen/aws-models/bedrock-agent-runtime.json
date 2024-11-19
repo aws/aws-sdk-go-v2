@@ -1656,7 +1656,7 @@
                 "value": {
                     "target": "com.amazonaws.bedrockagentruntime#FilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value to whcih to compare the value of the metadata attribute.</p>",
+                        "smithy.api#documentation": "<p>The value to which to compare the value of the metadata attribute.</p>",
                         "smithy.api#required": {}
                     }
                 }

@@ -5646,7 +5646,7 @@
                 "domainId": {
                     "target": "com.amazonaws.datazone#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in whcih the subscription request is created.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which the subscription request is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
