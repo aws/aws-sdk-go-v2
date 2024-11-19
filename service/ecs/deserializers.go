@@ -9977,6 +9977,15 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				sv.User = ptr.String(jtv)
 			}
 
+		case "versionConsistency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionConsistency to be of type string, got %T instead", value)
+				}
+				sv.VersionConsistency = types.VersionConsistency(jtv)
+			}
+
 		case "volumesFrom":
 			if err := awsAwsjson11_deserializeDocumentVolumeFromList(&sv.VolumesFrom, value); err != nil {
 				return err

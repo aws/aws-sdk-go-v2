@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new table optimizer for a specific function. compaction is the only
-// currently supported optimizer type.
+// Creates a new table optimizer for a specific function.
 func (c *Client) CreateTableOptimizer(ctx context.Context, params *CreateTableOptimizerInput, optFns ...func(*Options)) (*CreateTableOptimizerOutput, error) {
 	if params == nil {
 		params = &CreateTableOptimizerInput{}
@@ -51,7 +50,7 @@ type CreateTableOptimizerInput struct {
 	// This member is required.
 	TableOptimizerConfiguration *types.TableOptimizerConfiguration
 
-	// The type of table optimizer. Currently, the only valid value is compaction .
+	// The type of table optimizer.
 	//
 	// This member is required.
 	Type types.TableOptimizerType

@@ -32,7 +32,9 @@ func (c *Client) DescribeReplicationConfigurations(ctx context.Context, params *
 type DescribeReplicationConfigurationsInput struct {
 
 	// You can retrieve the replication configuration for a specific file system by
-	// providing its file system ID.
+	// providing its file system ID. For cross-account,cross-region replication, an
+	// account can only describe the replication configuration for a file system in its
+	// own Region.
 	FileSystemId *string
 
 	// (Optional) To limit the number of objects returned in a response, you can

@@ -1,0 +1,8 @@
+{
+    "id": "5e54503c-6c99-4582-8eab-e90783baf76a",
+    "type": "feature",
+    "description": "Add new X12 transactions sets and versions",
+    "modules": [
+        "service/b2bi"
+    ]
+}

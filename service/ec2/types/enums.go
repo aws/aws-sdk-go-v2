@@ -695,6 +695,27 @@ func (BgpStatus) Values() []BgpStatus {
 	}
 }
 
+type BlockPublicAccessMode string
+
+// Enum values for BlockPublicAccessMode
+const (
+	BlockPublicAccessModeOff                BlockPublicAccessMode = "off"
+	BlockPublicAccessModeBlockBidirectional BlockPublicAccessMode = "block-bidirectional"
+	BlockPublicAccessModeBlockIngress       BlockPublicAccessMode = "block-ingress"
+)
+
+// Values returns all known values for BlockPublicAccessMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlockPublicAccessMode) Values() []BlockPublicAccessMode {
+	return []BlockPublicAccessMode{
+		"off",
+		"block-bidirectional",
+		"block-ingress",
+	}
+}
+
 type BootModeType string
 
 // Enum values for BootModeType
@@ -4986,6 +5007,47 @@ func (InterfaceProtocolType) Values() []InterfaceProtocolType {
 	}
 }
 
+type InternetGatewayBlockMode string
+
+// Enum values for InternetGatewayBlockMode
+const (
+	InternetGatewayBlockModeOff                InternetGatewayBlockMode = "off"
+	InternetGatewayBlockModeBlockBidirectional InternetGatewayBlockMode = "block-bidirectional"
+	InternetGatewayBlockModeBlockIngress       InternetGatewayBlockMode = "block-ingress"
+)
+
+// Values returns all known values for InternetGatewayBlockMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InternetGatewayBlockMode) Values() []InternetGatewayBlockMode {
+	return []InternetGatewayBlockMode{
+		"off",
+		"block-bidirectional",
+		"block-ingress",
+	}
+}
+
+type InternetGatewayExclusionMode string
+
+// Enum values for InternetGatewayExclusionMode
+const (
+	InternetGatewayExclusionModeAllowBidirectional InternetGatewayExclusionMode = "allow-bidirectional"
+	InternetGatewayExclusionModeAllowEgress        InternetGatewayExclusionMode = "allow-egress"
+)
+
+// Values returns all known values for InternetGatewayExclusionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InternetGatewayExclusionMode) Values() []InternetGatewayExclusionMode {
+	return []InternetGatewayExclusionMode{
+		"allow-bidirectional",
+		"allow-egress",
+	}
+}
+
 type IpAddressType string
 
 // Enum values for IpAddressType
@@ -9243,6 +9305,63 @@ func (VpcAttributeName) Values() []VpcAttributeName {
 		"enableDnsSupport",
 		"enableDnsHostnames",
 		"enableNetworkAddressUsageMetrics",
+	}
+}
+
+type VpcBlockPublicAccessExclusionState string
+
+// Enum values for VpcBlockPublicAccessExclusionState
+const (
+	VpcBlockPublicAccessExclusionStateCreateInProgress  VpcBlockPublicAccessExclusionState = "create-in-progress"
+	VpcBlockPublicAccessExclusionStateCreateComplete    VpcBlockPublicAccessExclusionState = "create-complete"
+	VpcBlockPublicAccessExclusionStateCreateFailed      VpcBlockPublicAccessExclusionState = "create-failed"
+	VpcBlockPublicAccessExclusionStateUpdateInProgress  VpcBlockPublicAccessExclusionState = "update-in-progress"
+	VpcBlockPublicAccessExclusionStateUpdateComplete    VpcBlockPublicAccessExclusionState = "update-complete"
+	VpcBlockPublicAccessExclusionStateUpdateFailed      VpcBlockPublicAccessExclusionState = "update-failed"
+	VpcBlockPublicAccessExclusionStateDeleteInProgress  VpcBlockPublicAccessExclusionState = "delete-in-progress"
+	VpcBlockPublicAccessExclusionStateDeleteComplete    VpcBlockPublicAccessExclusionState = "delete-complete"
+	VpcBlockPublicAccessExclusionStateDisableInProgress VpcBlockPublicAccessExclusionState = "disable-in-progress"
+	VpcBlockPublicAccessExclusionStateDisableComplete   VpcBlockPublicAccessExclusionState = "disable-complete"
+)
+
+// Values returns all known values for VpcBlockPublicAccessExclusionState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcBlockPublicAccessExclusionState) Values() []VpcBlockPublicAccessExclusionState {
+	return []VpcBlockPublicAccessExclusionState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"update-in-progress",
+		"update-complete",
+		"update-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"disable-in-progress",
+		"disable-complete",
+	}
+}
+
+type VpcBlockPublicAccessState string
+
+// Enum values for VpcBlockPublicAccessState
+const (
+	VpcBlockPublicAccessStateDefaultState     VpcBlockPublicAccessState = "default-state"
+	VpcBlockPublicAccessStateUpdateInProgress VpcBlockPublicAccessState = "update-in-progress"
+	VpcBlockPublicAccessStateUpdateComplete   VpcBlockPublicAccessState = "update-complete"
+)
+
+// Values returns all known values for VpcBlockPublicAccessState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcBlockPublicAccessState) Values() []VpcBlockPublicAccessState {
+	return []VpcBlockPublicAccessState{
+		"default-state",
+		"update-in-progress",
+		"update-complete",
 	}
 }
 

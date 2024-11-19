@@ -13,7 +13,10 @@ import (
 //	The ListTypes operation returns a list of types for a specified keyspace.
 //
 // To read keyspace metadata using ListTypes , the IAM principal needs Select
-// action permissions for the system keyspace.
+// action permissions for the system keyspace. To configure the required
+// permissions, see [Permissions to view a UDT]in the Amazon Keyspaces Developer Guide.
+//
+// [Permissions to view a UDT]: https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view
 func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns ...func(*Options)) (*ListTypesOutput, error) {
 	if params == nil {
 		params = &ListTypesInput{}

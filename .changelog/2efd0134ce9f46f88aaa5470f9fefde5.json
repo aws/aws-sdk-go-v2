@@ -1,0 +1,8 @@
+{
+    "id": "2efd0134-ce9f-46f8-8aaa-5470f9fefde5",
+    "type": "feature",
+    "description": "This release introduces support for configuring the version consistency feature for individual containers defined within a task definition. The configuration allows to specify whether ECS should resolve the container image tag specified in the container definition to an image digest.",
+    "modules": [
+        "service/ecs"
+    ]
+}

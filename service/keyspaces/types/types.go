@@ -468,6 +468,29 @@ type ReplicaSpecificationSummary struct {
 	noSmithyDocumentSerde
 }
 
+//	This shows the summary status of the keyspace after a new Amazon Web Services
+//
+// Region was added.
+type ReplicationGroupStatus struct {
+
+	//  The status of the keyspace.
+	//
+	// This member is required.
+	KeyspaceStatus KeyspaceStatus
+
+	//  The name of the Region that was added to the keyspace.
+	//
+	// This member is required.
+	Region *string
+
+	//  This shows the replication progress of tables in the keyspace. The value is
+	// expressed as a percentage of the newly replicated tables with status Active
+	// compared to the total number of tables in the keyspace.
+	TablesReplicationProgress *string
+
+	noSmithyDocumentSerde
+}
+
 // The replication specification of the keyspace includes:
 //
 //   - regionList - up to six Amazon Web Services Regions where the keyspace is

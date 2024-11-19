@@ -30,6 +30,26 @@ func (m *validateOpBatchDeleteTaxRegistration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetTaxExemptions struct {
+}
+
+func (*validateOpBatchGetTaxExemptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetTaxExemptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetTaxExemptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetTaxExemptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchPutTaxRegistration struct {
 }
 
@@ -110,6 +130,26 @@ func (m *validateOpPutSupplementalTaxRegistration) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTaxExemption struct {
+}
+
+func (*validateOpPutTaxExemption) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTaxExemption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTaxExemptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTaxExemptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutTaxRegistration struct {
 }
 
@@ -134,6 +174,10 @@ func addOpBatchDeleteTaxRegistrationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpBatchDeleteTaxRegistration{}, middleware.After)
 }
 
+func addOpBatchGetTaxExemptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetTaxExemptions{}, middleware.After)
+}
+
 func addOpBatchPutTaxRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutTaxRegistration{}, middleware.After)
 }
@@ -148,6 +192,10 @@ func addOpGetTaxRegistrationDocumentValidationMiddleware(stack *middleware.Stack
 
 func addOpPutSupplementalTaxRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutSupplementalTaxRegistration{}, middleware.After)
+}
+
+func addOpPutTaxExemptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTaxExemption{}, middleware.After)
 }
 
 func addOpPutTaxRegistrationValidationMiddleware(stack *middleware.Stack) error {
@@ -230,6 +278,21 @@ func validateAddress(v *types.Address) error {
 	}
 }
 
+func validateAuthority(v *types.Authority) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Authority"}
+	if v.Country == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Country"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDestinationS3Location(v *types.DestinationS3Location) error {
 	if v == nil {
 		return nil
@@ -252,6 +315,24 @@ func validateEstoniaAdditionalInfo(v *types.EstoniaAdditionalInfo) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EstoniaAdditionalInfo"}
 	if v.RegistryCommercialCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryCommercialCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExemptionCertificate(v *types.ExemptionCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExemptionCertificate"}
+	if v.DocumentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
+	}
+	if v.DocumentFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentFile"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -423,16 +504,37 @@ func validateTaxDocumentMetadata(v *types.TaxDocumentMetadata) error {
 	}
 }
 
+func validateTaxRegistrationDocFile(v *types.TaxRegistrationDocFile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaxRegistrationDocFile"}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if v.FileContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileContent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTaxRegistrationDocument(v *types.TaxRegistrationDocument) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TaxRegistrationDocument"}
-	if v.S3Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Location"))
-	} else if v.S3Location != nil {
+	if v.S3Location != nil {
 		if err := validateSourceS3Location(v.S3Location); err != nil {
 			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.File != nil {
+		if err := validateTaxRegistrationDocFile(v.File); err != nil {
+			invalidParams.AddNested("File", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -539,6 +641,21 @@ func validateOpBatchDeleteTaxRegistrationInput(v *BatchDeleteTaxRegistrationInpu
 	}
 }
 
+func validateOpBatchGetTaxExemptionsInput(v *BatchGetTaxExemptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetTaxExemptionsInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchPutTaxRegistrationInput(v *BatchPutTaxRegistrationInput) error {
 	if v == nil {
 		return nil
@@ -581,9 +698,7 @@ func validateOpGetTaxRegistrationDocumentInput(v *GetTaxRegistrationDocumentInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTaxRegistrationDocumentInput"}
-	if v.DestinationS3Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationS3Location"))
-	} else if v.DestinationS3Location != nil {
+	if v.DestinationS3Location != nil {
 		if err := validateDestinationS3Location(v.DestinationS3Location); err != nil {
 			invalidParams.AddNested("DestinationS3Location", err.(smithy.InvalidParamsError))
 		}
@@ -612,6 +727,38 @@ func validateOpPutSupplementalTaxRegistrationInput(v *PutSupplementalTaxRegistra
 	} else if v.TaxRegistrationEntry != nil {
 		if err := validateSupplementalTaxRegistrationEntry(v.TaxRegistrationEntry); err != nil {
 			invalidParams.AddNested("TaxRegistrationEntry", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTaxExemptionInput(v *PutTaxExemptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTaxExemptionInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if v.Authority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Authority"))
+	} else if v.Authority != nil {
+		if err := validateAuthority(v.Authority); err != nil {
+			invalidParams.AddNested("Authority", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExemptionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExemptionType"))
+	}
+	if v.ExemptionCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExemptionCertificate"))
+	} else if v.ExemptionCertificate != nil {
+		if err := validateExemptionCertificate(v.ExemptionCertificate); err != nil {
+			invalidParams.AddNested("ExemptionCertificate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

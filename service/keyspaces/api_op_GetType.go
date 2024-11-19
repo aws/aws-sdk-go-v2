@@ -19,7 +19,10 @@ import (
 // tables.
 //
 // To read keyspace metadata using GetType , the IAM principal needs Select action
-// permissions for the system keyspace.
+// permissions for the system keyspace. To configure the required permissions, see [Permissions to view a UDT]
+// in the Amazon Keyspaces Developer Guide.
+//
+// [Permissions to view a UDT]: https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-view
 func (c *Client) GetType(ctx context.Context, params *GetTypeInput, optFns ...func(*Options)) (*GetTypeOutput, error) {
 	if params == nil {
 		params = &GetTypeInput{}

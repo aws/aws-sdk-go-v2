@@ -1114,6 +1114,15 @@ func awsRestjson1_deserializeOpDocumentCreateReplicationConfigurationOutput(v **
 				sv.SourceFileSystemId = ptr.String(jtv)
 			}
 
+		case "SourceFileSystemOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.SourceFileSystemOwnerId = ptr.String(jtv)
+			}
+
 		case "SourceFileSystemRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7009,6 +7018,15 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 				}
 			}
 
+		case "OwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.OwnerId = ptr.String(jtv)
+			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7018,6 +7036,15 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 				sv.Region = ptr.String(jtv)
 			}
 
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7025,6 +7052,15 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 					return fmt.Errorf("expected ReplicationStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.ReplicationStatus(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		default:
@@ -8630,6 +8666,15 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationDescription(v **typ
 					return fmt.Errorf("expected FileSystemId to be of type string, got %T instead", value)
 				}
 				sv.SourceFileSystemId = ptr.String(jtv)
+			}
+
+		case "SourceFileSystemOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.SourceFileSystemOwnerId = ptr.String(jtv)
 			}
 
 		case "SourceFileSystemRegion":

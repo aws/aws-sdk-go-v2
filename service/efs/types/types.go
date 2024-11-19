@@ -118,22 +118,10 @@ type Destination struct {
 	// This member is required.
 	Region *string
 
-	// Describes the status of the destination EFS file system.
+	// Describes the status of the replication configuration. For more information
+	// about replication status, see [Viewing replication details]in the Amazon EFS User Guide.
 	//
-	//   - The Paused state occurs as a result of opting out of the source or
-	//   destination Region after the replication configuration was created. To resume
-	//   replication for the file system, you need to again opt in to the Amazon Web
-	//   Services Region. For more information, see [Managing Amazon Web Services Regions]in the Amazon Web Services General
-	//   Reference Guide.
-	//
-	//   - The Error state occurs when either the source or the destination file system
-	//   (or both) is in a failed state and is unrecoverable. For more information, see [Monitoring replication status]
-	//   in the Amazon EFS User Guide. You must delete the replication configuration, and
-	//   then restore the most recent backup of the failed file system (either the source
-	//   or the destination) to a new file system.
-	//
-	// [Managing Amazon Web Services Regions]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
-	// [Monitoring replication status]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html
+	// [Viewing replication details]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html
 	//
 	// This member is required.
 	Status ReplicationStatus
@@ -145,20 +133,65 @@ type Destination struct {
 	// replicated.
 	LastReplicatedTimestamp *time.Time
 
+	// ID of the Amazon Web Services account in which the destination file system
+	// resides.
+	OwnerId *string
+
+	// Amazon Resource Name (ARN) of the IAM role in the source account that allows
+	// Amazon EFS to perform replication on its behalf. This is optional for
+	// same-account replication and required for cross-account replication.
+	RoleArn *string
+
+	// Message that provides details about the PAUSED or ERRROR state of the
+	// replication destination configuration. For more information about replication
+	// status messages, see [Viewing replication details]in the Amazon EFS User Guide.
+	//
+	// [Viewing replication details]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html
+	StatusMessage *string
+
 	noSmithyDocumentSerde
 }
 
 // Describes the new or existing destination file system for the replication
 // configuration.
+//
+//   - If you want to replicate to a new file system, do not specify the File
+//     System ID for the destination file system. Amazon EFS creates a new, empty file
+//     system. For One Zone storage, specify the Availability Zone to create the file
+//     system in. To use an Key Management Service key other than the default KMS key,
+//     then specify it. For more information, see [Configuring replication to new Amazon EFS file system]in the Amazon EFS User Guide.
+//
+// After the file system is created, you cannot change the KMS key or the
+//
+//	performance mode.
+//
+//	- If you want to replicate to an existing file system that's in the same
+//	account as the source file system, then you need to provide the ID or Amazon
+//	Resource Name (ARN) of the file system to which to replicate. The file system's
+//	replication overwrite protection must be disabled. For more information, see [Replicating to an existing file system]
+//	in the Amazon EFS User Guide.
+//
+//	- If you are replicating the file system to a file system that's in a
+//	different account than the source file system (cross-account replication), you
+//	need to provide the ARN for the file system and the IAM role that allows Amazon
+//	EFS to perform replication on the destination account. The file system's
+//	replication overwrite protection must be disabled. For more information, see [Replicating across Amazon Web Services accounts]
+//	in the Amazon EFS User Guide.
+//
+// [Configuring replication to new Amazon EFS file system]: https://docs.aws.amazon.com/efs/latest/ug/create-replication.html
+//
+// [Replicating across Amazon Web Services accounts]: https://docs.aws.amazon.com/efs/latest/ug/cross-account-replication.html
+// [Replicating to an existing file system]: https://docs.aws.amazon.com/efs/latest/ug/efs-replication#replicate-existing-destination
 type DestinationToCreate struct {
 
 	// To create a file system that uses One Zone storage, specify the name of the
 	// Availability Zone in which to create the destination file system.
 	AvailabilityZoneName *string
 
-	// The ID of the file system to use for the destination. The file system's
-	// replication overwrite replication must be disabled. If you do not provide an ID,
-	// then EFS creates a new file system for the replication destination.
+	// The ID or ARN of the file system to use for the destination. For cross-account
+	// replication, this must be an ARN. The file system's replication overwrite
+	// replication must be disabled. If no ID or ARN is specified, then a new file
+	// system is created.
 	FileSystemId *string
 
 	// Specify the Key Management Service (KMS) key that you want to use to encrypt
@@ -169,7 +202,7 @@ type DestinationToCreate struct {
 	//   - Key ID - The unique identifier of the key, for example
 	//   1234abcd-12ab-34cd-56ef-1234567890ab .
 	//
-	//   - ARN - The Amazon Resource Name (ARN) for the key, for example
+	//   - ARN - The ARN for the key, for example
 	//   arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
 	//
 	//   - Key alias - A previously created display name for a key, for example
@@ -180,8 +213,18 @@ type DestinationToCreate struct {
 	KmsKeyId *string
 
 	// To create a file system that uses Regional storage, specify the Amazon Web
-	// Services Region in which to create the destination file system.
+	// Services Region in which to create the destination file system. The Region must
+	// be enabled for the Amazon Web Services account that owns the source file system.
+	// For more information, see [Managing Amazon Web Services Regions]in the Amazon Web Services General Reference
+	// Reference Guide.
+	//
+	// [Managing Amazon Web Services Regions]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
 	Region *string
+
+	// Amazon Resource Name (ARN) of the IAM role in the source account that allows
+	// Amazon EFS to perform replication on its behalf. This is optional for
+	// same-account replication and required for cross-account replication.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -221,7 +264,7 @@ type FileSystemDescription struct {
 	// This member is required.
 	OwnerId *string
 
-	// The Performance mode of the file system.
+	// The performance mode of the file system.
 	//
 	// This member is required.
 	PerformanceMode PerformanceMode
@@ -348,7 +391,7 @@ type FileSystemSize struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a policy used by Lifecycle management that specifies when to
+// Describes a policy used by lifecycle management that specifies when to
 // transition files into and out of storage classes. For more information, see [Managing file system storage].
 //
 // When using the put-lifecycle-configuration CLI command or the
@@ -362,7 +405,7 @@ type FileSystemSize struct {
 type LifecyclePolicy struct {
 
 	// The number of days after files were last accessed in primary storage (the
-	// Standard storage class) files at which to move them to Archive storage. Metadata
+	// Standard storage class) at which to move them to Archive storage. Metadata
 	// operations such as listing the contents of a directory don't count as file
 	// access events.
 	TransitionToArchive TransitionToArchiveRules
@@ -489,6 +532,9 @@ type ReplicationConfigurationDescription struct {
 	// This member is required.
 	SourceFileSystemRegion *string
 
+	// ID of the Amazon Web Services account in which the source file system resides.
+	SourceFileSystemOwnerId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -511,7 +557,7 @@ type ResourceIdPreference struct {
 // provides access to. The access point exposes the specified file system path as
 // the root directory of your file system to applications using the access point.
 // NFS clients using the access point can only access data in the access point's
-// RootDirectory and it's subdirectories.
+// RootDirectory and its subdirectories.
 type RootDirectory struct {
 
 	// (Optional) Specifies the POSIX IDs and permissions to apply to the access

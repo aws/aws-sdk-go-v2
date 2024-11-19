@@ -50,7 +50,7 @@ type UpdateTableOptimizerInput struct {
 	// This member is required.
 	TableOptimizerConfiguration *types.TableOptimizerConfiguration
 
-	// The type of table optimizer. Currently, the only valid value is compaction .
+	// The type of table optimizer.
 	//
 	// This member is required.
 	Type types.TableOptimizerType

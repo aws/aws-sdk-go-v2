@@ -1,0 +1,8 @@
+{
+    "id": "d3286b6d-057c-44e8-ab56-ffd2586f7374",
+    "type": "feature",
+    "description": "Amazon Keyspaces Multi-Region Replication: Adds support to add new regions to multi and single-region keyspaces.",
+    "modules": [
+        "service/keyspaces"
+    ]
+}

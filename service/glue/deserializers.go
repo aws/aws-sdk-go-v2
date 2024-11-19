@@ -57346,6 +57346,11 @@ func awsAwsjson11_deserializeDocumentTableOptimizerConfiguration(v **types.Table
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "vpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentTableOptimizerVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -57487,6 +57492,48 @@ func awsAwsjson11_deserializeDocumentTableOptimizerRuns(v *[]types.TableOptimize
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableOptimizerVpcConfiguration(v *types.TableOptimizerVpcConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.TableOptimizerVpcConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "glueConnectionName":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected glueConnectionNameString to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.TableOptimizerVpcConfigurationMemberGlueConnectionName{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

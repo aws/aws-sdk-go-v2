@@ -1,0 +1,8 @@
+{
+    "id": "27fc33b4-aa0b-48d8-a657-bf60a7cc0e5b",
+    "type": "feature",
+    "description": "Release Tax Inheritance APIs,  Tax Exemption APIs, and functionality update for some existing Tax Registration APIs",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

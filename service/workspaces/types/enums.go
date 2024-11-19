@@ -1125,35 +1125,51 @@ type WorkspaceImageErrorDetailCode string
 
 // Enum values for WorkspaceImageErrorDetailCode
 const (
-	WorkspaceImageErrorDetailCodeOutdatedPowershellVersion     WorkspaceImageErrorDetailCode = "OutdatedPowershellVersion"
-	WorkspaceImageErrorDetailCodeOfficeInstalled               WorkspaceImageErrorDetailCode = "OfficeInstalled"
-	WorkspaceImageErrorDetailCodePcoipAgentInstalled           WorkspaceImageErrorDetailCode = "PCoIPAgentInstalled"
-	WorkspaceImageErrorDetailCodeWindowsUpdatesEnabled         WorkspaceImageErrorDetailCode = "WindowsUpdatesEnabled"
-	WorkspaceImageErrorDetailCodeAutoMountDisabled             WorkspaceImageErrorDetailCode = "AutoMountDisabled"
-	WorkspaceImageErrorDetailCodeWorkspacesByolAccountNotFound WorkspaceImageErrorDetailCode = "WorkspacesBYOLAccountNotFound"
-	WorkspaceImageErrorDetailCodeWorkspacesByolAccountDisabled WorkspaceImageErrorDetailCode = "WorkspacesBYOLAccountDisabled"
-	WorkspaceImageErrorDetailCodeDhcpDisabled                  WorkspaceImageErrorDetailCode = "DHCPDisabled"
-	WorkspaceImageErrorDetailCodeDiskFreeSpace                 WorkspaceImageErrorDetailCode = "DiskFreeSpace"
-	WorkspaceImageErrorDetailCodeAdditionalDrivesAttached      WorkspaceImageErrorDetailCode = "AdditionalDrivesAttached"
-	WorkspaceImageErrorDetailCodeOsNotSupported                WorkspaceImageErrorDetailCode = "OSNotSupported"
-	WorkspaceImageErrorDetailCodeDomainJoined                  WorkspaceImageErrorDetailCode = "DomainJoined"
-	WorkspaceImageErrorDetailCodeAzureDomainJoined             WorkspaceImageErrorDetailCode = "AzureDomainJoined"
-	WorkspaceImageErrorDetailCodeFirewallEnabled               WorkspaceImageErrorDetailCode = "FirewallEnabled"
-	WorkspaceImageErrorDetailCodeVmwareToolsInstalled          WorkspaceImageErrorDetailCode = "VMWareToolsInstalled"
-	WorkspaceImageErrorDetailCodeDiskSizeExceeded              WorkspaceImageErrorDetailCode = "DiskSizeExceeded"
-	WorkspaceImageErrorDetailCodeIncompatiblePartitioning      WorkspaceImageErrorDetailCode = "IncompatiblePartitioning"
-	WorkspaceImageErrorDetailCodePendingReboot                 WorkspaceImageErrorDetailCode = "PendingReboot"
-	WorkspaceImageErrorDetailCodeAutoLogonEnabled              WorkspaceImageErrorDetailCode = "AutoLogonEnabled"
-	WorkspaceImageErrorDetailCodeRealtimeUniversalDisabled     WorkspaceImageErrorDetailCode = "RealTimeUniversalDisabled"
-	WorkspaceImageErrorDetailCodeMultipleBootPartition         WorkspaceImageErrorDetailCode = "MultipleBootPartition"
-	WorkspaceImageErrorDetailCodeSixtyFourBitOs                WorkspaceImageErrorDetailCode = "Requires64BitOS"
-	WorkspaceImageErrorDetailCodeZeroRearmCount                WorkspaceImageErrorDetailCode = "ZeroRearmCount"
-	WorkspaceImageErrorDetailCodeInPlaceUpgrade                WorkspaceImageErrorDetailCode = "InPlaceUpgrade"
-	WorkspaceImageErrorDetailCodeAntiVirusInstalled            WorkspaceImageErrorDetailCode = "AntiVirusInstalled"
-	WorkspaceImageErrorDetailCodeUefiNotSupported              WorkspaceImageErrorDetailCode = "UEFINotSupported"
-	WorkspaceImageErrorDetailCodeUnknownError                  WorkspaceImageErrorDetailCode = "UnknownError"
-	WorkspaceImageErrorDetailCodeAppxPackagesInstalled         WorkspaceImageErrorDetailCode = "AppXPackagesInstalled"
-	WorkspaceImageErrorDetailCodeReservedStorageInUse          WorkspaceImageErrorDetailCode = "ReservedStorageInUse"
+	WorkspaceImageErrorDetailCodeOutdatedPowershellVersion              WorkspaceImageErrorDetailCode = "OutdatedPowershellVersion"
+	WorkspaceImageErrorDetailCodeOfficeInstalled                        WorkspaceImageErrorDetailCode = "OfficeInstalled"
+	WorkspaceImageErrorDetailCodePcoipAgentInstalled                    WorkspaceImageErrorDetailCode = "PCoIPAgentInstalled"
+	WorkspaceImageErrorDetailCodeWindowsUpdatesEnabled                  WorkspaceImageErrorDetailCode = "WindowsUpdatesEnabled"
+	WorkspaceImageErrorDetailCodeAutoMountDisabled                      WorkspaceImageErrorDetailCode = "AutoMountDisabled"
+	WorkspaceImageErrorDetailCodeWorkspacesByolAccountNotFound          WorkspaceImageErrorDetailCode = "WorkspacesBYOLAccountNotFound"
+	WorkspaceImageErrorDetailCodeWorkspacesByolAccountDisabled          WorkspaceImageErrorDetailCode = "WorkspacesBYOLAccountDisabled"
+	WorkspaceImageErrorDetailCodeDhcpDisabled                           WorkspaceImageErrorDetailCode = "DHCPDisabled"
+	WorkspaceImageErrorDetailCodeDiskFreeSpace                          WorkspaceImageErrorDetailCode = "DiskFreeSpace"
+	WorkspaceImageErrorDetailCodeAdditionalDrivesAttached               WorkspaceImageErrorDetailCode = "AdditionalDrivesAttached"
+	WorkspaceImageErrorDetailCodeOsNotSupported                         WorkspaceImageErrorDetailCode = "OSNotSupported"
+	WorkspaceImageErrorDetailCodeDomainJoined                           WorkspaceImageErrorDetailCode = "DomainJoined"
+	WorkspaceImageErrorDetailCodeAzureDomainJoined                      WorkspaceImageErrorDetailCode = "AzureDomainJoined"
+	WorkspaceImageErrorDetailCodeFirewallEnabled                        WorkspaceImageErrorDetailCode = "FirewallEnabled"
+	WorkspaceImageErrorDetailCodeVmwareToolsInstalled                   WorkspaceImageErrorDetailCode = "VMWareToolsInstalled"
+	WorkspaceImageErrorDetailCodeDiskSizeExceeded                       WorkspaceImageErrorDetailCode = "DiskSizeExceeded"
+	WorkspaceImageErrorDetailCodeIncompatiblePartitioning               WorkspaceImageErrorDetailCode = "IncompatiblePartitioning"
+	WorkspaceImageErrorDetailCodePendingReboot                          WorkspaceImageErrorDetailCode = "PendingReboot"
+	WorkspaceImageErrorDetailCodeAutoLogonEnabled                       WorkspaceImageErrorDetailCode = "AutoLogonEnabled"
+	WorkspaceImageErrorDetailCodeRealtimeUniversalDisabled              WorkspaceImageErrorDetailCode = "RealTimeUniversalDisabled"
+	WorkspaceImageErrorDetailCodeMultipleBootPartition                  WorkspaceImageErrorDetailCode = "MultipleBootPartition"
+	WorkspaceImageErrorDetailCodeSixtyFourBitOs                         WorkspaceImageErrorDetailCode = "Requires64BitOS"
+	WorkspaceImageErrorDetailCodeZeroRearmCount                         WorkspaceImageErrorDetailCode = "ZeroRearmCount"
+	WorkspaceImageErrorDetailCodeInPlaceUpgrade                         WorkspaceImageErrorDetailCode = "InPlaceUpgrade"
+	WorkspaceImageErrorDetailCodeAntiVirusInstalled                     WorkspaceImageErrorDetailCode = "AntiVirusInstalled"
+	WorkspaceImageErrorDetailCodeUefiNotSupported                       WorkspaceImageErrorDetailCode = "UEFINotSupported"
+	WorkspaceImageErrorDetailCodeUnknownError                           WorkspaceImageErrorDetailCode = "UnknownError"
+	WorkspaceImageErrorDetailCodeAppxPackagesInstalled                  WorkspaceImageErrorDetailCode = "AppXPackagesInstalled"
+	WorkspaceImageErrorDetailCodeReservedStorageInUse                   WorkspaceImageErrorDetailCode = "ReservedStorageInUse"
+	WorkspaceImageErrorDetailCodeAdditionalDrivesPresent                WorkspaceImageErrorDetailCode = "AdditionalDrivesPresent"
+	WorkspaceImageErrorDetailCodeWindowsUpdatesRequired                 WorkspaceImageErrorDetailCode = "WindowsUpdatesRequired"
+	WorkspaceImageErrorDetailCodeSysprepFileMissing                     WorkspaceImageErrorDetailCode = "SysPrepFileMissing"
+	WorkspaceImageErrorDetailCodeUserProfileMissing                     WorkspaceImageErrorDetailCode = "UserProfileMissing"
+	WorkspaceImageErrorDetailCodeInsufficientDiskSpace                  WorkspaceImageErrorDetailCode = "InsufficientDiskSpace"
+	WorkspaceImageErrorDetailCodeEnvironmentVariablesPathMissingEntries WorkspaceImageErrorDetailCode = "EnvironmentVariablesPathMissingEntries"
+	WorkspaceImageErrorDetailCodeDomainAccountServicesFound             WorkspaceImageErrorDetailCode = "DomainAccountServicesFound"
+	WorkspaceImageErrorDetailCodeInvalidIp                              WorkspaceImageErrorDetailCode = "InvalidIp"
+	WorkspaceImageErrorDetailCodeRemoteDesktopServicesDisabled          WorkspaceImageErrorDetailCode = "RemoteDesktopServicesDisabled"
+	WorkspaceImageErrorDetailCodeWindowsModulesInstallerDisabled        WorkspaceImageErrorDetailCode = "WindowsModulesInstallerDisabled"
+	WorkspaceImageErrorDetailCodeAmazonSsmAgentEnabled                  WorkspaceImageErrorDetailCode = "AmazonSsmAgentEnabled"
+	WorkspaceImageErrorDetailCodeUnsupportedSecurityProtocol            WorkspaceImageErrorDetailCode = "UnsupportedSecurityProtocol"
+	WorkspaceImageErrorDetailCodeMultipleUserProfiles                   WorkspaceImageErrorDetailCode = "MultipleUserProfiles"
+	WorkspaceImageErrorDetailCodeStagedAppxPackage                      WorkspaceImageErrorDetailCode = "StagedAppxPackage"
+	WorkspaceImageErrorDetailCodeUnsupportedOsUpgrade                   WorkspaceImageErrorDetailCode = "UnsupportedOsUpgrade"
+	WorkspaceImageErrorDetailCodeInsufficientRearmCount                 WorkspaceImageErrorDetailCode = "InsufficientRearmCount"
 )
 
 // Values returns all known values for WorkspaceImageErrorDetailCode. Note that
@@ -1192,6 +1208,22 @@ func (WorkspaceImageErrorDetailCode) Values() []WorkspaceImageErrorDetailCode {
 		"UnknownError",
 		"AppXPackagesInstalled",
 		"ReservedStorageInUse",
+		"AdditionalDrivesPresent",
+		"WindowsUpdatesRequired",
+		"SysPrepFileMissing",
+		"UserProfileMissing",
+		"InsufficientDiskSpace",
+		"EnvironmentVariablesPathMissingEntries",
+		"DomainAccountServicesFound",
+		"InvalidIp",
+		"RemoteDesktopServicesDisabled",
+		"WindowsModulesInstallerDisabled",
+		"AmazonSsmAgentEnabled",
+		"UnsupportedSecurityProtocol",
+		"MultipleUserProfiles",
+		"StagedAppxPackage",
+		"UnsupportedOsUpgrade",
+		"InsufficientRearmCount",
 	}
 }
 

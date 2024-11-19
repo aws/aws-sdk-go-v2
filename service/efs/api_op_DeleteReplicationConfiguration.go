@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +41,23 @@ type DeleteReplicationConfigurationInput struct {
 	//
 	// This member is required.
 	SourceFileSystemId *string
+
+	// When replicating across Amazon Web Services accounts or across Amazon Web
+	// Services Regions, Amazon EFS deletes the replication configuration from both the
+	// source and destination account or Region ( ALL_CONFIGURATIONS ) by default. If
+	// there's a configuration or permissions issue that prevents Amazon EFS from
+	// deleting the replication configuration from both sides, you can use the
+	// LOCAL_CONFIGURATION_ONLY mode to delete the replication configuration from only
+	// the local side (the account or Region from which the delete is performed).
+	//
+	// Only use the LOCAL_CONFIGURATION_ONLY mode in the case that Amazon EFS is
+	// unable to delete the replication configuration in both the source and
+	// destination account or Region. Deleting the local configuration leaves the
+	// configuration in the other account or Region unrecoverable.
+	//
+	// Additionally, do not use this mode for same-account, same-region replication as
+	// doing so results in a BadRequest exception error.
+	DeletionMode types.DeletionMode
 
 	noSmithyDocumentSerde
 }

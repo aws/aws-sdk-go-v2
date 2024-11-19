@@ -4143,6 +4143,11 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.String(*v.User)
 	}
 
+	if len(v.VersionConsistency) > 0 {
+		ok := object.Key("versionConsistency")
+		ok.String(string(v.VersionConsistency))
+	}
+
 	if v.VolumesFrom != nil {
 		ok := object.Key("volumesFrom")
 		if err := awsAwsjson11_serializeDocumentVolumeFromList(v.VolumesFrom, ok); err != nil {

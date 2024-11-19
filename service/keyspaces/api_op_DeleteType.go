@@ -13,6 +13,11 @@ import (
 //	The DeleteType operation deletes a user-defined type (UDT). You can only
 //
 // delete a type that is not used in a table or another UDT.
+//
+// To configure the required permissions, see [Permissions to delete a UDT] in the Amazon Keyspaces Developer
+// Guide.
+//
+// [Permissions to delete a UDT]: https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-drop
 func (c *Client) DeleteType(ctx context.Context, params *DeleteTypeInput, optFns ...func(*Options)) (*DeleteTypeOutput, error) {
 	if params == nil {
 		params = &DeleteTypeInput{}

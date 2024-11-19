@@ -22674,6 +22674,29 @@ func awsAwsjson11_serializeDocumentTableOptimizerConfiguration(v *types.TableOpt
 		ok.String(*v.RoleArn)
 	}
 
+	if v.VpcConfiguration != nil {
+		ok := object.Key("vpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentTableOptimizerVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTableOptimizerVpcConfiguration(v types.TableOptimizerVpcConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.TableOptimizerVpcConfigurationMemberGlueConnectionName:
+		av := object.Key("glueConnectionName")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

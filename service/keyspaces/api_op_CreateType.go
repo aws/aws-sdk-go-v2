@@ -15,9 +15,13 @@ import (
 //
 // keyspace.
 //
+// To configure the required permissions, see [Permissions to create a UDT] in the Amazon Keyspaces Developer
+// Guide.
+//
 // For more information, see [User-defined types (UDTs)] in the Amazon Keyspaces Developer Guide.
 //
 // [User-defined types (UDTs)]: https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html
+// [Permissions to create a UDT]: https://docs.aws.amazon.com/keyspaces/latest/devguide/configure-udt-permissions.html#udt-permissions-create
 func (c *Client) CreateType(ctx context.Context, params *CreateTypeInput, optFns ...func(*Options)) (*CreateTypeOutput, error) {
 	if params == nil {
 		params = &CreateTypeInput{}

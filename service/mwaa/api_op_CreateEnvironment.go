@@ -103,8 +103,8 @@ type CreateEnvironmentInput struct {
 	// delete the failed environment and create a new one.
 	EndpointManagement types.EndpointManagement
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large ,
-	// mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
+	// The environment class type. Valid values: mw1.micro , mw1.small , mw1.medium ,
+	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
 	//
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
@@ -129,7 +129,8 @@ type CreateEnvironmentInput struct {
 	// rates decrease Amazon MWAA disposes of the additional web servers, and scales
 	// down to the number set in MinxWebserers .
 	//
-	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	// Valid values: For environments larger than mw1.micro, accepts values from 2 to 5
+	// . Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	MaxWebservers *int32
 
 	// The maximum number of workers that you want to run in your environment. MWAA
@@ -147,7 +148,8 @@ type CreateEnvironmentInput struct {
 	// disposes of the additional web servers, and scales down to the number set in
 	// MinxWebserers .
 	//
-	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	// Valid values: For environments larger than mw1.micro, accepts values from 2 to 5
+	// . Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	MinWebservers *int32
 
 	// The minimum number of workers that you want to run in your environment. MWAA
@@ -187,7 +189,8 @@ type CreateEnvironmentInput struct {
 	// The number of Apache Airflow schedulers to run in your environment. Valid
 	// values:
 	//
-	//   - v2 - Accepts between 2 to 5 . Defaults to 2 .
+	//   - v2 - For environments larger than mw1.micro, accepts values from 2 to 5 .
+	//   Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	//
 	//   - v1 - Accepts 1 .
 	Schedulers *int32

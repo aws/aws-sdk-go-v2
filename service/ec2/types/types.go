@@ -897,6 +897,27 @@ type BlockDeviceMapping struct {
 	noSmithyDocumentSerde
 }
 
+// The state of VPC Block Public Access (BPA).
+type BlockPublicAccessStates struct {
+
+	// The mode of VPC BPA.
+	//
+	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
+	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//
+	//   - bidirectional-access-blocked : Block all traffic to and from internet
+	//   gateways and egress-only internet gateways in this Region (except for excluded
+	//   VPCs and subnets).
+	//
+	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
+	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
+	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   only allow outbound connections to be established.
+	InternetGatewayBlockMode BlockPublicAccessMode
+
+	noSmithyDocumentSerde
+}
+
 // Describes a bundle task.
 type BundleTask struct {
 
@@ -17245,6 +17266,9 @@ type Subnet struct {
 	// for any stopped instances are considered unavailable.
 	AvailableIpAddressCount *int32
 
+	// The state of VPC Block Public Access (BPA).
+	BlockPublicAccessStates *BlockPublicAccessStates
+
 	// The IPv4 CIDR block assigned to the subnet.
 	CidrBlock *string
 
@@ -19923,6 +19947,9 @@ type VolumeStatusItem struct {
 // Describes a VPC.
 type Vpc struct {
 
+	// The state of VPC Block Public Access (BPA).
+	BlockPublicAccessStates *BlockPublicAccessStates
+
 	// The primary IPv4 CIDR block for the VPC.
 	CidrBlock *string
 
@@ -19964,6 +19991,97 @@ type VpcAttachment struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet
+// that exempts it from the account’s BPA mode and will allow bidirectional or
+// egress-only access. You can create BPA exclusions for VPCs and subnets even when
+// BPA is not enabled on the account to ensure that there is no traffic disruption
+// to the exclusions when VPC BPA is turned on. To learn more about VPC BPA, see [Block public access to VPCs and subnets]
+// in the Amazon VPC User Guide.
+//
+// [Block public access to VPCs and subnets]: https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html
+type VpcBlockPublicAccessExclusion struct {
+
+	// When the exclusion was created.
+	CreationTimestamp *time.Time
+
+	// When the exclusion was deleted.
+	DeletionTimestamp *time.Time
+
+	// The ID of the exclusion.
+	ExclusionId *string
+
+	// The exclusion mode for internet gateway traffic.
+	//
+	//   - bidirectional-access-allowed : Allow all internet traffic to and from the
+	//   excluded VPCs and subnets.
+	//
+	//   - egress-access-allowed : Allow outbound internet traffic from the excluded
+	//   VPCs and subnets. Block inbound internet traffic to the excluded VPCs and
+	//   subnets. Only applies when VPC Block Public Access is set to Bidirectional.
+	InternetGatewayExclusionMode InternetGatewayExclusionMode
+
+	// When the exclusion was last updated.
+	LastUpdateTimestamp *time.Time
+
+	// The reason for the current exclusion state.
+	Reason *string
+
+	// The ARN of the exclusion.
+	ResourceArn *string
+
+	// The state of the exclusion.
+	State VpcBlockPublicAccessExclusionState
+
+	// tag - The key/value combination of a tag assigned to the resource. Use the tag
+	// key in the filter name and the tag value as the filter value. For example, to
+	// find all resources that have a tag with the key Owner and the value TeamA ,
+	// specify tag:Owner for the filter name and TeamA for the filter value.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// VPC Block public Access (BPA) enables you to block resources in VPCs and
+// subnets that you own in a Region from reaching or being reached from the
+// internet through internet gateways and egress-only internet gateways. To learn
+// more about VPC BPA, see [Block public access to VPCs and subnets]in the Amazon VPC User Guide.
+//
+// [Block public access to VPCs and subnets]: https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html
+type VpcBlockPublicAccessOptions struct {
+
+	// An Amazon Web Services account ID.
+	AwsAccountId *string
+
+	// An Amazon Web Services Region.
+	AwsRegion *string
+
+	// The current mode of VPC BPA.
+	//
+	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
+	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//
+	//   - bidirectional-access-blocked : Block all traffic to and from internet
+	//   gateways and egress-only internet gateways in this Region (except for excluded
+	//   VPCs and subnets).
+	//
+	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
+	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
+	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   only allow outbound connections to be established.
+	InternetGatewayBlockMode InternetGatewayBlockMode
+
+	// The last time the VPC BPA mode was updated.
+	LastUpdateTimestamp *time.Time
+
+	// The reason for the current state.
+	Reason *string
+
+	// The current state of VPC BPA.
+	State VpcBlockPublicAccessState
 
 	noSmithyDocumentSerde
 }

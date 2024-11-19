@@ -1,0 +1,8 @@
+{
+    "id": "025e4d88-cee1-454b-820b-b9f00ea0677e",
+    "type": "feature",
+    "description": "Add support for the new parameters in EFS replication APIs",
+    "modules": [
+        "service/efs"
+    ]
+}

@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // An object with your accountId and TRN information.
@@ -212,6 +213,20 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// The address domain associate with the tax information.
+type Authority struct {
+
+	//  The country code for the country that the address is in.
+	//
+	// This member is required.
+	Country *string
+
+	//  The state that the address is located.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
 //	The error object for representing failures in the BatchDeleteTaxRegistration
 //
 // operation.
@@ -338,6 +353,22 @@ type EstoniaAdditionalInfo struct {
 	//
 	// This member is required.
 	RegistryCommercialCode *string
+
+	noSmithyDocumentSerde
+}
+
+// The exemption certificate.
+type ExemptionCertificate struct {
+
+	// The exemption certificate file content.
+	//
+	// This member is required.
+	DocumentFile []byte
+
+	// The exemption certificate file name.
+	//
+	// This member is required.
+	DocumentName *string
 
 	noSmithyDocumentSerde
 }
@@ -645,6 +676,69 @@ type TaxDocumentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The tax exemption.
+type TaxExemption struct {
+
+	// The address domain associate with tax exemption.
+	//
+	// This member is required.
+	Authority *Authority
+
+	// The tax exemption type.
+	//
+	// This member is required.
+	TaxExemptionType *TaxExemptionType
+
+	// The tax exemption effective date.
+	EffectiveDate *time.Time
+
+	// The tax exemption expiration date.
+	ExpirationDate *time.Time
+
+	// The tax exemption status.
+	Status EntityExemptionAccountStatus
+
+	// The tax exemption recording time in the TaxSettings system.
+	SystemEffectiveDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The tax exemption details.
+type TaxExemptionDetails struct {
+
+	// The indicator if the tax exemption is inherited from the consolidated billing
+	// family management account.
+	HeritageObtainedDetails *bool
+
+	// The consolidated billing family management account the tax exemption inherited
+	// from.
+	HeritageObtainedParentEntity *string
+
+	// The reason of the heritage inheritance.
+	HeritageObtainedReason *string
+
+	// Tax exemptions.
+	TaxExemptions []TaxExemption
+
+	noSmithyDocumentSerde
+}
+
+// The tax exemption type.
+type TaxExemptionType struct {
+
+	// The tax exemption's applicable jurisdictions.
+	ApplicableJurisdictions []Authority
+
+	// The tax exemption's type description.
+	Description *string
+
+	// The tax exemption's type display name.
+	DisplayName *string
+
+	noSmithyDocumentSerde
+}
+
 // Tax inheritance information associated with the account.
 type TaxInheritanceDetails struct {
 
@@ -705,12 +799,29 @@ type TaxRegistration struct {
 	noSmithyDocumentSerde
 }
 
+// The tax registration document.
+type TaxRegistrationDocFile struct {
+
+	// The tax registration document content.
+	//
+	// This member is required.
+	FileContent []byte
+
+	// The tax registration document name.
+	//
+	// This member is required.
+	FileName *string
+
+	noSmithyDocumentSerde
+}
+
 // Tax registration document information.
 type TaxRegistrationDocument struct {
 
+	// The tax registration document.
+	File *TaxRegistrationDocFile
+
 	// The Amazon S3 location where your tax registration document is stored.
-	//
-	// This member is required.
 	S3Location *SourceS3Location
 
 	noSmithyDocumentSerde

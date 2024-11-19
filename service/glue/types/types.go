@@ -8891,6 +8891,13 @@ type TableOptimizerConfiguration struct {
 	// resources associated with the optimizer on the caller's behalf.
 	RoleArn *string
 
+	// A TableOptimizerVpcConfiguration object representing the VPC configuration for
+	// a table optimizer.
+	//
+	// This configuration is necessary to perform optimization on tables that are in a
+	// customer VPC.
+	VpcConfiguration TableOptimizerVpcConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -8930,6 +8937,27 @@ type TableOptimizerRun struct {
 
 	noSmithyDocumentSerde
 }
+
+// An object that describes the VPC configuration for a table optimizer.
+//
+// This configuration is necessary to perform optimization on tables that are in a
+// customer VPC.
+//
+// The following types satisfy this interface:
+//
+//	TableOptimizerVpcConfigurationMemberGlueConnectionName
+type TableOptimizerVpcConfiguration interface {
+	isTableOptimizerVpcConfiguration()
+}
+
+// The name of the Glue connection used for the VPC for the table optimizer.
+type TableOptimizerVpcConfigurationMemberGlueConnectionName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*TableOptimizerVpcConfigurationMemberGlueConnectionName) isTableOptimizerVpcConfiguration() {}
 
 // A structure containing information about the state of an asynchronous change to
 // a table.
@@ -9878,3 +9906,14 @@ type XMLClassifier struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isTableOptimizerVpcConfiguration() {}

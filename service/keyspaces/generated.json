@@ -25,6 +25,7 @@
         "api_op_RestoreTable.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateKeyspace.go",
         "api_op_UpdateTable.go",
         "auth.go",
         "deserializers.go",

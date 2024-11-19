@@ -30,15 +30,13 @@ func (c *Client) GetTaxRegistrationDocument(ctx context.Context, params *GetTaxR
 
 type GetTaxRegistrationDocumentInput struct {
 
-	// The Amazon S3 bucket that you specify to download your tax documents to.
-	//
-	// This member is required.
-	DestinationS3Location *types.DestinationS3Location
-
 	// The metadata for your tax document.
 	//
 	// This member is required.
 	TaxDocumentMetadata *types.TaxDocumentMetadata
+
+	// The Amazon S3 bucket that you specify to download your tax documents to.
+	DestinationS3Location *types.DestinationS3Location
 
 	noSmithyDocumentSerde
 }
@@ -48,6 +46,9 @@ type GetTaxRegistrationDocumentOutput struct {
 	// The file path of the Amazon S3 bucket where you want to download your tax
 	// document to.
 	DestinationFilePath *string
+
+	// The Amazon S3 presigned URL of the tax registration document.
+	PresignedS3Url *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

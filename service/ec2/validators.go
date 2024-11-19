@@ -2370,6 +2370,26 @@ func (m *validateOpCreateVolume) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcBlockPublicAccessExclusion struct {
+}
+
+func (*validateOpCreateVpcBlockPublicAccessExclusion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcBlockPublicAccessExclusion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcBlockPublicAccessExclusionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcBlockPublicAccessExclusionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVpcEndpointConnectionNotification struct {
 }
 
@@ -3745,6 +3765,26 @@ func (m *validateOpDeleteVolume) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpcBlockPublicAccessExclusion struct {
+}
+
+func (*validateOpDeleteVpcBlockPublicAccessExclusion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcBlockPublicAccessExclusion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcBlockPublicAccessExclusionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcBlockPublicAccessExclusionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7450,6 +7490,46 @@ func (m *validateOpModifyVpcAttribute) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyVpcBlockPublicAccessExclusion struct {
+}
+
+func (*validateOpModifyVpcBlockPublicAccessExclusion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyVpcBlockPublicAccessExclusion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyVpcBlockPublicAccessExclusionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyVpcBlockPublicAccessExclusionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyVpcBlockPublicAccessOptions struct {
+}
+
+func (*validateOpModifyVpcBlockPublicAccessOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyVpcBlockPublicAccessOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyVpcBlockPublicAccessOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyVpcBlockPublicAccessOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyVpcEndpointConnectionNotification struct {
 }
 
@@ -9462,6 +9542,10 @@ func addOpCreateVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVolume{}, middleware.After)
 }
 
+func addOpCreateVpcBlockPublicAccessExclusionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcBlockPublicAccessExclusion{}, middleware.After)
+}
+
 func addOpCreateVpcEndpointConnectionNotificationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpcEndpointConnectionNotification{}, middleware.After)
 }
@@ -9736,6 +9820,10 @@ func addOpDeleteVerifiedAccessTrustProviderValidationMiddleware(stack *middlewar
 
 func addOpDeleteVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVolume{}, middleware.After)
+}
+
+func addOpDeleteVpcBlockPublicAccessExclusionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcBlockPublicAccessExclusion{}, middleware.After)
 }
 
 func addOpDeleteVpcEndpointConnectionNotificationsValidationMiddleware(stack *middleware.Stack) error {
@@ -10476,6 +10564,14 @@ func addOpModifyVolumeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpModifyVpcAttributeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyVpcAttribute{}, middleware.After)
+}
+
+func addOpModifyVpcBlockPublicAccessExclusionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyVpcBlockPublicAccessExclusion{}, middleware.After)
+}
+
+func addOpModifyVpcBlockPublicAccessOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyVpcBlockPublicAccessOptions{}, middleware.After)
 }
 
 func addOpModifyVpcEndpointConnectionNotificationValidationMiddleware(stack *middleware.Stack) error {
@@ -13770,6 +13866,21 @@ func validateOpCreateVolumeInput(v *CreateVolumeInput) error {
 	}
 }
 
+func validateOpCreateVpcBlockPublicAccessExclusionInput(v *CreateVpcBlockPublicAccessExclusionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcBlockPublicAccessExclusionInput"}
+	if len(v.InternetGatewayExclusionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InternetGatewayExclusionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVpcEndpointConnectionNotificationInput(v *CreateVpcEndpointConnectionNotificationInput) error {
 	if v == nil {
 		return nil
@@ -14830,6 +14941,21 @@ func validateOpDeleteVolumeInput(v *DeleteVolumeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVolumeInput"}
 	if v.VolumeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpcBlockPublicAccessExclusionInput(v *DeleteVpcBlockPublicAccessExclusionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcBlockPublicAccessExclusionInput"}
+	if v.ExclusionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExclusionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17897,6 +18023,39 @@ func validateOpModifyVpcAttributeInput(v *ModifyVpcAttributeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyVpcAttributeInput"}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyVpcBlockPublicAccessExclusionInput(v *ModifyVpcBlockPublicAccessExclusionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyVpcBlockPublicAccessExclusionInput"}
+	if v.ExclusionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExclusionId"))
+	}
+	if len(v.InternetGatewayExclusionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InternetGatewayExclusionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyVpcBlockPublicAccessOptionsInput(v *ModifyVpcBlockPublicAccessOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyVpcBlockPublicAccessOptionsInput"}
+	if len(v.InternetGatewayBlockMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InternetGatewayBlockMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

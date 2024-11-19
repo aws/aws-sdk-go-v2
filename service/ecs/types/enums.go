@@ -1351,3 +1351,22 @@ func (UlimitName) Values() []UlimitName {
 		"stack",
 	}
 }
+
+type VersionConsistency string
+
+// Enum values for VersionConsistency
+const (
+	VersionConsistencyEnabled  VersionConsistency = "enabled"
+	VersionConsistencyDisabled VersionConsistency = "disabled"
+)
+
+// Values returns all known values for VersionConsistency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VersionConsistency) Values() []VersionConsistency {
+	return []VersionConsistency{
+		"enabled",
+		"disabled",
+	}
+}

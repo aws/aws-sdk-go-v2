@@ -1682,6 +1682,18 @@ func TestCheckSnapshot_CreateVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVpcEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcEndpoint(context.Background(), nil, func(o *Options) {
@@ -2575,6 +2587,18 @@ func TestCheckSnapshot_DeleteVpc(t *testing.T) {
 	_, err := svc.DeleteVpc(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVpc")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVpcBlockPublicAccessExclusion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4471,6 +4495,30 @@ func TestCheckSnapshot_DescribeVpcAttribute(t *testing.T) {
 	_, err := svc.DescribeVpcAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeVpcAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeVpcBlockPublicAccessExclusions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessExclusions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcBlockPublicAccessExclusions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcBlockPublicAccessOptions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6703,6 +6751,30 @@ func TestCheckSnapshot_ModifyVpcAttribute(t *testing.T) {
 	_, err := svc.ModifyVpcAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyVpcAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcBlockPublicAccessOptions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9325,6 +9397,18 @@ func TestUpdateSnapshot_CreateVpc(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVpcEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcEndpoint(context.Background(), nil, func(o *Options) {
@@ -10218,6 +10302,18 @@ func TestUpdateSnapshot_DeleteVpc(t *testing.T) {
 	_, err := svc.DeleteVpc(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVpc")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVpcBlockPublicAccessExclusion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12114,6 +12210,30 @@ func TestUpdateSnapshot_DescribeVpcAttribute(t *testing.T) {
 	_, err := svc.DescribeVpcAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeVpcAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeVpcBlockPublicAccessExclusions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessExclusions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcBlockPublicAccessExclusions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcBlockPublicAccessOptions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14346,6 +14466,30 @@ func TestUpdateSnapshot_ModifyVpcAttribute(t *testing.T) {
 	_, err := svc.ModifyVpcAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyVpcAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcBlockPublicAccessOptions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

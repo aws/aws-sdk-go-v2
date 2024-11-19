@@ -44,7 +44,7 @@ type ListTableOptimizerRunsInput struct {
 	// This member is required.
 	TableName *string
 
-	// The type of table optimizer. Currently, the only valid value is compaction .
+	// The type of table optimizer.
 	//
 	// This member is required.
 	Type types.TableOptimizerType
