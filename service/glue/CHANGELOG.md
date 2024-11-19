@@ -1,3 +1,7 @@
+# v1.102.0 (2024-11-19)
+
+* **Feature**: AWS Glue Data Catalog now enhances managed table optimizations of Apache Iceberg tables that can be accessed only from a specific Amazon Virtual Private Cloud (VPC) environment.
+
 # v1.101.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

@@ -1,8 +1,0 @@
-{
-    "id": "c068e8c0-e891-4b3b-928d-bfdc67f13cd4",
-    "type": "feature",
-    "description": "AWS Glue Data Catalog now enhances managed table optimizations of Apache Iceberg tables that can be accessed only from a specific Amazon Virtual Private Cloud (VPC) environment.",
-    "modules": [
-        "service/glue"
-    ]
-}

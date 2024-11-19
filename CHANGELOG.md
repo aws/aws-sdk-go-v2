@@ -1,3 +1,25 @@
+# Release (2024-11-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.54](service/b2bi/CHANGELOG.md#v100-preview54-2024-11-19)
+  * **Feature**: Add new X12 transactions sets and versions
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.191.0](service/ec2/CHANGELOG.md#v11910-2024-11-19)
+  * **Feature**: This release adds VPC Block Public Access (VPC BPA), a new declarative control which blocks resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.51.0](service/ecs/CHANGELOG.md#v1510-2024-11-19)
+  * **Feature**: This release introduces support for configuring the version consistency feature for individual containers defined within a task definition. The configuration allows to specify whether ECS should resolve the container image tag specified in the container definition to an image digest.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.34.0](service/efs/CHANGELOG.md#v1340-2024-11-19)
+  * **Feature**: Add support for the new parameters in EFS replication APIs
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.102.0](service/glue/CHANGELOG.md#v11020-2024-11-19)
+  * **Feature**: AWS Glue Data Catalog now enhances managed table optimizations of Apache Iceberg tables that can be accessed only from a specific Amazon Virtual Private Cloud (VPC) environment.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.16.0](service/keyspaces/CHANGELOG.md#v1160-2024-11-19)
+  * **Feature**: Amazon Keyspaces Multi-Region Replication: Adds support to add new regions to multi and single-region keyspaces.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.33.0](service/mwaa/CHANGELOG.md#v1330-2024-11-19)
+  * **Feature**: Amazon MWAA now supports a new environment class, mw1.micro, ideal for workloads requiring fewer resources than mw1.small. This class supports a single instance of each Airflow component: Scheduler, Worker, and Webserver.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.7.0](service/taxsettings/CHANGELOG.md#v170-2024-11-19)
+  * **Feature**: Release Tax Inheritance APIs,  Tax Exemption APIs, and functionality update for some existing Tax Registration APIs
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.49.0](service/workspaces/CHANGELOG.md#v1490-2024-11-19)
+  * **Feature**: Releasing new ErrorCodes for Image Validation failure during CreateWorkspaceImage process
+
 # Release (2024-11-18)
 
 ## General Highlights

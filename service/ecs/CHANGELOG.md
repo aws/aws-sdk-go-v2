@@ -1,3 +1,7 @@
+# v1.51.0 (2024-11-19)
+
+* **Feature**: This release introduces support for configuring the version consistency feature for individual containers defined within a task definition. The configuration allows to specify whether ECS should resolve the container image tag specified in the container definition to an image digest.
+
 # v1.50.0 (2024-11-18)
 
 * **Feature**: This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.

@@ -1,3 +1,7 @@
+# v1.49.0 (2024-11-19)
+
+* **Feature**: Releasing new ErrorCodes for Image Validation failure during CreateWorkspaceImage process
+
 # v1.48.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

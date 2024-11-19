@@ -1,3 +1,7 @@
+# v1.16.0 (2024-11-19)
+
+* **Feature**: Amazon Keyspaces Multi-Region Replication: Adds support to add new regions to multi and single-region keyspaces.
+
 # v1.15.3 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

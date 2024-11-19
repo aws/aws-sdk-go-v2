@@ -1,3 +1,7 @@
+# v1.0.0-preview.54 (2024-11-19)
+
+* **Feature**: Add new X12 transactions sets and versions
+
 # v1.0.0-preview.53 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

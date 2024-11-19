@@ -1,3 +1,7 @@
+# v1.33.0 (2024-11-19)
+
+* **Feature**: Amazon MWAA now supports a new environment class, mw1.micro, ideal for workloads requiring fewer resources than mw1.small. This class supports a single instance of each Airflow component: Scheduler, Worker, and Webserver.
+
 # v1.32.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

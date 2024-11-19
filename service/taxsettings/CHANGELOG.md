@@ -1,3 +1,7 @@
+# v1.7.0 (2024-11-19)
+
+* **Feature**: Release Tax Inheritance APIs,  Tax Exemption APIs, and functionality update for some existing Tax Registration APIs
+
 # v1.6.3 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

@@ -29,10 +29,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.37.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.190.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.191.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.6
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.50.0
-	github.com/aws/aws-sdk-go-v2/service/efs v1.33.6
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.51.0
+	github.com/aws/aws-sdk-go-v2/service/efs v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.28.5
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.37.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.26.6
-	github.com/aws/aws-sdk-go-v2/service/glue v1.101.4
+	github.com/aws/aws-sdk-go-v2/service/glue v1.102.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/iam v1.38.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.25.6
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.6
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.55.5
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.48.6
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.49.0
 	github.com/aws/smithy-go v1.22.1
 )
 

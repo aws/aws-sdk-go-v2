@@ -1,8 +1,0 @@
-{
-    "id": "d9f78711-8268-47fc-a3d8-bd3ddf342d26",
-    "type": "feature",
-    "description": "This release adds VPC Block Public Access (VPC BPA), a new declarative control which blocks resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways.",
-    "modules": [
-        "service/ec2"
-    ]
-}

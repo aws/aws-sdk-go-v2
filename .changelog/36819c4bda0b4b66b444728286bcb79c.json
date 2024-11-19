@@ -1,8 +1,0 @@
-{
-    "id": "36819c4b-da0b-4b66-b444-728286bcb79c",
-    "type": "feature",
-    "description": "Releasing new ErrorCodes for Image Validation failure during CreateWorkspaceImage process",
-    "modules": [
-        "service/workspaces"
-    ]
-}
