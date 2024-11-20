@@ -131,7 +131,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 	}()
 
 	// If any checksum header is already set nothing to do.
-	for header, _ := range req.Header {
+	for header := range req.Header {
 		h := strings.ToUpper(header)
 		if strings.HasPrefix(h, "X-AMZ-CHECKSUM-") {
 			algorithm = Algorithm(strings.TrimPrefix(h, "X-AMZ-CHECKSUM-"))
@@ -277,7 +277,7 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 	}
 
 	// If any checksum header is already set nothing to do.
-	for header, _ := range req.Header {
+	for header := range req.Header {
 		if strings.HasPrefix(strings.ToLower(header), "x-amz-checksum-") {
 			return next.HandleFinalize(ctx, in)
 		}
