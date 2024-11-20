@@ -2013,6 +2013,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "parentIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that represents the parent <code>EnabledBaseline</code> at the Organizational Unit (OU) level, from which the child <code>EnabledBaseline</code> inherits its configuration. The value is returned by <code>GetEnabledBaseline</code>.</p>"
+                    }
+                },
                 "statusSummary": {
                     "target": "com.amazonaws.controltower#EnablementStatusSummary",
                     "traits": {
@@ -2043,6 +2049,12 @@
                     "target": "com.amazonaws.controltower#EnabledBaselineBaselineIdentifiers",
                     "traits": {
                         "smithy.api#documentation": "<p>Identifiers for the <code>Baseline</code> objects returned as part of the filter operation.</p>"
+                    }
+                },
+                "parentIdentifiers": {
+                    "target": "com.amazonaws.controltower#EnabledBaselineParentIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter that sets up a list of <code>parentIdentifiers</code> to filter the results of the <code>ListEnabledBaseline</code> output.</p>"
                     }
                 }
             },
@@ -2109,6 +2121,18 @@
                 "target": "com.amazonaws.controltower#EnabledBaselineParameter"
             }
         },
+        "com.amazonaws.controltower#EnabledBaselineParentIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.controltower#EnabledBaselineResource": {
             "type": "resource",
             "identifiers": {
@@ -2170,6 +2194,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The target upon which the baseline is enabled.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "parentIdentifier": {
+                    "target": "com.amazonaws.controltower#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that represents an object returned by <code>ListEnabledBaseline</code>, to describe an enabled baseline.</p>"
                     }
                 },
                 "statusSummary": {
@@ -3547,6 +3577,13 @@
                     "target": "com.amazonaws.controltower#ListEnabledBaselinesMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to be shown.</p>"
+                    }
+                },
+                "includeChildren": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A value that can be  set to include the child enabled baselines in responses. The default value is false.</p>"
                     }
                 }
             },

@@ -940,6 +940,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The Availability Zone impairment policy.\n        </p>"
                     }
+                },
+                "CapacityReservationSpecification": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The capacity reservation specification. \n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -2413,6 +2419,20 @@
                 "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>BaselineEbsBandwidthMbps</code> object\n            when you specify <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_InstanceRequirements.html\">InstanceRequirements</a> for an Auto Scaling group.</p>"
             }
         },
+        "com.amazonaws.autoscaling#BaselinePerformanceFactorsRequest": {
+            "type": "structure",
+            "members": {
+                "Cpu": {
+                    "target": "com.amazonaws.autoscaling#CpuPerformanceFactorRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The CPU performance to consider, using an instance family as the baseline reference.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The baseline performance to consider, using an instance family as a baseline reference. The instance family establishes the lowest acceptable level of performance. Auto Scaling uses\n            this baseline to guide instance type selection, but there is no guarantee that the selected instance types will always exceed the baseline for every application.\n        </p>\n         <p>Currently, this parameter only supports CPU performance as a baseline performance factor. For example, specifying <code>c6i</code> uses the CPU performance of the <code>c6i</code>\n        family as the baseline reference.</p>"
+            }
+        },
         "com.amazonaws.autoscaling#BatchDeleteScheduledAction": {
             "type": "operation",
             "input": {
@@ -2725,6 +2745,87 @@
         "com.amazonaws.autoscaling#CapacityRebalanceEnabled": {
             "type": "boolean"
         },
+        "com.amazonaws.autoscaling#CapacityReservationIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255"
+            }
+        },
+        "com.amazonaws.autoscaling#CapacityReservationPreference": {
+            "type": "enum",
+            "members": {
+                "CapacityReservationsOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-reservations-only"
+                    }
+                },
+                "CapacityReservationsFirst": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-reservations-first"
+                    }
+                },
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#CapacityReservationResourceGroupArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#ResourceName"
+            }
+        },
+        "com.amazonaws.autoscaling#CapacityReservationSpecification": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationPreference": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The capacity reservation preference. The following options are available:\n        </p>\n         <ul>\n            <li>\n               <p>\n                  <code>capacity-reservations-only</code> - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.</p>\n            </li>\n            <li>\n               <p>\n                  <code>capacity-reservations-first</code> - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>none</code> - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. </p>\n            </li>\n            <li>\n               <p>\n                  <code>default</code> - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CapacityReservationTarget": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes a target Capacity Reservation or Capacity Reservation resource group.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the Capacity Reservation preference and targeting options. If you specify <code>open</code> or <code>none</code> for <code>CapacityReservationPreference</code>, do not specify a <code>CapacityReservationTarget</code>.\n        </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#CapacityReservationTarget": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationIds": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Capacity Reservation IDs to launch instances into.\n        </p>"
+                    }
+                },
+                "CapacityReservationResourceGroupArns": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationResourceGroupArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The resource group ARNs of the Capacity Reservation to launch instances into.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The target for the Capacity Reservation. Specify Capacity Reservations IDs or Capacity Reservation resource group ARNs. \n        </p>"
+            }
+        },
         "com.amazonaws.autoscaling#CheckpointDelay": {
             "type": "integer",
             "traits": {
@@ -2853,6 +2954,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.autoscaling#CpuManufacturer"
+            }
+        },
+        "com.amazonaws.autoscaling#CpuPerformanceFactorRequest": {
+            "type": "structure",
+            "members": {
+                "References": {
+                    "target": "com.amazonaws.autoscaling#PerformanceFactorReferenceSetRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specify an instance family to use as the baseline reference for CPU performance. All instance types that match your specified attributes will be compared against the CPU performance of the\n            referenced instance family, regardless of CPU manufacturer or architecture differences.\n        </p>\n         <note>\n            <p>Currently only one instance family can be specified in the list.</p>\n         </note>",
+                        "smithy.api#xmlName": "Reference"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The CPU performance to consider, using an instance family as the baseline reference.\n        </p>"
             }
         },
         "com.amazonaws.autoscaling#CreateAutoScalingGroup": {
@@ -3190,6 +3306,12 @@
                     "target": "com.amazonaws.autoscaling#SkipZonalShiftValidation",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones. To skip the validation, specify <code>true</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>"
+                    }
+                },
+                "CapacityReservationSpecification": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The capacity reservation specification for the Auto Scaling group. \n    </p>"
                     }
                 }
             }
@@ -6927,6 +7049,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The instance types to apply your specified attributes against. All other instance\n            types are ignored, even if they match your specified attributes.</p>\n         <p>You can use strings with one or more wild cards, represented by an asterisk\n                (<code>*</code>), to allow an instance type, size, or generation. The following are\n            examples: <code>m5.8xlarge</code>, <code>c5*.*</code>, <code>m5a.*</code>,\n                <code>r*</code>, <code>*3*</code>.</p>\n         <p>For example, if you specify <code>c5*</code>, Amazon EC2 Auto Scaling will allow the entire C5\n            instance family, which includes all C5a and C5n instance types. If you specify\n                <code>m5a.*</code>, Amazon EC2 Auto Scaling will allow all the M5a instance types, but not the M5n\n            instance types.</p>\n         <note>\n            <p>If you specify <code>AllowedInstanceTypes</code>, you can't specify\n                    <code>ExcludedInstanceTypes</code>.</p>\n         </note>\n         <p>Default: All instance types</p>"
                     }
+                },
+                "BaselinePerformanceFactors": {
+                    "target": "com.amazonaws.autoscaling#BaselinePerformanceFactorsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The baseline performance factors for the instance requirements.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -8325,6 +8453,29 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.autoscaling#LaunchTemplateOverrides"
+            }
+        },
+        "com.amazonaws.autoscaling#PerformanceFactorReferenceRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceFamily": {
+                    "target": "com.amazonaws.autoscaling#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The instance family to use as a baseline reference.\n        </p>\n         <note>\n            <p>Make sure that you specify the correct value for the instance family. The instance family is everything before the period (.) in the instance type name. For example, in the instance <code>c6i.large</code>, the\n            instance family is <code>c6i</code>, not <code>c6</code>. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html\">Amazon EC2 instance type naming conventions</a> in \n            <i>Amazon EC2 Instance Types</i>.</p>\n         </note>\n         <p>The following instance types are <i>not supported</i> for performance protection.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>c1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>g3| g3s</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hpc7g</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>m1| m2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>p3dn | p4d | p5</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>t1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb | u7in-16tb | u7in-24tb | u7in-32tb</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you performance protection by specifying a supported instance family, the returned instance types will exclude the preceding unsupported instance families.</p>\n         <p>If you specify an unsupported instance family as a value for baseline performance, the API returns an empty response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Specify an instance family to use as the baseline reference for CPU performance. All instance types that All instance types that match your specified attributes will be compared against the CPU performance of the\n            referenced instance family, regardless of CPU manufacturer or architecture differences.\n        </p>\n         <note>\n            <p>Currently only one instance family can be specified in the list.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.autoscaling#PerformanceFactorReferenceSetRequest": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#PerformanceFactorReferenceRequest",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.autoscaling#PoliciesType": {
@@ -10445,6 +10596,9 @@
                 "target": "com.amazonaws.autoscaling#StepAdjustment"
             }
         },
+        "com.amazonaws.autoscaling#String": {
+            "type": "string"
+        },
         "com.amazonaws.autoscaling#SuspendProcesses": {
             "type": "operation",
             "input": {
@@ -11086,7 +11240,13 @@
                 "SkipZonalShiftValidation": {
                     "target": "com.amazonaws.autoscaling#SkipZonalShiftValidation",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones. To skip the validation, specify <code>true</code>. For more information, see \n        <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n    </p>"
+                        "smithy.api#documentation": "<p>\n        If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones. To skip the validation, specify <code>true</code>. For more information, see\n        <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html\">Auto Scaling group zonal shift</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n    </p>"
+                    }
+                },
+                "CapacityReservationSpecification": {
+                    "target": "com.amazonaws.autoscaling#CapacityReservationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The capacity reservation specification for the Auto Scaling group. \n        </p>"
                     }
                 }
             }

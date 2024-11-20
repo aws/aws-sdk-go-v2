@@ -1503,6 +1503,23 @@
                 "smithy.api#documentation": "<p>The details of the Auto Scaling group capacity provider to update.</p>"
             }
         },
+        "com.amazonaws.ecs#AvailabilityZoneRebalancing": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#AwsVpcConfiguration": {
             "type": "structure",
             "members": {
@@ -3315,6 +3332,12 @@
                         "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full ARN of the\n\t\t\ttask definition to run in your service. If a <code>revision</code> isn't specified, the latest\n\t\t\t\t<code>ACTIVE</code> revision is used.</p>\n         <p>A task definition must be specified if the service uses either the <code>ECS</code> or\n\t\t\t\t<code>CODE_DEPLOY</code> deployment controllers.</p>\n         <p>For more information about deployment types, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a>.</p>"
                     }
                 },
+                "availabilityZoneRebalancing": {
+                    "target": "com.amazonaws.ecs#AvailabilityZoneRebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to use Availability Zone rebalancing for the service.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html\">Balancing an Amazon ECS service across Availability Zones</a> in\n\t\t\tthe <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
                 "loadBalancers": {
                     "target": "com.amazonaws.ecs#LoadBalancers",
                     "traits": {
@@ -3805,7 +3828,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified capacity provider.</p>\n         <note>\n            <p>The <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers are reserved and can't\n\t\t\t\tbe deleted. You can disassociate them from a cluster using either <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html\">PutCapacityProviderProviders</a> or by deleting the cluster.</p>\n         </note>\n         <p>Prior to a capacity provider being deleted, the capacity provider must be removed from the capacity\n\t\t\tprovider strategy from all services. The <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a> API can be used to\n\t\t\tremove a capacity provider from a service's capacity provider strategy. When updating a service, the\n\t\t\t\t<code>forceNewDeployment</code> option can be used to ensure that any tasks using the Amazon EC2\n\t\t\tinstance capacity provided by the capacity provider are transitioned to use the capacity from the\n\t\t\tremaining capacity providers. Only capacity providers that aren't associated with a cluster can be\n\t\t\tdeleted. To remove a capacity provider from a cluster, you can either use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html\">PutCapacityProviderProviders</a> or delete the cluster.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified capacity provider.</p>\n         <note>\n            <p>The <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers are reserved and can't\n\t\t\t\tbe deleted. You can disassociate them from a cluster using either <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html\">PutCapacityProviderProviders</a> or by deleting the cluster.</p>\n         </note>\n         <p>Prior to a capacity provider being deleted, the capacity provider must be removed from the capacity\n\t\t\tprovider strategy from all services. The <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a> API can be used to\n\t\t\tremove a capacity provider from a service's capacity provider strategy. When updating a service, the\n\t\t\t\t<code>forceNewDeployment</code> option can be used to ensure that any tasks using the Amazon EC2\n\t\t\tinstance capacity provided by the capacity provider are transitioned to use the capacity from the\n\t\t\tremaining capacity providers. Only capacity providers that aren't associated with a cluster can be\n\t\t\tdeleted. To remove a capacity provider from a cluster, you can either use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html\">PutClusterCapacityProviders</a> or delete the cluster.</p>"
             }
         },
         "com.amazonaws.ecs#DeleteCapacityProviderRequest": {
@@ -4386,13 +4409,13 @@
                 "type": {
                     "target": "com.amazonaws.ecs#DeploymentControllerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment controller type to use.</p>\n         <p>There are three deployment controller types available:</p>\n         <dl>\n            <dt>ECS</dt>\n            <dd>\n               <p>The rolling update (<code>ECS</code>) deployment type involves replacing the current\n\t\t\t\t\t\trunning version of the container with the latest version. The number of containers Amazon ECS\n\t\t\t\t\t\tadds or removes from the service during a rolling update is controlled by adjusting the\n\t\t\t\t\t\tminimum and maximum number of healthy tasks allowed during a service deployment, as\n\t\t\t\t\t\tspecified in the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html\">DeploymentConfiguration</a>.</p>\n            </dd>\n            <dt>CODE_DEPLOY</dt>\n            <dd>\n               <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment\n\t\t\t\t\t\tmodel powered by CodeDeploy, which allows you to verify a new deployment of a service before\n\t\t\t\t\t\tsending production traffic to it.</p>\n            </dd>\n            <dt>EXTERNAL</dt>\n            <dd>\n               <p>The external (<code>EXTERNAL</code>) deployment type enables you to use any third-party\n\t\t\t\t\t\tdeployment controller for full control over the deployment process for an Amazon ECS\n\t\t\t\t\t\tservice.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The deployment controller type to use.</p>\n         <p>There are three deployment controller types available:</p>\n         <dl>\n            <dt>ECS</dt>\n            <dd>\n               <p>The rolling update (<code>ECS</code>) deployment type involves replacing the current\n\t\t\t\t\t\trunning version of the container with the latest version. The number of containers Amazon ECS\n\t\t\t\t\t\tadds or removes from the service during a rolling update is controlled by adjusting the\n\t\t\t\t\t\tminimum and maximum number of healthy tasks allowed during a service deployment, as\n\t\t\t\t\t\tspecified in the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html\">DeploymentConfiguration</a>.</p>\n               <p>For more information about rolling deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Deploy Amazon ECS services by replacing tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </dd>\n            <dt>CODE_DEPLOY</dt>\n            <dd>\n               <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment\n\t\t\t\t\t\tmodel powered by CodeDeploy, which allows you to verify a new deployment of a service before\n\t\t\t\t\t\tsending production traffic to it.</p>\n               <p>For more information about blue/green deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html\">Validate the state of an Amazon ECS service before deployment </a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </dd>\n            <dt>EXTERNAL</dt>\n            <dd>\n               <p>The external (<code>EXTERNAL</code>) deployment type enables you to use any third-party\n\t\t\t\t\t\tdeployment controller for full control over the deployment process for an Amazon ECS\n\t\t\t\t\t\tservice.</p>\n               <p>For more information about external deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-external.html\">Deploy Amazon ECS services using a third-party controller </a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The deployment controller to use for the service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment\n\t\t\t\ttypes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The deployment controller to use for the service. </p>"
             }
         },
         "com.amazonaws.ecs#DeploymentControllerType": {
@@ -10373,6 +10396,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the execute command functionality is turned on for the service. If\n\t\t\t\t<code>true</code>, the execute command functionality is turned on for all containers in tasks as\n\t\t\tpart of the service.</p>"
                     }
+                },
+                "availabilityZoneRebalancing": {
+                    "target": "com.amazonaws.ecs#AvailabilityZoneRebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to use Availability Zone rebalancing for the service.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html\">Balancing an Amazon ECS service across Availability Zones</a> in\n\t\t\tthe <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13920,6 +13949,12 @@
                     "target": "com.amazonaws.ecs#DeploymentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment and the ordering\n\t\t\tof stopping and starting tasks.</p>"
+                    }
+                },
+                "availabilityZoneRebalancing": {
+                    "target": "com.amazonaws.ecs#AvailabilityZoneRebalancing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to use Availability Zone rebalancing for the service.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html\">Balancing an Amazon ECS service across Availability Zones</a> in\n\t\t\tthe <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "networkConfiguration": {

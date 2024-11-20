@@ -3687,7 +3687,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a blue/green deployment.</p>\n         <p>A blue/green deployment creates a staging environment that copies the production environment. \n            In a blue/green deployment, the blue environment is the current production environment. \n            The green environment is the staging environment. The staging environment stays in sync \n            with the current production environment using logical replication.</p>\n         <p>You can make changes to the databases in the green environment without affecting \n            production workloads. For example, you can upgrade the major or minor DB engine version, change \n            database parameters, or make schema changes in the staging environment. You can thoroughly test \n            changes in the green environment. When ready, you can switch over the environments to promote the \n            green environment to be the new production environment. The switchover typically takes under a minute.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a blue/green deployment.</p>\n         <p>A blue/green deployment creates a staging environment that copies the production environment. \n            In a blue/green deployment, the blue environment is the current production environment. \n            The green environment is the staging environment, and it stays in sync \n            with the current production environment.</p>\n         <p>You can make changes to the databases in the green environment without affecting \n            production workloads. For example, you can upgrade the major or minor DB engine version, change \n            database parameters, or make schema changes in the staging environment. You can thoroughly test \n            changes in the green environment. When ready, you can switch over the environments to promote the \n            green environment to be the new production environment. The switchover typically takes under a minute.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#CreateBlueGreenDeploymentRequest": {
@@ -3743,6 +3743,30 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to upgrade the storage file system configuration on the green database. This\n            option migrates the green DB instance from the older 32-bit file system to the preferred\n            configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem\">Upgrading the storage file system for a DB instance</a>.</p>"
+                    }
+                },
+                "TargetIops": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of Provisioned IOPS (input/output operations per second) to allocate for the green DB instance.\n            For information about valid IOPS values, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html\">Amazon RDS DB instance storage</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting doesn't apply to Amazon Aurora blue/green deployments.</p>"
+                    }
+                },
+                "TargetStorageType": {
+                    "target": "com.amazonaws.rds#TargetStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type to associate with the green DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2</code>\n         </p>\n         <p>This setting doesn't apply to Amazon Aurora blue/green deployments.</p>"
+                    }
+                },
+                "TargetAllocatedStorage": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to allocate for the green DB instance. You can choose to\n            increase or decrease the allocated storage on the green DB instance.</p>\n         <p>This setting doesn't apply to Amazon Aurora blue/green deployments.</p>"
+                    }
+                },
+                "TargetStorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput value for the green DB instance.</p>\n         <p>This setting applies only to the <code>gp3</code> storage type.</p>\n         <p>This setting doesn't apply to Amazon Aurora blue/green deployments.</p>"
                     }
                 }
             },
@@ -31157,6 +31181,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.rds#TargetStorageType": {
+            "type": "string"
         },
         "com.amazonaws.rds#TargetType": {
             "type": "enum",

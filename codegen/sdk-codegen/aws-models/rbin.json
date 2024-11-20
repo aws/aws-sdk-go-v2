@@ -1018,7 +1018,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-create-rule\">\n      Create Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a Recycle Bin retention rule. You can create two types of retention rules:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Tag-level retention rules</b> - These retention rules use \n          resource tags to identify the resources to protect. For each retention rule, you specify one or \n          more tag key and value pairs. Resources (of the specified type) that have at least one of these \n          tag key and value pairs are automatically retained in the Recycle Bin upon deletion. Use this \n          type of retention rule to protect specific resources in your account based on their tags.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Region-level retention rules</b> - These retention rules, \n          by default, apply to all of the resources (of the specified type) in the Region, even if the \n          resources are not tagged. However, you can specify exclusion tags to exclude resources that have \n          specific tags. Use this type of retention rule to protect all resources of a specific type in a \n          Region.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin.html\">\n      Create Recycle Bin retention rules</a> in the <i>Amazon EBS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/rules",
@@ -1058,13 +1058,19 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
                     }
                 },
                 "LockConfiguration": {
                     "target": "com.amazonaws.rbin#LockConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, \nor ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule \nupon deletion.</p>\n         <p>You can't specify exclusion tags for tag-level retention rules.</p>"
                     }
                 }
             },
@@ -1105,7 +1111,7 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "Status": {
@@ -1123,13 +1129,19 @@
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "RuleArn": {
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be \nexcluded, or ignored, by the retention rule.</p>"
                     }
                 }
             },
@@ -1199,6 +1211,18 @@
         },
         "com.amazonaws.rbin#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.rbin#ExcludeResourceTags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rbin#ResourceTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
         },
         "com.amazonaws.rbin#GetRule": {
             "type": "operation",
@@ -1274,7 +1298,7 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "Status": {
@@ -1292,7 +1316,7 @@
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LockEndTime": {
@@ -1305,6 +1329,12 @@
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be \nexcluded, or ignored, by the retention rule.</p>"
                     }
                 }
             },
@@ -1381,13 +1411,19 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
                         "smithy.api#documentation": "<p>The lock state of the retention rules to list. Only retention rules with the specified \n      lock state are returned.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be \nexcluded, or ignored, by the retention rule.</p>"
                     }
                 }
             },
@@ -1511,7 +1547,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Locks a retention rule. A locked retention rule can't be modified or deleted.</p>",
+                "smithy.api#documentation": "<p>Locks a Region-level retention rule. A locked retention rule can't be modified or \n      deleted.</p>\n         <note>\n            <p>You can't lock tag-level retention rules, or Region-level retention rules that \n        have exclusion tags.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/rules/{Identifier}/lock",
@@ -1569,7 +1605,7 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "Status": {
@@ -1587,13 +1623,19 @@
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "RuleArn": {
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be \nexcluded, or ignored, by the retention rule.</p>"
                     }
                 }
             },
@@ -1687,7 +1729,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
             }
         },
         "com.amazonaws.rbin#ResourceTagKey": {
@@ -1830,7 +1872,7 @@
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "RuleArn": {
@@ -2126,7 +2168,7 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "Status": {
@@ -2144,7 +2186,7 @@
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LockEndTime": {
@@ -2157,6 +2199,12 @@
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be \nexcluded, or ignored, by the retention rule.</p>"
                     }
                 }
             },
@@ -2289,7 +2337,13 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, \nor ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule \nupon deletion.</p>\n         <p>You can't specify exclusion tags for tag-level retention rules.</p>"
                     }
                 }
             },
@@ -2324,7 +2378,7 @@
                 "ResourceTags": {
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                        "smithy.api#documentation": "<p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
                     }
                 },
                 "Status": {
@@ -2336,7 +2390,7 @@
                 "LockState": {
                     "target": "com.amazonaws.rbin#LockState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "LockEndTime": {
@@ -2349,6 +2403,12 @@
                     "target": "com.amazonaws.rbin#RuleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the retention rule.</p>"
+                    }
+                },
+                "ExcludeResourceTags": {
+                    "target": "com.amazonaws.rbin#ExcludeResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be \nexcluded, or ignored, by the retention rule.</p>"
                     }
                 }
             },

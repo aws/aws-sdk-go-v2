@@ -5735,6 +5735,13 @@
         "com.amazonaws.mediaconvert#CreateQueueRequest": {
             "type": "structure",
             "members": {
+                "ConcurrentJobs": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.",
+                        "smithy.api#jsonName": "concurrentJobs"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -16063,6 +16070,20 @@
                         "smithy.api#documentation": "List of queues.",
                         "smithy.api#jsonName": "queues"
                     }
+                },
+                "TotalConcurrentJobs": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of jobs that MediaConvert can process at one time, across all of your on-demand queues in the current AWS Region.",
+                        "smithy.api#jsonName": "totalConcurrentJobs"
+                    }
+                },
+                "UnallocatedConcurrentJobs": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The remaining number of concurrent jobs that are not associated with a queue and are available to allocate to a queue. You can allocate these jobs when you create or update a queue.",
+                        "smithy.api#jsonName": "unallocatedConcurrentJobs"
+                    }
                 }
             },
             "traits": {
@@ -21519,6 +21540,13 @@
                         "smithy.api#jsonName": "arn"
                     }
                 },
+                "ConcurrentJobs": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of jobs your queue can process concurrently.",
+                        "smithy.api#jsonName": "concurrentJobs"
+                    }
+                },
                 "CreatedAt": {
                     "target": "com.amazonaws.mediaconvert#__timestampUnix",
                     "traits": {
@@ -21568,6 +21596,13 @@
                     "traits": {
                         "smithy.api#documentation": "Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.",
                         "smithy.api#jsonName": "reservationPlan"
+                    }
+                },
+                "ServiceOverrides": {
+                    "target": "com.amazonaws.mediaconvert#__listOfServiceOverride",
+                    "traits": {
+                        "smithy.api#documentation": "A list of any service overrides applied by MediaConvert to the settings that you have configured. If you see any overrides, we recommend that you contact AWS Support.",
+                        "smithy.api#jsonName": "serviceOverrides"
                     }
                 },
                 "Status": {
@@ -22374,6 +22409,42 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mediaconvert#ServiceOverride": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Details about the service override that MediaConvert has applied.",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the setting that MediaConvert has applied an override to.",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "OverrideValue": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The current value of the service override that MediaConvert has applied.",
+                        "smithy.api#jsonName": "overrideValue"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The value of the setting that you configured, prior to any overrides that MediaConvert has applied.",
+                        "smithy.api#jsonName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A service override applied by MediaConvert to the settings that you have configured. If you see any overrides, we recommend that you contact AWS Support."
             }
         },
         "com.amazonaws.mediaconvert#SimulateReservedQueue": {
@@ -23666,6 +23737,13 @@
         "com.amazonaws.mediaconvert#UpdateQueueRequest": {
             "type": "structure",
             "members": {
+                "ConcurrentJobs": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, update your reservation plan instead in order to increase your yearly commitment.",
+                        "smithy.api#jsonName": "concurrentJobs"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -27260,6 +27338,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#QueueTransition"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfServiceOverride": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#ServiceOverride"
             }
         },
         "com.amazonaws.mediaconvert#__listOfTeletextPageType": {

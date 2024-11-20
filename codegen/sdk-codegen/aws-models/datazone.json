@@ -354,6 +354,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the reason for accepting the subscription request.</p>"
                     }
+                },
+                "existingSubscriptionId": {
+                    "target": "com.amazonaws.datazone#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing subscription.</p>"
+                    }
+                },
+                "metadataForms": {
+                    "target": "com.amazonaws.datazone#MetadataForms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata form in the subscription request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1395,6 +1407,12 @@
                 "smithy.api#pattern": "^(?!\\.)[\\w\\.]*\\w$"
             }
         },
+        "com.amazonaws.datazone#AssetTypeIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AssetTypeIdentifier"
+            }
+        },
         "com.amazonaws.datazone#AssetTypeItem": {
             "type": "structure",
             "members": {
@@ -1478,6 +1496,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of the asset type.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AssetTypesForRule": {
+            "type": "structure",
+            "members": {
+                "selectionMode": {
+                    "target": "com.amazonaws.datazone#RuleScopeSelectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection mode for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "specificAssetTypes": {
+                    "target": "com.amazonaws.datazone#RuleAssetTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific asset types that are included in the rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The asset type for the rule details.</p>"
             }
         },
         "com.amazonaws.datazone#AssociateEnvironmentRole": {
@@ -5367,6 +5406,194 @@
                 "smithy.api#documentation": "<p>The details of the policy grant.</p>"
             }
         },
+        "com.amazonaws.datazone#CreateRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateRuleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateRuleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a rule in Amazon DataZone. A rule is a formal agreement that enforces specific\n         requirements across user workflows (e.g., publishing assets to the catalog, requesting\n         subscriptions, creating projects) within the Amazon DataZone data portal. These rules help\n         maintain consistency, ensure compliance, and uphold governance standards in data management\n         processes. For instance, a metadata enforcement rule can specify the required information\n         for creating a subscription request or publishing a data asset to the catalog, ensuring\n         alignment with organizational standards.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/rules"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateRuleInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the rule is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.datazone#RuleTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#RuleDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the rule.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateRuleOutput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleType": {
+                    "target": "com.amazonaws.datazone#RuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.datazone#RuleTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#RuleDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.datazone#RuleTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target type of the rule.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the rule.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who creates the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#CreateSubscriptionGrant": {
             "type": "operation",
             "input": {
@@ -5614,6 +5841,12 @@
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "metadataForms": {
+                    "target": "com.amazonaws.datazone#MetadataFormInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata form included in the subscription request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5710,6 +5943,18 @@
                     "target": "com.amazonaws.datazone#DecisionComment",
                     "traits": {
                         "smithy.api#documentation": "<p>The decision comment of the subscription request.</p>"
+                    }
+                },
+                "existingSubscriptionId": {
+                    "target": "com.amazonaws.datazone#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing subscription.</p>"
+                    }
+                },
+                "metadataForms": {
+                    "target": "com.amazonaws.datazone#MetadataForms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata form included in the subscription request.</p>"
                     }
                 }
             },
@@ -7590,6 +7835,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#MetadataGenerationRun"
+                },
+                {
+                    "target": "com.amazonaws.datazone#Rule"
                 }
             ],
             "errors": [
@@ -9376,6 +9624,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#DeleteRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteRuleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DeleteRuleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a rule in Amazon DataZone. A rule is a formal agreement that enforces specific\n         requirements across user workflows (e.g., publishing assets to the catalog, requesting\n         subscriptions, creating projects) within the Amazon DataZone data portal. These rules help\n         maintain consistency, ensure compliance, and uphold governance standards in data management\n         processes. For instance, a metadata enforcement rule can specify the required information\n         for creating a subscription request or publishing a data asset to the catalog, ensuring\n         alignment with organizational standards.</p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/rules/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteRuleInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain that where the rule is to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule that is to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteRuleOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#DeleteSubscriptionGrant": {
             "type": "operation",
             "input": {
@@ -10434,6 +10751,27 @@
                 "smithy.api#documentation": "<p>The summary of the domain unit.</p>"
             }
         },
+        "com.amazonaws.datazone#DomainUnitTarget": {
+            "type": "structure",
+            "members": {
+                "domainUnitId": {
+                    "target": "com.amazonaws.datazone#DomainUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to apply a rule to the child domain units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target for the domain unit.</p>"
+            }
+        },
         "com.amazonaws.datazone#DomainUnitUserProperties": {
             "type": "structure",
             "members": {
@@ -11437,7 +11775,7 @@
                     }
                 },
                 "typeRevision": {
-                    "target": "com.amazonaws.datazone#Revision",
+                    "target": "com.amazonaws.datazone#RevisionInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision of the metadata form type.</p>"
                     }
@@ -15011,6 +15349,176 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#GetRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetRuleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetRuleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a rule in Amazon DataZone. A rule is a formal agreement that\n         enforces specific requirements across user workflows (e.g., publishing assets to the\n         catalog, requesting subscriptions, creating projects) within the Amazon DataZone data\n         portal. These rules help maintain consistency, ensure compliance, and uphold governance\n         standards in data management processes. For instance, a metadata enforcement rule can\n         specify the required information for creating a subscription request or publishing a data\n         asset to the catalog, ensuring alignment with organizational standards.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/rules/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetRuleInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain where the <code>GetRule</code> action is to be invoked.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the rule.</p>",
+                        "smithy.api#httpQuery": "revision"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetRuleOutput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleType": {
+                    "target": "com.amazonaws.datazone#RuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.datazone#RuleTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#RuleDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.datazone#RuleTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target type of the rule.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the rule.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#GetSubscription": {
             "type": "operation",
             "input": {
@@ -15445,6 +15953,18 @@
                     "target": "com.amazonaws.datazone#DecisionComment",
                     "traits": {
                         "smithy.api#documentation": "<p>The decision comment of the subscription request.</p>"
+                    }
+                },
+                "existingSubscriptionId": {
+                    "target": "com.amazonaws.datazone#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing subscription.</p>"
+                    }
+                },
+                "metadataForms": {
+                    "target": "com.amazonaws.datazone#MetadataForms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata forms included in the subscription request.</p>"
                     }
                 }
             },
@@ -19217,6 +19737,160 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#ListRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListRulesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListRulesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists existing rules. In Amazon DataZone, a rule is a formal agreement that enforces\n         specific requirements across user workflows (e.g., publishing assets to the catalog,\n         requesting subscriptions, creating projects) within the Amazon DataZone data portal. These\n         rules help maintain consistency, ensure compliance, and uphold governance standards in data\n         management processes. For instance, a metadata enforcement rule can specify the required\n         information for creating a subscription request or publishing a data asset to the catalog,\n         ensuring alignment with organizational standards.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/list-rules/{targetType}/{targetIdentifier}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListRulesInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which the rules are to be listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.datazone#RuleTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target type of the rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target ID of the rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleType": {
+                    "target": "com.amazonaws.datazone#RuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the rule.</p>",
+                        "smithy.api#httpQuery": "ruleType"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the rule.</p>",
+                        "smithy.api#httpQuery": "ruleAction"
+                    }
+                },
+                "projectIds": {
+                    "target": "com.amazonaws.datazone#ProjectIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of projects in which rules are to be listed.</p>",
+                        "smithy.api#httpQuery": "projectIds"
+                    }
+                },
+                "assetTypes": {
+                    "target": "com.amazonaws.datazone#AssetTypeIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset types of the rule.</p>",
+                        "smithy.api#httpQuery": "assetTypes"
+                    }
+                },
+                "dataProduct": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product of the rule.</p>",
+                        "smithy.api#httpQuery": "dataProduct"
+                    }
+                },
+                "includeCascaded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include cascading rules in the results.</p>",
+                        "smithy.api#httpQuery": "includeCascaded"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of rules to return in a single call to <code>ListRules</code>. When\n         the number of rules to be listed is greater than the value of <code>MaxResults</code>, the\n         response contains a <code>NextToken</code> value that you can use in a subsequent call to\n            <code>ListRules</code> to list the next set of rules.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 25,
+                            "max": 50
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of rules is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of rules, the response includes a\n         pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>\n         value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListRulesOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#RuleSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the <code>ListRules</code> action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of rules is greater than the default value for the\n            <code>MaxResults</code> parameter, or if you explicitly specify a value for\n            <code>MaxResults</code> that is less than the number of rules, the response includes a\n         pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>\n         value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#ListSubscriptionGrants": {
             "type": "operation",
             "input": {
@@ -20299,6 +20973,88 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.datazone#MetadataFormEnforcementDetail": {
+            "type": "structure",
+            "members": {
+                "requiredMetadataForms": {
+                    "target": "com.amazonaws.datazone#RequiredMetadataFormList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The required metadata forms.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The enforcement details of a metadata form.</p>"
+            }
+        },
+        "com.amazonaws.datazone#MetadataFormInputs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#FormInput"
+            }
+        },
+        "com.amazonaws.datazone#MetadataFormReference": {
+            "type": "structure",
+            "members": {
+                "typeIdentifier": {
+                    "target": "com.amazonaws.datazone#FormTypeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type ID of the metadata form reference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type revision of the metadata form reference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reference of a metadata form.</p>"
+            }
+        },
+        "com.amazonaws.datazone#MetadataFormSummary": {
+            "type": "structure",
+            "members": {
+                "formName": {
+                    "target": "com.amazonaws.datazone#FormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The form name of the metadata form.</p>"
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.datazone#FormTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type name of the metadata form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type revision of the metadata form.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the metadata form.</p>"
+            }
+        },
+        "com.amazonaws.datazone#MetadataForms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#FormOutput"
+            }
+        },
+        "com.amazonaws.datazone#MetadataFormsSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#MetadataFormSummary"
+            }
+        },
         "com.amazonaws.datazone#MetadataGenerationRun": {
             "type": "resource",
             "identifiers": {
@@ -21354,6 +22110,12 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
             }
         },
+        "com.amazonaws.datazone#ProjectIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ProjectId"
+            }
+        },
         "com.amazonaws.datazone#ProjectMember": {
             "type": "structure",
             "members": {
@@ -21521,6 +22283,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of a Amazon DataZone project.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ProjectsForRule": {
+            "type": "structure",
+            "members": {
+                "selectionMode": {
+                    "target": "com.amazonaws.datazone#RuleScopeSelectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection mode of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "specificProjects": {
+                    "target": "com.amazonaws.datazone#RuleProjectIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific projects in which the rule is created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies projects in which the rule is created.</p>"
             }
         },
         "com.amazonaws.datazone#ProvisioningConfiguration": {
@@ -22285,6 +23068,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The decision comment of the rejected subscription request.</p>"
                     }
+                },
+                "existingSubscriptionId": {
+                    "target": "com.amazonaws.datazone#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing subscription.</p>"
+                    }
+                },
+                "metadataForms": {
+                    "target": "com.amazonaws.datazone#MetadataForms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata forms included in the subscription request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -22528,6 +23323,18 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.datazone#RequiredMetadataFormList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#MetadataFormReference"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.datazone#Resource": {
             "type": "structure",
             "members": {
@@ -22591,6 +23398,16 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.datazone#RevisionInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
         },
         "com.amazonaws.datazone#RevokeSubscription": {
@@ -22881,6 +23698,290 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#RowFilter"
+            }
+        },
+        "com.amazonaws.datazone#Rule": {
+            "type": "resource",
+            "identifiers": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId"
+                }
+            },
+            "properties": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId"
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName"
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description"
+                },
+                "ruleType": {
+                    "target": "com.amazonaws.datazone#RuleType"
+                },
+                "targetType": {
+                    "target": "com.amazonaws.datazone#RuleTargetType"
+                },
+                "target": {
+                    "target": "com.amazonaws.datazone#RuleTarget"
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction"
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope"
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#RuleDetail"
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision"
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy"
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt"
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy"
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.datazone#CreateRule"
+            },
+            "read": {
+                "target": "com.amazonaws.datazone#GetRule"
+            },
+            "update": {
+                "target": "com.amazonaws.datazone#UpdateRule"
+            },
+            "delete": {
+                "target": "com.amazonaws.datazone#DeleteRule"
+            },
+            "list": {
+                "target": "com.amazonaws.datazone#ListRules"
+            }
+        },
+        "com.amazonaws.datazone#RuleAction": {
+            "type": "enum",
+            "members": {
+                "CREATE_SUBSCRIPTION_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_SUBSCRIPTION_REQUEST"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#RuleAssetTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AssetTypeIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.datazone#RuleDetail": {
+            "type": "union",
+            "members": {
+                "metadataFormEnforcementDetail": {
+                    "target": "com.amazonaws.datazone#MetadataFormEnforcementDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enforcement detail of the metadata form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a rule.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#RuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\w -]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#RuleProjectIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#ProjectId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.datazone#RuleScope": {
+            "type": "structure",
+            "members": {
+                "assetType": {
+                    "target": "com.amazonaws.datazone#AssetTypesForRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset type included in the rule scope.</p>"
+                    }
+                },
+                "dataProduct": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data product included in the rule scope.</p>"
+                    }
+                },
+                "project": {
+                    "target": "com.amazonaws.datazone#ProjectsForRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project included in the rule scope.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of a rule.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RuleScopeSelectionMode": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "SPECIFIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPECIFIC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#RuleSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#RuleSummary"
+            }
+        },
+        "com.amazonaws.datazone#RuleSummary": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule.</p>"
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the rule.</p>"
+                    }
+                },
+                "ruleType": {
+                    "target": "com.amazonaws.datazone#RuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the rule.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.datazone#RuleTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target type of the rule.</p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.datazone#RuleTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target of the rule.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the rule.</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rule.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was last updated.</p>"
+                    }
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the rule.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RuleTarget": {
+            "type": "union",
+            "members": {
+                "domainUnitTarget": {
+                    "target": "com.amazonaws.datazone#DomainUnitTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain unit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target of the rule.</p>"
+            }
+        },
+        "com.amazonaws.datazone#RuleTargetType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_UNIT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#RuleType": {
+            "type": "enum",
+            "members": {
+                "METADATA_FORM_ENFORCEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA_FORM_ENFORCEMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.datazone#RunStatisticsForAssets": {
@@ -24941,6 +26042,18 @@
                     "target": "com.amazonaws.datazone#DecisionComment",
                     "traits": {
                         "smithy.api#documentation": "<p>The decision comment of the subscription request.</p>"
+                    }
+                },
+                "existingSubscriptionId": {
+                    "target": "com.amazonaws.datazone#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing subscription.</p>"
+                    }
+                },
+                "metadataFormsSummary": {
+                    "target": "com.amazonaws.datazone#MetadataFormsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the metadata forms.</p>"
                     }
                 }
             },
@@ -27959,6 +29072,200 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#UpdateRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateRuleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateRuleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a rule. In Amazon DataZone, a rule is a formal agreement that enforces specific\n         requirements across user workflows (e.g., publishing assets to the catalog, requesting\n         subscriptions, creating projects) within the Amazon DataZone data portal. These rules help\n         maintain consistency, ensure compliance, and uphold governance standards in data management\n         processes. For instance, a metadata enforcement rule can specify the required information\n         for creating a subscription request or publishing a data asset to the catalog, ensuring\n         alignment with organizational standards.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/v2/domains/{domainIdentifier}/rules/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateRuleInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain in which a rule is to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule that is to be updated</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the rule.</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scrope of the rule.</p>"
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#RuleDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of the rule.</p>"
+                    }
+                },
+                "includeChildDomainUnits": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to update this rule in the child domain units.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateRuleOutput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.datazone#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ruleType": {
+                    "target": "com.amazonaws.datazone#RuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.datazone#RuleTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.datazone#RuleAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.datazone#RuleScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detail": {
+                    "target": "com.amazonaws.datazone#RuleDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the rule.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.datazone#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.datazone#UpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedBy": {
+                    "target": "com.amazonaws.datazone#UpdatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#UpdateSubscriptionGrantStatus": {
             "type": "operation",
             "input": {
@@ -28292,6 +29599,18 @@
                     "target": "com.amazonaws.datazone#DecisionComment",
                     "traits": {
                         "smithy.api#documentation": "<p>The decision comment of the <code>UpdateSubscriptionRequest</code> action.</p>"
+                    }
+                },
+                "existingSubscriptionId": {
+                    "target": "com.amazonaws.datazone#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing subscription.</p>"
+                    }
+                },
+                "metadataForms": {
+                    "target": "com.amazonaws.datazone#MetadataForms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata forms included in the subscription request.</p>"
                     }
                 }
             },

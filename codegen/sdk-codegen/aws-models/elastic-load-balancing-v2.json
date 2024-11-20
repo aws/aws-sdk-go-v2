@@ -813,6 +813,112 @@
         "com.amazonaws.elasticloadbalancingv2#CanonicalHostedZoneId": {
             "type": "string"
         },
+        "com.amazonaws.elasticloadbalancingv2#CapacityDecreaseRequestsLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CapacityDecreaseRequestLimitExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>You've exceeded the daily capacity decrease limit for this reservation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#CapacityReservationPendingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CapacityReservationPending",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>There is a pending capacity reservation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#CapacityReservationStateEnum": {
+            "type": "enum",
+            "members": {
+                "PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provisioned"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "REBALANCING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rebalancing"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#CapacityReservationStatus": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityReservationStateEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#StateReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason code for the status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#CapacityUnits": {
+            "type": "integer"
+        },
+        "com.amazonaws.elasticloadbalancingv2#CapacityUnitsDouble": {
+            "type": "double"
+        },
+        "com.amazonaws.elasticloadbalancingv2#CapacityUnitsLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CapacityUnitsLimitExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>You've exceeded the capacity units limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#Certificate": {
             "type": "structure",
             "members": {
@@ -1810,6 +1916,9 @@
         "com.amazonaws.elasticloadbalancingv2#DNSName": {
             "type": "string"
         },
+        "com.amazonaws.elasticloadbalancingv2#DecreaseRequestsRemaining": {
+            "type": "integer"
+        },
         "com.amazonaws.elasticloadbalancingv2#Default": {
             "type": "boolean"
         },
@@ -2255,6 +2364,71 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#Marker",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the marker for the next set of results.\n      Otherwise, this is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the capacity reservation status for the specified load balancer.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "LoadBalancerArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeCapacityReservationOutput": {
+            "type": "structure",
+            "members": {
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the capacity reservation was modified.</p>"
+                    }
+                },
+                "DecreaseRequestsRemaining": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DecreaseRequestsRemaining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of daily capacity decreases remaining.</p>"
+                    }
+                },
+                "MinimumLoadBalancerCapacity": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MinimumLoadBalancerCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested minimum capacity reservation for the load balancer</p>"
+                    }
+                },
+                "CapacityReservationState": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the capacity reservation.</p>"
                     }
                 }
             },
@@ -3922,6 +4096,9 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#DescribeAccountLimits"
                 },
                 {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DescribeCapacityReservation"
+                },
+                {
                     "target": "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributes"
                 },
                 {
@@ -3971,6 +4148,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#GetTrustStoreRevocationContent"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ModifyCapacityReservation"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#ModifyListener"
@@ -5458,6 +5638,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#InsufficientCapacityException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientCapacity",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>There is insufficient capacity to reserve.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#InvalidCaCertificatesBundleException": {
             "type": "structure",
             "members": {
@@ -5622,6 +5819,9 @@
         },
         "com.amazonaws.elasticloadbalancingv2#IsDefault": {
             "type": "boolean"
+        },
+        "com.amazonaws.elasticloadbalancingv2#LastModifiedTime": {
+            "type": "timestamp"
         },
         "com.amazonaws.elasticloadbalancingv2#Limit": {
             "type": "structure",
@@ -6140,6 +6340,20 @@
         "com.amazonaws.elasticloadbalancingv2#Max": {
             "type": "string"
         },
+        "com.amazonaws.elasticloadbalancingv2#MinimumLoadBalancerCapacity": {
+            "type": "structure",
+            "members": {
+                "CapacityUnits": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of capacity units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum capacity for a load balancer.</p>"
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#MitigationInEffectEnum": {
             "type": "enum",
             "members": {
@@ -6159,6 +6373,104 @@
         },
         "com.amazonaws.elasticloadbalancingv2#Mode": {
             "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ModifyCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ModifyCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityDecreaseRequestsLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityReservationPendingException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityUnitsLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#InsufficientCapacityException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#InvalidConfigurationRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#PriorRequestNotCompleteException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the capacity reservation of the specified load balancer.</p>\n         <p>When modifying capacity reservation, you must include at least one <code>MinimumLoadBalancerCapacity</code> \n      or <code>ResetCapacityReservation</code>.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "LoadBalancerArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinimumLoadBalancerCapacity": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MinimumLoadBalancerCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum load balancer capacity reserved.</p>"
+                    }
+                },
+                "ResetCapacityReservation": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ResetCapacityReservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resets the capacity reservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyCapacityReservationOutput": {
+            "type": "structure",
+            "members": {
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the capacity reservation was modified.</p>"
+                    }
+                },
+                "DecreaseRequestsRemaining": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DecreaseRequestsRemaining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of daily capacity decreases remaining.</p>"
+                    }
+                },
+                "MinimumLoadBalancerCapacity": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#MinimumLoadBalancerCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested minimum capacity reservation for the load balancer</p>"
+                    }
+                },
+                "CapacityReservationState": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the capacity reservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.elasticloadbalancingv2#ModifyListener": {
             "type": "operation",
@@ -7150,6 +7462,23 @@
                 }
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#PriorRequestNotCompleteException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ErrorDescription"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PriorRequestNotComplete",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>This operation is not allowed while a prior request has not been completed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#PriorityInUseException": {
             "type": "structure",
             "members": {
@@ -7629,6 +7958,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ResetCapacityReservation": {
+            "type": "boolean"
         },
         "com.amazonaws.elasticloadbalancingv2#ResourceArn": {
             "type": "string"
@@ -8222,6 +8554,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#AvailabilityZoneNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityReservationPendingException"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#InvalidConfigurationRequestException"
@@ -9635,6 +9970,38 @@
         },
         "com.amazonaws.elasticloadbalancingv2#VpcId": {
             "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationState": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityReservationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the capacity reservation.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ZoneName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the availability zone.</p>"
+                    }
+                },
+                "EffectiveCapacityUnits": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#CapacityUnitsDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of effective capacity units.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity reservation status for each availability zone.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationState"
+            }
         },
         "com.amazonaws.elasticloadbalancingv2#ZoneName": {
             "type": "string"

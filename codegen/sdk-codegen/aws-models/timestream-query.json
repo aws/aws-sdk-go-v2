@@ -41,9 +41,27 @@
                     "code": "AccessDenied",
                     "httpResponseCode": 403
                 },
-                "smithy.api#documentation": "<p> You are not authorized to perform this action. </p>",
+                "smithy.api#documentation": "<p>You do not have the necessary permissions to access the account settings.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.timestreamquery#AccountSettingsNotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "SnsConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#SnsConfiguration"
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that grants Timestream permission to publish notifications. This field is only visible if SNS Topic is provided when updating the account settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for notifications related to account settings.</p>"
             }
         },
         "com.amazonaws.timestreamquery#AmazonResourceName": {
@@ -162,6 +180,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.timestreamquery#ColumnInfo"
+            }
+        },
+        "com.amazonaws.timestreamquery#ComputeMode": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
+                },
+                "PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONED"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#ConflictException": {
@@ -443,13 +478,19 @@
                 "MaxQueryTCU": {
                     "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html\">Timestream compute units</a> (TCUs) the service will use at any point in time to serve your queries.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html\">Timestream compute units</a> (TCUs) the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on. This configuration is applicable only for on-demand usage of (TCUs). \n        \n        \n        </p>"
                     }
                 },
                 "QueryPricingModel": {
                     "target": "com.amazonaws.timestreamquery#QueryPricingModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing model for queries in your account.</p>"
+                        "smithy.api#documentation": "<p>The pricing model for queries in your account.</p>\n         <note>\n            <p>The <code>QueryPricingModel</code> parameter is used by several Timestream operations; however, the <code>UpdateAccountSettings</code> API operation doesn't recognize any values other than <code>COMPUTE_UNITS</code>.</p>\n         </note>"
+                    }
+                },
+                "QueryCompute": {
+                    "target": "com.amazonaws.timestreamquery#QueryComputeResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the usage settings for Timestream Compute Units (TCUs) in your account for the query workload. </p>"
                     }
                 }
             },
@@ -705,7 +746,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p> You can use this API to run a scheduled query manually. </p>\n         <p>If you enabled <code>QueryInsights</code>, this API also returns insights and metrics related to the query that you executed as part of an Amazon SNS notification. <code>QueryInsights</code> helps with performance tuning of your query.</p>",
+                "smithy.api#documentation": "<p> You can use this API to run a scheduled query manually. </p>\n         <p>If you enabled <code>QueryInsights</code>, this API also returns insights and metrics related to the query that you executed as part of an Amazon SNS notification. <code>QueryInsights</code> helps with performance tuning of your query. For more information about <code>QueryInsights</code>, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/using-query-insights.html\">Using query insights to optimize queries in Amazon Timestream</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -802,7 +843,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The service was unable to fully process this request because of an internal\n            server error. </p>",
+                "smithy.api#documentation": "<p>An internal server error occurred while processing the request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -815,9 +856,58 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested endpoint was not valid.</p>",
+                "smithy.api#documentation": "<p>The requested endpoint is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 421
+            }
+        },
+        "com.amazonaws.timestreamquery#LastUpdate": {
+            "type": "structure",
+            "members": {
+                "TargetQueryTCU": {
+                    "target": "com.amazonaws.timestreamquery#QueryTCU",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of TimeStream Compute Units (TCUs) requested in the last account settings update.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.timestreamquery#LastUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the last update. Can be either <code>PENDING</code>, <code>FAILED</code>, or <code>SUCCEEDED</code>.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.timestreamquery#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error message describing the last account settings update status, visible only if an error occurred.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration object that contains the most recent account settings update, visible only if settings have been updated previously.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#LastUpdateStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#ListScheduledQueries": {
@@ -1175,7 +1265,7 @@
                 "SnsConfiguration": {
                     "target": "com.amazonaws.timestreamquery#SnsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details on SNS configuration. </p>",
+                        "smithy.api#documentation": "<p>Details about the Amazon Simple Notification Service (SNS) configuration. This field is visible only when SNS Topic is provided when updating the account settings.  </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1315,6 +1405,53 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.timestreamquery#ProvisionedCapacityRequest": {
+            "type": "structure",
+            "members": {
+                "TargetQueryTCU": {
+                    "target": "com.amazonaws.timestreamquery#QueryTCU",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target compute capacity for querying data, specified in Timestream Compute Units (TCUs).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#AccountSettingsNotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for notifications related to the provisioned capacity update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to update the provisioned capacity settings for querying data.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ProvisionedCapacityResponse": {
+            "type": "structure",
+            "members": {
+                "ActiveQueryTCU": {
+                    "target": "com.amazonaws.timestreamquery#QueryTCU",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Timestream Compute Units (TCUs) provisioned in the account. This field is only visible when the compute mode is <code>PROVISIONED</code>.</p>"
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#AccountSettingsNotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains settings for notifications that are sent whenever the provisioned capacity settings are modified. This field is only visible when the compute mode is <code>PROVISIONED</code>.</p>"
+                    }
+                },
+                "LastUpdate": {
+                    "target": "com.amazonaws.timestreamquery#LastUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the last update to the provisioned capacity settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response to a request to update the provisioned capacity settings for querying data.</p>"
+            }
+        },
         "com.amazonaws.timestreamquery#Query": {
             "type": "operation",
             "input": {
@@ -1350,7 +1487,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>\n            <code>Query</code> is a synchronous operation that enables you to run a query against\n            your Amazon Timestream data.</p>\n         <p>If you enabled <code>QueryInsights</code>, this API also returns insights and metrics related to the query that you executed. <code>QueryInsights</code> helps with performance tuning of your query.</p>\n         <note>\n            <p>The maximum number of <code>Query</code> API requests you're allowed to make with <code>QueryInsights</code> enabled is 1 query per second (QPS). If you exceed this query rate, it might result in throttling.</p>\n         </note>\n         <p>\n            <code>Query</code> will time out after 60 seconds.\n            You must update the default timeout in the SDK to support a timeout of 60 seconds. See\n            the <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html\">code\n                sample</a> for details. </p>\n         <p>Your query request will fail in the following cases:</p>\n         <ul>\n            <li>\n               <p> If you submit a <code>Query</code> request with the same client token outside\n                    of the 5-minute idempotency window. </p>\n            </li>\n            <li>\n               <p> If you submit a <code>Query</code> request with the same client token, but\n                    change other parameters, within the 5-minute idempotency window. </p>\n            </li>\n            <li>\n               <p> If the size of the row (including the query metadata) exceeds 1 MB, then the\n                    query will fail with the following error message: </p>\n               <p>\n                  <code>Query aborted as max page response size has been exceeded by the output\n                        result row</code>\n               </p>\n            </li>\n            <li>\n               <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            <code>Query</code> is a synchronous operation that enables you to run a query against\n            your Amazon Timestream data.</p>\n         <p>If you enabled <code>QueryInsights</code>, this API also returns insights and metrics related to the query that you executed. <code>QueryInsights</code> helps with performance tuning of your query. For more information about <code>QueryInsights</code>, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/using-query-insights.html\">Using query insights to optimize queries in Amazon Timestream</a>.</p>\n         <note>\n            <p>The maximum number of <code>Query</code> API requests you're allowed to make with <code>QueryInsights</code> enabled is 1 query per second (QPS). If you exceed this query rate, it might result in throttling.</p>\n         </note>\n         <p>\n            <code>Query</code> will time out after 60 seconds.\n            You must update the default timeout in the SDK to support a timeout of 60 seconds. See\n            the <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html\">code\n                sample</a> for details. </p>\n         <p>Your query request will fail in the following cases:</p>\n         <ul>\n            <li>\n               <p> If you submit a <code>Query</code> request with the same client token outside\n                    of the 5-minute idempotency window. </p>\n            </li>\n            <li>\n               <p> If you submit a <code>Query</code> request with the same client token, but\n                    change other parameters, within the 5-minute idempotency window. </p>\n            </li>\n            <li>\n               <p> If the size of the row (including the query metadata) exceeds 1 MB, then the\n                    query will fail with the following error message: </p>\n               <p>\n                  <code>Query aborted as max page response size has been exceeded by the output\n                        result row</code>\n               </p>\n            </li>\n            <li>\n               <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -1358,6 +1495,46 @@
                     "items": "Rows",
                     "pageSize": "MaxRows"
                 }
+            }
+        },
+        "com.amazonaws.timestreamquery#QueryComputeRequest": {
+            "type": "structure",
+            "members": {
+                "ComputeMode": {
+                    "target": "com.amazonaws.timestreamquery#ComputeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode in which Timestream Compute Units (TCUs) are allocated and utilized within an account. Note that in the Asia Pacific (Mumbai)  region, the API operation only recognizes the value <code>PROVISIONED</code>.</p>"
+                    }
+                },
+                "ProvisionedCapacity": {
+                    "target": "com.amazonaws.timestreamquery#ProvisionedCapacityRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration object that contains settings for provisioned Timestream Compute Units (TCUs) in your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to retrieve or update the compute capacity settings for querying data.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#QueryComputeResponse": {
+            "type": "structure",
+            "members": {
+                "ComputeMode": {
+                    "target": "com.amazonaws.timestreamquery#ComputeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode in which Timestream Compute Units (TCUs) are allocated and utilized within an account. Note that in the Asia Pacific (Mumbai)  region, the API operation only recognizes the value <code>PROVISIONED</code>.</p>"
+                    }
+                },
+                "ProvisionedCapacity": {
+                    "target": "com.amazonaws.timestreamquery#ProvisionedCapacityResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration object that contains settings for provisioned Timestream Compute Units (TCUs) in your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response to a request to retrieve or update the compute capacity settings for querying data.</p>"
             }
         },
         "com.amazonaws.timestreamquery#QueryExecutionException": {
@@ -1660,6 +1837,9 @@
                 },
                 "smithy.api#sensitive": {}
             }
+        },
+        "com.amazonaws.timestreamquery#QueryTCU": {
+            "type": "integer"
         },
         "com.amazonaws.timestreamquery#QueryTemporalRange": {
             "type": "structure",
@@ -2568,7 +2748,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#documentation": "<p>The request was throttled due to excessive requests.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -3508,13 +3688,19 @@
                 "MaxQueryTCU": {
                     "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of compute units the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on.</p>\n         <p>The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for maxQueryTCU, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default\">Default quotas</a>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of compute units the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on. The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for maxQueryTCU, see Default quotas. This configuration is applicable only for on-demand usage of Timestream Compute Units (TCUs).</p>\n         <p>The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for <code>maxQueryTCU</code>, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default\">Default quotas</a>.</p>"
                     }
                 },
                 "QueryPricingModel": {
                     "target": "com.amazonaws.timestreamquery#QueryPricingModel",
                     "traits": {
                         "smithy.api#documentation": "<p>The pricing model for queries in an account.</p>\n         <note>\n            <p>The <code>QueryPricingModel</code> parameter is used by several Timestream operations; however, the <code>UpdateAccountSettings</code> API operation doesn't recognize any values other than <code>COMPUTE_UNITS</code>.</p>\n         </note>"
+                    }
+                },
+                "QueryCompute": {
+                    "target": "com.amazonaws.timestreamquery#QueryComputeRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.</p>\n         <note>\n            <p>This API is idempotent, meaning that making the same request multiple times will have the same effect as making the request once.</p>\n         </note>"
                     }
                 }
             },
@@ -3535,6 +3721,12 @@
                     "target": "com.amazonaws.timestreamquery#QueryPricingModel",
                     "traits": {
                         "smithy.api#documentation": "<p>The pricing model for an account.</p>"
+                    }
+                },
+                "QueryCompute": {
+                    "target": "com.amazonaws.timestreamquery#QueryComputeResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Confirms the updated account settings for querying data in your account.</p>"
                     }
                 }
             },

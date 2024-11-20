@@ -39,6 +39,9 @@
                     "target": "com.amazonaws.workspacesweb#BrowserSettingsResource"
                 },
                 {
+                    "target": "com.amazonaws.workspacesweb#DataProtectionSettingsResource"
+                },
+                {
                     "target": "com.amazonaws.workspacesweb#IdentityProviderResource"
                 },
                 {
@@ -835,6 +838,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#AssociateDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#AssociateDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#AssociateDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a data protection settings resource with a web portal.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/portals/{portalArn+}/dataProtectionSettings",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#AssociateDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "portalArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the web portal.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>",
+                        "smithy.api#httpQuery": "dataProtectionSettingsArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#AssociateDataProtectionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "portalArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the web portal.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspacesweb#AssociateIpAccessSettings": {
             "type": "operation",
             "input": {
@@ -1411,6 +1499,17 @@
                 ]
             }
         },
+        "com.amazonaws.workspacesweb#BuiltInPatternId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[_\\-\\d\\w]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.workspacesweb#Certificate": {
             "type": "structure",
             "members": {
@@ -1540,6 +1639,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#ConfidenceLevel": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3
                 }
             }
         },
@@ -1749,6 +1857,113 @@
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the browser settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#CreateDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#CreateDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#CreateDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data protection settings resource that can be associated with a web portal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/dataProtectionSettings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#CreateDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the data protection settings.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.workspacesweb#DescriptionSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data protection settings.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesweb#TagList",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>The tags to add to the data protection settings resource. A tag is a key-value pair.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom managed key of the data protection settings.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional encryption context of the data protection settings.</p>"
+                    }
+                },
+                "inlineRedactionConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline redaction configuration of the data protection settings that will be applied to all sessions.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesweb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#CreateDataProtectionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2490,6 +2705,199 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#CustomPattern": {
+            "type": "structure",
+            "members": {
+                "patternName": {
+                    "target": "com.amazonaws.workspacesweb#PatternName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern name for the custom pattern.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "patternRegex": {
+                    "target": "com.amazonaws.workspacesweb#Regex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern regex for the customer pattern. The format must follow JavaScript regex format. The pattern must be enclosed between slashes, and can have flags behind the second slash. For example: “/ab+c/gi”.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "patternDescription": {
+                    "target": "com.amazonaws.workspacesweb#DescriptionSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern description for the customer pattern.</p>"
+                    }
+                },
+                "keywordRegex": {
+                    "target": "com.amazonaws.workspacesweb#Regex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keyword regex for the customer pattern. After there is a match to the pattern regex, the keyword regex is used to search within the proximity of the match. If there is a keyword match, then the match is confirmed. If no keyword regex is provided, the pattern regex match will automatically be confirmed. The format must follow JavaScript regex format. The pattern must be enclosed between slashes, and can have flags behind the second slash. For example, “/ab+c/gi”</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pattern configuration for redacting custom data types in session.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#DataProtectionSettings": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings resource.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dataProtectionSettingsArn"
+                    }
+                },
+                "inlineRedactionConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline redaction configuration for the data protection settings.</p>"
+                    }
+                },
+                "associatedPortalArns": {
+                    "target": "com.amazonaws.workspacesweb#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of web portal ARNs that this data protection settings resource is associated\n         with.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the data protection settings.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.workspacesweb#DescriptionSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data protection settings.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.workspacesweb#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date timestamp of the data protection settings.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key used to encrypt sensitive information in the data protection\n         settings.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the data protection settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data protection settings resource that can be associated with a web portal.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#DataProtectionSettingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#DataProtectionSettingsSummary"
+            }
+        },
+        "com.amazonaws.workspacesweb#DataProtectionSettingsResource": {
+            "type": "resource",
+            "identifiers": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN"
+                }
+            },
+            "properties": {
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe"
+                },
+                "description": {
+                    "target": "com.amazonaws.workspacesweb#DescriptionSafe"
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesweb#TagList"
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn"
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap"
+                },
+                "inlineRedactionConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionConfiguration"
+                },
+                "associatedPortalArns": {
+                    "target": "com.amazonaws.workspacesweb#ArnList"
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.workspacesweb#Timestamp"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.workspacesweb#CreateDataProtectionSettings"
+            },
+            "read": {
+                "target": "com.amazonaws.workspacesweb#GetDataProtectionSettings"
+            },
+            "update": {
+                "target": "com.amazonaws.workspacesweb#UpdateDataProtectionSettings"
+            },
+            "delete": {
+                "target": "com.amazonaws.workspacesweb#DeleteDataProtectionSettings"
+            },
+            "list": {
+                "target": "com.amazonaws.workspacesweb#ListDataProtectionSettings"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{dataProtectionSettingsArn}",
+                    "absolute": true
+                },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "DataProtectionSettings"
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#DataProtectionSettingsSummary": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dataProtectionSettingsArn"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the data protection settings.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.workspacesweb#DescriptionSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data protection settings.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.workspacesweb#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date timestamp of the data protection settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the data protection settings.</p>"
+            }
+        },
         "com.amazonaws.workspacesweb#DeleteBrowserSettings": {
             "type": "operation",
             "input": {
@@ -2542,6 +2950,64 @@
             }
         },
         "com.amazonaws.workspacesweb#DeleteBrowserSettingsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DeleteDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#DeleteDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#DeleteDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes data protection settings.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/dataProtectionSettings/{dataProtectionSettingsArn+}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DeleteDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DeleteDataProtectionSettingsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -2965,6 +3431,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.workspacesweb#DescriptionSafe": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[ _\\-\\d\\w]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.workspacesweb#DisassociateBrowserSettings": {
             "type": "operation",
             "input": {
@@ -3020,6 +3497,67 @@
             }
         },
         "com.amazonaws.workspacesweb#DisassociateBrowserSettingsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DisassociateDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#DisassociateDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#DisassociateDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates data protection settings from a web portal.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/portals/{portalArn+}/dataProtectionSettings",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DisassociateDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "portalArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the web portal.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#DisassociateDataProtectionSettingsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -3351,6 +3889,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.workspacesweb#DisplayNameSafe": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[ _\\-\\d\\w]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.workspacesweb#EnabledType": {
             "type": "string",
             "traits": {
@@ -3505,6 +4054,72 @@
                     "target": "com.amazonaws.workspacesweb#BrowserSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The browser settings.</p>",
+                        "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#GetDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#GetDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#GetDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the data protection settings.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/dataProtectionSettings/{dataProtectionSettingsArn+}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#GetDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#GetDataProtectionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettings": {
+                    "target": "com.amazonaws.workspacesweb#DataProtectionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data protection settings.</p>",
                         "smithy.api#nestedProperties": {}
                     }
                 }
@@ -4206,6 +4821,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#GlobalInlineRedactionUrls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#InlineRedactionUrl"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.workspacesweb#IdentityProvider": {
             "type": "structure",
             "members": {
@@ -4386,6 +5013,115 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 60
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#InlineRedactionConfiguration": {
+            "type": "structure",
+            "members": {
+                "inlineRedactionPatterns": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionPatterns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline redaction patterns to be enabled for the inline redaction configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalEnforcedUrls": {
+                    "target": "com.amazonaws.workspacesweb#GlobalInlineRedactionUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global enforced URL configuration for the inline redaction configuration. This is applied to patterns that do not have a pattern-level enforced URL list.</p>"
+                    }
+                },
+                "globalExemptUrls": {
+                    "target": "com.amazonaws.workspacesweb#GlobalInlineRedactionUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global exempt URL configuration for the inline redaction configuration. This is applied to patterns that do not have a pattern-level exempt URL list.</p>"
+                    }
+                },
+                "globalConfidenceLevel": {
+                    "target": "com.amazonaws.workspacesweb#ConfidenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global confidence level for the inline redaction configuration. This indicates the\n         certainty of data type matches in the redaction process. Confidence level 3 means high\n         confidence, and requires a formatted text pattern match in order for content to be\n         redacted. Confidence level 2 means medium confidence, and redaction considers both\n         formatted and unformatted text, and adds keyword associate to the logic. Confidence level 1\n         means low confidence, and redaction is enforced for both formatted pattern + unformatted\n         pattern without keyword. This is applied to patterns that do not have a pattern-level\n         confidence level. Defaults to confidence level 2.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for in-session inline redaction.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#InlineRedactionPattern": {
+            "type": "structure",
+            "members": {
+                "builtInPatternId": {
+                    "target": "com.amazonaws.workspacesweb#BuiltInPatternId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The built-in pattern from the list of preconfigured patterns. Either a customPattern or builtInPatternId is required.</p>"
+                    }
+                },
+                "customPattern": {
+                    "target": "com.amazonaws.workspacesweb#CustomPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>&gt;The configuration for a custom pattern. Either a customPattern or builtInPatternId is required.</p>"
+                    }
+                },
+                "redactionPlaceHolder": {
+                    "target": "com.amazonaws.workspacesweb#RedactionPlaceHolder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction placeholder that will replace the redacted text in session for the inline redaction pattern.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enforcedUrls": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enforced URL configuration for the inline redaction pattern. This will override the global enforced URL configuration.</p>"
+                    }
+                },
+                "exemptUrls": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exempt URL configuration for the inline redaction pattern. This will override the global exempt URL configuration for the inline redaction pattern.</p>"
+                    }
+                },
+                "confidenceLevel": {
+                    "target": "com.amazonaws.workspacesweb#ConfidenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level for inline redaction pattern. This indicates the certainty of data\n         type matches in the redaction process. Confidence level 3 means high confidence, and\n         requires a formatted text pattern match in order for content to be redacted. Confidence\n         level 2 means medium confidence, and redaction considers both formatted and unformatted\n         text, and adds keyword associate to the logic. Confidence level 1 means low confidence, and\n         redaction is enforced for both formatted pattern + unformatted pattern without keyword.\n         This overrides the global confidence level.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The set of patterns that determine the data types redacted in session.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#InlineRedactionPatterns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#InlineRedactionPattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#InlineRedactionUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#InlineRedactionUrls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspacesweb#InlineRedactionUrl"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },
@@ -4730,6 +5466,86 @@
                     "target": "com.amazonaws.workspacesweb#BrowserSettingsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The browser settings.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesweb#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n         operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#ListDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#ListDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#ListDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of data protection settings.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/dataProtectionSettings",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "dataProtectionSettings"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#ListDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.workspacesweb#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n         operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.workspacesweb#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be included in the next page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#ListDataProtectionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettings": {
+                    "target": "com.amazonaws.workspacesweb#DataProtectionSettingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data protection settings.</p>"
                     }
                 },
                 "nextToken": {
@@ -5741,6 +6557,17 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.workspacesweb#PatternName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[_\\-\\d\\w]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.workspacesweb#Portal": {
             "type": "structure",
             "members": {
@@ -5792,6 +6619,12 @@
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the browser settings that is associated with this web portal.</p>"
+                    }
+                },
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>"
                     }
                 },
                 "userSettingsArn": {
@@ -5920,6 +6753,9 @@
                 "browserSettingsArn": {
                     "target": "com.amazonaws.workspacesweb#ARN"
                 },
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN"
+                },
                 "userSettingsArn": {
                     "target": "com.amazonaws.workspacesweb#ARN"
                 },
@@ -5980,6 +6816,9 @@
                     "target": "com.amazonaws.workspacesweb#AssociateBrowserSettings"
                 },
                 {
+                    "target": "com.amazonaws.workspacesweb#AssociateDataProtectionSettings"
+                },
+                {
                     "target": "com.amazonaws.workspacesweb#AssociateIpAccessSettings"
                 },
                 {
@@ -5996,6 +6835,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspacesweb#DisassociateBrowserSettings"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#DisassociateDataProtectionSettings"
                 },
                 {
                     "target": "com.amazonaws.workspacesweb#DisassociateIpAccessSettings"
@@ -6028,6 +6870,7 @@
                     "name": "Portal",
                     "additionalSchemas": [
                         "com.amazonaws.workspacesweb#AssociateBrowserSettingsRequest",
+                        "com.amazonaws.workspacesweb#AssociateDataProtectionSettingsRequest",
                         "com.amazonaws.workspacesweb#AssociateNetworkSettingsRequest",
                         "com.amazonaws.workspacesweb#AssociateUserSettingsRequest",
                         "com.amazonaws.workspacesweb#AssociateUserAccessLoggingSettingsRequest",
@@ -6111,6 +6954,12 @@
                         "smithy.api#documentation": "<p>The ARN of the browser settings that is associated with the web portal.</p>"
                     }
                 },
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>"
+                    }
+                },
                 "userSettingsArn": {
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
@@ -6166,6 +7015,60 @@
         },
         "com.amazonaws.workspacesweb#QuotaCode": {
             "type": "string"
+        },
+        "com.amazonaws.workspacesweb#RedactionPlaceHolder": {
+            "type": "structure",
+            "members": {
+                "redactionPlaceHolderType": {
+                    "target": "com.amazonaws.workspacesweb#RedactionPlaceHolderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction placeholder type that will replace the redacted text in session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "redactionPlaceHolderText": {
+                    "target": "com.amazonaws.workspacesweb#RedactionPlaceHolderText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redaction placeholder text that will replace the redacted text in session for the custom text redaction placeholder type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The redaction placeholder that will replace the redacted text in session.</p>"
+            }
+        },
+        "com.amazonaws.workspacesweb#RedactionPlaceHolderText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[*_\\-\\d\\w]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#RedactionPlaceHolderType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CustomText",
+                        "name": "CUSTOM_TEXT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspacesweb#Regex": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^\\/((?:[^\\n])+)\\/([gimsuyvd]{0,8})$",
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.workspacesweb#RendererType": {
             "type": "string",
@@ -6919,6 +7822,97 @@
                     "target": "com.amazonaws.workspacesweb#BrowserSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The browser settings.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#UpdateDataProtectionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspacesweb#UpdateDataProtectionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspacesweb#UpdateDataProtectionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspacesweb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesweb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates data protection settings.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/dataProtectionSettings/{dataProtectionSettingsArn+}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.workspacesweb#UpdateDataProtectionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettingsArn": {
+                    "target": "com.amazonaws.workspacesweb#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data protection settings.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "inlineRedactionConfiguration": {
+                    "target": "com.amazonaws.workspacesweb#InlineRedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline redaction configuration of the data protection settings that will be applied to all sessions.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.workspacesweb#DisplayNameSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the data protection settings.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.workspacesweb#DescriptionSafe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the data protection settings.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.workspacesweb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspacesweb#UpdateDataProtectionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "dataProtectionSettings": {
+                    "target": "com.amazonaws.workspacesweb#DataProtectionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data protection settings.</p>",
                         "smithy.api#nestedProperties": {},
                         "smithy.api#required": {}
                     }
