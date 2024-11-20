@@ -91,6 +91,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
                 }
             ],
@@ -162,6 +165,9 @@
                     "target": "com.amazonaws.databasemigrationservice#CancelReplicationTaskAssessmentRun"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#CreateDataMigration"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#CreateDataProvider"
                 },
                 {
@@ -196,6 +202,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DeleteConnection"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DeleteDataMigration"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DeleteDataProvider"
@@ -247,6 +256,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeConversionConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeDataMigrations"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeDataProviders"
@@ -375,6 +387,9 @@
                     "target": "com.amazonaws.databasemigrationservice#ModifyConversionConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#ModifyDataMigration"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ModifyDataProvider"
                 },
                 {
@@ -423,6 +438,9 @@
                     "target": "com.amazonaws.databasemigrationservice#RunFleetAdvisorLsaAnalysis"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#StartDataMigration"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#StartExtensionPackAssociation"
                 },
                 {
@@ -454,6 +472,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StartReplicationTaskAssessmentRun"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#StopDataMigration"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StopReplication"
@@ -2253,7 +2274,7 @@
                 "MinCapacityUnits": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS\n         Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 1 DCU as the minimum value\n         allowed. The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU\n         value that you can specify for DMS Serverless is 1. You don't have to specify a value for the\n         <code>MinCapacityUnits</code> parameter. If you don't set this value, DMS scans the current activity\n         of available source tables to identify an optimum setting for this parameter. If there is no current\n         source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to\n         the minimum DCU value allowed, 1.</p>"
+                        "smithy.api#documentation": "<p>Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS\n         Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 1 DCU as the minimum value\n         allowed. The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU\n         value that you can specify for DMS Serverless is 1. If you don't set this value, DMS sets this parameter to the \n         minimum DCU value allowed, 1. If there is no current source activity, DMS scales down your replication until it \n         reaches the value specified in <code>MinCapacityUnits</code>.</p>"
                     }
                 },
                 "MultiAZ": {
@@ -2338,6 +2359,114 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#CreateDataMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#CreateDataMigrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#CreateDataMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceQuotaExceededFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data migration using the provided settings.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateDataMigrationMessage": {
+            "type": "structure",
+            "members": {
+                "DataMigrationName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name for the data migration. Data migration names\n      have the following constraints:</p>\n         <ul>\n            <li>\n               <p>Must begin with a letter, and can only contain ASCII letters,\n         digits, and hyphens. </p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Length must be from 1 to 255 characters.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MigrationProjectIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the migration project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataMigrationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the data migration is full-load only, change data capture (CDC) only, or full-load and CDC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the service access role that you want to use to\n         create the data migration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableCloudwatchLogs": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable CloudWatch logs for the data migration.</p>"
+                    }
+                },
+                "SourceDataSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#SourceDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies information about the source data provider.</p>"
+                    }
+                },
+                "NumberOfJobs": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databasemigrationservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags to be assigned to the data migration.</p>"
+                    }
+                },
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional JSON string specifying what tables, views, and schemas\n      to include or exclude from the migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateDataMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "DataMigration": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the created data migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#CreateDataProvider": {
             "type": "operation",
             "input": {
@@ -2349,6 +2478,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ResourceAlreadyExistsFault"
@@ -2550,7 +2682,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the\n         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,\n          <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, \n          <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,\n         <code>\"db2\"</code>, <code>\"db2-zos\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,\n         <code>\"sqlserver\"</code>, <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the\n         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,\n          <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, \n          <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,\n         <code>\"db2\"</code>, <code>\"db2-zos\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,\n         <code>\"sqlserver\"</code>, <code>\"neptune\"</code>, <code>\"babelfish\"</code>,\n         <code>redshift-serverless</code>, <code>aurora-serverless</code>, <code>aurora-postgresql-serverless</code>,\n         <code>gcp-mysql</code>, <code>azure-sql-managed-instance</code>, <code>redis</code>, <code>dms-transfer</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2988,6 +3120,9 @@
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
                 },
                 {
@@ -3134,6 +3269,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ResourceAlreadyExistsFault"
@@ -3725,7 +3863,7 @@
                 "ReplicationSubnetGroupIdentifier": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the replication subnet group. This value is stored as a lowercase\n         string.</p>\n         <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, spaces,\n         underscores, or hyphens. Must not be \"default\".</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name for the replication subnet group. This value is stored as a lowercase\n         string.</p>\n         <p>Constraints: Must contain no more than 255 alphanumeric characters, periods,\n         underscores, or hyphens. Must not be \"default\".</p>\n         <p>Example: <code>mySubnetgroup</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3961,6 +4099,217 @@
                         "smithy.api#enumValue": "parquet"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DataMigration": {
+            "type": "structure",
+            "members": {
+                "DataMigrationName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the data migration.</p>"
+                    }
+                },
+                "DataMigrationArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies this replication.</p>"
+                    }
+                },
+                "DataMigrationCreateTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC time when DMS created the data migration.</p>"
+                    }
+                },
+                "DataMigrationStartTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC time when DMS started the data migration.</p>"
+                    }
+                },
+                "DataMigrationEndTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC time when data migration ended.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that the data migration uses to access Amazon Web Services resources.</p>"
+                    }
+                },
+                "MigrationProjectArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data migration's associated migration project.</p>"
+                    }
+                },
+                "DataMigrationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the data migration is full-load only, change data capture (CDC) only, or full-load and CDC.</p>"
+                    }
+                },
+                "DataMigrationSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigrationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies CloudWatch settings and selection rules for the data migration.</p>"
+                    }
+                },
+                "SourceDataSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#SourceDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies information about the data migration's source data provider.</p>"
+                    }
+                },
+                "DataMigrationStatistics": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigrationStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the data migration's run, including start and stop time, latency, and data migration progress.</p>"
+                    }
+                },
+                "DataMigrationStatus": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the data migration. </p>"
+                    }
+                },
+                "PublicIpAddresses": {
+                    "target": "com.amazonaws.databasemigrationservice#PublicIpAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses of the endpoints for the data migration.</p>"
+                    }
+                },
+                "DataMigrationCidrBlocks": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigrationCidrBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR blocks of the endpoints for the data migration.</p>"
+                    }
+                },
+                "LastFailureMessage": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the data migration's most recent error or failure.</p>"
+                    }
+                },
+                "StopReason": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the data migration last stopped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object provides information about a DMS data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DataMigrationCidrBlock": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DataMigrationSettings": {
+            "type": "structure",
+            "members": {
+                "NumberOfJobs": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.</p>"
+                    }
+                },
+                "CloudwatchLogsEnabled": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable CloudWatch logging for the data migration.</p>"
+                    }
+                },
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON-formatted string that defines what objects to include and exclude from the migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for configuring a data migration, including whether to enable CloudWatch logs,\n      and the selection rules to use to include or exclude database objects from the migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DataMigrationStatistics": {
+            "type": "structure",
+            "members": {
+                "TablesLoaded": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of tables loaded in the current data migration run.</p>"
+                    }
+                },
+                "ElapsedTimeMillis": {
+                    "target": "com.amazonaws.databasemigrationservice#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The elapsed duration of the data migration run.</p>"
+                    }
+                },
+                "TablesLoading": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The data migration's table loading progress.</p>"
+                    }
+                },
+                "FullLoadPercentage": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The data migration's progress in the full-load migration phase.</p>"
+                    }
+                },
+                "CDCLatency": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The current latency of the change data capture (CDC) operation.</p>"
+                    }
+                },
+                "TablesQueued": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of tables that are waiting for processing.</p>"
+                    }
+                },
+                "TablesErrored": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of tables that DMS failed to process.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the migration started.</p>"
+                    }
+                },
+                "StopTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the migration stopped or failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the data migration run, including start and stop time, latency, and migration progress.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DataMigrations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#DataMigration"
             }
         },
         "com.amazonaws.databasemigrationservice#DataProvider": {
@@ -4508,6 +4857,58 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DeleteDataMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteDataMigrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteDataMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteDataMigrationMessage": {
+            "type": "structure",
+            "members": {
+                "DataMigrationIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the data migration to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteDataMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "DataMigration": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted data migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DeleteDataProvider": {
             "type": "operation",
             "input": {
@@ -4519,6 +4920,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
@@ -4719,6 +5123,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#CollectorNotFoundFault"
                 },
                 {
@@ -4738,6 +5145,9 @@
                 "target": "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabasesResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidOperationFault"
                 },
@@ -4789,6 +5199,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
@@ -4864,6 +5277,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
@@ -5741,6 +6157,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeDataMigrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeDataMigrationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeDataMigrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about data migrations.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DataMigrations",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeDataMigrationsMessage": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters applied to the data migrations.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified \n         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that \n         the remaining results can be retrieved. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                },
+                "WithoutSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to set to avoid returning information about settings. Use this to reduce\n         overhead when setting information is too large. To use this option, choose\n         <code>true</code>; otherwise, choose <code>false</code> (the default).</p>"
+                    }
+                },
+                "WithoutStatistics": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to set to avoid returning information about statistics. Use this to reduce\n         overhead when statistics information is too large. To use this option, choose\n         <code>true</code>; otherwise, choose <code>false</code> (the default).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeDataMigrationsResponse": {
+            "type": "structure",
+            "members": {
+                "DataMigrations": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the data migrations used in the project.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeDataProviders": {
             "type": "operation",
             "input": {
@@ -5752,6 +6255,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
@@ -6869,6 +7375,9 @@
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
                 }
             ],
@@ -7490,6 +7999,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
@@ -10356,6 +10868,18 @@
                 "smithy.api#documentation": "<p>Provides information about a metadata model assessment exported to SQL.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#FailedDependencyFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.databasemigrationservice#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A dependency threw an exception.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.databasemigrationservice#Filter": {
             "type": "structure",
             "members": {
@@ -11350,6 +11874,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
                 }
             ],
@@ -11467,6 +11994,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information that defines a MariaDB data provider.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#Marker": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#MessageFormatValue": {
@@ -11803,6 +12339,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#ModifyDataMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#ModifyDataMigrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#ModifyDataMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing DMS data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ModifyDataMigrationMessage": {
+            "type": "structure",
+            "members": {
+                "DataMigrationIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the data migration to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataMigrationName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name for the data migration.</p>"
+                    }
+                },
+                "EnableCloudwatchLogs": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable Cloudwatch logs for the data migration.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new service access role ARN for the data migration.</p>"
+                    }
+                },
+                "DataMigrationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new migration type for the data migration.</p>"
+                    }
+                },
+                "SourceDataSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#SourceDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new information about the source data provider for the data migration.</p>"
+                    }
+                },
+                "NumberOfJobs": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.</p>"
+                    }
+                },
+                "SelectionRules": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON-formatted string that defines what objects to include and exclude from the migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ModifyDataMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "DataMigration": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the modified data migration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#ModifyDataProvider": {
             "type": "operation",
             "input": {
@@ -11814,6 +12444,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
@@ -12308,6 +12941,9 @@
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
                 },
                 {
@@ -12446,6 +13082,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
@@ -14293,6 +14932,15 @@
                 "smithy.api#documentation": "<p>Information about provisioning resources for an DMS serverless replication.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#PublicIpAddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#RdsConfiguration": {
             "type": "structure",
             "members": {
@@ -15181,6 +15829,9 @@
                 "target": "com.amazonaws.databasemigrationservice#RemoveTagsFromResourceResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
                 }
@@ -16133,6 +16784,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique name of the assessment run.</p>"
                     }
+                },
+                "IsLatestTaskAssessmentRun": {
+                    "target": "com.amazonaws.databasemigrationservice#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates that the following PreflightAssessmentRun is the latest for the ReplicationTask. The status is either true or false.</p>"
+                    }
+                },
+                "ResultStatistic": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationTaskAssessmentRunResultStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Result statistics for a completed assessment run, showing aggregated statistics of IndividualAssessments for how many assessments were passed, failed, or encountered issues such as errors or warnings.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -16165,6 +16829,49 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The progress values reported by the <code>AssessmentProgress</code> response\n         element.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationTaskAssessmentRunResultStatistic": {
+            "type": "structure",
+            "members": {
+                "Passed": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of individual assessments that successfully passed all checks in the assessment run.</p>"
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of individual assessments that failed to meet the criteria defined in the assessment run.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of individual assessments that encountered a critical error and could not complete properly.</p>"
+                    }
+                },
+                "Warning": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Indicates that the recent completed AssessmentRun triggered a warning.</p>"
+                    }
+                },
+                "Cancelled": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The number of individual assessments that were cancelled during the assessment run.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object containing the result statistics for a completed assessment run.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationTaskIndividualAssessment": {
@@ -16938,6 +17645,44 @@
                 "smithy.api#documentation": "<p>Describes a server in a Fleet Advisor collector inventory.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#SourceDataSetting": {
+            "type": "structure",
+            "members": {
+                "CDCStartPosition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change data capture (CDC) start position for the source data provider.</p>"
+                    }
+                },
+                "CDCStartTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change data capture (CDC) start time for the source data provider.</p>"
+                    }
+                },
+                "CDCStopTime": {
+                    "target": "com.amazonaws.databasemigrationservice#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change data capture (CDC) stop time for the source data provider.</p>"
+                    }
+                },
+                "SlotName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the replication slot on the source data provider. This attribute is only \n      valid for a PostgreSQL or Aurora PostgreSQL source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines settings for a source data provider for a data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#SourceDataSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#SourceDataSetting"
+            }
+        },
         "com.amazonaws.databasemigrationservice#SourceIdsList": {
             "type": "list",
             "member": {
@@ -16973,6 +17718,71 @@
                         "smithy.api#enumValue": "ssl-encryption"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartDataMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#StartDataMigrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#StartDataMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceQuotaExceededFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts the specified data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartDataMigrationMessage": {
+            "type": "structure",
+            "members": {
+                "DataMigrationIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the data migration to start.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartType": {
+                    "target": "com.amazonaws.databasemigrationservice#StartReplicationMigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the start type for the data migration. Valid values include \n         <code>start-replication</code>, <code>reload-target</code>, and <code>resume-processing</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartDataMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "DataMigration": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data migration that DMS started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.databasemigrationservice#StartExtensionPackAssociation": {
@@ -17664,6 +18474,29 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#StartReplicationMigrationTypeValue": {
+            "type": "enum",
+            "members": {
+                "RELOAD_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reload-target"
+                    }
+                },
+                "RESUME_PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resume-processing"
+                    }
+                },
+                "START_REPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "start-replication"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#StartReplicationResponse": {
             "type": "structure",
             "members": {
@@ -17888,6 +18721,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Space-separated list of names for specific individual assessments that you want to\n         exclude. These names come from the default list of individual assessments that DMS\n         supports for the associated migration task. This task is specified by\n            <code>ReplicationTaskArn</code>.</p>\n         <note>\n            <p>You can't set a value for <code>Exclude</code> if you also set a value for\n            <code>IncludeOnly</code> in the API operation.</p>\n            <p>To identify the names of the default individual assessments that DMS\n            supports for the associated migration task, run the\n            <code>DescribeApplicableIndividualAssessments</code> operation using its own\n            <code>ReplicationTaskArn</code> request parameter.</p>\n         </note>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databasemigrationservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags to be assigned to the premigration assessment run that you want to start.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17987,6 +18826,58 @@
                         "smithy.api#enumValue": "reload-target"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StopDataMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#StopDataMigrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#StopDataMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#FailedDependencyFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops the specified data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StopDataMigrationMessage": {
+            "type": "structure",
+            "members": {
+                "DataMigrationIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier (name or ARN) of the data migration to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StopDataMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "DataMigration": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data migration that DMS stopped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.databasemigrationservice#StopReplication": {

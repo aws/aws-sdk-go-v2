@@ -12,7 +12,15 @@ import (
 	"time"
 )
 
+// End of support notice: On September 10, 2025, Amazon Web Services will
+// discontinue support for Amazon Web Services RoboMaker. After September 10, 2025,
+// you will no longer be able to access the Amazon Web Services RoboMaker console
+// or Amazon Web Services RoboMaker resources. For more information on
+// transitioning to Batch to help run containerized simulations, visit [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/].
+//
 // Creates a version of a robot application.
+//
+// [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateRobotApplicationVersion(ctx context.Context, params *CreateRobotApplicationVersionInput, optFns ...func(*Options)) (*CreateRobotApplicationVersionOutput, error) {
 	if params == nil {
 		params = &CreateRobotApplicationVersionInput{}
@@ -69,7 +77,7 @@ type CreateRobotApplicationVersionOutput struct {
 	// The revision id of the robot application.
 	RevisionId *string
 
-	// The robot software suite (ROS distribution) used by the robot application.
+	// The robot software suite used by the robot application.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The sources of the robot application.

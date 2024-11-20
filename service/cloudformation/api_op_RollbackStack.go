@@ -62,8 +62,8 @@ type RollbackStackInput struct {
 	// Default: false
 	RetainExceptOnCreate *bool
 
-	// The Amazon Resource Name (ARN) of an Identity and Access Management role that
-	// CloudFormation assumes to rollback the stack.
+	// The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to
+	// rollback the stack.
 	RoleARN *string
 
 	noSmithyDocumentSerde

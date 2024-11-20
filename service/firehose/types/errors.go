@@ -61,7 +61,7 @@ func (e *InvalidArgumentException) ErrorCode() string {
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Firehose throws this exception when an attempt to put records or to start or
-// stop delivery stream encryption fails. This happens when the KMS service throws
+// stop Firehose stream encryption fails. This happens when the KMS service throws
 // one of the following exception types: AccessDeniedException ,
 // InvalidStateException , DisabledException , or NotFoundException .
 type InvalidKMSResourceException struct {
@@ -199,7 +199,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unavailable. Back off and retry the operation. If you continue
-// to see the exception, throughput limits for the delivery stream may have been
+// to see the exception, throughput limits for the Firehose stream may have been
 // exceeded. For more information about limits and how to request an increase, see [Amazon Firehose Limits]
 // .
 //

@@ -2121,16 +2121,13 @@ type SalesforceConnectorProfileCredentials struct {
 	// from Salesforce after you log in to your Salesforce account and authorize Amazon
 	// AppFlow to access your records.
 	//
-	// CLIENT_CREDENTIALS Amazon AppFlow passes client credentials (a client ID and
-	// client secret) when it requests the access token from Salesforce. You provide
-	// these credentials to Amazon AppFlow when you define the connection to your
-	// Salesforce account.
-	//
 	// JWT_BEARER Amazon AppFlow passes a JSON web token (JWT) when it requests the
 	// access token from Salesforce. You provide the JWT to Amazon AppFlow when you
 	// define the connection to your Salesforce account. When you use this grant type,
 	// you don't need to log in to your Salesforce account to authorize Amazon AppFlow
 	// to access your records.
+	//
+	// The CLIENT_CREDENTIALS value is not supported for Salesforce.
 	OAuth2GrantType OAuth2GrantType
 
 	//  The OAuth requirement needed to request security tokens from the connector
@@ -2271,16 +2268,13 @@ type SalesforceMetadata struct {
 	// from Salesforce after you log in to your Salesforce account and authorize Amazon
 	// AppFlow to access your records.
 	//
-	// CLIENT_CREDENTIALS Amazon AppFlow passes client credentials (a client ID and
-	// client secret) when it requests the access token from Salesforce. You provide
-	// these credentials to Amazon AppFlow when you define the connection to your
-	// Salesforce account.
-	//
 	// JWT_BEARER Amazon AppFlow passes a JSON web token (JWT) when it requests the
 	// access token from Salesforce. You provide the JWT to Amazon AppFlow when you
 	// define the connection to your Salesforce account. When you use this grant type,
 	// you don't need to log in to your Salesforce account to authorize Amazon AppFlow
 	// to access your records.
+	//
+	// The CLIENT_CREDENTIALS value is not supported for Salesforce.
 	Oauth2GrantTypesSupported []OAuth2GrantType
 
 	noSmithyDocumentSerde

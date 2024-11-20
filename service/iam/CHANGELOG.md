@@ -1,3 +1,24 @@
+# v1.38.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.0 (2024-11-14)
+
+* **Feature**: This release includes support for five new APIs and changes to existing APIs that give AWS Organizations customers the ability to use temporary root credentials, targeted to member accounts in the organization.
+
+# v1.37.4 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

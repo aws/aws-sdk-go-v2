@@ -7,6 +7,88 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The access is denied for the Amazon Web Services Support API.
+type AccessDeniedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Failed to upload the tax exemption document to Amazon Web Services Support
+// case.
+type AttachmentUploadException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AttachmentUploadException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AttachmentUploadException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AttachmentUploadException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AttachmentUploadException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AttachmentUploadException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You've exceeded the Amazon Web Services Support case creation limit for your
+// account.
+type CaseCreationLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CaseCreationLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CaseCreationLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CaseCreationLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CaseCreationLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CaseCreationLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The exception when the input is creating conflict with the given state.
 type ConflictException struct {
 	Message *string

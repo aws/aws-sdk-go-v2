@@ -2701,6 +2701,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.Engine != nil {
+		ok := object.Key("Engine")
+		ok.String(*v.Engine)
+	}
+
 	if v.EngineVersion != nil {
 		ok := object.Key("EngineVersion")
 		ok.String(*v.EngineVersion)
@@ -3048,6 +3053,11 @@ func awsAwsjson11_serializeOpDocumentDescribeEngineVersionsInput(v *DescribeEngi
 	if v.DefaultOnly {
 		ok := object.Key("DefaultOnly")
 		ok.Boolean(v.DefaultOnly)
+	}
+
+	if v.Engine != nil {
+		ok := object.Key("Engine")
+		ok.String(*v.Engine)
 	}
 
 	if v.EngineVersion != nil {
@@ -3537,6 +3547,11 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.Engine != nil {
+		ok := object.Key("Engine")
+		ok.String(*v.Engine)
 	}
 
 	if v.EngineVersion != nil {

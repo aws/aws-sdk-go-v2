@@ -17,6 +17,8 @@ import (
 // before authorization. When a task definition revision is not specified,
 // authorization will occur using the latest revision of a task definition.
 //
+// Amazon Elastic Inference (EI) is no longer available to customers.
+//
 // You can allow Amazon ECS to place tasks for you, or you can customize how
 // Amazon ECS places tasks using placement constraints and placement strategies.
 // For more information, see [Scheduling Tasks]in the Amazon Elastic Container Service Developer
@@ -24,14 +26,6 @@ import (
 //
 // Alternatively, you can use StartTask to use your own scheduler or place tasks
 // manually on specific container instances.
-//
-// Starting April 15, 2023, Amazon Web Services will not onboard new customers to
-// Amazon Elastic Inference (EI), and will help current customers migrate their
-// workloads to options that offer better price and performance. After April 15,
-// 2023, new customers will not be able to launch instances with Amazon EI
-// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
-// who have used Amazon EI at least once during the past 30-day period are
-// considered current customers and will be able to continue using the service.
 //
 // You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume
 // when creating or updating a service. For more infomation, see [Amazon EBS volumes]in the Amazon
@@ -220,8 +214,8 @@ type RunTaskInput struct {
 	// [TagResource]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
 	PropagateTags types.PropagateTags
 
-	// The reference ID to use for the task. The reference ID can have a maximum
-	// length of 1024 characters.
+	// This parameter is only used by Amazon ECS. It is not intended for use by
+	// customers.
 	ReferenceId *string
 
 	// An optional tag specified when a task is started. For example, if you

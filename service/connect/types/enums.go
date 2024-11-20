@@ -1050,6 +1050,7 @@ const (
 	IntegrationTypeWisdomAssistant      IntegrationType = "WISDOM_ASSISTANT"
 	IntegrationTypeWisdomKnowledgeBase  IntegrationType = "WISDOM_KNOWLEDGE_BASE"
 	IntegrationTypeWisdomQuickResponses IntegrationType = "WISDOM_QUICK_RESPONSES"
+	IntegrationTypeQMessageTemplates    IntegrationType = "Q_MESSAGE_TEMPLATES"
 	IntegrationTypeCasesDomain          IntegrationType = "CASES_DOMAIN"
 	IntegrationTypeApplication          IntegrationType = "APPLICATION"
 	IntegrationTypeFileScanner          IntegrationType = "FILE_SCANNER"
@@ -1067,6 +1068,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"WISDOM_ASSISTANT",
 		"WISDOM_KNOWLEDGE_BASE",
 		"WISDOM_QUICK_RESPONSES",
+		"Q_MESSAGE_TEMPLATES",
 		"CASES_DOMAIN",
 		"APPLICATION",
 		"FILE_SCANNER",
@@ -2269,6 +2271,23 @@ func (RulePublishStatus) Values() []RulePublishStatus {
 	return []RulePublishStatus{
 		"DRAFT",
 		"PUBLISHED",
+	}
+}
+
+type ScreenShareCapability string
+
+// Enum values for ScreenShareCapability
+const (
+	ScreenShareCapabilitySend ScreenShareCapability = "SEND"
+)
+
+// Values returns all known values for ScreenShareCapability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScreenShareCapability) Values() []ScreenShareCapability {
+	return []ScreenShareCapability{
+		"SEND",
 	}
 }
 

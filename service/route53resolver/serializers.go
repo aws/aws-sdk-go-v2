@@ -4390,6 +4390,11 @@ func awsAwsjson11_serializeDocumentTargetAddress(v *types.TargetAddress, value s
 		ok.String(string(v.Protocol))
 	}
 
+	if v.ServerNameIndication != nil {
+		ok := object.Key("ServerNameIndication")
+		ok.String(*v.ServerNameIndication)
+	}
+
 	return nil
 }
 
@@ -4615,9 +4620,19 @@ func awsAwsjson11_serializeOpDocumentCreateFirewallRuleInput(v *CreateFirewallRu
 		ok.String(string(v.BlockResponse))
 	}
 
+	if len(v.ConfidenceThreshold) > 0 {
+		ok := object.Key("ConfidenceThreshold")
+		ok.String(string(v.ConfidenceThreshold))
+	}
+
 	if v.CreatorRequestId != nil {
 		ok := object.Key("CreatorRequestId")
 		ok.String(*v.CreatorRequestId)
+	}
+
+	if len(v.DnsThreatProtection) > 0 {
+		ok := object.Key("DnsThreatProtection")
+		ok.String(string(v.DnsThreatProtection))
 	}
 
 	if v.FirewallDomainListId != nil {
@@ -4868,6 +4883,11 @@ func awsAwsjson11_serializeOpDocumentDeleteFirewallRuleInput(v *DeleteFirewallRu
 	if v.FirewallRuleGroupId != nil {
 		ok := object.Key("FirewallRuleGroupId")
 		ok.String(*v.FirewallRuleGroupId)
+	}
+
+	if v.FirewallThreatProtectionId != nil {
+		ok := object.Key("FirewallThreatProtectionId")
+		ok.String(*v.FirewallThreatProtectionId)
 	}
 
 	if v.Qtype != nil {
@@ -5768,6 +5788,16 @@ func awsAwsjson11_serializeOpDocumentUpdateFirewallRuleInput(v *UpdateFirewallRu
 		ok.String(string(v.BlockResponse))
 	}
 
+	if len(v.ConfidenceThreshold) > 0 {
+		ok := object.Key("ConfidenceThreshold")
+		ok.String(string(v.ConfidenceThreshold))
+	}
+
+	if len(v.DnsThreatProtection) > 0 {
+		ok := object.Key("DnsThreatProtection")
+		ok.String(string(v.DnsThreatProtection))
+	}
+
 	if v.FirewallDomainListId != nil {
 		ok := object.Key("FirewallDomainListId")
 		ok.String(*v.FirewallDomainListId)
@@ -5781,6 +5811,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFirewallRuleInput(v *UpdateFirewallRu
 	if v.FirewallRuleGroupId != nil {
 		ok := object.Key("FirewallRuleGroupId")
 		ok.String(*v.FirewallRuleGroupId)
+	}
+
+	if v.FirewallThreatProtectionId != nil {
+		ok := object.Key("FirewallThreatProtectionId")
+		ok.String(*v.FirewallThreatProtectionId)
 	}
 
 	if v.Name != nil {

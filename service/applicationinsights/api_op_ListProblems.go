@@ -30,7 +30,7 @@ func (c *Client) ListProblems(ctx context.Context, params *ListProblemsInput, op
 
 type ListProblemsInput struct {
 
-	// The AWS account ID for the resource group owner.
+	// The Amazon Web Services account ID for the resource group owner.
 	AccountId *string
 
 	//  The name of the component.
@@ -63,7 +63,7 @@ type ListProblemsInput struct {
 
 type ListProblemsOutput struct {
 
-	// The AWS account ID for the resource group owner.
+	// The Amazon Web Services account ID for the resource group owner.
 	AccountId *string
 
 	// The token used to retrieve the next page of results. This value is null when

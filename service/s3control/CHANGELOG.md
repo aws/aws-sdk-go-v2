@@ -1,3 +1,21 @@
+# v1.50.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.0 (2024-11-06)
+
+* **Feature**: Fix ListStorageLensConfigurations and ListStorageLensGroups deserialization for Smithy SDKs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

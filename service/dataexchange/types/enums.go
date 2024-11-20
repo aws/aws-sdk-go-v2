@@ -2,6 +2,25 @@
 
 package types
 
+type AcceptanceStateFilterValue string
+
+// Enum values for AcceptanceStateFilterValue
+const (
+	AcceptanceStateFilterValuePendingReceiverAcceptance AcceptanceStateFilterValue = "PENDING_RECEIVER_ACCEPTANCE"
+	AcceptanceStateFilterValueAccepted                  AcceptanceStateFilterValue = "ACCEPTED"
+)
+
+// Values returns all known values for AcceptanceStateFilterValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcceptanceStateFilterValue) Values() []AcceptanceStateFilterValue {
+	return []AcceptanceStateFilterValue{
+		"PENDING_RECEIVER_ACCEPTANCE",
+		"ACCEPTED",
+	}
+}
+
 type AssetType string
 
 // Enum values for AssetType
@@ -74,6 +93,25 @@ func (DatabaseLFTagPolicyPermission) Values() []DatabaseLFTagPolicyPermission {
 	}
 }
 
+type DataGrantAcceptanceState string
+
+// Enum values for DataGrantAcceptanceState
+const (
+	DataGrantAcceptanceStatePendingReceiverAcceptance DataGrantAcceptanceState = "PENDING_RECEIVER_ACCEPTANCE"
+	DataGrantAcceptanceStateAccepted                  DataGrantAcceptanceState = "ACCEPTED"
+)
+
+// Values returns all known values for DataGrantAcceptanceState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataGrantAcceptanceState) Values() []DataGrantAcceptanceState {
+	return []DataGrantAcceptanceState{
+		"PENDING_RECEIVER_ACCEPTANCE",
+		"ACCEPTED",
+	}
+}
+
 type ExceptionCause string
 
 // Enum values for ExceptionCause
@@ -90,6 +128,25 @@ func (ExceptionCause) Values() []ExceptionCause {
 	return []ExceptionCause{
 		"InsufficientS3BucketPolicy",
 		"S3AccessDenied",
+	}
+}
+
+type GrantDistributionScope string
+
+// Enum values for GrantDistributionScope
+const (
+	GrantDistributionScopeAwsOrganization GrantDistributionScope = "AWS_ORGANIZATION"
+	GrantDistributionScopeNone            GrantDistributionScope = "NONE"
+)
+
+// Values returns all known values for GrantDistributionScope. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GrantDistributionScope) Values() []GrantDistributionScope {
+	return []GrantDistributionScope{
+		"AWS_ORGANIZATION",
+		"NONE",
 	}
 }
 
@@ -227,6 +284,8 @@ const (
 	LimitNameRevisionsPerAmazonS3DataAccessDataSet                                 LimitName = "Revisions per Amazon S3 data access data set"
 	LimitNameAmazonS3DataAccessAssetsPerRevision                                   LimitName = "Amazon S3 data access assets per revision"
 	LimitNameConcurrentInProgressJobsToCreateAmazonS3DataAccessAssetsFromS3Buckets LimitName = "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets"
+	LimitNameActiveAndPendingDataGrants                                            LimitName = "Active and pending data grants"
+	LimitNamePendingDataGrantsPerConsumer                                          LimitName = "Pending data grants per consumer"
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded
@@ -263,6 +322,8 @@ func (LimitName) Values() []LimitName {
 		"Revisions per Amazon S3 data access data set",
 		"Amazon S3 data access assets per revision",
 		"Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets",
+		"Active and pending data grants",
+		"Pending data grants per consumer",
 	}
 }
 
@@ -334,6 +395,7 @@ const (
 	ResourceTypeAsset       ResourceType = "ASSET"
 	ResourceTypeJob         ResourceType = "JOB"
 	ResourceTypeEventAction ResourceType = "EVENT_ACTION"
+	ResourceTypeDataGrant   ResourceType = "DATA_GRANT"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -347,6 +409,7 @@ func (ResourceType) Values() []ResourceType {
 		"ASSET",
 		"JOB",
 		"EVENT_ACTION",
+		"DATA_GRANT",
 	}
 }
 

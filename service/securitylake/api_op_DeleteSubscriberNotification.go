@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified notification subscription in Amazon Security Lake for the
+// Deletes the specified subscription notification in Amazon Security Lake for the
 // organization you specify.
 func (c *Client) DeleteSubscriberNotification(ctx context.Context, params *DeleteSubscriberNotificationInput, optFns ...func(*Options)) (*DeleteSubscriberNotificationOutput, error) {
 	if params == nil {

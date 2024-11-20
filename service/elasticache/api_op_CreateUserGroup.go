@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis OSS engine version 6.0 onwards: Creates a Redis OSS user group. For
-// more information, see [Using Role Based Access Control (RBAC)]
+// For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Creates a user
+// group. For more information, see [Using Role Based Access Control (RBAC)]
 //
 // [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
 func (c *Client) CreateUserGroup(ctx context.Context, params *CreateUserGroupInput, optFns ...func(*Options)) (*CreateUserGroupOutput, error) {
@@ -44,7 +44,7 @@ type CreateUserGroupInput struct {
 
 	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
 	// key must be accompanied by a tag value, although null is accepted. Available for
-	// Redis OSS only.
+	// Valkey and Redis OSS only.
 	Tags []types.Tag
 
 	// The list of user IDs that belong to the user group.
@@ -71,7 +71,7 @@ type CreateUserGroupOutput struct {
 	ReplicationGroups []string
 
 	// Indicates which serverless caches the specified user group is associated with.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCaches []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",

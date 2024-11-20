@@ -77,19 +77,19 @@ type DescribeTypeOutput struct {
 	// Whether CloudFormation automatically updates the extension in this account and
 	// Region when a new minor version is published by the extension publisher. Major
 	// versions released by the publisher must be manually updated. For more
-	// information, see [Activating public extensions for use in your account]in the CloudFormation User Guide.
+	// information, see [Automatically use new versions of extensions]in the CloudFormation User Guide.
 	//
-	// [Activating public extensions for use in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable
+	// [Automatically use new versions of extensions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto
 	AutoUpdate *bool
 
 	// A JSON string that represent the current configuration data for the extension
 	// in this account and Region.
 	//
-	// To set the configuration data for an extension, use [SetTypeConfiguration]. For more information, see [Configuring extensions at the account level]
+	// To set the configuration data for an extension, use [SetTypeConfiguration]. For more information, see [Edit configuration data for extensions in your account]
 	// in the CloudFormation User Guide.
 	//
 	// [SetTypeConfiguration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-	// [Configuring extensions at the account level]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
+	// [Edit configuration data for extensions in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
 	ConfigurationSchema *string
 
 	// The ID of the default version of the extension. The default version is used
@@ -188,9 +188,9 @@ type DescribeTypeOutput struct {
 	// If you specified a TypeNameAlias when enabling the extension in this account
 	// and Region, CloudFormation treats that alias as the extension's type name within
 	// the account and Region, not the type name of the public extension. For more
-	// information, see [Specifying aliases to refer to extensions]in the CloudFormation User Guide.
+	// information, see [Use aliases to refer to extensions]in the CloudFormation User Guide.
 	//
-	// [Specifying aliases to refer to extensions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias
+	// [Use aliases to refer to extensions]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias
 	OriginalTypeName *string
 
 	// For resource type extensions, the provisioning behavior of the resource type.
@@ -235,10 +235,10 @@ type DescribeTypeOutput struct {
 
 	// The schema that defines the extension.
 	//
-	// For more information about extension schemas, see [Resource Provider Schema] in the CloudFormation CLI
-	// User Guide.
+	// For more information about extension schemas, see [Resource type schema] in the CloudFormation
+	// Command Line Interface (CLI) User Guide.
 	//
-	// [Resource Provider Schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+	// [Resource type schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
 	Schema *string
 
 	// The URL of the source code for the extension.
@@ -271,7 +271,8 @@ type DescribeTypeOutput struct {
 	//   - PASSED : The extension has passed all its contract tests.
 	//
 	// An extension must have a test status of PASSED before it can be published. For
-	//   more information, see [Publishing extensions to make them available for public use]in the CloudFormation Command Line Interface User Guide.
+	//   more information, see [Publishing extensions to make them available for public use]in the CloudFormation Command Line Interface (CLI) User
+	//   Guide.
 	//
 	//   - FAILED : The extension has failed one or more contract tests.
 	//

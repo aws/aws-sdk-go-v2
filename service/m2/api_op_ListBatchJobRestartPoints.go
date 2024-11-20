@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the job steps for JCL files to restart a batch job. This is only
+// Lists all the job steps for a JCL file to restart a batch job. This is only
 // applicable for Micro Focus engine with versions 8.0.6 and above.
 func (c *Client) ListBatchJobRestartPoints(ctx context.Context, params *ListBatchJobRestartPointsInput, optFns ...func(*Options)) (*ListBatchJobRestartPointsOutput, error) {
 	if params == nil {
@@ -35,10 +35,14 @@ type ListBatchJobRestartPointsInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The unique identifier of each batch job execution.
+	// The unique identifier of the batch job execution.
 	//
 	// This member is required.
 	ExecutionId *string
+
+	// The Amazon Web Services Secrets Manager containing user's credentials for
+	// authentication and authorization for List Batch Job Restart Points operation.
+	AuthSecretsManagerArn *string
 
 	noSmithyDocumentSerde
 }

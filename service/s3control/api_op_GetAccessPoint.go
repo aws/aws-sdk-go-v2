@@ -137,7 +137,7 @@ type GetAccessPointOutput struct {
 	// point.
 	//
 	// This element is empty if this access point is an Amazon S3 on Outposts access
-	// point that is used by other Amazon Web Servicesservices.
+	// point that is used by other Amazon Web Services services.
 	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.

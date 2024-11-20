@@ -62,14 +62,15 @@ type DataLakeResourceType string
 
 // Enum values for DataLakeResourceType
 const (
-	DataLakeResourceTypeCatalog             DataLakeResourceType = "CATALOG"
-	DataLakeResourceTypeDatabase            DataLakeResourceType = "DATABASE"
-	DataLakeResourceTypeTable               DataLakeResourceType = "TABLE"
-	DataLakeResourceTypeDataLocation        DataLakeResourceType = "DATA_LOCATION"
-	DataLakeResourceTypeLfTag               DataLakeResourceType = "LF_TAG"
-	DataLakeResourceTypeLfTagPolicy         DataLakeResourceType = "LF_TAG_POLICY"
-	DataLakeResourceTypeLfTagPolicyDatabase DataLakeResourceType = "LF_TAG_POLICY_DATABASE"
-	DataLakeResourceTypeLfTagPolicyTable    DataLakeResourceType = "LF_TAG_POLICY_TABLE"
+	DataLakeResourceTypeCatalog              DataLakeResourceType = "CATALOG"
+	DataLakeResourceTypeDatabase             DataLakeResourceType = "DATABASE"
+	DataLakeResourceTypeTable                DataLakeResourceType = "TABLE"
+	DataLakeResourceTypeDataLocation         DataLakeResourceType = "DATA_LOCATION"
+	DataLakeResourceTypeLfTag                DataLakeResourceType = "LF_TAG"
+	DataLakeResourceTypeLfTagPolicy          DataLakeResourceType = "LF_TAG_POLICY"
+	DataLakeResourceTypeLfTagPolicyDatabase  DataLakeResourceType = "LF_TAG_POLICY_DATABASE"
+	DataLakeResourceTypeLfTagPolicyTable     DataLakeResourceType = "LF_TAG_POLICY_TABLE"
+	DataLakeResourceTypeLfNamedTagExpression DataLakeResourceType = "LF_NAMED_TAG_EXPRESSION"
 )
 
 // Values returns all known values for DataLakeResourceType. Note that this can be
@@ -86,6 +87,7 @@ func (DataLakeResourceType) Values() []DataLakeResourceType {
 		"LF_TAG_POLICY",
 		"LF_TAG_POLICY_DATABASE",
 		"LF_TAG_POLICY_TABLE",
+		"LF_NAMED_TAG_EXPRESSION",
 	}
 }
 
@@ -167,6 +169,7 @@ const (
 	PermissionCreateLfTag              Permission = "CREATE_LF_TAG"
 	PermissionAssociate                Permission = "ASSOCIATE"
 	PermissionGrantWithLfTagExpression Permission = "GRANT_WITH_LF_TAG_EXPRESSION"
+	PermissionCreateLfTagExpression    Permission = "CREATE_LF_TAG_EXPRESSION"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -188,6 +191,7 @@ func (Permission) Values() []Permission {
 		"CREATE_LF_TAG",
 		"ASSOCIATE",
 		"GRANT_WITH_LF_TAG_EXPRESSION",
+		"CREATE_LF_TAG_EXPRESSION",
 	}
 }
 

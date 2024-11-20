@@ -108,20 +108,25 @@ type StartMedicalStreamTranscriptionInput struct {
 	// audio is transcribed in a continuous manner and your transcript is not separated
 	// by channel.
 	//
+	// If you include EnableChannelIdentification in your request, you must also
+	// include NumberOfChannels .
+	//
 	// For more information, see [Transcribing multi-channel audio].
 	//
 	// [Transcribing multi-channel audio]: https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html
 	EnableChannelIdentification bool
 
-	// Specify the number of channels in your audio stream. Up to two channels are
-	// supported.
+	// Specify the number of channels in your audio stream. This value must be 2 , as
+	// only two channels are supported. If your audio doesn't contain multiple
+	// channels, do not include this parameter in your request.
+	//
+	// If you include NumberOfChannels in your request, you must also include
+	// EnableChannelIdentification .
 	NumberOfChannels *int32
 
 	// Specify a name for your transcription session. If you don't include this
 	// parameter in your request, Amazon Transcribe Medical generates an ID and returns
 	// it in the response.
-	//
-	// You can use a session ID to retry a streaming session.
 	SessionId *string
 
 	// Enables speaker partitioning (diarization) in your transcription output.

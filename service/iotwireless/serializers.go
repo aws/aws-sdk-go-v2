@@ -1050,6 +1050,11 @@ func awsRestjson1_serializeOpDocumentCreateFuotaTaskInput(v *CreateFuotaTaskInpu
 		ok.String(*v.Description)
 	}
 
+	if v.Descriptor != nil {
+		ok := object.Key("Descriptor")
+		ok.String(*v.Descriptor)
+	}
+
 	if v.FirmwareUpdateImage != nil {
 		ok := object.Key("FirmwareUpdateImage")
 		ok.String(*v.FirmwareUpdateImage)
@@ -8295,6 +8300,11 @@ func awsRestjson1_serializeOpDocumentUpdateFuotaTaskInput(v *UpdateFuotaTaskInpu
 		ok.String(*v.Description)
 	}
 
+	if v.Descriptor != nil {
+		ok := object.Key("Descriptor")
+		ok.String(*v.Descriptor)
+	}
+
 	if v.FirmwareUpdateImage != nil {
 		ok := object.Key("FirmwareUpdateImage")
 		ok.String(*v.FirmwareUpdateImage)
@@ -8411,6 +8421,13 @@ func awsRestjson1_serializeOpDocumentUpdateLogLevelsByResourceTypesInput(v *Upda
 	if len(v.DefaultLogLevel) > 0 {
 		ok := object.Key("DefaultLogLevel")
 		ok.String(string(v.DefaultLogLevel))
+	}
+
+	if v.FuotaTaskLogOptions != nil {
+		ok := object.Key("FuotaTaskLogOptions")
+		if err := awsRestjson1_serializeDocumentFuotaTaskLogOptionList(v.FuotaTaskLogOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.WirelessDeviceLogOptions != nil {
@@ -9998,6 +10015,73 @@ func awsRestjson1_serializeDocumentFPorts(v *types.FPorts, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFuotaTaskEventLogOption(v *types.FuotaTaskEventLogOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Event) > 0 {
+		ok := object.Key("Event")
+		ok.String(string(v.Event))
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFuotaTaskEventLogOptionList(v []types.FuotaTaskEventLogOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFuotaTaskEventLogOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFuotaTaskLogOption(v *types.FuotaTaskLogOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Events != nil {
+		ok := object.Key("Events")
+		if err := awsRestjson1_serializeDocumentFuotaTaskEventLogOptionList(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFuotaTaskLogOptionList(v []types.FuotaTaskLogOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFuotaTaskLogOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGatewayList(v []types.GatewayListItem, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10025,6 +10109,17 @@ func awsRestjson1_serializeDocumentGatewayListItem(v *types.GatewayListItem, val
 		ok.String(*v.GatewayId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGatewayListMulticast(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -10633,6 +10728,13 @@ func awsRestjson1_serializeDocumentLoRaWANMulticast(v *types.LoRaWANMulticast, v
 		ok.String(string(v.DlClass))
 	}
 
+	if v.ParticipatingGateways != nil {
+		ok := object.Key("ParticipatingGateways")
+		if err := awsRestjson1_serializeDocumentParticipatingGatewaysMulticast(v.ParticipatingGateways, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.RfRegion) > 0 {
 		ok := object.Key("RfRegion")
 		ok.String(string(v.RfRegion))
@@ -11109,6 +11211,25 @@ func awsRestjson1_serializeDocumentParticipatingGateways(v *types.ParticipatingG
 	if v.GatewayList != nil {
 		ok := object.Key("GatewayList")
 		if err := awsRestjson1_serializeDocumentGatewayList(v.GatewayList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TransmissionInterval != nil {
+		ok := object.Key("TransmissionInterval")
+		ok.Integer(*v.TransmissionInterval)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipatingGatewaysMulticast(v *types.ParticipatingGatewaysMulticast, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayList != nil {
+		ok := object.Key("GatewayList")
+		if err := awsRestjson1_serializeDocumentGatewayListMulticast(v.GatewayList, ok); err != nil {
 			return err
 		}
 	}

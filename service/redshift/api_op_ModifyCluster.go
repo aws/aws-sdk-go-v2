@@ -254,7 +254,8 @@ type ModifyClusterInput struct {
 	// For more information about resizing clusters, go to [Resizing Clusters in Amazon Redshift] in the Amazon Redshift
 	// Cluster Management Guide.
 	//
-	// Valid Values: dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge
+	// Valid Values: dc2.large | dc2.8xlarge | ra3.large | ra3.xlplus | ra3.4xlarge |
+	// ra3.16xlarge
 	//
 	// [Resizing Clusters in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html
 	NodeType *string

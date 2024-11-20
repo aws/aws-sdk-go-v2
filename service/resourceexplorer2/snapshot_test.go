@@ -182,6 +182,18 @@ func TestCheckSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetManagedView(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedView(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetView(context.Background(), nil, func(o *Options) {
@@ -211,6 +223,18 @@ func TestCheckSnapshot_ListIndexesForMembers(t *testing.T) {
 	_, err := svc.ListIndexesForMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIndexesForMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListManagedViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListManagedViews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -445,6 +469,18 @@ func TestUpdateSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetManagedView(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedView(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetView(context.Background(), nil, func(o *Options) {
@@ -474,6 +510,18 @@ func TestUpdateSnapshot_ListIndexesForMembers(t *testing.T) {
 	_, err := svc.ListIndexesForMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIndexesForMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListManagedViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListManagedViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListManagedViews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

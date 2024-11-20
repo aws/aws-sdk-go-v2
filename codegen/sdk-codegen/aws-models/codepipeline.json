@@ -250,6 +250,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Approval"
                     }
+                },
+                "Compute": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Compute"
+                    }
                 }
             }
         },
@@ -449,7 +455,7 @@
                 "commands": {
                     "target": "com.amazonaws.codepipeline#CommandList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shell commands to run with your compute action in CodePipeline. All commands are\n            supported except multi-line formats. While CodeBuild logs and permissions are used, you\n            do not need to create any resources in CodeBuild.</p>\n         <note>\n            <p>Using compute time for this action will incur separate charges in\n                CodeBuild.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The shell commands to run with your compute action in CodePipeline. All commands\n            are supported except multi-line formats. While CodeBuild logs and permissions\n            are used, you do not need to create any resources in CodeBuild.</p>\n         <note>\n            <p>Using compute time for this action will incur separate charges in CodeBuild.</p>\n         </note>"
                     }
                 },
                 "outputArtifacts": {
@@ -467,7 +473,7 @@
                 "outputVariables": {
                     "target": "com.amazonaws.codepipeline#OutputVariableList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of variables that are to be exported from the compute action. This is specifically CodeBuild environment variables as used for that action.</p>"
+                        "smithy.api#documentation": "<p>The list of variables that are to be exported from the compute action. This is\n            specifically CodeBuild environment variables as used for that action.</p>"
                     }
                 },
                 "roleArn": {
@@ -1928,7 +1934,7 @@
                     "name": "codepipeline"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>CodePipeline</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the CodePipeline API Reference. This guide provides descriptions\n            of the actions and data types for CodePipeline. Some functionality for your\n            pipeline can only be configured through the API. For more information, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">CodePipeline User Guide</a>.</p>\n         <p>You can use the CodePipeline API to work with pipelines, stages, actions,\n            and transitions.</p>\n         <p>\n            <i>Pipelines</i> are models of automated release processes. Each pipeline\n            is uniquely named, and consists of stages, actions, and transitions. </p>\n         <p>You can work with pipelines by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreatePipeline</a>, which creates a uniquely named\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePipeline</a>, which deletes the specified\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipeline</a>, which returns information about the pipeline\n                    structure and pipeline metadata, including the pipeline Amazon Resource Name\n                    (ARN).</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineExecution</a>, which returns information about a\n                    specific execution of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineState</a>, which returns information about the current\n                    state of the stages and actions of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListActionExecutions</a>, which returns action-level details\n                    for past executions. The details include full stage and action-level details,\n                    including individual action duration, status, any errors that occurred during\n                    the execution, and input and output artifact location details.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelines</a>, which gets a summary of all of the pipelines\n                    associated with your account.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelineExecutions</a>, which gets a summary of the most\n                    recent executions for a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartPipelineExecution</a>, which runs the most recent revision of\n                    an artifact through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopPipelineExecution</a>, which stops the specified pipeline\n                    execution from continuing through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdatePipeline</a>, which updates a pipeline with edits or changes\n                    to the structure of the pipeline.</p>\n            </li>\n         </ul>\n         <p>Pipelines include <i>stages</i>. Each stage contains one or more\n            actions that must complete before the next stage begins. A stage results in success or\n            failure. If a stage fails, the pipeline stops at that stage and remains stopped until\n            either a new version of an artifact appears in the source location, or a user takes\n            action to rerun the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the\n            status of stages in the pipeline, or <a>GetPipeline</a>, which returns the\n            entire structure of the pipeline, including the stages of that pipeline. For more\n            information about the structure of stages and actions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html\">CodePipeline\n                Pipeline Structure Reference</a>.</p>\n         <p>Pipeline stages include <i>actions</i> that are categorized into\n            categories such as source or build actions performed in a stage of a pipeline. For\n            example, you can use a source action to import artifacts into a pipeline from a source\n            such as Amazon S3. Like stages, you do not work with actions directly in most cases, but\n            you do define and interact with actions when working with pipeline operations such as\n                <a>CreatePipeline</a> and <a>GetPipelineState</a>. Valid\n            action categories are:</p>\n         <ul>\n            <li>\n               <p>Source</p>\n            </li>\n            <li>\n               <p>Build</p>\n            </li>\n            <li>\n               <p>Test</p>\n            </li>\n            <li>\n               <p>Deploy</p>\n            </li>\n            <li>\n               <p>Approval</p>\n            </li>\n            <li>\n               <p>Invoke</p>\n            </li>\n         </ul>\n         <p>Pipelines also include <i>transitions</i>, which allow the transition\n            of artifacts from one stage to the next in a pipeline after the actions in one stage\n            complete.</p>\n         <p>You can work with transitions by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableStageTransition</a>, which prevents artifacts from\n                    transitioning to the next stage in a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>EnableStageTransition</a>, which enables transition of artifacts\n                    between stages in a pipeline. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Using the API to integrate with CodePipeline</b>\n         </p>\n         <p>For third-party integrators or developers who want to create their own integrations\n            with CodePipeline, the expected sequence varies from the standard API user. To\n            integrate with CodePipeline, developers need to work with the following\n            items:</p>\n         <p>\n            <b>Jobs</b>, which are instances of an action. For\n            example, a job for a source action might import a revision of an artifact from a source. </p>\n         <p>You can work with jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeJob</a>, which confirms whether a job worker has\n                    received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetJobDetails</a>, which returns the details of a job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForJobs</a>, which determines whether there are any jobs to\n                    act on.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobFailureResult</a>, which provides details of a job failure.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Third party jobs</b>, which are instances of an action\n            created by a partner action and integrated into CodePipeline. Partner actions are\n            created by members of the Amazon Web Services Partner Network.</p>\n         <p>You can work with third party jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker\n                    has received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetThirdPartyJobDetails</a>, which requests the details of a job\n                    for a partner action.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForThirdPartyJobs</a>, which determines whether there are any\n                    jobs to act on. </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobFailureResult</a>, which provides details of a job\n                    failure.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>CodePipeline</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the CodePipeline API Reference. This guide provides descriptions\n            of the actions and data types for CodePipeline. Some functionality for your\n            pipeline can only be configured through the API. For more information, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">CodePipeline User Guide</a>.</p>\n         <p>You can use the CodePipeline API to work with pipelines, stages, actions,\n            and transitions.</p>\n         <p>\n            <i>Pipelines</i> are models of automated release processes. Each pipeline\n            is uniquely named, and consists of stages, actions, and transitions. </p>\n         <p>You can work with pipelines by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreatePipeline</a>, which creates a uniquely named\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePipeline</a>, which deletes the specified\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipeline</a>, which returns information about the pipeline\n                    structure and pipeline metadata, including the pipeline Amazon Resource Name\n                    (ARN).</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineExecution</a>, which returns information about a\n                    specific execution of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineState</a>, which returns information about the current\n                    state of the stages and actions of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListActionExecutions</a>, which returns action-level details\n                    for past executions. The details include full stage and action-level details,\n                    including individual action duration, status, any errors that occurred during\n                    the execution, and input and output artifact location details.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelines</a>, which gets a summary of all of the pipelines\n                    associated with your account.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelineExecutions</a>, which gets a summary of the most\n                    recent executions for a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartPipelineExecution</a>, which runs the most recent revision of\n                    an artifact through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopPipelineExecution</a>, which stops the specified pipeline\n                    execution from continuing through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdatePipeline</a>, which updates a pipeline with edits or changes\n                    to the structure of the pipeline.</p>\n            </li>\n         </ul>\n         <p>Pipelines include <i>stages</i>. Each stage contains one or more\n            actions that must complete before the next stage begins. A stage results in success or\n            failure. If a stage fails, the pipeline stops at that stage and remains stopped until\n            either a new version of an artifact appears in the source location, or a user takes\n            action to rerun the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the\n            status of stages in the pipeline, or <a>GetPipeline</a>, which returns the\n            entire structure of the pipeline, including the stages of that pipeline. For more\n            information about the structure of stages and actions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html\">CodePipeline\n                Pipeline Structure Reference</a>.</p>\n         <p>Pipeline stages include <i>actions</i> that are categorized into\n            categories such as source or build actions performed in a stage of a pipeline. For\n            example, you can use a source action to import artifacts into a pipeline from a source\n            such as Amazon S3. Like stages, you do not work with actions directly in most cases, but\n            you do define and interact with actions when working with pipeline operations such as\n                <a>CreatePipeline</a> and <a>GetPipelineState</a>. Valid\n            action categories are:</p>\n         <ul>\n            <li>\n               <p>Source</p>\n            </li>\n            <li>\n               <p>Build</p>\n            </li>\n            <li>\n               <p>Test</p>\n            </li>\n            <li>\n               <p>Deploy</p>\n            </li>\n            <li>\n               <p>Approval</p>\n            </li>\n            <li>\n               <p>Invoke</p>\n            </li>\n            <li>\n               <p>Compute</p>\n            </li>\n         </ul>\n         <p>Pipelines also include <i>transitions</i>, which allow the transition\n            of artifacts from one stage to the next in a pipeline after the actions in one stage\n            complete.</p>\n         <p>You can work with transitions by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableStageTransition</a>, which prevents artifacts from\n                    transitioning to the next stage in a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>EnableStageTransition</a>, which enables transition of artifacts\n                    between stages in a pipeline. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Using the API to integrate with CodePipeline</b>\n         </p>\n         <p>For third-party integrators or developers who want to create their own integrations\n            with CodePipeline, the expected sequence varies from the standard API user. To\n            integrate with CodePipeline, developers need to work with the following\n            items:</p>\n         <p>\n            <b>Jobs</b>, which are instances of an action. For\n            example, a job for a source action might import a revision of an artifact from a source. </p>\n         <p>You can work with jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeJob</a>, which confirms whether a job worker has\n                    received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetJobDetails</a>, which returns the details of a job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForJobs</a>, which determines whether there are any jobs to\n                    act on.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobFailureResult</a>, which provides details of a job failure.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Third party jobs</b>, which are instances of an action\n            created by a partner action and integrated into CodePipeline. Partner actions are\n            created by members of the Amazon Web Services Partner Network.</p>\n         <p>You can work with third party jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker\n                    has received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetThirdPartyJobDetails</a>, which requests the details of a job\n                    for a partner action.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForThirdPartyJobs</a>, which determines whether there are any\n                    jobs to act on. </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobFailureResult</a>, which provides details of a job\n                    failure.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS CodePipeline",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://codepipeline.amazonaws.com/doc/2015-07-09/"
@@ -2926,7 +2932,7 @@
                 "result": {
                     "target": "com.amazonaws.codepipeline#Result",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to be done when the condition is met. For example, rolling back an execution for a failure condition.</p>"
+                        "smithy.api#documentation": "<p>The action to be done when the condition is met. For example, rolling back an\n            execution for a failure condition.</p>"
                     }
                 },
                 "rules": {
@@ -2937,7 +2943,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The condition for the stage. A condition is made up of the rules and the result for the condition.</p>"
+                "smithy.api#documentation": "<p>The condition for the stage. A condition is made up of the rules and the result for\n            the condition.</p>"
             }
         },
         "com.amazonaws.codepipeline#ConditionExecution": {
@@ -3871,6 +3877,12 @@
                     "target": "com.amazonaws.codepipeline#Result",
                     "traits": {
                         "smithy.api#documentation": "<p>The specified result for when the failure conditions are met, such as rolling back the\n            stage.</p>"
+                    }
+                },
+                "retryConfiguration": {
+                    "target": "com.amazonaws.codepipeline#RetryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retry configuration specifies automatic retry for a failed stage, along with the\n            configured retry mode.</p>"
                     }
                 },
                 "conditions": {
@@ -5508,7 +5520,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the rule executions that have occurred in a pipeline configured for conditions with rules.</p>",
+                "smithy.api#documentation": "<p>Lists the rule executions that have occurred in a pipeline configured for conditions\n            with rules.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5542,7 +5554,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.codepipeline#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that was returned from the previous <code>ListRuleExecutions</code>\n            call, which can be used to return the next set of rule executions in the\n            list.</p>"
+                        "smithy.api#documentation": "<p>The token that was returned from the previous <code>ListRuleExecutions</code> call,\n            which can be used to return the next set of rule executions in the list.</p>"
                     }
                 }
             },
@@ -5562,7 +5574,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.codepipeline#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that can be used in the next <code>ListRuleExecutions</code> call. To\n            view all items in the list, continue to call this operation with each subsequent token\n            until no more nextToken values are returned.</p>"
+                        "smithy.api#documentation": "<p>A token that can be used in the next <code>ListRuleExecutions</code> call. To view all\n            items in the list, continue to call this operation with each subsequent token until no\n            more nextToken values are returned.</p>"
                     }
                 }
             },
@@ -5952,7 +5964,7 @@
                 "files": {
                     "target": "com.amazonaws.codepipeline#FilePathList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The files that you want to associate with the output artifact that will be exported from the compute action.</p>"
+                        "smithy.api#documentation": "<p>The files that you want to associate with the output artifact that will be exported\n            from the compute action.</p>"
                     }
                 }
             },
@@ -6079,7 +6091,7 @@
                 "conditionType": {
                     "target": "com.amazonaws.codepipeline#ConditionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of condition to override for the stage, such as entry conditions, failure conditions, or success conditions.</p>",
+                        "smithy.api#documentation": "<p>The type of condition to override for the stage, such as entry conditions, failure\n            conditions, or success conditions.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7598,7 +7610,41 @@
                     "traits": {
                         "smithy.api#enumValue": "FAIL"
                     }
+                },
+                "RETRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRY"
+                    }
+                },
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIP"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.codepipeline#RetryAttempt": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#RetryConfiguration": {
+            "type": "structure",
+            "members": {
+                "retryMode": {
+                    "target": "com.amazonaws.codepipeline#StageRetryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method that you want to configure for automatic stage retry on stage\n            failure. You can specify to retry only failed action in the stage or all actions in the\n            stage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The retry configuration specifies automatic retry for a failed stage, along with the\n            configured retry mode.</p>"
             }
         },
         "com.amazonaws.codepipeline#RetryStageExecution": {
@@ -7686,6 +7732,49 @@
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>RetryStageExecution</code> action.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codepipeline#RetryStageMetadata": {
+            "type": "structure",
+            "members": {
+                "autoStageRetryAttempt": {
+                    "target": "com.amazonaws.codepipeline#RetryAttempt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of attempts for a specific stage with automatic retry on stage failure. One attempt is allowed for automatic stage retry on failure.</p>"
+                    }
+                },
+                "manualStageRetryAttempt": {
+                    "target": "com.amazonaws.codepipeline#RetryAttempt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of attempts for a specific stage where manual retries have been made upon stage failure.</p>"
+                    }
+                },
+                "latestRetryTrigger": {
+                    "target": "com.amazonaws.codepipeline#RetryTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest trigger for a specific stage where manual or automatic retries have been made upon stage failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a specific automatic retry on stage failure, including the attempt number and trigger.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#RetryTrigger": {
+            "type": "enum",
+            "members": {
+                "AutomatedStageRetry": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomatedStageRetry"
+                    }
+                },
+                "ManualStageRetry": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManualStageRetry"
+                    }
+                }
             }
         },
         "com.amazonaws.codepipeline#Revision": {
@@ -7877,7 +7966,7 @@
                     "target": "com.amazonaws.codepipeline#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether the property can be queried.</p>\n         <p>If you create a pipeline with a condition and rule, and that rule contains a queryable property, the value for that configuration property is subject to other\n            restrictions. The value must be less than or equal to twenty (20) characters. The value\n            can contain only alphanumeric characters, underscores, and hyphens.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the property can be queried.</p>\n         <p>If you create a pipeline with a condition and rule, and that rule contains a\n            queryable property, the value for that configuration property is subject to other\n            restrictions. The value must be less than or equal to twenty (20) characters. The value\n            can contain only alphanumeric characters, underscores, and hyphens.</p>"
                     }
                 },
                 "description": {
@@ -7947,14 +8036,14 @@
                 "name": {
                     "target": "com.amazonaws.codepipeline#RuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rule that is created for the condition, such as CheckAllResults.</p>",
+                        "smithy.api#documentation": "<p>The name of the rule that is created for the condition, such as\n            CheckAllResults.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ruleTypeId": {
                     "target": "com.amazonaws.codepipeline#RuleTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.</p>",
+                        "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7967,7 +8056,7 @@
                 "inputArtifacts": {
                     "target": "com.amazonaws.codepipeline#InputArtifactList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input artifacts fields for the rule, such as specifying an input file for the rule.</p>"
+                        "smithy.api#documentation": "<p>The input artifacts fields for the rule, such as specifying an input file for the\n            rule.</p>"
                     }
                 },
                 "roleArn": {
@@ -7990,7 +8079,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents information about the rule to be created for an associated condition. An example would be creating a new rule for an entry condition, such as a rule that checks for a test result before allowing the run to enter the deployment stage.</p>"
+                "smithy.api#documentation": "<p>Represents information about the rule to be created for an associated condition. An\n            example would be creating a new rule for an entry condition, such as a rule that checks\n            for a test result before allowing the run to enter the deployment stage.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleDeclarationList": {
@@ -8061,7 +8150,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents information about each time a rule is run as part of the pipeline execution for a pipeline configured with conditions.</p>"
+                "smithy.api#documentation": "<p>Represents information about each time a rule is run as part of the pipeline execution\n            for a pipeline configured with conditions.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleExecutionDetail": {
@@ -8118,7 +8207,7 @@
                 "status": {
                     "target": "com.amazonaws.codepipeline#RuleExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the rule execution. Status categories are <code>InProgress</code>,\n                <code>Succeeded</code>, and <code>Failed</code>.\n</p>"
+                        "smithy.api#documentation": "<p>The status of the rule execution. Status categories are <code>InProgress</code>,\n                <code>Succeeded</code>, and <code>Failed</code>. </p>"
                     }
                 },
                 "input": {
@@ -8135,7 +8224,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of the runs for a rule and the results produced on an artifact as it passes\n            through stages in the pipeline.</p>"
+                "smithy.api#documentation": "<p>The details of the runs for a rule and the results produced on an artifact as it\n            passes through stages in the pipeline.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleExecutionDetailList": {
@@ -8176,13 +8265,13 @@
                 "ruleTypeId": {
                     "target": "com.amazonaws.codepipeline#RuleTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.</p>"
+                        "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version.</p>"
                     }
                 },
                 "configuration": {
                     "target": "com.amazonaws.codepipeline#RuleConfigurationMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration data for a rule execution, such as the resolved values for that run.</p>"
+                        "smithy.api#documentation": "<p>Configuration data for a rule execution, such as the resolved values for that\n            run.</p>"
                     }
                 },
                 "resolvedConfiguration": {
@@ -8206,7 +8295,7 @@
                 "inputArtifacts": {
                     "target": "com.amazonaws.codepipeline#ArtifactDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details of input artifacts of the rule that correspond to the rule \n            execution.</p>"
+                        "smithy.api#documentation": "<p>Details of input artifacts of the rule that correspond to the rule execution.</p>"
                     }
                 }
             },
@@ -8220,12 +8309,12 @@
                 "executionResult": {
                     "target": "com.amazonaws.codepipeline#RuleExecutionResult",
                     "traits": {
-                        "smithy.api#documentation": "<p>Execution result information listed in the output details for a rule\n            execution.</p>"
+                        "smithy.api#documentation": "<p>Execution result information listed in the output details for a rule execution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output details listed for a rule execution, such as the rule execution\n            result.</p>"
+                "smithy.api#documentation": "<p>Output details listed for a rule execution, such as the rule execution result.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleExecutionResult": {
@@ -8333,21 +8422,21 @@
                 "revisionId": {
                     "target": "com.amazonaws.codepipeline#Revision",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system-generated unique ID that identifies the revision number of the\n            rule.</p>",
+                        "smithy.api#documentation": "<p>The system-generated unique ID that identifies the revision number of the rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "revisionChangeId": {
                     "target": "com.amazonaws.codepipeline#RevisionChangeIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the change that set the state to this revision (for\n            example, a deployment ID or timestamp).</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the change that set the state to this revision (for example,\n            a deployment ID or timestamp).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "created": {
                     "target": "com.amazonaws.codepipeline#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the most recent version of the rule was created, in\n            timestamp format.</p>",
+                        "smithy.api#documentation": "<p>The date and time when the most recent version of the rule was created, in timestamp\n            format.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8380,7 +8469,7 @@
                 "entityUrl": {
                     "target": "com.amazonaws.codepipeline#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL link for more information about the state of the action, such as a details page.</p>"
+                        "smithy.api#documentation": "<p>A URL link for more information about the state of the action, such as a details\n            page.</p>"
                     }
                 },
                 "revisionUrl": {
@@ -8391,7 +8480,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the state of a rule.</p>\n         <note>\n            <p>Values returned in the <code>revisionId</code> field indicate the rule revision information, such as the commit ID, for the current state.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns information about the state of a rule.</p>\n         <note>\n            <p>Values returned in the <code>revisionId</code> field indicate the rule revision\n                information, such as the commit ID, for the current state.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#RuleStateList": {
@@ -8439,7 +8528,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The rule type, which is made up of the combined values for category, owner, provider, and version.</p>"
+                "smithy.api#documentation": "<p>The rule type, which is made up of the combined values for category, owner, provider,\n            and version.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleTypeId": {
@@ -8448,14 +8537,14 @@
                 "category": {
                     "target": "com.amazonaws.codepipeline#RuleCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A category defines what kind of rule can be run in the stage, and constrains the provider\n            type for the rule. The valid category is <code>Rule</code>. </p>",
+                        "smithy.api#documentation": "<p>A category defines what kind of rule can be run in the stage, and constrains the\n            provider type for the rule. The valid category is <code>Rule</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "owner": {
                     "target": "com.amazonaws.codepipeline#RuleOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The creator of the rule being called. The valid value for the\n                <code>Owner</code> field in the rule category is <code>AWS</code>. </p>"
+                        "smithy.api#documentation": "<p>The creator of the rule being called. The valid value for the <code>Owner</code> field\n            in the rule category is <code>AWS</code>. </p>"
                     }
                 },
                 "provider": {
@@ -8473,7 +8562,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner, provider, and version.</p>"
+                "smithy.api#documentation": "<p>The ID for the rule type, which is made up of the combined values for category, owner,\n            provider, and version.</p>"
             }
         },
         "com.amazonaws.codepipeline#RuleTypeList": {
@@ -8488,7 +8577,7 @@
                 "thirdPartyConfigurationUrl": {
                     "target": "com.amazonaws.codepipeline#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of a sign-up page where users can sign up for an external service and\n            perform initial configuration of the action provided by that service.</p>"
+                        "smithy.api#documentation": "<p>The URL of a sign-up page where users can sign up for an external service and perform\n            initial configuration of the action provided by that service.</p>"
                     }
                 },
                 "entityUrlTemplate": {
@@ -8666,7 +8755,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline\n            execution that's being started. A source revision is the version with all the changes to\n            your application code, or source artifact, for the pipeline execution.</p>\n         <note>\n            <p>For the <code>S3_OBJECT_VERSION_ID</code> and <code>S3_OBJECT_KEY</code> types of source revisions, either\n                of the types can be used independently, or they can be used together to override the\n                source with a specific ObjectKey and VersionID.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A list that allows you to specify, or override, the source revision for a pipeline\n            execution that's being started. A source revision is the version with all the changes to\n            your application code, or source artifact, for the pipeline execution.</p>\n         <note>\n            <p>For the <code>S3_OBJECT_VERSION_ID</code> and <code>S3_OBJECT_KEY</code> types of\n                source revisions, either of the types can be used independently, or they can be used\n                together to override the source with a specific ObjectKey and VersionID.</p>\n         </note>"
             }
         },
         "com.amazonaws.codepipeline#SourceRevisionOverrideList": {
@@ -8808,13 +8897,13 @@
                 "onSuccess": {
                     "target": "com.amazonaws.codepipeline#SuccessConditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method to use when a stage has succeeded. For example,\n            configuring this field for conditions will allow the stage to succeed when the conditions are met.</p>"
+                        "smithy.api#documentation": "<p>The method to use when a stage has succeeded. For example, configuring this field for\n            conditions will allow the stage to succeed when the conditions are met.</p>"
                     }
                 },
                 "beforeEntry": {
                     "target": "com.amazonaws.codepipeline#BeforeEntryConditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method to use when a stage allows entry. For example, configuring this field for conditions will allow entry to the stage when the conditions are met.</p>"
+                        "smithy.api#documentation": "<p>The method to use when a stage allows entry. For example, configuring this field for\n            conditions will allow entry to the stage when the conditions are met.</p>"
                     }
                 }
             },
@@ -8893,6 +8982,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Succeeded"
+                    }
+                },
+                "Skipped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Skipped"
                     }
                 }
             }
@@ -9006,6 +9101,12 @@
                     "target": "com.amazonaws.codepipeline#StageConditionState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the failure conditions for a stage.</p>"
+                    }
+                },
+                "retryStageMetadata": {
+                    "target": "com.amazonaws.codepipeline#RetryStageMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>he details of a specific automatic retry on stage failure, including the attempt number and trigger.</p>"
                     }
                 }
             },

@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetPolicy struct {
+}
+
+func (*validateOpBatchGetPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchIsAuthorized struct {
 }
 
@@ -510,6 +530,10 @@ func (m *validateOpUpdatePolicyTemplate) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetPolicy{}, middleware.After)
+}
+
 func addOpBatchIsAuthorizedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchIsAuthorized{}, middleware.After)
 }
@@ -649,6 +673,41 @@ func validateAttributeValue(v types.AttributeValue) error {
 			invalidParams.AddNested("[set]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetPolicyInputItem(v *types.BatchGetPolicyInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetPolicyInputItem"}
+	if v.PolicyStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyStoreId"))
+	}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetPolicyInputList(v []types.BatchGetPolicyInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetPolicyInputList"}
+	for i := range v {
+		if err := validateBatchGetPolicyInputItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1283,6 +1342,25 @@ func validateValidationSettings(v *types.ValidationSettings) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ValidationSettings"}
 	if len(v.Mode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetPolicyInput(v *BatchGetPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetPolicyInput"}
+	if v.Requests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Requests"))
+	} else if v.Requests != nil {
+		if err := validateBatchGetPolicyInputList(v.Requests); err != nil {
+			invalidParams.AddNested("Requests", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

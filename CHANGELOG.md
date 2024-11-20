@@ -1,3 +1,1342 @@
+# Release (2024-11-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.29.0](service/applicationdiscoveryservice/CHANGELOG.md#v1290-2024-11-20)
+  * **Feature**: Add support to import data from commercially available discovery tools without file manipulation.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.50.0](service/autoscaling/CHANGELOG.md#v1500-2024-11-20)
+  * **Feature**: With this release, customers can prioritize launching instances into ODCRs using targets from ASGs or Launch Templates. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family that meets their needs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.25.0](service/bedrockagentruntime/CHANGELOG.md#v1250-2024-11-20)
+  * **Feature**: Releasing new Prompt Optimization to enhance your prompts for improved performance
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.42.0](service/cloudfront/CHANGELOG.md#v1420-2024-11-20)
+  * **Feature**: Add support for gRPC, VPC origins, and Anycast IP Lists. Allow LoggingConfig IncludeCookies to be set regardless of whether the LoggingConfig is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.40.0](service/computeoptimizer/CHANGELOG.md#v1400-2024-11-20)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon Aurora database instances. It also enables Compute Optimizer to identify idle Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services running on Fargate, and Amazon RDS databases.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.20.0](service/controltower/CHANGELOG.md#v1200-2024-11-20)
+  * **Feature**: Adds support for child enabled baselines which allow you to see the enabled baseline status for individual accounts.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.11.0](service/costoptimizationhub/CHANGELOG.md#v1110-2024-11-20)
+  * **Feature**: This release adds action type "Delete" to the GetRecommendation, ListRecommendations and ListRecommendationSummaries APIs to support new EBS and ECS recommendations with action type "Delete".
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.24.0](service/datazone/CHANGELOG.md#v1240-2024-11-20)
+  * **Feature**: This release supports Metadata Enforcement Rule feature for Create Subscription Request action.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.192.0](service/ec2/CHANGELOG.md#v11920-2024-11-20)
+  * **Feature**: With this release, customers can express their desire to launch instances only in an ODCR or ODCR group rather than OnDemand capacity. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.52.0](service/ecs/CHANGELOG.md#v1520-2024-11-20)
+  * **Feature**: This release adds support for the Availability Zone rebalancing feature on Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.42.0](service/elasticloadbalancingv2/CHANGELOG.md#v1420-2024-11-20)
+  * **Feature**: This release adds support for configuring Load balancer Capacity Unit reservations
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.67.0](service/lambda/CHANGELOG.md#v1670-2024-11-20)
+  * **Feature**: Add Node 22.x (node22.x) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.63.0](service/mediaconvert/CHANGELOG.md#v1630-2024-11-20)
+  * **Feature**: This release adds the ability to reconfigure concurrent job settings for existing queues and create queues with custom concurrent job settings.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.20.0](service/mediapackagev2/CHANGELOG.md#v1200-2024-11-20)
+  * **Feature**: MediaPackage v2 now supports the Media Quality Confidence Score (MQCS) published from MediaLive. Customers can control input switching based on the MQCS and publishing HTTP Headers for the MQCS via the API.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.27.0](service/omics/CHANGELOG.md#v1270-2024-11-20)
+  * **Feature**: Enabling call caching feature that allows customers to reuse previously computed results from a set of completed tasks in a new workflow run.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.21.0](service/rbin/CHANGELOG.md#v1210-2024-11-20)
+  * **Feature**: This release adds support for exclusion tags for Recycle Bin, which allows you to identify resources that are to be excluded, or ignored, by a Region-level retention rule.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.91.0](service/rds/CHANGELOG.md#v1910-2024-11-20)
+  * **Feature**: This release adds support for scale storage on the DB instance using a Blue/Green Deployment.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.29.0](service/timestreamquery/CHANGELOG.md#v1290-2024-11-20)
+  * **Feature**: This release adds support for Provisioning Timestream Compute Units (TCUs), a new feature that allows provisioning dedicated compute resources for your queries, providing predictable and cost-effective query performance.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.50.0](service/workspaces/CHANGELOG.md#v1500-2024-11-20)
+  * **Feature**: Added support for Rocky Linux 8 on Amazon WorkSpaces Personal.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.25.0](service/workspacesweb/CHANGELOG.md#v1250-2024-11-20)
+  * **Feature**: Added data protection settings with support for inline data redaction.
+
+# Release (2024-11-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.54](service/b2bi/CHANGELOG.md#v100-preview54-2024-11-19)
+  * **Feature**: Add new X12 transactions sets and versions
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.191.0](service/ec2/CHANGELOG.md#v11910-2024-11-19)
+  * **Feature**: This release adds VPC Block Public Access (VPC BPA), a new declarative control which blocks resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.51.0](service/ecs/CHANGELOG.md#v1510-2024-11-19)
+  * **Feature**: This release introduces support for configuring the version consistency feature for individual containers defined within a task definition. The configuration allows to specify whether ECS should resolve the container image tag specified in the container definition to an image digest.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.34.0](service/efs/CHANGELOG.md#v1340-2024-11-19)
+  * **Feature**: Add support for the new parameters in EFS replication APIs
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.102.0](service/glue/CHANGELOG.md#v11020-2024-11-19)
+  * **Feature**: AWS Glue Data Catalog now enhances managed table optimizations of Apache Iceberg tables that can be accessed only from a specific Amazon Virtual Private Cloud (VPC) environment.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.16.0](service/keyspaces/CHANGELOG.md#v1160-2024-11-19)
+  * **Feature**: Amazon Keyspaces Multi-Region Replication: Adds support to add new regions to multi and single-region keyspaces.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.33.0](service/mwaa/CHANGELOG.md#v1330-2024-11-19)
+  * **Feature**: Amazon MWAA now supports a new environment class, mw1.micro, ideal for workloads requiring fewer resources than mw1.small. This class supports a single instance of each Airflow component: Scheduler, Worker, and Webserver.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.7.0](service/taxsettings/CHANGELOG.md#v170-2024-11-19)
+  * **Feature**: Release Tax Inheritance APIs,  Tax Exemption APIs, and functionality update for some existing Tax Registration APIs
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.49.0](service/workspaces/CHANGELOG.md#v1490-2024-11-19)
+  * **Feature**: Releasing new ErrorCodes for Image Validation failure during CreateWorkspaceImage process
+
+# Release (2024-11-18)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.36.0](service/appconfig/CHANGELOG.md#v1360-2024-11-18)
+  * **Feature**: AWS AppConfig has added a new extension action point, AT_DEPLOYMENT_TICK, to support third-party monitors to trigger an automatic rollback during a deployment.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.49.0](service/autoscaling/CHANGELOG.md#v1490-2024-11-18)
+  * **Feature**: Amazon EC2 Auto Scaling now supports Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift to help you quickly recover an impaired application from failures in an Availability Zone (AZ).
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.56.0](service/cloudformation/CHANGELOG.md#v1560-2024-11-18)
+  * **Feature**: This release adds a new API, ListHookResults, that allows retrieving CloudFormation Hooks invocation results for hooks invoked during a create change set operation or Cloud Control API operation
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.116.0](service/connect/CHANGELOG.md#v11160-2024-11-18)
+  * **Feature**: Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.43.0](service/customerprofiles/CHANGELOG.md#v1430-2024-11-18)
+  * **Feature**: This release introduces Segmentation APIs and new Calculated Attribute Event Filters as part of Amazon Connect Customer Profiles service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.190.0](service/ec2/CHANGELOG.md#v11900-2024-11-18)
+  * **Feature**: Adding request and response elements for managed resources.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.50.0](service/ecs/CHANGELOG.md#v1500-2024-11-18)
+  * **Feature**: This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.44.0](service/iotsitewise/CHANGELOG.md#v1440-2024-11-18)
+  * **Feature**: The release introduces a generative AI Assistant in AWS IoT SiteWise. It includes: 1) InvokeAssistant API - Invoke the Assistant to get alarm summaries and ask questions. 2) Dataset APIs - Manage knowledge base configuration for the Assistant. 3) Portal APIs enhancement - Manage AI-aware dashboards.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.13.0](service/qconnect/CHANGELOG.md#v1130-2024-11-18)
+  * **Feature**: This release introduces MessageTemplate as a resource in Amazon Q in Connect, along with APIs to create, read, search, update, and delete MessageTemplate resources.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.90.0](service/rds/CHANGELOG.md#v1900-2024-11-18)
+  * **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.26.0](service/rdsdata/CHANGELOG.md#v1260-2024-11-18)
+  * **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+
+# Release (2024-11-15.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.43.0](service/cloudwatch/CHANGELOG.md#v1430-2024-11-152)
+  * **Feature**: Adds support for adding related Entity information to metrics ingested through PutMetricData.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.0.0](service/connectcampaignsv2/CHANGELOG.md#v100-2024-11-152)
+  * **Release**: New AWS service client module
+  * **Feature**: Added Amazon Connect Outbound Campaigns V2 SDK.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.43.3](service/datasync/CHANGELOG.md#v1433-2024-11-152)
+  * **Documentation**: Doc-only updates and enhancements related to creating DataSync tasks and describing task executions.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.189.0](service/ec2/CHANGELOG.md#v11890-2024-11-152)
+  * **Feature**: Remove non-functional enum variants for FleetCapacityReservationUsageStrategy
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.60.0](service/iot/CHANGELOG.md#v1600-2024-11-152)
+  * **Feature**: This release allows AWS IoT Core users to enrich MQTT messages with propagating attributes, to associate a thing to a connection, and to enable Online Certificate Status Protocol (OCSP) stapling for TLS X.509 server certificates through private endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.47.0](service/outposts/CHANGELOG.md#v1470-2024-11-152)
+  * **Feature**: You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.18.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1180-2024-11-152)
+  * **Feature**: Use rule overrides to always allow or always block messages to specific phone numbers. Use message feedback to monitor if a customer interacts with your message.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.34.0](service/route53resolver/CHANGELOG.md#v1340-2024-11-152)
+  * **Feature**: Route 53 Resolver DNS Firewall Advanced Rules allows you to monitor and block suspicious DNS traffic based on anomalies detected in the queries, such as DNS tunneling and Domain Generation Algorithms (DGAs).
+
+# Release (2024-11-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.1.0](service/partnercentralselling/CHANGELOG.md#v110-2024-11-15)
+  * **Feature**: Announcing AWS Partner Central API for Selling: This service launch Introduces new APIs for co-selling opportunity management and related functions. Key features include notifications, a dynamic sandbox for testing, and streamlined validations.
+
+# Release (2024-11-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.36.0](service/accessanalyzer/CHANGELOG.md#v1360-2024-11-14)
+  * **Feature**: Expand analyzer configuration capabilities for unused access analyzers. Unused access analyzer configurations now support the ability to exclude accounts and resource tags from analysis providing more granular control over the scope of analysis.
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.23.0](service/cloudcontrol/CHANGELOG.md#v1230-2024-11-14)
+  * **Feature**: Added support for CloudFormation Hooks with Cloud Control API. The GetResourceRequestStatus API response now includes an optional HooksProgressEvent and HooksRequestToken parameter for Hooks Invocation Progress as part of resource operation with Cloud Control.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.7.0](service/deadline/CHANGELOG.md#v170-2024-11-14)
+  * **Feature**: Adds support for select GPU accelerated instance types when creating new service-managed fleets.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.38.0](service/iam/CHANGELOG.md#v1380-2024-11-14)
+  * **Feature**: This release includes support for five new APIs and changes to existing APIs that give AWS Organizations customers the ability to use temporary root credentials, targeted to member accounts in the organization.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.45.0](service/iotwireless/CHANGELOG.md#v1450-2024-11-14)
+  * **Feature**: New FuotaTask resource type to enable logging for your FUOTA tasks. A ParticipatingGatewaysforMulticast parameter to choose the list of gateways to receive the multicast downlink message and the transmission interval between them. Descriptor field which will be sent to devices during FUOTA transfer.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.42.0](service/ivs/CHANGELOG.md#v1420-2024-11-14)
+  * **Feature**: IVS now offers customers the ability to stream multitrack video to Channels.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.14.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v1140-2024-11-14)
+  * **Feature**: New and updated API operations to support License Included User-based Subscription of Microsoft Remote Desktop Services (RDS).
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.0.0](service/partnercentralselling/CHANGELOG.md#v100-2024-11-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Announcing AWS Partner Central API for Selling: This service launch Introduces new APIs for co-selling opportunity management and related functions. Key features include notifications, a dynamic sandbox for testing, and streamlined validations.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.79.0](service/quicksight/CHANGELOG.md#v1790-2024-11-14)
+  * **Feature**: This release adds APIs for Custom Permissions management in QuickSight, and APIs to support QuickSight Branding.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.52.0](service/redshift/CHANGELOG.md#v1520-2024-11-14)
+  * **Feature**: Adds support for Amazon Redshift S3AccessGrants
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.67.0](service/s3/CHANGELOG.md#v1670-2024-11-14)
+  * **Feature**: This release updates the ListBuckets API Reference documentation in support of the new 10,000 general purpose bucket default quota on all AWS accounts. To increase your bucket quota from 10,000 to up to 1 million buckets, simply request a quota increase via Service Quotas.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.167.0](service/sagemaker/CHANGELOG.md#v11670-2024-11-14)
+  * **Feature**: Add support for Neuron instance types [ trn1/trn1n/inf2 ] on SageMaker Notebook Instances Platform.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.33.0](service/sts/CHANGELOG.md#v1330-2024-11-14)
+  * **Feature**: This release introduces the new API 'AssumeRoot', which returns short-term credentials that you can use to perform privileged tasks.
+
+# Release (2024-11-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.35.0](service/accessanalyzer/CHANGELOG.md#v1350-2024-11-13)
+  * **Feature**: This release adds support for policy validation and external access findings for resource control policies (RCP). IAM Access Analyzer helps you author functional and secure RCPs and awareness that a RCP may restrict external access. Updated service API, documentation, and paginators.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.7.0](service/applicationsignals/CHANGELOG.md#v170-2024-11-13)
+  * **Feature**: Amazon CloudWatch Application Signals now supports creating Service Level Objectives with burn rates. Users can now create or update SLOs with burn rate configurations to meet their specific business requirements.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.52](service/b2bi/CHANGELOG.md#v100-preview52-2024-11-13)
+  * **Feature**: This release adds a GenerateMapping API to allow generation of JSONata or XSLT transformer code based on input and output samples.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.0.0](service/billing/CHANGELOG.md#v100-2024-11-13)
+  * **Release**: New AWS service client module
+  * **Feature**: Today, AWS announces the general availability of ListBillingViews API in the AWS SDKs, to enable AWS Billing Conductor (ABC) users to create proforma Cost and Usage Reports (CUR) programmatically.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.45.0](service/cloudtrail/CHANGELOG.md#v1450-2024-11-13)
+  * **Feature**: This release adds a new API GenerateQuery that generates a query from a natural language prompt about the event data in your event data store. This operation uses generative artificial intelligence (generative AI) to produce a ready-to-use SQL query from the prompt.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.37.0](service/dynamodb/CHANGELOG.md#v1370-2024-11-13)
+  * **Feature**: This release includes supports the new WarmThroughput feature for DynamoDB. You can now provide an optional WarmThroughput attribute for CreateTable or UpdateTable APIs to pre-warm your table or global secondary index. You can also use DescribeTable to see the latest WarmThroughput value.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.188.0](service/ec2/CHANGELOG.md#v11880-2024-11-13)
+  * **Feature**: This release adds the source AMI details in DescribeImages API
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.20.0](service/internetmonitor/CHANGELOG.md#v1200-2024-11-13)
+  * **Feature**: Add new query type Routing_Suggestions regarding querying interface
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.62.0](service/mediaconvert/CHANGELOG.md#v1620-2024-11-13)
+  * **Feature**: This release adds support for ARN inputs in the Kantar credentials secrets name field and the MSPR field to the manifests for PlayReady DRM protected outputs.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.35.0](service/organizations/CHANGELOG.md#v1350-2024-11-13)
+  * **Feature**: Add support for policy operations on the Resource Control Polices.
+
+# Release (2024-11-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.49.0](service/codebuild/CHANGELOG.md#v1490-2024-11-12)
+  * **Feature**: AWS CodeBuild now supports non-containerized Linux and Windows builds on Reserved Capacity.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.19.0](service/controltower/CHANGELOG.md#v1190-2024-11-12)
+  * **Feature**: Added ResetEnabledControl API.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.31.0](service/fis/CHANGELOG.md#v1310-2024-11-12)
+  * **Feature**: This release adds support for generating experiment reports with the experiment report configuration
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.37.0](service/gamelift/CHANGELOG.md#v1370-2024-11-12)
+  * **Feature**: Amazon GameLift releases container fleets support for general availability. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.16.0](service/paymentcryptography/CHANGELOG.md#v1160-2024-11-12)
+  * **Feature**: Updated ListAliases API with KeyArn filter.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.89.2](service/rds/CHANGELOG.md#v1892-2024-11-12)
+  * **Documentation**: Updates Amazon RDS documentation for Amazon RDS Extended Support for Amazon Aurora MySQL.
+
+# Release (2024-11-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.41.0](service/cloudfront/CHANGELOG.md#v1410-2024-11-11)
+  * **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.33.0](service/inspector2/CHANGELOG.md#v1330-2024-11-11)
+  * **Feature**: Adds support for filePath filter.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.66.0](service/lambda/CHANGELOG.md#v1660-2024-11-11)
+  * **Feature**: Add Python 3.13 (python3.13) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.44.0](service/opensearch/CHANGELOG.md#v1440-2024-11-11)
+  * **Feature**: Adds Support for new AssociatePackages and DissociatePackages API in Amazon OpenSearch Service that allows association and dissociation operations to be carried out on multiple packages at the same time.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.46.0](service/outposts/CHANGELOG.md#v1460-2024-11-11)
+  * **Feature**: This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.
+
+# Release (2024-11-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.48.0](service/batch/CHANGELOG.md#v1480-2024-11-08)
+  * **Feature**: This feature allows override LaunchTemplates to be specified in an AWS Batch Compute Environment.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.24.0](service/bedrockagentruntime/CHANGELOG.md#v1240-2024-11-08)
+  * **Feature**: This release adds trace functionality to Bedrock Prompt Flows
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.21.0](service/chimesdkmediapipelines/CHANGELOG.md#v1210-2024-11-08)
+  * **Feature**: Added support for Media Capture Pipeline and Media Concatenation Pipeline for customer managed server side encryption. Now Media Capture Pipeline can use IAM sink role to get access to KMS key and encrypt/decrypt recorded artifacts. KMS key ID can also be supplied with encryption context.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.6.0](service/controlcatalog/CHANGELOG.md#v160-2024-11-08)
+  * **Feature**: AWS Control Catalog GetControl public API returns additional data in output, including Implementation and Parameters
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.52.0](service/eks/CHANGELOG.md#v1520-2024-11-08)
+  * **Feature**: Adds new error code `Ec2InstanceTypeDoesNotExist` for Amazon EKS managed node groups
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.35.0](service/firehose/CHANGELOG.md#v1350-2024-11-08)
+  * **Feature**: Amazon Data Firehose / Features : Adds support for a new DeliveryStreamType, DatabaseAsSource. DatabaseAsSource hoses allow customers to stream CDC events from their RDS and Amazon EC2 hosted databases, running MySQL and PostgreSQL database engines, to Iceberg Table destinations.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.65.0](service/lambda/CHANGELOG.md#v1650-2024-11-08)
+  * **Feature**: This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.17.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1170-2024-11-08)
+  * **Feature**: Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.16.0](service/qbusiness/CHANGELOG.md#v1160-2024-11-08)
+  * **Feature**: Adds S3 path option to pass group member list for PutGroup API.
+
+# Release (2024-11-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.34.5](service/accessanalyzer/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.21.5](service/account/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.30.5](service/acm/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.37.6](service/acmpca/CHANGELOG.md#v1376-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.30.2](service/amp/CHANGELOG.md#v1302-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.27.3](service/amplify/CHANGELOG.md#v1273-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.27.5](service/amplifybackend/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.23.5](service/amplifyuibuilder/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.27.5](service/apigateway/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.23.5](service/apigatewaymanagementapi/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.24.5](service/apigatewayv2/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.35.3](service/appconfig/CHANGELOG.md#v1353-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.18.5](service/appconfigdata/CHANGELOG.md#v1185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.11.5](service/appfabric/CHANGELOG.md#v1115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.45.6](service/appflow/CHANGELOG.md#v1456-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.30.5](service/appintegrations/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.33.5](service/applicationautoscaling/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.21.5](service/applicationcostprofiler/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.28.5](service/applicationdiscoveryservice/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.29.3](service/applicationinsights/CHANGELOG.md#v1293-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.6.5](service/applicationsignals/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.29.5](service/appmesh/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.32.5](service/apprunner/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.41.5](service/appstream/CHANGELOG.md#v1415-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.39.2](service/appsync/CHANGELOG.md#v1392-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/apptest`: [v1.4.5](service/apptest/CHANGELOG.md#v145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.14.5](service/arczonalshift/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.6.5](service/artifact/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.48.3](service/athena/CHANGELOG.md#v1483-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.37.5](service/auditmanager/CHANGELOG.md#v1375-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.48.0](service/autoscaling/CHANGELOG.md#v1480-2024-11-07)
+  * **Feature**: Auto Scaling groups now support the ability to strictly balance instances across Availability Zones by configuring the AvailabilityZoneDistribution parameter. If balanced-only is configured for a group, launches will always be attempted in the under scaled Availability Zone even if it is unhealthy.
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.24.5](service/autoscalingplans/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.51](service/b2bi/CHANGELOG.md#v100-preview51-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.39.6](service/backup/CHANGELOG.md#v1396-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.20.5](service/backupgateway/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.47.2](service/batch/CHANGELOG.md#v1472-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.7.5](service/bcmdataexports/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.22.2](service/bedrock/CHANGELOG.md#v1222-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.27.0](service/bedrockagent/CHANGELOG.md#v1270-2024-11-07)
+  * **Feature**: Add prompt support for chat template configuration and agent generative AI resource. Add support for configuring an optional guardrail in Prompt and Knowledge Base nodes in Prompt Flows. Add API to validate flow definition
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.23.3](service/bedrockagentruntime/CHANGELOG.md#v1233-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.20.0](service/bedrockruntime/CHANGELOG.md#v1200-2024-11-07)
+  * **Feature**: Add Prompt management support to Bedrock runtime APIs: Converse, ConverseStream, InvokeModel, InvokeModelWithStreamingResponse
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.20.5](service/billingconductor/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.31.5](service/braket/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.28.5](service/budgets/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.8.5](service/chatbot/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.34.5](service/chime/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.22.5](service/chimesdkidentity/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.20.5](service/chimesdkmediapipelines/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.27.5](service/chimesdkmeetings/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.26.5](service/chimesdkmessaging/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.19.5](service/chimesdkvoice/CHANGELOG.md#v1195-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.20.0](service/cleanrooms/CHANGELOG.md#v1200-2024-11-07)
+  * **Feature**: This release introduces support for Custom Models in AWS Clean Rooms ML.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.10.0](service/cleanroomsml/CHANGELOG.md#v1100-2024-11-07)
+  * **Feature**: This release introduces support for Custom Models in AWS Clean Rooms ML.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.28.5](service/cloud9/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.22.5](service/cloudcontrol/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.24.5](service/clouddirectory/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.8.5](service/cloudfrontkeyvaluestore/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.24.5](service/cloudhsm/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.27.6](service/cloudhsmv2/CHANGELOG.md#v1276-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.23.5](service/cloudsearchdomain/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.44.5](service/cloudtrail/CHANGELOG.md#v1445-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.11.5](service/cloudtraildata/CHANGELOG.md#v1115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.27.5](service/cloudwatchevents/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.43.2](service/cloudwatchlogs/CHANGELOG.md#v1432-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.33.5](service/codeartifact/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.48.1](service/codebuild/CHANGELOG.md#v1481-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.17.5](service/codecatalyst/CHANGELOG.md#v1175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.27.5](service/codecommit/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.5.5](service/codeconnections/CHANGELOG.md#v155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.29.5](service/codedeploy/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.24.5](service/codeguruprofiler/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.29.5](service/codegurureviewer/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.12.5](service/codegurusecurity/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.36.3](service/codepipeline/CHANGELOG.md#v1363-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.29.5](service/codestarconnections/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.26.5](service/codestarnotifications/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.27.5](service/cognitoidentity/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.46.5](service/cognitoidentityprovider/CHANGELOG.md#v1465-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.23.5](service/cognitosync/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.35.5](service/comprehend/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.26.5](service/comprehendmedical/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.39.5](service/computeoptimizer/CHANGELOG.md#v1395-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.50.5](service/configservice/CHANGELOG.md#v1505-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.115.2](service/connect/CHANGELOG.md#v11152-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.15.5](service/connectcampaigns/CHANGELOG.md#v1155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.21.5](service/connectcases/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.26.5](service/connectcontactlens/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.27.5](service/connectparticipant/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.5.5](service/controlcatalog/CHANGELOG.md#v155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.18.6](service/controltower/CHANGELOG.md#v1186-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.28.5](service/costandusagereportservice/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.43.5](service/costexplorer/CHANGELOG.md#v1435-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.10.5](service/costoptimizationhub/CHANGELOG.md#v1105-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.42.5](service/customerprofiles/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.44.3](service/databasemigrationservice/CHANGELOG.md#v1443-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.33.5](service/databrew/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.33.3](service/dataexchange/CHANGELOG.md#v1333-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.25.5](service/datapipeline/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.43.2](service/datasync/CHANGELOG.md#v1432-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.23.3](service/datazone/CHANGELOG.md#v1233-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.23.5](service/dax/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.6.4](service/deadline/CHANGELOG.md#v164-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.31.5](service/detective/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.28.5](service/devicefarm/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.34.5](service/devopsguru/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.29.5](service/directconnect/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.30.5](service/directoryservice/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.2.5](service/directoryservicedata/CHANGELOG.md#v125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.28.5](service/dlm/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.14.2](service/docdbelastic/CHANGELOG.md#v1142-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.30.5](service/drs/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.36.5](service/dynamodb/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.24.5](service/dynamodbstreams/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.27.5](service/ebs/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.27.5](service/ec2instanceconnect/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.36.5](service/ecr/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.27.5](service/ecrpublic/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.49.2](service/ecs/CHANGELOG.md#v1492-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.33.5](service/efs/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.51.3](service/eks/CHANGELOG.md#v1513-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.7.5](service/eksauth/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.23.6](service/elasticinference/CHANGELOG.md#v1236-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.32.5](service/elasticsearchservice/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/elastictranscoder`: [v1.27.5](service/elastictranscoder/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.46.3](service/emr/CHANGELOG.md#v1463-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.33.5](service/emrcontainers/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.26.5](service/emrserverless/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.15.5](service/entityresolution/CHANGELOG.md#v1155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.35.5](service/eventbridge/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.23.5](service/evidently/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.28.5](service/finspace/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.28.5](service/finspacedata/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.34.5](service/firehose/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.30.5](service/fis/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.38.3](service/fms/CHANGELOG.md#v1383-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.36.5](service/forecast/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.24.5](service/forecastquery/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.35.5](service/frauddetector/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.7.5](service/freetier/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.49.5](service/fsx/CHANGELOG.md#v1495-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.36.5](service/gamelift/CHANGELOG.md#v1365-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.0.2](service/geomaps/CHANGELOG.md#v102-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.0.2](service/geoplaces/CHANGELOG.md#v102-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.0.2](service/georoutes/CHANGELOG.md#v102-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.26.5](service/glacier/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.29.5](service/globalaccelerator/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.101.2](service/glue/CHANGELOG.md#v11012-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.26.5](service/grafana/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.27.5](service/greengrass/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.35.5](service/greengrassv2/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.31.5](service/groundstation/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.51.1](service/guardduty/CHANGELOG.md#v1511-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.28.5](service/health/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.28.5](service/healthlake/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.27.5](service/identitystore/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.38.3](service/imagebuilder/CHANGELOG.md#v1383-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.25.5](service/inspector/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.32.5](service/inspector2/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.7.5](service/inspectorscan/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.19.5](service/internetmonitor/CHANGELOG.md#v1195-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.59.5](service/iot/CHANGELOG.md#v1595-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice`: [v1.23.5](service/iot1clickdevicesservice/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickprojects`: [v1.23.5](service/iot1clickprojects/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.26.5](service/iotanalytics/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.26.5](service/iotdataplane/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.31.5](service/iotdeviceadvisor/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.27.5](service/iotevents/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.24.5](service/ioteventsdata/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.24.5](service/iotfleethub/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.21.2](service/iotfleetwise/CHANGELOG.md#v1212-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.23.5](service/iotjobsdataplane/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.27.5](service/iotsecuretunneling/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.43.5](service/iotsitewise/CHANGELOG.md#v1435-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.25.5](service/iotthingsgraph/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.24.5](service/iottwinmaker/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.44.5](service/iotwireless/CHANGELOG.md#v1445-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.16.5](service/ivschat/CHANGELOG.md#v1165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.38.5](service/kafka/CHANGELOG.md#v1385-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.21.5](service/kafkaconnect/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.54.5](service/kendra/CHANGELOG.md#v1545-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.11.5](service/kendraranking/CHANGELOG.md#v1115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.15.2](service/keyspaces/CHANGELOG.md#v1152-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.32.5](service/kinesis/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.25.5](service/kinesisanalytics/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.31.5](service/kinesisanalyticsv2/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.27.5](service/kinesisvideo/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.27.5](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.22.5](service/kinesisvideomedia/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.23.5](service/kinesisvideosignaling/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.14.5](service/kinesisvideowebrtcstorage/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.37.5](service/kms/CHANGELOG.md#v1375-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.38.1](service/lakeformation/CHANGELOG.md#v1381-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.64.3](service/lambda/CHANGELOG.md#v1643-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.8.5](service/launchwizard/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.28.5](service/lexmodelbuildingservice/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.49.5](service/lexmodelsv2/CHANGELOG.md#v1495-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.24.5](service/lexruntimeservice/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.29.5](service/lexruntimev2/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.29.5](service/licensemanager/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.14.5](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.13.5](service/licensemanagerusersubscriptions/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.42.5](service/lightsail/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.42.5](service/location/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.30.5](service/lookoutequipment/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.31.5](service/lookoutmetrics/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.27.5](service/lookoutvision/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.18.3](service/m2/CHANGELOG.md#v1183-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.28.5](service/machinelearning/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.43.5](service/macie2/CHANGELOG.md#v1435-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.6.3](service/mailmanager/CHANGELOG.md#v163-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.26.5](service/managedblockchain/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.16.5](service/managedblockchainquery/CHANGELOG.md#v1165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.6.5](service/marketplaceagreement/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.30.5](service/marketplacecatalog/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.24.5](service/marketplacecommerceanalytics/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.6.5](service/marketplacedeployment/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.25.5](service/marketplaceentitlementservice/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.25.5](service/marketplacemetering/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.1.5](service/marketplacereporting/CHANGELOG.md#v115-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.35.5](service/mediaconnect/CHANGELOG.md#v1355-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.61.5](service/mediaconvert/CHANGELOG.md#v1615-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.62.5](service/medialive/CHANGELOG.md#v1625-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.34.5](service/mediapackage/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.19.2](service/mediapackagev2/CHANGELOG.md#v1192-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.34.6](service/mediapackagevod/CHANGELOG.md#v1346-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.24.5](service/mediastore/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.24.5](service/mediastoredata/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.42.5](service/mediatailor/CHANGELOG.md#v1425-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.14.5](service/medicalimaging/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.24.4](service/memorydb/CHANGELOG.md#v1244-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.32.5](service/mgn/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.24.5](service/migrationhub/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.25.5](service/migrationhubconfig/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.13.5](service/migrationhuborchestrator/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.20.5](service/migrationhubrefactorspaces/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.21.5](service/migrationhubstrategy/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.27.5](service/mq/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.25.5](service/mturk/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.32.3](service/mwaa/CHANGELOG.md#v1323-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.14.3](service/neptunegraph/CHANGELOG.md#v1143-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.44.2](service/networkfirewall/CHANGELOG.md#v1442-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.31.5](service/networkmanager/CHANGELOG.md#v1315-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.7.5](service/networkmonitor/CHANGELOG.md#v175-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.15.5](service/oam/CHANGELOG.md#v1155-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.26.5](service/omics/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.43.2](service/opensearch/CHANGELOG.md#v1432-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.17.2](service/opensearchserverless/CHANGELOG.md#v1172-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opsworks`: [v1.26.5](service/opsworks/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.27.5](service/opsworkscm/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.34.5](service/organizations/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.14.5](service/osis/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.45.3](service/outposts/CHANGELOG.md#v1453-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.22.5](service/panorama/CHANGELOG.md#v1225-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.15.3](service/paymentcryptography/CHANGELOG.md#v1153-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.16.3](service/paymentcryptographydata/CHANGELOG.md#v1163-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.9.5](service/pcaconnectorad/CHANGELOG.md#v195-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.4.5](service/pcaconnectorscep/CHANGELOG.md#v145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.2.6](service/pcs/CHANGELOG.md#v126-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.39.5](service/personalize/CHANGELOG.md#v1395-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.25.5](service/personalizeevents/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.27.5](service/personalizeruntime/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.29.5](service/pi/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.34.5](service/pinpoint/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.23.5](service/pinpointemail/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.23.5](service/pinpointsmsvoice/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.16.3](service/pinpointsmsvoicev2/CHANGELOG.md#v1163-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.18.3](service/pipes/CHANGELOG.md#v1183-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.45.5](service/polly/CHANGELOG.md#v1455-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.32.5](service/pricing/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.13.5](service/privatenetworks/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.33.5](service/proton/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.4.1](service/qapps/CHANGELOG.md#v141-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.15.3](service/qbusiness/CHANGELOG.md#v1153-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.12.5](service/qconnect/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.25.5](service/qldb/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/qldbsession`: [v1.25.5](service/qldbsession/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.78.0](service/quicksight/CHANGELOG.md#v1780-2024-11-07)
+  * **Feature**: Add Client Credentials based OAuth support for Snowflake and Starburst
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.29.5](service/ram/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.20.5](service/rbin/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.25.5](service/rdsdata/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.31.2](service/redshiftdata/CHANGELOG.md#v1312-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.24.2](service/redshiftserverless/CHANGELOG.md#v1242-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.45.6](service/rekognition/CHANGELOG.md#v1456-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.8.3](service/repostspace/CHANGELOG.md#v183-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.27.3](service/resiliencehub/CHANGELOG.md#v1273-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.16.0](service/resourceexplorer2/CHANGELOG.md#v1160-2024-11-07)
+  * **Feature**: Add GetManagedView, ListManagedViews APIs.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.27.5](service/resourcegroups/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.25.5](service/resourcegroupstaggingapi/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.30.6](service/robomaker/CHANGELOG.md#v1306-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.16.5](service/rolesanywhere/CHANGELOG.md#v1165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.27.5](service/route53domains/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.4.5](service/route53profiles/CHANGELOG.md#v145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.23.5](service/route53recoverycluster/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.25.5](service/route53recoverycontrolconfig/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.21.5](service/route53recoveryreadiness/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.33.3](service/route53resolver/CHANGELOG.md#v1333-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.21.5](service/rum/CHANGELOG.md#v1215-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.28.5](service/s3outposts/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.166.2](service/sagemaker/CHANGELOG.md#v11662-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.27.5](service/sagemakera2iruntime/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.25.5](service/sagemakeredge/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.29.5](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.14.5](service/sagemakergeospatial/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.32.5](service/sagemakerruntime/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.23.5](service/savingsplans/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.12.5](service/scheduler/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.28.6](service/schemas/CHANGELOG.md#v1286-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.34.5](service/secretsmanager/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.54.6](service/securityhub/CHANGELOG.md#v1546-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.19.3](service/securitylake/CHANGELOG.md#v1193-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.24.5](service/serverlessapplicationrepository/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.32.5](service/servicecatalog/CHANGELOG.md#v1325-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.30.5](service/servicecatalogappregistry/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.33.5](service/servicediscovery/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.25.5](service/servicequotas/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.38.2](service/sesv2/CHANGELOG.md#v1382-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.33.5](service/sfn/CHANGELOG.md#v1335-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.29.5](service/shield/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.26.5](service/signer/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.14.5](service/simspaceweaver/CHANGELOG.md#v1145-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.24.5](service/sms/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.30.5](service/snowball/CHANGELOG.md#v1305-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.20.5](service/snowdevicemanagement/CHANGELOG.md#v1205-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.0.3](service/socialmessaging/CHANGELOG.md#v103-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.37.0](service/sqs/CHANGELOG.md#v1370-2024-11-07)
+  * **Feature**: Send opt-in query-compatible header for applicable services.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.55.5](service/ssm/CHANGELOG.md#v1555-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.26.5](service/ssmcontacts/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.34.5](service/ssmincidents/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.2.6](service/ssmquicksetup/CHANGELOG.md#v126-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.18.5](service/ssmsap/CHANGELOG.md#v1185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.24.5](service/sso/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.29.5](service/ssoadmin/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.34.5](service/storagegateway/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.10.3](service/supplychain/CHANGELOG.md#v1103-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.26.5](service/support/CHANGELOG.md#v1265-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.13.5](service/supportapp/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.27.5](service/swf/CHANGELOG.md#v1275-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.30.0](service/synthetics/CHANGELOG.md#v1300-2024-11-07)
+  * **Feature**: Add support to toggle if a canary will automatically delete provisioned canary resources such as Lambda functions and layers when a canary is deleted.  This behavior can be controlled via the new ProvisionedResourceCleanup property exposed in the CreateCanary and UpdateCanary APIs.
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.6.2](service/taxsettings/CHANGELOG.md#v162-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.34.7](service/textract/CHANGELOG.md#v1347-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.6.5](service/timestreaminfluxdb/CHANGELOG.md#v165-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.28.3](service/timestreamquery/CHANGELOG.md#v1283-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.29.5](service/timestreamwrite/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.13.5](service/tnb/CHANGELOG.md#v1135-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.41.5](service/transcribe/CHANGELOG.md#v1415-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.22.3](service/transcribestreaming/CHANGELOG.md#v1223-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.53.3](service/transfer/CHANGELOG.md#v1533-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.28.5](service/translate/CHANGELOG.md#v1285-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.8.5](service/trustedadvisor/CHANGELOG.md#v185-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.20.1](service/verifiedpermissions/CHANGELOG.md#v1201-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.24.5](service/voiceid/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.12.5](service/vpclattice/CHANGELOG.md#v1125-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.25.5](service/waf/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.25.5](service/wafregional/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.55.4](service/wafv2/CHANGELOG.md#v1554-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.34.5](service/wellarchitected/CHANGELOG.md#v1345-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.27.6](service/wisdom/CHANGELOG.md#v1276-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.25.5](service/workdocs/CHANGELOG.md#v1255-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.30.2](service/workmail/CHANGELOG.md#v1302-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.23.5](service/workmailmessageflow/CHANGELOG.md#v1235-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.48.5](service/workspaces/CHANGELOG.md#v1485-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.10.5](service/workspacesthinclient/CHANGELOG.md#v1105-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.24.5](service/workspacesweb/CHANGELOG.md#v1245-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.29.5](service/xray/CHANGELOG.md#v1295-2024-11-07)
+  * **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# Release (2024-11-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.4
+  * **Bug Fix**: Fix potential for user agent language mismatch in tests.
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.8.0](feature/cloudfront/sign/CHANGELOG.md#v180-2024-11-06)
+  * **Feature**: Add Expires field to CookieOptions.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.48.0](service/codebuild/CHANGELOG.md#v1480-2024-11-06)
+  * **Feature**: AWS CodeBuild now adds additional compute types for reserved capacity fleet.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.51.0](service/guardduty/CHANGELOG.md#v1510-2024-11-06)
+  * **Feature**: GuardDuty RDS Protection expands support for Amazon Aurora PostgreSQL Limitless Databases.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.38.0](service/lakeformation/CHANGELOG.md#v1380-2024-11-06)
+  * **Feature**: API changes for new named tag expressions feature.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.4.0](service/qapps/CHANGELOG.md#v140-2024-11-06)
+  * **Feature**: Introduces category apis in AmazonQApps. Web experience users use Categories to tag and filter library items.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.50.0](service/s3control/CHANGELOG.md#v1500-2024-11-06)
+  * **Feature**: Fix ListStorageLensConfigurations and ListStorageLensGroups deserialization for Smithy SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.20.0](service/verifiedpermissions/CHANGELOG.md#v1200-2024-11-06)
+  * **Feature**: Adding BatchGetPolicy API which supports the retrieval of multiple policies across multiple policy stores within a single request.
+
+# Release (2024-11-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.26.0](service/bedrockagent/CHANGELOG.md#v1260-2024-11-01)
+  * **Feature**: Amazon Bedrock Knowledge Bases now supports using application inference profiles to increase throughput and improve resilience.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.14.0](service/docdbelastic/CHANGELOG.md#v1140-2024-11-01)
+  * **Feature**: Amazon DocumentDB Elastic Clusters adds support for pending maintenance actions feature with APIs GetPendingMaintenanceAction, ListPendingMaintenanceActions and ApplyPendingMaintenanceAction
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.6.0](service/taxsettings/CHANGELOG.md#v160-2024-11-01)
+  * **Feature**: Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.
+
+# Release (2024-10-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.30.0](service/amp/CHANGELOG.md#v1300-2024-10-31)
+  * **Feature**: Added support for UpdateScraper API, to enable updating collector configuration in-place
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.47.0](service/autoscaling/CHANGELOG.md#v1470-2024-10-31)
+  * **Feature**: Adds bake time for Auto Scaling group Instance Refresh
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.47.0](service/batch/CHANGELOG.md#v1470-2024-10-31)
+  * **Feature**: Add `podNamespace` to `EksAttemptDetail` and `containerID` to `EksAttemptContainerDetail`.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.41.0](service/elasticloadbalancingv2/CHANGELOG.md#v1410-2024-10-31)
+  * **Feature**: Add UDP support for AWS PrivateLink and dual-stack Network Load Balancers
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.101.0](service/glue/CHANGELOG.md#v11010-2024-10-31)
+  * **Feature**: Add schedule support for AWS Glue column statistics
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.166.0](service/sagemaker/CHANGELOG.md#v11660-2024-10-31)
+  * **Feature**: SageMaker HyperPod adds scale-down at instance level via BatchDeleteClusterNodes API and group level via UpdateCluster API. SageMaker Training exposes secondary job status in TrainingJobSummary from ListTrainingJobs API. SageMaker now supports G6, G6e, P5e instances for HyperPod and Training.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.38.0](service/sesv2/CHANGELOG.md#v1380-2024-10-31)
+  * **Feature**: This release enables customers to provide the email template content in the SESv2 SendEmail and SendBulkEmail APIs instead of the name or the ARN of a stored email template.
+
+# Release (2024-10-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.39.0](service/appsync/CHANGELOG.md#v1390-2024-10-30)
+  * **Feature**: This release adds support for AppSync Event APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.115.0](service/connect/CHANGELOG.md#v11150-2024-10-30)
+  * **Feature**: Updated the public documentation for the UserIdentityInfo object to accurately reflect the character limits for the FirstName and LastName fields, which were previously listed as 1-100 characters.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.43.0](service/datasync/CHANGELOG.md#v1430-2024-10-30)
+  * **Feature**: AWS DataSync now supports Enhanced mode tasks. This task mode supports transfer of virtually unlimited numbers of objects with enhanced metrics, more detailed logs, and higher performance than Basic mode. This mode currently supports transfers between Amazon S3 locations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.187.0](service/ec2/CHANGELOG.md#v11870-2024-10-30)
+  * **Feature**: This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.49.0](service/ecs/CHANGELOG.md#v1490-2024-10-30)
+  * **Feature**: This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.0.0](service/geomaps/CHANGELOG.md#v100-2024-10-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Release of Amazon Location Maps API. Maps enables you to build digital maps that showcase your locations, visualize your data, and unlock insights to drive your business
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.0.0](service/geoplaces/CHANGELOG.md#v100-2024-10-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Release of Amazon Location Places API. Places enables you to quickly search, display, and filter places, businesses, and locations based on proximity, category, and name
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.0.0](service/georoutes/CHANGELOG.md#v100-2024-10-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Release of Amazon Location Routes API. Routes enables you to plan efficient routes and streamline deliveries by leveraging real-time traffic, vehicle restrictions, and turn-by-turn directions.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.15.0](service/keyspaces/CHANGELOG.md#v1150-2024-10-30)
+  * **Feature**: Adds support for interacting with user-defined types (UDTs) through the following new operations: Create-Type, Delete-Type, List-Types, Get-Type.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.44.0](service/networkfirewall/CHANGELOG.md#v1440-2024-10-30)
+  * **Feature**: AWS Network Firewall now supports configuring TCP idle timeout
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.43.0](service/opensearch/CHANGELOG.md#v1430-2024-10-30)
+  * **Feature**: This release introduces the new OpenSearch user interface (Dashboards), a new web-based application that can be associated with multiple data sources across OpenSearch managed clusters, serverless collections, and Amazon S3, so that users can gain a comprehensive insights in an unified interface.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.17.0](service/opensearchserverless/CHANGELOG.md#v1170-2024-10-30)
+  * **Feature**: Neo Integration via IAM Identity Center (IdC)
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.51.0](service/redshift/CHANGELOG.md#v1510-2024-10-30)
+  * **Feature**: This release launches S3 event integrations to create and manage integrations from an Amazon S3 source into an Amazon Redshift database.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.24.0](service/redshiftserverless/CHANGELOG.md#v1240-2024-10-30)
+  * **Feature**: Adds and updates API members for the Redshift Serverless AI-driven scaling and optimization feature using the price-performance target setting.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.46.0](service/route53/CHANGELOG.md#v1460-2024-10-30)
+  * **Feature**: This release adds support for TLSA, SSHFP, SVCB, and HTTPS record types.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.165.0](service/sagemaker/CHANGELOG.md#v11650-2024-10-30)
+  * **Feature**: Added support for Model Registry Staging construct. Users can define series of stages that models can progress through for model workflows and lifecycle. This simplifies tracking and managing models as they transition through development, testing, and production stages.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.30.0](service/workmail/CHANGELOG.md#v1300-2024-10-30)
+  * **Feature**: This release adds support for Multi-Factor Authentication (MFA) and Personal Access Tokens through integration with AWS IAM Identity Center.
+
+# Release (2024-10-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.22.0](service/bedrock/CHANGELOG.md#v1220-2024-10-29)
+  * **Feature**: Update Application Inference Profile
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.19.0](service/cleanrooms/CHANGELOG.md#v1190-2024-10-29)
+  * **Feature**: This release adds the option for customers to configure analytics engine when creating a collaboration, and introduces the new SPARK analytics engine type in addition to maintaining the legacy CLEAN_ROOMS_SQL engine type.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.43.0](service/cloudwatchlogs/CHANGELOG.md#v1430-2024-10-29)
+  * **Feature**: Added support for new optional baseline parameter in the UpdateAnomaly API. For UpdateAnomaly requests with baseline set to True, The anomaly behavior is then treated as baseline behavior. However, more severe occurrences of this behavior will still be reported as anomalies.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.21.0](service/iotfleetwise/CHANGELOG.md#v1210-2024-10-29)
+  * **Feature**: Updated BatchCreateVehicle and BatchUpdateVehicle APIs: LimitExceededException has been added and the maximum number of vehicles in a batch has been set to 10 explicitly
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.31.0](service/redshiftdata/CHANGELOG.md#v1310-2024-10-29)
+  * **Feature**: Adding a new API GetStatementResultV2 that supports CSV formatted results from ExecuteStatement and BatchExecuteStatement calls.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.164.0](service/sagemaker/CHANGELOG.md#v11640-2024-10-29)
+  * **Feature**: Adding `notebook-al2-v3` as allowed value to SageMaker NotebookInstance PlatformIdentifier attribute
+
+# Release (2024-10-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.3
+  * **Bug Fix**: Improve handling of whitespace (or lack thereof) in sigv4 GetSignedRequestSignature.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.19.0](service/mediapackagev2/CHANGELOG.md#v1190-2024-10-28)
+  * **Feature**: MediaPackage V2 Live to VOD Harvester is a MediaPackage V2 feature, which is used to export content from an origin endpoint to a S3 bucket.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.42.0](service/opensearch/CHANGELOG.md#v1420-2024-10-28)
+  * **Feature**: Adds support for provisioning dedicated coordinator nodes. Coordinator nodes can be specified using the new NodeOptions parameter in ClusterConfig.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.89.0](service/rds/CHANGELOG.md#v1890-2024-10-28)
+  * **Feature**: This release adds support for Enhanced Monitoring and Performance Insights when restoring Aurora Limitless Database DB clusters. It also adds support for the os-upgrade pending maintenance action.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.34.3](service/storagegateway/CHANGELOG.md#v1343-2024-10-28)
+  * **Documentation**: Documentation update: Amazon FSx File Gateway will no longer be available to new customers.
+
+# Release (2024-10-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.25.0](service/bedrockagent/CHANGELOG.md#v1250-2024-10-25)
+  * **Feature**: Add support of new model types for Bedrock Agents, Adding inference profile support for Flows and Prompt Management, Adding new field to configure additional inference configurations for Flows and Prompt Management
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.42.0](service/cloudwatchlogs/CHANGELOG.md#v1420-2024-10-25)
+  * **Feature**: Adding inferred token name for dynamic tokens in Anomalies.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.47.0](service/codebuild/CHANGELOG.md#v1470-2024-10-25)
+  * **Feature**: AWS CodeBuild now supports automatically retrying failed builds
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.64.0](service/lambda/CHANGELOG.md#v1640-2024-10-25)
+  * **Feature**: Add TagsError field in Lambda GetFunctionResponse. The TagsError field contains details related to errors retrieving tags.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.29.0](service/nimble/CHANGELOG.md#v1290-2024-10-25)
+  * **Feature**: Mark service/nimble as deprecated. This service is no longer available for use. See https://aws.amazon.com/nimble-studio/faqs/.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.66.1](service/s3/CHANGELOG.md#v1661-2024-10-25)
+  * **Bug Fix**: Update presign post URL resolution to use the exact result from EndpointResolverV2
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.10.0](service/supplychain/CHANGELOG.md#v1100-2024-10-25)
+  * **Feature**: API doc updates, and also support showing error message on a failed instance
+
+# Release (2024-10-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.35.0](service/appconfig/CHANGELOG.md#v1350-2024-10-24)
+  * **Feature**: This release improves deployment safety by granting customers the ability to REVERT completed deployments, to the last known good state.In the StopDeployment API revert case the status of a COMPLETE deployment will be REVERTED. AppConfig only allows a revert within 72 hours of deployment completion.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.186.0](service/ec2/CHANGELOG.md#v11860-2024-10-24)
+  * **Feature**: This release includes a new API to describe some details of the Amazon Machine Images (AMIs) that were used to launch EC2 instances, even if those AMIs are no longer available for use.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.48.0](service/ecs/CHANGELOG.md#v1480-2024-10-24)
+  * **Feature**: This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.2.3](service/pcs/CHANGELOG.md#v123-2024-10-24)
+  * **Documentation**: Documentation update: added the default value of the Slurm configuration parameter scaleDownIdleTimeInSeconds to its description.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.15.0](service/qbusiness/CHANGELOG.md#v1150-2024-10-24)
+  * **Feature**: Add a new field in chat response. This field can be used to support nested schemas in array fields
+
+# Release (2024-10-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.21.1](service/bedrock/CHANGELOG.md#v1211-2024-10-23)
+  * **Documentation**: Doc updates for supporting converse
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.114.0](service/connect/CHANGELOG.md#v11140-2024-10-23)
+  * **Feature**: Amazon Connect Service Feature: Add support to start screen sharing for a web calling contact.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.185.0](service/ec2/CHANGELOG.md#v11850-2024-10-23)
+  * **Feature**: Amazon EC2 X8g, C8g and M8g instances are powered by AWS Graviton4 processors. X8g provide the lowest cost per GiB of memory among Graviton4 instances. C8g provide the best price performance for compute-intensive workloads. M8g provide the best price performance in for general purpose workloads.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.32.0](service/mwaa/CHANGELOG.md#v1320-2024-10-23)
+  * **Feature**: Introducing InvokeRestApi which allows users to invoke the Apache Airflow REST API on the webserver with the specified inputs.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.15.0](service/paymentcryptography/CHANGELOG.md#v1150-2024-10-23)
+  * **Feature**: Add support for ECC P-256 and P-384 Keys.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.16.0](service/paymentcryptographydata/CHANGELOG.md#v1160-2024-10-23)
+  * **Feature**: Add ECDH support on PIN operations.
+
+# Release (2024-10-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.38.0](service/imagebuilder/CHANGELOG.md#v1380-2024-10-22)
+  * **Feature**: Add macOS platform and instance placement options
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.18.0](service/m2/CHANGELOG.md#v1180-2024-10-22)
+  * **Feature**: Add AuthSecretsManagerArn optional parameter to batch job APIs, expand batch parameter limits, and introduce clientToken constraints.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.88.0](service/rds/CHANGELOG.md#v1880-2024-10-22)
+  * **Feature**: Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.8.0](service/repostspace/CHANGELOG.md#v180-2024-10-22)
+  * **Feature**: Adds the BatchAddRole and BatchRemoveRole APIs.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.28.0](service/timestreamquery/CHANGELOG.md#v1280-2024-10-22)
+  * **Feature**: This release adds support for Query Insights, a feature that provides details of query execution, enabling users to identify areas for improvement to optimize their queries, resulting in improved query performance and lower query costs.
+
+# Release (2024-10-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.29.0](service/applicationinsights/CHANGELOG.md#v1290-2024-10-21)
+  * **Feature**: This feature enables customers to specify SNS Topic ARN. CloudWatch Application Insights (CWAI) will utilize this ARN to send problem notifications.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.46.0](service/autoscaling/CHANGELOG.md#v1460-2024-10-21)
+  * **Feature**: Adds support for removing the PlacementGroup setting on an Auto Scaling Group through the UpdateAutoScalingGroup API.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.23.0](service/bedrockagentruntime/CHANGELOG.md#v1230-2024-10-21)
+  * **Feature**: Knowledge Bases for Amazon Bedrock now supports custom prompts and model parameters in the orchestrationConfiguration of the RetrieveAndGenerate API. The modelArn field accepts Custom Models and Imported Models ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.44.0](service/databasemigrationservice/CHANGELOG.md#v1440-2024-10-21)
+  * **Feature**: Added support for tagging in StartReplicationTaskAssessmentRun API and introduced IsLatestTaskAssessmentRun and ResultStatistic fields for enhanced tracking and assessment result statistics.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.184.0](service/ec2/CHANGELOG.md#v11840-2024-10-21)
+  * **Feature**: Amazon EC2 now allows you to create network interfaces with just the EFA driver and no ENA driver by specifying the network interface type as efa-only.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.51.0](service/eks/CHANGELOG.md#v1510-2024-10-21)
+  * **Feature**: This release adds support for Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift with EKS that enhances the resiliency of multi-AZ cluster environments
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.38.0](service/fms/CHANGELOG.md#v1380-2024-10-21)
+  * **Feature**: Update AWS WAF policy - add the option to retrofit existing web ACLs instead of creating all new web ACLs.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.15.0](service/paymentcryptographydata/CHANGELOG.md#v1150-2024-10-21)
+  * **Feature**: Adding new API to generate authenticated scripts for EMV pin change use cases.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.55.0](service/wafv2/CHANGELOG.md#v1550-2024-10-21)
+  * **Feature**: Add a property to WebACL to indicate whether it's been retrofitted by Firewall Manager.
+
+# Release (2024-10-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.48.0](service/athena/CHANGELOG.md#v1480-2024-10-18)
+  * **Feature**: **BREAKING CHANGE**: Remove DataCatalog from Create/DeleteDataCatalog. Remove Status, ConnectionType, and Error from DataCatalog and DataCatalogSummary. These were released inadvertently with no functionality. They were not populated or populated with a default value. Code related to these changes can be safely removed.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.21.0](service/bedrock/CHANGELOG.md#v1210-2024-10-18)
+  * **Feature**: Adding converse support to CMI API's
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.23.0](service/datazone/CHANGELOG.md#v1230-2024-10-18)
+  * **Feature**: Adding the following project member designations: PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER and PROJECT_CATALOG_STEWARD in the CreateProjectMembership API and PROJECT_CATALOG_STEWARD designation in the AddPolicyGrant API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.183.0](service/ec2/CHANGELOG.md#v11830-2024-10-18)
+  * **Feature**: RequestSpotInstances and RequestSpotFleet feature release.
+
+# Release (2024-10-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.24.0](service/bedrockagent/CHANGELOG.md#v1240-2024-10-17)
+  * **Feature**: Removing support for topK property in PromptModelInferenceConfiguration object, Making PromptTemplateConfiguration property as required, Limiting the maximum PromptVariant to 1
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.33.0](service/dataexchange/CHANGELOG.md#v1330-2024-10-17)
+  * **Feature**: This release adds Data Grant support, through which customers can programmatically create data grants to share with other AWS accounts and accept data grants from other AWS accounts.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.47.4](service/ecs/CHANGELOG.md#v1474-2024-10-17)
+  * **Documentation**: This is an Amazon ECS documentation only update to address tickets.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.16.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1160-2024-10-17)
+  * **Feature**: Added the registrations status of REQUIRES_AUTHENTICATION
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.18.0](service/pipes/CHANGELOG.md#v1180-2024-10-17)
+  * **Feature**: This release adds validation to require specifying a SecurityGroup and Subnets in the Vpc object under PipesSourceSelfManagedKafkaParameters. It also adds support for iso-e, iso-f, and other non-commercial partitions in ARN parameters.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.77.0](service/quicksight/CHANGELOG.md#v1770-2024-10-17)
+  * **Feature**: Add StartDashboardSnapshotJobSchedule API. RestoreAnalysis now supports restoring analysis to folders.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.87.3](service/rds/CHANGELOG.md#v1873-2024-10-17)
+  * **Documentation**: Updates Amazon RDS documentation for TAZ IAM support
+
+# Release (2024-10-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.28.0](config/CHANGELOG.md#v1280-2024-10-16)
+  * **Feature**: Adds the LoadOptions hook `WithBaseEndpoint` for setting global endpoint override in-code.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.37.3](service/imagebuilder/CHANGELOG.md#v1373-2024-10-16)
+  * **Bug Fix**: **BREAKING CHANGE**: The type of LaunchTemplateConfiguration.SetDefaultVersion has been changed from `bool` to `*bool`. Before this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to express the full range of values for the field (true, false, and unset/nil), each of which have distinctly different behaviors.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.66.0](service/s3/CHANGELOG.md#v1660-2024-10-16)
+  * **Feature**: Add support for the new optional bucket-region and prefix query parameters in the ListBuckets API. For ListBuckets requests that express pagination, Amazon S3 will now return both the bucket names and associated AWS regions in the response.
+
+# Release (2024-10-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.27.0](service/amplify/CHANGELOG.md#v1270-2024-10-15)
+  * **Feature**: Added sourceUrlType field to StartDeployment request
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.55.3](service/cloudformation/CHANGELOG.md#v1553-2024-10-15)
+  * **Documentation**: Documentation update for AWS CloudFormation API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.46.0](service/codebuild/CHANGELOG.md#v1460-2024-10-15)
+  * **Feature**: Enable proxy for reserved capacity fleet.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.41.0](service/ivs/CHANGELOG.md#v1410-2024-10-15)
+  * **Feature**: On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.14.0](service/qbusiness/CHANGELOG.md#v1140-2024-10-15)
+  * **Feature**: Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.50.0](service/redshift/CHANGELOG.md#v1500-2024-10-15)
+  * **Feature**: This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.27.0](service/resiliencehub/CHANGELOG.md#v1270-2024-10-15)
+  * **Feature**: AWS Resilience Hub now integrates with the myApplications platform, enabling customers to easily assess the resilience of applications defined in myApplications. The new Resiliency widget provides visibility into application resilience and actionable recommendations for improvement.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.37.0](service/sesv2/CHANGELOG.md#v1370-2024-10-15)
+  * **Feature**: This release adds support for email maximum delivery seconds that allows senders to control the time within which their emails are attempted for delivery.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.22.0](service/transcribestreaming/CHANGELOG.md#v1220-2024-10-15)
+  * **Feature**: We are expanding support for 40 new locales in AWS Transcribe Streaming.
+
+# Release (2024-10-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.36.0](service/codepipeline/CHANGELOG.md#v1360-2024-10-14)
+  * **Feature**: AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.6.0](service/mailmanager/CHANGELOG.md#v160-2024-10-14)
+  * **Feature**: Mail Manager support for viewing and exporting metadata of archived messages.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.19.0](service/securitylake/CHANGELOG.md#v1190-2024-10-14)
+  * **Feature**: This release updates request validation regex for resource ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.9.0](service/supplychain/CHANGELOG.md#v190-2024-10-14)
+  * **Feature**: This release adds AWS Supply Chain instance management functionality. Specifically adding CreateInstance, DeleteInstance, GetInstance, ListInstances, and UpdateInstance APIs.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.53.0](service/transfer/CHANGELOG.md#v1530-2024-10-14)
+  * **Feature**: This release enables customers using SFTP connectors to query the transfer status of their files to meet their monitoring needs as well as orchestrate post transfer actions.
+
+# Release (2024-10-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.45.3](service/appflow/CHANGELOG.md#v1453-2024-10-11)
+  * **Documentation**: Doc only updates for clarification around OAuth2GrantType for Salesforce.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.40.0](service/elasticloadbalancingv2/CHANGELOG.md#v1400-2024-10-11)
+  * **Feature**: Add zonal_shift.config.enabled attribute. Add new AdministrativeOverride construct in the describe-target-health API response to include information about the override status applied to a target.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.46.0](service/emr/CHANGELOG.md#v1460-2024-10-11)
+  * **Feature**: This release provides new parameter "Context" in instance fleet clusters.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.50.0](service/guardduty/CHANGELOG.md#v1500-2024-10-11)
+  * **Feature**: Added a new field for network connection details.
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.30.3](service/robomaker/CHANGELOG.md#v1303-2024-10-11)
+  * **Documentation**: Documentation update: added support notices to each API action.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.3](service/s3/CHANGELOG.md#v1653-2024-10-11)
+  * **Bug Fix**: **BREAKING CHANGE**: S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types
+
+# Release (2024-10-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.37.3](service/acmpca/CHANGELOG.md#v1373-2024-10-10)
+  * **Documentation**: Documentation updates for AWS Private CA.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.43.0](service/databasemigrationservice/CHANGELOG.md#v1430-2024-10-10)
+  * **Feature**: Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.182.0](service/ec2/CHANGELOG.md#v11820-2024-10-10)
+  * **Feature**: This release adds support for assigning the billing of shared Amazon EC2 On-Demand Capacity Reservations.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.47.3](service/ecs/CHANGELOG.md#v1473-2024-10-10)
+  * **Documentation**: This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.23.3](service/elasticinference/CHANGELOG.md#v1233-2024-10-10)
+  * **Documentation**: Elastic Inference - Documentation update to add service shutdown notice.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.20.0](service/iotfleetwise/CHANGELOG.md#v1200-2024-10-10)
+  * **Feature**: Refine campaign related API validations
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.14.0](service/neptunegraph/CHANGELOG.md#v1140-2024-10-10)
+  * **Feature**: Support for 16 m-NCU graphs available through account allowlisting
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.45.0](service/outposts/CHANGELOG.md#v1450-2024-10-10)
+  * **Feature**: Adding new "DELIVERED" enum value for Outposts Order status
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.33.0](service/route53resolver/CHANGELOG.md#v1330-2024-10-10)
+  * **Feature**: Route 53 Resolver Forwarding Rules can now include a server name indication (SNI) in the target address for rules that use the DNS-over-HTTPS (DoH) protocol. When a DoH-enabled Outbound Resolver Endpoint forwards a request to a DoH server, it will provide the SNI in the TLS handshake.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.0.0](service/socialmessaging/CHANGELOG.md#v100-2024-10-10)
+  * **Release**: New AWS service client module
+  * **Feature**: This release for AWS End User Messaging includes a public SDK, providing a suite of APIs that enable sending WhatsApp messages to end users.
+
+# Release (2024-10-09)
+
+## General Highlights
+* **Bug Fix**: Fixup some integration tests.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.35.0](service/codepipeline/CHANGELOG.md#v1350-2024-10-09)
+  * **Feature**: AWS CodePipeline introduces a Compute category
+
+# Release (2024-10-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.34.2](service/chime/CHANGELOG.md#v1342-2024-10-08)
+  * **Documentation**: Doc-only update to generate deprecated annotation for services that have been marked as deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.43.0](service/elasticache/CHANGELOG.md#v1430-2024-10-08)
+  * **Feature**: AWS ElastiCache SDK now supports using APIs with newly launched Valkey engine. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.24.0](service/memorydb/CHANGELOG.md#v1240-2024-10-08)
+  * **Feature**: Amazon MemoryDB SDK now supports all APIs for newly launched Valkey engine. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.24.2](service/sms/CHANGELOG.md#v1242-2024-10-08)
+  * **Documentation**: Doc-only update to generate deprecated annotation for services that have been marked as deprecated.
+
 # Release (2024-10-07)
 
 ## General Highlights
@@ -17,7 +1356,7 @@
 * `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.49.0](service/redshift/CHANGELOG.md#v1490-2024-10-07)
   * **Feature**: Add validation pattern to S3KeyPrefix on the EnableLogging API
 * `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.1](service/s3/CHANGELOG.md#v1651-2024-10-07)
-  * **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+  * **Bug Fix**: **CHANGE IN BEHAVIOR**: Allow serialization of headers with empty string for prefix headers. We are deploying this fix because the behavior is actively preventing users from transmitting keys with empty values to the service. If you were setting metadata keys with empty values before this change, they will now actually be sent to the service.
 
 # Release (2024-10-04)
 

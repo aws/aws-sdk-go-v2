@@ -22,7 +22,8 @@ import (
 // configurations.
 //
 // When you enable Security Lake, it starts ingesting security data after the
-// CreateAwsLogSource call. This includes ingesting security data from sources,
+// CreateAwsLogSource call and after you create subscribers using the
+// CreateSubscriber API. This includes ingesting security data from sources,
 // storing data, and making data accessible to subscribers. Security Lake also
 // enables all the existing settings and resources that it stores or maintains for
 // your Amazon Web Services account in the current Region, including security log

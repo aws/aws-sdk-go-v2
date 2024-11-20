@@ -57,6 +57,25 @@ func (AnnotationType) Values() []AnnotationType {
 	}
 }
 
+type CacheBehavior string
+
+// Enum values for CacheBehavior
+const (
+	CacheBehaviorCacheOnFailure CacheBehavior = "CACHE_ON_FAILURE"
+	CacheBehaviorCacheAlways    CacheBehavior = "CACHE_ALWAYS"
+)
+
+// Values returns all known values for CacheBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CacheBehavior) Values() []CacheBehavior {
+	return []CacheBehavior{
+		"CACHE_ON_FAILURE",
+		"CACHE_ALWAYS",
+	}
+}
+
 type CreationType string
 
 // Enum values for CreationType
@@ -585,6 +604,27 @@ func (ResourceOwner) Values() []ResourceOwner {
 	return []ResourceOwner{
 		"SELF",
 		"OTHER",
+	}
+}
+
+type RunCacheStatus string
+
+// Enum values for RunCacheStatus
+const (
+	RunCacheStatusActive  RunCacheStatus = "ACTIVE"
+	RunCacheStatusDeleted RunCacheStatus = "DELETED"
+	RunCacheStatusFailed  RunCacheStatus = "FAILED"
+)
+
+// Values returns all known values for RunCacheStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RunCacheStatus) Values() []RunCacheStatus {
+	return []RunCacheStatus{
+		"ACTIVE",
+		"DELETED",
+		"FAILED",
 	}
 }
 

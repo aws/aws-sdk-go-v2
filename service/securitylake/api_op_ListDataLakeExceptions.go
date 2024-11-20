@@ -30,10 +30,10 @@ func (c *Client) ListDataLakeExceptions(ctx context.Context, params *ListDataLak
 
 type ListDataLakeExceptionsInput struct {
 
-	// List the maximum number of failures in Security Lake.
+	// Lists the maximum number of failures in Security Lake.
 	MaxResults *int32
 
-	// List if there are more results available. The value of nextToken is a unique
+	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
 	// retrieve the next page. Keep all other arguments unchanged.
 	//
@@ -49,10 +49,10 @@ type ListDataLakeExceptionsInput struct {
 
 type ListDataLakeExceptionsOutput struct {
 
-	// Lists the failures that cannot be retried in the current Region.
+	// Lists the failures that cannot be retried.
 	Exceptions []types.DataLakeException
 
-	// List if there are more results available. The value of nextToken is a unique
+	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
 	// retrieve the next page. Keep all other arguments unchanged.
 	//
@@ -166,7 +166,7 @@ func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware
 // ListDataLakeExceptionsPaginatorOptions is the paginator options for
 // ListDataLakeExceptions
 type ListDataLakeExceptionsPaginatorOptions struct {
-	// List the maximum number of failures in Security Lake.
+	// Lists the maximum number of failures in Security Lake.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

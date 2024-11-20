@@ -306,17 +306,21 @@ type CreateDBClusterInput struct {
 	// Management (IAM) accounts to database accounts. By default, mapping isn't
 	// enabled.
 	//
-	// For more information, see [IAM Database Authentication] in the Amazon Aurora User Guide.
+	// For more information, see [IAM Database Authentication] in the Amazon Aurora User Guide or [IAM database authentication for MariaDB, MySQL, and PostgreSQL] in the Amazon
+	// RDS User Guide.
 	//
-	// Valid for Cluster Type: Aurora DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// [IAM Database Authentication]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+	// [IAM database authentication for MariaDB, MySQL, and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
 	// Specifies whether to enable Aurora Limitless Database. You must enable Aurora
 	// Limitless Database to create a DB shard group.
 	//
 	// Valid for: Aurora DB clusters only
+	//
+	// This setting is no longer used. Instead use the ClusterScalabilityType setting.
 	EnableLimitlessDatabase *bool
 
 	// Specifies whether read replicas can forward write operations to the writer DB
@@ -349,7 +353,7 @@ type CreateDBClusterInput struct {
 	// version on your DB cluster past the end of standard support for that engine
 	// version. For more information, see the following sections:
 	//
-	//   - Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended Support]in the Amazon Aurora User Guide
+	//   - Amazon Aurora - [Using Amazon RDS Extended Support]in the Amazon Aurora User Guide
 	//
 	//   - Amazon RDS - [Using Amazon RDS Extended Support]in the Amazon RDS User Guide
 	//

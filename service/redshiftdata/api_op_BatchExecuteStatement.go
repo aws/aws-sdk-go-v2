@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -88,6 +89,10 @@ type BatchExecuteStatementInput struct {
 	// The database user name. This parameter is required when connecting to a cluster
 	// as a database user and authenticating using temporary credentials.
 	DbUser *string
+
+	// The data format of the result of the SQL statement. If no format is specified,
+	// the default is JSON.
+	ResultFormat types.ResultFormatString
 
 	// The name or ARN of the secret that enables access to the database. This
 	// parameter is required when authenticating using Secrets Manager.

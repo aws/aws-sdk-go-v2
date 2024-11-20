@@ -9792,7 +9792,7 @@ func awsRestxml_deserializeOpDocumentListStorageLensConfigurationsOutput(v **Lis
 				sv.NextToken = ptr.String(xtv)
 			}
 
-		case strings.EqualFold("StorageLensConfigurationList", t.Name.Local):
+		case strings.EqualFold("StorageLensConfiguration", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentStorageLensConfigurationListUnwrapped(&sv.StorageLensConfigurationList, nodeDecoder); err != nil {
 				return err
@@ -9949,7 +9949,7 @@ func awsRestxml_deserializeOpDocumentListStorageLensGroupsOutput(v **ListStorage
 				sv.NextToken = ptr.String(xtv)
 			}
 
-		case strings.EqualFold("StorageLensGroupList", t.Name.Local):
+		case strings.EqualFold("StorageLensGroup", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentStorageLensGroupListUnwrapped(&sv.StorageLensGroupList, nodeDecoder); err != nil {
 				return err

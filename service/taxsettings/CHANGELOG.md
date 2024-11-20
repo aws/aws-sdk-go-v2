@@ -1,3 +1,32 @@
+# v1.7.0 (2024-11-19)
+
+* **Feature**: Release Tax Inheritance APIs,  Tax Exemption APIs, and functionality update for some existing Tax Registration APIs
+
+# v1.6.3 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.6.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.0 (2024-11-01)
+
+* **Feature**: Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.
+
+# v1.5.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.5.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

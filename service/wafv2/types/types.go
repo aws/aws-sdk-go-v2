@@ -1966,6 +1966,14 @@ type LoggingConfiguration struct {
 	// Indicates whether the logging configuration was created by Firewall Manager, as
 	// part of an WAF policy configuration. If true, only Firewall Manager can modify
 	// or delete the configuration.
+	//
+	// The logging configuration can be created by Firewall Manager for use with any
+	// web ACL that Firewall Manager is using for an WAF policy. Web ACLs that Firewall
+	// Manager creates and uses have their ManagedByFirewallManager property set to
+	// true. Web ACLs that were created by a customer account and then retrofitted by
+	// Firewall Manager for use by a policy have their RetrofittedByFirewallManager
+	// property set to true. For either case, any corresponding logging configuration
+	// will indicate ManagedByFirewallManager .
 	ManagedByFirewallManager bool
 
 	// The parts of the request that you want to keep out of the logs.
@@ -4754,9 +4762,11 @@ type WebACL struct {
 	// :
 	LabelNamespace *string
 
-	// Indicates whether this web ACL is managed by Firewall Manager. If true, then
-	// only Firewall Manager can delete the web ACL or any Firewall Manager rule groups
-	// in the web ACL.
+	// Indicates whether this web ACL was created by Firewall Manager and is being
+	// managed by Firewall Manager. If true, then only Firewall Manager can delete the
+	// web ACL or any Firewall Manager rule groups in the web ACL. See also the
+	// properties RetrofittedByFirewallManager , PreProcessFirewallManagerRuleGroups ,
+	// and PostProcessFirewallManagerRuleGroups .
 	ManagedByFirewallManager bool
 
 	// The last set of rules for WAF to process in the web ACL. This is defined in an
@@ -4780,6 +4790,14 @@ type WebACL struct {
 	// to run last. Within each set, the administrator prioritizes the rule groups, to
 	// determine their relative processing order.
 	PreProcessFirewallManagerRuleGroups []FirewallManagerRuleGroup
+
+	// Indicates whether this web ACL was created by a customer account and then
+	// retrofitted by Firewall Manager. If true, then the web ACL is currently being
+	// managed by a Firewall Manager WAF policy, and only Firewall Manager can manage
+	// any Firewall Manager rule groups in the web ACL. See also the properties
+	// ManagedByFirewallManager , PreProcessFirewallManagerRuleGroups , and
+	// PostProcessFirewallManagerRuleGroups .
+	RetrofittedByFirewallManager bool
 
 	// The Rule statements used to identify the web requests that you want to manage. Each
 	// rule includes one top-level statement that WAF uses to identify matching web

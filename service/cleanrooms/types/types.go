@@ -560,6 +560,19 @@ type BatchGetSchemaError struct {
 	noSmithyDocumentSerde
 }
 
+//	Information related to the utilization of resources that have been billed or
+//
+// charged for in a given context, such as a protected query.
+type BilledResourceUtilization struct {
+
+	//  The number of Clean Rooms Processing Unit (CRPU) hours that have been billed.
+	//
+	// This member is required.
+	Units *float64
+
+	noSmithyDocumentSerde
+}
+
 // The multi-party data share environment. The collaboration contains metadata
 // about its purpose and participants.
 type Collaboration struct {
@@ -611,6 +624,9 @@ type Collaboration struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	//  The analytics engine for the collaboration.
+	AnalyticsEngine AnalyticsEngine
 
 	// The settings for client-side encryption for cryptographic computing.
 	DataEncryptionMetadata *DataEncryptionMetadata
@@ -782,7 +798,7 @@ type CollaborationConfiguredAudienceModelAssociation struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -834,7 +850,7 @@ type CollaborationConfiguredAudienceModelAssociationSummary struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -1216,6 +1232,9 @@ type CollaborationSummary struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	//  The analytics engine.
+	AnalyticsEngine AnalyticsEngine
+
 	// The ARN of a member in a collaboration.
 	MembershipArn *string
 
@@ -1240,6 +1259,26 @@ type Column struct {
 
 	noSmithyDocumentSerde
 }
+
+//	The configuration of the compute resources for an analysis with the Spark
+//
+// analytics engine.
+//
+// The following types satisfy this interface:
+//
+//	ComputeConfigurationMemberWorker
+type ComputeConfiguration interface {
+	isComputeConfiguration()
+}
+
+// The worker configuration for the compute environment.
+type ComputeConfigurationMemberWorker struct {
+	Value WorkerComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ComputeConfigurationMemberWorker) isComputeConfiguration() {}
 
 //	The configuration details.
 //
@@ -2603,6 +2642,77 @@ type Membership struct {
 	// can receive results.
 	DefaultResultConfiguration *MembershipProtectedQueryResultConfiguration
 
+	// Specifies the ML member abilities that are granted to a collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlMemberAbilities *MLMemberAbilities
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's machine learning payment
+// responsibilities set by the collaboration creator.
+type MembershipMLPaymentConfig struct {
+
+	// The payment responsibilities accepted by the member for model inference.
+	ModelInference *MembershipModelInferencePaymentConfig
+
+	// The payment responsibilities accepted by the member for model training.
+	ModelTraining *MembershipModelTrainingPaymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model inference payment
+// responsibilities set by the collaboration creator.
+type MembershipModelInferencePaymentConfig struct {
+
+	// Indicates whether the collaboration member has accepted to pay for model
+	// inference costs ( TRUE ) or has not accepted to pay for model inference costs (
+	// FALSE ).
+	//
+	// If the collaboration creator has not specified anyone to pay for model
+	// inference costs, then the member who can query is the default payer.
+	//
+	// An error message is returned for the following reasons:
+	//
+	//   - If you set the value to FALSE but you are responsible to pay for model
+	//   inference costs.
+	//
+	//   - If you set the value to TRUE but you are not responsible to pay for model
+	//   inference costs.
+	//
+	// This member is required.
+	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model training payment
+// responsibilities set by the collaboration creator.
+type MembershipModelTrainingPaymentConfig struct {
+
+	// Indicates whether the collaboration member has accepted to pay for model
+	// training costs ( TRUE ) or has not accepted to pay for model training costs (
+	// FALSE ).
+	//
+	// If the collaboration creator has not specified anyone to pay for model training
+	// costs, then the member who can query is the default payer.
+	//
+	// An error message is returned for the following reasons:
+	//
+	//   - If you set the value to FALSE but you are responsible to pay for model
+	//   training costs.
+	//
+	//   - If you set the value to TRUE but you are not responsible to pay for model
+	//   training costs.
+	//
+	// This member is required.
+	IsResponsible *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2615,6 +2725,10 @@ type MembershipPaymentConfiguration struct {
 	//
 	// This member is required.
 	QueryCompute *MembershipQueryComputePaymentConfig
+
+	// The payment responsibilities accepted by the collaboration member for machine
+	// learning costs.
+	MachineLearning *MembershipMLPaymentConfig
 
 	noSmithyDocumentSerde
 }
@@ -2743,6 +2857,14 @@ type MembershipSummary struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// Provides a summary of the ML abilities for the collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlMemberAbilities *MLMemberAbilities
+
 	noSmithyDocumentSerde
 }
 
@@ -2764,6 +2886,14 @@ type MemberSpecification struct {
 	//
 	// This member is required.
 	MemberAbilities []MemberAbility
+
+	// The ML abilities granted to the collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlMemberAbilities *MLMemberAbilities
 
 	// The collaboration member's payment responsibilities set by the collaboration
 	// creator.
@@ -2821,6 +2951,95 @@ type MemberSummary struct {
 	// The unique ID for the member's associated membership, if present.
 	MembershipId *string
 
+	// Provides a summary of the ML abilities for the collaboration member.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	MlAbilities *MLMemberAbilities
+
+	noSmithyDocumentSerde
+}
+
+// The ML member abilities for a collaboration member.
+//
+// Custom ML modeling is in beta release and is subject to change. For beta terms
+// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+type MLMemberAbilities struct {
+
+	// The custom ML member abilities for a collaboration member. The inference
+	// feature is not available in the custom ML modeling beta.
+	//
+	// Custom ML modeling is in beta release and is subject to change. For beta terms
+	// and conditions, see Betas and Previews in the [Amazon Web Services Service Terms].
+	//
+	// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+	//
+	// This member is required.
+	CustomMLMemberAbilities []CustomMLMemberAbility
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's machine learning payment
+// responsibilities set by the collaboration creator.
+type MLPaymentConfig struct {
+
+	// The payment responsibilities accepted by the member for model inference.
+	ModelInference *ModelInferencePaymentConfig
+
+	// The payment responsibilities accepted by the member for model training.
+	ModelTraining *ModelTrainingPaymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model inference payment
+// responsibilities set by the collaboration creator.
+type ModelInferencePaymentConfig struct {
+
+	// Indicates whether the collaboration creator has configured the collaboration
+	// member to pay for model inference costs ( TRUE ) or has not configured the
+	// collaboration member to pay for model inference costs ( FALSE ).
+	//
+	// Exactly one member can be configured to pay for model inference costs. An error
+	// is returned if the collaboration creator sets a TRUE value for more than one
+	// member in the collaboration.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// model inference costs, then the member who can query is the default payer. An
+	// error is returned if the collaboration creator sets a FALSE value for the
+	// member who can query.
+	//
+	// This member is required.
+	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the collaboration member's model training payment
+// responsibilities set by the collaboration creator.
+type ModelTrainingPaymentConfig struct {
+
+	// Indicates whether the collaboration creator has configured the collaboration
+	// member to pay for model training costs ( TRUE ) or has not configured the
+	// collaboration member to pay for model training costs ( FALSE ).
+	//
+	// Exactly one member can be configured to pay for model training costs. An error
+	// is returned if the collaboration creator sets a TRUE value for more than one
+	// member in the collaboration.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// model training costs, then the member who can query is the default payer. An
+	// error is returned if the collaboration creator sets a FALSE value for the
+	// member who can query.
+	//
+	// This member is required.
+	IsResponsible *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2833,6 +3052,10 @@ type PaymentConfiguration struct {
 	//
 	// This member is required.
 	QueryCompute *QueryComputePaymentConfig
+
+	// An object representing the collaboration member's machine learning payment
+	// responsibilities set by the collaboration creator.
+	MachineLearning *MLPaymentConfig
 
 	noSmithyDocumentSerde
 }
@@ -3171,6 +3394,9 @@ type ProtectedQuery struct {
 	// This member is required.
 	Status ProtectedQueryStatus
 
+	//  The compute configuration for the protected query.
+	ComputeConfiguration ComputeConfiguration
+
 	// The sensitivity parameters of the differential privacy results of the protected
 	// query.
 	DifferentialPrivacy *DifferentialPrivacyParameters
@@ -3326,6 +3552,11 @@ type ProtectedQueryS3OutputConfiguration struct {
 	// The S3 prefix to unload the protected query results.
 	KeyPrefix *string
 
+	// Indicates whether files should be output as a single file ( TRUE ) or output as
+	// multiple files ( FALSE ). This parameter is only supported for analyses with the
+	// Spark analytics engine.
+	SingleFileOutput *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -3359,6 +3590,9 @@ type ProtectedQuerySQLParameters struct {
 
 // Contains statistics about the execution of the protected query.
 type ProtectedQueryStatistics struct {
+
+	//  The billed resource utilization.
+	BilledResourceUtilization *BilledResourceUtilization
 
 	// The duration of the protected query, from creation until query completion.
 	TotalDurationInMillis *int64
@@ -3394,8 +3628,7 @@ type ProtectedQuerySummary struct {
 	// This member is required.
 	ReceiverConfigurations []ReceiverConfiguration
 
-	// The status of the protected query. Value values are `SUBMITTED`, `STARTED`,
-	// `CANCELLED`, `CANCELLING`, `FAILED`, `SUCCESS`, `TIMED_OUT`.
+	// The status of the protected query.
 	//
 	// This member is required.
 	Status ProtectedQueryStatus
@@ -3473,13 +3706,14 @@ type ReceiverConfiguration struct {
 // A schema is a relation within a collaboration.
 type Schema struct {
 
-	// The analysis rule types associated with the schema. Currently, only one entry
-	// is present.
+	// The analysis rule types that are associated with the schema. Currently, only
+	// one entry is present.
 	//
 	// This member is required.
 	AnalysisRuleTypes []AnalysisRuleType
 
-	// The unique ARN for the collaboration that the schema belongs to.
+	// The unique Amazon Resource Name (ARN) for the collaboration that the schema
+	// belongs to.
 	//
 	// This member is required.
 	CollaborationArn *string
@@ -3489,12 +3723,12 @@ type Schema struct {
 	// This member is required.
 	CollaborationId *string
 
-	// The columns for the relation this schema represents.
+	// The columns for the relation that this schema represents.
 	//
 	// This member is required.
 	Columns []Column
 
-	// The time the schema was created.
+	// The time at which the schema was created.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -3525,18 +3759,18 @@ type Schema struct {
 	// This member is required.
 	SchemaStatusDetails []SchemaStatusDetail
 
-	// The type of schema. The only valid value is currently `TABLE`.
+	// The type of schema.
 	//
 	// This member is required.
 	Type SchemaType
 
-	// The time the schema was last updated.
+	// The most recent time at which the schema was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
 	// The analysis method for the schema. The only valid value is currently
-	// DIRECT_QUERY.
+	// DIRECT_QUERY .
 	AnalysisMethod AnalysisMethod
 
 	// The schema type properties.
@@ -3643,7 +3877,7 @@ type SchemaSummary struct {
 	// This member is required.
 	Name *string
 
-	// The type of schema object. The only valid schema type is currently `TABLE`.
+	// The type of schema object.
 	//
 	// This member is required.
 	Type SchemaType
@@ -3713,6 +3947,20 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration of the compute resources for workers running an analysis
+//
+// with the Clean Rooms SQL analytics engine.
+type WorkerComputeConfiguration struct {
+
+	//  The number of workers.
+	Number *int32
+
+	//  The worker compute configuration type.
+	Type WorkerComputeType
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -3727,6 +3975,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAnalysisRulePolicy()                             {}
 func (*UnknownUnionMember) isAnalysisRulePolicyV1()                           {}
 func (*UnknownUnionMember) isAnalysisSource()                                 {}
+func (*UnknownUnionMember) isComputeConfiguration()                           {}
 func (*UnknownUnionMember) isConfigurationDetails()                           {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()              {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()            {}

@@ -1,3 +1,40 @@
+# v1.22.4 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.3 (2024-11-11)
+
+* No change notes available for this release.
+
+# v1.22.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.22.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2024-10-29)
+
+* **Feature**: Update Application Inference Profile
+
+# v1.21.2 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.1 (2024-10-23)
+
+* **Documentation**: Doc updates for supporting converse
+
+# v1.21.0 (2024-10-18)
+
+* **Feature**: Adding converse support to CMI API's
+
+# v1.20.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

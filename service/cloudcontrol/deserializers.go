@@ -1932,7 +1932,7 @@ func awsAwsjson10_deserializeDocumentAlreadyExistsException(v **types.AlreadyExi
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1972,7 +1972,7 @@ func awsAwsjson10_deserializeDocumentClientTokenConflictException(v **types.Clie
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2012,7 +2012,7 @@ func awsAwsjson10_deserializeDocumentConcurrentModificationException(v **types.C
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2052,7 +2052,7 @@ func awsAwsjson10_deserializeDocumentConcurrentOperationException(v **types.Conc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2092,7 +2092,7 @@ func awsAwsjson10_deserializeDocumentGeneralServiceException(v **types.GeneralSe
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2132,7 +2132,7 @@ func awsAwsjson10_deserializeDocumentHandlerFailureException(v **types.HandlerFa
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2172,7 +2172,7 @@ func awsAwsjson10_deserializeDocumentHandlerInternalFailureException(v **types.H
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2187,6 +2187,150 @@ func awsAwsjson10_deserializeDocumentHandlerInternalFailureException(v **types.H
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentHookProgressEvent(v **types.HookProgressEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HookProgressEvent
+	if *v == nil {
+		sv = &types.HookProgressEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailureMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HookFailureMode to be of type string, got %T instead", value)
+				}
+				sv.FailureMode = ptr.String(jtv)
+			}
+
+		case "HookEventTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.HookEventTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "HookStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HookStatus to be of type string, got %T instead", value)
+				}
+				sv.HookStatus = ptr.String(jtv)
+			}
+
+		case "HookStatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
+				}
+				sv.HookStatusMessage = ptr.String(jtv)
+			}
+
+		case "HookTypeArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HookTypeArn to be of type string, got %T instead", value)
+				}
+				sv.HookTypeArn = ptr.String(jtv)
+			}
+
+		case "HookTypeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TypeName to be of type string, got %T instead", value)
+				}
+				sv.HookTypeName = ptr.String(jtv)
+			}
+
+		case "HookTypeVersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TypeVersionId to be of type string, got %T instead", value)
+				}
+				sv.HookTypeVersionId = ptr.String(jtv)
+			}
+
+		case "InvocationPoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HookInvocationPoint to be of type string, got %T instead", value)
+				}
+				sv.InvocationPoint = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentHooksProgressEvent(v *[]types.HookProgressEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HookProgressEvent
+	if *v == nil {
+		cv = []types.HookProgressEvent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HookProgressEvent
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentHookProgressEvent(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -2212,7 +2356,7 @@ func awsAwsjson10_deserializeDocumentInvalidCredentialsException(v **types.Inval
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2252,7 +2396,7 @@ func awsAwsjson10_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2292,7 +2436,7 @@ func awsAwsjson10_deserializeDocumentNetworkFailureException(v **types.NetworkFa
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2332,7 +2476,7 @@ func awsAwsjson10_deserializeDocumentNotStabilizedException(v **types.NotStabili
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2372,7 +2516,7 @@ func awsAwsjson10_deserializeDocumentNotUpdatableException(v **types.NotUpdatabl
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2412,7 +2556,7 @@ func awsAwsjson10_deserializeDocumentPrivateTypeException(v **types.PrivateTypeE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2475,6 +2619,15 @@ func awsAwsjson10_deserializeDocumentProgressEvent(v **types.ProgressEvent, valu
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "HooksRequestToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequestToken to be of type string, got %T instead", value)
+				}
+				sv.HooksRequestToken = ptr.String(jtv)
 			}
 
 		case "Identifier":
@@ -2587,7 +2740,7 @@ func awsAwsjson10_deserializeDocumentRequestTokenNotFoundException(v **types.Req
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2627,7 +2780,7 @@ func awsAwsjson10_deserializeDocumentResourceConflictException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2750,7 +2903,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2824,7 +2977,7 @@ func awsAwsjson10_deserializeDocumentServiceInternalErrorException(v **types.Ser
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2864,7 +3017,7 @@ func awsAwsjson10_deserializeDocumentServiceLimitExceededException(v **types.Ser
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2904,7 +3057,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2944,7 +3097,7 @@ func awsAwsjson10_deserializeDocumentTypeNotFoundException(v **types.TypeNotFoun
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2984,7 +3137,7 @@ func awsAwsjson10_deserializeDocumentUnsupportedActionException(v **types.Unsupp
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3177,6 +3330,11 @@ func awsAwsjson10_deserializeOpDocumentGetResourceRequestStatusOutput(v **GetRes
 
 	for key, value := range shape {
 		switch key {
+		case "HooksProgressEvent":
+			if err := awsAwsjson10_deserializeDocumentHooksProgressEvent(&sv.HooksProgressEvent, value); err != nil {
+				return err
+			}
+
 		case "ProgressEvent":
 			if err := awsAwsjson10_deserializeDocumentProgressEvent(&sv.ProgressEvent, value); err != nil {
 				return err

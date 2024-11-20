@@ -120,12 +120,14 @@ type DescribeReservedCacheNodesInput struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string

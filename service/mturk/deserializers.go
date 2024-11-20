@@ -6129,7 +6129,7 @@ func awsAwsjson11_deserializeDocumentRequestError(v **types.RequestError, value 
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6527,7 +6527,7 @@ func awsAwsjson11_deserializeDocumentServiceFault(v **types.ServiceFault, value 
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

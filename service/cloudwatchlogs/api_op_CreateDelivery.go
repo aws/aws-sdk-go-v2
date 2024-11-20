@@ -42,13 +42,13 @@ import (
 // deliveries to configure multiple delivery sources to send logs to the same
 // delivery destination.
 //
-// You can't update an existing delivery. You can only create and delete
-// deliveries.
+// To update an existing delivery configuration, use [UpdateDeliveryConfiguration].
 //
 // [PutDeliveryDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
 // [PutDeliverySource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
 // [Enabling logging from Amazon Web Services services.]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
 // [PutDeliveryDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
+// [UpdateDeliveryConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
 func (c *Client) CreateDelivery(ctx context.Context, params *CreateDeliveryInput, optFns ...func(*Options)) (*CreateDeliveryOutput, error) {
 	if params == nil {
 		params = &CreateDeliveryInput{}
@@ -81,10 +81,10 @@ type CreateDeliveryInput struct {
 	FieldDelimiter *string
 
 	// The list of record fields to be delivered to the destination, in order. If the
-	// delivery’s log source has mandatory fields, they must be included in this list.
+	// delivery's log source has mandatory fields, they must be included in this list.
 	RecordFields []string
 
-	// This structure contains parameters that are valid only when the delivery’s
+	// This structure contains parameters that are valid only when the delivery's
 	// delivery destination is an S3 bucket.
 	S3DeliveryConfiguration *types.S3DeliveryConfiguration
 

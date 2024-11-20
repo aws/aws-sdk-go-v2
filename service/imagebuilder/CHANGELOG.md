@@ -1,3 +1,32 @@
+# v1.38.4 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.3 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.38.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.0 (2024-10-22)
+
+* **Feature**: Add macOS platform and instance placement options
+
+# v1.37.3 (2024-10-16)
+
+* **Bug Fix**: **BREAKING CHANGE**: The type of LaunchTemplateConfiguration.SetDefaultVersion has been changed from `bool` to `*bool`. Before this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to express the full range of values for the field (true, false, and unset/nil), each of which have distinctly different behaviors.
+
+# v1.37.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

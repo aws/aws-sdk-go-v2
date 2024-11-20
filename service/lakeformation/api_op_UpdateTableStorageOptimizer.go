@@ -33,7 +33,7 @@ type UpdateTableStorageOptimizerInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// Name of the table for which to enable the storage optimizer.
+	// Name of the configuration for the storage optimizer.
 	//
 	// This member is required.
 	StorageOptimizerConfig map[string]map[string]string

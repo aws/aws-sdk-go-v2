@@ -178,6 +178,13 @@ func awsRestjson1_serializeOpDocumentCreateServiceLevelObjectiveInput(v *CreateS
 	object := value.Object()
 	defer object.Close()
 
+	if v.BurnRateConfigurations != nil {
+		ok := object.Key("BurnRateConfigurations")
+		if err := awsRestjson1_serializeDocumentBurnRateConfigurations(v.BurnRateConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -1328,6 +1335,13 @@ func awsRestjson1_serializeOpDocumentUpdateServiceLevelObjectiveInput(v *UpdateS
 	object := value.Object()
 	defer object.Close()
 
+	if v.BurnRateConfigurations != nil {
+		ok := object.Key("BurnRateConfigurations")
+		if err := awsRestjson1_serializeDocumentBurnRateConfigurations(v.BurnRateConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -1364,6 +1378,31 @@ func awsRestjson1_serializeDocumentAttributes(v map[string]string, value smithyj
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBurnRateConfiguration(v *types.BurnRateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LookBackWindowMinutes != nil {
+		ok := object.Key("LookBackWindowMinutes")
+		ok.Integer(*v.LookBackWindowMinutes)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBurnRateConfigurations(v []types.BurnRateConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBurnRateConfiguration(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

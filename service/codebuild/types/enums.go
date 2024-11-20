@@ -238,16 +238,17 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeBuildGeneral1Small   ComputeType = "BUILD_GENERAL1_SMALL"
-	ComputeTypeBuildGeneral1Medium  ComputeType = "BUILD_GENERAL1_MEDIUM"
-	ComputeTypeBuildGeneral1Large   ComputeType = "BUILD_GENERAL1_LARGE"
-	ComputeTypeBuildGeneral1Xlarge  ComputeType = "BUILD_GENERAL1_XLARGE"
-	ComputeTypeBuildGeneral12xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
-	ComputeTypeBuildLambda1gb       ComputeType = "BUILD_LAMBDA_1GB"
-	ComputeTypeBuildLambda2gb       ComputeType = "BUILD_LAMBDA_2GB"
-	ComputeTypeBuildLambda4gb       ComputeType = "BUILD_LAMBDA_4GB"
-	ComputeTypeBuildLambda8gb       ComputeType = "BUILD_LAMBDA_8GB"
-	ComputeTypeBuildLambda10gb      ComputeType = "BUILD_LAMBDA_10GB"
+	ComputeTypeBuildGeneral1Small    ComputeType = "BUILD_GENERAL1_SMALL"
+	ComputeTypeBuildGeneral1Medium   ComputeType = "BUILD_GENERAL1_MEDIUM"
+	ComputeTypeBuildGeneral1Large    ComputeType = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral1Xlarge   ComputeType = "BUILD_GENERAL1_XLARGE"
+	ComputeTypeBuildGeneral12xlarge  ComputeType = "BUILD_GENERAL1_2XLARGE"
+	ComputeTypeBuildLambda1gb        ComputeType = "BUILD_LAMBDA_1GB"
+	ComputeTypeBuildLambda2gb        ComputeType = "BUILD_LAMBDA_2GB"
+	ComputeTypeBuildLambda4gb        ComputeType = "BUILD_LAMBDA_4GB"
+	ComputeTypeBuildLambda8gb        ComputeType = "BUILD_LAMBDA_8GB"
+	ComputeTypeBuildLambda10gb       ComputeType = "BUILD_LAMBDA_10GB"
+	ComputeTypeAttributeBasedCompute ComputeType = "ATTRIBUTE_BASED_COMPUTE"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
@@ -266,6 +267,7 @@ func (ComputeType) Values() []ComputeType {
 		"BUILD_LAMBDA_4GB",
 		"BUILD_LAMBDA_8GB",
 		"BUILD_LAMBDA_10GB",
+		"ATTRIBUTE_BASED_COMPUTE",
 	}
 }
 
@@ -297,6 +299,9 @@ const (
 	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
 	EnvironmentTypeLinuxLambdaContainer       EnvironmentType = "LINUX_LAMBDA_CONTAINER"
 	EnvironmentTypeArmLambdaContainer         EnvironmentType = "ARM_LAMBDA_CONTAINER"
+	EnvironmentTypeLinuxEc2                   EnvironmentType = "LINUX_EC2"
+	EnvironmentTypeArmEc2                     EnvironmentType = "ARM_EC2"
+	EnvironmentTypeWindowsEc2                 EnvironmentType = "WINDOWS_EC2"
 	EnvironmentTypeMacArm                     EnvironmentType = "MAC_ARM"
 )
 
@@ -313,6 +318,9 @@ func (EnvironmentType) Values() []EnvironmentType {
 		"WINDOWS_SERVER_2019_CONTAINER",
 		"LINUX_LAMBDA_CONTAINER",
 		"ARM_LAMBDA_CONTAINER",
+		"LINUX_EC2",
+		"ARM_EC2",
+		"WINDOWS_EC2",
 		"MAC_ARM",
 	}
 }
@@ -396,6 +404,63 @@ func (FleetOverflowBehavior) Values() []FleetOverflowBehavior {
 	return []FleetOverflowBehavior{
 		"QUEUE",
 		"ON_DEMAND",
+	}
+}
+
+type FleetProxyRuleBehavior string
+
+// Enum values for FleetProxyRuleBehavior
+const (
+	FleetProxyRuleBehaviorAllowAll FleetProxyRuleBehavior = "ALLOW_ALL"
+	FleetProxyRuleBehaviorDenyAll  FleetProxyRuleBehavior = "DENY_ALL"
+)
+
+// Values returns all known values for FleetProxyRuleBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetProxyRuleBehavior) Values() []FleetProxyRuleBehavior {
+	return []FleetProxyRuleBehavior{
+		"ALLOW_ALL",
+		"DENY_ALL",
+	}
+}
+
+type FleetProxyRuleEffectType string
+
+// Enum values for FleetProxyRuleEffectType
+const (
+	FleetProxyRuleEffectTypeAllow FleetProxyRuleEffectType = "ALLOW"
+	FleetProxyRuleEffectTypeDeny  FleetProxyRuleEffectType = "DENY"
+)
+
+// Values returns all known values for FleetProxyRuleEffectType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetProxyRuleEffectType) Values() []FleetProxyRuleEffectType {
+	return []FleetProxyRuleEffectType{
+		"ALLOW",
+		"DENY",
+	}
+}
+
+type FleetProxyRuleType string
+
+// Enum values for FleetProxyRuleType
+const (
+	FleetProxyRuleTypeDomain FleetProxyRuleType = "DOMAIN"
+	FleetProxyRuleTypeIp     FleetProxyRuleType = "IP"
+)
+
+// Values returns all known values for FleetProxyRuleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetProxyRuleType) Values() []FleetProxyRuleType {
+	return []FleetProxyRuleType{
+		"DOMAIN",
+		"IP",
 	}
 }
 
@@ -555,6 +620,25 @@ func (LogsConfigStatusType) Values() []LogsConfigStatusType {
 	return []LogsConfigStatusType{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type MachineType string
+
+// Enum values for MachineType
+const (
+	MachineTypeGeneral MachineType = "GENERAL"
+	MachineTypeNvme    MachineType = "NVME"
+)
+
+// Values returns all known values for MachineType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MachineType) Values() []MachineType {
+	return []MachineType{
+		"GENERAL",
+		"NVME",
 	}
 }
 
@@ -991,6 +1075,7 @@ const (
 	WebhookFilterTypeWorkflowName   WebhookFilterType = "WORKFLOW_NAME"
 	WebhookFilterTypeTagName        WebhookFilterType = "TAG_NAME"
 	WebhookFilterTypeReleaseName    WebhookFilterType = "RELEASE_NAME"
+	WebhookFilterTypeRepositoryName WebhookFilterType = "REPOSITORY_NAME"
 )
 
 // Values returns all known values for WebhookFilterType. Note that this can be
@@ -1008,6 +1093,7 @@ func (WebhookFilterType) Values() []WebhookFilterType {
 		"WORKFLOW_NAME",
 		"TAG_NAME",
 		"RELEASE_NAME",
+		"REPOSITORY_NAME",
 	}
 }
 

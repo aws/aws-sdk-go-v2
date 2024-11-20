@@ -250,6 +250,26 @@ func (m *validateOpEnableFederation) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateQuery struct {
+}
+
+func (*validateOpGenerateQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetChannel struct {
 }
 
@@ -858,6 +878,10 @@ func addOpEnableFederationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableFederation{}, middleware.After)
 }
 
+func addOpGenerateQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateQuery{}, middleware.After)
+}
+
 func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
 }
@@ -1395,6 +1419,24 @@ func validateOpEnableFederationInput(v *EnableFederationInput) error {
 	}
 	if v.FederationRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FederationRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateQueryInput(v *GenerateQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateQueryInput"}
+	if v.EventDataStores == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStores"))
+	}
+	if v.Prompt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prompt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

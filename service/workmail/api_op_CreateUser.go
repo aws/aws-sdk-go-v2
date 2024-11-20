@@ -51,6 +51,11 @@ type CreateUserInput struct {
 	// If this parameter is enabled, the user will be hidden from the address book.
 	HiddenFromGlobalAddressList bool
 
+	// User ID from the IAM Identity Center. If this parameter is empty it will be
+	// updated automatically when the user logs in for the first time to the mailbox
+	// associated with WorkMail.
+	IdentityProviderUserId *string
+
 	// The last name of the new user.
 	LastName *string
 

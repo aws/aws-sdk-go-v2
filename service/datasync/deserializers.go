@@ -7823,7 +7823,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7881,7 +7881,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10776,6 +10776,146 @@ func awsAwsjson11_deserializeDocumentTagListEntry(v **types.TagListEntry, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTaskExecutionFilesFailedDetail(v **types.TaskExecutionFilesFailedDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskExecutionFilesFailedDetail
+	if *v == nil {
+		sv = &types.TaskExecutionFilesFailedDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Delete":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Delete = i64
+			}
+
+		case "Prepare":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Prepare = i64
+			}
+
+		case "Transfer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Transfer = i64
+			}
+
+		case "Verify":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Verify = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTaskExecutionFilesListedDetail(v **types.TaskExecutionFilesListedDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskExecutionFilesListedDetail
+	if *v == nil {
+		sv = &types.TaskExecutionFilesListedDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AtDestinationForDelete":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AtDestinationForDelete = i64
+			}
+
+		case "AtSource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AtSource = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTaskExecutionList(v *[]types.TaskExecutionListEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10848,6 +10988,15 @@ func awsAwsjson11_deserializeDocumentTaskExecutionListEntry(v **types.TaskExecut
 					return fmt.Errorf("expected TaskExecutionArn to be of type string, got %T instead", value)
 				}
 				sv.TaskExecutionArn = ptr.String(jtv)
+			}
+
+		case "TaskMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskMode to be of type string, got %T instead", value)
+				}
+				sv.TaskMode = types.TaskMode(jtv)
 			}
 
 		default:
@@ -11068,6 +11217,15 @@ func awsAwsjson11_deserializeDocumentTaskListEntry(v **types.TaskListEntry, valu
 					return fmt.Errorf("expected TaskArn to be of type string, got %T instead", value)
 				}
 				sv.TaskArn = ptr.String(jtv)
+			}
+
+		case "TaskMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskMode to be of type string, got %T instead", value)
+				}
+				sv.TaskMode = types.TaskMode(jtv)
 			}
 
 		default:
@@ -13680,6 +13838,29 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 				sv.FilesDeleted = i64
 			}
 
+		case "FilesFailed":
+			if err := awsAwsjson11_deserializeDocumentTaskExecutionFilesFailedDetail(&sv.FilesFailed, value); err != nil {
+				return err
+			}
+
+		case "FilesListed":
+			if err := awsAwsjson11_deserializeDocumentTaskExecutionFilesListedDetail(&sv.FilesListed, value); err != nil {
+				return err
+			}
+
+		case "FilesPrepared":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FilesPrepared = i64
+			}
+
 		case "FilesSkipped":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13776,6 +13957,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 					return fmt.Errorf("expected TaskExecutionArn to be of type string, got %T instead", value)
 				}
 				sv.TaskExecutionArn = ptr.String(jtv)
+			}
+
+		case "TaskMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskMode to be of type string, got %T instead", value)
+				}
+				sv.TaskMode = types.TaskMode(jtv)
 			}
 
 		case "TaskReportConfig":
@@ -13949,6 +14139,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 					return fmt.Errorf("expected TaskArn to be of type string, got %T instead", value)
 				}
 				sv.TaskArn = ptr.String(jtv)
+			}
+
+		case "TaskMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TaskMode to be of type string, got %T instead", value)
+				}
+				sv.TaskMode = types.TaskMode(jtv)
 			}
 
 		case "TaskReportConfig":

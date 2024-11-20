@@ -99,7 +99,7 @@ type CreateContainerRecipeInput struct {
 	// testing container images.
 	InstanceConfiguration *types.InstanceConfiguration
 
-	// Identifies which KMS key is used to encrypt the container image.
+	// Identifies which KMS key is used to encrypt the Dockerfile template.
 	KmsKeyId *string
 
 	// Specifies the operating system platform when you use a custom base image.

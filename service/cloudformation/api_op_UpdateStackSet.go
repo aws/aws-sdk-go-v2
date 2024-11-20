@@ -104,9 +104,9 @@ type UpdateStackSetInput struct {
 	//   - CAPABILITY_IAM and CAPABILITY_NAMED_IAM
 	//
 	// Some stack templates might include resources that can affect permissions in
-	//   your Amazon Web Services account; for example, by creating new Identity and
-	//   Access Management (IAM) users. For those stacks sets, you must explicitly
-	//   acknowledge this by specifying one of these capabilities.
+	//   your Amazon Web Services account, for example, by creating new IAM users. For
+	//   those stacks sets, you must explicitly acknowledge this by specifying one of
+	//   these capabilities.
 	//
 	// The following IAM resources require you to specify either the CAPABILITY_IAM or
 	//   CAPABILITY_NAMED_IAM capability.
@@ -136,7 +136,7 @@ type UpdateStackSetInput struct {
 	//
 	// [AWS::IAM::UserToGroupAddition]
 	//
-	// For more information, see [Acknowledging IAM Resources in CloudFormation Templates].
+	// For more information, see [Acknowledging IAM resources in CloudFormation templates].
 	//
 	//   - CAPABILITY_AUTO_EXPAND
 	//
@@ -152,17 +152,17 @@ type UpdateStackSetInput struct {
 	//   with service-managed permissions, if you reference a macro in your template the
 	//   stack set operation will fail.
 	//
-	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
 	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
+	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
+	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
+	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
 	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
 	// [Using CloudFormation Macros to Perform Custom Processing on Templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
-	// [Acknowledging IAM Resources in CloudFormation Templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
 	Capabilities []types.Capability
 
 	// [Service-managed permissions] The Organizations accounts in which to update
@@ -284,24 +284,18 @@ type UpdateStackSetInput struct {
 	Tags []types.Tag
 
 	// The structure that contains the template body, with a minimum length of 1 byte
-	// and a maximum length of 51,200 bytes. For more information, see [Template Anatomy]in the
-	// CloudFormation User Guide.
+	// and a maximum length of 51,200 bytes.
 	//
 	// Conditional: You must specify only one of the following parameters: TemplateBody
 	// or TemplateURL —or set UsePreviousTemplate to true.
-	//
-	// [Template Anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateBody *string
 
 	// The location of the file that contains the template body. The URL must point to
 	// a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket
-	// or a Systems Manager document. For more information, see [Template Anatomy]in the CloudFormation
-	// User Guide.
+	// or a Systems Manager document.
 	//
 	// Conditional: You must specify only one of the following parameters: TemplateBody
 	// or TemplateURL —or set UsePreviousTemplate to true.
-	//
-	// [Template Anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateURL *string
 
 	// Use the existing template that's associated with the stack set that you're

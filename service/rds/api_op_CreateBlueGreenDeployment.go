@@ -16,8 +16,7 @@ import (
 // A blue/green deployment creates a staging environment that copies the
 // production environment. In a blue/green deployment, the blue environment is the
 // current production environment. The green environment is the staging
-// environment. The staging environment stays in sync with the current production
-// environment using logical replication.
+// environment, and it stays in sync with the current production environment.
 //
 // You can make changes to the databases in the green environment without
 // affecting production workloads. For example, you can upgrade the major or minor
@@ -72,6 +71,13 @@ type CreateBlueGreenDeploymentInput struct {
 	// Tags to assign to the blue/green deployment.
 	Tags []types.Tag
 
+	// The amount of storage in gibibytes (GiB) to allocate for the green DB instance.
+	// You can choose to increase or decrease the allocated storage on the green DB
+	// instance.
+	//
+	// This setting doesn't apply to Amazon Aurora blue/green deployments.
+	TargetAllocatedStorage *int32
+
 	// The DB cluster parameter group associated with the Aurora DB cluster in the
 	// green environment.
 	//
@@ -98,6 +104,29 @@ type CreateBlueGreenDeploymentInput struct {
 	//
 	// Specify the engine version to upgrade to in the green environment.
 	TargetEngineVersion *string
+
+	// The amount of Provisioned IOPS (input/output operations per second) to allocate
+	// for the green DB instance. For information about valid IOPS values, see [Amazon RDS DB instance storage]in the
+	// Amazon RDS User Guide.
+	//
+	// This setting doesn't apply to Amazon Aurora blue/green deployments.
+	//
+	// [Amazon RDS DB instance storage]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html
+	TargetIops *int32
+
+	// The storage throughput value for the green DB instance.
+	//
+	// This setting applies only to the gp3 storage type.
+	//
+	// This setting doesn't apply to Amazon Aurora blue/green deployments.
+	TargetStorageThroughput *int32
+
+	// The storage type to associate with the green DB instance.
+	//
+	// Valid Values: gp2 | gp3 | io1 | io2
+	//
+	// This setting doesn't apply to Amazon Aurora blue/green deployments.
+	TargetStorageType *string
 
 	// Whether to upgrade the storage file system configuration on the green database.
 	// This option migrates the green DB instance from the older 32-bit file system to

@@ -82,7 +82,7 @@ type ChatSyncInput struct {
 	// The identifier of the previous system message in a conversation.
 	ParentMessageId *string
 
-	// The groups that a user associated with the chat input belongs to.
+	// The group names that a user associated with the chat input belongs to.
 	UserGroups []string
 
 	// The identifier of the user attached to the chat input.

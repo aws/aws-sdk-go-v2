@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcceptDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CancelJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataGrant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -134,6 +158,18 @@ func TestCheckSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataSet(context.Background(), nil, func(o *Options) {
@@ -182,6 +218,18 @@ func TestCheckSnapshot_GetAsset(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataSet(context.Background(), nil, func(o *Options) {
@@ -218,11 +266,35 @@ func TestCheckSnapshot_GetJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetReceivedDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReceivedDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetReceivedDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRevision(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRevision(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRevision")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -271,6 +343,18 @@ func TestCheckSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListReceivedDataGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReceivedDataGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReceivedDataGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -421,11 +505,35 @@ func TestCheckSnapshot_UpdateRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AcceptDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataGrant")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +601,18 @@ func TestUpdateSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDataSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataSet(context.Background(), nil, func(o *Options) {
@@ -541,6 +661,18 @@ func TestUpdateSnapshot_GetAsset(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataSet(context.Background(), nil, func(o *Options) {
@@ -577,11 +709,35 @@ func TestUpdateSnapshot_GetJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetReceivedDataGrant(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetReceivedDataGrant(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetReceivedDataGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRevision(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRevision(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRevision")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -630,6 +786,18 @@ func TestUpdateSnapshot_ListJobs(t *testing.T) {
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListReceivedDataGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReceivedDataGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReceivedDataGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

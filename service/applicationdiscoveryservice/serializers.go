@@ -2245,6 +2245,11 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.Name)
 	}
 
+	if v.Wave != nil {
+		ok := object.Key("wave")
+		ok.String(*v.Wave)
+	}
+
 	return nil
 }
 
@@ -2727,6 +2732,11 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Wave != nil {
+		ok := object.Key("wave")
+		ok.String(*v.Wave)
 	}
 
 	return nil

@@ -362,6 +362,18 @@ func TestCheckSnapshot_CreateContactFlowModule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateContactFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContactFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContactFlowVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvaluationForm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluationForm(context.Background(), nil, func(o *Options) {
@@ -1610,6 +1622,18 @@ func TestCheckSnapshot_ListContactFlows(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContactFlowVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactFlowVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContactFlowVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListContactReferences(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContactReferences(context.Background(), nil, func(o *Options) {
@@ -2419,6 +2443,18 @@ func TestCheckSnapshot_StartOutboundVoiceContact(t *testing.T) {
 	_, err := svc.StartOutboundVoiceContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartOutboundVoiceContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartScreenSharing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartScreenSharing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartScreenSharing")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3426,6 +3462,18 @@ func TestUpdateSnapshot_CreateContactFlowModule(t *testing.T) {
 	_, err := svc.CreateContactFlowModule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateContactFlowModule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateContactFlowVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContactFlowVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContactFlowVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4681,6 +4729,18 @@ func TestUpdateSnapshot_ListContactFlows(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListContactFlowVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactFlowVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContactFlowVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListContactReferences(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListContactReferences(context.Background(), nil, func(o *Options) {
@@ -5490,6 +5550,18 @@ func TestUpdateSnapshot_StartOutboundVoiceContact(t *testing.T) {
 	_, err := svc.StartOutboundVoiceContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartOutboundVoiceContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartScreenSharing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartScreenSharing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartScreenSharing")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

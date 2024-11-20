@@ -1187,6 +1187,183 @@ type GpuInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the estimated monthly savings possible for idle resources by adopting
+// Compute Optimizer recommendations.
+type IdleEstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings for Idle resources.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Idle resource recommendation.
+type IdleRecommendation struct {
+
+	// The Amazon Web Services account ID of the idle resource.
+	AccountId *string
+
+	// The finding classification of an idle resource.
+	Finding IdleFinding
+
+	// A summary of the findings for the resource.
+	FindingDescription *string
+
+	// The timestamp of when the idle resource recommendation was last generated.
+	LastRefreshTimestamp *time.Time
+
+	// The number of days the idle resource utilization metrics were analyzed.
+	LookBackPeriodInDays float64
+
+	// The ARN of the current idle resource.
+	ResourceArn *string
+
+	// The unique identifier for the resource.
+	ResourceId *string
+
+	// The type of resource that is idle.
+	ResourceType IdleRecommendationResourceType
+
+	// The savings opportunity for the idle resource.
+	SavingsOpportunity *IdleSavingsOpportunity
+
+	// The savings opportunity for the idle resource after any applying discounts.
+	SavingsOpportunityAfterDiscounts *IdleSavingsOpportunityAfterDiscounts
+
+	// A list of tags assigned to your idle resource recommendations.
+	Tags []Tag
+
+	// An array of objects that describe the utilization metrics of the idle resource.
+	UtilizationMetrics []IdleUtilizationMetric
+
+	noSmithyDocumentSerde
+}
+
+// Returns of list of resources that doesn't have idle recommendations.
+type IdleRecommendationError struct {
+
+	// The error code.
+	Code *string
+
+	// The ID of the error.
+	Identifier *string
+
+	// The error message.
+	Message *string
+
+	// The type of resource associated with the error.
+	ResourceType IdleRecommendationResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a filter that returns a more specific list of idle resource
+// recommendations.
+type IdleRecommendationFilter struct {
+
+	//  The name of the filter.
+	//
+	// Specify Finding to return recommendations with a specific finding
+	// classification.
+	//
+	// You can filter your idle resource recommendations by tag:key and tag-key tags.
+	//
+	// A tag:key is a key and value combination of a tag assigned to your idle
+	// resource recommendations. Use the tag key in the filter name and the tag value
+	// as the filter value. For example, to find all idle resource service
+	// recommendations that have a tag with the key of Owner and the value of TeamA ,
+	// specify tag:Owner for the filter name and TeamA for the filter value.
+	//
+	// A tag-key is the key of a tag assigned to your idle resource recommendations.
+	// Use this filter to find all of your idle resource recommendations that have a
+	// tag with a specific key. This doesn’t consider the tag value. For example, you
+	// can find your idle resource service recommendations with a tag key value of
+	// Owner or without any tag keys assigned.
+	Name IdleRecommendationFilterName
+
+	// The value of the filter.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for idle resource recommendations.
+type IdleSavingsOpportunity struct {
+
+	// The estimated monthly savings possible by adopting Compute Optimizer's idle
+	// resource recommendations.
+	EstimatedMonthlySavings *IdleEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer's idle resource recommendations.
+	SavingsOpportunityPercentage float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for idle resource recommendations after
+// applying discounts.
+//
+// Savings opportunity represents the estimated monthly savings after applying
+// discounts. You can achieve this by implementing a given Compute Optimizer
+// recommendation.
+type IdleSavingsOpportunityAfterDiscounts struct {
+
+	// The estimated monthly savings possible by adopting Compute Optimizer's idle
+	// resource recommendations. This includes any applicable discounts.
+	EstimatedMonthlySavings *IdleEstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost by
+	// adopting Compute Optimizer's idle resource recommendations. This includes any
+	// applicable discounts.
+	SavingsOpportunityPercentage float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the findings summary of the idle resources.
+type IdleSummary struct {
+
+	// The name of the finding group for the idle resources.
+	Name IdleFinding
+
+	// The count of idle resources in the finding group.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the utilization metric of an idle resource.
+type IdleUtilizationMetric struct {
+
+	// The name of the utilization metric.
+	Name IdleMetricName
+
+	//  The statistic of the utilization metric.
+	//
+	// The Compute Optimizer API, Command Line Interface (CLI), and SDKs return
+	// utilization metrics using only the Maximum statistic, which is the highest
+	// value observed during the specified period.
+	//
+	// The Compute Optimizer console displays graphs for some utilization metrics
+	// using the Average statistic, which is the value of Sum / SampleCount during the
+	// specified period. For more information, see [Viewing resource recommendations]in the Compute Optimizer User
+	// Guide. You can also get averaged utilization metric data for your resources
+	// using Amazon CloudWatch. For more information, see the [Amazon CloudWatch User Guide].
+	//
+	// [Viewing resource recommendations]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+	// [Amazon CloudWatch User Guide]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+	Statistic MetricStatistic
+
+	// The value of the utilization metric.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
 //	The estimated monthly savings after you adjust the configurations of your
 //
 // instances running on the inferred workload types to the recommended
@@ -2151,6 +2328,18 @@ type MetricSource struct {
 	noSmithyDocumentSerde
 }
 
+// Describes how the recommendations are ordered.
+type OrderBy struct {
+
+	// The dimension values to sort the recommendations.
+	Dimension Dimension
+
+	// The order to sort the recommendations.
+	Order Order
+
+	noSmithyDocumentSerde
+}
+
 //	The preference to control which resource type values are considered when
 //
 // generating rightsizing recommendations. You can specify this preference as a
@@ -2342,8 +2531,14 @@ type RDSDBRecommendation struct {
 	//  The DB instance class of the current RDS instance.
 	CurrentDBInstanceClass *string
 
+	// The performance risk for the current DB instance.
+	CurrentInstancePerformanceRisk RDSCurrentInstancePerformanceRisk
+
 	//  The configuration of the current RDS storage.
 	CurrentStorageConfiguration *DBStorageConfiguration
+
+	// The identifier for DB cluster.
+	DbClusterIdentifier *string
 
 	//  Describes the effective recommendation preferences for Amazon RDS.
 	EffectiveRecommendationPreferences *RDSEffectiveRecommendationPreferences
@@ -2383,6 +2578,9 @@ type RDSDBRecommendation struct {
 
 	//  The number of days the Amazon RDS utilization metrics were analyzed.
 	LookbackPeriodInDays float64
+
+	// The promotion tier for the Aurora instance.
+	PromotionTier *int32
 
 	//  The ARN of the current Amazon RDS.
 	//
@@ -2793,8 +2991,49 @@ type RecommendationSummary struct {
 	// The Amazon Web Services account ID of the recommendation summary.
 	AccountId *string
 
+	// Describes the savings opportunity for recommendations of a given resource type
+	// or for the recommendation option of an individual resource.
+	//
+	// Savings opportunity represents the estimated monthly savings you can achieve by
+	// implementing a given Compute Optimizer recommendation.
+	//
+	// Savings opportunity data requires that you opt in to Cost Explorer, as well as
+	// activate Receive Amazon EC2 resource recommendations in the Cost Explorer
+	// preferences page. That creates a connection between Cost Explorer and Compute
+	// Optimizer. With this connection, Cost Explorer generates savings estimates
+	// considering the price of existing resources, the price of recommended resources,
+	// and historical usage data. Estimated monthly savings reflects the projected
+	// dollar savings associated with each of the recommendations generated. For more
+	// information, see [Enabling Cost Explorer]and [Optimizing your cost with Rightsizing Recommendations] in the Cost Management User Guide.
+	//
+	// [Optimizing your cost with Rightsizing Recommendations]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+	// [Enabling Cost Explorer]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+	AggregatedSavingsOpportunity *SavingsOpportunity
+
 	// An object that describes the performance risk ratings for a given resource type.
 	CurrentPerformanceRiskRatings *CurrentPerformanceRiskRatings
+
+	// Describes the savings opportunity for recommendations of a given resource type
+	// or for the recommendation option of an individual resource.
+	//
+	// Savings opportunity represents the estimated monthly savings you can achieve by
+	// implementing a given Compute Optimizer recommendation.
+	//
+	// Savings opportunity data requires that you opt in to Cost Explorer, as well as
+	// activate Receive Amazon EC2 resource recommendations in the Cost Explorer
+	// preferences page. That creates a connection between Cost Explorer and Compute
+	// Optimizer. With this connection, Cost Explorer generates savings estimates
+	// considering the price of existing resources, the price of recommended resources,
+	// and historical usage data. Estimated monthly savings reflects the projected
+	// dollar savings associated with each of the recommendations generated. For more
+	// information, see [Enabling Cost Explorer]and [Optimizing your cost with Rightsizing Recommendations] in the Cost Management User Guide.
+	//
+	// [Optimizing your cost with Rightsizing Recommendations]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+	// [Enabling Cost Explorer]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+	IdleSavingsOpportunity *SavingsOpportunity
+
+	//  Describes the findings summary of the idle resources.
+	IdleSummaries []IdleSummary
 
 	//  An array of objects that describes the estimated monthly saving amounts for
 	// the instances running on the specified inferredWorkloadTypes . The array
@@ -3205,9 +3444,17 @@ type VolumeConfiguration struct {
 
 	// The volume type.
 	//
-	// This can be gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD,
-	// st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic
-	// volumes.
+	// The volume types can be the following:
+	//
+	//   - General Purpose SSD gp2 and gp3
+	//
+	//   - Provisioned IOPS SSD io1 , io2 , and io2 Block Express
+	//
+	//   - Throughput Optimized HDD st1
+	//
+	//   - Cold HDD sc1
+	//
+	//   - Magnetic volumes standard
 	VolumeType *string
 
 	noSmithyDocumentSerde

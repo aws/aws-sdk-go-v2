@@ -60,7 +60,8 @@ type DescribeThingTypeOutput struct {
 	ThingTypeName *string
 
 	// The ThingTypeProperties contains information about the thing type including
-	// description, and a list of searchable thing attribute names.
+	// description, a list of searchable thing attribute names, and MQTT5
+	// configuration.
 	ThingTypeProperties *types.ThingTypeProperties
 
 	// Metadata pertaining to the operation's result.

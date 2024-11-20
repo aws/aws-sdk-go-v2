@@ -431,6 +431,52 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.transfer#ConnectorFileTransferResult": {
+            "type": "structure",
+            "members": {
+                "FilePath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filename and path to where the file was sent to or retrieved from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.transfer#TransferTableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status for the transfer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.transfer#FailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For transfers that fail, this parameter contains a code indicating the reason. For example, <code>RETRIEVE_FILE_NOT_FOUND</code>\n         </p>"
+                    }
+                },
+                "FailureMessage": {
+                    "target": "com.amazonaws.transfer#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For transfers that fail, this parameter describes the reason for the failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the details for files transferred using an SFTP connector, during a single transfer.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ConnectorFileTransferResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ConnectorFileTransferResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.transfer#ConnectorId": {
             "type": "string",
             "traits": {
@@ -698,7 +744,7 @@
                 "BaseDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The landing directory (folder) for files transferred by using the AS2 protocol.</p>\n         <p>A <code>BaseDirectory</code> example is\n          <code>/DOC-EXAMPLE-BUCKET/home/mydirectory</code>.</p>",
+                        "smithy.api#documentation": "<p>The landing directory (folder) for files transferred by using the AS2 protocol.</p>\n         <p>A <code>BaseDirectory</code> example is\n      <code>/<i>amzn-s3-demo-bucket</i>/home/mydirectory</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3669,7 +3715,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The virtual private cloud (VPC) endpoint settings that are configured for your file\n      transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server\n      and resources only within your VPC. To control incoming internet traffic, invoke the\n        <code>UpdateServer</code> API and attach an Elastic IP address to your server's\n      endpoint.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The virtual private cloud (VPC) endpoint settings that are configured for your file\n      transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server\n      and resources only within your VPC. To control incoming internet traffic, invoke the\n        <code>UpdateServer</code> API and attach an Elastic IP address to your server's\n      endpoint.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#EndpointType": {
@@ -3879,6 +3925,9 @@
                 },
                 "smithy.api#pattern": "^S-1-[\\d-]+$"
             }
+        },
+        "com.amazonaws.transfer#FailureCode": {
+            "type": "string"
         },
         "com.amazonaws.transfer#FileLocation": {
             "type": "structure",
@@ -4872,6 +4921,97 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the details for each execution, in a <code>ListedExecution</code> array.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#ListFileTransferResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#ListFileTransferResultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#ListFileTransferResultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Returns real-time updates and detailed information on the status of each individual file being transferred in a specific file transfer operation. \n      You specify the file transfer by providing its <code>ConnectorId</code> and its <code>TransferId</code>.</p>\n         <note>\n            <p>File transfer results are available up to 7 days after an operation has been requested.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listFileTransferResults"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FileTransferResults",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListFileTransferResultsRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectorId": {
+                    "target": "com.amazonaws.transfer#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a connector. This value should match the value supplied to the corresponding <code>StartFileTransfer</code> call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransferId": {
+                    "target": "com.amazonaws.transfer#TransferId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for a file transfer. This value should match the value supplied to the corresponding <code>StartFileTransfer</code> call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more file details than returned in this call, use this value for a subsequent call to <code>ListFileTransferResults</code> to retrieve them.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.transfer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of files to return in a single page. Note that currently you can specify a maximum of 10 file paths in a single\n      <a href=\"https://docs.aws.amazon.com/transfer/latest/APIReference/API_StartFileTransfer.html\">StartFileTransfer</a> operation. Thus, the maximum\n      number of file transfer results that can be returned in a single page is 10.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#ListFileTransferResultsResponse": {
+            "type": "structure",
+            "members": {
+                "FileTransferResults": {
+                    "target": "com.amazonaws.transfer#ConnectorFileTransferResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the details for the files transferred in the transfer identified by the <code>TransferId</code> and <code>ConnectorId</code> specified.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FilePath</code>: the filename and path to where the file was sent to or retrieved from.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StatusCode</code>: current status for the transfer. The status returned is one of the following values:<code>QUEUED</code>,\n          <code>IN_PROGRESS</code>, <code>COMPLETED</code>, or <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FailureCode</code>: for transfers that fail, this parameter contains a code indicating the reason. For example, <code>RETRIEVE_FILE_NOT_FOUND</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FailureMessage</code>: for transfers that fail, this parameter describes the reason for the failure.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a token that you can use to call <code>ListFileTransferResults</code> again and receive\n      additional results, if there are any (against the same <code>TransferId</code>.</p>"
                     }
                 }
             },
@@ -7244,7 +7384,7 @@
                 "SendFilePaths": {
                     "target": "com.amazonaws.transfer#FilePaths",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more source paths for the Amazon S3 storage. Each string represents a source\n      file path for one outbound file transfer. For example,\n          <code>\n               <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i>\n            </code>.</p>\n         <note>\n            <p>Replace <code>\n                  <i>DOC-EXAMPLE-BUCKET</i>\n               </code> with one of your actual buckets.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>One or more source paths for the Amazon S3 storage. Each string represents a source\n      file path for one outbound file transfer. For example,\n      <code>\n               <i>amzn-s3-demo-bucket</i>/<i>myfile.txt</i>\n            </code>.</p>\n         <note>\n            <p>Replace <code>\n                  <i>amzn-s3-demo-bucket</i>\n               </code> with one of your actual buckets.</p>\n         </note>"
                     }
                 },
                 "RetrieveFilePaths": {
@@ -7852,6 +7992,9 @@
                     "target": "com.amazonaws.transfer#ListExecutions"
                 },
                 {
+                    "target": "com.amazonaws.transfer#ListFileTransferResults"
+                },
+                {
                     "target": "com.amazonaws.transfer#ListHostKeys"
                 },
                 {
@@ -7930,7 +8073,7 @@
                     "name": "transfer"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Transfer Family is a fully managed service that enables the transfer of files over the File\n      Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File\n      Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3) or Amazon EFS.\n      Additionally, you can use Applicability Statement 2 (AS2) to transfer files into and out of Amazon S3.\n      Amazon Web Services helps you seamlessly migrate your file transfer workflows to Transfer Family by integrating\n      with existing authentication systems, and providing DNS routing with Amazon Route 53 so\n      nothing changes for your customers and partners, or their applications. With your data in\n      Amazon S3, you can use it with Amazon Web Services for processing, analytics, machine learning, and\n      archiving. Getting started with Transfer Family is easy since there is no infrastructure to buy and\n      set up.</p>",
+                "smithy.api#documentation": "<p>Transfer Family is a fully managed service that enables the transfer of files over the File\n      Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File\n      Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3) or Amazon EFS.\n      Additionally, you can use Applicability Statement 2 (AS2) to transfer files into and out of Amazon S3.\n      Amazon Web Services helps you seamlessly migrate your file transfer workflows to Transfer Family by integrating\n      with existing authentication systems, and providing DNS routing with Amazon Route 53 so\n      nothing changes for your customers and partners, or their applications. With your data in\n      Amazon S3, you can use it with Amazon Web Services services for processing, analytics, machine learning, and\n      archiving. Getting started with Transfer Family is easy since there is no infrastructure to buy and\n      set up.</p>",
                 "smithy.api#title": "AWS Transfer Family",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -8913,6 +9056,35 @@
                 }
             }
         },
+        "com.amazonaws.transfer#TransferTableStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#UntagResource": {
             "type": "operation",
             "input": {
@@ -9153,7 +9325,7 @@
                 "BaseDirectory": {
                     "target": "com.amazonaws.transfer#HomeDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>To change the landing directory (folder) for files that are transferred, provide the\n      bucket folder that you want to use; for example,\n          <code>/<i>DOC-EXAMPLE-BUCKET</i>/<i>home</i>/<i>mydirectory</i>\n            </code>.</p>"
+                        "smithy.api#documentation": "<p>To change the landing directory (folder) for files that are transferred, provide the\n      bucket folder that you want to use; for example,\n      <code>/<i>amzn-s3-demo-bucket</i>/<i>home</i>/<i>mydirectory</i>\n            </code>.</p>"
                     }
                 },
                 "AccessRole": {
@@ -9611,7 +9783,7 @@
                 "EndpointType": {
                     "target": "com.amazonaws.transfer#EndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of endpoint that you want your server to use. You can choose to make your server's endpoint publicly accessible (PUBLIC)\n      or host it inside your VPC. With an endpoint that is hosted in a VPC, you can restrict access to your server and \n      resources only within your VPC or choose to make it internet facing by attaching Elastic IP addresses directly to it.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of endpoint that you want your server to use. You can choose to make your server's endpoint publicly accessible (PUBLIC)\n      or host it inside your VPC. With an endpoint that is hosted in a VPC, you can restrict access to your server and \n      resources only within your VPC or choose to make it internet facing by attaching Elastic IP addresses directly to it.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
                     }
                 },
                 "HostKey": {
@@ -9975,13 +10147,13 @@
                 "OnUpload": {
                     "target": "com.amazonaws.transfer#OnUploadWorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>\n         <note>\n            <p>\n               <code>OnUpload</code> can contain a maximum of one <code>WorkflowDetail</code> object.</p>\n         </note>"
                     }
                 },
                 "OnPartialUpload": {
                     "target": "com.amazonaws.transfer#OnPartialUploadWorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A trigger that starts a workflow if a file is only partially uploaded. You can attach a workflow to a server\n  that executes whenever there is a partial upload.</p>\n         <p>A <i>partial upload</i> occurs when a file is open when the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>A trigger that starts a workflow if a file is only partially uploaded. You can attach a workflow to a server\n  that executes whenever there is a partial upload.</p>\n         <p>A <i>partial upload</i> occurs when a file is open when the session disconnects.</p>\n         <note>\n            <p>\n               <code>OnPartialUpload</code> can contain a maximum of one <code>WorkflowDetail</code> object.</p>\n         </note>"
                     }
                 }
             },

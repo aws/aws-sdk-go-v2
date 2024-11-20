@@ -27,7 +27,7 @@ import (
 //
 // The Archive storage class is available only for file systems that use the
 //
-//	Elastic Throughput mode and the General Purpose Performance mode.
+//	Elastic throughput mode and the General Purpose performance mode.
 //
 //	- TransitionToPrimaryStorageClass – Whether to move files in the file system
 //	back to primary storage (Standard storage class) after they are accessed in IA
@@ -43,7 +43,7 @@ import (
 // LifecycleConfiguration . In the request, specify the following:
 //
 //   - The ID for the file system for which you are enabling, disabling, or
-//     modifying Lifecycle management.
+//     modifying lifecycle management.
 //
 //   - A LifecyclePolicies array of LifecyclePolicy objects that define when to
 //     move files to IA storage, to Archive storage, and back to primary storage.
@@ -86,8 +86,8 @@ type PutLifecycleConfigurationInput struct {
 	FileSystemId *string
 
 	// An array of LifecyclePolicy objects that define the file system's
-	// LifecycleConfiguration object. A LifecycleConfiguration object informs EFS
-	// Lifecycle management of the following:
+	// LifecycleConfiguration object. A LifecycleConfiguration object informs
+	// lifecycle management of the following:
 	//
 	//   - TransitionToIA – When to move files in the file system from primary storage
 	//   (Standard storage class) into the Infrequent Access (IA) storage.
@@ -100,7 +100,7 @@ type PutLifecycleConfigurationInput struct {
 	//   later than TransitionToIA.
 	//
 	// The Archive storage class is available only for file systems that use the
-	//   Elastic Throughput mode and the General Purpose Performance mode.
+	//   Elastic throughput mode and the General Purpose performance mode.
 	//
 	//   - TransitionToPrimaryStorageClass – Whether to move files in the file system
 	//   back to primary storage (Standard storage class) after they are accessed in IA

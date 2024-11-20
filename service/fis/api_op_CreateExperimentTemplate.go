@@ -77,6 +77,9 @@ type CreateExperimentTemplateInput struct {
 	// The experiment options for the experiment template.
 	ExperimentOptions *types.CreateExperimentTemplateExperimentOptionsInput
 
+	// The experiment report configuration for the experiment template.
+	ExperimentReportConfiguration *types.CreateExperimentTemplateReportConfigurationInput
+
 	// The configuration for experiment logging.
 	LogConfiguration *types.CreateExperimentTemplateLogConfigurationInput
 

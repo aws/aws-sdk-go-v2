@@ -43,6 +43,9 @@ type StartProductSubscriptionInput struct {
 
 	// The name of the user-based subscription product.
 	//
+	// Valid values: VISUAL_STUDIO_ENTERPRISE | VISUAL_STUDIO_PROFESSIONAL |
+	// OFFICE_PROFESSIONAL_PLUS
+	//
 	// This member is required.
 	Product *string
 
@@ -51,8 +54,12 @@ type StartProductSubscriptionInput struct {
 	// This member is required.
 	Username *string
 
-	// The domain name of the user.
+	// The domain name of the Active Directory that contains the user for whom to
+	// start the product subscription.
 	Domain *string
+
+	// The tags that apply to the product subscription.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

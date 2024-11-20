@@ -184,8 +184,6 @@ type CreateHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -234,8 +232,6 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -262,6 +258,19 @@ type DashUtcTiming struct {
 	// The the method that the player uses to synchronize to coordinated universal
 	// time (UTC) wall clock time.
 	TimingSource *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the destination where the harvested content will be
+// exported.
+type Destination struct {
+
+	// The configuration for exporting harvested content to an S3 bucket. This
+	// includes details such as the bucket name and destination path within the bucket.
+	//
+	// This member is required.
+	S3Destination *S3DestinationConfig
 
 	noSmithyDocumentSerde
 }
@@ -542,8 +551,6 @@ type GetHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -597,8 +604,6 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -615,6 +620,143 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a harvested DASH manifest.
+type HarvestedDashManifest struct {
+
+	// The name of the harvested DASH manifest.
+	//
+	// This member is required.
+	ManifestName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a harvested HLS manifest.
+type HarvestedHlsManifest struct {
+
+	// The name of the harvested HLS manifest.
+	//
+	// This member is required.
+	ManifestName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a harvested Low-Latency HLS manifest.
+type HarvestedLowLatencyHlsManifest struct {
+
+	// The name of the harvested Low-Latency HLS manifest.
+	//
+	// This member is required.
+	ManifestName *string
+
+	noSmithyDocumentSerde
+}
+
+// A collection of harvested manifests of different types.
+type HarvestedManifests struct {
+
+	// A list of harvested DASH manifests.
+	DashManifests []HarvestedDashManifest
+
+	// A list of harvested HLS manifests.
+	HlsManifests []HarvestedHlsManifest
+
+	// A list of harvested Low-Latency HLS manifests.
+	LowLatencyHlsManifests []HarvestedLowLatencyHlsManifest
+
+	noSmithyDocumentSerde
+}
+
+// Defines the schedule configuration for a harvest job.
+type HarvesterScheduleConfiguration struct {
+
+	// The end time for the harvest job.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The start time for the harvest job.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a harvest job resource in MediaPackage v2, which is used to export
+// content from an origin endpoint to an S3 bucket.
+type HarvestJob struct {
+
+	// The Amazon Resource Name (ARN) of the harvest job.
+	//
+	// This member is required.
+	Arn *string
+
+	// The name of the channel group containing the channel associated with this
+	// harvest job.
+	//
+	// This member is required.
+	ChannelGroupName *string
+
+	// The name of the channel associated with this harvest job.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The date and time when the harvest job was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The S3 destination where the harvested content will be placed.
+	//
+	// This member is required.
+	Destination *Destination
+
+	// The name of the harvest job.
+	//
+	// This member is required.
+	HarvestJobName *string
+
+	// A list of manifests that are being or have been harvested.
+	//
+	// This member is required.
+	HarvestedManifests *HarvestedManifests
+
+	// The date and time when the harvest job was last modified.
+	//
+	// This member is required.
+	ModifiedAt *time.Time
+
+	// The name of the origin endpoint associated with this harvest job.
+	//
+	// This member is required.
+	OriginEndpointName *string
+
+	// The configuration for when the harvest job is scheduled to run.
+	//
+	// This member is required.
+	ScheduleConfiguration *HarvesterScheduleConfiguration
+
+	// The current status of the harvest job (e.g., QUEUED, IN_PROGRESS, CANCELLED,
+	// COMPLETED, FAILED).
+	//
+	// This member is required.
+	Status HarvestJobStatus
+
+	// An optional description of the harvest job.
+	Description *string
+
+	// The current version of the harvest job. Used for concurrency control.
+	ETag *string
+
+	// An error message if the harvest job encountered any issues.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // The ingest domain URL where the source stream should be sent.
 type IngestEndpoint struct {
 
@@ -623,6 +765,17 @@ type IngestEndpoint struct {
 
 	// The ingest domain URL where the source stream should be sent.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for input switching based on the media quality confidence
+// score (MQCS) as provided from AWS Elemental MediaLive.
+type InputSwitchConfiguration struct {
+
+	// When true, AWS Elemental MediaPackage performs input switching based on the
+	// MQCS. Default is true. This setting is valid only when InputType is CMAF .
+	MQCSInputSwitching *bool
 
 	noSmithyDocumentSerde
 }
@@ -751,6 +904,35 @@ type OriginEndpointListConfiguration struct {
 
 	// The date and time the origin endpoint was modified.
 	ModifiedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The settings for what common media server data (CMSD) headers AWS Elemental
+// MediaPackage includes in responses to the CDN.
+type OutputHeaderConfiguration struct {
+
+	// When true, AWS Elemental MediaPackage includes the MQCS in responses to the
+	// CDN. This setting is valid only when InputType is CMAF .
+	PublishMQCS *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration parameters for where in an S3 bucket to place the harvested
+// content.
+type S3DestinationConfig struct {
+
+	// The name of an S3 bucket within which harvested content will be exported.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The path within the specified S3 bucket where the harvested content will be
+	// placed.
+	//
+	// This member is required.
+	DestinationPath *string
 
 	noSmithyDocumentSerde
 }

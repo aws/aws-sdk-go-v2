@@ -50,10 +50,7 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 
 	// Specify the language code that represents the language spoken in your audio.
 	//
-	// If you're unsure of the language spoken in your audio, consider using
-	// IdentifyLanguage to enable automatic language identification.
-	//
-	// For a list of languages supported with streaming Call Analytics, refer to the [Supported languages]
+	// For a list of languages supported with real-time Call Analytics, refer to the [Supported languages]
 	// table.
 	//
 	// [Supported languages]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
@@ -89,7 +86,8 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// transcript.
 	//
 	// Content identification is performed at the segment level; PII specified in
-	// PiiEntityTypes is flagged upon complete transcription of an audio segment.
+	// PiiEntityTypes is flagged upon complete transcription of an audio segment. If
+	// you don't include PiiEntityTypes in your request, all PII is identified.
 	//
 	// You can’t set ContentIdentificationType and ContentRedactionType in the same
 	// request. If you set both, your request returns a BadRequestException .
@@ -103,7 +101,8 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// transcript.
 	//
 	// Content redaction is performed at the segment level; PII specified in
-	// PiiEntityTypes is redacted upon complete transcription of an audio segment.
+	// PiiEntityTypes is redacted upon complete transcription of an audio segment. If
+	// you don't include PiiEntityTypes in your request, all PII is redacted.
 	//
 	// You can’t set ContentRedactionType and ContentIdentificationType in the same
 	// request. If you set both, your request returns a BadRequestException .
@@ -149,19 +148,20 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	// redact in your transcript. You can include as many types as you'd like, or you
 	// can select ALL .
 	//
-	// To include PiiEntityTypes in your Call Analytics request, you must also include
-	// either ContentIdentificationType or ContentRedactionType .
+	// Values must be comma-separated and can include: ADDRESS , BANK_ACCOUNT_NUMBER ,
+	// BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY , CREDIT_DEBIT_NUMBER ,
+	// EMAIL , NAME , PHONE , PIN , SSN , or ALL .
 	//
-	// Values must be comma-separated and can include: BANK_ACCOUNT_NUMBER ,
-	// BANK_ROUTING , CREDIT_DEBIT_NUMBER , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY ,
-	// PIN , EMAIL , ADDRESS , NAME , PHONE , SSN , or ALL .
+	// Note that if you include PiiEntityTypes in your request, you must also include
+	// ContentIdentificationType or ContentRedactionType .
+	//
+	// If you include ContentRedactionType or ContentIdentificationType in your
+	// request, but do not include PiiEntityTypes , all PII is redacted or identified.
 	PiiEntityTypes *string
 
 	// Specify a name for your Call Analytics transcription session. If you don't
 	// include this parameter in your request, Amazon Transcribe generates an ID and
 	// returns it in the response.
-	//
-	// You can use a session ID to retry a streaming session.
 	SessionId *string
 
 	// Specify how you want your vocabulary filter applied to your transcript.
@@ -234,7 +234,7 @@ type StartCallAnalyticsStreamTranscriptionOutput struct {
 	// Lists the PII entity types you specified in your Call Analytics request.
 	PiiEntityTypes *string
 
-	// Provides the identifier for your Call Analytics streaming request.
+	// Provides the identifier for your real-time Call Analytics request.
 	RequestId *string
 
 	// Provides the identifier for your Call Analytics transcription session.

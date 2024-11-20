@@ -86,6 +86,18 @@ func TestCheckSnapshot_CopyDistribution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAnycastIpList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCachePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCachePolicy(context.Background(), nil, func(o *Options) {
@@ -314,6 +326,30 @@ func TestCheckSnapshot_CreateStreamingDistributionWithTags(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAnycastIpList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCachePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCachePolicy(context.Background(), nil, func(o *Options) {
@@ -506,6 +542,18 @@ func TestCheckSnapshot_DeleteStreamingDistribution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeFunction(context.Background(), nil, func(o *Options) {
@@ -523,6 +571,18 @@ func TestCheckSnapshot_DescribeKeyValueStore(t *testing.T) {
 	_, err := svc.DescribeKeyValueStore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeKeyValueStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAnycastIpList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -866,6 +926,30 @@ func TestCheckSnapshot_GetStreamingDistributionConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAnycastIpLists(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnycastIpLists(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAnycastIpLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCachePolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCachePolicies(context.Background(), nil, func(o *Options) {
@@ -926,6 +1010,18 @@ func TestCheckSnapshot_ListDistributions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDistributionsByAnycastIpListId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByAnycastIpListId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDistributionsByAnycastIpListId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDistributionsByCachePolicyId(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDistributionsByCachePolicyId(context.Background(), nil, func(o *Options) {
@@ -979,6 +1075,18 @@ func TestCheckSnapshot_ListDistributionsByResponseHeadersPolicyId(t *testing.T) 
 	_, err := svc.ListDistributionsByResponseHeadersPolicyId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDistributionsByResponseHeadersPolicyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDistributionsByVpcOriginId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByVpcOriginId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDistributionsByVpcOriginId")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1147,6 +1255,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListVpcOrigins(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVpcOrigins(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListVpcOrigins")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,6 +1513,18 @@ func TestCheckSnapshot_UpdateStreamingDistribution(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateAlias(context.Background(), nil, func(o *Options) {
@@ -1410,6 +1542,18 @@ func TestUpdateSnapshot_CopyDistribution(t *testing.T) {
 	_, err := svc.CopyDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CopyDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAnycastIpList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1645,6 +1789,30 @@ func TestUpdateSnapshot_CreateStreamingDistributionWithTags(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAnycastIpList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCachePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCachePolicy(context.Background(), nil, func(o *Options) {
@@ -1837,6 +2005,18 @@ func TestUpdateSnapshot_DeleteStreamingDistribution(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeFunction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeFunction(context.Background(), nil, func(o *Options) {
@@ -1854,6 +2034,18 @@ func TestUpdateSnapshot_DescribeKeyValueStore(t *testing.T) {
 	_, err := svc.DescribeKeyValueStore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeKeyValueStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAnycastIpList(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnycastIpList(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAnycastIpList")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2197,6 +2389,30 @@ func TestUpdateSnapshot_GetStreamingDistributionConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVpcOrigin")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAnycastIpLists(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnycastIpLists(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAnycastIpLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCachePolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCachePolicies(context.Background(), nil, func(o *Options) {
@@ -2257,6 +2473,18 @@ func TestUpdateSnapshot_ListDistributions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListDistributionsByAnycastIpListId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByAnycastIpListId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDistributionsByAnycastIpListId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDistributionsByCachePolicyId(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDistributionsByCachePolicyId(context.Background(), nil, func(o *Options) {
@@ -2310,6 +2538,18 @@ func TestUpdateSnapshot_ListDistributionsByResponseHeadersPolicyId(t *testing.T)
 	_, err := svc.ListDistributionsByResponseHeadersPolicyId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDistributionsByResponseHeadersPolicyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDistributionsByVpcOriginId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDistributionsByVpcOriginId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDistributionsByVpcOriginId")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2478,6 +2718,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListVpcOrigins(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVpcOrigins(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListVpcOrigins")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2718,6 +2970,18 @@ func TestUpdateSnapshot_UpdateStreamingDistribution(t *testing.T) {
 	_, err := svc.UpdateStreamingDistribution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStreamingDistribution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateVpcOrigin(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateVpcOrigin(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateVpcOrigin")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

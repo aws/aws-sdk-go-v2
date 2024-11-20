@@ -10,18 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
+// Removes a compute resource from an Amazon GameLift Anywhere fleet. Deregistered
+// computes can no longer host game sessions through Amazon GameLift.
 //
-// feature, which is currently in public preview.
-//
-// Removes a compute resource from an Amazon GameLift Anywhere fleet or container
-// fleet. Deregistered computes can no longer host game sessions through Amazon
-// GameLift.
-//
-// For an Anywhere fleet or a container fleet that's running the Amazon GameLift
-// Agent, the Agent handles all compute registry tasks for you. For an Anywhere
-// fleet that doesn't use the Agent, call this operation to deregister fleet
-// computes.
+// For an Anywhere fleet that's running the Amazon GameLift Agent, the Agent
+// handles all compute registry tasks for you. For an Anywhere fleet that doesn't
+// use the Agent, call this operation to deregister fleet computes.
 //
 // To deregister a compute, call this operation from the compute that's being
 // deregistered and specify the compute name and the fleet ID.
@@ -43,10 +37,7 @@ func (c *Client) DeregisterCompute(ctx context.Context, params *DeregisterComput
 type DeregisterComputeInput struct {
 
 	// The unique identifier of the compute resource to deregister. For an Anywhere
-	// fleet compute, use the registered compute name. For a container fleet, use the
-	// compute name (for example,
-	// a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9 ) or the
-	// compute ARN.
+	// fleet compute, use the registered compute name.
 	//
 	// This member is required.
 	ComputeName *string

@@ -548,6 +548,41 @@
         "com.amazonaws.applicationsignals#BudgetSecondsRemaining": {
             "type": "integer"
         },
+        "com.amazonaws.applicationsignals#BurnRateConfiguration": {
+            "type": "structure",
+            "members": {
+                "LookBackWindowMinutes": {
+                    "target": "com.amazonaws.applicationsignals#BurnRateLookBackWindowMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes to use as the look-back window.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object defines the length of the look-back window used to calculate one burn rate metric\n         for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. A burn rate of\n      exactly 1 indicates that the SLO goal will be met exactly.</p>\n         <p>For example, if you specify 60 as the number of minutes in the look-back window, the burn rate is calculated as the following:</p>\n         <p>\n            <i>burn rate = error rate over the look-back window / (1 - attainment goal percentage)</i>\n         </p>\n         <p>For more information about burn rates, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-burn\">Calculate burn rates</a>.</p>"
+            }
+        },
+        "com.amazonaws.applicationsignals#BurnRateConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationsignals#BurnRateConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.applicationsignals#BurnRateLookBackWindowMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10080
+                }
+            }
+        },
         "com.amazonaws.applicationsignals#CalendarInterval": {
             "type": "structure",
             "members": {
@@ -673,6 +708,12 @@
                     "target": "com.amazonaws.applicationsignals#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs to associate with the SLO. You can associate as many as 50 tags with an SLO.\n      To be able to associate tags with the SLO when you create the SLO, you must\n      have the <code>cloudwatch:TagResource</code> permission.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n      permissions by granting a user\n      permission to access or change only resources with certain tag values.</p>"
+                    }
+                },
+                "BurnRateConfigurations": {
+                    "target": "com.amazonaws.applicationsignals#BurnRateConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this array to create <i>burn rates</i> for this SLO. Each \n         burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>"
                     }
                 }
             },
@@ -2543,6 +2584,12 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "BurnRateConfigurations": {
+                    "target": "com.amazonaws.applicationsignals#BurnRateConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Each object in this array defines the length of the look-back window used to calculate one burn rate metric\n         for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3391,6 +3438,12 @@
                     "target": "com.amazonaws.applicationsignals#Goal",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains the attributes that determine the goal of the SLO. This includes\n         the time period for evaluation and the attainment threshold.</p>"
+                    }
+                },
+                "BurnRateConfigurations": {
+                    "target": "com.amazonaws.applicationsignals#BurnRateConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this array to create <i>burn rates</i> for this SLO. Each \n         burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>"
                     }
                 }
             },

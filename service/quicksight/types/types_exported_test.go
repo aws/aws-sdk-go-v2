@@ -125,6 +125,27 @@ var _ *types.AuroraPostgreSqlParameters
 var _ *types.AthenaParameters
 var _ *types.SparkParameters
 
+func ExampleImageSource_outputUsage() {
+	var union types.ImageSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ImageSourceMemberPublicUrl:
+		_ = v.Value // Value is string
+
+	case *types.ImageSourceMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExamplePhysicalTable_outputUsage() {
 	var union types.PhysicalTable
 	// type switches can be used to check the union value

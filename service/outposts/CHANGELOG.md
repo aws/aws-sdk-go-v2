@@ -1,3 +1,36 @@
+# v1.47.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2024-11-15.2)
+
+* **Feature**: You can now purchase AWS Outposts rack or server capacity for a 5-year term with one of  the following payment options: All Upfront, Partial Upfront, and No Upfront.
+
+# v1.46.0 (2024-11-11)
+
+* **Feature**: This release updates StartCapacityTask to allow an active Outpost to be modified. It also adds a new API to list all running EC2 instances on the Outpost.
+
+# v1.45.3 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.45.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.0 (2024-10-10)
+
+* **Feature**: Adding new "DELIVERED" enum value for Outposts Order status
+
+# v1.44.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

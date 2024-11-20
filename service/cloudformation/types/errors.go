@@ -170,6 +170,32 @@ func (e *GeneratedTemplateNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The specified target doesn't have any requested Hook invocations.
+type HookResultNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *HookResultNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *HookResultNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *HookResultNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "HookResultNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *HookResultNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The template contains resources with capabilities that weren't specified in the
 // Capabilities parameter.
 type InsufficientCapabilitiesException struct {

@@ -279,6 +279,68 @@ type DatabaseLFTagPolicyAndPermissions struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a data grant.
+type DataGrantSummaryEntry struct {
+
+	// The acceptance state of the data grant.
+	//
+	// This member is required.
+	AcceptanceState DataGrantAcceptanceState
+
+	// The Amazon Resource Name (ARN) of the data grant.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp of when the data grant was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the data set associated to the data grant.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The ID of the data grant.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the data grant.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Web Services account ID of the data grant receiver.
+	//
+	// This member is required.
+	ReceiverPrincipal *string
+
+	// The Amazon Web Services account ID of the data grant sender.
+	//
+	// This member is required.
+	SenderPrincipal *string
+
+	// The ID of the data set used to create the data grant.
+	//
+	// This member is required.
+	SourceDataSetId *string
+
+	// The timestamp of when the data grant was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp of when the data grant was accepted.
+	AcceptedAt *time.Time
+
+	// The timestamp of when access to the associated data set ends.
+	EndsAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A data set is an AWS resource with one or more revisions.
 type DataSetEntry struct {
 
@@ -1106,8 +1168,68 @@ type NotificationDetails struct {
 // Details about the origin of the data set.
 type OriginDetails struct {
 
+	// The ID of the data grant.
+	DataGrantId *string
+
 	// The product ID of the origin of the data set.
 	ProductId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a received data grant.
+type ReceivedDataGrantSummariesEntry struct {
+
+	// The acceptance state of the data grant.
+	//
+	// This member is required.
+	AcceptanceState DataGrantAcceptanceState
+
+	// The Amazon Resource Name (ARN) of the data grant.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp of when the data grant was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the data set associated to the data grant.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The ID of the data grant.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the data grant.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Web Services account ID of the data grant receiver.
+	//
+	// This member is required.
+	ReceiverPrincipal *string
+
+	// The Amazon Web Services account ID of the data grant sender.
+	//
+	// This member is required.
+	SenderPrincipal *string
+
+	// The timestamp of when the data grant was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp of when the data grant was accepted.
+	AcceptedAt *time.Time
+
+	// The timestamp of when access to the associated data set ends.
+	EndsAt *time.Time
 
 	noSmithyDocumentSerde
 }

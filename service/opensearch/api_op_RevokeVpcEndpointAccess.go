@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,15 +30,16 @@ func (c *Client) RevokeVpcEndpointAccess(ctx context.Context, params *RevokeVpcE
 
 type RevokeVpcEndpointAccessInput struct {
 
-	// The account ID to revoke access from.
-	//
-	// This member is required.
-	Account *string
-
 	// The name of the OpenSearch Service domain.
 	//
 	// This member is required.
 	DomainName *string
+
+	// The account ID to revoke access from.
+	Account *string
+
+	// The service SP to revoke access from.
+	Service types.AWSServicePrincipal
 
 	noSmithyDocumentSerde
 }

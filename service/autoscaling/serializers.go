@@ -4667,6 +4667,35 @@ func awsAwsquery_serializeDocumentAutoScalingNotificationTypes(v []string, value
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v *types.AvailabilityZoneDistribution, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.CapacityDistributionStrategy) > 0 {
+		objectKey := object.Key("CapacityDistributionStrategy")
+		objectKey.String(string(v.CapacityDistributionStrategy))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentAvailabilityZoneImpairmentPolicy(v *types.AvailabilityZoneImpairmentPolicy, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.ImpairedZoneHealthCheckBehavior) > 0 {
+		objectKey := object.Key("ImpairedZoneHealthCheckBehavior")
+		objectKey.String(string(v.ImpairedZoneHealthCheckBehavior))
+	}
+
+	if v.ZonalShiftEnabled != nil {
+		objectKey := object.Key("ZonalShiftEnabled")
+		objectKey.Boolean(*v.ZonalShiftEnabled)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -4689,6 +4718,20 @@ func awsAwsquery_serializeDocumentBaselineEbsBandwidthMbpsRequest(v *types.Basel
 	if v.Min != nil {
 		objectKey := object.Key("Min")
 		objectKey.Integer(*v.Min)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentBaselinePerformanceFactorsRequest(v *types.BaselinePerformanceFactorsRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Cpu != nil {
+		objectKey := object.Key("Cpu")
+		if err := awsAwsquery_serializeDocumentCpuPerformanceFactorRequest(v.Cpu, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4735,6 +4778,66 @@ func awsAwsquery_serializeDocumentBlockDeviceMappings(v []types.BlockDeviceMappi
 	return nil
 }
 
+func awsAwsquery_serializeDocumentCapacityReservationIds(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentCapacityReservationResourceGroupArns(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentCapacityReservationSpecification(v *types.CapacityReservationSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.CapacityReservationPreference) > 0 {
+		objectKey := object.Key("CapacityReservationPreference")
+		objectKey.String(string(v.CapacityReservationPreference))
+	}
+
+	if v.CapacityReservationTarget != nil {
+		objectKey := object.Key("CapacityReservationTarget")
+		if err := awsAwsquery_serializeDocumentCapacityReservationTarget(v.CapacityReservationTarget, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentCapacityReservationTarget(v *types.CapacityReservationTarget, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityReservationIds != nil {
+		objectKey := object.Key("CapacityReservationIds")
+		if err := awsAwsquery_serializeDocumentCapacityReservationIds(v.CapacityReservationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.CapacityReservationResourceGroupArns != nil {
+		objectKey := object.Key("CapacityReservationResourceGroupArns")
+		if err := awsAwsquery_serializeDocumentCapacityReservationResourceGroupArns(v.CapacityReservationResourceGroupArns, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentCheckpointPercentages(v []int32, value query.Value) error {
 	array := value.Array("member")
 
@@ -4762,6 +4865,20 @@ func awsAwsquery_serializeDocumentCpuManufacturers(v []types.CpuManufacturer, va
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentCpuPerformanceFactorRequest(v *types.CpuPerformanceFactorRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.References != nil {
+		objectKey := object.Key("Reference")
+		if err := awsAwsquery_serializeDocumentPerformanceFactorReferenceSetRequest(v.References, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5045,6 +5162,13 @@ func awsAwsquery_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 	if v.BaselineEbsBandwidthMbps != nil {
 		objectKey := object.Key("BaselineEbsBandwidthMbps")
 		if err := awsAwsquery_serializeDocumentBaselineEbsBandwidthMbpsRequest(v.BaselineEbsBandwidthMbps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.BaselinePerformanceFactors != nil {
+		objectKey := object.Key("BaselinePerformanceFactors")
+		if err := awsAwsquery_serializeDocumentBaselinePerformanceFactorsRequest(v.BaselinePerformanceFactors, objectKey); err != nil {
 			return err
 		}
 	}
@@ -5655,6 +5779,30 @@ func awsAwsquery_serializeDocumentOverrides(v []types.LaunchTemplateOverrides, v
 	return nil
 }
 
+func awsAwsquery_serializeDocumentPerformanceFactorReferenceRequest(v *types.PerformanceFactorReferenceRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InstanceFamily != nil {
+		objectKey := object.Key("InstanceFamily")
+		objectKey.String(*v.InstanceFamily)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPerformanceFactorReferenceSetRequest(v []types.PerformanceFactorReferenceRequest, value query.Value) error {
+	array := value.Array("item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentPerformanceFactorReferenceRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentPolicyNames(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -5922,6 +6070,11 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 	if v.AutoRollback != nil {
 		objectKey := object.Key("AutoRollback")
 		objectKey.Boolean(*v.AutoRollback)
+	}
+
+	if v.BakeTime != nil {
+		objectKey := object.Key("BakeTime")
+		objectKey.Integer(*v.BakeTime)
 	}
 
 	if v.CheckpointDelay != nil {
@@ -6451,6 +6604,11 @@ func awsAwsquery_serializeOpDocumentAttachTrafficSourcesInput(v *AttachTrafficSo
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.SkipZonalShiftValidation != nil {
+		objectKey := object.Key("SkipZonalShiftValidation")
+		objectKey.Boolean(*v.SkipZonalShiftValidation)
+	}
+
 	if v.TrafficSources != nil {
 		objectKey := object.Key("TrafficSources")
 		if err := awsAwsquery_serializeDocumentTrafficSources(v.TrafficSources, objectKey); err != nil {
@@ -6552,6 +6710,20 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.AvailabilityZoneDistribution != nil {
+		objectKey := object.Key("AvailabilityZoneDistribution")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v.AvailabilityZoneDistribution, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.AvailabilityZoneImpairmentPolicy != nil {
+		objectKey := object.Key("AvailabilityZoneImpairmentPolicy")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneImpairmentPolicy(v.AvailabilityZoneImpairmentPolicy, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityZones != nil {
 		objectKey := object.Key("AvailabilityZones")
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
@@ -6562,6 +6734,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.CapacityRebalance != nil {
 		objectKey := object.Key("CapacityRebalance")
 		objectKey.Boolean(*v.CapacityRebalance)
+	}
+
+	if v.CapacityReservationSpecification != nil {
+		objectKey := object.Key("CapacityReservationSpecification")
+		if err := awsAwsquery_serializeDocumentCapacityReservationSpecification(v.CapacityReservationSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Context != nil {
@@ -6672,6 +6851,11 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.ServiceLinkedRoleARN != nil {
 		objectKey := object.Key("ServiceLinkedRoleARN")
 		objectKey.String(*v.ServiceLinkedRoleARN)
+	}
+
+	if v.SkipZonalShiftValidation != nil {
+		objectKey := object.Key("SkipZonalShiftValidation")
+		objectKey.Boolean(*v.SkipZonalShiftValidation)
 	}
 
 	if v.Tags != nil {
@@ -8040,6 +8224,20 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.AvailabilityZoneDistribution != nil {
+		objectKey := object.Key("AvailabilityZoneDistribution")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneDistribution(v.AvailabilityZoneDistribution, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.AvailabilityZoneImpairmentPolicy != nil {
+		objectKey := object.Key("AvailabilityZoneImpairmentPolicy")
+		if err := awsAwsquery_serializeDocumentAvailabilityZoneImpairmentPolicy(v.AvailabilityZoneImpairmentPolicy, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityZones != nil {
 		objectKey := object.Key("AvailabilityZones")
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
@@ -8050,6 +8248,13 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.CapacityRebalance != nil {
 		objectKey := object.Key("CapacityRebalance")
 		objectKey.Boolean(*v.CapacityRebalance)
+	}
+
+	if v.CapacityReservationSpecification != nil {
+		objectKey := object.Key("CapacityReservationSpecification")
+		if err := awsAwsquery_serializeDocumentCapacityReservationSpecification(v.CapacityReservationSpecification, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Context != nil {
@@ -8141,6 +8346,11 @@ func awsAwsquery_serializeOpDocumentUpdateAutoScalingGroupInput(v *UpdateAutoSca
 	if v.ServiceLinkedRoleARN != nil {
 		objectKey := object.Key("ServiceLinkedRoleARN")
 		objectKey.String(*v.ServiceLinkedRoleARN)
+	}
+
+	if v.SkipZonalShiftValidation != nil {
+		objectKey := object.Key("SkipZonalShiftValidation")
+		objectKey.Boolean(*v.SkipZonalShiftValidation)
 	}
 
 	if v.TerminationPolicies != nil {

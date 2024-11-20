@@ -454,6 +454,38 @@ type LFTagError struct {
 	noSmithyDocumentSerde
 }
 
+// A structure consists LF-Tag expression name and catalog ID.
+type LFTagExpression struct {
+
+	// The identifier for the Data Catalog. By default, the account ID.
+	CatalogId *string
+
+	// A structure that contains information about the LF-Tag expression.
+	Description *string
+
+	// A logical expression composed of one or more LF-Tags.
+	Expression []LFTag
+
+	// The name for saved the LF-Tag expression.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing a LF-Tag expression (keys and values).
+type LFTagExpressionResource struct {
+
+	// The name of the LF-Tag expression to grant permissions on.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier for the Data Catalog. By default, the account ID.
+	CatalogId *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing an LF-tag key and values for a resource.
 type LFTagKeyResource struct {
 
@@ -498,14 +530,9 @@ type LFTagPair struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing a list of LF-tag conditions that apply to a resource's
-// LF-tag policy.
+// A structure containing a list of LF-tag conditions or saved LF-Tag expressions
+// that apply to a resource's LF-tag policy.
 type LFTagPolicyResource struct {
-
-	// A list of LF-tag conditions that apply to the resource's LF-tag policy.
-	//
-	// This member is required.
-	Expression []LFTag
 
 	// The resource type for which the LF-tag policy applies.
 	//
@@ -517,6 +544,15 @@ type LFTagPolicyResource struct {
 	// table definitions, and other control information to manage your Lake Formation
 	// environment.
 	CatalogId *string
+
+	// A list of LF-tag conditions or a saved expression that apply to the resource's
+	// LF-tag policy.
+	Expression []LFTag
+
+	// If provided, permissions are granted to the Data Catalog resources whose
+	// assigned LF-Tags match the expression body of the saved expression under the
+	// provided ExpressionName .
+	ExpressionName *string
 
 	noSmithyDocumentSerde
 }
@@ -681,7 +717,12 @@ type Resource struct {
 	// The LF-tag key and values attached to a resource.
 	LFTag *LFTagKeyResource
 
-	// A list of LF-tag conditions that define a resource's LF-tag policy.
+	// LF-Tag expression resource. A logical expression composed of one or more LF-Tag
+	// key:value pairs.
+	LFTagExpression *LFTagExpressionResource
+
+	// A list of LF-tag conditions or saved LF-Tag expressions that define a
+	// resource's LF-tag policy.
 	LFTagPolicy *LFTagPolicyResource
 
 	// The table for the resource. A table is a metadata definition that represents

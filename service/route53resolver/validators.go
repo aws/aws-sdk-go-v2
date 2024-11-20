@@ -1599,9 +1599,6 @@ func validateOpCreateFirewallRuleInput(v *CreateFirewallRuleInput) error {
 	if v.FirewallRuleGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
 	}
-	if v.FirewallDomainListId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
-	}
 	if v.Priority == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
@@ -1766,9 +1763,6 @@ func validateOpDeleteFirewallRuleInput(v *DeleteFirewallRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFirewallRuleInput"}
 	if v.FirewallRuleGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
-	}
-	if v.FirewallDomainListId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2367,9 +2361,6 @@ func validateOpUpdateFirewallRuleInput(v *UpdateFirewallRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallRuleInput"}
 	if v.FirewallRuleGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
-	}
-	if v.FirewallDomainListId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

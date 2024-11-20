@@ -854,6 +854,33 @@ func (e *DBInstanceNotFoundFault) ErrorCode() string {
 }
 func (e *DBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An attempt to download or examine log files didn't succeed because an Aurora
+// Serverless v2 instance was paused.
+type DBInstanceNotReadyFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DBInstanceNotReadyFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBInstanceNotReadyFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBInstanceNotReadyFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DBInstanceNotReady"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DBInstanceNotReadyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The specified RoleArn or FeatureName value is already associated with the DB
 // instance.
 type DBInstanceRoleAlreadyExistsFault struct {
@@ -1850,8 +1877,9 @@ func (e *ExportTaskNotFoundFault) ErrorCode() string {
 }
 func (e *ExportTaskNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The GlobalClusterIdentifier already exists. Choose a new global database
-// identifier (unique name) to create a new global database cluster.
+// The GlobalClusterIdentifier already exists. Specify a new global database
+// identifier (unique name) to create a new global database cluster or to rename an
+// existing one.
 type GlobalClusterAlreadyExistsFault struct {
 	Message *string
 

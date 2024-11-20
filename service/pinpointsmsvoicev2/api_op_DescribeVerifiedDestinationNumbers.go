@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the specified verified destiona numbers.
+// Retrieves the specified verified destination numbers.
 func (c *Client) DescribeVerifiedDestinationNumbers(ctx context.Context, params *DescribeVerifiedDestinationNumbersInput, optFns ...func(*Options)) (*DescribeVerifiedDestinationNumbersOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedDestinationNumbersInput{}
@@ -42,7 +42,7 @@ type DescribeVerifiedDestinationNumbersInput struct {
 	// supply a value for this field in the initial request.
 	NextToken *string
 
-	// An array of VerifiedDestinationNumberid to retreive.
+	// An array of VerifiedDestinationNumberid to retrieve.
 	VerifiedDestinationNumberIds []string
 
 	noSmithyDocumentSerde

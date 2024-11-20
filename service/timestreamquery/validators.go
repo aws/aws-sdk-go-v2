@@ -210,6 +210,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAccountSettings struct {
+}
+
+func (*validateOpUpdateAccountSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAccountSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAccountSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAccountSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateScheduledQuery struct {
 }
 
@@ -270,8 +290,32 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAccountSettings{}, middleware.After)
+}
+
 func addOpUpdateScheduledQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateScheduledQuery{}, middleware.After)
+}
+
+func validateAccountSettingsNotificationConfiguration(v *types.AccountSettingsNotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountSettingsNotificationConfiguration"}
+	if v.SnsConfiguration != nil {
+		if err := validateSnsConfiguration(v.SnsConfiguration); err != nil {
+			invalidParams.AddNested("SnsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDimensionMapping(v *types.DimensionMapping) error {
@@ -438,6 +482,58 @@ func validateNotificationConfiguration(v *types.NotificationConfiguration) error
 	}
 }
 
+func validateProvisionedCapacityRequest(v *types.ProvisionedCapacityRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisionedCapacityRequest"}
+	if v.TargetQueryTCU == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetQueryTCU"))
+	}
+	if v.NotificationConfiguration != nil {
+		if err := validateAccountSettingsNotificationConfiguration(v.NotificationConfiguration); err != nil {
+			invalidParams.AddNested("NotificationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryComputeRequest(v *types.QueryComputeRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryComputeRequest"}
+	if v.ProvisionedCapacity != nil {
+		if err := validateProvisionedCapacityRequest(v.ProvisionedCapacity); err != nil {
+			invalidParams.AddNested("ProvisionedCapacity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryInsights(v *types.QueryInsights) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryInsights"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Configuration(v *types.S3Configuration) error {
 	if v == nil {
 		return nil
@@ -460,6 +556,21 @@ func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledQueryInsights(v *types.ScheduledQueryInsights) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledQueryInsights"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -683,6 +794,11 @@ func validateOpExecuteScheduledQueryInput(v *ExecuteScheduledQueryInput) error {
 	if v.InvocationTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvocationTime"))
 	}
+	if v.QueryInsights != nil {
+		if err := validateScheduledQueryInsights(v.QueryInsights); err != nil {
+			invalidParams.AddNested("QueryInsights", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -728,6 +844,11 @@ func validateOpQueryInput(v *QueryInput) error {
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
+	if v.QueryInsights != nil {
+		if err := validateQueryInsights(v.QueryInsights); err != nil {
+			invalidParams.AddNested("QueryInsights", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -767,6 +888,23 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAccountSettingsInput(v *UpdateAccountSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccountSettingsInput"}
+	if v.QueryCompute != nil {
+		if err := validateQueryComputeRequest(v.QueryCompute); err != nil {
+			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

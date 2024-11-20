@@ -100,6 +100,12 @@ type UpdateSubscriptionRequestOutput struct {
 	// The decision comment of the UpdateSubscriptionRequest action.
 	DecisionComment *string
 
+	// The ID of the existing subscription.
+	ExistingSubscriptionId *string
+
+	// Metadata forms included in the subscription request.
+	MetadataForms []types.FormOutput
+
 	// The identifier of the Amazon DataZone user who reviews the subscription request.
 	ReviewerId *string
 

@@ -70,6 +70,26 @@ func (m *validateOpGenerateCardValidationData) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateMacEmvPinChange struct {
+}
+
+func (*validateOpGenerateMacEmvPinChange) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateMacEmvPinChange) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateMacEmvPinChangeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateMacEmvPinChangeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGenerateMac struct {
 }
 
@@ -242,6 +262,10 @@ func addOpGenerateCardValidationDataValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpGenerateCardValidationData{}, middleware.After)
 }
 
+func addOpGenerateMacEmvPinChangeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateMacEmvPinChange{}, middleware.After)
+}
+
 func addOpGenerateMacValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGenerateMac{}, middleware.After)
 }
@@ -272,6 +296,38 @@ func addOpVerifyMacValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpVerifyPinDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpVerifyPinData{}, middleware.After)
+}
+
+func validateAmexAttributes(v *types.AmexAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmexAttributes"}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.ApplicationTransactionCounter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationTransactionCounter"))
+	}
+	if v.AuthorizationRequestKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationRequestKeyIdentifier"))
+	}
+	if v.CurrentPinAttributes != nil {
+		if err := validateCurrentPinAttributes(v.CurrentPinAttributes); err != nil {
+			invalidParams.AddNested("CurrentPinAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAmexCardSecurityCodeVersion1(v *types.AmexCardSecurityCodeVersion1) error {
@@ -518,6 +574,63 @@ func validateCryptogramVerificationArpcMethod2(v *types.CryptogramVerificationAr
 	}
 }
 
+func validateCurrentPinAttributes(v *types.CurrentPinAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CurrentPinAttributes"}
+	if v.CurrentPinPekIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentPinPekIdentifier"))
+	}
+	if v.CurrentEncryptedPinBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentEncryptedPinBlock"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDerivationMethodAttributes(v types.DerivationMethodAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DerivationMethodAttributes"}
+	switch uv := v.(type) {
+	case *types.DerivationMethodAttributesMemberAmex:
+		if err := validateAmexAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[Amex]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DerivationMethodAttributesMemberEmv2000:
+		if err := validateEmv2000Attributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[Emv2000]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DerivationMethodAttributesMemberEmvCommon:
+		if err := validateEmvCommonAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[EmvCommon]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DerivationMethodAttributesMemberMastercard:
+		if err := validateMasterCardAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[Mastercard]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DerivationMethodAttributesMemberVisa:
+		if err := validateVisaAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[Visa]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDiscoverDynamicCardVerificationCode(v *types.DiscoverDynamicCardVerificationCode) error {
 	if v == nil {
 		return nil
@@ -627,6 +740,93 @@ func validateDynamicCardVerificationValue(v *types.DynamicCardVerificationValue)
 	}
 	if v.ApplicationTransactionCounter == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationTransactionCounter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEcdhDerivationAttributes(v *types.EcdhDerivationAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EcdhDerivationAttributes"}
+	if v.CertificateAuthorityPublicKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityPublicKeyIdentifier"))
+	}
+	if v.PublicKeyCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyCertificate"))
+	}
+	if len(v.KeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
+	}
+	if len(v.KeyDerivationFunction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationFunction"))
+	}
+	if len(v.KeyDerivationHashAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationHashAlgorithm"))
+	}
+	if v.SharedInformation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedInformation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmv2000Attributes(v *types.Emv2000Attributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Emv2000Attributes"}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.ApplicationTransactionCounter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationTransactionCounter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmvCommonAttributes(v *types.EmvCommonAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmvCommonAttributes"}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.ApplicationCryptogram == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationCryptogram"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if len(v.PinBlockPaddingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PinBlockPaddingType"))
+	}
+	if len(v.PinBlockLengthPosition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PinBlockLengthPosition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -873,6 +1073,30 @@ func validateMacAttributes(v types.MacAttributes) error {
 			invalidParams.AddNested("[EmvMac]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMasterCardAttributes(v *types.MasterCardAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MasterCardAttributes"}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.ApplicationCryptogram == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationCryptogram"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1173,6 +1397,38 @@ func validateTranslationPinDataIsoFormat034(v *types.TranslationPinDataIsoFormat
 	}
 }
 
+func validateVisaAttributes(v *types.VisaAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VisaAttributes"}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.ApplicationTransactionCounter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationTransactionCounter"))
+	}
+	if v.AuthorizationRequestKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationRequestKeyIdentifier"))
+	}
+	if v.CurrentPinAttributes != nil {
+		if err := validateCurrentPinAttributes(v.CurrentPinAttributes); err != nil {
+			invalidParams.AddNested("CurrentPinAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVisaPin(v *types.VisaPin) error {
 	if v == nil {
 		return nil
@@ -1231,6 +1487,29 @@ func validateWrappedKey(v *types.WrappedKey) error {
 	invalidParams := smithy.InvalidParamsError{Context: "WrappedKey"}
 	if v.WrappedKeyMaterial == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyMaterial"))
+	} else if v.WrappedKeyMaterial != nil {
+		if err := validateWrappedKeyMaterial(v.WrappedKeyMaterial); err != nil {
+			invalidParams.AddNested("WrappedKeyMaterial", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWrappedKeyMaterial(v types.WrappedKeyMaterial) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WrappedKeyMaterial"}
+	switch uv := v.(type) {
+	case *types.WrappedKeyMaterialMemberDiffieHellmanSymmetricKey:
+		if err := validateEcdhDerivationAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[DiffieHellmanSymmetricKey]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1324,6 +1603,43 @@ func validateOpGenerateCardValidationDataInput(v *GenerateCardValidationDataInpu
 	}
 }
 
+func validateOpGenerateMacEmvPinChangeInput(v *GenerateMacEmvPinChangeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateMacEmvPinChangeInput"}
+	if v.NewPinPekIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewPinPekIdentifier"))
+	}
+	if v.NewEncryptedPinBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewEncryptedPinBlock"))
+	}
+	if len(v.PinBlockFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PinBlockFormat"))
+	}
+	if v.SecureMessagingIntegrityKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecureMessagingIntegrityKeyIdentifier"))
+	}
+	if v.SecureMessagingConfidentialityKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecureMessagingConfidentialityKeyIdentifier"))
+	}
+	if v.MessageData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageData"))
+	}
+	if v.DerivationMethodAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DerivationMethodAttributes"))
+	} else if v.DerivationMethodAttributes != nil {
+		if err := validateDerivationMethodAttributes(v.DerivationMethodAttributes); err != nil {
+			invalidParams.AddNested("DerivationMethodAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGenerateMacInput(v *GenerateMacInput) error {
 	if v == nil {
 		return nil
@@ -1372,6 +1688,11 @@ func validateOpGeneratePinDataInput(v *GeneratePinDataInput) error {
 	}
 	if len(v.PinBlockFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PinBlockFormat"))
+	}
+	if v.EncryptionWrappedKey != nil {
+		if err := validateWrappedKey(v.EncryptionWrappedKey); err != nil {
+			invalidParams.AddNested("EncryptionWrappedKey", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1602,6 +1923,11 @@ func validateOpVerifyPinDataInput(v *VerifyPinDataInput) error {
 	if v.DukptAttributes != nil {
 		if err := validateDukptAttributes(v.DukptAttributes); err != nil {
 			invalidParams.AddNested("DukptAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionWrappedKey != nil {
+		if err := validateWrappedKey(v.EncryptionWrappedKey); err != nil {
+			invalidParams.AddNested("EncryptionWrappedKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

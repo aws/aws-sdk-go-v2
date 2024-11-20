@@ -30,6 +30,46 @@ func (m *validateOpAddProfileKey) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetCalculatedAttributeForProfile struct {
+}
+
+func (*validateOpBatchGetCalculatedAttributeForProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCalculatedAttributeForProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCalculatedAttributeForProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCalculatedAttributeForProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetProfile struct {
+}
+
+func (*validateOpBatchGetProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCalculatedAttributeDefinition struct {
 }
 
@@ -125,6 +165,66 @@ func (m *validateOpCreateProfile) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSegmentDefinition struct {
+}
+
+func (*validateOpCreateSegmentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSegmentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSegmentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSegmentDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSegmentEstimate struct {
+}
+
+func (*validateOpCreateSegmentEstimate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSegmentEstimate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSegmentEstimateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSegmentEstimateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSegmentSnapshot struct {
+}
+
+func (*validateOpCreateSegmentSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSegmentSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSegmentSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSegmentSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +385,26 @@ func (m *validateOpDeleteProfileObjectType) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProfileObjectTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSegmentDefinition struct {
+}
+
+func (*validateOpDeleteSegmentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSegmentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSegmentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSegmentDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +650,86 @@ func (m *validateOpGetProfileObjectTypeTemplate) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSegmentDefinition struct {
+}
+
+func (*validateOpGetSegmentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSegmentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSegmentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSegmentDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSegmentEstimate struct {
+}
+
+func (*validateOpGetSegmentEstimate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSegmentEstimate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSegmentEstimateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSegmentEstimateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSegmentMembership struct {
+}
+
+func (*validateOpGetSegmentMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSegmentMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSegmentMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSegmentMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSegmentSnapshot struct {
+}
+
+func (*validateOpGetSegmentSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSegmentSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSegmentSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSegmentSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSimilarProfiles struct {
 }
 
@@ -710,6 +910,46 @@ func (m *validateOpListIntegrations) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListObjectTypeAttributes struct {
+}
+
+func (*validateOpListObjectTypeAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListObjectTypeAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListObjectTypeAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListObjectTypeAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListProfileAttributeValues struct {
+}
+
+func (*validateOpListProfileAttributeValues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProfileAttributeValues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProfileAttributeValuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProfileAttributeValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListProfileObjects struct {
 }
 
@@ -765,6 +1005,26 @@ func (m *validateOpListRuleBasedMatches) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRuleBasedMatchesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSegmentDefinitions struct {
+}
+
+func (*validateOpListSegmentDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSegmentDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSegmentDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSegmentDefinitionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1014,6 +1274,14 @@ func addOpAddProfileKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddProfileKey{}, middleware.After)
 }
 
+func addOpBatchGetCalculatedAttributeForProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCalculatedAttributeForProfile{}, middleware.After)
+}
+
+func addOpBatchGetProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetProfile{}, middleware.After)
+}
+
 func addOpCreateCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCalculatedAttributeDefinition{}, middleware.After)
 }
@@ -1032,6 +1300,18 @@ func addOpCreateIntegrationWorkflowValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProfile{}, middleware.After)
+}
+
+func addOpCreateSegmentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSegmentDefinition{}, middleware.After)
+}
+
+func addOpCreateSegmentEstimateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSegmentEstimate{}, middleware.After)
+}
+
+func addOpCreateSegmentSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSegmentSnapshot{}, middleware.After)
 }
 
 func addOpDeleteCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -1064,6 +1344,10 @@ func addOpDeleteProfileObjectValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteProfileObjectTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProfileObjectType{}, middleware.After)
+}
+
+func addOpDeleteSegmentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSegmentDefinition{}, middleware.After)
 }
 
 func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
@@ -1114,6 +1398,22 @@ func addOpGetProfileObjectTypeTemplateValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpGetProfileObjectTypeTemplate{}, middleware.After)
 }
 
+func addOpGetSegmentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSegmentDefinition{}, middleware.After)
+}
+
+func addOpGetSegmentEstimateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSegmentEstimate{}, middleware.After)
+}
+
+func addOpGetSegmentMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSegmentMembership{}, middleware.After)
+}
+
+func addOpGetSegmentSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSegmentSnapshot{}, middleware.After)
+}
+
 func addOpGetSimilarProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSimilarProfiles{}, middleware.After)
 }
@@ -1150,6 +1450,14 @@ func addOpListIntegrationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIntegrations{}, middleware.After)
 }
 
+func addOpListObjectTypeAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListObjectTypeAttributes{}, middleware.After)
+}
+
+func addOpListProfileAttributeValuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProfileAttributeValues{}, middleware.After)
+}
+
 func addOpListProfileObjectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProfileObjects{}, middleware.After)
 }
@@ -1160,6 +1468,10 @@ func addOpListProfileObjectTypesValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListRuleBasedMatchesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRuleBasedMatches{}, middleware.After)
+}
+
+func addOpListSegmentDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSegmentDefinitions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1245,6 +1557,48 @@ func validateAdditionalSearchKeysList(v []types.AdditionalSearchKey) error {
 	}
 }
 
+func validateAddressDimension(v *types.AddressDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddressDimension"}
+	if v.City != nil {
+		if err := validateProfileDimension(v.City); err != nil {
+			invalidParams.AddNested("City", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Country != nil {
+		if err := validateProfileDimension(v.Country); err != nil {
+			invalidParams.AddNested("Country", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.County != nil {
+		if err := validateProfileDimension(v.County); err != nil {
+			invalidParams.AddNested("County", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PostalCode != nil {
+		if err := validateProfileDimension(v.PostalCode); err != nil {
+			invalidParams.AddNested("PostalCode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Province != nil {
+		if err := validateProfileDimension(v.Province); err != nil {
+			invalidParams.AddNested("Province", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.State != nil {
+		if err := validateProfileDimension(v.State); err != nil {
+			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAppflowIntegration(v *types.AppflowIntegration) error {
 	if v == nil {
 		return nil
@@ -1291,6 +1645,24 @@ func validateAttributeDetails(v *types.AttributeDetails) error {
 	}
 }
 
+func validateAttributeDimension(v *types.AttributeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAttributeItem(v *types.AttributeItem) error {
 	if v == nil {
 		return nil
@@ -1314,6 +1686,24 @@ func validateAttributeList(v []types.AttributeItem) error {
 	for i := range v {
 		if err := validateAttributeItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeMap(v map[string]types.FilterAttributeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateFilterAttributeDimension(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1398,6 +1788,64 @@ func validateBatches(v []types.Batch) error {
 	}
 }
 
+func validateCalculatedAttributeDimension(v *types.CalculatedAttributeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculatedAttributeDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if v.ConditionOverrides != nil {
+		if err := validateConditionOverrides(v.ConditionOverrides); err != nil {
+			invalidParams.AddNested("ConditionOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCalculatedCustomAttributes(v map[string]types.CalculatedAttributeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculatedCustomAttributes"}
+	for key := range v {
+		value := v[key]
+		if err := validateCalculatedAttributeDimension(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionOverrides(v *types.ConditionOverrides) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionOverrides"}
+	if v.Range != nil {
+		if err := validateRangeOverride(v.Range); err != nil {
+			invalidParams.AddNested("Range", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConditions(v *types.Conditions) error {
 	if v == nil {
 		return nil
@@ -1450,6 +1898,83 @@ func validateConsolidation(v *types.Consolidation) error {
 	}
 }
 
+func validateCustomAttributes(v map[string]types.AttributeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomAttributes"}
+	for key := range v {
+		value := v[key]
+		if err := validateAttributeDimension(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDateDimension(v *types.DateDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DateDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDimension(v types.Dimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Dimension"}
+	switch uv := v.(type) {
+	case *types.DimensionMemberCalculatedAttributes:
+		if err := validateCalculatedCustomAttributes(uv.Value); err != nil {
+			invalidParams.AddNested("[CalculatedAttributes]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DimensionMemberProfileAttributes:
+		if err := validateProfileAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[ProfileAttributes]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDimensionList(v []types.Dimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DimensionList"}
+	for i := range v {
+		if err := validateDimension(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportingConfig(v *types.ExportingConfig) error {
 	if v == nil {
 		return nil
@@ -1458,6 +1983,122 @@ func validateExportingConfig(v *types.ExportingConfig) error {
 	if v.S3Exporting != nil {
 		if err := validateS3ExportingConfig(v.S3Exporting); err != nil {
 			invalidParams.AddNested("S3Exporting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtraLengthValueProfileDimension(v *types.ExtraLengthValueProfileDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtraLengthValueProfileDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilter(v *types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if len(v.Include) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Include"))
+	}
+	if v.Groups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Groups"))
+	} else if v.Groups != nil {
+		if err := validateGroupList(v.Groups); err != nil {
+			invalidParams.AddNested("Groups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterAttributeDimension(v *types.FilterAttributeDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterAttributeDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterDimension(v *types.FilterDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterDimension"}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateAttributeMap(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterDimensionList(v []types.FilterDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterDimensionList"}
+	for i := range v {
+		if err := validateFilterDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterGroup(v *types.FilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterGroup"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Dimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimensions"))
+	} else if v.Dimensions != nil {
+		if err := validateFilterDimensionList(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1497,6 +2138,40 @@ func validateFlowDefinition(v *types.FlowDefinition) error {
 	} else if v.TriggerConfig != nil {
 		if err := validateTriggerConfig(v.TriggerConfig); err != nil {
 			invalidParams.AddNested("TriggerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroup(v *types.Group) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Group"}
+	if v.Dimensions != nil {
+		if err := validateDimensionList(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGroupList(v []types.FilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupList"}
+	for i := range v {
+		if err := validateFilterGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1636,6 +2311,141 @@ func validateObjectFilter(v *types.ObjectFilter) error {
 	}
 }
 
+func validateProfileAttributes(v *types.ProfileAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileAttributes"}
+	if v.AccountNumber != nil {
+		if err := validateProfileDimension(v.AccountNumber); err != nil {
+			invalidParams.AddNested("AccountNumber", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalInformation != nil {
+		if err := validateExtraLengthValueProfileDimension(v.AdditionalInformation); err != nil {
+			invalidParams.AddNested("AdditionalInformation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FirstName != nil {
+		if err := validateProfileDimension(v.FirstName); err != nil {
+			invalidParams.AddNested("FirstName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LastName != nil {
+		if err := validateProfileDimension(v.LastName); err != nil {
+			invalidParams.AddNested("LastName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MiddleName != nil {
+		if err := validateProfileDimension(v.MiddleName); err != nil {
+			invalidParams.AddNested("MiddleName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenderString != nil {
+		if err := validateProfileDimension(v.GenderString); err != nil {
+			invalidParams.AddNested("GenderString", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PartyTypeString != nil {
+		if err := validateProfileDimension(v.PartyTypeString); err != nil {
+			invalidParams.AddNested("PartyTypeString", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BirthDate != nil {
+		if err := validateDateDimension(v.BirthDate); err != nil {
+			invalidParams.AddNested("BirthDate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PhoneNumber != nil {
+		if err := validateProfileDimension(v.PhoneNumber); err != nil {
+			invalidParams.AddNested("PhoneNumber", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BusinessName != nil {
+		if err := validateProfileDimension(v.BusinessName); err != nil {
+			invalidParams.AddNested("BusinessName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BusinessPhoneNumber != nil {
+		if err := validateProfileDimension(v.BusinessPhoneNumber); err != nil {
+			invalidParams.AddNested("BusinessPhoneNumber", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HomePhoneNumber != nil {
+		if err := validateProfileDimension(v.HomePhoneNumber); err != nil {
+			invalidParams.AddNested("HomePhoneNumber", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MobilePhoneNumber != nil {
+		if err := validateProfileDimension(v.MobilePhoneNumber); err != nil {
+			invalidParams.AddNested("MobilePhoneNumber", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EmailAddress != nil {
+		if err := validateProfileDimension(v.EmailAddress); err != nil {
+			invalidParams.AddNested("EmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PersonalEmailAddress != nil {
+		if err := validateProfileDimension(v.PersonalEmailAddress); err != nil {
+			invalidParams.AddNested("PersonalEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BusinessEmailAddress != nil {
+		if err := validateProfileDimension(v.BusinessEmailAddress); err != nil {
+			invalidParams.AddNested("BusinessEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Address != nil {
+		if err := validateAddressDimension(v.Address); err != nil {
+			invalidParams.AddNested("Address", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ShippingAddress != nil {
+		if err := validateAddressDimension(v.ShippingAddress); err != nil {
+			invalidParams.AddNested("ShippingAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MailingAddress != nil {
+		if err := validateAddressDimension(v.MailingAddress); err != nil {
+			invalidParams.AddNested("MailingAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BillingAddress != nil {
+		if err := validateAddressDimension(v.BillingAddress); err != nil {
+			invalidParams.AddNested("BillingAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attributes != nil {
+		if err := validateCustomAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProfileDimension(v *types.ProfileDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileDimension"}
+	if len(v.DimensionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionType"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRange(v *types.Range) error {
 	if v == nil {
 		return nil
@@ -1643,6 +2453,24 @@ func validateRange(v *types.Range) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Range"}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRangeOverride(v *types.RangeOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RangeOverride"}
+	if v.Start == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Start"))
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
@@ -1741,6 +2569,57 @@ func validateScheduledTriggerProperties(v *types.ScheduledTriggerProperties) err
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduledTriggerProperties"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSegmentGroup(v *types.SegmentGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentGroup"}
+	if v.Groups != nil {
+		if err := validateSegmentGroupList(v.Groups); err != nil {
+			invalidParams.AddNested("Groups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSegmentGroupList(v []types.Group) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentGroupList"}
+	for i := range v {
+		if err := validateGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSegmentGroupStructure(v *types.SegmentGroupStructure) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentGroupStructure"}
+	if v.Groups != nil {
+		if err := validateSegmentGroupList(v.Groups); err != nil {
+			invalidParams.AddNested("Groups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1952,6 +2831,50 @@ func validateOpAddProfileKeyInput(v *AddProfileKeyInput) error {
 	}
 }
 
+func validateOpBatchGetCalculatedAttributeForProfileInput(v *BatchGetCalculatedAttributeForProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCalculatedAttributeForProfileInput"}
+	if v.CalculatedAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatedAttributeName"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ProfileIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileIds"))
+	}
+	if v.ConditionOverrides != nil {
+		if err := validateConditionOverrides(v.ConditionOverrides); err != nil {
+			invalidParams.AddNested("ConditionOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetProfileInput(v *BatchGetProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetProfileInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ProfileIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCalculatedAttributeDefinitionInput(v *CreateCalculatedAttributeDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -1973,6 +2896,11 @@ func validateOpCreateCalculatedAttributeDefinitionInput(v *CreateCalculatedAttri
 	if v.Conditions != nil {
 		if err := validateConditions(v.Conditions); err != nil {
 			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filter != nil {
+		if err := validateFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
 	}
 	if len(v.Statistic) == 0 {
@@ -2072,6 +3000,77 @@ func validateOpCreateProfileInput(v *CreateProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProfileInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSegmentDefinitionInput(v *CreateSegmentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSegmentDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.SegmentGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentGroups"))
+	} else if v.SegmentGroups != nil {
+		if err := validateSegmentGroup(v.SegmentGroups); err != nil {
+			invalidParams.AddNested("SegmentGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSegmentEstimateInput(v *CreateSegmentEstimateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSegmentEstimateInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentQuery"))
+	} else if v.SegmentQuery != nil {
+		if err := validateSegmentGroupStructure(v.SegmentQuery); err != nil {
+			invalidParams.AddNested("SegmentQuery", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSegmentSnapshotInput(v *CreateSegmentSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSegmentSnapshotInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if len(v.DataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2225,6 +3224,24 @@ func validateOpDeleteProfileObjectTypeInput(v *DeleteProfileObjectTypeInput) err
 	}
 	if v.ObjectTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSegmentDefinitionInput(v *DeleteSegmentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSegmentDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2454,6 +3471,84 @@ func validateOpGetProfileObjectTypeTemplateInput(v *GetProfileObjectTypeTemplate
 	}
 }
 
+func validateOpGetSegmentDefinitionInput(v *GetSegmentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSegmentDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSegmentEstimateInput(v *GetSegmentEstimateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSegmentEstimateInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EstimateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EstimateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSegmentMembershipInput(v *GetSegmentMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSegmentMembershipInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if v.ProfileIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSegmentSnapshotInput(v *GetSegmentSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSegmentSnapshotInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if v.SnapshotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSimilarProfilesInput(v *GetSimilarProfilesInput) error {
 	if v == nil {
 		return nil
@@ -2607,6 +3702,42 @@ func validateOpListIntegrationsInput(v *ListIntegrationsInput) error {
 	}
 }
 
+func validateOpListObjectTypeAttributesInput(v *ListObjectTypeAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListObjectTypeAttributesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ObjectTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProfileAttributeValuesInput(v *ListProfileAttributeValuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProfileAttributeValuesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListProfileObjectsInput(v *ListProfileObjectsInput) error {
 	if v == nil {
 		return nil
@@ -2653,6 +3784,21 @@ func validateOpListRuleBasedMatchesInput(v *ListRuleBasedMatchesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRuleBasedMatchesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSegmentDefinitionsInput(v *ListSegmentDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSegmentDefinitionsInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}

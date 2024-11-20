@@ -383,6 +383,9 @@ func awsAwsjson10_deserializeOpErrorBatchUpdateVehicle(response *smithyhttp.Resp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
@@ -6494,6 +6497,9 @@ func awsAwsjson10_deserializeOpErrorUpdateVehicle(response *smithyhttp.Response,
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -6885,7 +6891,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7418,7 +7424,7 @@ func awsAwsjson10_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -7928,7 +7934,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8610,7 +8616,7 @@ func awsAwsjson10_deserializeDocumentDecoderManifestValidationException(v **type
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8917,7 +8923,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9058,7 +9064,7 @@ func awsAwsjson10_deserializeDocumentInvalidNodeException(v **types.InvalidNodeE
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9287,7 +9293,7 @@ func awsAwsjson10_deserializeDocumentInvalidSignalsException(v **types.InvalidSi
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9327,7 +9333,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10286,7 +10292,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11306,7 +11312,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11788,7 +11794,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12009,7 +12015,7 @@ func awsAwsjson10_deserializeDocumentVehicleStatus(v **types.VehicleStatus, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignName to be of type string, got %T instead", value)
 				}
 				sv.CampaignName = ptr.String(jtv)
 			}
@@ -12352,7 +12358,7 @@ func awsAwsjson10_deserializeOpDocumentCreateCampaignOutput(v **CreateCampaignOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -12655,7 +12661,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteCampaignOutput(v **DeleteCampaignOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -12980,7 +12986,7 @@ func awsAwsjson10_deserializeOpDocumentGetCampaignOutput(v **GetCampaignOutput, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -14903,7 +14909,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateCampaignOutput(v **UpdateCampaignOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}

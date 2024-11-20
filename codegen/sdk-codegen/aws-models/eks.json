@@ -2571,6 +2571,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This value indicates if extended support is enabled or disabled for the cluster.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html\">Learn more about EKS Extended Support in the EKS User Guide.</a>\n         </p>"
                     }
+                },
+                "zonalShiftConfig": {
+                    "target": "com.amazonaws.eks#ZonalShiftConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for zonal shift for the cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3277,7 +3283,7 @@
                 "name": {
                     "target": "com.amazonaws.eks#ClusterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name to give to your cluster.</p>",
+                        "smithy.api#documentation": "<p>The unique name to give to your cluster. The name can contain only alphanumeric characters (case-sensitive),\nhyphens, and underscores. It must start with an alphanumeric character and can't be longer than\n100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're \ncreating the cluster in.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3354,6 +3360,12 @@
                     "target": "com.amazonaws.eks#UpgradePolicyRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>New clusters, by default, have extended support enabled. You can disable extended support when creating a cluster by setting this value to <code>STANDARD</code>.</p>"
+                    }
+                },
+                "zonalShiftConfig": {
+                    "target": "com.amazonaws.eks#ZonalShiftConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable or disable ARC zonal shift for the cluster. If zonal shift is enabled, Amazon Web Services\n            configures zonal autoshift for the cluster.</p>\n         <p>Zonal shift is a feature of\n            Amazon Application Recovery Controller (ARC). ARC zonal shift is designed to be a temporary measure that allows you to move\n            traffic for a resource away from an impaired AZ until the zonal shift expires or you cancel\n            it. You can extend the zonal shift if necessary.</p>\n         <p>You can start a zonal shift for an EKS cluster, or you can allow Amazon Web Services to do it for you\n            by enabling <i>zonal autoshift</i>. This shift updates the flow of\n            east-to-west network traffic in your cluster to only consider network endpoints for Pods\n            running on worker nodes in healthy AZs. Additionally, any ALB or NLB handling ingress\n            traffic for applications in your EKS cluster will automatically route traffic to targets in\n            the healthy AZs. For more information about zonal shift in EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/zone-shift.html\">Learn about Amazon Application Recovery Controller (ARC)\n                Zonal Shift in Amazon EKS</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 }
             },
@@ -6785,7 +6797,7 @@
                 "code": {
                     "target": "com.amazonaws.eks#NodegroupIssueCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or\n                    more of your managed nodes is failing to authenticate or authorize with your\n                    Kubernetes cluster API server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be\n                    able to recreate an Auto Scaling group with the same settings to\n                    recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one\n                    or more of your managed nodes is unable to to communicate with your Kubernetes\n                    cluster API server. This can happen if there are network disruptions or if API\n                    servers are timing out processing requests. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be\n                    able to recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not\n                    match the version that Amazon EKS created. You may be able to revert to\n                    the version that Amazon EKS created to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                        Amazon EC2 subnets specified for a node group do not automatically\n                    assign public IP addresses to instances launched into it. If you want your\n                    instances to be assigned a public IP address, then you need to enable the\n                        <code>auto-assign public IP address</code> setting for the subnet. See\n                        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public <code>IPv4</code> addressing attribute for your subnet</a> in\n                    the <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be\n                    able to recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                        IAM role for your managed node group. You may be able to\n                    recreate an IAM role with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance\n                    type. You may be able to request an Amazon EC2 instance limit increase\n                    to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of\n                    this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM\n                        role</a> permissions or lack of outbound internet access for the nodes.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or\n                    more of your managed nodes is failing to authenticate or authorize with your\n                    Kubernetes cluster API server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be\n                    able to recreate an Auto Scaling group with the same settings to\n                    recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one\n                    or more of your managed nodes is unable to to communicate with your Kubernetes\n                    cluster API server. This can happen if there are network disruptions or if API\n                    servers are timing out processing requests. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2InstanceTypeDoesNotExist</b>: One or more of\n                    the supplied Amazon EC2 instance types do not exist. Amazon EKS checked for the\n                    instance types that you provided in this Amazon Web Services Region, and one or more aren't\n                    available.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be\n                    able to recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not\n                    match the version that Amazon EKS created. You may be able to revert to\n                    the version that Amazon EKS created to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                        Amazon EC2 subnets specified for a node group do not automatically\n                    assign public IP addresses to instances launched into it. If you want your\n                    instances to be assigned a public IP address, then you need to enable the\n                        <code>auto-assign public IP address</code> setting for the subnet. See\n                        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public <code>IPv4</code> addressing attribute for your subnet</a> in\n                    the <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be\n                    able to recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                        IAM role for your managed node group. You may be able to\n                    recreate an IAM role with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance\n                    type. You may be able to request an Amazon EC2 instance limit increase\n                    to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of\n                    this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM\n                        role</a> permissions or lack of outbound internet access for the nodes.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "message": {
@@ -8626,6 +8638,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Ec2LaunchTemplateVersionMaxLimitExceeded"
                     }
+                },
+                "EC2_INSTANCE_TYPE_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2InstanceTypeDoesNotExist"
+                    }
                 }
             }
         },
@@ -9998,7 +10016,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with <code>DescribeUpdate</code>\"/>.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control plane\n            logs for your cluster to CloudWatch Logs. By default, cluster control plane logs\n            aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>You can also use this API operation to choose different subnets and security groups\n            for the cluster. You must specify at least two subnets that are in different\n            Availability Zones. You can't change which VPC the subnets are from, the subnets must be\n            in the same VPC as the subnets that the cluster was created with. For more information\n            about the VPC requirements, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with <code>DescribeUpdate</code>\"/>.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control plane\n            logs for your cluster to CloudWatch Logs. By default, cluster control plane logs\n            aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>You can also use this API operation to choose different subnets and security groups\n            for the cluster. You must specify at least two subnets that are in different\n            Availability Zones. You can't change which VPC the subnets are from, the subnets must be\n            in the same VPC as the subnets that the cluster was created with. For more information\n            about the VPC requirements, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <p>You can also use this API operation to enable or disable ARC zonal shift. If zonal shift is enabled, Amazon Web Services\n            configures zonal autoshift for the cluster.</p>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/update-config",
@@ -10043,6 +10061,12 @@
                     "target": "com.amazonaws.eks#UpgradePolicyRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>You can enable or disable extended support for clusters currently on standard support. You cannot disable extended support once it starts. You must enable extended support before your cluster exits standard support.</p>"
+                    }
+                },
+                "zonalShiftConfig": {
+                    "target": "com.amazonaws.eks#ZonalShiftConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable or disable ARC zonal shift for the cluster. If zonal shift is enabled, Amazon Web Services\n            configures zonal autoshift for the cluster.</p>\n         <p>Zonal shift is a feature of\n            Amazon Application Recovery Controller (ARC). ARC zonal shift is designed to be a temporary measure that allows you to move\n            traffic for a resource away from an impaired AZ until the zonal shift expires or you cancel\n            it. You can extend the zonal shift if necessary.</p>\n         <p>You can start a zonal shift for an EKS cluster, or you can allow Amazon Web Services to do it for you\n            by enabling <i>zonal autoshift</i>. This shift updates the flow of\n            east-to-west network traffic in your cluster to only consider network endpoints for Pods\n            running on worker nodes in healthy AZs. Additionally, any ALB or NLB handling ingress\n            traffic for applications in your EKS cluster will automatically route traffic to targets in\n            the healthy AZs. For more information about zonal shift in EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/zone-shift.html\">Learn about Amazon Application Recovery Controller (ARC)\n                Zonal Shift in Amazon EKS</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 }
             },
@@ -10644,6 +10668,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UpgradePolicy"
                     }
+                },
+                "ZONAL_SHIFT_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZonalShiftConfig"
+                    }
                 }
             }
         },
@@ -10852,6 +10882,12 @@
                     "traits": {
                         "smithy.api#enumValue": "UpgradePolicyUpdate"
                     }
+                },
+                "ZONAL_SHIFT_CONFIG_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZonalShiftConfigUpdate"
+                    }
                 }
             }
         },
@@ -10979,6 +11015,34 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.eks#ZonalShiftConfigRequest": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If zonal shift is enabled, Amazon Web Services configures zonal autoshift for the cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for zonal shift for the cluster.</p>"
+            }
+        },
+        "com.amazonaws.eks#ZonalShiftConfigResponse": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the zonal shift is enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of zonal shift configuration for the cluster</p>"
             }
         },
         "com.amazonaws.eks#configStatus": {

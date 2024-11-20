@@ -929,7 +929,7 @@
                 "scaleDownIdleTimeInSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time before an idle node is scaled down.</p>",
+                        "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down.</p>\n         <p>Default: <code>600</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -958,7 +958,7 @@
                 "scaleDownIdleTimeInSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time before an idle node is scaled down.</p>",
+                        "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down.</p>\n         <p>Default: <code>600</code>\n         </p>",
                         "smithy.api#range": {
                             "min": 1
                         }

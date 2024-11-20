@@ -1383,6 +1383,13 @@ func awsRestjson1_serializeOpDocumentCreateWebExperienceInput(v *CreateWebExperi
 		}
 	}
 
+	if v.Origins != nil {
+		ok := object.Key("origins")
+		if err := awsRestjson1_serializeDocumentWebExperienceOrigins(v.Origins, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -4212,6 +4219,11 @@ func awsRestjson1_serializeOpDocumentPutGroupInput(v *PutGroupInput, value smith
 		ok.String(*v.GroupName)
 	}
 
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -5568,6 +5580,13 @@ func awsRestjson1_serializeOpDocumentUpdateWebExperienceInput(v *UpdateWebExperi
 		}
 	}
 
+	if v.Origins != nil {
+		ok := object.Key("origins")
+		if err := awsRestjson1_serializeDocumentWebExperienceOrigins(v.Origins, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -6759,6 +6778,13 @@ func awsRestjson1_serializeDocumentGroupMembers(v *types.GroupMembers, value smi
 		}
 	}
 
+	if v.S3PathForGroupMembers != nil {
+		ok := object.Key("s3PathForGroupMembers")
+		if err := awsRestjson1_serializeDocumentS3(v.S3PathForGroupMembers, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7560,6 +7586,17 @@ func awsRestjson1_serializeDocumentWebExperienceAuthConfiguration(v types.WebExp
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebExperienceOrigins(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

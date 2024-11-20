@@ -31,11 +31,6 @@ func (c *Client) GetOutpostSupportedInstanceTypes(ctx context.Context, params *G
 
 type GetOutpostSupportedInstanceTypesInput struct {
 
-	// The ID for the Amazon Web Services Outposts order.
-	//
-	// This member is required.
-	OrderId *string
-
 	// The ID or ARN of the Outpost.
 	//
 	// This member is required.
@@ -46,6 +41,9 @@ type GetOutpostSupportedInstanceTypesInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	// The ID for the Amazon Web Services Outposts order.
+	OrderId *string
 
 	noSmithyDocumentSerde
 }

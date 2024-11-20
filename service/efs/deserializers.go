@@ -1114,6 +1114,15 @@ func awsRestjson1_deserializeOpDocumentCreateReplicationConfigurationOutput(v **
 				sv.SourceFileSystemId = ptr.String(jtv)
 			}
 
+		case "SourceFileSystemOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.SourceFileSystemOwnerId = ptr.String(jtv)
+			}
+
 		case "SourceFileSystemRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6401,7 +6410,7 @@ func awsRestjson1_deserializeDocumentAccessPointAlreadyExists(v **types.AccessPo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6593,7 +6602,7 @@ func awsRestjson1_deserializeDocumentAccessPointLimitExceeded(v **types.AccessPo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6642,7 +6651,7 @@ func awsRestjson1_deserializeDocumentAccessPointNotFound(v **types.AccessPointNo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6691,7 +6700,7 @@ func awsRestjson1_deserializeDocumentAvailabilityZonesMismatch(v **types.Availab
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6780,7 +6789,7 @@ func awsRestjson1_deserializeDocumentBadRequest(v **types.BadRequest, value inte
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6829,7 +6838,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6944,7 +6953,7 @@ func awsRestjson1_deserializeDocumentDependencyTimeout(v **types.DependencyTimeo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7009,6 +7018,15 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 				}
 			}
 
+		case "OwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.OwnerId = ptr.String(jtv)
+			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7018,6 +7036,15 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 				sv.Region = ptr.String(jtv)
 			}
 
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7025,6 +7052,15 @@ func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value in
 					return fmt.Errorf("expected ReplicationStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.ReplicationStatus(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		default:
@@ -7110,7 +7146,7 @@ func awsRestjson1_deserializeDocumentFileSystemAlreadyExists(v **types.FileSyste
 				sv.FileSystemId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7410,7 +7446,7 @@ func awsRestjson1_deserializeDocumentFileSystemInUse(v **types.FileSystemInUse, 
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7459,7 +7495,7 @@ func awsRestjson1_deserializeDocumentFileSystemLimitExceeded(v **types.FileSyste
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7508,7 +7544,7 @@ func awsRestjson1_deserializeDocumentFileSystemNotFound(v **types.FileSystemNotF
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7696,7 +7732,7 @@ func awsRestjson1_deserializeDocumentIncorrectFileSystemLifeCycleState(v **types
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7745,7 +7781,7 @@ func awsRestjson1_deserializeDocumentIncorrectMountTargetState(v **types.Incorre
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7794,7 +7830,7 @@ func awsRestjson1_deserializeDocumentInsufficientThroughputCapacity(v **types.In
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7843,7 +7879,7 @@ func awsRestjson1_deserializeDocumentInternalServerError(v **types.InternalServe
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7892,7 +7928,7 @@ func awsRestjson1_deserializeDocumentInvalidPolicyException(v **types.InvalidPol
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7941,7 +7977,7 @@ func awsRestjson1_deserializeDocumentIpAddressInUse(v **types.IpAddressInUse, va
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8082,7 +8118,7 @@ func awsRestjson1_deserializeDocumentMountTargetConflict(v **types.MountTargetCo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8286,7 +8322,7 @@ func awsRestjson1_deserializeDocumentMountTargetNotFound(v **types.MountTargetNo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8335,7 +8371,7 @@ func awsRestjson1_deserializeDocumentNetworkInterfaceLimitExceeded(v **types.Net
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8384,7 +8420,7 @@ func awsRestjson1_deserializeDocumentNoFreeAddressesInSubnet(v **types.NoFreeAdd
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8433,7 +8469,7 @@ func awsRestjson1_deserializeDocumentPolicyNotFound(v **types.PolicyNotFound, va
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8544,7 +8580,7 @@ func awsRestjson1_deserializeDocumentReplicationAlreadyExists(v **types.Replicat
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8632,6 +8668,15 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationDescription(v **typ
 				sv.SourceFileSystemId = ptr.String(jtv)
 			}
 
+		case "SourceFileSystemOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.SourceFileSystemOwnerId = ptr.String(jtv)
+			}
+
 		case "SourceFileSystemRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8715,7 +8760,7 @@ func awsRestjson1_deserializeDocumentReplicationNotFound(v **types.ReplicationNo
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8930,7 +8975,7 @@ func awsRestjson1_deserializeDocumentSecurityGroupLimitExceeded(v **types.Securi
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8979,7 +9024,7 @@ func awsRestjson1_deserializeDocumentSecurityGroupNotFound(v **types.SecurityGro
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9064,7 +9109,7 @@ func awsRestjson1_deserializeDocumentSubnetNotFound(v **types.SubnetNotFound, va
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9196,7 +9241,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9245,7 +9290,7 @@ func awsRestjson1_deserializeDocumentThroughputLimitExceeded(v **types.Throughpu
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9294,7 +9339,7 @@ func awsRestjson1_deserializeDocumentTooManyRequests(v **types.TooManyRequests, 
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9343,7 +9388,7 @@ func awsRestjson1_deserializeDocumentUnsupportedAvailabilityZone(v **types.Unsup
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9392,7 +9437,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

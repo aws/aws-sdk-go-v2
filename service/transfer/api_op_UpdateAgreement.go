@@ -76,7 +76,7 @@ type UpdateAgreementInput struct {
 
 	// To change the landing directory (folder) for files that are transferred,
 	// provide the bucket folder that you want to use; for example,
-	// /DOC-EXAMPLE-BUCKET/home/mydirectory .
+	// /amzn-s3-demo-bucket/home/mydirectory .
 	BaseDirectory *string
 
 	// To replace the existing description, provide a short description for the

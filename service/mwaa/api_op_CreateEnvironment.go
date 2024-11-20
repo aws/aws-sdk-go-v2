@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+// Creates an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
+// environment.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -27,9 +28,9 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 	return out, nil
 }
 
-// This section contains the Amazon Managed Workflows for Apache Airflow (MWAA)
-// API reference documentation to create an environment. For more information, see [Get started with Amazon Managed Workflows for Apache Airflow]
-// .
+// This section contains the Amazon Managed Workflows for Apache Airflow (Amazon
+// MWAA) API reference documentation to create an environment. For more
+// information, see [Get started with Amazon Managed Workflows for Apache Airflow].
 //
 // [Get started with Amazon Managed Workflows for Apache Airflow]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
 type CreateEnvironmentInput struct {
@@ -83,12 +84,12 @@ type CreateEnvironmentInput struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version for your environment. If no value is specified, it
-	// defaults to the latest version. For more information, see [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)].
+	// defaults to the latest version. For more information, see [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)].
 	//
-	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2
-	//     2.8.1
+	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 ,
+	// 2.9.2 , and 2.10.1 .
 	//
-	// [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
+	// [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
 	AirflowVersion *string
 
 	// Defines whether the VPC endpoints configured for the environment are created,
@@ -102,8 +103,8 @@ type CreateEnvironmentInput struct {
 	// delete the failed environment and create a new one.
 	EndpointManagement types.EndpointManagement
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large ,
-	// mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
+	// The environment class type. Valid values: mw1.micro , mw1.small , mw1.medium ,
+	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
 	//
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
@@ -128,7 +129,8 @@ type CreateEnvironmentInput struct {
 	// rates decrease Amazon MWAA disposes of the additional web servers, and scales
 	// down to the number set in MinxWebserers .
 	//
-	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	// Valid values: For environments larger than mw1.micro, accepts values from 2 to 5
+	// . Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	MaxWebservers *int32
 
 	// The maximum number of workers that you want to run in your environment. MWAA
@@ -146,7 +148,8 @@ type CreateEnvironmentInput struct {
 	// disposes of the additional web servers, and scales down to the number set in
 	// MinxWebserers .
 	//
-	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	// Valid values: For environments larger than mw1.micro, accepts values from 2 to 5
+	// . Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	MinWebservers *int32
 
 	// The minimum number of workers that you want to run in your environment. MWAA
@@ -186,7 +189,8 @@ type CreateEnvironmentInput struct {
 	// The number of Apache Airflow schedulers to run in your environment. Valid
 	// values:
 	//
-	//   - v2 - Accepts between 2 to 5 . Defaults to 2 .
+	//   - v2 - For environments larger than mw1.micro, accepts values from 2 to 5 .
+	//   Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	//
 	//   - v1 - Accepts 1 .
 	Schedulers *int32

@@ -494,6 +494,18 @@ func TestCheckSnapshot_ListExecutions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFileTransferResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFileTransferResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFileTransferResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListHostKeys(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHostKeys(context.Background(), nil, func(o *Options) {
@@ -1206,6 +1218,18 @@ func TestUpdateSnapshot_ListExecutions(t *testing.T) {
 	_, err := svc.ListExecutions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFileTransferResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFileTransferResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFileTransferResults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

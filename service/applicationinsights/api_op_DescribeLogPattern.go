@@ -44,7 +44,7 @@ type DescribeLogPatternInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The AWS account ID for the resource group owner.
+	// The Amazon Web Services account ID for the resource group owner.
 	AccountId *string
 
 	noSmithyDocumentSerde
@@ -52,7 +52,7 @@ type DescribeLogPatternInput struct {
 
 type DescribeLogPatternOutput struct {
 
-	// The AWS account ID for the resource group owner.
+	// The Amazon Web Services account ID for the resource group owner.
 	AccountId *string
 
 	// The successfully created log pattern.

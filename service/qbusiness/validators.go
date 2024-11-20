@@ -2113,6 +2113,11 @@ func validateGroupMembers(v *types.GroupMembers) error {
 			invalidParams.AddNested("MemberUsers", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3PathForGroupMembers != nil {
+		if err := validateS3(v.S3PathForGroupMembers); err != nil {
+			invalidParams.AddNested("S3PathForGroupMembers", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

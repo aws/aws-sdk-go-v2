@@ -72,10 +72,14 @@ type SendMediaMessageInput struct {
 	// The text body of the message.
 	MessageBody *string
 
+	// Set to true to enable message feedback for the message. When a user receives
+	// the message you need to update the message status using PutMessageFeedback.
+	MessageFeedbackEnabled *bool
+
 	// The unique identifier of the protect configuration to use.
 	ProtectConfigurationId *string
 
-	// How long the text message is valid for. By default this is 72 hours.
+	// How long the media message is valid for. By default this is 72 hours.
 	TimeToLive *int32
 
 	noSmithyDocumentSerde

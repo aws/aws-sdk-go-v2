@@ -78,6 +78,10 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The logging configuration of the infrastructure configuration.
 	Logging *types.Logging
 
+	// The instance placement settings that define where the instances that are
+	// launched from your image will run.
+	Placement *types.Placement
+
 	// The tags attached to the resource created by Image Builder.
 	ResourceTags map[string]string
 

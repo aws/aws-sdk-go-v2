@@ -4,6 +4,7 @@ package types_test
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 )
 
@@ -50,6 +51,24 @@ func ExampleAPISchema_outputUsage() {
 
 var _ *string
 var _ *types.S3Identifier
+
+func ExampleContentBlock_outputUsage() {
+	var union types.ContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleFlowConnectionConfiguration_outputUsage() {
 	var union types.FlowConnectionConfiguration
@@ -135,6 +154,120 @@ var _ *types.LexFlowNodeConfiguration
 var _ *types.PromptFlowNodeConfiguration
 var _ *types.InputFlowNodeConfiguration
 
+func ExampleFlowValidationDetails_outputUsage() {
+	var union types.FlowValidationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowValidationDetailsMemberCyclicConnection:
+		_ = v.Value // Value is types.CyclicConnectionFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberDuplicateConditionExpression:
+		_ = v.Value // Value is types.DuplicateConditionExpressionFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberDuplicateConnections:
+		_ = v.Value // Value is types.DuplicateConnectionsFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberIncompatibleConnectionDataType:
+		_ = v.Value // Value is types.IncompatibleConnectionDataTypeFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMalformedConditionExpression:
+		_ = v.Value // Value is types.MalformedConditionExpressionFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMalformedNodeInputExpression:
+		_ = v.Value // Value is types.MalformedNodeInputExpressionFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMismatchedNodeInputType:
+		_ = v.Value // Value is types.MismatchedNodeInputTypeFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMismatchedNodeOutputType:
+		_ = v.Value // Value is types.MismatchedNodeOutputTypeFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingConnectionConfiguration:
+		_ = v.Value // Value is types.MissingConnectionConfigurationFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingDefaultCondition:
+		_ = v.Value // Value is types.MissingDefaultConditionFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingEndingNodes:
+		_ = v.Value // Value is types.MissingEndingNodesFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingNodeConfiguration:
+		_ = v.Value // Value is types.MissingNodeConfigurationFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingNodeInput:
+		_ = v.Value // Value is types.MissingNodeInputFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingNodeOutput:
+		_ = v.Value // Value is types.MissingNodeOutputFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMissingStartingNodes:
+		_ = v.Value // Value is types.MissingStartingNodesFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberMultipleNodeInputConnections:
+		_ = v.Value // Value is types.MultipleNodeInputConnectionsFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnfulfilledNodeInput:
+		_ = v.Value // Value is types.UnfulfilledNodeInputFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnknownConnectionCondition:
+		_ = v.Value // Value is types.UnknownConnectionConditionFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnknownConnectionSource:
+		_ = v.Value // Value is types.UnknownConnectionSourceFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnknownConnectionSourceOutput:
+		_ = v.Value // Value is types.UnknownConnectionSourceOutputFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnknownConnectionTarget:
+		_ = v.Value // Value is types.UnknownConnectionTargetFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnknownConnectionTargetInput:
+		_ = v.Value // Value is types.UnknownConnectionTargetInputFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnreachableNode:
+		_ = v.Value // Value is types.UnreachableNodeFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnsatisfiedConnectionConditions:
+		_ = v.Value // Value is types.UnsatisfiedConnectionConditionsFlowValidationDetails
+
+	case *types.FlowValidationDetailsMemberUnspecified:
+		_ = v.Value // Value is types.UnspecifiedFlowValidationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MalformedConditionExpressionFlowValidationDetails
+var _ *types.UnfulfilledNodeInputFlowValidationDetails
+var _ *types.MalformedNodeInputExpressionFlowValidationDetails
+var _ *types.UnknownConnectionConditionFlowValidationDetails
+var _ *types.MissingNodeConfigurationFlowValidationDetails
+var _ *types.DuplicateConditionExpressionFlowValidationDetails
+var _ *types.MissingNodeInputFlowValidationDetails
+var _ *types.UnknownConnectionTargetFlowValidationDetails
+var _ *types.MultipleNodeInputConnectionsFlowValidationDetails
+var _ *types.MismatchedNodeInputTypeFlowValidationDetails
+var _ *types.UnsatisfiedConnectionConditionsFlowValidationDetails
+var _ *types.MissingDefaultConditionFlowValidationDetails
+var _ *types.DuplicateConnectionsFlowValidationDetails
+var _ *types.UnreachableNodeFlowValidationDetails
+var _ *types.MissingEndingNodesFlowValidationDetails
+var _ *types.MissingStartingNodesFlowValidationDetails
+var _ *types.UnknownConnectionSourceFlowValidationDetails
+var _ *types.UnknownConnectionTargetInputFlowValidationDetails
+var _ *types.MismatchedNodeOutputTypeFlowValidationDetails
+var _ *types.MissingNodeOutputFlowValidationDetails
+var _ *types.UnknownConnectionSourceOutputFlowValidationDetails
+var _ *types.UnspecifiedFlowValidationDetails
+var _ *types.IncompatibleConnectionDataTypeFlowValidationDetails
+var _ *types.CyclicConnectionFlowValidationDetails
+var _ *types.MissingConnectionConfigurationFlowValidationDetails
+
 func ExampleFunctionSchema_outputUsage() {
 	var union types.FunctionSchema
 	// type switches can be used to check the union value
@@ -175,6 +308,24 @@ func ExamplePromptFlowNodeSourceConfiguration_outputUsage() {
 var _ *types.PromptFlowNodeInlineConfiguration
 var _ *types.PromptFlowNodeResourceConfiguration
 
+func ExamplePromptGenAiResource_outputUsage() {
+	var union types.PromptGenAiResource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PromptGenAiResourceMemberAgent:
+		_ = v.Value // Value is types.PromptAgentResource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PromptAgentResource
+
 func ExamplePromptInferenceConfiguration_outputUsage() {
 	var union types.PromptInferenceConfiguration
 	// type switches can be used to check the union value
@@ -197,6 +348,9 @@ func ExamplePromptTemplateConfiguration_outputUsage() {
 	var union types.PromptTemplateConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PromptTemplateConfigurationMemberChat:
+		_ = v.Value // Value is types.ChatPromptTemplateConfiguration
+
 	case *types.PromptTemplateConfigurationMemberText:
 		_ = v.Value // Value is types.TextPromptTemplateConfiguration
 
@@ -210,6 +364,7 @@ func ExamplePromptTemplateConfiguration_outputUsage() {
 }
 
 var _ *types.TextPromptTemplateConfiguration
+var _ *types.ChatPromptTemplateConfiguration
 
 func ExampleRetrievalFlowNodeServiceConfiguration_outputUsage() {
 	var union types.RetrievalFlowNodeServiceConfiguration
@@ -246,3 +401,83 @@ func ExampleStorageFlowNodeServiceConfiguration_outputUsage() {
 }
 
 var _ *types.StorageFlowNodeS3Configuration
+
+func ExampleSystemContentBlock_outputUsage() {
+	var union types.SystemContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SystemContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleTool_outputUsage() {
+	var union types.Tool
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolMemberToolSpec:
+		_ = v.Value // Value is types.ToolSpecification
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolSpecification
+
+func ExampleToolChoice_outputUsage() {
+	var union types.ToolChoice
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolChoiceMemberAny:
+		_ = v.Value // Value is types.AnyToolChoice
+
+	case *types.ToolChoiceMemberAuto:
+		_ = v.Value // Value is types.AutoToolChoice
+
+	case *types.ToolChoiceMemberTool:
+		_ = v.Value // Value is types.SpecificToolChoice
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutoToolChoice
+var _ *types.AnyToolChoice
+var _ *types.SpecificToolChoice
+
+func ExampleToolInputSchema_outputUsage() {
+	var union types.ToolInputSchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolInputSchemaMemberJson:
+		_ = v.Value // Value is document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ document.Interface

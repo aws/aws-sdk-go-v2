@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the log-level overrides for all resources; both wireless devices and
-// wireless gateways.
+// Removes the log-level overrides for all resources; wireless devices, wireless
+// gateways, and fuota tasks.
 func (c *Client) ResetAllResourceLogLevels(ctx context.Context, params *ResetAllResourceLogLevelsInput, optFns ...func(*Options)) (*ResetAllResourceLogLevelsOutput, error) {
 	if params == nil {
 		params = &ResetAllResourceLogLevelsInput{}

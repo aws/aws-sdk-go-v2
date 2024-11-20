@@ -39,10 +39,8 @@ type CreateDataCatalogInput struct {
 	// This member is required.
 	Name *string
 
-	// The type of data catalog to create: LAMBDA for a federated catalog, GLUE for an
-	// Glue Data Catalog, and HIVE for an external Apache Hive metastore. FEDERATED is
-	// a federated catalog for which Athena creates the connection and the Lambda
-	// function for you based on the parameters that you pass.
+	// The type of data catalog to create: LAMBDA for a federated catalog, HIVE for an
+	// external hive metastore, or GLUE for an Glue Data Catalog.
 	//
 	// This member is required.
 	Type types.DataCatalogType
@@ -81,22 +79,6 @@ type CreateDataCatalogInput struct {
 	//   - The GLUE data catalog type also applies to the default AwsDataCatalog that
 	//   already exists in your account, of which you can have only one and cannot
 	//   modify.
-	//
-	//   - The FEDERATED data catalog type uses one of the following parameters, but
-	//   not both. Use connection-arn for an existing Glue connection. Use
-	//   connection-type and connection-properties to specify the configuration setting
-	//   for a new connection.
-	//
-	//   - connection-arn:
-	//
-	//   - lambda-role-arn (optional): The execution role to use for the Lambda
-	//   function. If not provided, one is created.
-	//
-	//   - connection-type:MYSQL|REDSHIFT|...., connection-properties:""
-	//
-	// For , use escaped JSON text, as in the following example.
-	//
-	//   "{\"spill_bucket\":\"my_spill\",\"spill_prefix\":\"athena-spill\",\"host\":\"abc12345.snowflakecomputing.com\",\"port\":\"1234\",\"warehouse\":\"DEV_WH\",\"database\":\"TEST\",\"schema\":\"PUBLIC\",\"SecretArn\":\"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j\"}"
 	Parameters map[string]string
 
 	// A list of comma separated tags to add to the data catalog that is created.
@@ -106,13 +88,6 @@ type CreateDataCatalogInput struct {
 }
 
 type CreateDataCatalogOutput struct {
-
-	// Contains information about a data catalog in an Amazon Web Services account.
-	//
-	// In the Athena console, data catalogs are listed as "data sources" on the Data
-	// sources page under the Data source name column.
-	DataCatalog *types.DataCatalog
-
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -155,6 +155,25 @@ func (ConfluenceHostType) Values() []ConfluenceHostType {
 	}
 }
 
+type ConversationRole string
+
+// Enum values for ConversationRole
+const (
+	ConversationRoleUser      ConversationRole = "user"
+	ConversationRoleAssistant ConversationRole = "assistant"
+)
+
+// Values returns all known values for ConversationRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConversationRole) Values() []ConversationRole {
+	return []ConversationRole{
+		"user",
+		"assistant",
+	}
+}
+
 type CrawlFilterConfigurationType string
 
 // Enum values for CrawlFilterConfigurationType
@@ -399,6 +418,71 @@ func (FlowValidationSeverity) Values() []FlowValidationSeverity {
 	}
 }
 
+type FlowValidationType string
+
+// Enum values for FlowValidationType
+const (
+	FlowValidationTypeCyclicConnection                FlowValidationType = "CyclicConnection"
+	FlowValidationTypeDuplicateConnections            FlowValidationType = "DuplicateConnections"
+	FlowValidationTypeDuplicateConditionExpression    FlowValidationType = "DuplicateConditionExpression"
+	FlowValidationTypeUnreachableNode                 FlowValidationType = "UnreachableNode"
+	FlowValidationTypeUnknownConnectionSource         FlowValidationType = "UnknownConnectionSource"
+	FlowValidationTypeUnknownConnectionSourceOutput   FlowValidationType = "UnknownConnectionSourceOutput"
+	FlowValidationTypeUnknownConnectionTarget         FlowValidationType = "UnknownConnectionTarget"
+	FlowValidationTypeUnknownConnectionTargetInput    FlowValidationType = "UnknownConnectionTargetInput"
+	FlowValidationTypeUnknownConnectionCondition      FlowValidationType = "UnknownConnectionCondition"
+	FlowValidationTypeMalformedConditionExpression    FlowValidationType = "MalformedConditionExpression"
+	FlowValidationTypeMalformedNodeInputExpression    FlowValidationType = "MalformedNodeInputExpression"
+	FlowValidationTypeMismatchedNodeInputType         FlowValidationType = "MismatchedNodeInputType"
+	FlowValidationTypeMismatchedNodeOutputType        FlowValidationType = "MismatchedNodeOutputType"
+	FlowValidationTypeIncompatibleConnectionDataType  FlowValidationType = "IncompatibleConnectionDataType"
+	FlowValidationTypeMissingConnectionConfiguration  FlowValidationType = "MissingConnectionConfiguration"
+	FlowValidationTypeMissingDefaultCondition         FlowValidationType = "MissingDefaultCondition"
+	FlowValidationTypeMissingEndingNodes              FlowValidationType = "MissingEndingNodes"
+	FlowValidationTypeMissingNodeConfiguration        FlowValidationType = "MissingNodeConfiguration"
+	FlowValidationTypeMissingNodeInput                FlowValidationType = "MissingNodeInput"
+	FlowValidationTypeMissingNodeOutput               FlowValidationType = "MissingNodeOutput"
+	FlowValidationTypeMissingStartingNodes            FlowValidationType = "MissingStartingNodes"
+	FlowValidationTypeMultipleNodeInputConnections    FlowValidationType = "MultipleNodeInputConnections"
+	FlowValidationTypeUnfulfilledNodeInput            FlowValidationType = "UnfulfilledNodeInput"
+	FlowValidationTypeUnsatisfiedConnectionConditions FlowValidationType = "UnsatisfiedConnectionConditions"
+	FlowValidationTypeUnspecified                     FlowValidationType = "Unspecified"
+)
+
+// Values returns all known values for FlowValidationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlowValidationType) Values() []FlowValidationType {
+	return []FlowValidationType{
+		"CyclicConnection",
+		"DuplicateConnections",
+		"DuplicateConditionExpression",
+		"UnreachableNode",
+		"UnknownConnectionSource",
+		"UnknownConnectionSourceOutput",
+		"UnknownConnectionTarget",
+		"UnknownConnectionTargetInput",
+		"UnknownConnectionCondition",
+		"MalformedConditionExpression",
+		"MalformedNodeInputExpression",
+		"MismatchedNodeInputType",
+		"MismatchedNodeOutputType",
+		"IncompatibleConnectionDataType",
+		"MissingConnectionConfiguration",
+		"MissingDefaultCondition",
+		"MissingEndingNodes",
+		"MissingNodeConfiguration",
+		"MissingNodeInput",
+		"MissingNodeOutput",
+		"MissingStartingNodes",
+		"MultipleNodeInputConnections",
+		"UnfulfilledNodeInput",
+		"UnsatisfiedConnectionConditions",
+		"Unspecified",
+	}
+}
+
 type IngestionJobFilterAttribute string
 
 // Enum values for IngestionJobFilterAttribute
@@ -625,6 +709,7 @@ type PromptTemplateType string
 // Enum values for PromptTemplateType
 const (
 	PromptTemplateTypeText PromptTemplateType = "TEXT"
+	PromptTemplateTypeChat PromptTemplateType = "CHAT"
 )
 
 // Values returns all known values for PromptTemplateType. Note that this can be
@@ -634,6 +719,7 @@ const (
 func (PromptTemplateType) Values() []PromptTemplateType {
 	return []PromptTemplateType{
 		"TEXT",
+		"CHAT",
 	}
 }
 

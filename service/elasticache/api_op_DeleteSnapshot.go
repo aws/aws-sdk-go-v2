@@ -15,7 +15,7 @@ import (
 // operation, ElastiCache immediately begins deleting the snapshot; you cannot
 // cancel or revert this operation.
 //
-// This operation is valid for Redis OSS only.
+// This operation is valid for Valkey or Redis OSS only.
 func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput, optFns ...func(*Options)) (*DeleteSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteSnapshotInput{}
@@ -44,8 +44,8 @@ type DeleteSnapshotInput struct {
 
 type DeleteSnapshotOutput struct {
 
-	// Represents a copy of an entire Redis OSS cluster as of the time when the
-	// snapshot was taken.
+	// Represents a copy of an entire Valkey or Redis OSS cluster as of the time when
+	// the snapshot was taken.
 	Snapshot *types.Snapshot
 
 	// Metadata pertaining to the operation's result.

@@ -14,8 +14,14 @@ func ExampleAttributeValue_outputUsage() {
 	case *types.AttributeValueMemberBoolean:
 		_ = v.Value // Value is bool
 
+	case *types.AttributeValueMemberDecimal:
+		_ = v.Value // Value is string
+
 	case *types.AttributeValueMemberEntityIdentifier:
 		_ = v.Value // Value is types.EntityIdentifier
+
+	case *types.AttributeValueMemberIpaddr:
+		_ = v.Value // Value is string
 
 	case *types.AttributeValueMemberLong:
 		_ = v.Value // Value is int64
@@ -39,6 +45,8 @@ func ExampleAttributeValue_outputUsage() {
 }
 
 var _ *types.EntityIdentifier
+var _ *string
+var _ *string
 var _ *string
 var _ map[string]types.AttributeValue
 var _ *bool

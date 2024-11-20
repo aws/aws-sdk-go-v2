@@ -160,6 +160,14 @@ type UpdateServiceInput struct {
 	// This member is required.
 	Service *string
 
+	// Indicates whether to use Availability Zone rebalancing for the service.
+	//
+	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
+	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing
+
 	// The capacity provider strategy to update the service to use.
 	//
 	// if the service uses the default capacity provider strategy for the cluster, the
@@ -227,14 +235,16 @@ type UpdateServiceInput struct {
 	ForceNewDeployment bool
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
-	// unhealthy Elastic Load Balancing target health checks after a task has first
-	// started. This is only valid if your service is configured to use a load
-	// balancer. If your service's tasks take a while to start and respond to Elastic
-	// Load Balancing health checks, you can specify a health check grace period of up
-	// to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler
-	// ignores the Elastic Load Balancing health check status. This grace period can
-	// prevent the ECS service scheduler from marking tasks as unhealthy and stopping
-	// them before they have time to come up.
+	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
+	// a task has first started. If you don't specify a health check grace period
+	// value, the default value of 0 is used. If you don't use any of the health
+	// checks, then healthCheckGracePeriodSeconds is unused.
+	//
+	// If your service's tasks take a while to start and respond to health checks, you
+	// can specify a health check grace period of up to 2,147,483,647 seconds (about 69
+	// years). During that time, the Amazon ECS service scheduler ignores health check
+	// status. This grace period can prevent the service scheduler from marking tasks
+	// as unhealthy and stopping them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int32
 
 	// A list of Elastic Load Balancing load balancer objects. It contains the load
@@ -344,6 +354,10 @@ type UpdateServiceInput struct {
 	//
 	// [ServiceManagedEBSVolumeConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
 	VolumeConfigurations []types.ServiceVolumeConfiguration
+
+	// An object representing the VPC Lattice configuration for the service being
+	// updated.
+	VpcLatticeConfigurations []types.VpcLatticeConfiguration
 
 	noSmithyDocumentSerde
 }

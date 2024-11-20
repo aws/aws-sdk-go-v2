@@ -2188,7 +2188,7 @@ func awsRestjson1_deserializeDocumentEngineNotSupportedException(v **types.Engin
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2228,7 +2228,7 @@ func awsRestjson1_deserializeDocumentInvalidLexiconException(v **types.InvalidLe
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2268,7 +2268,7 @@ func awsRestjson1_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2308,7 +2308,7 @@ func awsRestjson1_deserializeDocumentInvalidS3BucketException(v **types.InvalidS
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2348,7 +2348,7 @@ func awsRestjson1_deserializeDocumentInvalidS3KeyException(v **types.InvalidS3Ke
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2388,7 +2388,7 @@ func awsRestjson1_deserializeDocumentInvalidSampleRateException(v **types.Invali
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2428,7 +2428,7 @@ func awsRestjson1_deserializeDocumentInvalidSnsTopicArnException(v **types.Inval
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2468,7 +2468,7 @@ func awsRestjson1_deserializeDocumentInvalidSsmlException(v **types.InvalidSsmlE
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2508,7 +2508,7 @@ func awsRestjson1_deserializeDocumentInvalidTaskIdException(v **types.InvalidTas
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2584,7 +2584,7 @@ func awsRestjson1_deserializeDocumentLanguageNotSupportedException(v **types.Lan
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2888,7 +2888,7 @@ func awsRestjson1_deserializeDocumentLexiconNotFoundException(v **types.LexiconN
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2928,7 +2928,7 @@ func awsRestjson1_deserializeDocumentLexiconSizeExceededException(v **types.Lexi
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2968,7 +2968,7 @@ func awsRestjson1_deserializeDocumentMarksNotSupportedForFormatException(v **typ
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3008,7 +3008,7 @@ func awsRestjson1_deserializeDocumentMaxLexemeLengthExceededException(v **types.
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3048,7 +3048,7 @@ func awsRestjson1_deserializeDocumentMaxLexiconsNumberExceededException(v **type
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3088,7 +3088,7 @@ func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFa
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3164,7 +3164,7 @@ func awsRestjson1_deserializeDocumentSsmlMarksNotSupportedForTextTypeException(v
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3373,7 +3373,7 @@ func awsRestjson1_deserializeDocumentSynthesisTaskNotFoundException(v **types.Sy
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3447,7 +3447,7 @@ func awsRestjson1_deserializeDocumentTextLengthExceededException(v **types.TextL
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3487,7 +3487,7 @@ func awsRestjson1_deserializeDocumentUnsupportedPlsAlphabetException(v **types.U
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3527,7 +3527,7 @@ func awsRestjson1_deserializeDocumentUnsupportedPlsLanguageException(v **types.U
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

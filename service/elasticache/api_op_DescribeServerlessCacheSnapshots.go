@@ -14,7 +14,7 @@ import (
 // Returns information about serverless cache snapshots. By default, this API
 // lists all of the customer’s serverless cache snapshots. It can also describe a
 // single serverless cache snapshot, or the snapshots associated with a particular
-// serverless cache. Available for Redis OSS and Serverless Memcached only.
+// serverless cache. Available for Valkey, Redis OSS and Serverless Memcached only.
 func (c *Client) DescribeServerlessCacheSnapshots(ctx context.Context, params *DescribeServerlessCacheSnapshotsInput, optFns ...func(*Options)) (*DescribeServerlessCacheSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeServerlessCacheSnapshotsInput{}
@@ -34,29 +34,29 @@ type DescribeServerlessCacheSnapshotsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified max-results value, a market is included in the response so
-	// that remaining results can be retrieved. Available for Redis OSS and Serverless
-	// Memcached only.The default is 50. The Validation Constraints are a maximum of
-	// 50.
+	// that remaining results can be retrieved. Available for Valkey, Redis OSS and
+	// Serverless Memcached only.The default is 50. The Validation Constraints are a
+	// maximum of 50.
 	MaxResults *int32
 
 	// An optional marker returned from a prior request to support pagination of
 	// results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
-	// max-results. Available for Redis OSS and Serverless Memcached only.
+	// max-results. Available for Valkey, Redis OSS and Serverless Memcached only.
 	NextToken *string
 
 	// The identifier of serverless cache. If this parameter is specified, only
 	// snapshots associated with that specific serverless cache are described.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCacheName *string
 
 	// The identifier of the serverless cache’s snapshot. If this parameter is
-	// specified, only this snapshot is described. Available for Redis OSS and
+	// specified, only this snapshot is described. Available for Valkey, Redis OSS and
 	// Serverless Memcached only.
 	ServerlessCacheSnapshotName *string
 
-	// The type of snapshot that is being described. Available for Redis OSS and
-	// Serverless Memcached only.
+	// The type of snapshot that is being described. Available for Valkey, Redis OSS
+	// and Serverless Memcached only.
 	SnapshotType *string
 
 	noSmithyDocumentSerde
@@ -67,11 +67,11 @@ type DescribeServerlessCacheSnapshotsOutput struct {
 	// An optional marker returned from a prior request to support pagination of
 	// results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
-	// max-results. Available for Redis OSS and Serverless Memcached only.
+	// max-results. Available for Valkey, Redis OSS and Serverless Memcached only.
 	NextToken *string
 
 	// The serverless caches snapshots associated with a given description request.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCacheSnapshots []types.ServerlessCacheSnapshot
 
 	// Metadata pertaining to the operation's result.
@@ -182,9 +182,9 @@ func (c *Client) addOperationDescribeServerlessCacheSnapshotsMiddlewares(stack *
 type DescribeServerlessCacheSnapshotsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified max-results value, a market is included in the response so
-	// that remaining results can be retrieved. Available for Redis OSS and Serverless
-	// Memcached only.The default is 50. The Validation Constraints are a maximum of
-	// 50.
+	// that remaining results can be retrieved. Available for Valkey, Redis OSS and
+	// Serverless Memcached only.The default is 50. The Validation Constraints are a
+	// maximum of 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

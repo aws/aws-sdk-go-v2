@@ -12,8 +12,7 @@ import (
 )
 
 // Retrieves a list of resources of the specified type that have been analyzed by
-// the specified external access analyzer. This action is not supported for unused
-// access analyzers.
+// the specified analyzer.
 func (c *Client) ListAnalyzedResources(ctx context.Context, params *ListAnalyzedResourcesInput, optFns ...func(*Options)) (*ListAnalyzedResourcesOutput, error) {
 	if params == nil {
 		params = &ListAnalyzedResourcesInput{}

@@ -40,7 +40,7 @@ type ApplicationComponent struct {
 // Describes the status of the application.
 type ApplicationInfo struct {
 
-	// The AWS account ID for the owner of the application.
+	// The Amazon Web Services account ID for the owner of the application.
 	AccountId *string
 
 	// If set to true, the managed policies for SSM and CW will be attached to the
@@ -80,14 +80,18 @@ type ApplicationInfo struct {
 	// The name of the resource group used for the application.
 	ResourceGroupName *string
 
+	//  The SNS topic ARN that is associated with SNS notifications for updates or
+	// issues.
+	SNSNotificationArn *string
+
 	noSmithyDocumentSerde
 }
 
 // The event information.
 type ConfigurationEvent struct {
 
-	// The AWS account ID for the owner of the application to which the configuration
-	// event belongs.
+	// The Amazon Web Services account ID for the owner of the application to which
+	// the configuration event belongs.
 	AccountId *string
 
 	//  The details of the event in plain text.
@@ -143,7 +147,8 @@ type LogPattern struct {
 	// configure custom log patterns from the console, a Low severity pattern
 	// translates to a 750,000 rank. A Medium severity pattern translates to a 500,000
 	// rank. And a High severity pattern translates to a 250,000 rank. Rank values
-	// less than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
+	// less than 1 or greater than 1,000,000 are reserved for Amazon Web Services
+	// provided patterns.
 	Rank int32
 
 	noSmithyDocumentSerde
@@ -198,21 +203,20 @@ type Observation struct {
 	// The time when the observation ended, in epoch seconds.
 	EndTime *time.Time
 
-	//  The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
+	//  The Amazon Resource Name (ARN) of the Health Event-based observation.
 	HealthEventArn *string
 
-	//  The description of the AWS Health event provided by the service, such as
-	// Amazon EC2.
+	//  The description of the Health event provided by the service, such as Amazon
+	// EC2.
 	HealthEventDescription *string
 
-	//  The category of the AWS Health event, such as issue .
+	//  The category of the Health event, such as issue .
 	HealthEventTypeCategory *string
 
-	//  The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE
-	// .
+	//  The type of the Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE .
 	HealthEventTypeCode *string
 
-	//  The service to which the AWS Health Event belongs, such as EC2.
+	//  The service to which the Health Event belongs, such as EC2.
 	HealthService *string
 
 	// The ID of the observation type.
@@ -301,7 +305,8 @@ type Observation struct {
 // Describes a problem that is detected by correlating observations.
 type Problem struct {
 
-	// The AWS account ID for the owner of the resource group affected by the problem.
+	// The Amazon Web Services account ID for the owner of the resource group affected
+	// by the problem.
 	AccountId *string
 
 	// The resource affected by the problem.
@@ -336,6 +341,9 @@ type Problem struct {
 
 	// A measure of the level of impact of the problem.
 	SeverityLevel SeverityLevel
+
+	//  The short name of the problem associated with the SNS notification.
+	ShortName *string
 
 	// The time when the problem started, in epoch seconds.
 	StartTime *time.Time
@@ -380,9 +388,9 @@ type RelatedObservations struct {
 //   - For each associated resource, each tag key must be unique and it can have
 //     only one value.
 //
-//   - The aws: prefix is reserved for use by AWS; you can’t use it in any tag keys
-//     or values that you define. In addition, you can't edit or remove tag keys or
-//     values that use this prefix.
+//   - The aws: prefix is reserved for use by Amazon Web Services; you can’t use it
+//     in any tag keys or values that you define. In addition, you can't edit or remove
+//     tag keys or values that use this prefix.
 type Tag struct {
 
 	// One part of a key-value pair that defines a tag. The maximum length of a tag
@@ -407,6 +415,10 @@ type Workload struct {
 
 	// The name of the component.
 	ComponentName *string
+
+	// Indicates whether all of the component configurations required to monitor a
+	// workload were provided.
+	MissingWorkloadConfig *bool
 
 	// The tier of the workload.
 	Tier Tier

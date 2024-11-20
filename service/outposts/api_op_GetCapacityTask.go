@@ -74,6 +74,10 @@ type GetCapacityTaskOutput struct {
 	// Reason why the capacity task failed.
 	Failed *types.CapacityTaskFailure
 
+	// Instances that the user specified they cannot stop in order to free up the
+	// capacity needed to run the capacity task.
+	InstancesToExclude *types.InstancesToExclude
+
 	// The date the capacity task was last modified.
 	LastModifiedDate *time.Time
 
@@ -86,6 +90,15 @@ type GetCapacityTaskOutput struct {
 
 	// List of instance pools requested in the capacity task.
 	RequestedInstancePools []types.InstanceTypeCapacity
+
+	// User-specified option in case an instance is blocking the capacity task from
+	// running. Shows one of the following options:
+	//
+	//   - WAIT_FOR_EVACUATION - Checks every 10 minutes over 48 hours to determine if
+	//   instances have stopped and capacity is available to complete the task.
+	//
+	//   - FAIL_TASK - The capacity task fails.
+	TaskActionOnBlockingInstances types.TaskActionOnBlockingInstances
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

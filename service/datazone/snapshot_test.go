@@ -374,6 +374,18 @@ func TestCheckSnapshot_CreateProjectMembership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSubscriptionGrant(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSubscriptionGrant(context.Background(), nil, func(o *Options) {
@@ -619,6 +631,18 @@ func TestCheckSnapshot_DeleteProjectMembership(t *testing.T) {
 	_, err := svc.DeleteProjectMembership(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteProjectMembership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -962,6 +986,18 @@ func TestCheckSnapshot_GetProject(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSubscription(context.Background(), nil, func(o *Options) {
@@ -1267,6 +1303,18 @@ func TestCheckSnapshot_ListProjects(t *testing.T) {
 	_, err := svc.ListProjects(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListProjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1682,6 +1730,18 @@ func TestCheckSnapshot_UpdateProject(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSubscriptionGrantStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSubscriptionGrantStatus(context.Background(), nil, func(o *Options) {
@@ -2041,6 +2101,18 @@ func TestUpdateSnapshot_CreateProjectMembership(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSubscriptionGrant(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSubscriptionGrant(context.Background(), nil, func(o *Options) {
@@ -2286,6 +2358,18 @@ func TestUpdateSnapshot_DeleteProjectMembership(t *testing.T) {
 	_, err := svc.DeleteProjectMembership(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteProjectMembership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2629,6 +2713,18 @@ func TestUpdateSnapshot_GetProject(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSubscription(context.Background(), nil, func(o *Options) {
@@ -2934,6 +3030,18 @@ func TestUpdateSnapshot_ListProjects(t *testing.T) {
 	_, err := svc.ListProjects(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListProjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3342,6 +3450,18 @@ func TestUpdateSnapshot_UpdateProject(t *testing.T) {
 	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

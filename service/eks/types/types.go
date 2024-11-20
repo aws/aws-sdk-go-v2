@@ -420,6 +420,9 @@ type Cluster struct {
 	// The Kubernetes server version for the cluster.
 	Version *string
 
+	// The configuration for zonal shift for the cluster.
+	ZonalShiftConfig *ZonalShiftConfigResponse
+
 	noSmithyDocumentSerde
 }
 
@@ -949,6 +952,10 @@ type Issue struct {
 	//   unable to to communicate with your Kubernetes cluster API server. This can
 	//   happen if there are network disruptions or if API servers are timing out
 	//   processing requests.
+	//
+	//   - Ec2InstanceTypeDoesNotExist: One or more of the supplied Amazon EC2
+	//   instance types do not exist. Amazon EKS checked for the instance types that you
+	//   provided in this Amazon Web Services Region, and one or more aren't available.
 	//
 	//   - Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template
 	//   for your managed node group. You may be able to recreate a launch template with
@@ -1893,6 +1900,25 @@ type VpcConfigResponse struct {
 
 	// The VPC associated with your cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for zonal shift for the cluster.
+type ZonalShiftConfigRequest struct {
+
+	// If zonal shift is enabled, Amazon Web Services configures zonal autoshift for
+	// the cluster.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The status of zonal shift configuration for the cluster
+type ZonalShiftConfigResponse struct {
+
+	// Whether the zonal shift is enabled.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }

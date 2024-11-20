@@ -102,7 +102,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1011
-                }
+                },
+                "smithy.api#pattern": "^arn:.*"
             }
         },
         "com.amazonaws.iotfleetwise#AssociateVehicleFleet": {
@@ -324,6 +325,9 @@
                     "target": "com.amazonaws.iotfleetwise#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.iotfleetwise#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.iotfleetwise#ThrottlingException"
                 },
                 {
@@ -463,7 +467,7 @@
             "type": "structure",
             "members": {
                 "arn": {
-                    "target": "com.amazonaws.iotfleetwise#arn",
+                    "target": "com.amazonaws.iotfleetwise#campaignArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a campaign.</p>"
                     }
@@ -897,6 +901,9 @@
                 "priority": {
                     "target": "com.amazonaws.iotfleetwise#priority",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "priority is no longer used or needed as input"
+                        },
                         "smithy.api#documentation": "<p>(Optional) A number indicating the priority of one campaign over another campaign for\n            a certain vehicle or fleet. A campaign with the lowest value is deployed to vehicles\n            before any other campaigns. If it's not specified, <code>0</code> is used. </p>\n         <p>Default: <code>0</code>\n         </p>"
                     }
                 },
@@ -943,7 +950,7 @@
                     }
                 },
                 "arn": {
-                    "target": "com.amazonaws.iotfleetwise#arn",
+                    "target": "com.amazonaws.iotfleetwise#campaignArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The ARN of the created campaign. </p>"
                     }
@@ -1667,10 +1674,12 @@
                 "target": "com.amazonaws.iotfleetwise#NodePath"
             },
             "traits": {
+                "aws.api#data": "content",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 5
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iotfleetwise#DataFormat": {
@@ -1868,7 +1877,7 @@
                     }
                 },
                 "arn": {
-                    "target": "com.amazonaws.iotfleetwise#arn",
+                    "target": "com.amazonaws.iotfleetwise#campaignArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the deleted campaign.</p>\n         <note>\n            <p>The ARN isn’t returned if a campaign doesn’t exist.</p>\n         </note>"
                     }
@@ -2503,7 +2512,7 @@
                     }
                 },
                 "arn": {
-                    "target": "com.amazonaws.iotfleetwise#arn",
+                    "target": "com.amazonaws.iotfleetwise#campaignArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the campaign. </p>"
                     }
@@ -4592,7 +4601,7 @@
                     }
                 },
                 "status": {
-                    "target": "com.amazonaws.iotfleetwise#status",
+                    "target": "com.amazonaws.iotfleetwise#statusStr",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional parameter to filter the results by the status of each created campaign in\n            your account. The status can be one of: <code>CREATING</code>,\n                <code>WAITING_FOR_APPROVAL</code>, <code>RUNNING</code>, or\n            <code>SUSPENDED</code>.</p>",
                         "smithy.api#httpQuery": "status"
@@ -7290,10 +7299,12 @@
                 "target": "com.amazonaws.iotfleetwise#SignalInformation"
             },
             "traits": {
+                "aws.api#data": "content",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iotfleetwise#SignalNodeType": {
@@ -7983,7 +7994,7 @@
             "type": "structure",
             "members": {
                 "arn": {
-                    "target": "com.amazonaws.iotfleetwise#arn",
+                    "target": "com.amazonaws.iotfleetwise#campaignArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the campaign. </p>"
                     }
@@ -8432,6 +8443,9 @@
                     "target": "com.amazonaws.iotfleetwise#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.iotfleetwise#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.iotfleetwise#ResourceNotFoundException"
                 },
                 {
@@ -8829,7 +8843,7 @@
             "type": "structure",
             "members": {
                 "campaignName": {
-                    "target": "com.amazonaws.iotfleetwise#string",
+                    "target": "com.amazonaws.iotfleetwise#campaignName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a campaign.</p>"
                     }
@@ -8962,6 +8976,12 @@
                 "target": "com.amazonaws.iotfleetwise#attributeValue"
             }
         },
+        "com.amazonaws.iotfleetwise#campaignArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:iotfleetwise:[a-z0-9-]+:[0-9]{12}:campaign/[a-zA-Z\\d\\-_:]{1,100}$"
+            }
+        },
         "com.amazonaws.iotfleetwise#campaignName": {
             "type": "string",
             "traits": {
@@ -8983,7 +9003,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 10000,
-                    "max": 60000
+                    "max": 86400000
                 }
             }
         },
@@ -9000,7 +9020,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -9038,10 +9059,12 @@
         "com.amazonaws.iotfleetwise#eventExpression": {
             "type": "string",
             "traits": {
+                "aws.api#data": "content",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iotfleetwise#fleetId": {
@@ -9070,7 +9093,8 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1
+                    "min": 1,
+                    "max": 1
                 }
             }
         },
@@ -9188,8 +9212,15 @@
                 "target": "com.amazonaws.iotfleetwise#SignalCatalogSummary"
             }
         },
-        "com.amazonaws.iotfleetwise#status": {
-            "type": "string"
+        "com.amazonaws.iotfleetwise#statusStr": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[A-Z_]*$"
+            }
         },
         "com.amazonaws.iotfleetwise#string": {
             "type": "string"
@@ -9219,7 +9250,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 10
                 }
             }
         },

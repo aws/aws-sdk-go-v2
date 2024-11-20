@@ -1,3 +1,32 @@
+# v1.48.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.0 (2024-11-08)
+
+* **Feature**: This feature allows override LaunchTemplates to be specified in an AWS Batch Compute Environment.
+
+# v1.47.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.47.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2024-10-31)
+
+* **Feature**: Add `podNamespace` to `EksAttemptDetail` and `containerID` to `EksAttemptContainerDetail`.
+
+# v1.46.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

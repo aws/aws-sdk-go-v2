@@ -81,7 +81,9 @@ type GetEnvironmentOutput struct {
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The status of the runtime environment.
+	// The status of the runtime environment. If the Amazon Web Services Mainframe
+	// Modernization environment is missing a connection to the customer owned
+	// dependent resource, the status will be Unhealthy .
 	//
 	// This member is required.
 	Status types.EnvironmentLifecycle

@@ -19,7 +19,7 @@ type AmazonOpenSearchServerlessBufferingHints struct {
 	// destination. The default value is 5.
 	//
 	// We recommend setting this parameter to a value greater than the amount of data
-	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// you typically ingest into the Firehose stream in 10 seconds. For example, if you
 	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
@@ -51,7 +51,7 @@ type AmazonOpenSearchServerlessDestinationConfiguration struct {
 	// AmazonopensearchserviceBufferingHints are used.
 	BufferingHints *AmazonOpenSearchServerlessBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the collection in the Serverless
@@ -88,7 +88,7 @@ type AmazonOpenSearchServerlessDestinationDescription struct {
 	// The buffering options.
 	BufferingHints *AmazonOpenSearchServerlessBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the collection in the Serverless
@@ -127,7 +127,7 @@ type AmazonOpenSearchServerlessDestinationUpdate struct {
 	// object default values are used.
 	BufferingHints *AmazonOpenSearchServerlessBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the collection in the Serverless
@@ -182,7 +182,7 @@ type AmazonopensearchserviceBufferingHints struct {
 	// destination. The default value is 5.
 	//
 	// We recommend setting this parameter to a value greater than the amount of data
-	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// you typically ingest into the Firehose stream in 10 seconds. For example, if you
 	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
@@ -213,7 +213,7 @@ type AmazonopensearchserviceDestinationConfiguration struct {
 	// AmazonopensearchserviceBufferingHints are used.
 	BufferingHints *AmazonopensearchserviceBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Specify either this
@@ -266,7 +266,7 @@ type AmazonopensearchserviceDestinationDescription struct {
 	// The buffering options.
 	BufferingHints *AmazonopensearchserviceBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Firehose uses either
@@ -320,7 +320,7 @@ type AmazonopensearchserviceDestinationUpdate struct {
 	// object default values are used.
 	BufferingHints *AmazonopensearchserviceBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Specify either this
@@ -362,9 +362,9 @@ type AmazonopensearchserviceDestinationUpdate struct {
 	// only one type per index. If you try to specify a new type for an existing index
 	// that already has another type, Firehose returns an error during runtime.
 	//
-	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your Firehose
 	// stream, Firehose still delivers data to Elasticsearch with the old index name
-	// and type name. If you want to update your delivery stream with a new index name,
+	// and type name. If you want to update your Firehose stream with a new index name,
 	// provide an empty string for TypeName.
 	TypeName *string
 
@@ -420,7 +420,7 @@ type BufferingHints struct {
 	// and vice versa.
 	//
 	// We recommend setting this parameter to a value greater than the amount of data
-	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// you typically ingest into the Firehose stream in 10 seconds. For example, if you
 	// typically ingest data at 1 MiB/sec, the value should be 10 MiB or higher.
 	SizeInMBs *int32
 
@@ -430,21 +430,20 @@ type BufferingHints struct {
 //	Describes the containers where the destination Apache Iceberg Tables are
 //
 // persisted.
-//
-// Amazon Data Firehose is in preview release and is subject to change.
 type CatalogConfiguration struct {
 
-	//  Specifies the Glue catalog ARN indentifier of the destination Apache Iceberg
+	//  Specifies the Glue catalog ARN identifier of the destination Apache Iceberg
 	// Tables. You must specify the ARN in the format
 	// arn:aws:glue:region:account-id:catalog .
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	CatalogARN *string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	WarehouseLocation *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the Amazon CloudWatch logging options for your delivery stream.
+// Describes the Amazon CloudWatch logging options for your Firehose stream.
 type CloudWatchLoggingOptions struct {
 
 	// Enables or disables CloudWatch logging.
@@ -499,6 +498,196 @@ type CopyCommand struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseColumnList struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Exclude []string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Include []string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseList struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Exclude []string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Include []string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseSnapshotInfo struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Id *string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	RequestTimestamp *time.Time
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	RequestedBy SnapshotRequestedBy
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Status SnapshotStatus
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Table *string
+
+	// Provides details in case one of the following operations fails due to an error
+	// related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
+	FailureDescription *FailureDescription
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseSourceAuthenticationConfiguration struct {
+
+	// The structure that defines how Firehose accesses the secret.
+	//
+	// This member is required.
+	SecretsManagerConfiguration *SecretsManagerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseSourceConfiguration struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	DatabaseSourceAuthenticationConfiguration *DatabaseSourceAuthenticationConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	DatabaseSourceVPCConfiguration *DatabaseSourceVPCConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Databases *DatabaseList
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Port *int32
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	SnapshotWatermarkTable *string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Tables *DatabaseTableList
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Type DatabaseType
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Columns *DatabaseColumnList
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SSLMode SSLMode
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SurrogateKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseSourceDescription struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Columns *DatabaseColumnList
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DatabaseSourceAuthenticationConfiguration *DatabaseSourceAuthenticationConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DatabaseSourceVPCConfiguration *DatabaseSourceVPCConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Databases *DatabaseList
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Endpoint *string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Port *int32
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SSLMode SSLMode
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SnapshotInfo []DatabaseSnapshotInfo
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SnapshotWatermarkTable *string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SurrogateKeys []string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Tables *DatabaseTableList
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Type DatabaseType
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseSourceVPCConfiguration struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	VpcEndpointServiceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type DatabaseTableList struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Exclude []string
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Include []string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies that you want Firehose to convert data from the JSON format to the
 // Parquet or ORC format before writing it to Amazon S3. Firehose uses the
 // serializer and deserializer that you specify, in addition to the column
@@ -529,10 +718,10 @@ type DataFormatConversionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a delivery stream.
+// Contains information about a Firehose stream.
 type DeliveryStreamDescription struct {
 
-	// The Amazon Resource Name (ARN) of the delivery stream. For more information,
+	// The Amazon Resource Name (ARN) of the Firehose stream. For more information,
 	// see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
 	//
 	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
@@ -540,12 +729,12 @@ type DeliveryStreamDescription struct {
 	// This member is required.
 	DeliveryStreamARN *string
 
-	// The name of the delivery stream.
+	// The name of the Firehose stream.
 	//
 	// This member is required.
 	DeliveryStreamName *string
 
-	// The status of the delivery stream. If the status of a delivery stream is
+	// The status of the Firehose stream. If the status of a Firehose stream is
 	// CREATING_FAILED , this status doesn't change, and you can't invoke
 	// CreateDeliveryStream again on it. However, you can invoke the DeleteDeliveryStream operation to
 	// delete it.
@@ -553,11 +742,11 @@ type DeliveryStreamDescription struct {
 	// This member is required.
 	DeliveryStreamStatus DeliveryStreamStatus
 
-	// The delivery stream type. This can be one of the following values:
+	// The Firehose stream type. This can be one of the following values:
 	//
-	//   - DirectPut : Provider applications access the delivery stream directly.
+	//   - DirectPut : Provider applications access the Firehose stream directly.
 	//
-	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
+	//   - KinesisStreamAsSource : The Firehose stream uses a Kinesis data stream as a
 	//   source.
 	//
 	// This member is required.
@@ -573,7 +762,7 @@ type DeliveryStreamDescription struct {
 	// This member is required.
 	HasMoreDestinations *bool
 
-	// Each time the destination is updated for a delivery stream, the version ID is
+	// Each time the destination is updated for a Firehose stream, the version ID is
 	// changed, and the current version ID is required when updating the destination.
 	// This is so that the service knows it is applying the changes to the correct
 	// version of the delivery stream.
@@ -581,17 +770,17 @@ type DeliveryStreamDescription struct {
 	// This member is required.
 	VersionId *string
 
-	// The date and time that the delivery stream was created.
+	// The date and time that the Firehose stream was created.
 	CreateTimestamp *time.Time
 
-	// Indicates the server-side encryption (SSE) status for the delivery stream.
+	// Indicates the server-side encryption (SSE) status for the Firehose stream.
 	DeliveryStreamEncryptionConfiguration *DeliveryStreamEncryptionConfiguration
 
 	// Provides details in case one of the following operations fails due to an error
 	// related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 	FailureDescription *FailureDescription
 
-	// The date and time that the delivery stream was last updated.
+	// The date and time that the Firehose stream was last updated.
 	LastUpdateTimestamp *time.Time
 
 	// If the DeliveryStreamType parameter is KinesisStreamAsSource , a SourceDescription object
@@ -623,7 +812,7 @@ type DeliveryStreamEncryptionConfiguration struct {
 	// [Customer Master Keys (CMKs)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
 	KeyType KeyType
 
-	// This is the server-side encryption (SSE) status for the delivery stream. For a
+	// This is the server-side encryption (SSE) status for the Firehose stream. For a
 	// full description of the different values of this status, see StartDeliveryStreamEncryptionand StopDeliveryStreamEncryption. If this
 	// status is ENABLING_FAILED or DISABLING_FAILED , it is the status of the most
 	// recent attempt to enable or disable SSE, respectively.
@@ -643,15 +832,15 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 	// Firehose service to use the customer managed CMK to perform encryption and
 	// decryption. Firehose manages that grant.
 	//
-	// When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream that is encrypted with
+	// When you invoke StartDeliveryStreamEncryption to change the CMK for a Firehose stream that is encrypted with
 	// a customer managed CMK, Firehose schedules the grant it had on the old CMK for
 	// retirement.
 	//
-	// You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery
+	// You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 Firehose
 	// streams. If a CreateDeliveryStreamor StartDeliveryStreamEncryption operation exceeds this limit, Firehose throws a
 	// LimitExceededException .
 	//
-	// To encrypt your delivery stream, use symmetric CMKs. Firehose doesn't support
+	// To encrypt your Firehose stream, use symmetric CMKs. Firehose doesn't support
 	// asymmetric CMKs. For information about symmetric and asymmetric CMKs, see [About Symmetric and Asymmetric CMKs]in
 	// the Amazon Web Services Key Management Service developer guide.
 	//
@@ -695,7 +884,7 @@ type Deserializer struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the destination for a delivery stream.
+// Describes the destination for a Firehose stream.
 type DestinationDescription struct {
 
 	// The ID of the destination.
@@ -719,8 +908,6 @@ type DestinationDescription struct {
 	HttpEndpointDestinationDescription *HttpEndpointDestinationDescription
 
 	//  Describes a destination in Apache Iceberg Tables.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	IcebergDestinationDescription *IcebergDestinationDescription
 
 	// The destination in Amazon Redshift.
@@ -738,35 +925,29 @@ type DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
-//	Describes the configuration of a destination in Apache Iceberg Tables.
-//
-// Amazon Data Firehose is in preview release and is subject to change.
+// Describes the configuration of a destination in Apache Iceberg Tables.
 type DestinationTableConfiguration struct {
 
 	//  The name of the Apache Iceberg database.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	//
 	// This member is required.
 	DestinationDatabaseName *string
 
 	//  Specifies the name of the Apache Iceberg Table.
 	//
-	// Amazon Data Firehose is in preview release and is subject to change.
-	//
 	// This member is required.
 	DestinationTableName *string
 
+	// Amazon Data Firehose is in preview release and is subject to change.
+	PartitionSpec *PartitionSpec
+
 	//  The table specific S3 error output prefix. All the errors that occurred while
 	// delivering to this table will be prefixed with this value in S3 destination.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	S3ErrorOutputPrefix *string
 
 	//  A list of unique keys for a given Apache Iceberg table. Firehose will use
-	// these for running Create/Update/Delete operations on the given Iceberg table.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	// these for running Create, Update, or Delete operations on the given Iceberg
+	// table.
 	UniqueKeys []string
 
 	noSmithyDocumentSerde
@@ -801,7 +982,7 @@ type DocumentIdOptions struct {
 // Currently, dynamic partitioning is only supported for Amazon S3 destinations.
 type DynamicPartitioningConfiguration struct {
 
-	// Specifies that the dynamic partitioning is enabled for this Firehose delivery
+	// Specifies that the dynamic partitioning is enabled for this Firehose Firehose
 	// stream.
 	Enabled *bool
 
@@ -824,7 +1005,7 @@ type ElasticsearchBufferingHints struct {
 	// destination. The default value is 5.
 	//
 	// We recommend setting this parameter to a value greater than the amount of data
-	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// you typically ingest into the Firehose stream in 10 seconds. For example, if you
 	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
@@ -858,7 +1039,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// ElasticsearchBufferingHints are used.
 	BufferingHints *ElasticsearchBufferingHints
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Specify either this
@@ -900,7 +1081,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// AmazonOpenSearchService-failed/ appended to the prefix. For more information,
 	// see [Amazon S3 Backup for the Amazon ES Destination]. Default value is FailedDocumentsOnly .
 	//
-	// You can't change this backup mode after you create the delivery stream.
+	// You can't change this backup mode after you create the Firehose stream.
 	//
 	// [Amazon S3 Backup for the Amazon ES Destination]: https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
 	S3BackupMode ElasticsearchS3BackupMode
@@ -985,7 +1166,7 @@ type ElasticsearchDestinationUpdate struct {
 	// object default values are used.
 	BufferingHints *ElasticsearchBufferingHints
 
-	// The CloudWatch logging options for your delivery stream.
+	// The CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Specify either this
@@ -1037,9 +1218,9 @@ type ElasticsearchDestinationUpdate struct {
 	// per index. If you try to specify a new type for an existing index that already
 	// has another type, Firehose returns an error during runtime.
 	//
-	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery
+	// If you upgrade Elasticsearch from 6.x to 7.x and don’t update your Firehose
 	// stream, Firehose still delivers data to Elasticsearch with the old index name
-	// and type name. If you want to update your delivery stream with a new index name,
+	// and type name. If you want to update your Firehose stream with a new index name,
 	// provide an empty string for TypeName .
 	TypeName *string
 
@@ -1093,7 +1274,7 @@ type ExtendedS3DestinationConfiguration struct {
 	// The buffering option.
 	BufferingHints *BufferingHints
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
@@ -1137,9 +1318,9 @@ type ExtendedS3DestinationConfiguration struct {
 	// The configuration for backup in Amazon S3.
 	S3BackupConfiguration *S3DestinationConfiguration
 
-	// The Amazon S3 backup mode. After you create a delivery stream, you can update
+	// The Amazon S3 backup mode. After you create a Firehose stream, you can update
 	// it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
-	// update the delivery stream to disable it.
+	// update the Firehose stream to disable it.
 	S3BackupMode S3BackupMode
 
 	noSmithyDocumentSerde
@@ -1179,7 +1360,7 @@ type ExtendedS3DestinationDescription struct {
 	// This member is required.
 	RoleARN *string
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The time zone you prefer. UTC is the default.
@@ -1233,7 +1414,7 @@ type ExtendedS3DestinationUpdate struct {
 	// The buffering option.
 	BufferingHints *BufferingHints
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED .
@@ -1280,8 +1461,8 @@ type ExtendedS3DestinationUpdate struct {
 	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
-	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
-	// If backup is enabled, you can't update the delivery stream to disable it.
+	// You can update a Firehose stream to enable Amazon S3 backup if it is disabled.
+	// If backup is enabled, you can't update the Firehose stream to disable it.
 	S3BackupMode S3BackupMode
 
 	// The Amazon S3 destination for backup.
@@ -1342,7 +1523,7 @@ type HttpEndpointBufferingHints struct {
 	// destination. The default value is 5.
 	//
 	// We recommend setting this parameter to a value greater than the amount of data
-	// you typically ingest into the delivery stream in 10 seconds. For example, if you
+	// you typically ingest into the Firehose stream in 10 seconds. For example, if you
 	// typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
 	SizeInMBs *int32
 
@@ -1422,7 +1603,7 @@ type HttpEndpointDestinationConfiguration struct {
 	// must also provide a value for the other.
 	BufferingHints *HttpEndpointBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// Describes a data processing configuration.
@@ -1464,7 +1645,7 @@ type HttpEndpointDestinationDescription struct {
 	// of them, you must also provide a value for the other.
 	BufferingHints *HttpEndpointBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The configuration of the specified HTTP endpoint destination.
@@ -1512,7 +1693,7 @@ type HttpEndpointDestinationUpdate struct {
 	// of them, you must also provide a value for the other.
 	BufferingHints *HttpEndpointBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// Describes the configuration of the HTTP endpoint destination.
@@ -1580,22 +1761,17 @@ type HttpEndpointRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
-//	Specifies the destination configure settings for Apache Iceberg Table.
-//
-// Amazon Data Firehose is in preview release and is subject to change.
+// Specifies the destination configure settings for Apache Iceberg Table.
 type IcebergDestinationConfiguration struct {
 
 	//  Configuration describing where the destination Apache Iceberg Tables are
 	// persisted.
 	//
-	// Amazon Data Firehose is in preview release and is subject to change.
-	//
 	// This member is required.
 	CatalogConfiguration *CatalogConfiguration
 
-	//  The Amazon Resource Name (ARN) of the Apache Iceberg tables role.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	//  The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
+	// calling Apache Iceberg Tables.
 	//
 	// This member is required.
 	RoleARN *string
@@ -1612,34 +1788,34 @@ type IcebergDestinationConfiguration struct {
 	// of them, you must also provide a value for the other.
 	BufferingHints *BufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	//  Provides a list of DestinationTableConfigurations which Firehose uses to
-	// deliver data to Apache Iceberg tables.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	// deliver data to Apache Iceberg Tables. Firehose will write data with insert if
+	// table specific configuration is not provided here.
 	DestinationTableConfigurationList []DestinationTableConfiguration
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	//  The retry behavior in case Firehose is unable to deliver data to an Amazon S3
-	// prefix.
+	//  The retry behavior in case Firehose is unable to deliver data to a destination.
 	RetryOptions *RetryOptions
 
-	//  Describes how Firehose will backup records. Currently,Firehose only supports
-	// FailedDataOnly for preview.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	//  Describes how Firehose will backup records. Currently,S3 backup only supports
+	// FailedDataOnly .
 	S3BackupMode IcebergS3BackupMode
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SchemaEvolutionConfiguration *SchemaEvolutionConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	TableCreationConfiguration *TableCreationConfiguration
 
 	noSmithyDocumentSerde
 }
 
-//	Describes a destination in Apache Iceberg Tables.
-//
-// Amazon Data Firehose is in preview release and is subject to change.
+// Describes a destination in Apache Iceberg Tables.
 type IcebergDestinationDescription struct {
 
 	// Describes hints for the buffering to perform before delivering data to the
@@ -1650,46 +1826,43 @@ type IcebergDestinationDescription struct {
 	BufferingHints *BufferingHints
 
 	//  Configuration describing where the destination Iceberg tables are persisted.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	CatalogConfiguration *CatalogConfiguration
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	//  Provides a list of DestinationTableConfigurations which Firehose uses to
-	// deliver data to Apache Iceberg tables.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	// deliver data to Apache Iceberg Tables. Firehose will write data with insert if
+	// table specific configuration is not provided here.
 	DestinationTableConfigurationList []DestinationTableConfiguration
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	//  The retry behavior in case Firehose is unable to deliver data to an Amazon S3
-	// prefix.
+	//  The retry behavior in case Firehose is unable to deliver data to a destination.
 	RetryOptions *RetryOptions
 
-	//  The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	//  The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
+	// calling Apache Iceberg Tables.
 	RoleARN *string
 
 	//  Describes how Firehose will backup records. Currently,Firehose only supports
-	// FailedDataOnly for preview.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	// FailedDataOnly .
 	S3BackupMode IcebergS3BackupMode
 
 	// Describes a destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
 
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SchemaEvolutionConfiguration *SchemaEvolutionConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	TableCreationConfiguration *TableCreationConfiguration
+
 	noSmithyDocumentSerde
 }
 
-//	Describes an update for a destination in Apache Iceberg Tables.
-//
-// Amazon Data Firehose is in preview release and is subject to change.
+// Describes an update for a destination in Apache Iceberg Tables.
 type IcebergDestinationUpdate struct {
 
 	// Describes hints for the buffering to perform before delivering data to the
@@ -1700,39 +1873,38 @@ type IcebergDestinationUpdate struct {
 	BufferingHints *BufferingHints
 
 	//  Configuration describing where the destination Iceberg tables are persisted.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	CatalogConfiguration *CatalogConfiguration
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	//  Provides a list of DestinationTableConfigurations which Firehose uses to
-	// deliver data to Apache Iceberg tables.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	// deliver data to Apache Iceberg Tables. Firehose will write data with insert if
+	// table specific configuration is not provided here.
 	DestinationTableConfigurationList []DestinationTableConfiguration
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	//  The retry behavior in case Firehose is unable to deliver data to an Amazon S3
-	// prefix.
+	//  The retry behavior in case Firehose is unable to deliver data to a destination.
 	RetryOptions *RetryOptions
 
-	//  The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	//  The Amazon Resource Name (ARN) of the IAM role to be assumed by Firehose for
+	// calling Apache Iceberg Tables.
 	RoleARN *string
 
 	//  Describes how Firehose will backup records. Currently,Firehose only supports
-	// FailedDataOnly for preview.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
+	// FailedDataOnly .
 	S3BackupMode IcebergS3BackupMode
 
 	// Describes the configuration of a destination in Amazon S3.
 	S3Configuration *S3DestinationConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	SchemaEvolutionConfiguration *SchemaEvolutionConfiguration
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	TableCreationConfiguration *TableCreationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1750,7 +1922,7 @@ type InputFormatConfiguration struct {
 }
 
 // The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used
-// as the source for a delivery stream.
+// as the source for a Firehose stream.
 type KinesisStreamSourceConfiguration struct {
 
 	// The ARN of the source Kinesis data stream. For more information, see [Amazon Kinesis Data Streams ARN Format].
@@ -1771,7 +1943,7 @@ type KinesisStreamSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a Kinesis data stream used as the source for a Firehose delivery
+// Details about a Kinesis data stream used as the source for a Firehose Firehose
 // stream.
 type KinesisStreamSourceDescription struct {
 
@@ -1840,7 +2012,7 @@ type MSKSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the Amazon MSK cluster used as the source for a Firehose delivery
+// Details about the Amazon MSK cluster used as the source for a Firehose Firehose
 // stream.
 type MSKSourceDescription struct {
 
@@ -2011,6 +2183,26 @@ type ParquetSerDe struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Data Firehose is in preview release and is subject to change.
+type PartitionField struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	SourceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Data Firehose is in preview release and is subject to change.
+type PartitionSpec struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	Identity []PartitionField
+
+	noSmithyDocumentSerde
+}
+
 // Describes a data processing configuration.
 type ProcessingConfiguration struct {
 
@@ -2063,8 +2255,8 @@ type ProcessorParameter struct {
 }
 
 // Contains the result for an individual record from a PutRecordBatch request. If the record is
-// successfully added to your delivery stream, it receives a record ID. If the
-// record fails to be added to your delivery stream, the result includes an error
+// successfully added to your Firehose stream, it receives a record ID. If the
+// record fails to be added to your Firehose stream, the result includes an error
 // code and an error message.
 type PutRecordBatchResponseEntry struct {
 
@@ -2080,7 +2272,7 @@ type PutRecordBatchResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The unit of data in a delivery stream.
+// The unit of data in a Firehose stream.
 type Record struct {
 
 	// The data blob, which is base64-encoded when the blob is serialized. The maximum
@@ -2124,7 +2316,7 @@ type RedshiftDestinationConfiguration struct {
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
 
-	// The CloudWatch logging options for your delivery stream.
+	// The CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The user password.
@@ -2140,9 +2332,9 @@ type RedshiftDestinationConfiguration struct {
 	// The configuration for backup in Amazon S3.
 	S3BackupConfiguration *S3DestinationConfiguration
 
-	// The Amazon S3 backup mode. After you create a delivery stream, you can update
+	// The Amazon S3 backup mode. After you create a Firehose stream, you can update
 	// it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
-	// update the delivery stream to disable it.
+	// update the Firehose stream to disable it.
 	S3BackupMode RedshiftS3BackupMode
 
 	//  The configuration that defines how you access secrets for Amazon Redshift.
@@ -2180,7 +2372,7 @@ type RedshiftDestinationDescription struct {
 	// This member is required.
 	S3DestinationDescription *S3DestinationDescription
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The data processing configuration.
@@ -2208,7 +2400,7 @@ type RedshiftDestinationDescription struct {
 // Describes an update for a destination in Amazon Redshift.
 type RedshiftDestinationUpdate struct {
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The database connection string.
@@ -2233,8 +2425,8 @@ type RedshiftDestinationUpdate struct {
 	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleARN *string
 
-	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
-	// If backup is enabled, you can't update the delivery stream to disable it.
+	// You can update a Firehose stream to enable Amazon S3 backup if it is disabled.
+	// If backup is enabled, you can't update the Firehose stream to disable it.
 	S3BackupMode RedshiftS3BackupMode
 
 	// The Amazon S3 destination for backup.
@@ -2270,13 +2462,11 @@ type RedshiftRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
-//	The retry behavior in case Firehose is unable to deliver data to an Amazon S3
-//
-// prefix.
+// The retry behavior in case Firehose is unable to deliver data to a destination.
 type RetryOptions struct {
 
 	// The period of time during which Firehose retries to deliver data to the
-	// specified Amazon S3 prefix.
+	// specified destination.
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -2304,7 +2494,7 @@ type S3DestinationConfiguration struct {
 	// values are used.
 	BufferingHints *BufferingHints
 
-	// The CloudWatch logging options for your delivery stream.
+	// The CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED .
@@ -2369,7 +2559,7 @@ type S3DestinationDescription struct {
 	// This member is required.
 	RoleARN *string
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// A prefix that Firehose evaluates and adds to failed records before writing them
@@ -2400,7 +2590,7 @@ type S3DestinationUpdate struct {
 	// values are used.
 	BufferingHints *BufferingHints
 
-	// The CloudWatch logging options for your delivery stream.
+	// The CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED .
@@ -2481,11 +2671,22 @@ type SchemaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Data Firehose is in preview release and is subject to change.
+type SchemaEvolutionConfiguration struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // The structure that defines how Firehose accesses the secret.
 type SecretsManagerConfiguration struct {
 
-	// Specifies whether you want to use the the secrets manager feature. When set as
-	// True the secrets manager configuration overwrites the existing secrets in the
+	// Specifies whether you want to use the secrets manager feature. When set as True
+	// the secrets manager configuration overwrites the existing secrets in the
 	// destination configuration. When it's set to False Firehose falls back to the
 	// credentials in the destination configuration.
 	//
@@ -2500,7 +2701,7 @@ type SecretsManagerConfiguration struct {
 
 	// The ARN of the secret that stores your credentials. It must be in the same
 	// region as the Firehose stream and the role. The secret ARN can reside in a
-	// different account than the delivery stream and role as Firehose supports
+	// different account than the Firehose stream and role as Firehose supports
 	// cross-account secret access. This parameter is required when Enabled is set to
 	// True .
 	SecretARN *string
@@ -2540,8 +2741,8 @@ type SnowflakeBufferingHints struct {
 	// delivering it to the destination. The default value is 0.
 	IntervalInSeconds *int32
 
-	//  Buffer incoming data to the specified size, in MBs, before delivering it to
-	// the destination. The default value is 1.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the
+	// destination. The default value is 128.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
@@ -2589,7 +2790,7 @@ type SnowflakeDestinationConfiguration struct {
 	// destination. If you do not specify any value, Firehose uses the default values.
 	BufferingHints *SnowflakeBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The name of the record content column
@@ -2656,7 +2857,7 @@ type SnowflakeDestinationDescription struct {
 	// destination. If you do not specify any value, Firehose uses the default values.
 	BufferingHints *SnowflakeBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The name of the record content column
@@ -2729,7 +2930,7 @@ type SnowflakeDestinationUpdate struct {
 	// destination.
 	BufferingHints *SnowflakeBufferingHints
 
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	// Describes the Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The name of the content metadata column
@@ -2785,7 +2986,8 @@ type SnowflakeDestinationUpdate struct {
 	// The Amazon Resource Name (ARN) of the Snowflake role
 	RoleARN *string
 
-	// Choose an S3 backup mode
+	// Choose an S3 backup mode. Once you set the mode as AllData , you can not change
+	// it to FailedDataOnly .
 	S3BackupMode SnowflakeS3BackupMode
 
 	// Describes an update for a destination in Amazon S3.
@@ -2868,9 +3070,12 @@ type SnowflakeVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a Kinesis data stream used as the source for a Firehose delivery
+// Details about a Kinesis data stream used as the source for a Firehose Firehose
 // stream.
 type SourceDescription struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	DatabaseSourceDescription *DatabaseSourceDescription
 
 	// The KinesisStreamSourceDescription value for the source Kinesis data stream.
 	KinesisStreamSourceDescription *KinesisStreamSourceDescription
@@ -2919,7 +3124,7 @@ type SplunkDestinationConfiguration struct {
 	// are used.
 	BufferingHints *SplunkBufferingHints
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The amount of time that Firehose waits to receive an acknowledgment from Splunk
@@ -2961,7 +3166,7 @@ type SplunkDestinationDescription struct {
 	// are used.
 	BufferingHints *SplunkBufferingHints
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The amount of time that Firehose waits to receive an acknowledgment from Splunk
@@ -3008,7 +3213,7 @@ type SplunkDestinationUpdate struct {
 	// are used.
 	BufferingHints *SplunkBufferingHints
 
-	// The Amazon CloudWatch logging options for your delivery stream.
+	// The Amazon CloudWatch logging options for your Firehose stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The amount of time that Firehose waits to receive an acknowledgment from Splunk
@@ -3065,7 +3270,18 @@ type SplunkRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata that you can assign to a delivery stream, consisting of a key-value
+// Amazon Data Firehose is in preview release and is subject to change.
+type TableCreationConfiguration struct {
+
+	// Amazon Data Firehose is in preview release and is subject to change.
+	//
+	// This member is required.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Metadata that you can assign to a Firehose stream, consisting of a key-value
 // pair.
 type Tag struct {
 
@@ -3087,7 +3303,7 @@ type Tag struct {
 // destination.
 type VpcConfiguration struct {
 
-	// The ARN of the IAM role that you want the delivery stream to use to create
+	// The ARN of the IAM role that you want the Firehose stream to use to create
 	// endpoints in the destination VPC. You can use your existing Firehose delivery
 	// role or you can specify a new role. In either case, make sure that the role
 	// trusts the Firehose service principal and that it grants the following
@@ -3144,7 +3360,7 @@ type VpcConfiguration struct {
 	// up and down automatically based on throughput. To enable Firehose to scale up
 	// the number of ENIs to match throughput, ensure that you have sufficient quota.
 	// To help you calculate the quota you need, assume that Firehose can create up to
-	// three ENIs for this delivery stream for each of the subnets specified here. For
+	// three ENIs for this Firehose stream for each of the subnets specified here. For
 	// more information about ENI quota, see [Network Interfaces]in the Amazon VPC Quotas topic.
 	//
 	// [Network Interfaces]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
@@ -3158,7 +3374,7 @@ type VpcConfiguration struct {
 // The details of the VPC of the Amazon ES destination.
 type VpcConfigurationDescription struct {
 
-	// The ARN of the IAM role that the delivery stream uses to create endpoints in
+	// The ARN of the IAM role that the Firehose stream uses to create endpoints in
 	// the destination VPC. You can use your existing Firehose delivery role or you can
 	// specify a new role. In either case, make sure that the role trusts the Firehose
 	// service principal and that it grants the following permissions:
@@ -3179,7 +3395,7 @@ type VpcConfigurationDescription struct {
 	//
 	//   - ec2:DeleteNetworkInterface
 	//
-	// If you revoke these permissions after you create the delivery stream, Firehose
+	// If you revoke these permissions after you create the Firehose stream, Firehose
 	// can't scale out by creating more ENIs when necessary. You might therefore see a
 	// degradation in performance.
 	//
@@ -3192,7 +3408,7 @@ type VpcConfigurationDescription struct {
 	// groups, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's
 	// security group. Also ensure that the Amazon ES domain's security group allows
 	// HTTPS traffic from the security groups specified here. If you use the same
-	// security group for both your delivery stream and the Amazon ES domain, make sure
+	// security group for both your Firehose stream and the Amazon ES domain, make sure
 	// the security group inbound rule allows HTTPS traffic. For more information about
 	// security group rules, see [Security group rules]in the Amazon VPC documentation.
 	//
@@ -3212,7 +3428,7 @@ type VpcConfigurationDescription struct {
 	// up and down automatically based on throughput. To enable Firehose to scale up
 	// the number of ENIs to match throughput, ensure that you have sufficient quota.
 	// To help you calculate the quota you need, assume that Firehose can create up to
-	// three ENIs for this delivery stream for each of the subnets specified here. For
+	// three ENIs for this Firehose stream for each of the subnets specified here. For
 	// more information about ENI quota, see [Network Interfaces]in the Amazon VPC Quotas topic.
 	//
 	// [Network Interfaces]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis

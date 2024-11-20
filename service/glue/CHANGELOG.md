@@ -1,3 +1,36 @@
+# v1.102.0 (2024-11-19)
+
+* **Feature**: AWS Glue Data Catalog now enhances managed table optimizations of Apache Iceberg tables that can be accessed only from a specific Amazon Virtual Private Cloud (VPC) environment.
+
+# v1.101.4 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.3 (2024-11-13)
+
+* No change notes available for this release.
+
+# v1.101.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.101.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.101.0 (2024-10-31)
+
+* **Feature**: Add schedule support for AWS Glue column statistics
+
+# v1.100.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.100.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.100.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

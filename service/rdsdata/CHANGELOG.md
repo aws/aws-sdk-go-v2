@@ -1,3 +1,25 @@
+# v1.26.0 (2024-11-18)
+
+* **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.5 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.25.4 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

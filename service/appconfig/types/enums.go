@@ -8,6 +8,7 @@ type ActionPoint string
 const (
 	ActionPointPreCreateHostedConfigurationVersion ActionPoint = "PRE_CREATE_HOSTED_CONFIGURATION_VERSION"
 	ActionPointPreStartDeployment                  ActionPoint = "PRE_START_DEPLOYMENT"
+	ActionPointAtDeploymentTick                    ActionPoint = "AT_DEPLOYMENT_TICK"
 	ActionPointOnDeploymentStart                   ActionPoint = "ON_DEPLOYMENT_START"
 	ActionPointOnDeploymentStep                    ActionPoint = "ON_DEPLOYMENT_STEP"
 	ActionPointOnDeploymentBaking                  ActionPoint = "ON_DEPLOYMENT_BAKING"
@@ -23,6 +24,7 @@ func (ActionPoint) Values() []ActionPoint {
 	return []ActionPoint{
 		"PRE_CREATE_HOSTED_CONFIGURATION_VERSION",
 		"PRE_START_DEPLOYMENT",
+		"AT_DEPLOYMENT_TICK",
 		"ON_DEPLOYMENT_START",
 		"ON_DEPLOYMENT_STEP",
 		"ON_DEPLOYMENT_BAKING",
@@ -96,6 +98,7 @@ const (
 	DeploymentEventTypeBakeTimeStarted     DeploymentEventType = "BAKE_TIME_STARTED"
 	DeploymentEventTypeDeploymentStarted   DeploymentEventType = "DEPLOYMENT_STARTED"
 	DeploymentEventTypeDeploymentCompleted DeploymentEventType = "DEPLOYMENT_COMPLETED"
+	DeploymentEventTypeRevertCompleted     DeploymentEventType = "REVERT_COMPLETED"
 )
 
 // Values returns all known values for DeploymentEventType. Note that this can be
@@ -110,6 +113,7 @@ func (DeploymentEventType) Values() []DeploymentEventType {
 		"BAKE_TIME_STARTED",
 		"DEPLOYMENT_STARTED",
 		"DEPLOYMENT_COMPLETED",
+		"REVERT_COMPLETED",
 	}
 }
 
@@ -123,6 +127,7 @@ const (
 	DeploymentStateComplete    DeploymentState = "COMPLETE"
 	DeploymentStateRollingBack DeploymentState = "ROLLING_BACK"
 	DeploymentStateRolledBack  DeploymentState = "ROLLED_BACK"
+	DeploymentStateReverted    DeploymentState = "REVERTED"
 )
 
 // Values returns all known values for DeploymentState. Note that this can be
@@ -137,6 +142,7 @@ func (DeploymentState) Values() []DeploymentState {
 		"COMPLETE",
 		"ROLLING_BACK",
 		"ROLLED_BACK",
+		"REVERTED",
 	}
 }
 
@@ -148,6 +154,7 @@ const (
 	EnvironmentStateDeploying          EnvironmentState = "DEPLOYING"
 	EnvironmentStateRollingBack        EnvironmentState = "ROLLING_BACK"
 	EnvironmentStateRolledBack         EnvironmentState = "ROLLED_BACK"
+	EnvironmentStateReverted           EnvironmentState = "REVERTED"
 )
 
 // Values returns all known values for EnvironmentState. Note that this can be
@@ -160,6 +167,7 @@ func (EnvironmentState) Values() []EnvironmentState {
 		"DEPLOYING",
 		"ROLLING_BACK",
 		"ROLLED_BACK",
+		"REVERTED",
 	}
 }
 

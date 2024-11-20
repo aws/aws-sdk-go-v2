@@ -149,6 +149,25 @@ func (EntityType) Values() []EntityType {
 	}
 }
 
+type FeatureType string
+
+// Enum values for FeatureType
+const (
+	FeatureTypeRootCredentialsManagement FeatureType = "RootCredentialsManagement"
+	FeatureTypeRootSessions              FeatureType = "RootSessions"
+)
+
+// Values returns all known values for FeatureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureType) Values() []FeatureType {
+	return []FeatureType{
+		"RootCredentialsManagement",
+		"RootSessions",
+	}
+}
+
 type GlobalEndpointTokenVersion string
 
 // Enum values for GlobalEndpointTokenVersion
@@ -437,6 +456,7 @@ const (
 	SummaryKeyTypeMFADevicesInUse                   SummaryKeyType = "MFADevicesInUse"
 	SummaryKeyTypeAccountMFAEnabled                 SummaryKeyType = "AccountMFAEnabled"
 	SummaryKeyTypeAccountAccessKeysPresent          SummaryKeyType = "AccountAccessKeysPresent"
+	SummaryKeyTypeAccountPasswordPresent            SummaryKeyType = "AccountPasswordPresent"
 	SummaryKeyTypeAccountSigningCertificatesPresent SummaryKeyType = "AccountSigningCertificatesPresent"
 	SummaryKeyTypeAttachedPoliciesPerGroupQuota     SummaryKeyType = "AttachedPoliciesPerGroupQuota"
 	SummaryKeyTypeAttachedPoliciesPerRoleQuota      SummaryKeyType = "AttachedPoliciesPerRoleQuota"
@@ -471,6 +491,7 @@ func (SummaryKeyType) Values() []SummaryKeyType {
 		"MFADevicesInUse",
 		"AccountMFAEnabled",
 		"AccountAccessKeysPresent",
+		"AccountPasswordPresent",
 		"AccountSigningCertificatesPresent",
 		"AttachedPoliciesPerGroupQuota",
 		"AttachedPoliciesPerRoleQuota",

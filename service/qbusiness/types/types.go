@@ -166,6 +166,10 @@ type ActionReviewPayloadField struct {
 	// Amazon Q Business for Amazon Q Business to perform the requested plugin action.
 	AllowedValues []ActionReviewPayloadFieldAllowedValue
 
+	// Use to create a custom form with array fields (fields with nested objects
+	// inside an array).
+	ArrayItemJsonSchema document.Interface
+
 	// The field level description of each action review input field. This could be an
 	// explanation of the field. In the Amazon Q Business web experience, these
 	// descriptions could be used to display as tool tips to help users understand the
@@ -1408,6 +1412,10 @@ type GroupMembers struct {
 	// belong to the "Interns" group.
 	MemberUsers []MemberUser
 
+	// Information required for Amazon Q Business to find a specific file in an Amazon
+	// S3 bucket.
+	S3PathForGroupMembers *S3
+
 	noSmithyDocumentSerde
 }
 
@@ -1976,7 +1984,7 @@ type PrincipalUser struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information about Amazon Q Apps. (preview feature)
+// Configuration information about Amazon Q Apps.
 type QAppsConfiguration struct {
 
 	// Status information about whether end users can create and use Amazon Q Apps in
@@ -2359,11 +2367,11 @@ type UserAlias struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about users and groups associated with a topic control
-// rule.
+// Provides information about users and group names associated with a topic
+// control rule.
 type UsersAndGroups struct {
 
-	// The user groups associated with a topic control rule.
+	// The user group names associated with a topic control rule.
 	UserGroups []string
 
 	// The user ids associated with a topic control rule.

@@ -183,7 +183,7 @@ type DistributionDeployedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, DistributionDeployedWaiter will use default max delay of 120
+	// set to zero, DistributionDeployedWaiter will use default max delay of 2100
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -214,7 +214,7 @@ type DistributionDeployedWaiter struct {
 func NewDistributionDeployedWaiter(client GetDistributionAPIClient, optFns ...func(*DistributionDeployedWaiterOptions)) *DistributionDeployedWaiter {
 	options := DistributionDeployedWaiterOptions{}
 	options.MinDelay = 60 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 2100 * time.Second
 	options.Retryable = distributionDeployedStateRetryable
 
 	for _, fn := range optFns {
@@ -249,7 +249,7 @@ func (w *DistributionDeployedWaiter) WaitForOutput(ctx context.Context, params *
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 2100 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

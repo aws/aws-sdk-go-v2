@@ -56,11 +56,11 @@ type CreateResolverQueryLogConfigInput struct {
 	//
 	//   - S3 bucket:
 	//
-	// arn:aws:s3:::examplebucket
+	// arn:aws:s3:::amzn-s3-demo-bucket
 	//
 	// You can optionally append a file prefix to the end of the ARN.
 	//
-	// arn:aws:s3:::examplebucket/development/
+	// arn:aws:s3:::amzn-s3-demo-bucket/development/
 	//
 	//   - CloudWatch Logs log group:
 	//

@@ -12,9 +12,6 @@ import (
 )
 
 // Deletes a cluster. It also deletes all associated nodes and node endpoints
-//
-// CreateSnapshot permission is required to create a final snapshot. Without this
-// permission, the API call will fail with an Access Denied exception.
 func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
 	if params == nil {
 		params = &DeleteClusterInput{}

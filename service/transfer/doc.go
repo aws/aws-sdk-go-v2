@@ -12,7 +12,7 @@
 // Transfer Family by integrating with existing authentication systems, and
 // providing DNS routing with Amazon Route 53 so nothing changes for your customers
 // and partners, or their applications. With your data in Amazon S3, you can use it
-// with Amazon Web Services for processing, analytics, machine learning, and
-// archiving. Getting started with Transfer Family is easy since there is no
+// with Amazon Web Services services for processing, analytics, machine learning,
+// and archiving. Getting started with Transfer Family is easy since there is no
 // infrastructure to buy and set up.
 package transfer

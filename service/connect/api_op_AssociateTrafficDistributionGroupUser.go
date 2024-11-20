@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an agent with a traffic distribution group.
+// Associates an agent with a traffic distribution group. This API can be called
+// only in the Region where the traffic distribution group is created.
 func (c *Client) AssociateTrafficDistributionGroupUser(ctx context.Context, params *AssociateTrafficDistributionGroupUserInput, optFns ...func(*Options)) (*AssociateTrafficDistributionGroupUserOutput, error) {
 	if params == nil {
 		params = &AssociateTrafficDistributionGroupUserInput{}
@@ -37,8 +38,7 @@ type AssociateTrafficDistributionGroupUserInput struct {
 	InstanceId *string
 
 	// The identifier of the traffic distribution group. This can be the ID or the ARN
-	// if the API is being called in the Region where the traffic distribution group
-	// was created. The ARN must be provided if the call is from the replicated Region.
+	// of the traffic distribution group.
 	//
 	// This member is required.
 	TrafficDistributionGroupId *string

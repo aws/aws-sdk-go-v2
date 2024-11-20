@@ -88,8 +88,9 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The operation tried to access a keyspace or table that doesn't exist. The
-// resource might not be specified correctly, or its status might not be ACTIVE .
+// The operation tried to access a keyspace, table, or type that doesn't exist.
+// The resource might not be specified correctly, or its status might not be ACTIVE
+// .
 type ResourceNotFoundException struct {
 	Message *string
 

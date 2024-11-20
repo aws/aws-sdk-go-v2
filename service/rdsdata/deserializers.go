@@ -146,6 +146,9 @@ func awsRestjson1_deserializeOpErrorBatchExecuteStatement(response *smithyhttp.R
 	case strings.EqualFold("DatabaseNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorDatabaseNotFoundException(response, errorBody)
 
+	case strings.EqualFold("DatabaseResumingException", errorCode):
+		return awsRestjson1_deserializeErrorDatabaseResumingException(response, errorBody)
+
 	case strings.EqualFold("DatabaseUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorDatabaseUnavailableException(response, errorBody)
 
@@ -333,6 +336,9 @@ func awsRestjson1_deserializeOpErrorBeginTransaction(response *smithyhttp.Respon
 
 	case strings.EqualFold("DatabaseNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorDatabaseNotFoundException(response, errorBody)
+
+	case strings.EqualFold("DatabaseResumingException", errorCode):
+		return awsRestjson1_deserializeErrorDatabaseResumingException(response, errorBody)
 
 	case strings.EqualFold("DatabaseUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorDatabaseUnavailableException(response, errorBody)
@@ -885,6 +891,9 @@ func awsRestjson1_deserializeOpErrorExecuteStatement(response *smithyhttp.Respon
 	case strings.EqualFold("DatabaseNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorDatabaseNotFoundException(response, errorBody)
 
+	case strings.EqualFold("DatabaseResumingException", errorCode):
+		return awsRestjson1_deserializeErrorDatabaseResumingException(response, errorBody)
+
 	case strings.EqualFold("DatabaseUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorDatabaseUnavailableException(response, errorBody)
 
@@ -1332,6 +1341,42 @@ func awsRestjson1_deserializeErrorDatabaseNotFoundException(response *smithyhttp
 	return output
 }
 
+func awsRestjson1_deserializeErrorDatabaseResumingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DatabaseResumingException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentDatabaseResumingException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorDatabaseUnavailableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DatabaseUnavailableException{}
 	return output
@@ -1657,7 +1702,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -1831,7 +1876,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2084,7 +2129,7 @@ func awsRestjson1_deserializeDocumentDatabaseErrorException(v **types.DatabaseEr
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2124,7 +2169,47 @@ func awsRestjson1_deserializeDocumentDatabaseNotFoundException(v **types.Databas
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatabaseResumingException(v **types.DatabaseResumingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseResumingException
+	if *v == nil {
+		sv = &types.DatabaseResumingException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2431,7 +2516,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2471,7 +2556,7 @@ func awsRestjson1_deserializeDocumentHttpEndpointNotEnabledException(v **types.H
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2542,7 +2627,7 @@ func awsRestjson1_deserializeDocumentInvalidSecretException(v **types.InvalidSec
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2656,7 +2741,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2888,7 +2973,7 @@ func awsRestjson1_deserializeDocumentSecretsErrorException(v **types.SecretsErro
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3087,7 +3172,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 				sv.DbConnectionId = i64
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3199,7 +3284,7 @@ func awsRestjson1_deserializeDocumentTransactionNotFoundException(v **types.Tran
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -3239,7 +3324,7 @@ func awsRestjson1_deserializeDocumentUnsupportedResultException(v **types.Unsupp
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"path"
@@ -1402,6 +1403,67 @@ func (m *awsAwsjson10_serializeOpDeleteProtectConfiguration) HandleSerialize(ctx
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteProtectConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteProtectConfigurationRuleSetNumberOverride struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteProtectConfigurationRuleSetNumberOverride) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteProtectConfigurationRuleSetNumberOverride) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteProtectConfigurationRuleSetNumberOverrideInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DeleteProtectConfigurationRuleSetNumberOverride")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteProtectConfigurationRuleSetNumberOverrideInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3371,6 +3433,67 @@ func (m *awsAwsjson10_serializeOpListPoolOriginationIdentities) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListProtectConfigurationRuleSetNumberOverrides struct {
+}
+
+func (*awsAwsjson10_serializeOpListProtectConfigurationRuleSetNumberOverrides) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListProtectConfigurationRuleSetNumberOverrides) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListProtectConfigurationRuleSetNumberOverridesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.ListProtectConfigurationRuleSetNumberOverrides")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListProtectConfigurationRuleSetNumberOverridesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListRegistrationAssociations struct {
 }
 
@@ -3554,6 +3677,67 @@ func (m *awsAwsjson10_serializeOpPutKeyword) HandleSerialize(ctx context.Context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpPutMessageFeedback struct {
+}
+
+func (*awsAwsjson10_serializeOpPutMessageFeedback) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPutMessageFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutMessageFeedbackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.PutMessageFeedback")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPutMessageFeedbackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpPutOptedOutNumber struct {
 }
 
@@ -3598,6 +3782,67 @@ func (m *awsAwsjson10_serializeOpPutOptedOutNumber) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentPutOptedOutNumberInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpPutProtectConfigurationRuleSetNumberOverride struct {
+}
+
+func (*awsAwsjson10_serializeOpPutProtectConfigurationRuleSetNumberOverride) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPutProtectConfigurationRuleSetNumberOverride) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutProtectConfigurationRuleSetNumberOverrideInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.PutProtectConfigurationRuleSetNumberOverride")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPutProtectConfigurationRuleSetNumberOverrideInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4269,6 +4514,67 @@ func (m *awsAwsjson10_serializeOpSetAccountDefaultProtectConfiguration) HandleSe
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentSetAccountDefaultProtectConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpSetDefaultMessageFeedbackEnabled struct {
+}
+
+func (*awsAwsjson10_serializeOpSetDefaultMessageFeedbackEnabled) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpSetDefaultMessageFeedbackEnabled) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetDefaultMessageFeedbackEnabledInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.SetDefaultMessageFeedbackEnabled")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentSetDefaultMessageFeedbackEnabledInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5386,6 +5692,19 @@ func awsAwsjson10_serializeDocumentKinesisFirehoseDestination(v *types.KinesisFi
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentListProtectConfigurationRuleSetNumberOverrideFilter(v []types.ProtectConfigurationRuleSetNumberOverrideFilterItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentProtectConfigurationRuleSetNumberOverrideFilterItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentMediaUrlList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5670,6 +5989,25 @@ func awsAwsjson10_serializeDocumentProtectConfigurationIdList(v []string, value 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProtectConfigurationRuleSetNumberOverrideFilterItem(v *types.ProtectConfigurationRuleSetNumberOverrideFilterItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson10_serializeDocumentFilterValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6505,6 +6843,23 @@ func awsAwsjson10_serializeOpDocumentDeleteProtectConfigurationInput(v *DeletePr
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDeleteProtectConfigurationRuleSetNumberOverrideInput(v *DeleteProtectConfigurationRuleSetNumberOverrideInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("DestinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.ProtectConfigurationId != nil {
+		ok := object.Key("ProtectConfigurationId")
+		ok.String(*v.ProtectConfigurationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteRegistrationAttachmentInput(v *DeleteRegistrationAttachmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7289,6 +7644,35 @@ func awsAwsjson10_serializeOpDocumentListPoolOriginationIdentitiesInput(v *ListP
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentListProtectConfigurationRuleSetNumberOverridesInput(v *ListProtectConfigurationRuleSetNumberOverridesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson10_serializeDocumentListProtectConfigurationRuleSetNumberOverrideFilter(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ProtectConfigurationId != nil {
+		ok := object.Key("ProtectConfigurationId")
+		ok.String(*v.ProtectConfigurationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListRegistrationAssociationsInput(v *ListRegistrationAssociationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7357,6 +7741,23 @@ func awsAwsjson10_serializeOpDocumentPutKeywordInput(v *PutKeywordInput, value s
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentPutMessageFeedbackInput(v *PutMessageFeedbackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MessageFeedbackStatus) > 0 {
+		ok := object.Key("MessageFeedbackStatus")
+		ok.String(string(v.MessageFeedbackStatus))
+	}
+
+	if v.MessageId != nil {
+		ok := object.Key("MessageId")
+		ok.String(*v.MessageId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentPutOptedOutNumberInput(v *PutOptedOutNumberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7369,6 +7770,38 @@ func awsAwsjson10_serializeOpDocumentPutOptedOutNumberInput(v *PutOptedOutNumber
 	if v.OptOutListName != nil {
 		ok := object.Key("OptOutListName")
 		ok.String(*v.OptOutListName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentPutProtectConfigurationRuleSetNumberOverrideInput(v *PutProtectConfigurationRuleSetNumberOverrideInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DestinationPhoneNumber != nil {
+		ok := object.Key("DestinationPhoneNumber")
+		ok.String(*v.DestinationPhoneNumber)
+	}
+
+	if v.ExpirationTimestamp != nil {
+		ok := object.Key("ExpirationTimestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ExpirationTimestamp))
+	}
+
+	if v.ProtectConfigurationId != nil {
+		ok := object.Key("ProtectConfigurationId")
+		ok.String(*v.ProtectConfigurationId)
 	}
 
 	return nil
@@ -7645,6 +8078,11 @@ func awsAwsjson10_serializeOpDocumentSendMediaMessageInput(v *SendMediaMessageIn
 		ok.String(*v.MessageBody)
 	}
 
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
+	}
+
 	if v.OriginationIdentity != nil {
 		ok := object.Key("OriginationIdentity")
 		ok.String(*v.OriginationIdentity)
@@ -7711,6 +8149,11 @@ func awsAwsjson10_serializeOpDocumentSendTextMessageInput(v *SendTextMessageInpu
 		ok.String(*v.MessageBody)
 	}
 
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
+	}
+
 	if len(v.MessageType) > 0 {
 		ok := object.Key("MessageType")
 		ok.String(string(v.MessageType))
@@ -7775,6 +8218,11 @@ func awsAwsjson10_serializeOpDocumentSendVoiceMessageInput(v *SendVoiceMessageIn
 		ok.String(string(v.MessageBodyTextType))
 	}
 
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
+	}
+
 	if v.OriginationIdentity != nil {
 		ok := object.Key("OriginationIdentity")
 		ok.String(*v.OriginationIdentity)
@@ -7805,6 +8253,23 @@ func awsAwsjson10_serializeOpDocumentSetAccountDefaultProtectConfigurationInput(
 	if v.ProtectConfigurationId != nil {
 		ok := object.Key("ProtectConfigurationId")
 		ok.String(*v.ProtectConfigurationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentSetDefaultMessageFeedbackEnabledInput(v *SetDefaultMessageFeedbackEnabledInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationSetName != nil {
+		ok := object.Key("ConfigurationSetName")
+		ok.String(*v.ConfigurationSetName)
+	}
+
+	if v.MessageFeedbackEnabled != nil {
+		ok := object.Key("MessageFeedbackEnabled")
+		ok.Boolean(*v.MessageFeedbackEnabled)
 	}
 
 	return nil

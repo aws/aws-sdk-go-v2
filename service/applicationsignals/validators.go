@@ -322,6 +322,38 @@ func addOpUpdateServiceLevelObjectiveValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateServiceLevelObjective{}, middleware.After)
 }
 
+func validateBurnRateConfiguration(v *types.BurnRateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BurnRateConfiguration"}
+	if v.LookBackWindowMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookBackWindowMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBurnRateConfigurations(v []types.BurnRateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BurnRateConfigurations"}
+	for i := range v {
+		if err := validateBurnRateConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCalendarInterval(v *types.CalendarInterval) error {
 	if v == nil {
 		return nil
@@ -704,6 +736,11 @@ func validateOpCreateServiceLevelObjectiveInput(v *CreateServiceLevelObjectiveIn
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.BurnRateConfigurations != nil {
+		if err := validateBurnRateConfigurations(v.BurnRateConfigurations); err != nil {
+			invalidParams.AddNested("BurnRateConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -919,6 +956,11 @@ func validateOpUpdateServiceLevelObjectiveInput(v *UpdateServiceLevelObjectiveIn
 	if v.Goal != nil {
 		if err := validateGoal(v.Goal); err != nil {
 			invalidParams.AddNested("Goal", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BurnRateConfigurations != nil {
+		if err := validateBurnRateConfigurations(v.BurnRateConfigurations); err != nil {
+			invalidParams.AddNested("BurnRateConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

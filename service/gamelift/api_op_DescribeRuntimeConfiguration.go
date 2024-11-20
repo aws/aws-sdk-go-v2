@@ -12,11 +12,9 @@ import (
 )
 
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
-// determines which server processes run, and how, on computes in the fleet. For
-// managed EC2 fleets, the runtime configuration describes server processes that
-// run on each fleet instance. For container fleets, the runtime configuration
-// describes server processes that run in each replica container group. You can
-// update a fleet's runtime configuration at any time using UpdateRuntimeConfiguration.
+// determines which server processes run, and how they run, and how many run
+// concurrently on computes in managed EC2 and Anywhere fleets. You can update a
+// fleet's runtime configuration at any time using UpdateRuntimeConfiguration.
 //
 // To get the current runtime configuration for a fleet, provide the fleet ID.
 //

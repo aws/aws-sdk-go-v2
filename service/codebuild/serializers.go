@@ -3158,6 +3158,33 @@ func awsAwsjson11_serializeDocumentCloudWatchLogsConfig(v *types.CloudWatchLogsC
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentComputeConfiguration(v *types.ComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Disk != nil {
+		ok := object.Key("disk")
+		ok.Long(*v.Disk)
+	}
+
+	if len(v.MachineType) > 0 {
+		ok := object.Key("machineType")
+		ok.String(string(v.MachineType))
+	}
+
+	if v.Memory != nil {
+		ok := object.Key("memory")
+		ok.Long(*v.Memory)
+	}
+
+	if v.VCpu != nil {
+		ok := object.Key("vCpu")
+		ok.Long(*v.VCpu)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentComputeTypesAllowed(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3240,6 +3267,54 @@ func awsAwsjson11_serializeDocumentFleetNames(v []string, value smithyjson.Value
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFleetProxyRule(v *types.FleetProxyRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Effect) > 0 {
+		ok := object.Key("effect")
+		ok.String(string(v.Effect))
+	}
+
+	if v.Entities != nil {
+		ok := object.Key("entities")
+		if err := awsAwsjson11_serializeDocumentFleetProxyRuleEntities(v.Entities, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFleetProxyRuleEntities(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFleetProxyRules(v []types.FleetProxyRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentFleetProxyRule(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -3423,6 +3498,13 @@ func awsAwsjson11_serializeDocumentProjectEnvironment(v *types.ProjectEnvironmen
 	if v.Certificate != nil {
 		ok := object.Key("certificate")
 		ok.String(*v.Certificate)
+	}
+
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsAwsjson11_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ComputeType) > 0 {
@@ -3643,6 +3725,25 @@ func awsAwsjson11_serializeDocumentProjectSourceVersion(v *types.ProjectSourceVe
 	if v.SourceVersion != nil {
 		ok := object.Key("sourceVersion")
 		ok.String(*v.SourceVersion)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProxyConfiguration(v *types.ProxyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultBehavior) > 0 {
+		ok := object.Key("defaultBehavior")
+		ok.String(string(v.DefaultBehavior))
+	}
+
+	if v.OrderedProxyRules != nil {
+		ok := object.Key("orderedProxyRules")
+		if err := awsAwsjson11_serializeDocumentFleetProxyRules(v.OrderedProxyRules, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4112,6 +4213,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.Integer(*v.BaseCapacity)
 	}
 
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsAwsjson11_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ComputeType) > 0 {
 		ok := object.Key("computeType")
 		ok.String(string(v.ComputeType))
@@ -4140,6 +4248,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if len(v.OverflowBehavior) > 0 {
 		ok := object.Key("overflowBehavior")
 		ok.String(string(v.OverflowBehavior))
+	}
+
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("proxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScalingConfiguration != nil {
@@ -4175,6 +4290,11 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 		if err := awsAwsjson11_serializeDocumentProjectArtifacts(v.Artifacts, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AutoRetryLimit != nil {
+		ok := object.Key("autoRetryLimit")
+		ok.Integer(*v.AutoRetryLimit)
 	}
 
 	if v.BadgeEnabled != nil {
@@ -5210,6 +5330,11 @@ func awsAwsjson11_serializeOpDocumentStartBuildInput(v *StartBuildInput, value s
 		}
 	}
 
+	if v.AutoRetryLimitOverride != nil {
+		ok := object.Key("autoRetryLimitOverride")
+		ok.Integer(*v.AutoRetryLimitOverride)
+	}
+
 	if v.BuildspecOverride != nil {
 		ok := object.Key("buildspecOverride")
 		ok.String(*v.BuildspecOverride)
@@ -5428,6 +5553,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 		ok.Integer(*v.BaseCapacity)
 	}
 
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsAwsjson11_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ComputeType) > 0 {
 		ok := object.Key("computeType")
 		ok.String(string(v.ComputeType))
@@ -5451,6 +5583,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if len(v.OverflowBehavior) > 0 {
 		ok := object.Key("overflowBehavior")
 		ok.String(string(v.OverflowBehavior))
+	}
+
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("proxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScalingConfiguration != nil {
@@ -5486,6 +5625,11 @@ func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 		if err := awsAwsjson11_serializeDocumentProjectArtifacts(v.Artifacts, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AutoRetryLimit != nil {
+		ok := object.Key("autoRetryLimit")
+		ok.Integer(*v.AutoRetryLimit)
 	}
 
 	if v.BadgeEnabled != nil {

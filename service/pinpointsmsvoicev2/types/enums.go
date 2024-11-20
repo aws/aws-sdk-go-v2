@@ -115,11 +115,12 @@ type ConfigurationSetFilterName string
 
 // Enum values for ConfigurationSetFilterName
 const (
-	ConfigurationSetFilterNameEventDestinationName   ConfigurationSetFilterName = "event-destination-name"
-	ConfigurationSetFilterNameMatchingEventTypes     ConfigurationSetFilterName = "matching-event-types"
-	ConfigurationSetFilterNameDefaultMessageType     ConfigurationSetFilterName = "default-message-type"
-	ConfigurationSetFilterNameDefaultSenderId        ConfigurationSetFilterName = "default-sender-id"
-	ConfigurationSetFilterNameProtectConfigurationId ConfigurationSetFilterName = "protect-configuration-id"
+	ConfigurationSetFilterNameEventDestinationName          ConfigurationSetFilterName = "event-destination-name"
+	ConfigurationSetFilterNameMatchingEventTypes            ConfigurationSetFilterName = "matching-event-types"
+	ConfigurationSetFilterNameDefaultMessageType            ConfigurationSetFilterName = "default-message-type"
+	ConfigurationSetFilterNameDefaultSenderId               ConfigurationSetFilterName = "default-sender-id"
+	ConfigurationSetFilterNameDefaultMessageFeedbackEnabled ConfigurationSetFilterName = "default-message-feedback-enabled"
+	ConfigurationSetFilterNameProtectConfigurationId        ConfigurationSetFilterName = "protect-configuration-id"
 )
 
 // Values returns all known values for ConfigurationSetFilterName. Note that this
@@ -132,6 +133,7 @@ func (ConfigurationSetFilterName) Values() []ConfigurationSetFilterName {
 		"matching-event-types",
 		"default-message-type",
 		"default-sender-id",
+		"default-message-feedback-enabled",
 		"protect-configuration-id",
 	}
 }
@@ -175,6 +177,7 @@ const (
 	ConflictExceptionReasonProtectConfigurationAssociatedWithConfigurationSet    ConflictExceptionReason = "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET"
 	ConflictExceptionReasonProtectConfigurationNotAssociatedWithConfigurationSet ConflictExceptionReason = "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET"
 	ConflictExceptionReasonDestinationCountryBlockedByProtectConfiguration       ConflictExceptionReason = "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION"
+	ConflictExceptionReasonDestinationPhoneNumberBlockedByProtectNumberOverride  ConflictExceptionReason = "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -218,6 +221,7 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET",
 		"PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
 		"DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
+		"DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
 	}
 }
 
@@ -261,6 +265,7 @@ const (
 	EventTypeTextSpam                 EventType = "TEXT_SPAM"
 	EventTypeTextUnknown              EventType = "TEXT_UNKNOWN"
 	EventTypeTextTtlExpired           EventType = "TEXT_TTL_EXPIRED"
+	EventTypeTextProtectBlocked       EventType = "TEXT_PROTECT_BLOCKED"
 	EventTypeVoiceAll                 EventType = "VOICE_ALL"
 	EventTypeVoiceInitiated           EventType = "VOICE_INITIATED"
 	EventTypeVoiceRinging             EventType = "VOICE_RINGING"
@@ -311,6 +316,7 @@ func (EventType) Values() []EventType {
 		"TEXT_SPAM",
 		"TEXT_UNKNOWN",
 		"TEXT_TTL_EXPIRED",
+		"TEXT_PROTECT_BLOCKED",
 		"VOICE_ALL",
 		"VOICE_INITIATED",
 		"VOICE_RINGING",
@@ -458,6 +464,25 @@ func (LanguageCode) Values() []LanguageCode {
 		"PT_BR",
 		"ZH_CN",
 		"ZH_TW",
+	}
+}
+
+type MessageFeedbackStatus string
+
+// Enum values for MessageFeedbackStatus
+const (
+	MessageFeedbackStatusReceived MessageFeedbackStatus = "RECEIVED"
+	MessageFeedbackStatusFailed   MessageFeedbackStatus = "FAILED"
+)
+
+// Values returns all known values for MessageFeedbackStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageFeedbackStatus) Values() []MessageFeedbackStatus {
+	return []MessageFeedbackStatus{
+		"RECEIVED",
+		"FAILED",
 	}
 }
 
@@ -714,6 +739,56 @@ func (ProtectConfigurationFilterName) Values() []ProtectConfigurationFilterName 
 	}
 }
 
+type ProtectConfigurationRuleOverrideAction string
+
+// Enum values for ProtectConfigurationRuleOverrideAction
+const (
+	ProtectConfigurationRuleOverrideActionAllow ProtectConfigurationRuleOverrideAction = "ALLOW"
+	ProtectConfigurationRuleOverrideActionBlock ProtectConfigurationRuleOverrideAction = "BLOCK"
+)
+
+// Values returns all known values for ProtectConfigurationRuleOverrideAction.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectConfigurationRuleOverrideAction) Values() []ProtectConfigurationRuleOverrideAction {
+	return []ProtectConfigurationRuleOverrideAction{
+		"ALLOW",
+		"BLOCK",
+	}
+}
+
+type ProtectConfigurationRuleSetNumberOverrideFilterName string
+
+// Enum values for ProtectConfigurationRuleSetNumberOverrideFilterName
+const (
+	ProtectConfigurationRuleSetNumberOverrideFilterNameIsoCountryCode                   ProtectConfigurationRuleSetNumberOverrideFilterName = "iso-country-code"
+	ProtectConfigurationRuleSetNumberOverrideFilterNameDestinationPhoneNumberBeginsWith ProtectConfigurationRuleSetNumberOverrideFilterName = "destination-phone-number-begins-with"
+	ProtectConfigurationRuleSetNumberOverrideFilterNameAction                           ProtectConfigurationRuleSetNumberOverrideFilterName = "action"
+	ProtectConfigurationRuleSetNumberOverrideFilterNameExpiresBefore                    ProtectConfigurationRuleSetNumberOverrideFilterName = "expires-before"
+	ProtectConfigurationRuleSetNumberOverrideFilterNameExpiresAfter                     ProtectConfigurationRuleSetNumberOverrideFilterName = "expires-after"
+	ProtectConfigurationRuleSetNumberOverrideFilterNameCreatedBefore                    ProtectConfigurationRuleSetNumberOverrideFilterName = "created-before"
+	ProtectConfigurationRuleSetNumberOverrideFilterNameCreatedAfter                     ProtectConfigurationRuleSetNumberOverrideFilterName = "created-after"
+)
+
+// Values returns all known values for
+// ProtectConfigurationRuleSetNumberOverrideFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectConfigurationRuleSetNumberOverrideFilterName) Values() []ProtectConfigurationRuleSetNumberOverrideFilterName {
+	return []ProtectConfigurationRuleSetNumberOverrideFilterName{
+		"iso-country-code",
+		"destination-phone-number-begins-with",
+		"action",
+		"expires-before",
+		"expires-after",
+		"created-before",
+		"created-after",
+	}
+}
+
 type ProtectStatus string
 
 // Enum values for ProtectStatus
@@ -838,14 +913,15 @@ type RegistrationStatus string
 
 // Enum values for RegistrationStatus
 const (
-	RegistrationStatusCreated         RegistrationStatus = "CREATED"
-	RegistrationStatusSubmitted       RegistrationStatus = "SUBMITTED"
-	RegistrationStatusReviewing       RegistrationStatus = "REVIEWING"
-	RegistrationStatusProvisioning    RegistrationStatus = "PROVISIONING"
-	RegistrationStatusComplete        RegistrationStatus = "COMPLETE"
-	RegistrationStatusRequiresUpdates RegistrationStatus = "REQUIRES_UPDATES"
-	RegistrationStatusClosed          RegistrationStatus = "CLOSED"
-	RegistrationStatusDeleted         RegistrationStatus = "DELETED"
+	RegistrationStatusCreated                RegistrationStatus = "CREATED"
+	RegistrationStatusSubmitted              RegistrationStatus = "SUBMITTED"
+	RegistrationStatusReviewing              RegistrationStatus = "REVIEWING"
+	RegistrationStatusRequiresAuthentication RegistrationStatus = "REQUIRES_AUTHENTICATION"
+	RegistrationStatusProvisioning           RegistrationStatus = "PROVISIONING"
+	RegistrationStatusComplete               RegistrationStatus = "COMPLETE"
+	RegistrationStatusRequiresUpdates        RegistrationStatus = "REQUIRES_UPDATES"
+	RegistrationStatusClosed                 RegistrationStatus = "CLOSED"
+	RegistrationStatusDeleted                RegistrationStatus = "DELETED"
 )
 
 // Values returns all known values for RegistrationStatus. Note that this can be
@@ -857,6 +933,7 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 		"CREATED",
 		"SUBMITTED",
 		"REVIEWING",
+		"REQUIRES_AUTHENTICATION",
 		"PROVISIONING",
 		"COMPLETE",
 		"REQUIRES_UPDATES",
@@ -906,14 +983,15 @@ type RegistrationVersionStatus string
 
 // Enum values for RegistrationVersionStatus
 const (
-	RegistrationVersionStatusDraft     RegistrationVersionStatus = "DRAFT"
-	RegistrationVersionStatusSubmitted RegistrationVersionStatus = "SUBMITTED"
-	RegistrationVersionStatusReviewing RegistrationVersionStatus = "REVIEWING"
-	RegistrationVersionStatusApproved  RegistrationVersionStatus = "APPROVED"
-	RegistrationVersionStatusDiscarded RegistrationVersionStatus = "DISCARDED"
-	RegistrationVersionStatusDenied    RegistrationVersionStatus = "DENIED"
-	RegistrationVersionStatusRevoked   RegistrationVersionStatus = "REVOKED"
-	RegistrationVersionStatusArchived  RegistrationVersionStatus = "ARCHIVED"
+	RegistrationVersionStatusDraft                  RegistrationVersionStatus = "DRAFT"
+	RegistrationVersionStatusSubmitted              RegistrationVersionStatus = "SUBMITTED"
+	RegistrationVersionStatusReviewing              RegistrationVersionStatus = "REVIEWING"
+	RegistrationVersionStatusRequiresAuthentication RegistrationVersionStatus = "REQUIRES_AUTHENTICATION"
+	RegistrationVersionStatusApproved               RegistrationVersionStatus = "APPROVED"
+	RegistrationVersionStatusDiscarded              RegistrationVersionStatus = "DISCARDED"
+	RegistrationVersionStatusDenied                 RegistrationVersionStatus = "DENIED"
+	RegistrationVersionStatusRevoked                RegistrationVersionStatus = "REVOKED"
+	RegistrationVersionStatusArchived               RegistrationVersionStatus = "ARCHIVED"
 )
 
 // Values returns all known values for RegistrationVersionStatus. Note that this
@@ -925,6 +1003,7 @@ func (RegistrationVersionStatus) Values() []RegistrationVersionStatus {
 		"DRAFT",
 		"SUBMITTED",
 		"REVIEWING",
+		"REQUIRES_AUTHENTICATION",
 		"APPROVED",
 		"DISCARDED",
 		"DENIED",
@@ -974,6 +1053,7 @@ const (
 	ResourceTypeVerifiedDestinationNumber ResourceType = "verified-destination-number"
 	ResourceTypeProtectConfiguration      ResourceType = "protect-configuration"
 	ResourceTypePolicy                    ResourceType = "policy"
+	ResourceTypeMessage                   ResourceType = "message"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -996,6 +1076,7 @@ func (ResourceType) Values() []ResourceType {
 		"verified-destination-number",
 		"protect-configuration",
 		"policy",
+		"message",
 	}
 }
 
@@ -1149,6 +1230,7 @@ const (
 	ValidationExceptionReasonRegistrationFieldCannotBeDeleted          ValidationExceptionReason = "REGISTRATION_FIELD_CANNOT_BE_DELETED"
 	ValidationExceptionReasonVerificationCodeMismatch                  ValidationExceptionReason = "VERIFICATION_CODE_MISMATCH"
 	ValidationExceptionReasonVoiceCapabilityNotAvailable               ValidationExceptionReason = "VOICE_CAPABILITY_NOT_AVAILABLE"
+	ValidationExceptionReasonUnspecifiedParameterNotSupported          ValidationExceptionReason = "UNSPECIFIED_PARAMETER_NOT_SUPPORTED"
 	ValidationExceptionReasonOther                                     ValidationExceptionReason = "OTHER"
 )
 
@@ -1196,6 +1278,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"REGISTRATION_FIELD_CANNOT_BE_DELETED",
 		"VERIFICATION_CODE_MISMATCH",
 		"VOICE_CAPABILITY_NOT_AVAILABLE",
+		"UNSPECIFIED_PARAMETER_NOT_SUPPORTED",
 		"OTHER",
 	}
 }

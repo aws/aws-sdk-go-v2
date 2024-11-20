@@ -36,13 +36,17 @@ func (c *Client) CreateCustomLogSource(ctx context.Context, params *CreateCustom
 
 type CreateCustomLogSourceInput struct {
 
-	// The configuration for the third-party custom source.
+	// The configuration used for the third-party custom source.
 	//
 	// This member is required.
 	Configuration *types.CustomLogSourceConfiguration
 
 	// Specify the name for a third-party custom source. This must be a Regionally
-	// unique value.
+	// unique value. The sourceName you enter here, is used in the LogProviderRole
+	// name which follows the convention AmazonSecurityLake-Provider-{name of the
+	// custom source}-{region} . You must use a CustomLogSource name that is shorter
+	// than or equal to 20 characters. This ensures that the LogProviderRole name is
+	// below the 64 character limit.
 	//
 	// This member is required.
 	SourceName *string
@@ -119,7 +123,7 @@ type CreateCustomLogSourceInput struct {
 
 type CreateCustomLogSourceOutput struct {
 
-	// The created third-party custom source.
+	// The third-party custom source that was created.
 	Source *types.CustomLogSourceResource
 
 	// Metadata pertaining to the operation's result.

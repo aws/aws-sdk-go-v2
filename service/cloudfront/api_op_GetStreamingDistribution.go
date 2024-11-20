@@ -185,7 +185,7 @@ type StreamingDistributionDeployedWaiterOptions struct {
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
 	// set to zero, StreamingDistributionDeployedWaiter will use default max delay of
-	// 120 seconds. Note that MaxDelay must resolve to value greater than or equal to
+	// 1500 seconds. Note that MaxDelay must resolve to value greater than or equal to
 	// the MinDelay.
 	MaxDelay time.Duration
 
@@ -217,7 +217,7 @@ type StreamingDistributionDeployedWaiter struct {
 func NewStreamingDistributionDeployedWaiter(client GetStreamingDistributionAPIClient, optFns ...func(*StreamingDistributionDeployedWaiterOptions)) *StreamingDistributionDeployedWaiter {
 	options := StreamingDistributionDeployedWaiterOptions{}
 	options.MinDelay = 60 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 1500 * time.Second
 	options.Retryable = streamingDistributionDeployedStateRetryable
 
 	for _, fn := range optFns {
@@ -252,7 +252,7 @@ func (w *StreamingDistributionDeployedWaiter) WaitForOutput(ctx context.Context,
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 1500 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

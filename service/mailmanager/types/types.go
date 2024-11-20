@@ -289,6 +289,21 @@ type DropAction struct {
 	noSmithyDocumentSerde
 }
 
+// The SMTP envelope information of the email.
+type Envelope struct {
+
+	// The RCPT FROM given by the host from which the email was received.
+	From *string
+
+	// The HELO used by the host from which the email was received.
+	Helo *string
+
+	// All SMTP TO entries given by the host from which the email was received.
+	To []string
+
+	noSmithyDocumentSerde
+}
+
 // The destination configuration for delivering exported email data.
 //
 // The following types satisfy this interface:
@@ -611,6 +626,38 @@ type MessageBody struct {
 	noSmithyDocumentSerde
 }
 
+// The metadata about the email.
+type Metadata struct {
+
+	// The ID of the ingress endpoint through which the email was received.
+	IngressPointId *string
+
+	// The ID of the rule set that processed the email.
+	RuleSetId *string
+
+	// The name of the host from which the email was received.
+	SenderHostname *string
+
+	// The IP address of the host from which the email was received.
+	SenderIpAddress *string
+
+	// The timestamp of when the email was received.
+	Timestamp *time.Time
+
+	// The TLS cipher suite used to communicate with the host from which the email was
+	// received.
+	TlsCipherSuite *string
+
+	// The TLS protocol used to communicate with the host from which the email was
+	// received.
+	TlsProtocol *string
+
+	// The ID of the traffic policy that was in effect when the email was received.
+	TrafficPolicyId *string
+
+	noSmithyDocumentSerde
+}
+
 // Explicitly indicate that the relay destination server does not require SMTP
 // credential authentication.
 type NoAuthentication struct {
@@ -785,6 +832,9 @@ type Row struct {
 	// The date the email was sent.
 	Date *string
 
+	// The SMTP envelope information of the email.
+	Envelope *Envelope
+
 	// The email address of the sender.
 	From *string
 
@@ -794,6 +844,9 @@ type Row struct {
 	// The email message ID this is a reply to.
 	InReplyTo *string
 
+	// The ID of the ingress endpoint through which the email was received.
+	IngressPointId *string
+
 	// The unique message ID of the email.
 	MessageId *string
 
@@ -802,6 +855,12 @@ type Row struct {
 
 	// The timestamp of when the email was received.
 	ReceivedTimestamp *time.Time
+
+	// The name of the host from which the email was received.
+	SenderHostname *string
+
+	// The IP address of the host from which the email was received.
+	SenderIpAddress *string
 
 	// The subject header value of the email.
 	Subject *string

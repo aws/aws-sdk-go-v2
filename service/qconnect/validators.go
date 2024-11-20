@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpActivateMessageTemplate struct {
+}
+
+func (*validateOpActivateMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpActivateMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ActivateMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpActivateMessageTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAIAgent struct {
 }
 
@@ -190,6 +210,66 @@ func (m *validateOpCreateKnowledgeBase) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMessageTemplateAttachment struct {
+}
+
+func (*validateOpCreateMessageTemplateAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMessageTemplateAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMessageTemplateAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMessageTemplateAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMessageTemplate struct {
+}
+
+func (*validateOpCreateMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMessageTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMessageTemplateVersion struct {
+}
+
+func (*validateOpCreateMessageTemplateVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMessageTemplateVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMessageTemplateVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMessageTemplateVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateQuickResponse struct {
 }
 
@@ -225,6 +305,26 @@ func (m *validateOpCreateSession) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeactivateMessageTemplate struct {
+}
+
+func (*validateOpDeactivateMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeactivateMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeactivateMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeactivateMessageTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +530,46 @@ func (m *validateOpDeleteKnowledgeBase) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMessageTemplateAttachment struct {
+}
+
+func (*validateOpDeleteMessageTemplateAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMessageTemplateAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMessageTemplateAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMessageTemplateAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMessageTemplate struct {
+}
+
+func (*validateOpDeleteMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMessageTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteQuickResponse struct {
 }
 
@@ -625,6 +765,26 @@ func (m *validateOpGetKnowledgeBase) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMessageTemplate struct {
+}
+
+func (*validateOpGetMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMessageTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -850,6 +1010,46 @@ func (m *validateOpListImportJobs) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMessageTemplates struct {
+}
+
+func (*validateOpListMessageTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMessageTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMessageTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMessageTemplatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMessageTemplateVersions struct {
+}
+
+func (*validateOpListMessageTemplateVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMessageTemplateVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMessageTemplateVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMessageTemplateVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListQuickResponses struct {
 }
 
@@ -990,6 +1190,26 @@ func (m *validateOpRemoveKnowledgeBaseTemplateUri) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRenderMessageTemplate struct {
+}
+
+func (*validateOpRenderMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRenderMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RenderMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRenderMessageTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchContent struct {
 }
 
@@ -1005,6 +1225,26 @@ func (m *validateOpSearchContent) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchMessageTemplates struct {
+}
+
+func (*validateOpSearchMessageTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchMessageTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchMessageTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchMessageTemplatesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1230,6 +1470,46 @@ func (m *validateOpUpdateKnowledgeBaseTemplateUri) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMessageTemplate struct {
+}
+
+func (*validateOpUpdateMessageTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMessageTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMessageTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMessageTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateMessageTemplateMetadata struct {
+}
+
+func (*validateOpUpdateMessageTemplateMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMessageTemplateMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMessageTemplateMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMessageTemplateMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateQuickResponse struct {
 }
 
@@ -1290,6 +1570,10 @@ func (m *validateOpUpdateSession) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpActivateMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpActivateMessageTemplate{}, middleware.After)
+}
+
 func addOpCreateAIAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAIAgent{}, middleware.After)
 }
@@ -1326,12 +1610,28 @@ func addOpCreateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateKnowledgeBase{}, middleware.After)
 }
 
+func addOpCreateMessageTemplateAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMessageTemplateAttachment{}, middleware.After)
+}
+
+func addOpCreateMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMessageTemplate{}, middleware.After)
+}
+
+func addOpCreateMessageTemplateVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMessageTemplateVersion{}, middleware.After)
+}
+
 func addOpCreateQuickResponseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQuickResponse{}, middleware.After)
 }
 
 func addOpCreateSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSession{}, middleware.After)
+}
+
+func addOpDeactivateMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeactivateMessageTemplate{}, middleware.After)
 }
 
 func addOpDeleteAIAgentValidationMiddleware(stack *middleware.Stack) error {
@@ -1374,6 +1674,14 @@ func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDeleteKnowledgeBase{}, middleware.After)
 }
 
+func addOpDeleteMessageTemplateAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMessageTemplateAttachment{}, middleware.After)
+}
+
+func addOpDeleteMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMessageTemplate{}, middleware.After)
+}
+
 func addOpDeleteQuickResponseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQuickResponse{}, middleware.After)
 }
@@ -1412,6 +1720,10 @@ func addOpGetImportJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKnowledgeBase{}, middleware.After)
+}
+
+func addOpGetMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMessageTemplate{}, middleware.After)
 }
 
 func addOpGetQuickResponseValidationMiddleware(stack *middleware.Stack) error {
@@ -1458,6 +1770,14 @@ func addOpListImportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImportJobs{}, middleware.After)
 }
 
+func addOpListMessageTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMessageTemplates{}, middleware.After)
+}
+
+func addOpListMessageTemplateVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMessageTemplateVersions{}, middleware.After)
+}
+
 func addOpListQuickResponsesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListQuickResponses{}, middleware.After)
 }
@@ -1486,8 +1806,16 @@ func addOpRemoveKnowledgeBaseTemplateUriValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpRemoveKnowledgeBaseTemplateUri{}, middleware.After)
 }
 
+func addOpRenderMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRenderMessageTemplate{}, middleware.After)
+}
+
 func addOpSearchContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchContent{}, middleware.After)
+}
+
+func addOpSearchMessageTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchMessageTemplates{}, middleware.After)
 }
 
 func addOpSearchQuickResponsesValidationMiddleware(stack *middleware.Stack) error {
@@ -1532,6 +1860,14 @@ func addOpUpdateContentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateKnowledgeBaseTemplateUriValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKnowledgeBaseTemplateUri{}, middleware.After)
+}
+
+func addOpUpdateMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMessageTemplate{}, middleware.After)
+}
+
+func addOpUpdateMessageTemplateMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMessageTemplateMetadata{}, middleware.After)
 }
 
 func addOpUpdateQuickResponseValidationMiddleware(stack *middleware.Stack) error {
@@ -1995,6 +2331,121 @@ func validateManualSearchAIAgentConfiguration(v *types.ManualSearchAIAgentConfig
 	if v.AssociationConfigurations != nil {
 		if err := validateAssociationConfigurationList(v.AssociationConfigurations); err != nil {
 			invalidParams.AddNested("AssociationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageTemplateFilterField(v *types.MessageTemplateFilterField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateFilterField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageTemplateFilterFieldList(v []types.MessageTemplateFilterField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateFilterFieldList"}
+	for i := range v {
+		if err := validateMessageTemplateFilterField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageTemplateOrderField(v *types.MessageTemplateOrderField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateOrderField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageTemplateQueryField(v *types.MessageTemplateQueryField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateQueryField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageTemplateQueryFieldList(v []types.MessageTemplateQueryField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateQueryFieldList"}
+	for i := range v {
+		if err := validateMessageTemplateQueryField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessageTemplateSearchExpression(v *types.MessageTemplateSearchExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageTemplateSearchExpression"}
+	if v.Queries != nil {
+		if err := validateMessageTemplateQueryFieldList(v.Queries); err != nil {
+			invalidParams.AddNested("Queries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateMessageTemplateFilterFieldList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrderOnField != nil {
+		if err := validateMessageTemplateOrderField(v.OrderOnField); err != nil {
+			invalidParams.AddNested("OrderOnField", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2486,6 +2937,27 @@ func validateWebCrawlerConfiguration(v *types.WebCrawlerConfiguration) error {
 	}
 }
 
+func validateOpActivateMessageTemplateInput(v *ActivateMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActivateMessageTemplateInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAIAgentInput(v *CreateAIAgentInput) error {
 	if v == nil {
 		return nil
@@ -2705,6 +3177,75 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 	}
 }
 
+func validateOpCreateMessageTemplateAttachmentInput(v *CreateMessageTemplateAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMessageTemplateAttachmentInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if len(v.ContentDisposition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentDisposition"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMessageTemplateInput(v *CreateMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMessageTemplateInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if len(v.ChannelSubtype) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelSubtype"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMessageTemplateVersionInput(v *CreateMessageTemplateVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMessageTemplateVersionInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateQuickResponseInput(v *CreateQuickResponseInput) error {
 	if v == nil {
 		return nil
@@ -2746,6 +3287,27 @@ func validateOpCreateSessionInput(v *CreateSessionInput) error {
 		if err := validateAIAgentConfigurationMap(v.AiAgentConfiguration); err != nil {
 			invalidParams.AddNested("AiAgentConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeactivateMessageTemplateInput(v *DeactivateMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeactivateMessageTemplateInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2937,6 +3499,45 @@ func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	}
 }
 
+func validateOpDeleteMessageTemplateAttachmentInput(v *DeleteMessageTemplateAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMessageTemplateAttachmentInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMessageTemplateInput(v *DeleteMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMessageTemplateInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteQuickResponseInput(v *DeleteQuickResponseInput) error {
 	if v == nil {
 		return nil
@@ -3104,6 +3705,24 @@ func validateOpGetKnowledgeBaseInput(v *GetKnowledgeBaseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetKnowledgeBaseInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMessageTemplateInput(v *GetMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMessageTemplateInput"}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
 	}
@@ -3297,6 +3916,39 @@ func validateOpListImportJobsInput(v *ListImportJobsInput) error {
 	}
 }
 
+func validateOpListMessageTemplatesInput(v *ListMessageTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMessageTemplatesInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMessageTemplateVersionsInput(v *ListMessageTemplateVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMessageTemplateVersionsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListQuickResponsesInput(v *ListQuickResponsesInput) error {
 	if v == nil {
 		return nil
@@ -3434,6 +4086,27 @@ func validateOpRemoveKnowledgeBaseTemplateUriInput(v *RemoveKnowledgeBaseTemplat
 	}
 }
 
+func validateOpRenderMessageTemplateInput(v *RenderMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RenderMessageTemplateInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchContentInput(v *SearchContentInput) error {
 	if v == nil {
 		return nil
@@ -3446,6 +4119,28 @@ func validateOpSearchContentInput(v *SearchContentInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("SearchExpression"))
 	} else if v.SearchExpression != nil {
 		if err := validateSearchExpression(v.SearchExpression); err != nil {
+			invalidParams.AddNested("SearchExpression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchMessageTemplatesInput(v *SearchMessageTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchMessageTemplatesInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.SearchExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchExpression"))
+	} else if v.SearchExpression != nil {
+		if err := validateMessageTemplateSearchExpression(v.SearchExpression); err != nil {
 			invalidParams.AddNested("SearchExpression", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3685,6 +4380,42 @@ func validateOpUpdateKnowledgeBaseTemplateUriInput(v *UpdateKnowledgeBaseTemplat
 	}
 	if v.TemplateUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMessageTemplateInput(v *UpdateMessageTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMessageTemplateInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMessageTemplateMetadataInput(v *UpdateMessageTemplateMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMessageTemplateMetadataInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

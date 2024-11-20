@@ -125,10 +125,13 @@ type Cluster struct {
 	// A description of the cluster
 	Description *string
 
-	// The Redis OSS engine patch version used by the cluster
+	//  The Redis OSS or Valkey engine used by the cluster.
+	Engine *string
+
+	// The engine patch version used by the cluster
 	EnginePatchVersion *string
 
-	// The Redis OSS engine version used by the cluster
+	// The Redis engine version used by the cluster
 	EngineVersion *string
 
 	// The ID of the KMS key used to encrypt the cluster
@@ -203,7 +206,10 @@ type ClusterConfiguration struct {
 	// The description of the cluster configuration
 	Description *string
 
-	// The Redis OSS engine version used by the cluster
+	// The configuration for the Redis OSS or Valkey engine used by the cluster.
+	Engine *string
+
+	// The engine version used by the cluster
 	EngineVersion *string
 
 	// The specified maintenance window for the cluster
@@ -273,8 +279,11 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details of the Redis OSS engine version
+// Provides details of the engine version.
 type EngineVersionInfo struct {
+
+	// The version of the Redis OSS or Valkey engine used by the cluster.
+	Engine *string
 
 	// The patched engine version
 	EnginePatchVersion *string
@@ -540,6 +549,10 @@ type ServiceUpdate struct {
 
 	// Provides details of the service update
 	Description *string
+
+	// The MemoryDB engine to which the update applies. The values are either Redis or
+	// Valkey.
+	Engine *string
 
 	// A list of nodes updated by the service update
 	NodesUpdated *string

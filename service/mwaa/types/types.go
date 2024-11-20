@@ -38,7 +38,8 @@ type Environment struct {
 
 	// The Apache Airflow version on your environment.
 	//
-	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 .
+	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 ,
+	// 2.9.2 , and 2.10.1 .
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
@@ -69,8 +70,8 @@ type Environment struct {
 	// CUSTOMER , you must create, and manage, the VPC endpoints in your VPC.
 	EndpointManagement EndpointManagement
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large ,
-	// mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
+	// The environment class type. Valid values: mw1.micro , mw1.small , mw1.medium ,
+	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
 	//
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
@@ -101,7 +102,8 @@ type Environment struct {
 	// rates decrease Amazon MWAA disposes of the additional web servers, and scales
 	// down to the number set in MinxWebserers .
 	//
-	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	// Valid values: For environments larger than mw1.micro, accepts values from 2 to 5
+	// . Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	MaxWebservers *int32
 
 	// The maximum number of workers that run in your environment. For example, 20 .
@@ -115,7 +117,8 @@ type Environment struct {
 	// disposes of the additional web servers, and scales down to the number set in
 	// MinxWebserers .
 	//
-	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	// Valid values: For environments larger than mw1.micro, accepts values from 2 to 5
+	// . Defaults to 2 for all environment sizes except mw1.micro, which defaults to 1 .
 	MinWebservers *int32
 
 	// The minimum number of workers that run in your environment. For example, 2 .

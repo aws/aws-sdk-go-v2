@@ -1,3 +1,36 @@
+# v1.18.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.0 (2024-11-15.2)
+
+* **Feature**: Use rule overrides to always allow or always block messages to specific phone numbers. Use message feedback to monitor if a customer interacts with your message.
+
+# v1.17.0 (2024-11-08)
+
+* **Feature**: Added the RequiresAuthenticationTimestamp field to the RegistrationVersionStatusHistory data type.
+
+# v1.16.3 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.16.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2024-10-17)
+
+* **Feature**: Added the registrations status of REQUIRES_AUTHENTICATION
+
+# v1.15.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

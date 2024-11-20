@@ -45,6 +45,11 @@ type StartBuildInput struct {
 	// ones already defined in the build project.
 	ArtifactsOverride *types.ProjectArtifacts
 
+	// The maximum number of additional automatic retries after a failed build. For
+	// example, if the auto-retry limit is set to 2, CodeBuild will call the RetryBuild
+	// API to automatically retry your build for up to 2 additional times.
+	AutoRetryLimitOverride *int32
+
 	// Contains information that defines how the build project reports the build
 	// status to the source provider. This option is only used when the source provider
 	// is GITHUB , GITHUB_ENTERPRISE , or BITBUCKET .

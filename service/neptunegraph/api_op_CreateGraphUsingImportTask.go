@@ -74,10 +74,12 @@ type CreateGraphUsingImportTaskInput struct {
 	FailOnError *bool
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	// identifies the [Gremlin CSV format], OPEN_CYPHER , which identifies the [openCypher load format], or ntriples , which
+	// identifies the [RDF n-triples]format.
 	//
 	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
 	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
+	// [RDF n-triples]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html
 	Format types.Format
 
 	// Contains options for controlling the import process. For example, if the

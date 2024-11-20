@@ -110,6 +110,26 @@ func (m *validateOpDeleteDataLakeDataset) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteInstance struct {
+}
+
+func (*validateOpDeleteInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBillOfMaterialsImportJob struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpGetDataLakeDataset) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDataLakeDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInstance struct {
+}
+
+func (*validateOpGetInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInstanceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,26 @@ func (m *validateOpUpdateDataLakeDataset) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInstance struct {
+}
+
+func (*validateOpUpdateInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateBillOfMaterialsImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBillOfMaterialsImportJob{}, middleware.After)
 }
@@ -350,6 +410,10 @@ func addOpDeleteDataLakeDatasetValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteDataLakeDataset{}, middleware.After)
 }
 
+func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInstance{}, middleware.After)
+}
+
 func addOpGetBillOfMaterialsImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBillOfMaterialsImportJob{}, middleware.After)
 }
@@ -360,6 +424,10 @@ func addOpGetDataIntegrationFlowValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetDataLakeDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataLakeDataset{}, middleware.After)
+}
+
+func addOpGetInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInstance{}, middleware.After)
 }
 
 func addOpListDataIntegrationFlowsValidationMiddleware(stack *middleware.Stack) error {
@@ -392,6 +460,10 @@ func addOpUpdateDataIntegrationFlowValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateDataLakeDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataLakeDataset{}, middleware.After)
+}
+
+func addOpUpdateInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInstance{}, middleware.After)
 }
 
 func validateDataIntegrationFlowDatasetSourceConfiguration(v *types.DataIntegrationFlowDatasetSourceConfiguration) error {
@@ -747,6 +819,21 @@ func validateOpDeleteDataLakeDatasetInput(v *DeleteDataLakeDatasetInput) error {
 	}
 }
 
+func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBillOfMaterialsImportJobInput(v *GetBillOfMaterialsImportJobInput) error {
 	if v == nil {
 		return nil
@@ -796,6 +883,21 @@ func validateOpGetDataLakeDatasetInput(v *GetDataLakeDatasetInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInstanceInput(v *GetInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -958,6 +1060,21 @@ func validateOpUpdateDataLakeDatasetInput(v *UpdateDataLakeDatasetInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInstanceInput(v *UpdateInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

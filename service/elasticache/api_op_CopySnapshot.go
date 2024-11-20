@@ -13,7 +13,7 @@ import (
 
 // Makes a copy of an existing snapshot.
 //
-// This operation is valid for Redis OSS only.
+// This operation is valid for Valkey or Redis OSS only.
 //
 // Users or groups that have permissions to use the CopySnapshot operation can
 // create their own Amazon S3 buckets and copy snapshots to it. To control access
@@ -136,8 +136,8 @@ type CopySnapshotInput struct {
 
 type CopySnapshotOutput struct {
 
-	// Represents a copy of an entire Redis OSS cluster as of the time when the
-	// snapshot was taken.
+	// Represents a copy of an entire Valkey or Redis OSS cluster as of the time when
+	// the snapshot was taken.
 	Snapshot *types.Snapshot
 
 	// Metadata pertaining to the operation's result.

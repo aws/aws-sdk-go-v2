@@ -1,3 +1,28 @@
+# v1.7.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.0 (2024-11-14)
+
+* **Feature**: Adds support for select GPU accelerated instance types when creating new service-managed fleets.
+
+# v1.6.4 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.6.3 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.2 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.1 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2024-10-07)
 
 * **Feature**: Add support for using the template from a previous job during job creation and listing parameter definitions for a job.

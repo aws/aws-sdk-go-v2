@@ -225,6 +225,46 @@ func ExampleManagedSourceConfiguration_outputUsage() {
 
 var _ *types.WebCrawlerConfiguration
 
+func ExampleMessageTemplateBodyContentProvider_outputUsage() {
+	var union types.MessageTemplateBodyContentProvider
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MessageTemplateBodyContentProviderMemberContent:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleMessageTemplateContentProvider_outputUsage() {
+	var union types.MessageTemplateContentProvider
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MessageTemplateContentProviderMemberEmail:
+		_ = v.Value // Value is types.EmailMessageTemplateContent
+
+	case *types.MessageTemplateContentProviderMemberSms:
+		_ = v.Value // Value is types.SMSMessageTemplateContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EmailMessageTemplateContent
+var _ *types.SMSMessageTemplateContent
+
 func ExampleOrCondition_outputUsage() {
 	var union types.OrCondition
 	// type switches can be used to check the union value

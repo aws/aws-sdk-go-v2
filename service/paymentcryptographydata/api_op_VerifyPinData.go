@@ -98,6 +98,9 @@ type VerifyPinDataInput struct {
 	// The attributes and values for the DUKPT encrypted PIN block data.
 	DukptAttributes *types.DukptAttributes
 
+	// Parameter information of a WrappedKeyBlock for encryption key exchange.
+	EncryptionWrappedKey *types.WrappedKey
+
 	// The length of PIN being verified.
 	PinDataLength *int32
 

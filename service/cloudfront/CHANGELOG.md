@@ -1,3 +1,28 @@
+# v1.42.0 (2024-11-20)
+
+* **Feature**: Add support for gRPC, VPC origins, and Anycast IP Lists. Allow LoggingConfig IncludeCookies to be set regardless of whether the LoggingConfig is enabled.
+
+# v1.41.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.0 (2024-11-11)
+
+* **Feature**: No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
+# v1.40.4 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -3364,6 +3364,13 @@ func awsAwsjson11_serializeDocumentFailureConditions(v *types.FailureConditions,
 		ok.String(string(v.Result))
 	}
 
+	if v.RetryConfiguration != nil {
+		ok := object.Key("retryConfiguration")
+		if err := awsAwsjson11_serializeDocumentRetryConfiguration(v.RetryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3965,6 +3972,18 @@ func awsAwsjson11_serializeDocumentQueryParamMap(v map[string]string, value smit
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRetryConfiguration(v *types.RetryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RetryMode) > 0 {
+		ok := object.Key("retryMode")
+		ok.String(string(v.RetryMode))
+	}
+
 	return nil
 }
 

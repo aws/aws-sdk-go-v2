@@ -1,3 +1,33 @@
+# v1.79.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.0 (2024-11-14)
+
+* **Feature**: This release adds APIs for Custom Permissions management in QuickSight, and APIs to support QuickSight Branding.
+
+# v1.78.0 (2024-11-07)
+
+* **Feature**: Add Client Credentials based OAuth support for Snowflake and Starburst
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.77.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.0 (2024-10-17)
+
+* **Feature**: Add StartDashboardSnapshotJobSchedule API. RestoreAnalysis now supports restoring analysis to folders.
+
+# v1.76.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.76.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

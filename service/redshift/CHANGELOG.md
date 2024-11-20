@@ -1,3 +1,32 @@
+# v1.52.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.52.0 (2024-11-14)
+
+* **Feature**: Adds support for Amazon Redshift S3AccessGrants
+
+# v1.51.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.0 (2024-10-30)
+
+* **Feature**: This release launches S3 event integrations to create and manage integrations from an Amazon S3 source into an Amazon Redshift database.
+
+# v1.50.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.0 (2024-10-15)
+
+* **Feature**: This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.
+
+# v1.49.1 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2024-10-07)
 
 * **Feature**: Add validation pattern to S3KeyPrefix on the EnableLogging API

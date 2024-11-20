@@ -39,12 +39,12 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 // CreateLocationNfsRequest
 type CreateLocationNfsInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that want to
-	// connect to your NFS file server.
+	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect
+	// to your NFS file server.
 	//
-	// You can specify more than one agent. For more information, see [Using multiple agents for transfers].
+	// You can specify more than one agent. For more information, see [Using multiple DataSync agents].
 	//
-	// [Using multiple agents for transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
+	// [Using multiple DataSync agents]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#multiple-agents
 	//
 	// This member is required.
 	OnPremConfig *types.OnPremConfig

@@ -25,12 +25,13 @@ import (
 //   - Update the distribution configuration that was returned in the response.
 //     Note the following important requirements and restrictions:
 //
-//   - You must rename the ETag field to IfMatch , leaving the value unchanged.
-//     (Set the value of IfMatch to the value of ETag , then remove the ETag field.)
+//   - You must copy the ETag field value from the response. (You'll use it for the
+//     IfMatch parameter in your request.) Then, remove the ETag field from the
+//     distribution configuration.
 //
 //   - You can't change the value of CallerReference .
 //
-//   - Submit an UpdateDistribution request, providing the distribution
+//   - Submit an UpdateDistribution request, providing the updated distribution
 //     configuration. The new configuration replaces the existing configuration. The
 //     values that you specify in an UpdateDistribution request are not merged into
 //     your existing configuration. Make sure to include all fields: the ones that you

@@ -87,6 +87,11 @@ type GetChannelOutput struct {
 	// The list of ingest endpoints.
 	IngestEndpoints []types.IngestEndpoint
 
+	// The configuration for input switching based on the media quality confidence
+	// score (MQCS) as provided from AWS Elemental MediaLive. This setting is valid
+	// only when InputType is CMAF .
+	InputSwitchConfiguration *types.InputSwitchConfiguration
+
 	// The input type will be an immutable field which will be used to define whether
 	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
 	// to HLS to preserve current behavior.
@@ -99,6 +104,11 @@ type GetChannelOutput struct {
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
 	InputType types.InputType
+
+	// The settings for what common media server data (CMSD) headers AWS Elemental
+	// MediaPackage includes in responses to the CDN. This setting is valid only when
+	// InputType is CMAF .
+	OutputHeaderConfiguration *types.OutputHeaderConfiguration
 
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string

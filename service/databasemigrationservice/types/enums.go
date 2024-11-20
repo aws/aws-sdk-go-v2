@@ -682,6 +682,28 @@ func (SslSecurityProtocolValue) Values() []SslSecurityProtocolValue {
 	}
 }
 
+type StartReplicationMigrationTypeValue string
+
+// Enum values for StartReplicationMigrationTypeValue
+const (
+	StartReplicationMigrationTypeValueReloadTarget     StartReplicationMigrationTypeValue = "reload-target"
+	StartReplicationMigrationTypeValueResumeProcessing StartReplicationMigrationTypeValue = "resume-processing"
+	StartReplicationMigrationTypeValueStartReplication StartReplicationMigrationTypeValue = "start-replication"
+)
+
+// Values returns all known values for StartReplicationMigrationTypeValue. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StartReplicationMigrationTypeValue) Values() []StartReplicationMigrationTypeValue {
+	return []StartReplicationMigrationTypeValue{
+		"reload-target",
+		"resume-processing",
+		"start-replication",
+	}
+}
+
 type StartReplicationTaskTypeValue string
 
 // Enum values for StartReplicationTaskTypeValue

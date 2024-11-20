@@ -52,7 +52,7 @@ type UpdateFileSystemProtectionInput struct {
 	//   modified only by EFS replication.
 	//
 	// If the replication configuration is deleted, the file system's replication
-	// overwrite protection is re-enabled, the file system becomes writeable.
+	// overwrite protection is re-enabled and the file system becomes writeable.
 	ReplicationOverwriteProtection types.ReplicationOverwriteProtection
 
 	noSmithyDocumentSerde

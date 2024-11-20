@@ -178,7 +178,19 @@
                     "target": "com.amazonaws.iam#DetachUserPolicy"
                 },
                 {
+                    "target": "com.amazonaws.iam#DisableOrganizationsRootCredentialsManagement"
+                },
+                {
+                    "target": "com.amazonaws.iam#DisableOrganizationsRootSessions"
+                },
+                {
                     "target": "com.amazonaws.iam#EnableMFADevice"
+                },
+                {
+                    "target": "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagement"
+                },
+                {
+                    "target": "com.amazonaws.iam#EnableOrganizationsRootSessions"
                 },
                 {
                     "target": "com.amazonaws.iam#GenerateCredentialReport"
@@ -314,6 +326,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#ListOpenIDConnectProviderTags"
+                },
+                {
+                    "target": "com.amazonaws.iam#ListOrganizationsFeatures"
                 },
                 {
                     "target": "com.amazonaws.iam#ListPolicies"
@@ -2049,6 +2064,19 @@
                 "smithy.api#documentation": "<p>Contains information about an Amazon Web Services access key, without its secret key.</p>\n         <p>This data type is used as a response element in the <a>ListAccessKeys</a>\n         operation.</p>"
             }
         },
+        "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.iam#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because the account making the request is not the management\n      account or delegated administrator account for <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management\">centralized root\n        access</a>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.iam#ActionNameListType": {
             "type": "list",
             "member": {
@@ -2471,6 +2499,19 @@
             "type": "blob",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iam#CallerIsNotManagementAccountException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.iam#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because the account making the request is not the management\n      account for the organization.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.iam#CertificationKeyType": {
@@ -3071,15 +3112,13 @@
                 "UserName": {
                     "target": "com.amazonaws.iam#userNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM user to create a password for. The user must already\n            exist.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the IAM user to create a password for. The user must already\n            exist.</p>\n         <p>This parameter is optional. If no user name is included, it defaults to the principal\n            making the request. When you make this request with root user credentials, you must use\n            an <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html\">AssumeRoot</a> session to omit the user name.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.iam#passwordType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new password for the user.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> \n    that is used to validate this parameter is a string of characters. That string can include almost any printable \n    ASCII character from the space (<code>\\u0020</code>) through the end of the ASCII character range (<code>\\u00FF</code>). \n    You can also include the tab (<code>\\u0009</code>), line feed (<code>\\u000A</code>), and carriage return (<code>\\u000D</code>) \n    characters. Any of these characters are valid in a password. However, many tools, such \n    as the Amazon Web Services Management Console, might restrict the ability to type certain characters because they have \n    special meaning within that tool.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The new password for the user.</p>\n         <p>This parameter must be omitted when you make the request with an <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html\">AssumeRoot</a> session. It is required in all other cases.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> \n    that is used to validate this parameter is a string of characters. That string can include almost any printable \n    ASCII character from the space (<code>\\u0020</code>) through the end of the ASCII character range (<code>\\u00FF</code>). \n    You can also include the tab (<code>\\u0009</code>), line feed (<code>\\u000A</code>), and carriage return (<code>\\u000D</code>) \n    characters. Any of these characters are valid in a password. However, many tools, such \n    as the Amazon Web Services Management Console, might restrict the ability to type certain characters because they have \n    special meaning within that tool.</p>"
                     }
                 },
                 "PasswordResetRequired": {
@@ -3955,8 +3994,7 @@
                 "UserName": {
                     "target": "com.amazonaws.iam#existingUserNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user whose MFA device you want to deactivate.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user whose MFA device you want to deactivate.</p>\n         <p>This parameter is optional. If no user name is included, it defaults to the principal\n            making the request. When you make this request with root user credentials, you must use\n            an <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html\">AssumeRoot</a> session to omit the user name.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
                     }
                 },
                 "SerialNumber": {
@@ -4308,8 +4346,7 @@
                 "UserName": {
                     "target": "com.amazonaws.iam#userNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user whose password you want to delete.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user whose password you want to delete.</p>\n         <p>This parameter is optional. If no user name is included, it defaults to the principal\n            making the request. When you make this request with root user credentials, you must use\n            an <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html\">AssumeRoot</a> session to omit the user name.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
                     }
                 }
             },
@@ -5272,6 +5309,136 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.iam#DisableOrganizationsRootCredentialsManagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#DisableOrganizationsRootCredentialsManagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#DisableOrganizationsRootCredentialsManagementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceAccessNotEnabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables the management of privileged root user credentials across member accounts in\n            your organization. When you disable this feature, the management account and the\n            delegated admininstrator for IAM can no longer manage root user credentials for member\n            accounts in your organization.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable the RootCredentialsManagement feature in your organization",
+                        "documentation": "The following command disables the management of privileged root user credentials across member accounts in your organization.",
+                        "output": {
+                            "OrganizationId": "o-aa111bb222",
+                            "EnabledFeatures": [
+                                "RootSessions"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iam#DisableOrganizationsRootCredentialsManagementRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#DisableOrganizationsRootCredentialsManagementResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.iam#OrganizationIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an organization.</p>"
+                    }
+                },
+                "EnabledFeatures": {
+                    "target": "com.amazonaws.iam#FeaturesListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The features enabled for centralized root access for member accounts in your\n            organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iam#DisableOrganizationsRootSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#DisableOrganizationsRootSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#DisableOrganizationsRootSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceAccessNotEnabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables root user sessions for privileged tasks across member accounts in your\n            organization. When you disable this feature, the management account and the delegated\n            admininstrator for IAM can no longer perform privileged tasks on member accounts in\n            your organization.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable the RootSessions feature in your organization",
+                        "documentation": "The following command disables root user sessions for privileged tasks across member accounts in your organization.",
+                        "output": {
+                            "OrganizationId": "o-aa111bb222",
+                            "EnabledFeatures": [
+                                "RootCredentialsManagement"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iam#DisableOrganizationsRootSessionsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#DisableOrganizationsRootSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.iam#OrganizationIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an organization.</p>"
+                    }
+                },
+                "EnabledFeatures": {
+                    "target": "com.amazonaws.iam#FeaturesListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The features you have enabled for centralized root access of member accounts in your\n            organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#DuplicateCertificateException": {
             "type": "structure",
             "members": {
@@ -5375,6 +5542,143 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException"
+                },
+                {
+                    "target": "com.amazonaws.iam#CallerIsNotManagementAccountException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceAccessNotEnabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables the management of privileged root user credentials across member accounts in your\n            organization. When you enable root credentials management for <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management\">centralized root access</a>, the management account and the delegated\n            admininstrator for IAM can manage root user credentials for member accounts in your\n            organization.</p>\n         <p>Before you enable centralized root access, you must have an account configured with\n            the following settings:</p>\n         <ul>\n            <li>\n               <p>You must manage your Amazon Web Services accounts in <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">Organizations</a>.</p>\n            </li>\n            <li>\n               <p>Enable trusted access for Identity and Access Management in Organizations. For details, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html\">IAM and Organizations</a> in the <i>Organizations User\n                        Guide</i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable the RootCredentialsManagement feature in your organization",
+                        "documentation": "The following command enables the management of privileged root user credentials across member accounts in your organization.",
+                        "output": {
+                            "OrganizationId": "o-aa111bb222",
+                            "EnabledFeatures": [
+                                "RootCredentialsManagement"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagementRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagementResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.iam#OrganizationIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an organization.</p>"
+                    }
+                },
+                "EnabledFeatures": {
+                    "target": "com.amazonaws.iam#FeaturesListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The features you have enabled for centralized root access.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iam#EnableOrganizationsRootSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#EnableOrganizationsRootSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#EnableOrganizationsRootSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException"
+                },
+                {
+                    "target": "com.amazonaws.iam#CallerIsNotManagementAccountException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceAccessNotEnabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows the management account or delegated administrator to perform privileged tasks\n            on member accounts in your organization. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management\">Centrally manage root access for member accounts</a> in the <i>Identity and Access Management\n                User Guide</i>.</p>\n         <p>Before you enable this feature, you must have an account configured with the following\n            settings:</p>\n         <ul>\n            <li>\n               <p>You must manage your Amazon Web Services accounts in <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">Organizations</a>.</p>\n            </li>\n            <li>\n               <p>Enable trusted access for Identity and Access Management in Organizations. For details, see\n                        <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-ra.html\">IAM and Organizations</a> in the <i>Organizations User\n                        Guide</i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable the RootSessions feature in your organization",
+                        "documentation": "The following command allows the management account or delegated administrator to perform privileged tasks on member accounts in your organization.",
+                        "output": {
+                            "OrganizationId": "o-aa111bb222",
+                            "EnabledFeatures": [
+                                "RootCredentialsManagement",
+                                "RootSessions"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iam#EnableOrganizationsRootSessionsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#EnableOrganizationsRootSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.iam#OrganizationIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an organization.</p>"
+                    }
+                },
+                "EnabledFeatures": {
+                    "target": "com.amazonaws.iam#FeaturesListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The features you have enabled for centralized root access.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iam#EntityAlreadyExistsException": {
@@ -5616,6 +5920,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iam#EvaluationResult"
+            }
+        },
+        "com.amazonaws.iam#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iam#FeatureType": {
+            "type": "enum",
+            "members": {
+                "ROOT_CREDENTIALS_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RootCredentialsManagement"
+                    }
+                },
+                "ROOT_SESSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RootSessions"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iam#FeaturesListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#FeatureType"
             }
         },
         "com.amazonaws.iam#GenerateCredentialReport": {
@@ -6496,8 +6826,7 @@
                 "UserName": {
                     "target": "com.amazonaws.iam#userNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user whose login profile you want to retrieve.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the user whose login profile you want to retrieve.</p>\n         <p>This parameter is optional. If no user name is included, it defaults to the principal\n            making the request. When you make this request with root user credentials, you must use\n            an <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html\">AssumeRoot</a> session to omit the user name.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
                     }
                 }
             },
@@ -8224,7 +8553,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the account alias associated with the Amazon Web Services account (Note: you can have only\n            one). For information about using an Amazon Web Services account alias, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#CreateAccountAlias\">Creating,\n                deleting, and listing an Amazon Web Services account alias</a> in the\n                <i>IAM User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lists the account alias associated with the Amazon Web Services account (Note: you can have only\n            one). For information about using an Amazon Web Services account alias, see <a href=\"https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html\">Creating,\n                deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In\n                User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list account aliases",
@@ -9517,6 +9846,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the response to a successful <a>ListOpenIDConnectProviders</a>\n      request. </p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iam#ListOrganizationsFeatures": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#ListOrganizationsFeaturesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#ListOrganizationsFeaturesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceAccessNotEnabledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the centralized root access features enabled for your organization. For more\n            information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user-access-management\">Centrally manage root access for member accounts</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the centralized root access features enabled for your organization",
+                        "documentation": "he following command lists the centralized root access features enabled for your organization.",
+                        "output": {
+                            "OrganizationId": "o-aa111bb222",
+                            "EnabledFeatures": [
+                                "RootCredentialsManagement"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iam#ListOrganizationsFeaturesRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#ListOrganizationsFeaturesResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.iam#OrganizationIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of an organization.</p>"
+                    }
+                },
+                "EnabledFeatures": {
+                    "target": "com.amazonaws.iam#FeaturesListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the features that are currently available in your organization.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -11332,6 +11726,42 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iam#OrganizationIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 34
+                },
+                "smithy.api#pattern": "^o-[a-z0-9]{10,32}$"
+            }
+        },
+        "com.amazonaws.iam#OrganizationNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.iam#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because no organization is associated with your account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.iam#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because your organization does not have All features enabled. For\n      more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set\">Available feature sets</a> in the <i>Organizations User\n      Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.iam#OrganizationsDecisionDetail": {
             "type": "structure",
             "members": {
@@ -13009,6 +13439,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a server certificate without its certificate body,\n         certificate chain, and private key.</p>\n         <p> This data type is used as a response element in the <a>UploadServerCertificate</a> and <a>ListServerCertificates</a>\n         operations. </p>"
+            }
+        },
+        "com.amazonaws.iam#ServiceAccessNotEnabledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.iam#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because trusted access is not enabled for IAM in Organizations. For details, see IAM and Organizations in the <i>Organizations User Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.iam#ServiceFailureException": {
@@ -16842,6 +17285,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AccountAccessKeysPresent"
+                    }
+                },
+                "AccountPasswordPresent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountPasswordPresent"
                     }
                 },
                 "AccountSigningCertificatesPresent": {

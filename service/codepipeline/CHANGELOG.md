@@ -1,3 +1,32 @@
+# v1.36.4 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.3 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.36.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.0 (2024-10-14)
+
+* **Feature**: AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.
+
+# v1.35.0 (2024-10-09)
+
+* **Feature**: AWS CodePipeline introduces a Compute category
+
+# v1.34.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

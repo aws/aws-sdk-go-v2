@@ -130,8 +130,10 @@ type DiscoveryServerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The subnet and security groups that DataSync uses to access your Amazon EFS
-// file system.
+// The subnet and security groups that DataSync uses to connect to one of your
+// Amazon EFS file system's [mount targets].
+//
+// [mount targets]: https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html
 type Ec2Config struct {
 
 	// Specifies the Amazon Resource Names (ARNs) of the security groups associated
@@ -627,11 +629,16 @@ type NfsMountOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The DataSync agents that are connecting to a Network File System (NFS) location.
+// The DataSync agents that can connect to your Network File System (NFS) file
+// server.
 type OnPremConfig struct {
 
-	// The Amazon Resource Names (ARNs) of the agents connecting to a transfer
-	// location.
+	// The Amazon Resource Names (ARNs) of the DataSync agents that can connect to
+	// your NFS file server.
+	//
+	// You can specify more than one agent. For more information, see [Using multiple DataSync agents].
+	//
+	// [Using multiple DataSync agents]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#multiple-agents
 	//
 	// This member is required.
 	AgentArns []string
@@ -660,7 +667,7 @@ type Options struct {
 	// only do this on a best-effort basis.
 	//
 	//   - BEST_EFFORT (default) - DataSync attempts to preserve the original Atime
-	//   attribute on all source files (that is, the version before the PREPARING phase
+	//   attribute on all source files (that is, the version before the PREPARING steps
 	//   of the task execution). This option is recommended.
 	//
 	//   - NONE - Ignores Atime .
@@ -672,6 +679,10 @@ type Options struct {
 
 	// Limits the bandwidth used by a DataSync task. For example, if you want DataSync
 	// to use a maximum of 1 MB, set this value to 1048576 ( =1024*1024 ).
+	//
+	// Not applicable to [Enhanced mode tasks].
+	//
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	BytesPerSecond *int64
 
 	// Specifies the POSIX group ID (GID) of the file's owners.
@@ -681,9 +692,9 @@ type Options struct {
 	//
 	//   - NONE - Ignores UID and GID.
 	//
-	// For more information, see [Metadata copied by DataSync].
+	// For more information, see [Understanding how DataSync handles file and object metadata].
 	//
-	// [Metadata copied by DataSync]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
+	// [Understanding how DataSync handles file and object metadata]: https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html
 	Gid Gid
 
 	// Specifies the type of logs that DataSync publishes to a Amazon CloudWatch Logs
@@ -700,7 +711,7 @@ type Options struct {
 	LogLevel LogLevel
 
 	// Specifies whether to preserve metadata indicating the last time that a file was
-	// written to before the PREPARING phase of your task execution. This option is
+	// written to before the PREPARING step of your task execution. This option is
 	// required when you need to run the a task more than once.
 	//
 	//   - PRESERVE (default) - Preserves original Mtime , which is recommended.
@@ -737,7 +748,7 @@ type Options struct {
 	// Specifies which users or groups can access a file for a specific purpose such
 	// as reading, writing, or execution of the file.
 	//
-	// For more information, see [Metadata copied by DataSync].
+	// For more information, see [Understanding how DataSync handles file and object metadata].
 	//
 	//   - PRESERVE (default) - Preserves POSIX-style permissions, which is recommended.
 	//
@@ -745,7 +756,7 @@ type Options struct {
 	//
 	// DataSync can preserve extant permissions of a source location.
 	//
-	// [Metadata copied by DataSync]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
+	// [Understanding how DataSync handles file and object metadata]: https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html
 	PosixPermissions PosixPermissions
 
 	// Specifies whether files in the destination location that don't exist in the
@@ -783,7 +794,7 @@ type Options struct {
 	//
 	// This value is only used for transfers between SMB and Amazon FSx for Windows
 	// File Server locations or between two FSx for Windows File Server locations. For
-	// more information, see [how DataSync handles metadata].
+	// more information, see [Understanding how DataSync handles file and object metadata].
 	//
 	//   - OWNER_DACL (default) - For each copied object, DataSync copies the following
 	//   metadata:
@@ -817,7 +828,7 @@ type Options struct {
 	//   configuration.
 	//
 	// [FSx for Windows File Server]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
-	// [how DataSync handles metadata]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html
+	// [Understanding how DataSync handles file and object metadata]: https://docs.aws.amazon.com/datasync/latest/userguide/metadata-copied.html
 	// [SMB]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
 	// [FSx for ONTAP]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
 	SecurityDescriptorCopyFlags SmbSecurityDescriptorCopyFlags
@@ -828,12 +839,13 @@ type Options struct {
 	// [running multiple tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#running-multiple-tasks
 	TaskQueueing TaskQueueing
 
-	// Determines whether DataSync transfers only the data and metadata that differ
-	// between the source and the destination location or transfers all the content
-	// from the source (without comparing what's in the destination).
+	// Specifies whether DataSync transfers only the data (including metadata) that
+	// differs between locations following an initial copy or transfers all data every
+	// time you run the task. If you're planning on recurring transfers, you might only
+	// want to transfer what's changed since your previous task execution.
 	//
-	//   - CHANGED (default) - DataSync copies only data or metadata that is new or
-	//   different content from the source location to the destination location.
+	//   - CHANGED (default) - After your initial full transfer, DataSync copies only
+	//   the data and metadata that differs between the source and destination location.
 	//
 	//   - ALL - DataSync copies everything in the source to the destination without
 	//   comparing differences between the locations.
@@ -851,32 +863,39 @@ type Options struct {
 	// [Metadata copied by DataSync]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied
 	Uid Uid
 
-	// Specifies how and when DataSync checks the integrity of your data during a
-	// transfer.
+	// Specifies if and how DataSync checks the integrity of your data at the end of
+	// your transfer.
 	//
 	//   - ONLY_FILES_TRANSFERRED (recommended) - DataSync calculates the checksum of
-	//   transferred files and metadata at the source location. At the end of the
+	//   transferred data (including metadata) at the source location. At the end of the
 	//   transfer, DataSync then compares this checksum to the checksum calculated on
-	//   those files at the destination.
+	//   that data at the destination.
+	//
+	// This is the default option for [Enhanced mode tasks].
 	//
 	// We recommend this option when transferring to S3 Glacier Flexible Retrieval or
 	//   S3 Glacier Deep Archive storage classes. For more information, see [Storage class considerations with Amazon S3 locations].
 	//
-	//   - POINT_IN_TIME_CONSISTENT (default) - At the end of the transfer, DataSync
-	//   scans the entire source and destination to verify that both locations are fully
+	//   - POINT_IN_TIME_CONSISTENT - At the end of the transfer, DataSync checks the
+	//   entire source and destination to verify that both locations are fully
 	//   synchronized.
+	//
+	// The is the default option for [Basic mode tasks]and isn't currently supported with Enhanced mode
+	//   tasks.
 	//
 	// If you use a [manifest], DataSync only scans and verifies what's listed in the manifest.
 	//
 	// You can't use this option when transferring to S3 Glacier Flexible Retrieval or
 	//   S3 Glacier Deep Archive storage classes. For more information, see [Storage class considerations with Amazon S3 locations].
 	//
-	//   - NONE - DataSync doesn't run additional verification at the end of the
-	//   transfer. All data transmissions are still integrity-checked with checksum
-	//   verification during the transfer.
+	//   - NONE - DataSync performs data integrity checks only during your transfer.
+	//   Unlike other options, there's no additional verification at the end of your
+	//   transfer.
 	//
 	// [Storage class considerations with Amazon S3 locations]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
 	// [manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+	// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	// [Basic mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
 	VerifyMode VerifyMode
 
 	noSmithyDocumentSerde
@@ -919,7 +938,7 @@ type PrivateLinkConfig struct {
 
 	// Specifies the VPC endpoint provided by [Amazon Web Services PrivateLink] that your agent connects to.
 	//
-	// [Amazon Web Services PrivateLink]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
+	// [Amazon Web Services PrivateLink]: https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-share-your-services.html
 	PrivateLinkEndpoint *string
 
 	// Specifies the Amazon Resource Names (ARN) of the security group that provides
@@ -1246,6 +1265,62 @@ type TagListEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The number of objects that DataSync fails to prepare, transfer, verify, and
+// delete during your task execution.
+//
+// Applies only to [Enhanced mode tasks].
+//
+// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+type TaskExecutionFilesFailedDetail struct {
+
+	// The number of objects that DataSync fails to delete during your task execution.
+	Delete int64
+
+	// The number of objects that DataSync fails to prepare during your task execution.
+	Prepare int64
+
+	// The number of objects that DataSync fails to transfer during your task
+	// execution.
+	Transfer int64
+
+	// The number of objects that DataSync fails to verify during your task execution.
+	Verify int64
+
+	noSmithyDocumentSerde
+}
+
+// The number of objects that DataSync finds at your locations.
+//
+// Applies only to [Enhanced mode tasks].
+//
+// [Enhanced mode tasks]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+type TaskExecutionFilesListedDetail struct {
+
+	// The number of objects that DataSync finds at your destination location. This
+	// counter is only applicable if you [configure your task]to delete data in the destination that isn't
+	// in the source.
+	//
+	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling
+	AtDestinationForDelete int64
+
+	// The number of objects that DataSync finds at your source location.
+	//
+	//   - With a [manifest], DataSync lists only what's in your manifest (and not everything at
+	//   your source location).
+	//
+	//   - With an include [filter], DataSync lists only what matches the filter at your
+	//   source location.
+	//
+	//   - With an exclude filter, DataSync lists everything at your source location
+	//   before applying the filter.
+	//
+	// [filter]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
+	// [manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+	AtSource int64
+
+	noSmithyDocumentSerde
+}
+
 // Represents a single entry in a list of DataSync task executions that's returned
 // with the [ListTaskExecutions]operation.
 //
@@ -1260,42 +1335,75 @@ type TaskExecutionListEntry struct {
 	// The Amazon Resource Name (ARN) of a task execution.
 	TaskExecutionArn *string
 
+	// The task mode that you're using. For more information, see [Choosing a task mode for your data transfer].
+	//
+	// [Choosing a task mode for your data transfer]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	TaskMode TaskMode
+
 	noSmithyDocumentSerde
 }
 
-// Describes the detailed result of a TaskExecution operation. This result
-// includes the time in milliseconds spent in each phase, the status of the task
-// execution, and the errors encountered.
+// Provides detailed information about the result of your DataSync task execution.
 type TaskExecutionResultDetail struct {
 
-	// Errors that DataSync encountered during execution of the task. You can use this
-	// error code to help troubleshoot issues.
+	// An error that DataSync encountered during your task execution. You can use this
+	// information to help [troubleshoot issues].
+	//
+	// [troubleshoot issues]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
 	ErrorCode *string
 
-	// Detailed description of an error that was encountered during the task
-	// execution. You can use this information to help troubleshoot issues.
+	// The detailed description of an error that DataSync encountered during your task
+	// execution. You can use this information to help [troubleshoot issues].
+	//
+	// [troubleshoot issues]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
 	ErrorDetail *string
 
-	// The total time in milliseconds that DataSync spent in the PREPARING phase.
+	// The time in milliseconds that your task execution was in the PREPARING step.
+	// For more information, see [Task execution statuses].
+	//
+	// For Enhanced mode tasks, the value is always 0 . For more information, see [How DataSync prepares your data transfer].
+	//
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+	// [How DataSync prepares your data transfer]: https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html#how-datasync-prepares
 	PrepareDuration *int64
 
-	// The status of the PREPARING phase.
+	// The status of the PREPARING step for your task execution. For more information,
+	// see [Task execution statuses].
+	//
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
 	PrepareStatus PhaseStatus
 
-	// The total time in milliseconds that DataSync took to transfer the file from the
-	// source to the destination location.
+	// The time in milliseconds that your task execution ran.
 	TotalDuration *int64
 
-	// The total time in milliseconds that DataSync spent in the TRANSFERRING phase.
+	// The time in milliseconds that your task execution was in the TRANSFERRING step.
+	// For more information, see [Task execution statuses].
+	//
+	// For Enhanced mode tasks, the value is always 0 . For more information, see [How DataSync transfers your data].
+	//
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+	// [How DataSync transfers your data]: https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html#how-datasync-transfers
 	TransferDuration *int64
 
-	// The status of the TRANSFERRING phase.
+	// The status of the TRANSFERRING step for your task execution. For more
+	// information, see [Task execution statuses].
+	//
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
 	TransferStatus PhaseStatus
 
-	// The total time in milliseconds that DataSync spent in the VERIFYING phase.
+	// The time in milliseconds that your task execution was in the VERIFYING step.
+	// For more information, see [Task execution statuses].
+	//
+	// For Enhanced mode tasks, the value is always 0 . For more information, see [How DataSync verifies your data's integrity].
+	//
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+	// [How DataSync verifies your data's integrity]: https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html#how-verifying-works
 	VerifyDuration *int64
 
-	// The status of the VERIFYING phase.
+	// The status of the VERIFYING step for your task execution. For more information,
+	// see [Task execution statuses].
+	//
+	// [Task execution statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
 	VerifyStatus PhaseStatus
 
 	noSmithyDocumentSerde
@@ -1348,6 +1456,11 @@ type TaskListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the task.
 	TaskArn *string
+
+	// The task mode that you're using. For more information, see [Choosing a task mode for your data transfer].
+	//
+	// [Choosing a task mode for your data transfer]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+	TaskMode TaskMode
 
 	noSmithyDocumentSerde
 }
@@ -1407,10 +1520,23 @@ type TaskReportConfig struct {
 // [schedule]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
 type TaskSchedule struct {
 
-	// Specifies your task schedule by using a cron expression in UTC time. For
-	// information about cron expression syntax, see the [Amazon EventBridge User Guide].
+	// Specifies your task schedule by using a cron or rate expression.
 	//
-	// [Amazon EventBridge User Guide]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html
+	// Use cron expressions for task schedules that run on a specific time and day.
+	// For example, the following cron expression creates a task schedule that runs at
+	// 8 AM on the first Wednesday of every month:
+	//
+	//     cron(0 8 * * 3#1)
+	//
+	// Use rate expressions for task schedules that run on a regular interval. For
+	// example, the following rate expression creates a task schedule that runs every
+	// 12 hours:
+	//
+	//     rate(12 hours)
+	//
+	// For information about cron and rate expression syntax, see the [Amazon EventBridge User Guide].
+	//
+	// [Amazon EventBridge User Guide]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-scheduled-rule-pattern.html
 	//
 	// This member is required.
 	ScheduleExpression *string

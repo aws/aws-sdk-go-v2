@@ -10,22 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a delivery stream and its data.
+// Deletes a Firehose stream and its data.
 //
-// You can delete a delivery stream only if it is in one of the following states:
+// You can delete a Firehose stream only if it is in one of the following states:
 // ACTIVE , DELETING , CREATING_FAILED , or DELETING_FAILED . You can't delete a
-// delivery stream that is in the CREATING state. To check the state of a delivery
+// Firehose stream that is in the CREATING state. To check the state of a Firehose
 // stream, use DescribeDeliveryStream.
 //
 // DeleteDeliveryStream is an asynchronous API. When an API request to
-// DeleteDeliveryStream succeeds, the delivery stream is marked for deletion, and
-// it goes into the DELETING state.While the delivery stream is in the DELETING
+// DeleteDeliveryStream succeeds, the Firehose stream is marked for deletion, and
+// it goes into the DELETING state.While the Firehose stream is in the DELETING
 // state, the service might continue to accept records, but it doesn't make any
 // guarantees with respect to delivering the data. Therefore, as a best practice,
 // first stop any applications that are sending records before you delete a
-// delivery stream.
+// Firehose stream.
 //
-// Removal of a delivery stream that is in the DELETING state is a low priority
+// Removal of a Firehose stream that is in the DELETING state is a low priority
 // operation for the service. A stream may remain in the DELETING state for
 // several minutes. Therefore, as a best practice, applications should not wait for
 // streams in the DELETING state to be removed.
@@ -46,12 +46,12 @@ func (c *Client) DeleteDeliveryStream(ctx context.Context, params *DeleteDeliver
 
 type DeleteDeliveryStreamInput struct {
 
-	// The name of the delivery stream.
+	// The name of the Firehose stream.
 	//
 	// This member is required.
 	DeliveryStreamName *string
 
-	// Set this to true if you want to delete the delivery stream even if Firehose is
+	// Set this to true if you want to delete the Firehose stream even if Firehose is
 	// unable to retire the grant for the CMK. Firehose might be unable to retire the
 	// grant due to a customer error, such as when the CMK or the grant are in an
 	// invalid state. If you force deletion, you can then use the [RevokeGrant]operation to revoke

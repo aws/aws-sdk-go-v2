@@ -29,9 +29,9 @@ func (c *Client) DescribeDBShardGroups(ctx context.Context, params *DescribeDBSh
 
 type DescribeDBShardGroupsInput struct {
 
-	// The user-supplied DB shard group identifier or the Amazon Resource Name (ARN)
-	// of the DB shard group. If this parameter is specified, information for only the
-	// specific DB shard group is returned. This parameter isn't case-sensitive.
+	// The user-supplied DB shard group identifier. If this parameter is specified,
+	// information for only the specific DB shard group is returned. This parameter
+	// isn't case-sensitive.
 	//
 	// Constraints:
 	//

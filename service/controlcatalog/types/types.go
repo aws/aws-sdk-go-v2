@@ -84,6 +84,45 @@ type CommonControlSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Four types of control parameters are supported.
+//
+//   - AllowedRegions: List of Amazon Web Services Regions exempted from the
+//     control. Each string is expected to be an Amazon Web Services Region code. This
+//     parameter is mandatory for the OU Region deny control, CT.MULTISERVICE.PV.1.
+//
+// Example: ["us-east-1","us-west-2"]
+//
+//   - ExemptedActions: List of Amazon Web Services IAM actions exempted from the
+//     control. Each string is expected to be an IAM action.
+//
+// Example: ["logs:DescribeLogGroups","logs:StartQuery","logs:GetQueryResults"]
+//
+//   - ExemptedPrincipalArns: List of Amazon Web Services IAM principal ARNs
+//     exempted from the control. Each string is expected to be an IAM principal that
+//     follows the pattern ^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$
+//
+// Example:
+//
+//	["arn:aws:iam::*:role/ReadOnly","arn:aws:sts::*:assumed-role/ReadOnly/*"]
+//
+//	- ExemptedResourceArns: List of resource ARNs exempted from the control. Each
+//	string is expected to be a resource ARN.
+//
+// Example: ["arn:aws:s3:::my-bucket-name"]
+type ControlParameter struct {
+
+	// The parameter name. This name is the parameter key when you call [EnableControl]EnableControl
+	// or [UpdateEnabledControl]UpdateEnabledControl .
+	//
+	// [EnableControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html
+	// [UpdateEnabledControl]: https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Overview of information about a control.
 type ControlSummary struct {
 
@@ -142,6 +181,36 @@ type DomainSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that describes the implementation type for a control.
+//
+// Our ImplementationDetails Type format has three required segments:
+//
+//   - SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME
+//
+// For example, AWS::Config::ConfigRule or AWS::SecurityHub::SecurityControl
+// resources have the format with three required segments.
+//
+// Our ImplementationDetails Type format has an optional fourth segment, which is
+// present for applicable implementation types. The format is as follows:
+//
+//   - SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME::RESOURCE-TYPE-DESCRIPTION
+//
+// For example, AWS::Organizations::Policy::SERVICE_CONTROL_POLICY or
+// AWS::CloudFormation::Type::HOOK have the format with four segments.
+//
+// Although the format is similar, the values for the Type field do not match any
+// Amazon Web Services CloudFormation values, and we do not use CloudFormation to
+// implement these controls.
+type ImplementationDetails struct {
+
+	// A string that describes a control's implementation type.
+	//
+	// This member is required.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -205,7 +274,7 @@ type ObjectiveSummary struct {
 
 // Returns information about the control, including the scope of the control, if
 // enabled, and the Regions in which the control currently is available for
-// deployment.
+// deployment. For more information about scope, see [Global services].
 //
 // If you are applying controls through an Amazon Web Services Control Tower
 // landing zone environment, remember that the values returned in the
@@ -215,6 +284,8 @@ type ObjectiveSummary struct {
 // with DeployableRegions of A , B , C , and D for a control with REGIONAL scope,
 // even though you may not intend to deploy the control in Region D , because you
 // do not govern it through your landing zone.
+//
+// [Global services]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html
 type RegionConfiguration struct {
 
 	// The coverage of the control, if deployed. Scope is an enumerated type, with

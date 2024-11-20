@@ -51,23 +51,25 @@ type SubmitRegistrationVersionOutput struct {
 
 	// The status of the registration version.
 	//
-	//   - DRAFT : The initial status of a registration version after it’s created.
-	//
-	//   - SUBMITTED : Your registration has been submitted.
-	//
-	//   - REVIEWING : Your registration has been accepted and is being reviewed.
-	//
 	//   - APPROVED : Your registration has been approved.
+	//
+	//   - ARCHIVED : Your previously approved registration version moves into this
+	//   status when a more recently submitted version is approved.
+	//
+	//   - DENIED : You must fix your registration and resubmit it.
 	//
 	//   - DISCARDED : You've abandon this version of their registration to start over
 	//   with a new version.
 	//
-	//   - DENIED : You must fix your registration and resubmit it.
+	//   - DRAFT : The initial status of a registration version after it’s created.
+	//
+	//   - REQUIRES_AUTHENTICATION : You need to complete email authentication.
+	//
+	//   - REVIEWING : Your registration has been accepted and is being reviewed.
 	//
 	//   - REVOKED : Your previously approved registration has been revoked.
 	//
-	//   - ARCHIVED : Your previously approved registration version moves into this
-	//   status when a more recently submitted version is approved.
+	//   - SUBMITTED : Your registration has been submitted.
 	//
 	// This member is required.
 	RegistrationVersionStatus types.RegistrationVersionStatus

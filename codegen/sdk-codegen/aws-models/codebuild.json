@@ -133,6 +133,38 @@
                 }
             }
         },
+        "com.amazonaws.codebuild#AutoRetryConfig": {
+            "type": "structure",
+            "members": {
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n            auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n            retry your build for up to 2 additional times.</p>"
+                    }
+                },
+                "autoRetryNumber": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times that the build has been retried. The initial build will have an auto-retry number of 0.</p>"
+                    }
+                },
+                "nextAutoRetry": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The build ARN of the auto-retried build triggered by the current build. The next auto-retry \n            will be <code>null</code> for builds that don't trigger an auto-retry.</p>"
+                    }
+                },
+                "previousAutoRetry": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The build ARN of the build that triggered the current auto-retry build. The previous auto-retry will be \n            <code>null</code> for the initial build.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the auto-retry configuration for the build.</p>"
+            }
+        },
         "com.amazonaws.codebuild#BatchDeleteBuilds": {
             "type": "operation",
             "input": {
@@ -760,6 +792,12 @@
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the batch build that this build is a member of, if applicable.</p>"
+                    }
+                },
+                "autoRetryConfig": {
+                    "target": "com.amazonaws.codebuild#AutoRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the auto-retry configuration for the build.</p>"
                     }
                 }
             },
@@ -2762,6 +2800,38 @@
                 "target": "com.amazonaws.codebuild#CodeCoverage"
             }
         },
+        "com.amazonaws.codebuild#ComputeConfiguration": {
+            "type": "structure",
+            "members": {
+                "vCpu": {
+                    "target": "com.amazonaws.codebuild#WrapperLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of vCPUs of the instance type included in your fleet.</p>"
+                    }
+                },
+                "memory": {
+                    "target": "com.amazonaws.codebuild#WrapperLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory of the instance type included in your fleet.</p>"
+                    }
+                },
+                "disk": {
+                    "target": "com.amazonaws.codebuild#WrapperLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of disk space of the instance type included in your fleet.</p>"
+                    }
+                },
+                "machineType": {
+                    "target": "com.amazonaws.codebuild#MachineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine type of the instance type included in your fleet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains compute attributes. These attributes only need be specified when your project's or fleet's <code>computeType</code> is set to <code>ATTRIBUTE_BASED_COMPUTE</code>.</p>"
+            }
+        },
         "com.amazonaws.codebuild#ComputeType": {
             "type": "enum",
             "members": {
@@ -2824,6 +2894,12 @@
                     "traits": {
                         "smithy.api#enumValue": "BUILD_LAMBDA_10GB"
                     }
+                },
+                "ATTRIBUTE_BASED_COMPUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTRIBUTE_BASED_COMPUTE"
+                    }
                 }
             }
         },
@@ -2876,15 +2952,21 @@
                 "environmentType": {
                     "target": "com.amazonaws.codebuild#EnvironmentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment type of the compute fleet.</p>\n         <ul>\n            <li>\n               <p>The environment type <code>ARM_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),\n                    Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), \n                    EU (Frankfurt), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    and EU (Frankfurt)</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Large fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    Asia Pacific (Tokyo), Asia Pacific (Mumbai) and\n                    EU (Ireland).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), \n                    Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild\n                user guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The environment type of the compute fleet.</p>\n         <ul>\n            <li>\n               <p>The environment type <code>ARM_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),\n                    Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), \n                    EU (Frankfurt), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>The environment type <code>ARM_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    and EU (Frankfurt)</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Large fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    Asia Pacific (Tokyo), Asia Pacific (Mumbai) and\n                    EU (Ireland).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), \n                    Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild\n                user guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "computeType": {
                     "target": "com.amazonaws.codebuild#ComputeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the compute resources the compute fleet uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 70 GB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 3 GB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment\n            compute types</a> in the <i>CodeBuild User Guide.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>Information about the compute resources the compute fleet uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ATTRIBUTE_BASED_COMPUTE</code>: Specify the amount of vCPUs, memory, disk space, and the type of machine.</p>\n               <note>\n                  <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild \n                        will select the cheapest instance that satisfies your specified attributes. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types\">Reserved capacity environment \n                        types</a> in the <i>CodeBuild User Guide</i>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 4 GiB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 8 GiB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GiB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 72 GiB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 144 GiB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_1GB</code>: Use up to 1 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_2GB</code>: Use up to 2 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_4GB</code>: Use up to 4 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_8GB</code>: Use up to 8 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_10GB</code>: Use up to 10 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types\">On-demand environment types</a> \n                in the <i>CodeBuild User Guide.</i>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.codebuild#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the compute fleet. This is only required if <code>computeType</code> is set to <code>ATTRIBUTE_BASED_COMPUTE</code>.</p>"
                     }
                 },
                 "scalingConfiguration": {
@@ -2901,6 +2983,12 @@
                 },
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.codebuild#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy configuration of the compute fleet.</p>"
+                    }
                 },
                 "imageId": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
@@ -3094,6 +3182,12 @@
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>"
+                    }
+                },
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n      auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n      retry your build for up to 2 additional times.</p>"
                     }
                 }
             },
@@ -3959,6 +4053,24 @@
                         "smithy.api#enumValue": "ARM_LAMBDA_CONTAINER"
                     }
                 },
+                "LINUX_EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_EC2"
+                    }
+                },
+                "ARM_EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARM_EC2"
+                    }
+                },
+                "WINDOWS_EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_EC2"
+                    }
+                },
                 "MAC_ARM": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4121,13 +4233,19 @@
                 "environmentType": {
                     "target": "com.amazonaws.codebuild#EnvironmentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment type of the compute fleet.</p>\n         <ul>\n            <li>\n               <p>The environment type <code>ARM_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),\n                    Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), \n                    EU (Frankfurt), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    and EU (Frankfurt)</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Large fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    Asia Pacific (Tokyo), Asia Pacific (Mumbai) and\n                    EU (Ireland).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), \n                    Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild\n                user guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The environment type of the compute fleet.</p>\n         <ul>\n            <li>\n               <p>The environment type <code>ARM_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),\n                    Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), \n                    EU (Frankfurt), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>The environment type <code>ARM_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    and EU (Frankfurt)</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Large fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    Asia Pacific (Tokyo), Asia Pacific (Mumbai) and\n                    EU (Ireland).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), \n                    Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild\n                user guide</i>.</p>"
                     }
                 },
                 "computeType": {
                     "target": "com.amazonaws.codebuild#ComputeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the compute resources the compute fleet uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 70 GB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 3 GB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment\n            compute types</a> in the <i>CodeBuild User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Information about the compute resources the compute fleet uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ATTRIBUTE_BASED_COMPUTE</code>: Specify the amount of vCPUs, memory, disk space, and the type of machine.</p>\n               <note>\n                  <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild \n                        will select the cheapest instance that satisfies your specified attributes. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types\">Reserved capacity environment \n                        types</a> in the <i>CodeBuild User Guide</i>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 4 GiB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 8 GiB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GiB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 72 GiB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 144 GiB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_1GB</code>: Use up to 1 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_2GB</code>: Use up to 2 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_4GB</code>: Use up to 4 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_8GB</code>: Use up to 8 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_10GB</code>: Use up to 10 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types\">On-demand environment types</a> \n                in the <i>CodeBuild User Guide.</i>\n         </p>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.codebuild#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the compute fleet. This is only required if <code>computeType</code> is set to <code>ATTRIBUTE_BASED_COMPUTE</code>.</p>"
                     }
                 },
                 "scalingConfiguration": {
@@ -4144,6 +4262,12 @@
                 },
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.codebuild#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy configuration of the compute fleet.</p>"
+                    }
                 },
                 "imageId": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
@@ -4259,6 +4383,110 @@
                     "traits": {
                         "smithy.api#enumValue": "ON_DEMAND"
                     }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRule": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of proxy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleEffectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The behavior of the proxy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entities": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination of the proxy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the proxy rule for your reserved capacity instances.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleBehavior": {
+            "type": "enum",
+            "members": {
+                "ALLOW_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW_ALL"
+                    }
+                },
+                "DENY_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY_ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleEffectType": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleEntities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN"
+                    }
+                },
+                "IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#FleetProxyRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -5771,6 +5999,23 @@
                 "smithy.api#documentation": "<p>Information about build logs in CloudWatch Logs.</p>"
             }
         },
+        "com.amazonaws.codebuild#MachineType": {
+            "type": "enum",
+            "members": {
+                "GENERAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERAL"
+                    }
+                },
+                "NVME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NVME"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codebuild#NetworkInterface": {
             "type": "structure",
             "members": {
@@ -6059,6 +6304,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for\n      the project's builds.</p>"
                     }
+                },
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n      auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n      retry your build for up to 2 additional times.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6276,8 +6527,14 @@
                 "computeType": {
                     "target": "com.amazonaws.codebuild#ComputeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the compute resources the build project uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 70 GB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_1GB</code>: Use up to 1 GB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_2GB</code>: Use up to 2 GB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_4GB</code>: Use up to 4 GB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_8GB</code>: Use up to 8 GB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_10GB</code>: Use up to 10 GB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 3 GB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you're using compute fleets during project creation, <code>computeType</code> will be ignored.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build Environment\n                Compute Types</a> in the <i>CodeBuild User Guide.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>Information about the compute resources the build project uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ATTRIBUTE_BASED_COMPUTE</code>: Specify the amount of vCPUs, memory, disk space, and the type of machine.</p>\n               <note>\n                  <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild \n                        will select the cheapest instance that satisfies your specified attributes. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types\">Reserved capacity environment \n                        types</a> in the <i>CodeBuild User Guide</i>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 4 GiB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 8 GiB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GiB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 72 GiB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 144 GiB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_1GB</code>: Use up to 1 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_2GB</code>: Use up to 2 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_4GB</code>: Use up to 4 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_8GB</code>: Use up to 8 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_10GB</code>: Use up to 10 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types\">On-demand environment types</a> \n                in the <i>CodeBuild User Guide.</i>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.codebuild#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the build project. This is only required if <code>computeType</code> is set to <code>ATTRIBUTE_BASED_COMPUTE</code>.</p>"
                     }
                 },
                 "fleet": {
@@ -6563,6 +6820,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.codebuild#Project"
+            }
+        },
+        "com.amazonaws.codebuild#ProxyConfiguration": {
+            "type": "structure",
+            "members": {
+                "defaultBehavior": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default behavior of outgoing traffic.</p>"
+                    }
+                },
+                "orderedProxyRules": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>FleetProxyRule</code> objects that represent the specified destination domains or IPs to allow or deny network access control to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the proxy configurations that apply network access control to your reserved capacity instances.</p>"
             }
         },
         "com.amazonaws.codebuild#PutResourcePolicy": {
@@ -8161,6 +8438,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A ProjectFleet object specified for this build that overrides the one defined in the\n            build project.</p>"
                     }
+                },
+                "autoRetryLimitOverride": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n            auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n            retry your build for up to 2 additional times.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8555,13 +8838,19 @@
                 "environmentType": {
                     "target": "com.amazonaws.codebuild#EnvironmentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment type of the compute fleet.</p>\n         <ul>\n            <li>\n               <p>The environment type <code>ARM_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),\n                    Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), \n                    EU (Frankfurt), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    and EU (Frankfurt)</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Large fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    Asia Pacific (Tokyo), Asia Pacific (Mumbai) and\n                    EU (Ireland).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), \n                    Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild\n                user guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The environment type of the compute fleet.</p>\n         <ul>\n            <li>\n               <p>The environment type <code>ARM_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),\n                    Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), \n                    EU (Frankfurt), and South America (São Paulo).</p>\n            </li>\n            <li>\n               <p>The environment type <code>ARM_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    and EU (Frankfurt)</p>\n            </li>\n            <li>\n               <p>The environment type <code>MAC_ARM</code> is available for Large fleets only in\n                    regions US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific (Sydney).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_EC2</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), \n                    EU (Frankfurt), Asia Pacific (Tokyo),\n                    Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), \n                    Asia Pacific (Tokyo), Asia Pacific (Mumbai) and\n                    EU (Ireland).</p>\n            </li>\n            <li>\n               <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions\n                    US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), \n                    Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and\n                    Asia Pacific (Mumbai).</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild\n                user guide</i>.</p>"
                     }
                 },
                 "computeType": {
                     "target": "com.amazonaws.codebuild#ComputeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the compute resources the compute fleet uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 70 GB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 3 GB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment\n            compute types</a> in the <i>CodeBuild User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Information about the compute resources the compute fleet uses. Available values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ATTRIBUTE_BASED_COMPUTE</code>: Specify the amount of vCPUs, memory, disk space, and the type of machine.</p>\n               <note>\n                  <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild \n                        will select the cheapest instance that satisfies your specified attributes. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types\">Reserved capacity environment \n                        types</a> in the <i>CodeBuild User Guide</i>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_SMALL</code>: Use up to 4 GiB memory and 2 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 8 GiB memory and 4 vCPUs for\n                    builds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GiB memory and 8 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_XLARGE</code>: Use up to 72 GiB memory and 36 vCPUs for\n                    builds, depending on your environment type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 144 GiB memory, 72 vCPUs, and\n                    824 GB of SSD storage for builds. This compute type supports Docker images up to\n                    100 GB uncompressed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_1GB</code>: Use up to 1 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_2GB</code>: Use up to 2 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_4GB</code>: Use up to 4 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_8GB</code>: Use up to 8 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BUILD_LAMBDA_10GB</code>: Use up to 10 GiB memory for\n                    builds. Only available for environment type <code>LINUX_LAMBDA_CONTAINER</code> and <code>ARM_LAMBDA_CONTAINER</code>.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_SMALL</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 16\n                    GiB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 4 GiB\n                    memory and 2 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p>\n         <ul>\n            <li>\n               <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs for builds. </p>\n            </li>\n            <li>\n               <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255\n                    GiB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p>\n            </li>\n            <li>\n               <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GiB\n                    memory and 8 vCPUs on ARM-based processors for builds.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types\">On-demand environment types</a> \n                in the <i>CodeBuild User Guide.</i>\n         </p>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.codebuild#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the compute fleet. This is only required if <code>computeType</code> is set to <code>ATTRIBUTE_BASED_COMPUTE</code>.</p>"
                     }
                 },
                 "scalingConfiguration": {
@@ -8578,6 +8867,12 @@
                 },
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
+                },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.codebuild#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy configuration of the compute fleet.</p>"
+                    }
                 },
                 "imageId": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
@@ -8761,6 +9056,12 @@
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>\n         <p>To remove this limit, set this value to -1.</p>"
+                    }
+                },
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n      auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n      retry your build for up to 2 additional times.</p>"
                     }
                 }
             },
@@ -9188,6 +9489,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RELEASE_NAME"
+                    }
+                },
+                "REPOSITORY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPOSITORY_NAME"
                     }
                 }
             }

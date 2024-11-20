@@ -35,8 +35,7 @@ func (c *Client) DeleteTrafficDistributionGroup(ctx context.Context, params *Del
 type DeleteTrafficDistributionGroupInput struct {
 
 	// The identifier of the traffic distribution group. This can be the ID or the ARN
-	// if the API is being called in the Region where the traffic distribution group
-	// was created. The ARN must be provided if the call is from the replicated Region.
+	// of the traffic distribution group.
 	//
 	// This member is required.
 	TrafficDistributionGroupId *string

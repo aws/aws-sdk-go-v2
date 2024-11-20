@@ -440,9 +440,11 @@ const (
 	InvalidInputExceptionReasonTargetNotSupported                    InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
 	InvalidInputExceptionReasonInvalidEmailAddressTarget             InvalidInputExceptionReason = "INVALID_EMAIL_ADDRESS_TARGET"
 	InvalidInputExceptionReasonInvalidResourcePolicyJson             InvalidInputExceptionReason = "INVALID_RESOURCE_POLICY_JSON"
+	InvalidInputExceptionReasonInvalidPrincipal                      InvalidInputExceptionReason = "INVALID_PRINCIPAL"
 	InvalidInputExceptionReasonUnsupportedActionInResourcePolicy     InvalidInputExceptionReason = "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY"
 	InvalidInputExceptionReasonUnsupportedPolicyTypeInResourcePolicy InvalidInputExceptionReason = "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY"
 	InvalidInputExceptionReasonUnsupportedResourceInResourcePolicy   InvalidInputExceptionReason = "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY"
+	InvalidInputExceptionReasonNonDetachablePolicy                   InvalidInputExceptionReason = "NON_DETACHABLE_POLICY"
 )
 
 // Values returns all known values for InvalidInputExceptionReason. Note that this
@@ -476,9 +478,11 @@ func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
 		"TARGET_NOT_SUPPORTED",
 		"INVALID_EMAIL_ADDRESS_TARGET",
 		"INVALID_RESOURCE_POLICY_JSON",
+		"INVALID_PRINCIPAL",
 		"UNSUPPORTED_ACTION_IN_RESOURCE_POLICY",
 		"UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY",
 		"UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY",
+		"NON_DETACHABLE_POLICY",
 	}
 }
 
@@ -525,6 +529,7 @@ type PolicyType string
 // Enum values for PolicyType
 const (
 	PolicyTypeServiceControlPolicy   PolicyType = "SERVICE_CONTROL_POLICY"
+	PolicyTypeResourceControlPolicy  PolicyType = "RESOURCE_CONTROL_POLICY"
 	PolicyTypeTagPolicy              PolicyType = "TAG_POLICY"
 	PolicyTypeBackupPolicy           PolicyType = "BACKUP_POLICY"
 	PolicyTypeAiservicesOptOutPolicy PolicyType = "AISERVICES_OPT_OUT_POLICY"
@@ -538,6 +543,7 @@ const (
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"SERVICE_CONTROL_POLICY",
+		"RESOURCE_CONTROL_POLICY",
 		"TAG_POLICY",
 		"BACKUP_POLICY",
 		"AISERVICES_OPT_OUT_POLICY",

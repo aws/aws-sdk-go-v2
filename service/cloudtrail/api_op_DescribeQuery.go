@@ -62,6 +62,12 @@ type DescribeQueryOutput struct {
 	// The error message returned if a query failed.
 	ErrorMessage *string
 
+	//  The prompt used for a generated query. For information about generated
+	// queries, see [Create CloudTrail Lake queries from natural language prompts]in the CloudTrail user guide.
+	//
+	// [Create CloudTrail Lake queries from natural language prompts]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
+	Prompt *string
+
 	// The ID of the query.
 	QueryId *string
 

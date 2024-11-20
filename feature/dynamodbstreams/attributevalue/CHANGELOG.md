@@ -1,3 +1,96 @@
+# v1.14.52 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.51 (2024-11-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.50 (2024-11-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.49 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.48 (2024-11-01)
+
+* No change notes available for this release.
+
+# v1.14.47 (2024-10-31)
+
+* No change notes available for this release.
+
+# v1.14.46 (2024-10-30)
+
+* No change notes available for this release.
+
+# v1.14.45 (2024-10-29)
+
+* No change notes available for this release.
+
+# v1.14.44 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.43 (2024-10-25)
+
+* No change notes available for this release.
+
+# v1.14.42 (2024-10-24)
+
+* No change notes available for this release.
+
+# v1.14.41 (2024-10-23)
+
+* No change notes available for this release.
+
+# v1.14.40 (2024-10-22)
+
+* No change notes available for this release.
+
+# v1.14.39 (2024-10-21)
+
+* No change notes available for this release.
+
+# v1.14.38 (2024-10-18)
+
+* No change notes available for this release.
+
+# v1.14.37 (2024-10-17)
+
+* No change notes available for this release.
+
+# v1.14.36 (2024-10-16)
+
+* No change notes available for this release.
+
+# v1.14.35 (2024-10-15)
+
+* No change notes available for this release.
+
+# v1.14.34 (2024-10-14)
+
+* No change notes available for this release.
+
+# v1.14.33 (2024-10-11)
+
+* No change notes available for this release.
+
+# v1.14.32 (2024-10-10)
+
+* No change notes available for this release.
+
+# v1.14.31 (2024-10-09)
+
+* No change notes available for this release.
+
+# v1.14.30 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.29 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

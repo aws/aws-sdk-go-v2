@@ -77,7 +77,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.workspaces#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.</p>"
+                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.</p>"
                     }
                 }
             },
@@ -1798,7 +1798,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.workspaces#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.</p>"
+                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.</p>"
                     }
                 }
             },
@@ -2960,7 +2960,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.workspaces#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.</p>"
+                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.</p>"
                     }
                 }
             },
@@ -5464,7 +5464,7 @@
         "com.amazonaws.workspaces#DomainName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+$"
+                "smithy.api#pattern": "^([a-zA-Z0-9]+[.-])+([a-zA-Z0-9])+$"
             }
         },
         "com.amazonaws.workspaces#Ec2ImageId": {
@@ -7357,6 +7357,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RHEL_8"
+                    }
+                },
+                "ROCKY_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROCKY_8"
                     }
                 }
             }
@@ -10844,6 +10850,102 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ReservedStorageInUse"
+                    }
+                },
+                "ADDITIONAL_DRIVES_PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AdditionalDrivesPresent"
+                    }
+                },
+                "WINDOWS_UPDATES_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WindowsUpdatesRequired"
+                    }
+                },
+                "SYSPREP_FILE_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SysPrepFileMissing"
+                    }
+                },
+                "USER_PROFILE_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UserProfileMissing"
+                    }
+                },
+                "INSUFFICIENT_DISK_SPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientDiskSpace"
+                    }
+                },
+                "ENVIRONMENT_VARIABLES_PATH_MISSING_ENTRIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EnvironmentVariablesPathMissingEntries"
+                    }
+                },
+                "DOMAIN_ACCOUNT_SERVICES_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DomainAccountServicesFound"
+                    }
+                },
+                "INVALID_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidIp"
+                    }
+                },
+                "REMOTE_DESKTOP_SERVICES_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RemoteDesktopServicesDisabled"
+                    }
+                },
+                "WINDOWS_MODULES_INSTALLER_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WindowsModulesInstallerDisabled"
+                    }
+                },
+                "AMAZON_SSM_AGENT_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonSsmAgentEnabled"
+                    }
+                },
+                "UNSUPPORTED_SECURITY_PROTOCOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsupportedSecurityProtocol"
+                    }
+                },
+                "MULTIPLE_USER_PROFILES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultipleUserProfiles"
+                    }
+                },
+                "STAGED_APPX_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StagedAppxPackage"
+                    }
+                },
+                "UNSUPPORTED_OS_UPGRADE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsupportedOsUpgrade"
+                    }
+                },
+                "INSUFFICIENT_REARM_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientRearmCount"
                     }
                 }
             }

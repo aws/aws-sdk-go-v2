@@ -59,7 +59,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):securitylake:[A-za-z0-9_/.\\-]{0,63}:[A-za-z0-9_/.\\-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.\\-]{0,127}$"
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):securitylake:[A-Za-z0-9_/.\\-]{0,63}:[A-Za-z0-9_/.\\-]{0,63}:[A-Za-z0-9][A-Za-z0-9_/.\\-]{0,127}$"
             }
         },
         "com.amazonaws.securitylake#AwsAccountId": {
@@ -79,20 +79,20 @@
                 "principal": {
                     "target": "com.amazonaws.securitylake#AwsPrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS identity principal.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services identity principal.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "externalId": {
                     "target": "com.amazonaws.securitylake#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The external ID used to estalish trust relationship with the AWS identity.</p>",
+                        "smithy.api#documentation": "<p>The external ID used to establish trust relationship with the Amazon Web Services identity.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS identity.</p>"
+                "smithy.api#documentation": "<p>The Amazon Web Services identity.</p>"
             }
         },
         "com.amazonaws.securitylake#AwsLogSourceConfiguration": {
@@ -114,7 +114,7 @@
                 "sourceName": {
                     "target": "com.amazonaws.securitylake#AwsLogSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for a Amazon Web Services source. This must be a Regionally unique value.</p>",
+                        "smithy.api#documentation": "<p>The name for a Amazon Web Services source. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -122,12 +122,12 @@
                     "target": "com.amazonaws.securitylake#AwsLogSourceVersion",
                     "traits": {
                         "smithy.api#default": "latest",
-                        "smithy.api#documentation": "<p>The version for a Amazon Web Services source. This must be a Regionally unique value.</p>"
+                        "smithy.api#documentation": "<p>The version for a Amazon Web Services source. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Security Lake logs source configuration file describes the information needed to generate Security Lake logs. </p>"
+                "smithy.api#documentation": "<p>To add a natively-supported Amazon Web Services service as a log source, use these\n         parameters to specify the configuration settings for the log source. </p>"
             }
         },
         "com.amazonaws.securitylake#AwsLogSourceConfigurationList": {
@@ -212,7 +212,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Security Lake can collect logs and events from natively-supported Amazon Web Services services.</p>"
+                "smithy.api#documentation": "<p>Amazon Security Lake can collect logs and events from natively-supported Amazon Web Services\n         services.</p>"
             }
         },
         "com.amazonaws.securitylake#AwsLogSourceResourceList": {
@@ -315,7 +315,7 @@
                     "glue:CreateTable",
                     "glue:CreateDatabase"
                 ],
-                "smithy.api#documentation": "<p>Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables\n         source types for member accounts in required Amazon Web Services Regions, based on the\n         parameters you specify. You can choose any source type in any Region for either accounts\n         that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it.</p>\n         <p>You can use this API only to enable natively supported Amazon Web Services as a\n         source. Use <code>CreateCustomLogSource</code> to enable data collection from a custom\n         source.</p>",
+                "smithy.api#documentation": "<p>Adds a natively supported Amazon Web Services service as an Amazon Security Lake source. Enables\n         source types for member accounts in required Amazon Web Services Regions, based on the\n         parameters you specify. You can choose any source type in any Region for either accounts\n         that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Services service as a source, Security Lake starts collecting logs and events from it.</p>\n         <p>You can use this API only to enable natively supported Amazon Web Services services as a\n         source. Use <code>CreateCustomLogSource</code> to enable data collection from a custom\n         source.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/logsources/aws",
@@ -344,7 +344,7 @@
                 "failed": {
                     "target": "com.amazonaws.securitylake#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists all accounts in which enabling a natively supported Amazon Web Service as\n         a Security Lake source failed. The failure occurred as these accounts are not part of an\n         organization.</p>"
+                        "smithy.api#documentation": "<p>Lists all accounts in which enabling a natively supported Amazon Web Services service as\n         a Security Lake source failed. The failure occurred as these accounts are not part of an\n         organization.</p>"
                     }
                 }
             },
@@ -414,7 +414,7 @@
                 "sourceName": {
                     "target": "com.amazonaws.securitylake#CustomLogSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the name for a third-party custom source. This must be a Regionally unique\n         value.</p>",
+                        "smithy.api#documentation": "<p>Specify the name for a third-party custom source. This must be a Regionally unique\n         value. The <code>sourceName</code> you enter here, is used in the\n            <code>LogProviderRole</code> name which follows the convention\n            <code>AmazonSecurityLake-Provider-{name of the custom source}-{region}</code>. You must\n         use a <code>CustomLogSource</code> name that is shorter than or equal to 20 characters.\n         This ensures that the <code>LogProviderRole</code> name is below the 64 character\n         limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -433,7 +433,7 @@
                 "configuration": {
                     "target": "com.amazonaws.securitylake#CustomLogSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the third-party custom source.</p>",
+                        "smithy.api#documentation": "<p>The configuration used for the third-party custom source.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -448,7 +448,7 @@
                 "source": {
                     "target": "com.amazonaws.securitylake#CustomLogSourceResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The created third-party custom source.</p>"
+                        "smithy.api#documentation": "<p>The third-party custom source that was created.</p>"
                     }
                 }
             },
@@ -516,7 +516,7 @@
                     "lambda:CreateFunction",
                     "lambda:CreateEventSourceMapping"
                 ],
-                "smithy.api#documentation": "<p>Initializes an Amazon Security Lake instance with the provided (or default) configuration. You\n         can enable Security Lake in Amazon Web Services Regions with customized settings before enabling\n         log collection in Regions. To specify particular Regions, configure these Regions using the\n            <code>configurations</code> parameter. If you have already enabled Security Lake in a Region\n         when you call this command, the command will update the Region if you provide new\n         configuration parameters. If you have not already enabled Security Lake in the Region when you\n         call this API, it will set up the data lake in the Region with the specified\n         configurations.</p>\n         <p>When you enable Security Lake, it starts ingesting security data after the\n            <code>CreateAwsLogSource</code> call. This includes ingesting security data from\n         sources, storing data, and making data accessible to subscribers. Security Lake also enables\n         all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For\n         more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html\">Amazon Security Lake User\n            Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Initializes an Amazon Security Lake instance with the provided (or default) configuration. You\n         can enable Security Lake in Amazon Web Services Regions with customized settings before enabling\n         log collection in Regions. To specify particular Regions, configure these Regions using the\n            <code>configurations</code> parameter. If you have already enabled Security Lake in a Region\n         when you call this command, the command will update the Region if you provide new\n         configuration parameters. If you have not already enabled Security Lake in the Region when you\n         call this API, it will set up the data lake in the Region with the specified\n         configurations.</p>\n         <p>When you enable Security Lake, it starts ingesting security data after the\n            <code>CreateAwsLogSource</code> call and after you create subscribers using the <code>CreateSubscriber</code> API. This includes ingesting security data from\n         sources, storing data, and making data accessible to subscribers. Security Lake also enables\n         all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For\n         more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html\">Amazon Security Lake User\n            Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake",
@@ -554,7 +554,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get instant notifications about exceptions. Subscribes to the SNS topics for exception notifications",
-                "smithy.api#documentation": "<p>Creates the specified notification subscription in Amazon Security Lake for the organization\n         you specify.</p>",
+                "smithy.api#documentation": "<p>Creates the specified notification subscription in Amazon Security Lake for the organization\n         you specify. The notification subscription is created for exceptions that cannot be resolved by Security Lake automatically.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/exceptions/subscription",
@@ -582,7 +582,7 @@
                 "exceptionTimeToLive": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expiration period and time-to-live (TTL).</p>",
+                        "smithy.api#documentation": "<p>The expiration period and time-to-live (TTL). It is the duration of time until which the exception message remains.</p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -749,7 +749,7 @@
                     "ram:UpdateResourceShare",
                     "ram:GetResourceShares"
                 ],
-                "smithy.api#documentation": "<p>Creates a subscription permission for accounts that are already enabled in\n         Amazon Security Lake. You can create a subscriber with access to data in the current Amazon Web Services Region.</p>",
+                "smithy.api#documentation": "<p>Creates a subscriber for accounts that are already enabled in Amazon Security Lake. You can\n         create a subscriber with access to data in the current Amazon Web Services Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/subscribers",
@@ -880,7 +880,7 @@
                 "sources": {
                     "target": "com.amazonaws.securitylake#LogSourceResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported Amazon Web Services from which logs and events are collected.\n         Security Lake supports log and event collection for natively supported Amazon Web Services.</p>",
+                        "smithy.api#documentation": "<p>The supported Amazon Web Services services from which logs and events are collected.\n         Security Lake supports log and event collection for natively supported Amazon Web Services services.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -947,7 +947,7 @@
                 "crawlerConfiguration": {
                     "target": "com.amazonaws.securitylake#CustomLogSourceCrawlerConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the Glue Crawler for the third-party custom source.</p>",
+                        "smithy.api#documentation": "<p>The configuration used for the Glue Crawler for a third-party custom source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -960,7 +960,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for the third-party custom source.</p>"
+                "smithy.api#documentation": "<p>The configuration used for the third-party custom source.</p>"
             }
         },
         "com.amazonaws.securitylake#CustomLogSourceCrawlerConfiguration": {
@@ -975,7 +975,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for the Glue Crawler for the third-party custom source.</p>"
+                "smithy.api#documentation": "<p>The configuration used for the Glue Crawler for a third-party custom source.</p>"
             }
         },
         "com.amazonaws.securitylake#CustomLogSourceName": {
@@ -1187,7 +1187,7 @@
                 "kmsKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The id of KMS encryption key used by Amazon Security Lake to encrypt the Security Lake\n         object.</p>"
+                        "smithy.api#documentation": "<p>The identifier of KMS encryption key used by Amazon Security Lake to encrypt the Security Lake\n         object.</p>"
                     }
                 }
             },
@@ -1364,7 +1364,7 @@
                 "createStatus": {
                     "target": "com.amazonaws.securitylake#DataLakeStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves the status of the configuration operation for an account in Amazon Security Lake.</p>"
+                        "smithy.api#documentation": "<p>Retrieves the status of the <code>CreateDatalake</code> API call for an account in Amazon Security Lake.</p>"
                     }
                 },
                 "updateStatus": {
@@ -1396,7 +1396,7 @@
                 "sourceName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported Amazon Web Services from which logs and events are collected.\n         Amazon Security Lake supports log and event collection for natively supported Amazon Web Services.</p>"
+                        "smithy.api#documentation": "<p>The supported Amazon Web Services services from which logs and events are collected.\n         Amazon Security Lake supports log and event collection for natively supported Amazon Web Services services.</p>"
                     }
                 },
                 "eventClasses": {
@@ -1413,7 +1413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Security Lake collects logs and events from supported Amazon Web Services and\n         custom sources. For the list of supported Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Amazon Security Lake collects logs and events from supported Amazon Web Services services and\n         custom sources. For the list of supported Amazon Web Services services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
             }
         },
         "com.amazonaws.securitylake#DataLakeSourceList": {
@@ -1556,7 +1556,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to disable any source type in any region for accounts that are part of a trusted organization or standalone accounts",
-                "smithy.api#documentation": "<p>Removes a natively supported Amazon Web Service as an Amazon Security Lake source. You\n         can remove a source for one or more Regions. When you remove the source, Security Lake stops\n         collecting data from that source in the specified Regions and accounts, and subscribers can\n         no longer consume new data from the source. However, subscribers can still consume data\n         that Security Lake collected from the source before removal.</p>\n         <p>You can choose any source type in any Amazon Web Services Region for either accounts that\n         are part of a trusted organization or standalone accounts. </p>",
+                "smithy.api#documentation": "<p>Removes a natively supported Amazon Web Services service as an Amazon Security Lake source. You\n         can remove a source for one or more Regions. When you remove the source, Security Lake stops\n         collecting data from that source in the specified Regions and accounts, and subscribers can\n         no longer consume new data from the source. However, subscribers can still consume data\n         that Security Lake collected from the source before removal.</p>\n         <p>You can choose any source type in any Amazon Web Services Region for either accounts that\n         are part of a trusted organization or standalone accounts. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/logsources/aws/delete",
@@ -1945,7 +1945,7 @@
                     "sqs:DeleteQueue",
                     "sqs:GetQueueUrl"
                 ],
-                "smithy.api#documentation": "<p>Deletes the specified notification subscription in Amazon Security Lake for the organization\n         you specify.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified subscription notification in Amazon Security Lake for the organization\n         you specify.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v1/subscribers/{subscriberId}/notification",
@@ -2104,7 +2104,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to query the protocol and endpoint that were provided when subscribing to SNS topics for exception notifications",
-                "smithy.api#documentation": "<p>Retrieves the details of exception notifications for the account in Amazon Security Lake.</p>",
+                "smithy.api#documentation": "<p>Retrieves the protocol and endpoint that were provided when subscribing to Amazon SNS topics for exception notifications.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/datalake/exceptions/subscription",
@@ -2138,7 +2138,7 @@
                 "exceptionTimeToLive": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expiration period and time-to-live (TTL).</p>"
+                        "smithy.api#documentation": "<p>The expiration period and time-to-live (TTL). It is the duration of time until which the exception message remains.</p>"
                     }
                 }
             },
@@ -2201,7 +2201,7 @@
                 "autoEnableNewAccount": {
                     "target": "com.amazonaws.securitylake#DataLakeAutoEnableNewAccountConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for new accounts.</p>"
+                        "smithy.api#documentation": "<p>The configuration used for new accounts in Security Lake.</p>"
                     }
                 }
             },
@@ -2430,7 +2430,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configurations for HTTPS subscriber notification.</p>"
+                "smithy.api#documentation": "<p>The configurations used for HTTPS subscriber notification.</p>"
             }
         },
         "com.amazonaws.securitylake#InternalServerException": {
@@ -2505,13 +2505,13 @@
                     "target": "com.amazonaws.securitylake#MaxResults",
                     "traits": {
                         "smithy.api#default": 50,
-                        "smithy.api#documentation": "<p>List the maximum number of failures in Security Lake.</p>"
+                        "smithy.api#documentation": "<p>Lists the maximum number of failures in Security Lake.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.securitylake#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>List if there are more results available. The value of nextToken is a unique pagination\n         token for each page. Repeat the call using the returned token to retrieve the next page.\n         Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will\n         return an HTTP 400 InvalidToken error.</p>"
+                        "smithy.api#documentation": "<p>Lists if there are more results available. The value of nextToken is a unique pagination\n         token for each page. Repeat the call using the returned token to retrieve the next page.\n         Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will\n         return an HTTP 400 InvalidToken error.</p>"
                     }
                 }
             },
@@ -2525,13 +2525,13 @@
                 "exceptions": {
                     "target": "com.amazonaws.securitylake#DataLakeExceptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the failures that cannot be retried in the current Region.</p>"
+                        "smithy.api#documentation": "<p>Lists the failures that cannot be retried.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.securitylake#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>List if there are more results available. The value of nextToken is a unique pagination\n         token for each page. Repeat the call using the returned token to retrieve the next page.\n         Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will\n         return an HTTP 400 InvalidToken error.</p>"
+                        "smithy.api#documentation": "<p>Lists if there are more results available. The value of nextToken is a unique pagination\n         token for each page. Repeat the call using the returned token to retrieve the next page.\n         Keep all other arguments unchanged.</p>\n         <p>Each pagination token expires after 24 hours. Using an expired pagination token will\n         return an HTTP 400 InvalidToken error.</p>"
                     }
                 }
             },
@@ -2637,7 +2637,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to view the enabled accounts. You can view the enabled sources in the enabled regions",
-                "smithy.api#documentation": "<p>Retrieves the log sources in the current Amazon Web Services Region.</p>",
+                "smithy.api#documentation": "<p>Retrieves the log sources.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/logsources/list",
@@ -2741,7 +2741,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to list all subscribers",
-                "smithy.api#documentation": "<p>List all subscribers for the specific Amazon Security Lake account ID. You can retrieve a list\n         of subscriptions associated with a specific organization or Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists all subscribers for the specific Amazon Security Lake account ID. You can retrieve a list\n         of subscriptions associated with a specific organization or Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/subscribers",
@@ -2905,7 +2905,7 @@
                 "awsLogSource": {
                     "target": "com.amazonaws.securitylake#AwsLogSourceResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services services. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
                     }
                 },
                 "customLogSource": {
@@ -2916,7 +2916,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The supported source types from which logs and events are collected in Amazon Security Lake.\n         For a list of supported Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
+                "smithy.api#documentation": "<p>The supported source types from which logs and events are collected in Amazon Security Lake.\n         For a list of supported Amazon Web Services services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
             }
         },
         "com.amazonaws.securitylake#LogSourceResourceList": {
@@ -2954,7 +2954,7 @@
                 "httpsNotificationConfiguration": {
                     "target": "com.amazonaws.securitylake#HttpsNotificationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configurations for HTTPS subscriber notification.</p>"
+                        "smithy.api#documentation": "<p>The configurations used for HTTPS subscriber notification.</p>"
                     }
                 }
             },
@@ -3219,7 +3219,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>Amazon Security Lake is a fully managed security data lake service. You can use Security Lake to\n         automatically centralize security data from cloud, on-premises, and custom sources into a\n         data lake that's stored in your Amazon Web Services account. Amazon Web Services Organizations\n         is an account management service that lets you consolidate multiple Amazon Web Services\n         accounts into an organization that you create and centrally manage. With Organizations, you\n         can create member accounts and invite existing accounts to join your organization.\n         Security Lake helps you analyze security data for a more complete understanding of your\n         security posture across the entire organization. It can also help you improve the\n         protection of your workloads, applications, and data.</p>\n         <p>The data lake is backed by Amazon Simple Storage Service (Amazon S3) buckets, and you\n         retain ownership over your data.</p>\n         <p>Amazon Security Lake integrates with CloudTrail, a service that provides a record of\n         actions taken by a user, role, or an Amazon Web Services service. In Security Lake, CloudTrail captures API calls for Security Lake as events. The calls captured include calls\n         from the Security Lake console and code calls to the Security Lake API operations. If you create a\n         trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Security Lake. If you don't configure a trail, you can still\n         view the most recent events in the CloudTrail console in Event history. Using the\n         information collected by CloudTrail you can determine the request that was made to\n         Security Lake, the IP address from which the request was made, who made the request, when it\n         was made, and additional details. To learn more about Security Lake information in CloudTrail, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/securitylake-cloudtrail.html\">Amazon Security Lake User Guide</a>.</p>\n         <p>Security Lake automates the collection of security-related log and event data from\n         integrated Amazon Web Services and third-party services. It also helps you manage\n         the lifecycle of data with customizable retention and replication settings. Security Lake\n         converts ingested data into Apache Parquet format and a standard open-source schema called\n         the Open Cybersecurity Schema Framework (OCSF).</p>\n         <p>Other Amazon Web Services and third-party services can subscribe to the data that's stored in Security Lake for \n         incident response and security data analytics.</p>",
+                "smithy.api#documentation": "<p>Amazon Security Lake is a fully managed security data lake service. You can use Security Lake to\n         automatically centralize security data from cloud, on-premises, and custom sources into a\n         data lake that's stored in your Amazon Web Services account. Amazon Web Services Organizations\n         is an account management service that lets you consolidate multiple Amazon Web Services\n         accounts into an organization that you create and centrally manage. With Organizations, you\n         can create member accounts and invite existing accounts to join your organization.\n         Security Lake helps you analyze security data for a more complete understanding of your\n         security posture across the entire organization. It can also help you improve the\n         protection of your workloads, applications, and data.</p>\n         <p>The data lake is backed by Amazon Simple Storage Service (Amazon S3) buckets, and you\n         retain ownership over your data.</p>\n         <p>Amazon Security Lake integrates with CloudTrail, a service that provides a record of\n         actions taken by a user, role, or an Amazon Web Services service. In Security Lake, CloudTrail captures API calls for Security Lake as events. The calls captured include calls\n         from the Security Lake console and code calls to the Security Lake API operations. If you create a\n         trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Security Lake. If you don't configure a trail, you can still\n         view the most recent events in the CloudTrail console in Event history. Using the\n         information collected by CloudTrail you can determine the request that was made to\n         Security Lake, the IP address from which the request was made, who made the request, when it\n         was made, and additional details. To learn more about Security Lake information in CloudTrail, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/securitylake-cloudtrail.html\">Amazon Security Lake User Guide</a>.</p>\n         <p>Security Lake automates the collection of security-related log and event data from\n         integrated Amazon Web Services services and third-party services. It also helps you manage\n         the lifecycle of data with customizable retention and replication settings. Security Lake\n         converts ingested data into Apache Parquet format and a standard open-source schema called\n         the Open Cybersecurity Schema Framework (OCSF).</p>\n         <p>Other Amazon Web Services services and third-party services can subscribe to the data that's stored in Security Lake for \n         incident response and security data analytics.</p>",
                 "smithy.api#title": "Amazon Security Lake",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3914,7 +3914,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The configurations for SQS subscriber notification.</p>"
+                "smithy.api#documentation": "<p>The configurations used for EventBridge subscriber notification.</p>"
             }
         },
         "com.amazonaws.securitylake#Subscriber": {
@@ -4001,7 +4001,7 @@
                 "sources": {
                     "target": "com.amazonaws.securitylake#LogSourceResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html\">Amazon Security Lake User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services services. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html\">Amazon Security Lake User Guide</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4421,7 +4421,7 @@
                     "lambda:CreateFunction",
                     "lambda:CreateEventSourceMapping"
                 ],
-                "smithy.api#documentation": "<p>Specifies where to store your security data and for how long. You can add a rollup\n         Region to consolidate data from multiple Amazon Web Services Regions.</p>",
+                "smithy.api#documentation": "<p>You can use <code>UpdateDataLake</code> to specify where to store your security data, how it should\n         be encrypted at rest and for how long. You can add a <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/manage-regions.html#add-rollup-region\">Rollup\n            Region</a> to consolidate data from multiple Amazon Web Services Regions, replace\n         default encryption (SSE-S3) with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">Customer Manged Key</a>,\n         or specify transition and expiration actions through storage <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/lifecycle-management.html\">Lifecycle management</a>. The <code>UpdateDataLake</code> API works as an \"upsert\" operation that performs an insert if the specified item or record does not exist, or an update if it\n         already exists. Security Lake securely stores your data at rest using Amazon Web Services encryption solutions. For more details, see <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/data-protection.html\">Data protection in Amazon Security Lake</a>.</p>\n         <p>For example, omitting the key <code>encryptionConfiguration</code> from a Region that is\n         included in an update call that currently uses KMS will leave that Region's KMS key in\n         place, but specifying <code>encryptionConfiguration: {kmsKeyId: 'S3_MANAGED_KEY'}</code>\n         for that same Region will reset the key to <code>S3-managed</code>.</p>\n         <p>For more details about lifecycle management and how to update retention settings for one or more Regions after enabling Security Lake, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/lifecycle-management.html\">Amazon Security Lake User Guide</a>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/datalake",
@@ -4489,7 +4489,7 @@
                 "exceptionTimeToLive": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time-to-live (TTL) for the exception message to remain.</p>",
+                        "smithy.api#documentation": "<p>The time-to-live (TTL) for the exception message to remain. It is the duration of time until which the exception message remains. </p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -4513,7 +4513,7 @@
                 "configurations": {
                     "target": "com.amazonaws.securitylake#DataLakeConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Region or Regions that will contribute data to the rollup region.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Region or Regions that will contribute data to the rollup region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4710,7 +4710,7 @@
                 "subscriberIdentity": {
                     "target": "com.amazonaws.securitylake#AwsIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS identity used to access your data.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services identity used to access your data.</p>"
                     }
                 },
                 "subscriberName": {
@@ -4731,7 +4731,7 @@
                 "sources": {
                     "target": "com.amazonaws.securitylake#LogSourceResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported Amazon Web Services from which logs and events are collected. For\n         the list of supported Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>The supported Amazon Web Services services from which logs and events are collected. For\n         the list of supported Amazon Web Services services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
                     }
                 }
             },

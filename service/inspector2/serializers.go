@@ -7190,6 +7190,13 @@ func awsRestjson1_serializeDocumentPackageFilter(v *types.PackageFilter, value s
 		}
 	}
 
+	if v.FilePath != nil {
+		ok := object.Key("filePath")
+		if err := awsRestjson1_serializeDocumentStringFilter(v.FilePath, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		if err := awsRestjson1_serializeDocumentStringFilter(v.Name, ok); err != nil {

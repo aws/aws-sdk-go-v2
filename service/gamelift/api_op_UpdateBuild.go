@@ -46,12 +46,12 @@ type UpdateBuildInput struct {
 	// This member is required.
 	BuildId *string
 
-	// A descriptive label associated with a build. Build names don't need to be
-	// unique.
+	// A descriptive label that is associated with a build. Build names do not need to
+	// be unique.
 	Name *string
 
-	// Version information associated with a build or script. Version strings don't
-	// need to be unique.
+	// Version information that is associated with a build or script. Version strings
+	// do not need to be unique.
 	Version *string
 
 	noSmithyDocumentSerde

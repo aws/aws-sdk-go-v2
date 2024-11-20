@@ -38,6 +38,13 @@ type RestoreAnalysisInput struct {
 	// This member is required.
 	AwsAccountId *string
 
+	// A boolean value that determines if the analysis will be restored to folders
+	// that it previously resided in. A True value restores analysis back to all
+	// folders that it previously resided in. A False value restores the analysis but
+	// does not restore the analysis back to all previously resided folders. Restoring
+	// a restricted analysis requires this parameter to be set to True .
+	RestoreToFolders bool
+
 	noSmithyDocumentSerde
 }
 
@@ -51,6 +58,9 @@ type RestoreAnalysisOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
 	RequestId *string
+
+	// A list of folder arns thatthe analysis failed to be restored to.
+	RestorationFailedFolderArns []string
 
 	// The HTTP status of the request.
 	Status int32

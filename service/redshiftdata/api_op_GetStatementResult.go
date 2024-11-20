@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Fetches the temporarily cached result of an SQL statement. A token is returned
-// to page through the statement results.
+// Fetches the temporarily cached result of an SQL statement in JSON format. The
+// ExecuteStatement or BatchExecuteStatement operation that ran the SQL statement
+// must have specified ResultFormat as JSON , or let the format default to JSON. A
+// token is returned to page through the statement results.
 //
 // For more information about the Amazon Redshift Data API and CLI usage examples,
 // see [Using the Amazon Redshift Data API]in the Amazon Redshift Management Guide.
@@ -57,7 +59,7 @@ type GetStatementResultInput struct {
 
 type GetStatementResultOutput struct {
 
-	// The results of the SQL statement.
+	// The results of the SQL statement in JSON format.
 	//
 	// This member is required.
 	Records [][]types.Field

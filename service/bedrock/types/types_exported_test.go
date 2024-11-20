@@ -83,6 +83,24 @@ func ExampleEvaluationModelConfig_outputUsage() {
 
 var _ *types.EvaluationBedrockModel
 
+func ExampleInferenceProfileModelSource_outputUsage() {
+	var union types.InferenceProfileModelSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InferenceProfileModelSourceMemberCopyFrom:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleModelDataSource_outputUsage() {
 	var union types.ModelDataSource
 	// type switches can be used to check the union value

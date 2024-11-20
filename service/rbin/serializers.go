@@ -93,6 +93,13 @@ func awsRestjson1_serializeOpDocumentCreateRuleInput(v *CreateRuleInput, value s
 		ok.String(*v.Description)
 	}
 
+	if v.ExcludeResourceTags != nil {
+		ok := object.Key("ExcludeResourceTags")
+		if err := awsRestjson1_serializeDocumentExcludeResourceTags(v.ExcludeResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LockConfiguration != nil {
 		ok := object.Key("LockConfiguration")
 		if err := awsRestjson1_serializeDocumentLockConfiguration(v.LockConfiguration, ok); err != nil {
@@ -343,6 +350,13 @@ func awsRestjson1_serializeOpHttpBindingsListRulesInput(v *ListRulesInput, encod
 func awsRestjson1_serializeOpDocumentListRulesInput(v *ListRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ExcludeResourceTags != nil {
+		ok := object.Key("ExcludeResourceTags")
+		if err := awsRestjson1_serializeDocumentExcludeResourceTags(v.ExcludeResourceTags, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.LockState) > 0 {
 		ok := object.Key("LockState")
@@ -876,6 +890,13 @@ func awsRestjson1_serializeOpDocumentUpdateRuleInput(v *UpdateRuleInput, value s
 		ok.String(*v.Description)
 	}
 
+	if v.ExcludeResourceTags != nil {
+		ok := object.Key("ExcludeResourceTags")
+		if err := awsRestjson1_serializeDocumentExcludeResourceTags(v.ExcludeResourceTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTags != nil {
 		ok := object.Key("ResourceTags")
 		if err := awsRestjson1_serializeDocumentResourceTags(v.ResourceTags, ok); err != nil {
@@ -895,6 +916,19 @@ func awsRestjson1_serializeOpDocumentUpdateRuleInput(v *UpdateRuleInput, value s
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExcludeResourceTags(v []types.ResourceTag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentResourceTag(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -109,6 +109,7 @@ type CreateDBShardGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details for an Amazon RDS DB shard group.
 type CreateDBShardGroupOutput struct {
 
 	// Specifies whether to create standby DB shard groups for the DB shard group.

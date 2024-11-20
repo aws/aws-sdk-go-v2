@@ -61,6 +61,17 @@ func (m *awsRestjson1_serializeOpCancelBatchJobExecution) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCancelBatchJobExecutionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -91,6 +102,18 @@ func awsRestjson1_serializeOpHttpBindingsCancelBatchJobExecutionInput(v *CancelB
 		if err := encoder.SetURI("executionId").String(*v.ExecutionId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCancelBatchJobExecutionInput(v *CancelBatchJobExecutionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthSecretsManagerArn != nil {
+		ok := object.Key("authSecretsManagerArn")
+		ok.String(*v.AuthSecretsManagerArn)
 	}
 
 	return nil
@@ -1810,6 +1833,10 @@ func awsRestjson1_serializeOpHttpBindingsListBatchJobRestartPointsInput(v *ListB
 		}
 	}
 
+	if v.AuthSecretsManagerArn != nil {
+		encoder.SetQuery("authSecretsManagerArn").String(*v.AuthSecretsManagerArn)
+	}
+
 	if v.ExecutionId == nil || len(*v.ExecutionId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member executionId must not be empty")}
 	}
@@ -2448,6 +2475,11 @@ func awsRestjson1_serializeOpHttpBindingsStartBatchJobInput(v *StartBatchJobInpu
 func awsRestjson1_serializeOpDocumentStartBatchJobInput(v *StartBatchJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuthSecretsManagerArn != nil {
+		ok := object.Key("authSecretsManagerArn")
+		ok.String(*v.AuthSecretsManagerArn)
+	}
 
 	if v.BatchJobIdentifier != nil {
 		ok := object.Key("batchJobIdentifier")

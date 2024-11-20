@@ -224,6 +224,56 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.customerprofiles#AddressDimension": {
+            "type": "structure",
+            "members": {
+                "City": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city belonging to the address.</p>",
+                        "smithy.api#jsonName": "City"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country belonging to the address.</p>",
+                        "smithy.api#jsonName": "Country"
+                    }
+                },
+                "County": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county belonging to the address.</p>",
+                        "smithy.api#jsonName": "County"
+                    }
+                },
+                "PostalCode": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code belonging to the address.</p>",
+                        "smithy.api#jsonName": "PostalCode"
+                    }
+                },
+                "Province": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province belonging to the address.</p>",
+                        "smithy.api#jsonName": "Province"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state belonging to the address.</p>",
+                        "smithy.api#jsonName": "State"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that segments on Customer Profile's address object.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#AddressList": {
             "type": "list",
             "member": {
@@ -404,6 +454,125 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.customerprofiles#AttributeDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#AttributeDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to segment with.</p>",
+                        "smithy.api#jsonName": "DimensionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#jsonName": "Values",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that segments on various Customer Profile's fields.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AttributeDimensionType": {
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
+                    }
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BEGINS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEGINS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE"
+                    }
+                },
+                "AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "NOT_BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_BETWEEN"
+                    }
+                },
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL"
+                    }
+                },
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#AttributeItem": {
             "type": "structure",
             "members": {
@@ -429,6 +598,15 @@
                     "min": 1,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.customerprofiles#AttributeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#attributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#FilterAttributeDimension"
             }
         },
         "com.amazonaws.customerprofiles#AttributeMatchingModel": {
@@ -488,6 +666,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration information about the <code>AttributeTypesSelector </code>where the\n         rule-based identity resolution uses to match profiles. You can choose how profiles are\n         compared across attribute types and which attribute to use for matching from each type.\n         There are three attribute types you can configure:</p>\n         <ul>\n            <li>\n               <p>Email type</p>\n               <ul>\n                  <li>\n                     <p>You can choose from <code>Email</code>, <code>BusinessEmail</code>, and\n                        <code>PersonalEmail</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Phone number type</p>\n               <ul>\n                  <li>\n                     <p>You can choose from <code>Phone</code>, <code>HomePhone</code>, and\n                        <code>MobilePhone</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Address type</p>\n               <ul>\n                  <li>\n                     <p>You can choose from <code>Address</code>, <code>BusinessAddress</code>,\n                        <code>MaillingAddress</code>, and <code>ShippingAddress</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the\n            <code>AttributeMatchingModel</code>. When choosing <code>MANY_TO_MANY</code>, the system\n         can match attribute across the sub-types of an attribute type. For example, if the value of\n         the <code>Email</code> field of Profile A and the value of <code>BusinessEmail</code> field\n         of Profile B matches, the two profiles are matched on the Email type. When choosing\n            <code>ONE_TO_ONE</code> the system can only match if the sub-types are exact matches.\n         For example, only when the value of the <code>Email</code> field of Profile A and the value\n         of the <code>Email</code> field of Profile B matches, the two profiles are matched on the\n         Email type.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AttributeValueItem": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An individual value belonging to the given attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List containing the values for the given attribute.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AttributeValueItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#AttributeValueItem"
             }
         },
         "com.amazonaws.customerprofiles#Attributes": {
@@ -570,6 +768,274 @@
                 "smithy.api#documentation": "<p>Batch defines the boundaries for ingestion for each step in\n            <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow\n         splits ingestion based on these boundaries.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fetch the possible attribute values given the attribute name.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}/batch-get-for-profiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status code for why a specific profile and calculated attribute failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing why a specific profile and calculated attribute failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile id that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error object describing why a specific profile and calculated attribute failed.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileError"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#uuid"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileRequest": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileIds": {
+                    "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of unique identifiers for customer profiles to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConditionOverrides": {
+                    "target": "com.amazonaws.customerprofiles#ConditionOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the condition block within the original calculated attribute definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Errors": {
+                    "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfileErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of errors for calculated attribute values that could not be retrieved.</p>"
+                    }
+                },
+                "CalculatedAttributeValues": {
+                    "target": "com.amazonaws.customerprofiles#CalculatedAttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of calculated attribute values retrieved.</p>"
+                    }
+                },
+                "ConditionOverrides": {
+                    "target": "com.amazonaws.customerprofiles#ConditionOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the condition block within the original calculated attribute definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#BatchGetProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#BatchGetProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a batch of profiles.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/batch-get-profiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetProfileError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status code for why a specific profile failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing why a specific profile failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile id that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error object describing why a specific profile failed.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetProfileErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchGetProfileError"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetProfileIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#uuid"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetProfileRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileIds": {
+                    "target": "com.amazonaws.customerprofiles#BatchGetProfileIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of unique identifiers for customer profiles to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchGetProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Errors": {
+                    "target": "com.amazonaws.customerprofiles#BatchGetProfileErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For information about the errors that are common to all actions, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>"
+                    }
+                },
+                "Profiles": {
+                    "target": "com.amazonaws.customerprofiles#ProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of Profile Objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#Batches": {
             "type": "list",
             "member": {
@@ -605,10 +1071,109 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.customerprofiles#CalculatedAttributeDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#AttributeDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to segment with.</p>",
+                        "smithy.api#jsonName": "DimensionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType with.</p>",
+                        "smithy.api#jsonName": "Values",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConditionOverrides": {
+                    "target": "com.amazonaws.customerprofiles#ConditionOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies the given condition over the initial Calculated Attribute's definition.</p>",
+                        "smithy.api#jsonName": "ConditionOverrides"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that segments on Customer Profile's Calculated Attributes.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#CalculatedAttributeValue": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "IsDataPartial": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute's value is based on partial data. If the data is partial, it is set to true.</p>"
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile id belonging to this calculated attribute value.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the calculated attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object containing the values of a single calculated attribute value.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#CalculatedAttributeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#CalculatedAttributeValue"
+            }
+        },
         "com.amazonaws.customerprofiles#CalculatedAttributesForProfileList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeForProfileItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#CalculatedCustomAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#typeName"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#CalculatedAttributeDimension"
+            }
+        },
+        "com.amazonaws.customerprofiles#ConditionOverrides": {
+            "type": "structure",
+            "members": {
+                "Range": {
+                    "target": "com.amazonaws.customerprofiles#RangeOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative time period over which data is included in the aggregation for this override.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to override the original condition block of a calculated attribute.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.customerprofiles#Conditions": {
@@ -817,6 +1382,12 @@
                         "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
                     }
                 },
+                "Filter": {
+                    "target": "com.amazonaws.customerprofiles#Filter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how to filter incoming objects to include part of the Calculated Attribute.</p>"
+                    }
+                },
                 "Statistic": {
                     "target": "com.amazonaws.customerprofiles#Statistic",
                     "traits": {
@@ -866,6 +1437,12 @@
                     "target": "com.amazonaws.customerprofiles#Conditions",
                     "traits": {
                         "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated\n         attribute.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.customerprofiles#Filter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that was used as part of the request.</p>"
                     }
                 },
                 "Statistic": {
@@ -1451,12 +2028,346 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#CreateSegmentDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateSegmentDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateSegmentDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a segment definition associated to the given domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the segment definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the segment definition.</p>"
+                    }
+                },
+                "SegmentGroups": {
+                    "target": "com.amazonaws.customerprofiles#SegmentGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the base segments and dimensions for a segment definition along with their respective relationship.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the segment definition.</p>",
+                        "smithy.api#jsonName": "DisplayName"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the segment definition.</p>",
+                        "smithy.api#jsonName": "Description"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the segment definition was created.</p>",
+                        "smithy.api#jsonName": "CreatedAt"
+                    }
+                },
+                "SegmentDefinitionArn": {
+                    "target": "com.amazonaws.customerprofiles#SegmentDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionArn"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>",
+                        "smithy.api#jsonName": "Tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentEstimate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateSegmentEstimateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateSegmentEstimateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a segment estimate query.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/segment-estimates",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentEstimateRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentQuery": {
+                    "target": "com.amazonaws.customerprofiles#SegmentGroupStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment query for calculating a segment estimate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentEstimateResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>"
+                    }
+                },
+                "EstimateId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource. The value can be passed to <code>GetSegmentEstimate</code> to retrieve the result of segment estimate status.</p>"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.customerprofiles#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The status code for the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateSegmentSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateSegmentSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Triggers a job to export a segment to a specified destination.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/segments/{SegmentDefinitionName}/snapshots",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment definition used in this snapshot request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataFormat": {
+                    "target": "com.amazonaws.customerprofiles#DataFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which the segment will be exported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported segment.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting KMS and S3 operations.</p>"
+                    }
+                },
+                "DestinationUri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if the request is not submitted from the Amazon Connect Admin Website.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateSegmentSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the segment snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CustomAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#typeName"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#AttributeDimension"
+            }
+        },
         "com.amazonaws.customerprofiles#CustomerProfiles_20200815": {
             "type": "service",
             "version": "2020-08-15",
             "operations": [
                 {
                     "target": "com.amazonaws.customerprofiles#AddProfileKey"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BatchGetProfile"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition"
@@ -1472,6 +2383,15 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateSegmentDefinition"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateSegmentEstimate"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateSegmentSnapshot"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinition"
@@ -1496,6 +2416,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteProfileObjectType"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteSegmentDefinition"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteWorkflow"
@@ -1534,6 +2457,18 @@
                     "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplate"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentDefinition"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentEstimate"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentMembership"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentSnapshot"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetSimilarProfiles"
                 },
                 {
@@ -1564,6 +2499,12 @@
                     "target": "com.amazonaws.customerprofiles#ListIntegrations"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#ListObjectTypeAttributes"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListProfileAttributeValues"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#ListProfileObjects"
                 },
                 {
@@ -1574,6 +2515,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListRuleBasedMatches"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListSegmentDefinitions"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListTagsForResource"
@@ -2373,6 +3317,29 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#DataFormat": {
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                },
+                "JSONL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONL"
+                    }
+                },
+                "ORC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORC"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#DataPullMode": {
             "type": "enum",
             "members": {
@@ -2392,6 +3359,77 @@
         },
         "com.amazonaws.customerprofiles#Date": {
             "type": "timestamp"
+        },
+        "com.amazonaws.customerprofiles#DateDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#DateDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to segment with.</p>",
+                        "smithy.api#jsonName": "DimensionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#DateValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#jsonName": "Values",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that segments on various Customer Profile's date fields.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#DateDimensionType": {
+            "type": "enum",
+            "members": {
+                "BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE"
+                    }
+                },
+                "AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "NOT_BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_BETWEEN"
+                    }
+                },
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DateValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
         },
         "com.amazonaws.customerprofiles#DatetimeTypeFieldName": {
             "type": "string",
@@ -2985,6 +4023,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#DeleteSegmentDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteSegmentDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteSegmentDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a segment definition from the domain.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteSegmentDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteSegmentDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#DeleteWorkflow": {
             "type": "operation",
             "input": {
@@ -3191,6 +4303,34 @@
                 "target": "com.amazonaws.customerprofiles#DetectedProfileObjectType"
             }
         },
+        "com.amazonaws.customerprofiles#Dimension": {
+            "type": "union",
+            "members": {
+                "ProfileAttributes": {
+                    "target": "com.amazonaws.customerprofiles#ProfileAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that holds the profile attributes to segment on.</p>",
+                        "smithy.api#jsonName": "ProfileAttributes"
+                    }
+                },
+                "CalculatedAttributes": {
+                    "target": "com.amazonaws.customerprofiles#CalculatedCustomAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that holds the calculated attributes to segment on.</p>",
+                        "smithy.api#jsonName": "CalculatedAttributes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that holds what profile and calculated attributes to segment on.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#DimensionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#Dimension"
+            }
+        },
         "com.amazonaws.customerprofiles#DomainList": {
             "type": "list",
             "member": {
@@ -3254,6 +4394,39 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 3
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#End": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 366
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EstimateStatus": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
                 }
             }
         },
@@ -3411,6 +4584,48 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The S3 location where Identity Resolution Jobs write result files.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ExtraLengthValueProfileDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#StringDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to segment with.</p>",
+                        "smithy.api#jsonName": "DimensionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#ExtraLengthValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#jsonName": "Values",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that segments on various Customer profile's fields that are larger than normal.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ExtraLengthValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To1000"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Failures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ProfileQueryFailures"
             }
         },
         "com.amazonaws.customerprofiles#FieldContentType": {
@@ -3598,6 +4813,194 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A duplicate customer profile that is to be merged into a main profile. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#Filter": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.customerprofiles#Include",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define whether to include or exclude objects for Calculated Attributed calculation that fit the filter groups criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Groups": {
+                    "target": "com.amazonaws.customerprofiles#GroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Holds the list of Filter groups within the Filter definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines how to filter the objects coming in for calculated attributes.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#FilterAttributeDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#FilterDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to filter with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#ValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that defines how to filter the incoming objects for the calculated attribute.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#FilterDimension": {
+            "type": "structure",
+            "members": {
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#AttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Is the attribute within the FilterDimension map</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the map of attribute names to attribute dimensions.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#FilterDimensionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#FilterDimension"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#FilterDimensionType": {
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
+                    }
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BEGINS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEGINS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE"
+                    }
+                },
+                "AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "NOT_BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_BETWEEN"
+                    }
+                },
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL"
+                    }
+                },
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#FilterGroup": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.customerprofiles#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of logical relationship between the dimensions of the Filter group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.customerprofiles#FilterDimensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that holds the attributes to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that holds the dimensions to filter on.</p>"
             }
         },
         "com.amazonaws.customerprofiles#FlowDefinition": {
@@ -3918,6 +5321,12 @@
                     "target": "com.amazonaws.customerprofiles#Statistic",
                     "traits": {
                         "smithy.api#documentation": "<p>The aggregation operation to perform for the calculated attribute.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.customerprofiles#Filter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter assigned to this calculated attribute definition.</p>"
                     }
                 },
                 "Conditions": {
@@ -4886,6 +6295,447 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#GetSegmentDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a segment definition from the domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionName"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the segment definition.</p>",
+                        "smithy.api#jsonName": "DisplayName"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the segment definition.</p>",
+                        "smithy.api#jsonName": "Description"
+                    }
+                },
+                "SegmentGroups": {
+                    "target": "com.amazonaws.customerprofiles#SegmentGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment criteria associated with this definition.</p>",
+                        "smithy.api#jsonName": "SegmentGroups"
+                    }
+                },
+                "SegmentDefinitionArn": {
+                    "target": "com.amazonaws.customerprofiles#SegmentDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the segment definition was created.</p>",
+                        "smithy.api#jsonName": "CreatedAt"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>",
+                        "smithy.api#jsonName": "Tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentEstimate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentEstimateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentEstimateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the result of a segment estimate query.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segment-estimates/{EstimateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentEstimateRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EstimateId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query Id passed by a previous <code>CreateSegmentEstimate</code> operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentEstimateResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>"
+                    }
+                },
+                "EstimateId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>QueryId</code> which is the same as the value passed in <code>QueryId</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#EstimateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the query.</p>"
+                    }
+                },
+                "Estimate": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated number of profiles contained in the segment.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message if there is any error.</p>"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.customerprofiles#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The status code of the segment estimate.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Determines if the given profiles are within a segment.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/segments/{SegmentDefinitionName}/membership",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentMembershipMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.customerprofiles#GetSegmentMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Id of the wanted segment. Needs to be a valid, and existing segment Id.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileIds": {
+                    "target": "com.amazonaws.customerprofiles#ProfileIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of profile IDs to query for.</p>",
+                        "smithy.api#jsonName": "ProfileIds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionName"
+                    }
+                },
+                "Profiles": {
+                    "target": "com.amazonaws.customerprofiles#Profiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of maps where each contains a response per profile requested.</p>",
+                        "smithy.api#jsonName": "Profiles"
+                    }
+                },
+                "Failures": {
+                    "target": "com.amazonaws.customerprofiles#Failures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of maps where each contains a response per profile failed for the request.</p>",
+                        "smithy.api#jsonName": "Failures"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentMembershipStatus": {
+            "type": "integer"
+        },
+        "com.amazonaws.customerprofiles#GetSegmentSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the latest status of a segment snapshot.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segments/{SegmentDefinitionName}/snapshots/{SnapshotId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the segment snapshot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the segment snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSnapshotStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asynchronous job for exporting the segment snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the asynchronous job for exporting the segment snapshot.</p>"
+                    }
+                },
+                "DataFormat": {
+                    "target": "com.amazonaws.customerprofiles#DataFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which the segment will be exported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported segment.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting KMS and S3 operations.</p>"
+                    }
+                },
+                "DestinationUri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if the request is not submitted from the Amazon Connect Admin Website.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#GetSimilarProfiles": {
             "type": "operation",
             "input": {
@@ -4917,6 +6767,12 @@
                     "method": "POST",
                     "uri": "/domains/{DomainName}/matches",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ProfileIds",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -5233,6 +7089,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#Group": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.customerprofiles#DimensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the attributes to segment on.</p>",
+                        "smithy.api#jsonName": "Dimensions"
+                    }
+                },
+                "SourceSegments": {
+                    "target": "com.amazonaws.customerprofiles#SourceSegmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the starting source of data.</p>",
+                        "smithy.api#jsonName": "SourceSegments"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.customerprofiles#IncludeOptions",
+                    "traits": {
+                        "smithy.api#default": "ALL",
+                        "smithy.api#documentation": "<p>Defines how to interact with the source data.</p>",
+                        "smithy.api#jsonName": "SourceType"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.customerprofiles#IncludeOptions",
+                    "traits": {
+                        "smithy.api#default": "ALL",
+                        "smithy.api#documentation": "<p>Defines how to interact with the profiles found in the current filtering.</p>",
+                        "smithy.api#jsonName": "Type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains dimensions that determine what to segment on.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#GroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#FilterGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#IdentityResolutionJob": {
             "type": "structure",
             "members": {
@@ -5340,6 +7246,52 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#IdentityResolutionJob"
+            }
+        },
+        "com.amazonaws.customerprofiles#Include": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#IncludeOptions": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#IncrementalPullConfig": {
@@ -6309,6 +8261,166 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#ListObjectTypeAttributeItem": {
+            "type": "structure",
+            "members": {
+                "AttributeName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the attribute was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Item that contains the attribute and when it was last updated.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListObjectTypeAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListObjectTypeAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListObjectTypeAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fetch the possible attribute values given the attribute name.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/object-types/{ObjectTypeName}/attributes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListObjectTypeAttributesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListObjectTypeAttributeItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListObjectTypeAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call. </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListObjectTypeAttributesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#ListObjectTypeAttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The items returned as part of the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileAttributeValues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ProfileAttributeValuesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ProfileAttributeValuesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fetch the possible attribute values given the attribute name.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/profile-attributes/{AttributeName}/values",
+                    "code": 200
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ListProfileObjectTypeItem": {
             "type": "structure",
             "members": {
@@ -6708,6 +8820,12 @@
                     "method": "GET",
                     "uri": "/domains/{DomainName}/profiles/ruleBasedMatches",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MatchIds",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -6754,6 +8872,98 @@
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token from the previous <code>ListRuleBasedMatches</code> API\n         call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListSegmentDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListSegmentDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListSegmentDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all segment definitions under a domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segment-definitions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListSegmentDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#MaxSize500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call. </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListSegmentDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call.</p>",
+                        "smithy.api#jsonName": "NextToken"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#SegmentDefinitionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of segment definitions.</p>",
+                        "smithy.api#jsonName": "Items"
                     }
                 }
             },
@@ -7294,6 +9504,15 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#MaxSize500": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#MergeProfiles": {
             "type": "operation",
             "input": {
@@ -7805,6 +10024,247 @@
                 "smithy.api#documentation": "<p>The standard profile of a customer.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#ProfileAttributeValuesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute name.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileAttributeValuesResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>"
+                    }
+                },
+                "AttributeName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute name.</p>"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#AttributeValueItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The items returned as part of the response.</p>"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.customerprofiles#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The status code for the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileAttributes": {
+            "type": "structure",
+            "members": {
+                "AccountNumber": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within account number.</p>",
+                        "smithy.api#jsonName": "AccountNumber"
+                    }
+                },
+                "AdditionalInformation": {
+                    "target": "com.amazonaws.customerprofiles#ExtraLengthValueProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within additional information.</p>",
+                        "smithy.api#jsonName": "AdditionalInformation"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within first name.</p>",
+                        "smithy.api#jsonName": "FirstName"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within last name.</p>",
+                        "smithy.api#jsonName": "LastName"
+                    }
+                },
+                "MiddleName": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within middle name.</p>",
+                        "smithy.api#jsonName": "MiddleName"
+                    }
+                },
+                "GenderString": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within genderString.</p>",
+                        "smithy.api#jsonName": "GenderString"
+                    }
+                },
+                "PartyTypeString": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within partyTypeString.</p>",
+                        "smithy.api#jsonName": "PartyTypeString"
+                    }
+                },
+                "BirthDate": {
+                    "target": "com.amazonaws.customerprofiles#DateDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within birthDate.</p>",
+                        "smithy.api#jsonName": "BirthDate"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within phone number.</p>",
+                        "smithy.api#jsonName": "PhoneNumber"
+                    }
+                },
+                "BusinessName": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within business name.</p>",
+                        "smithy.api#jsonName": "BusinessName"
+                    }
+                },
+                "BusinessPhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within business phone number.</p>",
+                        "smithy.api#jsonName": "BusinessPhoneNumber"
+                    }
+                },
+                "HomePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within home phone number.</p>",
+                        "smithy.api#jsonName": "HomePhoneNumber"
+                    }
+                },
+                "MobilePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within mobile phone number.</p>",
+                        "smithy.api#jsonName": "MobilePhoneNumber"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within email address.</p>",
+                        "smithy.api#jsonName": "EmailAddress"
+                    }
+                },
+                "PersonalEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within personal email address.</p>",
+                        "smithy.api#jsonName": "PersonalEmailAddress"
+                    }
+                },
+                "BusinessEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#ProfileDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within business email address.</p>",
+                        "smithy.api#jsonName": "BusinessEmailAddress"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.customerprofiles#AddressDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within address.</p>",
+                        "smithy.api#jsonName": "Address"
+                    }
+                },
+                "ShippingAddress": {
+                    "target": "com.amazonaws.customerprofiles#AddressDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within shipping address.</p>",
+                        "smithy.api#jsonName": "ShippingAddress"
+                    }
+                },
+                "MailingAddress": {
+                    "target": "com.amazonaws.customerprofiles#AddressDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within mailing address.</p>",
+                        "smithy.api#jsonName": "MailingAddress"
+                    }
+                },
+                "BillingAddress": {
+                    "target": "com.amazonaws.customerprofiles#AddressDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within billing address.</p>",
+                        "smithy.api#jsonName": "BillingAddress"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#CustomAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field to describe values to segment on within attributes.</p>",
+                        "smithy.api#jsonName": "Attributes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object used to segment on attributes within the customer profile.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionType": {
+                    "target": "com.amazonaws.customerprofiles#StringDimensionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to segment on.</p>",
+                        "smithy.api#jsonName": "DimensionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#Values",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#jsonName": "Values",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to hold the dimensions of a profile's fields to segment on.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileId": {
+            "type": "string"
+        },
         "com.amazonaws.customerprofiles#ProfileIdList": {
             "type": "list",
             "member": {
@@ -7820,6 +10280,18 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#uuid"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -7848,6 +10320,73 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplateItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileQueryFailures": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#ProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile id the failure belongs to.</p>",
+                        "smithy.api#jsonName": "ProfileId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentMembershipMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the failure.</p>",
+                        "smithy.api#jsonName": "Message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentMembershipStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status describing the failure.</p>",
+                        "smithy.api#jsonName": "Status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that holds failures for membership.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileQueryResult": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#ProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile id the result belongs to.</p>",
+                        "smithy.api#jsonName": "ProfileId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryResult": {
+                    "target": "com.amazonaws.customerprofiles#QueryResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether the profile was absent or present in the segment.</p>",
+                        "smithy.api#jsonName": "QueryResult",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.customerprofiles#Profile",
+                    "traits": {
+                        "smithy.api#jsonName": "Profile"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object that holds the results for membership.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#Profiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ProfileQueryResult"
             }
         },
         "com.amazonaws.customerprofiles#Property": {
@@ -8311,6 +10850,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#QueryResult": {
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#Range": {
             "type": "structure",
             "members": {
@@ -8331,6 +10887,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The relative time period over which data is included in the aggregation.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RangeOverride": {
+            "type": "structure",
+            "members": {
+                "Start": {
+                    "target": "com.amazonaws.customerprofiles#Start",
+                    "traits": {
+                        "smithy.api#default": 366,
+                        "smithy.api#documentation": "<p>The start time of when to include objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "End": {
+                    "target": "com.amazonaws.customerprofiles#End",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The end time of when to include objects.</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.customerprofiles#RangeUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit for start and end.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overrides the original range on a calculated attribute definition.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RangeUnit": {
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#ResourceNotFoundException": {
@@ -9012,6 +11609,144 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#SegmentDefinitionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentDefinitionItem": {
+            "type": "structure",
+            "members": {
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionName"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display name of the segment definition.</p>",
+                        "smithy.api#jsonName": "DisplayName"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#sensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the segment definition.</p>",
+                        "smithy.api#jsonName": "Description"
+                    }
+                },
+                "SegmentDefinitionArn": {
+                    "target": "com.amazonaws.customerprofiles#SegmentDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionArn"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the segment definition was created.</p>",
+                        "smithy.api#jsonName": "CreatedAt"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags belonging to the segment definition.</p>",
+                        "smithy.api#jsonName": "Tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object holding the segment definition fields.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentDefinitionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#SegmentDefinitionItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentGroup": {
+            "type": "structure",
+            "members": {
+                "Groups": {
+                    "target": "com.amazonaws.customerprofiles#SegmentGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Holds the list of groups within the segment definition.</p>",
+                        "smithy.api#jsonName": "Groups"
+                    }
+                },
+                "Include": {
+                    "target": "com.amazonaws.customerprofiles#IncludeOptions",
+                    "traits": {
+                        "smithy.api#default": "ALL",
+                        "smithy.api#documentation": "<p>Defines whether to include or exclude the profiles that fit the segment criteria.</p>",
+                        "smithy.api#jsonName": "Include"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains all groups of the segment definition.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#Group"
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentGroupStructure": {
+            "type": "structure",
+            "members": {
+                "Groups": {
+                    "target": "com.amazonaws.customerprofiles#SegmentGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Holds the list of groups within the segment definition.</p>"
+                    }
+                },
+                "Include": {
+                    "target": "com.amazonaws.customerprofiles#IncludeOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define whether to include or exclude the profiles that fit the segment criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains all groups of the segment definition.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentSnapshotStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ServiceNowConnectorOperator": {
             "type": "enum",
             "members": {
@@ -9271,6 +12006,27 @@
                 "smithy.api#documentation": "<p>Contains information about the configuration of the source connector used in the\n         flow.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#SourceSegment": {
+            "type": "structure",
+            "members": {
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition.</p>",
+                        "smithy.api#jsonName": "SegmentDefinitionName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source segments to build off of.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#SourceSegmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#SourceSegment"
+            }
+        },
         "com.amazonaws.customerprofiles#StandardIdentifier": {
             "type": "enum",
             "members": {
@@ -9290,6 +12046,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CASE"
+                    }
+                },
+                "ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORDER"
+                    }
+                },
+                "COMMUNICATION_RECORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMUNICATION_RECORD"
                     }
                 },
                 "UNIQUE": {
@@ -9315,12 +12083,6 @@
                     "traits": {
                         "smithy.api#enumValue": "NEW_ONLY"
                     }
-                },
-                "ORDER": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ORDER"
-                    }
                 }
             }
         },
@@ -9328,6 +12090,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#StandardIdentifier"
+            }
+        },
+        "com.amazonaws.customerprofiles#Start": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 366
+                }
             }
         },
         "com.amazonaws.customerprofiles#Statistic": {
@@ -9429,6 +12200,47 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#StatusCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.customerprofiles#StringDimensionType": {
+            "type": "enum",
+            "members": {
+                "INCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUSIVE"
+                    }
+                },
+                "EXCLUSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BEGINS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEGINS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
                     }
                 }
             }
@@ -9748,6 +12560,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OnDemand"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Type": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
                 }
             }
@@ -10408,6 +13243,30 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 366
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Values": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },

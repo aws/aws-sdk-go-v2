@@ -216,12 +216,10 @@ type ComputeConfig struct {
 	// DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with
 	// 1 DCU as the minimum value allowed. The list of valid DCU values includes 1, 2,
 	// 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can
-	// specify for DMS Serverless is 1. You don't have to specify a value for the
-	// MinCapacityUnits parameter. If you don't set this value, DMS scans the current
-	// activity of available source tables to identify an optimum setting for this
-	// parameter. If there is no current source activity or DMS can't otherwise
-	// identify a more appropriate value, it sets this parameter to the minimum DCU
-	// value allowed, 1.
+	// specify for DMS Serverless is 1. If you don't set this value, DMS sets this
+	// parameter to the minimum DCU value allowed, 1. If there is no current source
+	// activity, DMS scales down your replication until it reaches the value specified
+	// in MinCapacityUnits .
 	MinCapacityUnits *int32
 
 	// Specifies whether the DMS Serverless replication is a Multi-AZ deployment. You
@@ -363,6 +361,117 @@ type DatabaseShortInfoResponse struct {
 
 	// The name of a database in a Fleet Advisor collector inventory.
 	DatabaseName *string
+
+	noSmithyDocumentSerde
+}
+
+// This object provides information about a DMS data migration.
+type DataMigration struct {
+
+	// The Amazon Resource Name (ARN) that identifies this replication.
+	DataMigrationArn *string
+
+	// The CIDR blocks of the endpoints for the data migration.
+	DataMigrationCidrBlocks []string
+
+	// The UTC time when DMS created the data migration.
+	DataMigrationCreateTime *time.Time
+
+	// The UTC time when data migration ended.
+	DataMigrationEndTime *time.Time
+
+	// The user-friendly name for the data migration.
+	DataMigrationName *string
+
+	// Specifies CloudWatch settings and selection rules for the data migration.
+	DataMigrationSettings *DataMigrationSettings
+
+	// The UTC time when DMS started the data migration.
+	DataMigrationStartTime *time.Time
+
+	// Provides information about the data migration's run, including start and stop
+	// time, latency, and data migration progress.
+	DataMigrationStatistics *DataMigrationStatistics
+
+	// The current status of the data migration.
+	DataMigrationStatus *string
+
+	// Specifies whether the data migration is full-load only, change data capture
+	// (CDC) only, or full-load and CDC.
+	DataMigrationType MigrationTypeValue
+
+	// Information about the data migration's most recent error or failure.
+	LastFailureMessage *string
+
+	// The Amazon Resource Name (ARN) of the data migration's associated migration
+	// project.
+	MigrationProjectArn *string
+
+	// The IP addresses of the endpoints for the data migration.
+	PublicIpAddresses []string
+
+	// The IAM role that the data migration uses to access Amazon Web Services
+	// resources.
+	ServiceAccessRoleArn *string
+
+	// Specifies information about the data migration's source data provider.
+	SourceDataSettings []SourceDataSetting
+
+	// The reason the data migration last stopped.
+	StopReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for configuring a data migration, including whether to enable
+// CloudWatch logs, and the selection rules to use to include or exclude database
+// objects from the migration.
+type DataMigrationSettings struct {
+
+	// Whether to enable CloudWatch logging for the data migration.
+	CloudwatchLogsEnabled *bool
+
+	// The number of parallel jobs that trigger parallel threads to unload the tables
+	// from the source, and then load them to the target.
+	NumberOfJobs *int32
+
+	// A JSON-formatted string that defines what objects to include and exclude from
+	// the migration.
+	SelectionRules *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the data migration run, including start and stop time,
+// latency, and migration progress.
+type DataMigrationStatistics struct {
+
+	// The current latency of the change data capture (CDC) operation.
+	CDCLatency int32
+
+	// The elapsed duration of the data migration run.
+	ElapsedTimeMillis int64
+
+	// The data migration's progress in the full-load migration phase.
+	FullLoadPercentage int32
+
+	// The time when the migration started.
+	StartTime *time.Time
+
+	// The time when the migration stopped or failed.
+	StopTime *time.Time
+
+	// The number of tables that DMS failed to process.
+	TablesErrored int32
+
+	// The number of tables loaded in the current data migration run.
+	TablesLoaded int32
+
+	// The data migration's table loading progress.
+	TablesLoading int32
+
+	// The number of tables that are waiting for processing.
+	TablesQueued int32
 
 	noSmithyDocumentSerde
 }
@@ -3805,6 +3914,10 @@ type ReplicationTaskAssessmentRun struct {
 	// Unique name of the assessment run.
 	AssessmentRunName *string
 
+	// Indicates that the following PreflightAssessmentRun is the latest for the
+	// ReplicationTask. The status is either true or false.
+	IsLatestTaskAssessmentRun bool
+
 	// Last message generated by an individual assessment failure.
 	LastFailureMessage *string
 
@@ -3830,6 +3943,11 @@ type ReplicationTaskAssessmentRun struct {
 	// Folder in an Amazon S3 bucket where DMS stores the results of this assessment
 	// run.
 	ResultLocationFolder *string
+
+	//  Result statistics for a completed assessment run, showing aggregated
+	// statistics of IndividualAssessments for how many assessments were passed,
+	// failed, or encountered issues such as errors or warnings.
+	ResultStatistic *ReplicationTaskAssessmentRunResultStatistic
 
 	// ARN of the service role used to start the assessment run using the
 	// StartReplicationTaskAssessmentRun operation. The role must allow the
@@ -3879,6 +3997,31 @@ type ReplicationTaskAssessmentRunProgress struct {
 
 	// The number of individual assessments that are specified to run.
 	IndividualAssessmentCount int32
+
+	noSmithyDocumentSerde
+}
+
+// The object containing the result statistics for a completed assessment run.
+type ReplicationTaskAssessmentRunResultStatistic struct {
+
+	//  The number of individual assessments that were cancelled during the assessment
+	// run.
+	Cancelled int32
+
+	// The number of individual assessments that encountered a critical error and
+	// could not complete properly.
+	Error int32
+
+	// The number of individual assessments that failed to meet the criteria defined
+	// in the assessment run.
+	Failed int32
+
+	// The number of individual assessments that successfully passed all checks in the
+	// assessment run.
+	Passed int32
+
+	// Indicates that the recent completed AssessmentRun triggered a warning.
+	Warning int32
 
 	noSmithyDocumentSerde
 }
@@ -4522,6 +4665,25 @@ type ServerShortInfoResponse struct {
 
 	// The name address of a server in a Fleet Advisor collector inventory.
 	ServerName *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines settings for a source data provider for a data migration.
+type SourceDataSetting struct {
+
+	// The change data capture (CDC) start position for the source data provider.
+	CDCStartPosition *string
+
+	// The change data capture (CDC) start time for the source data provider.
+	CDCStartTime *time.Time
+
+	// The change data capture (CDC) stop time for the source data provider.
+	CDCStopTime *time.Time
+
+	// The name of the replication slot on the source data provider. This attribute is
+	// only valid for a PostgreSQL or Aurora PostgreSQL source.
+	SlotName *string
 
 	noSmithyDocumentSerde
 }

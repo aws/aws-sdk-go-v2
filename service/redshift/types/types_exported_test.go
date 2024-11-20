@@ -25,12 +25,33 @@ func ExampleLakeFormationScopeUnion_outputUsage() {
 
 var _ *types.LakeFormationQuery
 
+func ExampleS3AccessGrantsScopeUnion_outputUsage() {
+	var union types.S3AccessGrantsScopeUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.S3AccessGrantsScopeUnionMemberReadWriteAccess:
+		_ = v.Value // Value is types.ReadWriteAccess
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReadWriteAccess
+
 func ExampleServiceIntegrationsUnion_outputUsage() {
 	var union types.ServiceIntegrationsUnion
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.ServiceIntegrationsUnionMemberLakeFormation:
 		_ = v.Value // Value is []types.LakeFormationScopeUnion
+
+	case *types.ServiceIntegrationsUnionMemberS3AccessGrants:
+		_ = v.Value // Value is []types.S3AccessGrantsScopeUnion
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -42,3 +63,4 @@ func ExampleServiceIntegrationsUnion_outputUsage() {
 }
 
 var _ []types.LakeFormationScopeUnion
+var _ []types.S3AccessGrantsScopeUnion

@@ -522,7 +522,7 @@ func awsRestjson1_deserializeDocumentChannelInsufficientPermission(v **types.Cha
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -562,7 +562,7 @@ func awsRestjson1_deserializeDocumentChannelNotFound(v **types.ChannelNotFound, 
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -602,7 +602,7 @@ func awsRestjson1_deserializeDocumentChannelUnsupportedSchema(v **types.ChannelU
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -642,7 +642,7 @@ func awsRestjson1_deserializeDocumentDuplicatedAuditEventId(v **types.Duplicated
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -682,7 +682,7 @@ func awsRestjson1_deserializeDocumentInvalidChannelARN(v **types.InvalidChannelA
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -814,7 +814,7 @@ func awsRestjson1_deserializeDocumentUnsupportedOperationException(v **types.Uns
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

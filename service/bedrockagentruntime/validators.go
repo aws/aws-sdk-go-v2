@@ -90,6 +90,26 @@ func (m *validateOpInvokeFlow) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpOptimizePrompt struct {
+}
+
+func (*validateOpOptimizePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpOptimizePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*OptimizePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpOptimizePromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRetrieveAndGenerate struct {
 }
 
@@ -144,6 +164,10 @@ func addOpInvokeAgentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpInvokeFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeFlow{}, middleware.After)
+}
+
+func addOpOptimizePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpOptimizePrompt{}, middleware.After)
 }
 
 func addOpRetrieveAndGenerateValidationMiddleware(stack *middleware.Stack) error {
@@ -467,6 +491,25 @@ func validateInputFiles(v []types.InputFile) error {
 	}
 }
 
+func validateInputPrompt(v types.InputPrompt) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputPrompt"}
+	switch uv := v.(type) {
+	case *types.InputPromptMemberTextPrompt:
+		if err := validateTextPrompt(&uv.Value); err != nil {
+			invalidParams.AddNested("[textPrompt]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvocationResultMember(v types.InvocationResultMember) error {
 	if v == nil {
 		return nil
@@ -619,9 +662,7 @@ func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrchestrationConfiguration"}
-	if v.QueryTransformationConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryTransformationConfiguration"))
-	} else if v.QueryTransformationConfiguration != nil {
+	if v.QueryTransformationConfiguration != nil {
 		if err := validateQueryTransformationConfiguration(v.QueryTransformationConfiguration); err != nil {
 			invalidParams.AddNested("QueryTransformationConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -873,6 +914,21 @@ func validateSessionState(v *types.SessionState) error {
 	}
 }
 
+func validateTextPrompt(v *types.TextPrompt) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextPrompt"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAgentMemoryInput(v *DeleteAgentMemoryInput) error {
 	if v == nil {
 		return nil
@@ -958,6 +1014,28 @@ func validateOpInvokeFlowInput(v *InvokeFlowInput) error {
 		if err := validateFlowInputs(v.Inputs); err != nil {
 			invalidParams.AddNested("Inputs", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpOptimizePromptInput(v *OptimizePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OptimizePromptInput"}
+	if v.Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	} else if v.Input != nil {
+		if err := validateInputPrompt(v.Input); err != nil {
+			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

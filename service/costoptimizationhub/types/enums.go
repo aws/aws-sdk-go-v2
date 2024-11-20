@@ -12,6 +12,7 @@ const (
 	ActionTypePurchaseSavingsPlans      ActionType = "PurchaseSavingsPlans"
 	ActionTypePurchaseReservedInstances ActionType = "PurchaseReservedInstances"
 	ActionTypeMigrateToGraviton         ActionType = "MigrateToGraviton"
+	ActionTypeDelete                    ActionType = "Delete"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -26,6 +27,7 @@ func (ActionType) Values() []ActionType {
 		"PurchaseSavingsPlans",
 		"PurchaseReservedInstances",
 		"MigrateToGraviton",
+		"Delete",
 	}
 }
 

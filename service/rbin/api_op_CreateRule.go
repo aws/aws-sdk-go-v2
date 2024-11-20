@@ -11,10 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Recycle Bin retention rule. For more information, see [Create Recycle Bin retention rules] in the Amazon
-// Elastic Compute Cloud User Guide.
+// Creates a Recycle Bin retention rule. You can create two types of retention
+// rules:
 //
-// [Create Recycle Bin retention rules]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-create-rule
+//   - Tag-level retention rules - These retention rules use resource tags to
+//     identify the resources to protect. For each retention rule, you specify one or
+//     more tag key and value pairs. Resources (of the specified type) that have at
+//     least one of these tag key and value pairs are automatically retained in the
+//     Recycle Bin upon deletion. Use this type of retention rule to protect specific
+//     resources in your account based on their tags.
+//
+//   - Region-level retention rules - These retention rules, by default, apply to
+//     all of the resources (of the specified type) in the Region, even if the
+//     resources are not tagged. However, you can specify exclusion tags to exclude
+//     resources that have specific tags. Use this type of retention rule to protect
+//     all resources of a specific type in a Region.
+//
+// For more information, see [Create Recycle Bin retention rules] in the Amazon EBS User Guide.
+//
+// [Create Recycle Bin retention rules]: https://docs.aws.amazon.com/ebs/latest/userguide/recycle-bin.html
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
 		params = &CreateRuleInput{}
@@ -48,15 +63,23 @@ type CreateRuleInput struct {
 	// The retention rule description.
 	Description *string
 
+	// [Region-level retention rules only] Specifies the exclusion tags to use to
+	// identify resources that are to be excluded, or ignored, by a Region-level
+	// retention rule. Resources that have any of these tags are not retained by the
+	// retention rule upon deletion.
+	//
+	// You can't specify exclusion tags for tag-level retention rules.
+	ExcludeResourceTags []types.ResourceTag
+
 	// Information about the retention rule lock configuration.
 	LockConfiguration *types.LockConfiguration
 
-	// Specifies the resource tags to use to identify resources that are to be
-	// retained by a tag-level retention rule. For tag-level retention rules, only
-	// deleted resources, of the specified resource type, that have one or more of the
-	// specified tag key and value pairs are retained. If a resource is deleted, but it
-	// does not have any of the specified tag key and value pairs, it is immediately
-	// deleted without being retained by the retention rule.
+	// [Tag-level retention rules only] Specifies the resource tags to use to identify
+	// resources that are to be retained by a tag-level retention rule. For tag-level
+	// retention rules, only deleted resources, of the specified resource type, that
+	// have one or more of the specified tag key and value pairs are retained. If a
+	// resource is deleted, but it does not have any of the specified tag key and value
+	// pairs, it is immediately deleted without being retained by the retention rule.
 	//
 	// You can add the same tag key and value pair to a maximum or five retention
 	// rules.
@@ -78,13 +101,18 @@ type CreateRuleOutput struct {
 	// The retention rule description.
 	Description *string
 
+	// [Region-level retention rules only] Information about the exclusion tags used
+	// to identify resources that are to be excluded, or ignored, by the retention
+	// rule.
+	ExcludeResourceTags []types.ResourceTag
+
 	// The unique ID of the retention rule.
 	Identifier *string
 
 	// Information about the retention rule lock configuration.
 	LockConfiguration *types.LockConfiguration
 
-	// The lock state for the retention rule.
+	// [Region-level retention rules only] The lock state for the retention rule.
 	//
 	//   - locked - The retention rule is locked and can't be modified or deleted.
 	//
@@ -100,8 +128,8 @@ type CreateRuleOutput struct {
 	//   can never transition back to null .
 	LockState types.LockState
 
-	// Information about the resource tags used to identify resources that are
-	// retained by the retention rule.
+	// [Tag-level retention rules only] Information about the resource tags used to
+	// identify resources that are retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	// The resource type retained by the retention rule.

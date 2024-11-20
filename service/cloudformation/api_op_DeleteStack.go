@@ -14,6 +14,11 @@ import (
 // Deletes a specified stack. Once the call completes successfully, stack deletion
 // starts. Deleted stacks don't show up in the DescribeStacksoperation if the deletion has been
 // completed successfully.
+//
+// For more information about deleting a stack, see [Delete a stack from the CloudFormation console] in the CloudFormation User
+// Guide.
+//
+// [Delete a stack from the CloudFormation console]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-delete-stack.html
 func (c *Client) DeleteStack(ctx context.Context, params *DeleteStackInput, optFns ...func(*Options)) (*DeleteStackOutput, error) {
 	if params == nil {
 		params = &DeleteStackInput{}
@@ -72,9 +77,9 @@ type DeleteStackInput struct {
 	// non-empty S3 bucket, but you want to delete the stack.
 	RetainResources []string
 
-	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
-	// that CloudFormation assumes to delete the stack. CloudFormation uses the role's
-	// credentials to make calls on your behalf.
+	// The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to
+	// delete the stack. CloudFormation uses the role's credentials to make calls on
+	// your behalf.
 	//
 	// If you don't specify a value, CloudFormation uses the role that was previously
 	// associated with the stack. If no role is available, CloudFormation uses a

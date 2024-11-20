@@ -982,6 +982,44 @@ func validateFilterGroups(v [][]types.WebhookFilter) error {
 	}
 }
 
+func validateFleetProxyRule(v *types.FleetProxyRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FleetProxyRule"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Effect) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
+	}
+	if v.Entities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entities"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFleetProxyRules(v []types.FleetProxyRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FleetProxyRules"}
+	for i := range v {
+		if err := validateFleetProxyRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGitSubmodulesConfig(v *types.GitSubmodulesConfig) error {
 	if v == nil {
 		return nil
@@ -1166,6 +1204,23 @@ func validateProjectSourceVersion(v *types.ProjectSourceVersion) error {
 	}
 	if v.SourceVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxyConfiguration(v *types.ProxyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProxyConfiguration"}
+	if v.OrderedProxyRules != nil {
+		if err := validateFleetProxyRules(v.OrderedProxyRules); err != nil {
+			invalidParams.AddNested("OrderedProxyRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1379,6 +1434,11 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	}
 	if len(v.ComputeType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
+	}
+	if v.ProxyConfiguration != nil {
+		if err := validateProxyConfiguration(v.ProxyConfiguration); err != nil {
+			invalidParams.AddNested("ProxyConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1931,6 +1991,11 @@ func validateOpUpdateFleetInput(v *UpdateFleetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFleetInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.ProxyConfiguration != nil {
+		if err := validateProxyConfiguration(v.ProxyConfiguration); err != nil {
+			invalidParams.AddNested("ProxyConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

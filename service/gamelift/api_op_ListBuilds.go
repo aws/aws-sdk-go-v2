@@ -49,7 +49,7 @@ type ListBuildsInput struct {
 
 	// A token that indicates the start of the next sequential page of results. Use
 	// the token that is returned with a previous call to this operation. To start at
-	// the beginning of the result set, don't specify a value.
+	// the beginning of the result set, do not specify a value.
 	NextToken *string
 
 	// Build status to filter results by. To retrieve all builds, leave this parameter

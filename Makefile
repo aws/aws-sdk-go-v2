@@ -215,13 +215,13 @@ sync-api-models:
 
 copy-attributevalue-feature:
 	cd ./feature/dynamodbstreams/attributevalue && \
-	find . -name "*.go" | grep -v "doc.go" | xargs -I % rm % && \
-	find ../../dynamodb/attributevalue -name "*.go" | grep -v "doc.go" | xargs -I % cp % . && \
-	ls *.go | grep -v "convert.go" | grep -v "doc.go" | \
+	find . -name "*.go" | grep -v "doc.go" | grep -v "go_module_metadata.go" | xargs -I % rm % && \
+	find ../../dynamodb/attributevalue -name "*.go" | grep -v "doc.go" | grep -v "go_module_metadata.go" | xargs -I % cp % . && \
+	ls *.go | grep -v "convert.go" | grep -v "doc.go" | grep -v "go_module_metadata.go" | \
 		xargs -I % sed -i.bk -E 's:github.com/aws/aws-sdk-go-v2/(service|feature)/dynamodb:github.com/aws/aws-sdk-go-v2/\1/dynamodbstreams:g' % &&  \
-	ls *.go | grep -v "convert.go" | grep -v "doc.go" | \
+	ls *.go | grep -v "convert.go" | grep -v "doc.go" | grep -v "go_module_metadata.go" | \
 		xargs -I % sed -i.bk 's:DynamoDB:DynamoDBStreams:g' % &&  \
-	ls *.go | grep -v "doc.go" | \
+	ls *.go | grep -v "doc.go" | grep -v "go_module_metadata.go" | \
 		xargs -I % sed -i.bk 's:dynamodb\.:dynamodbstreams.:g' % &&  \
 	sed -i.bk 's:streams\.:ddbtypes.:g' "convert.go" && \
 	sed -i.bk 's:ddb\.:streams.:g' "convert.go" &&  \
@@ -410,7 +410,7 @@ ci-lint-install:
 #######################
 .PHONY: integration integ-modules-% cleanup-integ-buckets
 
-integration: integ-modules-service
+integration: integ-modules-service integ-modules-feature
 
 integ-modules-%:
 	@# integration command that uses the pattern to define the root path that

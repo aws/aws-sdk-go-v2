@@ -12,6 +12,7 @@
         "api_op_EncryptData.go",
         "api_op_GenerateCardValidationData.go",
         "api_op_GenerateMac.go",
+        "api_op_GenerateMacEmvPinChange.go",
         "api_op_GeneratePinData.go",
         "api_op_ReEncryptData.go",
         "api_op_TranslatePinData.go",

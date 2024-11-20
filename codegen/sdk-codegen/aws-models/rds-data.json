@@ -114,6 +114,9 @@
                     "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rdsdata#DatabaseResumingException"
+                },
+                {
                     "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
                 },
                 {
@@ -237,6 +240,9 @@
                 },
                 {
                     "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseResumingException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
@@ -587,6 +593,19 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.rdsdata#DatabaseResumingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rdsdata#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request was canceled because the Aurora Serverless v2 DB instance was in a paused state.\n      The Data API request automatically causes the DB instance to begin resuming. Wait a few seconds and\n      try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.rdsdata#DatabaseUnavailableException": {
             "type": "structure",
             "members": {},
@@ -744,6 +763,9 @@
                 },
                 {
                     "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rdsdata#DatabaseResumingException"
                 },
                 {
                     "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"

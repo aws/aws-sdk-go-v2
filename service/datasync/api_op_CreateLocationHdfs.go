@@ -34,8 +34,8 @@ func (c *Client) CreateLocationHdfs(ctx context.Context, params *CreateLocationH
 
 type CreateLocationHdfsInput struct {
 
-	// The Amazon Resource Names (ARNs) of the agents that are used to connect to the
-	// HDFS cluster.
+	// The Amazon Resource Names (ARNs) of the DataSync agents that can connect to
+	// your HDFS cluster.
 	//
 	// This member is required.
 	AgentArns []string
@@ -114,7 +114,7 @@ type CreateLocationHdfsInput struct {
 
 type CreateLocationHdfsOutput struct {
 
-	// The ARN of the source HDFS cluster location that's created.
+	// The ARN of the source HDFS cluster location that you create.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.

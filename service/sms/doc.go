@@ -18,6 +18,8 @@
 //
 // [Server Migration Service User Guide]
 //
+// Deprecated: AWS Server Migration Service is Deprecated.
+//
 // [Server Migration Service User Guide]: https://docs.aws.amazon.com/server-migration-service/latest/userguide/
 // [Amazon Web Services Application Migration Service]: http://aws.amazon.com/application-migration-service
 // [Server Migration Service product page]: http://aws.amazon.com/server-migration-service/

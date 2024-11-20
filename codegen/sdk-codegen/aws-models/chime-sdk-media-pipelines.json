@@ -260,7 +260,7 @@
                     "target": "com.amazonaws.chimesdkmediapipelines#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Turns language identification on or off for multiple languages.</p>"
+                        "smithy.api#documentation": "<p>Turns language identification on or off for multiple languages.</p>\n         <note>\n            <p>Calls to this API must include a <code>LanguageCode</code>, <code>IdentifyLanguage</code>, or <code>IdentifyMultipleLanguages</code> parameter. \n         If you include more than one of those parameters, your transcription job fails.</p>\n         </note>"
                     }
                 },
                 "LanguageOptions": {
@@ -1980,6 +1980,18 @@
                     "target": "com.amazonaws.chimesdkmediapipelines#ChimeSdkMeetingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for a specified media pipeline. <code>SourceType</code> must\n         be <code>ChimeSdkMeeting</code>.</p>"
+                    }
+                },
+                "SseAwsKeyManagementParams": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#SseAwsKeyManagementParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains server side encryption parameters to be used by media capture\n         pipeline. The parameters can also be used by media concatenation pipeline taking media\n         capture pipeline as a media source.</p>"
+                    }
+                },
+                "SinkIamRoleArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the sink role to be used with <code>AwsKmsKeyId</code>\n         in <code>SseAwsKeyManagementParams</code>. Can only interact with <code>S3Bucket</code>\n         sink type. The role must belong to the caller’s account and be able to act on behalf of the\n         caller during the API call. All minimum policy permissions requirements for the caller to\n         perform sink-related actions are the same for <code>SinkIamRoleArn</code>.</p>\n         <p>Additionally, the role must have permission to <code>kms:GenerateDataKey</code> using\n         KMS key supplied as <code>AwsKmsKeyId</code> in <code>SseAwsKeyManagementParams</code>. If\n         media concatenation will be required later, the role must also have permission to\n         <code>kms:Decrypt</code> for the same KMS key.</p>"
                     }
                 },
                 "Tags": {
@@ -4585,6 +4597,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for a specified media pipeline. <code>SourceType</code> must\n         be <code>ChimeSdkMeeting</code>.</p>"
                     }
+                },
+                "SseAwsKeyManagementParams": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#SseAwsKeyManagementParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains server side encryption parameters to be used by media capture\n         pipeline. The parameters can also be used by media concatenation pipeline taking media\n         capture pipeline as a media source.</p>"
+                    }
+                },
+                "SinkIamRoleArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the sink role to be used with <code>AwsKmsKeyId</code>\n         in <code>SseAwsKeyManagementParams</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6144,6 +6168,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration settings for the SQS sink.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#SseAwsKeyManagementParams": {
+            "type": "structure",
+            "members": {
+                "AwsKmsKeyId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your media pipeline output.\n         Decryption is required for concatenation pipeline. If using a key located in the current\n         Amazon Web Services account, you can specify your KMS key in one of four\n         ways:</p>\n         <ul>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n               <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n               <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For example,\n               <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n               <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ul>\n         <p>If using a key located in a different Amazon Web Services account than the current\n         Amazon Web Services account, you can specify your KMS key in one of two\n         ways:</p>\n         <ul>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n               <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n               <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ul>\n         <p>If you don't specify an encryption key, your output is encrypted with the default\n         Amazon S3 key (SSE-S3).</p>\n         <p>Note that the role specified in the <code>SinkIamRoleArn</code> request parameter must\n         have permission to use the specified KMS key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsKmsEncryptionContext": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Base64-encoded string of a UTF-8 encoded JSON, which contains the encryption context as\n         non-secret key-value pair known as encryption context pairs, that provides an added layer\n         of security for your data. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html\">KMS encryption\n            context</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Asymmetric keys in KMS</a> in the <i>Key Management Service Developer\n                     Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains server side encryption parameters to be used by media capture pipeline. The\n         parameters can also be used by media concatenation pipeline taking media capture pipeline\n         as a media source.</p>"
             }
         },
         "com.amazonaws.chimesdkmediapipelines#StartSpeakerSearchTask": {

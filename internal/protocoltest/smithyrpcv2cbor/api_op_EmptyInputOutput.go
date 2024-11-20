@@ -97,6 +97,9 @@ func (c *Client) addOperationEmptyInputOutputMiddlewares(stack *middleware.Stack
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyInputOutput(options.Region), middleware.Before); err != nil {
 		return err
 	}

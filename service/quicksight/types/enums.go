@@ -554,6 +554,27 @@ func (AuthenticationMethodOption) Values() []AuthenticationMethodOption {
 	}
 }
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypePassword AuthenticationType = "PASSWORD"
+	AuthenticationTypeToken    AuthenticationType = "TOKEN"
+	AuthenticationTypeX509     AuthenticationType = "X509"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"PASSWORD",
+		"TOKEN",
+		"X509",
+	}
+}
+
 type AuthorSpecifiedAggregation string
 
 // Enum values for AuthorSpecifiedAggregation
@@ -691,6 +712,69 @@ func (BoxPlotFillStyle) Values() []BoxPlotFillStyle {
 	return []BoxPlotFillStyle{
 		"SOLID",
 		"TRANSPARENT",
+	}
+}
+
+type BrandStatus string
+
+// Enum values for BrandStatus
+const (
+	BrandStatusCreateInProgress BrandStatus = "CREATE_IN_PROGRESS"
+	BrandStatusCreateSucceeded  BrandStatus = "CREATE_SUCCEEDED"
+	BrandStatusCreateFailed     BrandStatus = "CREATE_FAILED"
+	BrandStatusDeleteInProgress BrandStatus = "DELETE_IN_PROGRESS"
+	BrandStatusDeleteFailed     BrandStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for BrandStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrandStatus) Values() []BrandStatus {
+	return []BrandStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_SUCCEEDED",
+		"CREATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
+type BrandVersionStatus string
+
+// Enum values for BrandVersionStatus
+const (
+	BrandVersionStatusCreateInProgress BrandVersionStatus = "CREATE_IN_PROGRESS"
+	BrandVersionStatusCreateSucceeded  BrandVersionStatus = "CREATE_SUCCEEDED"
+	BrandVersionStatusCreateFailed     BrandVersionStatus = "CREATE_FAILED"
+)
+
+// Values returns all known values for BrandVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrandVersionStatus) Values() []BrandVersionStatus {
+	return []BrandVersionStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_SUCCEEDED",
+		"CREATE_FAILED",
+	}
+}
+
+type CapabilityState string
+
+// Enum values for CapabilityState
+const (
+	CapabilityStateDeny CapabilityState = "DENY"
+)
+
+// Values returns all known values for CapabilityState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityState) Values() []CapabilityState {
+	return []CapabilityState{
+		"DENY",
 	}
 }
 

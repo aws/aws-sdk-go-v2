@@ -2328,6 +2328,28 @@ func awsAwsjson10_serializeDocumentCollectionNames(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCreateIamIdentityCenterConfigOptions(v *types.CreateIamIdentityCenterConfigOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GroupAttribute) > 0 {
+		ok := object.Key("groupAttribute")
+		ok.String(string(v.GroupAttribute))
+	}
+
+	if v.InstanceArn != nil {
+		ok := object.Key("instanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if len(v.UserAttribute) > 0 {
+		ok := object.Key("userAttribute")
+		ok.String(string(v.UserAttribute))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentLifecyclePolicyIdentifier(v *types.LifecyclePolicyIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2497,6 +2519,23 @@ func awsAwsjson10_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentUpdateIamIdentityCenterConfigOptions(v *types.UpdateIamIdentityCenterConfigOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GroupAttribute) > 0 {
+		ok := object.Key("groupAttribute")
+		ok.String(string(v.GroupAttribute))
+	}
+
+	if len(v.UserAttribute) > 0 {
+		ok := object.Key("userAttribute")
+		ok.String(string(v.UserAttribute))
+	}
+
 	return nil
 }
 
@@ -2701,6 +2740,13 @@ func awsAwsjson10_serializeOpDocumentCreateSecurityConfigInput(v *CreateSecurity
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.IamIdentityCenterOptions != nil {
+		ok := object.Key("iamIdentityCenterOptions")
+		if err := awsAwsjson10_serializeDocumentCreateIamIdentityCenterConfigOptions(v.IamIdentityCenterOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -3302,6 +3348,13 @@ func awsAwsjson10_serializeOpDocumentUpdateSecurityConfigInput(v *UpdateSecurity
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.IamIdentityCenterOptionsUpdates != nil {
+		ok := object.Key("iamIdentityCenterOptionsUpdates")
+		if err := awsAwsjson10_serializeDocumentUpdateIamIdentityCenterConfigOptions(v.IamIdentityCenterOptionsUpdates, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Id != nil {

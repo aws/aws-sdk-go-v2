@@ -51,7 +51,7 @@ type CreateReplicationSubnetGroupInput struct {
 	// string.
 	//
 	// Constraints: Must contain no more than 255 alphanumeric characters, periods,
-	// spaces, underscores, or hyphens. Must not be "default".
+	// underscores, or hyphens. Must not be "default".
 	//
 	// Example: mySubnetgroup
 	//

@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateDataLakeDataset(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataIntegrationFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataIntegrationFlow(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_DeleteDataLakeDataset(t *testing.T) {
 	_, err := svc.DeleteDataLakeDataset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDataLakeDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteInstance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -158,6 +182,18 @@ func TestCheckSnapshot_GetDataLakeDataset(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDataIntegrationFlows(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataIntegrationFlows(context.Background(), nil, func(o *Options) {
@@ -175,6 +211,18 @@ func TestCheckSnapshot_ListDataLakeDatasets(t *testing.T) {
 	_, err := svc.ListDataLakeDatasets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDataLakeDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInstances")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +301,18 @@ func TestCheckSnapshot_UpdateDataLakeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateBillOfMaterialsImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBillOfMaterialsImportJob(context.Background(), nil, func(o *Options) {
@@ -289,6 +349,18 @@ func TestUpdateSnapshot_CreateDataLakeDataset(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDataIntegrationFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataIntegrationFlow(context.Background(), nil, func(o *Options) {
@@ -306,6 +378,18 @@ func TestUpdateSnapshot_DeleteDataLakeDataset(t *testing.T) {
 	_, err := svc.DeleteDataLakeDataset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDataLakeDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteInstance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -349,6 +433,18 @@ func TestUpdateSnapshot_GetDataLakeDataset(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDataIntegrationFlows(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataIntegrationFlows(context.Background(), nil, func(o *Options) {
@@ -366,6 +462,18 @@ func TestUpdateSnapshot_ListDataLakeDatasets(t *testing.T) {
 	_, err := svc.ListDataLakeDatasets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDataLakeDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInstances(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInstances(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInstances")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -438,6 +546,18 @@ func TestUpdateSnapshot_UpdateDataLakeDataset(t *testing.T) {
 	_, err := svc.UpdateDataLakeDataset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDataLakeDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateInstance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInstance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateInstance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

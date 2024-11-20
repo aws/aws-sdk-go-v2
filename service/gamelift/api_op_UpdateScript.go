@@ -59,7 +59,7 @@ type UpdateScriptInput struct {
 	// This member is required.
 	ScriptId *string
 
-	// A descriptive label that is associated with a script. Script names don't need
+	// A descriptive label that is associated with a script. Script names do not need
 	// to be unique.
 	Name *string
 
@@ -73,8 +73,8 @@ type UpdateScriptInput struct {
 	// version.
 	StorageLocation *types.S3Location
 
-	// Version information associated with a build or script. Version strings don't
-	// need to be unique.
+	// Version information that is associated with a build or script. Version strings
+	// do not need to be unique.
 	Version *string
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.

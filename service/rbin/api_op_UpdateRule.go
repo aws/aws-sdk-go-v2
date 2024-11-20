@@ -43,12 +43,20 @@ type UpdateRuleInput struct {
 	// The retention rule description.
 	Description *string
 
-	// Specifies the resource tags to use to identify resources that are to be
-	// retained by a tag-level retention rule. For tag-level retention rules, only
-	// deleted resources, of the specified resource type, that have one or more of the
-	// specified tag key and value pairs are retained. If a resource is deleted, but it
-	// does not have any of the specified tag key and value pairs, it is immediately
-	// deleted without being retained by the retention rule.
+	// [Region-level retention rules only] Specifies the exclusion tags to use to
+	// identify resources that are to be excluded, or ignored, by a Region-level
+	// retention rule. Resources that have any of these tags are not retained by the
+	// retention rule upon deletion.
+	//
+	// You can't specify exclusion tags for tag-level retention rules.
+	ExcludeResourceTags []types.ResourceTag
+
+	// [Tag-level retention rules only] Specifies the resource tags to use to identify
+	// resources that are to be retained by a tag-level retention rule. For tag-level
+	// retention rules, only deleted resources, of the specified resource type, that
+	// have one or more of the specified tag key and value pairs are retained. If a
+	// resource is deleted, but it does not have any of the specified tag key and value
+	// pairs, it is immediately deleted without being retained by the retention rule.
 	//
 	// You can add the same tag key and value pair to a maximum or five retention
 	// rules.
@@ -75,6 +83,11 @@ type UpdateRuleOutput struct {
 	// The retention rule description.
 	Description *string
 
+	// [Region-level retention rules only] Information about the exclusion tags used
+	// to identify resources that are to be excluded, or ignored, by the retention
+	// rule.
+	ExcludeResourceTags []types.ResourceTag
+
 	// The unique ID of the retention rule.
 	Identifier *string
 
@@ -83,7 +96,7 @@ type UpdateRuleOutput struct {
 	// delay period.
 	LockEndTime *time.Time
 
-	// The lock state for the retention rule.
+	// [Region-level retention rules only] The lock state for the retention rule.
 	//
 	//   - locked - The retention rule is locked and can't be modified or deleted.
 	//
@@ -99,8 +112,8 @@ type UpdateRuleOutput struct {
 	//   can never transition back to null .
 	LockState types.LockState
 
-	// Information about the resource tags used to identify resources that are
-	// retained by the retention rule.
+	// [Tag-level retention rules only] Information about the resource tags used to
+	// identify resources that are retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	// The resource type retained by the retention rule.

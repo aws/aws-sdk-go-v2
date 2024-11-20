@@ -8,16 +8,50 @@ import (
 	"time"
 )
 
+// Provides information about the GPU accelerators and drivers for the instance
+// types in a fleet. If you include the acceleratorCapabilities property in the [ServiceManagedEc2InstanceCapabilities]
+// object, all of the Amazon EC2 instances will have at least one accelerator.
+//
+// [ServiceManagedEc2InstanceCapabilities]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+type AcceleratorCapabilities struct {
+
+	// A list of objects that contain the GPU name of the accelerator and driver for
+	// the instance types that support the accelerator.
+	//
+	// This member is required.
+	Selections []AcceleratorSelection
+
+	// The number of GPUs on each worker. The default is 1.
+	Count *AcceleratorCountRange
+
+	noSmithyDocumentSerde
+}
+
 // The range for the GPU fleet acceleration.
 type AcceleratorCountRange struct {
 
-	// The minimum GPU for the accelerator.
+	// The minimum number of GPUs for the accelerator. If you set the value to 0, a
+	// worker will still have 1 GPU.
 	//
 	// This member is required.
 	Min *int32
 
-	// The maximum GPU for the accelerator.
+	// The maximum number of GPUs for the accelerator.
 	Max *int32
+
+	noSmithyDocumentSerde
+}
+
+// Values that you can use to select a particular Amazon EC2 instance type.
+type AcceleratorSelection struct {
+
+	// The name of the GPU accelerator.
+	//
+	// This member is required.
+	Name AcceleratorName
+
+	// The driver version that the GPU accelerator uses.
+	Runtime *string
 
 	noSmithyDocumentSerde
 }
@@ -2115,6 +2149,13 @@ type ServiceManagedEc2InstanceCapabilities struct {
 	//
 	// This member is required.
 	VCpuCount *VCpuCountRange
+
+	// The GPU accelerator capabilities required for the Amazon EC2 instances. If you
+	// include the acceleratorCapabilities property in the [ServiceManagedEc2InstanceCapabilities] object, all of the Amazon
+	// EC2 instances will have at least one accelerator.
+	//
+	// [ServiceManagedEc2InstanceCapabilities]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_ServiceManagedEc2InstanceCapabilities
+	AcceleratorCapabilities *AcceleratorCapabilities
 
 	// The allowable Amazon EC2 instance types.
 	AllowedInstanceTypes []string

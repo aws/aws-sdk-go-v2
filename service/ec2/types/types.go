@@ -858,6 +858,42 @@ type BaselineEbsBandwidthMbpsRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The baseline performance to consider, using an instance family as a baseline
+// reference. The instance family establishes the lowest acceptable level of
+// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+// there is no guarantee that the selected instance types will always exceed the
+// baseline for every application.
+//
+// Currently, this parameter only supports CPU performance as a baseline
+// performance factor. For example, specifying c6i would use the CPU performance
+// of the c6i family as the baseline reference.
+type BaselinePerformanceFactors struct {
+
+	// The CPU performance to consider, using an instance family as the baseline
+	// reference.
+	Cpu *CpuPerformanceFactor
+
+	noSmithyDocumentSerde
+}
+
+// The baseline performance to consider, using an instance family as a baseline
+// reference. The instance family establishes the lowest acceptable level of
+// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+// there is no guarantee that the selected instance types will always exceed the
+// baseline for every application.
+//
+// Currently, this parameter only supports CPU performance as a baseline
+// performance factor. For example, specifying c6i would use the CPU performance
+// of the c6i family as the baseline reference.
+type BaselinePerformanceFactorsRequest struct {
+
+	// The CPU performance to consider, using an instance family as the baseline
+	// reference.
+	Cpu *CpuPerformanceFactorRequest
+
+	noSmithyDocumentSerde
+}
+
 type BlobAttributeValue struct {
 	Value []byte
 
@@ -893,6 +929,27 @@ type BlockDeviceMapping struct {
 	// block device mapping for the instance. When you launch an M3 instance, we ignore
 	// any instance store volumes specified in the block device mapping for the AMI.
 	VirtualName *string
+
+	noSmithyDocumentSerde
+}
+
+// The state of VPC Block Public Access (BPA).
+type BlockPublicAccessStates struct {
+
+	// The mode of VPC BPA.
+	//
+	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
+	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//
+	//   - bidirectional-access-blocked : Block all traffic to and from internet
+	//   gateways and egress-only internet gateways in this Region (except for excluded
+	//   VPCs and subnets).
+	//
+	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
+	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
+	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   only allow outbound connections to be established.
+	InternetGatewayBlockMode BlockPublicAccessMode
 
 	noSmithyDocumentSerde
 }
@@ -1272,6 +1329,40 @@ type CapacityReservation struct {
 	// capacity.
 	TotalInstanceCount *int32
 
+	// The ID of the Amazon Web Services account to which billing of the unused
+	// capacity of the Capacity Reservation is assigned.
+	UnusedReservationBillingOwnerId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a request to assign billing of the unused capacity of a
+// Capacity Reservation.
+type CapacityReservationBillingRequest struct {
+
+	// The ID of the Capacity Reservation.
+	CapacityReservationId *string
+
+	// Information about the Capacity Reservation.
+	CapacityReservationInfo *CapacityReservationInfo
+
+	// The date and time, in UTC time format, at which the request was initiated.
+	LastUpdateTime *time.Time
+
+	// The ID of the Amazon Web Services account that initiated the request.
+	RequestedBy *string
+
+	// The status of the request. For more information, see [View billing assignment requests for a shared Amazon EC2 Capacity Reservation].
+	//
+	// [View billing assignment requests for a shared Amazon EC2 Capacity Reservation]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-billing-transfers.html
+	Status CapacityReservationBillingRequestStatus
+
+	// Information about the status.
+	StatusMessage *string
+
+	// The ID of the Amazon Web Services account to which the request was sent.
+	UnusedReservationBillingOwnerId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1398,6 +1489,21 @@ type CapacityReservationGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a Capacity Reservation.
+type CapacityReservationInfo struct {
+
+	// The Availability Zone for the Capacity Reservation.
+	AvailabilityZone *string
+
+	// The instance type for the Capacity Reservation.
+	InstanceType *string
+
+	// The tenancy of the Capacity Reservation.
+	Tenancy CapacityReservationTenancy
+
+	noSmithyDocumentSerde
+}
+
 // Describes the strategy for using unused Capacity Reservations for fulfilling
 // On-Demand capacity.
 //
@@ -1460,24 +1566,30 @@ type CapacityReservationOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an instance's Capacity Reservation targeting option. You can specify
-// only one parameter at a time. If you specify CapacityReservationPreference and
-// CapacityReservationTarget , the request fails.
+// Describes an instance's Capacity Reservation targeting option.
 //
 // Use the CapacityReservationPreference parameter to configure the instance to
-// run as an On-Demand Instance or to run in any open Capacity Reservation that
-// has matching attributes (instance type, platform, Availability Zone). Use the
-// CapacityReservationTarget parameter to explicitly target a specific Capacity
-// Reservation or a Capacity Reservation group.
+// run as an On-Demand Instance, to run in any open Capacity Reservation that has
+// matching attributes, or to run only in a Capacity Reservation or Capacity
+// Reservation group. Use the CapacityReservationTarget parameter to explicitly
+// target a specific Capacity Reservation or a Capacity Reservation group.
+//
+// You can only specify CapacityReservationPreference and CapacityReservationTarget
+// if the CapacityReservationPreference is capacity-reservations-only .
 type CapacityReservationSpecification struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
 	//
-	//   - open - The instance can run in any open Capacity Reservation that has
-	//   matching attributes (instance type, platform, Availability Zone).
+	//   - capacity-reservations-only - The instance will only run in a Capacity
+	//   Reservation or Capacity Reservation group. If capacity isn't available, the
+	//   instance will fail to launch.
 	//
-	//   - none - The instance avoids running in a Capacity Reservation even if one is
+	//   - open - The instance can run in any open Capacity Reservation that has
+	//   matching attributes (instance type, platform, Availability Zone, and tenancy).
+	//   If capacity isn't available, the instance runs as an On-Demand Instance.
+	//
+	//   - none - The instance doesn't run in a Capacity Reservation even if one is
 	//   available. The instance runs as an On-Demand Instance.
 	CapacityReservationPreference CapacityReservationPreference
 
@@ -2374,6 +2486,36 @@ type CpuOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The CPU performance to consider, using an instance family as the baseline
+// reference.
+type CpuPerformanceFactor struct {
+
+	// Specify an instance family to use as the baseline reference for CPU
+	// performance. All instance types that match your specified attributes will be
+	// compared against the CPU performance of the referenced instance family,
+	// regardless of CPU manufacturer or architecture differences.
+	//
+	// Currently, only one instance family can be specified in the list.
+	References []PerformanceFactorReference
+
+	noSmithyDocumentSerde
+}
+
+// The CPU performance to consider, using an instance family as the baseline
+// reference.
+type CpuPerformanceFactorRequest struct {
+
+	// Specify an instance family to use as the baseline reference for CPU
+	// performance. All instance types that match your specified attributes will be
+	// compared against the CPU performance of the referenced instance family,
+	// regardless of CPU manufacturer or architecture differences.
+	//
+	// Currently, only one instance family can be specified in the list.
+	References []PerformanceFactorReferenceRequest
+
+	noSmithyDocumentSerde
+}
+
 // Describes the instances that could not be launched by the fleet.
 type CreateFleetError struct {
 
@@ -2482,8 +2624,8 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enables you to reference a security group across VPCs attached to a transit
 	// gateway to simplify security group management.
 	//
-	// This option is enabled by default. However, security group referencing is
-	// disabled by default at the transit gateway level.
+	// This option is set to enable by default. However, at the transit gateway level
+	// the default is set to disable .
 	//
 	// For more information about security group referencing, see [Security group referencing] in the Amazon Web
 	// Services Transit Gateways Guide.
@@ -3366,8 +3508,8 @@ type EbsBlockDevice struct {
 	// [instances built on the Nitro System]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
 	Iops *int32
 
-	// Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK
-	// under which the EBS volume is encrypted.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed
+	// KMS key to use for EBS encryption.
 	//
 	// This parameter is only supported on BlockDeviceMapping objects called by [RunInstances], [RequestSpotFleet],
 	// and [RequestSpotInstances].
@@ -3451,6 +3593,9 @@ type EbsInstanceBlockDevice struct {
 
 	// Indicates whether the volume is deleted on instance termination.
 	DeleteOnTermination *bool
+
+	// The entity that manages the EBS volume.
+	Operator *OperatorResponse
 
 	// The attachment state.
 	Status AttachmentStatus
@@ -3620,9 +3765,7 @@ type EgressOnlyInternetGateway struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads
-// that require graphics acceleration, we recommend that you use Amazon EC2 G4, G5,
-// or G6 instances.
+// Amazon Elastic Graphics reached end of life on January 8, 2024.
 //
 // Describes the association between an instance and an Elastic Graphics
 // accelerator.
@@ -3644,9 +3787,7 @@ type ElasticGpuAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads
-// that require graphics acceleration, we recommend that you use Amazon EC2 G4, G5,
-// or G6 instances.
+// Amazon Elastic Graphics reached end of life on January 8, 2024.
 //
 // Describes the status of an Elastic Graphics accelerator.
 type ElasticGpuHealth struct {
@@ -3657,9 +3798,7 @@ type ElasticGpuHealth struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads
-// that require graphics acceleration, we recommend that you use Amazon EC2 G4, G5,
-// or G6 instances.
+// Amazon Elastic Graphics reached end of life on January 8, 2024.
 //
 // Describes an Elastic Graphics accelerator.
 type ElasticGpus struct {
@@ -3688,9 +3827,7 @@ type ElasticGpus struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads
-// that require graphics acceleration, we recommend that you use Amazon EC2 G4, G5,
-// or G6 instances.
+// Amazon Elastic Graphics reached end of life on January 8, 2024.
 //
 // A specification for an Elastic Graphics accelerator.
 type ElasticGpuSpecification struct {
@@ -3720,6 +3857,8 @@ type ElasticGpuSpecificationResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Elastic Inference is no longer available.
+//
 // Describes an elastic inference accelerator.
 type ElasticInferenceAccelerator struct {
 
@@ -3737,8 +3876,9 @@ type ElasticInferenceAccelerator struct {
 	noSmithyDocumentSerde
 }
 
-//	Describes the association between an instance and an elastic inference
+// Amazon Elastic Inference is no longer available.
 //
+// Describes the association between an instance and an elastic inference
 // accelerator.
 type ElasticInferenceAcceleratorAssociation struct {
 
@@ -5744,7 +5884,7 @@ type Image struct {
 	// The location of the AMI.
 	ImageLocation *string
 
-	// The owner alias ( amazon | aws-marketplace ).
+	// The owner alias ( amazon | aws-backup-vault | aws-marketplace ).
 	ImageOwnerAlias *string
 
 	// The type of image.
@@ -5805,6 +5945,25 @@ type Image struct {
 	// The type of root device used by the AMI. The AMI can use an Amazon EBS volume
 	// or an instance store volume.
 	RootDeviceType DeviceType
+
+	// The ID of the source AMI from which the AMI was created.
+	//
+	// The ID only appears if the AMI was created using CreateImage, CopyImage, or CreateRestoreImageTask. The ID does not
+	// appear if the AMI was created using any other API. For some older AMIs, the ID
+	// might not be available. For more information, see [Identify the source AMI used to create a new AMI]in the Amazon EC2 User Guide.
+	//
+	// [Identify the source AMI used to create a new AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
+	SourceImageId *string
+
+	// The Region of the source AMI.
+	//
+	// The Region only appears if the AMI was created using CreateImage, CopyImage, or CreateRestoreImageTask. The Region does
+	// not appear if the AMI was created using any other API. For some older AMIs, the
+	// Region might not be available. For more information, see [Identify the source AMI used to create a new AMI]in the Amazon EC2 User
+	// Guide.
+	//
+	// [Identify the source AMI used to create a new AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify-source-ami-used-to-create-new-ami.html
+	SourceImageRegion *string
 
 	// The ID of the instance that the AMI was created from if the AMI was created
 	// using [CreateImage]. This field only appears if the AMI was created using CreateImage.
@@ -5874,6 +6033,42 @@ type ImageDiskContainer struct {
 
 	// The S3 bucket for the disk image.
 	UserBucket *UserBucket
+
+	noSmithyDocumentSerde
+}
+
+// Information about the AMI.
+type ImageMetadata struct {
+
+	// The date and time the AMI was created.
+	CreationDate *string
+
+	// The deprecation date and time of the AMI, in UTC, in the following format:
+	// YYYY-MM-DDTHH:MM:SSZ.
+	DeprecationTime *string
+
+	// The ID of the AMI.
+	ImageId *string
+
+	// The alias of the AMI owner.
+	//
+	// Valid values: amazon | aws-backup-vault | aws-marketplace
+	ImageOwnerAlias *string
+
+	// Indicates whether the AMI has public launch permissions. A value of true means
+	// this AMI has public launch permissions, while false means it has only implicit
+	// (AMI owner) or explicit (shared with your account) launch permissions.
+	IsPublic *bool
+
+	// The name of the AMI.
+	Name *string
+
+	// The ID of the Amazon Web Services account that owns the AMI.
+	OwnerId *string
+
+	// The current state of the AMI. If the state is available , the AMI is
+	// successfully registered and can be used to launch an instance.
+	State ImageState
 
 	noSmithyDocumentSerde
 }
@@ -6107,6 +6302,8 @@ type ImportVolumeTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Elastic Inference is no longer available.
+//
 // Describes the Inference accelerators for the instance type.
 type InferenceAcceleratorInfo struct {
 
@@ -6120,6 +6317,8 @@ type InferenceAcceleratorInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Elastic Inference is no longer available.
+//
 // Describes the Inference accelerators for the instance type.
 type InferenceDeviceInfo struct {
 
@@ -6138,6 +6337,8 @@ type InferenceDeviceInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Elastic Inference is no longer available.
+//
 // Describes the memory available to the inference accelerator.
 type InferenceDeviceMemoryInfo struct {
 
@@ -6200,12 +6401,12 @@ type Instance struct {
 
 	// Deprecated.
 	//
-	// Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads
-	// that require graphics acceleration, we recommend that you use Amazon EC2 G4ad,
-	// G4dn, or G5 instances.
+	// Amazon Elastic Graphics reached end of life on January 8, 2024.
 	ElasticGpuAssociations []ElasticGpuAssociation
 
-	// The elastic inference accelerator associated with the instance.
+	// Deprecated
+	//
+	// Amazon Elastic Inference is no longer available.
 	ElasticInferenceAcceleratorAssociations []ElasticInferenceAcceleratorAssociation
 
 	// Specifies whether enhanced networking with ENA is enabled.
@@ -6247,7 +6448,9 @@ type Instance struct {
 	// pair.
 	KeyName *string
 
-	// The time the instance was launched.
+	// The time that the instance was last launched. To determine the time that
+	// instance was first launched, see the attachment time for the primary network
+	// interface.
 	LaunchTime *time.Time
 
 	// The license configurations for the instance.
@@ -6264,6 +6467,9 @@ type Instance struct {
 
 	// The network interfaces for the instance.
 	NetworkInterfaces []InstanceNetworkInterface
+
+	// The entity that manages the instance.
+	Operator *OperatorResponse
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
@@ -6659,6 +6865,42 @@ type InstanceFamilyCreditSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the instance and the AMI used to launch the instance.
+type InstanceImageMetadata struct {
+
+	// The Availability Zone or Local Zone of the instance.
+	AvailabilityZone *string
+
+	// Information about the AMI used to launch the instance.
+	ImageMetadata *ImageMetadata
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The instance type.
+	InstanceType InstanceType
+
+	// The time the instance was launched.
+	LaunchTime *time.Time
+
+	// The entity that manages the instance.
+	Operator *OperatorResponse
+
+	// The ID of the Amazon Web Services account that owns the instance.
+	OwnerId *string
+
+	// The current state of the instance.
+	State *InstanceState
+
+	// Any tags assigned to the instance.
+	Tags []Tag
+
+	// The ID of the Availability Zone or Local Zone of the instance.
+	ZoneId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an IPv4 prefix.
 type InstanceIpv4Prefix struct {
 
@@ -6905,7 +7147,7 @@ type InstanceNetworkInterface struct {
 
 	// The type of network interface.
 	//
-	// Valid values: interface | efa | trunk
+	// Valid values: interface | efa | efa-only | trunk
 	InterfaceType *string
 
 	// The IPv4 delegated prefixes that are assigned to the network interface.
@@ -6922,6 +7164,9 @@ type InstanceNetworkInterface struct {
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
+
+	// The entity that manages the network interface.
+	Operator *OperatorResponse
 
 	// The ID of the Amazon Web Services account that created the network interface.
 	OwnerId *string
@@ -7058,7 +7303,10 @@ type InstanceNetworkInterfaceSpecification struct {
 
 	// The type of network interface.
 	//
-	// Valid values: interface | efa
+	// If you specify efa-only , do not assign any IP addresses to the network
+	// interface. EFA-only network interfaces do not support IP addresses.
+	//
+	// Valid values: interface | efa | efa-only
 	InterfaceType *string
 
 	// The number of IPv4 delegated prefixes to be automatically assigned to the
@@ -7191,14 +7439,13 @@ type InstancePrivateIpAddress struct {
 // use the launch template in the [launch instance wizard]or with the [RunInstances API], you can't specify
 // InstanceRequirements .
 //
-// For more information, see [Create a mixed instances group using attribute-based instance type selection] in the Amazon EC2 Auto Scaling User Guide, and also [Attribute-based instance type selection for EC2 Fleet]
-// , [Attribute-based instance type selection for Spot Fleet], and [Spot placement score] in the Amazon EC2 User Guide.
+// For more information, see [Create mixed instances group using attribute-based instance type selection] in the Amazon EC2 Auto Scaling User Guide, and also [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]
+// and [Spot placement score]in the Amazon EC2 User Guide.
 //
-// [Attribute-based instance type selection for EC2 Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+// [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
 // [RunInstances API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+// [Create mixed instances group using attribute-based instance type selection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
 // [Spot placement score]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-// [Create a mixed instances group using attribute-based instance type selection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
-// [Attribute-based instance type selection for Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
 // [launch instance wizard]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
 type InstanceRequirements struct {
 
@@ -7268,8 +7515,6 @@ type InstanceRequirements struct {
 	//
 	//   - For instance types with FPGA accelerators, specify fpga .
 	//
-	//   - For instance types with inference accelerators, specify inference .
-	//
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
 
@@ -7309,6 +7554,17 @@ type InstanceRequirements struct {
 	//
 	// [Amazon EBS–optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 	BaselineEbsBandwidthMbps *BaselineEbsBandwidthMbps
+
+	// The baseline performance to consider, using an instance family as a baseline
+	// reference. The instance family establishes the lowest acceptable level of
+	// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+	// there is no guarantee that the selected instance types will always exceed the
+	// baseline for every application. Currently, this parameter only supports CPU
+	// performance as a baseline performance factor. For more information, see [Performance protection]in the
+	// Amazon EC2 User Guide.
+	//
+	// [Performance protection]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-abis-performance-protection
+	BaselinePerformanceFactors *BaselinePerformanceFactors
 
 	// Indicates whether burstable performance T instance types are included,
 	// excluded, or required. For more information, see [Burstable performance instances].
@@ -7541,13 +7797,12 @@ type InstanceRequirements struct {
 // use the launch template in the [launch instance wizard], or with the [RunInstances] API or [AWS::EC2::Instance] Amazon Web Services
 // CloudFormation resource, you can't specify InstanceRequirements .
 //
-// For more information, see [Attribute-based instance type selection for EC2 Fleet], [Attribute-based instance type selection for Spot Fleet], and [Spot placement score] in the Amazon EC2 User Guide.
+// For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet] and [Spot placement score] in the Amazon EC2 User Guide.
 //
-// [Attribute-based instance type selection for EC2 Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+// [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
 // [AWS::EC2::Instance]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 // [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 // [Spot placement score]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-// [Attribute-based instance type selection for Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
 // [launch instance wizard]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
 type InstanceRequirementsRequest struct {
 
@@ -7627,8 +7882,6 @@ type InstanceRequirementsRequest struct {
 	//
 	//   - To include instance types with FPGA hardware, specify fpga .
 	//
-	//   - To include instance types with inference hardware, specify inference .
-	//
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
 
@@ -7668,6 +7921,17 @@ type InstanceRequirementsRequest struct {
 	//
 	// [Amazon EBS–optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 	BaselineEbsBandwidthMbps *BaselineEbsBandwidthMbpsRequest
+
+	// The baseline performance to consider, using an instance family as a baseline
+	// reference. The instance family establishes the lowest acceptable level of
+	// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+	// there is no guarantee that the selected instance types will always exceed the
+	// baseline for every application. Currently, this parameter only supports CPU
+	// performance as a baseline performance factor. For more information, see [Performance protection]in the
+	// Amazon EC2 User Guide.
+	//
+	// [Performance protection]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-abis-performance-protection
+	BaselinePerformanceFactors *BaselinePerformanceFactorsRequest
 
 	// Indicates whether burstable performance T instance types are included,
 	// excluded, or required. For more information, see [Burstable performance instances].
@@ -7987,6 +8251,9 @@ type InstanceStatus struct {
 	// such as impaired reachability.
 	InstanceStatus *InstanceStatusSummary
 
+	// The entity that manages the instance.
+	Operator *OperatorResponse
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -8205,7 +8472,8 @@ type InstanceTypeInfo struct {
 	// The supported root device types.
 	SupportedRootDeviceTypes []RootDeviceType
 
-	// Indicates whether the instance type is offered for spot or On-Demand.
+	// Indicates whether the instance type is offered for spot, On-Demand, or Capacity
+	// Blocks.
 	SupportedUsageClasses []UsageClassType
 
 	// The supported virtualization types.
@@ -9612,6 +9880,9 @@ type LaunchTemplate struct {
 	// The name of the launch template.
 	LaunchTemplateName *string
 
+	// The entity that manages the launch template.
+	Operator *OperatorResponse
+
 	// The tags for the launch template.
 	Tags []Tag
 
@@ -9781,7 +10052,8 @@ type LaunchTemplateEbsBlockDevice struct {
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	Iops *int32
 
-	// The ARN of the Key Management Service (KMS) CMK used for encryption.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed
+	// KMS key to use for EBS encryption.
 	KmsKeyId *string
 
 	// The ID of the snapshot.
@@ -9831,7 +10103,8 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// [instances built on the Nitro System]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
 	Iops *int32
 
-	// The ARN of the symmetric Key Management Service (KMS) CMK used for encryption.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed
+	// KMS key to use for EBS encryption.
 	KmsKeyId *string
 
 	// The ID of the snapshot.
@@ -9864,6 +10137,8 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Elastic Inference is no longer available.
+//
 // Describes an elastic inference accelerator.
 type LaunchTemplateElasticInferenceAccelerator struct {
 
@@ -9881,6 +10156,8 @@ type LaunchTemplateElasticInferenceAccelerator struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon Elastic Inference is no longer available.
+//
 // Describes an elastic inference accelerator.
 type LaunchTemplateElasticInferenceAcceleratorResponse struct {
 
@@ -10316,11 +10593,14 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	Groups []string
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
-	// specify efa . For more information, see [Elastic Fabric Adapter] in the Amazon EC2 User Guide.
+	// specify efa or efa . For more information, see [Elastic Fabric Adapter] in the Amazon EC2 User Guide.
 	//
 	// If you are not creating an EFA, specify interface or omit this parameter.
 	//
-	// Valid values: interface | efa
+	// If you specify efa-only , do not assign any IP addresses to the network
+	// interface. EFA-only network interfaces do not support IP addresses.
+	//
+	// Valid values: interface | efa | efa-only
 	//
 	// [Elastic Fabric Adapter]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
 	InterfaceType *string
@@ -10744,6 +11024,9 @@ type LaunchTemplateVersion struct {
 
 	// The name of the launch template.
 	LaunchTemplateName *string
+
+	// The entity that manages the launch template.
+	Operator *OperatorResponse
 
 	// The description for the version.
 	VersionDescription *string
@@ -12174,6 +12457,9 @@ type NetworkInterface struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
+	// The entity that manages the network interface.
+	Operator *OperatorResponse
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -12610,6 +12896,29 @@ type OnDemandOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The entity that manages the resource.
+type OperatorRequest struct {
+
+	// The entity that manages the resource.
+	Principal *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether the resource is managed by an entity and, if so, describes
+// the entity that manages it.
+type OperatorResponse struct {
+
+	// If true , the resource is managed by an entity.
+	Managed *bool
+
+	// If managed is true , then the principal is returned. The principal is the entity
+	// that manages the resource.
+	Principal *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a packet header statement.
 type PacketHeaderStatement struct {
 
@@ -12868,6 +13177,102 @@ type PeeringTgwInfo struct {
 
 	// The ID of the transit gateway.
 	TransitGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify an instance family to use as the baseline reference for CPU
+// performance. All instance types that match your specified attributes will be
+// compared against the CPU performance of the referenced instance family,
+// regardless of CPU manufacturer or architecture.
+//
+// Currently, only one instance family can be specified in the list.
+type PerformanceFactorReference struct {
+
+	// The instance family to use as a baseline reference.
+	//
+	// Ensure that you specify the correct value for the instance family. The instance
+	// family is everything before the period ( . ) in the instance type name. For
+	// example, in the instance type c6i.large , the instance family is c6i , not c6 .
+	// For more information, see [Amazon EC2 instance type naming conventions]in Amazon EC2 Instance Types.
+	//
+	// The following instance families are not supported for performance protection:
+	//
+	//   - c1
+	//
+	//   - g3 | g3s
+	//
+	//   - hpc7g
+	//
+	//   - m1 | m2
+	//
+	//   - mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro
+	//
+	//   - p3dn | p4d | p5
+	//
+	//   - t1
+	//
+	//   - u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb |
+	//   u7in-16tb | u7in-24tb | u7in-32tb
+	//
+	// If you enable performance protection by specifying a supported instance family,
+	// the returned instance types will exclude the above unsupported instance
+	// families.
+	//
+	// If you specify an unsupported instance family as a value for baseline
+	// performance, the API returns an empty response for and an exception for , , ,
+	// and .
+	//
+	// [Amazon EC2 instance type naming conventions]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+	InstanceFamily *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify an instance family to use as the baseline reference for CPU
+// performance. All instance types that match your specified attributes will be
+// compared against the CPU performance of the referenced instance family,
+// regardless of CPU manufacturer or architecture.
+//
+// Currently, only one instance family can be specified in the list.
+type PerformanceFactorReferenceRequest struct {
+
+	// The instance family to use as a baseline reference.
+	//
+	// Ensure that you specify the correct value for the instance family. The instance
+	// family is everything before the period ( . ) in the instance type name. For
+	// example, in the instance type c6i.large , the instance family is c6i , not c6 .
+	// For more information, see [Amazon EC2 instance type naming conventions]in Amazon EC2 Instance Types.
+	//
+	// The following instance families are not supported for performance protection:
+	//
+	//   - c1
+	//
+	//   - g3 | g3s
+	//
+	//   - hpc7g
+	//
+	//   - m1 | m2
+	//
+	//   - mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro
+	//
+	//   - p3dn | p4d | p5
+	//
+	//   - t1
+	//
+	//   - u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb |
+	//   u7in-16tb | u7in-24tb | u7in-32tb
+	//
+	// If you enable performance protection by specifying a supported instance family,
+	// the returned instance types will exclude the above unsupported instance
+	// families.
+	//
+	// If you specify an unsupported instance family as a value for baseline
+	// performance, the API returns an empty response for and an exception for , , ,
+	// and .
+	//
+	// [Amazon EC2 instance type naming conventions]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+	InstanceFamily *string
 
 	noSmithyDocumentSerde
 }
@@ -13753,6 +14158,8 @@ type RequestLaunchTemplateData struct {
 	// G4dn, or G5 instances.
 	ElasticGpuSpecifications []ElasticGpuSpecification
 
+	// Amazon Elastic Inference is no longer available.
+	//
 	// An elastic inference accelerator to associate with the instance. Elastic
 	// inference accelerators are a resource you can attach to your Amazon EC2
 	// instances to accelerate your Deep Learning (DL) inference workloads.
@@ -13865,13 +14272,12 @@ type RequestLaunchTemplateData struct {
 	// use the launch template in the [launch instance wizard], or with the [RunInstances] API or [AWS::EC2::Instance] Amazon Web Services
 	// CloudFormation resource, you can't specify InstanceRequirements .
 	//
-	// For more information, see [Attribute-based instance type selection for EC2 Fleet], [Attribute-based instance type selection for Spot Fleet], and [Spot placement score] in the Amazon EC2 User Guide.
+	// For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet] and [Spot placement score] in the Amazon EC2 User Guide.
 	//
-	// [Attribute-based instance type selection for EC2 Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+	// [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
 	// [AWS::EC2::Instance]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 	// [Spot placement score]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-	// [Attribute-based instance type selection for Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
 	// [launch instance wizard]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
 	InstanceRequirements *InstanceRequirementsRequest
 
@@ -13916,6 +14322,9 @@ type RequestLaunchTemplateData struct {
 
 	// The network interfaces for the instance.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
+
+	// The entity that manages the launch template.
+	Operator *OperatorRequest
 
 	// The placement for the instance.
 	Placement *LaunchTemplatePlacementRequest
@@ -14465,6 +14874,8 @@ type ResponseLaunchTemplateData struct {
 	// G4dn, or G5 instances.
 	ElasticGpuSpecifications []ElasticGpuSpecificationResponse
 
+	// Amazon Elastic Inference is no longer available.
+	//
 	// An elastic inference accelerator to associate with the instance. Elastic
 	// inference accelerators are a resource you can attach to your Amazon EC2
 	// instances to accelerate your Deep Learning (DL) inference workloads.
@@ -14552,6 +14963,9 @@ type ResponseLaunchTemplateData struct {
 	// The network interfaces.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecification
 
+	// The entity that manages the launch template.
+	Operator *OperatorResponse
+
 	// The placement of the instance.
 	Placement *LaunchTemplatePlacement
 
@@ -14573,6 +14987,48 @@ type ResponseLaunchTemplateData struct {
 
 	// The user data for the instance.
 	UserData *string
+
+	noSmithyDocumentSerde
+}
+
+// A security group rule removed with [RevokeSecurityGroupEgress] or [RevokeSecurityGroupIngress].
+//
+// [RevokeSecurityGroupIngress]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html
+// [RevokeSecurityGroupEgress]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html
+type RevokedSecurityGroupRule struct {
+
+	// The IPv4 CIDR of the traffic source.
+	CidrIpv4 *string
+
+	// The IPv6 CIDR of the traffic source.
+	CidrIpv6 *string
+
+	// A description of the revoked security group rule.
+	Description *string
+
+	// The 'from' port number of the security group rule.
+	FromPort *int32
+
+	// A security group ID.
+	GroupId *string
+
+	// The security group rule's protocol.
+	IpProtocol *string
+
+	// Defines if a security group rule is an outbound rule.
+	IsEgress *bool
+
+	// The ID of a prefix list that's the traffic source.
+	PrefixListId *string
+
+	// The ID of a referenced security group.
+	ReferencedGroupId *string
+
+	// A security group rule ID.
+	SecurityGroupRuleId *string
+
+	// The 'to' port number of the security group rule.
+	ToPort *int32
 
 	noSmithyDocumentSerde
 }
@@ -15199,6 +15655,9 @@ type SecurityGroup struct {
 	// The Amazon Web Services account ID of the owner of the security group.
 	OwnerId *string
 
+	// The ARN of the security group.
+	SecurityGroupArn *string
+
 	// Any tags assigned to the security group.
 	Tags []Tag
 
@@ -15306,6 +15765,9 @@ type SecurityGroupRule struct {
 	// Describes the security group that is referenced in the rule.
 	ReferencedGroupInfo *ReferencedSecurityGroup
 
+	// The ARN of the security group rule.
+	SecurityGroupRuleArn *string
+
 	// The ID of the security group rule.
 	SecurityGroupRuleId *string
 
@@ -15401,6 +15863,29 @@ type SecurityGroupRuleUpdate struct {
 
 	// Information about the security group rule.
 	SecurityGroupRule *SecurityGroupRuleRequest
+
+	noSmithyDocumentSerde
+}
+
+// A security group association with a VPC that you made with [AssociateSecurityGroupVpc].
+//
+// [AssociateSecurityGroupVpc]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html
+type SecurityGroupVpcAssociation struct {
+
+	// The association's security group ID.
+	GroupId *string
+
+	// The association's state.
+	State SecurityGroupVpcAssociationState
+
+	// The association's state reason.
+	StateReason *string
+
+	// The association's VPC ID.
+	VpcId *string
+
+	// The Amazon Web Services account ID of the owner of the VPC.
+	VpcOwnerId *string
 
 	noSmithyDocumentSerde
 }
@@ -16970,6 +17455,9 @@ type Subnet struct {
 	// The number of unused private IPv4 addresses in the subnet. The IPv4 addresses
 	// for any stopped instances are considered unavailable.
 	AvailableIpAddressCount *int32
+
+	// The state of VPC Block Public Access (BPA).
+	BlockPublicAccessStates *BlockPublicAccessStates
 
 	// The IPv4 CIDR block assigned to the subnet.
 	CidrBlock *string
@@ -19404,6 +19892,9 @@ type Volume struct {
 	// Indicates whether Amazon EBS Multi-Attach is enabled.
 	MultiAttachEnabled *bool
 
+	// The entity that manages the volume.
+	Operator *OperatorResponse
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -19646,6 +20137,9 @@ type VolumeStatusItem struct {
 // Describes a VPC.
 type Vpc struct {
 
+	// The state of VPC Block Public Access (BPA).
+	BlockPublicAccessStates *BlockPublicAccessStates
+
 	// The primary IPv4 CIDR block for the VPC.
 	CidrBlock *string
 
@@ -19687,6 +20181,97 @@ type VpcAttachment struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet
+// that exempts it from the account’s BPA mode and will allow bidirectional or
+// egress-only access. You can create BPA exclusions for VPCs and subnets even when
+// BPA is not enabled on the account to ensure that there is no traffic disruption
+// to the exclusions when VPC BPA is turned on. To learn more about VPC BPA, see [Block public access to VPCs and subnets]
+// in the Amazon VPC User Guide.
+//
+// [Block public access to VPCs and subnets]: https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html
+type VpcBlockPublicAccessExclusion struct {
+
+	// When the exclusion was created.
+	CreationTimestamp *time.Time
+
+	// When the exclusion was deleted.
+	DeletionTimestamp *time.Time
+
+	// The ID of the exclusion.
+	ExclusionId *string
+
+	// The exclusion mode for internet gateway traffic.
+	//
+	//   - bidirectional-access-allowed : Allow all internet traffic to and from the
+	//   excluded VPCs and subnets.
+	//
+	//   - egress-access-allowed : Allow outbound internet traffic from the excluded
+	//   VPCs and subnets. Block inbound internet traffic to the excluded VPCs and
+	//   subnets. Only applies when VPC Block Public Access is set to Bidirectional.
+	InternetGatewayExclusionMode InternetGatewayExclusionMode
+
+	// When the exclusion was last updated.
+	LastUpdateTimestamp *time.Time
+
+	// The reason for the current exclusion state.
+	Reason *string
+
+	// The ARN of the exclusion.
+	ResourceArn *string
+
+	// The state of the exclusion.
+	State VpcBlockPublicAccessExclusionState
+
+	// tag - The key/value combination of a tag assigned to the resource. Use the tag
+	// key in the filter name and the tag value as the filter value. For example, to
+	// find all resources that have a tag with the key Owner and the value TeamA ,
+	// specify tag:Owner for the filter name and TeamA for the filter value.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// VPC Block public Access (BPA) enables you to block resources in VPCs and
+// subnets that you own in a Region from reaching or being reached from the
+// internet through internet gateways and egress-only internet gateways. To learn
+// more about VPC BPA, see [Block public access to VPCs and subnets]in the Amazon VPC User Guide.
+//
+// [Block public access to VPCs and subnets]: https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html
+type VpcBlockPublicAccessOptions struct {
+
+	// An Amazon Web Services account ID.
+	AwsAccountId *string
+
+	// An Amazon Web Services Region.
+	AwsRegion *string
+
+	// The current mode of VPC BPA.
+	//
+	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
+	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//
+	//   - bidirectional-access-blocked : Block all traffic to and from internet
+	//   gateways and egress-only internet gateways in this Region (except for excluded
+	//   VPCs and subnets).
+	//
+	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
+	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
+	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   only allow outbound connections to be established.
+	InternetGatewayBlockMode InternetGatewayBlockMode
+
+	// The last time the VPC BPA mode was updated.
+	LastUpdateTimestamp *time.Time
+
+	// The reason for the current state.
+	Reason *string
+
+	// The current state of VPC BPA.
+	State VpcBlockPublicAccessState
 
 	noSmithyDocumentSerde
 }

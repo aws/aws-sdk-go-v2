@@ -10,14 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation is used with the Amazon GameLift containers feature, which is
-//
-// currently in public preview.
-//
-// Deletes a container group definition resource. You can delete a container group
+// Deletes a container group definition. You can delete a container group
 // definition if there are no fleets using the definition.
 //
-// To delete a container group definition, identify the resource to delete.
+// Request options:
+//
+//   - Delete an entire container group definition, including all versions.
+//     Specify the container group definition name, or use an ARN value without the
+//     version number.
+//
+//   - Delete a particular version. Specify the container group definition name
+//     and a version number, or use an ARN value that includes the version number.
+//
+//   - Keep the newest versions and delete all older versions. Specify the
+//     container group definition name and the number of versions to retain. For
+//     example, set VersionCountToRetain to 5 to delete all but the five most recent
+//     versions.
 //
 // # Learn more
 //
@@ -46,6 +54,12 @@ type DeleteContainerGroupDefinitionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The number of most recent versions to keep while deleting all older versions.
+	VersionCountToRetain *int32
+
+	// The specific version to delete.
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

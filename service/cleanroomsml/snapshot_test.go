@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CancelTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelTrainedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CancelTrainedModelInferenceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTrainedModelInferenceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelTrainedModelInferenceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAudienceModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAudienceModel(context.Background(), nil, func(o *Options) {
@@ -79,6 +103,54 @@ func TestCheckSnapshot_CreateConfiguredAudienceModel(t *testing.T) {
 	_, err := svc.CreateConfiguredAudienceModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateConfiguredAudienceModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateConfiguredModelAlgorithm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguredModelAlgorithm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConfiguredModelAlgorithm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateMLInputChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMLInputChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateMLInputChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTrainedModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -146,6 +218,66 @@ func TestCheckSnapshot_DeleteConfiguredAudienceModelPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConfiguredModelAlgorithm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguredModelAlgorithm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfiguredModelAlgorithm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteMLConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMLConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMLConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteMLInputChannelData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMLInputChannelData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMLInputChannelData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTrainedModelOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrainedModelOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTrainedModelOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTrainingDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTrainingDataset(context.Background(), nil, func(o *Options) {
@@ -182,6 +314,42 @@ func TestCheckSnapshot_GetAudienceModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCollaborationConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCollaborationConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCollaborationMLInputChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationMLInputChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCollaborationMLInputChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCollaborationTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCollaborationTrainedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetConfiguredAudienceModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetConfiguredAudienceModel(context.Background(), nil, func(o *Options) {
@@ -199,6 +367,78 @@ func TestCheckSnapshot_GetConfiguredAudienceModelPolicy(t *testing.T) {
 	_, err := svc.GetConfiguredAudienceModelPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConfiguredAudienceModelPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConfiguredModelAlgorithm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguredModelAlgorithm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfiguredModelAlgorithm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetMLConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMLConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMLConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetMLInputChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMLInputChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMLInputChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrainedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrainedModelInferenceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrainedModelInferenceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrainedModelInferenceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +494,66 @@ func TestCheckSnapshot_ListAudienceModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCollaborationConfiguredModelAlgorithmAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationConfiguredModelAlgorithmAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationConfiguredModelAlgorithmAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCollaborationMLInputChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationMLInputChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationMLInputChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCollaborationTrainedModelExportJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationTrainedModelExportJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationTrainedModelExportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCollaborationTrainedModelInferenceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationTrainedModelInferenceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationTrainedModelInferenceJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCollaborationTrainedModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationTrainedModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCollaborationTrainedModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListConfiguredAudienceModels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConfiguredAudienceModels(context.Background(), nil, func(o *Options) {
@@ -266,11 +566,71 @@ func TestCheckSnapshot_ListConfiguredAudienceModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConfiguredModelAlgorithmAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfiguredModelAlgorithmAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfiguredModelAlgorithmAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConfiguredModelAlgorithms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfiguredModelAlgorithms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfiguredModelAlgorithms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMLInputChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMLInputChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMLInputChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTrainedModelInferenceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainedModelInferenceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTrainedModelInferenceJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTrainedModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainedModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTrainedModels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -302,6 +662,18 @@ func TestCheckSnapshot_PutConfiguredAudienceModelPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutMLConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutMLConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutMLConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAudienceExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAudienceExportJob(context.Background(), nil, func(o *Options) {
@@ -319,6 +691,30 @@ func TestCheckSnapshot_StartAudienceGenerationJob(t *testing.T) {
 	_, err := svc.StartAudienceGenerationJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAudienceGenerationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTrainedModelExportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrainedModelExportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTrainedModelExportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTrainedModelInferenceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrainedModelInferenceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTrainedModelInferenceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,6 +757,30 @@ func TestCheckSnapshot_UpdateConfiguredAudienceModel(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CancelTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelTrainedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelTrainedModelInferenceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTrainedModelInferenceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelTrainedModelInferenceJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAudienceModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAudienceModel(context.Background(), nil, func(o *Options) {
@@ -378,6 +798,54 @@ func TestUpdateSnapshot_CreateConfiguredAudienceModel(t *testing.T) {
 	_, err := svc.CreateConfiguredAudienceModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateConfiguredAudienceModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateConfiguredModelAlgorithm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguredModelAlgorithm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConfiguredModelAlgorithm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateMLInputChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateMLInputChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateMLInputChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTrainedModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -445,6 +913,66 @@ func TestUpdateSnapshot_DeleteConfiguredAudienceModelPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteConfiguredModelAlgorithm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguredModelAlgorithm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfiguredModelAlgorithm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMLConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMLConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMLConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMLInputChannelData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMLInputChannelData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMLInputChannelData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTrainedModelOutput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTrainedModelOutput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTrainedModelOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTrainingDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTrainingDataset(context.Background(), nil, func(o *Options) {
@@ -481,6 +1009,42 @@ func TestUpdateSnapshot_GetAudienceModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCollaborationConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCollaborationConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCollaborationMLInputChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationMLInputChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCollaborationMLInputChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCollaborationTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCollaborationTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCollaborationTrainedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetConfiguredAudienceModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetConfiguredAudienceModel(context.Background(), nil, func(o *Options) {
@@ -498,6 +1062,78 @@ func TestUpdateSnapshot_GetConfiguredAudienceModelPolicy(t *testing.T) {
 	_, err := svc.GetConfiguredAudienceModelPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConfiguredAudienceModelPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConfiguredModelAlgorithm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguredModelAlgorithm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfiguredModelAlgorithm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConfiguredModelAlgorithmAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguredModelAlgorithmAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfiguredModelAlgorithmAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMLConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMLConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMLConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMLInputChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMLInputChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMLInputChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrainedModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrainedModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrainedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrainedModelInferenceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrainedModelInferenceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrainedModelInferenceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -553,6 +1189,66 @@ func TestUpdateSnapshot_ListAudienceModels(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCollaborationConfiguredModelAlgorithmAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationConfiguredModelAlgorithmAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationConfiguredModelAlgorithmAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCollaborationMLInputChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationMLInputChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationMLInputChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCollaborationTrainedModelExportJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationTrainedModelExportJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationTrainedModelExportJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCollaborationTrainedModelInferenceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationTrainedModelInferenceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationTrainedModelInferenceJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCollaborationTrainedModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCollaborationTrainedModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCollaborationTrainedModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListConfiguredAudienceModels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConfiguredAudienceModels(context.Background(), nil, func(o *Options) {
@@ -565,11 +1261,71 @@ func TestUpdateSnapshot_ListConfiguredAudienceModels(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConfiguredModelAlgorithmAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfiguredModelAlgorithmAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfiguredModelAlgorithmAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConfiguredModelAlgorithms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfiguredModelAlgorithms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfiguredModelAlgorithms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMLInputChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMLInputChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMLInputChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTrainedModelInferenceJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainedModelInferenceJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTrainedModelInferenceJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTrainedModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrainedModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTrainedModels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -601,6 +1357,18 @@ func TestUpdateSnapshot_PutConfiguredAudienceModelPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutMLConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutMLConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutMLConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartAudienceExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAudienceExportJob(context.Background(), nil, func(o *Options) {
@@ -618,6 +1386,30 @@ func TestUpdateSnapshot_StartAudienceGenerationJob(t *testing.T) {
 	_, err := svc.StartAudienceGenerationJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAudienceGenerationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTrainedModelExportJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrainedModelExportJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTrainedModelExportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTrainedModelInferenceJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrainedModelInferenceJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTrainedModelInferenceJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

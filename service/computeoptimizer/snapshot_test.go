@@ -134,6 +134,18 @@ func TestCheckSnapshot_ExportECSServiceRecommendations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ExportIdleRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportIdleRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExportIdleRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ExportLambdaFunctionRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ExportLambdaFunctionRecommendations(context.Background(), nil, func(o *Options) {
@@ -271,6 +283,18 @@ func TestCheckSnapshot_GetEnrollmentStatusesForOrganization(t *testing.T) {
 	_, err := svc.GetEnrollmentStatusesForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetEnrollmentStatusesForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIdleRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdleRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIdleRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -445,6 +469,18 @@ func TestUpdateSnapshot_ExportECSServiceRecommendations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ExportIdleRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportIdleRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExportIdleRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ExportLambdaFunctionRecommendations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ExportLambdaFunctionRecommendations(context.Background(), nil, func(o *Options) {
@@ -582,6 +618,18 @@ func TestUpdateSnapshot_GetEnrollmentStatusesForOrganization(t *testing.T) {
 	_, err := svc.GetEnrollmentStatusesForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEnrollmentStatusesForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIdleRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdleRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIdleRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -77,9 +77,9 @@ type CreateChangeSetInput struct {
 	//   - CAPABILITY_IAM and CAPABILITY_NAMED_IAM
 	//
 	// Some stack templates might include resources that can affect permissions in
-	//   your Amazon Web Services account; for example, by creating new Identity and
-	//   Access Management (IAM) users. For those stacks, you must explicitly acknowledge
-	//   this by specifying one of these capabilities.
+	//   your Amazon Web Services account; for example, by creating new IAM users. For
+	//   those stacks, you must explicitly acknowledge this by specifying one of these
+	//   capabilities.
 	//
 	// The following IAM resources require you to specify either the CAPABILITY_IAM or
 	//   CAPABILITY_NAMED_IAM capability.
@@ -130,20 +130,20 @@ type CreateChangeSetInput struct {
 	//   nested stacks, you must create or update the stack directly from the template
 	//   using the CreateStackor UpdateStackaction, and specifying this capability.
 	//
-	// For more information about macros, see [Using CloudFormation macros to perform custom processing on templates].
+	// For more information about macros, see [Perform custom processing on CloudFormation templates with template macros].
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
 	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
-	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
+	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
+	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
+	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
 	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-	// [Using CloudFormation macros to perform custom processing on templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
 	Capabilities []types.Capability
 
@@ -152,14 +152,12 @@ type CreateChangeSetInput struct {
 	// To create a change set for an import operation, specify IMPORT .
 	//
 	// If you create a change set for a new stack, CloudFormation creates a stack with
-	// a unique stack ID, but no template or resources. The stack will be in the [REVIEW_IN_PROGRESS]state
-	// until you execute the change set.
+	// a unique stack ID, but no template or resources. The stack will be in the
+	// REVIEW_IN_PROGRESS state until you execute the change set.
 	//
 	// By default, CloudFormation specifies UPDATE . You can't use the UPDATE type to
 	// create a change set for a new stack or the CREATE type to create a change set
 	// for an existing stack.
-	//
-	// [REVIEW_IN_PROGRESS]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
 	ChangeSetType types.ChangeSetType
 
 	// A unique identifier for this CreateChangeSet request. Specify this token if you
@@ -176,9 +174,9 @@ type CreateChangeSetInput struct {
 	// This parameter can only import resources that have custom names in templates.
 	// For more information, see [name type]in the CloudFormation User Guide. To import resources
 	// that do not accept custom names, such as EC2 instances, use the resource import
-	// feature instead. For more information, see [Bringing existing resources into CloudFormation management]in the CloudFormation User Guide.
+	// feature instead. For more information, see [Import Amazon Web Services resources into a CloudFormation stack with a resource import]in the CloudFormation User Guide.
 	//
-	// [Bringing existing resources into CloudFormation management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+	// [Import Amazon Web Services resources into a CloudFormation stack with a resource import]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
 	// [name type]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
 	ImportExistingResources *bool
 
@@ -187,9 +185,9 @@ type CreateChangeSetInput struct {
 	// change set, specify True .
 	IncludeNestedStacks *bool
 
-	// The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon
-	// SNS) topics that CloudFormation associates with the stack. To remove all
-	// associated notification topics, specify an empty list.
+	// The Amazon Resource Names (ARNs) of Amazon SNS topics that CloudFormation
+	// associates with the stack. To remove all associated notification topics, specify
+	// an empty list.
 	NotificationARNs []string
 
 	// Determines what action will be taken if stack creation fails. If this parameter
@@ -224,24 +222,24 @@ type CreateChangeSetInput struct {
 	//
 	// If the list of resource types doesn't include a resource type that you're
 	// updating, the stack update fails. By default, CloudFormation grants permissions
-	// to all resource types. Identity and Access Management (IAM) uses this parameter
-	// for condition keys in IAM policies for CloudFormation. For more information, see
-	// [Controlling access with Identity and Access Management]in the CloudFormation User Guide.
+	// to all resource types. IAM uses this parameter for condition keys in IAM
+	// policies for CloudFormation. For more information, see [Control access with Identity and Access Management]in the CloudFormation
+	// User Guide.
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [Controlling access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
 	ResourceTypes []string
 
 	// The resources to import into your stack.
 	ResourcesToImport []types.ResourceToImport
 
-	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
-	// that CloudFormation assumes when executing the change set. CloudFormation uses
-	// the role's credentials to make calls on your behalf. CloudFormation uses this
-	// role for all future operations on the stack. Provided that users have permission
-	// to operate on the stack, CloudFormation uses this role even if the users don't
-	// have permission to pass it. Ensure that the role grants least permission.
+	// The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes when
+	// executing the change set. CloudFormation uses the role's credentials to make
+	// calls on your behalf. CloudFormation uses this role for all future operations on
+	// the stack. Provided that users have permission to operate on the stack,
+	// CloudFormation uses this role even if the users don't have permission to pass
+	// it. Ensure that the role grants least permission.
 	//
 	// If you don't specify a value, CloudFormation uses the role that was previously
 	// associated with the stack. If no role is available, CloudFormation uses a

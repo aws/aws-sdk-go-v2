@@ -4568,6 +4568,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resize specification for the instance fleet.</p>"
                     }
+                },
+                "Context": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4619,6 +4625,12 @@
                     "target": "com.amazonaws.emr#InstanceFleetResizingSpecifications",
                     "traits": {
                         "smithy.api#documentation": "<p>The resize specification for the instance fleet.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },
@@ -4674,6 +4686,12 @@
                     "target": "com.amazonaws.emr#InstanceTypeConfigList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of InstanceTypeConfig objects that specify how Amazon EMR provisions Amazon EC2 instances\n         when it fulfills On-Demand and Spot capacities. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/APIReference/API_InstanceTypeConfig.html\">InstanceTypeConfig</a>.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             },

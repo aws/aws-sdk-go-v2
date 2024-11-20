@@ -1,3 +1,28 @@
+# v1.45.7 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.6 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.45.5 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.4 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.3 (2024-10-11)
+
+* **Documentation**: Doc only updates for clarification around OAuth2GrantType for Salesforce.
+
+# v1.45.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

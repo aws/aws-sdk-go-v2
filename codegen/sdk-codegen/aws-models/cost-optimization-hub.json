@@ -111,6 +111,15 @@
                     "traits": {
                         "smithy.api#enumValue": "MigrateToGraviton"
                     }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Delete",
+                        "smithy.api#tags": [
+                            "idle"
+                        ]
+                    }
                 }
             }
         },
@@ -2353,10 +2362,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details of an Amazon RDS DB instance.</p>",
-                "smithy.api#tags": [
-                    "rds"
-                ]
+                "smithy.api#documentation": "<p>Contains the details of an Amazon RDS DB instance.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#RdsDbInstanceConfiguration": {
@@ -2387,10 +2393,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details of an Amazon RDS DB instance storage.</p>",
-                "smithy.api#tags": [
-                    "rds"
-                ]
+                "smithy.api#documentation": "<p>Contains the details of an Amazon RDS DB instance storage.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#RdsDbInstanceStorageConfiguration": {
@@ -3019,19 +3022,13 @@
                 "rdsDbInstance": {
                     "target": "com.amazonaws.costoptimizationhub#RdsDbInstance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB instance recommendation details.</p>",
-                        "smithy.api#tags": [
-                            "rds"
-                        ]
+                        "smithy.api#documentation": "<p>The DB instance recommendation details.</p>"
                     }
                 },
                 "rdsDbInstanceStorage": {
                     "target": "com.amazonaws.costoptimizationhub#RdsDbInstanceStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB instance storage recommendation details.</p>",
-                        "smithy.api#tags": [
-                            "rds"
-                        ]
+                        "smithy.api#documentation": "<p>The DB instance storage recommendation details.</p>"
                     }
                 }
             },
@@ -3190,19 +3187,13 @@
                 "RDS_DB_INSTANCE_STORAGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "RdsDbInstanceStorage",
-                        "smithy.api#tags": [
-                            "rds"
-                        ]
+                        "smithy.api#enumValue": "RdsDbInstanceStorage"
                     }
                 },
                 "RDS_DB_INSTANCE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "RdsDbInstance",
-                        "smithy.api#tags": [
-                            "rds"
-                        ]
+                        "smithy.api#enumValue": "RdsDbInstance"
                     }
                 }
             }

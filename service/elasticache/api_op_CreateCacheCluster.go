@@ -12,9 +12,10 @@ import (
 )
 
 // Creates a cluster. All nodes in the cluster run the same protocol-compliant
-// cache engine software, either Memcached or Redis OSS.
+// cache engine software, either Memcached, Valkey or Redis OSS.
 //
-// This operation is not supported for Redis OSS (cluster mode enabled) clusters.
+// This operation is not supported for Valkey or Redis OSS (cluster mode enabled)
+// clusters.
 func (c *Client) CreateCacheCluster(ctx context.Context, params *CreateCacheClusterInput, optFns ...func(*Options)) (*CreateCacheClusterOutput, error) {
 	if params == nil {
 		params = &CreateCacheClusterInput{}
@@ -73,9 +74,9 @@ type CreateCacheClusterInput struct {
 	// [AUTH password]: http://redis.io/commands/AUTH
 	AuthToken *string
 
-	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
-	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
-	// This parameter is disabled for previous versions.
+	//  If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and
+	// above, set this parameter to yes to opt-in to the next auto minor version
+	// upgrade campaign. This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// The compute and memory capacity of the nodes in the node group (shard).
@@ -166,12 +167,14 @@ type CreateCacheClusterInput struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -216,8 +219,9 @@ type CreateCacheClusterInput struct {
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
-	// is supported for workloads using Redis OSS engine version 6.2 onward or
-	// Memcached engine version 1.6.6 on all instances built on the [Nitro system].
+	// is supported for workloads using Valkey 7.2 and above, Redis OSS engine version
+	// 6.2 and above or Memcached engine version 1.6.6 and above on all instances built
+	// on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery types.IpDiscovery
@@ -226,8 +230,8 @@ type CreateCacheClusterInput struct {
 	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the [Nitro system].
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	NetworkType types.NetworkType
@@ -240,8 +244,8 @@ type CreateCacheClusterInput struct {
 
 	// The initial number of cache nodes that the cluster has.
 	//
-	// For clusters running Redis OSS, this value must be 1. For clusters running
-	// Memcached, this value must be between 1 and 40.
+	// For clusters running Valkey or Redis OSS, this value must be 1. For clusters
+	// running Memcached, this value must be between 1 and 40.
 	//
 	// If you need more than 40 nodes for your Memcached cluster, please fill out the
 	// ElastiCache Limit Increase Request form at [http://aws.amazon.com/contact-us/elasticache-node-limit-request/].
@@ -313,18 +317,18 @@ type CreateCacheClusterInput struct {
 	SecurityGroupIds []string
 
 	// A single-element string list containing an Amazon Resource Name (ARN) that
-	// uniquely identifies a Redis OSS RDB snapshot file stored in Amazon S3. The
-	// snapshot file is used to populate the node group (shard). The Amazon S3 object
-	// name in the ARN cannot contain any commas.
+	// uniquely identifies a Valkey or Redis OSS RDB snapshot file stored in Amazon S3.
+	// The snapshot file is used to populate the node group (shard). The Amazon S3
+	// object name in the ARN cannot contain any commas.
 	//
 	// This parameter is only valid if the Engine parameter is redis .
 	//
 	// Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
 	SnapshotArns []string
 
-	// The name of a Redis OSS snapshot from which to restore data into the new node
-	// group (shard). The snapshot status changes to restoring while the new node
-	// group (shard) is being created.
+	// The name of a Valkey or Redis OSS snapshot from which to restore data into the
+	// new node group (shard). The snapshot status changes to restoring while the new
+	// node group (shard) is being created.
 	//
 	// This parameter is only valid if the Engine parameter is redis .
 	SnapshotName *string

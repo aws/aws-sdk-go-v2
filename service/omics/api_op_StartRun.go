@@ -17,10 +17,10 @@ import (
 //
 // StartRun will not support re-run for a workflow that is shared with you.
 //
-// The total number of runs in your account is subject to a quota per Region. To
-// avoid needing to delete runs manually, you can set the retention mode to REMOVE
-// . Runs with this setting are deleted automatically when the run quoata is
-// exceeded.
+// HealthOmics stores a fixed number of runs that are available to the console and
+// API. By default, HealthOmics doesn't any remove any runs. If HealthOmics reaches
+// the maximum number of runs, you must manually remove runs. To have older runs
+// removed automatically, set the retention mode to REMOVE .
 //
 // By default, the run uses STATIC storage. For STATIC storage, set the
 // storageCapacity field. You can set the storage type to DYNAMIC. You do not set
@@ -57,6 +57,17 @@ type StartRunInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The cache behavior for the run. You specify this value if you want to override
+	// the default behavior for the cache. You had set the default value when you
+	// created the cache. For more information, see [Run cache behavior]in the AWS HealthOmics User Guide.
+	//
+	// [Run cache behavior]: https://docs.aws.amazon.com/omics/latest/dev/how-run-cache.html#run-cache-behavior
+	CacheBehavior types.CacheBehavior
+
+	// Identifier of the cache associated with this run. If you don't specify a cache
+	// ID, no task outputs are cached for this run.
+	CacheId *string
+
 	// A log level for the run.
 	LogLevel types.RunLogLevel
 
@@ -72,7 +83,20 @@ type StartRunInput struct {
 	// A priority for the run.
 	Priority *int32
 
-	// The retention mode for the run.
+	// The retention mode for the run. The default value is RETAIN.
+	//
+	// HealthOmics stores a fixed number of runs that are available to the console and
+	// API. In the default mode (RETAIN), you need to remove runs manually when the
+	// number of run exceeds the maximum. If you set the retention mode to REMOVE ,
+	// HealthOmics automatically removes runs (that have mode set to REMOVE) when the
+	// number of run exceeds the maximum. All run logs are available in CloudWatch
+	// logs, if you need information about a run that is no longer available to the
+	// API.
+	//
+	// For more information about retention mode, see [Specifying run retention mode] in the AWS HealthOmics User
+	// Guide.
+	//
+	// [Specifying run retention mode]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
 	RetentionMode types.RunRetentionMode
 
 	// The run's group ID.
@@ -108,7 +132,7 @@ type StartRunInput struct {
 
 type StartRunOutput struct {
 
-	// The run's ARN.
+	// Unique resource identifier for the run.
 	Arn *string
 
 	// The run's ID.

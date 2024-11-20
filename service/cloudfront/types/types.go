@@ -158,6 +158,125 @@ type AllowedMethods struct {
 	noSmithyDocumentSerde
 }
 
+// An Anycast static IP list.
+type AnycastIpList struct {
+
+	// The static IP addresses that are allocated to the Anycast static IP list.
+	//
+	// This member is required.
+	AnycastIps []string
+
+	// The Amazon Resource Name (ARN) of the Anycast static IP list.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the Anycast static IP list.
+	//
+	// This member is required.
+	Id *string
+
+	// The number of IP addresses in the Anycast static IP list.
+	//
+	// This member is required.
+	IpCount *int32
+
+	// The last time the Anycast static IP list was modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the Anycast static IP list.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the Anycast static IP list. Valid values: Deployed , Deploying ,
+	// or Failed .
+	//
+	// This member is required.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The Anycast static IP list collection.
+type AnycastIpListCollection struct {
+
+	// If there are more items in the list collection than are in this response, this
+	// value is true .
+	//
+	// This member is required.
+	IsTruncated *bool
+
+	// Use this field when paginating results to indicate where to begin in your list.
+	// The response includes items in the list that occur after the marker. To get the
+	// next page of the list, set this field's value to the value of NextMarker from
+	// the current page's response.
+	//
+	// This member is required.
+	Marker *string
+
+	// The maximum number of Anycast static IP list collections that you want returned
+	// in the response.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The quantity of Anycast static IP lists in the collection.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// Items in the Anycast static IP list collection. Each item is of the AnycastIpListSummary structure
+	// type.
+	Items []AnycastIpListSummary
+
+	// Indicates the next page of the Anycast static IP list collection. To get the
+	// next page of the list, use this value in the Marker field of your request.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// An abbreviated version of the AnycastIpList structure. Omits the allocated static IP
+// addresses (AnycastIpList$AnycastIps ).
+type AnycastIpListSummary struct {
+
+	// The Amazon Resource Name (ARN) of the Anycast static IP list.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the Anycast static IP list.
+	//
+	// This member is required.
+	Id *string
+
+	// The number of IP addresses in the Anycast static IP list.
+	//
+	// This member is required.
+	IpCount *int32
+
+	// The last time the Anycast static IP list was modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the Anycast static IP list.
+	//
+	// This member is required.
+	Name *string
+
+	// The deployment status of the Anycast static IP list. Valid values: Deployed,
+	// Deploying, or Failed.
+	//
+	// This member is required.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that describes how CloudFront processes requests.
 //
 // You must create at least as many cache behaviors (including the default cache
@@ -334,6 +453,9 @@ type CacheBehavior struct {
 	// CloudFront functions must be published to the LIVE stage to associate them with
 	// a cache behavior.
 	FunctionAssociations *FunctionAssociations
+
+	// The gRPC configuration for your cache behavior.
+	GrpcConfig *GrpcConfig
 
 	// A complex type that contains zero or more Lambda@Edge function associations for
 	// a cache behavior.
@@ -1460,6 +1582,9 @@ type DefaultCacheBehavior struct {
 	// cache behavior.
 	FunctionAssociations *FunctionAssociations
 
+	// The gRPC configuration for your cache behavior.
+	GrpcConfig *GrpcConfig
+
 	// A complex type that contains zero or more Lambda@Edge function associations for
 	// a cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations
@@ -1667,6 +1792,9 @@ type DistributionConfig struct {
 	// A complex type that contains information about CNAMEs (alternate domain names),
 	// if any, for this distribution.
 	Aliases *Aliases
+
+	// ID of the Anycast static IP list that is associated with the distribution.
+	AnycastIpListId *string
 
 	// A complex type that contains zero or more CacheBehavior elements.
 	CacheBehaviors *CacheBehaviors
@@ -2043,6 +2171,9 @@ type DistributionSummary struct {
 	//
 	// [Signup, Accounts, and Credentials]: https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html
 	AliasICPRecordals []AliasICPRecordal
+
+	// ID of the Anycast static IP list that is associated with the distribution.
+	AnycastIpListId *string
 
 	// A complex type that contains information about origin groups for this
 	// distribution.
@@ -2634,6 +2765,28 @@ type GeoRestriction struct {
 	noSmithyDocumentSerde
 }
 
+// Amazon CloudFront supports gRPC, an open-source remote procedure call (RPC)
+// framework built on HTTP/2. gRPC offers bi-directional streaming and binary
+// protocol that buffers payloads, making it suitable for applications that require
+// low latency communications.
+//
+// To enable your distribution to handle gRPC requests, you must include HTTP/2 as
+// one of the supported HTTP versions and allow HTTP methods, including POST .
+//
+// For more information, see [Using gRPC with CloudFront distributions] in the Amazon CloudFront Developer Guide.
+//
+// [Using gRPC with CloudFront distributions]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-using-grpc.html
+type GrpcConfig struct {
+
+	// Enables your CloudFront distribution to receive gRPC requests and to proxy them
+	// directly to your origins.
+	//
+	// This member is required.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains a list of HTTP header names.
 type Headers struct {
 
@@ -3075,24 +3228,30 @@ type LambdaFunctionAssociations struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that controls whether access logs are written for the
+// A complex type that specifies whether access logs are written for the
 // distribution.
+//
+// If you already enabled standard logging (legacy) and you want to enable
+// standard logging (v2) to send your access logs to Amazon S3, we recommend that
+// you specify a different Amazon S3 bucket or use a separate path in the same
+// bucket (for example, use a log prefix or partitioning). This helps you keep
+// track of which log files are associated with which logging subscription and
+// prevents log files from overwriting each other. For more information, see [Standard logging (access logs)]in
+// the Amazon CloudFront Developer Guide.
+//
+// [Standard logging (access logs)]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
 type LoggingConfig struct {
 
 	// The Amazon S3 bucket to store the access logs in, for example,
-	// myawslogbucket.s3.amazonaws.com .
-	//
-	// This member is required.
+	// amzn-s3-demo-bucket.s3.amazonaws.com .
 	Bucket *string
 
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
 	// bucket. If you don't want to enable logging when you create a distribution or if
 	// you want to disable logging for an existing distribution, specify false for
 	// Enabled , and specify empty Bucket and Prefix elements. If you specify false
-	// for Enabled but you specify values for Bucket , prefix , and IncludeCookies ,
-	// the values are automatically deleted.
-	//
-	// This member is required.
+	// for Enabled but you specify values for Bucket and prefix , the values are
+	// automatically deleted.
 	Enabled *bool
 
 	// Specifies whether you want CloudFront to include cookies in access logs,
@@ -3101,16 +3260,12 @@ type LoggingConfig struct {
 	// for this distribution. If you don't want to include cookies when you create a
 	// distribution or if you want to disable include cookies for an existing
 	// distribution, specify false for IncludeCookies .
-	//
-	// This member is required.
 	IncludeCookies *bool
 
 	// An optional string that you want CloudFront to prefix to the access log
 	// filenames for this distribution, for example, myprefix/ . If you want to enable
 	// logging, but you don't want to specify a prefix, you still must include an empty
 	// Prefix element in the Logging element.
-	//
-	// This member is required.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -3237,6 +3392,9 @@ type Origin struct {
 	// including an Amazon S3 bucket that is configured with static website hosting,
 	// use the CustomOriginConfig type instead.
 	S3OriginConfig *S3OriginConfig
+
+	// The VPC origin configuration.
+	VpcOriginConfig *VpcOriginConfig
 
 	noSmithyDocumentSerde
 }
@@ -5289,7 +5447,7 @@ type StreamingDistributionSummary struct {
 type StreamingLoggingConfig struct {
 
 	// The Amazon S3 bucket to store the access logs in, for example,
-	// myawslogbucket.s3.amazonaws.com .
+	// amzn-s3-demo-bucket.s3.amazonaws.com .
 	//
 	// This member is required.
 	Bucket *string
@@ -5593,6 +5751,163 @@ type ViewerCertificate struct {
 	// [server name indication (SNI)]: https://en.wikipedia.org/wiki/Server_Name_Indication
 	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home
 	SSLSupportMethod SSLSupportMethod
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon CloudFront VPC origin.
+type VpcOrigin struct {
+
+	// The VPC origin ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// The VPC origin created time.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The VPC origin ID.
+	//
+	// This member is required.
+	Id *string
+
+	// The VPC origin last modified time.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The VPC origin status.
+	//
+	// This member is required.
+	Status *string
+
+	// The VPC origin endpoint configuration.
+	//
+	// This member is required.
+	VpcOriginEndpointConfig *VpcOriginEndpointConfig
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon CloudFront VPC origin configuration.
+type VpcOriginConfig struct {
+
+	// The VPC origin ID.
+	//
+	// This member is required.
+	VpcOriginId *string
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon CloudFront VPC origin endpoint configuration.
+type VpcOriginEndpointConfig struct {
+
+	// The ARN of the CloudFront VPC origin endpoint configuration.
+	//
+	// This member is required.
+	Arn *string
+
+	// The HTTP port for the CloudFront VPC origin endpoint configuration.
+	//
+	// This member is required.
+	HTTPPort *int32
+
+	// The HTTPS port of the CloudFront VPC origin endpoint configuration.
+	//
+	// This member is required.
+	HTTPSPort *int32
+
+	// The name of the CloudFront VPC origin endpoint configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The origin protocol policy for the CloudFront VPC origin endpoint configuration.
+	//
+	// This member is required.
+	OriginProtocolPolicy OriginProtocolPolicy
+
+	// A complex type that contains information about the SSL/TLS protocols that
+	// CloudFront can use when establishing an HTTPS connection with your origin.
+	OriginSslProtocols *OriginSslProtocols
+
+	noSmithyDocumentSerde
+}
+
+// A list of CloudFront VPC origins.
+type VpcOriginList struct {
+
+	// A flag that indicates whether more VPC origins remain to be listed. If your
+	// results were truncated, you can make a follow-up pagination request using the
+	// Marker request parameter to retrieve more VPC origins in the list.
+	//
+	// This member is required.
+	IsTruncated *bool
+
+	// The marker associated with the VPC origins list.
+	//
+	// This member is required.
+	Marker *string
+
+	// The maximum number of items included in the list.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The number of VPC origins in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The items of the VPC origins list.
+	Items []VpcOriginSummary
+
+	// The next marker associated with the VPC origins list.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the CloudFront VPC origin.
+type VpcOriginSummary struct {
+
+	// The VPC origin summary ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// The VPC origin summary created time.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The VPC origin summary ID.
+	//
+	// This member is required.
+	Id *string
+
+	// The VPC origin summary last modified time.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The VPC origin summary name.
+	//
+	// This member is required.
+	Name *string
+
+	// The VPC origin summary origin endpoint ARN.
+	//
+	// This member is required.
+	OriginEndpointArn *string
+
+	// The VPC origin summary status.
+	//
+	// This member is required.
+	Status *string
 
 	noSmithyDocumentSerde
 }

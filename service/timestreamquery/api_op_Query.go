@@ -13,9 +13,18 @@ import (
 )
 
 // Query is a synchronous operation that enables you to run a query against your
-// Amazon Timestream data. Query will time out after 60 seconds. You must update
-// the default timeout in the SDK to support a timeout of 60 seconds. See the [code sample]for
-// details.
+// Amazon Timestream data.
+//
+// If you enabled QueryInsights , this API also returns insights and metrics
+// related to the query that you executed. QueryInsights helps with performance
+// tuning of your query. For more information about QueryInsights , see [Using query insights to optimize queries in Amazon Timestream].
+//
+// The maximum number of Query API requests you're allowed to make with
+// QueryInsights enabled is 1 query per second (QPS). If you exceed this query
+// rate, it might result in throttling.
+//
+// Query will time out after 60 seconds. You must update the default timeout in
+// the SDK to support a timeout of 60 seconds. See the [code sample]for details.
 //
 // Your query request will fail in the following cases:
 //
@@ -38,6 +47,7 @@ import (
 //	pagination token error.
 //
 // [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html
+// [Using query insights to optimize queries in Amazon Timestream]: https://docs.aws.amazon.com/timestream/latest/developerguide/using-query-insights.html
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}
@@ -129,6 +139,13 @@ type QueryInput struct {
 	//   pagination token error.
 	NextToken *string
 
+	// Encapsulates settings for enabling QueryInsights .
+	//
+	// Enabling QueryInsights returns insights and metrics in addition to query
+	// results for the query that you executed. You can use QueryInsights to tune your
+	// query performance.
+	QueryInsights *types.QueryInsights
+
 	noSmithyDocumentSerde
 }
 
@@ -152,6 +169,10 @@ type QueryOutput struct {
 	//  A pagination token that can be used again on a Query call to get the next set
 	// of results.
 	NextToken *string
+
+	// Encapsulates QueryInsights containing insights and metrics related to the query
+	// that you executed.
+	QueryInsightsResponse *types.QueryInsightsResponse
 
 	// Information about the status of the query, including progress and bytes scanned.
 	QueryStatus *types.QueryStatus

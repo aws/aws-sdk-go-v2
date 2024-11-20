@@ -74,6 +74,18 @@ func TestCheckSnapshot_AcceptAddressTransfer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AcceptCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptCapacityReservationBillingOwnership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
@@ -254,6 +266,18 @@ func TestCheckSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateCapacityReservationBillingOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateClientVpnTargetNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateClientVpnTargetNetwork(context.Background(), nil, func(o *Options) {
@@ -355,6 +379,18 @@ func TestCheckSnapshot_AssociateRouteTable(t *testing.T) {
 	_, err := svc.AssociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AssociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AssociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1646,6 +1682,18 @@ func TestCheckSnapshot_CreateVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVpcEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcEndpoint(context.Background(), nil, func(o *Options) {
@@ -2546,6 +2594,18 @@ func TestCheckSnapshot_DeleteVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteVpcEndpointConnectionNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVpcEndpointConnectionNotifications(context.Background(), nil, func(o *Options) {
@@ -2839,6 +2899,18 @@ func TestCheckSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	_, err := svc.DescribeCapacityBlockOfferings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapacityBlockOfferings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationBillingRequests")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3319,6 +3391,18 @@ func TestCheckSnapshot_DescribeInstanceEventWindows(t *testing.T) {
 	_, err := svc.DescribeInstanceEventWindows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeInstanceEventWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeInstanceImageMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceImageMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInstanceImageMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3950,6 +4034,18 @@ func TestCheckSnapshot_DescribeSecurityGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeSecurityGroupVpcAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityGroupVpcAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecurityGroupVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSnapshotAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSnapshotAttribute(context.Background(), nil, func(o *Options) {
@@ -4406,6 +4502,30 @@ func TestCheckSnapshot_DescribeVpcAttribute(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeVpcBlockPublicAccessExclusions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessExclusions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcBlockPublicAccessExclusions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeVpcBlockPublicAccessOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeVpcClassicLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVpcClassicLink(context.Background(), nil, func(o *Options) {
@@ -4826,6 +4946,18 @@ func TestCheckSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateCapacityReservationBillingOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateClientVpnTargetNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateClientVpnTargetNetwork(context.Background(), nil, func(o *Options) {
@@ -4915,6 +5047,18 @@ func TestCheckSnapshot_DisassociateRouteTable(t *testing.T) {
 	_, err := svc.DisassociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6614,6 +6758,30 @@ func TestCheckSnapshot_ModifyVpcAttribute(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcBlockPublicAccessOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyVpcEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyVpcEndpoint(context.Background(), nil, func(o *Options) {
@@ -6943,6 +7111,18 @@ func TestCheckSnapshot_RegisterTransitGatewayMulticastGroupSources(t *testing.T)
 	_, err := svc.RegisterTransitGatewayMulticastGroupSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RegisterTransitGatewayMulticastGroupSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectCapacityReservationBillingOwnership")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7609,6 +7789,18 @@ func TestUpdateSnapshot_AcceptAddressTransfer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AcceptCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptCapacityReservationBillingOwnership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
@@ -7789,6 +7981,18 @@ func TestUpdateSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateCapacityReservationBillingOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateClientVpnTargetNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateClientVpnTargetNetwork(context.Background(), nil, func(o *Options) {
@@ -7890,6 +8094,18 @@ func TestUpdateSnapshot_AssociateRouteTable(t *testing.T) {
 	_, err := svc.AssociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9181,6 +9397,18 @@ func TestUpdateSnapshot_CreateVpc(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVpcEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcEndpoint(context.Background(), nil, func(o *Options) {
@@ -10081,6 +10309,18 @@ func TestUpdateSnapshot_DeleteVpc(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteVpcEndpointConnectionNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVpcEndpointConnectionNotifications(context.Background(), nil, func(o *Options) {
@@ -10374,6 +10614,18 @@ func TestUpdateSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	_, err := svc.DescribeCapacityBlockOfferings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityBlockOfferings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationBillingRequests")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10854,6 +11106,18 @@ func TestUpdateSnapshot_DescribeInstanceEventWindows(t *testing.T) {
 	_, err := svc.DescribeInstanceEventWindows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeInstanceEventWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeInstanceImageMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceImageMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInstanceImageMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11485,6 +11749,18 @@ func TestUpdateSnapshot_DescribeSecurityGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeSecurityGroupVpcAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityGroupVpcAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecurityGroupVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSnapshotAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSnapshotAttribute(context.Background(), nil, func(o *Options) {
@@ -11941,6 +12217,30 @@ func TestUpdateSnapshot_DescribeVpcAttribute(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeVpcBlockPublicAccessExclusions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessExclusions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcBlockPublicAccessExclusions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeVpcBlockPublicAccessOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeVpcClassicLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVpcClassicLink(context.Background(), nil, func(o *Options) {
@@ -12361,6 +12661,18 @@ func TestUpdateSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateCapacityReservationBillingOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateClientVpnTargetNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateClientVpnTargetNetwork(context.Background(), nil, func(o *Options) {
@@ -12450,6 +12762,18 @@ func TestUpdateSnapshot_DisassociateRouteTable(t *testing.T) {
 	_, err := svc.DisassociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14149,6 +14473,30 @@ func TestUpdateSnapshot_ModifyVpcAttribute(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyVpcBlockPublicAccessExclusion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessExclusion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcBlockPublicAccessExclusion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVpcBlockPublicAccessOptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcBlockPublicAccessOptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcBlockPublicAccessOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyVpcEndpoint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyVpcEndpoint(context.Background(), nil, func(o *Options) {
@@ -14478,6 +14826,18 @@ func TestUpdateSnapshot_RegisterTransitGatewayMulticastGroupSources(t *testing.T
 	_, err := svc.RegisterTransitGatewayMulticastGroupSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterTransitGatewayMulticastGroupSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectCapacityReservationBillingOwnership")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

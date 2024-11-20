@@ -71,6 +71,53 @@ func (CollectionType) Values() []CollectionType {
 	}
 }
 
+type IamIdentityCenterGroupAttribute string
+
+// Enum values for IamIdentityCenterGroupAttribute
+const (
+	// Group ID
+	IamIdentityCenterGroupAttributeGroupId IamIdentityCenterGroupAttribute = "GroupId"
+	// Group Name
+	IamIdentityCenterGroupAttributeGroupName IamIdentityCenterGroupAttribute = "GroupName"
+)
+
+// Values returns all known values for IamIdentityCenterGroupAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IamIdentityCenterGroupAttribute) Values() []IamIdentityCenterGroupAttribute {
+	return []IamIdentityCenterGroupAttribute{
+		"GroupId",
+		"GroupName",
+	}
+}
+
+type IamIdentityCenterUserAttribute string
+
+// Enum values for IamIdentityCenterUserAttribute
+const (
+	// User ID
+	IamIdentityCenterUserAttributeUserId IamIdentityCenterUserAttribute = "UserId"
+	// User Name
+	IamIdentityCenterUserAttributeUserName IamIdentityCenterUserAttribute = "UserName"
+	// Email
+	IamIdentityCenterUserAttributeEmail IamIdentityCenterUserAttribute = "Email"
+)
+
+// Values returns all known values for IamIdentityCenterUserAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IamIdentityCenterUserAttribute) Values() []IamIdentityCenterUserAttribute {
+	return []IamIdentityCenterUserAttribute{
+		"UserId",
+		"UserName",
+		"Email",
+	}
+}
+
 type LifecyclePolicyType string
 
 // Enum values for LifecyclePolicyType
@@ -113,6 +160,8 @@ type SecurityConfigType string
 const (
 	// saml provider
 	SecurityConfigTypeSaml SecurityConfigType = "saml"
+	// iam identity center
+	SecurityConfigTypeIamidentitycenter SecurityConfigType = "iamidentitycenter"
 )
 
 // Values returns all known values for SecurityConfigType. Note that this can be
@@ -122,6 +171,7 @@ const (
 func (SecurityConfigType) Values() []SecurityConfigType {
 	return []SecurityConfigType{
 		"saml",
+		"iamidentitycenter",
 	}
 }
 

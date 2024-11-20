@@ -7,6 +7,29 @@ import (
 	"time"
 )
 
+// Information about the auto-retry configuration for the build.
+type AutoRetryConfig struct {
+
+	// The maximum number of additional automatic retries after a failed build. For
+	// example, if the auto-retry limit is set to 2, CodeBuild will call the RetryBuild
+	// API to automatically retry your build for up to 2 additional times.
+	AutoRetryLimit *int32
+
+	// The number of times that the build has been retried. The initial build will
+	// have an auto-retry number of 0.
+	AutoRetryNumber *int32
+
+	// The build ARN of the auto-retried build triggered by the current build. The
+	// next auto-retry will be null for builds that don't trigger an auto-retry.
+	NextAutoRetry *string
+
+	// The build ARN of the build that triggered the current auto-retry build. The
+	// previous auto-retry will be null for the initial build.
+	PreviousAutoRetry *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies restrictions for the batch build.
 type BatchRestrictions struct {
 
@@ -30,6 +53,9 @@ type Build struct {
 
 	// Information about the output artifacts for the build.
 	Artifacts *BuildArtifacts
+
+	// Information about the auto-retry configuration for the build.
+	AutoRetryConfig *AutoRetryConfig
 
 	// The ARN of the batch build that this build is a member of, if applicable.
 	BuildBatchArn *string
@@ -744,6 +770,25 @@ type CodeCoverageReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains compute attributes. These attributes only need be specified when your
+// project's or fleet's computeType is set to ATTRIBUTE_BASED_COMPUTE .
+type ComputeConfiguration struct {
+
+	// The amount of disk space of the instance type included in your fleet.
+	Disk *int64
+
+	// The machine type of the instance type included in your fleet.
+	MachineType MachineType
+
+	// The amount of memory of the instance type included in your fleet.
+	Memory *int64
+
+	// The number of vCPUs of the instance type included in your fleet.
+	VCpu *int64
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the debug session for a build. For more information,
 // see [Viewing a running build in Session Manager].
 //
@@ -880,48 +925,76 @@ type Fleet struct {
 	// number of builds that can run in parallel.
 	BaseCapacity *int32
 
+	// The compute configuration of the compute fleet. This is only required if
+	// computeType is set to ATTRIBUTE_BASED_COMPUTE .
+	ComputeConfiguration *ComputeConfiguration
+
 	// Information about the compute resources the compute fleet uses. Available
 	// values include:
 	//
-	//   - BUILD_GENERAL1_SMALL : Use up to 3 GB memory and 2 vCPUs for builds.
+	//   - ATTRIBUTE_BASED_COMPUTE : Specify the amount of vCPUs, memory, disk space,
+	//   and the type of machine.
 	//
-	//   - BUILD_GENERAL1_MEDIUM : Use up to 7 GB memory and 4 vCPUs for builds.
+	// If you use ATTRIBUTE_BASED_COMPUTE , you must define your attributes by using
+	//   computeConfiguration . CodeBuild will select the cheapest instance that
+	//   satisfies your specified attributes. For more information, see [Reserved capacity environment types]in the
+	//   CodeBuild User Guide.
 	//
-	//   - BUILD_GENERAL1_LARGE : Use up to 16 GB memory and 8 vCPUs for builds,
+	//   - BUILD_GENERAL1_SMALL : Use up to 4 GiB memory and 2 vCPUs for builds.
+	//
+	//   - BUILD_GENERAL1_MEDIUM : Use up to 8 GiB memory and 4 vCPUs for builds.
+	//
+	//   - BUILD_GENERAL1_LARGE : Use up to 16 GiB memory and 8 vCPUs for builds,
 	//   depending on your environment type.
 	//
-	//   - BUILD_GENERAL1_XLARGE : Use up to 70 GB memory and 36 vCPUs for builds,
+	//   - BUILD_GENERAL1_XLARGE : Use up to 72 GiB memory and 36 vCPUs for builds,
 	//   depending on your environment type.
 	//
-	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
+	//   - BUILD_GENERAL1_2XLARGE : Use up to 144 GiB memory, 72 vCPUs, and 824 GB of
 	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
 	//   uncompressed.
 	//
+	//   - BUILD_LAMBDA_1GB : Use up to 1 GiB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
+	//   - BUILD_LAMBDA_2GB : Use up to 2 GiB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
+	//   - BUILD_LAMBDA_4GB : Use up to 4 GiB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
+	//   - BUILD_LAMBDA_8GB : Use up to 8 GiB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
+	//   - BUILD_LAMBDA_10GB : Use up to 10 GiB memory for builds. Only available for
+	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
 	// If you use BUILD_GENERAL1_SMALL :
 	//
-	//   - For environment type LINUX_CONTAINER , you can use up to 3 GB memory and 2
+	//   - For environment type LINUX_CONTAINER , you can use up to 4 GiB memory and 2
 	//   vCPUs for builds.
 	//
-	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GB memory, 4
-	//   vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GiB memory,
+	//   4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
 	//
-	//   - For environment type ARM_CONTAINER , you can use up to 4 GB memory and 2
+	//   - For environment type ARM_CONTAINER , you can use up to 4 GiB memory and 2
 	//   vCPUs on ARM-based processors for builds.
 	//
 	// If you use BUILD_GENERAL1_LARGE :
 	//
-	//   - For environment type LINUX_CONTAINER , you can use up to 15 GB memory and 8
+	//   - For environment type LINUX_CONTAINER , you can use up to 16 GiB memory and 8
 	//   vCPUs for builds.
 	//
-	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GB memory,
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GiB memory,
 	//   32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
 	//
-	//   - For environment type ARM_CONTAINER , you can use up to 16 GB memory and 8
+	//   - For environment type ARM_CONTAINER , you can use up to 16 GiB memory and 8
 	//   vCPUs on ARM-based processors for builds.
 	//
-	// For more information, see [Build environment compute types] in the CodeBuild User Guide.
+	// For more information, see [On-demand environment types] in the CodeBuild User Guide.
 	//
-	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+	// [Reserved capacity environment types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+	// [On-demand environment types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
 	ComputeType ComputeType
 
 	// The time at which the compute fleet was created.
@@ -934,10 +1007,20 @@ type Fleet struct {
 	//   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney),
 	//   EU (Frankfurt), and South America (São Paulo).
 	//
+	//   - The environment type ARM_EC2 is available only in regions US East (N.
+	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia
+	//   Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South America
+	//   (São Paulo), and Asia Pacific (Mumbai).
+	//
 	//   - The environment type LINUX_CONTAINER is available only in regions US East
 	//   (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt),
 	//   Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South
 	//   America (São Paulo), and Asia Pacific (Mumbai).
+	//
+	//   - The environment type LINUX_EC2 is available only in regions US East (N.
+	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia
+	//   Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South America
+	//   (São Paulo), and Asia Pacific (Mumbai).
 	//
 	//   - The environment type LINUX_GPU_CONTAINER is available only in regions US
 	//   East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU
@@ -950,6 +1033,11 @@ type Fleet struct {
 	//   - The environment type MAC_ARM is available for Large fleets only in regions
 	//   US East (N. Virginia), US East (Ohio), US West (Oregon), and Asia Pacific
 	//   (Sydney).
+	//
+	//   - The environment type WINDOWS_EC2 is available only in regions US East (N.
+	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), Asia
+	//   Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South America
+	//   (São Paulo), and Asia Pacific (Mumbai).
 	//
 	//   - The environment type WINDOWS_SERVER_2019_CONTAINER is available only in
 	//   regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific
@@ -998,6 +1086,9 @@ type Fleet struct {
 	// [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
 	OverflowBehavior FleetOverflowBehavior
 
+	// The proxy configuration of the compute fleet.
+	ProxyConfiguration *ProxyConfiguration
+
 	// The scaling configuration of the compute fleet.
 	ScalingConfiguration *ScalingConfigurationOutput
 
@@ -1012,6 +1103,27 @@ type Fleet struct {
 
 	// Information about the VPC configuration that CodeBuild accesses.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Information about the proxy rule for your reserved capacity instances.
+type FleetProxyRule struct {
+
+	// The behavior of the proxy rule.
+	//
+	// This member is required.
+	Effect FleetProxyRuleEffectType
+
+	// The destination of the proxy rule.
+	//
+	// This member is required.
+	Entities []string
+
+	// The type of proxy rule.
+	//
+	// This member is required.
+	Type FleetProxyRuleType
 
 	noSmithyDocumentSerde
 }
@@ -1155,6 +1267,11 @@ type Project struct {
 
 	// Information about the build output artifacts for the build project.
 	Artifacts *ProjectArtifacts
+
+	// The maximum number of additional automatic retries after a failed build. For
+	// example, if the auto-retry limit is set to 2, CodeBuild will call the RetryBuild
+	// API to automatically retry your build for up to 2 additional times.
+	AutoRetryLimit *int32
 
 	// Information about the build badge for the build project.
 	Badge *ProjectBadge
@@ -1572,63 +1689,69 @@ type ProjectEnvironment struct {
 	// Information about the compute resources the build project uses. Available
 	// values include:
 	//
-	//   - BUILD_GENERAL1_SMALL : Use up to 3 GB memory and 2 vCPUs for builds.
+	//   - ATTRIBUTE_BASED_COMPUTE : Specify the amount of vCPUs, memory, disk space,
+	//   and the type of machine.
 	//
-	//   - BUILD_GENERAL1_MEDIUM : Use up to 7 GB memory and 4 vCPUs for builds.
+	// If you use ATTRIBUTE_BASED_COMPUTE , you must define your attributes by using
+	//   computeConfiguration . CodeBuild will select the cheapest instance that
+	//   satisfies your specified attributes. For more information, see [Reserved capacity environment types]in the
+	//   CodeBuild User Guide.
 	//
-	//   - BUILD_GENERAL1_LARGE : Use up to 16 GB memory and 8 vCPUs for builds,
+	//   - BUILD_GENERAL1_SMALL : Use up to 4 GiB memory and 2 vCPUs for builds.
+	//
+	//   - BUILD_GENERAL1_MEDIUM : Use up to 8 GiB memory and 4 vCPUs for builds.
+	//
+	//   - BUILD_GENERAL1_LARGE : Use up to 16 GiB memory and 8 vCPUs for builds,
 	//   depending on your environment type.
 	//
-	//   - BUILD_GENERAL1_XLARGE : Use up to 70 GB memory and 36 vCPUs for builds,
+	//   - BUILD_GENERAL1_XLARGE : Use up to 72 GiB memory and 36 vCPUs for builds,
 	//   depending on your environment type.
 	//
-	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
+	//   - BUILD_GENERAL1_2XLARGE : Use up to 144 GiB memory, 72 vCPUs, and 824 GB of
 	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
 	//   uncompressed.
 	//
-	//   - BUILD_LAMBDA_1GB : Use up to 1 GB memory for builds. Only available for
+	//   - BUILD_LAMBDA_1GB : Use up to 1 GiB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
 	//
-	//   - BUILD_LAMBDA_2GB : Use up to 2 GB memory for builds. Only available for
+	//   - BUILD_LAMBDA_2GB : Use up to 2 GiB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
 	//
-	//   - BUILD_LAMBDA_4GB : Use up to 4 GB memory for builds. Only available for
+	//   - BUILD_LAMBDA_4GB : Use up to 4 GiB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
 	//
-	//   - BUILD_LAMBDA_8GB : Use up to 8 GB memory for builds. Only available for
+	//   - BUILD_LAMBDA_8GB : Use up to 8 GiB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
 	//
-	//   - BUILD_LAMBDA_10GB : Use up to 10 GB memory for builds. Only available for
+	//   - BUILD_LAMBDA_10GB : Use up to 10 GiB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
 	//
 	// If you use BUILD_GENERAL1_SMALL :
 	//
-	//   - For environment type LINUX_CONTAINER , you can use up to 3 GB memory and 2
+	//   - For environment type LINUX_CONTAINER , you can use up to 4 GiB memory and 2
 	//   vCPUs for builds.
 	//
-	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GB memory, 4
-	//   vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GiB memory,
+	//   4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
 	//
-	//   - For environment type ARM_CONTAINER , you can use up to 4 GB memory and 2
+	//   - For environment type ARM_CONTAINER , you can use up to 4 GiB memory and 2
 	//   vCPUs on ARM-based processors for builds.
 	//
 	// If you use BUILD_GENERAL1_LARGE :
 	//
-	//   - For environment type LINUX_CONTAINER , you can use up to 15 GB memory and 8
+	//   - For environment type LINUX_CONTAINER , you can use up to 16 GiB memory and 8
 	//   vCPUs for builds.
 	//
-	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GB memory,
+	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GiB memory,
 	//   32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
 	//
-	//   - For environment type ARM_CONTAINER , you can use up to 16 GB memory and 8
+	//   - For environment type ARM_CONTAINER , you can use up to 16 GiB memory and 8
 	//   vCPUs on ARM-based processors for builds.
 	//
-	// If you're using compute fleets during project creation, computeType will be
-	// ignored.
+	// For more information, see [On-demand environment types] in the CodeBuild User Guide.
 	//
-	// For more information, see [Build Environment Compute Types] in the CodeBuild User Guide.
-	//
-	// [Build Environment Compute Types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+	// [Reserved capacity environment types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
+	// [On-demand environment types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
 	//
 	// This member is required.
 	ComputeType ComputeType
@@ -1693,6 +1816,10 @@ type ProjectEnvironment struct {
 	//
 	// [certificate]: https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate
 	Certificate *string
+
+	// The compute configuration of the build project. This is only required if
+	// computeType is set to ATTRIBUTE_BASED_COMPUTE .
+	ComputeConfiguration *ComputeConfiguration
 
 	// A set of environment variables to make available to builds for this build
 	// project.
@@ -1985,6 +2112,20 @@ type ProjectSourceVersion struct {
 	//
 	// This member is required.
 	SourceVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the proxy configurations that apply network access control to
+// your reserved capacity instances.
+type ProxyConfiguration struct {
+
+	// The default behavior of outgoing traffic.
+	DefaultBehavior FleetProxyRuleBehavior
+
+	// An array of FleetProxyRule objects that represent the specified destination
+	// domains or IPs to allow or deny network access control to.
+	OrderedProxyRules []FleetProxyRule
 
 	noSmithyDocumentSerde
 }

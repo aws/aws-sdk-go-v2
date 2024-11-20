@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateLFTag(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLFTagExpression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataCellsFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataCellsFilter(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_DeleteLFTag(t *testing.T) {
 	_, err := svc.DeleteLFTag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLFTag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLFTagExpression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +386,18 @@ func TestCheckSnapshot_GetLFTag(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLFTagExpression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetQueryState(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetQueryState(context.Background(), nil, func(o *Options) {
@@ -487,6 +523,18 @@ func TestCheckSnapshot_ListLakeFormationOptIns(t *testing.T) {
 	_, err := svc.ListLakeFormationOptIns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListLakeFormationOptIns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListLFTagExpressions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLFTagExpressions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLFTagExpressions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -686,6 +734,18 @@ func TestCheckSnapshot_UpdateLFTag(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLFTagExpression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateResource(context.Background(), nil, func(o *Options) {
@@ -841,6 +901,18 @@ func TestUpdateSnapshot_CreateLFTag(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLFTagExpression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDataCellsFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataCellsFilter(context.Background(), nil, func(o *Options) {
@@ -882,6 +954,18 @@ func TestUpdateSnapshot_DeleteLFTag(t *testing.T) {
 	_, err := svc.DeleteLFTag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLFTag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLFTagExpression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,6 +1105,18 @@ func TestUpdateSnapshot_GetLFTag(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLFTagExpression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetQueryState(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetQueryState(context.Background(), nil, func(o *Options) {
@@ -1146,6 +1242,18 @@ func TestUpdateSnapshot_ListLakeFormationOptIns(t *testing.T) {
 	_, err := svc.ListLakeFormationOptIns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListLakeFormationOptIns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLFTagExpressions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLFTagExpressions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLFTagExpressions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1338,6 +1446,18 @@ func TestUpdateSnapshot_UpdateLFTag(t *testing.T) {
 	_, err := svc.UpdateLFTag(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLFTag")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLFTagExpression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLFTagExpression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLFTagExpression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

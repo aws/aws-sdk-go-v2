@@ -49,6 +49,10 @@ type GetResourceRequestStatusInput struct {
 
 type GetResourceRequestStatusOutput struct {
 
+	// Lists Hook invocations for the specified target in the request. This is a list
+	// since the same target can invoke multiple Hooks.
+	HooksProgressEvent []types.HookProgressEvent
+
 	// Represents the current status of the resource operation request.
 	ProgressEvent *types.ProgressEvent
 

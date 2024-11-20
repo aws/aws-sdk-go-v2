@@ -230,6 +230,26 @@ func (m *validateOpCreateReferenceStore) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRunCache struct {
+}
+
+func (*validateOpCreateRunCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRunCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRunCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRunCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRunGroup struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpDeleteReferenceStore) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteReferenceStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRunCache struct {
+}
+
+func (*validateOpDeleteRunCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRunCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRunCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRunCacheInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -765,6 +805,26 @@ func (m *validateOpGetReferenceStore) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetReferenceStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRunCache struct {
+}
+
+func (*validateOpGetRunCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRunCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRunCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRunCacheInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1390,6 +1450,26 @@ func (m *validateOpUpdateAnnotationStoreVersion) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRunCache struct {
+}
+
+func (*validateOpUpdateRunCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRunCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRunCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRunCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRunGroup struct {
 }
 
@@ -1514,6 +1594,10 @@ func addOpCreateReferenceStoreValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateReferenceStore{}, middleware.After)
 }
 
+func addOpCreateRunCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRunCache{}, middleware.After)
+}
+
 func addOpCreateRunGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRunGroup{}, middleware.After)
 }
@@ -1548,6 +1632,10 @@ func addOpDeleteReferenceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteReferenceStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteReferenceStore{}, middleware.After)
+}
+
+func addOpDeleteRunCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRunCache{}, middleware.After)
 }
 
 func addOpDeleteRunGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1620,6 +1708,10 @@ func addOpGetReferenceMetadataValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetReferenceStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReferenceStore{}, middleware.After)
+}
+
+func addOpGetRunCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRunCache{}, middleware.After)
 }
 
 func addOpGetRunGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1744,6 +1836,10 @@ func addOpUpdateAnnotationStoreValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAnnotationStoreVersion{}, middleware.After)
+}
+
+func addOpUpdateRunCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRunCache{}, middleware.After)
 }
 
 func addOpUpdateRunGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -2244,6 +2340,24 @@ func validateOpCreateReferenceStoreInput(v *CreateReferenceStoreInput) error {
 	}
 }
 
+func validateOpCreateRunCacheInput(v *CreateRunCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRunCacheInput"}
+	if v.CacheS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CacheS3Location"))
+	}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRunGroupInput(v *CreateRunGroupInput) error {
 	if v == nil {
 		return nil
@@ -2388,6 +2502,21 @@ func validateOpDeleteReferenceStoreInput(v *DeleteReferenceStoreInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteReferenceStoreInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRunCacheInput(v *DeleteRunCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRunCacheInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -2691,6 +2820,21 @@ func validateOpGetReferenceStoreInput(v *GetReferenceStoreInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetReferenceStoreInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRunCacheInput(v *GetRunCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRunCacheInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -3239,6 +3383,21 @@ func validateOpUpdateAnnotationStoreVersionInput(v *UpdateAnnotationStoreVersion
 	}
 	if v.VersionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRunCacheInput(v *UpdateRunCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRunCacheInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

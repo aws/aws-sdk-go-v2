@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +45,16 @@ type AttachThingPrincipalInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	// The type of the relation you want to specify when you attach a principal to a
+	// thing.
+	//
+	//   - EXCLUSIVE_THING - Attaches the specified principal to the specified thing,
+	//   exclusively. The thing will be the only thing that’s attached to the principal.
+	//
+	//   - NON_EXCLUSIVE_THING - Attaches the specified principal to the specified
+	//   thing. Multiple things can be attached to the principal.
+	ThingPrincipalType types.ThingPrincipalType
 
 	noSmithyDocumentSerde
 }

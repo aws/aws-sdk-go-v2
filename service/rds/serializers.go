@@ -11901,6 +11901,11 @@ func awsAwsquery_serializeDocumentServerlessV2ScalingConfiguration(v *types.Serv
 		}
 	}
 
+	if v.SecondsUntilAutoPause != nil {
+		objectKey := object.Key("SecondsUntilAutoPause")
+		objectKey.Integer(*v.SecondsUntilAutoPause)
+	}
+
 	return nil
 }
 
@@ -12406,6 +12411,11 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 		}
 	}
 
+	if v.TargetAllocatedStorage != nil {
+		objectKey := object.Key("TargetAllocatedStorage")
+		objectKey.Integer(*v.TargetAllocatedStorage)
+	}
+
 	if v.TargetDBClusterParameterGroupName != nil {
 		objectKey := object.Key("TargetDBClusterParameterGroupName")
 		objectKey.String(*v.TargetDBClusterParameterGroupName)
@@ -12424,6 +12434,21 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 	if v.TargetEngineVersion != nil {
 		objectKey := object.Key("TargetEngineVersion")
 		objectKey.String(*v.TargetEngineVersion)
+	}
+
+	if v.TargetIops != nil {
+		objectKey := object.Key("TargetIops")
+		objectKey.Integer(*v.TargetIops)
+	}
+
+	if v.TargetStorageThroughput != nil {
+		objectKey := object.Key("TargetStorageThroughput")
+		objectKey.Integer(*v.TargetStorageThroughput)
+	}
+
+	if v.TargetStorageType != nil {
+		objectKey := object.Key("TargetStorageType")
+		objectKey.String(*v.TargetStorageType)
 	}
 
 	if v.UpgradeTargetStorageConfig != nil {
@@ -17703,6 +17728,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
 	}
 
+	if v.EnablePerformanceInsights != nil {
+		objectKey := object.Key("EnablePerformanceInsights")
+		objectKey.Boolean(*v.EnablePerformanceInsights)
+	}
+
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
@@ -17733,6 +17763,16 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.MonitoringInterval != nil {
+		objectKey := object.Key("MonitoringInterval")
+		objectKey.Integer(*v.MonitoringInterval)
+	}
+
+	if v.MonitoringRoleArn != nil {
+		objectKey := object.Key("MonitoringRoleArn")
+		objectKey.String(*v.MonitoringRoleArn)
+	}
+
 	if v.NetworkType != nil {
 		objectKey := object.Key("NetworkType")
 		objectKey.String(*v.NetworkType)
@@ -17741,6 +17781,16 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
+	}
+
+	if v.PerformanceInsightsKMSKeyId != nil {
+		objectKey := object.Key("PerformanceInsightsKMSKeyId")
+		objectKey.String(*v.PerformanceInsightsKMSKeyId)
+	}
+
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		objectKey := object.Key("PerformanceInsightsRetentionPeriod")
+		objectKey.Integer(*v.PerformanceInsightsRetentionPeriod)
 	}
 
 	if v.Port != nil {
@@ -17862,6 +17912,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
 	}
 
+	if v.EnablePerformanceInsights != nil {
+		objectKey := object.Key("EnablePerformanceInsights")
+		objectKey.Boolean(*v.EnablePerformanceInsights)
+	}
+
 	if v.EngineLifecycleSupport != nil {
 		objectKey := object.Key("EngineLifecycleSupport")
 		objectKey.String(*v.EngineLifecycleSupport)
@@ -17882,6 +17937,16 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.MonitoringInterval != nil {
+		objectKey := object.Key("MonitoringInterval")
+		objectKey.Integer(*v.MonitoringInterval)
+	}
+
+	if v.MonitoringRoleArn != nil {
+		objectKey := object.Key("MonitoringRoleArn")
+		objectKey.String(*v.MonitoringRoleArn)
+	}
+
 	if v.NetworkType != nil {
 		objectKey := object.Key("NetworkType")
 		objectKey.String(*v.NetworkType)
@@ -17890,6 +17955,16 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
+	}
+
+	if v.PerformanceInsightsKMSKeyId != nil {
+		objectKey := object.Key("PerformanceInsightsKMSKeyId")
+		objectKey.String(*v.PerformanceInsightsKMSKeyId)
+	}
+
+	if v.PerformanceInsightsRetentionPeriod != nil {
+		objectKey := object.Key("PerformanceInsightsRetentionPeriod")
+		objectKey.Integer(*v.PerformanceInsightsRetentionPeriod)
 	}
 
 	if v.Port != nil {

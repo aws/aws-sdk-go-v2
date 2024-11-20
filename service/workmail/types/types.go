@@ -228,6 +228,24 @@ type GroupIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// The IAM Identity Center configuration.
+type IdentityCenterConfiguration struct {
+
+	//  The Amazon Resource Name (ARN) of IAMIdentity Center Application for WorkMail.
+	// Must be created by the WorkMail API, see CreateIdentityCenterApplication.
+	//
+	// This member is required.
+	ApplicationArn *string
+
+	//  The Amazon Resource Name (ARN) of the of IAM Identity Center instance. Must be
+	// in the same AWS account and region as WorkMail organization.
+	//
+	// This member is required.
+	InstanceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The impersonation rule that matched the input.
 type ImpersonationMatchedRule struct {
 
@@ -353,6 +371,9 @@ type ListUsersFilters struct {
 
 	// Filters only users with the provided display name prefix.
 	DisplayNamePrefix *string
+
+	// Filters only users with the ID from the IAM Identity Center.
+	IdentityProviderUserIdPrefix *string
 
 	// Filters only users with the provided email prefix.
 	PrimaryEmailPrefix *string
@@ -574,6 +595,56 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
+// Displays the Personal Access Token status.
+type PersonalAccessTokenConfiguration struct {
+
+	//  The status of the Personal Access Token allowed for the organization.
+	//
+	//   - Active - Mailbox users can login to the web application and choose Settings
+	//   to see the new Personal Access Tokens page to create and delete the Personal
+	//   Access Tokens. Mailbox users can use the Personal Access Tokens to set up
+	//   mailbox connection from desktop or mobile email clients.
+	//
+	//   - Inactive - Personal Access Tokens are disabled for your organization.
+	//   Mailbox users can’t create, list, or delete Personal Access Tokens and can’t use
+	//   them to connect to their mailboxes from desktop or mobile email clients.
+	//
+	// This member is required.
+	Status PersonalAccessTokenConfigurationStatus
+
+	//  The validity of the Personal Access Token status in days.
+	LifetimeInDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the Personal Access Token.
+type PersonalAccessTokenSummary struct {
+
+	//  The date when the Personal Access Token was created.
+	DateCreated *time.Time
+
+	//  The date when the Personal Access Token was last used.
+	DateLastUsed *time.Time
+
+	//  The date when the Personal Access Token will expire.
+	ExpiresTime *time.Time
+
+	//  The name of the Personal Access Token.
+	Name *string
+
+	//  The ID of the Personal Access Token.
+	PersonalAccessTokenId *string
+
+	//  Lists all the Personal Access Token permissions for a mailbox.
+	Scopes []string
+
+	//  The user ID of the WorkMail user associated with the Personal Access Token.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an EWS based availability provider when returned from the service. It
 // does not contain the password of the endpoint.
 type RedactedEwsAvailabilityProvider struct {
@@ -650,6 +721,16 @@ type User struct {
 
 	// The identifier of the user.
 	Id *string
+
+	// Identity store ID from the IAM Identity Center. If this parameter is empty it
+	// will be updated automatically when the user logs in for the first time to the
+	// mailbox associated with WorkMail.
+	IdentityProviderIdentityStoreId *string
+
+	// User ID from the IAM Identity Center. If this parameter is empty it will be
+	// updated automatically when the user logs in for the first time to the mailbox
+	// associated with WorkMail.
+	IdentityProviderUserId *string
 
 	// The name of the user.
 	Name *string

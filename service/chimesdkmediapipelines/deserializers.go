@@ -5805,7 +5805,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6374,7 +6374,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -6597,7 +6597,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7662,6 +7662,15 @@ func awsRestjson1_deserializeDocumentMediaCapturePipeline(v **types.MediaCapture
 				sv.SinkArn = ptr.String(jtv)
 			}
 
+		case "SinkIamRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.SinkIamRoleArn = ptr.String(jtv)
+			}
+
 		case "SinkType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7687,6 +7696,11 @@ func awsRestjson1_deserializeDocumentMediaCapturePipeline(v **types.MediaCapture
 					return fmt.Errorf("expected MediaPipelineSourceType to be of type string, got %T instead", value)
 				}
 				sv.SourceType = types.MediaPipelineSourceType(jtv)
+			}
+
+		case "SseAwsKeyManagementParams":
+			if err := awsRestjson1_deserializeDocumentSseAwsKeyManagementParams(&sv.SseAwsKeyManagementParams, value); err != nil {
+				return err
 			}
 
 		case "Status":
@@ -9066,7 +9080,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9439,7 +9453,7 @@ func awsRestjson1_deserializeDocumentResourceLimitExceededException(v **types.Re
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9738,7 +9752,7 @@ func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFa
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9796,7 +9810,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10003,6 +10017,55 @@ func awsRestjson1_deserializeDocumentSqsQueueSinkConfiguration(v **types.SqsQueu
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.InsightsTarget = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSseAwsKeyManagementParams(v **types.SseAwsKeyManagementParams, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SseAwsKeyManagementParams
+	if *v == nil {
+		sv = &types.SseAwsKeyManagementParams{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AwsKmsEncryptionContext":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AwsKmsEncryptionContext = ptr.String(jtv)
+			}
+
+		case "AwsKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AwsKmsKeyId = ptr.String(jtv)
 			}
 
 		default:
@@ -10265,7 +10328,7 @@ func awsRestjson1_deserializeDocumentThrottledClientException(v **types.Throttle
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10426,7 +10489,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 				sv.Code = types.ErrorCode(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

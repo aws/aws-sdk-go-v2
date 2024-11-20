@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the DataIntegrationFlow.
+// Enables you to programmatically update an existing data pipeline to ingest data
+// from the source systems such as, Amazon S3 buckets, to a predefined Amazon Web
+// Services Supply Chain dataset (product, inbound_order) or a temporary dataset
+// along with the data transformation query provided with the API.
 func (c *Client) UpdateDataIntegrationFlow(ctx context.Context, params *UpdateDataIntegrationFlowInput, optFns ...func(*Options)) (*UpdateDataIntegrationFlowOutput, error) {
 	if params == nil {
 		params = &UpdateDataIntegrationFlowInput{}

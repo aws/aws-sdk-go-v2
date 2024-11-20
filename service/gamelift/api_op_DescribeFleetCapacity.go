@@ -11,12 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
-//
-// feature, which is currently in public preview.
-//
 // Retrieves the resource capacity settings for one or more fleets. For a
-// container fleet, this operation also returns counts for replica container
+// container fleet, this operation also returns counts for game server container
 // groups.
 //
 // With multi-location fleets, this operation retrieves data for the fleet's home

@@ -4776,6 +4776,11 @@ func awsAwsjson10_serializeOpDocumentStartArchiveExportInput(v *StartArchiveExpo
 		ok.Double(smithytime.FormatEpochSeconds(*v.FromTimestamp))
 	}
 
+	if v.IncludeMetadata != nil {
+		ok := object.Key("IncludeMetadata")
+		ok.Boolean(*v.IncludeMetadata)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)

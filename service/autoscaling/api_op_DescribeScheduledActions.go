@@ -16,7 +16,9 @@ import (
 // reached their end time.
 //
 // To describe the scaling activities for scheduled actions that have already run,
-// call the DescribeScalingActivitiesAPI.
+// call the [DescribeScalingActivities]API.
+//
+// [DescribeScalingActivities]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeScalingActivities.html
 func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeScheduledActionsInput, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
 	if params == nil {
 		params = &DescribeScheduledActionsInput{}

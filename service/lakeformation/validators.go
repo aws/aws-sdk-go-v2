@@ -190,6 +190,26 @@ func (m *validateOpCreateLakeFormationOptIn) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLFTagExpression struct {
+}
+
+func (*validateOpCreateLFTagExpression) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLFTagExpression) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLFTagExpressionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLFTagExpressionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLFTag struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteLakeFormationOptIn) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLakeFormationOptInInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLFTagExpression struct {
+}
+
+func (*validateOpDeleteLFTagExpression) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLFTagExpression) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLFTagExpressionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLFTagExpressionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -365,6 +405,26 @@ func (m *validateOpGetEffectivePermissionsForPath) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEffectivePermissionsForPathInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLFTagExpression struct {
+}
+
+func (*validateOpGetLFTagExpression) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLFTagExpression) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLFTagExpressionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLFTagExpressionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +890,26 @@ func (m *validateOpUpdateLakeFormationIdentityCenterConfiguration) HandleInitial
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLFTagExpression struct {
+}
+
+func (*validateOpUpdateLFTagExpression) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLFTagExpression) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLFTagExpressionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLFTagExpressionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLFTag struct {
 }
 
@@ -946,12 +1026,20 @@ func addOpCreateLakeFormationOptInValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateLakeFormationOptIn{}, middleware.After)
 }
 
+func addOpCreateLFTagExpressionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLFTagExpression{}, middleware.After)
+}
+
 func addOpCreateLFTagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLFTag{}, middleware.After)
 }
 
 func addOpDeleteLakeFormationOptInValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLakeFormationOptIn{}, middleware.After)
+}
+
+func addOpDeleteLFTagExpressionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLFTagExpression{}, middleware.After)
 }
 
 func addOpDeleteLFTagValidationMiddleware(stack *middleware.Stack) error {
@@ -980,6 +1068,10 @@ func addOpGetDataCellsFilterValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetEffectivePermissionsForPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEffectivePermissionsForPath{}, middleware.After)
+}
+
+func addOpGetLFTagExpressionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLFTagExpression{}, middleware.After)
 }
 
 func addOpGetLFTagValidationMiddleware(stack *middleware.Stack) error {
@@ -1072,6 +1164,10 @@ func addOpUpdateDataCellsFilterValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLakeFormationIdentityCenterConfiguration{}, middleware.After)
+}
+
+func addOpUpdateLFTagExpressionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLFTagExpression{}, middleware.After)
 }
 
 func addOpUpdateLFTagValidationMiddleware(stack *middleware.Stack) error {
@@ -1267,6 +1363,21 @@ func validateLFTag(v *types.LFTag) error {
 	}
 }
 
+func validateLFTagExpressionResource(v *types.LFTagExpressionResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTagExpressionResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLFTagKeyResource(v *types.LFTagKeyResource) error {
 	if v == nil {
 		return nil
@@ -1311,9 +1422,7 @@ func validateLFTagPolicyResource(v *types.LFTagPolicyResource) error {
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
-	if v.Expression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
-	} else if v.Expression != nil {
+	if v.Expression != nil {
 		if err := validateExpression(v.Expression); err != nil {
 			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
 		}
@@ -1405,6 +1514,11 @@ func validateResource(v *types.Resource) error {
 	if v.LFTagPolicy != nil {
 		if err := validateLFTagPolicyResource(v.LFTagPolicy); err != nil {
 			invalidParams.AddNested("LFTagPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LFTagExpression != nil {
+		if err := validateLFTagExpressionResource(v.LFTagExpression); err != nil {
+			invalidParams.AddNested("LFTagExpression", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1691,6 +1805,28 @@ func validateOpCreateLakeFormationOptInInput(v *CreateLakeFormationOptInInput) e
 	}
 }
 
+func validateOpCreateLFTagExpressionInput(v *CreateLFTagExpressionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLFTagExpressionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateExpression(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLFTagInput(v *CreateLFTagInput) error {
 	if v == nil {
 		return nil
@@ -1723,6 +1859,21 @@ func validateOpDeleteLakeFormationOptInInput(v *DeleteLakeFormationOptInInput) e
 		if err := validateResource(v.Resource); err != nil {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLFTagExpressionInput(v *DeleteLFTagExpressionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLFTagExpressionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1850,6 +2001,21 @@ func validateOpGetEffectivePermissionsForPathInput(v *GetEffectivePermissionsFor
 	invalidParams := smithy.InvalidParamsError{Context: "GetEffectivePermissionsForPathInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLFTagExpressionInput(v *GetLFTagExpressionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLFTagExpressionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2272,6 +2438,28 @@ func validateOpUpdateLakeFormationIdentityCenterConfigurationInput(v *UpdateLake
 	if v.ExternalFiltering != nil {
 		if err := validateExternalFilteringConfiguration(v.ExternalFiltering); err != nil {
 			invalidParams.AddNested("ExternalFiltering", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLFTagExpressionInput(v *UpdateLFTagExpressionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLFTagExpressionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateExpression(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

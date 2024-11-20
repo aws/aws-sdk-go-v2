@@ -1,3 +1,36 @@
+# v1.25.0 (2024-11-20)
+
+* **Feature**: Releasing new Prompt Optimization to enhance your prompts for improved performance
+
+# v1.24.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.0 (2024-11-08)
+
+* **Feature**: This release adds trace functionality to Bedrock Prompt Flows
+
+# v1.23.3 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.23.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2024-10-21)
+
+* **Feature**: Knowledge Bases for Amazon Bedrock now supports custom prompts and model parameters in the orchestrationConfiguration of the RetrieveAndGenerate API. The modelArn field accepts Custom Models and Imported Models ARNs.
+
+# v1.22.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

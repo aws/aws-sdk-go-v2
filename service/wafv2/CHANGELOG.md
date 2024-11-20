@@ -1,3 +1,32 @@
+# v1.55.5 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.4 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.55.3 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.2 (2024-10-31)
+
+* No change notes available for this release.
+
+# v1.55.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.0 (2024-10-21)
+
+* **Feature**: Add a property to WebACL to indicate whether it's been retrofitted by Firewall Manager.
+
+# v1.54.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a subscription permission for accounts that are already enabled in
-// Amazon Security Lake. You can create a subscriber with access to data in the
-// current Amazon Web Services Region.
+// Creates a subscriber for accounts that are already enabled in Amazon Security
+// Lake. You can create a subscriber with access to data in the current Amazon Web
+// Services Region.
 func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberInput, optFns ...func(*Options)) (*CreateSubscriberOutput, error) {
 	if params == nil {
 		params = &CreateSubscriberInput{}
@@ -31,9 +31,9 @@ func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberI
 
 type CreateSubscriberInput struct {
 
-	// The supported Amazon Web Services from which logs and events are collected.
-	// Security Lake supports log and event collection for natively supported Amazon
-	// Web Services.
+	// The supported Amazon Web Services services from which logs and events are
+	// collected. Security Lake supports log and event collection for natively
+	// supported Amazon Web Services services.
 	//
 	// This member is required.
 	Sources []types.LogSourceResource

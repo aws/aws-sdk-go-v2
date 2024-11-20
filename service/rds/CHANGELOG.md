@@ -1,3 +1,38 @@
+# v1.91.0 (2024-11-20)
+
+* **Feature**: This release adds support for scale storage on the DB instance using a Blue/Green Deployment.
+
+# v1.90.0 (2024-11-18)
+
+* **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.89.2 (2024-11-12)
+
+* **Documentation**: Updates Amazon RDS documentation for Amazon RDS Extended Support for Amazon Aurora MySQL.
+
+# v1.89.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.89.0 (2024-10-28)
+
+* **Feature**: This release adds support for Enhanced Monitoring and Performance Insights when restoring Aurora Limitless Database DB clusters. It also adds support for the os-upgrade pending maintenance action.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.88.0 (2024-10-22)
+
+* **Feature**: Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.
+
+# v1.87.3 (2024-10-17)
+
+* **Documentation**: Updates Amazon RDS documentation for TAZ IAM support
+
+# v1.87.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.87.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

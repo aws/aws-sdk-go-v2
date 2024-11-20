@@ -29,7 +29,7 @@ func (c *Client) DeleteDBShardGroup(ctx context.Context, params *DeleteDBShardGr
 
 type DeleteDBShardGroupInput struct {
 
-	// Teh name of the DB shard group to delete.
+	// The name of the DB shard group to delete.
 	//
 	// This member is required.
 	DBShardGroupIdentifier *string
@@ -37,6 +37,7 @@ type DeleteDBShardGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details for an Amazon RDS DB shard group.
 type DeleteDBShardGroupOutput struct {
 
 	// Specifies whether to create standby DB shard groups for the DB shard group.

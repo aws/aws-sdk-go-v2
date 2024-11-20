@@ -38,6 +38,11 @@ type ListRulesInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
+	// [Region-level retention rules only] Information about the exclusion tags used
+	// to identify resources that are to be excluded, or ignored, by the retention
+	// rule.
+	ExcludeResourceTags []types.ResourceTag
+
 	// The lock state of the retention rules to list. Only retention rules with the
 	// specified lock state are returned.
 	LockState types.LockState
@@ -49,8 +54,8 @@ type ListRulesInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// Information about the resource tags used to identify resources that are
-	// retained by the retention rule.
+	// [Tag-level retention rules only] Information about the resource tags used to
+	// identify resources that are retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	noSmithyDocumentSerde

@@ -1,3 +1,28 @@
+# v1.42.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.0 (2024-11-14)
+
+* **Feature**: IVS now offers customers the ability to stream multitrack video to Channels.
+
+# v1.41.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.0 (2024-10-15)
+
+* **Feature**: On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.
+
+# v1.40.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

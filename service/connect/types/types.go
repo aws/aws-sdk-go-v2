@@ -104,8 +104,11 @@ type AgentInfo struct {
 	// Agent pause duration for a contact in seconds.
 	AgentPauseDurationInSeconds *int32
 
-	// The configuration for the allowed capabilities for participants present over
-	// the call.
+	// The configuration for the allowed video and screen sharing capabilities for
+	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
+	// Connect Administrator Guide.
+	//
+	// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 	Capabilities *ParticipantCapabilities
 
 	// The timestamp when the contact was connected to the agent.
@@ -1017,8 +1020,21 @@ type ContactFlow struct {
 	// The description of the flow.
 	Description *string
 
+	// Indicates the checksum value of the flow content.
+	FlowContentSha256 *string
+
 	// The identifier of the flow.
 	Id *string
+
+	// Amazon Connect includes a set of default flows that have already been
+	// published. It uses them to power your contact center.
+	IsDefault bool
+
+	// The region in which the contact flow was last modified
+	LastModifiedRegion *string
+
+	// The time at which the contact flow was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the flow.
 	Name *string
@@ -1038,6 +1054,12 @@ type ContactFlow struct {
 	//
 	// [Choose a flow type]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
 	Type ContactFlowType
+
+	// The identifier of the flow version.
+	Version *int64
+
+	// The description of the flow version.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -1184,6 +1206,21 @@ type ContactFlowSummary struct {
 
 	// The name of the flow.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a contact flow version's metadata.
+type ContactFlowVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the view version.
+	Arn *string
+
+	// The identifier of the flow version.
+	Version *int64
+
+	// The description of the flow version.
+	VersionDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -1470,8 +1507,11 @@ type CurrentMetricSortCriteria struct {
 // Information about the Customer on the contact.
 type Customer struct {
 
-	// The configuration for the allowed capabilities for participants present over
-	// the call.
+	// The configuration for the allowed video and screen sharing capabilities for
+	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
+	// Connect Administrator Guide.
+	//
+	// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 	Capabilities *ParticipantCapabilities
 
 	// Information regarding Customer’s device.
@@ -3399,27 +3439,42 @@ type MetricFilterV2 struct {
 
 	// The key to use for filtering data.
 	//
-	// Valid metric filter keys: INITIATION_METHOD , DISCONNECT_REASON . These are the
-	// same values as the InitiationMethod and DisconnectReason in the contact record.
-	// For more information, see [ContactTraceRecord]in the Amazon Connect Administrator Guide.
+	// Valid metric filter keys:
 	//
-	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
+	//   - ANSWERING_MACHINE_DETECTION_STATUS
+	//
+	//   - CASE_STATUS
+	//
+	//   - DISCONNECT_REASON
+	//
+	//   - FLOWS_ACTION_IDENTIFIER
+	//
+	//   - FLOWS_NEXT_ACTION_IDENTIFIER
+	//
+	//   - FLOWS_OUTCOME_TYPE
+	//
+	//   - FLOWS_RESOURCE_TYPE
+	//
+	//   - INITIATION_METHOD
 	MetricFilterKey *string
 
-	// The values to use for filtering data.
+	// The values to use for filtering data. Values for metric-level filters can be
+	// either a fixed set of values or a customized list, depending on the use case.
 	//
-	// Valid metric filter values for INITIATION_METHOD : INBOUND | OUTBOUND | TRANSFER
-	// | QUEUE_TRANSFER | CALLBACK | API | WEBRTC_API | MONITOR | DISCONNECT |
-	// EXTERNAL_OUTBOUND
+	// For valid values of metric-level filters INITIATION_METHOD , DISCONNECT_REASON ,
+	// and ANSWERING_MACHINE_DETECTION_STATUS , see [ContactTraceRecord] in the Amazon Connect
+	// Administrator Guide.
 	//
-	// Valid metric filter values for DISCONNECT_REASON : CUSTOMER_DISCONNECT |
-	// AGENT_DISCONNECT | THIRD_PARTY_DISCONNECT | TELECOM_PROBLEM | BARGED |
-	// CONTACT_FLOW_DISCONNECT | OTHER | EXPIRED | API
+	// For valid values of the metric-level filter FLOWS_OUTCOME_TYPE , see the
+	// description for the [Flow outcome]metric in the Amazon Connect Administrator Guide.
+	//
+	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
+	// [Flow outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
 	MetricFilterValues []string
 
-	// The flag to use to filter on requested metric filter values or to not filter on
-	// requested metric filter values. By default the negate is false , which indicates
-	// to filter on the requested metric filter.
+	// If set to true , the API response contains results that filter out the results
+	// matched by the metric-level filters condition. By default, Negate is set to
+	// false .
 	Negate bool
 
 	noSmithyDocumentSerde
@@ -3593,12 +3648,19 @@ type OutboundCallerConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for the allowed capabilities for participants present over
-// the call.
+// The configuration for the allowed video and screen sharing capabilities for
+// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
+// Connect Administrator Guide.
+//
+// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 type ParticipantCapabilities struct {
 
-	// The configuration having the video sharing capabilities for participants over
-	// the call.
+	// The screen sharing capability that is enabled for the participant. SEND
+	// indicates the participant can share their screen.
+	ScreenShare ScreenShareCapability
+
+	// The configuration having the video and screen sharing capabilities for
+	// participants over the call.
 	Video VideoCapability
 
 	noSmithyDocumentSerde
@@ -6261,6 +6323,11 @@ type UserHierarchyGroupSearchFilter struct {
 // For Amazon Connect instances that are created with the EXISTING_DIRECTORY
 // identity management type, FirstName , LastName , and Email cannot be updated
 // from within Amazon Connect because they are managed by the directory.
+//
+// The FirstName and LastName length constraints below apply only to instances
+// using SAML for identity management. If you are using Amazon Connect for identity
+// management, the length constraints are 1-255 for FirstName , and 1-256 for
+// LastName .
 type UserIdentityInfo struct {
 
 	// The email address. If you are using SAML for identity management and include

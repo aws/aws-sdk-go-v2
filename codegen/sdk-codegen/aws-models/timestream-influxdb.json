@@ -1225,7 +1225,7 @@
                     "min": 3,
                     "max": 40
                 },
-                "smithy.api#pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#DbInstanceResource": {
@@ -1416,7 +1416,7 @@
                     "min": 3,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource": {

@@ -47,7 +47,8 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	// The recommended configuration type.
 	RecommendationType types.RecommendationType
 
-	// The name of the workload.
+	// The name of the workload. The name of the workload is required when the tier of
+	// the application component is SAP_ASE_SINGLE_NODE or SAP_ASE_HIGH_AVAILABILITY .
 	WorkloadName *string
 
 	noSmithyDocumentSerde

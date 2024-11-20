@@ -86,6 +86,42 @@ func TestCheckSnapshot_AssociateQAppWithUser(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchCreateCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchCreateCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDeleteCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateLibraryItem(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLibraryItem(context.Background(), nil, func(o *Options) {
@@ -199,6 +235,18 @@ func TestCheckSnapshot_ImportDocument(t *testing.T) {
 	_, err := svc.ImportDocument(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ImportDocument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCategories(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCategories(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCategories")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -373,6 +421,42 @@ func TestUpdateSnapshot_AssociateQAppWithUser(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchCreateCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchCreateCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateCategory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateCategory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateLibraryItem(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLibraryItem(context.Background(), nil, func(o *Options) {
@@ -486,6 +570,18 @@ func TestUpdateSnapshot_ImportDocument(t *testing.T) {
 	_, err := svc.ImportDocument(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportDocument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCategories(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCategories(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCategories")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

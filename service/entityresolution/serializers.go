@@ -200,13 +200,16 @@ func awsRestjson1_serializeOpHttpBindingsBatchDeleteUniqueIdInput(v *BatchDelete
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InputSource != nil && len(*v.InputSource) > 0 {
+	if v.InputSource != nil {
 		locationName := "Inputsource"
 		encoder.SetHeader(locationName).String(*v.InputSource)
 	}
 
 	if v.UniqueIds != nil {
 		locationName := "Uniqueids"
+		if len(v.UniqueIds) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.UniqueIds {
 			if len(v.UniqueIds[i]) > 0 {
 				escaped := v.UniqueIds[i]

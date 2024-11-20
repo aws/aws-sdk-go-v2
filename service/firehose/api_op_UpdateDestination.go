@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified destination of the specified delivery stream.
+// Updates the specified destination of the specified Firehose stream.
 //
 // Use this operation to change the destination type (for example, to replace the
 // Amazon S3 destination with Amazon Redshift) or change the parameters associated
 // with a destination (for example, to change the bucket name of the Amazon S3
-// destination). The update might not occur immediately. The target delivery stream
+// destination). The update might not occur immediately. The target Firehose stream
 // remains active while the configurations are updated, so data writes to the
-// delivery stream can continue during this process. The updated configurations are
+// Firehose stream can continue during this process. The updated configurations are
 // usually effective within a few minutes.
 //
 // Switching between Amazon OpenSearch Service and other services is not
@@ -68,7 +68,7 @@ type UpdateDestinationInput struct {
 	// This member is required.
 	CurrentDeliveryStreamVersionId *string
 
-	// The name of the delivery stream.
+	// The name of the Firehose stream.
 	//
 	// This member is required.
 	DeliveryStreamName *string
@@ -95,8 +95,6 @@ type UpdateDestinationInput struct {
 	HttpEndpointDestinationUpdate *types.HttpEndpointDestinationUpdate
 
 	//  Describes an update for a destination in Apache Iceberg Tables.
-	//
-	// Amazon Data Firehose is in preview release and is subject to change.
 	IcebergDestinationUpdate *types.IcebergDestinationUpdate
 
 	// Describes an update for a destination in Amazon Redshift.

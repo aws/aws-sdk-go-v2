@@ -5073,7 +5073,7 @@ func awsRestjson1_serializeOpHttpBindingsGetExportInput(v *GetExportInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accepts != nil && len(*v.Accepts) > 0 {
+	if v.Accepts != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accepts)
 	}

@@ -38,6 +38,29 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type KeyspaceStatus string
+
+// Enum values for KeyspaceStatus
+const (
+	KeyspaceStatusActive   KeyspaceStatus = "ACTIVE"
+	KeyspaceStatusCreating KeyspaceStatus = "CREATING"
+	KeyspaceStatusUpdating KeyspaceStatus = "UPDATING"
+	KeyspaceStatusDeleting KeyspaceStatus = "DELETING"
+)
+
+// Values returns all known values for KeyspaceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyspaceStatus) Values() []KeyspaceStatus {
+	return []KeyspaceStatus{
+		"ACTIVE",
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type PointInTimeRecoveryStatus string
 
 // Enum values for PointInTimeRecoveryStatus
@@ -157,5 +180,28 @@ const (
 func (TimeToLiveStatus) Values() []TimeToLiveStatus {
 	return []TimeToLiveStatus{
 		"ENABLED",
+	}
+}
+
+type TypeStatus string
+
+// Enum values for TypeStatus
+const (
+	TypeStatusActive    TypeStatus = "ACTIVE"
+	TypeStatusCreating  TypeStatus = "CREATING"
+	TypeStatusDeleting  TypeStatus = "DELETING"
+	TypeStatusRestoring TypeStatus = "RESTORING"
+)
+
+// Values returns all known values for TypeStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TypeStatus) Values() []TypeStatus {
+	return []TypeStatus{
+		"ACTIVE",
+		"CREATING",
+		"DELETING",
+		"RESTORING",
 	}
 }

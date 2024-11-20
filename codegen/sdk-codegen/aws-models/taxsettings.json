@@ -1,6 +1,22 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.taxsettings#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.taxsettings#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access is denied for the Amazon Web Services Support API.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
         "com.amazonaws.taxsettings#AccountDetails": {
             "type": "structure",
             "members": {
@@ -338,7 +354,7 @@
                 "stateOrRegion": {
                     "target": "com.amazonaws.taxsettings#State",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state, region, or province that the address is located.</p>\n         <p>If this is required for tax settings, use the same name as shown on the <b>Tax Settings</b> page.</p>"
+                        "smithy.api#documentation": "<p>The state, region, or province that the address is located. This field is only required for Canada, India, United Arab Emirates, Romania, and Brazil (CPF). It is optional for all other countries.</p>\n         <p>If this is required for tax settings, use the same name as shown on the <b>Tax Settings</b> page.</p>"
                     }
                 },
                 "postalCode": {
@@ -420,6 +436,49 @@
                         "smithy.api#enumValue": "ContactAddress"
                     }
                 }
+            }
+        },
+        "com.amazonaws.taxsettings#AttachmentUploadException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.taxsettings#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Failed to upload the tax exemption document to Amazon Web Services Support case.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.taxsettings#Authorities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#Authority"
+            }
+        },
+        "com.amazonaws.taxsettings#Authority": {
+            "type": "structure",
+            "members": {
+                "country": {
+                    "target": "com.amazonaws.taxsettings#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The country code for the country that the address is in.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.taxsettings#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The state that the address is located. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The address domain associate with the tax information.\n    </p>"
             }
         },
         "com.amazonaws.taxsettings#BatchDeleteTaxRegistration": {
@@ -517,6 +576,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.taxsettings#BatchGetTaxExemptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#BatchGetTaxExemptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#BatchGetTaxExemptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:GetExemptions"
+                    ],
+                    "documentation": "Grants batch get active tax exemptions for a given list of accounts permission"
+                },
+                "smithy.api#documentation": "<p>Get the active tax exemptions for a given list of accounts.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/BatchGetTaxExemptions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#BatchGetTaxExemptionsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.taxsettings#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      List of unique account identifiers.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#BatchGetTaxExemptionsResponse": {
+            "type": "structure",
+            "members": {
+                "taxExemptionDetailsMap": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionDetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption details map of accountId and tax exemption details.\n    </p>"
+                    }
+                },
+                "failedAccounts": {
+                    "target": "com.amazonaws.taxsettings#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of accounts that failed to get tax exemptions.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.taxsettings#BatchPutTaxRegistration": {
             "type": "operation",
             "input": {
@@ -540,7 +669,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants store permission"
                 },
-                "smithy.api#documentation": "<p>Adds or updates tax registration for multiple accounts in batch. This can be used to add\n      or update tax registrations for up to five accounts in one batch. You can't set a TRN if there's a pending TRN. You'll need to delete the pending TRN first.</p>\n         <p>To call this API operation for specific countries, see the following country-specific\n      requirements.</p>\n         <p>\n            <b>Bangladesh</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Brazil</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must complete the tax registration process in the <a href=\"https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods\">Payment preferences</a> page in the Billing and Cost Management console. After your TRN and billing address are verified, you can call this API operation.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services accounts created through Organizations, you can call this API operation when you don't have a billing address.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Georgia</b>\n         </p>\n         <ul>\n            <li>\n               <p>The valid <code>personType</code> values are <code>Physical Person</code> and <code>Business</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Kenya</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>personType</code> in the <code>kenyaAdditionalInfo</code>\n          field of the <code>additionalTaxInformation</code> object.</p>\n            </li>\n            <li>\n               <p>If the <code>personType</code> is <code>Physical Person</code>, you must specify the\n          tax registration certificate document in the <code>taxRegistrationDocuments</code> field\n          of the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Malaysia</b>\n         </p>\n         <ul>\n            <li>\n               <p>If you use this operation to set a tax registration number (TRN) in Malaysia, only\n          resellers with a valid sales and service tax (SST) number are required to provide tax\n          registration information.</p>\n            </li>\n            <li>\n               <p>By using this API operation to set a TRN in Malaysia, Amazon Web Services will regard you as\n          self-declaring that you're an authorized business reseller registered with the Royal\n          Malaysia Customs Department (RMCD) and have a valid SST number.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services reserves the right to seek additional information and/or take other actions to\n          support your self-declaration as appropriate.</p>\n            </li>\n            <li>\n               <p>If you're not a reseller of Amazon Web Services, we don't recommend that you use\n          this operation to set the TRN in Malaysia.</p>\n            </li>\n            <li>\n               <p>Only use this API operation to upload the TRNs for accounts through which you're\n          reselling Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services is currently registered under the following service tax codes. You must include\n          at least one of the service tax codes in the service tax code strings to declare yourself\n          as an authorized registered business reseller.</p>\n               <p>Taxable service and service tax codes:</p>\n               <p>Consultancy - 9907061674</p>\n               <p>Training or coaching service - 9907071685</p>\n               <p>IT service - 9907101676</p>\n               <p>Digital services and electronic medium - 9907121690</p>\n            </li>\n         </ul>\n         <p>\n            <b>Nepal</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Saudi Arabia</b>\n         </p>\n         <ul>\n            <li>\n               <p>For <code>address</code>, you must specify <code>addressLine3</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>South Korea</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>certifiedEmailId</code> and <code>legalName</code> in the\n            <code>TaxRegistrationEntry</code> object. Use Korean characters for\n            <code>legalName</code>.</p>\n            </li>\n            <li>\n               <p>You must specify the <code>businessRepresentativeName</code>,\n            <code>itemOfBusiness</code>, and <code>lineOfBusiness</code> in the\n            <code>southKoreaAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object. Use Korean characters for these fields.</p>\n            </li>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n            <li>\n               <p>For the <code>address</code> object, use Korean characters for <code>addressLine1</code>, <code>addressLine2</code>\n                  <code>city</code>, <code>postalCode</code>, and <code>stateOrRegion</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spain</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>registrationType</code> in the\n            <code>spainAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object.</p>\n            </li>\n            <li>\n               <p>If the <code>registrationType</code> is <code>Local</code>, you must specify the tax\n          registration certificate document in the <code>taxRegistrationDocuments</code> field of\n          the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Turkey</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>sector</code> in the <code>taxRegistrationEntry</code> object.</p>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code>, <code>Individual</code>, or\n          <code>Government</code>:</p>\n               <ul>\n                  <li>\n                     <p>Specify the <code>taxOffice</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Specify the <code>kepEmailId</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Note:</b> In the  <b>Tax Settings</b> page of the Billing console, <code>Government</code> appears as <b>Public institutions</b>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code> and you're subject to KDV tax,\n          you must specify your industry in the <code>industries</code> field.</p>\n            </li>\n            <li>\n               <p>For <code>address</code>, you must specify <code>districtOrCounty</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Ukraine</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Adds or updates tax registration for multiple accounts in batch. This can be used to add\n      or update tax registrations for up to five accounts in one batch. You can't set a TRN if there's a pending TRN. You'll need to delete the pending TRN first.</p>\n         <p>To call this API operation for specific countries, see the following country-specific\n      requirements.</p>\n         <p>\n            <b>Bangladesh</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Brazil</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must complete the tax registration process in the <a href=\"https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods\">Payment preferences</a> page in the Billing and Cost Management console. After your TRN and billing address are verified, you can call this API operation.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services accounts created through Organizations, you can call this API operation when you don't have a billing address.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Georgia</b>\n         </p>\n         <ul>\n            <li>\n               <p>The valid <code>personType</code> values are <code>Physical Person</code> and <code>Business</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Kenya</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>personType</code> in the <code>kenyaAdditionalInfo</code>\n          field of the <code>additionalTaxInformation</code> object.</p>\n            </li>\n            <li>\n               <p>If the <code>personType</code> is <code>Physical Person</code>, you must specify the\n          tax registration certificate document in the <code>taxRegistrationDocuments</code> field\n          of the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Malaysia</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RegistrationType</code> valid values are <code>NRIC</code> for individual, and TIN and sales and service tax (SST) for Business.</p>\n            </li>\n            <li>\n               <p>For individual, you can specify the <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with NRIC type, and a valid <code>MyKad</code> or NRIC number.</p>\n            </li>\n            <li>\n               <p>For business, you must specify a <code>businessRegistrationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a TIN type and tax identification number.</p>\n            </li>\n            <li>\n               <p>For business resellers, you must specify a <code>businessRegistrationNumber</code> and <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a sales and service tax (SST) type and a valid SST number.</p>\n            </li>\n            <li>\n               <p>For business resellers with service codes, you must specify <code>businessRegistrationNumber</code>, <code>taxInformationNumber</code>, and distinct <code>serviceTaxCodes</code> in <code>MalaysiaAdditionalInfo</code> with a SST type and valid sales and service tax (SST) number. By using this API operation, Amazon Web Services registers your self-declaration that you’re an authorized business reseller registered with the Royal Malaysia Customs Department (RMCD), and have a valid SST number.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services reserves the right to seek additional information and/or take other actions to\n          support your self-declaration as appropriate.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services is currently registered under the following service tax codes. You must include\n          at least one of the service tax codes in the service tax code strings to declare yourself\n          as an authorized registered business reseller.</p>\n               <p>Taxable service and service tax codes:</p>\n               <p>Consultancy - 9907061674</p>\n               <p>Training or coaching service - 9907071685</p>\n               <p>IT service - 9907101676</p>\n               <p>Digital services and electronic medium - 9907121690</p>\n            </li>\n         </ul>\n         <p>\n            <b>Nepal</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Saudi Arabia</b>\n         </p>\n         <ul>\n            <li>\n               <p>For <code>address</code>, you must specify <code>addressLine3</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>South Korea</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>certifiedEmailId</code> and <code>legalName</code> in the\n            <code>TaxRegistrationEntry</code> object. Use Korean characters for\n            <code>legalName</code>.</p>\n            </li>\n            <li>\n               <p>You must specify the <code>businessRepresentativeName</code>,\n            <code>itemOfBusiness</code>, and <code>lineOfBusiness</code> in the\n            <code>southKoreaAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object. Use Korean characters for these fields.</p>\n            </li>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n            <li>\n               <p>For the <code>address</code> object, use Korean characters for <code>addressLine1</code>, <code>addressLine2</code>\n                  <code>city</code>, <code>postalCode</code>, and <code>stateOrRegion</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spain</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>registrationType</code> in the\n            <code>spainAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object.</p>\n            </li>\n            <li>\n               <p>If the <code>registrationType</code> is <code>Local</code>, you must specify the tax\n          registration certificate document in the <code>taxRegistrationDocuments</code> field of\n          the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Turkey</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>sector</code> in the <code>taxRegistrationEntry</code> object.</p>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code>, <code>Individual</code>, or\n          <code>Government</code>:</p>\n               <ul>\n                  <li>\n                     <p>Specify the <code>taxOffice</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Specify the <code>kepEmailId</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Note:</b> In the  <b>Tax Settings</b> page of the Billing console, <code>Government</code> appears as <b>Public institutions</b>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code> and you're subject to KDV tax,\n          you must specify your industry in the <code>industries</code> field.</p>\n            </li>\n            <li>\n               <p>For <code>address</code>, you must specify <code>districtOrCounty</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Ukraine</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -648,6 +777,12 @@
                 "smithy.api#documentation": "<p>Additional tax information associated with your TRN in Brazil.</p>"
             }
         },
+        "com.amazonaws.taxsettings#BusinessRegistrationNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.taxsettings#BusinessRepresentativeName": {
             "type": "string",
             "traits": {
@@ -676,7 +811,7 @@
                 "canadaRetailSalesTaxNumber": {
                     "target": "com.amazonaws.taxsettings#CanadaRetailSalesTaxNumberString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Manitoba Retail Sales Tax ID number. Customers purchasing Amazon Web Services for resale in Manitoba must provide a valid Retail Sales Tax ID number for Manitoba. Leave this blank if you do not have a Retail Sales Tax ID number in Manitoba or are not purchasing Amazon Web Services for resale.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      Manitoba Retail Sales Tax ID number. Customers purchasing Amazon Web Services services for resale in Manitoba must provide a valid Retail Sales Tax ID number for Manitoba. Leave this blank if you do not have a Retail Sales Tax ID number in Manitoba or are not purchasing Amazon Web Services services for resale.\n    </p>"
                     }
                 },
                 "isResellerAccount": {
@@ -710,6 +845,22 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^([0-9]{6}-[0-9]{1})$"
+            }
+        },
+        "com.amazonaws.taxsettings#CaseCreationLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.taxsettings#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You've exceeded the Amazon Web Services Support case creation limit for your account.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 413
             }
         },
         "com.amazonaws.taxsettings#CcmCode": {
@@ -790,6 +941,62 @@
                     "max": 10
                 },
                 "smithy.api#pattern": "^(\\d{4}-(0[0-9]|1[0-2])-([0-2][0-9]|3[0-1]))$"
+            }
+        },
+        "com.amazonaws.taxsettings#DeleteSupplementalTaxRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#DeleteSupplementalTaxRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#DeleteSupplementalTaxRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants delete permission"
+                },
+                "smithy.api#documentation": "<p>\n      Deletes a supplemental tax registration for a single account.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/DeleteSupplementalTaxRegistration"
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#DeleteSupplementalTaxRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "authorityId": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique authority Id for the supplemental TRN information that needs to be deleted.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#DeleteSupplementalTaxRegistrationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.taxsettings#DeleteTaxRegistration": {
@@ -874,6 +1081,16 @@
                 "smithy.api#documentation": "<p>The location of the Amazon S3 bucket that you specify to download your tax documents to.</p>"
             }
         },
+        "com.amazonaws.taxsettings#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
         "com.amazonaws.taxsettings#District": {
             "type": "string",
             "traits": {
@@ -882,6 +1099,35 @@
                     "max": 50
                 },
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.taxsettings#EntityExemptionAccountStatus": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "Valid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Valid"
+                    }
+                },
+                "Expired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                },
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                }
             }
         },
         "com.amazonaws.taxsettings#ErrorCode": {
@@ -920,10 +1166,70 @@
                 "smithy.api#documentation": "<p> Additional tax information associated with your TRN in Estonia.</p>"
             }
         },
+        "com.amazonaws.taxsettings#ExemptionCertificate": {
+            "type": "structure",
+            "members": {
+                "documentName": {
+                    "target": "com.amazonaws.taxsettings#ExemptionDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exemption certificate file name.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentFile": {
+                    "target": "com.amazonaws.taxsettings#ExemptionFileBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exemption certificate file content.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The exemption certificate.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#ExemptionDocumentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9-_.]+).(pdf|jpg|png)$"
+            }
+        },
+        "com.amazonaws.taxsettings#ExemptionFileBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4194304
+                }
+            }
+        },
         "com.amazonaws.taxsettings#FieldName": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.taxsettings#FileBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5242880
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#GenericString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.taxsettings#GeorgiaAdditionalInfo": {
@@ -939,6 +1245,115 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n      Additional tax information associated with your TRN in Georgia.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxExemptionTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#GetTaxExemptionTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#GetTaxExemptionTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:GetExemptions"
+                    ],
+                    "documentation": "Grants get supported tax exemption types permission"
+                },
+                "smithy.api#documentation": "<p>Get supported tax exemption types.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/GetTaxExemptionTypes"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxExemptionTypesRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxExemptionTypesResponse": {
+            "type": "structure",
+            "members": {
+                "taxExemptionTypes": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported types of tax exemptions.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxInheritance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#GetTaxInheritanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#GetTaxInheritanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants get tax inheritance permission"
+                },
+                "smithy.api#documentation": "<p>The get account tax inheritance status.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/GetTaxInheritance"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxInheritanceRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#GetTaxInheritanceResponse": {
+            "type": "structure",
+            "members": {
+                "heritageStatus": {
+                    "target": "com.amazonaws.taxsettings#HeritageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax inheritance status.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.taxsettings#GetTaxRegistration": {
@@ -998,7 +1413,8 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/GetTaxRegistrationDocument"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.taxsettings#GetTaxRegistrationDocumentRequest": {
@@ -1007,8 +1423,7 @@
                 "destinationS3Location": {
                     "target": "com.amazonaws.taxsettings#DestinationS3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket that you specify to download your tax documents to.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that you specify to download your tax documents to.</p>"
                     }
                 },
                 "taxDocumentMetadata": {
@@ -1030,6 +1445,12 @@
                     "target": "com.amazonaws.taxsettings#DestinationFilePath",
                     "traits": {
                         "smithy.api#documentation": "<p>The file path of the Amazon S3 bucket where you want to download your tax document to.</p>"
+                    }
+                },
+                "presignedS3Url": {
+                    "target": "com.amazonaws.taxsettings#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 presigned URL of the tax registration document.\n    </p>"
                     }
                 }
             },
@@ -1063,6 +1484,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#HeritageStatus": {
+            "type": "enum",
+            "members": {
+                "OptIn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OptIn"
+                    }
+                },
+                "OptOut": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OptOut"
+                    }
+                }
             }
         },
         "com.amazonaws.taxsettings#IndiaAdditionalInfo": {
@@ -1324,6 +1762,166 @@
                 "smithy.api#pattern": "^[0-9\\u3130-\\u318F\\uAC00-\\uD7AF,.( )-\\\\s]*$"
             }
         },
+        "com.amazonaws.taxsettings#ListSupplementalTaxRegistrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#ListSupplementalTaxRegistrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#ListSupplementalTaxRegistrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants retrieve permission"
+                },
+                "smithy.api#documentation": "<p>\n      Retrieves supplemental tax registrations for a single account.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ListSupplementalTaxRegistrations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "taxRegistrations",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListSupplementalTaxRegistrationsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.taxsettings#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of <code>taxRegistrations</code> results you want in one response.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.taxsettings#PaginationTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListSupplementalTaxRegistrationsResponse": {
+            "type": "structure",
+            "members": {
+                "taxRegistrations": {
+                    "target": "com.amazonaws.taxsettings#SupplementalTaxRegistrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of supplemental tax registrations. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.taxsettings#PaginationTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListTaxExemptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#ListTaxExemptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#ListTaxExemptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:GetExemptions"
+                    ],
+                    "documentation": "Grants list the active tax exemptions for a CB family permission"
+                },
+                "smithy.api#documentation": "<p>Retrieves the tax exemption of accounts listed in a consolidated billing family.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/ListTaxExemptions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "taxExemptionDetailsMap",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListTaxExemptionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.taxsettings#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results you want in one response.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.taxsettings#PaginationTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#ListTaxExemptionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.taxsettings#PaginationTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. </p>"
+                    }
+                },
+                "taxExemptionDetailsMap": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionDetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption details map of <code>accountId</code> and tax exemption details.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.taxsettings#ListTaxRegistrations": {
             "type": "operation",
             "input": {
@@ -1409,8 +2007,21 @@
                 "serviceTaxCodes": {
                     "target": "com.amazonaws.taxsettings#MalaysiaServiceTaxCodesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of service tax codes for your TRN in Malaysia.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>List of service tax codes for your TRN in Malaysia.</p>"
+                    }
+                },
+                "taxInformationNumber": {
+                    "target": "com.amazonaws.taxsettings#TaxInformationNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax information number in Malaysia. \n    </p>\n         <p>For individual, you can specify the <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with NRIC type, and a valid MyKad or NRIC number. For business resellers, you must specify a <code>businessRegistrationNumber</code> and <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a sales and service tax (SST) type and a valid SST number.\n    </p>\n         <p>For business resellers with service codes, you must specify <code>businessRegistrationNumber</code>, <code>taxInformationNumber</code>, and distinct <code>serviceTaxCodes</code> in <code>MalaysiaAdditionalInfo</code> with a SST type and valid sales and service tax (SST) number. By using this API operation, Amazon Web Services registers your self-declaration that you’re an authorized business reseller registered with the Royal Malaysia Customs Department (RMCD), and have a valid SST number.</p>"
+                    }
+                },
+                "businessRegistrationNumber": {
+                    "target": "com.amazonaws.taxsettings#BusinessRegistrationNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration number (TRN) in Malaysia. </p>\n         <p>For individual, you can specify the <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with NRIC type, and a valid MyKad or NRIC number. For business, you must specify a <code>businessRegistrationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a TIN type and tax identification number. For business resellers, you must specify a <code>businessRegistrationNumber</code> and <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a sales and service tax (SST) type and a valid SST number.\n    </p>\n         <p>For business resellers with service codes, you must specify <code>businessRegistrationNumber</code>, <code>taxInformationNumber</code>, and distinct <code>serviceTaxCodes</code> in <code>MalaysiaAdditionalInfo</code> with a SST type and valid sales and service tax (SST) number. By using this API operation, Amazon Web Services registers your self-declaration that you’re an authorized business reseller registered with the Royal Malaysia Customs Department (RMCD), and have a valid SST number.</p>"
                     }
                 }
             },
@@ -1454,7 +2065,6 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
                     "max": 4
                 },
                 "smithy.api#uniqueItems": {}
@@ -1538,6 +2148,222 @@
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
             }
         },
+        "com.amazonaws.taxsettings#PutSupplementalTaxRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#PutSupplementalTaxRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#PutSupplementalTaxRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants store permission"
+                },
+                "smithy.api#documentation": "<p>\n      Stores supplemental tax registration for a single account.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/PutSupplementalTaxRegistration"
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#PutSupplementalTaxRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "taxRegistrationEntry": {
+                    "target": "com.amazonaws.taxsettings#SupplementalTaxRegistrationEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The supplemental TRN information that will be stored for the caller account ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutSupplementalTaxRegistrationResponse": {
+            "type": "structure",
+            "members": {
+                "authorityId": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Unique authority ID for the supplemental TRN information that was stored.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.taxsettings#TaxRegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of the supplemental TRN stored in the system after processing. Based on the validation occurring on the TRN, the status can be <code>Verified</code>, <code>Pending</code>, <code>Rejected</code>, or <code>Deleted</code>.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxExemption": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#PutTaxExemptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#PutTaxExemptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#AttachmentUploadException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#CaseCreationLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "tax:UpdateExemptions",
+                        "support:CreateCase",
+                        "support:AddAttachmentsToSet"
+                    ],
+                    "documentation": "Grants create customer tax exemption case permission"
+                },
+                "smithy.api#documentation": "<p>Adds the tax exemption for a single account or all accounts listed in a consolidated billing family.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/PutTaxExemption"
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxExemptionRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.taxsettings#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of unique account identifiers.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authority": {
+                    "target": "com.amazonaws.taxsettings#Authority",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "exemptionType": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exemption type.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exemptionCertificate": {
+                    "target": "com.amazonaws.taxsettings#ExemptionCertificate",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxExemptionResponse": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer support case ID.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxInheritance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.taxsettings#PutTaxInheritanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.taxsettings#PutTaxInheritanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.taxsettings#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants put tax inheritance permission"
+                },
+                "smithy.api#documentation": "<p>The updated tax inheritance status.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/PutTaxInheritance"
+                }
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxInheritanceRequest": {
+            "type": "structure",
+            "members": {
+                "heritageStatus": {
+                    "target": "com.amazonaws.taxsettings#HeritageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax inheritance status.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.taxsettings#PutTaxInheritanceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.taxsettings#PutTaxRegistration": {
             "type": "operation",
             "input": {
@@ -1561,7 +2387,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants store permission"
                 },
-                "smithy.api#documentation": "<p>Adds or updates tax registration for a single account. You can't set a TRN if there's a pending TRN. You'll need to delete the pending TRN first.</p>\n         <p>To call this API operation for specific countries, see the following country-specific\n      requirements.</p>\n         <p>\n            <b>Bangladesh</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Brazil</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must complete the tax registration process in the <a href=\"https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods\">Payment preferences</a> page in the Billing and Cost Management console. After your TRN and billing address are verified, you can call this API operation.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services accounts created through Organizations, you can call this API operation when you don't have a billing address.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Georgia</b>\n         </p>\n         <ul>\n            <li>\n               <p>The valid <code>personType</code> values are <code>Physical Person</code> and <code>Business</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Kenya</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>personType</code> in the <code>kenyaAdditionalInfo</code>\n          field of the <code>additionalTaxInformation</code> object.</p>\n            </li>\n            <li>\n               <p>If the <code>personType</code> is <code>Physical Person</code>, you must specify the\n          tax registration certificate document in the <code>taxRegistrationDocuments</code> field\n          of the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Malaysia</b>\n         </p>\n         <ul>\n            <li>\n               <p>If you use this operation to set a tax registration number (TRN) in Malaysia, only\n          resellers with a valid sales and service tax (SST) number are required to provide tax\n          registration information.</p>\n            </li>\n            <li>\n               <p>By using this API operation to set a TRN in Malaysia, Amazon Web Services will regard you as\n          self-declaring that you're an authorized business reseller registered with the Royal\n          Malaysia Customs Department (RMCD) and have a valid SST number.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services reserves the right to seek additional information and/or take other actions to\n          support your self-declaration as appropriate.</p>\n            </li>\n            <li>\n               <p>If you're not a reseller of Amazon Web Services, we don't recommend that you use\n          this operation to set the TRN in Malaysia.</p>\n            </li>\n            <li>\n               <p>Only use this API operation to upload the TRNs for accounts through which you're\n          reselling Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services is currently registered under the following service tax codes. You must include\n          at least one of the service tax codes in the service tax code strings to declare yourself\n          as an authorized registered business reseller.</p>\n               <p>Taxable service and service tax codes:</p>\n               <p>Consultancy - 9907061674</p>\n               <p>Training or coaching service - 9907071685</p>\n               <p>IT service - 9907101676</p>\n               <p>Digital services and electronic medium - 9907121690</p>\n            </li>\n         </ul>\n         <p>\n            <b>Nepal</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Saudi Arabia</b>\n         </p>\n         <ul>\n            <li>\n               <p>For <code>address</code>, you must specify <code>addressLine3</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>South Korea</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>certifiedEmailId</code> and <code>legalName</code> in the\n            <code>TaxRegistrationEntry</code> object. Use Korean characters for\n            <code>legalName</code>.</p>\n            </li>\n            <li>\n               <p>You must specify the <code>businessRepresentativeName</code>,\n            <code>itemOfBusiness</code>, and <code>lineOfBusiness</code> in the\n            <code>southKoreaAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object. Use Korean characters for these fields.</p>\n            </li>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n            <li>\n               <p>For the <code>address</code> object, use Korean characters for <code>addressLine1</code>, <code>addressLine2</code>\n                  <code>city</code>, <code>postalCode</code>, and <code>stateOrRegion</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spain</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>registrationType</code> in the\n            <code>spainAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object.</p>\n            </li>\n            <li>\n               <p>If the <code>registrationType</code> is <code>Local</code>, you must specify the tax\n          registration certificate document in the <code>taxRegistrationDocuments</code> field of\n          the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Turkey</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>sector</code> in the <code>taxRegistrationEntry</code> object.</p>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code>, <code>Individual</code>, or\n          <code>Government</code>:</p>\n               <ul>\n                  <li>\n                     <p>Specify the <code>taxOffice</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Specify the <code>kepEmailId</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Note:</b> In the  <b>Tax Settings</b> page of the Billing console, <code>Government</code> appears as <b>Public institutions</b>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code> and you're subject to KDV tax,\n          you must specify your industry in the <code>industries</code> field.</p>\n            </li>\n            <li>\n               <p>For <code>address</code>, you must specify <code>districtOrCounty</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Ukraine</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Adds or updates tax registration for a single account. You can't set a TRN if there's a pending TRN. You'll need to delete the pending TRN first.</p>\n         <p>To call this API operation for specific countries, see the following country-specific\n      requirements.</p>\n         <p>\n            <b>Bangladesh</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Brazil</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must complete the tax registration process in the <a href=\"https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods\">Payment preferences</a> page in the Billing and Cost Management console. After your TRN and billing address are verified, you can call this API operation.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services accounts created through Organizations, you can call this API operation when you don't have a billing address.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Georgia</b>\n         </p>\n         <ul>\n            <li>\n               <p>The valid <code>personType</code> values are <code>Physical Person</code> and <code>Business</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Kenya</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>personType</code> in the <code>kenyaAdditionalInfo</code>\n          field of the <code>additionalTaxInformation</code> object.</p>\n            </li>\n            <li>\n               <p>If the <code>personType</code> is <code>Physical Person</code>, you must specify the\n          tax registration certificate document in the <code>taxRegistrationDocuments</code> field\n          of the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Malaysia</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RegistrationType</code> valid values are <code>NRIC</code> for individual, and TIN and sales and service tax (SST) for Business.</p>\n            </li>\n            <li>\n               <p>For individual, you can specify the <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with NRIC type, and a valid <code>MyKad</code> or NRIC number.</p>\n            </li>\n            <li>\n               <p>For business, you must specify a <code>businessRegistrationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a TIN type and tax identification number.</p>\n            </li>\n            <li>\n               <p>For business resellers, you must specify a <code>businessRegistrationNumber</code> and <code>taxInformationNumber</code> in <code>MalaysiaAdditionalInfo</code> with a sales and service tax (SST) type and a valid SST number.</p>\n            </li>\n            <li>\n               <p>For business resellers with service codes, you must specify <code>businessRegistrationNumber</code>, <code>taxInformationNumber</code>, and distinct <code>serviceTaxCodes</code> in <code>MalaysiaAdditionalInfo</code> with a SST type and valid sales and service tax (SST) number. By using this API operation, Amazon Web Services registers your self-declaration that you’re an authorized business reseller registered with the Royal Malaysia Customs Department (RMCD), and have a valid SST number.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services reserves the right to seek additional information and/or take other actions to\n          support your self-declaration as appropriate.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services is currently registered under the following service tax codes. You must include\n          at least one of the service tax codes in the service tax code strings to declare yourself\n          as an authorized registered business reseller.</p>\n               <p>Taxable service and service tax codes:</p>\n               <p>Consultancy - 9907061674</p>\n               <p>Training or coaching service - 9907071685</p>\n               <p>IT service - 9907101676</p>\n               <p>Digital services and electronic medium - 9907121690</p>\n            </li>\n         </ul>\n         <p>\n            <b>Nepal</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Saudi Arabia</b>\n         </p>\n         <ul>\n            <li>\n               <p>For <code>address</code>, you must specify <code>addressLine3</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>South Korea</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>certifiedEmailId</code> and <code>legalName</code> in the\n            <code>TaxRegistrationEntry</code> object. Use Korean characters for\n            <code>legalName</code>.</p>\n            </li>\n            <li>\n               <p>You must specify the <code>businessRepresentativeName</code>,\n            <code>itemOfBusiness</code>, and <code>lineOfBusiness</code> in the\n            <code>southKoreaAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object. Use Korean characters for these fields.</p>\n            </li>\n            <li>\n               <p>You must specify the tax registration certificate document in the\n            <code>taxRegistrationDocuments</code> field of the <code>VerificationDetails</code>\n          object.</p>\n            </li>\n            <li>\n               <p>For the <code>address</code> object, use Korean characters for <code>addressLine1</code>, <code>addressLine2</code>\n                  <code>city</code>, <code>postalCode</code>, and <code>stateOrRegion</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spain</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>registrationType</code> in the\n            <code>spainAdditionalInfo</code> field of the <code>additionalTaxInformation</code>\n          object.</p>\n            </li>\n            <li>\n               <p>If the <code>registrationType</code> is <code>Local</code>, you must specify the tax\n          registration certificate document in the <code>taxRegistrationDocuments</code> field of\n          the <code>VerificationDetails</code> object.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Turkey</b>\n         </p>\n         <ul>\n            <li>\n               <p>You must specify the <code>sector</code> in the <code>taxRegistrationEntry</code> object.</p>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code>, <code>Individual</code>, or\n          <code>Government</code>:</p>\n               <ul>\n                  <li>\n                     <p>Specify the <code>taxOffice</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) Specify the <code>kepEmailId</code>. If your\n                <code>sector</code> is <code>Individual</code>, don't enter this value.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Note:</b> In the  <b>Tax Settings</b> page of the Billing console, <code>Government</code> appears as <b>Public institutions</b>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If your <code>sector</code> is <code>Business</code> and you're subject to KDV tax,\n          you must specify your industry in the <code>industries</code> field.</p>\n            </li>\n            <li>\n               <p>For <code>address</code>, you must specify <code>districtOrCounty</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Ukraine</b>\n         </p>\n         <ul>\n            <li>\n               <p>The sector valid values are <code>Business</code> and <code>Individual</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1609,7 +2435,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20
+                    "max": 200
                 },
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
             }
@@ -1863,6 +2689,109 @@
                 "smithy.api#pattern": "^(?!\\s*$)[\\s\\S]+$"
             }
         },
+        "com.amazonaws.taxsettings#SupplementalTaxRegistration": {
+            "type": "structure",
+            "members": {
+                "registrationId": {
+                    "target": "com.amazonaws.taxsettings#RegistrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The supplemental TRN unique identifier.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "registrationType": {
+                    "target": "com.amazonaws.taxsettings#SupplementalTaxRegistrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Type of supplemental TRN. Currently, this can only be VAT.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "legalName": {
+                    "target": "com.amazonaws.taxsettings#LegalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The legal name associated with your TRN registration.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "address": {
+                    "target": "com.amazonaws.taxsettings#Address",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "authorityId": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Unique authority ID for the supplemental TRN.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.taxsettings#TaxRegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of your TRN.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Supplemental TRN details.\n    </p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.taxsettings#SupplementalTaxRegistrationEntry": {
+            "type": "structure",
+            "members": {
+                "registrationId": {
+                    "target": "com.amazonaws.taxsettings#RegistrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The supplemental TRN unique identifier.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "registrationType": {
+                    "target": "com.amazonaws.taxsettings#SupplementalTaxRegistrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Type of supplemental TRN. Currently, this can only be VAT.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "legalName": {
+                    "target": "com.amazonaws.taxsettings#LegalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The legal name associated with your TRN registration.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "address": {
+                    "target": "com.amazonaws.taxsettings#Address",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The supplemental TRN information to provide when adding or updating a supplemental TRN.\n    </p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.taxsettings#SupplementalTaxRegistrationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#SupplementalTaxRegistration"
+            }
+        },
+        "com.amazonaws.taxsettings#SupplementalTaxRegistrationType": {
+            "type": "enum",
+            "members": {
+                "VAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VAT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.taxsettings#TaxCode": {
             "type": "string",
             "traits": {
@@ -1913,6 +2842,137 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemption": {
+            "type": "structure",
+            "members": {
+                "authority": {
+                    "target": "com.amazonaws.taxsettings#Authority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address domain associate with tax exemption.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taxExemptionType": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption type.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "effectiveDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption effective date.\n    </p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption expiration date.\n    </p>"
+                    }
+                },
+                "systemEffectiveDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption recording time in the <code>TaxSettings</code> system.\n    </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.taxsettings#EntityExemptionAccountStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption status.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax exemption.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionDetails": {
+            "type": "structure",
+            "members": {
+                "taxExemptions": {
+                    "target": "com.amazonaws.taxsettings#TaxExemptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tax exemptions.\n    </p>"
+                    }
+                },
+                "heritageObtainedDetails": {
+                    "target": "com.amazonaws.taxsettings#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The indicator if the tax exemption is inherited from the consolidated billing family management account.\n    </p>"
+                    }
+                },
+                "heritageObtainedParentEntity": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The consolidated billing family management account the tax exemption inherited from.\n    </p>"
+                    }
+                },
+                "heritageObtainedReason": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason of the heritage inheritance.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax exemption details.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionDetailsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.taxsettings#AccountId"
+            },
+            "value": {
+                "target": "com.amazonaws.taxsettings#TaxExemptionDetails"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionType": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "com.amazonaws.taxsettings#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption's type display name.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.taxsettings#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption's type description.\n    </p>"
+                    }
+                },
+                "applicableJurisdictions": {
+                    "target": "com.amazonaws.taxsettings#Authorities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax exemption's applicable jurisdictions.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax exemption type.\n    </p>"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptionTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#TaxExemptionType"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxExemptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.taxsettings#TaxExemption"
+            }
+        },
+        "com.amazonaws.taxsettings#TaxInformationNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Z]{1,2}[0-9]{1,11}$"
             }
         },
         "com.amazonaws.taxsettings#TaxInheritanceDetails": {
@@ -2009,14 +3069,41 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.taxsettings#TaxRegistrationDocFile": {
+            "type": "structure",
+            "members": {
+                "fileName": {
+                    "target": "com.amazonaws.taxsettings#TaxDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration document name.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileContent": {
+                    "target": "com.amazonaws.taxsettings#FileBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration document content.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tax registration document.\n    </p>"
+            }
+        },
         "com.amazonaws.taxsettings#TaxRegistrationDocument": {
             "type": "structure",
             "members": {
                 "s3Location": {
                     "target": "com.amazonaws.taxsettings#SourceS3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location where your tax registration document is stored.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon S3 location where your tax registration document is stored.</p>"
+                    }
+                },
+                "file": {
+                    "target": "com.amazonaws.taxsettings#TaxRegistrationDocFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tax registration document.\n    </p>"
                     }
                 }
             },
@@ -2174,6 +3261,18 @@
                     "traits": {
                         "smithy.api#enumValue": "SST"
                     }
+                },
+                "TIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIN"
+                    }
+                },
+                "NRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NRIC"
+                    }
                 }
             }
         },
@@ -2253,10 +3352,22 @@
                     "target": "com.amazonaws.taxsettings#BatchDeleteTaxRegistration"
                 },
                 {
+                    "target": "com.amazonaws.taxsettings#BatchGetTaxExemptions"
+                },
+                {
                     "target": "com.amazonaws.taxsettings#BatchPutTaxRegistration"
                 },
                 {
+                    "target": "com.amazonaws.taxsettings#DeleteSupplementalTaxRegistration"
+                },
+                {
                     "target": "com.amazonaws.taxsettings#DeleteTaxRegistration"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#GetTaxExemptionTypes"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#GetTaxInheritance"
                 },
                 {
                     "target": "com.amazonaws.taxsettings#GetTaxRegistration"
@@ -2265,7 +3376,22 @@
                     "target": "com.amazonaws.taxsettings#GetTaxRegistrationDocument"
                 },
                 {
+                    "target": "com.amazonaws.taxsettings#ListSupplementalTaxRegistrations"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#ListTaxExemptions"
+                },
+                {
                     "target": "com.amazonaws.taxsettings#ListTaxRegistrations"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#PutSupplementalTaxRegistration"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#PutTaxExemption"
+                },
+                {
+                    "target": "com.amazonaws.taxsettings#PutTaxInheritance"
                 },
                 {
                     "target": "com.amazonaws.taxsettings#PutTaxRegistration"
@@ -2284,6 +3410,19 @@
                     "endpointPatternType": "service_region_dnsSuffix"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type,X-Amz-Date",
+                        "Authorization",
+                        "X-Api-Key",
+                        "X-Amz-Security-Token",
+                        "Access-Control-Allow-Origin",
+                        "X-Amz-Content-Sha256",
+                        "Amz-Sdk-Invocation-Id",
+                        "Amz-Sdk-Request",
+                        "X-Amz-User-Agent"
+                    ]
+                },
                 "smithy.api#documentation": "<p>You can use the tax setting API to programmatically set, modify, and delete the tax\n      registration number (TRN), associated business legal name, and address (Collectively referred\n      to as \"TRN information\"). You can also programmatically view TRN information and tax addresses\n      (\"Tax profiles\"). </p>\n         <p>You can use this API to automate your TRN information settings instead of manually using\n      the console.</p>\n         <p>Service Endpoint</p>\n         <ul>\n            <li>\n               <p>https://tax.us-east-1.amazonaws.com</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Tax Settings",
                 "smithy.rules#endpointRuleSet": {
@@ -3274,6 +4413,16 @@
                         "smithy.api#enumValue": "Individual"
                     }
                 }
+            }
+        },
+        "com.amazonaws.taxsettings#Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^https.*\\S.*$"
             }
         },
         "com.amazonaws.taxsettings#ValidationException": {

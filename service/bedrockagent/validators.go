@@ -1170,6 +1170,26 @@ func (m *validateOpUpdatePrompt) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpValidateFlowDefinition struct {
+}
+
+func (*validateOpValidateFlowDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpValidateFlowDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ValidateFlowDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpValidateFlowDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateAgentKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAgentKnowledgeBase{}, middleware.After)
 }
@@ -1402,6 +1422,10 @@ func addOpUpdatePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePrompt{}, middleware.After)
 }
 
+func addOpValidateFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpValidateFlowDefinition{}, middleware.After)
+}
+
 func validateAgentFlowNodeConfiguration(v *types.AgentFlowNodeConfiguration) error {
 	if v == nil {
 		return nil
@@ -1428,6 +1452,30 @@ func validateBedrockFoundationModelConfiguration(v *types.BedrockFoundationModel
 	if v.ParsingPrompt != nil {
 		if err := validateParsingPrompt(v.ParsingPrompt); err != nil {
 			invalidParams.AddNested("ParsingPrompt", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChatPromptTemplateConfiguration(v *types.ChatPromptTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatPromptTemplateConfiguration"}
+	if v.Messages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Messages"))
+	} else if v.Messages != nil {
+		if err := validateMessages(v.Messages); err != nil {
+			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ToolConfiguration != nil {
+		if err := validateToolConfiguration(v.ToolConfiguration); err != nil {
+			invalidParams.AddNested("ToolConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2257,6 +2305,41 @@ func validateMemoryConfiguration(v *types.MemoryConfiguration) error {
 	}
 }
 
+func validateMessage(v *types.Message) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Message"}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMessages(v []types.Message) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Messages"}
+	for i := range v {
+		if err := validateMessage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMongoDbAtlasConfiguration(v *types.MongoDbAtlasConfiguration) error {
 	if v == nil {
 		return nil
@@ -2520,6 +2603,21 @@ func validatePineconeFieldMapping(v *types.PineconeFieldMapping) error {
 	}
 }
 
+func validatePromptAgentResource(v *types.PromptAgentResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptAgentResource"}
+	if v.AgentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePromptFlowNodeConfiguration(v *types.PromptFlowNodeConfiguration) error {
 	if v == nil {
 		return nil
@@ -2603,6 +2701,25 @@ func validatePromptFlowNodeSourceConfiguration(v types.PromptFlowNodeSourceConfi
 	}
 }
 
+func validatePromptGenAiResource(v types.PromptGenAiResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptGenAiResource"}
+	switch uv := v.(type) {
+	case *types.PromptGenAiResourceMemberAgent:
+		if err := validatePromptAgentResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[agent]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePromptMetadataEntry(v *types.PromptMetadataEntry) error {
 	if v == nil {
 		return nil
@@ -2659,6 +2776,11 @@ func validatePromptTemplateConfiguration(v types.PromptTemplateConfiguration) er
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PromptTemplateConfiguration"}
 	switch uv := v.(type) {
+	case *types.PromptTemplateConfigurationMemberChat:
+		if err := validateChatPromptTemplateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[chat]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.PromptTemplateConfigurationMemberText:
 		if err := validateTextPromptTemplateConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[text]", err.(smithy.InvalidParamsError))
@@ -2683,7 +2805,9 @@ func validatePromptVariant(v *types.PromptVariant) error {
 	if len(v.TemplateType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
 	}
-	if v.TemplateConfiguration != nil {
+	if v.TemplateConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateConfiguration"))
+	} else if v.TemplateConfiguration != nil {
 		if err := validatePromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
 			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -2691,6 +2815,11 @@ func validatePromptVariant(v *types.PromptVariant) error {
 	if v.Metadata != nil {
 		if err := validatePromptMetadataList(v.Metadata); err != nil {
 			invalidParams.AddNested("Metadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenAiResource != nil {
+		if err := validatePromptGenAiResource(v.GenAiResource); err != nil {
+			invalidParams.AddNested("GenAiResource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3055,6 +3184,21 @@ func validateSharePointSourceConfiguration(v *types.SharePointSourceConfiguratio
 	}
 }
 
+func validateSpecificToolChoice(v *types.SpecificToolChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpecificToolChoice"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStorageConfiguration(v *types.StorageConfiguration) error {
 	if v == nil {
 		return nil
@@ -3155,6 +3299,103 @@ func validateTextPromptTemplateConfiguration(v *types.TextPromptTemplateConfigur
 	invalidParams := smithy.InvalidParamsError{Context: "TextPromptTemplateConfiguration"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTool(v types.Tool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tool"}
+	switch uv := v.(type) {
+	case *types.ToolMemberToolSpec:
+		if err := validateToolSpecification(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolSpec]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolChoice(v types.ToolChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolChoice"}
+	switch uv := v.(type) {
+	case *types.ToolChoiceMemberTool:
+		if err := validateSpecificToolChoice(&uv.Value); err != nil {
+			invalidParams.AddNested("[tool]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolConfiguration(v *types.ToolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolConfiguration"}
+	if v.Tools == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
+	} else if v.Tools != nil {
+		if err := validateTools(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ToolChoice != nil {
+		if err := validateToolChoice(v.ToolChoice); err != nil {
+			invalidParams.AddNested("ToolChoice", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTools(v []types.Tool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tools"}
+	for i := range v {
+		if err := validateTool(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolSpecification(v *types.ToolSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolSpecification"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.InputSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSchema"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4463,6 +4704,25 @@ func validateOpUpdatePromptInput(v *UpdatePromptInput) error {
 	}
 	if v.PromptIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpValidateFlowDefinitionInput(v *ValidateFlowDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidateFlowDefinitionInput"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	} else if v.Definition != nil {
+		if err := validateFlowDefinition(v.Definition); err != nil {
+			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

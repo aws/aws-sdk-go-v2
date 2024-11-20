@@ -1,3 +1,32 @@
+# v1.50.0 (2024-11-20)
+
+* **Feature**: Added support for Rocky Linux 8 on Amazon WorkSpaces Personal.
+
+# v1.49.0 (2024-11-19)
+
+* **Feature**: Releasing new ErrorCodes for Image Validation failure during CreateWorkspaceImage process
+
+# v1.48.6 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.5 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.48.4 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

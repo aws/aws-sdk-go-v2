@@ -73,10 +73,15 @@ type GetFunctionOutput struct {
 	// The configuration of the function or version.
 	Configuration *types.FunctionConfiguration
 
-	// The function's [tags].
+	// The function's [tags]. Lambda returns tag data only if you have explicit allow
+	// permissions for [lambda:ListTags].
 	//
+	// [lambda:ListTags]: https://docs.aws.amazon.com/lambda/latest/api/API_ListTags.html
 	// [tags]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
 	Tags map[string]string
+
+	// An object that contains details about an error related to retrieving tags.
+	TagsError *types.TagsError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,7 +55,7 @@ type GetSbomExportOutput struct {
 	// The report ID of the software bill of materials (SBOM) report.
 	ReportId *string
 
-	// Contains details of the Amazon S3 bucket and KMS key used to export findings.
+	// Contains details of the Amazon S3 bucket and KMS key used to export findings
 	S3Destination *types.Destination
 
 	// The status of the software bill of materials (SBOM) report.

@@ -56,9 +56,9 @@ type UpdateMatchmakingConfigurationInput struct {
 
 	// The number of player slots in a match to keep open for future players. For
 	// example, if the configuration's rule set specifies a match for a single
-	// 10-person team, and the additional player count is set to 2, 10 players will be
-	// selected for the match and 2 more player slots will be open for future players.
-	// This parameter is not used if FlexMatchMode is set to STANDALONE .
+	// 12-person team, and the additional player count is set to 2, only 10 players are
+	// selected for the match. This parameter is not used if FlexMatchMode is set to
+	// STANDALONE .
 	AdditionalPlayerCount *int32
 
 	// The method that is used to backfill game sessions created with this matchmaking
@@ -97,11 +97,11 @@ type UpdateMatchmakingConfigurationInput struct {
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process with a request to start a new game
-	// session (see [Start a Game Session]). This information is added to the game session that is created
-	// for a successful match. This parameter is not used if FlexMatchMode is set to
-	// STANDALONE .
+	// session. For more information, see [Start a game session]. This information is added to the game
+	// session that is created for a successful match. This parameter is not used if
+	// FlexMatchMode is set to STANDALONE .
 	//
-	// [Start a Game Session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+	// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift game session

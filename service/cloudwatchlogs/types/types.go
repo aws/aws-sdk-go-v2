@@ -233,7 +233,7 @@ type ConfigurationTemplate struct {
 	// that delivers to an S3 bucket.
 	AllowedSuffixPathFields []string
 
-	// A mapping that displays the default value of each property within a delivery’s
+	// A mapping that displays the default value of each property within a delivery's
 	// configuration, if it is not specified in the request.
 	DefaultDeliveryConfigValues *ConfigurationTemplateDeliveryConfigValues
 
@@ -290,10 +290,10 @@ type ConfigurationTemplateDeliveryConfigValues struct {
 //
 // For more information, see [CreateDelivery].
 //
-// You can't update an existing delivery. You can only create and delete
-// deliveries.
+// To update an existing delivery configuration, use [UpdateDeliveryConfiguration].
 //
 // [CreateDelivery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+// [UpdateDeliveryConfiguration]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
 type Delivery struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies this delivery.
@@ -979,6 +979,18 @@ type PatternToken struct {
 	// Contains the values found for a dynamic token, and the number of times each
 	// value was found.
 	Enumerations map[string]int64
+
+	// A name that CloudWatch Logs assigned to this dynamic token to make the pattern
+	// more readable. The string part of the inferredTokenName gives you a clearer
+	// idea of the content of this token. The number part of the inferredTokenName
+	// shows where in the pattern this token appears, compared to other dynamic tokens.
+	// CloudWatch Logs assigns the string part of the name based on analyzing the
+	// content of the log events that contain it.
+	//
+	// For example, an inferred token name of IPAddress-3 means that the token
+	// represents an IP address, and this token is the third dynamic token in the
+	// pattern.
+	InferredTokenName *string
 
 	// Specifies whether this is a dynamic token.
 	IsDynamic *bool

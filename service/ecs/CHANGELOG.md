@@ -1,3 +1,49 @@
+# v1.52.0 (2024-11-20)
+
+* **Feature**: This release adds support for the Availability Zone rebalancing feature on Amazon ECS.
+
+# v1.51.0 (2024-11-19)
+
+* **Feature**: This release introduces support for configuring the version consistency feature for individual containers defined within a task definition. The configuration allows to specify whether ECS should resolve the container image tag specified in the container definition to an image digest.
+
+# v1.50.0 (2024-11-18)
+
+* **Feature**: This release adds support for adding VPC Lattice configurations in ECS CreateService/UpdateService APIs. The configuration allows for associating VPC Lattice target groups with ECS Services.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.49.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2024-10-30)
+
+* **Feature**: This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.
+
+# v1.48.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.0 (2024-10-24)
+
+* **Feature**: This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.
+
+# v1.47.4 (2024-10-17)
+
+* **Documentation**: This is an Amazon ECS documentation only update to address tickets.
+
+# v1.47.3 (2024-10-10)
+
+* **Documentation**: This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.
+
+# v1.47.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

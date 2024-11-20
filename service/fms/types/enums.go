@@ -528,6 +528,7 @@ const (
 	ViolationReasonRouteHasOutOfScopeEndpoint              ViolationReason = "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"
 	ViolationReasonFirewallSubnetMissingVPCEndpoint        ViolationReason = "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"
 	ViolationReasonInvalidNetworkAclEntry                  ViolationReason = "INVALID_NETWORK_ACL_ENTRY"
+	ViolationReasonWebACLConfigurationOrScopeOfUse         ViolationReason = "WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
@@ -565,5 +566,6 @@ func (ViolationReason) Values() []ViolationReason {
 		"ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT",
 		"FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT",
 		"INVALID_NETWORK_ACL_ENTRY",
+		"WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE",
 	}
 }

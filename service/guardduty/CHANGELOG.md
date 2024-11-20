@@ -1,3 +1,29 @@
+# v1.51.2 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.51.0 (2024-11-06)
+
+* **Feature**: GuardDuty RDS Protection expands support for Amazon Aurora PostgreSQL Limitless Databases.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.0 (2024-10-11)
+
+* **Feature**: Added a new field for network connection details.
+
+# v1.49.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -110,6 +110,18 @@ func TestCheckSnapshot_CancelReplicationTaskAssessmentRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataProvider(context.Background(), nil, func(o *Options) {
@@ -247,6 +259,18 @@ func TestCheckSnapshot_DeleteConnection(t *testing.T) {
 	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -451,6 +475,18 @@ func TestCheckSnapshot_DescribeConversionConfiguration(t *testing.T) {
 	_, err := svc.DescribeConversionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeConversionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeDataMigrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataMigrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDataMigrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -962,6 +998,18 @@ func TestCheckSnapshot_ModifyConversionConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyDataMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyDataProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyDataProvider(context.Background(), nil, func(o *Options) {
@@ -1154,6 +1202,18 @@ func TestCheckSnapshot_RunFleetAdvisorLsaAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDataMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartExtensionPackAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartExtensionPackAssociation(context.Background(), nil, func(o *Options) {
@@ -1286,6 +1346,18 @@ func TestCheckSnapshot_StartReplicationTaskAssessmentRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopDataMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopReplication(context.Background(), nil, func(o *Options) {
@@ -1374,6 +1446,18 @@ func TestUpdateSnapshot_CancelReplicationTaskAssessmentRun(t *testing.T) {
 	_, err := svc.CancelReplicationTaskAssessmentRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelReplicationTaskAssessmentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1518,6 +1602,18 @@ func TestUpdateSnapshot_DeleteConnection(t *testing.T) {
 	_, err := svc.DeleteConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1722,6 +1818,18 @@ func TestUpdateSnapshot_DescribeConversionConfiguration(t *testing.T) {
 	_, err := svc.DescribeConversionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeConversionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeDataMigrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataMigrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDataMigrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2233,6 +2341,18 @@ func TestUpdateSnapshot_ModifyConversionConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyDataMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyDataProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyDataProvider(context.Background(), nil, func(o *Options) {
@@ -2425,6 +2545,18 @@ func TestUpdateSnapshot_RunFleetAdvisorLsaAnalysis(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDataMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartExtensionPackAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartExtensionPackAssociation(context.Background(), nil, func(o *Options) {
@@ -2550,6 +2682,18 @@ func TestUpdateSnapshot_StartReplicationTaskAssessmentRun(t *testing.T) {
 	_, err := svc.StartReplicationTaskAssessmentRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartReplicationTaskAssessmentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopDataMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopDataMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopDataMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -68,7 +68,11 @@ type StartQueryInput struct {
 	//
 	//   - OVERALL_TRAFFIC_SUGGESTIONS_DETAILS : Provides TTFB, using a 30-day weighted
 	//   average, for each top location, for a proposed Amazon Web Services location.
-	//   Must provide a Amazon Web Services location to search.
+	//   Must provide an Amazon Web Services location to search.
+	//
+	//   - ROUTING_SUGGESTIONS : Provides the predicted average round-trip time (RTT)
+	//   from an IP prefix toward an Amazon Web Services location for a DNS resolver. The
+	//   RTT is calculated at one hour intervals, over a one hour period.
 	//
 	// For lists of the fields returned with each query type and more information
 	// about how each type of query is performed, see [Using the Amazon CloudWatch Internet Monitor query interface]in the Amazon CloudWatch

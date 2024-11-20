@@ -151,6 +151,102 @@ func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
+// ListPublicKeysPaginatorOptions is the paginator options for ListPublicKeys
+type ListPublicKeysPaginatorOptions struct {
+	// The maximum number of public keys you want in the response body.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPublicKeysPaginator is a paginator for ListPublicKeys
+type ListPublicKeysPaginator struct {
+	options   ListPublicKeysPaginatorOptions
+	client    ListPublicKeysAPIClient
+	params    *ListPublicKeysInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPublicKeysPaginator returns a new ListPublicKeysPaginator
+func NewListPublicKeysPaginator(client ListPublicKeysAPIClient, params *ListPublicKeysInput, optFns ...func(*ListPublicKeysPaginatorOptions)) *ListPublicKeysPaginator {
+	if params == nil {
+		params = &ListPublicKeysInput{}
+	}
+
+	options := ListPublicKeysPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListPublicKeysPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPublicKeysPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListPublicKeys page.
+func (p *ListPublicKeysPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPublicKeysOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListPublicKeys(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = nil
+	if result.PublicKeyList != nil {
+		p.nextToken = result.PublicKeyList.NextMarker
+	}
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListPublicKeysAPIClient is a client that implements the ListPublicKeys
+// operation.
+type ListPublicKeysAPIClient interface {
+	ListPublicKeys(context.Context, *ListPublicKeysInput, ...func(*Options)) (*ListPublicKeysOutput, error)
+}
+
+var _ ListPublicKeysAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListPublicKeys(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -384,6 +384,9 @@
                     "target": "com.amazonaws.computeoptimizer#ExportECSServiceRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.computeoptimizer#ExportIdleRecommendations"
+                },
+                {
                     "target": "com.amazonaws.computeoptimizer#ExportLambdaFunctionRecommendations"
                 },
                 {
@@ -418,6 +421,9 @@
                 },
                 {
                     "target": "com.amazonaws.computeoptimizer#GetEnrollmentStatusesForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetIdleRecommendations"
                 },
                 {
                     "target": "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendations"
@@ -1572,6 +1578,9 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#DBClusterIdentifier": {
+            "type": "string"
+        },
         "com.amazonaws.computeoptimizer#DBInstanceClass": {
             "type": "string"
         },
@@ -1797,6 +1806,23 @@
         },
         "com.amazonaws.computeoptimizer#DestinationKeyPrefix": {
             "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#Dimension": {
+            "type": "enum",
+            "members": {
+                "SAVINGS_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SavingsValue"
+                    }
+                },
+                "SAVINGS_VALUE_AFTER_DISCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SavingsValueAfterDiscount"
+                    }
+                }
+            }
         },
         "com.amazonaws.computeoptimizer#EBSEffectiveRecommendationPreferences": {
             "type": "structure",
@@ -3149,6 +3175,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#ExportIdleRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#ExportIdleRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#ExportIdleRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Export optimization recommendations for your idle resources.\n        </p>\n         <p>Recommendations are exported in a comma-separated values (CSV) file, and its metadata\n            in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>\n         <p>You can have only one idle resource export job in progress per Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportIdleRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services account IDs for the export idle resource recommendations.\n        </p>\n         <p>If your account is the management account or the delegated administrator \n            of an organization, use this parameter to specify the member account you want to \n            export recommendations to.</p>\n         <p>This parameter can't be specified together with the include member accounts \n            parameter. The parameters are mutually exclusive.</p>\n         <p>If this parameter or the include member accounts parameter is omitted,\n            the recommendations for member accounts aren't included in the export.</p>\n         <p>You can specify multiple account IDs per request.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects to specify a filter that exports a more specific set of idle resource recommendations.</p>"
+                    }
+                },
+                "fieldsToExport": {
+                    "target": "com.amazonaws.computeoptimizer#ExportableIdleFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations data to include in the export file. For more information about the\n            fields that can be exported, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files\">Exported files</a> in the <i>Compute Optimizer User\n                    Guide</i>.</p>"
+                    }
+                },
+                "s3DestinationConfig": {
+                    "target": "com.amazonaws.computeoptimizer#S3DestinationConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.computeoptimizer#FileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export file. The CSV file is the only export file format currently supported.</p>"
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If your account is the management account or the delegated administrator of an organization,\n            this parameter indicates whether to include recommendations for resources in all member accounts of\n            the organization.</p>\n         <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for\n            Compute Optimizer must be enabled in the organization account. For more information,\n            see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access\">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the\n            <i>Compute Optimizer User Guide</i>.</p>\n         <p>If this parameter is omitted, recommendations for member accounts of the \n            organization aren't included in the export file.</p>\n         <p>If this parameter or the account ID parameter is omitted, recommendations for \n            member accounts aren't included in the export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportIdleRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.computeoptimizer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identification number of the export job.\n        </p>\n         <p>To view the status of an export job, use the \n            <a>DescribeRecommendationExportJobs</a> action and specify the job ID.\n        </p>"
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.computeoptimizer#S3Destination"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizer#ExportLambdaFunctionRecommendations": {
             "type": "operation",
             "input": {
@@ -4038,6 +4164,137 @@
                 "target": "com.amazonaws.computeoptimizer#ExportableECSServiceField"
             }
         },
+        "com.amazonaws.computeoptimizer#ExportableIdleField": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountId"
+                    }
+                },
+                "RESOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceArn"
+                    }
+                },
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceId"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                },
+                "LAST_REFRESH_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastRefreshTimestamp"
+                    }
+                },
+                "LOOKBACK_PERIOD_IN_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LookbackPeriodInDays"
+                    }
+                },
+                "SAVINGS_OPPORTUNITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SavingsOpportunity"
+                    }
+                },
+                "SAVINGS_OPPORTUNITY_AFTER_DISCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SavingsOpportunityAfterDiscount"
+                    }
+                },
+                "UTILIZATION_METRICS_CPU_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsCpuMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_MEMORY_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsMemoryMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsNetworkOutBytesPerSecondMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsNetworkInBytesPerSecondMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsDatabaseConnectionsMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeReadIOPSMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEBSVolumeWriteIOPSMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeReadOpsPerSecondMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
+                    }
+                },
+                "FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Finding"
+                    }
+                },
+                "FINDING_DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FindingDescription"
+                    }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tags"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableIdleFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ExportableIdleField"
+            }
+        },
         "com.amazonaws.computeoptimizer#ExportableInstanceField": {
             "type": "enum",
             "members": {
@@ -4902,6 +5159,12 @@
                         "smithy.api#enumValue": "LookbackPeriodInDays"
                     }
                 },
+                "CURRENT_INSTANCE_PERFORMANCE_RISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrentInstancePerformanceRisk"
+                    }
+                },
                 "UTILIZATION_METRICS_CPU_MAXIMUM": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4960,6 +5223,54 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UtilizationMetricsDatabaseConnectionsMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsStorageNetworkReceiveThroughputMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsStorageNetworkTransmitThroughputMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsAuroraMemoryHealthStateMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsAuroraMemoryNumKillConnTotalMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsReadIOPSEphemeralStorageMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsWriteIOPSEphemeralStorageMaximum"
                     }
                 },
                 "INSTANCE_FINDING": {
@@ -5164,6 +5475,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Tags"
+                    }
+                },
+                "DB_CLUSTER_IDENTIFIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DBClusterIdentifier"
+                    }
+                },
+                "PROMOTION_TIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PromotionTier"
                     }
                 }
             }
@@ -6533,6 +6856,114 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizer#GetIdleRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetIdleRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetIdleRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns idle resource recommendations. Compute Optimizer generates recommendations for \n            idle resources that meet a specific set of requirements. For more information, see\n            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Resource requirements</a> in the\n            <i>Compute Optimizer User Guide</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetIdleRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArns": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that identifies the idle resource.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of idle resource recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#IdleMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of idle resource recommendations to return with a single request. </p>\n         <p>To retrieve the remaining results, \n            make another request with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects to specify a filter that returns a more specific list of idle resource recommendations.</p>"
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Return the idle resource recommendations to the specified Amazon Web Services account IDs.</p>\n         <p>If your account is the management account \n            or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to \n            specific member accounts.</p>\n         <p>You can only specify one account ID per request.</p>"
+                    }
+                },
+                "orderBy": {
+                    "target": "com.amazonaws.computeoptimizer#OrderBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort the idle resource recommendations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetIdleRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of idle resource recommendations.</p>"
+                    }
+                },
+                "idleRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the idle resource recommendations.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendations": {
             "type": "operation",
             "input": {
@@ -7235,6 +7666,420 @@
                         "smithy.api#enumValue": "False"
                     }
                 }
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleEstimatedMonthlySavings": {
+            "type": "structure",
+            "members": {
+                "currency": {
+                    "target": "com.amazonaws.computeoptimizer#Currency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency of the estimated monthly savings.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#Value",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The value of the estimated monthly savings for Idle resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the estimated monthly savings possible for idle resources by adopting Compute Optimizer recommendations.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleFinding": {
+            "type": "enum",
+            "members": {
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Idle"
+                    }
+                },
+                "UNATTACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unattached"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleFindingDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#IdleMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleMetricName": {
+            "type": "enum",
+            "members": {
+                "CPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPU"
+                    }
+                },
+                "MEMORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Memory"
+                    }
+                },
+                "NETWORK_OUT_BYTES_PER_SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkOutBytesPerSecond"
+                    }
+                },
+                "NETWORK_IN_BYTES_PER_SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkInBytesPerSecond"
+                    }
+                },
+                "DATABASE_CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DatabaseConnections"
+                    }
+                },
+                "EBS_VOLUME_READ_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeReadIOPS"
+                    }
+                },
+                "EBS_VOLUME_WRITE_IOPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolumeWriteIOPS"
+                    }
+                },
+                "VOLUME_READ_OPS_PER_SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeReadOpsPerSecond"
+                    }
+                },
+                "VOLUME_WRITE_OPS_PER_SECOND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VolumeWriteOpsPerSecond"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendation": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the current idle resource.</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that is idle.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the idle resource.</p>"
+                    }
+                },
+                "finding": {
+                    "target": "com.amazonaws.computeoptimizer#IdleFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding classification of an idle resource.</p>"
+                    }
+                },
+                "findingDescription": {
+                    "target": "com.amazonaws.computeoptimizer#IdleFindingDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the findings for the resource.</p>"
+                    }
+                },
+                "savingsOpportunity": {
+                    "target": "com.amazonaws.computeoptimizer#IdleSavingsOpportunity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The savings opportunity for the idle resource.</p>"
+                    }
+                },
+                "savingsOpportunityAfterDiscounts": {
+                    "target": "com.amazonaws.computeoptimizer#IdleSavingsOpportunityAfterDiscounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The savings opportunity for the idle resource after any applying discounts.</p>"
+                    }
+                },
+                "utilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#IdleUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the idle resource.</p>"
+                    }
+                },
+                "lookBackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of days the idle resource utilization metrics were analyzed.</p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the idle resource recommendation was last generated.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.computeoptimizer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags assigned to your idle resource recommendations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Idle resource recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendationError": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.computeoptimizer#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the error.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.computeoptimizer#Code",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource associated with the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns of list of resources that doesn't have idle recommendations.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendationErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleRecommendationError"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendationFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#IdleRecommendationFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the filter.\n        </p>\n         <p>\n            Specify <code>Finding</code> to return recommendations with a specific finding classification.\n        </p>\n         <p>You can filter your idle resource recommendations by <code>tag:key</code> \n            and <code>tag-key</code> tags.</p>\n         <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your \n            idle resource recommendations. Use the tag key in the filter name and the tag value \n            as the filter value. For example, to find all idle resource service recommendations that have \n            a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, \n            specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n         <p>A <code>tag-key</code> is the key of a tag assigned to your idle resource recommendations. Use \n            this filter to find all of your idle resource recommendations that have a tag with a \n            specific key. This doesn’t consider the tag value. For example, you can find \n            your idle resource service recommendations with a tag key value of <code>Owner</code> or without any tag \n            keys assigned.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of idle resource recommendations.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendationFilterName": {
+            "type": "enum",
+            "members": {
+                "FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Finding"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleRecommendationFilter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendationResourceType": {
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2Instance"
+                    }
+                },
+                "AUTO_SCALING_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoScalingGroup"
+                    }
+                },
+                "EBS_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSVolume"
+                    }
+                },
+                "ECS_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECSService"
+                    }
+                },
+                "RDS_DB_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDSDBInstance"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleSavingsOpportunity": {
+            "type": "structure",
+            "members": {
+                "savingsOpportunityPercentage": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer's idle resource recommendations.</p>"
+                    }
+                },
+                "estimatedMonthlySavings": {
+                    "target": "com.amazonaws.computeoptimizer#IdleEstimatedMonthlySavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated monthly savings possible by adopting Compute Optimizer's idle resource recommendations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the savings opportunity for idle resource recommendations.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleSavingsOpportunityAfterDiscounts": {
+            "type": "structure",
+            "members": {
+                "savingsOpportunityPercentage": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunityPercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer's idle resource recommendations. This includes any applicable discounts.</p>"
+                    }
+                },
+                "estimatedMonthlySavings": {
+                    "target": "com.amazonaws.computeoptimizer#IdleEstimatedMonthlySavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated monthly savings possible by adopting Compute Optimizer's idle resource recommendations. This includes any applicable discounts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the savings opportunity for idle resource recommendations after applying discounts.</p>\n         <p>Savings opportunity represents the estimated monthly savings after applying discounts. You can achieve this by implementing a given Compute Optimizer recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleSummary"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#IdleFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the finding group for the idle resources.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#SummaryValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The count of idle resources in the finding group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the findings summary of the idle resources.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleUtilizationMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#IdleMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.computeoptimizer#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The statistic of the utilization metric.\n        </p>\n         <p>The Compute Optimizer API, Command Line Interface (CLI), and SDKs\n            return utilization metrics using only the <code>Maximum</code> statistic, which is the\n            highest value observed during the specified period.</p>\n         <p>The Compute Optimizer console displays graphs for some utilization metrics using the\n            <code>Average</code> statistic, which is the value of <code>Sum</code> /\n            <code>SampleCount</code> during the specified period. For more information, see\n            <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html\">Viewing resource\n                recommendations</a> in the <i>Compute Optimizer User\n                    Guide</i>. You can also get averaged utilization metric data for your resources\n            using Amazon CloudWatch. For more information, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch\n                User Guide</a>.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The value of the utilization metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the utilization metric of an idle resource.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleUtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleUtilizationMetric"
             }
         },
         "com.amazonaws.computeoptimizer#IncludeMemberAccounts": {
@@ -9133,6 +9978,43 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.computeoptimizer#Order": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Asc"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Desc"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#OrderBy": {
+            "type": "structure",
+            "members": {
+                "dimension": {
+                    "target": "com.amazonaws.computeoptimizer#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension values to sort the recommendations.</p>"
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.computeoptimizer#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort the recommendations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes how the recommendations are ordered.</p>"
+            }
+        },
         "com.amazonaws.computeoptimizer#PerformanceRisk": {
             "type": "double",
             "traits": {
@@ -9286,6 +10168,9 @@
                 "target": "com.amazonaws.computeoptimizer#UtilizationMetric"
             }
         },
+        "com.amazonaws.computeoptimizer#PromotionTier": {
+            "type": "integer"
+        },
         "com.amazonaws.computeoptimizer#PutRecommendationPreferences": {
             "type": "operation",
             "input": {
@@ -9392,6 +10277,35 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#RDSCurrentInstancePerformanceRisk": {
+            "type": "enum",
+            "members": {
+                "VERY_LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VeryLow"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                }
             }
         },
         "com.amazonaws.computeoptimizer#RDSDBInstanceRecommendationOption": {
@@ -9505,6 +10419,54 @@
                     "traits": {
                         "smithy.api#enumValue": "DatabaseConnections"
                     }
+                },
+                "STORAGE_NETWORK_RECEIVE_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageNetworkReceiveThroughput"
+                    }
+                },
+                "STORAGE_NETWORK_TRANSMIT_THROUGHPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StorageNetworkTransmitThroughput"
+                    }
+                },
+                "AURORA_MEMORY_HEALTH_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraMemoryHealthState"
+                    }
+                },
+                "AURORA_MEMORY_NUM_DECLINED_SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraMemoryNumDeclinedSql"
+                    }
+                },
+                "AURORA_MEMORY_NUM_KILL_CONN_TOTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraMemoryNumKillConnTotal"
+                    }
+                },
+                "AURORA_MEMORY_NUM_KILL_QUERY_TOTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraMemoryNumKillQueryTotal"
+                    }
+                },
+                "READ_IOPS_EPHEMERAL_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadIOPSEphemeralStorage"
+                    }
+                },
+                "WRITE_IOPS_EPHEMERAL_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WriteIOPSEphemeralStorage"
+                    }
                 }
             }
         },
@@ -9564,6 +10526,12 @@
                         "smithy.api#documentation": "<p>\n            The database engine version.\n        </p>"
                     }
                 },
+                "promotionTier": {
+                    "target": "com.amazonaws.computeoptimizer#PromotionTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The promotion tier for the Aurora instance.</p>"
+                    }
+                },
                 "currentDBInstanceClass": {
                     "target": "com.amazonaws.computeoptimizer#CurrentDBInstanceClass",
                     "traits": {
@@ -9574,6 +10542,12 @@
                     "target": "com.amazonaws.computeoptimizer#DBStorageConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The configuration of the current RDS storage.\n        </p>"
+                    }
+                },
+                "dbClusterIdentifier": {
+                    "target": "com.amazonaws.computeoptimizer#DBClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for DB cluster.</p>"
                     }
                 },
                 "idle": {
@@ -9598,6 +10572,12 @@
                     "target": "com.amazonaws.computeoptimizer#RDSInstanceFindingReasonCodes",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The reason for the finding classification of an Amazon RDS instance.\n        </p>"
+                    }
+                },
+                "currentInstancePerformanceRisk": {
+                    "target": "com.amazonaws.computeoptimizer#RDSCurrentInstancePerformanceRisk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance risk for the current DB instance.</p>"
                     }
                 },
                 "storageFindingReasonCodes": {
@@ -9952,6 +10932,12 @@
                         "smithy.api#enumValue": "EBSIOPSOverprovisioned"
                     }
                 },
+                "EBS_IOPS_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBSIOPSUnderprovisioned"
+                    }
+                },
                 "EBS_THROUGHPUT_OVER_PROVISIONED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -9986,6 +10972,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NewEngineVersionAvailable"
+                    }
+                },
+                "DB_CLUSTER_WRITER_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DBClusterWriterUnderprovisioned"
+                    }
+                },
+                "MEMORY_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryUnderprovisioned"
+                    }
+                },
+                "INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceStorageReadIOPSUnderprovisioned"
+                    }
+                },
+                "INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceStorageWriteIOPSUnderprovisioned"
                     }
                 }
             }
@@ -10481,6 +11491,12 @@
                         "smithy.api#documentation": "<p>An array of objects that describe a recommendation summary.</p>"
                     }
                 },
+                "idleSummaries": {
+                    "target": "com.amazonaws.computeoptimizer#IdleSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the findings summary of the idle resources.\n        </p>"
+                    }
+                },
                 "recommendationResourceType": {
                     "target": "com.amazonaws.computeoptimizer#RecommendationSourceType",
                     "traits": {
@@ -10498,6 +11514,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the savings opportunity for a given resource type. Savings\n            opportunity includes the estimated monthly savings amount and percentage.</p>"
                     }
+                },
+                "idleSavingsOpportunity": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunity"
+                },
+                "aggregatedSavingsOpportunity": {
+                    "target": "com.amazonaws.computeoptimizer#SavingsOpportunity"
                 },
                 "currentPerformanceRiskRatings": {
                     "target": "com.amazonaws.computeoptimizer#CurrentPerformanceRiskRatings",
@@ -10564,6 +11586,9 @@
                 "target": "com.amazonaws.computeoptimizer#ResourceArn"
             }
         },
+        "com.amazonaws.computeoptimizer#ResourceId": {
+            "type": "string"
+        },
         "com.amazonaws.computeoptimizer#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -10626,6 +11651,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RdsDBInstance"
+                    }
+                },
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Idle"
                     }
                 }
             }
@@ -11153,7 +12184,7 @@
                 "volumeType": {
                     "target": "com.amazonaws.computeoptimizer#VolumeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume type.</p>\n         <p>This can be <code>gp2</code> for General Purpose SSD, <code>io1</code> or\n                <code>io2</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput Optimized\n            HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for Magnetic\n            volumes.</p>"
+                        "smithy.api#documentation": "<p>The volume type.</p>\n         <p>The volume types can be the following:</p>\n         <ul>\n            <li>\n               <p>General Purpose SSD <code>gp2</code> and <code>gp3</code>\n               </p>\n            </li>\n            <li>\n               <p>Provisioned IOPS SSD <code>io1</code>, <code>io2</code>, and <code>io2 Block Express</code>\n               </p>\n            </li>\n            <li>\n               <p>Throughput Optimized HDD <code>st1</code>\n               </p>\n            </li>\n            <li>\n               <p>Cold HDD <code>sc1</code>\n               </p>\n            </li>\n            <li>\n               <p>Magnetic volumes <code>standard</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "volumeSize": {

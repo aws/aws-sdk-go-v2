@@ -342,6 +342,11 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.Boolean(v.Authorized)
 	}
 
+	if len(v.ContainerFormat) > 0 {
+		ok := object.Key("containerFormat")
+		ok.String(string(v.ContainerFormat))
+	}
+
 	if v.InsecureIngest {
 		ok := object.Key("insecureIngest")
 		ok.Boolean(v.InsecureIngest)
@@ -350,6 +355,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	if len(v.LatencyMode) > 0 {
 		ok := object.Key("latencyMode")
 		ok.String(string(v.LatencyMode))
+	}
+
+	if v.MultitrackInputConfiguration != nil {
+		ok := object.Key("multitrackInputConfiguration")
+		if err := awsRestjson1_serializeDocumentMultitrackInputConfiguration(v.MultitrackInputConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -2985,6 +2997,11 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		ok.Boolean(v.Authorized)
 	}
 
+	if len(v.ContainerFormat) > 0 {
+		ok := object.Key("containerFormat")
+		ok.String(string(v.ContainerFormat))
+	}
+
 	if v.InsecureIngest {
 		ok := object.Key("insecureIngest")
 		ok.Boolean(v.InsecureIngest)
@@ -2993,6 +3010,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	if len(v.LatencyMode) > 0 {
 		ok := object.Key("latencyMode")
 		ok.String(string(v.LatencyMode))
+	}
+
+	if v.MultitrackInputConfiguration != nil {
+		ok := object.Key("multitrackInputConfiguration")
+		if err := awsRestjson1_serializeDocumentMultitrackInputConfiguration(v.MultitrackInputConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -3183,6 +3207,28 @@ func awsRestjson1_serializeDocumentDestinationConfiguration(v *types.Destination
 		if err := awsRestjson1_serializeDocumentS3DestinationConfiguration(v.S3, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultitrackInputConfiguration(v *types.MultitrackInputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if len(v.MaximumResolution) > 0 {
+		ok := object.Key("maximumResolution")
+		ok.String(string(v.MaximumResolution))
+	}
+
+	if len(v.Policy) > 0 {
+		ok := object.Key("policy")
+		ok.String(string(v.Policy))
 	}
 
 	return nil

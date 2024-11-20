@@ -56,7 +56,8 @@ type DescribeLocationNfsOutput struct {
 	// The mount options that DataSync uses to mount your NFS file server.
 	MountOptions *types.NfsMountOptions
 
-	// The DataSync agents that are connecting to a Network File System (NFS) location.
+	// The DataSync agents that can connect to your Network File System (NFS) file
+	// server.
 	OnPremConfig *types.OnPremConfig
 
 	// Metadata pertaining to the operation's result.

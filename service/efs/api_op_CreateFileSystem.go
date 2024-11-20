@@ -44,16 +44,13 @@ import (
 // operation, which among other things returns the file system state.
 //
 // This operation accepts an optional PerformanceMode parameter that you choose
-// for your file system. We recommend generalPurpose performance mode for all file
-// systems. File systems using the maxIO mode is a previous generation performance
-// type that is designed for highly parallelized workloads that can tolerate higher
-// latencies than the General Purpose mode. Max I/O mode is not supported for One
-// Zone file systems or file systems that use Elastic throughput.
+// for your file system. We recommend generalPurpose PerformanceMode for all file
+// systems. The maxIO mode is a previous generation performance type that is
+// designed for highly parallelized workloads that can tolerate higher latencies
+// than the generalPurpose mode. MaxIO mode is not supported for One Zone file
+// systems or file systems that use Elastic throughput.
 //
-// Due to the higher per-operation latencies with Max I/O, we recommend using
-// General Purpose performance mode for all file systems.
-//
-// The performance mode can't be changed after the file system has been created.
+// The PerformanceMode can't be changed after the file system has been created.
 // For more information, see [Amazon EFS performance modes].
 //
 // You can set the throughput mode for the file system using the ThroughputMode
@@ -101,15 +98,15 @@ type CreateFileSystemInput struct {
 	// This member is required.
 	CreationToken *string
 
-	// Used to create a One Zone file system. It specifies the Amazon Web Services
-	// Availability Zone in which to create the file system. Use the format us-east-1a
-	// to specify the Availability Zone. For more information about One Zone file
-	// systems, see [Using EFS storage classes]in the Amazon EFS User Guide.
+	// For One Zone file systems, specify the Amazon Web Services Availability Zone in
+	// which to create the file system. Use the format us-east-1a to specify the
+	// Availability Zone. For more information about One Zone file systems, see [EFS file system types]in the
+	// Amazon EFS User Guide.
 	//
 	// One Zone file systems are not available in all Availability Zones in Amazon Web
 	// Services Regions where Amazon EFS is available.
 	//
-	// [Using EFS storage classes]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
+	// [EFS file system types]: https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html#file-system-type
 	AvailabilityZoneName *string
 
 	// Specifies whether automatic backups are enabled on the file system that you are
@@ -156,7 +153,7 @@ type CreateFileSystemInput struct {
 	// Amazon EFS file systems.
 	KmsKeyId *string
 
-	// The Performance mode of the file system. We recommend generalPurpose
+	// The performance mode of the file system. We recommend generalPurpose
 	// performance mode for all file systems. File systems using the maxIO performance
 	// mode can scale to higher levels of aggregate throughput and operations per
 	// second with a tradeoff of slightly higher latencies for most file operations.
@@ -236,7 +233,7 @@ type CreateFileSystemOutput struct {
 	// This member is required.
 	OwnerId *string
 
-	// The Performance mode of the file system.
+	// The performance mode of the file system.
 	//
 	// This member is required.
 	PerformanceMode types.PerformanceMode

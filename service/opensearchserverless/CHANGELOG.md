@@ -1,3 +1,28 @@
+# v1.17.3 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.17.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.0 (2024-10-30)
+
+* **Feature**: Neo Integration via IAM Identity Center (IdC)
+
+# v1.16.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

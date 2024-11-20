@@ -7923,6 +7923,11 @@ func awsAwsquery_serializeOpDocumentModifyCacheClusterInput(v *ModifyCacheCluste
 		}
 	}
 
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
@@ -8054,6 +8059,11 @@ func awsAwsquery_serializeOpDocumentModifyGlobalReplicationGroupInput(v *ModifyG
 		objectKey.String(*v.CacheParameterGroupName)
 	}
 
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
@@ -8121,6 +8131,11 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupInput(v *ModifyReplica
 	if len(v.ClusterMode) > 0 {
 		objectKey := object.Key("ClusterMode")
 		objectKey.String(string(v.ClusterMode))
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
 	}
 
 	if v.EngineVersion != nil {
@@ -8296,6 +8311,16 @@ func awsAwsquery_serializeOpDocumentModifyServerlessCacheInput(v *ModifyServerle
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
+	if v.MajorEngineVersion != nil {
+		objectKey := object.Key("MajorEngineVersion")
+		objectKey.String(*v.MajorEngineVersion)
 	}
 
 	if v.RemoveUserGroup != nil {

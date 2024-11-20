@@ -170,6 +170,18 @@ func TestCheckSnapshot_DeleteTransformer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateMapping")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCapability(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapability(context.Background(), nil, func(o *Options) {
@@ -510,6 +522,18 @@ func TestUpdateSnapshot_DeleteTransformer(t *testing.T) {
 	_, err := svc.DeleteTransformer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTransformer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GenerateMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateMapping")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

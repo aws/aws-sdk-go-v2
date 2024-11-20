@@ -103,6 +103,16 @@ type CreatePortalInput struct {
 	// The image is displayed on a dark background.
 	PortalLogoImageFile *types.ImageFile
 
+	// Define the type of portal. The value for IoT SiteWise Monitor (Classic) is
+	// SITEWISE_PORTAL_V1 . The value for IoT SiteWise Monitor (AI-aware) is
+	// SITEWISE_PORTAL_V2 .
+	PortalType types.PortalType
+
+	// The configuration entry associated with the specific portal type. The value for
+	// IoT SiteWise Monitor (Classic) is SITEWISE_PORTAL_V1 . The value for IoT
+	// SiteWise Monitor (AI-aware) is SITEWISE_PORTAL_V2 .
+	PortalTypeConfiguration map[string]types.PortalTypeEntry
+
 	// A list of key-value pairs that contain metadata for the portal. For more
 	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
 	//

@@ -430,6 +430,26 @@ func (m *validateOpDeleteProtectConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteProtectConfigurationRuleSetNumberOverride struct {
+}
+
+func (*validateOpDeleteProtectConfigurationRuleSetNumberOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProtectConfigurationRuleSetNumberOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProtectConfigurationRuleSetNumberOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProtectConfigurationRuleSetNumberOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRegistrationAttachment struct {
 }
 
@@ -950,6 +970,26 @@ func (m *validateOpListPoolOriginationIdentities) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProtectConfigurationRuleSetNumberOverrides struct {
+}
+
+func (*validateOpListProtectConfigurationRuleSetNumberOverrides) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProtectConfigurationRuleSetNumberOverrides) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProtectConfigurationRuleSetNumberOverridesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProtectConfigurationRuleSetNumberOverridesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRegistrationAssociations struct {
 }
 
@@ -1010,6 +1050,26 @@ func (m *validateOpPutKeyword) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutMessageFeedback struct {
+}
+
+func (*validateOpPutMessageFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMessageFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMessageFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMessageFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutOptedOutNumber struct {
 }
 
@@ -1025,6 +1085,26 @@ func (m *validateOpPutOptedOutNumber) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutOptedOutNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutProtectConfigurationRuleSetNumberOverride struct {
+}
+
+func (*validateOpPutProtectConfigurationRuleSetNumberOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutProtectConfigurationRuleSetNumberOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutProtectConfigurationRuleSetNumberOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutProtectConfigurationRuleSetNumberOverrideInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1245,6 +1325,26 @@ func (m *validateOpSetAccountDefaultProtectConfiguration) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetAccountDefaultProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetDefaultMessageFeedbackEnabled struct {
+}
+
+func (*validateOpSetDefaultMessageFeedbackEnabled) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetDefaultMessageFeedbackEnabled) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetDefaultMessageFeedbackEnabledInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetDefaultMessageFeedbackEnabledInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1634,6 +1734,10 @@ func addOpDeleteProtectConfigurationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeleteProtectConfiguration{}, middleware.After)
 }
 
+func addOpDeleteProtectConfigurationRuleSetNumberOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProtectConfigurationRuleSetNumberOverride{}, middleware.After)
+}
+
 func addOpDeleteRegistrationAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRegistrationAttachment{}, middleware.After)
 }
@@ -1738,6 +1842,10 @@ func addOpListPoolOriginationIdentitiesValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpListPoolOriginationIdentities{}, middleware.After)
 }
 
+func addOpListProtectConfigurationRuleSetNumberOverridesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProtectConfigurationRuleSetNumberOverrides{}, middleware.After)
+}
+
 func addOpListRegistrationAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRegistrationAssociations{}, middleware.After)
 }
@@ -1750,8 +1858,16 @@ func addOpPutKeywordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutKeyword{}, middleware.After)
 }
 
+func addOpPutMessageFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMessageFeedback{}, middleware.After)
+}
+
 func addOpPutOptedOutNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutOptedOutNumber{}, middleware.After)
+}
+
+func addOpPutProtectConfigurationRuleSetNumberOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutProtectConfigurationRuleSetNumberOverride{}, middleware.After)
 }
 
 func addOpPutRegistrationFieldValueValidationMiddleware(stack *middleware.Stack) error {
@@ -1796,6 +1912,10 @@ func addOpSendVoiceMessageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSetAccountDefaultProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetAccountDefaultProtectConfiguration{}, middleware.After)
+}
+
+func addOpSetDefaultMessageFeedbackEnabledValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetDefaultMessageFeedbackEnabled{}, middleware.After)
 }
 
 func addOpSetDefaultMessageTypeValidationMiddleware(stack *middleware.Stack) error {
@@ -1956,6 +2076,23 @@ func validateKinesisFirehoseDestination(v *types.KinesisFirehoseDestination) err
 	}
 	if v.DeliveryStreamArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeliveryStreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListProtectConfigurationRuleSetNumberOverrideFilter(v []types.ProtectConfigurationRuleSetNumberOverrideFilterItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProtectConfigurationRuleSetNumberOverrideFilter"}
+	for i := range v {
+		if err := validateProtectConfigurationRuleSetNumberOverrideFilterItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2181,6 +2318,24 @@ func validateProtectConfigurationFilterList(v []types.ProtectConfigurationFilter
 		if err := validateProtectConfigurationFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectConfigurationRuleSetNumberOverrideFilterItem(v *types.ProtectConfigurationRuleSetNumberOverrideFilterItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectConfigurationRuleSetNumberOverrideFilterItem"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2911,6 +3066,24 @@ func validateOpDeleteProtectConfigurationInput(v *DeleteProtectConfigurationInpu
 	}
 }
 
+func validateOpDeleteProtectConfigurationRuleSetNumberOverrideInput(v *DeleteProtectConfigurationRuleSetNumberOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProtectConfigurationRuleSetNumberOverrideInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRegistrationAttachmentInput(v *DeleteRegistrationAttachmentInput) error {
 	if v == nil {
 		return nil
@@ -3359,6 +3532,26 @@ func validateOpListPoolOriginationIdentitiesInput(v *ListPoolOriginationIdentiti
 	}
 }
 
+func validateOpListProtectConfigurationRuleSetNumberOverridesInput(v *ListProtectConfigurationRuleSetNumberOverridesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProtectConfigurationRuleSetNumberOverridesInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if v.Filters != nil {
+		if err := validateListProtectConfigurationRuleSetNumberOverrideFilter(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRegistrationAssociationsInput(v *ListRegistrationAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -3415,6 +3608,24 @@ func validateOpPutKeywordInput(v *PutKeywordInput) error {
 	}
 }
 
+func validateOpPutMessageFeedbackInput(v *PutMessageFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMessageFeedbackInput"}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if len(v.MessageFeedbackStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageFeedbackStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutOptedOutNumberInput(v *PutOptedOutNumberInput) error {
 	if v == nil {
 		return nil
@@ -3425,6 +3636,27 @@ func validateOpPutOptedOutNumberInput(v *PutOptedOutNumberInput) error {
 	}
 	if v.OptedOutNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OptedOutNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutProtectConfigurationRuleSetNumberOverrideInput(v *PutProtectConfigurationRuleSetNumberOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutProtectConfigurationRuleSetNumberOverrideInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3630,6 +3862,24 @@ func validateOpSetAccountDefaultProtectConfigurationInput(v *SetAccountDefaultPr
 	invalidParams := smithy.InvalidParamsError{Context: "SetAccountDefaultProtectConfigurationInput"}
 	if v.ProtectConfigurationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetDefaultMessageFeedbackEnabledInput(v *SetDefaultMessageFeedbackEnabledInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetDefaultMessageFeedbackEnabledInput"}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
+	}
+	if v.MessageFeedbackEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageFeedbackEnabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

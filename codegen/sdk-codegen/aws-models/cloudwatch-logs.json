@@ -497,6 +497,9 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#Baseline": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudwatchlogs#Boolean": {
             "type": "boolean"
         },
@@ -581,7 +584,7 @@
                 "defaultDeliveryConfigValues": {
                     "target": "com.amazonaws.cloudwatchlogs#ConfigurationTemplateDeliveryConfigValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>A mapping that displays the default value of each property within a delivery’s configuration,\n      if it is not specified in the request.</p>"
+                        "smithy.api#documentation": "<p>A mapping that displays the default value of each property within a delivery's configuration,\n      if it is not specified in the request.</p>"
                     }
                 },
                 "allowedFields": {
@@ -701,7 +704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>\n       that you have already created.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>You can't update an existing delivery. You can only create and delete deliveries.</p>"
+                "smithy.api#documentation": "<p>Creates a <i>delivery</i>. A delivery is a connection between a logical <i>delivery source</i> and a logical\n       <i>delivery destination</i>\n       that you have already created.</p>\n         <p>Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed\n       as <b>Supported [V2 Permissions]</b> in the table at \n       <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enabling \n         logging from Amazon Web Services services.</a>\n         </p>\n         <p>A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.</p>\n         <p>To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:</p>\n         <ul>\n            <li>\n               <p>Create a delivery source, which is a logical object that represents the resource that is actually\n         sending the logs. For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>\n            </li>\n            <li>\n               <p>Create a <i>delivery destination</i>, which is a logical object that represents the actual\n         delivery destination.  For more \n         information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html\">PutDeliveryDestination</a>.</p>\n            </li>\n            <li>\n               <p>If you are delivering logs cross-account, you must use \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html\">PutDeliveryDestinationPolicy</a>\n         in the destination account to assign an IAM policy to the \n         destination. This policy allows delivery to that destination.\n       </p>\n            </li>\n            <li>\n               <p>Use <code>CreateDelivery</code> to create a <i>delivery</i> by pairing exactly one delivery source and one delivery destination.\n         </p>\n            </li>\n         </ul>\n         <p>You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You \n       can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination.</p>\n         <p>To update an existing delivery configuration, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html\">UpdateDeliveryConfiguration</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateDeliveryRequest": {
@@ -724,7 +727,7 @@
                 "recordFields": {
                     "target": "com.amazonaws.cloudwatchlogs#RecordFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of record fields to be delivered to the destination, in order. \n      If the delivery’s log source has mandatory fields, they must be included in this list.</p>"
+                        "smithy.api#documentation": "<p>The list of record fields to be delivered to the destination, in order. \n      If the delivery's log source has mandatory fields, they must be included in this list.</p>"
                     }
                 },
                 "fieldDelimiter": {
@@ -736,7 +739,7 @@
                 "s3DeliveryConfiguration": {
                     "target": "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>This structure contains parameters that are valid only when the delivery’s delivery destination is an S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>This structure contains parameters that are valid only when the delivery's delivery destination is an S3 bucket.</p>"
                     }
                 },
                 "tags": {
@@ -842,7 +845,7 @@
                 "destinationPrefix": {
                     "target": "com.amazonaws.cloudwatchlogs#ExportDestinationPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix used as the start of the key for every object exported. If you don't\n      specify a value, the default is <code>exportedlogs</code>.</p>"
+                        "smithy.api#documentation": "<p>The prefix used as the start of the key for every object exported. If you don't\n      specify a value, the default is <code>exportedlogs</code>.</p>\n         <p>The length of this parameter must comply with the S3 object key name length limits. The object key name is a sequence of Unicode characters with UTF-8 encoding, \n      and can be up to 1,024 bytes.</p>"
                     }
                 }
             },
@@ -1858,7 +1861,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery</i> in your account. </p>\n         <p>A delivery is a connection between a logical <i>delivery source</i> and a logical\n     <i>delivery destination</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n         <p>You can't update an existing delivery. You can only create and delete deliveries.</p>"
+                "smithy.api#documentation": "<p>This structure contains information about one <i>delivery</i> in your account. </p>\n         <p>A delivery is a connection between a logical <i>delivery source</i> and a logical\n     <i>delivery destination</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>\n         <p>To update an existing delivery configuration, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html\">UpdateDeliveryConfiguration</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeliveryDestination": {
@@ -2581,7 +2584,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the specified log groups. You can list all your log groups or filter the results by prefix.\n      The results are ASCII-sorted by log group name.</p>\n         <p>CloudWatch Logs doesn’t support IAM policies that control access to the <code>DescribeLogGroups</code> action by using the \n      <code>aws:ResourceTag/<i>key-name</i>\n            </code> condition key. Other CloudWatch Logs actions\n      do support the use of the <code>aws:ResourceTag/<i>key-name</i>\n            </code> condition key to control access.\n      For more information about using tags to control access, see \n      <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n    view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
+                "smithy.api#documentation": "<p>Lists the specified log groups. You can list all your log groups or filter the results by prefix.\n      The results are ASCII-sorted by log group name.</p>\n         <p>CloudWatch Logs doesn't support IAM policies that control access to the <code>DescribeLogGroups</code> action by using the \n      <code>aws:ResourceTag/<i>key-name</i>\n            </code> condition key. Other CloudWatch Logs actions\n      do support the use of the <code>aws:ResourceTag/<i>key-name</i>\n            </code> condition key to control access.\n      For more information about using tags to control access, see \n      <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n    view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3383,7 +3386,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 3
+                    "max": 4
                 }
             }
         },
@@ -4690,6 +4693,14 @@
         },
         "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatchlogs#InferredTokenName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.cloudwatchlogs#InheritedProperties": {
             "type": "list",
@@ -7178,6 +7189,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the values found for a dynamic token, and the number of times each value was found.</p>"
                     }
+                },
+                "inferredTokenName": {
+                    "target": "com.amazonaws.cloudwatchlogs#InferredTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name that CloudWatch Logs assigned to this dynamic token to make the pattern more readable. The string part of \n      the <code>inferredTokenName</code> gives you a clearer idea of the content of this token. The number part of \n      the <code>inferredTokenName</code> shows where in the pattern this token appears, compared to other dynamic tokens.\n      CloudWatch Logs assigns the string part of the name based on analyzing the content of the log events that contain it.</p>\n         <p>For example, an inferred token name of <code>IPAddress-3</code> means that the token represents an IP address, and this \n      token is the third dynamic token in the pattern.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8080,7 +8097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the retention of the specified log group. With a retention policy, you can\n      configure the number of days for which to retain log events in the specified log\n      group.</p>\n         <note>\n            <p>CloudWatch Logs doesn’t immediately delete log events when they reach their retention\n        setting. It typically takes up to 72 hours after that before log events are deleted, but in\n        rare situations might take longer.</p>\n            <p>To illustrate, imagine that you change a log group to have a longer retention setting\n        when it contains log events that are past the expiration date, but haven’t been deleted.\n        Those log events will take up to 72 hours to be deleted after the new retention date is\n        reached. To make sure that log data is deleted permanently, keep a log group at its lower\n        retention setting until 72 hours after the previous retention period ends. Alternatively,\n        wait to change the retention setting until you confirm that the earlier log events are\n        deleted. </p>\n            <p>When log events reach their retention setting they are marked for deletion. After\n        they are marked for deletion, they do not add to your archival storage costs anymore, even if \n        they are not actually deleted until later. These log events marked for deletion are also not \n        included when you use an API to retrieve the <code>storedBytes</code> value to see how many bytes a log group is storing.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Sets the retention of the specified log group. With a retention policy, you can\n      configure the number of days for which to retain log events in the specified log\n      group.</p>\n         <note>\n            <p>CloudWatch Logs doesn't immediately delete log events when they reach their retention\n        setting. It typically takes up to 72 hours after that before log events are deleted, but in\n        rare situations might take longer.</p>\n            <p>To illustrate, imagine that you change a log group to have a longer retention setting\n        when it contains log events that are past the expiration date, but haven't been deleted.\n        Those log events will take up to 72 hours to be deleted after the new retention date is\n        reached. To make sure that log data is deleted permanently, keep a log group at its lower\n        retention setting until 72 hours after the previous retention period ends. Alternatively,\n        wait to change the retention setting until you confirm that the earlier log events are\n        deleted. </p>\n            <p>When log events reach their retention setting they are marked for deletion. After\n        they are marked for deletion, they do not add to your archival storage costs anymore, even if \n        they are not actually deleted until later. These log events marked for deletion are also not \n        included when you use an API to retrieve the <code>storedBytes</code> value to see how many bytes a log group is storing.</p>\n         </note>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutRetentionPolicyRequest": {
@@ -9152,7 +9169,7 @@
                 "limit": {
                     "target": "com.amazonaws.cloudwatchlogs#EventsLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of log events to return in the query. If the query string uses the <code>fields</code> command,\n    only the specified fields and their values are returned. The default is 1000.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of log events to return in the query. If the query string uses the <code>fields</code> command,\n    only the specified fields and their values are returned. The default is 10,000.</p>"
                     }
                 }
             },
@@ -9451,7 +9468,7 @@
                 "smithy.api#deprecated": {
                     "message": "Please use the generic tagging API TagResource"
                 },
-                "smithy.api#documentation": "<important>\n            <p>The TagLogGroup operation is on the path to deprecation. We recommend that you use \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html\">TagResource</a> instead.</p>\n         </important>\n         <p>Adds or updates the specified tags for the specified log group.</p>\n         <p>To list the tags for a log group, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>.\n      To remove tags, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging\">Tag Log Groups in Amazon CloudWatch Logs</a>\n      in the <i>Amazon CloudWatch Logs User Guide</i>.</p>\n         <p>CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to \n      log groups using the <code>aws:Resource/<i>key-name</i>\n            </code> or <code>aws:TagKeys</code> condition keys. \n      For more information about using tags to control access, see \n      <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
+                "smithy.api#documentation": "<important>\n            <p>The TagLogGroup operation is on the path to deprecation. We recommend that you use \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html\">TagResource</a> instead.</p>\n         </important>\n         <p>Adds or updates the specified tags for the specified log group.</p>\n         <p>To list the tags for a log group, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>.\n      To remove tags, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging\">Tag Log Groups in Amazon CloudWatch Logs</a>\n      in the <i>Amazon CloudWatch Logs User Guide</i>.</p>\n         <p>CloudWatch Logs doesn't support IAM policies that prevent users from assigning specified tags to \n      log groups using the <code>aws:Resource/<i>key-name</i>\n            </code> or <code>aws:TagKeys</code> condition keys. \n      For more information about using tags to control access, see \n      <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#TagLogGroupRequest": {
@@ -9726,7 +9743,7 @@
                 "smithy.api#deprecated": {
                     "message": "Please use the generic tagging API UntagResource"
                 },
-                "smithy.api#documentation": "<important>\n            <p>The UntagLogGroup operation is on the path to deprecation. We recommend that you use \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html\">UntagResource</a> instead.</p>\n         </important>\n         <p>Removes the specified tags from the specified log group.</p>\n         <p>To list the tags for a log group, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>.\n      To add tags, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <p>CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to \n      log groups using the <code>aws:Resource/<i>key-name</i>\n            </code> or <code>aws:TagKeys</code> condition keys. \n     </p>"
+                "smithy.api#documentation": "<important>\n            <p>The UntagLogGroup operation is on the path to deprecation. We recommend that you use \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html\">UntagResource</a> instead.</p>\n         </important>\n         <p>Removes the specified tags from the specified log group.</p>\n         <p>To list the tags for a log group, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>.\n      To add tags, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <p>CloudWatch Logs doesn't support IAM policies that prevent users from assigning specified tags to \n      log groups using the <code>aws:Resource/<i>key-name</i>\n            </code> or <code>aws:TagKeys</code> condition keys. \n     </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#UntagLogGroupRequest": {
@@ -9822,7 +9839,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to <i>suppress</i> anomaly detection for a specified anomaly or pattern. If you suppress \n       an anomaly, CloudWatch Logs won’t report new occurrences of that anomaly and won't\n       update that anomaly \n       with new data. If you suppress a pattern, CloudWatch Logs won’t report any anomalies related to that pattern.</p>\n         <p>You must specify either <code>anomalyId</code> or <code>patternId</code>, but you can't specify both parameters in the \n     same operation.</p>\n         <p>If you have previously used this operation to suppress detection of a pattern or anomaly, you can use it again to cause\n       CloudWatch Logs to end the suppression. To do this, use this operation and specify the anomaly or pattern to \n     stop suppressing, and omit the <code>suppressionType</code> and <code>suppressionPeriod</code> parameters.</p>"
+                "smithy.api#documentation": "<p>Use this operation to <i>suppress</i> anomaly detection for a specified anomaly or pattern. If you suppress \n       an anomaly, CloudWatch Logs won't report new occurrences of that anomaly and won't\n       update that anomaly \n       with new data. If you suppress a pattern, CloudWatch Logs won't report any anomalies related to that pattern.</p>\n         <p>You must specify either <code>anomalyId</code> or <code>patternId</code>, but you can't specify both parameters in the \n     same operation.</p>\n         <p>If you have previously used this operation to suppress detection of a pattern or anomaly, you can use it again to cause\n       CloudWatch Logs to end the suppression. To do this, use this operation and specify the anomaly or pattern to \n     stop suppressing, and omit the <code>suppressionType</code> and <code>suppressionPeriod</code> parameters.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#UpdateAnomalyRequest": {
@@ -9857,6 +9874,12 @@
                     "target": "com.amazonaws.cloudwatchlogs#SuppressionPeriod",
                     "traits": {
                         "smithy.api#documentation": "<p>If you are temporarily suppressing an anomaly or pattern, use this structure to specify\n      how long the suppression is to last.</p>"
+                    }
+                },
+                "baseline": {
+                    "target": "com.amazonaws.cloudwatchlogs#Baseline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this to <code>true</code> to prevent CloudWatch Logs from displaying this behavior as an anomaly in the future. The behavior is then treated as \n      baseline behavior. However, if similar but \n    more severe occurrences of this behavior occur in the future, those will still be reported as anomalies. </p>\n         <p>The default is <code>false</code>\n         </p>"
                     }
                 }
             },
@@ -9909,7 +9932,7 @@
                 "recordFields": {
                     "target": "com.amazonaws.cloudwatchlogs#RecordFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of record fields to be delivered to the destination, in order. \n      If the delivery’s log source has mandatory fields, they must be included in this list.</p>"
+                        "smithy.api#documentation": "<p>The list of record fields to be delivered to the destination, in order. \n      If the delivery's log source has mandatory fields, they must be included in this list.</p>"
                     }
                 },
                 "fieldDelimiter": {
@@ -9921,7 +9944,7 @@
                 "s3DeliveryConfiguration": {
                     "target": "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>This structure contains parameters that are valid only when the delivery’s delivery destination is an S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>This structure contains parameters that are valid only when the delivery's delivery destination is an S3 bucket.</p>"
                     }
                 }
             },

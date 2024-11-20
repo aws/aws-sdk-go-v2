@@ -53,6 +53,10 @@ type ModifyGlobalReplicationGroupInput struct {
 	// be compatible with the major engine version used by the Global datastore.
 	CacheParameterGroupName *string
 
+	// Modifies the engine listed in a global replication group message. The options
+	// are redis, memcached or valkey.
+	Engine *string
+
 	// The upgraded version of the cache engine to be run on the clusters in the
 	// Global datastore.
 	EngineVersion *string

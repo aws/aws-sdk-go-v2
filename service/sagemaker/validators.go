@@ -70,6 +70,26 @@ func (m *validateOpAssociateTrialComponent) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteClusterNodes struct {
+}
+
+func (*validateOpBatchDeleteClusterNodes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteClusterNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteClusterNodesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteClusterNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDescribeModelPackage struct {
 }
 
@@ -5442,6 +5462,10 @@ func addOpAssociateTrialComponentValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAssociateTrialComponent{}, middleware.After)
 }
 
+func addOpBatchDeleteClusterNodesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteClusterNodes{}, middleware.After)
+}
+
 func addOpBatchDescribeModelPackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDescribeModelPackage{}, middleware.After)
 }
@@ -10176,6 +10200,24 @@ func validateModelInput(v *types.ModelInput) error {
 	}
 }
 
+func validateModelLifeCycle(v *types.ModelLifeCycle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelLifeCycle"}
+	if v.Stage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
+	}
+	if v.StageStatus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelMetadataFilter(v *types.ModelMetadataFilter) error {
 	if v == nil {
 		return nil
@@ -12919,6 +12961,24 @@ func validateOpAssociateTrialComponentInput(v *AssociateTrialComponentInput) err
 	}
 }
 
+func validateOpBatchDeleteClusterNodesInput(v *BatchDeleteClusterNodesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteClusterNodesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodeIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDescribeModelPackageInput(v *BatchDescribeModelPackageInput) error {
 	if v == nil {
 		return nil
@@ -14379,6 +14439,11 @@ func validateOpCreateModelPackageInput(v *CreateModelPackageInput) error {
 	if v.SecurityConfig != nil {
 		if err := validateModelPackageSecurityConfig(v.SecurityConfig); err != nil {
 			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelLifeCycle != nil {
+		if err := validateModelLifeCycle(v.ModelLifeCycle); err != nil {
+			invalidParams.AddNested("ModelLifeCycle", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -18274,6 +18339,11 @@ func validateOpUpdateModelPackageInput(v *UpdateModelPackageInput) error {
 	if v.InferenceSpecification != nil {
 		if err := validateInferenceSpecification(v.InferenceSpecification); err != nil {
 			invalidParams.AddNested("InferenceSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelLifeCycle != nil {
+		if err := validateModelLifeCycle(v.ModelLifeCycle); err != nil {
+			invalidParams.AddNested("ModelLifeCycle", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

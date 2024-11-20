@@ -20,6 +20,8 @@ import (
 // before authorization. When a task definition revision is not specified,
 // authorization will occur using the latest revision of a task definition.
 //
+// Amazon Elastic Inference (EI) is no longer available to customers.
+//
 // In addition to maintaining the desired count of tasks in your service, you can
 // optionally run your service behind one or more load balancers. The load
 // balancers distribute traffic across the tasks that are associated with the
@@ -105,14 +107,6 @@ import (
 // For information about task placement and task placement strategies, see [Amazon ECS task placement]in the
 // Amazon Elastic Container Service Developer Guide
 //
-// Starting April 15, 2023, Amazon Web Services will not onboard new customers to
-// Amazon Elastic Inference (EI), and will help current customers migrate their
-// workloads to options that offer better price and performance. After April 15,
-// 2023, new customers will not be able to launch instances with Amazon EI
-// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
-// who have used Amazon EI at least once during the past 30-day period are
-// considered current customers and will be able to continue using the service.
-//
 // [Amazon ECS task placement]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
 // [Service scheduler concepts]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
 // [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
@@ -144,6 +138,14 @@ type CreateServiceInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	// Indicates whether to use Availability Zone rebalancing for the service.
+	//
+	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
+	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing
 
 	// The capacity provider strategy to use for the service.
 	//
@@ -195,23 +197,16 @@ type CreateServiceInput struct {
 	EnableExecuteCommand bool
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
-	// unhealthy Elastic Load Balancing target health checks after a task has first
-	// started. This is only used when your service is configured to use a load
-	// balancer. If your service has a load balancer defined and you don't specify a
-	// health check grace period value, the default value of 0 is used.
+	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
+	// a task has first started. If you don't specify a health check grace period
+	// value, the default value of 0 is used. If you don't use any of the health
+	// checks, then healthCheckGracePeriodSeconds is unused.
 	//
-	// If you do not use an Elastic Load Balancing, we recommend that you use the
-	// startPeriod in the task definition health check parameters. For more
-	// information, see [Health check].
-	//
-	// If your service's tasks take a while to start and respond to Elastic Load
-	// Balancing health checks, you can specify a health check grace period of up to
-	// 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service
-	// scheduler ignores health check status. This grace period can prevent the service
-	// scheduler from marking tasks as unhealthy and stopping them before they have
-	// time to come up.
-	//
-	// [Health check]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
+	// If your service's tasks take a while to start and respond to health checks, you
+	// can specify a health check grace period of up to 2,147,483,647 seconds (about 69
+	// years). During that time, the Amazon ECS service scheduler ignores health check
+	// status. This grace period can prevent the service scheduler from marking tasks
+	// as unhealthy and stopping them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int32
 
 	// The infrastructure that you run your service on. For more information, see [Amazon ECS launch types] in
@@ -441,6 +436,9 @@ type CreateServiceInput struct {
 	// that is configured at launch time. Currently, the only supported volume type is
 	// an Amazon EBS volume.
 	VolumeConfigurations []types.ServiceVolumeConfiguration
+
+	// The VPC Lattice configuration for the service being created.
+	VpcLatticeConfigurations []types.VpcLatticeConfiguration
 
 	noSmithyDocumentSerde
 }

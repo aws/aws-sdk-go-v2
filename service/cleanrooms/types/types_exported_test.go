@@ -73,6 +73,24 @@ func ExampleAnalysisSource_outputUsage() {
 
 var _ *string
 
+func ExampleComputeConfiguration_outputUsage() {
+	var union types.ComputeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ComputeConfigurationMemberWorker:
+		_ = v.Value // Value is types.WorkerComputeConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WorkerComputeConfiguration
+
 func ExampleConfigurationDetails_outputUsage() {
 	var union types.ConfigurationDetails
 	// type switches can be used to check the union value

@@ -79,11 +79,10 @@ type ModifyDBClusterInput struct {
 	//   cluster's current version.
 	AllowMajorVersionUpgrade *bool
 
-	// Specifies whether the modifications in this request and any pending
-	// modifications are asynchronously applied as soon as possible, regardless of the
-	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is
-	// disabled, changes to the DB cluster are applied during the next maintenance
-	// window.
+	// Specifies whether the modifications in this request are asynchronously applied
+	// as soon as possible, regardless of the PreferredMaintenanceWindow setting for
+	// the DB cluster. If this parameter is disabled, changes to the DB cluster are
+	// applied during the next maintenance window.
 	//
 	// Most modifications can be applied immediately or during the next scheduled
 	// maintenance window. Some modifications, such as turning on deletion protection
@@ -267,17 +266,22 @@ type ModifyDBClusterInput struct {
 	// Management (IAM) accounts to database accounts. By default, mapping isn't
 	// enabled.
 	//
-	// For more information, see [IAM Database Authentication] in the Amazon Aurora User Guide.
+	// For more information, see [IAM Database Authentication] in the Amazon Aurora User Guide or [IAM database authentication for MariaDB, MySQL, and PostgreSQL] in the Amazon
+	// RDS User Guide.
 	//
-	// Valid for Cluster Type: Aurora DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// [IAM Database Authentication]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+	// [IAM database authentication for MariaDB, MySQL, and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
 	// Specifies whether to enable Aurora Limitless Database. You must enable Aurora
 	// Limitless Database to create a DB shard group.
 	//
 	// Valid for: Aurora DB clusters only
+	//
+	// This setting is no longer used. Instead use the ClusterScalabilityType setting
+	// when you create your Aurora Limitless Database DB cluster.
 	EnableLimitlessDatabase *bool
 
 	// Specifies whether read replicas can forward write operations to the writer DB
@@ -291,7 +295,7 @@ type ModifyDBClusterInput struct {
 	//
 	// For more information, see [Using Amazon Performance Insights] in the Amazon RDS User Guide.
 	//
-	// Valid for Cluster Type: Multi-AZ DB clusters only
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool

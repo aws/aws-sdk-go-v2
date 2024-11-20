@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis OSS engine version 6.0 onwards: Deletes a user group. The user group
-// must first be disassociated from the replication group before it can be deleted.
-// For more information, see [Using Role Based Access Control (RBAC)].
+// For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Deletes a user
+// group. The user group must first be disassociated from the replication group
+// before it can be deleted. For more information, see [Using Role Based Access Control (RBAC)].
 //
 // [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
 func (c *Client) DeleteUserGroup(ctx context.Context, params *DeleteUserGroupInput, optFns ...func(*Options)) (*DeleteUserGroupOutput, error) {
@@ -59,7 +59,7 @@ type DeleteUserGroupOutput struct {
 	ReplicationGroups []string
 
 	// Indicates which serverless caches the specified user group is associated with.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCaches []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",

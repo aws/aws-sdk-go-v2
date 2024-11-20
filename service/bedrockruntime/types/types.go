@@ -994,6 +994,28 @@ type PayloadPart struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a map of variables in a prompt from Prompt management to an object
+// containing the values to fill in for them when running model invocation. For
+// more information, see [How Prompt management works].
+//
+// The following types satisfy this interface:
+//
+//	PromptVariableValuesMemberText
+//
+// [How Prompt management works]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-how.html
+type PromptVariableValues interface {
+	isPromptVariableValues()
+}
+
+// The text value that the variable maps to.
+type PromptVariableValuesMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*PromptVariableValuesMemberText) isPromptVariableValues() {}
+
 // Definition of content in the response stream.
 //
 // The following types satisfy this interface:
@@ -1345,6 +1367,7 @@ func (*UnknownUnionMember) isDocumentSource()                {}
 func (*UnknownUnionMember) isGuardrailContentBlock()         {}
 func (*UnknownUnionMember) isGuardrailConverseContentBlock() {}
 func (*UnknownUnionMember) isImageSource()                   {}
+func (*UnknownUnionMember) isPromptVariableValues()          {}
 func (*UnknownUnionMember) isResponseStream()                {}
 func (*UnknownUnionMember) isSystemContentBlock()            {}
 func (*UnknownUnionMember) isTool()                          {}

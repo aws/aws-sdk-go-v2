@@ -88,6 +88,17 @@ type Canary struct {
 	// The name of the canary.
 	Name *string
 
+	// Specifies whether to also delete the Lambda functions and layers used by this
+	// canary when the canary is deleted. If it is AUTOMATIC , the Lambda functions and
+	// layers will be deleted when the canary is deleted.
+	//
+	// If the value of this parameter is OFF , then the value of the DeleteLambda
+	// parameter of the [DeleteCanary]operation determines whether the Lambda functions and layers
+	// will be deleted.
+	//
+	// [DeleteCanary]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
+	ProvisionedResourceCleanup ProvisionedResourceCleanupSetting
+
 	// A structure that contains information about a canary run.
 	RunConfig *CanaryRunConfigOutput
 

@@ -98,6 +98,12 @@ type RejectSubscriptionRequestOutput struct {
 	// The decision comment of the rejected subscription request.
 	DecisionComment *string
 
+	// The ID of the existing subscription.
+	ExistingSubscriptionId *string
+
+	// Metadata forms included in the subscription request.
+	MetadataForms []types.FormOutput
+
 	// The identifier of the subscription request reviewer.
 	ReviewerId *string
 

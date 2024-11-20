@@ -892,6 +892,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteReplicationConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.DeletionMode) > 0 {
+		encoder.SetQuery("deletionMode").String(string(v.DeletionMode))
+	}
+
 	if v.SourceFileSystemId == nil || len(*v.SourceFileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SourceFileSystemId must not be empty")}
 	}
@@ -2756,6 +2760,11 @@ func awsRestjson1_serializeDocumentDestinationToCreate(v *types.DestinationToCre
 	if v.Region != nil {
 		ok := object.Key("Region")
 		ok.String(*v.Region)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
 	}
 
 	return nil

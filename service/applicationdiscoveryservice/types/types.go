@@ -710,6 +710,9 @@ type ImportTask struct {
 	// attempt importing it again.
 	ErrorsAndFailedEntriesZip *string
 
+	// The type of file detected by the import task.
+	FileClassification FileClassification
+
 	// The time that the import task request finished, presented in the Unix time
 	// stamp format.
 	ImportCompletionTime *time.Time

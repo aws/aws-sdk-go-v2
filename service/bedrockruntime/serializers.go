@@ -249,6 +249,13 @@ func awsRestjson1_serializeOpDocumentConverseInput(v *ConverseInput, value smith
 		}
 	}
 
+	if v.PromptVariables != nil {
+		ok := object.Key("promptVariables")
+		if err := awsRestjson1_serializeDocumentPromptVariableMap(v.PromptVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.System != nil {
 		ok := object.Key("system")
 		if err := awsRestjson1_serializeDocumentSystemContentBlocks(v.System, ok); err != nil {
@@ -387,6 +394,13 @@ func awsRestjson1_serializeOpDocumentConverseStreamInput(v *ConverseStreamInput,
 		}
 	}
 
+	if v.PromptVariables != nil {
+		ok := object.Key("promptVariables")
+		if err := awsRestjson1_serializeDocumentPromptVariableMap(v.PromptVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.System != nil {
 		ok := object.Key("system")
 		if err := awsRestjson1_serializeDocumentSystemContentBlocks(v.System, ok); err != nil {
@@ -475,22 +489,22 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.GuardrailIdentifier != nil && len(*v.GuardrailIdentifier) > 0 {
+	if v.GuardrailIdentifier != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailidentifier"
 		encoder.SetHeader(locationName).String(*v.GuardrailIdentifier)
 	}
 
-	if v.GuardrailVersion != nil && len(*v.GuardrailVersion) > 0 {
+	if v.GuardrailVersion != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailversion"
 		encoder.SetHeader(locationName).String(*v.GuardrailVersion)
 	}
@@ -583,22 +597,22 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "X-Amzn-Bedrock-Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.GuardrailIdentifier != nil && len(*v.GuardrailIdentifier) > 0 {
+	if v.GuardrailIdentifier != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailidentifier"
 		encoder.SetHeader(locationName).String(*v.GuardrailIdentifier)
 	}
 
-	if v.GuardrailVersion != nil && len(*v.GuardrailVersion) > 0 {
+	if v.GuardrailVersion != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailversion"
 		encoder.SetHeader(locationName).String(*v.GuardrailVersion)
 	}
@@ -1037,6 +1051,38 @@ func awsRestjson1_serializeDocumentNonEmptyStringList(v []string, value smithyjs
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptVariableMap(v map[string]types.PromptVariableValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentPromptVariableValues(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptVariableValues(v types.PromptVariableValues, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PromptVariableValuesMemberText:
+		av := object.Key("text")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

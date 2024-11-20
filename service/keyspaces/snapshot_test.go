@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteKeyspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKeyspace(context.Background(), nil, func(o *Options) {
@@ -103,6 +115,18 @@ func TestCheckSnapshot_DeleteTable(t *testing.T) {
 	_, err := svc.DeleteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -146,6 +170,18 @@ func TestCheckSnapshot_GetTableAutoScalingSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListKeyspaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListKeyspaces(context.Background(), nil, func(o *Options) {
@@ -175,6 +211,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTypes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -218,6 +266,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateKeyspace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKeyspace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateKeyspace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTable(context.Background(), nil, func(o *Options) {
@@ -253,6 +313,18 @@ func TestUpdateSnapshot_CreateTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteKeyspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKeyspace(context.Background(), nil, func(o *Options) {
@@ -270,6 +342,18 @@ func TestUpdateSnapshot_DeleteTable(t *testing.T) {
 	_, err := svc.DeleteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -313,6 +397,18 @@ func TestUpdateSnapshot_GetTableAutoScalingSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListKeyspaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListKeyspaces(context.Background(), nil, func(o *Options) {
@@ -349,6 +445,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RestoreTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RestoreTable(context.Background(), nil, func(o *Options) {
@@ -378,6 +486,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateKeyspace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKeyspace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateKeyspace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

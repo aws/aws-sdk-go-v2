@@ -8,6 +8,8 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchAddRole.go",
+        "api_op_BatchRemoveRole.go",
         "api_op_CreateSpace.go",
         "api_op_DeleteSpace.go",
         "api_op_DeregisterAdmin.go",

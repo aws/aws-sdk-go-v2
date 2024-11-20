@@ -110,6 +110,18 @@ func TestCheckSnapshot_GenerateMac(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateMacEmvPinChange(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateMacEmvPinChange(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateMacEmvPinChange")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GeneratePinData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GeneratePinData(context.Background(), nil, func(o *Options) {
@@ -234,6 +246,18 @@ func TestUpdateSnapshot_GenerateMac(t *testing.T) {
 	_, err := svc.GenerateMac(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GenerateMac")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GenerateMacEmvPinChange(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateMacEmvPinChange(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateMacEmvPinChange")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

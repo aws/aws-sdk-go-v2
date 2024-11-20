@@ -106,6 +106,11 @@ func awsRestjson1_serializeOpDocumentCreateMediaCapturePipelineInput(v *CreateMe
 		ok.String(*v.SinkArn)
 	}
 
+	if v.SinkIamRoleArn != nil {
+		ok := object.Key("SinkIamRoleArn")
+		ok.String(*v.SinkIamRoleArn)
+	}
+
 	if len(v.SinkType) > 0 {
 		ok := object.Key("SinkType")
 		ok.String(string(v.SinkType))
@@ -119,6 +124,13 @@ func awsRestjson1_serializeOpDocumentCreateMediaCapturePipelineInput(v *CreateMe
 	if len(v.SourceType) > 0 {
 		ok := object.Key("SourceType")
 		ok.String(string(v.SourceType))
+	}
+
+	if v.SseAwsKeyManagementParams != nil {
+		ok := object.Key("SseAwsKeyManagementParams")
+		if err := awsRestjson1_serializeDocumentSseAwsKeyManagementParams(v.SseAwsKeyManagementParams, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -4062,6 +4074,23 @@ func awsRestjson1_serializeDocumentSqsQueueSinkConfiguration(v *types.SqsQueueSi
 	if v.InsightsTarget != nil {
 		ok := object.Key("InsightsTarget")
 		ok.String(*v.InsightsTarget)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSseAwsKeyManagementParams(v *types.SseAwsKeyManagementParams, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsKmsEncryptionContext != nil {
+		ok := object.Key("AwsKmsEncryptionContext")
+		ok.String(*v.AwsKmsEncryptionContext)
+	}
+
+	if v.AwsKmsKeyId != nil {
+		ok := object.Key("AwsKmsKeyId")
+		ok.String(*v.AwsKmsKeyId)
 	}
 
 	return nil

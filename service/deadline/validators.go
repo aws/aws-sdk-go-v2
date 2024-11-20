@@ -2386,6 +2386,30 @@ func addOpUpdateWorkerScheduleValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateWorkerSchedule{}, middleware.After)
 }
 
+func validateAcceleratorCapabilities(v *types.AcceleratorCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceleratorCapabilities"}
+	if v.Selections == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Selections"))
+	} else if v.Selections != nil {
+		if err := validateAcceleratorSelections(v.Selections); err != nil {
+			invalidParams.AddNested("Selections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Count != nil {
+		if err := validateAcceleratorCountRange(v.Count); err != nil {
+			invalidParams.AddNested("Count", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAcceleratorCountRange(v *types.AcceleratorCountRange) error {
 	if v == nil {
 		return nil
@@ -2393,6 +2417,38 @@ func validateAcceleratorCountRange(v *types.AcceleratorCountRange) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AcceleratorCountRange"}
 	if v.Min == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Min"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcceleratorSelection(v *types.AcceleratorSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceleratorSelection"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcceleratorSelections(v []types.AcceleratorSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceleratorSelections"}
+	for i := range v {
+		if err := validateAcceleratorSelection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3243,6 +3299,11 @@ func validateServiceManagedEc2InstanceCapabilities(v *types.ServiceManagedEc2Ins
 	}
 	if len(v.CpuArchitectureType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CpuArchitectureType"))
+	}
+	if v.AcceleratorCapabilities != nil {
+		if err := validateAcceleratorCapabilities(v.AcceleratorCapabilities); err != nil {
+			invalidParams.AddNested("AcceleratorCapabilities", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.CustomAmounts != nil {
 		if err := validateCustomFleetAmountCapabilities(v.CustomAmounts); err != nil {

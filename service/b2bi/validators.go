@@ -190,6 +190,26 @@ func (m *validateOpDeleteTransformer) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateMapping struct {
+}
+
+func (*validateOpGenerateMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCapability struct {
 }
 
@@ -544,6 +564,10 @@ func addOpDeleteProfileValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteTransformerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTransformer{}, middleware.After)
+}
+
+func addOpGenerateMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateMapping{}, middleware.After)
 }
 
 func addOpGetCapabilityValidationMiddleware(stack *middleware.Stack) error {
@@ -982,6 +1006,27 @@ func validateOpDeleteTransformerInput(v *DeleteTransformerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTransformerInput"}
 	if v.TransformerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransformerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateMappingInput(v *GenerateMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateMappingInput"}
+	if v.InputFileContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputFileContent"))
+	}
+	if v.OutputFileContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFileContent"))
+	}
+	if len(v.MappingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MappingType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

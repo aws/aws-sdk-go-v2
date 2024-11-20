@@ -587,6 +587,42 @@ var _ *types.NotInExpression
 var _ *types.InExpression
 var _ *types.EqualToExpression
 
+func ExampleRuleDetail_outputUsage() {
+	var union types.RuleDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RuleDetailMemberMetadataFormEnforcementDetail:
+		_ = v.Value // Value is types.MetadataFormEnforcementDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MetadataFormEnforcementDetail
+
+func ExampleRuleTarget_outputUsage() {
+	var union types.RuleTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RuleTargetMemberDomainUnitTarget:
+		_ = v.Value // Value is types.DomainUnitTarget
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DomainUnitTarget
+
 func ExampleSearchInventoryResultItem_outputUsage() {
 	var union types.SearchInventoryResultItem
 	// type switches can be used to check the union value

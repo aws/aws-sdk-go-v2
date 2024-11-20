@@ -33,7 +33,7 @@ type ListLogPatternSetsInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The AWS account ID for the resource group owner.
+	// The Amazon Web Services account ID for the resource group owner.
 	AccountId *string
 
 	// The maximum number of results to return in a single call. To retrieve the
@@ -48,7 +48,7 @@ type ListLogPatternSetsInput struct {
 
 type ListLogPatternSetsOutput struct {
 
-	// The AWS account ID for the resource group owner.
+	// The Amazon Web Services account ID for the resource group owner.
 	AccountId *string
 
 	// The list of log pattern sets.

@@ -228,6 +228,7 @@ type EventNotificationResourceType string
 
 // Enum values for EventNotificationResourceType
 const (
+	EventNotificationResourceTypeFuotaTask       EventNotificationResourceType = "FuotaTask"
 	EventNotificationResourceTypeSidewalkAccount EventNotificationResourceType = "SidewalkAccount"
 	EventNotificationResourceTypeWirelessDevice  EventNotificationResourceType = "WirelessDevice"
 	EventNotificationResourceTypeWirelessGateway EventNotificationResourceType = "WirelessGateway"
@@ -240,6 +241,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EventNotificationResourceType) Values() []EventNotificationResourceType {
 	return []EventNotificationResourceType{
+		"FuotaTask",
 		"SidewalkAccount",
 		"WirelessDevice",
 		"WirelessGateway",
@@ -324,6 +326,23 @@ func (FuotaDeviceStatus) Values() []FuotaDeviceStatus {
 	}
 }
 
+type FuotaTaskEvent string
+
+// Enum values for FuotaTaskEvent
+const (
+	FuotaTaskEventFuota FuotaTaskEvent = "Fuota"
+)
+
+// Values returns all known values for FuotaTaskEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FuotaTaskEvent) Values() []FuotaTaskEvent {
+	return []FuotaTaskEvent{
+		"Fuota",
+	}
+}
+
 type FuotaTaskStatus string
 
 // Enum values for FuotaTaskStatus
@@ -349,12 +368,30 @@ func (FuotaTaskStatus) Values() []FuotaTaskStatus {
 	}
 }
 
+type FuotaTaskType string
+
+// Enum values for FuotaTaskType
+const (
+	FuotaTaskTypeLoRaWAN FuotaTaskType = "LoRaWAN"
+)
+
+// Values returns all known values for FuotaTaskType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FuotaTaskType) Values() []FuotaTaskType {
+	return []FuotaTaskType{
+		"LoRaWAN",
+	}
+}
+
 type IdentifierType string
 
 // Enum values for IdentifierType
 const (
 	IdentifierTypePartnerAccountId  IdentifierType = "PartnerAccountId"
 	IdentifierTypeDevEui            IdentifierType = "DevEui"
+	IdentifierTypeFuotaTaskId       IdentifierType = "FuotaTaskId"
 	IdentifierTypeGatewayEui        IdentifierType = "GatewayEui"
 	IdentifierTypeWirelessDeviceId  IdentifierType = "WirelessDeviceId"
 	IdentifierTypeWirelessGatewayId IdentifierType = "WirelessGatewayId"
@@ -368,6 +405,7 @@ func (IdentifierType) Values() []IdentifierType {
 	return []IdentifierType{
 		"PartnerAccountId",
 		"DevEui",
+		"FuotaTaskId",
 		"GatewayEui",
 		"WirelessDeviceId",
 		"WirelessGatewayId",

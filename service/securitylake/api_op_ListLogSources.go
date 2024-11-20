@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the log sources in the current Amazon Web Services Region.
+// Retrieves the log sources.
 func (c *Client) ListLogSources(ctx context.Context, params *ListLogSourcesInput, optFns ...func(*Options)) (*ListLogSourcesOutput, error) {
 	if params == nil {
 		params = &ListLogSourcesInput{}

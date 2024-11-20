@@ -57,6 +57,10 @@ type DeleteConfigurationSetOutput struct {
 	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
+	// True if the configuration set has message feedback enabled. By default this is
+	// set to false.
+	DefaultMessageFeedbackEnabled *bool
+
 	// The default message type of the configuration set that was deleted.
 	DefaultMessageType types.MessageType
 

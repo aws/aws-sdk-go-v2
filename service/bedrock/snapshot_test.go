@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateGuardrailVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateInferenceProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInferenceProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInferenceProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateModelCopyJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModelCopyJob(context.Background(), nil, func(o *Options) {
@@ -199,6 +211,18 @@ func TestCheckSnapshot_DeleteImportedModel(t *testing.T) {
 	_, err := svc.DeleteImportedModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteImportedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteInferenceProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInferenceProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteInferenceProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -661,6 +685,18 @@ func TestUpdateSnapshot_CreateGuardrailVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateInferenceProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInferenceProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInferenceProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateModelCopyJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModelCopyJob(context.Background(), nil, func(o *Options) {
@@ -750,6 +786,18 @@ func TestUpdateSnapshot_DeleteImportedModel(t *testing.T) {
 	_, err := svc.DeleteImportedModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteImportedModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteInferenceProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInferenceProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteInferenceProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

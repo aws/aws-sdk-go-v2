@@ -89,7 +89,7 @@ type AccessPoint struct {
 	// exists.
 	//
 	// This element is empty if this access point is an Amazon S3 on Outposts access
-	// point that is used by other Amazon Web Servicesservices.
+	// point that is used by other Amazon Web Services services.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -1767,7 +1767,7 @@ type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
 	// in this account. Setting this element to TRUE restricts access to buckets with
-	// public policies to only Amazon Web Servicesservice principals and authorized
+	// public policies to only Amazon Web Services service principals and authorized
 	// users within this account.
 	//
 	// Enabling this setting doesn't affect previously stored bucket policies, except

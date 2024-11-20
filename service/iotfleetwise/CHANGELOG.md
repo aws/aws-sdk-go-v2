@@ -1,3 +1,36 @@
+# v1.21.4 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.3 (2024-11-13)
+
+* No change notes available for this release.
+
+# v1.21.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.21.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2024-10-29)
+
+* **Feature**: Updated BatchCreateVehicle and BatchUpdateVehicle APIs: LimitExceededException has been added and the maximum number of vehicles in a batch has been set to 10 explicitly
+
+# v1.20.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.0 (2024-10-10)
+
+* **Feature**: Refine campaign related API validations
+
+# v1.19.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

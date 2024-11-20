@@ -43,6 +43,11 @@ type GetRuleOutput struct {
 	// The retention rule description.
 	Description *string
 
+	// [Region-level retention rules only] Information about the exclusion tags used
+	// to identify resources that are to be excluded, or ignored, by the retention
+	// rule.
+	ExcludeResourceTags []types.ResourceTag
+
 	// The unique ID of the retention rule.
 	Identifier *string
 
@@ -54,7 +59,7 @@ type GetRuleOutput struct {
 	// delay period.
 	LockEndTime *time.Time
 
-	// The lock state for the retention rule.
+	// [Region-level retention rules only] The lock state for the retention rule.
 	//
 	//   - locked - The retention rule is locked and can't be modified or deleted.
 	//
@@ -70,8 +75,8 @@ type GetRuleOutput struct {
 	//   can never transition back to null .
 	LockState types.LockState
 
-	// Information about the resource tags used to identify resources that are
-	// retained by the retention rule.
+	// [Tag-level retention rules only] Information about the resource tags used to
+	// identify resources that are retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	// The resource type retained by the retention rule.

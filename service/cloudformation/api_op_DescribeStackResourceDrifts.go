@@ -19,12 +19,12 @@ import (
 // that has been checked for drift. Resources that haven't yet been checked for
 // drift aren't included. Resources that don't currently support drift detection
 // aren't checked, and so not included. For a list of resources that support drift
-// detection, see [Resources that Support Drift Detection].
+// detection, see [Resource type support for imports and drift detection].
 //
 // Use DetectStackResourceDrift to detect drift on individual resources, or DetectStackDrift to detect drift on all
 // supported resources for a given stack.
 //
-// [Resources that Support Drift Detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+// [Resource type support for imports and drift detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
 func (c *Client) DescribeStackResourceDrifts(ctx context.Context, params *DescribeStackResourceDriftsInput, optFns ...func(*Options)) (*DescribeStackResourceDriftsOutput, error) {
 	if params == nil {
 		params = &DescribeStackResourceDriftsInput{}
@@ -84,9 +84,9 @@ type DescribeStackResourceDriftsOutput struct {
 	// that has been checked for drift. Resources that haven't yet been checked for
 	// drift aren't included. Resources that do not currently support drift detection
 	// aren't checked, and so not included. For a list of resources that support drift
-	// detection, see [Resources that Support Drift Detection].
+	// detection, see [Resource type support for imports and drift detection].
 	//
-	// [Resources that Support Drift Detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
+	// [Resource type support for imports and drift detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
 	//
 	// This member is required.
 	StackResourceDrifts []types.StackResourceDrift

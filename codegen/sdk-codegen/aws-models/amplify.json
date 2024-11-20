@@ -2388,7 +2388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a deployment for a manually deployed Amplify app. Manually deployed apps are\n            not connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n                <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8\n            hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
+                "smithy.api#documentation": "<p>Creates a deployment for a manually deployed Amplify app. Manually deployed apps are\n            not connected to a Git repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n                <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8\n            hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/branches/{branchName}/deployments",
@@ -4280,8 +4280,20 @@
                 "jobType": {
                     "target": "com.amazonaws.amplify#JobType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type for the job. If the value is <code>RELEASE</code>, the job was manually\n            released from its source by using the <code>StartJob</code> API. If the value is\n                <code>RETRY</code>, the job was manually retried using the <code>StartJob</code>\n            API. If the value is <code>WEB_HOOK</code>, the job was automatically triggered by\n            webhooks. </p>",
+                        "smithy.api#documentation": "<p> The type for the job. If the value is <code>RELEASE</code>, the job was manually\n            released from its source by using the <code>StartJob</code> API. This value is available only for apps\n            that are connected to a repository.</p>\n         <p>If the value is <code>RETRY</code>, the job was manually retried using the <code>StartJob</code>\n            API. If the value is <code>WEB_HOOK</code>, the job was automatically triggered by\n            webhooks. If the value is <code>MANUAL</code>, the job is for a manually deployed app. Manually deployed apps are not connected to a Git repository.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "sourceUrl": {
+                    "target": "com.amazonaws.amplify#SourceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source URL for the files to deploy. The source URL can be either an HTTP GET URL that is publicly accessible and\n            downloads a single .zip file, or an Amazon S3 bucket and prefix.</p>"
+                    }
+                },
+                "sourceUrlType": {
+                    "target": "com.amazonaws.amplify#SourceUrlType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source specified by the <code>sourceURL</code>.\n            If the value is <code>ZIP</code>, the source is a .zip file.\n            If the value is <code>BUCKET_PREFIX</code>, the source is an Amazon S3 bucket and\n            prefix. If no value is specified, the default is <code>ZIP</code>.</p>"
                     }
                 }
             },
@@ -5279,7 +5291,24 @@
                     "min": 0,
                     "max": 3000
                 },
-                "smithy.api#pattern": "^(?s)"
+                "smithy.api#pattern": "^(s3|https|http)://"
+            }
+        },
+        "com.amazonaws.amplify#SourceUrlType": {
+            "type": "enum",
+            "members": {
+                "ZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZIP"
+                    }
+                },
+                "BUCKET_PREFIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUCKET_PREFIX"
+                    }
+                }
             }
         },
         "com.amazonaws.amplify#StackArn": {
@@ -5363,7 +5392,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a deployment for a manually deployed app. Manually deployed apps are not\n            connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n                <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8\n            hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
+                "smithy.api#documentation": "<p>Starts a deployment for a manually deployed app. Manually deployed apps are not\n            connected to a Git repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n                <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8\n            hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/branches/{branchName}/deployments/start",
@@ -5385,7 +5414,7 @@
                 "branchName": {
                     "target": "com.amazonaws.amplify#BranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the branch to use for the job. </p>",
+                        "smithy.api#documentation": "<p>The name of the branch to use for the deployment job. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5393,13 +5422,19 @@
                 "jobId": {
                     "target": "com.amazonaws.amplify#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job ID for this deployment, generated by the create deployment request. </p>"
+                        "smithy.api#documentation": "<p>The job ID for this deployment that is generated by the <code>CreateDeployment</code> request. </p>"
                     }
                 },
                 "sourceUrl": {
                     "target": "com.amazonaws.amplify#SourceUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source URL for this deployment, used when calling start deployment without create\n            deployment. The source URL can be any HTTP GET URL that is publicly accessible and\n            downloads a single .zip file. </p>"
+                        "smithy.api#documentation": "<p>The source URL for the deployment that is used when calling <code>StartDeployment</code> without <code>CreateDeployment</code>. The source URL can be either an HTTP GET URL that is publicly accessible and\n            downloads a single .zip file, or an Amazon S3 bucket and prefix.</p>"
+                    }
+                },
+                "sourceUrlType": {
+                    "target": "com.amazonaws.amplify#SourceUrlType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of source specified by the <code>sourceURL</code>.\n            If the value is <code>ZIP</code>, the source is a .zip file.\n            If the value is <code>BUCKET_PREFIX</code>, the source is an Amazon S3 bucket and\n            prefix. If no value is specified, the default is <code>ZIP</code>.</p>"
                     }
                 }
             },

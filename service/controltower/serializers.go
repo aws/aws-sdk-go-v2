@@ -1391,6 +1391,11 @@ func awsRestjson1_serializeOpDocumentListEnabledBaselinesInput(v *ListEnabledBas
 		}
 	}
 
+	if v.IncludeChildren {
+		ok := object.Key("includeChildren")
+		ok.Boolean(v.IncludeChildren)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -1828,6 +1833,87 @@ func awsRestjson1_serializeOpDocumentResetEnabledBaselineInput(v *ResetEnabledBa
 	if v.EnabledBaselineIdentifier != nil {
 		ok := object.Key("enabledBaselineIdentifier")
 		ok.String(*v.EnabledBaselineIdentifier)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpResetEnabledControl struct {
+}
+
+func (*awsRestjson1_serializeOpResetEnabledControl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetEnabledControl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetEnabledControlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reset-enabled-control")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentResetEnabledControlInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetEnabledControlInput(v *ResetEnabledControlInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentResetEnabledControlInput(v *ResetEnabledControlInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnabledControlIdentifier != nil {
+		ok := object.Key("enabledControlIdentifier")
+		ok.String(*v.EnabledControlIdentifier)
 	}
 
 	return nil
@@ -2469,6 +2555,13 @@ func awsRestjson1_serializeDocumentEnabledBaselineFilter(v *types.EnabledBaselin
 		}
 	}
 
+	if v.ParentIdentifiers != nil {
+		ok := object.Key("parentIdentifiers")
+		if err := awsRestjson1_serializeDocumentEnabledBaselineParentIdentifiers(v.ParentIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetIdentifiers != nil {
 		ok := object.Key("targetIdentifiers")
 		if err := awsRestjson1_serializeDocumentEnabledBaselineTargetIdentifiers(v.TargetIdentifiers, ok); err != nil {
@@ -2522,6 +2615,17 @@ func awsRestjson1_serializeDocumentEnabledBaselineParameters(v []types.EnabledBa
 		if err := awsRestjson1_serializeDocumentEnabledBaselineParameter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnabledBaselineParentIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

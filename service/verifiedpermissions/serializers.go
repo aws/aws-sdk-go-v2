@@ -16,6 +16,67 @@ import (
 	"path"
 )
 
+type awsAwsjson10_serializeOpBatchGetPolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpBatchGetPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpBatchGetPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("VerifiedPermissions.BatchGetPolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentBatchGetPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpBatchIsAuthorized struct {
 }
 
@@ -1627,11 +1688,19 @@ func awsAwsjson10_serializeDocumentAttributeValue(v types.AttributeValue, value 
 		av := object.Key("boolean")
 		av.Boolean(uv.Value)
 
+	case *types.AttributeValueMemberDecimal:
+		av := object.Key("decimal")
+		av.String(uv.Value)
+
 	case *types.AttributeValueMemberEntityIdentifier:
 		av := object.Key("entityIdentifier")
 		if err := awsAwsjson10_serializeDocumentEntityIdentifier(&uv.Value, av); err != nil {
 			return err
 		}
+
+	case *types.AttributeValueMemberIpaddr:
+		av := object.Key("ipaddr")
+		av.String(uv.Value)
 
 	case *types.AttributeValueMemberLong:
 		av := object.Key("long")
@@ -1667,6 +1736,36 @@ func awsAwsjson10_serializeDocumentAudiences(v []string, value smithyjson.Value)
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchGetPolicyInputItem(v *types.BatchGetPolicyInputItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PolicyId != nil {
+		ok := object.Key("policyId")
+		ok.String(*v.PolicyId)
+	}
+
+	if v.PolicyStoreId != nil {
+		ok := object.Key("policyStoreId")
+		ok.String(*v.PolicyStoreId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBatchGetPolicyInputList(v []types.BatchGetPolicyInputItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBatchGetPolicyInputItem(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -2489,6 +2588,20 @@ func awsAwsjson10_serializeDocumentValidationSettings(v *types.ValidationSetting
 	if len(v.Mode) > 0 {
 		ok := object.Key("mode")
 		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentBatchGetPolicyInput(v *BatchGetPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Requests != nil {
+		ok := object.Key("requests")
+		if err := awsAwsjson10_serializeDocumentBatchGetPolicyInputList(v.Requests, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

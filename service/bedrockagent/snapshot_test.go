@@ -805,6 +805,18 @@ func TestCheckSnapshot_UpdatePrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_ValidateFlowDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateFlowDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ValidateFlowDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateAgentKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateAgentKnowledgeBase(context.Background(), nil, func(o *Options) {
@@ -1542,6 +1554,18 @@ func TestUpdateSnapshot_UpdatePrompt(t *testing.T) {
 	_, err := svc.UpdatePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ValidateFlowDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateFlowDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ValidateFlowDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

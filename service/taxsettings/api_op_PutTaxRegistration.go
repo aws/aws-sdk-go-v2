@@ -46,23 +46,31 @@ import (
 //
 // Malaysia
 //
-//   - If you use this operation to set a tax registration number (TRN) in
-//     Malaysia, only resellers with a valid sales and service tax (SST) number are
-//     required to provide tax registration information.
+//   - The sector valid values are Business and Individual .
 //
-//   - By using this API operation to set a TRN in Malaysia, Amazon Web Services
-//     will regard you as self-declaring that you're an authorized business reseller
-//     registered with the Royal Malaysia Customs Department (RMCD) and have a valid
+//   - RegistrationType valid values are NRIC for individual, and TIN and sales and
+//     service tax (SST) for Business.
+//
+//   - For individual, you can specify the taxInformationNumber in
+//     MalaysiaAdditionalInfo with NRIC type, and a valid MyKad or NRIC number.
+//
+//   - For business, you must specify a businessRegistrationNumber in
+//     MalaysiaAdditionalInfo with a TIN type and tax identification number.
+//
+//   - For business resellers, you must specify a businessRegistrationNumber and
+//     taxInformationNumber in MalaysiaAdditionalInfo with a sales and service tax
+//     (SST) type and a valid SST number.
+//
+//   - For business resellers with service codes, you must specify
+//     businessRegistrationNumber , taxInformationNumber , and distinct
+//     serviceTaxCodes in MalaysiaAdditionalInfo with a SST type and valid sales and
+//     service tax (SST) number. By using this API operation, Amazon Web Services
+//     registers your self-declaration that you’re an authorized business reseller
+//     registered with the Royal Malaysia Customs Department (RMCD), and have a valid
 //     SST number.
 //
 //   - Amazon Web Services reserves the right to seek additional information
 //     and/or take other actions to support your self-declaration as appropriate.
-//
-//   - If you're not a reseller of Amazon Web Services, we don't recommend that
-//     you use this operation to set the TRN in Malaysia.
-//
-//   - Only use this API operation to upload the TRNs for accounts through which
-//     you're reselling Amazon Web Services.
 //
 //   - Amazon Web Services is currently registered under the following service tax
 //     codes. You must include at least one of the service tax codes in the service tax

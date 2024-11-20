@@ -39,7 +39,8 @@ type UpdateDataLakeExceptionSubscriptionInput struct {
 	// This member is required.
 	SubscriptionProtocol *string
 
-	// The time-to-live (TTL) for the exception message to remain.
+	// The time-to-live (TTL) for the exception message to remain. It is the duration
+	// of time until which the exception message remains.
 	ExceptionTimeToLive *int64
 
 	noSmithyDocumentSerde

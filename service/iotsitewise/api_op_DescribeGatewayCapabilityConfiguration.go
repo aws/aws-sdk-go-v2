@@ -72,9 +72,16 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	//
 	//   - IN_SYNC – The gateway is running the capability configuration.
 	//
+	//   - NOT_APPLICABLE – Synchronization is not required for this capability
+	//   configuration. This is most common when integrating partner data sources,
+	//   because the data integration is handled externally by the partner.
+	//
 	//   - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
 	//
 	//   - SYNC_FAILED – The gateway rejected the capability configuration.
+	//
+	//   - UNKNOWN – The synchronization status is currently unknown due to an
+	//   undetermined or temporary error.
 	//
 	// This member is required.
 	CapabilitySyncStatus types.CapabilitySyncStatus

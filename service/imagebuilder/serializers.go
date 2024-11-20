@@ -1145,6 +1145,13 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 		ok.String(*v.Name)
 	}
 
+	if v.Placement != nil {
+		ok := object.Key("placement")
+		if err := awsRestjson1_serializeDocumentPlacement(v.Placement, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTags != nil {
 		ok := object.Key("resourceTags")
 		if err := awsRestjson1_serializeDocumentResourceTagMap(v.ResourceTags, ok); err != nil {
@@ -6595,6 +6602,13 @@ func awsRestjson1_serializeOpDocumentUpdateInfrastructureConfigurationInput(v *U
 		}
 	}
 
+	if v.Placement != nil {
+		ok := object.Key("placement")
+		if err := awsRestjson1_serializeDocumentPlacement(v.Placement, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTags != nil {
 		ok := object.Key("resourceTags")
 		if err := awsRestjson1_serializeDocumentResourceTagMap(v.ResourceTags, ok); err != nil {
@@ -7397,9 +7411,9 @@ func awsRestjson1_serializeDocumentLaunchTemplateConfiguration(v *types.LaunchTe
 		ok.String(*v.LaunchTemplateId)
 	}
 
-	if v.SetDefaultVersion {
+	if v.SetDefaultVersion != nil {
 		ok := object.Key("setDefaultVersion")
-		ok.Boolean(v.SetDefaultVersion)
+		ok.Boolean(*v.SetDefaultVersion)
 	}
 
 	return nil
@@ -7711,6 +7725,33 @@ func awsRestjson1_serializeDocumentOsVersionList(v []string, value smithyjson.Va
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPlacement(v *types.Placement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityZone != nil {
+		ok := object.Key("availabilityZone")
+		ok.String(*v.AvailabilityZone)
+	}
+
+	if v.HostId != nil {
+		ok := object.Key("hostId")
+		ok.String(*v.HostId)
+	}
+
+	if v.HostResourceGroupArn != nil {
+		ok := object.Key("hostResourceGroupArn")
+		ok.String(*v.HostResourceGroupArn)
+	}
+
+	if len(v.Tenancy) > 0 {
+		ok := object.Key("tenancy")
+		ok.String(string(v.Tenancy))
+	}
+
 	return nil
 }
 

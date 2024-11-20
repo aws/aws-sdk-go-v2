@@ -112,6 +112,13 @@ func awsRestjson1_serializeOpDocumentCreateExperimentTemplateInput(v *CreateExpe
 		}
 	}
 
+	if v.ExperimentReportConfiguration != nil {
+		ok := object.Key("experimentReportConfiguration")
+		if err := awsRestjson1_serializeDocumentCreateExperimentTemplateReportConfigurationInput(v.ExperimentReportConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogConfiguration != nil {
 		ok := object.Key("logConfiguration")
 		if err := awsRestjson1_serializeDocumentCreateExperimentTemplateLogConfigurationInput(v.LogConfiguration, ok); err != nil {
@@ -1968,6 +1975,13 @@ func awsRestjson1_serializeOpDocumentUpdateExperimentTemplateInput(v *UpdateExpe
 		}
 	}
 
+	if v.ExperimentReportConfiguration != nil {
+		ok := object.Key("experimentReportConfiguration")
+		if err := awsRestjson1_serializeDocumentUpdateExperimentTemplateReportConfigurationInput(v.ExperimentReportConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogConfiguration != nil {
 		ok := object.Key("logConfiguration")
 		if err := awsRestjson1_serializeDocumentUpdateExperimentTemplateLogConfigurationInput(v.LogConfiguration, ok); err != nil {
@@ -2296,6 +2310,37 @@ func awsRestjson1_serializeDocumentCreateExperimentTemplateLogConfigurationInput
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCreateExperimentTemplateReportConfigurationInput(v *types.CreateExperimentTemplateReportConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSources != nil {
+		ok := object.Key("dataSources")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateReportConfigurationDataSourcesInput(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Outputs != nil {
+		ok := object.Key("outputs")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateReportConfigurationOutputsInput(v.Outputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PostExperimentDuration != nil {
+		ok := object.Key("postExperimentDuration")
+		ok.String(*v.PostExperimentDuration)
+	}
+
+	if v.PreExperimentDuration != nil {
+		ok := object.Key("preExperimentDuration")
+		ok.String(*v.PreExperimentDuration)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCreateExperimentTemplateStopConditionInput(v *types.CreateExperimentTemplateStopConditionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2430,6 +2475,34 @@ func awsRestjson1_serializeDocumentExperimentTemplateCloudWatchLogsLogConfigurat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExperimentTemplateReportConfigurationDataSourcesInput(v *types.ExperimentTemplateReportConfigurationDataSourcesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchDashboards != nil {
+		ok := object.Key("cloudWatchDashboards")
+		if err := awsRestjson1_serializeDocumentReportConfigurationCloudWatchDashboardInputList(v.CloudWatchDashboards, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExperimentTemplateReportConfigurationOutputsInput(v *types.ExperimentTemplateReportConfigurationOutputsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Configuration != nil {
+		ok := object.Key("s3Configuration")
+		if err := awsRestjson1_serializeDocumentReportConfigurationS3OutputInput(v.S3Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExperimentTemplateS3LogConfigurationInput(v *types.ExperimentTemplateS3LogConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2498,6 +2571,48 @@ func awsRestjson1_serializeDocumentExperimentTemplateTargetParameterMap(v map[st
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReportConfigurationCloudWatchDashboardInput(v *types.ReportConfigurationCloudWatchDashboardInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DashboardIdentifier != nil {
+		ok := object.Key("dashboardIdentifier")
+		ok.String(*v.DashboardIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReportConfigurationCloudWatchDashboardInputList(v []types.ReportConfigurationCloudWatchDashboardInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentReportConfigurationCloudWatchDashboardInput(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReportConfigurationS3OutputInput(v *types.ReportConfigurationS3OutputInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("bucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
+	}
+
 	return nil
 }
 
@@ -2620,6 +2735,37 @@ func awsRestjson1_serializeDocumentUpdateExperimentTemplateLogConfigurationInput
 		if err := awsRestjson1_serializeDocumentExperimentTemplateS3LogConfigurationInput(v.S3Configuration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateExperimentTemplateReportConfigurationInput(v *types.UpdateExperimentTemplateReportConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSources != nil {
+		ok := object.Key("dataSources")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateReportConfigurationDataSourcesInput(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Outputs != nil {
+		ok := object.Key("outputs")
+		if err := awsRestjson1_serializeDocumentExperimentTemplateReportConfigurationOutputsInput(v.Outputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PostExperimentDuration != nil {
+		ok := object.Key("postExperimentDuration")
+		ok.String(*v.PostExperimentDuration)
+	}
+
+	if v.PreExperimentDuration != nil {
+		ok := object.Key("preExperimentDuration")
+		ok.String(*v.PreExperimentDuration)
 	}
 
 	return nil

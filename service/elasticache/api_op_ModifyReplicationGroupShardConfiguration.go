@@ -45,8 +45,8 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	// This member is required.
 	NodeGroupCount *int32
 
-	// The name of the Redis OSS (cluster mode enabled) cluster (replication group) on
-	// which the shards are to be configured.
+	// The name of the Valkey or Redis OSS (cluster mode enabled) cluster (replication
+	// group) on which the shards are to be configured.
 	//
 	// This member is required.
 	ReplicationGroupId *string
@@ -55,16 +55,16 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRemove is a list of NodeGroupId s to remove from the cluster.
 	//
-	// ElastiCache (Redis OSS) will attempt to remove all node groups listed by
-	// NodeGroupsToRemove from the cluster.
+	// ElastiCache will attempt to remove all node groups listed by NodeGroupsToRemove
+	// from the cluster.
 	NodeGroupsToRemove []string
 
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRetain is a list of NodeGroupId s to retain in the cluster.
 	//
-	// ElastiCache (Redis OSS) will attempt to remove all node groups except those
-	// listed by NodeGroupsToRetain from the cluster.
+	// ElastiCache will attempt to remove all node groups except those listed by
+	// NodeGroupsToRetain from the cluster.
 	NodeGroupsToRetain []string
 
 	// Specifies the preferred availability zones for each node group in the cluster.
@@ -82,7 +82,8 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 
 type ModifyReplicationGroupShardConfigurationOutput struct {
 
-	// Contains all of the attributes of a specific Redis OSS replication group.
+	// Contains all of the attributes of a specific Valkey or Redis OSS replication
+	// group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

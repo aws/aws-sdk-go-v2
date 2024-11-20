@@ -293,6 +293,8 @@ const (
 	TierSapHanaMultiNode                   Tier = "SAP_HANA_MULTI_NODE"
 	TierSapHanaSingleNode                  Tier = "SAP_HANA_SINGLE_NODE"
 	TierSapHanaHighAvailability            Tier = "SAP_HANA_HIGH_AVAILABILITY"
+	TierSapAseSingleNode                   Tier = "SAP_ASE_SINGLE_NODE"
+	TierSapAseHighAvailability             Tier = "SAP_ASE_HIGH_AVAILABILITY"
 	TierSqlServerFailoverClusterInstance   Tier = "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
 	TierSharepoint                         Tier = "SHAREPOINT"
 	TierActiveDirectory                    Tier = "ACTIVE_DIRECTORY"
@@ -322,6 +324,8 @@ func (Tier) Values() []Tier {
 		"SAP_HANA_MULTI_NODE",
 		"SAP_HANA_SINGLE_NODE",
 		"SAP_HANA_HIGH_AVAILABILITY",
+		"SAP_ASE_SINGLE_NODE",
+		"SAP_ASE_HIGH_AVAILABILITY",
 		"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
 		"SHAREPOINT",
 		"ACTIVE_DIRECTORY",

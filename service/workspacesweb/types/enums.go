@@ -126,6 +126,23 @@ func (PortalStatus) Values() []PortalStatus {
 	}
 }
 
+type RedactionPlaceHolderType string
+
+// Enum values for RedactionPlaceHolderType
+const (
+	RedactionPlaceHolderTypeCustomText RedactionPlaceHolderType = "CustomText"
+)
+
+// Values returns all known values for RedactionPlaceHolderType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedactionPlaceHolderType) Values() []RedactionPlaceHolderType {
+	return []RedactionPlaceHolderType{
+		"CustomText",
+	}
+}
+
 type RendererType string
 
 // Enum values for RendererType

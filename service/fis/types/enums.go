@@ -92,6 +92,31 @@ func (ExperimentActionStatus) Values() []ExperimentActionStatus {
 	}
 }
 
+type ExperimentReportStatus string
+
+// Enum values for ExperimentReportStatus
+const (
+	ExperimentReportStatusPending   ExperimentReportStatus = "pending"
+	ExperimentReportStatusRunning   ExperimentReportStatus = "running"
+	ExperimentReportStatusCompleted ExperimentReportStatus = "completed"
+	ExperimentReportStatusCancelled ExperimentReportStatus = "cancelled"
+	ExperimentReportStatusFailed    ExperimentReportStatus = "failed"
+)
+
+// Values returns all known values for ExperimentReportStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExperimentReportStatus) Values() []ExperimentReportStatus {
+	return []ExperimentReportStatus{
+		"pending",
+		"running",
+		"completed",
+		"cancelled",
+		"failed",
+	}
+}
+
 type ExperimentStatus string
 
 // Enum values for ExperimentStatus

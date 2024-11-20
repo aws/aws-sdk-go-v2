@@ -1,3 +1,28 @@
+# v1.44.3 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.44.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.0 (2024-10-30)
+
+* **Feature**: AWS Network Firewall now supports configuring TCP idle timeout
+
+# v1.43.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

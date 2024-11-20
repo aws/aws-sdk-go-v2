@@ -1,3 +1,29 @@
+# v1.24.5 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.4 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.24.3 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.2 (2024-10-30)
+
+* No change notes available for this release.
+
+# v1.24.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.0 (2024-10-08)
+
+* **Feature**: Amazon MemoryDB SDK now supports all APIs for newly launched Valkey engine. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

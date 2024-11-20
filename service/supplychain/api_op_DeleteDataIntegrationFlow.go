@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete the DataIntegrationFlow.
+// Enable you to programmatically delete an existing data pipeline for the
+// provided Amazon Web Services Supply Chain instance and DataIntegrationFlow name.
 func (c *Client) DeleteDataIntegrationFlow(ctx context.Context, params *DeleteDataIntegrationFlowInput, optFns ...func(*Options)) (*DeleteDataIntegrationFlowOutput, error) {
 	if params == nil {
 		params = &DeleteDataIntegrationFlowInput{}

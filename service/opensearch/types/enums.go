@@ -71,6 +71,50 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AppConfigType string
+
+// Enum values for AppConfigType
+const (
+	AppConfigTypeOpensearchDashboardAdminUsers  AppConfigType = "opensearchDashboards.dashboardAdmin.users"
+	AppConfigTypeOpensearchDashboardAdminGroups AppConfigType = "opensearchDashboards.dashboardAdmin.groups"
+)
+
+// Values returns all known values for AppConfigType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AppConfigType) Values() []AppConfigType {
+	return []AppConfigType{
+		"opensearchDashboards.dashboardAdmin.users",
+		"opensearchDashboards.dashboardAdmin.groups",
+	}
+}
+
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
+const (
+	ApplicationStatusCreating ApplicationStatus = "CREATING"
+	ApplicationStatusUpdating ApplicationStatus = "UPDATING"
+	ApplicationStatusDeleting ApplicationStatus = "DELETING"
+	ApplicationStatusActive   ApplicationStatus = "ACTIVE"
+	ApplicationStatusFailed   ApplicationStatus = "FAILED"
+)
+
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
 type AutoTuneDesiredState string
 
 // Enum values for AutoTuneDesiredState
@@ -137,6 +181,23 @@ const (
 func (AutoTuneType) Values() []AutoTuneType {
 	return []AutoTuneType{
 		"SCHEDULED_ACTION",
+	}
+}
+
+type AWSServicePrincipal string
+
+// Enum values for AWSServicePrincipal
+const (
+	AWSServicePrincipalApplicationOpensearchserviceAmazonawsCom AWSServicePrincipal = "application.opensearchservice.amazonaws.com"
+)
+
+// Values returns all known values for AWSServicePrincipal. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AWSServicePrincipal) Values() []AWSServicePrincipal {
+	return []AWSServicePrincipal{
+		"application.opensearchservice.amazonaws.com",
 	}
 }
 
@@ -243,6 +304,7 @@ const (
 	DescribePackagesFilterNamePackageStatus DescribePackagesFilterName = "PackageStatus"
 	DescribePackagesFilterNamePackageType   DescribePackagesFilterName = "PackageType"
 	DescribePackagesFilterNameEngineVersion DescribePackagesFilterName = "EngineVersion"
+	DescribePackagesFilterNamePackageOwner  DescribePackagesFilterName = "PackageOwner"
 )
 
 // Values returns all known values for DescribePackagesFilterName. Note that this
@@ -256,6 +318,7 @@ func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
 		"PackageStatus",
 		"PackageType",
 		"EngineVersion",
+		"PackageOwner",
 	}
 }
 
@@ -599,6 +662,23 @@ func (NaturalLanguageQueryGenerationDesiredState) Values() []NaturalLanguageQuer
 	return []NaturalLanguageQueryGenerationDesiredState{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type NodeOptionsNodeType string
+
+// Enum values for NodeOptionsNodeType
+const (
+	NodeOptionsNodeTypeCoordinator NodeOptionsNodeType = "coordinator"
+)
+
+// Values returns all known values for NodeOptionsNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeOptionsNodeType) Values() []NodeOptionsNodeType {
+	return []NodeOptionsNodeType{
+		"coordinator",
 	}
 }
 
@@ -968,6 +1048,27 @@ func (OverallChangeStatus) Values() []OverallChangeStatus {
 	}
 }
 
+type PackageScopeOperationEnum string
+
+// Enum values for PackageScopeOperationEnum
+const (
+	PackageScopeOperationEnumAdd      PackageScopeOperationEnum = "ADD"
+	PackageScopeOperationEnumOverride PackageScopeOperationEnum = "OVERRIDE"
+	PackageScopeOperationEnumRemove   PackageScopeOperationEnum = "REMOVE"
+)
+
+// Values returns all known values for PackageScopeOperationEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PackageScopeOperationEnum) Values() []PackageScopeOperationEnum {
+	return []PackageScopeOperationEnum{
+		"ADD",
+		"OVERRIDE",
+		"REMOVE",
+	}
+}
+
 type PackageStatus string
 
 // Enum values for PackageStatus
@@ -1003,8 +1104,10 @@ type PackageType string
 
 // Enum values for PackageType
 const (
-	PackageTypeTxtDictionary PackageType = "TXT-DICTIONARY"
-	PackageTypeZipPlugin     PackageType = "ZIP-PLUGIN"
+	PackageTypeTxtDictionary  PackageType = "TXT-DICTIONARY"
+	PackageTypeZipPlugin      PackageType = "ZIP-PLUGIN"
+	PackageTypePackageLicense PackageType = "PACKAGE-LICENSE"
+	PackageTypePackageConfig  PackageType = "PACKAGE-CONFIG"
 )
 
 // Values returns all known values for PackageType. Note that this can be expanded
@@ -1015,6 +1118,8 @@ func (PackageType) Values() []PackageType {
 	return []PackageType{
 		"TXT-DICTIONARY",
 		"ZIP-PLUGIN",
+		"PACKAGE-LICENSE",
+		"PACKAGE-CONFIG",
 	}
 }
 
@@ -1056,6 +1161,27 @@ func (PropertyValueType) Values() []PropertyValueType {
 	}
 }
 
+type RequirementLevel string
+
+// Enum values for RequirementLevel
+const (
+	RequirementLevelRequired RequirementLevel = "REQUIRED"
+	RequirementLevelOptional RequirementLevel = "OPTIONAL"
+	RequirementLevelNone     RequirementLevel = "NONE"
+)
+
+// Values returns all known values for RequirementLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RequirementLevel) Values() []RequirementLevel {
+	return []RequirementLevel{
+		"REQUIRED",
+		"OPTIONAL",
+		"NONE",
+	}
+}
+
 type ReservedInstancePaymentOption string
 
 // Enum values for ReservedInstancePaymentOption
@@ -1075,6 +1201,25 @@ func (ReservedInstancePaymentOption) Values() []ReservedInstancePaymentOption {
 		"ALL_UPFRONT",
 		"PARTIAL_UPFRONT",
 		"NO_UPFRONT",
+	}
+}
+
+type RolesKeyIdCOption string
+
+// Enum values for RolesKeyIdCOption
+const (
+	RolesKeyIdCOptionGroupName RolesKeyIdCOption = "GroupName"
+	RolesKeyIdCOptionGroupId   RolesKeyIdCOption = "GroupId"
+)
+
+// Values returns all known values for RolesKeyIdCOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RolesKeyIdCOption) Values() []RolesKeyIdCOption {
+	return []RolesKeyIdCOption{
+		"GroupName",
+		"GroupId",
 	}
 }
 
@@ -1194,6 +1339,27 @@ func (SkipUnavailableStatus) Values() []SkipUnavailableStatus {
 	return []SkipUnavailableStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type SubjectKeyIdCOption string
+
+// Enum values for SubjectKeyIdCOption
+const (
+	SubjectKeyIdCOptionUserName SubjectKeyIdCOption = "UserName"
+	SubjectKeyIdCOptionUserId   SubjectKeyIdCOption = "UserId"
+	SubjectKeyIdCOptionEmail    SubjectKeyIdCOption = "Email"
+)
+
+// Values returns all known values for SubjectKeyIdCOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubjectKeyIdCOption) Values() []SubjectKeyIdCOption {
+	return []SubjectKeyIdCOption{
+		"UserName",
+		"UserId",
+		"Email",
 	}
 }
 

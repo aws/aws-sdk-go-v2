@@ -1071,6 +1071,16 @@
                 "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#ApplicationWave": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^($|[^\\s\\x00]( *[^\\s\\x00])*$)$"
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#AssociateConfigurationItemsToApplication": {
             "type": "operation",
             "input": {
@@ -1763,14 +1773,20 @@
                 "name": {
                     "target": "com.amazonaws.applicationdiscoveryservice#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the application to be created.</p>",
+                        "smithy.api#documentation": "<p>The name of the application to be created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.applicationdiscoveryservice#ApplicationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the application to be created.</p>"
+                        "smithy.api#documentation": "<p>The description of the application to be created.</p>"
+                    }
+                },
+                "wave": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ApplicationWave",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration wave of the application to be created.</p>"
                     }
                 }
             },
@@ -1784,7 +1800,7 @@
                 "configurationId": {
                     "target": "com.amazonaws.applicationdiscoveryservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration ID of an application to be created.</p>"
+                        "smithy.api#documentation": "<p>The configuration ID of an application to be created.</p>"
                     }
                 }
             },
@@ -3409,6 +3425,35 @@
                 "target": "com.amazonaws.applicationdiscoveryservice#FailedConfiguration"
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#FileClassification": {
+            "type": "enum",
+            "members": {
+                "MODELIZEIT_EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODELIZEIT_EXPORT"
+                    }
+                },
+                "RVTOOLS_EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RVTOOLS_EXPORT"
+                    }
+                },
+                "VMWARE_NSX_EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VMWARE_NSX_EXPORT"
+                    }
+                },
+                "IMPORT_TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_TEMPLATE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#Filter": {
             "type": "structure",
             "members": {
@@ -3621,6 +3666,12 @@
                         "smithy.api#enumValue": "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"
                     }
                 },
+                "IMPORT_FAILED_UNSUPPORTED_FILE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_FAILED_UNSUPPORTED_FILE_TYPE"
+                    }
+                },
                 "DELETE_IN_PROGRESS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -3704,6 +3755,12 @@
                         "smithy.api#documentation": "<p>The time that the import task request was deleted, presented in the Unix time stamp\n      format.</p>"
                     }
                 },
+                "fileClassification": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#FileClassification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of file detected by the import task.</p>"
+                    }
+                },
                 "serverImportSuccess": {
                     "target": "com.amazonaws.applicationdiscoveryservice#Integer",
                     "traits": {
@@ -3782,6 +3839,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "FILE_CLASSIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_CLASSIFICATION"
                     }
                 }
             }
@@ -4331,6 +4394,9 @@
                 },
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#HomeRegionNotSetException"
+                },
+                {
+                    "target": "com.amazonaws.applicationdiscoveryservice#InvalidParameterException"
                 },
                 {
                     "target": "com.amazonaws.applicationdiscoveryservice#InvalidParameterValueException"
@@ -5005,6 +5071,12 @@
                     "target": "com.amazonaws.applicationdiscoveryservice#ApplicationDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>New description of the application to be updated.</p>"
+                    }
+                },
+                "wave": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#ApplicationWave",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new migration wave of the application that you want to update.</p>"
                     }
                 }
             },

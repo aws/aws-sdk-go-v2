@@ -185,7 +185,7 @@ type InvalidationCompletedWaiterOptions struct {
 	MinDelay time.Duration
 
 	// MaxDelay is the maximum amount of time to delay between retries. If unset or
-	// set to zero, InvalidationCompletedWaiter will use default max delay of 120
+	// set to zero, InvalidationCompletedWaiter will use default max delay of 600
 	// seconds. Note that MaxDelay must resolve to value greater than or equal to the
 	// MinDelay.
 	MaxDelay time.Duration
@@ -216,7 +216,7 @@ type InvalidationCompletedWaiter struct {
 func NewInvalidationCompletedWaiter(client GetInvalidationAPIClient, optFns ...func(*InvalidationCompletedWaiterOptions)) *InvalidationCompletedWaiter {
 	options := InvalidationCompletedWaiterOptions{}
 	options.MinDelay = 20 * time.Second
-	options.MaxDelay = 120 * time.Second
+	options.MaxDelay = 600 * time.Second
 	options.Retryable = invalidationCompletedStateRetryable
 
 	for _, fn := range optFns {
@@ -251,7 +251,7 @@ func (w *InvalidationCompletedWaiter) WaitForOutput(ctx context.Context, params 
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = 600 * time.Second
 	}
 
 	if options.MinDelay > options.MaxDelay {

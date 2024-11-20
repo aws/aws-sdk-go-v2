@@ -12,6 +12,7 @@
         "api_op_AddAssociation.go",
         "api_op_AddTags.go",
         "api_op_AssociateTrialComponent.go",
+        "api_op_BatchDeleteClusterNodes.go",
         "api_op_BatchDescribeModelPackage.go",
         "api_op_CreateAction.go",
         "api_op_CreateAlgorithm.go",

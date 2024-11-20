@@ -34,11 +34,6 @@ type UpdateGraphqlApiInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The new authentication type for the GraphqlApi object.
-	//
-	// This member is required.
-	AuthenticationType types.AuthenticationType
-
 	// The new name for the GraphqlApi object.
 	//
 	// This member is required.
@@ -46,6 +41,9 @@ type UpdateGraphqlApiInput struct {
 
 	// A list of additional authentication providers for the GraphqlApi API.
 	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
+
+	// The new authentication type for the GraphqlApi object.
+	AuthenticationType types.AuthenticationType
 
 	// The enhancedMetricsConfig object.
 	EnhancedMetricsConfig *types.EnhancedMetricsConfig

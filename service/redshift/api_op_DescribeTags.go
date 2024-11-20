@@ -92,6 +92,11 @@ type DescribeTagsInput struct {
 	//
 	//   - Snapshot copy grant
 	//
+	//   - Integration (zero-ETL integration or S3 event integration)
+	//
+	// To describe the tags associated with an integration , don't specify ResourceType
+	//   , instead specify the ResourceName of the integration.
+	//
 	// For more information about Amazon Redshift resource types and constructing
 	// ARNs, go to [Specifying Policy Elements: Actions, Effects, Resources, and Principals]in the Amazon Redshift Cluster Management Guide.
 	//

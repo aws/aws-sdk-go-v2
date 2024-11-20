@@ -90,6 +90,30 @@ type As2ConnectorConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the details for files transferred using an SFTP
+// connector, during a single transfer.
+type ConnectorFileTransferResult struct {
+
+	// The filename and path to where the file was sent to or retrieved from.
+	//
+	// This member is required.
+	FilePath *string
+
+	// The current status for the transfer.
+	//
+	// This member is required.
+	StatusCode TransferTableStatus
+
+	// For transfers that fail, this parameter contains a code indicating the reason.
+	// For example, RETRIEVE_FILE_NOT_FOUND
+	FailureCode *string
+
+	// For transfers that fail, this parameter describes the reason for the failure.
+	FailureMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Each step type has its own StepDetails structure.
 type CopyStepDetails struct {
 
@@ -1024,13 +1048,19 @@ type EfsFileLocation struct {
 // to your server's endpoint.
 //
 // After May 19, 2021, you won't be able to create a server using
-// EndpointType=VPC_ENDPOINT in your Amazon Web Servicesaccount if your account
+// EndpointType=VPC_ENDPOINT in your Amazon Web Services account if your account
 // hasn't already done so before May 19, 2021. If you have already created servers
-// with EndpointType=VPC_ENDPOINT in your Amazon Web Servicesaccount on or before
+// with EndpointType=VPC_ENDPOINT in your Amazon Web Services account on or before
 // May 19, 2021, you will not be affected. After this date, use EndpointType = VPC .
 //
 // For more information, see
 // https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
+//
+// It is recommended that you use VPC as the EndpointType . With this endpoint
+// type, you have the option to directly associate up to three Elastic IPv4
+// addresses (BYO IP included) with your server's endpoint and use VPC security
+// groups to restrict traffic by the client's public IP address. This is not
+// possible with EndpointType set to VPC_ENDPOINT .
 type EndpointDetails struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
@@ -2028,6 +2058,8 @@ type WorkflowDetails struct {
 	// attach a workflow to a server that executes whenever there is a partial upload.
 	//
 	// A partial upload occurs when a file is open when the session disconnects.
+	//
+	// OnPartialUpload can contain a maximum of one WorkflowDetail object.
 	OnPartialUpload []WorkflowDetail
 
 	// A trigger that starts a workflow: the workflow begins to execute after a file
@@ -2038,6 +2070,8 @@ type WorkflowDetails struct {
 	//
 	//     aws transfer update-server --server-id s-01234567890abcdef --workflow-details
 	//     '{"OnUpload":[]}'
+	//
+	// OnUpload can contain a maximum of one WorkflowDetail object.
 	OnUpload []WorkflowDetail
 
 	noSmithyDocumentSerde

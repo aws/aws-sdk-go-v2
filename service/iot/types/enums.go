@@ -1675,6 +1675,25 @@ func (ThingIndexingMode) Values() []ThingIndexingMode {
 	}
 }
 
+type ThingPrincipalType string
+
+// Enum values for ThingPrincipalType
+const (
+	ThingPrincipalTypeExclusiveThing    ThingPrincipalType = "EXCLUSIVE_THING"
+	ThingPrincipalTypeNonExclusiveThing ThingPrincipalType = "NON_EXCLUSIVE_THING"
+)
+
+// Values returns all known values for ThingPrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThingPrincipalType) Values() []ThingPrincipalType {
+	return []ThingPrincipalType{
+		"EXCLUSIVE_THING",
+		"NON_EXCLUSIVE_THING",
+	}
+}
+
 type TopicRuleDestinationStatus string
 
 // Enum values for TopicRuleDestinationStatus

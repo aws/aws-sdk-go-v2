@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the name and the Amazon Resource Name (ARN) of the specified table.
+// Returns the name of the specified keyspace, the Amazon Resource Name (ARN), the
+// replication strategy, the Amazon Web Services Regions of a multi-Region
+// keyspace, and the status of newly added Regions after an UpdateKeyspace
+// operation.
 func (c *Client) GetKeyspace(ctx context.Context, params *GetKeyspaceInput, optFns ...func(*Options)) (*GetKeyspaceOutput, error) {
 	if params == nil {
 		params = &GetKeyspaceInput{}
@@ -54,6 +57,10 @@ type GetKeyspaceOutput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	//  A list of all Regions the keyspace is replicated in after the update keyspace
+	// operation and their status.
+	ReplicationGroupStatuses []types.ReplicationGroupStatus
 
 	//  If the replicationStrategy of the keyspace is MULTI_REGION , a list of
 	// replication Regions is returned.

@@ -805,6 +805,22 @@ type DeleteClusterSnapshotMessage struct {
 	noSmithyDocumentSerde
 }
 
+// A set of elements to filter the returned integrations.
+type DescribeIntegrationsFilter struct {
+
+	// Specifies the type of integration filter.
+	//
+	// This member is required.
+	Name DescribeIntegrationsFilterName
+
+	// Specifies the values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Amazon EC2 security group.
 type EC2SecurityGroup struct {
 
@@ -1134,6 +1150,50 @@ type InboundIntegration struct {
 	noSmithyDocumentSerde
 }
 
+type Integration struct {
+
+	// The encryption context for the integration. For more information, see [Encryption context] in the
+	// Amazon Web Services Key Management Service Developer Guide.
+	//
+	// [Encryption context]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+	AdditionalEncryptionContext map[string]string
+
+	// The time (UTC) when the integration was created.
+	CreateTime *time.Time
+
+	// The description of the integration.
+	Description *string
+
+	// Any errors associated with the integration.
+	Errors []IntegrationError
+
+	// The Amazon Resource Name (ARN) of the integration.
+	IntegrationArn *string
+
+	// The name of the integration.
+	IntegrationName *string
+
+	// The Key Management Service (KMS) key identifier for the key used to encrypt the
+	// integration.
+	KMSKeyId *string
+
+	// The Amazon Resource Name (ARN) of the database used as the source for
+	// replication.
+	SourceArn *string
+
+	// The current status of the integration.
+	Status ZeroETLIntegrationStatus
+
+	// The list of tags associated with the integration.
+	Tags []Tag
+
+	// The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use as
+	// the target for replication.
+	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The error of an inbound integration.
 type IntegrationError struct {
 
@@ -1413,6 +1473,17 @@ type PendingModifiedValues struct {
 	// The pending or in-progress change of the ability to connect to the cluster from
 	// the public network.
 	PubliclyAccessible *bool
+
+	noSmithyDocumentSerde
+}
+
+// The S3 Access Grants scope.
+type ReadWriteAccess struct {
+
+	// Determines whether the read/write scope is enabled or disabled.
+	//
+	// This member is required.
+	Authorization ServiceAuthorization
 
 	noSmithyDocumentSerde
 }
@@ -1820,6 +1891,24 @@ type RevisionTarget struct {
 	noSmithyDocumentSerde
 }
 
+// A list of scopes set up for S3 Access Grants integration.
+//
+// The following types satisfy this interface:
+//
+//	S3AccessGrantsScopeUnionMemberReadWriteAccess
+type S3AccessGrantsScopeUnion interface {
+	isS3AccessGrantsScopeUnion()
+}
+
+// The S3 Access Grants scope.
+type S3AccessGrantsScopeUnionMemberReadWriteAccess struct {
+	Value ReadWriteAccess
+
+	noSmithyDocumentSerde
+}
+
+func (*S3AccessGrantsScopeUnionMemberReadWriteAccess) isS3AccessGrantsScopeUnion() {}
+
 // Describes a scheduled action. You can use a scheduled action to trigger some
 // Amazon Redshift API operations on a schedule. For information about which API
 // operations can be scheduled, see ScheduledActionType.
@@ -1931,6 +2020,7 @@ type SecondaryClusterInfo struct {
 // The following types satisfy this interface:
 //
 //	ServiceIntegrationsUnionMemberLakeFormation
+//	ServiceIntegrationsUnionMemberS3AccessGrants
 type ServiceIntegrationsUnion interface {
 	isServiceIntegrationsUnion()
 }
@@ -1943,6 +2033,15 @@ type ServiceIntegrationsUnionMemberLakeFormation struct {
 }
 
 func (*ServiceIntegrationsUnionMemberLakeFormation) isServiceIntegrationsUnion() {}
+
+// A list of scopes set up for S3 Access Grants integration.
+type ServiceIntegrationsUnionMemberS3AccessGrants struct {
+	Value []S3AccessGrantsScopeUnion
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceIntegrationsUnionMemberS3AccessGrants) isServiceIntegrationsUnion() {}
 
 // Describes a snapshot.
 type Snapshot struct {
@@ -2415,4 +2514,5 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isLakeFormationScopeUnion()  {}
+func (*UnknownUnionMember) isS3AccessGrantsScopeUnion() {}
 func (*UnknownUnionMember) isServiceIntegrationsUnion() {}

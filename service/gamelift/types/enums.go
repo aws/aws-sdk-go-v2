@@ -131,6 +131,7 @@ const (
 	ComputeStatusPending     ComputeStatus = "PENDING"
 	ComputeStatusActive      ComputeStatus = "ACTIVE"
 	ComputeStatusTerminating ComputeStatus = "TERMINATING"
+	ComputeStatusImpaired    ComputeStatus = "IMPAIRED"
 )
 
 // Values returns all known values for ComputeStatus. Note that this can be
@@ -142,6 +143,7 @@ func (ComputeStatus) Values() []ComputeStatus {
 		"PENDING",
 		"ACTIVE",
 		"TERMINATING",
+		"IMPAIRED",
 	}
 }
 
@@ -149,9 +151,8 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeEc2       ComputeType = "EC2"
-	ComputeTypeAnywhere  ComputeType = "ANYWHERE"
-	ComputeTypeContainer ComputeType = "CONTAINER"
+	ComputeTypeEc2      ComputeType = "EC2"
+	ComputeTypeAnywhere ComputeType = "ANYWHERE"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
@@ -162,7 +163,6 @@ func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"EC2",
 		"ANYWHERE",
-		"CONTAINER",
 	}
 }
 
@@ -190,6 +190,102 @@ func (ContainerDependencyCondition) Values() []ContainerDependencyCondition {
 	}
 }
 
+type ContainerFleetBillingType string
+
+// Enum values for ContainerFleetBillingType
+const (
+	ContainerFleetBillingTypeOnDemand ContainerFleetBillingType = "ON_DEMAND"
+	ContainerFleetBillingTypeSpot     ContainerFleetBillingType = "SPOT"
+)
+
+// Values returns all known values for ContainerFleetBillingType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerFleetBillingType) Values() []ContainerFleetBillingType {
+	return []ContainerFleetBillingType{
+		"ON_DEMAND",
+		"SPOT",
+	}
+}
+
+type ContainerFleetLocationStatus string
+
+// Enum values for ContainerFleetLocationStatus
+const (
+	ContainerFleetLocationStatusPending    ContainerFleetLocationStatus = "PENDING"
+	ContainerFleetLocationStatusCreating   ContainerFleetLocationStatus = "CREATING"
+	ContainerFleetLocationStatusCreated    ContainerFleetLocationStatus = "CREATED"
+	ContainerFleetLocationStatusActivating ContainerFleetLocationStatus = "ACTIVATING"
+	ContainerFleetLocationStatusActive     ContainerFleetLocationStatus = "ACTIVE"
+	ContainerFleetLocationStatusUpdating   ContainerFleetLocationStatus = "UPDATING"
+	ContainerFleetLocationStatusDeleting   ContainerFleetLocationStatus = "DELETING"
+)
+
+// Values returns all known values for ContainerFleetLocationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerFleetLocationStatus) Values() []ContainerFleetLocationStatus {
+	return []ContainerFleetLocationStatus{
+		"PENDING",
+		"CREATING",
+		"CREATED",
+		"ACTIVATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
+type ContainerFleetRemoveAttribute string
+
+// Enum values for ContainerFleetRemoveAttribute
+const (
+	ContainerFleetRemoveAttributePerInstanceContainerGroupDefinition ContainerFleetRemoveAttribute = "PER_INSTANCE_CONTAINER_GROUP_DEFINITION"
+)
+
+// Values returns all known values for ContainerFleetRemoveAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerFleetRemoveAttribute) Values() []ContainerFleetRemoveAttribute {
+	return []ContainerFleetRemoveAttribute{
+		"PER_INSTANCE_CONTAINER_GROUP_DEFINITION",
+	}
+}
+
+type ContainerFleetStatus string
+
+// Enum values for ContainerFleetStatus
+const (
+	ContainerFleetStatusPending    ContainerFleetStatus = "PENDING"
+	ContainerFleetStatusCreating   ContainerFleetStatus = "CREATING"
+	ContainerFleetStatusCreated    ContainerFleetStatus = "CREATED"
+	ContainerFleetStatusActivating ContainerFleetStatus = "ACTIVATING"
+	ContainerFleetStatusActive     ContainerFleetStatus = "ACTIVE"
+	ContainerFleetStatusUpdating   ContainerFleetStatus = "UPDATING"
+	ContainerFleetStatusDeleting   ContainerFleetStatus = "DELETING"
+)
+
+// Values returns all known values for ContainerFleetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerFleetStatus) Values() []ContainerFleetStatus {
+	return []ContainerFleetStatus{
+		"PENDING",
+		"CREATING",
+		"CREATED",
+		"ACTIVATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type ContainerGroupDefinitionStatus string
 
 // Enum values for ContainerGroupDefinitionStatus
@@ -212,6 +308,45 @@ func (ContainerGroupDefinitionStatus) Values() []ContainerGroupDefinitionStatus 
 	}
 }
 
+type ContainerGroupType string
+
+// Enum values for ContainerGroupType
+const (
+	ContainerGroupTypeGameServer  ContainerGroupType = "GAME_SERVER"
+	ContainerGroupTypePerInstance ContainerGroupType = "PER_INSTANCE"
+)
+
+// Values returns all known values for ContainerGroupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerGroupType) Values() []ContainerGroupType {
+	return []ContainerGroupType{
+		"GAME_SERVER",
+		"PER_INSTANCE",
+	}
+}
+
+type ContainerMountPointAccessLevel string
+
+// Enum values for ContainerMountPointAccessLevel
+const (
+	ContainerMountPointAccessLevelReadOnly     ContainerMountPointAccessLevel = "READ_ONLY"
+	ContainerMountPointAccessLevelReadAndWrite ContainerMountPointAccessLevel = "READ_AND_WRITE"
+)
+
+// Values returns all known values for ContainerMountPointAccessLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerMountPointAccessLevel) Values() []ContainerMountPointAccessLevel {
+	return []ContainerMountPointAccessLevel{
+		"READ_ONLY",
+		"READ_AND_WRITE",
+	}
+}
+
 type ContainerOperatingSystem string
 
 // Enum values for ContainerOperatingSystem
@@ -229,22 +364,72 @@ func (ContainerOperatingSystem) Values() []ContainerOperatingSystem {
 	}
 }
 
-type ContainerSchedulingStrategy string
+type DeploymentImpairmentStrategy string
 
-// Enum values for ContainerSchedulingStrategy
+// Enum values for DeploymentImpairmentStrategy
 const (
-	ContainerSchedulingStrategyReplica ContainerSchedulingStrategy = "REPLICA"
-	ContainerSchedulingStrategyDaemon  ContainerSchedulingStrategy = "DAEMON"
+	DeploymentImpairmentStrategyMaintain DeploymentImpairmentStrategy = "MAINTAIN"
+	DeploymentImpairmentStrategyRollback DeploymentImpairmentStrategy = "ROLLBACK"
 )
 
-// Values returns all known values for ContainerSchedulingStrategy. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
+// Values returns all known values for DeploymentImpairmentStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
 //
 // The ordering of this slice is not guaranteed to be stable across updates.
-func (ContainerSchedulingStrategy) Values() []ContainerSchedulingStrategy {
-	return []ContainerSchedulingStrategy{
-		"REPLICA",
-		"DAEMON",
+func (DeploymentImpairmentStrategy) Values() []DeploymentImpairmentStrategy {
+	return []DeploymentImpairmentStrategy{
+		"MAINTAIN",
+		"ROLLBACK",
+	}
+}
+
+type DeploymentProtectionStrategy string
+
+// Enum values for DeploymentProtectionStrategy
+const (
+	DeploymentProtectionStrategyWithProtection   DeploymentProtectionStrategy = "WITH_PROTECTION"
+	DeploymentProtectionStrategyIgnoreProtection DeploymentProtectionStrategy = "IGNORE_PROTECTION"
+)
+
+// Values returns all known values for DeploymentProtectionStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentProtectionStrategy) Values() []DeploymentProtectionStrategy {
+	return []DeploymentProtectionStrategy{
+		"WITH_PROTECTION",
+		"IGNORE_PROTECTION",
+	}
+}
+
+type DeploymentStatus string
+
+// Enum values for DeploymentStatus
+const (
+	DeploymentStatusInProgress         DeploymentStatus = "IN_PROGRESS"
+	DeploymentStatusImpaired           DeploymentStatus = "IMPAIRED"
+	DeploymentStatusComplete           DeploymentStatus = "COMPLETE"
+	DeploymentStatusRollbackInProgress DeploymentStatus = "ROLLBACK_IN_PROGRESS"
+	DeploymentStatusRollbackComplete   DeploymentStatus = "ROLLBACK_COMPLETE"
+	DeploymentStatusCancelled          DeploymentStatus = "CANCELLED"
+	DeploymentStatusPending            DeploymentStatus = "PENDING"
+)
+
+// Values returns all known values for DeploymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentStatus) Values() []DeploymentStatus {
+	return []DeploymentStatus{
+		"IN_PROGRESS",
+		"IMPAIRED",
+		"COMPLETE",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_COMPLETE",
+		"CANCELLED",
+		"PENDING",
 	}
 }
 
@@ -627,6 +812,10 @@ const (
 	EventCodeFleetStateActivating                       EventCode = "FLEET_STATE_ACTIVATING"
 	EventCodeFleetStateActive                           EventCode = "FLEET_STATE_ACTIVE"
 	EventCodeFleetStateError                            EventCode = "FLEET_STATE_ERROR"
+	EventCodeFleetStatePending                          EventCode = "FLEET_STATE_PENDING"
+	EventCodeFleetStateCreating                         EventCode = "FLEET_STATE_CREATING"
+	EventCodeFleetStateCreated                          EventCode = "FLEET_STATE_CREATED"
+	EventCodeFleetStateUpdating                         EventCode = "FLEET_STATE_UPDATING"
 	EventCodeFleetInitializationFailed                  EventCode = "FLEET_INITIALIZATION_FAILED"
 	EventCodeFleetBinaryDownloadFailed                  EventCode = "FLEET_BINARY_DOWNLOAD_FAILED"
 	EventCodeFleetValidationLaunchPathNotFound          EventCode = "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"
@@ -642,6 +831,8 @@ const (
 	EventCodeServerProcessTerminatedUnhealthy           EventCode = "SERVER_PROCESS_TERMINATED_UNHEALTHY"
 	EventCodeServerProcessForceTerminated               EventCode = "SERVER_PROCESS_FORCE_TERMINATED"
 	EventCodeServerProcessProcessExitTimeout            EventCode = "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"
+	EventCodeServerProcessSdkInitializationFailed       EventCode = "SERVER_PROCESS_SDK_INITIALIZATION_FAILED"
+	EventCodeServerProcessMisconfiguredContainerPort    EventCode = "SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT"
 	EventCodeGameSessionActivationTimeout               EventCode = "GAME_SESSION_ACTIVATION_TIMEOUT"
 	EventCodeFleetCreationExtractingBuild               EventCode = "FLEET_CREATION_EXTRACTING_BUILD"
 	EventCodeFleetCreationRunningInstaller              EventCode = "FLEET_CREATION_RUNNING_INSTALLER"
@@ -651,8 +842,22 @@ const (
 	EventCodeFleetVpcPeeringDeleted                     EventCode = "FLEET_VPC_PEERING_DELETED"
 	EventCodeInstanceInterrupted                        EventCode = "INSTANCE_INTERRUPTED"
 	EventCodeInstanceRecycled                           EventCode = "INSTANCE_RECYCLED"
+	EventCodeInstanceReplacedUnhealthy                  EventCode = "INSTANCE_REPLACED_UNHEALTHY"
 	EventCodeFleetCreationCompletedInstaller            EventCode = "FLEET_CREATION_COMPLETED_INSTALLER"
 	EventCodeFleetCreationFailedInstaller               EventCode = "FLEET_CREATION_FAILED_INSTALLER"
+	EventCodeComputeLogUploadFailed                     EventCode = "COMPUTE_LOG_UPLOAD_FAILED"
+	EventCodeGameServerContainerGroupCrashed            EventCode = "GAME_SERVER_CONTAINER_GROUP_CRASHED"
+	EventCodePerInstanceContainerGroupCrashed           EventCode = "PER_INSTANCE_CONTAINER_GROUP_CRASHED"
+	EventCodeGameServerContainerGroupReplacedUnhealthy  EventCode = "GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY"
+	EventCodeLocationStatePending                       EventCode = "LOCATION_STATE_PENDING"
+	EventCodeLocationStateCreating                      EventCode = "LOCATION_STATE_CREATING"
+	EventCodeLocationStateCreated                       EventCode = "LOCATION_STATE_CREATED"
+	EventCodeLocationStateActivating                    EventCode = "LOCATION_STATE_ACTIVATING"
+	EventCodeLocationStateActive                        EventCode = "LOCATION_STATE_ACTIVE"
+	EventCodeLocationStateUpdating                      EventCode = "LOCATION_STATE_UPDATING"
+	EventCodeLocationStateError                         EventCode = "LOCATION_STATE_ERROR"
+	EventCodeLocationStateDeleting                      EventCode = "LOCATION_STATE_DELETING"
+	EventCodeLocationStateDeleted                       EventCode = "LOCATION_STATE_DELETED"
 )
 
 // Values returns all known values for EventCode. Note that this can be expanded
@@ -671,6 +876,10 @@ func (EventCode) Values() []EventCode {
 		"FLEET_STATE_ACTIVATING",
 		"FLEET_STATE_ACTIVE",
 		"FLEET_STATE_ERROR",
+		"FLEET_STATE_PENDING",
+		"FLEET_STATE_CREATING",
+		"FLEET_STATE_CREATED",
+		"FLEET_STATE_UPDATING",
 		"FLEET_INITIALIZATION_FAILED",
 		"FLEET_BINARY_DOWNLOAD_FAILED",
 		"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND",
@@ -686,6 +895,8 @@ func (EventCode) Values() []EventCode {
 		"SERVER_PROCESS_TERMINATED_UNHEALTHY",
 		"SERVER_PROCESS_FORCE_TERMINATED",
 		"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT",
+		"SERVER_PROCESS_SDK_INITIALIZATION_FAILED",
+		"SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT",
 		"GAME_SESSION_ACTIVATION_TIMEOUT",
 		"FLEET_CREATION_EXTRACTING_BUILD",
 		"FLEET_CREATION_RUNNING_INSTALLER",
@@ -695,8 +906,22 @@ func (EventCode) Values() []EventCode {
 		"FLEET_VPC_PEERING_DELETED",
 		"INSTANCE_INTERRUPTED",
 		"INSTANCE_RECYCLED",
+		"INSTANCE_REPLACED_UNHEALTHY",
 		"FLEET_CREATION_COMPLETED_INSTALLER",
 		"FLEET_CREATION_FAILED_INSTALLER",
+		"COMPUTE_LOG_UPLOAD_FAILED",
+		"GAME_SERVER_CONTAINER_GROUP_CRASHED",
+		"PER_INSTANCE_CONTAINER_GROUP_CRASHED",
+		"GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY",
+		"LOCATION_STATE_PENDING",
+		"LOCATION_STATE_CREATING",
+		"LOCATION_STATE_CREATED",
+		"LOCATION_STATE_ACTIVATING",
+		"LOCATION_STATE_ACTIVE",
+		"LOCATION_STATE_UPDATING",
+		"LOCATION_STATE_ERROR",
+		"LOCATION_STATE_DELETING",
+		"LOCATION_STATE_DELETED",
 	}
 }
 
@@ -1285,6 +1510,25 @@ func (IpProtocol) Values() []IpProtocol {
 	}
 }
 
+type ListComputeInputStatus string
+
+// Enum values for ListComputeInputStatus
+const (
+	ListComputeInputStatusActive   ListComputeInputStatus = "ACTIVE"
+	ListComputeInputStatusImpaired ListComputeInputStatus = "IMPAIRED"
+)
+
+// Values returns all known values for ListComputeInputStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListComputeInputStatus) Values() []ListComputeInputStatus {
+	return []ListComputeInputStatus{
+		"ACTIVE",
+		"IMPAIRED",
+	}
+}
+
 type LocationFilter string
 
 // Enum values for LocationFilter
@@ -1318,6 +1562,27 @@ const (
 func (LocationUpdateStatus) Values() []LocationUpdateStatus {
 	return []LocationUpdateStatus{
 		"PENDING_UPDATE",
+	}
+}
+
+type LogDestination string
+
+// Enum values for LogDestination
+const (
+	LogDestinationNone       LogDestination = "NONE"
+	LogDestinationCloudwatch LogDestination = "CLOUDWATCH"
+	LogDestinationS3         LogDestination = "S3"
+)
+
+// Values returns all known values for LogDestination. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogDestination) Values() []LogDestination {
+	return []LogDestination{
+		"NONE",
+		"CLOUDWATCH",
+		"S3",
 	}
 }
 

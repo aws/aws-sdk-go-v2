@@ -109,6 +109,26 @@ func (m *validateOpExportECSServiceRecommendations) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExportIdleRecommendations struct {
+}
+
+func (*validateOpExportIdleRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportIdleRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportIdleRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportIdleRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpExportLambdaFunctionRecommendations struct {
 }
 
@@ -329,6 +349,10 @@ func addOpExportECSServiceRecommendationsValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpExportECSServiceRecommendations{}, middleware.After)
 }
 
+func addOpExportIdleRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportIdleRecommendations{}, middleware.After)
+}
+
 func addOpExportLambdaFunctionRecommendationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportLambdaFunctionRecommendations{}, middleware.After)
 }
@@ -437,6 +461,21 @@ func validateOpExportECSServiceRecommendationsInput(v *ExportECSServiceRecommend
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportECSServiceRecommendationsInput"}
+	if v.S3DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportIdleRecommendationsInput(v *ExportIdleRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportIdleRecommendationsInput"}
 	if v.S3DestinationConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
 	}

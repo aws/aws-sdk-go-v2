@@ -1986,6 +1986,14 @@ type ResourceViolation struct {
 	// The violation details for a third-party firewall's subnet that's been deleted.
 	ThirdPartyFirewallMissingSubnetViolation *ThirdPartyFirewallMissingSubnetViolation
 
+	// The violation details for a web ACL whose configuration is incompatible with
+	// the Firewall Manager policy.
+	WebACLHasIncompatibleConfigurationViolation *WebACLHasIncompatibleConfigurationViolation
+
+	// The violation details for a web ACL that's associated with at least one
+	// resource that's out of scope of the Firewall Manager policy.
+	WebACLHasOutOfScopeResourcesViolation *WebACLHasOutOfScopeResourcesViolation
+
 	noSmithyDocumentSerde
 }
 
@@ -2175,9 +2183,7 @@ type SecurityServicePolicyData struct {
 	//
 	//   - Example: SECURITY_GROUPS_COMMON
 	//
-	//   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
-	//   \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
-	//   sg-000e55995d61a06bd\"}]}"
+	//   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"securityGroups\":[{\"id\":\"sg-03b1f67d69ed00197\"}],\"revertManualSecurityGroupChanges\":true,\"exclusiveResourceSecurityGroupManagement\":true,\"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":true,\"enableSecurityGroupReferencesDistribution\":true}"
 	//
 	//   - Example: SECURITY_GROUPS_COMMON - Security group tag distribution
 	//
@@ -2203,7 +2209,7 @@ type SecurityServicePolicyData struct {
 	//
 	//   - Example: SECURITY_GROUPS_CONTENT_AUDIT
 	//
-	//   "{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"
+	//   "{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"preManagedOptions\":[{\"denyProtocolAllValue\":true},{\"auditSgDirection\":{\"type\":\"ALL\"}}],\"securityGroups\":[{\"id\":\"sg-049b2393a25468971\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"
 	//
 	// The security group action for content audit can be ALLOW or DENY . For ALLOW ,
 	//   all in-scope security group rules must be within the allowed range of the
@@ -2213,7 +2219,7 @@ type SecurityServicePolicyData struct {
 	//
 	//   - Example: SECURITY_GROUPS_USAGE_AUDIT
 	//
-	//   "{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
+	//   "{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true,\"optionalDelayForUnusedInMinutes\":60}"
 	//
 	//   - Example: SHIELD_ADVANCED with web ACL management
 	//
@@ -2326,7 +2332,7 @@ type SecurityServicePolicyData struct {
 	//   - Example: WAFV2 - Firewall Manager support for WAF managed rule group
 	//   versioning
 	//
-	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
+	//   "{\"preProcessRuleGroups\":[{\"ruleGroupType\":\"ManagedRuleGroup\",\"overrideAction\":{\"type\":\"NONE\"},\"sampledRequestsEnabled\":true,\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendorName\":\"AWS\",\"managedRuleGroupConfigs\":null}}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"tokenDomains\":null,\"customResponse\":null,\"type\":\"WAFV2\",\"overrideCustomerWebACLAssociation\":false,\"sampledRequestsEnabledForDefaultActions\":true,\"optimizeUnassociatedWebACL\":true,\"webACLSource\":\"RETROFIT_EXISTING\"}"
 	//
 	// To use a specific version of a WAF managed rule group in your Firewall Manager
 	//   policy, you must set versionEnabled to true , and set version to the version
@@ -2362,9 +2368,7 @@ type SecurityServicePolicyData struct {
 	//
 	//   - Example: WAF Classic
 	//
-	// "{\"type\": \"WAF\", \"ruleGroups\":
-	//   [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" :
-	//   {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"
+	//   "{\"ruleGroups\":[{\"id\":\"78cb36c0-1b5e-4d7d-82b2-cf48d3ad9659\",\"overrideAction\":{\"type\":\"NONE\"}}],\"overrideCustomerWebACLAssociation\":true,\"defaultAction\":{\"type\":\"ALLOW\"},\"type\":\"WAF\"}"
 	//
 	// [AssociationConfig]: https://docs.aws.amazon.com/waf/latest/APIReference/API_AssociationConfig.html
 	// [PolicyOption]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html
@@ -2621,6 +2625,34 @@ type ViolationDetail struct {
 
 	// The ResourceTag objects associated with the resource.
 	ResourceTags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The violation details for a web ACL whose configuration is incompatible with
+// the Firewall Manager policy.
+type WebACLHasIncompatibleConfigurationViolation struct {
+
+	// Information about the problems that Firewall Manager encountered with the web
+	// ACL configuration.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the web ACL.
+	WebACLArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The violation details for a web ACL that's associated with at least one
+// resource that's out of scope of the Firewall Manager policy.
+type WebACLHasOutOfScopeResourcesViolation struct {
+
+	// An array of Amazon Resource Name (ARN) for the resources that are out of scope
+	// of the policy and are associated with the web ACL.
+	OutOfScopeResourceList []string
+
+	// The Amazon Resource Name (ARN) of the web ACL.
+	WebACLArn *string
 
 	noSmithyDocumentSerde
 }

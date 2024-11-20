@@ -32,7 +32,7 @@ type DescribeUpdateActionsInput struct {
 	// The cache cluster IDs
 	CacheClusterIds []string
 
-	// The Elasticache engine to which the update applies. Either Redis OSS or
+	// The Elasticache engine to which the update applies. Either Valkey, Redis OSS or
 	// Memcached.
 	Engine *string
 

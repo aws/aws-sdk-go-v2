@@ -66,6 +66,9 @@ type GetCalculatedAttributeDefinitionOutput struct {
 	// The display name of the calculated attribute.
 	DisplayName *string
 
+	// The filter assigned to this calculated attribute definition.
+	Filter *types.Filter
+
 	// The timestamp of when the calculated attribute definition was most recently
 	// edited.
 	LastUpdatedAt *time.Time

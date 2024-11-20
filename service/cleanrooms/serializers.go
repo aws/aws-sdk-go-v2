@@ -501,6 +501,11 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AnalyticsEngine) > 0 {
+		ok := object.Key("analyticsEngine")
+		ok.String(string(v.AnalyticsEngine))
+	}
+
 	if v.CreatorDisplayName != nil {
 		ok := object.Key("creatorDisplayName")
 		ok.String(*v.CreatorDisplayName)
@@ -509,6 +514,13 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 	if v.CreatorMemberAbilities != nil {
 		ok := object.Key("creatorMemberAbilities")
 		if err := awsRestjson1_serializeDocumentMemberAbilities(v.CreatorMemberAbilities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreatorMLMemberAbilities != nil {
+		ok := object.Key("creatorMLMemberAbilities")
+		if err := awsRestjson1_serializeDocumentMLMemberAbilities(v.CreatorMLMemberAbilities, ok); err != nil {
 			return err
 		}
 	}
@@ -5697,6 +5709,13 @@ func awsRestjson1_serializeOpDocumentStartProtectedQueryInput(v *StartProtectedQ
 	object := value.Object()
 	defer object.Close()
 
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsRestjson1_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResultConfiguration != nil {
 		ok := object.Key("resultConfiguration")
 		if err := awsRestjson1_serializeDocumentProtectedQueryResultConfiguration(v.ResultConfiguration, ok); err != nil {
@@ -7503,6 +7522,24 @@ func awsRestjson1_serializeDocumentAnalysisTemplateArnList(v []string, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentComputeConfiguration(v types.ComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ComputeConfigurationMemberWorker:
+		av := object.Key("worker")
+		if err := awsRestjson1_serializeDocumentWorkerComputeConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConfiguredTableAnalysisRulePolicy(v types.ConfiguredTableAnalysisRulePolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7658,6 +7695,17 @@ func awsRestjson1_serializeDocumentConfiguredTableAssociationAnalysisRulePolicyV
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomMLMemberAbilities(v []types.CustomMLMemberAbility, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -7877,9 +7925,61 @@ func awsRestjson1_serializeDocumentMemberList(v []types.MemberSpecification, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMembershipMLPaymentConfig(v *types.MembershipMLPaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelInference != nil {
+		ok := object.Key("modelInference")
+		if err := awsRestjson1_serializeDocumentMembershipModelInferencePaymentConfig(v.ModelInference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelTraining != nil {
+		ok := object.Key("modelTraining")
+		if err := awsRestjson1_serializeDocumentMembershipModelTrainingPaymentConfig(v.ModelTraining, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMembershipModelInferencePaymentConfig(v *types.MembershipModelInferencePaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMembershipModelTrainingPaymentConfig(v *types.MembershipModelTrainingPaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMembershipPaymentConfiguration(v *types.MembershipPaymentConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MachineLearning != nil {
+		ok := object.Key("machineLearning")
+		if err := awsRestjson1_serializeDocumentMembershipMLPaymentConfig(v.MachineLearning, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.QueryCompute != nil {
 		ok := object.Key("queryCompute")
@@ -7961,11 +8061,77 @@ func awsRestjson1_serializeDocumentMemberSpecification(v *types.MemberSpecificat
 		}
 	}
 
+	if v.MlMemberAbilities != nil {
+		ok := object.Key("mlMemberAbilities")
+		if err := awsRestjson1_serializeDocumentMLMemberAbilities(v.MlMemberAbilities, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.PaymentConfiguration != nil {
 		ok := object.Key("paymentConfiguration")
 		if err := awsRestjson1_serializeDocumentPaymentConfiguration(v.PaymentConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMLMemberAbilities(v *types.MLMemberAbilities, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomMLMemberAbilities != nil {
+		ok := object.Key("customMLMemberAbilities")
+		if err := awsRestjson1_serializeDocumentCustomMLMemberAbilities(v.CustomMLMemberAbilities, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMLPaymentConfig(v *types.MLPaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelInference != nil {
+		ok := object.Key("modelInference")
+		if err := awsRestjson1_serializeDocumentModelInferencePaymentConfig(v.ModelInference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelTraining != nil {
+		ok := object.Key("modelTraining")
+		if err := awsRestjson1_serializeDocumentModelTrainingPaymentConfig(v.ModelTraining, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentModelInferencePaymentConfig(v *types.ModelInferencePaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentModelTrainingPaymentConfig(v *types.ModelTrainingPaymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsResponsible != nil {
+		ok := object.Key("isResponsible")
+		ok.Boolean(*v.IsResponsible)
 	}
 
 	return nil
@@ -7985,6 +8151,13 @@ func awsRestjson1_serializeDocumentParameterMap(v map[string]string, value smith
 func awsRestjson1_serializeDocumentPaymentConfiguration(v *types.PaymentConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MachineLearning != nil {
+		ok := object.Key("machineLearning")
+		if err := awsRestjson1_serializeDocumentMLPaymentConfig(v.MachineLearning, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.QueryCompute != nil {
 		ok := object.Key("queryCompute")
@@ -8119,6 +8292,11 @@ func awsRestjson1_serializeDocumentProtectedQueryS3OutputConfiguration(v *types.
 		ok.String(string(v.ResultFormat))
 	}
 
+	if v.SingleFileOutput != nil {
+		ok := object.Key("singleFileOutput")
+		ok.Boolean(*v.SingleFileOutput)
+	}
+
 	return nil
 }
 
@@ -8236,5 +8414,22 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkerComputeConfiguration(v *types.WorkerComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Number != nil {
+		ok := object.Key("number")
+		ok.Integer(*v.Number)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }

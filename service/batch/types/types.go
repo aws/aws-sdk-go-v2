@@ -1455,7 +1455,8 @@ type EcsProperties struct {
 	// An object that contains the properties for the Amazon ECS task definition of a
 	// job.
 	//
-	// This object is currently limited to one element.
+	// This object is currently limited to one task element. However, the task element
+	// can run up to 10 containers.
 	//
 	// This member is required.
 	TaskProperties []EcsTaskProperties
@@ -1704,6 +1705,9 @@ type EFSVolumeConfiguration struct {
 // Amazon EKS container runs.
 type EksAttemptContainerDetail struct {
 
+	// The ID for the container.
+	ContainerID *string
+
 	// The exit code returned for the job attempt. A non-zero exit code is considered
 	// failed.
 	ExitCode *int32
@@ -1736,6 +1740,9 @@ type EksAttemptDetail struct {
 
 	// The name of the pod for this job attempt.
 	PodName *string
+
+	// The namespace of the Amazon EKS cluster that the pod exists in.
+	PodNamespace *string
 
 	// The Unix timestamp (in milliseconds) for when the attempt was started (when the
 	// attempt transitioned from the STARTING state to the RUNNING state).
@@ -2205,6 +2212,8 @@ type EksMetadata struct {
 type EksPodProperties struct {
 
 	// The properties of the container that's used on the Amazon EKS pod.
+	//
+	// This object is limited to 10 elements.
 	Containers []EksContainer
 
 	// The DNS policy for the pod. The default value is ClusterFirst . If the
@@ -2240,7 +2249,7 @@ type EksPodProperties struct {
 	// registration information in the Kubernetes backend data store. For more
 	// information, see [Init Containers]in the Kubernetes documentation.
 	//
-	// This object is limited to 10 elements
+	// This object is limited to 10 elements.
 	//
 	// [Init Containers]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 	InitContainers []EksContainer
@@ -2354,14 +2363,12 @@ type EksPodPropertiesOverride struct {
 	// The overrides for the container that's used on the Amazon EKS pod.
 	Containers []EksContainerOverride
 
-	// The overrides for the conatainers defined in the Amazon EKS pod. These
+	// The overrides for the initContainers defined in the Amazon EKS pod. These
 	// containers run before application containers, always runs to completion, and
 	// must complete successfully before the next container starts. These containers
 	// are registered with the Amazon EKS Connector agent and persists the registration
 	// information in the Kubernetes backend data store. For more information, see [Init Containers]in
 	// the Kubernetes documentation.
-	//
-	// This object is limited to 10 elements
 	//
 	// [Init Containers]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 	InitContainers []EksContainerOverride
@@ -3090,22 +3097,120 @@ type LaunchTemplateSpecification struct {
 	// The name of the launch template.
 	LaunchTemplateName *string
 
-	// The version number of the launch template, $Latest , or $Default .
+	// A launch template to use in place of the default launch template. You must
+	// specify either the launch template ID or launch template name in the request,
+	// but not both.
 	//
-	// If the value is $Latest , the latest version of the launch template is used. If
-	// the value is $Default , the default version of the launch template is used.
+	// You can specify up to ten (10) launch template overrides that are associated to
+	// unique instance types or families for each compute environment.
+	//
+	// To unset all override templates for a compute environment, you can pass an
+	// empty array to the [UpdateComputeEnvironment.overrides]parameter, or not include the overrides parameter when
+	// submitting the UpdateComputeEnvironment API operation.
+	//
+	// [UpdateComputeEnvironment.overrides]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html
+	Overrides []LaunchTemplateSpecificationOverride
+
+	// The version number of the launch template, $Default , or $Latest .
+	//
+	// If the value is $Default , the default version of the launch template is used.
+	// If the value is $Latest , the latest version of the launch template is used.
 	//
 	// If the AMI ID that's used in a compute environment is from the launch template,
 	// the AMI isn't changed when the compute environment is updated. It's only changed
 	// if the updateToLatestImageVersion parameter for the compute environment is set
-	// to true . During an infrastructure update, if either $Latest or $Default is
+	// to true . During an infrastructure update, if either $Default or $Latest is
 	// specified, Batch re-evaluates the launch template version, and it might use a
 	// different version of the launch template. This is the case even if the launch
 	// template isn't specified in the update. When updating a compute environment,
 	// changing the launch template requires an infrastructure update of the compute
 	// environment. For more information, see [Updating compute environments]in the Batch User Guide.
 	//
-	// Default: $Default .
+	// Default: $Default
+	//
+	// Latest: $Latest
+	//
+	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents a launch template to use in place of the default
+// launch template. You must specify either the launch template ID or launch
+// template name in the request, but not both.
+//
+// If security groups are specified using both the securityGroupIds parameter of
+// CreateComputeEnvironment and the launch template, the values in the
+// securityGroupIds parameter of CreateComputeEnvironment will be used.
+//
+// You can define up to ten (10) overrides for each compute environment.
+//
+// This object isn't applicable to jobs that are running on Fargate resources.
+//
+// To unset all override templates for a compute environment, you can pass an
+// empty array to the [UpdateComputeEnvironment.overrides]parameter, or not include the overrides parameter when
+// submitting the UpdateComputeEnvironment API operation.
+//
+// [UpdateComputeEnvironment.overrides]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UpdateComputeEnvironment.html
+type LaunchTemplateSpecificationOverride struct {
+
+	// The ID of the launch template.
+	//
+	// Note: If you specify the launchTemplateId you can't specify the
+	// launchTemplateName as well.
+	LaunchTemplateId *string
+
+	// The name of the launch template.
+	//
+	// Note: If you specify the launchTemplateName you can't specify the
+	// launchTemplateId as well.
+	LaunchTemplateName *string
+
+	// The instance type or family that this this override launch template should be
+	// applied to.
+	//
+	// This parameter is required when defining a launch template override.
+	//
+	// Information included in this parameter must meet the following requirements:
+	//
+	//   - Must be a valid Amazon EC2 instance type or family.
+	//
+	//   - optimal isn't allowed.
+	//
+	//   - targetInstanceTypes can target only instance types and families that are
+	//   included within the [ComputeResource.instanceTypes]ComputeResource.instanceTypes set. targetInstanceTypes
+	//   doesn't need to include all of the instances from the instanceType set, but at
+	//   least a subset. For example, if ComputeResource.instanceTypes includes [m5,
+	//   g5] , targetInstanceTypes can include [m5.2xlarge] and [m5.large] but not
+	//   [c5.large] .
+	//
+	//   - targetInstanceTypes included within the same launch template override or
+	//   across launch template overrides can't overlap for the same compute environment.
+	//   For example, you can't define one launch template override to target an instance
+	//   family and another define an instance type within this same family.
+	//
+	// [ComputeResource.instanceTypes]: https://docs.aws.amazon.com/batch/latest/APIReference/API_ComputeResource.html#Batch-Type-ComputeResource-instanceTypes
+	TargetInstanceTypes []string
+
+	// The version number of the launch template, $Default , or $Latest .
+	//
+	// If the value is $Default , the default version of the launch template is used.
+	// If the value is $Latest , the latest version of the launch template is used.
+	//
+	// If the AMI ID that's used in a compute environment is from the launch template,
+	// the AMI isn't changed when the compute environment is updated. It's only changed
+	// if the updateToLatestImageVersion parameter for the compute environment is set
+	// to true . During an infrastructure update, if either $Default or $Latest is
+	// specified, Batch re-evaluates the launch template version, and it might use a
+	// different version of the launch template. This is the case even if the launch
+	// template isn't specified in the update. When updating a compute environment,
+	// changing the launch template requires an infrastructure update of the compute
+	// environment. For more information, see [Updating compute environments]in the Batch User Guide.
+	//
+	// Default: $Default
+	//
+	// Latest: $Latest
 	//
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	Version *string

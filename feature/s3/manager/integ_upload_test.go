@@ -497,7 +497,7 @@ func (b *invalidateHash) RegisterMiddleware(stack *middleware.Stack) error {
 func (b *invalidateHash) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && input.PartNumber == aws.Int32(2) {
+	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && aws.ToInt32(input.PartNumber) == 2 {
 		ctx = v4.SetPayloadHash(ctx, "000")
 	}
 

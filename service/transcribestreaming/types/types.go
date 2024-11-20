@@ -149,7 +149,7 @@ type CallAnalyticsItem struct {
 	noSmithyDocumentSerde
 }
 
-// Contains detailed information about your Call Analytics streaming session.
+// Contains detailed information about your real-time Call Analytics session.
 // These details are provided in the UtteranceEvent and CategoryEvent objects.
 //
 // The following types satisfy this interface:
@@ -244,8 +244,13 @@ type ConfigurationEvent struct {
 	ChannelDefinitions []ChannelDefinition
 
 	// Provides additional optional settings for your Call Analytics post-call
-	// request, including encryption and output locations for your redacted and
-	// unredacted transcript.
+	// request, including encryption and output locations for your redacted transcript.
+	//
+	// PostCallAnalyticsSettings provides you with the same insights as a Call
+	// Analytics post-call transcription. Refer to [Post-call analytics]for more information on this
+	// feature.
+	//
+	// [Post-call analytics]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
 	PostCallAnalyticsSettings *PostCallAnalyticsSettings
 
 	noSmithyDocumentSerde
@@ -527,12 +532,17 @@ type PointsOfInterest struct {
 	noSmithyDocumentSerde
 }
 
-// Allows you to specify additional settings for your streaming Call Analytics
-// post-call request, including output locations for your redacted and unredacted
-// transcript, which IAM role to use, and, optionally, which encryption key to use.
+// Allows you to specify additional settings for your Call Analytics post-call
+// request, including output locations for your redacted transcript, which IAM role
+// to use, and which encryption key to use.
 //
-// ContentRedactionOutput , DataAccessRoleArn , and OutputLocation are required
-// fields.
+// DataAccessRoleArn and OutputLocation are required fields.
+//
+// PostCallAnalyticsSettings provides you with the same insights as a Call
+// Analytics post-call transcription. Refer to [Post-call analytics]for more information on this
+// feature.
+//
+// [Post-call analytics]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
 type PostCallAnalyticsSettings struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
@@ -596,7 +606,7 @@ type PostCallAnalyticsSettings struct {
 	//   - Use the ARN for the KMS key alias. For example,
 	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
 	//
-	// Note that the user making the request must have permission to use the specified
+	// Note that the role making the request must have permission to use the specified
 	// KMS key.
 	OutputEncryptionKMSKeyId *string
 

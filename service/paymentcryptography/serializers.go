@@ -1926,6 +1926,11 @@ func awsAwsjson10_serializeOpDocumentListAliasesInput(v *ListAliasesInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.KeyArn != nil {
+		ok := object.Key("KeyArn")
+		ok.String(*v.KeyArn)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)

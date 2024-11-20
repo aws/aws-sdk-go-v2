@@ -67,9 +67,9 @@ type StartFileTransferInput struct {
 
 	// One or more source paths for the Amazon S3 storage. Each string represents a
 	// source file path for one outbound file transfer. For example,
-	// DOC-EXAMPLE-BUCKET/myfile.txt .
+	// amzn-s3-demo-bucket/myfile.txt .
 	//
-	// Replace  DOC-EXAMPLE-BUCKET  with one of your actual buckets.
+	// Replace  amzn-s3-demo-bucket  with one of your actual buckets.
 	SendFilePaths []string
 
 	noSmithyDocumentSerde

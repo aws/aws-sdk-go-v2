@@ -40,8 +40,10 @@ type ListHostedConfigurationVersionsInput struct {
 	// This member is required.
 	ConfigurationProfileId *string
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
+	// The maximum number of items to return for this call. If MaxResults is not
+	// provided in the call, AppConfig returns the maximum of 50. The call also returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
 	MaxResults *int32
 
 	// A token to start the list. Use this token to get the next set of results.
@@ -174,8 +176,10 @@ func (c *Client) addOperationListHostedConfigurationVersionsMiddlewares(stack *m
 // ListHostedConfigurationVersionsPaginatorOptions is the paginator options for
 // ListHostedConfigurationVersions
 type ListHostedConfigurationVersionsPaginatorOptions struct {
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
+	// The maximum number of items to return for this call. If MaxResults is not
+	// provided in the call, AppConfig returns the maximum of 50. The call also returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

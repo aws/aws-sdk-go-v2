@@ -36,23 +36,27 @@ func (c *Client) AssociateUser(ctx context.Context, params *AssociateUserInput, 
 
 type AssociateUserInput struct {
 
-	// The identity provider of the user.
+	// The identity provider for the user.
 	//
 	// This member is required.
 	IdentityProvider types.IdentityProvider
 
-	// The ID of the EC2 instance, which provides user-based subscriptions.
+	// The ID of the EC2 instance that provides the user-based subscription.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The user name from the identity provider for the user.
+	// The user name from the identity provider.
 	//
 	// This member is required.
 	Username *string
 
-	// The domain name of the user.
+	// The domain name of the Active Directory that contains information for the user
+	// to associate.
 	Domain *string
+
+	// The tags that apply for the user association.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

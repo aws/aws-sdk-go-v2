@@ -18,7 +18,7 @@ import (
 // It has new metrics, offers filtering at a metric level, and offers the ability
 // to filter and group data by channels, queues, routing profiles, agents, and
 // agent hierarchy levels. It can retrieve historical data for the last 3 months,
-// at varying intervals.
+// at varying intervals. It does not support agent queues.
 //
 // For a description of the historical metrics that are supported by
 // GetMetricDataV2 and GetMetricData , see [Historical metrics definitions] in the Amazon Connect Administrator
@@ -83,12 +83,13 @@ type GetMetricDataV2Input struct {
 	//   Valid filter keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
 	//   AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
 	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
-	//   ANSWERING_MACHINE_DETECTION_STATUS | CAMPAIGN | CASE_TEMPLATE_ARN |
-	//   CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
-	//   DISCONNECT_REASON | FEATURE | FLOW_TYPE | FLOWS_NEXT_RESOURCE_ID |
-	//   FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
-	//   INITIATION_METHOD | RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE |
-	//   ROUTING_STEP_EXPRESSION | QUEUE | Q_CONNECT_ENABLED |
+	//   ANSWERING_MACHINE_DETECTION_STATUS | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
+	//   CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
+	//   contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON | FEATURE |
+	//   FLOW_TYPE | FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID |
+	//   FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID | INITIATION_METHOD |
+	//   RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
+	//   QUEUE | Q_CONNECT_ENABLED |
 	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
@@ -239,7 +240,7 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average agent API connecting time]
 	//
-	// The Negate key in Metric Level Filters is not applicable for this metric.
+	// The Negate key in metric-level filters is not applicable for this metric.
 	//
 	// AVG_AGENT_PAUSE_TIME Unit: Seconds
 	//
@@ -280,12 +281,12 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average conversation duration]
 	//
-	// AVG_DIALS_PER_MINUTE This metric is available only for contacts analyzed by
-	// outbound campaigns analytics.
+	// AVG_DIALS_PER_MINUTE This metric is available only for outbound campaigns that
+	// use the agent assisted voice and automated voice delivery modes.
 	//
 	// Unit: Count
 	//
-	// Valid groupings and filters: Campaign, Agent, Queue, Routing Profile
+	// Valid groupings and filters: Agent, Campaign, Queue, Routing Profile
 	//
 	// UI name: [Average dials per minute]
 	//
@@ -438,7 +439,8 @@ type GetMetricDataV2Input struct {
 	// UI name: [Average customer talk time]
 	//
 	// AVG_WAIT_TIME_AFTER_CUSTOMER_CONNECTION This metric is available only for
-	// contacts analyzed by outbound campaigns analytics.
+	// outbound campaigns that use the agent assisted voice and automated voice
+	// delivery modes.
 	//
 	// Unit: Seconds
 	//
@@ -446,12 +448,12 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average wait time after customer connection]
 	//
-	// CAMPAIGN_CONTACTS_ABANDONED_AFTER_X This metric is available only for contacts
-	// analyzed by outbound campaigns analytics.
+	// CAMPAIGN_CONTACTS_ABANDONED_AFTER_X This metric is available only for outbound
+	// campaigns using the agent assisted voice and automated voice delivery modes.
 	//
 	// Unit: Count
 	//
-	// Valid groupings and filters: Campaign, Agent
+	// Valid groupings and filters: Agent, Campaign
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter GT (for Greater than).
@@ -459,16 +461,37 @@ type GetMetricDataV2Input struct {
 	// UI name: [Campaign contacts abandoned after X]
 	//
 	// CAMPAIGN_CONTACTS_ABANDONED_AFTER_X_RATE This metric is available only for
-	// contacts analyzed by outbound campaigns analytics.
+	// outbound campaigns using the agent assisted voice and automated voice delivery
+	// modes.
 	//
 	// Unit: Percent
 	//
-	// Valid groupings and filters: Campaign, Agent
+	// Valid groupings and filters: Agent, Campaign
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you must enter GT (for Greater than).
 	//
 	// UI name: [Campaign contacts abandoned after X rate]
+	//
+	// CAMPAIGN_INTERACTIONS This metric is available only for outbound campaigns
+	// using the email delivery mode.
+	//
+	// Unit: Count
+	//
+	// Valid metric filter key: CAMPAIGN_INTERACTION_EVENT_TYPE
+	//
+	// Valid groupings and filters: Campaign
+	//
+	// UI name: [Campaign interactions]
+	//
+	// CAMPAIGN_SEND_ATTEMPTS This metric is available only for outbound campaigns.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Campaign, Channel,
+	// contact/segmentAttributes/connect:Subtype
+	//
+	// UI name: [Campaign send attempts]
 	//
 	// CASES_CREATED Unit: Count
 	//
@@ -581,7 +604,7 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
 	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
-	// Threshold: For ThresholdValue enter any whole number from 1 to 604800
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
 	// LTE (for "Less than equal").
 	//
@@ -618,33 +641,44 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Current cases]
 	//
-	// DELIVERY_ATTEMPTS This metric is available only for contacts analyzed by
-	// outbound campaigns analytics.
+	// DELIVERY_ATTEMPTS This metric is available only for outbound campaigns.
 	//
 	// Unit: Count
 	//
-	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS , DISCONNECT_REASON
+	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS ,
+	// CAMPAIGN_DELIVERY_EVENT_TYPE , DISCONNECT_REASON
 	//
-	// Valid groupings and filters: Campaign, Agent, Queue, Routing Profile, Answering
-	// Machine Detection Status, Disconnect Reason
+	// Valid groupings and filters: Agent, Answering Machine Detection Status,
+	// Campaign, Campaign Delivery EventType, Channel,
+	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Queue, Routing
+	// Profile
 	//
 	// UI name: [Delivery attempts]
 	//
-	// DELIVERY_ATTEMPT_DISPOSITION_RATE This metric is available only for contacts
-	// analyzed by outbound campaigns analytics, and with the answering machine
-	// detection enabled.
+	// Campaign Delivery EventType filter and grouping are only available for SMS and
+	// Email campaign delivery modes. Agent, Queue, Routing Profile, Answering Machine
+	// Detection Status and Disconnect Reason are only available for agent assisted
+	// voice and automated voice delivery modes.
+	//
+	// DELIVERY_ATTEMPT_DISPOSITION_RATE This metric is available only for outbound
+	// campaigns. Dispositions for the agent assisted voice and automated voice
+	// delivery modes are only available with answering machine detection enabled.
 	//
 	// Unit: Percent
 	//
-	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS , DISCONNECT_REASON
+	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS ,
+	// CAMPAIGN_DELIVERY_EVENT_TYPE , DISCONNECT_REASON
 	//
-	// Valid groupings and filters: Campaign, Agent, Answering Machine Detection
-	// Status, Disconnect Reason
-	//
-	// Answering Machine Detection Status and Disconnect Reason are valid filters but
-	// not valid groupings.
+	// Valid groupings and filters: Agent, Answering Machine Detection Status,
+	// Campaign, Channel, contact/segmentAttributes/connect:Subtype, Disconnect Reason,
+	// Queue, Routing Profile
 	//
 	// UI name: [Delivery attempt disposition rate]
+	//
+	// Campaign Delivery Event Type filter and grouping are only available for SMS and
+	// Email campaign delivery modes. Agent, Queue, Routing Profile, Answering Machine
+	// Detection Status and Disconnect Reason are only available for agent assisted
+	// voice and automated voice delivery modes.
 	//
 	// FLOWS_OUTCOME Unit: Count
 	//
@@ -663,12 +697,13 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Flows started]
 	//
-	// HUMAN_ANSWERED_CALLS This metric is available only for contacts analyzed by
-	// outbound campaigns analytics, and with the answering machine detection enabled.
+	// HUMAN_ANSWERED_CALLS This metric is available only for outbound campaigns.
+	// Dispositions for the agent assisted voice and automated voice delivery modes are
+	// only available with answering machine detection enabled.
 	//
 	// Unit: Count
 	//
-	// Valid groupings and filters: Campaign, Agent
+	// Valid groupings and filters: Agent, Campaign
 	//
 	// UI name: [Human answered]
 	//
@@ -824,7 +859,7 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Agent API connecting time]
 	//
-	// The Negate key in Metric Level Filters is not applicable for this metric.
+	// The Negate key in metric-level filters is not applicable for this metric.
 	//
 	// CONTACTS_ABANDONED Unit: Count
 	//
@@ -986,6 +1021,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
 	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical
 	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
+	// [Campaign send attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-send-attempts-historical
 	// [Average resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical
 	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
 	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historical
@@ -1008,6 +1044,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
 	// [Cases resolved on first contact]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
 	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
+	// [Campaign interactions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#campaign-interactions-historical
 	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical
 	// [Abandonment rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical
 	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical
@@ -1063,8 +1100,9 @@ type GetMetricDataV2Input struct {
 	// Valid grouping keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
 	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
 	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
-	// ANSWERING_MACHINE_DETECTION_STATUS | CAMPAIGN | CASE_TEMPLATE_ARN | CASE_STATUS
-	// | CHANNEL | contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
+	// ANSWERING_MACHINE_DETECTION_STATUS | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
+	// CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
+	// contact/segmentAttributes/connect:Subtype | DISCONNECT_REASON |
 	// FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
 	// INITIATION_METHOD | Q_CONNECT_ENABLED | QUEUE | RESOURCE_PUBLISHED_TIMESTAMP |
 	// ROUTING_PROFILE | ROUTING_STEP_EXPRESSION

@@ -613,6 +613,18 @@
                     "traits": {
                         "smithy.api#enumValue": "SUBJECT"
                     }
+                },
+                "ENVELOPE_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENVELOPE_TO"
+                    }
+                },
+                "ENVELOPE_FROM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENVELOPE_FROM"
+                    }
                 }
             }
         },
@@ -1741,6 +1753,32 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.mailmanager#Envelope": {
+            "type": "structure",
+            "members": {
+                "Helo": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HELO used by the host from which the email was received.</p>"
+                    }
+                },
+                "From": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RCPT FROM given by the host from which the email was received.</p>"
+                    }
+                },
+                "To": {
+                    "target": "com.amazonaws.mailmanager#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All SMTP TO entries given by the host from which the email was received.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SMTP envelope information of the email.</p>"
+            }
+        },
         "com.amazonaws.mailmanager#ErrorMessage": {
             "type": "string"
         },
@@ -2217,6 +2255,18 @@
                     "target": "com.amazonaws.mailmanager#S3PresignedURL",
                     "traits": {
                         "smithy.api#documentation": "<p>A pre-signed URL to temporarily download the full message content.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.mailmanager#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata about the email.</p>"
+                    }
+                },
+                "Envelope": {
+                    "target": "com.amazonaws.mailmanager#Envelope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SMTP envelope information of the email.</p>"
                     }
                 }
             },
@@ -5120,6 +5170,62 @@
                 "smithy.api#documentation": "<p>The textual body content of an email message.</p>"
             }
         },
+        "com.amazonaws.mailmanager#Metadata": {
+            "type": "structure",
+            "members": {
+                "Timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the email was received.</p>"
+                    }
+                },
+                "IngressPointId": {
+                    "target": "com.amazonaws.mailmanager#IngressPointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the ingress endpoint through which the email was received.</p>"
+                    }
+                },
+                "TrafficPolicyId": {
+                    "target": "com.amazonaws.mailmanager#TrafficPolicyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the traffic policy that was in effect when the email was received.</p>"
+                    }
+                },
+                "RuleSetId": {
+                    "target": "com.amazonaws.mailmanager#RuleSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule set that processed the email.</p>"
+                    }
+                },
+                "SenderHostname": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the host from which the email was received.</p>"
+                    }
+                },
+                "SenderIpAddress": {
+                    "target": "com.amazonaws.mailmanager#SenderIpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the host from which the email was received.</p>"
+                    }
+                },
+                "TlsCipherSuite": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS cipher suite used to communicate with the host from which the email was received.</p>"
+                    }
+                },
+                "TlsProtocol": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS protocol used to communicate with the host from which the email was received.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata about the email.</p>"
+            }
+        },
         "com.amazonaws.mailmanager#MimeHeaderAttribute": {
             "type": "string",
             "traits": {
@@ -5646,6 +5752,30 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The priority level of the email.</p>"
+                    }
+                },
+                "IngressPointId": {
+                    "target": "com.amazonaws.mailmanager#IngressPointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the ingress endpoint through which the email was received.</p>"
+                    }
+                },
+                "SenderHostname": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the host from which the email was received.</p>"
+                    }
+                },
+                "SenderIpAddress": {
+                    "target": "com.amazonaws.mailmanager#SenderIpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the host from which the email was received.</p>"
+                    }
+                },
+                "Envelope": {
+                    "target": "com.amazonaws.mailmanager#Envelope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SMTP envelope information of the email.</p>"
                     }
                 }
             },
@@ -6787,6 +6917,12 @@
                 "smithy.api#documentation": "<p>Sends the email to the internet using the ses:SendRawEmail API.</p>"
             }
         },
+        "com.amazonaws.mailmanager#SenderIpAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.mailmanager#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -6881,6 +7017,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details on where to deliver the exported email data.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "IncludeMetadata": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to include message metadata as JSON files in the export.</p>"
                     }
                 }
             },

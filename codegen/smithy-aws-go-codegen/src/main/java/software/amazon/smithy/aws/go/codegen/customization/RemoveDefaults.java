@@ -32,7 +32,11 @@ public class RemoveDefaults implements GoIntegration {
         serviceToShapeIds("com.amazonaws.paymentcryptographydata#PaymentCryptographyDataPlane",
                 "com.amazonaws.paymentcryptographydata#IntegerRangeBetween4And12"),
         serviceToShapeIds("com.amazonaws.emrserverless#AwsToledoWebService",
-                "com.amazonaws.emrserverless#WorkerCounts"));
+                "com.amazonaws.emrserverless#WorkerCounts"),
+        serviceToShapeIds("com.amazonaws.imagebuilder#imagebuilder",
+                    // https://github.com/aws/aws-sdk-go-v2/issues/2734
+                    // V1479153907
+                    "com.amazonaws.imagebuilder#LaunchTemplateConfiguration$setDefaultVersion"));
 
     private boolean mustPreprocess(ShapeId service) {
         return toRemove.containsKey(service);

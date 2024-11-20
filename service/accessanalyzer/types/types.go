@@ -16,7 +16,9 @@ type Access struct {
 	Actions []string
 
 	// A list of resources for the access permissions. Any strings that can be used as
-	// a resource in an IAM policy can be used in the list of resources to check.
+	// an Amazon Resource Name (ARN) in an IAM policy can be used in the list of
+	// resources to check. You can only use a wildcard in the portion of the ARN that
+	// specifies the resource ID.
 	Resources []string
 
 	noSmithyDocumentSerde
@@ -147,6 +149,10 @@ type AccessPreviewFinding struct {
 	// associated with the access preview.
 	Resource *string
 
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
+
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
 	Sources []FindingSource
@@ -238,6 +244,43 @@ type AclGranteeMemberUri struct {
 
 func (*AclGranteeMemberUri) isAclGrantee() {}
 
+// Contains information about analysis rules for the analyzer. Analysis rules
+// determine which entities will generate findings based on the criteria you define
+// when you create the rule.
+type AnalysisRule struct {
+
+	// A list of rules for the analyzer containing criteria to exclude from analysis.
+	// Entities that meet the rule criteria will not generate findings.
+	Exclusions []AnalysisRuleCriteria
+
+	noSmithyDocumentSerde
+}
+
+// The criteria for an analysis rule for an analyzer. The criteria determine which
+// entities will generate findings.
+type AnalysisRuleCriteria struct {
+
+	// A list of Amazon Web Services account IDs to apply to the analysis rule
+	// criteria. The accounts cannot include the organization analyzer owner account.
+	// Account IDs can only be applied to the analysis rule criteria for
+	// organization-level analyzers. The list cannot include more than 2,000 account
+	// IDs.
+	AccountIds []string
+
+	// An array of key-value pairs to match for your resources. You can use the set of
+	// Unicode letters, digits, whitespace, _ , . , / , = , + , and - .
+	//
+	// For the tag key, you can specify a value that is 1 to 128 characters in length
+	// and cannot be prefixed with aws: .
+	//
+	// For the tag value, you can specify a value that is 0 to 256 characters in
+	// length. If the specified tag value is 0 characters, the rule is applied to all
+	// principals with the specified tag key.
+	ResourceTags []map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the analyzed resource.
 type AnalyzedResource struct {
 
@@ -315,8 +358,8 @@ type AnalyzedResourceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the configuration of an unused access analyzer for
-// an Amazon Web Services organization or account.
+// Contains information about the configuration of an analyzer for an Amazon Web
+// Services organization or account.
 //
 // The following types satisfy this interface:
 //
@@ -326,8 +369,7 @@ type AnalyzerConfiguration interface {
 }
 
 // Specifies the configuration of an unused access analyzer for an Amazon Web
-// Services organization or account. External access analyzers do not support any
-// configuration.
+// Services organization or account.
 type AnalyzerConfigurationMemberUnusedAccess struct {
 	Value UnusedAccessConfiguration
 
@@ -392,7 +434,8 @@ type AnalyzerSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an archive rule.
+// Contains information about an archive rule. Archive rules automatically archive
+// new findings that meet the criteria you define when you create the rule.
 type ArchiveRuleSummary struct {
 
 	// The time at which the archive rule was created.
@@ -820,6 +863,10 @@ type ExternalAccessDetails struct {
 	// The external principal that has access to a resource within the zone of trust.
 	Principal map[string]string
 
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
+
 	// The sources of the external access finding. This indicates how the access that
 	// generated the finding is granted. It is populated for Amazon S3 bucket findings.
 	Sources []FindingSource
@@ -886,6 +933,10 @@ type Finding struct {
 
 	// The resource that an external principal has access to.
 	Resource *string
+
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
@@ -1047,6 +1098,10 @@ type FindingSummary struct {
 
 	// The resource that the external principal has access to.
 	Resource *string
+
+	// The type of restriction applied to the finding by the resource owner with an
+	// Organizations resource control policy (RCP).
+	ResourceControlPolicyRestriction ResourceControlPolicyRestriction
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
@@ -1981,11 +2036,16 @@ type TrailProperties struct {
 // Contains information about an unused access analyzer.
 type UnusedAccessConfiguration struct {
 
+	// Contains information about analysis rules for the analyzer. Analysis rules
+	// determine which entities will generate findings based on the criteria you define
+	// when you create the rule.
+	AnalysisRule *AnalysisRule
+
 	// The specified access age in days for which to generate findings for unused
 	// access. For example, if you specify 90 days, the analyzer will generate findings
 	// for IAM entities within the accounts of the selected organization for any access
 	// that hasn't been used in 90 or more days since the analyzer's last scan. You can
-	// choose a value between 1 and 180 days.
+	// choose a value between 1 and 365 days.
 	UnusedAccessAge *int32
 
 	noSmithyDocumentSerde

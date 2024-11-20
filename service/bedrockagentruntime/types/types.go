@@ -9,10 +9,10 @@ import (
 )
 
 // Contains information about the action group being invoked. For more information
-// about the possible structures, see the InvocationInput tab in [OrchestrationTrace]in the Amazon
-// Bedrock User Guide.
+// about the possible structures, see the InvocationInput tab in [OrchestrationTrace]in the [Amazon Bedrock User Guide].
 //
 // [OrchestrationTrace]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-orchestration.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 type ActionGroupInvocationInput struct {
 
 	// The name of the action group.
@@ -51,6 +51,15 @@ type ActionGroupInvocationOutput struct {
 
 	// The JSON-formatted string returned by the API invoked by the action group.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// An event in which the prompt was analyzed in preparation for optimization.
+type AnalyzePromptEvent struct {
+
+	// A message describing the analysis of the prompt.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -422,12 +431,6 @@ type FinalResponse struct {
 }
 
 // Contains information about why a flow completed.
-//
-// This data type is used in the following API operations:
-//
-// [InvokeFlow response]
-//
-// [InvokeFlow response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
 type FlowCompletionEvent struct {
 
 	// The reason that the flow completed.
@@ -439,12 +442,6 @@ type FlowCompletionEvent struct {
 }
 
 // Contains information about an input into the prompt flow and where to send it.
-//
-// This data type is used in the following API operations:
-//
-// [InvokeFlow request]
-//
-// [InvokeFlow request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
 type FlowInput struct {
 
 	// Contains information about an input into the prompt flow.
@@ -467,15 +464,9 @@ type FlowInput struct {
 
 // Contains information about an input into the flow.
 //
-// This data type is used in the following API operations:
-//
-// [InvokeFlow request]
-//
 // The following types satisfy this interface:
 //
 //	FlowInputContentMemberDocument
-//
-// [InvokeFlow request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
 type FlowInputContent interface {
 	isFlowInputContent()
 }
@@ -491,15 +482,9 @@ func (*FlowInputContentMemberDocument) isFlowInputContent() {}
 
 // Contains information about the content in an output from prompt flow invocation.
 //
-// This data type is used in the following API operations:
-//
-// [InvokeFlow request]
-//
 // The following types satisfy this interface:
 //
 //	FlowOutputContentMemberDocument
-//
-// [InvokeFlow request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
 type FlowOutputContent interface {
 	isFlowOutputContent()
 }
@@ -514,12 +499,6 @@ type FlowOutputContentMemberDocument struct {
 func (*FlowOutputContentMemberDocument) isFlowOutputContent() {}
 
 // Contains information about an output from prompt flow invoction.
-//
-// This data type is used in the following API operations:
-//
-// [InvokeFlow response]
-//
-// [InvokeFlow response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
 type FlowOutputEvent struct {
 
 	// The content in the output.
@@ -542,16 +521,11 @@ type FlowOutputEvent struct {
 
 // The output of the flow.
 //
-// This data type is used in the following API operations:
-//
-// [InvokeFlow response]
-//
 // The following types satisfy this interface:
 //
 //	FlowResponseStreamMemberFlowCompletionEvent
 //	FlowResponseStreamMemberFlowOutputEvent
-//
-// [InvokeFlow response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
+//	FlowResponseStreamMemberFlowTraceEvent
 type FlowResponseStream interface {
 	isFlowResponseStream()
 }
@@ -573,6 +547,235 @@ type FlowResponseStreamMemberFlowOutputEvent struct {
 }
 
 func (*FlowResponseStreamMemberFlowOutputEvent) isFlowResponseStream() {}
+
+// Contains information about a trace, which tracks an input or output for a node
+// in the flow.
+type FlowResponseStreamMemberFlowTraceEvent struct {
+	Value FlowTraceEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowResponseStreamMemberFlowTraceEvent) isFlowResponseStream() {}
+
+// Contains information about an input or output for a node in the flow. For more
+// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// The following types satisfy this interface:
+//
+//	FlowTraceMemberConditionNodeResultTrace
+//	FlowTraceMemberNodeInputTrace
+//	FlowTraceMemberNodeOutputTrace
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTrace interface {
+	isFlowTrace()
+}
+
+// Contains information about an output from a condition node.
+type FlowTraceMemberConditionNodeResultTrace struct {
+	Value FlowTraceConditionNodeResultEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceMemberConditionNodeResultTrace) isFlowTrace() {}
+
+// Contains information about the input into a node.
+type FlowTraceMemberNodeInputTrace struct {
+	Value FlowTraceNodeInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceMemberNodeInputTrace) isFlowTrace() {}
+
+// Contains information about the output from a node.
+type FlowTraceMemberNodeOutputTrace struct {
+	Value FlowTraceNodeOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceMemberNodeOutputTrace) isFlowTrace() {}
+
+// Contains information about a condition that was satisfied. For more
+// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceCondition struct {
+
+	// The name of the condition.
+	//
+	// This member is required.
+	ConditionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an output from a condition node. For more
+// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceConditionNodeResultEvent struct {
+
+	// The name of the condition node.
+	//
+	// This member is required.
+	NodeName *string
+
+	// An array of objects containing information about the conditions that were
+	// satisfied.
+	//
+	// This member is required.
+	SatisfiedConditions []FlowTraceCondition
+
+	// The date and time that the trace was returned.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a trace, which tracks an input or output for a node
+// in the flow. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceEvent struct {
+
+	// The trace object containing information about an input or output for a node in
+	// the flow.
+	//
+	// This member is required.
+	Trace FlowTrace
+
+	noSmithyDocumentSerde
+}
+
+// Contains the content of the node input. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// The following types satisfy this interface:
+//
+//	FlowTraceNodeInputContentMemberDocument
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceNodeInputContent interface {
+	isFlowTraceNodeInputContent()
+}
+
+// The content of the node input.
+type FlowTraceNodeInputContentMemberDocument struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceNodeInputContentMemberDocument) isFlowTraceNodeInputContent() {}
+
+// Contains information about the input into a node. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceNodeInputEvent struct {
+
+	// An array of objects containing information about each field in the input.
+	//
+	// This member is required.
+	Fields []FlowTraceNodeInputField
+
+	// The name of the node that received the input.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The date and time that the trace was returned.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a field in the input into a node. For more
+// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceNodeInputField struct {
+
+	// The content of the node input.
+	//
+	// This member is required.
+	Content FlowTraceNodeInputContent
+
+	// The name of the node input.
+	//
+	// This member is required.
+	NodeInputName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the content of the node output. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// The following types satisfy this interface:
+//
+//	FlowTraceNodeOutputContentMemberDocument
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceNodeOutputContent interface {
+	isFlowTraceNodeOutputContent()
+}
+
+// The content of the node output.
+type FlowTraceNodeOutputContentMemberDocument struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowTraceNodeOutputContentMemberDocument) isFlowTraceNodeOutputContent() {}
+
+// Contains information about the output from a node. For more information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceNodeOutputEvent struct {
+
+	// An array of objects containing information about each field in the output.
+	//
+	// This member is required.
+	Fields []FlowTraceNodeOutputField
+
+	// The name of the node that yielded the output.
+	//
+	// This member is required.
+	NodeName *string
+
+	// The date and time that the trace was returned.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a field in the output from a node. For more
+// information, see [Track each step in your prompt flow by viewing its trace in Amazon Bedrock].
+//
+// [Track each step in your prompt flow by viewing its trace in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html
+type FlowTraceNodeOutputField struct {
+
+	// The content of the node output.
+	//
+	// This member is required.
+	Content FlowTraceNodeOutputContent
+
+	// The name of the node output.
+	//
+	// This member is required.
+	NodeOutputName *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains information about the function that the agent predicts should be
 // called.
@@ -702,7 +905,10 @@ type GenerationConfiguration struct {
 	InferenceConfig *InferenceConfig
 
 	// Contains the template for the prompt that's sent to the model for response
-	// generation.
+	// generation. Generation prompts must include the $search_results$ variable. For
+	// more information, see [Use placeholder variables]in the user guide.
+	//
+	// [Use placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	PromptTemplate *PromptTemplate
 
 	noSmithyDocumentSerde
@@ -967,6 +1173,24 @@ type InputFile struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about the prompt to optimize.
+//
+// The following types satisfy this interface:
+//
+//	InputPromptMemberTextPrompt
+type InputPrompt interface {
+	isInputPrompt()
+}
+
+// Contains information about the text prompt to optimize.
+type InputPromptMemberTextPrompt struct {
+	Value TextPrompt
+
+	noSmithyDocumentSerde
+}
+
+func (*InputPromptMemberTextPrompt) isInputPrompt() {}
 
 // Contains information pertaining to the action group or knowledge base that is
 // being invoked.
@@ -1395,14 +1619,84 @@ type Observation struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the optimized prompt.
+//
+// The following types satisfy this interface:
+//
+//	OptimizedPromptMemberTextPrompt
+type OptimizedPrompt interface {
+	isOptimizedPrompt()
+}
+
+// Contains information about the text in the prompt that was optimized.
+type OptimizedPromptMemberTextPrompt struct {
+	Value TextPrompt
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizedPromptMemberTextPrompt) isOptimizedPrompt() {}
+
+// An event in which the prompt was optimized.
+type OptimizedPromptEvent struct {
+
+	// Contains information about the optimized prompt.
+	OptimizedPrompt OptimizedPrompt
+
+	noSmithyDocumentSerde
+}
+
+// The stream containing events in the prompt optimization process.
+//
+// The following types satisfy this interface:
+//
+//	OptimizedPromptStreamMemberAnalyzePromptEvent
+//	OptimizedPromptStreamMemberOptimizedPromptEvent
+type OptimizedPromptStream interface {
+	isOptimizedPromptStream()
+}
+
+// An event in which the prompt was analyzed in preparation for optimization.
+type OptimizedPromptStreamMemberAnalyzePromptEvent struct {
+	Value AnalyzePromptEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizedPromptStreamMemberAnalyzePromptEvent) isOptimizedPromptStream() {}
+
+// An event in which the prompt was optimized.
+type OptimizedPromptStreamMemberOptimizedPromptEvent struct {
+	Value OptimizedPromptEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizedPromptStreamMemberOptimizedPromptEvent) isOptimizedPromptStream() {}
+
 // Settings for how the model processes the prompt prior to retrieval and
 // generation.
 type OrchestrationConfiguration struct {
 
+	//  Additional model parameters and corresponding values not included in the
+	// textInferenceConfig structure for a knowledge base. This allows users to provide
+	// custom model parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	//  Configuration settings for inference when using RetrieveAndGenerate to
+	// generate responses while using a knowledge base as a source.
+	InferenceConfig *InferenceConfig
+
+	// Contains the template for the prompt that's sent to the model. Orchestration
+	// prompts must include the $conversation_history$ and
+	// $output_format_instructions$ variables. For more information, see [Use placeholder variables] in the user
+	// guide.
+	//
+	// [Use placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
+	PromptTemplate *PromptTemplate
+
 	// To split up the prompt and retrieve multiple sources, set the transformation
 	// type to QUERY_DECOMPOSITION .
-	//
-	// This member is required.
 	QueryTransformationConfiguration *QueryTransformationConfiguration
 
 	noSmithyDocumentSerde
@@ -1411,7 +1705,8 @@ type OrchestrationConfiguration struct {
 // The foundation model output from the orchestration step.
 type OrchestrationModelInvocationOutput struct {
 
-	// Contains information about the foundation model output.
+	// Contains information about the foundation model output from the orchestration
+	// step.
 	Metadata *Metadata
 
 	// Contains details of the raw response from the foundation model output.
@@ -1540,14 +1835,15 @@ type PayloadPart struct {
 // The foundation model output from the post-processing step.
 type PostProcessingModelInvocationOutput struct {
 
-	// Provides details of the foundation model.
+	//  Contains information about the foundation model output from the
+	// post-processing step.
 	Metadata *Metadata
 
 	// Details about the response from the Lambda parsing of the output of the
 	// post-processing step.
 	ParsedResponse *PostProcessingParsedResponse
 
-	// Contains the raw output from the foundation model.
+	//  Details of the raw response from the foundation model output.
 	RawResponse *RawResponse
 
 	// The unique identifier of the trace.
@@ -1606,14 +1902,15 @@ func (*PostProcessingTraceMemberModelInvocationOutput) isPostProcessingTrace() {
 // The foundation model output from the pre-processing step.
 type PreProcessingModelInvocationOutput struct {
 
-	// Provides details of the foundation model.
+	//  Contains information about the foundation model output from the pre-processing
+	// step.
 	Metadata *Metadata
 
 	// Details about the response from the Lambda parsing of the output of the
 	// pre-processing step.
 	ParsedResponse *PreProcessingParsedResponse
 
-	// Contains the raw output from the foundation model.
+	//  Details of the raw response from the foundation model output.
 	RawResponse *RawResponse
 
 	// The unique identifier of the trace.
@@ -2461,6 +2758,17 @@ type TextInferenceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the text prompt to optimize.
+type TextPrompt struct {
+
+	// The text in the text prompt to optimize.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the part of the generated text that contains a citation, alongside
 // where it begins and ends.
 //
@@ -2606,15 +2914,21 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isFlowInputContent()       {}
-func (*UnknownUnionMember) isFlowOutputContent()      {}
-func (*UnknownUnionMember) isFlowResponseStream()     {}
-func (*UnknownUnionMember) isInvocationInputMember()  {}
-func (*UnknownUnionMember) isInvocationResultMember() {}
-func (*UnknownUnionMember) isMemory()                 {}
-func (*UnknownUnionMember) isOrchestrationTrace()     {}
-func (*UnknownUnionMember) isPostProcessingTrace()    {}
-func (*UnknownUnionMember) isPreProcessingTrace()     {}
-func (*UnknownUnionMember) isResponseStream()         {}
-func (*UnknownUnionMember) isRetrievalFilter()        {}
-func (*UnknownUnionMember) isTrace()                  {}
+func (*UnknownUnionMember) isFlowInputContent()           {}
+func (*UnknownUnionMember) isFlowOutputContent()          {}
+func (*UnknownUnionMember) isFlowResponseStream()         {}
+func (*UnknownUnionMember) isFlowTrace()                  {}
+func (*UnknownUnionMember) isFlowTraceNodeInputContent()  {}
+func (*UnknownUnionMember) isFlowTraceNodeOutputContent() {}
+func (*UnknownUnionMember) isInputPrompt()                {}
+func (*UnknownUnionMember) isInvocationInputMember()      {}
+func (*UnknownUnionMember) isInvocationResultMember()     {}
+func (*UnknownUnionMember) isMemory()                     {}
+func (*UnknownUnionMember) isOptimizedPrompt()            {}
+func (*UnknownUnionMember) isOptimizedPromptStream()      {}
+func (*UnknownUnionMember) isOrchestrationTrace()         {}
+func (*UnknownUnionMember) isPostProcessingTrace()        {}
+func (*UnknownUnionMember) isPreProcessingTrace()         {}
+func (*UnknownUnionMember) isResponseStream()             {}
+func (*UnknownUnionMember) isRetrievalFilter()            {}
+func (*UnknownUnionMember) isTrace()                      {}

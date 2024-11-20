@@ -29,16 +29,17 @@ func (c *Client) DeleteFirewallRule(ctx context.Context, params *DeleteFirewallR
 
 type DeleteFirewallRuleInput struct {
 
-	// The ID of the domain list that's used in the rule.
-	//
-	// This member is required.
-	FirewallDomainListId *string
-
 	// The unique identifier of the firewall rule group that you want to delete the
 	// rule from.
 	//
 	// This member is required.
 	FirewallRuleGroupId *string
+
+	// The ID of the domain list that's used in the rule.
+	FirewallDomainListId *string
+
+	//  The ID that is created for a DNS Firewall Advanced rule.
+	FirewallThreatProtectionId *string
 
 	//  The DNS query type that the rule you are deleting evaluates. Allowed values
 	// are;

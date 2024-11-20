@@ -5236,6 +5236,11 @@ func awsRestjson1_serializeOpDocumentPutConfigurationSetDeliveryOptionsInput(v *
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxDeliverySeconds != nil {
+		ok := object.Key("MaxDeliverySeconds")
+		ok.Long(*v.MaxDeliverySeconds)
+	}
+
 	if v.SendingPoolName != nil {
 		ok := object.Key("SendingPoolName")
 		ok.String(*v.SendingPoolName)
@@ -8167,6 +8172,11 @@ func awsRestjson1_serializeDocumentDeliveryOptions(v *types.DeliveryOptions, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxDeliverySeconds != nil {
+		ok := object.Key("MaxDeliverySeconds")
+		ok.Long(*v.MaxDeliverySeconds)
+	}
+
 	if v.SendingPoolName != nil {
 		ok := object.Key("SendingPoolName")
 		ok.String(*v.SendingPoolName)
@@ -9103,6 +9113,13 @@ func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.
 	if v.TemplateArn != nil {
 		ok := object.Key("TemplateArn")
 		ok.String(*v.TemplateArn)
+	}
+
+	if v.TemplateContent != nil {
+		ok := object.Key("TemplateContent")
+		if err := awsRestjson1_serializeDocumentEmailTemplateContent(v.TemplateContent, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TemplateData != nil {

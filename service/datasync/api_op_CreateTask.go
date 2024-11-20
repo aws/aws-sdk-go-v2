@@ -51,6 +51,9 @@ type CreateTaskInput struct {
 
 	// Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for
 	// monitoring your task.
+	//
+	// For Enhanced mode tasks, you don't need to specify anything. DataSync
+	// automatically sends logs to a CloudWatch log group named /aws/datasync .
 	CloudWatchLogGroupArn *string
 
 	// Specifies exclude filters that define the files, objects, and folders in your
@@ -60,9 +63,9 @@ type CreateTaskInput struct {
 	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Excludes []types.FilterRule
 
-	// Specifies include filters define the files, objects, and folders in your source
-	// location that you want DataSync to transfer. For more information and examples,
-	// see [Specifying what DataSync transfers by using filters].
+	// Specifies include filters that define the files, objects, and folders in your
+	// source location that you want DataSync to transfer. For more information and
+	// examples, see [Specifying what DataSync transfers by using filters].
 	//
 	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Includes []types.FilterRule
@@ -96,6 +99,28 @@ type CreateTaskInput struct {
 	// Tags are key-value pairs that help you manage, filter, and search for your
 	// DataSync resources.
 	Tags []types.TagListEntry
+
+	// Specifies one of the following task modes for your data transfer:
+	//
+	//   - ENHANCED - Transfer virtually unlimited numbers of objects with higher
+	//   performance than Basic mode. Enhanced mode tasks optimize the data transfer
+	//   process by listing, preparing, transferring, and verifying data in parallel.
+	//   Enhanced mode is currently available for transfers between Amazon S3 locations.
+	//
+	// To create an Enhanced mode task, the IAM role that you use to call the
+	//   CreateTask operation must have the iam:CreateServiceLinkedRole permission.
+	//
+	//   - BASIC (default) - Transfer files or objects between Amazon Web Services
+	//   storage and all other supported DataSync locations. Basic mode tasks are subject
+	//   to [quotas]on the number of files, objects, and directories in a dataset. Basic mode
+	//   sequentially prepares, transfers, and verifies data, making it slower than
+	//   Enhanced mode for most workloads.
+	//
+	// For more information, see [Understanding task mode differences].
+	//
+	// [Understanding task mode differences]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html#task-mode-differences
+	// [quotas]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-limits.html
+	TaskMode types.TaskMode
 
 	// Specifies how you want to configure a task report, which provides detailed
 	// information about your DataSync transfer. For more information, see [Monitoring your DataSync transfers with task reports].

@@ -89,7 +89,7 @@ type UpdateFileSystemOutput struct {
 	// This member is required.
 	OwnerId *string
 
-	// The Performance mode of the file system.
+	// The performance mode of the file system.
 	//
 	// This member is required.
 	PerformanceMode types.PerformanceMode

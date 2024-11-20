@@ -5885,13 +5885,88 @@ func awsAwsjson11_deserializeDocumentAccountLimitExceededException(v **types.Acc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoRetryConfig(v **types.AutoRetryConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoRetryConfig
+	if *v == nil {
+		sv = &types.AutoRetryConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoRetryLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoRetryLimit = ptr.Int32(int32(i64))
+			}
+
+		case "autoRetryNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoRetryNumber = ptr.Int32(int32(i64))
+			}
+
+		case "nextAutoRetry":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextAutoRetry = ptr.String(jtv)
+			}
+
+		case "previousAutoRetry":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PreviousAutoRetry = ptr.String(jtv)
 			}
 
 		default:
@@ -5985,6 +6060,11 @@ func awsAwsjson11_deserializeDocumentBuild(v **types.Build, value interface{}) e
 
 		case "artifacts":
 			if err := awsAwsjson11_deserializeDocumentBuildArtifacts(&sv.Artifacts, value); err != nil {
+				return err
+			}
+
+		case "autoRetryConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoRetryConfig(&sv.AutoRetryConfig, value); err != nil {
 				return err
 			}
 
@@ -7858,6 +7938,85 @@ func awsAwsjson11_deserializeDocumentCodeCoverages(v *[]types.CodeCoverage, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentComputeConfiguration(v **types.ComputeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComputeConfiguration
+	if *v == nil {
+		sv = &types.ComputeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "disk":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Disk = ptr.Int64(i64)
+			}
+
+		case "machineType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MachineType to be of type string, got %T instead", value)
+				}
+				sv.MachineType = types.MachineType(jtv)
+			}
+
+		case "memory":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Memory = ptr.Int64(i64)
+			}
+
+		case "vCpu":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VCpu = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentComputeTypesAllowed(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8474,6 +8633,11 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 				sv.BaseCapacity = ptr.Int32(int32(i64))
 			}
 
+		case "computeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentComputeConfiguration(&sv.ComputeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "computeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8567,6 +8731,11 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 					return fmt.Errorf("expected FleetOverflowBehavior to be of type string, got %T instead", value)
 				}
 				sv.OverflowBehavior = types.FleetOverflowBehavior(jtv)
+			}
+
+		case "proxyConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProxyConfiguration(&sv.ProxyConfiguration, value); err != nil {
+				return err
 			}
 
 		case "scalingConfiguration":
@@ -8663,6 +8832,130 @@ func awsAwsjson11_deserializeDocumentFleetNames(v *[]string, value interface{}) 
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFleetProxyRule(v **types.FleetProxyRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FleetProxyRule
+	if *v == nil {
+		sv = &types.FleetProxyRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FleetProxyRuleEffectType to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.FleetProxyRuleEffectType(jtv)
+			}
+
+		case "entities":
+			if err := awsAwsjson11_deserializeDocumentFleetProxyRuleEntities(&sv.Entities, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FleetProxyRuleType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.FleetProxyRuleType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFleetProxyRuleEntities(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFleetProxyRules(v *[]types.FleetProxyRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FleetProxyRule
+	if *v == nil {
+		cv = []types.FleetProxyRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FleetProxyRule
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFleetProxyRule(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8896,7 +9189,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9121,7 +9414,7 @@ func awsAwsjson11_deserializeDocumentOAuthProviderException(v **types.OAuthProvi
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9256,6 +9549,19 @@ func awsAwsjson11_deserializeDocumentProject(v **types.Project, value interface{
 		case "artifacts":
 			if err := awsAwsjson11_deserializeDocumentProjectArtifacts(&sv.Artifacts, value); err != nil {
 				return err
+			}
+
+		case "autoRetryLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoRetryLimit = ptr.Int32(int32(i64))
 			}
 
 		case "badge":
@@ -9912,6 +10218,11 @@ func awsAwsjson11_deserializeDocumentProjectEnvironment(v **types.ProjectEnviron
 				sv.Certificate = ptr.String(jtv)
 			}
 
+		case "computeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentComputeConfiguration(&sv.ComputeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "computeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10420,6 +10731,51 @@ func awsAwsjson11_deserializeDocumentProjectSourceVersion(v **types.ProjectSourc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SourceVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProxyConfiguration(v **types.ProxyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProxyConfiguration
+	if *v == nil {
+		sv = &types.ProxyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FleetProxyRuleBehavior to be of type string, got %T instead", value)
+				}
+				sv.DefaultBehavior = types.FleetProxyRuleBehavior(jtv)
+			}
+
+		case "orderedProxyRules":
+			if err := awsAwsjson11_deserializeDocumentFleetProxyRules(&sv.OrderedProxyRules, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11210,7 +11566,7 @@ func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11250,7 +11606,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

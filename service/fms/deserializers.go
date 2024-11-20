@@ -7749,7 +7749,7 @@ func awsAwsjson11_deserializeDocumentInternalErrorException(v **types.InternalEr
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7789,7 +7789,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7901,7 +7901,7 @@ func awsAwsjson11_deserializeDocumentInvalidOperationException(v **types.Invalid
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7941,7 +7941,7 @@ func awsAwsjson11_deserializeDocumentInvalidTypeException(v **types.InvalidTypeE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8053,7 +8053,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10956,6 +10956,42 @@ func awsAwsjson11_deserializeDocumentResource(v **types.Resource, value interfac
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentResourceArnList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11048,7 +11084,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11574,6 +11610,16 @@ func awsAwsjson11_deserializeDocumentResourceViolation(v **types.ResourceViolati
 
 		case "ThirdPartyFirewallMissingSubnetViolation":
 			if err := awsAwsjson11_deserializeDocumentThirdPartyFirewallMissingSubnetViolation(&sv.ThirdPartyFirewallMissingSubnetViolation, value); err != nil {
+				return err
+			}
+
+		case "WebACLHasIncompatibleConfigurationViolation":
+			if err := awsAwsjson11_deserializeDocumentWebACLHasIncompatibleConfigurationViolation(&sv.WebACLHasIncompatibleConfigurationViolation, value); err != nil {
+				return err
+			}
+
+		case "WebACLHasOutOfScopeResourcesViolation":
+			if err := awsAwsjson11_deserializeDocumentWebACLHasOutOfScopeResourcesViolation(&sv.WebACLHasOutOfScopeResourcesViolation, value); err != nil {
 				return err
 			}
 
@@ -12901,6 +12947,100 @@ func awsAwsjson11_deserializeDocumentViolationDetail(v **types.ViolationDetail, 
 		case "ResourceViolations":
 			if err := awsAwsjson11_deserializeDocumentResourceViolations(&sv.ResourceViolations, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWebACLHasIncompatibleConfigurationViolation(v **types.WebACLHasIncompatibleConfigurationViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebACLHasIncompatibleConfigurationViolation
+	if *v == nil {
+		sv = &types.WebACLHasIncompatibleConfigurationViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "WebACLArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.WebACLArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWebACLHasOutOfScopeResourcesViolation(v **types.WebACLHasOutOfScopeResourcesViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebACLHasOutOfScopeResourcesViolation
+	if *v == nil {
+		sv = &types.WebACLHasOutOfScopeResourcesViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OutOfScopeResourceList":
+			if err := awsAwsjson11_deserializeDocumentResourceArnList(&sv.OutOfScopeResourceList, value); err != nil {
+				return err
+			}
+
+		case "WebACLArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.WebACLArn = ptr.String(jtv)
 			}
 
 		default:

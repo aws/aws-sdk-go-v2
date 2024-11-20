@@ -1,3 +1,25 @@
+# v1.56.0 (2024-11-18)
+
+* **Feature**: This release adds a new API, ListHookResults, that allows retrieving CloudFormation Hooks invocation results for hooks invoked during a create change set operation or Cloud Control API operation
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.5 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.4 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.3 (2024-10-15)
+
+* **Documentation**: Documentation update for AWS CloudFormation API Reference.
+
+# v1.55.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

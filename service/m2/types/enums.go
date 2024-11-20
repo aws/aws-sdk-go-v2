@@ -210,6 +210,7 @@ const (
 	EnvironmentLifecycleUpdating  EnvironmentLifecycle = "Updating"
 	EnvironmentLifecycleDeleting  EnvironmentLifecycle = "Deleting"
 	EnvironmentLifecycleFailed    EnvironmentLifecycle = "Failed"
+	EnvironmentLifecycleUnhealthy EnvironmentLifecycle = "UnHealthy"
 )
 
 // Values returns all known values for EnvironmentLifecycle. Note that this can be
@@ -223,6 +224,7 @@ func (EnvironmentLifecycle) Values() []EnvironmentLifecycle {
 		"Updating",
 		"Deleting",
 		"Failed",
+		"UnHealthy",
 	}
 }
 

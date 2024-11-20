@@ -2246,7 +2246,7 @@
                         "documentation": "Stores a pronunciation lexicon in an AWS Region.",
                         "input": {
                             "Name": "W3C",
-                            "Content": "file://example.pls"
+                            "Content": "<Lexicon Content>"
                         },
                         "output": {}
                     }

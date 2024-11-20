@@ -571,6 +571,9 @@
                     "target": "com.amazonaws.iot#ListPrincipalThings"
                 },
                 {
+                    "target": "com.amazonaws.iot#ListPrincipalThingsV2"
+                },
+                {
                     "target": "com.amazonaws.iot#ListProvisioningTemplates"
                 },
                 {
@@ -614,6 +617,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListThingPrincipals"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListThingPrincipalsV2"
                 },
                 {
                     "target": "com.amazonaws.iot#ListThingRegistrationTaskReports"
@@ -800,6 +806,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateThingGroupsForThing"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdateThingType"
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateTopicRuleDestination"
@@ -3217,6 +3226,13 @@
                         "smithy.api#httpHeader": "x-amzn-principal",
                         "smithy.api#required": {}
                     }
+                },
+                "thingPrincipalType": {
+                    "target": "com.amazonaws.iot#ThingPrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the relation you want to specify when you attach a principal to a thing.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. \n\t\t\t\t\t\tThe thing will be the only thing that’s attached to the principal.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>NON_EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing.\n\t\t\t\t\t\tMultiple things can be attached to the principal.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "thingPrincipalType"
+                    }
                 }
             },
             "traits": {
@@ -3273,7 +3289,7 @@
                     "min": 0,
                     "max": 800
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_.,@/:#-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.,@/:#=\\[\\]-]*$"
             }
         },
         "com.amazonaws.iot#Attributes": {
@@ -6395,6 +6411,16 @@
                 "smithy.api#documentation": "<p>A conflicting resource update exception. This exception is thrown when two pending\n         updates cause a conflict.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iot#ConnectionAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:.]+$"
             }
         },
         "com.amazonaws.iot#ConnectivityTimestamp": {
@@ -15240,7 +15266,7 @@
                 "thingTypeProperties": {
                     "target": "com.amazonaws.iot#ThingTypeProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ThingTypeProperties contains information about the thing type including\n\t\t\tdescription, and a list of searchable thing attribute names.</p>"
+                        "smithy.api#documentation": "<p>The ThingTypeProperties contains information about the thing type including\n\t\t\tdescription, a list of searchable thing attribute names, and MQTT5 configuration.</p>"
                     }
                 },
                 "thingTypeMetadata": {
@@ -23771,6 +23797,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#ListPrincipalThingsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListPrincipalThingsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListPrincipalThingsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the things associated with the specified principal. A principal can be an X.509\n\t\t\tcertificate or an Amazon Cognito ID.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalThings</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/principals/things-v2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "principalThingObjects",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListPrincipalThingsV2Request": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code>\n\t\t\t\tvalue from a previous response; otherwise <b>null</b> to receive\n\t\t\t\tthe first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot#RegistryMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this operation.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.iot#Principal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal. A principal can be an X.509 certificate or an Amazon Cognito ID.</p>",
+                        "smithy.api#httpHeader": "x-amzn-principal",
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingPrincipalType": {
+                    "target": "com.amazonaws.iot#ThingPrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the relation you want to filter in the response. If no value is provided in\n\t\t\tthis field, the response will list all things, including both the\n\t\t\t\t<code>EXCLUSIVE_THING</code> and <code>NON_EXCLUSIVE_THING</code> attachment\n\t\t\ttypes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. \n\t\t\t\t\t\tThe thing will be the only thing that’s attached to the principal.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>NON_EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing.\n\t\t\t\t\t\tMultiple things can be attached to the principal.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "thingPrincipalType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListPrincipalThingsV2Response": {
+            "type": "structure",
+            "members": {
+                "principalThingObjects": {
+                    "target": "com.amazonaws.iot#PrincipalThingObjects",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>thingPrincipalObject</code> that represents the principal and the type of relation it has with the thing.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#ListProvisioningTemplateVersions": {
             "type": "operation",
             "input": {
@@ -25123,6 +25249,106 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output from the ListThingPrincipals operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#ListThingPrincipalsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListThingPrincipalsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListThingPrincipalsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the principals associated with the specified thing. A principal can be an X.509\n\t\t\tcertificate or an Amazon Cognito ID.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListThingPrincipals</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/things/{thingName}/principals-v2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "thingPrincipalObjects",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListThingPrincipalsV2Request": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code>\n\t\t\t\tvalue from a previous response; otherwise <b>null</b> to receive\n\t\t\t\tthe first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot#RegistryMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this operation.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "thingName": {
+                    "target": "com.amazonaws.iot#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingPrincipalType": {
+                    "target": "com.amazonaws.iot#ThingPrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the relation you want to filter in the response. If no value is provided in\n\t\t\tthis field, the response will list all principals, including both the\n\t\t\t\t<code>EXCLUSIVE_THING</code> and <code>NON_EXCLUSIVE_THING</code> attachment\n\t\t\ttypes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. \n\t\t\t\t\t\tThe thing will be the only thing that’s attached to the principal.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>NON_EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing.\n\t\t\t\t\t\tMultiple things can be attached to the principal.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "thingPrincipalType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListThingPrincipalsV2Response": {
+            "type": "structure",
+            "members": {
+                "thingPrincipalObjects": {
+                    "target": "com.amazonaws.iot#ThingPrincipalObjects",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>thingPrincipalObject</code> that represents the principal and the type of relation it has \n\t\t\t\twith the thing.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -26906,6 +27132,20 @@
                 }
             }
         },
+        "com.amazonaws.iot#Mqtt5Configuration": {
+            "type": "structure",
+            "members": {
+                "propagatingAttributes": {
+                    "target": "com.amazonaws.iot#PropagatingAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the propagating thing attributes and the connection attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration to add user-defined properties to enrich MQTT 5 messages.</p>"
+            }
+        },
         "com.amazonaws.iot#MqttClientId": {
             "type": "string",
             "traits": {
@@ -27120,6 +27360,15 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#OCSPLambdaArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 140
                 }
             }
         },
@@ -28015,6 +28264,33 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9]+$"
             }
         },
+        "com.amazonaws.iot#PrincipalThingObject": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iot#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingPrincipalType": {
+                    "target": "com.amazonaws.iot#ThingPrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the relation you want to specify when you attach a principal to a thing.\n\t\t\t\tThe value defaults to <code>NON_EXCLUSIVE_THING</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. \n\t\t\t\t\t\tThe thing will be the only thing that’s attached to the principal.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>NON_EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing.\n\t\t\t\t\t\tMultiple things can be attached to the principal.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the thing and the type of relation it has with the principal.</p>"
+            }
+        },
+        "com.amazonaws.iot#PrincipalThingObjects": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#PrincipalThingObject"
+            }
+        },
         "com.amazonaws.iot#Principals": {
             "type": "list",
             "member": {
@@ -28037,6 +28313,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#ProcessingTargetName"
+            }
+        },
+        "com.amazonaws.iot#PropagatingAttribute": {
+            "type": "structure",
+            "members": {
+                "userPropertyKey": {
+                    "target": "com.amazonaws.iot#UserPropertyKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the user property key-value pair.</p>"
+                    }
+                },
+                "thingAttribute": {
+                    "target": "com.amazonaws.iot#AttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-defined thing attribute that is propagating for MQTT 5 message enrichment.</p>"
+                    }
+                },
+                "connectionAttribute": {
+                    "target": "com.amazonaws.iot#ConnectionAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute associated with the connection between a device and Amazon Web Services IoT Core.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the connection attribute, thing attribute, and the user property key.</p>"
+            }
+        },
+        "com.amazonaws.iot#PropagatingAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#PropagatingAttribute"
             }
         },
         "com.amazonaws.iot#Protocol": {
@@ -30388,7 +30696,19 @@
                 "enableOCSPCheck": {
                     "target": "com.amazonaws.iot#EnableOCSPCheck",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that indicates whether Online Certificate Status Protocol (OCSP) server\n         certificate check is enabled or not.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html\">Configuring OCSP server-certificate stapling in domain\n         configuration</a> from Amazon Web Services IoT Core Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether Online Certificate Status Protocol (OCSP) server\n         certificate check is enabled or not.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html\">\n         Server certificate configuration for OCSP stapling</a> from Amazon Web Services IoT Core Developer Guide.</p>"
+                    }
+                },
+                "ocspLambdaArn": {
+                    "target": "com.amazonaws.iot#OCSPLambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a Lambda function that acts as a Request for Comments\n         (RFC) 6960-compliant Online Certificate Status Protocol (OCSP) responder, supporting basic\n         OCSP responses.  The Lambda function accepts a JSON string that's Base64-encoded.\n         Therefore, you must convert your OCSP response, which is typically in the Distinguished\n         Encoding Rules (DER) format, into a JSON string that's Base64-encoded. The Lambda\n         function's response is also a Base64-encoded JSON string and the response payload must not\n         exceed 8 kilobytes (KiB) in size. The Lambda function must be in the same Amazon Web Services region and\n         account as the domain configuration.</p>"
+                    }
+                },
+                "ocspAuthorizedResponderArn": {
+                    "target": "com.amazonaws.iot#AcmCertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an X.509 certificate stored in Amazon Web Services Certificate Manager (ACM). \n         If provided, Amazon Web Services IoT Core will use this certificate to validate the signature of the received OCSP response. \n         The OCSP responder must sign responses using either this authorized responder certificate or the issuing certificate, \n         depending on whether the ARN is provided or not. The certificate must be in the same Amazon Web Services region and account as the domain configuration.\n      </p>"
                     }
                 }
             },
@@ -32869,6 +33189,50 @@
                 "target": "com.amazonaws.iot#ThingName"
             }
         },
+        "com.amazonaws.iot#ThingPrincipalObject": {
+            "type": "structure",
+            "members": {
+                "principal": {
+                    "target": "com.amazonaws.iot#Principal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal of the thing principal object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingPrincipalType": {
+                    "target": "com.amazonaws.iot#ThingPrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the relation you want to specify when you attach a principal to a thing.\n\t\t\t\tThe value defaults to <code>NON_EXCLUSIVE_THING</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. \n\t\t\t\t\t\tThe thing will be the only thing that’s attached to the principal.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>NON_EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing.\n\t\t\t\t\t\tMultiple things can be attached to the principal.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the principal and the type of relation it has with the thing.</p>"
+            }
+        },
+        "com.amazonaws.iot#ThingPrincipalObjects": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#ThingPrincipalObject"
+            }
+        },
+        "com.amazonaws.iot#ThingPrincipalType": {
+            "type": "enum",
+            "members": {
+                "EXCLUSIVE_THING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUSIVE_THING"
+                    }
+                },
+                "NON_EXCLUSIVE_THING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_EXCLUSIVE_THING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iot#ThingTypeArn": {
             "type": "string"
         },
@@ -32973,6 +33337,12 @@
                     "target": "com.amazonaws.iot#SearchableAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of searchable thing attribute names.</p>"
+                    }
+                },
+                "mqtt5Configuration": {
+                    "target": "com.amazonaws.iot#Mqtt5Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration to add user-defined properties to enrich MQTT 5 messages.</p>"
                     }
                 }
             },
@@ -36251,6 +36621,69 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#UpdateThingType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdateThingTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdateThingTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a thing type.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/thing-types/{thingTypeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#UpdateThingTypeRequest": {
+            "type": "structure",
+            "members": {
+                "thingTypeName": {
+                    "target": "com.amazonaws.iot#ThingTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a thing type.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingTypeProperties": {
+                    "target": "com.amazonaws.iot#ThingTypeProperties"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdateThingTypeResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#UpdateTopicRuleDestination": {
             "type": "operation",
             "input": {
@@ -36367,6 +36800,16 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.iot#UserPropertyKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:$.]+$"
             }
         },
         "com.amazonaws.iot#UserPropertyValue": {

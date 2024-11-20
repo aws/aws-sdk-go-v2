@@ -74,6 +74,11 @@ type InviteMembersInput struct {
 	// The unique ID of the detector of the GuardDuty account with which you want to
 	// invite members.
 	//
+	// To find the detectorId in the current Region, see the Settings page in the
+	// GuardDuty console, or run the [ListDetectors]API.
+	//
+	// [ListDetectors]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+	//
 	// This member is required.
 	DetectorId *string
 

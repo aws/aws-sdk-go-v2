@@ -610,6 +610,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAnalyzer struct {
+}
+
+func (*validateOpUpdateAnalyzer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAnalyzer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAnalyzerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAnalyzerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateArchiveRule struct {
 }
 
@@ -788,6 +808,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAnalyzerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAnalyzer{}, middleware.After)
 }
 
 func addOpUpdateArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -1685,6 +1709,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAnalyzerInput(v *UpdateAnalyzerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnalyzerInput"}
+	if v.AnalyzerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

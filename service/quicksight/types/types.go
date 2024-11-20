@@ -602,6 +602,18 @@ type AnonymousUserSnapshotJobResult struct {
 	noSmithyDocumentSerde
 }
 
+// The application theme.
+type ApplicationTheme struct {
+
+	// The color palette.
+	BrandColorPalette *BrandColorPalette
+
+	// The element style.
+	BrandElementStyle *BrandElementStyle
+
+	noSmithyDocumentSerde
+}
+
 // The arc axis configuration of a GaugeChartVisual .
 type ArcAxisConfiguration struct {
 
@@ -2344,6 +2356,130 @@ type BoxPlotVisual struct {
 	noSmithyDocumentSerde
 }
 
+// The color palette.
+type BrandColorPalette struct {
+
+	// The color that is used for accent elements.
+	Accent *Palette
+
+	// The color that is used for danger elements.
+	Danger *Palette
+
+	// The color that is used for dimension elements.
+	Dimension *Palette
+
+	// The color that is used for info elements.
+	Info *Palette
+
+	// The color that is used for measure elements.
+	Measure *Palette
+
+	// The primary color.
+	Primary *Palette
+
+	// The secondary color.
+	Secondary *Palette
+
+	// The color that is used for success elements.
+	Success *Palette
+
+	// The color that is used for warning elements.
+	Warning *Palette
+
+	noSmithyDocumentSerde
+}
+
+// The definition of the brand.
+type BrandDefinition struct {
+
+	// The name of the brand.
+	//
+	// This member is required.
+	BrandName *string
+
+	// The application theme of the brand.
+	ApplicationTheme *ApplicationTheme
+
+	// The description of the brand.
+	Description *string
+
+	// The logo configuration of the brand.
+	LogoConfiguration *LogoConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The details of the brand.
+type BrandDetail struct {
+
+	// The ID of the Amazon QuickSight brand.
+	//
+	// This member is required.
+	BrandId *string
+
+	// The Amazon Resource Name (ARN) of the brand.
+	Arn *string
+
+	// The status of the brand.
+	BrandStatus BrandStatus
+
+	// The time that the brand was created.
+	CreatedTime *time.Time
+
+	// A list of errors that occurred during the most recent brand operation.
+	Errors []string
+
+	// The last time the brand was updated.
+	LastUpdatedTime *time.Time
+
+	// The logo details.
+	Logo *Logo
+
+	// The ID of the version.
+	VersionId *string
+
+	// The status of the version.
+	VersionStatus BrandVersionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The element style.
+type BrandElementStyle struct {
+
+	// The navigation bar style.
+	NavbarStyle *NavbarStyle
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the brand.
+type BrandSummary struct {
+
+	// The Amazon Resource Name (ARN) of the brand.
+	Arn *string
+
+	// The ID of the Amazon QuickSight brand.
+	BrandId *string
+
+	// The name of the brand.
+	BrandName *string
+
+	// The status of the brand.
+	BrandStatus BrandStatus
+
+	// The time that the brand was created.
+	CreatedTime *time.Time
+
+	// The description of the brand.
+	Description *string
+
+	// The time when the brand was last updated.
+	LastUpdatedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A calculated column for a dataset.
 type CalculatedColumn struct {
 
@@ -2400,6 +2536,63 @@ type CalculatedMeasureField struct {
 	//
 	// This member is required.
 	FieldId *string
+
+	noSmithyDocumentSerde
+}
+
+// A set of actions that correspond to Amazon QuickSight permissions.
+type Capabilities struct {
+
+	// The ability to add or run anomaly detection.
+	AddOrRunAnomalyDetectionForAnalyses CapabilityState
+
+	// The ability to create and update email reports.
+	CreateAndUpdateDashboardEmailReports CapabilityState
+
+	// The ability to create and update data sources.
+	CreateAndUpdateDataSources CapabilityState
+
+	// The ability to create and update datasets.
+	CreateAndUpdateDatasets CapabilityState
+
+	// The ability to export to Create and Update themes.
+	CreateAndUpdateThemes CapabilityState
+
+	// The ability to create and update threshold alerts.
+	CreateAndUpdateThresholdAlerts CapabilityState
+
+	// The ability to create a SPICE dataset.
+	CreateSPICEDataset CapabilityState
+
+	// The ability to create shared folders.
+	CreateSharedFolders CapabilityState
+
+	// The ability to export to CSV files.
+	ExportToCsv CapabilityState
+
+	// The ability to export to Excel files.
+	ExportToExcel CapabilityState
+
+	// The ability to rename shared folders.
+	RenameSharedFolders CapabilityState
+
+	// The ability to share analyses.
+	ShareAnalyses CapabilityState
+
+	// The ability to share dashboards.
+	ShareDashboards CapabilityState
+
+	// The ability to share data sources.
+	ShareDataSources CapabilityState
+
+	// The ability to share datasets.
+	ShareDatasets CapabilityState
+
+	// The ability to subscribe to email reports.
+	SubscribeDashboardEmailReports CapabilityState
+
+	// The ability to view account SPICE capacity.
+	ViewAccountSPICECapacity CapabilityState
 
 	noSmithyDocumentSerde
 }
@@ -3611,6 +3804,21 @@ type CustomParameterValues struct {
 
 	// A list of string-type parameter values.
 	StringValues []string
+
+	noSmithyDocumentSerde
+}
+
+// The custom permissions profile.
+type CustomPermissions struct {
+
+	// The Amazon Resource Name (ARN) of the custom permissions profile.
+	Arn *string
+
+	// A set of actions in the custom permissions profile.
+	Capabilities *Capabilities
+
+	// The name of the custom permissions profile.
+	CustomPermissionsName *string
 
 	noSmithyDocumentSerde
 }
@@ -8080,6 +8288,83 @@ type IdentityCenterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The logo image.
+type Image struct {
+
+	// The URL that points to the generated logo image.
+	GeneratedImageUrl *string
+
+	// The source of the logo image.
+	Source ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The logo image configuration.
+type ImageConfiguration struct {
+
+	// The source of the image.
+	Source ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The image set.
+type ImageSet struct {
+
+	// The original image.
+	//
+	// This member is required.
+	Original *Image
+
+	// The image with the height set to 32 pixels.
+	Height32 *Image
+
+	// The image with the height set to 64 pixels.
+	Height64 *Image
+
+	noSmithyDocumentSerde
+}
+
+// The image set configuration.
+type ImageSetConfiguration struct {
+
+	// The original image.
+	//
+	// This member is required.
+	Original *ImageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The source of the image.
+//
+// The following types satisfy this interface:
+//
+//	ImageSourceMemberPublicUrl
+//	ImageSourceMemberS3Uri
+type ImageSource interface {
+	isImageSource()
+}
+
+// The public URL that points to the source image.
+type ImageSourceMemberPublicUrl struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceMemberPublicUrl) isImageSource() {}
+
+// The Amazon S3 URI that points to the source image.
+type ImageSourceMemberS3Uri struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceMemberS3Uri) isImageSource() {}
+
 // The incremental refresh configuration for a dataset.
 type IncrementalRefresh struct {
 
@@ -9077,6 +9362,66 @@ type LogicalTableSource struct {
 	noSmithyDocumentSerde
 }
 
+// The logo configuration.
+type Logo struct {
+
+	// The alt text for the logo.
+	//
+	// This member is required.
+	AltText *string
+
+	// A set of configured logos.
+	//
+	// This member is required.
+	LogoSet *LogoSet
+
+	noSmithyDocumentSerde
+}
+
+// The logo configuration.
+type LogoConfiguration struct {
+
+	// The alt text for the logo.
+	//
+	// This member is required.
+	AltText *string
+
+	// A set of configured logos.
+	//
+	// This member is required.
+	LogoSet *LogoSetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A set of logos.
+type LogoSet struct {
+
+	// The primary logo.
+	//
+	// This member is required.
+	Primary *ImageSet
+
+	// The favicon logo.
+	Favicon *ImageSet
+
+	noSmithyDocumentSerde
+}
+
+// The logo set configuration.
+type LogoSetConfiguration struct {
+
+	// The primary logo.
+	//
+	// This member is required.
+	Primary *ImageSetConfiguration
+
+	// The favicon logo.
+	Favicon *ImageSetConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The text format for a subtitle.
 //
 // This is a union type structure. For this structure to be valid, only one of the
@@ -9392,6 +9737,18 @@ type NamespaceInfoV2 struct {
 
 	// An error that occurred when the namespace was created.
 	NamespaceError *NamespaceError
+
+	noSmithyDocumentSerde
+}
+
+// The navigation bar style.
+type NavbarStyle struct {
+
+	// The contextual navigation bar style.
+	ContextualNavbar *Palette
+
+	// The global navigation bar style.
+	GlobalNavbar *Palette
 
 	noSmithyDocumentSerde
 }
@@ -9788,6 +10145,28 @@ type NumericSeparatorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains information needed to create a data source connection
+// that uses OAuth client credentials. This option is available for data source
+// connections that are made with Snowflake and Starburst.
+type OAuthParameters struct {
+
+	// The token endpoint URL of the identity provider.
+	//
+	// This member is required.
+	TokenProviderUrl *string
+
+	// The resource uri of the identity provider.
+	IdentityProviderResourceUri *string
+
+	// VPC connection properties.
+	IdentityProviderVpcConnectionProperties *VpcConnectionProperties
+
+	// The OAuth scope.
+	OAuthScope *string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for Oracle.
 type OracleParameters struct {
 
@@ -9857,6 +10236,18 @@ type PaginationConfiguration struct {
 	//
 	// This member is required.
 	PageSize *int64
+
+	noSmithyDocumentSerde
+}
+
+// The color palette.
+type Palette struct {
+
+	// The background color.
+	Background *string
+
+	// The foreground color.
+	Foreground *string
 
 	noSmithyDocumentSerde
 }
@@ -13135,6 +13526,17 @@ type SnowflakeParameters struct {
 	// This member is required.
 	Warehouse *string
 
+	// The authentication type that you want to use for your connection. This
+	// parameter accepts OAuth and non-OAuth authentication types.
+	AuthenticationType AuthenticationType
+
+	// The database access control role.
+	DatabaseAccessControlRole *string
+
+	// An object that contains information needed to create a data source connection
+	// between an Amazon QuickSight account and Snowflake.
+	OAuthParameters *OAuthParameters
+
 	noSmithyDocumentSerde
 }
 
@@ -13220,6 +13622,17 @@ type StarburstParameters struct {
 	//
 	// This member is required.
 	Port *int32
+
+	// The authentication type that you want to use for your connection. This
+	// parameter accepts OAuth and non-OAuth authentication types.
+	AuthenticationType AuthenticationType
+
+	// The database access control role.
+	DatabaseAccessControlRole *string
+
+	// An object that contains information needed to create a data source connection
+	// between an Amazon QuickSight account and Starburst.
+	OAuthParameters *OAuthParameters
 
 	// The product type for the Starburst data source.
 	ProductType StarburstProductType
@@ -16701,5 +17114,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isDataSourceParameters() {}
+func (*UnknownUnionMember) isImageSource()          {}
 func (*UnknownUnionMember) isPhysicalTable()        {}
 func (*UnknownUnionMember) isTransformOperation()   {}

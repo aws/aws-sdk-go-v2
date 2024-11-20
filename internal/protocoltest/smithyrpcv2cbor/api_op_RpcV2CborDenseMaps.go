@@ -119,6 +119,9 @@ func (c *Client) addOperationRpcV2CborDenseMapsMiddlewares(stack *middleware.Sta
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRpcV2CborDenseMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}

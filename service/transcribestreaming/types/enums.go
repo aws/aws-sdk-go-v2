@@ -123,8 +123,48 @@ const (
 	LanguageCodeJaJp LanguageCode = "ja-JP"
 	LanguageCodeKoKr LanguageCode = "ko-KR"
 	LanguageCodeZhCn LanguageCode = "zh-CN"
-	LanguageCodeHiIn LanguageCode = "hi-IN"
 	LanguageCodeThTh LanguageCode = "th-TH"
+	LanguageCodeEsEs LanguageCode = "es-ES"
+	LanguageCodeArSa LanguageCode = "ar-SA"
+	LanguageCodePtPt LanguageCode = "pt-PT"
+	LanguageCodeCaEs LanguageCode = "ca-ES"
+	LanguageCodeArAe LanguageCode = "ar-AE"
+	LanguageCodeHiIn LanguageCode = "hi-IN"
+	LanguageCodeZhHk LanguageCode = "zh-HK"
+	LanguageCodeNlNl LanguageCode = "nl-NL"
+	LanguageCodeNoNo LanguageCode = "no-NO"
+	LanguageCodeSvSe LanguageCode = "sv-SE"
+	LanguageCodePlPl LanguageCode = "pl-PL"
+	LanguageCodeFiFi LanguageCode = "fi-FI"
+	LanguageCodeZhTw LanguageCode = "zh-TW"
+	LanguageCodeEnIn LanguageCode = "en-IN"
+	LanguageCodeEnIe LanguageCode = "en-IE"
+	LanguageCodeEnNz LanguageCode = "en-NZ"
+	LanguageCodeEnAb LanguageCode = "en-AB"
+	LanguageCodeEnZa LanguageCode = "en-ZA"
+	LanguageCodeEnWl LanguageCode = "en-WL"
+	LanguageCodeDeCh LanguageCode = "de-CH"
+	LanguageCodeAfZa LanguageCode = "af-ZA"
+	LanguageCodeEuEs LanguageCode = "eu-ES"
+	LanguageCodeHrHr LanguageCode = "hr-HR"
+	LanguageCodeCsCz LanguageCode = "cs-CZ"
+	LanguageCodeDaDk LanguageCode = "da-DK"
+	LanguageCodeFaIr LanguageCode = "fa-IR"
+	LanguageCodeGlEs LanguageCode = "gl-ES"
+	LanguageCodeElGr LanguageCode = "el-GR"
+	LanguageCodeHeIl LanguageCode = "he-IL"
+	LanguageCodeIdId LanguageCode = "id-ID"
+	LanguageCodeLvLv LanguageCode = "lv-LV"
+	LanguageCodeMsMy LanguageCode = "ms-MY"
+	LanguageCodeRoRo LanguageCode = "ro-RO"
+	LanguageCodeRuRu LanguageCode = "ru-RU"
+	LanguageCodeSrRs LanguageCode = "sr-RS"
+	LanguageCodeSkSk LanguageCode = "sk-SK"
+	LanguageCodeSoSo LanguageCode = "so-SO"
+	LanguageCodeTlPh LanguageCode = "tl-PH"
+	LanguageCodeUkUa LanguageCode = "uk-UA"
+	LanguageCodeViVn LanguageCode = "vi-VN"
+	LanguageCodeZuZa LanguageCode = "zu-ZA"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be
@@ -145,8 +185,48 @@ func (LanguageCode) Values() []LanguageCode {
 		"ja-JP",
 		"ko-KR",
 		"zh-CN",
-		"hi-IN",
 		"th-TH",
+		"es-ES",
+		"ar-SA",
+		"pt-PT",
+		"ca-ES",
+		"ar-AE",
+		"hi-IN",
+		"zh-HK",
+		"nl-NL",
+		"no-NO",
+		"sv-SE",
+		"pl-PL",
+		"fi-FI",
+		"zh-TW",
+		"en-IN",
+		"en-IE",
+		"en-NZ",
+		"en-AB",
+		"en-ZA",
+		"en-WL",
+		"de-CH",
+		"af-ZA",
+		"eu-ES",
+		"hr-HR",
+		"cs-CZ",
+		"da-DK",
+		"fa-IR",
+		"gl-ES",
+		"el-GR",
+		"he-IL",
+		"id-ID",
+		"lv-LV",
+		"ms-MY",
+		"ro-RO",
+		"ru-RU",
+		"sr-RS",
+		"sk-SK",
+		"so-SO",
+		"tl-PH",
+		"uk-UA",
+		"vi-VN",
+		"zu-ZA",
 	}
 }
 

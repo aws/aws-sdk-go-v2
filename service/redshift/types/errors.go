@@ -1487,6 +1487,87 @@ func (e *InsufficientS3BucketPolicyFault) ErrorCode() string {
 }
 func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The integration you are trying to create already exists.
+type IntegrationAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A conflicting conditional operation is currently in progress against this
+// resource. This typically occurs when there are multiple requests being made to
+// the same resource at the same time, and these requests conflict with each other.
+type IntegrationConflictOperationFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationConflictOperationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationConflictOperationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationConflictOperationFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationConflictOperationFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationConflictOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The integration is in an invalid state and can't perform the requested
+// operation.
+type IntegrationConflictStateFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationConflictStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationConflictStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationConflictStateFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationConflictStateFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationConflictStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The integration can't be found.
 type IntegrationNotFoundFault struct {
 	Message *string
@@ -1512,6 +1593,85 @@ func (e *IntegrationNotFoundFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IntegrationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You can't create any more zero-ETL or S3 event integrations because the quota
+// has been reached.
+type IntegrationQuotaExceededFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationQuotaExceededFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationQuotaExceededFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified integration source can't be found.
+type IntegrationSourceNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationSourceNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationSourceNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationSourceNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationSourceNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationSourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified integration target can't be found.
+type IntegrationTargetNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IntegrationTargetNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IntegrationTargetNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IntegrationTargetNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "IntegrationTargetNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *IntegrationTargetNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The authentication profile request is not valid. The profile name can't be null
 // or empty. The authentication profile API operation must be available in the

@@ -290,6 +290,46 @@ func (m *validateOpDescribeContainerInstances) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeServiceDeployments struct {
+}
+
+func (*validateOpDescribeServiceDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeServiceDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeServiceDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeServiceDeploymentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeServiceRevisions struct {
+}
+
+func (*validateOpDescribeServiceRevisions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeServiceRevisions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeServiceRevisionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeServiceRevisionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeServices struct {
 }
 
@@ -425,6 +465,26 @@ func (m *validateOpListAttributes) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServiceDeployments struct {
+}
+
+func (*validateOpListServiceDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceDeploymentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -966,6 +1026,14 @@ func addOpDescribeContainerInstancesValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDescribeContainerInstances{}, middleware.After)
 }
 
+func addOpDescribeServiceDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeServiceDeployments{}, middleware.After)
+}
+
+func addOpDescribeServiceRevisionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeServiceRevisions{}, middleware.After)
+}
+
 func addOpDescribeServicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeServices{}, middleware.After)
 }
@@ -992,6 +1060,10 @@ func addOpGetTaskProtectionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAttributes{}, middleware.After)
+}
+
+func addOpListServiceDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceDeployments{}, middleware.After)
 }
 
 func addOpListServicesByNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -2347,6 +2419,44 @@ func validateVolumeList(v []types.Volume) error {
 	}
 }
 
+func validateVpcLatticeConfiguration(v *types.VpcLatticeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcLatticeConfiguration"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.TargetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupArn"))
+	}
+	if v.PortName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcLatticeConfigurations(v []types.VpcLatticeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcLatticeConfigurations"}
+	for i := range v {
+		if err := validateVpcLatticeConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCapacityProviderInput(v *CreateCapacityProviderInput) error {
 	if v == nil {
 		return nil
@@ -2427,6 +2537,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.VolumeConfigurations != nil {
 		if err := validateServiceVolumeConfigurations(v.VolumeConfigurations); err != nil {
 			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcLatticeConfigurations != nil {
+		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
+			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2627,6 +2742,36 @@ func validateOpDescribeContainerInstancesInput(v *DescribeContainerInstancesInpu
 	}
 }
 
+func validateOpDescribeServiceDeploymentsInput(v *DescribeServiceDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeServiceDeploymentsInput"}
+	if v.ServiceDeploymentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceDeploymentArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeServiceRevisionsInput(v *DescribeServiceRevisionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeServiceRevisionsInput"}
+	if v.ServiceRevisionArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRevisionArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeServicesInput(v *DescribeServicesInput) error {
 	if v == nil {
 		return nil
@@ -2730,6 +2875,21 @@ func validateOpListAttributesInput(v *ListAttributesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAttributesInput"}
 	if len(v.TargetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServiceDeploymentsInput(v *ListServiceDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceDeploymentsInput"}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3192,6 +3352,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.VolumeConfigurations != nil {
 		if err := validateServiceVolumeConfigurations(v.VolumeConfigurations); err != nil {
 			invalidParams.AddNested("VolumeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcLatticeConfigurations != nil {
+		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
+			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

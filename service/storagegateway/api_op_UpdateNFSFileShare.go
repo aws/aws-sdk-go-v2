@@ -84,6 +84,9 @@ type UpdateNFSFileShareInput struct {
 	//
 	// FileShareName must be set if an S3 prefix name is set in LocationARN , or if an
 	// access point or access point alias is used.
+	//
+	// A valid NFS file share name can only contain the following characters: a - z , A
+	// - Z , 0 - 9 , - , . , and _ .
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on

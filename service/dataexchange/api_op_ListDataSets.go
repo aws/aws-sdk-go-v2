@@ -13,7 +13,7 @@ import (
 
 // This operation lists your data sets. When listing by origin OWNED, results are
 // sorted by CreatedAt in descending order. When listing by origin ENTITLED, there
-// is no order and the maxResults parameter is ignored.
+// is no order.
 func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
 	if params == nil {
 		params = &ListDataSetsInput{}

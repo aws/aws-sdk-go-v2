@@ -658,6 +658,29 @@ func (IdentityProvider) Values() []IdentityProvider {
 	}
 }
 
+type ListHookResultsTargetType string
+
+// Enum values for ListHookResultsTargetType
+const (
+	ListHookResultsTargetTypeChangeSet    ListHookResultsTargetType = "CHANGE_SET"
+	ListHookResultsTargetTypeStack        ListHookResultsTargetType = "STACK"
+	ListHookResultsTargetTypeResource     ListHookResultsTargetType = "RESOURCE"
+	ListHookResultsTargetTypeCloudControl ListHookResultsTargetType = "CLOUD_CONTROL"
+)
+
+// Values returns all known values for ListHookResultsTargetType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListHookResultsTargetType) Values() []ListHookResultsTargetType {
+	return []ListHookResultsTargetType{
+		"CHANGE_SET",
+		"STACK",
+		"RESOURCE",
+		"CLOUD_CONTROL",
+	}
+}
+
 type OnFailure string
 
 // Enum values for OnFailure

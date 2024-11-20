@@ -182,6 +182,11 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ExcludeResourceTags":
+			if err := awsRestjson1_deserializeDocumentExcludeResourceTags(&sv.ExcludeResourceTags, value); err != nil {
+				return err
+			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -504,6 +509,11 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ExcludeResourceTags":
+			if err := awsRestjson1_deserializeDocumentExcludeResourceTags(&sv.ExcludeResourceTags, value); err != nil {
+				return err
 			}
 
 		case "Identifier":
@@ -1069,6 +1079,11 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ExcludeResourceTags":
+			if err := awsRestjson1_deserializeDocumentExcludeResourceTags(&sv.ExcludeResourceTags, value); err != nil {
+				return err
+			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1389,6 +1404,11 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ExcludeResourceTags":
+			if err := awsRestjson1_deserializeDocumentExcludeResourceTags(&sv.ExcludeResourceTags, value); err != nil {
+				return err
 			}
 
 		case "Identifier":
@@ -1729,6 +1749,11 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ExcludeResourceTags":
+			if err := awsRestjson1_deserializeDocumentExcludeResourceTags(&sv.ExcludeResourceTags, value); err != nil {
+				return err
+			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2011,7 +2036,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2038,6 +2063,40 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExcludeResourceTags(v *[]types.ResourceTag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceTag
+	if *v == nil {
+		cv = []types.ResourceTag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceTag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourceTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2060,7 +2119,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2136,7 +2195,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2427,7 +2486,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -2612,7 +2671,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

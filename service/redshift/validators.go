@@ -450,6 +450,26 @@ func (m *validateOpCreateHsmConfiguration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIntegration struct {
+}
+
+func (*validateOpCreateIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRedshiftIdcApplication struct {
 }
 
@@ -790,6 +810,26 @@ func (m *validateOpDeleteHsmConfiguration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIntegration struct {
+}
+
+func (*validateOpDeleteIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePartner struct {
 }
 
@@ -1005,6 +1045,26 @@ func (m *validateOpDescribeDefaultClusterParameters) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDefaultClusterParametersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeIntegrations struct {
+}
+
+func (*validateOpDescribeIntegrations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeIntegrations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeIntegrationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeIntegrationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1570,6 +1630,26 @@ func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyIntegration struct {
+}
+
+func (*validateOpModifyIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyRedshiftIdcApplication struct {
 }
 
@@ -2038,6 +2118,10 @@ func addOpCreateHsmConfigurationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateHsmConfiguration{}, middleware.After)
 }
 
+func addOpCreateIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIntegration{}, middleware.After)
+}
+
 func addOpCreateRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRedshiftIdcApplication{}, middleware.After)
 }
@@ -2106,6 +2190,10 @@ func addOpDeleteHsmConfigurationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteHsmConfiguration{}, middleware.After)
 }
 
+func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIntegration{}, middleware.After)
+}
+
 func addOpDeletePartnerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePartner{}, middleware.After)
 }
@@ -2148,6 +2236,10 @@ func addOpDescribeClusterSnapshotsValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeDefaultClusterParametersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDefaultClusterParameters{}, middleware.After)
+}
+
+func addOpDescribeIntegrationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeIntegrations{}, middleware.After)
 }
 
 func addOpDescribeLoggingStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -2262,6 +2354,10 @@ func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpModifyEventSubscription{}, middleware.After)
 }
 
+func addOpModifyIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyIntegration{}, middleware.After)
+}
+
 func addOpModifyRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyRedshiftIdcApplication{}, middleware.After)
 }
@@ -2370,6 +2466,41 @@ func validateDeleteClusterSnapshotMessageList(v []types.DeleteClusterSnapshotMes
 	}
 }
 
+func validateDescribeIntegrationsFilter(v *types.DescribeIntegrationsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIntegrationsFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDescribeIntegrationsFilterList(v []types.DescribeIntegrationsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIntegrationsFilterList"}
+	for i := range v {
+		if err := validateDescribeIntegrationsFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLakeFormationQuery(v *types.LakeFormationQuery) error {
 	if v == nil {
 		return nil
@@ -2436,6 +2567,21 @@ func validatePauseClusterMessage(v *types.PauseClusterMessage) error {
 	}
 }
 
+func validateReadWriteAccess(v *types.ReadWriteAccess) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReadWriteAccess"}
+	if len(v.Authorization) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Authorization"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResizeClusterMessage(v *types.ResizeClusterMessage) error {
 	if v == nil {
 		return nil
@@ -2458,6 +2604,42 @@ func validateResumeClusterMessage(v *types.ResumeClusterMessage) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResumeClusterMessage"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessGrantsScopeUnion(v types.S3AccessGrantsScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessGrantsScopeUnion"}
+	switch uv := v.(type) {
+	case *types.S3AccessGrantsScopeUnionMemberReadWriteAccess:
+		if err := validateReadWriteAccess(&uv.Value); err != nil {
+			invalidParams.AddNested("[ReadWriteAccess]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessGrantsServiceIntegrations(v []types.S3AccessGrantsScopeUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessGrantsServiceIntegrations"}
+	for i := range v {
+		if err := validateS3AccessGrantsScopeUnion(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2554,6 +2736,11 @@ func validateServiceIntegrationsUnion(v types.ServiceIntegrationsUnion) error {
 	case *types.ServiceIntegrationsUnionMemberLakeFormation:
 		if err := validateLakeFormationServiceIntegrations(uv.Value); err != nil {
 			invalidParams.AddNested("[LakeFormation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceIntegrationsUnionMemberS3AccessGrants:
+		if err := validateS3AccessGrantsServiceIntegrations(uv.Value); err != nil {
+			invalidParams.AddNested("[S3AccessGrants]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -3002,6 +3189,27 @@ func validateOpCreateHsmConfigurationInput(v *CreateHsmConfigurationInput) error
 	}
 }
 
+func validateOpCreateIntegrationInput(v *CreateIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationInput"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if v.IntegrationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRedshiftIdcApplicationInput(v *CreateRedshiftIdcApplicationInput) error {
 	if v == nil {
 		return nil
@@ -3302,6 +3510,21 @@ func validateOpDeleteHsmConfigurationInput(v *DeleteHsmConfigurationInput) error
 	}
 }
 
+func validateOpDeleteIntegrationInput(v *DeleteIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationInput"}
+	if v.IntegrationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePartnerInput(v *DeletePartnerInput) error {
 	if v == nil {
 		return nil
@@ -3473,6 +3696,23 @@ func validateOpDescribeDefaultClusterParametersInput(v *DescribeDefaultClusterPa
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDefaultClusterParametersInput"}
 	if v.ParameterGroupFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterGroupFamily"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeIntegrationsInput(v *DescribeIntegrationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIntegrationsInput"}
+	if v.Filters != nil {
+		if err := validateDescribeIntegrationsFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3919,6 +4159,21 @@ func validateOpModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyEventSubscriptionInput"}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyIntegrationInput(v *ModifyIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyIntegrationInput"}
+	if v.IntegrationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

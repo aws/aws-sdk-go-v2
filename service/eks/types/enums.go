@@ -594,6 +594,7 @@ const (
 	NodegroupIssueCodeAutoScalingGroupInstanceRefreshActive    NodegroupIssueCode = "AutoScalingGroupInstanceRefreshActive"
 	NodegroupIssueCodeKubernetesLabelInvalid                   NodegroupIssueCode = "KubernetesLabelInvalid"
 	NodegroupIssueCodeEc2LaunchTemplateVersionMaxLimitExceeded NodegroupIssueCode = "Ec2LaunchTemplateVersionMaxLimitExceeded"
+	NodegroupIssueCodeEc2InstanceTypeDoesNotExist              NodegroupIssueCode = "Ec2InstanceTypeDoesNotExist"
 )
 
 // Values returns all known values for NodegroupIssueCode. Note that this can be
@@ -637,6 +638,7 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 		"AutoScalingGroupInstanceRefreshActive",
 		"KubernetesLabelInvalid",
 		"Ec2LaunchTemplateVersionMaxLimitExceeded",
+		"Ec2InstanceTypeDoesNotExist",
 	}
 }
 
@@ -763,6 +765,7 @@ const (
 	UpdateParamTypeAuthenticationMode       UpdateParamType = "AuthenticationMode"
 	UpdateParamTypePodIdentityAssociations  UpdateParamType = "PodIdentityAssociations"
 	UpdateParamTypeUpgradePolicy            UpdateParamType = "UpgradePolicy"
+	UpdateParamTypeZonalShiftConfig         UpdateParamType = "ZonalShiftConfig"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -800,6 +803,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"AuthenticationMode",
 		"PodIdentityAssociations",
 		"UpgradePolicy",
+		"ZonalShiftConfig",
 	}
 }
 
@@ -841,6 +845,7 @@ const (
 	UpdateTypeVpcConfigUpdate                    UpdateType = "VpcConfigUpdate"
 	UpdateTypeAccessConfigUpdate                 UpdateType = "AccessConfigUpdate"
 	UpdateTypeUpgradePolicyUpdate                UpdateType = "UpgradePolicyUpdate"
+	UpdateTypeZonalShiftConfigUpdate             UpdateType = "ZonalShiftConfigUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -860,5 +865,6 @@ func (UpdateType) Values() []UpdateType {
 		"VpcConfigUpdate",
 		"AccessConfigUpdate",
 		"UpgradePolicyUpdate",
+		"ZonalShiftConfigUpdate",
 	}
 }

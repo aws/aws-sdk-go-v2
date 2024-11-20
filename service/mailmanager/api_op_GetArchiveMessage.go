@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,8 +42,14 @@ type GetArchiveMessageInput struct {
 // The response containing details about the requested archived email message.
 type GetArchiveMessageOutput struct {
 
+	// The SMTP envelope information of the email.
+	Envelope *types.Envelope
+
 	// A pre-signed URL to temporarily download the full message content.
 	MessageDownloadLink *string
+
+	// The metadata about the email.
+	Metadata *types.Metadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

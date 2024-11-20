@@ -744,6 +744,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.Version)
 	}
 
+	if v.ZonalShiftConfig != nil {
+		ok := object.Key("zonalShiftConfig")
+		if err := awsRestjson1_serializeDocumentZonalShiftConfigRequest(v.ZonalShiftConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4771,6 +4778,13 @@ func awsRestjson1_serializeOpDocumentUpdateClusterConfigInput(v *UpdateClusterCo
 		}
 	}
 
+	if v.ZonalShiftConfig != nil {
+		ok := object.Key("zonalShiftConfig")
+		if err := awsRestjson1_serializeDocumentZonalShiftConfigRequest(v.ZonalShiftConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6022,6 +6036,18 @@ func awsRestjson1_serializeDocumentVpcConfigRequest(v *types.VpcConfigRequest, v
 		if err := awsRestjson1_serializeDocumentStringList(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentZonalShiftConfigRequest(v *types.ZonalShiftConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
 	}
 
 	return nil

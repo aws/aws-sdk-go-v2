@@ -5579,12 +5579,55 @@ func awsRestjson1_deserializeDocumentAudioConfiguration(v **types.AudioConfigura
 				sv.TargetBitrate = i64
 			}
 
+		case "track":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Track = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioConfigurationList(v *[]types.AudioConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioConfiguration
+	if *v == nil {
+		cv = []types.AudioConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5821,6 +5864,15 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.Authorized = jtv
 			}
 
+		case "containerFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContainerFormat to be of type string, got %T instead", value)
+				}
+				sv.ContainerFormat = types.ContainerFormat(jtv)
+			}
+
 		case "ingestEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5846,6 +5898,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 					return fmt.Errorf("expected ChannelLatencyMode to be of type string, got %T instead", value)
 				}
 				sv.LatencyMode = types.ChannelLatencyMode(jtv)
+			}
+
+		case "multitrackInputConfiguration":
+			if err := awsRestjson1_deserializeDocumentMultitrackInputConfiguration(&sv.MultitrackInputConfiguration, value); err != nil {
+				return err
 			}
 
 		case "name":
@@ -6263,6 +6320,47 @@ func awsRestjson1_deserializeDocumentIngestConfiguration(v **types.IngestConfigu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIngestConfigurations(v **types.IngestConfigurations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IngestConfigurations
+	if *v == nil {
+		sv = &types.IngestConfigurations{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioConfigurations":
+			if err := awsRestjson1_deserializeDocumentAudioConfigurationList(&sv.AudioConfigurations, value); err != nil {
+				return err
+			}
+
+		case "videoConfigurations":
+			if err := awsRestjson1_deserializeDocumentVideoConfigurationList(&sv.VideoConfigurations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6292,6 +6390,64 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultitrackInputConfiguration(v **types.MultitrackInputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultitrackInputConfiguration
+	if *v == nil {
+		sv = &types.MultitrackInputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected IsMultitrackInputEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "maximumResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MultitrackMaximumResolution to be of type string, got %T instead", value)
+				}
+				sv.MaximumResolution = types.MultitrackMaximumResolution(jtv)
+			}
+
+		case "policy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MultitrackPolicy to be of type string, got %T instead", value)
+				}
+				sv.Policy = types.MultitrackPolicy(jtv)
 			}
 
 		default:
@@ -7313,6 +7469,15 @@ func awsRestjson1_deserializeDocumentStreamEvent(v **types.StreamEvent, value in
 
 	for key, value := range shape {
 		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
 		case "eventTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7648,6 +7813,11 @@ func awsRestjson1_deserializeDocumentStreamSession(v **types.StreamSession, valu
 
 		case "ingestConfiguration":
 			if err := awsRestjson1_deserializeDocumentIngestConfiguration(&sv.IngestConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ingestConfigurations":
+			if err := awsRestjson1_deserializeDocumentIngestConfigurations(&sv.IngestConfigurations, value); err != nil {
 				return err
 			}
 
@@ -8211,6 +8381,24 @@ func awsRestjson1_deserializeDocumentVideoConfiguration(v **types.VideoConfigura
 				sv.Encoder = ptr.String(jtv)
 			}
 
+		case "level":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Level = ptr.String(jtv)
+			}
+
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Profile = ptr.String(jtv)
+			}
+
 		case "targetBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8235,6 +8423,15 @@ func awsRestjson1_deserializeDocumentVideoConfiguration(v **types.VideoConfigura
 					return err
 				}
 				sv.TargetFramerate = i64
+			}
+
+		case "track":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Track = ptr.String(jtv)
 			}
 
 		case "videoHeight":
@@ -8269,5 +8466,39 @@ func awsRestjson1_deserializeDocumentVideoConfiguration(v **types.VideoConfigura
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoConfigurationList(v *[]types.VideoConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VideoConfiguration
+	if *v == nil {
+		cv = []types.VideoConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VideoConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVideoConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }

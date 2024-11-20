@@ -120,6 +120,8 @@ type CreateCampaignInput struct {
 	// used.
 	//
 	// Default: 0
+	//
+	// Deprecated: priority is no longer used or needed as input
 	Priority *int32
 
 	// (Optional) A list of information about signals to collect.

@@ -66,7 +66,7 @@ type CreateKnowledgeBaseInput struct {
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
 	//
-	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	// [Making retries safe with idempotent APIs]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The description.
@@ -88,7 +88,7 @@ type CreateKnowledgeBaseInput struct {
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The source of the knowledge base content. Only set this argument for EXTERNAL
-	// knowledge bases.
+	// or Managed knowledge bases.
 	SourceConfiguration types.SourceConfiguration
 
 	// The tags used to organize, track, or control access for this resource.

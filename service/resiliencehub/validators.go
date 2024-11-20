@@ -1635,9 +1635,6 @@ func validateUpdateRecommendationStatusRequestEntry(v *types.UpdateRecommendatio
 	if v.ReferenceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReferenceId"))
 	}
-	if v.Item == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Item"))
-	}
 	if v.Excluded == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Excluded"))
 	}

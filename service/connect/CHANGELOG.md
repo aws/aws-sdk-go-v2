@@ -1,3 +1,33 @@
+# v1.116.0 (2024-11-18)
+
+* **Feature**: Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.115.2 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.115.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.115.0 (2024-10-30)
+
+* **Feature**: Updated the public documentation for the UserIdentityInfo object to accurately reflect the character limits for the FirstName and LastName fields, which were previously listed as 1-100 characters.
+
+# v1.114.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.0 (2024-10-23)
+
+* **Feature**: Amazon Connect Service Feature: Add support to start screen sharing for a web calling contact.
+
+# v1.113.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.113.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

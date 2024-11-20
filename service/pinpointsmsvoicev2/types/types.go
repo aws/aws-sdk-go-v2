@@ -105,6 +105,9 @@ type ConfigurationSetInformation struct {
 	// This member is required.
 	EventDestinations []EventDestination
 
+	// True if message feedback is enabled.
+	DefaultMessageFeedbackEnabled *bool
+
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
 	// critical or time-sensitive and PROMOTIONAL for messages that aren't critical or
 	// time-sensitive.
@@ -604,6 +607,54 @@ type ProtectConfigurationInformation struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details on a RuleSetNumberOverride.
+type ProtectConfigurationRuleSetNumberOverride struct {
+
+	// The action for the rule to perform of either blocking or allowing messages to
+	// the destination phone number.
+	//
+	// This member is required.
+	Action ProtectConfigurationRuleOverrideAction
+
+	// The time when the rule was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The destination phone number in E.164 format.
+	//
+	// This member is required.
+	DestinationPhoneNumber *string
+
+	// The time the rule will expire at. If ExpirationTimestamp is not set then the
+	// rule will not expire.
+	ExpirationTimestamp *time.Time
+
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	IsoCountryCode *string
+
+	noSmithyDocumentSerde
+}
+
+// The information for a protect configuration rule set number override that meets
+// a specified criteria.
+type ProtectConfigurationRuleSetNumberOverrideFilterItem struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name ProtectConfigurationRuleSetNumberOverrideFilterName
+
+	// An array values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // The filter definition for filtering registrations that meets a specified
 // criteria.
 type RegistrationAssociationFilter struct {
@@ -870,24 +921,26 @@ type RegistrationInformation struct {
 
 	// The status of the registration.
 	//
+	//   - CLOSED : The phone number or sender ID has been deleted and you must also
+	//   delete the registration for the number.
+	//
 	//   - CREATED : Your registration is created but not submitted.
 	//
-	//   - SUBMITTED : Your registration has been submitted and is awaiting review.
+	//   - COMPLETE : Your registration has been approved and your origination identity
+	//   has been created.
 	//
-	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//   - DELETED : The registration has been deleted.
 	//
 	//   - PROVISIONING : Your registration has been approved and your origination
 	//   identity is being created.
 	//
-	//   - COMPLETE : Your registration has been approved and and your origination
-	//   identity has been created.
+	//   - REQUIRES_AUTHENTICATION : You need to complete email authentication.
 	//
 	//   - REQUIRES_UPDATES : You must fix your registration and resubmit it.
 	//
-	//   - CLOSED : The phone number or sender ID has been deleted and you must also
-	//   delete the registration for the number.
+	//   - REVIEWING : Your registration has been accepted and is being reviewed.
 	//
-	//   - DELETED : The registration has been deleted.
+	//   - SUBMITTED : Your registration has been submitted and is awaiting review.
 	//
 	// This member is required.
 	RegistrationStatus RegistrationStatus
@@ -1033,23 +1086,25 @@ type RegistrationVersionInformation struct {
 
 	// The status of the registration.
 	//
-	//   - DRAFT : The initial status of a registration version after it’s created.
-	//
-	//   - SUBMITTED : Your registration has been submitted.
-	//
-	//   - REVIEWING : Your registration has been accepted and is being reviewed.
-	//
 	//   - APPROVED : Your registration has been approved.
+	//
+	//   - ARCHIVED : Your previously approved registration version moves into this
+	//   status when a more recently submitted version is approved.
+	//
+	//   - DENIED : You must fix your registration and resubmit it.
 	//
 	//   - DISCARDED : You've abandon this version of their registration to start over
 	//   with a new version.
 	//
-	//   - DENIED : You must fix your registration and resubmit it.
+	//   - DRAFT : The initial status of a registration version after it’s created.
+	//
+	//   - REQUIRES_AUTHENTICATION : You need to complete email authentication.
+	//
+	//   - REVIEWING : Your registration has been accepted and is being reviewed.
 	//
 	//   - REVOKED : Your previously approved registration has been revoked.
 	//
-	//   - ARCHIVED : Your previously approved registration version moves into this
-	//   status when a more recently submitted version is approved.
+	//   - SUBMITTED : Your registration has been submitted.
 	//
 	// This member is required.
 	RegistrationVersionStatus RegistrationVersionStatus
@@ -1101,6 +1156,12 @@ type RegistrationVersionStatusHistory struct {
 	//
 	// [UNIX epoch time]: https://www.epochconverter.com/
 	DiscardedTimestamp *time.Time
+
+	// The time when the registration was in the requires authentication state, in [UNIX epoch time]
+	// format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	RequiresAuthenticationTimestamp *time.Time
 
 	// The time when the registration was in the reviewing state, in [UNIX epoch time] format.
 	//

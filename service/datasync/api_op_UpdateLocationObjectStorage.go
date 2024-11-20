@@ -40,7 +40,7 @@ type UpdateLocationObjectStorageInput struct {
 	AccessKey *string
 
 	// Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can
-	// securely connect with your location.
+	// connect with your object storage system.
 	AgentArns []string
 
 	// Specifies the secret key (for example, a password) if credentials are required

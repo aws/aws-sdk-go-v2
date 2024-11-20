@@ -50,6 +50,26 @@ func (m *validateOpCopyDistribution) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAnycastIpList struct {
+}
+
+func (*validateOpCreateAnycastIpList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAnycastIpList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAnycastIpListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAnycastIpListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCachePolicy struct {
 }
 
@@ -430,6 +450,46 @@ func (m *validateOpCreateStreamingDistributionWithTags) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcOrigin struct {
+}
+
+func (*validateOpCreateVpcOrigin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcOriginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAnycastIpList struct {
+}
+
+func (*validateOpDeleteAnycastIpList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAnycastIpList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAnycastIpListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAnycastIpListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCachePolicy struct {
 }
 
@@ -730,6 +790,26 @@ func (m *validateOpDeleteStreamingDistribution) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVpcOrigin struct {
+}
+
+func (*validateOpDeleteVpcOrigin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcOriginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFunction struct {
 }
 
@@ -765,6 +845,26 @@ func (m *validateOpDescribeKeyValueStore) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeKeyValueStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAnycastIpList struct {
+}
+
+func (*validateOpGetAnycastIpList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAnycastIpList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAnycastIpListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAnycastIpListInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1310,6 +1410,26 @@ func (m *validateOpGetStreamingDistribution) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVpcOrigin struct {
+}
+
+func (*validateOpGetVpcOrigin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVpcOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVpcOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVpcOriginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListConflictingAliases struct {
 }
 
@@ -1325,6 +1445,26 @@ func (m *validateOpListConflictingAliases) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListConflictingAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDistributionsByAnycastIpListId struct {
+}
+
+func (*validateOpListDistributionsByAnycastIpListId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDistributionsByAnycastIpListId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDistributionsByAnycastIpListIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDistributionsByAnycastIpListIdInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1405,6 +1545,26 @@ func (m *validateOpListDistributionsByResponseHeadersPolicyId) HandleInitialize(
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDistributionsByResponseHeadersPolicyIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDistributionsByVpcOriginId struct {
+}
+
+func (*validateOpListDistributionsByVpcOriginId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDistributionsByVpcOriginId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDistributionsByVpcOriginIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDistributionsByVpcOriginIdInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1870,12 +2030,36 @@ func (m *validateOpUpdateStreamingDistribution) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateVpcOrigin struct {
+}
+
+func (*validateOpUpdateVpcOrigin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVpcOrigin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVpcOriginInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVpcOriginInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAlias{}, middleware.After)
 }
 
 func addOpCopyDistributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyDistribution{}, middleware.After)
+}
+
+func addOpCreateAnycastIpListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAnycastIpList{}, middleware.After)
 }
 
 func addOpCreateCachePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1954,6 +2138,14 @@ func addOpCreateStreamingDistributionWithTagsValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpCreateStreamingDistributionWithTags{}, middleware.After)
 }
 
+func addOpCreateVpcOriginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcOrigin{}, middleware.After)
+}
+
+func addOpDeleteAnycastIpListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAnycastIpList{}, middleware.After)
+}
+
 func addOpDeleteCachePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCachePolicy{}, middleware.After)
 }
@@ -2014,12 +2206,20 @@ func addOpDeleteStreamingDistributionValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDeleteStreamingDistribution{}, middleware.After)
 }
 
+func addOpDeleteVpcOriginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcOrigin{}, middleware.After)
+}
+
 func addOpDescribeFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFunction{}, middleware.After)
 }
 
 func addOpDescribeKeyValueStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeKeyValueStore{}, middleware.After)
+}
+
+func addOpGetAnycastIpListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAnycastIpList{}, middleware.After)
 }
 
 func addOpGetCachePolicyConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -2130,8 +2330,16 @@ func addOpGetStreamingDistributionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetStreamingDistribution{}, middleware.After)
 }
 
+func addOpGetVpcOriginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVpcOrigin{}, middleware.After)
+}
+
 func addOpListConflictingAliasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListConflictingAliases{}, middleware.After)
+}
+
+func addOpListDistributionsByAnycastIpListIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDistributionsByAnycastIpListId{}, middleware.After)
 }
 
 func addOpListDistributionsByCachePolicyIdValidationMiddleware(stack *middleware.Stack) error {
@@ -2148,6 +2356,10 @@ func addOpListDistributionsByOriginRequestPolicyIdValidationMiddleware(stack *mi
 
 func addOpListDistributionsByResponseHeadersPolicyIdValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDistributionsByResponseHeadersPolicyId{}, middleware.After)
+}
+
+func addOpListDistributionsByVpcOriginIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDistributionsByVpcOriginId{}, middleware.After)
 }
 
 func addOpListDistributionsByWebACLIdValidationMiddleware(stack *middleware.Stack) error {
@@ -2242,6 +2454,10 @@ func addOpUpdateStreamingDistributionValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateStreamingDistribution{}, middleware.After)
 }
 
+func addOpUpdateVpcOriginValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVpcOrigin{}, middleware.After)
+}
+
 func validateAliases(v *types.Aliases) error {
 	if v == nil {
 		return nil
@@ -2317,6 +2533,11 @@ func validateCacheBehavior(v *types.CacheBehavior) error {
 	if v.FunctionAssociations != nil {
 		if err := validateFunctionAssociations(v.FunctionAssociations); err != nil {
 			invalidParams.AddNested("FunctionAssociations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GrpcConfig != nil {
+		if err := validateGrpcConfig(v.GrpcConfig); err != nil {
+			invalidParams.AddNested("GrpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ForwardedValues != nil {
@@ -2796,6 +3017,11 @@ func validateDefaultCacheBehavior(v *types.DefaultCacheBehavior) error {
 			invalidParams.AddNested("FunctionAssociations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.GrpcConfig != nil {
+		if err := validateGrpcConfig(v.GrpcConfig); err != nil {
+			invalidParams.AddNested("GrpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ForwardedValues != nil {
 		if err := validateForwardedValues(v.ForwardedValues); err != nil {
 			invalidParams.AddNested("ForwardedValues", err.(smithy.InvalidParamsError))
@@ -2852,11 +3078,6 @@ func validateDistributionConfig(v *types.DistributionConfig) error {
 	}
 	if v.Comment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Comment"))
-	}
-	if v.Logging != nil {
-		if err := validateLoggingConfig(v.Logging); err != nil {
-			invalidParams.AddNested("Logging", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
@@ -3191,6 +3412,21 @@ func validateGeoRestriction(v *types.GeoRestriction) error {
 	}
 }
 
+func validateGrpcConfig(v *types.GrpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GrpcConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHeaders(v *types.Headers) error {
 	if v == nil {
 		return nil
@@ -3389,30 +3625,6 @@ func validateLambdaFunctionAssociations(v *types.LambdaFunctionAssociations) err
 	}
 }
 
-func validateLoggingConfig(v *types.LoggingConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "LoggingConfig"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
-	if v.IncludeCookies == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IncludeCookies"))
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if v.Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateMonitoringSubscription(v *types.MonitoringSubscription) error {
 	if v == nil {
 		return nil
@@ -3454,6 +3666,11 @@ func validateOrigin(v *types.Origin) error {
 	if v.CustomOriginConfig != nil {
 		if err := validateCustomOriginConfig(v.CustomOriginConfig); err != nil {
 			invalidParams.AddNested("CustomOriginConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcOriginConfig != nil {
+		if err := validateVpcOriginConfig(v.VpcOriginConfig); err != nil {
+			invalidParams.AddNested("VpcOriginConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.OriginShield != nil {
@@ -4756,6 +4973,53 @@ func validateTrustedSigners(v *types.TrustedSigners) error {
 	}
 }
 
+func validateVpcOriginConfig(v *types.VpcOriginConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcOriginConfig"}
+	if v.VpcOriginId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcOriginId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcOriginEndpointConfig(v *types.VpcOriginEndpointConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcOriginEndpointConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.HTTPPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HTTPPort"))
+	}
+	if v.HTTPSPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HTTPSPort"))
+	}
+	if len(v.OriginProtocolPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginProtocolPolicy"))
+	}
+	if v.OriginSslProtocols != nil {
+		if err := validateOriginSslProtocols(v.OriginSslProtocols); err != nil {
+			invalidParams.AddNested("OriginSslProtocols", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateAliasInput(v *AssociateAliasInput) error {
 	if v == nil {
 		return nil
@@ -4784,6 +5048,29 @@ func validateOpCopyDistributionInput(v *CopyDistributionInput) error {
 	}
 	if v.CallerReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAnycastIpListInput(v *CreateAnycastIpListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAnycastIpListInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IpCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpCount"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5175,6 +5462,48 @@ func validateOpCreateStreamingDistributionWithTagsInput(v *CreateStreamingDistri
 	}
 }
 
+func validateOpCreateVpcOriginInput(v *CreateVpcOriginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcOriginInput"}
+	if v.VpcOriginEndpointConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcOriginEndpointConfig"))
+	} else if v.VpcOriginEndpointConfig != nil {
+		if err := validateVpcOriginEndpointConfig(v.VpcOriginEndpointConfig); err != nil {
+			invalidParams.AddNested("VpcOriginEndpointConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAnycastIpListInput(v *DeleteAnycastIpListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnycastIpListInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCachePolicyInput(v *DeleteCachePolicyInput) error {
 	if v == nil {
 		return nil
@@ -5406,6 +5735,24 @@ func validateOpDeleteStreamingDistributionInput(v *DeleteStreamingDistributionIn
 	}
 }
 
+func validateOpDeleteVpcOriginInput(v *DeleteVpcOriginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcOriginInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFunctionInput(v *DescribeFunctionInput) error {
 	if v == nil {
 		return nil
@@ -5428,6 +5775,21 @@ func validateOpDescribeKeyValueStoreInput(v *DescribeKeyValueStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeKeyValueStoreInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAnycastIpListInput(v *GetAnycastIpListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAnycastIpListInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5844,6 +6206,21 @@ func validateOpGetStreamingDistributionInput(v *GetStreamingDistributionInput) e
 	}
 }
 
+func validateOpGetVpcOriginInput(v *GetVpcOriginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVpcOriginInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListConflictingAliasesInput(v *ListConflictingAliasesInput) error {
 	if v == nil {
 		return nil
@@ -5854,6 +6231,21 @@ func validateOpListConflictingAliasesInput(v *ListConflictingAliasesInput) error
 	}
 	if v.Alias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDistributionsByAnycastIpListIdInput(v *ListDistributionsByAnycastIpListIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDistributionsByAnycastIpListIdInput"}
+	if v.AnycastIpListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnycastIpListId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5914,6 +6306,21 @@ func validateOpListDistributionsByResponseHeadersPolicyIdInput(v *ListDistributi
 	invalidParams := smithy.InvalidParamsError{Context: "ListDistributionsByResponseHeadersPolicyIdInput"}
 	if v.ResponseHeadersPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResponseHeadersPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDistributionsByVpcOriginIdInput(v *ListDistributionsByVpcOriginIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDistributionsByVpcOriginIdInput"}
+	if v.VpcOriginId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcOriginId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6383,6 +6790,31 @@ func validateOpUpdateStreamingDistributionInput(v *UpdateStreamingDistributionIn
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVpcOriginInput(v *UpdateVpcOriginInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVpcOriginInput"}
+	if v.VpcOriginEndpointConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcOriginEndpointConfig"))
+	} else if v.VpcOriginEndpointConfig != nil {
+		if err := validateVpcOriginEndpointConfig(v.VpcOriginEndpointConfig); err != nil {
+			invalidParams.AddNested("VpcOriginEndpointConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

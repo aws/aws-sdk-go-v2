@@ -308,7 +308,7 @@ func awsAwsjson11_deserializeDocumentMarketplaceCommerceAnalyticsException(v **t
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

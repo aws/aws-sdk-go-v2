@@ -17193,6 +17193,47 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAcceleratorCapabilities(v **types.AcceleratorCapabilities, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AcceleratorCapabilities
+	if *v == nil {
+		sv = &types.AcceleratorCapabilities{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "count":
+			if err := awsRestjson1_deserializeDocumentAcceleratorCountRange(&sv.Count, value); err != nil {
+				return err
+			}
+
+		case "selections":
+			if err := awsRestjson1_deserializeDocumentAcceleratorSelections(&sv.Selections, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAcceleratorCountRange(v **types.AcceleratorCountRange, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17247,6 +17288,89 @@ func awsRestjson1_deserializeDocumentAcceleratorCountRange(v **types.Accelerator
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAcceleratorSelection(v **types.AcceleratorSelection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AcceleratorSelection
+	if *v == nil {
+		sv = &types.AcceleratorSelection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AcceleratorName to be of type string, got %T instead", value)
+				}
+				sv.Name = types.AcceleratorName(jtv)
+			}
+
+		case "runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AcceleratorRuntime to be of type string, got %T instead", value)
+				}
+				sv.Runtime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAcceleratorSelections(v *[]types.AcceleratorSelection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AcceleratorSelection
+	if *v == nil {
+		cv = []types.AcceleratorSelection{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AcceleratorSelection
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAcceleratorSelection(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -17370,7 +17494,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18347,7 +18471,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20414,7 +20538,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -23281,7 +23405,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -23533,6 +23657,11 @@ func awsRestjson1_deserializeDocumentServiceManagedEc2InstanceCapabilities(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "acceleratorCapabilities":
+			if err := awsRestjson1_deserializeDocumentAcceleratorCapabilities(&sv.AcceleratorCapabilities, value); err != nil {
+				return err
+			}
+
 		case "allowedInstanceTypes":
 			if err := awsRestjson1_deserializeDocumentInstanceTypes(&sv.AllowedInstanceTypes, value); err != nil {
 				return err
@@ -23662,7 +23791,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -26521,7 +26650,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -26644,7 +26773,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				return err
 			}
 
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

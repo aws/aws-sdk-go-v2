@@ -653,9 +653,7 @@ func validateOpConverseInput(v *ConverseInput) error {
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
-	if v.Messages == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Messages"))
-	} else if v.Messages != nil {
+	if v.Messages != nil {
 		if err := validateMessages(v.Messages); err != nil {
 			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
 		}
@@ -690,9 +688,7 @@ func validateOpConverseStreamInput(v *ConverseStreamInput) error {
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
-	if v.Messages == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Messages"))
-	} else if v.Messages != nil {
+	if v.Messages != nil {
 		if err := validateMessages(v.Messages); err != nil {
 			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
 		}
@@ -724,9 +720,6 @@ func validateOpInvokeModelInput(v *InvokeModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelInput"}
-	if v.Body == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Body"))
-	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
@@ -742,9 +735,6 @@ func validateOpInvokeModelWithResponseStreamInput(v *InvokeModelWithResponseStre
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeModelWithResponseStreamInput"}
-	if v.Body == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Body"))
-	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}

@@ -68,6 +68,10 @@ type CreateCalculatedAttributeDefinitionInput struct {
 	// The display name of the calculated attribute.
 	DisplayName *string
 
+	// Defines how to filter incoming objects to include part of the Calculated
+	// Attribute.
+	Filter *types.Filter
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -95,6 +99,9 @@ type CreateCalculatedAttributeDefinitionOutput struct {
 
 	// The display name of the calculated attribute.
 	DisplayName *string
+
+	// The filter that was used as part of the request.
+	Filter *types.Filter
 
 	// The timestamp of when the calculated attribute definition was most recently
 	// edited.

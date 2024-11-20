@@ -85,7 +85,7 @@ func awsRestjson1_serializeOpHttpBindingsCompleteAttachmentUploadInput(v *Comple
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -182,7 +182,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateParticipantConnectionInput(v *Cre
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ParticipantToken != nil && len(*v.ParticipantToken) > 0 {
+	if v.ParticipantToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ParticipantToken)
 	}
@@ -268,7 +268,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeViewInput(v *DescribeViewInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -355,7 +355,7 @@ func awsRestjson1_serializeOpHttpBindingsDisconnectParticipantInput(v *Disconnec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -445,7 +445,7 @@ func awsRestjson1_serializeOpHttpBindingsGetAttachmentInput(v *GetAttachmentInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -535,7 +535,7 @@ func awsRestjson1_serializeOpHttpBindingsGetTranscriptInput(v *GetTranscriptInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -652,7 +652,7 @@ func awsRestjson1_serializeOpHttpBindingsSendEventInput(v *SendEventInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -752,7 +752,7 @@ func awsRestjson1_serializeOpHttpBindingsSendMessageInput(v *SendMessageInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}
@@ -852,7 +852,7 @@ func awsRestjson1_serializeOpHttpBindingsStartAttachmentUploadInput(v *StartAtta
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionToken != nil && len(*v.ConnectionToken) > 0 {
+	if v.ConnectionToken != nil {
 		locationName := "X-Amz-Bearer"
 		encoder.SetHeader(locationName).String(*v.ConnectionToken)
 	}

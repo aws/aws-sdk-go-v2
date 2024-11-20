@@ -34,7 +34,7 @@ type SetStackPolicyInput struct {
 	// This member is required.
 	StackName *string
 
-	// Structure containing the stack policy body. For more information, go to [Prevent updates to stack resources] in the
+	// Structure containing the stack policy body. For more information, see [Prevent updates to stack resources] in the
 	// CloudFormation User Guide. You can specify either the StackPolicyBody or the
 	// StackPolicyURL parameter, but not both.
 	//

@@ -1204,7 +1204,7 @@ type HumanWorkflowConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about tne imported model.
+// Information about the imported model.
 type ImportedModelSummary struct {
 
 	// Creation time of the imported model.
@@ -1222,6 +1222,12 @@ type ImportedModelSummary struct {
 	// This member is required.
 	ModelName *string
 
+	// Specifies if the imported model supports converse.
+	InstructSupported *bool
+
+	// The architecture of the imported model.
+	ModelArchitecture *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1233,6 +1239,26 @@ type InferenceProfileModel struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about the model or system-defined inference profile that
+// is the source for an inference profile..
+//
+// The following types satisfy this interface:
+//
+//	InferenceProfileModelSourceMemberCopyFrom
+type InferenceProfileModelSource interface {
+	isInferenceProfileModelSource()
+}
+
+// The ARN of the model or system-defined inference profile that is the source for
+// the inference profile.
+type InferenceProfileModelSourceMemberCopyFrom struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*InferenceProfileModelSourceMemberCopyFrom) isInferenceProfileModelSource() {}
 
 // Contains information about an inference profile.
 type InferenceProfileSummary struct {
@@ -1258,13 +1284,19 @@ type InferenceProfileSummary struct {
 	Models []InferenceProfileModel
 
 	// The status of the inference profile. ACTIVE means that the inference profile is
-	// available to use.
+	// ready to be used.
 	//
 	// This member is required.
 	Status InferenceProfileStatus
 
-	// The type of the inference profile. SYSTEM_DEFINED means that the inference
-	// profile is defined by Amazon Bedrock.
+	// The type of the inference profile. The following types are possible:
+	//
+	//   - SYSTEM_DEFINED – The inference profile is defined by Amazon Bedrock. You can
+	//   route inference requests across regions with these inference profiles.
+	//
+	//   - APPLICATION – The inference profile was created by a user. This type of
+	//   inference profile can track metrics and costs when invoking the model in it. The
+	//   inference profile may route requests to one or multiple regions.
 	//
 	// This member is required.
 	Type InferenceProfileType
@@ -1829,6 +1861,7 @@ func (*UnknownUnionMember) isEvaluationConfig()                   {}
 func (*UnknownUnionMember) isEvaluationDatasetLocation()          {}
 func (*UnknownUnionMember) isEvaluationInferenceConfig()          {}
 func (*UnknownUnionMember) isEvaluationModelConfig()              {}
+func (*UnknownUnionMember) isInferenceProfileModelSource()        {}
 func (*UnknownUnionMember) isModelDataSource()                    {}
 func (*UnknownUnionMember) isModelInvocationJobInputDataConfig()  {}
 func (*UnknownUnionMember) isModelInvocationJobOutputDataConfig() {}

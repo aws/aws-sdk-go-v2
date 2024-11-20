@@ -44,7 +44,8 @@ type PutResourceLogLevelInput struct {
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice or WirelessGateway .
+	// The type of the resource, which can be WirelessDevice , WirelessGateway , or
+	// FuotaTask .
 	//
 	// This member is required.
 	ResourceType *string

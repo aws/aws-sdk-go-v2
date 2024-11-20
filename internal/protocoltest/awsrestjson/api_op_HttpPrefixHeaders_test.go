@@ -56,7 +56,7 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
-		// No prefix headers are serialized because the value is empty
+		// No prefix headers are serialized because the value is not present
 		"RestJsonHttpPrefixHeadersAreNotPresent": {
 			Params: &HttpPrefixHeadersInput{
 				Foo:    ptr.String("Foo"),
@@ -67,6 +67,23 @@ func TestClient_HttpPrefixHeaders_awsRestjson1Serialize(t *testing.T) {
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"X-Foo": []string{"Foo"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Serialize prefix headers were the value is present but empty
+		"RestJsonHttpPrefixEmptyHeaders": {
+			Params: &HttpPrefixHeadersInput{
+				FooMap: map[string]string{
+					"Abc": "",
+				},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/HttpPrefixHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Foo-Abc": []string{""},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

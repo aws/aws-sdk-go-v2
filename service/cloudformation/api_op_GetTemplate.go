@@ -73,13 +73,10 @@ type GetTemplateOutput struct {
 	// set, the Processed template becomes available.
 	StagesAvailable []types.TemplateStage
 
-	// Structure containing the template body. (For more information, go to [Template Anatomy] in the
-	// CloudFormation User Guide.)
+	// Structure containing the template body.
 	//
 	// CloudFormation returns the same template that was used when the stack was
 	// created.
-	//
-	// [Template Anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateBody *string
 
 	// Metadata pertaining to the operation's result.

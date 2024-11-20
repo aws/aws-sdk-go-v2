@@ -269,8 +269,10 @@ type CapacityProvider struct {
 // With FARGATE_SPOT , you can run interruption tolerant tasks at a rate that's
 // discounted compared to the FARGATE price. FARGATE_SPOT runs tasks on spare
 // compute capacity. When Amazon Web Services needs the capacity back, your tasks
-// are interrupted with a two-minute warning. FARGATE_SPOT only supports Linux
-// tasks with the X86_64 architecture on platform version 1.3.0 or later.
+// are interrupted with a two-minute warning. FARGATE_SPOT supports Linux tasks
+// with the X86_64 architecture on platform version 1.3.0 or later. FARGATE_SPOT
+// supports Linux tasks with the ARM64 architecture on platform version 1.4.0 or
+// later.
 //
 // A capacity provider strategy may contain a maximum of 6 capacity providers.
 //
@@ -1230,6 +1232,16 @@ type ContainerDefinition struct {
 	// This parameter is not supported for Windows containers.
 	User *string
 
+	// Specifies whether Amazon ECS will resolve the container image tag provided in
+	// the container definition to an image digest. By default, the value is enabled .
+	// If you set the value for a container as disabled , Amazon ECS will not resolve
+	// the provided container image tag to a digest and will use the original image URI
+	// specified in the container definition for deployment. For more information about
+	// container image resolution, see [Container image resolution]in the Amazon ECS Developer Guide.
+	//
+	// [Container image resolution]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability
+	VersionConsistency VersionConsistency
+
 	// Data volumes to mount from another container. This parameter maps to VolumesFrom
 	// in the docker container create command and the --volumes-from option to docker
 	// run.
@@ -1300,6 +1312,33 @@ type ContainerDependency struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
+}
+
+// The details about the container image a service revision uses.
+//
+// To ensure that all tasks in a service use the same container image, Amazon ECS
+// resolves container image names and any image tags specified in the task
+// definition to container image digests.
+//
+// After the container image digest has been established, Amazon ECS uses the
+// digest to start any other desired tasks, and for any future service and service
+// revision updates. This leads to all tasks in a service always running identical
+// container images, resulting in version consistency for your software. For more
+// information, see [Container image resolution]in the Amazon ECS Developer Guide.
+//
+// [Container image resolution]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability
+type ContainerImage struct {
+
+	// The name of the container.
+	ContainerName *string
+
+	// The container image.
+	Image *string
+
+	// The container image digest.
+	ImageDigest *string
 
 	noSmithyDocumentSerde
 }
@@ -1563,6 +1602,23 @@ type ContainerStateChange struct {
 	noSmithyDocumentSerde
 }
 
+// The optional filter to narrow the ListServiceDeployment results.
+//
+// If you do not specify a value, service deployments that were created before the
+// current time are included in the result.
+type CreatedAt struct {
+
+	// Include service deployments in the result that were created after this time.
+	// The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	After *time.Time
+
+	// Include service deployments in the result that were created before this time.
+	// The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	Before *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The details of an Amazon ECS service deployment. This is used only when a
 // service uses the ECS deployment controller type.
 type Deployment struct {
@@ -1684,6 +1740,9 @@ type Deployment struct {
 	//
 	// [ServiceManagedEBSVolumeConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
 	VolumeConfigurations []ServiceVolumeConfiguration
+
+	// The VPC Lattice configuration for the service deployment.
+	VpcLatticeConfigurations []VpcLatticeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1870,10 +1929,7 @@ type DeploymentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The deployment controller to use for the service. For more information, see [Amazon ECS deployment types] in
-// the Amazon Elastic Container Service Developer Guide.
-//
-// [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+// The deployment controller to use for the service.
 type DeploymentController struct {
 
 	// The deployment controller type to use.
@@ -1886,14 +1942,26 @@ type DeploymentController struct {
 	// is controlled by adjusting the minimum and maximum number of healthy tasks
 	// allowed during a service deployment, as specified in the [DeploymentConfiguration].
 	//
+	// For more information about rolling deployments, see [Deploy Amazon ECS services by replacing tasks] in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
 	// CODE_DEPLOY The blue/green ( CODE_DEPLOY ) deployment type uses the blue/green
 	// deployment model powered by CodeDeploy, which allows you to verify a new
 	// deployment of a service before sending production traffic to it.
+	//
+	// For more information about blue/green deployments, see [Validate the state of an Amazon ECS service before deployment] in the Amazon Elastic
+	// Container Service Developer Guide.
 	//
 	// EXTERNAL The external ( EXTERNAL ) deployment type enables you to use any
 	// third-party deployment controller for full control over the deployment process
 	// for an Amazon ECS service.
 	//
+	// For more information about external deployments, see [Deploy Amazon ECS services using a third-party controller] in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
+	// [Validate the state of an Amazon ECS service before deployment]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html
+	// [Deploy Amazon ECS services by replacing tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
+	// [Deploy Amazon ECS services using a third-party controller]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-external.html
 	// [DeploymentConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html
 	//
 	// This member is required.
@@ -2415,7 +2483,7 @@ type HealthCheck struct {
 	//     CMD-SHELL, curl -f http://localhost/ || exit 1
 	//
 	// An exit code of 0 indicates success, and non-zero exit code indicates failure.
-	// For more information, see HealthCheck in the docker container create command
+	// For more information, see HealthCheck in the docker container create command.
 	//
 	// This member is required.
 	Command []string
@@ -2802,11 +2870,153 @@ type LogConfiguration struct {
 	// This member is required.
 	LogDriver LogDriver
 
-	// The configuration options to send to the log driver. This parameter requires
-	// version 1.19 of the Docker Remote API or greater on your container instance. To
-	// check the Docker Remote API version on your container instance, log in to your
-	// container instance and run the following command: sudo docker version --format
-	// '{{.Server.APIVersion}}'
+	// The configuration options to send to the log driver.
+	//
+	// The options you can specify depend on the log driver. Some of the options you
+	// can specify when you use the awslogs log driver to route logs to Amazon
+	// CloudWatch include the following:
+	//
+	// awslogs-create-group Required: No
+	//
+	// Specify whether you want the log group to be created automatically. If this
+	// option isn't specified, it defaults to false .
+	//
+	// Your IAM policy must include the logs:CreateLogGroup permission before you
+	// attempt to use awslogs-create-group .
+	//
+	// awslogs-region Required: Yes
+	//
+	// Specify the Amazon Web Services Region that the awslogs log driver is to send
+	// your Docker logs to. You can choose to send all of your logs from clusters in
+	// different Regions to a single region in CloudWatch Logs. This is so that they're
+	// all visible in one location. Otherwise, you can separate them by Region for more
+	// granularity. Make sure that the specified log group exists in the Region that
+	// you specify with this option.
+	//
+	// awslogs-group Required: Yes
+	//
+	// Make sure to specify a log group that the awslogs log driver sends its log
+	// streams to.
+	//
+	// awslogs-stream-prefix Required: Yes, when using the Fargate launch
+	// type.Optional for the EC2 launch type, required for the Fargate launch type.
+	//
+	// Use the awslogs-stream-prefix option to associate a log stream with the
+	// specified prefix, the container name, and the ID of the Amazon ECS task that the
+	// container belongs to. If you specify a prefix with this option, then the log
+	// stream takes the format prefix-name/container-name/ecs-task-id .
+	//
+	// If you don't specify a prefix with this option, then the log stream is named
+	// after the container ID that's assigned by the Docker daemon on the container
+	// instance. Because it's difficult to trace logs back to the container that sent
+	// them with just the Docker container ID (which is only available on the container
+	// instance), we recommend that you specify a prefix with this option.
+	//
+	// For Amazon ECS services, you can use the service name as the prefix. Doing so,
+	// you can trace log streams to the service that the container belongs to, the name
+	// of the container that sent them, and the ID of the task that the container
+	// belongs to.
+	//
+	// You must specify a stream-prefix for your logs to have your logs appear in the
+	// Log pane when using the Amazon ECS console.
+	//
+	// awslogs-datetime-format Required: No
+	//
+	// This option defines a multiline start pattern in Python strftime format. A log
+	// message consists of a line that matches the pattern and any following lines that
+	// don’t match the pattern. The matched line is the delimiter between log messages.
+	//
+	// One example of a use case for using this format is for parsing output such as a
+	// stack dump, which might otherwise be logged in multiple entries. The correct
+	// pattern allows it to be captured in a single entry.
+	//
+	// For more information, see [awslogs-datetime-format].
+	//
+	// You cannot configure both the awslogs-datetime-format and
+	// awslogs-multiline-pattern options.
+	//
+	// Multiline logging performs regular expression parsing and matching of all log
+	// messages. This might have a negative impact on logging performance.
+	//
+	// awslogs-multiline-pattern Required: No
+	//
+	// This option defines a multiline start pattern that uses a regular expression. A
+	// log message consists of a line that matches the pattern and any following lines
+	// that don’t match the pattern. The matched line is the delimiter between log
+	// messages.
+	//
+	// For more information, see [awslogs-multiline-pattern].
+	//
+	// This option is ignored if awslogs-datetime-format is also configured.
+	//
+	// You cannot configure both the awslogs-datetime-format and
+	// awslogs-multiline-pattern options.
+	//
+	// Multiline logging performs regular expression parsing and matching of all log
+	// messages. This might have a negative impact on logging performance.
+	//
+	// mode Required: No
+	//
+	// Valid values: non-blocking | blocking
+	//
+	// This option defines the delivery mode of log messages from the container to
+	// CloudWatch Logs. The delivery mode you choose affects application availability
+	// when the flow of logs from container to CloudWatch is interrupted.
+	//
+	// If you use the blocking mode and the flow of logs to CloudWatch is interrupted,
+	// calls from container code to write to the stdout and stderr streams will block.
+	// The logging thread of the application will block as a result. This may cause the
+	// application to become unresponsive and lead to container healthcheck failure.
+	//
+	// If you use the non-blocking mode, the container's logs are instead stored in an
+	// in-memory intermediate buffer configured with the max-buffer-size option. This
+	// prevents the application from becoming unresponsive when logs cannot be sent to
+	// CloudWatch. We recommend using this mode if you want to ensure service
+	// availability and are okay with some log loss. For more information, see [Preventing log loss with non-blocking mode in the awslogs container log driver]awslogs .
+	//
+	// max-buffer-size Required: No
+	//
+	// Default value: 1m
+	//
+	// When non-blocking mode is used, the max-buffer-size log option controls the
+	// size of the buffer that's used for intermediate message storage. Make sure to
+	// specify an adequate buffer size based on your application. When the buffer fills
+	// up, further logs cannot be stored. Logs that cannot be stored are lost.
+	//
+	// To route logs using the splunk log router, you need to specify a splunk-token
+	// and a splunk-url .
+	//
+	// When you use the awsfirelens log router to route logs to an Amazon Web Services
+	// Service or Amazon Web Services Partner Network destination for log storage and
+	// analytics, you can set the log-driver-buffer-limit option to limit the number
+	// of events that are buffered in memory, before being sent to the log router
+	// container. It can help to resolve potential log loss issue because high
+	// throughput might result in memory running out for the buffer inside of Docker.
+	//
+	// Other options you can specify when using awsfirelens to route logs depend on
+	// the destination. When you export logs to Amazon Data Firehose, you can specify
+	// the Amazon Web Services Region with region and a name for the log stream with
+	// delivery_stream .
+	//
+	// When you export logs to Amazon Kinesis Data Streams, you can specify an Amazon
+	// Web Services Region with region and a data stream name with stream .
+	//
+	// When you export logs to Amazon OpenSearch Service, you can specify options like
+	// Name , Host (OpenSearch Service endpoint without protocol), Port , Index , Type
+	// , Aws_auth , Aws_region , Suppress_Type_Name , and tls .
+	//
+	// When you export logs to Amazon S3, you can specify the bucket using the bucket
+	// option. You can also specify region , total_file_size , upload_timeout , and
+	// use_put_object as options.
+	//
+	// This parameter requires version 1.19 of the Docker Remote API or greater on
+	// your container instance. To check the Docker Remote API version on your
+	// container instance, log in to your container instance and run the following
+	// command: sudo docker version --format '{{.Server.APIVersion}}'
+	//
+	// [awslogs-multiline-pattern]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-multiline-pattern
+	// [awslogs-datetime-format]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-datetime-format
+	// [Preventing log loss with non-blocking mode in the awslogs container log driver]: http://aws.amazon.com/blogs/containers/preventing-log-loss-with-non-blocking-mode-in-the-awslogs-container-log-driver/
 	Options map[string]string
 
 	// The secrets to pass to the log configuration. For more information, see [Specifying sensitive data] in the
@@ -3271,16 +3481,11 @@ type PortMapping struct {
 	// [DescribeContainerInstances]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeContainerInstances.html
 	HostPort *int32
 
-	// The name that's used for the port mapping. This parameter only applies to
-	// Service Connect. This parameter is the name that you use in the
-	// serviceConnectConfiguration of a service. The name can include up to 64
-	// characters. The characters can include lowercase letters, numbers, underscores
-	// (_), and hyphens (-). The name can't start with a hyphen.
-	//
-	// For more information, see [Service Connect] in the Amazon Elastic Container Service Developer
-	// Guide.
-	//
-	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+	// The name that's used for the port mapping. This parameter is the name that you
+	// use in the serviceConnectConfiguration and the vpcLatticeConfigurations of a
+	// service. The name can include up to 64 characters. The characters can include
+	// lowercase letters, numbers, underscores (_), and hyphens (-). The name can't
+	// start with a hyphen.
 	Name *string
 
 	// The protocol used for the port mapping. Valid values are tcp and udp . The
@@ -3442,6 +3647,32 @@ type ResourceRequirement struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the service deployment rollback.
+type Rollback struct {
+
+	// The reason the rollback happened. For example, the circuit breaker initiated
+	// the rollback operation.
+	Reason *string
+
+	// The ARN of the service revision deployed as part of the rollback.
+	//
+	// When the type is GPU , the value is the number of physical GPUs the Amazon ECS
+	// container agent reserves for the container. The number of GPUs that's reserved
+	// for all containers in a task can't exceed the number of available GPUs on the
+	// container instance that the task is launched on.
+	//
+	// When the type is InferenceAccelerator , the value matches the deviceName for an [InferenceAccelerator]
+	// specified in a task definition.
+	//
+	// [InferenceAccelerator]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html
+	ServiceRevisionArn *string
+
+	// Time time that the rollback started. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about the platform for the Amazon ECS service or task.
 //
 // For more information about RuntimePlatform , see [RuntimePlatform] in the Amazon Elastic
@@ -3520,6 +3751,14 @@ type Secret struct {
 
 // Details on a service within a cluster.
 type Service struct {
+
+	// Indicates whether to use Availability Zone rebalancing for the service.
+	//
+	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
+	AvailabilityZoneRebalancing AvailabilityZoneRebalancing
 
 	// The capacity provider strategy the service uses. When using the
 	// DescribeServices API, this field is omitted if the service was created using a
@@ -3955,6 +4194,176 @@ type ServiceConnectTlsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the service deployment.
+//
+// Service deployments provide a comprehensive view of your deployments. For
+// information about service deployments, see [View service history using Amazon ECS service deployments]in the Amazon Elastic Container
+// Service Developer Guide .
+//
+// [View service history using Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html
+type ServiceDeployment struct {
+
+	// The CloudWatch alarms that determine when a service deployment fails.
+	Alarms *ServiceDeploymentAlarms
+
+	// The ARN of the cluster that hosts the service.
+	ClusterArn *string
+
+	// The time the service deployment was created. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	CreatedAt *time.Time
+
+	// The circuit breaker configuration that determines a service deployment failed.
+	DeploymentCircuitBreaker *ServiceDeploymentCircuitBreaker
+
+	// Optional deployment parameters that control how many tasks run during a
+	// deployment and the ordering of stopping and starting tasks.
+	DeploymentConfiguration *DeploymentConfiguration
+
+	// The time the service deployment finished. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	FinishedAt *time.Time
+
+	// The rollback options the service deployment uses when the deployment fails.
+	Rollback *Rollback
+
+	// The ARN of the service for this service deployment.
+	ServiceArn *string
+
+	// The ARN of the service deployment.
+	ServiceDeploymentArn *string
+
+	// The currently deployed workload configuration.
+	SourceServiceRevisions []ServiceRevisionSummary
+
+	// The time the service deployment statred. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	StartedAt *time.Time
+
+	// The service deployment state.
+	Status ServiceDeploymentStatus
+
+	// Information about why the service deployment is in the current status. For
+	// example, the circuit breaker detected a failure.
+	StatusReason *string
+
+	// The time the service deployment stopped. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	//
+	// The service deployment stops when any of the following actions happen:
+	//
+	//   - A user manually stops the deployment
+	//
+	//   - The rollback option is not in use for the failure detection mechanism (the
+	//   circuit breaker or alarm-based) and the service fails.
+	StoppedAt *time.Time
+
+	// The workload configuration being deployed.
+	TargetServiceRevision *ServiceRevisionSummary
+
+	// The time that the service deployment was last updated. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The CloudWatch alarms used to determine a service deployment failed.
+//
+// Amazon ECS considers the service deployment as failed when any of the alarms
+// move to the ALARM state. For more information, see [How CloudWatch alarms detect Amazon ECS deployment failures] in the Amazon ECS Developer
+// Guide.
+//
+// [How CloudWatch alarms detect Amazon ECS deployment failures]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-alarm-failure.html
+type ServiceDeploymentAlarms struct {
+
+	// The name of the CloudWatch alarms that determine when a service deployment
+	// failed. A "," separates the alarms.
+	AlarmNames []string
+
+	// The status of the alarms check. Amazon ECS is not using alarms for service
+	// deployment failures when the status is DISABLED .
+	Status ServiceDeploymentRollbackMonitorsStatus
+
+	// One or more CloudWatch alarm names that have been triggered during the service
+	// deployment. A "," separates the alarm names.
+	TriggeredAlarmNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The service deployment properties that are retured when you call
+// ListServiceDeployments .
+//
+// This provides a high-level overview of the service deployment.
+type ServiceDeploymentBrief struct {
+
+	// The ARN of the cluster that hosts the service.
+	ClusterArn *string
+
+	// The time that the service deployment was created. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	CreatedAt *time.Time
+
+	// The time that the service deployment completed. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	FinishedAt *time.Time
+
+	// The ARN of the service for this service deployment.
+	ServiceArn *string
+
+	// The ARN of the service deployment.
+	ServiceDeploymentArn *string
+
+	// The time that the service deployment statred. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	StartedAt *time.Time
+
+	// The status of the service deployment
+	Status ServiceDeploymentStatus
+
+	// Information about why the service deployment is in the current status. For
+	// example, the circuit breaker detected a deployment failure.
+	StatusReason *string
+
+	// The ARN of the service revision being deplyed.
+	TargetServiceRevisionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the circuit breaker used to determine when a service
+// deployment has failed.
+//
+// The deployment circuit breaker is the rolling update mechanism that determines
+// if the tasks reach a steady state. The deployment circuit breaker has an option
+// that will automatically roll back a failed deployment to the last cpompleted
+// service revision. For more information, see [How the Amazon ECS deployment circuit breaker detects failures]in the Amazon ECS Developer Guide.
+//
+// [How the Amazon ECS deployment circuit breaker detects failures]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html
+type ServiceDeploymentCircuitBreaker struct {
+
+	// The number of times the circuit breaker detected a service deploymeny failure.
+	FailureCount int32
+
+	// The circuit breaker status. Amazon ECS is not using the circuit breaker for
+	// service deployment failures when the status is DISABLED .
+	Status ServiceDeploymentRollbackMonitorsStatus
+
+	// The threshhold which determines that the service deployment failed.
+	//
+	// The deployment circuit breaker calculates the threshold value, and then uses
+	// the value to determine when to move the deployment to a FAILED state. The
+	// deployment circuit breaker has a minimum threshold of 3 and a maximum threshold
+	// of 200. and uses the values in the following formula to determine the deployment
+	// failure.
+	//
+	//     0.5 * desired task count
+	Threshold int32
+
+	noSmithyDocumentSerde
+}
+
 // The details for an event that's associated with a service.
 type ServiceEvent struct {
 
@@ -3972,10 +4381,14 @@ type ServiceEvent struct {
 
 // The configuration for the Amazon EBS volume that Amazon ECS creates and manages
 // on your behalf. These settings are used to create each Amazon EBS volume, with
-// one volume created for each task in the service.
+// one volume created for each task in the service. For information about the
+// supported launch types and operating systems, see [Supported operating systems and launch types]in the Amazon Elastic
+// Container Service Developer Guide.
 //
 // Many of these parameters map 1:1 with the Amazon EBS CreateVolume API request
 // parameters.
+//
+// [Supported operating systems and launch types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration
 type ServiceManagedEBSVolumeConfiguration struct {
 
 	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS
@@ -3996,13 +4409,15 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	Encrypted *bool
 
-	// The Linux filesystem type for the volume. For volumes created from a snapshot,
-	// you must specify the same filesystem type that the volume was using when the
+	// The filesystem type for the volume. For volumes created from a snapshot, you
+	// must specify the same filesystem type that the volume was using when the
 	// snapshot was created. If there is a filesystem type mismatch, the task will fail
 	// to start.
 	//
-	// The available filesystem types are  ext3 , ext4 , and xfs . If no value is
+	// The available Linux filesystem types are  ext3 , ext4 , and xfs . If no value is
 	// specified, the xfs filesystem type is used by default.
+	//
+	// The available Windows filesystem types are NTFS .
 	FilesystemType TaskFilesystemType
 
 	// The number of I/O operations per second (IOPS). For gp3 , io1 , and io2
@@ -4147,6 +4562,105 @@ type ServiceRegistry struct {
 	//
 	// [CreateService]: https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
 	RegistryArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the service revision.
+//
+// A service revision contains a record of the workload configuration Amazon ECS
+// is attempting to deploy. Whenever you create or deploy a service, Amazon ECS
+// automatically creates and captures the configuration that you're trying to
+// deploy in the service revision. For information about service revisions, see [Amazon ECS service revisions]in
+// the Amazon Elastic Container Service Developer Guide .
+//
+// [Amazon ECS service revisions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html
+type ServiceRevision struct {
+
+	// The capacity provider strategy the service revision uses.
+	CapacityProviderStrategy []CapacityProviderStrategyItem
+
+	// The ARN of the cluster that hosts the service.
+	ClusterArn *string
+
+	// The container images the service revision uses.
+	ContainerImages []ContainerImage
+
+	// The time that the service revision was created. The format is yyyy-mm-dd
+	// HH:mm:ss.SSSSS.
+	CreatedAt *time.Time
+
+	// The amount of ephemeral storage to allocate for the deployment.
+	FargateEphemeralStorage *DeploymentEphemeralStorage
+
+	// Indicates whether Runtime Monitoring is turned on.
+	GuardDutyEnabled bool
+
+	// The launch type the service revision uses.
+	LaunchType LaunchType
+
+	// The load balancers the service revision uses.
+	LoadBalancers []LoadBalancer
+
+	// The network configuration for a task or service.
+	NetworkConfiguration *NetworkConfiguration
+
+	// The platform family the service revision uses.
+	PlatformFamily *string
+
+	// For the Fargate launch type, the platform version the service revision uses.
+	PlatformVersion *string
+
+	// The ARN of the service for the service revision.
+	ServiceArn *string
+
+	// The Service Connect configuration of your Amazon ECS service. The configuration
+	// for this service to discover and connect to services, and be discovered by, and
+	// connected from, other services within a namespace.
+	//
+	// Tasks that run in a namespace can use short names to connect to services in the
+	// namespace. Tasks can connect to services across all of the clusters in the
+	// namespace. Tasks connect through a managed proxy container that collects logs
+	// and metrics for increased visibility. Only the tasks that Amazon ECS services
+	// create are supported with Service Connect. For more information, see [Service Connect]in the
+	// Amazon Elastic Container Service Developer Guide.
+	//
+	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+	ServiceConnectConfiguration *ServiceConnectConfiguration
+
+	// The service registries (for Service Discovery) the service revision uses.
+	ServiceRegistries []ServiceRegistry
+
+	// The ARN of the service revision.
+	ServiceRevisionArn *string
+
+	// The task definition the service revision uses.
+	TaskDefinition *string
+
+	// The volumes that are configured at deployment that the service revision uses.
+	VolumeConfigurations []ServiceVolumeConfiguration
+
+	// The VPC Lattice configuration for the service revision.
+	VpcLatticeConfigurations []VpcLatticeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The information about the number of requested, pending, and running tasks for a
+// service revision.
+type ServiceRevisionSummary struct {
+
+	// The ARN of the service revision.
+	Arn *string
+
+	// The number of pending tasks for the service revision.
+	PendingTaskCount int32
+
+	// The number of requested tasks for the service revision.
+	RequestedTaskCount int32
+
+	// The number of running tasks for the service revision.
+	RunningTaskCount int32
 
 	noSmithyDocumentSerde
 }
@@ -5447,6 +5961,33 @@ type VolumeFrom struct {
 	// The name of another container within the same task definition to mount volumes
 	// from.
 	SourceContainer *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC Lattice configuration for your service that holds the information for
+// the target group(s) Amazon ECS tasks will be registered to.
+type VpcLatticeConfiguration struct {
+
+	// The name of the port mapping to register in the VPC Lattice target group. This
+	// is the name of the portMapping you defined in your task definition.
+	//
+	// This member is required.
+	PortName *string
+
+	// The ARN of the IAM role to associate with this VPC Lattice configuration. This
+	// is the Amazon ECS  infrastructure IAM role that is used to manage your VPC
+	// Lattice infrastructure.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The full Amazon Resource Name (ARN) of the target group or groups associated
+	// with the VPC Lattice configuration that the Amazon ECS tasks will be registered
+	// to.
+	//
+	// This member is required.
+	TargetGroupArn *string
 
 	noSmithyDocumentSerde
 }

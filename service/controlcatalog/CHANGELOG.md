@@ -1,3 +1,28 @@
+# v1.6.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.0 (2024-11-08)
+
+* **Feature**: AWS Control Catalog GetControl public API returns additional data in output, including Implementation and Parameters
+
+# v1.5.5 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.5.4 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.5.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.5.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

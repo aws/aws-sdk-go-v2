@@ -69,6 +69,25 @@ func (AssignPublicIp) Values() []AssignPublicIp {
 	}
 }
 
+type AvailabilityZoneRebalancing string
+
+// Enum values for AvailabilityZoneRebalancing
+const (
+	AvailabilityZoneRebalancingEnabled  AvailabilityZoneRebalancing = "ENABLED"
+	AvailabilityZoneRebalancingDisabled AvailabilityZoneRebalancing = "DISABLED"
+)
+
+// Values returns all known values for AvailabilityZoneRebalancing. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AvailabilityZoneRebalancing) Values() []AvailabilityZoneRebalancing {
+	return []AvailabilityZoneRebalancing{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type CapacityProviderField string
 
 // Enum values for CapacityProviderField
@@ -948,6 +967,61 @@ func (Scope) Values() []Scope {
 	}
 }
 
+type ServiceDeploymentRollbackMonitorsStatus string
+
+// Enum values for ServiceDeploymentRollbackMonitorsStatus
+const (
+	ServiceDeploymentRollbackMonitorsStatusTriggered          ServiceDeploymentRollbackMonitorsStatus = "TRIGGERED"
+	ServiceDeploymentRollbackMonitorsStatusMonitoring         ServiceDeploymentRollbackMonitorsStatus = "MONITORING"
+	ServiceDeploymentRollbackMonitorsStatusMonitoringComplete ServiceDeploymentRollbackMonitorsStatus = "MONITORING_COMPLETE"
+	ServiceDeploymentRollbackMonitorsStatusDisabled           ServiceDeploymentRollbackMonitorsStatus = "DISABLED"
+)
+
+// Values returns all known values for ServiceDeploymentRollbackMonitorsStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceDeploymentRollbackMonitorsStatus) Values() []ServiceDeploymentRollbackMonitorsStatus {
+	return []ServiceDeploymentRollbackMonitorsStatus{
+		"TRIGGERED",
+		"MONITORING",
+		"MONITORING_COMPLETE",
+		"DISABLED",
+	}
+}
+
+type ServiceDeploymentStatus string
+
+// Enum values for ServiceDeploymentStatus
+const (
+	ServiceDeploymentStatusPending            ServiceDeploymentStatus = "PENDING"
+	ServiceDeploymentStatusSuccessful         ServiceDeploymentStatus = "SUCCESSFUL"
+	ServiceDeploymentStatusStopped            ServiceDeploymentStatus = "STOPPED"
+	ServiceDeploymentStatusStopRequested      ServiceDeploymentStatus = "STOP_REQUESTED"
+	ServiceDeploymentStatusInProgress         ServiceDeploymentStatus = "IN_PROGRESS"
+	ServiceDeploymentStatusRollbackInProgress ServiceDeploymentStatus = "ROLLBACK_IN_PROGRESS"
+	ServiceDeploymentStatusRollbackSuccessful ServiceDeploymentStatus = "ROLLBACK_SUCCESSFUL"
+	ServiceDeploymentStatusRollbackFailed     ServiceDeploymentStatus = "ROLLBACK_FAILED"
+)
+
+// Values returns all known values for ServiceDeploymentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceDeploymentStatus) Values() []ServiceDeploymentStatus {
+	return []ServiceDeploymentStatus{
+		"PENDING",
+		"SUCCESSFUL",
+		"STOPPED",
+		"STOP_REQUESTED",
+		"IN_PROGRESS",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_SUCCESSFUL",
+		"ROLLBACK_FAILED",
+	}
+}
+
 type ServiceField string
 
 // Enum values for ServiceField
@@ -1173,6 +1247,7 @@ const (
 	TaskFilesystemTypeExt3 TaskFilesystemType = "ext3"
 	TaskFilesystemTypeExt4 TaskFilesystemType = "ext4"
 	TaskFilesystemTypeXfs  TaskFilesystemType = "xfs"
+	TaskFilesystemTypeNtfs TaskFilesystemType = "ntfs"
 )
 
 // Values returns all known values for TaskFilesystemType. Note that this can be
@@ -1184,6 +1259,7 @@ func (TaskFilesystemType) Values() []TaskFilesystemType {
 		"ext3",
 		"ext4",
 		"xfs",
+		"ntfs",
 	}
 }
 
@@ -1292,5 +1368,24 @@ func (UlimitName) Values() []UlimitName {
 		"rttime",
 		"sigpending",
 		"stack",
+	}
+}
+
+type VersionConsistency string
+
+// Enum values for VersionConsistency
+const (
+	VersionConsistencyEnabled  VersionConsistency = "enabled"
+	VersionConsistencyDisabled VersionConsistency = "disabled"
+)
+
+// Values returns all known values for VersionConsistency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VersionConsistency) Values() []VersionConsistency {
+	return []VersionConsistency{
+		"enabled",
+		"disabled",
 	}
 }

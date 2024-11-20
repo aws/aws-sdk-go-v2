@@ -81,7 +81,7 @@ type CreateConfigurationProfileInput struct {
 	//   secretsmanager ://.
 	//
 	//   - For an Amazon S3 object, specify the URI in the following format: s3:/// .
-	//   Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
+	//   Here is an example: s3://amzn-s3-demo-bucket/my-app/us-east-1/my-config.json
 	//
 	//   - For an SSM document, specify either the document name in the format
 	//   ssm-document:// or the Amazon Resource Name (ARN).

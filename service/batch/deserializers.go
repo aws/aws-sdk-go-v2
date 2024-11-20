@@ -4065,7 +4065,7 @@ func awsRestjson1_deserializeDocumentClientException(v **types.ClientException, 
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -5685,6 +5685,15 @@ func awsRestjson1_deserializeDocumentEksAttemptContainerDetail(v **types.EksAtte
 
 	for key, value := range shape {
 		switch key {
+		case "containerID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContainerID = ptr.String(jtv)
+			}
+
 		case "exitCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5816,6 +5825,15 @@ func awsRestjson1_deserializeDocumentEksAttemptDetail(v **types.EksAttemptDetail
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PodName = ptr.String(jtv)
+			}
+
+		case "podNamespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PodNamespace = ptr.String(jtv)
 			}
 
 		case "startedAt":
@@ -8813,6 +8831,11 @@ func awsRestjson1_deserializeDocumentLaunchTemplateSpecification(v **types.Launc
 				sv.LaunchTemplateName = ptr.String(jtv)
 			}
 
+		case "overrides":
+			if err := awsRestjson1_deserializeDocumentLaunchTemplateSpecificationOverrideList(&sv.Overrides, value); err != nil {
+				return err
+			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8828,6 +8851,103 @@ func awsRestjson1_deserializeDocumentLaunchTemplateSpecification(v **types.Launc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLaunchTemplateSpecificationOverride(v **types.LaunchTemplateSpecificationOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LaunchTemplateSpecificationOverride
+	if *v == nil {
+		sv = &types.LaunchTemplateSpecificationOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "launchTemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LaunchTemplateId = ptr.String(jtv)
+			}
+
+		case "launchTemplateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LaunchTemplateName = ptr.String(jtv)
+			}
+
+		case "targetInstanceTypes":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.TargetInstanceTypes, value); err != nil {
+				return err
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLaunchTemplateSpecificationOverrideList(v *[]types.LaunchTemplateSpecificationOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LaunchTemplateSpecificationOverride
+	if *v == nil {
+		cv = []types.LaunchTemplateSpecificationOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LaunchTemplateSpecificationOverride
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLaunchTemplateSpecificationOverride(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -10274,7 +10394,7 @@ func awsRestjson1_deserializeDocumentServerException(v **types.ServerException, 
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

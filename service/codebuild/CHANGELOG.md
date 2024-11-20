@@ -1,3 +1,37 @@
+# v1.49.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2024-11-12)
+
+* **Feature**: AWS CodeBuild now supports non-containerized Linux and Windows builds on Reserved Capacity.
+
+# v1.48.1 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.48.0 (2024-11-06)
+
+* **Feature**: AWS CodeBuild now adds additional compute types for reserved capacity fleet.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2024-10-25)
+
+* **Feature**: AWS CodeBuild now supports automatically retrying failed builds
+
+# v1.46.0 (2024-10-15)
+
+* **Feature**: Enable proxy for reserved capacity fleet.
+
+# v1.45.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

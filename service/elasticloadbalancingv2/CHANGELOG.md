@@ -1,3 +1,32 @@
+# v1.42.0 (2024-11-20)
+
+* **Feature**: This release adds support for configuring Load balancer Capacity Unit reservations
+
+# v1.41.2 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.0 (2024-10-31)
+
+* **Feature**: Add UDP support for AWS PrivateLink and dual-stack Network Load Balancers
+
+# v1.40.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.0 (2024-10-11)
+
+* **Feature**: Add zonal_shift.config.enabled attribute. Add new AdministrativeOverride construct in the describe-target-health API response to include information about the override status applied to a target.
+
+# v1.39.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

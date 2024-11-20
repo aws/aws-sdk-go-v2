@@ -12,7 +12,7 @@ import (
 )
 
 // This API creates a copy of an entire ServerlessCache at a specific moment in
-// time. Available for Redis OSS and Serverless Memcached only.
+// time. Available for Valkey, Redis OSS and Serverless Memcached only.
 func (c *Client) CreateServerlessCacheSnapshot(ctx context.Context, params *CreateServerlessCacheSnapshotInput, optFns ...func(*Options)) (*CreateServerlessCacheSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateServerlessCacheSnapshotInput{}
@@ -31,24 +31,24 @@ func (c *Client) CreateServerlessCacheSnapshot(ctx context.Context, params *Crea
 type CreateServerlessCacheSnapshotInput struct {
 
 	// The name of an existing serverless cache. The snapshot is created from this
-	// cache. Available for Redis OSS and Serverless Memcached only.
+	// cache. Available for Valkey, Redis OSS and Serverless Memcached only.
 	//
 	// This member is required.
 	ServerlessCacheName *string
 
 	// The name for the snapshot being created. Must be unique for the customer
-	// account. Available for Redis OSS and Serverless Memcached only. Must be between
-	// 1 and 255 characters.
+	// account. Available for Valkey, Redis OSS and Serverless Memcached only. Must be
+	// between 1 and 255 characters.
 	//
 	// This member is required.
 	ServerlessCacheSnapshotName *string
 
-	// The ID of the KMS key used to encrypt the snapshot. Available for Redis OSS and
-	// Serverless Memcached only. Default: NULL
+	// The ID of the KMS key used to encrypt the snapshot. Available for Valkey, Redis
+	// OSS and Serverless Memcached only. Default: NULL
 	KmsKeyId *string
 
 	// A list of tags to be added to the snapshot resource. A tag is a key-value pair.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -57,7 +57,7 @@ type CreateServerlessCacheSnapshotInput struct {
 type CreateServerlessCacheSnapshotOutput struct {
 
 	// The state of a serverless cache snapshot at a specific point in time, to the
-	// millisecond. Available for Redis OSS and Serverless Memcached only.
+	// millisecond. Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCacheSnapshot *types.ServerlessCacheSnapshot
 
 	// Metadata pertaining to the operation's result.

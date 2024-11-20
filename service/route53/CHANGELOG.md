@@ -1,3 +1,24 @@
+# v1.46.2 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.1 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.0 (2024-10-30)
+
+* **Feature**: This release adds support for TLSA, SSHFP, SVCB, and HTTPS record types.
+
+# v1.45.3 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

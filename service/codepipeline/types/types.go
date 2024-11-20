@@ -1031,6 +1031,10 @@ type FailureConditions struct {
 	// back the stage.
 	Result Result
 
+	// The retry configuration specifies automatic retry for a failed stage, along
+	// with the configured retry mode.
+	RetryConfiguration *RetryConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1759,6 +1763,37 @@ type ResolvedPipelineVariable struct {
 	noSmithyDocumentSerde
 }
 
+// The retry configuration specifies automatic retry for a failed stage, along
+// with the configured retry mode.
+type RetryConfiguration struct {
+
+	// The method that you want to configure for automatic stage retry on stage
+	// failure. You can specify to retry only failed action in the stage or all actions
+	// in the stage.
+	RetryMode StageRetryMode
+
+	noSmithyDocumentSerde
+}
+
+// The details of a specific automatic retry on stage failure, including the
+// attempt number and trigger.
+type RetryStageMetadata struct {
+
+	// The number of attempts for a specific stage with automatic retry on stage
+	// failure. One attempt is allowed for automatic stage retry on failure.
+	AutoStageRetryAttempt *int32
+
+	// The latest trigger for a specific stage where manual or automatic retries have
+	// been made upon stage failure.
+	LatestRetryTrigger RetryTrigger
+
+	// The number of attempts for a specific stage where manual retries have been made
+	// upon stage failure.
+	ManualStageRetryAttempt *int32
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about a rule configuration property.
 type RuleConfigurationProperty struct {
 
@@ -2313,6 +2348,10 @@ type StageState struct {
 
 	// The state of the success conditions for a stage.
 	OnSuccessConditionState *StageConditionState
+
+	// he details of a specific automatic retry on stage failure, including the
+	// attempt number and trigger.
+	RetryStageMetadata *RetryStageMetadata
 
 	// The name of the stage.
 	StageName *string

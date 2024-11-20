@@ -36,6 +36,13 @@ type CreateQueueInput struct {
 	// This member is required.
 	Name *string
 
+	// Specify the maximum number of jobs your queue can process concurrently. For
+	// on-demand queues, the value you enter is constrained by your service quotas for
+	// Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per
+	// account. For reserved queues, specify the number of jobs you can process
+	// concurrently in your reservation plan instead.
+	ConcurrentJobs *int32
+
 	// Optional. A description of the queue that you are creating.
 	Description *string
 

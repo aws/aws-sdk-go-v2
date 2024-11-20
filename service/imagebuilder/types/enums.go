@@ -535,6 +535,7 @@ type Platform string
 const (
 	PlatformWindows Platform = "Windows"
 	PlatformLinux   Platform = "Linux"
+	PlatformMacos   Platform = "macOS"
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in
@@ -545,6 +546,7 @@ func (Platform) Values() []Platform {
 	return []Platform{
 		"Windows",
 		"Linux",
+		"macOS",
 	}
 }
 
@@ -568,6 +570,27 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"DELETED",
 		"DEPRECATED",
 		"DISABLED",
+	}
+}
+
+type TenancyType string
+
+// Enum values for TenancyType
+const (
+	TenancyTypeDefault   TenancyType = "default"
+	TenancyTypeDedicated TenancyType = "dedicated"
+	TenancyTypeHost      TenancyType = "host"
+)
+
+// Values returns all known values for TenancyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TenancyType) Values() []TenancyType {
+	return []TenancyType{
+		"default",
+		"dedicated",
+		"host",
 	}
 }
 

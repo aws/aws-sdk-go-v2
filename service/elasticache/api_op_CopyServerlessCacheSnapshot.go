@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a copy of an existing serverless cache’s snapshot. Available for Redis
-// OSS and Serverless Memcached only.
+// Creates a copy of an existing serverless cache’s snapshot. Available for
+// Valkey, Redis OSS and Serverless Memcached only.
 func (c *Client) CopyServerlessCacheSnapshot(ctx context.Context, params *CopyServerlessCacheSnapshotInput, optFns ...func(*Options)) (*CopyServerlessCacheSnapshotOutput, error) {
 	if params == nil {
 		params = &CopyServerlessCacheSnapshotInput{}
@@ -31,24 +31,24 @@ func (c *Client) CopyServerlessCacheSnapshot(ctx context.Context, params *CopySe
 type CopyServerlessCacheSnapshotInput struct {
 
 	// The identifier of the existing serverless cache’s snapshot to be copied.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	//
 	// This member is required.
 	SourceServerlessCacheSnapshotName *string
 
-	// The identifier for the snapshot to be created. Available for Redis OSS and
-	// Serverless Memcached only.
+	// The identifier for the snapshot to be created. Available for Valkey, Redis OSS
+	// and Serverless Memcached only.
 	//
 	// This member is required.
 	TargetServerlessCacheSnapshotName *string
 
 	// The identifier of the KMS key used to encrypt the target snapshot. Available
-	// for Redis OSS and Serverless Memcached only.
+	// for Valkey, Redis OSS and Serverless Memcached only.
 	KmsKeyId *string
 
 	// A list of tags to be added to the target snapshot resource. A tag is a
-	// key-value pair. Available for Redis OSS and Serverless Memcached only. Default:
-	// NULL
+	// key-value pair. Available for Valkey, Redis OSS and Serverless Memcached only.
+	// Default: NULL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -57,7 +57,7 @@ type CopyServerlessCacheSnapshotInput struct {
 type CopyServerlessCacheSnapshotOutput struct {
 
 	// The response for the attempt to copy the serverless cache snapshot. Available
-	// for Redis OSS and Serverless Memcached only.
+	// for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCacheSnapshot *types.ServerlessCacheSnapshot
 
 	// Metadata pertaining to the operation's result.

@@ -14,6 +14,11 @@ import (
 // Creates a stack as specified in the template. After the call completes
 // successfully, the stack creation starts. You can check the status of the stack
 // through the DescribeStacksoperation.
+//
+// For more information about creating a stack and monitoring stack progress, see [Managing Amazon Web Services resources as a single unit with CloudFormation stacks]
+// in the CloudFormation User Guide.
+//
+// [Managing Amazon Web Services resources as a single unit with CloudFormation stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
 func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optFns ...func(*Options)) (*CreateStackOutput, error) {
 	if params == nil {
 		params = &CreateStackInput{}
@@ -48,9 +53,9 @@ type CreateStackInput struct {
 	//   - CAPABILITY_IAM and CAPABILITY_NAMED_IAM
 	//
 	// Some stack templates might include resources that can affect permissions in
-	//   your Amazon Web Services account; for example, by creating new Identity and
-	//   Access Management (IAM) users. For those stacks, you must explicitly acknowledge
-	//   this by specifying one of these capabilities.
+	//   your Amazon Web Services account; for example, by creating new IAM users. For
+	//   those stacks, you must explicitly acknowledge this by specifying one of these
+	//   capabilities.
 	//
 	// The following IAM resources require you to specify either the CAPABILITY_IAM or
 	//   CAPABILITY_NAMED_IAM capability.
@@ -80,7 +85,7 @@ type CreateStackInput struct {
 	//
 	// [AWS::IAM::UserToGroupAddition]
 	//
-	// For more information, see [Acknowledging IAM Resources in CloudFormation Templates].
+	// For more information, see [Acknowledging IAM resources in CloudFormation templates].
 	//
 	//   - CAPABILITY_AUTO_EXPAND
 	//
@@ -105,21 +110,21 @@ type CreateStackInput struct {
 	//   templates. Be aware that the Lambda function owner can update the function
 	//   operation without CloudFormation being notified.
 	//
-	// For more information, see [Using CloudFormation macros to perform custom processing on templates].
+	// For more information, see [Perform custom processing on CloudFormation templates with template macros].
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
+	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html
-	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+	// [AWS::IAM::User]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-user.html
 	// [AWS::IAM::InstanceProfile]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
-	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
-	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
-	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+	// [Acknowledging IAM resources in CloudFormation templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#using-iam-capabilities
+	// [Perform custom processing on CloudFormation templates with template macros]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
+	// [AWS::IAM::Policy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
+	// [AWS::IAM::Group]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-group.html
+	// [AWS::IAM::UserToGroupAddition]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-usertogroupaddition.html
 	// [AWS::IAM::Role]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
-	// [Using CloudFormation macros to perform custom processing on templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
 	// [AWS::Serverless]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
-	// [Acknowledging IAM Resources in CloudFormation Templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
 	Capabilities []types.Capability
 
 	// A unique identifier for this CreateStack request. Specify this token if you
@@ -148,20 +153,20 @@ type CreateStackInput struct {
 
 	// Whether to enable termination protection on the specified stack. If a user
 	// attempts to delete a stack with termination protection enabled, the operation
-	// fails and the stack remains unchanged. For more information, see [Protecting a Stack From Being Deleted]in the
+	// fails and the stack remains unchanged. For more information, see [Protect CloudFormation stacks from being deleted]in the
 	// CloudFormation User Guide. Termination protection is deactivated on stacks by
 	// default.
 	//
 	// For [nested stacks], termination protection is set on the root stack and can't be changed
 	// directly on the nested stack.
 	//
-	// [Protecting a Stack From Being Deleted]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+	// [Protect CloudFormation stacks from being deleted]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
 	// [nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
 	EnableTerminationProtection *bool
 
-	// The Amazon Simple Notification Service (Amazon SNS) topic ARNs to publish stack
-	// related events. You can find your Amazon SNS topic ARNs using the Amazon SNS
-	// console or your Command Line Interface (CLI).
+	// The Amazon SNS topic ARNs to publish stack related events. You can find your
+	// Amazon SNS topic ARNs using the Amazon SNS console or your Command Line
+	// Interface (CLI).
 	NotificationARNs []string
 
 	// Determines what action will be taken if stack creation fails. This must be one
@@ -188,13 +193,12 @@ type CreateStackInput struct {
 	//
 	// If the list of resource types doesn't include a resource that you're creating,
 	// the stack creation fails. By default, CloudFormation grants permissions to all
-	// resource types. Identity and Access Management (IAM) uses this parameter for
-	// CloudFormation-specific condition keys in IAM policies. For more information,
-	// see [Controlling Access with Identity and Access Management].
+	// resource types. IAM uses this parameter for CloudFormation-specific condition
+	// keys in IAM policies. For more information, see [Control access with Identity and Access Management].
 	//
 	// Only one of the Capabilities and ResourceType parameters can be specified.
 	//
-	// [Controlling Access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+	// [Control access with Identity and Access Management]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
 	ResourceTypes []string
 
 	// When set to true , newly created resources are deleted when the operation rolls
@@ -204,12 +208,12 @@ type CreateStackInput struct {
 	// Default: false
 	RetainExceptOnCreate *bool
 
-	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
-	// that CloudFormation assumes to create the stack. CloudFormation uses the role's
-	// credentials to make calls on your behalf. CloudFormation always uses this role
-	// for all future operations on the stack. Provided that users have permission to
-	// operate on the stack, CloudFormation uses this role even if the users don't have
-	// permission to pass it. Ensure that the role grants least privilege.
+	// The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to
+	// create the stack. CloudFormation uses the role's credentials to make calls on
+	// your behalf. CloudFormation always uses this role for all future operations on
+	// the stack. Provided that users have permission to operate on the stack,
+	// CloudFormation uses this role even if the users don't have permission to pass
+	// it. Ensure that the role grants least privilege.
 	//
 	// If you don't specify a value, CloudFormation uses the role that was previously
 	// associated with the stack. If no role is available, CloudFormation uses a
@@ -220,11 +224,11 @@ type CreateStackInput struct {
 	// updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *types.RollbackConfiguration
 
-	// Structure containing the stack policy body. For more information, go to [Prevent Updates to Stack Resources] in the
+	// Structure containing the stack policy body. For more information, see [Prevent updates to stack resources] in the
 	// CloudFormation User Guide. You can specify either the StackPolicyBody or the
 	// StackPolicyURL parameter, but not both.
 	//
-	// [Prevent Updates to Stack Resources]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+	// [Prevent updates to stack resources]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
 	StackPolicyBody *string
 
 	// Location of a file containing the stack policy. The URL must point to a policy
@@ -239,24 +243,18 @@ type CreateStackInput struct {
 	Tags []types.Tag
 
 	// Structure containing the template body with a minimum length of 1 byte and a
-	// maximum length of 51,200 bytes. For more information, go to [Template anatomy]in the
-	// CloudFormation User Guide.
+	// maximum length of 51,200 bytes.
 	//
 	// Conditional: You must specify either the TemplateBody or the TemplateURL
 	// parameter, but not both.
-	//
-	// [Template anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateBody *string
 
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems
-	// Manager document. For more information, go to the [Template anatomy]in the CloudFormation User
-	// Guide. The location for an Amazon S3 bucket must start with https:// .
+	// Manager document. The location for an Amazon S3 bucket must start with https:// .
 	//
 	// Conditional: You must specify either the TemplateBody or the TemplateURL
 	// parameter, but not both.
-	//
-	// [Template anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateURL *string
 
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED ;

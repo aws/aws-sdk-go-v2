@@ -11,39 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This operation has been expanded to use with the Amazon GameLift containers
-//
-// feature, which is currently in public preview.
-//
 // Requests authorization to remotely connect to a hosting resource in a Amazon
 // GameLift managed fleet. This operation is not used with Amazon GameLift Anywhere
-// fleets
+// fleets.
 //
-// To request access, specify the compute name and the fleet ID. If successful,
-// this operation returns a set of temporary Amazon Web Services credentials,
-// including a two-part access key and a session token.
+// # Request options
 //
-// # EC2 fleets
+// To request access to a compute, specify the compute name and the fleet ID.
 //
-// With an EC2 fleet (where compute type is EC2 ), use these credentials with
-// Amazon EC2 Systems Manager (SSM) to start a session with the compute. For more
-// details, see [Starting a session (CLI)]in the Amazon EC2 Systems Manager User Guide.
+// # Results
 //
-// # Container fleets
+// If successful, this operation returns a set of temporary Amazon Web Services
+// credentials, including a two-part access key and a session token.
 //
-// With a container fleet (where compute type is CONTAINER ), use these credentials
-// and the target value with SSM to connect to the fleet instance where the
-// container is running. After you're connected to the instance, use Docker
-// commands to interact with the container.
+//   - With a managed EC2 fleet (where compute type is EC2 ), use these credentials
+//     with Amazon EC2 Systems Manager (SSM) to start a session with the compute. For
+//     more details, see [Starting a session (CLI)]in the Amazon EC2 Systems Manager User Guide.
 //
-// # Learn more
-//
-// [Remotely connect to fleet instances]
-//
-// [Debug fleet issues]
-//
-// [Remotely connect to fleet instances]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
-// [Debug fleet issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
 // [Starting a session (CLI)]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli
 func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessInput, optFns ...func(*Options)) (*GetComputeAccessOutput, error) {
 	if params == nil {
@@ -63,10 +47,7 @@ func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessI
 type GetComputeAccessInput struct {
 
 	// A unique identifier for the compute resource that you want to connect to. For
-	// an EC2 fleet compute, use the instance ID. For a container fleet, use the
-	// compute name (for example,
-	// a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9 ) or the
-	// compute ARN.
+	// an EC2 fleet compute, use the instance ID. Use ListComputeto retrieve compute identifiers.
 	//
 	// This member is required.
 	ComputeName *string
@@ -93,6 +74,10 @@ type GetComputeAccessOutput struct {
 	// either a compute name or an instance ID.
 	ComputeName *string
 
+	// For a managed container fleet, a list of containers on the compute. Use the
+	// container runtime ID with Docker commands to connect to a specific container.
+	ContainerIdentifiers []types.ContainerIdentifier
+
 	// A set of temporary Amazon Web Services credentials for use when connecting to
 	// the compute resource with Amazon EC2 Systems Manager (SSM).
 	Credentials *types.AwsCredentials
@@ -107,8 +92,7 @@ type GetComputeAccessOutput struct {
 	// The ID of the fleet that holds the compute resource to be accessed.
 	FleetId *string
 
-	// (For container fleets only) The instance ID where the compute resource is
-	// running.
+	// The instance ID where the compute resource is running.
 	Target *string
 
 	// Metadata pertaining to the operation's result.

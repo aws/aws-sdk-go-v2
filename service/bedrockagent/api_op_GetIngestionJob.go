@@ -12,7 +12,7 @@ import (
 )
 
 // Gets information about a data ingestion job. Data sources are ingested into
-// your knowledge base so that Large Lanaguage Models (LLMs) can use your data.
+// your knowledge base so that Large Language Models (LLMs) can use your data.
 func (c *Client) GetIngestionJob(ctx context.Context, params *GetIngestionJobInput, optFns ...func(*Options)) (*GetIngestionJobOutput, error) {
 	if params == nil {
 		params = &GetIngestionJobInput{}

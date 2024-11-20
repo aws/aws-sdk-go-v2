@@ -156,6 +156,100 @@ func (c *Client) addOperationListRuleBasedMatchesMiddlewares(stack *middleware.S
 	return nil
 }
 
+// ListRuleBasedMatchesPaginatorOptions is the paginator options for
+// ListRuleBasedMatches
+type ListRuleBasedMatchesPaginatorOptions struct {
+	// The maximum number of MatchIds returned per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRuleBasedMatchesPaginator is a paginator for ListRuleBasedMatches
+type ListRuleBasedMatchesPaginator struct {
+	options   ListRuleBasedMatchesPaginatorOptions
+	client    ListRuleBasedMatchesAPIClient
+	params    *ListRuleBasedMatchesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRuleBasedMatchesPaginator returns a new ListRuleBasedMatchesPaginator
+func NewListRuleBasedMatchesPaginator(client ListRuleBasedMatchesAPIClient, params *ListRuleBasedMatchesInput, optFns ...func(*ListRuleBasedMatchesPaginatorOptions)) *ListRuleBasedMatchesPaginator {
+	if params == nil {
+		params = &ListRuleBasedMatchesInput{}
+	}
+
+	options := ListRuleBasedMatchesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListRuleBasedMatchesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRuleBasedMatchesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListRuleBasedMatches page.
+func (p *ListRuleBasedMatchesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRuleBasedMatchesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListRuleBasedMatches(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListRuleBasedMatchesAPIClient is a client that implements the
+// ListRuleBasedMatches operation.
+type ListRuleBasedMatchesAPIClient interface {
+	ListRuleBasedMatches(context.Context, *ListRuleBasedMatchesInput, ...func(*Options)) (*ListRuleBasedMatchesOutput, error)
+}
+
+var _ ListRuleBasedMatchesAPIClient = (*Client)(nil)
+
 func newServiceMetadataMiddleware_opListRuleBasedMatches(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

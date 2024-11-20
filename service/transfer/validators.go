@@ -690,6 +690,26 @@ func (m *validateOpListExecutions) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFileTransferResults struct {
+}
+
+func (*validateOpListFileTransferResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFileTransferResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFileTransferResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFileTransferResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListHostKeys struct {
 }
 
@@ -1224,6 +1244,10 @@ func addOpListAgreementsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListExecutions{}, middleware.After)
+}
+
+func addOpListFileTransferResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFileTransferResults{}, middleware.After)
 }
 
 func addOpListHostKeysValidationMiddleware(stack *middleware.Stack) error {
@@ -2225,6 +2249,24 @@ func validateOpListExecutionsInput(v *ListExecutionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListExecutionsInput"}
 	if v.WorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFileTransferResultsInput(v *ListFileTransferResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFileTransferResultsInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.TransferId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransferId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

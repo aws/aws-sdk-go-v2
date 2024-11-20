@@ -387,6 +387,65 @@ func (ConfigurationState) Values() []ConfigurationState {
 	}
 }
 
+type DatasetSourceFormat string
+
+// Enum values for DatasetSourceFormat
+const (
+	DatasetSourceFormatKnowledgeBase DatasetSourceFormat = "KNOWLEDGE_BASE"
+)
+
+// Values returns all known values for DatasetSourceFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetSourceFormat) Values() []DatasetSourceFormat {
+	return []DatasetSourceFormat{
+		"KNOWLEDGE_BASE",
+	}
+}
+
+type DatasetSourceType string
+
+// Enum values for DatasetSourceType
+const (
+	DatasetSourceTypeKendra DatasetSourceType = "KENDRA"
+)
+
+// Values returns all known values for DatasetSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetSourceType) Values() []DatasetSourceType {
+	return []DatasetSourceType{
+		"KENDRA",
+	}
+}
+
+type DatasetState string
+
+// Enum values for DatasetState
+const (
+	DatasetStateCreating DatasetState = "CREATING"
+	DatasetStateActive   DatasetState = "ACTIVE"
+	DatasetStateUpdating DatasetState = "UPDATING"
+	DatasetStateDeleting DatasetState = "DELETING"
+	DatasetStateFailed   DatasetState = "FAILED"
+)
+
+// Values returns all known values for DatasetState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetState) Values() []DatasetState {
+	return []DatasetState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type DetailedErrorCode string
 
 // Enum values for DetailedErrorCode
@@ -720,6 +779,7 @@ type PortalState string
 // Enum values for PortalState
 const (
 	PortalStateCreating PortalState = "CREATING"
+	PortalStatePending  PortalState = "PENDING"
 	PortalStateUpdating PortalState = "UPDATING"
 	PortalStateDeleting PortalState = "DELETING"
 	PortalStateActive   PortalState = "ACTIVE"
@@ -733,10 +793,30 @@ const (
 func (PortalState) Values() []PortalState {
 	return []PortalState{
 		"CREATING",
+		"PENDING",
 		"UPDATING",
 		"DELETING",
 		"ACTIVE",
 		"FAILED",
+	}
+}
+
+type PortalType string
+
+// Enum values for PortalType
+const (
+	PortalTypeSitewisePortalV1 PortalType = "SITEWISE_PORTAL_V1"
+	PortalTypeSitewisePortalV2 PortalType = "SITEWISE_PORTAL_V2"
+)
+
+// Values returns all known values for PortalType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PortalType) Values() []PortalType {
+	return []PortalType{
+		"SITEWISE_PORTAL_V1",
+		"SITEWISE_PORTAL_V2",
 	}
 }
 

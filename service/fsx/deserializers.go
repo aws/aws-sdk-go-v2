@@ -6893,7 +6893,7 @@ func awsAwsjson11_deserializeDocumentActiveDirectoryError(v **types.ActiveDirect
 				sv.ActiveDirectoryId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7608,7 +7608,7 @@ func awsAwsjson11_deserializeDocumentBackupBeingCopied(v **types.BackupBeingCopi
 				sv.BackupId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7688,7 +7688,7 @@ func awsAwsjson11_deserializeDocumentBackupInProgress(v **types.BackupInProgress
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7728,7 +7728,7 @@ func awsAwsjson11_deserializeDocumentBackupNotFound(v **types.BackupNotFound, va
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7777,7 +7777,7 @@ func awsAwsjson11_deserializeDocumentBackupRestoring(v **types.BackupRestoring, 
 				sv.FileSystemId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -7851,7 +7851,7 @@ func awsAwsjson11_deserializeDocumentBadRequest(v **types.BadRequest, value inte
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8160,7 +8160,7 @@ func awsAwsjson11_deserializeDocumentDataRepositoryAssociationNotFound(v **types
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8535,7 +8535,7 @@ func awsAwsjson11_deserializeDocumentDataRepositoryTaskEnded(v **types.DataRepos
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8575,7 +8575,7 @@ func awsAwsjson11_deserializeDocumentDataRepositoryTaskExecuting(v **types.DataR
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -8655,7 +8655,7 @@ func awsAwsjson11_deserializeDocumentDataRepositoryTaskNotFound(v **types.DataRe
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -9733,7 +9733,7 @@ func awsAwsjson11_deserializeDocumentFileCacheNotFound(v **types.FileCacheNotFou
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10217,7 +10217,7 @@ func awsAwsjson11_deserializeDocumentFileSystemNotFound(v **types.FileSystemNotF
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10291,7 +10291,7 @@ func awsAwsjson11_deserializeDocumentIncompatibleParameterError(v **types.Incomp
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10340,7 +10340,7 @@ func awsAwsjson11_deserializeDocumentIncompatibleRegionForMultiAZ(v **types.Inco
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10380,7 +10380,7 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10420,7 +10420,7 @@ func awsAwsjson11_deserializeDocumentInvalidDataRepositoryType(v **types.Invalid
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10460,7 +10460,7 @@ func awsAwsjson11_deserializeDocumentInvalidDestinationKmsKey(v **types.InvalidD
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10500,7 +10500,7 @@ func awsAwsjson11_deserializeDocumentInvalidExportPath(v **types.InvalidExportPa
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10540,7 +10540,7 @@ func awsAwsjson11_deserializeDocumentInvalidImportPath(v **types.InvalidImportPa
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10607,7 +10607,7 @@ func awsAwsjson11_deserializeDocumentInvalidNetworkSettings(v **types.InvalidNet
 				sv.InvalidSubnetId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10647,7 +10647,7 @@ func awsAwsjson11_deserializeDocumentInvalidPerUnitStorageThroughput(v **types.I
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10687,7 +10687,7 @@ func awsAwsjson11_deserializeDocumentInvalidRegion(v **types.InvalidRegion, valu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -10727,7 +10727,7 @@ func awsAwsjson11_deserializeDocumentInvalidSourceKmsKey(v **types.InvalidSource
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11077,7 +11077,7 @@ func awsAwsjson11_deserializeDocumentMissingFileCacheConfiguration(v **types.Mis
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11117,7 +11117,7 @@ func awsAwsjson11_deserializeDocumentMissingFileSystemConfiguration(v **types.Mi
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11157,7 +11157,7 @@ func awsAwsjson11_deserializeDocumentMissingVolumeConfiguration(v **types.Missin
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -11283,7 +11283,7 @@ func awsAwsjson11_deserializeDocumentNotServiceResourceError(v **types.NotServic
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12438,7 +12438,7 @@ func awsAwsjson11_deserializeDocumentResourceDoesNotSupportTagging(v **types.Res
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12487,7 +12487,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -12747,7 +12747,7 @@ func awsAwsjson11_deserializeDocumentServiceLimitExceeded(v **types.ServiceLimit
 				sv.Limit = types.ServiceLimit(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13017,7 +13017,7 @@ func awsAwsjson11_deserializeDocumentSnapshotNotFound(v **types.SnapshotNotFound
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13100,7 +13100,7 @@ func awsAwsjson11_deserializeDocumentSourceBackupUnavailable(v **types.SourceBac
 				sv.BackupId = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13279,7 +13279,7 @@ func awsAwsjson11_deserializeDocumentStorageVirtualMachineNotFound(v **types.Sto
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13702,7 +13702,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperation(v **types.UnsupportedO
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -13868,7 +13868,7 @@ func awsAwsjson11_deserializeDocumentVolumeNotFound(v **types.VolumeNotFound, va
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

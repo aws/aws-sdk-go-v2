@@ -2810,6 +2810,26 @@ func (m *validateOpListPrincipalThings) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPrincipalThingsV2 struct {
+}
+
+func (*validateOpListPrincipalThingsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPrincipalThingsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPrincipalThingsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPrincipalThingsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListProvisioningTemplateVersions struct {
 }
 
@@ -2985,6 +3005,26 @@ func (m *validateOpListThingPrincipals) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListThingPrincipalsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThingPrincipalsV2 struct {
+}
+
+func (*validateOpListThingPrincipalsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThingPrincipalsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThingPrincipalsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThingPrincipalsV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3970,6 +4010,26 @@ func (m *validateOpUpdateThing) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateThingType struct {
+}
+
+func (*validateOpUpdateThingType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateThingType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateThingTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateThingTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTopicRuleDestination struct {
 }
 
@@ -4570,6 +4630,10 @@ func addOpListPrincipalThingsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListPrincipalThings{}, middleware.After)
 }
 
+func addOpListPrincipalThingsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPrincipalThingsV2{}, middleware.After)
+}
+
 func addOpListProvisioningTemplateVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProvisioningTemplateVersions{}, middleware.After)
 }
@@ -4604,6 +4668,10 @@ func addOpListThingGroupsForThingValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListThingPrincipalsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListThingPrincipals{}, middleware.After)
+}
+
+func addOpListThingPrincipalsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThingPrincipalsV2{}, middleware.After)
 }
 
 func addOpListThingRegistrationTaskReportsValidationMiddleware(stack *middleware.Stack) error {
@@ -4800,6 +4868,10 @@ func addOpUpdateThingGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateThingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateThing{}, middleware.After)
+}
+
+func addOpUpdateThingTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateThingType{}, middleware.After)
 }
 
 func addOpUpdateTopicRuleDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -9140,6 +9212,21 @@ func validateOpListPrincipalThingsInput(v *ListPrincipalThingsInput) error {
 	}
 }
 
+func validateOpListPrincipalThingsV2Input(v *ListPrincipalThingsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPrincipalThingsV2Input"}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListProvisioningTemplateVersionsInput(v *ListProvisioningTemplateVersionsInput) error {
 	if v == nil {
 		return nil
@@ -9268,6 +9355,21 @@ func validateOpListThingPrincipalsInput(v *ListThingPrincipalsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListThingPrincipalsInput"}
+	if v.ThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThingPrincipalsV2Input(v *ListThingPrincipalsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThingPrincipalsV2Input"}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
 	}
@@ -10173,6 +10275,21 @@ func validateOpUpdateThingInput(v *UpdateThingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateThingInput"}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateThingTypeInput(v *UpdateThingTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateThingTypeInput"}
+	if v.ThingTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThingTypeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

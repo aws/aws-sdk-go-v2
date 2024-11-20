@@ -11,42 +11,44 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Redis OSS (cluster mode disabled) or a Redis OSS (cluster mode
-// enabled) replication group.
+// Creates a Valkey or Redis OSS (cluster mode disabled) or a Valkey or Redis OSS
+// (cluster mode enabled) replication group.
 //
 // This API can be used to create a standalone regional replication group or a
 // secondary replication group associated with a Global datastore.
 //
-// A Redis OSS (cluster mode disabled) replication group is a collection of nodes,
-// where one of the nodes is a read/write primary and the others are read-only
-// replicas. Writes to the primary are asynchronously propagated to the replicas.
+// A Valkey or Redis OSS (cluster mode disabled) replication group is a collection
+// of nodes, where one of the nodes is a read/write primary and the others are
+// read-only replicas. Writes to the primary are asynchronously propagated to the
+// replicas.
 //
-// A Redis OSS cluster-mode enabled cluster is comprised of from 1 to 90 shards
-// (API/CLI: node groups). Each shard has a primary node and up to 5 read-only
-// replica nodes. The configuration can range from 90 shards and 0 replicas to 15
-// shards and 5 replicas, which is the maximum number or replicas allowed.
+// A Valkey or Redis OSS cluster-mode enabled cluster is comprised of from 1 to 90
+// shards (API/CLI: node groups). Each shard has a primary node and up to 5
+// read-only replica nodes. The configuration can range from 90 shards and 0
+// replicas to 15 shards and 5 replicas, which is the maximum number or replicas
+// allowed.
 //
 // The node or shard limit can be increased to a maximum of 500 per cluster if the
-// Redis OSS engine version is 5.0.6 or higher. For example, you can choose to
-// configure a 500 node cluster that ranges between 83 shards (one primary and 5
-// replicas per shard) and 500 shards (single primary and no replicas). Make sure
-// there are enough available IP addresses to accommodate the increase. Common
-// pitfalls include the subnets in the subnet group have too small a CIDR range or
-// the subnets are shared and heavily used by other clusters. For more information,
-// see [Creating a Subnet Group]. For versions below 5.0.6, the limit is 250 per cluster.
+// Valkey or Redis OSS engine version is 5.0.6 or higher. For example, you can
+// choose to configure a 500 node cluster that ranges between 83 shards (one
+// primary and 5 replicas per shard) and 500 shards (single primary and no
+// replicas). Make sure there are enough available IP addresses to accommodate the
+// increase. Common pitfalls include the subnets in the subnet group have too small
+// a CIDR range or the subnets are shared and heavily used by other clusters. For
+// more information, see [Creating a Subnet Group]. For versions below 5.0.6, the limit is 250 per cluster.
 //
 // To request a limit increase, see [Amazon Service Limits] and choose the limit type Nodes per cluster
 // per instance type.
 //
-// When a Redis OSS (cluster mode disabled) replication group has been
+// When a Valkey or Redis OSS (cluster mode disabled) replication group has been
 // successfully created, you can add one or more read replicas to it, up to a total
 // of 5 read replicas. If you need to increase or decrease the number of node
-// groups (console: shards), you can use ElastiCache (Redis OSS) scaling. For more
-// information, see [Scaling ElastiCache (Redis OSS) Clusters]in the ElastiCache User Guide.
+// groups (console: shards), you can use scaling. For more information, see [Scaling self-designed clusters]in the
+// ElastiCache User Guide.
 //
-// This operation is valid for Redis OSS only.
+// This operation is valid for Valkey and Redis OSS only.
 //
-// [Scaling ElastiCache (Redis OSS) Clusters]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
+// [Scaling self-designed clusters]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
 // [Creating a Subnet Group]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html
 // [Amazon Service Limits]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
 func (c *Client) CreateReplicationGroup(ctx context.Context, params *CreateReplicationGroupInput, optFns ...func(*Options)) (*CreateReplicationGroupOutput, error) {
@@ -120,16 +122,16 @@ type CreateReplicationGroupInput struct {
 	// [AUTH password]: http://redis.io/commands/AUTH
 	AuthToken *string
 
-	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
-	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
-	// This parameter is disabled for previous versions.
+	//  If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and
+	// above, set this parameter to yes to opt-in to the next auto minor version
+	// upgrade campaign. This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// Specifies whether a read-only replica is automatically promoted to read/write
 	// primary if the existing primary fails.
 	//
-	// AutomaticFailoverEnabled must be enabled for Redis OSS (cluster mode enabled)
-	// replication groups.
+	// AutomaticFailoverEnabled must be enabled for Valkey or Redis OSS (cluster mode
+	// enabled) replication groups.
 	//
 	// Default: false
 	AutomaticFailoverEnabled *bool
@@ -222,12 +224,14 @@ type CreateReplicationGroupInput struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -236,15 +240,15 @@ type CreateReplicationGroupInput struct {
 	// this argument is omitted, the default cache parameter group for the specified
 	// engine is used.
 	//
-	// If you are running Redis OSS version 3.2.4 or later, only one node group
-	// (shard), and want to use a default parameter group, we recommend that you
+	// If you are running Valkey or Redis OSS version 3.2.4 or later, only one node
+	// group (shard), and want to use a default parameter group, we recommend that you
 	// specify the parameter group by name.
 	//
-	//   - To create a Redis OSS (cluster mode disabled) replication group, use
-	//   CacheParameterGroupName=default.redis3.2 .
+	//   - To create a Valkey or Redis OSS (cluster mode disabled) replication group,
+	//   use CacheParameterGroupName=default.redis3.2 .
 	//
-	//   - To create a Redis OSS (cluster mode enabled) replication group, use
-	//   CacheParameterGroupName=default.redis3.2.cluster.on .
+	//   - To create a Valkey or Redis OSS (cluster mode enabled) replication group,
+	//   use CacheParameterGroupName=default.redis3.2.cluster.on .
 	CacheParameterGroupName *string
 
 	// A list of cache security group names to associate with this replication group.
@@ -259,10 +263,11 @@ type CreateReplicationGroupInput struct {
 	CacheSubnetGroupName *string
 
 	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
-	// first set the cluster mode to Compatible. Compatible mode allows your Redis OSS
-	// clients to connect using both cluster mode enabled and cluster mode disabled.
-	// After you migrate all Redis OSS clients to use cluster mode enabled, you can
-	// then complete cluster mode configuration and set the cluster mode to Enabled.
+	// first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+	// Redis OSS clients to connect using both cluster mode enabled and cluster mode
+	// disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+	// enabled, you can then complete cluster mode configuration and set the cluster
+	// mode to Enabled.
 	ClusterMode types.ClusterMode
 
 	// Enables data tiering. Data tiering is only supported for replication groups
@@ -292,8 +297,9 @@ type CreateReplicationGroupInput struct {
 	GlobalReplicationGroupId *string
 
 	// The network type you choose when creating a replication group, either ipv4 |
-	// ipv6 . IPv6 is supported for workloads using Redis OSS engine version 6.2 onward
-	// or Memcached engine version 1.6.6 on all instances built on the [Nitro system].
+	// ipv6 . IPv6 is supported for workloads using Valkey 7.2 and above, Redis OSS
+	// engine version 6.2 and above or Memcached engine version 1.6.6 and above on all
+	// instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery types.IpDiscovery
@@ -311,8 +317,8 @@ type CreateReplicationGroupInput struct {
 	MultiAZEnabled *bool
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the [Nitro system].
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	NetworkType types.NetworkType
@@ -321,12 +327,13 @@ type CreateReplicationGroupInput struct {
 	// configuration has the following members: PrimaryAvailabilityZone ,
 	// ReplicaAvailabilityZones , ReplicaCount , and Slots .
 	//
-	// If you're creating a Redis OSS (cluster mode disabled) or a Redis OSS (cluster
-	// mode enabled) replication group, you can use this parameter to individually
-	// configure each node group (shard), or you can omit this parameter. However, it
-	// is required when seeding a Redis OSS (cluster mode enabled) cluster from a S3
-	// rdb file. You must configure each node group (shard) using this parameter
-	// because you must specify the slots for each node group.
+	// If you're creating a Valkey or Redis OSS (cluster mode disabled) or a Valkey or
+	// Redis OSS (cluster mode enabled) replication group, you can use this parameter
+	// to individually configure each node group (shard), or you can omit this
+	// parameter. However, it is required when seeding a Valkey or Redis OSS (cluster
+	// mode enabled) cluster from a S3 rdb file. You must configure each node group
+	// (shard) using this parameter because you must specify the slots for each node
+	// group.
 	NodeGroupConfiguration []types.NodeGroupConfiguration
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
@@ -349,8 +356,8 @@ type CreateReplicationGroupInput struct {
 	NumCacheClusters *int32
 
 	// An optional parameter that specifies the number of node groups (shards) for
-	// this Redis OSS (cluster mode enabled) replication group. For Redis OSS (cluster
-	// mode disabled) either omit this parameter or set it to 1.
+	// this Valkey or Redis OSS (cluster mode enabled) replication group. For Valkey or
+	// Redis OSS (cluster mode disabled) either omit this parameter or set it to 1.
 	//
 	// Default: 1
 	NumNodeGroups *int32
@@ -418,16 +425,16 @@ type CreateReplicationGroupInput struct {
 	SecurityGroupIds []string
 
 	// The name of the snapshot used to create a replication group. Available for
-	// Redis OSS only.
+	// Valkey, Redis OSS only.
 	ServerlessCacheSnapshotName *string
 
-	// A list of Amazon Resource Names (ARN) that uniquely identify the Redis OSS RDB
-	// snapshot files stored in Amazon S3. The snapshot files are used to populate the
-	// new replication group. The Amazon S3 object name in the ARN cannot contain any
-	// commas. The new replication group will have the number of node groups (console:
-	// shards) specified by the parameter NumNodeGroups or the number of node groups
-	// configured by NodeGroupConfiguration regardless of the number of ARNs specified
-	// here.
+	// A list of Amazon Resource Names (ARN) that uniquely identify the Valkey or
+	// Redis OSS RDB snapshot files stored in Amazon S3. The snapshot files are used to
+	// populate the new replication group. The Amazon S3 object name in the ARN cannot
+	// contain any commas. The new replication group will have the number of node
+	// groups (console: shards) specified by the parameter NumNodeGroups or the number
+	// of node groups configured by NodeGroupConfiguration regardless of the number of
+	// ARNs specified here.
 	//
 	// Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
 	SnapshotArns []string
@@ -482,9 +489,9 @@ type CreateReplicationGroupInput struct {
 	//
 	// When setting TransitEncryptionEnabled to true , you can set your
 	// TransitEncryptionMode to preferred in the same request, to allow both encrypted
-	// and unencrypted connections at the same time. Once you migrate all your Redis
-	// OSS clients to use encrypted connections you can modify the value to required
-	// to allow encrypted connections only.
+	// and unencrypted connections at the same time. Once you migrate all your Valkey
+	// or Redis OSS clients to use encrypted connections you can modify the value to
+	// required to allow encrypted connections only.
 	//
 	// Setting TransitEncryptionMode to required is a two-step process that requires
 	// you to first set the TransitEncryptionMode to preferred , after that you can set
@@ -501,7 +508,8 @@ type CreateReplicationGroupInput struct {
 
 type CreateReplicationGroupOutput struct {
 
-	// Contains all of the attributes of a specific Redis OSS replication group.
+	// Contains all of the attributes of a specific Valkey or Redis OSS replication
+	// group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

@@ -51,7 +51,7 @@ import (
 // To track the status of a placement request, call [DescribeGameSessionPlacement] and check the request's
 // status. If the status is FULFILLED , a new game session has been created and a
 // game session ARN and Region are referenced. If the placement request times out,
-// you can resubmit the request or retry it with a different queue.
+// submit a new request to the same queue or a different queue.
 //
 // [DescribeGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionPlacement.html
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {
@@ -98,10 +98,10 @@ type StartGameSessionPlacementInput struct {
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session (see [Start a Game Session]).
+	// This data is passed to a game server process with a request to start a new game
+	// session. For more information, see [Start a game session].
 	//
-	// [Start a Game Session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+	// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
 	// A descriptive label that is associated with a game session. Session names do
@@ -109,9 +109,9 @@ type StartGameSessionPlacementInput struct {
 	GameSessionName *string
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
-	// latency that a player experiences when connected to Amazon Web Services Regions.
-	// This information is used to try to place the new game session where it can offer
-	// the best possible gameplay experience for the players.
+	// latency that a player experiences when connected to @aws; Regions. This
+	// information is used to try to place the new game session where it can offer the
+	// best possible gameplay experience for the players.
 	PlayerLatencies []types.PlayerLatency
 
 	noSmithyDocumentSerde

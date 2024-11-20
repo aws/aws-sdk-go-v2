@@ -58,6 +58,15 @@ type ListQueuesOutput struct {
 	// List of queues.
 	Queues []types.Queue
 
+	// The maximum number of jobs that MediaConvert can process at one time, across
+	// all of your on-demand queues in the current AWS Region.
+	TotalConcurrentJobs *int32
+
+	// The remaining number of concurrent jobs that are not associated with a queue
+	// and are available to allocate to a queue. You can allocate these jobs when you
+	// create or update a queue.
+	UnallocatedConcurrentJobs *int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

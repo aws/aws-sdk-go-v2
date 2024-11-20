@@ -8,7 +8,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?)?:(\\d{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#ArnOrJsonPath": {
@@ -18,7 +18,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?)?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
             }
         },
         "com.amazonaws.pipes#ArnOrUrl": {
@@ -28,7 +28,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
+                "smithy.api#pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?)?:(\\d{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#AssignPublicIp": {
@@ -364,7 +364,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):log-group:[\\.\\-_/#A-Za-z0-9]{1,512}(:\\*)?)$"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?):(\\d{12}):log-group:[\\.\\-_/#A-Za-z0-9]{1,512}(:\\*)?)$"
             }
         },
         "com.amazonaws.pipes#CloudwatchLogsLogDestination": {
@@ -1410,7 +1410,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):deliverystream/[a-zA-Z0-9_.-]{1,64})$"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?):(\\d{12}):deliverystream/[a-zA-Z0-9_.-]{1,64})$"
             }
         },
         "com.amazonaws.pipes#FirehoseLogDestination": {
@@ -2162,7 +2162,7 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
+                "smithy.api#pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?)?:(\\d{12})?:(.+)$"
             }
         },
         "com.amazonaws.pipes#PathParameter": {
@@ -2506,7 +2506,7 @@
                 "OnPartialBatchItemFailure": {
                     "target": "com.amazonaws.pipes#OnPartialBatchItemFailureStreams",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
+                        "smithy.api#documentation": "<p>Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
                     }
                 },
                 "MaximumBatchingWindowInSeconds": {
@@ -2518,25 +2518,25 @@
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.pipes#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
+                        "smithy.api#documentation": "<p>Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.pipes#MaximumRetryAttemptsESM",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
+                        "smithy.api#documentation": "<p>Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.pipes#LimitMax10",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
+                        "smithy.api#documentation": "<p>The number of batches to process concurrently from each shard. The default value is 1.</p>"
                     }
                 },
                 "StartingPosition": {
                     "target": "com.amazonaws.pipes#DynamoDBStreamStartPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The position in a stream from which to start reading.</p>",
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2563,7 +2563,7 @@
                 "OnPartialBatchItemFailure": {
                     "target": "com.amazonaws.pipes#OnPartialBatchItemFailureStreams",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
+                        "smithy.api#documentation": "<p>Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
                     }
                 },
                 "MaximumBatchingWindowInSeconds": {
@@ -2575,25 +2575,25 @@
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.pipes#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
+                        "smithy.api#documentation": "<p>Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.pipes#MaximumRetryAttemptsESM",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
+                        "smithy.api#documentation": "<p>Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.pipes#LimitMax10",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
+                        "smithy.api#documentation": "<p>The number of batches to process concurrently from each shard. The default value is 1.</p>"
                     }
                 },
                 "StartingPosition": {
                     "target": "com.amazonaws.pipes#KinesisStreamStartPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The position in a stream from which to start reading.</p>",
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2621,7 +2621,7 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.pipes#MSKStartPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The position in a stream from which to start reading.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading.</p>"
                     }
                 },
                 "BatchSize": {
@@ -2762,7 +2762,7 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.pipes#SelfManagedKafkaStartPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The position in a stream from which to start reading.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading.</p>"
                     }
                 },
                 "AdditionalBootstrapServers": {
@@ -3396,7 +3396,7 @@
                 "TimestampFormat": {
                     "target": "com.amazonaws.pipes#TimestampFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>How to format the timestamps. For example,\n         <code>YYYY-MM-DDThh:mm:ss.sssTZD</code>.</p>\n         <p>Required if <code>TimeFieldType</code> is specified as\n         <code>TIMESTAMP_FORMAT</code>.</p>"
+                        "smithy.api#documentation": "<p>How to format the timestamps. For example,\n         <code>yyyy-MM-dd'T'HH:mm:ss'Z'</code>.</p>\n         <p>Required if <code>TimeFieldType</code> is specified as\n         <code>TIMESTAMP_FORMAT</code>.</p>"
                     }
                 },
                 "VersionValue": {
@@ -4558,7 +4558,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?):(\\d{12}):secret:.+)$"
             }
         },
         "com.amazonaws.pipes#SecretManagerArnOrJsonPath": {
@@ -4569,7 +4569,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
+                "smithy.api#pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2,4}((-gov)|(-de)|(-iso([a-z]?)))?-[a-z]+(-\\d{1})?):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
             }
         },
         "com.amazonaws.pipes#SecurityGroup": {
@@ -4602,7 +4602,7 @@
             "traits": {
                 "smithy.api#documentation": "List of SecurityGroupId.",
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 5
                 }
             }
@@ -5045,7 +5045,7 @@
             "traits": {
                 "smithy.api#documentation": "List of SubnetId.",
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 16
                 }
             }
@@ -5564,7 +5564,7 @@
                 "OnPartialBatchItemFailure": {
                     "target": "com.amazonaws.pipes#OnPartialBatchItemFailureStreams",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
+                        "smithy.api#documentation": "<p>Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
                     }
                 },
                 "MaximumBatchingWindowInSeconds": {
@@ -5576,19 +5576,19 @@
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.pipes#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
+                        "smithy.api#documentation": "<p>Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.pipes#MaximumRetryAttemptsESM",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
+                        "smithy.api#documentation": "<p>Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.pipes#LimitMax10",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
+                        "smithy.api#documentation": "<p>The number of batches to process concurrently from each shard. The default value is 1.</p>"
                     }
                 }
             },
@@ -5614,7 +5614,7 @@
                 "OnPartialBatchItemFailure": {
                     "target": "com.amazonaws.pipes#OnPartialBatchItemFailureStreams",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
+                        "smithy.api#documentation": "<p>Define how to handle item process failures. <code>AUTOMATIC_BISECT</code> halves each batch and retry each half \nuntil all the records are processed or there is one failed message left in the batch.</p>"
                     }
                 },
                 "MaximumBatchingWindowInSeconds": {
@@ -5626,19 +5626,19 @@
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.pipes#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
+                        "smithy.api#documentation": "<p>Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. \nWhen the value is set to infinite, EventBridge never discards old records. </p>"
                     }
                 },
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.pipes#MaximumRetryAttemptsESM",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
+                        "smithy.api#documentation": "<p>Discard records after the specified number of retries. The default value is -1, which sets the maximum number of \nretries to infinite. When MaximumRetryAttempts is infinite, EventBridge retries failed records until the record expires in the event source.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.pipes#LimitMax10",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
+                        "smithy.api#documentation": "<p>The number of batches to process concurrently from each shard. The default value is 1.</p>"
                     }
                 }
             },

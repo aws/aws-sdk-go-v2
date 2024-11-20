@@ -4303,6 +4303,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionOutput(v **GetFunctionOutput, 
 				return err
 			}
 
+		case "TagsError":
+			if err := awsRestjson1_deserializeDocumentTagsError(&sv.TagsError, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16120,7 +16125,7 @@ func awsRestjson1_deserializeDocumentCodeSigningConfigNotFoundException(v **type
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16209,7 +16214,7 @@ func awsRestjson1_deserializeDocumentCodeStorageExceededException(v **types.Code
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16258,7 +16263,7 @@ func awsRestjson1_deserializeDocumentCodeVerificationFailedException(v **types.C
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16635,7 +16640,7 @@ func awsRestjson1_deserializeDocumentEC2AccessDeniedException(v **types.EC2Acces
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16684,7 +16689,7 @@ func awsRestjson1_deserializeDocumentEC2ThrottledException(v **types.EC2Throttle
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16742,7 +16747,7 @@ func awsRestjson1_deserializeDocumentEC2UnexpectedException(v **types.EC2Unexpec
 				sv.EC2ErrorCode = ptr.String(jtv)
 			}
 
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16791,7 +16796,7 @@ func awsRestjson1_deserializeDocumentEFSIOException(v **types.EFSIOException, va
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16840,7 +16845,7 @@ func awsRestjson1_deserializeDocumentEFSMountConnectivityException(v **types.EFS
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16889,7 +16894,7 @@ func awsRestjson1_deserializeDocumentEFSMountFailureException(v **types.EFSMount
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16938,7 +16943,7 @@ func awsRestjson1_deserializeDocumentEFSMountTimeoutException(v **types.EFSMount
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17057,7 +17062,7 @@ func awsRestjson1_deserializeDocumentENILimitReachedException(v **types.ENILimit
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -17915,6 +17920,15 @@ func awsRestjson1_deserializeDocumentFunctionCodeLocation(v **types.FunctionCode
 				sv.ResolvedImageUri = ptr.String(jtv)
 			}
 
+		case "SourceKMSKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SourceKMSKeyArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18756,7 +18770,7 @@ func awsRestjson1_deserializeDocumentInvalidCodeSignatureException(v **types.Inv
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18805,7 +18819,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18854,7 +18868,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestContentException(v **types.In
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18903,7 +18917,7 @@ func awsRestjson1_deserializeDocumentInvalidRuntimeException(v **types.InvalidRu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -18952,7 +18966,7 @@ func awsRestjson1_deserializeDocumentInvalidSecurityGroupIDException(v **types.I
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19001,7 +19015,7 @@ func awsRestjson1_deserializeDocumentInvalidSubnetIDException(v **types.InvalidS
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19050,7 +19064,7 @@ func awsRestjson1_deserializeDocumentInvalidZipFileException(v **types.InvalidZi
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19099,7 +19113,7 @@ func awsRestjson1_deserializeDocumentKMSAccessDeniedException(v **types.KMSAcces
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19148,7 +19162,7 @@ func awsRestjson1_deserializeDocumentKMSDisabledException(v **types.KMSDisabledE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19197,7 +19211,7 @@ func awsRestjson1_deserializeDocumentKMSInvalidStateException(v **types.KMSInval
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19246,7 +19260,7 @@ func awsRestjson1_deserializeDocumentKMSNotFoundException(v **types.KMSNotFoundE
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19839,7 +19853,7 @@ func awsRestjson1_deserializeDocumentPolicyLengthExceededException(v **types.Pol
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19888,7 +19902,7 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20077,7 +20091,7 @@ func awsRestjson1_deserializeDocumentProvisionedConcurrencyConfigNotFoundExcepti
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20162,7 +20176,7 @@ func awsRestjson1_deserializeDocumentRecursiveInvocationException(v **types.Recu
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20211,7 +20225,7 @@ func awsRestjson1_deserializeDocumentRequestTooLargeException(v **types.RequestT
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20260,7 +20274,7 @@ func awsRestjson1_deserializeDocumentResourceConflictException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20309,7 +20323,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20358,7 +20372,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20407,7 +20421,7 @@ func awsRestjson1_deserializeDocumentResourceNotReadyException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20706,7 +20720,7 @@ func awsRestjson1_deserializeDocumentServiceException(v **types.ServiceException
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20791,7 +20805,7 @@ func awsRestjson1_deserializeDocumentSnapStartException(v **types.SnapStartExcep
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20840,7 +20854,7 @@ func awsRestjson1_deserializeDocumentSnapStartNotReadyException(v **types.SnapSt
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -20938,7 +20952,7 @@ func awsRestjson1_deserializeDocumentSnapStartTimeoutException(v **types.SnapSta
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21142,7 +21156,7 @@ func awsRestjson1_deserializeDocumentSubnetIPAddressLimitReachedException(v **ty
 
 	for key, value := range shape {
 		switch key {
-		case "Message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21205,6 +21219,55 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTagsError(v **types.TagsError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TagsError
+	if *v == nil {
+		sv = &types.TagsError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagsErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagsErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyRequestsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21227,7 +21290,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -21370,7 +21433,7 @@ func awsRestjson1_deserializeDocumentUnsupportedMediaTypeException(v **types.Uns
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

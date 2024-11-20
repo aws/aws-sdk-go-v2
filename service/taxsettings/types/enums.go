@@ -23,6 +23,49 @@ func (AddressRoleType) Values() []AddressRoleType {
 	}
 }
 
+type EntityExemptionAccountStatus string
+
+// Enum values for EntityExemptionAccountStatus
+const (
+	EntityExemptionAccountStatusNone    EntityExemptionAccountStatus = "None"
+	EntityExemptionAccountStatusValid   EntityExemptionAccountStatus = "Valid"
+	EntityExemptionAccountStatusExpired EntityExemptionAccountStatus = "Expired"
+	EntityExemptionAccountStatusPending EntityExemptionAccountStatus = "Pending"
+)
+
+// Values returns all known values for EntityExemptionAccountStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntityExemptionAccountStatus) Values() []EntityExemptionAccountStatus {
+	return []EntityExemptionAccountStatus{
+		"None",
+		"Valid",
+		"Expired",
+		"Pending",
+	}
+}
+
+type HeritageStatus string
+
+// Enum values for HeritageStatus
+const (
+	HeritageStatusOptIn  HeritageStatus = "OptIn"
+	HeritageStatusOptOut HeritageStatus = "OptOut"
+)
+
+// Values returns all known values for HeritageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HeritageStatus) Values() []HeritageStatus {
+	return []HeritageStatus{
+		"OptIn",
+		"OptOut",
+	}
+}
+
 type Industries string
 
 // Enum values for Industries
@@ -194,6 +237,24 @@ func (Sector) Values() []Sector {
 	}
 }
 
+type SupplementalTaxRegistrationType string
+
+// Enum values for SupplementalTaxRegistrationType
+const (
+	SupplementalTaxRegistrationTypeVat SupplementalTaxRegistrationType = "VAT"
+)
+
+// Values returns all known values for SupplementalTaxRegistrationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupplementalTaxRegistrationType) Values() []SupplementalTaxRegistrationType {
+	return []SupplementalTaxRegistrationType{
+		"VAT",
+	}
+}
+
 type TaxRegistrationNumberType string
 
 // Enum values for TaxRegistrationNumberType
@@ -245,6 +306,8 @@ const (
 	TaxRegistrationTypeCpf  TaxRegistrationType = "CPF"
 	TaxRegistrationTypeCnpj TaxRegistrationType = "CNPJ"
 	TaxRegistrationTypeSst  TaxRegistrationType = "SST"
+	TaxRegistrationTypeTin  TaxRegistrationType = "TIN"
+	TaxRegistrationTypeNric TaxRegistrationType = "NRIC"
 )
 
 // Values returns all known values for TaxRegistrationType. Note that this can be
@@ -258,6 +321,8 @@ func (TaxRegistrationType) Values() []TaxRegistrationType {
 		"CPF",
 		"CNPJ",
 		"SST",
+		"TIN",
+		"NRIC",
 	}
 }
 

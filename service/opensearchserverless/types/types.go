@@ -234,6 +234,26 @@ type CreateCollectionDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Describes IAM Identity Center options for creating an OpenSearch Serverless
+// security configuration in the form of a key-value map.
+type CreateIamIdentityCenterConfigOptions struct {
+
+	// The ARN of the IAM Identity Center instance used to integrate with OpenSearch
+	// Serverless.
+	//
+	// This member is required.
+	InstanceArn *string
+
+	// The group attribute for this IAM Identity Center integration. Defaults to
+	// GroupId .
+	GroupAttribute IamIdentityCenterGroupAttribute
+
+	// The user attribute for this IAM Identity Center integration. Defaults to UserId .
+	UserAttribute IamIdentityCenterUserAttribute
+
+	noSmithyDocumentSerde
+}
+
 // Creation details for an OpenSearch Serverless-managed interface endpoint. For
 // more information, see [Access Amazon OpenSearch Serverless using an interface endpoint].
 //
@@ -325,6 +345,36 @@ type EffectiveLifecyclePolicyErrorDetail struct {
 
 	// The type of lifecycle policy.
 	Type LifecyclePolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Describes IAM Identity Center options for an OpenSearch Serverless security
+// configuration in the form of a key-value map.
+type IamIdentityCenterConfigOptions struct {
+
+	// The ARN of the IAM Identity Center application used to integrate with
+	// OpenSearch Serverless.
+	ApplicationArn *string
+
+	// The description of the IAM Identity Center application used to integrate with
+	// OpenSearch Serverless.
+	ApplicationDescription *string
+
+	// The name of the IAM Identity Center application used to integrate with
+	// OpenSearch Serverless.
+	ApplicationName *string
+
+	// The group attribute for this IAM Identity Center integration. Defaults to
+	// GroupId .
+	GroupAttribute IamIdentityCenterGroupAttribute
+
+	// The ARN of the IAM Identity Center instance used to integrate with OpenSearch
+	// Serverless.
+	InstanceArn *string
+
+	// The user attribute for this IAM Identity Center integration. Defaults to UserId
+	UserAttribute IamIdentityCenterUserAttribute
 
 	noSmithyDocumentSerde
 }
@@ -472,6 +522,9 @@ type SecurityConfigDetail struct {
 
 	// The description of the security configuration.
 	Description *string
+
+	// Describes IAM Identity Center options in the form of a key-value map.
+	IamIdentityCenterOptions *IamIdentityCenterConfigOptions
 
 	// The unique identifier of the security configuration.
 	Id *string
@@ -626,6 +679,20 @@ type UpdateCollectionDetail struct {
 
 	// The collection type.
 	Type CollectionType
+
+	noSmithyDocumentSerde
+}
+
+// Describes IAM Identity Center options for updating an OpenSearch Serverless
+// security configuration in the form of a key-value map.
+type UpdateIamIdentityCenterConfigOptions struct {
+
+	// The group attribute for this IAM Identity Center integration. Defaults to
+	// GroupId .
+	GroupAttribute IamIdentityCenterGroupAttribute
+
+	// The user attribute for this IAM Identity Center integration. Defaults to UserId .
+	UserAttribute IamIdentityCenterUserAttribute
 
 	noSmithyDocumentSerde
 }

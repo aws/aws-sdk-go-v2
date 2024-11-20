@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You are not authorized to perform this action.
+// You do not have the necessary permissions to access the account settings.
 type AccessDeniedException struct {
 	Message *string
 
@@ -59,9 +59,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//	The service was unable to fully process this request because of an internal
-//
-// server error.
+// An internal server error occurred while processing the request.
 type InternalServerException struct {
 	Message *string
 
@@ -87,7 +85,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The requested endpoint was not valid.
+// The requested endpoint is invalid.
 type InvalidEndpointException struct {
 	Message *string
 
@@ -193,7 +191,7 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied due to request throttling.
+// The request was throttled due to excessive requests.
 type ThrottlingException struct {
 	Message *string
 

@@ -194,6 +194,18 @@ func TestCheckSnapshot_CreateReferenceStore(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRunCache")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRunGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRunGroup(context.Background(), nil, func(o *Options) {
@@ -307,6 +319,18 @@ func TestCheckSnapshot_DeleteRun(t *testing.T) {
 	_, err := svc.DeleteRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRunCache")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -523,6 +547,18 @@ func TestCheckSnapshot_GetRun(t *testing.T) {
 	_, err := svc.GetRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRunCache")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -751,6 +787,18 @@ func TestCheckSnapshot_ListReferenceStores(t *testing.T) {
 	_, err := svc.ListReferenceStores(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListReferenceStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRunCaches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRunCaches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRunCaches")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -998,6 +1046,18 @@ func TestCheckSnapshot_UpdateAnnotationStoreVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRunCache")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRunGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRunGroup(context.Background(), nil, func(o *Options) {
@@ -1177,6 +1237,18 @@ func TestUpdateSnapshot_CreateReferenceStore(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRunCache")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRunGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRunGroup(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1362,18 @@ func TestUpdateSnapshot_DeleteRun(t *testing.T) {
 	_, err := svc.DeleteRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRunCache")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1506,6 +1590,18 @@ func TestUpdateSnapshot_GetRun(t *testing.T) {
 	_, err := svc.GetRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRunCache")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1734,6 +1830,18 @@ func TestUpdateSnapshot_ListReferenceStores(t *testing.T) {
 	_, err := svc.ListReferenceStores(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListReferenceStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRunCaches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRunCaches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRunCaches")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1974,6 +2082,18 @@ func TestUpdateSnapshot_UpdateAnnotationStoreVersion(t *testing.T) {
 	_, err := svc.UpdateAnnotationStoreVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAnnotationStoreVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRunCache(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRunCache(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRunCache")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

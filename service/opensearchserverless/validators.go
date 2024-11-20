@@ -754,6 +754,21 @@ func addOpUpdateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVpcEndpoint{}, middleware.After)
 }
 
+func validateCreateIamIdentityCenterConfigOptions(v *types.CreateIamIdentityCenterConfigOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIamIdentityCenterConfigOptions"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLifecyclePolicyIdentifier(v *types.LifecyclePolicyIdentifier) error {
 	if v == nil {
 		return nil
@@ -1003,6 +1018,11 @@ func validateOpCreateSecurityConfigInput(v *CreateSecurityConfigInput) error {
 	if v.SamlOptions != nil {
 		if err := validateSamlConfigOptions(v.SamlOptions); err != nil {
 			invalidParams.AddNested("SamlOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IamIdentityCenterOptions != nil {
+		if err := validateCreateIamIdentityCenterConfigOptions(v.IamIdentityCenterOptions); err != nil {
+			invalidParams.AddNested("IamIdentityCenterOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

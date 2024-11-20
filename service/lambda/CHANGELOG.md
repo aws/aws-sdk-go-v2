@@ -1,3 +1,40 @@
+# v1.67.0 (2024-11-20)
+
+* **Feature**: Add Node 22.x (node22.x) support to AWS Lambda
+
+# v1.66.1 (2024-11-18)
+
+* **Dependency Update**: Update to smithy-go v1.22.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.66.0 (2024-11-11)
+
+* **Feature**: Add Python 3.13 (python3.13) support to AWS Lambda
+
+# v1.65.0 (2024-11-08)
+
+* **Feature**: This release adds support for using AWS KMS customer managed keys to encrypt AWS Lambda .zip deployment packages.
+
+# v1.64.3 (2024-11-07)
+
+* **Bug Fix**: Adds case-insensitive handling of error message fields in service responses
+
+# v1.64.2 (2024-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2024-10-25)
+
+* **Feature**: Add TagsError field in Lambda GetFunctionResponse. The TagsError field contains details related to errors retrieving tags.
+
+# v1.63.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

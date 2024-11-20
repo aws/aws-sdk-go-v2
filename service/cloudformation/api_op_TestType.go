@@ -20,7 +20,8 @@ import (
 //   - For modules, this includes determining if the module's model meets all
 //     necessary requirements.
 //
-// For more information, see [Testing your public extension prior to publishing] in the CloudFormation CLI User Guide.
+// For more information, see [Testing your public extension before publishing] in the CloudFormation Command Line Interface (CLI)
+// User Guide.
 //
 // If you don't specify a version, CloudFormation uses the default version of the
 // extension in your account and Region for testing.
@@ -33,10 +34,11 @@ import (
 // status description for the extension.
 //
 // An extension must have a test status of PASSED before it can be published. For
-// more information, see [Publishing extensions to make them available for public use]in the CloudFormation CLI User Guide.
+// more information, see [Publishing extensions to make them available for public use]in the CloudFormation Command Line Interface (CLI) User
+// Guide.
 //
 // [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-// [Testing your public extension prior to publishing]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing
+// [Testing your public extension before publishing]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing
 // [RegisterType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
 // [Publishing extensions to make them available for public use]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html
 func (c *Client) TestType(ctx context.Context, params *TestTypeInput, optFns ...func(*Options)) (*TestTypeOutput, error) {
@@ -73,8 +75,7 @@ type TestTypeInput struct {
 	//
 	//   - PutObject
 	//
-	// For more information, see [Actions, Resources, and Condition Keys for Amazon S3] in the Amazon Web Services Identity and Access
-	// Management User Guide.
+	// For more information, see [Actions, Resources, and Condition Keys for Amazon S3] in the Identity and Access Management User Guide.
 	//
 	// [Actions, Resources, and Condition Keys for Amazon S3]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html
 	LogDeliveryBucket *string

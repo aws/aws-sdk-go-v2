@@ -44,6 +44,14 @@ type AssociatePackageInput struct {
 	// This member is required.
 	PackageID *string
 
+	// The configuration for associating a package with an Amazon OpenSearch Service
+	// domain.
+	AssociationConfiguration *types.PackageAssociationConfiguration
+
+	// A list of package IDs that must be associated with the domain before the
+	// package specified in the request can be associated.
+	PrerequisitePackageIDList []string
+
 	noSmithyDocumentSerde
 }
 

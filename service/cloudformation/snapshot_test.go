@@ -650,6 +650,18 @@ func TestCheckSnapshot_ListGeneratedTemplates(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListHookResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHookResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHookResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListImports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListImports(context.Background(), nil, func(o *Options) {
@@ -1626,6 +1638,18 @@ func TestUpdateSnapshot_ListGeneratedTemplates(t *testing.T) {
 	_, err := svc.ListGeneratedTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListGeneratedTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHookResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHookResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHookResults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

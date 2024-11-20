@@ -250,6 +250,23 @@ func addOpUpdateRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRule{}, middleware.After)
 }
 
+func validateExcludeResourceTags(v []types.ResourceTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExcludeResourceTags"}
+	for i := range v {
+		if err := validateResourceTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLockConfiguration(v *types.LockConfiguration) error {
 	if v == nil {
 		return nil
@@ -402,6 +419,11 @@ func validateOpCreateRuleInput(v *CreateRuleInput) error {
 			invalidParams.AddNested("LockConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ExcludeResourceTags != nil {
+		if err := validateExcludeResourceTags(v.ExcludeResourceTags); err != nil {
+			invalidParams.AddNested("ExcludeResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -450,6 +472,11 @@ func validateOpListRulesInput(v *ListRulesInput) error {
 	if v.ResourceTags != nil {
 		if err := validateResourceTags(v.ResourceTags); err != nil {
 			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExcludeResourceTags != nil {
+		if err := validateExcludeResourceTags(v.ExcludeResourceTags); err != nil {
+			invalidParams.AddNested("ExcludeResourceTags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -567,6 +594,11 @@ func validateOpUpdateRuleInput(v *UpdateRuleInput) error {
 	if v.ResourceTags != nil {
 		if err := validateResourceTags(v.ResourceTags); err != nil {
 			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExcludeResourceTags != nil {
+		if err := validateExcludeResourceTags(v.ExcludeResourceTags); err != nil {
+			invalidParams.AddNested("ExcludeResourceTags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -30,15 +30,16 @@ func (c *Client) AuthorizeVpcEndpointAccess(ctx context.Context, params *Authori
 
 type AuthorizeVpcEndpointAccessInput struct {
 
-	// The Amazon Web Services account ID to grant access to.
-	//
-	// This member is required.
-	Account *string
-
 	// The name of the OpenSearch Service domain to provide access to.
 	//
 	// This member is required.
 	DomainName *string
+
+	// The Amazon Web Services account ID to grant access to.
+	Account *string
+
+	// The Amazon Web Services service SP to grant access to.
+	Service types.AWSServicePrincipal
 
 	noSmithyDocumentSerde
 }

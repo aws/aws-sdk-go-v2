@@ -482,6 +482,20 @@ type AssetTypeItem struct {
 	noSmithyDocumentSerde
 }
 
+// The asset type for the rule details.
+type AssetTypesForRule struct {
+
+	// The selection mode for the rule.
+	//
+	// This member is required.
+	SelectionMode RuleScopeSelectionMode
+
+	// The specific asset types that are included in the rule.
+	SpecificAssetTypes []string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters of the console link specified as part of the environment action.
 type AwsConsoleLinkParameters struct {
 
@@ -1235,6 +1249,20 @@ type DomainUnitSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The target for the domain unit.
+type DomainUnitTarget struct {
+
+	// The ID of the domain unit.
+	//
+	// This member is required.
+	DomainUnitId *string
+
+	// Specifies whether to apply a rule to the child domain units.
+	IncludeChildDomainUnits *bool
 
 	noSmithyDocumentSerde
 }
@@ -2362,6 +2390,50 @@ type MemberDetailsMemberUser struct {
 
 func (*MemberDetailsMemberUser) isMemberDetails() {}
 
+// The enforcement details of a metadata form.
+type MetadataFormEnforcementDetail struct {
+
+	// The required metadata forms.
+	RequiredMetadataForms []MetadataFormReference
+
+	noSmithyDocumentSerde
+}
+
+// The reference of a metadata form.
+type MetadataFormReference struct {
+
+	// The type ID of the metadata form reference.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The type revision of the metadata form reference.
+	//
+	// This member is required.
+	TypeRevision *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the metadata form.
+type MetadataFormSummary struct {
+
+	// The type name of the metadata form.
+	//
+	// This member is required.
+	TypeName *string
+
+	// The type revision of the metadata form.
+	//
+	// This member is required.
+	TypeRevision *string
+
+	// The form name of the metadata form.
+	FormName *string
+
+	noSmithyDocumentSerde
+}
+
 // The metadata generation run.
 type MetadataGenerationRunItem struct {
 
@@ -2932,6 +3004,20 @@ type ProjectPolicyGrantPrincipal struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies projects in which the rule is created.
+type ProjectsForRule struct {
+
+	// The selection mode of the rule.
+	//
+	// This member is required.
+	SelectionMode RuleScopeSelectionMode
+
+	// The specific projects in which the rule is created.
+	SpecificProjects []string
+
+	noSmithyDocumentSerde
+}
+
 // The details of a Amazon DataZone project.
 type ProjectSummary struct {
 
@@ -3409,6 +3495,93 @@ type RowFilterExpressionMemberNotLike struct {
 }
 
 func (*RowFilterExpressionMemberNotLike) isRowFilterExpression() {}
+
+// The details of a rule.
+//
+// The following types satisfy this interface:
+//
+//	RuleDetailMemberMetadataFormEnforcementDetail
+type RuleDetail interface {
+	isRuleDetail()
+}
+
+// The enforcement detail of the metadata form.
+type RuleDetailMemberMetadataFormEnforcementDetail struct {
+	Value MetadataFormEnforcementDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleDetailMemberMetadataFormEnforcementDetail) isRuleDetail() {}
+
+// The scope of a rule.
+type RuleScope struct {
+
+	// The asset type included in the rule scope.
+	AssetType *AssetTypesForRule
+
+	// The data product included in the rule scope.
+	DataProduct *bool
+
+	// The project included in the rule scope.
+	Project *ProjectsForRule
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the rule.
+type RuleSummary struct {
+
+	// The action of the rule.
+	Action RuleAction
+
+	// The ID of the rule.
+	Identifier *string
+
+	// The timestamp at which the rule was last updated.
+	LastUpdatedBy *string
+
+	// The name of the rule.
+	Name *string
+
+	// The revision of the rule.
+	Revision *string
+
+	// The type of the rule.
+	RuleType RuleType
+
+	// The scope of the rule.
+	Scope *RuleScope
+
+	// The target of the rule.
+	Target RuleTarget
+
+	// The target type of the rule.
+	TargetType RuleTargetType
+
+	// The timestamp at which the rule was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The target of the rule.
+//
+// The following types satisfy this interface:
+//
+//	RuleTargetMemberDomainUnitTarget
+type RuleTarget interface {
+	isRuleTarget()
+}
+
+// The ID of the domain unit.
+type RuleTargetMemberDomainUnitTarget struct {
+	Value DomainUnitTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleTargetMemberDomainUnitTarget) isRuleTarget() {}
 
 // The asset statistics from the data source run.
 type RunStatisticsForAssets struct {
@@ -3996,6 +4169,12 @@ type SubscriptionRequestSummary struct {
 	// The decision comment of the subscription request.
 	DecisionComment *string
 
+	// The ID of the existing subscription.
+	ExistingSubscriptionId *string
+
+	// The summary of the metadata forms.
+	MetadataFormsSummary []MetadataFormSummary
+
 	// The identifier of the subscription request reviewer.
 	ReviewerId *string
 
@@ -4402,6 +4581,8 @@ func (*UnknownUnionMember) isProvisioningProperties()        {}
 func (*UnknownUnionMember) isRedshiftStorage()               {}
 func (*UnknownUnionMember) isRowFilter()                     {}
 func (*UnknownUnionMember) isRowFilterExpression()           {}
+func (*UnknownUnionMember) isRuleDetail()                    {}
+func (*UnknownUnionMember) isRuleTarget()                    {}
 func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}

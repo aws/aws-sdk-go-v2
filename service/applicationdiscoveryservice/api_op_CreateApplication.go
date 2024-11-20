@@ -28,20 +28,23 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// Name of the application to be created.
+	// The name of the application to be created.
 	//
 	// This member is required.
 	Name *string
 
-	// Description of the application to be created.
+	// The description of the application to be created.
 	Description *string
+
+	// The name of the migration wave of the application to be created.
+	Wave *string
 
 	noSmithyDocumentSerde
 }
 
 type CreateApplicationOutput struct {
 
-	// Configuration ID of an application to be created.
+	// The configuration ID of an application to be created.
 	ConfigurationId *string
 
 	// Metadata pertaining to the operation's result.

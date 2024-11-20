@@ -55,7 +55,8 @@ type UpdateLogPatternInput struct {
 	// configure custom log patterns from the console, a Low severity pattern
 	// translates to a 750,000 rank. A Medium severity pattern translates to a 500,000
 	// rank. And a High severity pattern translates to a 250,000 rank. Rank values
-	// less than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
+	// less than 1 or greater than 1,000,000 are reserved for Amazon Web Services
+	// provided patterns.
 	Rank int32
 
 	noSmithyDocumentSerde

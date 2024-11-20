@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchDeleteTaxRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetTaxExemptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetTaxExemptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetTaxExemptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchPutTaxRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchPutTaxRegistration(context.Background(), nil, func(o *Options) {
@@ -86,11 +98,47 @@ func TestCheckSnapshot_BatchPutTaxRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSupplementalTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTaxRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTaxRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTaxExemptionTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTaxExemptionTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTaxExemptionTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTaxInheritance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTaxInheritance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTaxInheritance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,11 +170,71 @@ func TestCheckSnapshot_GetTaxRegistrationDocument(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSupplementalTaxRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSupplementalTaxRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSupplementalTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTaxExemptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTaxExemptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTaxExemptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTaxRegistrations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTaxRegistrations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutSupplementalTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTaxExemption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTaxExemption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTaxExemption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTaxInheritance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTaxInheritance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTaxInheritance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -157,6 +265,18 @@ func TestUpdateSnapshot_BatchDeleteTaxRegistration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetTaxExemptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetTaxExemptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetTaxExemptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchPutTaxRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchPutTaxRegistration(context.Background(), nil, func(o *Options) {
@@ -169,11 +289,47 @@ func TestUpdateSnapshot_BatchPutTaxRegistration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSupplementalTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTaxRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTaxRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTaxExemptionTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTaxExemptionTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTaxExemptionTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTaxInheritance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTaxInheritance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTaxInheritance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -205,11 +361,71 @@ func TestUpdateSnapshot_GetTaxRegistrationDocument(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListSupplementalTaxRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSupplementalTaxRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSupplementalTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTaxExemptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTaxExemptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTaxExemptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTaxRegistrations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTaxRegistrations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutSupplementalTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTaxExemption(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTaxExemption(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTaxExemption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTaxInheritance(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTaxInheritance(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTaxInheritance")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
