@@ -1,8 +1,0 @@
-{
-    "id": "fd6c5097-d498-46ce-b8ff-1fb98c642ed3",
-    "type": "feature",
-    "description": "Enabling call caching feature that allows customers to reuse previously computed results from a set of completed tasks in a new workflow run.",
-    "modules": [
-        "service/omics"
-    ]
-}

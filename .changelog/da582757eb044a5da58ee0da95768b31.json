@@ -1,8 +1,0 @@
-{
-    "id": "da582757-eb04-4a5d-a58e-e0da95768b31",
-    "type": "feature",
-    "description": "MediaPackage v2 now supports the Media Quality Confidence Score (MQCS) published from MediaLive. Customers can control input switching based on the MQCS and publishing HTTP Headers for the MQCS via the API.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

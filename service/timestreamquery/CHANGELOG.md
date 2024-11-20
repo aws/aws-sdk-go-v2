@@ -1,3 +1,7 @@
+# v1.29.0 (2024-11-20)
+
+* **Feature**: This release adds support for Provisioning Timestream Compute Units (TCUs), a new feature that allows provisioning dedicated compute resources for your queries, providing predictable and cost-effective query performance.
+
 # v1.28.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

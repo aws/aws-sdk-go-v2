@@ -1,3 +1,7 @@
+# v1.192.0 (2024-11-20)
+
+* **Feature**: With this release, customers can express their desire to launch instances only in an ODCR or ODCR group rather than OnDemand capacity. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family.
+
 # v1.191.0 (2024-11-19)
 
 * **Feature**: This release adds VPC Block Public Access (VPC BPA), a new declarative control which blocks resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways.

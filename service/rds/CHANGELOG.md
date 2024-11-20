@@ -1,3 +1,7 @@
+# v1.91.0 (2024-11-20)
+
+* **Feature**: This release adds support for scale storage on the DB instance using a Blue/Green Deployment.
+
 # v1.90.0 (2024-11-18)
 
 * **Feature**: Add support for the automatic pause/resume feature of Aurora Serverless v2.

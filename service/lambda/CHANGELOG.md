@@ -1,3 +1,7 @@
+# v1.67.0 (2024-11-20)
+
+* **Feature**: Add Node 22.x (node22.x) support to AWS Lambda
+
 # v1.66.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

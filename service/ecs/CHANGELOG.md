@@ -1,3 +1,7 @@
+# v1.52.0 (2024-11-20)
+
+* **Feature**: This release adds support for the Availability Zone rebalancing feature on Amazon ECS.
+
 # v1.51.0 (2024-11-19)
 
 * **Feature**: This release introduces support for configuring the version consistency feature for individual containers defined within a task definition. The configuration allows to specify whether ECS should resolve the container image tag specified in the container definition to an image digest.

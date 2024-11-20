@@ -1,8 +1,0 @@
-{
-    "id": "f76d67ed-8b75-43d9-8912-1385ddc10323",
-    "type": "feature",
-    "description": "This release adds support for the Availability Zone rebalancing feature on Amazon ECS.",
-    "modules": [
-        "service/ecs"
-    ]
-}

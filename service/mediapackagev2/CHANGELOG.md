@@ -1,3 +1,7 @@
+# v1.20.0 (2024-11-20)
+
+* **Feature**: MediaPackage v2 now supports the Media Quality Confidence Score (MQCS) published from MediaLive. Customers can control input switching based on the MQCS and publishing HTTP Headers for the MQCS via the API.
+
 # v1.19.3 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

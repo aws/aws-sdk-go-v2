@@ -1,3 +1,7 @@
+# v1.50.0 (2024-11-20)
+
+* **Feature**: With this release, customers can prioritize launching instances into ODCRs using targets from ASGs or Launch Templates. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family that meets their needs.
+
 # v1.49.0 (2024-11-18)
 
 * **Feature**: Amazon EC2 Auto Scaling now supports Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift to help you quickly recover an impaired application from failures in an Availability Zone (AZ).

@@ -1,8 +1,0 @@
-{
-    "id": "e9a99da9-feb8-4135-913d-651f6d51ec5b",
-    "type": "feature",
-    "description": "This release adds support for exclusion tags for Recycle Bin, which allows you to identify resources that are to be excluded, or ignored, by a Region-level retention rule.",
-    "modules": [
-        "service/rbin"
-    ]
-}

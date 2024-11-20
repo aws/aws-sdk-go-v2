@@ -1,3 +1,7 @@
+# v1.29.0 (2024-11-20)
+
+* **Feature**: Add support to import data from commercially available discovery tools without file manipulation.
+
 # v1.28.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

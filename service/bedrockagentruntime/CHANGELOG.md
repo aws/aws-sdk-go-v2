@@ -1,3 +1,7 @@
+# v1.25.0 (2024-11-20)
+
+* **Feature**: Releasing new Prompt Optimization to enhance your prompts for improved performance
+
 # v1.24.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

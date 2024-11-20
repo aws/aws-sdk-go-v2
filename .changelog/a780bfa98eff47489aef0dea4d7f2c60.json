@@ -1,8 +1,0 @@
-{
-    "id": "a780bfa9-8eff-4748-9aef-0dea4d7f2c60",
-    "type": "feature",
-    "description": "This release adds support for scale storage on the DB instance using a Blue/Green Deployment.",
-    "modules": [
-        "service/rds"
-    ]
-}

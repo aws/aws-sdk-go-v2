@@ -1,3 +1,7 @@
+# v1.27.0 (2024-11-20)
+
+* **Feature**: Enabling call caching feature that allows customers to reuse previously computed results from a set of completed tasks in a new workflow run.
+
 # v1.26.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

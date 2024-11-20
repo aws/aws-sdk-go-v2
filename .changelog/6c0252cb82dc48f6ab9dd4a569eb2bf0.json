@@ -1,8 +1,0 @@
-{
-    "id": "6c0252cb-82dc-48f6-ab9d-d4a569eb2bf0",
-    "type": "feature",
-    "description": "This release supports Metadata Enforcement Rule feature for Create Subscription Request action.",
-    "modules": [
-        "service/datazone"
-    ]
-}

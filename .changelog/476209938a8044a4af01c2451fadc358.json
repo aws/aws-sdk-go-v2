@@ -1,8 +1,0 @@
-{
-    "id": "47620993-8a80-44a4-af01-c2451fadc358",
-    "type": "feature",
-    "description": "Added support for Rocky Linux 8 on Amazon WorkSpaces Personal.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

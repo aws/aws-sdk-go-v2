@@ -1,8 +1,0 @@
-{
-    "id": "b74dddbf-31f7-462e-b7c8-8fd7b293a251",
-    "type": "feature",
-    "description": "Releasing new Prompt Optimization to enhance your prompts for improved performance",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

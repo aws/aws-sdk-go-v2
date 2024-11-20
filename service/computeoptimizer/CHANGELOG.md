@@ -1,3 +1,7 @@
+# v1.40.0 (2024-11-20)
+
+* **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon Aurora database instances. It also enables Compute Optimizer to identify idle Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services running on Fargate, and Amazon RDS databases.
+
 # v1.39.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

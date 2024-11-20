@@ -1,3 +1,7 @@
+# v1.42.0 (2024-11-20)
+
+* **Feature**: This release adds support for configuring Load balancer Capacity Unit reservations
+
 # v1.41.2 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

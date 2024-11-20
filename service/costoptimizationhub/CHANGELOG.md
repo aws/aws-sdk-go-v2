@@ -1,3 +1,7 @@
+# v1.11.0 (2024-11-20)
+
+* **Feature**: This release adds action type "Delete" to the GetRecommendation, ListRecommendations and ListRecommendationSummaries APIs to support new EBS and ECS recommendations with action type "Delete".
+
 # v1.10.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

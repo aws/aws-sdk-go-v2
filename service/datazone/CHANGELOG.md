@@ -1,3 +1,7 @@
+# v1.24.0 (2024-11-20)
+
+* **Feature**: This release supports Metadata Enforcement Rule feature for Create Subscription Request action.
+
 # v1.23.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

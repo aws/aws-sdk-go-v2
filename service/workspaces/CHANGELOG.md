@@ -1,3 +1,7 @@
+# v1.50.0 (2024-11-20)
+
+* **Feature**: Added support for Rocky Linux 8 on Amazon WorkSpaces Personal.
+
 # v1.49.0 (2024-11-19)
 
 * **Feature**: Releasing new ErrorCodes for Image Validation failure during CreateWorkspaceImage process

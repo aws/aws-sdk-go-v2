@@ -1,8 +1,0 @@
-{
-    "id": "6fa756a0-5498-4a63-8341-24d156e0806d",
-    "type": "feature",
-    "description": "With this release, customers can prioritize launching instances into ODCRs using targets from ASGs or Launch Templates. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family that meets their needs.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

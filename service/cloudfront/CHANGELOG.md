@@ -1,3 +1,7 @@
+# v1.42.0 (2024-11-20)
+
+* **Feature**: Add support for gRPC, VPC origins, and Anycast IP Lists. Allow LoggingConfig IncludeCookies to be set regardless of whether the LoggingConfig is enabled.
+
 # v1.41.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

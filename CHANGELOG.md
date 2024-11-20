@@ -1,3 +1,47 @@
+# Release (2024-11-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.29.0](service/applicationdiscoveryservice/CHANGELOG.md#v1290-2024-11-20)
+  * **Feature**: Add support to import data from commercially available discovery tools without file manipulation.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.50.0](service/autoscaling/CHANGELOG.md#v1500-2024-11-20)
+  * **Feature**: With this release, customers can prioritize launching instances into ODCRs using targets from ASGs or Launch Templates. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family that meets their needs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.25.0](service/bedrockagentruntime/CHANGELOG.md#v1250-2024-11-20)
+  * **Feature**: Releasing new Prompt Optimization to enhance your prompts for improved performance
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.42.0](service/cloudfront/CHANGELOG.md#v1420-2024-11-20)
+  * **Feature**: Add support for gRPC, VPC origins, and Anycast IP Lists. Allow LoggingConfig IncludeCookies to be set regardless of whether the LoggingConfig is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.40.0](service/computeoptimizer/CHANGELOG.md#v1400-2024-11-20)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon Aurora database instances. It also enables Compute Optimizer to identify idle Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services running on Fargate, and Amazon RDS databases.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.20.0](service/controltower/CHANGELOG.md#v1200-2024-11-20)
+  * **Feature**: Adds support for child enabled baselines which allow you to see the enabled baseline status for individual accounts.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.11.0](service/costoptimizationhub/CHANGELOG.md#v1110-2024-11-20)
+  * **Feature**: This release adds action type "Delete" to the GetRecommendation, ListRecommendations and ListRecommendationSummaries APIs to support new EBS and ECS recommendations with action type "Delete".
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.24.0](service/datazone/CHANGELOG.md#v1240-2024-11-20)
+  * **Feature**: This release supports Metadata Enforcement Rule feature for Create Subscription Request action.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.192.0](service/ec2/CHANGELOG.md#v11920-2024-11-20)
+  * **Feature**: With this release, customers can express their desire to launch instances only in an ODCR or ODCR group rather than OnDemand capacity. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.52.0](service/ecs/CHANGELOG.md#v1520-2024-11-20)
+  * **Feature**: This release adds support for the Availability Zone rebalancing feature on Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.42.0](service/elasticloadbalancingv2/CHANGELOG.md#v1420-2024-11-20)
+  * **Feature**: This release adds support for configuring Load balancer Capacity Unit reservations
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.67.0](service/lambda/CHANGELOG.md#v1670-2024-11-20)
+  * **Feature**: Add Node 22.x (node22.x) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.63.0](service/mediaconvert/CHANGELOG.md#v1630-2024-11-20)
+  * **Feature**: This release adds the ability to reconfigure concurrent job settings for existing queues and create queues with custom concurrent job settings.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.20.0](service/mediapackagev2/CHANGELOG.md#v1200-2024-11-20)
+  * **Feature**: MediaPackage v2 now supports the Media Quality Confidence Score (MQCS) published from MediaLive. Customers can control input switching based on the MQCS and publishing HTTP Headers for the MQCS via the API.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.27.0](service/omics/CHANGELOG.md#v1270-2024-11-20)
+  * **Feature**: Enabling call caching feature that allows customers to reuse previously computed results from a set of completed tasks in a new workflow run.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.21.0](service/rbin/CHANGELOG.md#v1210-2024-11-20)
+  * **Feature**: This release adds support for exclusion tags for Recycle Bin, which allows you to identify resources that are to be excluded, or ignored, by a Region-level retention rule.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.91.0](service/rds/CHANGELOG.md#v1910-2024-11-20)
+  * **Feature**: This release adds support for scale storage on the DB instance using a Blue/Green Deployment.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.29.0](service/timestreamquery/CHANGELOG.md#v1290-2024-11-20)
+  * **Feature**: This release adds support for Provisioning Timestream Compute Units (TCUs), a new feature that allows provisioning dedicated compute resources for your queries, providing predictable and cost-effective query performance.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.50.0](service/workspaces/CHANGELOG.md#v1500-2024-11-20)
+  * **Feature**: Added support for Rocky Linux 8 on Amazon WorkSpaces Personal.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.25.0](service/workspacesweb/CHANGELOG.md#v1250-2024-11-20)
+  * **Feature**: Added data protection settings with support for inline data redaction.
+
 # Release (2024-11-19)
 
 ## Module Highlights

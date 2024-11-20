@@ -7,12 +7,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.27.6
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.33.6
-	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.28.6
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/athena v1.48.4
 	github.com/aws/aws-sdk-go-v2/service/batch v1.48.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.56.0
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.41.1
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.45.1
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.43.1
@@ -29,14 +29,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.37.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.191.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.192.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.6
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.51.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.28.5
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.41.2
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.32.6
 	github.com/aws/aws-sdk-go-v2/service/emr v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.35.6
@@ -50,13 +50,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.60.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.6
 	github.com/aws/aws-sdk-go-v2/service/kms v1.37.6
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.66.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.67.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.42.6
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.24.6
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.35.5
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/polly v1.45.6
-	github.com/aws/aws-sdk-go-v2/service/rds v1.90.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.91.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.52.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.7
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.2
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.6
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.55.5
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.49.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.50.0
 	github.com/aws/smithy-go v1.22.1
 )
 

@@ -1,8 +1,0 @@
-{
-    "id": "968d4fc2-474c-408a-b008-bb2aff20e8ae",
-    "type": "feature",
-    "description": "Added data protection settings with support for inline data redaction.",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}

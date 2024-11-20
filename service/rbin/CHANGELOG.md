@@ -1,3 +1,7 @@
+# v1.21.0 (2024-11-20)
+
+* **Feature**: This release adds support for exclusion tags for Recycle Bin, which allows you to identify resources that are to be excluded, or ignored, by a Region-level retention rule.
+
 # v1.20.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

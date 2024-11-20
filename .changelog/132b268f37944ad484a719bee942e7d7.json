@@ -1,8 +1,0 @@
-{
-    "id": "132b268f-3794-4ad4-84a7-19bee942e7d7",
-    "type": "feature",
-    "description": "This release adds the ability to reconfigure concurrent job settings for existing queues and create queues with custom concurrent job settings.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}
