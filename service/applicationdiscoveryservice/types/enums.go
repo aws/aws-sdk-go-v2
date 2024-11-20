@@ -223,6 +223,29 @@ func (ExportStatus) Values() []ExportStatus {
 	}
 }
 
+type FileClassification string
+
+// Enum values for FileClassification
+const (
+	FileClassificationModelizeitExport FileClassification = "MODELIZEIT_EXPORT"
+	FileClassificationRvtoolsExport    FileClassification = "RVTOOLS_EXPORT"
+	FileClassificationVmwareNsxExport  FileClassification = "VMWARE_NSX_EXPORT"
+	FileClassificationImportTemplate   FileClassification = "IMPORT_TEMPLATE"
+)
+
+// Values returns all known values for FileClassification. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FileClassification) Values() []FileClassification {
+	return []FileClassification{
+		"MODELIZEIT_EXPORT",
+		"RVTOOLS_EXPORT",
+		"VMWARE_NSX_EXPORT",
+		"IMPORT_TEMPLATE",
+	}
+}
+
 type ImportStatus string
 
 // Enum values for ImportStatus
@@ -233,6 +256,7 @@ const (
 	ImportStatusImportFailed                    ImportStatus = "IMPORT_FAILED"
 	ImportStatusImportFailedServerLimitExceeded ImportStatus = "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"
 	ImportStatusImportFailedRecordLimitExceeded ImportStatus = "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"
+	ImportStatusImportFailedUnsupportedFileType ImportStatus = "IMPORT_FAILED_UNSUPPORTED_FILE_TYPE"
 	ImportStatusDeleteInProgress                ImportStatus = "DELETE_IN_PROGRESS"
 	ImportStatusDeleteComplete                  ImportStatus = "DELETE_COMPLETE"
 	ImportStatusDeleteFailed                    ImportStatus = "DELETE_FAILED"
@@ -252,6 +276,7 @@ func (ImportStatus) Values() []ImportStatus {
 		"IMPORT_FAILED",
 		"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED",
 		"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED",
+		"IMPORT_FAILED_UNSUPPORTED_FILE_TYPE",
 		"DELETE_IN_PROGRESS",
 		"DELETE_COMPLETE",
 		"DELETE_FAILED",
@@ -264,9 +289,10 @@ type ImportTaskFilterName string
 
 // Enum values for ImportTaskFilterName
 const (
-	ImportTaskFilterNameImportTaskId ImportTaskFilterName = "IMPORT_TASK_ID"
-	ImportTaskFilterNameStatus       ImportTaskFilterName = "STATUS"
-	ImportTaskFilterNameName         ImportTaskFilterName = "NAME"
+	ImportTaskFilterNameImportTaskId       ImportTaskFilterName = "IMPORT_TASK_ID"
+	ImportTaskFilterNameStatus             ImportTaskFilterName = "STATUS"
+	ImportTaskFilterNameName               ImportTaskFilterName = "NAME"
+	ImportTaskFilterNameFileClassification ImportTaskFilterName = "FILE_CLASSIFICATION"
 )
 
 // Values returns all known values for ImportTaskFilterName. Note that this can be
@@ -278,6 +304,7 @@ func (ImportTaskFilterName) Values() []ImportTaskFilterName {
 		"IMPORT_TASK_ID",
 		"STATUS",
 		"NAME",
+		"FILE_CLASSIFICATION",
 	}
 }
 

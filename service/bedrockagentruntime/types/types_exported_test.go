@@ -132,6 +132,24 @@ func ExampleFlowTraceNodeOutputContent_outputUsage() {
 
 var _ document.Interface
 
+func ExampleInputPrompt_outputUsage() {
+	var union types.InputPrompt
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InputPromptMemberTextPrompt:
+		_ = v.Value // Value is types.TextPrompt
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TextPrompt
+
 func ExampleInvocationInputMember_outputUsage() {
 	var union types.InvocationInputMember
 	// type switches can be used to check the union value
@@ -193,6 +211,46 @@ func ExampleMemory_outputUsage() {
 }
 
 var _ *types.MemorySessionSummary
+
+func ExampleOptimizedPrompt_outputUsage() {
+	var union types.OptimizedPrompt
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OptimizedPromptMemberTextPrompt:
+		_ = v.Value // Value is types.TextPrompt
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TextPrompt
+
+func ExampleOptimizedPromptStream_outputUsage() {
+	var union types.OptimizedPromptStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OptimizedPromptStreamMemberAnalyzePromptEvent:
+		_ = v.Value // Value is types.AnalyzePromptEvent
+
+	case *types.OptimizedPromptStreamMemberOptimizedPromptEvent:
+		_ = v.Value // Value is types.OptimizedPromptEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OptimizedPromptEvent
+var _ *types.AnalyzePromptEvent
 
 func ExampleOrchestrationTrace_outputUsage() {
 	var union types.OrchestrationTrace

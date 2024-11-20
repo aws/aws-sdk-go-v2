@@ -45470,6 +45470,34 @@ func awsEc2query_serializeDocumentBaselineEbsBandwidthMbpsRequest(v *types.Basel
 	return nil
 }
 
+func awsEc2query_serializeDocumentBaselinePerformanceFactors(v *types.BaselinePerformanceFactors, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Cpu != nil {
+		objectKey := object.Key("Cpu")
+		if err := awsEc2query_serializeDocumentCpuPerformanceFactor(v.Cpu, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentBaselinePerformanceFactorsRequest(v *types.BaselinePerformanceFactorsRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Cpu != nil {
+		objectKey := object.Key("Cpu")
+		if err := awsEc2query_serializeDocumentCpuPerformanceFactorRequest(v.Cpu, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentBillingProductList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -46007,6 +46035,34 @@ func awsEc2query_serializeDocumentCpuOptionsRequest(v *types.CpuOptionsRequest, 
 	if v.ThreadsPerCore != nil {
 		objectKey := object.Key("ThreadsPerCore")
 		objectKey.Integer(*v.ThreadsPerCore)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentCpuPerformanceFactor(v *types.CpuPerformanceFactor, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.References != nil {
+		objectKey := object.FlatKey("ReferenceSet")
+		if err := awsEc2query_serializeDocumentPerformanceFactorReferenceSet(v.References, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentCpuPerformanceFactorRequest(v *types.CpuPerformanceFactorRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.References != nil {
+		objectKey := object.FlatKey("Reference")
+		if err := awsEc2query_serializeDocumentPerformanceFactorReferenceSetRequest(v.References, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -48190,6 +48246,13 @@ func awsEc2query_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 		}
 	}
 
+	if v.BaselinePerformanceFactors != nil {
+		objectKey := object.Key("BaselinePerformanceFactors")
+		if err := awsEc2query_serializeDocumentBaselinePerformanceFactors(v.BaselinePerformanceFactors, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if len(v.BurstablePerformance) > 0 {
 		objectKey := object.Key("BurstablePerformance")
 		objectKey.String(string(v.BurstablePerformance))
@@ -48347,6 +48410,13 @@ func awsEc2query_serializeDocumentInstanceRequirementsRequest(v *types.InstanceR
 	if v.BaselineEbsBandwidthMbps != nil {
 		objectKey := object.Key("BaselineEbsBandwidthMbps")
 		if err := awsEc2query_serializeDocumentBaselineEbsBandwidthMbpsRequest(v.BaselineEbsBandwidthMbps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.BaselinePerformanceFactors != nil {
+		objectKey := object.Key("BaselinePerformanceFactors")
+		if err := awsEc2query_serializeDocumentBaselinePerformanceFactorsRequest(v.BaselinePerformanceFactors, objectKey); err != nil {
 			return err
 		}
 	}
@@ -50884,6 +50954,60 @@ func awsEc2query_serializeDocumentPeeringConnectionOptionsRequest(v *types.Peeri
 		objectKey.Boolean(*v.AllowEgressFromLocalVpcToRemoteClassicLink)
 	}
 
+	return nil
+}
+
+func awsEc2query_serializeDocumentPerformanceFactorReference(v *types.PerformanceFactorReference, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InstanceFamily != nil {
+		objectKey := object.Key("InstanceFamily")
+		objectKey.String(*v.InstanceFamily)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentPerformanceFactorReferenceRequest(v *types.PerformanceFactorReferenceRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InstanceFamily != nil {
+		objectKey := object.Key("InstanceFamily")
+		objectKey.String(*v.InstanceFamily)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentPerformanceFactorReferenceSet(v []types.PerformanceFactorReference, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentPerformanceFactorReference(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentPerformanceFactorReferenceSetRequest(v []types.PerformanceFactorReferenceRequest, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentPerformanceFactorReferenceRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

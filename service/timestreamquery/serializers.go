@@ -931,6 +931,25 @@ func (m *awsAwsjson10_serializeOpUpdateScheduledQuery) HandleSerialize(ctx conte
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentAccountSettingsNotificationConfiguration(v *types.AccountSettingsNotificationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.SnsConfiguration != nil {
+		ok := object.Key("SnsConfiguration")
+		if err := awsAwsjson10_serializeDocumentSnsConfiguration(v.SnsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDimensionMapping(v *types.DimensionMapping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1083,6 +1102,44 @@ func awsAwsjson10_serializeDocumentNotificationConfiguration(v *types.Notificati
 	if v.SnsConfiguration != nil {
 		ok := object.Key("SnsConfiguration")
 		if err := awsAwsjson10_serializeDocumentSnsConfiguration(v.SnsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProvisionedCapacityRequest(v *types.ProvisionedCapacityRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NotificationConfiguration != nil {
+		ok := object.Key("NotificationConfiguration")
+		if err := awsAwsjson10_serializeDocumentAccountSettingsNotificationConfiguration(v.NotificationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetQueryTCU != nil {
+		ok := object.Key("TargetQueryTCU")
+		ok.Integer(*v.TargetQueryTCU)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentQueryComputeRequest(v *types.QueryComputeRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComputeMode) > 0 {
+		ok := object.Key("ComputeMode")
+		ok.String(string(v.ComputeMode))
+	}
+
+	if v.ProvisionedCapacity != nil {
+		ok := object.Key("ProvisionedCapacity")
+		if err := awsAwsjson10_serializeDocumentProvisionedCapacityRequest(v.ProvisionedCapacity, ok); err != nil {
 			return err
 		}
 	}
@@ -1544,6 +1601,13 @@ func awsAwsjson10_serializeOpDocumentUpdateAccountSettingsInput(v *UpdateAccount
 	if v.MaxQueryTCU != nil {
 		ok := object.Key("MaxQueryTCU")
 		ok.Integer(*v.MaxQueryTCU)
+	}
+
+	if v.QueryCompute != nil {
+		ok := object.Key("QueryCompute")
+		if err := awsAwsjson10_serializeDocumentQueryComputeRequest(v.QueryCompute, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.QueryPricingModel) > 0 {

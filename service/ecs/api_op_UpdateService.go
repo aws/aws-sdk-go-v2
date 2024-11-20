@@ -160,6 +160,14 @@ type UpdateServiceInput struct {
 	// This member is required.
 	Service *string
 
+	// Indicates whether to use Availability Zone rebalancing for the service.
+	//
+	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
+	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing
+
 	// The capacity provider strategy to update the service to use.
 	//
 	// if the service uses the default capacity provider strategy for the cluster, the

@@ -39,6 +39,9 @@ type UpdateApplicationInput struct {
 	// New name of the application to be updated.
 	Name *string
 
+	// The new migration wave of the application that you want to update.
+	Wave *string
+
 	noSmithyDocumentSerde
 }
 

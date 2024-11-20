@@ -1,0 +1,8 @@
+{
+    "id": "182d1e6b-4e1b-4889-bdf0-6bb2ab5c4b9a",
+    "type": "feature",
+    "description": "This release adds support for configuring Load balancer Capacity Unit reservations",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

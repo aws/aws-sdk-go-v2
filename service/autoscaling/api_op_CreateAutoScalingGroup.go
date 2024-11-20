@@ -100,6 +100,9 @@ type CreateAutoScalingGroupInput struct {
 	// [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
 	CapacityRebalance *bool
 
+	//  The capacity reservation specification for the Auto Scaling group.
+	CapacityReservationSpecification *types.CapacityReservationSpecification
+
 	// Reserved.
 	Context *string
 

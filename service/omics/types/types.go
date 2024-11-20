@@ -1103,6 +1103,33 @@ type ReferenceStoreFilter struct {
 	noSmithyDocumentSerde
 }
 
+// List entry for one run cache.
+type RunCacheListItem struct {
+
+	// Unique resource identifier for the run cache.
+	Arn *string
+
+	// Default cache behavior for the run cache.
+	CacheBehavior CacheBehavior
+
+	// The S3 uri for the run cache data.
+	CacheS3Uri *string
+
+	// The time that this run cache was created (an ISO 8601 formatted string).
+	CreationTime *time.Time
+
+	// The identifier for this run cache.
+	Id *string
+
+	// The name of the run cache.
+	Name *string
+
+	// The run cache status.
+	Status RunCacheStatus
+
+	noSmithyDocumentSerde
+}
+
 // A run group.
 type RunGroupListItem struct {
 
@@ -1425,6 +1452,13 @@ func (*StoreOptionsMemberTsvStoreOptions) isStoreOptions() {}
 
 // A workflow run task.
 type TaskListItem struct {
+
+	// Set to true if AWS HealthOmics found a matching entry in the run cache for this
+	// task.
+	CacheHit *bool
+
+	// The S3 URI of the cache location.
+	CacheS3Uri *string
 
 	// The task's CPU count.
 	Cpus *int32

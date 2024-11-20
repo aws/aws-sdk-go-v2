@@ -1,0 +1,8 @@
+{
+    "id": "c2b6ac0c-b99a-4e6d-974c-ce450e18de93",
+    "type": "feature",
+    "description": "With this release, customers can express their desire to launch instances only in an ODCR or ODCR group rather than OnDemand capacity. Customers can express their baseline instances' CPU-performance in attribute-based Instance Requirements configuration by referencing an instance family.",
+    "modules": [
+        "service/ec2"
+    ]
+}

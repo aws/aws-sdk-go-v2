@@ -858,6 +858,42 @@ type BaselineEbsBandwidthMbpsRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The baseline performance to consider, using an instance family as a baseline
+// reference. The instance family establishes the lowest acceptable level of
+// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+// there is no guarantee that the selected instance types will always exceed the
+// baseline for every application.
+//
+// Currently, this parameter only supports CPU performance as a baseline
+// performance factor. For example, specifying c6i would use the CPU performance
+// of the c6i family as the baseline reference.
+type BaselinePerformanceFactors struct {
+
+	// The CPU performance to consider, using an instance family as the baseline
+	// reference.
+	Cpu *CpuPerformanceFactor
+
+	noSmithyDocumentSerde
+}
+
+// The baseline performance to consider, using an instance family as a baseline
+// reference. The instance family establishes the lowest acceptable level of
+// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+// there is no guarantee that the selected instance types will always exceed the
+// baseline for every application.
+//
+// Currently, this parameter only supports CPU performance as a baseline
+// performance factor. For example, specifying c6i would use the CPU performance
+// of the c6i family as the baseline reference.
+type BaselinePerformanceFactorsRequest struct {
+
+	// The CPU performance to consider, using an instance family as the baseline
+	// reference.
+	Cpu *CpuPerformanceFactorRequest
+
+	noSmithyDocumentSerde
+}
+
 type BlobAttributeValue struct {
 	Value []byte
 
@@ -1530,24 +1566,30 @@ type CapacityReservationOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an instance's Capacity Reservation targeting option. You can specify
-// only one parameter at a time. If you specify CapacityReservationPreference and
-// CapacityReservationTarget , the request fails.
+// Describes an instance's Capacity Reservation targeting option.
 //
 // Use the CapacityReservationPreference parameter to configure the instance to
-// run as an On-Demand Instance or to run in any open Capacity Reservation that
-// has matching attributes (instance type, platform, Availability Zone). Use the
-// CapacityReservationTarget parameter to explicitly target a specific Capacity
-// Reservation or a Capacity Reservation group.
+// run as an On-Demand Instance, to run in any open Capacity Reservation that has
+// matching attributes, or to run only in a Capacity Reservation or Capacity
+// Reservation group. Use the CapacityReservationTarget parameter to explicitly
+// target a specific Capacity Reservation or a Capacity Reservation group.
+//
+// You can only specify CapacityReservationPreference and CapacityReservationTarget
+// if the CapacityReservationPreference is capacity-reservations-only .
 type CapacityReservationSpecification struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
 	//
-	//   - open - The instance can run in any open Capacity Reservation that has
-	//   matching attributes (instance type, platform, Availability Zone).
+	//   - capacity-reservations-only - The instance will only run in a Capacity
+	//   Reservation or Capacity Reservation group. If capacity isn't available, the
+	//   instance will fail to launch.
 	//
-	//   - none - The instance avoids running in a Capacity Reservation even if one is
+	//   - open - The instance can run in any open Capacity Reservation that has
+	//   matching attributes (instance type, platform, Availability Zone, and tenancy).
+	//   If capacity isn't available, the instance runs as an On-Demand Instance.
+	//
+	//   - none - The instance doesn't run in a Capacity Reservation even if one is
 	//   available. The instance runs as an On-Demand Instance.
 	CapacityReservationPreference CapacityReservationPreference
 
@@ -2440,6 +2482,36 @@ type CpuOptionsRequest struct {
 	// The number of threads per CPU core. To disable multithreading for the instance,
 	// specify a value of 1 . Otherwise, specify the default value of 2 .
 	ThreadsPerCore *int32
+
+	noSmithyDocumentSerde
+}
+
+// The CPU performance to consider, using an instance family as the baseline
+// reference.
+type CpuPerformanceFactor struct {
+
+	// Specify an instance family to use as the baseline reference for CPU
+	// performance. All instance types that match your specified attributes will be
+	// compared against the CPU performance of the referenced instance family,
+	// regardless of CPU manufacturer or architecture differences.
+	//
+	// Currently, only one instance family can be specified in the list.
+	References []PerformanceFactorReference
+
+	noSmithyDocumentSerde
+}
+
+// The CPU performance to consider, using an instance family as the baseline
+// reference.
+type CpuPerformanceFactorRequest struct {
+
+	// Specify an instance family to use as the baseline reference for CPU
+	// performance. All instance types that match your specified attributes will be
+	// compared against the CPU performance of the referenced instance family,
+	// regardless of CPU manufacturer or architecture differences.
+	//
+	// Currently, only one instance family can be specified in the list.
+	References []PerformanceFactorReferenceRequest
 
 	noSmithyDocumentSerde
 }
@@ -7483,6 +7555,17 @@ type InstanceRequirements struct {
 	// [Amazon EBS–optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 	BaselineEbsBandwidthMbps *BaselineEbsBandwidthMbps
 
+	// The baseline performance to consider, using an instance family as a baseline
+	// reference. The instance family establishes the lowest acceptable level of
+	// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+	// there is no guarantee that the selected instance types will always exceed the
+	// baseline for every application. Currently, this parameter only supports CPU
+	// performance as a baseline performance factor. For more information, see [Performance protection]in the
+	// Amazon EC2 User Guide.
+	//
+	// [Performance protection]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-abis-performance-protection
+	BaselinePerformanceFactors *BaselinePerformanceFactors
+
 	// Indicates whether burstable performance T instance types are included,
 	// excluded, or required. For more information, see [Burstable performance instances].
 	//
@@ -7838,6 +7921,17 @@ type InstanceRequirementsRequest struct {
 	//
 	// [Amazon EBS–optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 	BaselineEbsBandwidthMbps *BaselineEbsBandwidthMbpsRequest
+
+	// The baseline performance to consider, using an instance family as a baseline
+	// reference. The instance family establishes the lowest acceptable level of
+	// performance. Amazon EC2 uses this baseline to guide instance type selection, but
+	// there is no guarantee that the selected instance types will always exceed the
+	// baseline for every application. Currently, this parameter only supports CPU
+	// performance as a baseline performance factor. For more information, see [Performance protection]in the
+	// Amazon EC2 User Guide.
+	//
+	// [Performance protection]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-abis-performance-protection
+	BaselinePerformanceFactors *BaselinePerformanceFactorsRequest
 
 	// Indicates whether burstable performance T instance types are included,
 	// excluded, or required. For more information, see [Burstable performance instances].
@@ -13083,6 +13177,102 @@ type PeeringTgwInfo struct {
 
 	// The ID of the transit gateway.
 	TransitGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify an instance family to use as the baseline reference for CPU
+// performance. All instance types that match your specified attributes will be
+// compared against the CPU performance of the referenced instance family,
+// regardless of CPU manufacturer or architecture.
+//
+// Currently, only one instance family can be specified in the list.
+type PerformanceFactorReference struct {
+
+	// The instance family to use as a baseline reference.
+	//
+	// Ensure that you specify the correct value for the instance family. The instance
+	// family is everything before the period ( . ) in the instance type name. For
+	// example, in the instance type c6i.large , the instance family is c6i , not c6 .
+	// For more information, see [Amazon EC2 instance type naming conventions]in Amazon EC2 Instance Types.
+	//
+	// The following instance families are not supported for performance protection:
+	//
+	//   - c1
+	//
+	//   - g3 | g3s
+	//
+	//   - hpc7g
+	//
+	//   - m1 | m2
+	//
+	//   - mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro
+	//
+	//   - p3dn | p4d | p5
+	//
+	//   - t1
+	//
+	//   - u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb |
+	//   u7in-16tb | u7in-24tb | u7in-32tb
+	//
+	// If you enable performance protection by specifying a supported instance family,
+	// the returned instance types will exclude the above unsupported instance
+	// families.
+	//
+	// If you specify an unsupported instance family as a value for baseline
+	// performance, the API returns an empty response for and an exception for , , ,
+	// and .
+	//
+	// [Amazon EC2 instance type naming conventions]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+	InstanceFamily *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify an instance family to use as the baseline reference for CPU
+// performance. All instance types that match your specified attributes will be
+// compared against the CPU performance of the referenced instance family,
+// regardless of CPU manufacturer or architecture.
+//
+// Currently, only one instance family can be specified in the list.
+type PerformanceFactorReferenceRequest struct {
+
+	// The instance family to use as a baseline reference.
+	//
+	// Ensure that you specify the correct value for the instance family. The instance
+	// family is everything before the period ( . ) in the instance type name. For
+	// example, in the instance type c6i.large , the instance family is c6i , not c6 .
+	// For more information, see [Amazon EC2 instance type naming conventions]in Amazon EC2 Instance Types.
+	//
+	// The following instance families are not supported for performance protection:
+	//
+	//   - c1
+	//
+	//   - g3 | g3s
+	//
+	//   - hpc7g
+	//
+	//   - m1 | m2
+	//
+	//   - mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro
+	//
+	//   - p3dn | p4d | p5
+	//
+	//   - t1
+	//
+	//   - u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb |
+	//   u7in-16tb | u7in-24tb | u7in-32tb
+	//
+	// If you enable performance protection by specifying a supported instance family,
+	// the returned instance types will exclude the above unsupported instance
+	// families.
+	//
+	// If you specify an unsupported instance family as a value for baseline
+	// performance, the API returns an empty response for and an exception for , , ,
+	// and .
+	//
+	// [Amazon EC2 instance type naming conventions]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+	InstanceFamily *string
 
 	noSmithyDocumentSerde
 }

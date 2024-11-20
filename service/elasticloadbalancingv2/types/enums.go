@@ -90,6 +90,30 @@ func (AuthenticateOidcActionConditionalBehaviorEnum) Values() []AuthenticateOidc
 	}
 }
 
+type CapacityReservationStateEnum string
+
+// Enum values for CapacityReservationStateEnum
+const (
+	CapacityReservationStateEnumProvisioned CapacityReservationStateEnum = "provisioned"
+	CapacityReservationStateEnumPending     CapacityReservationStateEnum = "pending"
+	CapacityReservationStateEnumRebalancing CapacityReservationStateEnum = "rebalancing"
+	CapacityReservationStateEnumFailed      CapacityReservationStateEnum = "failed"
+)
+
+// Values returns all known values for CapacityReservationStateEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationStateEnum) Values() []CapacityReservationStateEnum {
+	return []CapacityReservationStateEnum{
+		"provisioned",
+		"pending",
+		"rebalancing",
+		"failed",
+	}
+}
+
 type DescribeTargetHealthInputIncludeEnum string
 
 // Enum values for DescribeTargetHealthInputIncludeEnum

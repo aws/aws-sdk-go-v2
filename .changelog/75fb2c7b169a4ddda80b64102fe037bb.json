@@ -1,0 +1,8 @@
+{
+    "id": "75fb2c7b-169a-4ddd-a80b-64102fe037bb",
+    "type": "feature",
+    "description": "Add Node 22.x (node22.x) support to AWS Lambda",
+    "modules": [
+        "service/lambda"
+    ]
+}

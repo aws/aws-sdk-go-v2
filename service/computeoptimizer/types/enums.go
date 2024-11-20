@@ -145,6 +145,25 @@ func (CustomizableMetricThreshold) Values() []CustomizableMetricThreshold {
 	}
 }
 
+type Dimension string
+
+// Enum values for Dimension
+const (
+	DimensionSavingsValue              Dimension = "SavingsValue"
+	DimensionSavingsValueAfterDiscount Dimension = "SavingsValueAfterDiscount"
+)
+
+// Values returns all known values for Dimension. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Dimension) Values() []Dimension {
+	return []Dimension{
+		"SavingsValue",
+		"SavingsValueAfterDiscount",
+	}
+}
+
 type EBSFilterName string
 
 // Enum values for EBSFilterName
@@ -627,6 +646,61 @@ func (ExportableECSServiceField) Values() []ExportableECSServiceField {
 	}
 }
 
+type ExportableIdleField string
+
+// Enum values for ExportableIdleField
+const (
+	ExportableIdleFieldAccountId                                         ExportableIdleField = "AccountId"
+	ExportableIdleFieldResourceArn                                       ExportableIdleField = "ResourceArn"
+	ExportableIdleFieldResourceId                                        ExportableIdleField = "ResourceId"
+	ExportableIdleFieldResourceType                                      ExportableIdleField = "ResourceType"
+	ExportableIdleFieldLastRefreshTimestamp                              ExportableIdleField = "LastRefreshTimestamp"
+	ExportableIdleFieldLookbackPeriodInDays                              ExportableIdleField = "LookbackPeriodInDays"
+	ExportableIdleFieldSavingsOpportunity                                ExportableIdleField = "SavingsOpportunity"
+	ExportableIdleFieldSavingsOpportunityAfterDiscount                   ExportableIdleField = "SavingsOpportunityAfterDiscount"
+	ExportableIdleFieldUtilizationMetricsCpuMaximum                      ExportableIdleField = "UtilizationMetricsCpuMaximum"
+	ExportableIdleFieldUtilizationMetricsMemoryMaximum                   ExportableIdleField = "UtilizationMetricsMemoryMaximum"
+	ExportableIdleFieldUtilizationMetricsNetworkOutBytesPerSecondMaximum ExportableIdleField = "UtilizationMetricsNetworkOutBytesPerSecondMaximum"
+	ExportableIdleFieldUtilizationMetricsNetworkInBytesPerSecondMaximum  ExportableIdleField = "UtilizationMetricsNetworkInBytesPerSecondMaximum"
+	ExportableIdleFieldUtilizationMetricsDatabaseConnectionsMaximum      ExportableIdleField = "UtilizationMetricsDatabaseConnectionsMaximum"
+	ExportableIdleFieldUtilizationMetricsEbsVolumeReadIopsMaximum        ExportableIdleField = "UtilizationMetricsEBSVolumeReadIOPSMaximum"
+	ExportableIdleFieldUtilizationMetricsEbsVolumeWriteIopsMaximum       ExportableIdleField = "UtilizationMetricsEBSVolumeWriteIOPSMaximum"
+	ExportableIdleFieldUtilizationMetricsVolumeReadOpsPerSecondMaximum   ExportableIdleField = "UtilizationMetricsVolumeReadOpsPerSecondMaximum"
+	ExportableIdleFieldUtilizationMetricsVolumeWriteOpsPerSecondMaximum  ExportableIdleField = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
+	ExportableIdleFieldFinding                                           ExportableIdleField = "Finding"
+	ExportableIdleFieldFindingDescription                                ExportableIdleField = "FindingDescription"
+	ExportableIdleFieldTags                                              ExportableIdleField = "Tags"
+)
+
+// Values returns all known values for ExportableIdleField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableIdleField) Values() []ExportableIdleField {
+	return []ExportableIdleField{
+		"AccountId",
+		"ResourceArn",
+		"ResourceId",
+		"ResourceType",
+		"LastRefreshTimestamp",
+		"LookbackPeriodInDays",
+		"SavingsOpportunity",
+		"SavingsOpportunityAfterDiscount",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkInBytesPerSecondMaximum",
+		"UtilizationMetricsDatabaseConnectionsMaximum",
+		"UtilizationMetricsEBSVolumeReadIOPSMaximum",
+		"UtilizationMetricsEBSVolumeWriteIOPSMaximum",
+		"UtilizationMetricsVolumeReadOpsPerSecondMaximum",
+		"UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
+		"Finding",
+		"FindingDescription",
+		"Tags",
+	}
+}
+
 type ExportableInstanceField string
 
 // Enum values for ExportableInstanceField
@@ -938,6 +1012,7 @@ const (
 	ExportableRDSDBFieldCurrentInstanceOnDemandHourlyPrice                                         ExportableRDSDBField = "CurrentInstanceOnDemandHourlyPrice"
 	ExportableRDSDBFieldCurrentStorageOnDemandMonthlyPrice                                         ExportableRDSDBField = "CurrentStorageOnDemandMonthlyPrice"
 	ExportableRDSDBFieldLookbackPeriodInDays                                                       ExportableRDSDBField = "LookbackPeriodInDays"
+	ExportableRDSDBFieldCurrentInstancePerformanceRisk                                             ExportableRDSDBField = "CurrentInstancePerformanceRisk"
 	ExportableRDSDBFieldUtilizationMetricsCpuMaximum                                               ExportableRDSDBField = "UtilizationMetricsCpuMaximum"
 	ExportableRDSDBFieldUtilizationMetricsMemoryMaximum                                            ExportableRDSDBField = "UtilizationMetricsMemoryMaximum"
 	ExportableRDSDBFieldUtilizationMetricsEbsVolumeStorageSpaceUtilizationMaximum                  ExportableRDSDBField = "UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum"
@@ -948,6 +1023,14 @@ const (
 	ExportableRDSDBFieldUtilizationMetricsEbsVolumeReadThroughputMaximum                           ExportableRDSDBField = "UtilizationMetricsEBSVolumeReadThroughputMaximum"
 	ExportableRDSDBFieldUtilizationMetricsEbsVolumeWriteThroughputMaximum                          ExportableRDSDBField = "UtilizationMetricsEBSVolumeWriteThroughputMaximum"
 	ExportableRDSDBFieldUtilizationMetricsDatabaseConnectionsMaximum                               ExportableRDSDBField = "UtilizationMetricsDatabaseConnectionsMaximum"
+	ExportableRDSDBFieldUtilizationMetricsStorageNetworkReceiveThroughputMaximum                   ExportableRDSDBField = "UtilizationMetricsStorageNetworkReceiveThroughputMaximum"
+	ExportableRDSDBFieldUtilizationMetricsStorageNetworkTransmitThroughputMaximum                  ExportableRDSDBField = "UtilizationMetricsStorageNetworkTransmitThroughputMaximum"
+	ExportableRDSDBFieldUtilizationMetricsAuroraMemoryHealthStateMaximum                           ExportableRDSDBField = "UtilizationMetricsAuroraMemoryHealthStateMaximum"
+	ExportableRDSDBFieldUtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum                   ExportableRDSDBField = "UtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum"
+	ExportableRDSDBFieldUtilizationMetricsAuroraMemoryNumKillConnTotalMaximum                      ExportableRDSDBField = "UtilizationMetricsAuroraMemoryNumKillConnTotalMaximum"
+	ExportableRDSDBFieldUtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum                     ExportableRDSDBField = "UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum"
+	ExportableRDSDBFieldUtilizationMetricsReadIopsEphemeralStorageMaximum                          ExportableRDSDBField = "UtilizationMetricsReadIOPSEphemeralStorageMaximum"
+	ExportableRDSDBFieldUtilizationMetricsWriteIopsEphemeralStorageMaximum                         ExportableRDSDBField = "UtilizationMetricsWriteIOPSEphemeralStorageMaximum"
 	ExportableRDSDBFieldInstanceFinding                                                            ExportableRDSDBField = "InstanceFinding"
 	ExportableRDSDBFieldInstanceFindingReasonCodes                                                 ExportableRDSDBField = "InstanceFindingReasonCodes"
 	ExportableRDSDBFieldStorageFinding                                                             ExportableRDSDBField = "StorageFinding"
@@ -982,6 +1065,8 @@ const (
 	ExportableRDSDBFieldEffectiveRecommendationPreferencesSavingsEstimationMode                    ExportableRDSDBField = "EffectiveRecommendationPreferencesSavingsEstimationMode"
 	ExportableRDSDBFieldLastRefreshTimestamp                                                       ExportableRDSDBField = "LastRefreshTimestamp"
 	ExportableRDSDBFieldTags                                                                       ExportableRDSDBField = "Tags"
+	ExportableRDSDBFieldDbClusterIdentifier                                                        ExportableRDSDBField = "DBClusterIdentifier"
+	ExportableRDSDBFieldPromotionTier                                                              ExportableRDSDBField = "PromotionTier"
 )
 
 // Values returns all known values for ExportableRDSDBField. Note that this can be
@@ -1005,6 +1090,7 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"CurrentInstanceOnDemandHourlyPrice",
 		"CurrentStorageOnDemandMonthlyPrice",
 		"LookbackPeriodInDays",
+		"CurrentInstancePerformanceRisk",
 		"UtilizationMetricsCpuMaximum",
 		"UtilizationMetricsMemoryMaximum",
 		"UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum",
@@ -1015,6 +1101,14 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"UtilizationMetricsEBSVolumeReadThroughputMaximum",
 		"UtilizationMetricsEBSVolumeWriteThroughputMaximum",
 		"UtilizationMetricsDatabaseConnectionsMaximum",
+		"UtilizationMetricsStorageNetworkReceiveThroughputMaximum",
+		"UtilizationMetricsStorageNetworkTransmitThroughputMaximum",
+		"UtilizationMetricsAuroraMemoryHealthStateMaximum",
+		"UtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum",
+		"UtilizationMetricsAuroraMemoryNumKillConnTotalMaximum",
+		"UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum",
+		"UtilizationMetricsReadIOPSEphemeralStorageMaximum",
+		"UtilizationMetricsWriteIOPSEphemeralStorageMaximum",
 		"InstanceFinding",
 		"InstanceFindingReasonCodes",
 		"StorageFinding",
@@ -1049,6 +1143,8 @@ func (ExportableRDSDBField) Values() []ExportableRDSDBField {
 		"EffectiveRecommendationPreferencesSavingsEstimationMode",
 		"LastRefreshTimestamp",
 		"Tags",
+		"DBClusterIdentifier",
+		"PromotionTier",
 	}
 }
 
@@ -1293,6 +1389,104 @@ func (Idle) Values() []Idle {
 	return []Idle{
 		"True",
 		"False",
+	}
+}
+
+type IdleFinding string
+
+// Enum values for IdleFinding
+const (
+	IdleFindingIdle       IdleFinding = "Idle"
+	IdleFindingUnattached IdleFinding = "Unattached"
+)
+
+// Values returns all known values for IdleFinding. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdleFinding) Values() []IdleFinding {
+	return []IdleFinding{
+		"Idle",
+		"Unattached",
+	}
+}
+
+type IdleMetricName string
+
+// Enum values for IdleMetricName
+const (
+	IdleMetricNameCpu                      IdleMetricName = "CPU"
+	IdleMetricNameMemory                   IdleMetricName = "Memory"
+	IdleMetricNameNetworkOutBytesPerSecond IdleMetricName = "NetworkOutBytesPerSecond"
+	IdleMetricNameNetworkInBytesPerSecond  IdleMetricName = "NetworkInBytesPerSecond"
+	IdleMetricNameDatabaseConnections      IdleMetricName = "DatabaseConnections"
+	IdleMetricNameEbsVolumeReadIops        IdleMetricName = "EBSVolumeReadIOPS"
+	IdleMetricNameEbsVolumeWriteIops       IdleMetricName = "EBSVolumeWriteIOPS"
+	IdleMetricNameVolumeReadOpsPerSecond   IdleMetricName = "VolumeReadOpsPerSecond"
+	IdleMetricNameVolumeWriteOpsPerSecond  IdleMetricName = "VolumeWriteOpsPerSecond"
+)
+
+// Values returns all known values for IdleMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdleMetricName) Values() []IdleMetricName {
+	return []IdleMetricName{
+		"CPU",
+		"Memory",
+		"NetworkOutBytesPerSecond",
+		"NetworkInBytesPerSecond",
+		"DatabaseConnections",
+		"EBSVolumeReadIOPS",
+		"EBSVolumeWriteIOPS",
+		"VolumeReadOpsPerSecond",
+		"VolumeWriteOpsPerSecond",
+	}
+}
+
+type IdleRecommendationFilterName string
+
+// Enum values for IdleRecommendationFilterName
+const (
+	IdleRecommendationFilterNameFinding      IdleRecommendationFilterName = "Finding"
+	IdleRecommendationFilterNameResourceType IdleRecommendationFilterName = "ResourceType"
+)
+
+// Values returns all known values for IdleRecommendationFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdleRecommendationFilterName) Values() []IdleRecommendationFilterName {
+	return []IdleRecommendationFilterName{
+		"Finding",
+		"ResourceType",
+	}
+}
+
+type IdleRecommendationResourceType string
+
+// Enum values for IdleRecommendationResourceType
+const (
+	IdleRecommendationResourceTypeEc2Instance      IdleRecommendationResourceType = "EC2Instance"
+	IdleRecommendationResourceTypeAutoScalingGroup IdleRecommendationResourceType = "AutoScalingGroup"
+	IdleRecommendationResourceTypeEbsVolume        IdleRecommendationResourceType = "EBSVolume"
+	IdleRecommendationResourceTypeEcsService       IdleRecommendationResourceType = "ECSService"
+	IdleRecommendationResourceTypeRdsDbInstance    IdleRecommendationResourceType = "RDSDBInstance"
+)
+
+// Values returns all known values for IdleRecommendationResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdleRecommendationResourceType) Values() []IdleRecommendationResourceType {
+	return []IdleRecommendationResourceType{
+		"EC2Instance",
+		"AutoScalingGroup",
+		"EBSVolume",
+		"ECSService",
+		"RDSDBInstance",
 	}
 }
 
@@ -1934,6 +2128,25 @@ func (MigrationEffort) Values() []MigrationEffort {
 	}
 }
 
+type Order string
+
+// Enum values for Order
+const (
+	OrderAsc  Order = "Asc"
+	OrderDesc Order = "Desc"
+)
+
+// Values returns all known values for Order. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Order) Values() []Order {
+	return []Order{
+		"Asc",
+		"Desc",
+	}
+}
+
 type PlatformDifference string
 
 // Enum values for PlatformDifference
@@ -1978,6 +2191,30 @@ func (PreferredResourceName) Values() []PreferredResourceName {
 	}
 }
 
+type RDSCurrentInstancePerformanceRisk string
+
+// Enum values for RDSCurrentInstancePerformanceRisk
+const (
+	RDSCurrentInstancePerformanceRiskVeryLow RDSCurrentInstancePerformanceRisk = "VeryLow"
+	RDSCurrentInstancePerformanceRiskLow     RDSCurrentInstancePerformanceRisk = "Low"
+	RDSCurrentInstancePerformanceRiskMedium  RDSCurrentInstancePerformanceRisk = "Medium"
+	RDSCurrentInstancePerformanceRiskHigh    RDSCurrentInstancePerformanceRisk = "High"
+)
+
+// Values returns all known values for RDSCurrentInstancePerformanceRisk. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RDSCurrentInstancePerformanceRisk) Values() []RDSCurrentInstancePerformanceRisk {
+	return []RDSCurrentInstancePerformanceRisk{
+		"VeryLow",
+		"Low",
+		"Medium",
+		"High",
+	}
+}
+
 type RDSDBMetricName string
 
 // Enum values for RDSDBMetricName
@@ -1992,6 +2229,14 @@ const (
 	RDSDBMetricNameEbsVolumeReadThroughput          RDSDBMetricName = "EBSVolumeReadThroughput"
 	RDSDBMetricNameEbsVolumeWriteThroughput         RDSDBMetricName = "EBSVolumeWriteThroughput"
 	RDSDBMetricNameDatabaseConnections              RDSDBMetricName = "DatabaseConnections"
+	RDSDBMetricNameStorageNetworkReceiveThroughput  RDSDBMetricName = "StorageNetworkReceiveThroughput"
+	RDSDBMetricNameStorageNetworkTransmitThroughput RDSDBMetricName = "StorageNetworkTransmitThroughput"
+	RDSDBMetricNameAuroraMemoryHealthState          RDSDBMetricName = "AuroraMemoryHealthState"
+	RDSDBMetricNameAuroraMemoryNumDeclinedSql       RDSDBMetricName = "AuroraMemoryNumDeclinedSql"
+	RDSDBMetricNameAuroraMemoryNumKillConnTotal     RDSDBMetricName = "AuroraMemoryNumKillConnTotal"
+	RDSDBMetricNameAuroraMemoryNumKillQueryTotal    RDSDBMetricName = "AuroraMemoryNumKillQueryTotal"
+	RDSDBMetricNameReadIopsEphemeralStorage         RDSDBMetricName = "ReadIOPSEphemeralStorage"
+	RDSDBMetricNameWriteIopsEphemeralStorage        RDSDBMetricName = "WriteIOPSEphemeralStorage"
 )
 
 // Values returns all known values for RDSDBMetricName. Note that this can be
@@ -2010,6 +2255,14 @@ func (RDSDBMetricName) Values() []RDSDBMetricName {
 		"EBSVolumeReadThroughput",
 		"EBSVolumeWriteThroughput",
 		"DatabaseConnections",
+		"StorageNetworkReceiveThroughput",
+		"StorageNetworkTransmitThroughput",
+		"AuroraMemoryHealthState",
+		"AuroraMemoryNumDeclinedSql",
+		"AuroraMemoryNumKillConnTotal",
+		"AuroraMemoryNumKillQueryTotal",
+		"ReadIOPSEphemeralStorage",
+		"WriteIOPSEphemeralStorage",
 	}
 }
 
@@ -2085,15 +2338,20 @@ type RDSInstanceFindingReasonCode string
 
 // Enum values for RDSInstanceFindingReasonCode
 const (
-	RDSInstanceFindingReasonCodeCpuOverProvisioned                    RDSInstanceFindingReasonCode = "CPUOverprovisioned"
-	RDSInstanceFindingReasonCodeNetworkBandwidthOverProvisioned       RDSInstanceFindingReasonCode = "NetworkBandwidthOverprovisioned"
-	RDSInstanceFindingReasonCodeEbsIopsOverProvisioned                RDSInstanceFindingReasonCode = "EBSIOPSOverprovisioned"
-	RDSInstanceFindingReasonCodeEbsThroughputOverProvisioned          RDSInstanceFindingReasonCode = "EBSThroughputOverprovisioned"
-	RDSInstanceFindingReasonCodeCpuUnderProvisioned                   RDSInstanceFindingReasonCode = "CPUUnderprovisioned"
-	RDSInstanceFindingReasonCodeNetworkBandwidthUnderProvisioned      RDSInstanceFindingReasonCode = "NetworkBandwidthUnderprovisioned"
-	RDSInstanceFindingReasonCodeEbsThroughputUnderProvisioned         RDSInstanceFindingReasonCode = "EBSThroughputUnderprovisioned"
-	RDSInstanceFindingReasonCodeNewGenerationDbInstanceClassAvailable RDSInstanceFindingReasonCode = "NewGenerationDBInstanceClassAvailable"
-	RDSInstanceFindingReasonCodeNewEngineVersionAvailable             RDSInstanceFindingReasonCode = "NewEngineVersionAvailable"
+	RDSInstanceFindingReasonCodeCpuOverProvisioned                       RDSInstanceFindingReasonCode = "CPUOverprovisioned"
+	RDSInstanceFindingReasonCodeNetworkBandwidthOverProvisioned          RDSInstanceFindingReasonCode = "NetworkBandwidthOverprovisioned"
+	RDSInstanceFindingReasonCodeEbsIopsOverProvisioned                   RDSInstanceFindingReasonCode = "EBSIOPSOverprovisioned"
+	RDSInstanceFindingReasonCodeEbsIopsUnderProvisioned                  RDSInstanceFindingReasonCode = "EBSIOPSUnderprovisioned"
+	RDSInstanceFindingReasonCodeEbsThroughputOverProvisioned             RDSInstanceFindingReasonCode = "EBSThroughputOverprovisioned"
+	RDSInstanceFindingReasonCodeCpuUnderProvisioned                      RDSInstanceFindingReasonCode = "CPUUnderprovisioned"
+	RDSInstanceFindingReasonCodeNetworkBandwidthUnderProvisioned         RDSInstanceFindingReasonCode = "NetworkBandwidthUnderprovisioned"
+	RDSInstanceFindingReasonCodeEbsThroughputUnderProvisioned            RDSInstanceFindingReasonCode = "EBSThroughputUnderprovisioned"
+	RDSInstanceFindingReasonCodeNewGenerationDbInstanceClassAvailable    RDSInstanceFindingReasonCode = "NewGenerationDBInstanceClassAvailable"
+	RDSInstanceFindingReasonCodeNewEngineVersionAvailable                RDSInstanceFindingReasonCode = "NewEngineVersionAvailable"
+	RDSInstanceFindingReasonCodeDbClusterWriterUnderProvisioned          RDSInstanceFindingReasonCode = "DBClusterWriterUnderprovisioned"
+	RDSInstanceFindingReasonCodeMemoryUnderProvisioned                   RDSInstanceFindingReasonCode = "MemoryUnderprovisioned"
+	RDSInstanceFindingReasonCodeInstanceStorageReadIopsUnderProvisioned  RDSInstanceFindingReasonCode = "InstanceStorageReadIOPSUnderprovisioned"
+	RDSInstanceFindingReasonCodeInstanceStorageWriteIopsUnderProvisioned RDSInstanceFindingReasonCode = "InstanceStorageWriteIOPSUnderprovisioned"
 )
 
 // Values returns all known values for RDSInstanceFindingReasonCode. Note that
@@ -2106,12 +2364,17 @@ func (RDSInstanceFindingReasonCode) Values() []RDSInstanceFindingReasonCode {
 		"CPUOverprovisioned",
 		"NetworkBandwidthOverprovisioned",
 		"EBSIOPSOverprovisioned",
+		"EBSIOPSUnderprovisioned",
 		"EBSThroughputOverprovisioned",
 		"CPUUnderprovisioned",
 		"NetworkBandwidthUnderprovisioned",
 		"EBSThroughputUnderprovisioned",
 		"NewGenerationDBInstanceClassAvailable",
 		"NewEngineVersionAvailable",
+		"DBClusterWriterUnderprovisioned",
+		"MemoryUnderprovisioned",
+		"InstanceStorageReadIOPSUnderprovisioned",
+		"InstanceStorageWriteIOPSUnderprovisioned",
 	}
 }
 
@@ -2254,6 +2517,7 @@ const (
 	ResourceTypeEcsService       ResourceType = "EcsService"
 	ResourceTypeLicense          ResourceType = "License"
 	ResourceTypeRdsDbInstance    ResourceType = "RdsDBInstance"
+	ResourceTypeIdle             ResourceType = "Idle"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -2270,6 +2534,7 @@ func (ResourceType) Values() []ResourceType {
 		"EcsService",
 		"License",
 		"RdsDBInstance",
+		"Idle",
 	}
 }
 

@@ -7,6 +7,22 @@ import (
 	"time"
 )
 
+// Configuration settings for notifications related to account settings.
+type AccountSettingsNotificationConfiguration struct {
+
+	// An Amazon Resource Name (ARN) that grants Timestream permission to publish
+	// notifications. This field is only visible if SNS Topic is provided when updating
+	// the account settings.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Details on SNS that are required to send the notification.
+	SnsConfiguration *SnsConfiguration
+
+	noSmithyDocumentSerde
+}
+
 //	Contains the metadata for query results such as the column names, data types,
 //
 // and other attributes.
@@ -129,6 +145,24 @@ type ExecutionStats struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration object that contains the most recent account settings update,
+// visible only if settings have been updated previously.
+type LastUpdate struct {
+
+	// The status of the last update. Can be either PENDING , FAILED , or SUCCEEDED .
+	Status LastUpdateStatus
+
+	// Error message describing the last account settings update status, visible only
+	// if an error occurred.
+	StatusMessage *string
+
+	// The number of TimeStream Compute Units (TCUs) requested in the last account
+	// settings update.
+	TargetQueryTCU *int32
+
+	noSmithyDocumentSerde
+}
+
 // MixedMeasureMappings are mappings that can be used to ingest data into a
 // mixture of narrow and multi measures in the derived table.
 type MixedMeasureMapping struct {
@@ -202,7 +236,9 @@ type MultiMeasureMappings struct {
 // deleted.
 type NotificationConfiguration struct {
 
-	// Details on SNS configuration.
+	// Details about the Amazon Simple Notification Service (SNS) configuration. This
+	// field is visible only when SNS Topic is provided when updating the account
+	// settings.
 	//
 	// This member is required.
 	SnsConfiguration *SnsConfiguration
@@ -225,6 +261,72 @@ type ParameterMapping struct {
 	//
 	// This member is required.
 	Type *Type
+
+	noSmithyDocumentSerde
+}
+
+// A request to update the provisioned capacity settings for querying data.
+type ProvisionedCapacityRequest struct {
+
+	// The target compute capacity for querying data, specified in Timestream Compute
+	// Units (TCUs).
+	//
+	// This member is required.
+	TargetQueryTCU *int32
+
+	// Configuration settings for notifications related to the provisioned capacity
+	// update.
+	NotificationConfiguration *AccountSettingsNotificationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The response to a request to update the provisioned capacity settings for
+// querying data.
+type ProvisionedCapacityResponse struct {
+
+	// The number of Timestream Compute Units (TCUs) provisioned in the account. This
+	// field is only visible when the compute mode is PROVISIONED .
+	ActiveQueryTCU *int32
+
+	// Information about the last update to the provisioned capacity settings.
+	LastUpdate *LastUpdate
+
+	// An object that contains settings for notifications that are sent whenever the
+	// provisioned capacity settings are modified. This field is only visible when the
+	// compute mode is PROVISIONED .
+	NotificationConfiguration *AccountSettingsNotificationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A request to retrieve or update the compute capacity settings for querying data.
+type QueryComputeRequest struct {
+
+	// The mode in which Timestream Compute Units (TCUs) are allocated and utilized
+	// within an account. Note that in the Asia Pacific (Mumbai) region, the API
+	// operation only recognizes the value PROVISIONED .
+	ComputeMode ComputeMode
+
+	// Configuration object that contains settings for provisioned Timestream Compute
+	// Units (TCUs) in your account.
+	ProvisionedCapacity *ProvisionedCapacityRequest
+
+	noSmithyDocumentSerde
+}
+
+// The response to a request to retrieve or update the compute capacity settings
+// for querying data.
+type QueryComputeResponse struct {
+
+	// The mode in which Timestream Compute Units (TCUs) are allocated and utilized
+	// within an account. Note that in the Asia Pacific (Mumbai) region, the API
+	// operation only recognizes the value PROVISIONED .
+	ComputeMode ComputeMode
+
+	// Configuration object that contains settings for provisioned Timestream Compute
+	// Units (TCUs) in your account.
+	ProvisionedCapacity *ProvisionedCapacityResponse
 
 	noSmithyDocumentSerde
 }

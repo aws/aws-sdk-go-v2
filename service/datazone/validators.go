@@ -530,6 +530,26 @@ func (m *validateOpCreateProjectMembership) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRule struct {
+}
+
+func (*validateOpCreateRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSubscriptionGrant struct {
 }
 
@@ -945,6 +965,26 @@ func (m *validateOpDeleteProjectMembership) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProjectMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRule struct {
+}
+
+func (*validateOpDeleteRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1510,6 +1550,26 @@ func (m *validateOpGetProject) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRule struct {
+}
+
+func (*validateOpGetRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSubscriptionGrant struct {
 }
 
@@ -2005,6 +2065,26 @@ func (m *validateOpListProjects) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListProjectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRules struct {
+}
+
+func (*validateOpListRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2690,6 +2770,26 @@ func (m *validateOpUpdateProject) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRule struct {
+}
+
+func (*validateOpUpdateRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSubscriptionGrantStatus struct {
 }
 
@@ -2874,6 +2974,10 @@ func addOpCreateProjectMembershipValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateProjectMembership{}, middleware.After)
 }
 
+func addOpCreateRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRule{}, middleware.After)
+}
+
 func addOpCreateSubscriptionGrantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSubscriptionGrant{}, middleware.After)
 }
@@ -2956,6 +3060,10 @@ func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteProjectMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProjectMembership{}, middleware.After)
+}
+
+func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRule{}, middleware.After)
 }
 
 func addOpDeleteSubscriptionGrantValidationMiddleware(stack *middleware.Stack) error {
@@ -3070,6 +3178,10 @@ func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
 }
 
+func addOpGetRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRule{}, middleware.After)
+}
+
 func addOpGetSubscriptionGrantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSubscriptionGrant{}, middleware.After)
 }
@@ -3168,6 +3280,10 @@ func addOpListProjectMembershipsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListProjectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProjects{}, middleware.After)
+}
+
+func addOpListRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRules{}, middleware.After)
 }
 
 func addOpListSubscriptionGrantsValidationMiddleware(stack *middleware.Stack) error {
@@ -3304,6 +3420,10 @@ func addOpUpdateGroupProfileValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
+}
+
+func addOpUpdateRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRule{}, middleware.After)
 }
 
 func addOpUpdateSubscriptionGrantStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -3443,6 +3563,21 @@ func validateAssetTargetNames(v []types.AssetTargetNameMap) error {
 	}
 }
 
+func validateAssetTypesForRule(v *types.AssetTypesForRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetTypesForRule"}
+	if len(v.SelectionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataProductItem(v *types.DataProductItem) error {
 	if v == nil {
 		return nil
@@ -3524,6 +3659,21 @@ func validateDomainUnitPolicyGrantPrincipal(v *types.DomainUnitPolicyGrantPrinci
 	invalidParams := smithy.InvalidParamsError{Context: "DomainUnitPolicyGrantPrincipal"}
 	if len(v.DomainUnitDesignation) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainUnitDesignation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDomainUnitTarget(v *types.DomainUnitTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DomainUnitTarget"}
+	if v.DomainUnitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainUnitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3911,6 +4061,58 @@ func validateListingRevisionInput(v *types.ListingRevisionInput) error {
 	}
 }
 
+func validateMetadataFormEnforcementDetail(v *types.MetadataFormEnforcementDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataFormEnforcementDetail"}
+	if v.RequiredMetadataForms != nil {
+		if err := validateRequiredMetadataFormList(v.RequiredMetadataForms); err != nil {
+			invalidParams.AddNested("RequiredMetadataForms", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataFormInputs(v []types.FormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataFormInputs"}
+	for i := range v {
+		if err := validateFormInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataFormReference(v *types.MetadataFormReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataFormReference"}
+	if v.TypeIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeIdentifier"))
+	}
+	if v.TypeRevision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeRevision"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetadataGenerationRunTarget(v *types.MetadataGenerationRunTarget) error {
 	if v == nil {
 		return nil
@@ -4100,6 +4302,21 @@ func validateProjectPolicyGrantPrincipal(v *types.ProjectPolicyGrantPrincipal) e
 	}
 }
 
+func validateProjectsForRule(v *types.ProjectsForRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectsForRule"}
+	if len(v.SelectionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftClusterStorage(v *types.RedshiftClusterStorage) error {
 	if v == nil {
 		return nil
@@ -4271,6 +4488,23 @@ func validateRelationalFilterConfigurations(v []types.RelationalFilterConfigurat
 	}
 }
 
+func validateRequiredMetadataFormList(v []types.MetadataFormReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequiredMetadataFormList"}
+	for i := range v {
+		if err := validateMetadataFormReference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRowFilter(v types.RowFilter) error {
 	if v == nil {
 		return nil
@@ -4402,6 +4636,66 @@ func validateRowFilterList(v []types.RowFilter) error {
 		if err := validateRowFilter(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleDetail(v types.RuleDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleDetail"}
+	switch uv := v.(type) {
+	case *types.RuleDetailMemberMetadataFormEnforcementDetail:
+		if err := validateMetadataFormEnforcementDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[metadataFormEnforcementDetail]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleScope(v *types.RuleScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleScope"}
+	if v.AssetType != nil {
+		if err := validateAssetTypesForRule(v.AssetType); err != nil {
+			invalidParams.AddNested("AssetType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Project != nil {
+		if err := validateProjectsForRule(v.Project); err != nil {
+			invalidParams.AddNested("Project", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleTarget(v types.RuleTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleTarget"}
+	switch uv := v.(type) {
+	case *types.RuleTargetMemberDomainUnitTarget:
+		if err := validateDomainUnitTarget(&uv.Value); err != nil {
+			invalidParams.AddNested("[domainUnitTarget]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5198,6 +5492,48 @@ func validateOpCreateProjectMembershipInput(v *CreateProjectMembershipInput) err
 	}
 }
 
+func validateOpCreateRuleInput(v *CreateRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRuleInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	} else if v.Target != nil {
+		if err := validateRuleTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	} else if v.Scope != nil {
+		if err := validateRuleScope(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Detail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Detail"))
+	} else if v.Detail != nil {
+		if err := validateRuleDetail(v.Detail); err != nil {
+			invalidParams.AddNested("Detail", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSubscriptionGrantInput(v *CreateSubscriptionGrantInput) error {
 	if v == nil {
 		return nil
@@ -5251,6 +5587,11 @@ func validateOpCreateSubscriptionRequestInput(v *CreateSubscriptionRequestInput)
 	}
 	if v.RequestReason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestReason"))
+	}
+	if v.MetadataForms != nil {
+		if err := validateMetadataFormInputs(v.MetadataForms); err != nil {
+			invalidParams.AddNested("MetadataForms", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5621,6 +5962,24 @@ func validateOpDeleteProjectMembershipInput(v *DeleteProjectMembershipInput) err
 	}
 	if v.Member == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Member"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRuleInput(v *DeleteRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRuleInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6145,6 +6504,24 @@ func validateOpGetProjectInput(v *GetProjectInput) error {
 	}
 }
 
+func validateOpGetRuleInput(v *GetRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRuleInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSubscriptionGrantInput(v *GetSubscriptionGrantInput) error {
 	if v == nil {
 		return nil
@@ -6593,6 +6970,27 @@ func validateOpListProjectsInput(v *ListProjectsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListProjectsInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRulesInput(v *ListRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRulesInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if v.TargetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7316,6 +7714,34 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRuleInput(v *UpdateRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuleInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Scope != nil {
+		if err := validateRuleScope(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Detail != nil {
+		if err := validateRuleDetail(v.Detail); err != nil {
+			invalidParams.AddNested("Detail", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

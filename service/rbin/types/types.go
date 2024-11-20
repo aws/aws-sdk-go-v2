@@ -17,8 +17,8 @@ type LockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the resource tags used to identify resources that are
-// retained by the retention rule.
+// [Tag-level retention rules only] Information about the resource tags used to
+// identify resources that are retained by the retention rule.
 type ResourceTag struct {
 
 	// The tag key.
@@ -60,7 +60,7 @@ type RuleSummary struct {
 	// The unique ID of the retention rule.
 	Identifier *string
 
-	// The lock state for the retention rule.
+	// [Region-level retention rules only] The lock state for the retention rule.
 	//
 	//   - locked - The retention rule is locked and can't be modified or deleted.
 	//

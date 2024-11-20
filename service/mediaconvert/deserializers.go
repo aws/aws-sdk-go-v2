@@ -3125,6 +3125,32 @@ func awsRestjson1_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, va
 				return err
 			}
 
+		case "totalConcurrentJobs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalConcurrentJobs = ptr.Int32(int32(i64))
+			}
+
+		case "unallocatedConcurrentJobs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnallocatedConcurrentJobs = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6186,6 +6212,40 @@ func awsRestjson1_deserializeDocument__listOfQueueTransition(v *[]types.QueueTra
 		var col types.QueueTransition
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentQueueTransition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfServiceOverride(v *[]types.ServiceOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ServiceOverride
+	if *v == nil {
+		cv = []types.ServiceOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ServiceOverride
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentServiceOverride(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -20930,6 +20990,19 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "concurrentJobs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConcurrentJobs = ptr.Int32(int32(i64))
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21004,6 +21077,11 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 
 		case "reservationPlan":
 			if err := awsRestjson1_deserializeDocumentReservationPlan(&sv.ReservationPlan, value); err != nil {
+				return err
+			}
+
+		case "serviceOverrides":
+			if err := awsRestjson1_deserializeDocument__listOfServiceOverride(&sv.ServiceOverrides, value); err != nil {
 				return err
 			}
 
@@ -21608,6 +21686,73 @@ func awsRestjson1_deserializeDocumentSccDestinationSettings(v **types.SccDestina
 					return fmt.Errorf("expected SccDestinationFramerate to be of type string, got %T instead", value)
 				}
 				sv.Framerate = types.SccDestinationFramerate(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceOverride(v **types.ServiceOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceOverride
+	if *v == nil {
+		sv = &types.ServiceOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "overrideValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.OverrideValue = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:

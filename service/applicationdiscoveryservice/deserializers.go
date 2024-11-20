@@ -2611,6 +2611,9 @@ func awsAwsjson11_deserializeOpErrorStartBatchDeleteConfigurationTask(response *
 	case strings.EqualFold("HomeRegionNotSetException", errorCode):
 		return awsAwsjson11_deserializeErrorHomeRegionNotSetException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
 
@@ -5946,6 +5949,15 @@ func awsAwsjson11_deserializeDocumentImportTask(v **types.ImportTask, value inte
 					return fmt.Errorf("expected S3PresignedUrl to be of type string, got %T instead", value)
 				}
 				sv.ErrorsAndFailedEntriesZip = ptr.String(jtv)
+			}
+
+		case "fileClassification":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileClassification to be of type string, got %T instead", value)
+				}
+				sv.FileClassification = types.FileClassification(jtv)
 			}
 
 		case "importCompletionTime":

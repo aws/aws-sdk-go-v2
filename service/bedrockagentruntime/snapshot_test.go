@@ -110,6 +110,18 @@ func TestCheckSnapshot_InvokeFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_OptimizePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OptimizePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "OptimizePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_Retrieve(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Retrieve(context.Background(), nil, func(o *Options) {
@@ -174,6 +186,18 @@ func TestUpdateSnapshot_InvokeFlow(t *testing.T) {
 	_, err := svc.InvokeFlow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_OptimizePrompt(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OptimizePrompt(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "OptimizePrompt")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

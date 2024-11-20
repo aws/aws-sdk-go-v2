@@ -37,8 +37,8 @@ type AcceptAccountLinkInvitationInput struct {
 	// This member is required.
 	LinkId *string
 
-	// A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent
-	// creation.
+	// A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure
+	// idempotent creation.
 	ClientToken *string
 
 	noSmithyDocumentSerde

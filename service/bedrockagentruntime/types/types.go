@@ -9,10 +9,10 @@ import (
 )
 
 // Contains information about the action group being invoked. For more information
-// about the possible structures, see the InvocationInput tab in [OrchestrationTrace]in the Amazon
-// Bedrock User Guide.
+// about the possible structures, see the InvocationInput tab in [OrchestrationTrace]in the [Amazon Bedrock User Guide].
 //
 // [OrchestrationTrace]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-orchestration.html
+// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 type ActionGroupInvocationInput struct {
 
 	// The name of the action group.
@@ -51,6 +51,15 @@ type ActionGroupInvocationOutput struct {
 
 	// The JSON-formatted string returned by the API invoked by the action group.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// An event in which the prompt was analyzed in preparation for optimization.
+type AnalyzePromptEvent struct {
+
+	// A message describing the analysis of the prompt.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -1165,6 +1174,24 @@ type InputFile struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the prompt to optimize.
+//
+// The following types satisfy this interface:
+//
+//	InputPromptMemberTextPrompt
+type InputPrompt interface {
+	isInputPrompt()
+}
+
+// Contains information about the text prompt to optimize.
+type InputPromptMemberTextPrompt struct {
+	Value TextPrompt
+
+	noSmithyDocumentSerde
+}
+
+func (*InputPromptMemberTextPrompt) isInputPrompt() {}
+
 // Contains information pertaining to the action group or knowledge base that is
 // being invoked.
 type InvocationInput struct {
@@ -1591,6 +1618,61 @@ type Observation struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about the optimized prompt.
+//
+// The following types satisfy this interface:
+//
+//	OptimizedPromptMemberTextPrompt
+type OptimizedPrompt interface {
+	isOptimizedPrompt()
+}
+
+// Contains information about the text in the prompt that was optimized.
+type OptimizedPromptMemberTextPrompt struct {
+	Value TextPrompt
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizedPromptMemberTextPrompt) isOptimizedPrompt() {}
+
+// An event in which the prompt was optimized.
+type OptimizedPromptEvent struct {
+
+	// Contains information about the optimized prompt.
+	OptimizedPrompt OptimizedPrompt
+
+	noSmithyDocumentSerde
+}
+
+// The stream containing events in the prompt optimization process.
+//
+// The following types satisfy this interface:
+//
+//	OptimizedPromptStreamMemberAnalyzePromptEvent
+//	OptimizedPromptStreamMemberOptimizedPromptEvent
+type OptimizedPromptStream interface {
+	isOptimizedPromptStream()
+}
+
+// An event in which the prompt was analyzed in preparation for optimization.
+type OptimizedPromptStreamMemberAnalyzePromptEvent struct {
+	Value AnalyzePromptEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizedPromptStreamMemberAnalyzePromptEvent) isOptimizedPromptStream() {}
+
+// An event in which the prompt was optimized.
+type OptimizedPromptStreamMemberOptimizedPromptEvent struct {
+	Value OptimizedPromptEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizedPromptStreamMemberOptimizedPromptEvent) isOptimizedPromptStream() {}
 
 // Settings for how the model processes the prompt prior to retrieval and
 // generation.
@@ -2676,6 +2758,17 @@ type TextInferenceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the text prompt to optimize.
+type TextPrompt struct {
+
+	// The text in the text prompt to optimize.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the part of the generated text that contains a citation, alongside
 // where it begins and ends.
 //
@@ -2827,9 +2920,12 @@ func (*UnknownUnionMember) isFlowResponseStream()         {}
 func (*UnknownUnionMember) isFlowTrace()                  {}
 func (*UnknownUnionMember) isFlowTraceNodeInputContent()  {}
 func (*UnknownUnionMember) isFlowTraceNodeOutputContent() {}
+func (*UnknownUnionMember) isInputPrompt()                {}
 func (*UnknownUnionMember) isInvocationInputMember()      {}
 func (*UnknownUnionMember) isInvocationResultMember()     {}
 func (*UnknownUnionMember) isMemory()                     {}
+func (*UnknownUnionMember) isOptimizedPrompt()            {}
+func (*UnknownUnionMember) isOptimizedPromptStream()      {}
 func (*UnknownUnionMember) isOrchestrationTrace()         {}
 func (*UnknownUnionMember) isPostProcessingTrace()        {}
 func (*UnknownUnionMember) isPreProcessingTrace()         {}

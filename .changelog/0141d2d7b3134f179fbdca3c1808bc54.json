@@ -1,0 +1,8 @@
+{
+    "id": "0141d2d7-b313-4f17-9fbd-ca3c1808bc54",
+    "type": "feature",
+    "description": "Add support for gRPC, VPC origins, and Anycast IP Lists. Allow LoggingConfig IncludeCookies to be set regardless of whether the LoggingConfig is enabled.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

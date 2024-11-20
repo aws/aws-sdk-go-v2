@@ -12411,6 +12411,11 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 		}
 	}
 
+	if v.TargetAllocatedStorage != nil {
+		objectKey := object.Key("TargetAllocatedStorage")
+		objectKey.Integer(*v.TargetAllocatedStorage)
+	}
+
 	if v.TargetDBClusterParameterGroupName != nil {
 		objectKey := object.Key("TargetDBClusterParameterGroupName")
 		objectKey.String(*v.TargetDBClusterParameterGroupName)
@@ -12429,6 +12434,21 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 	if v.TargetEngineVersion != nil {
 		objectKey := object.Key("TargetEngineVersion")
 		objectKey.String(*v.TargetEngineVersion)
+	}
+
+	if v.TargetIops != nil {
+		objectKey := object.Key("TargetIops")
+		objectKey.Integer(*v.TargetIops)
+	}
+
+	if v.TargetStorageThroughput != nil {
+		objectKey := object.Key("TargetStorageThroughput")
+		objectKey.Integer(*v.TargetStorageThroughput)
+	}
+
+	if v.TargetStorageType != nil {
+		objectKey := object.Key("TargetStorageType")
+		objectKey.String(*v.TargetStorageType)
 	}
 
 	if v.UpgradeTargetStorageConfig != nil {

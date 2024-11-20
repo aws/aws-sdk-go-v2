@@ -178,6 +178,9 @@ type AutoScalingGroup struct {
 	// Indicates whether Capacity Rebalancing is enabled.
 	CapacityRebalance *bool
 
+	//  The capacity reservation specification.
+	CapacityReservationSpecification *CapacityReservationSpecification
+
 	// Reserved.
 	Context *string
 
@@ -380,6 +383,25 @@ type BaselineEbsBandwidthMbpsRequest struct {
 	noSmithyDocumentSerde
 }
 
+//	The baseline performance to consider, using an instance family as a baseline
+//
+// reference. The instance family establishes the lowest acceptable level of
+// performance. Auto Scaling uses this baseline to guide instance type selection,
+// but there is no guarantee that the selected instance types will always exceed
+// the baseline for every application.
+//
+// Currently, this parameter only supports CPU performance as a baseline
+// performance factor. For example, specifying c6i uses the CPU performance of the
+// c6i family as the baseline reference.
+type BaselinePerformanceFactorsRequest struct {
+
+	//  The CPU performance to consider, using an instance family as the baseline
+	// reference.
+	Cpu *CpuPerformanceFactorRequest
+
+	noSmithyDocumentSerde
+}
+
 // Describes a block device mapping.
 type BlockDeviceMapping struct {
 
@@ -427,6 +449,66 @@ type CapacityForecast struct {
 	//
 	// This member is required.
 	Values []float64
+
+	noSmithyDocumentSerde
+}
+
+//	Describes the Capacity Reservation preference and targeting options. If you
+//
+// specify open or none for CapacityReservationPreference , do not specify a
+// CapacityReservationTarget .
+type CapacityReservationSpecification struct {
+
+	//  The capacity reservation preference. The following options are available:
+	//
+	//   - capacity-reservations-only - Auto Scaling will only launch instances into a
+	//   Capacity Reservation or Capacity Reservation resource group. If capacity isn't
+	//   available, instances will fail to launch.
+	//
+	//   - capacity-reservations-first - Auto Scaling will try to launch instances into
+	//   a Capacity Reservation or Capacity Reservation resource group first. If capacity
+	//   isn't available, instances will run in On-Demand capacity.
+	//
+	//   - none - Auto Scaling will not launch instances into a Capacity Reservation.
+	//   Instances will run in On-Demand capacity.
+	//
+	//   - default - Auto Scaling uses the Capacity Reservation preference from your
+	//   launch template or an open Capacity Reservation.
+	CapacityReservationPreference CapacityReservationPreference
+
+	//  Describes a target Capacity Reservation or Capacity Reservation resource
+	// group.
+	CapacityReservationTarget *CapacityReservationTarget
+
+	noSmithyDocumentSerde
+}
+
+//	The target for the Capacity Reservation. Specify Capacity Reservations IDs or
+//
+// Capacity Reservation resource group ARNs.
+type CapacityReservationTarget struct {
+
+	//  The Capacity Reservation IDs to launch instances into.
+	CapacityReservationIds []string
+
+	//  The resource group ARNs of the Capacity Reservation to launch instances into.
+	CapacityReservationResourceGroupArns []string
+
+	noSmithyDocumentSerde
+}
+
+//	The CPU performance to consider, using an instance family as the baseline
+//
+// reference.
+type CpuPerformanceFactorRequest struct {
+
+	//  Specify an instance family to use as the baseline reference for CPU
+	// performance. All instance types that match your specified attributes will be
+	// compared against the CPU performance of the referenced instance family,
+	// regardless of CPU manufacturer or architecture differences.
+	//
+	// Currently only one instance family can be specified in the list.
+	References []PerformanceFactorReferenceRequest
 
 	noSmithyDocumentSerde
 }
@@ -1116,6 +1198,9 @@ type InstanceRequirements struct {
 	//
 	// [Amazon EBS–optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 	BaselineEbsBandwidthMbps *BaselineEbsBandwidthMbpsRequest
+
+	//  The baseline performance factors for the instance requirements.
+	BaselinePerformanceFactors *BaselinePerformanceFactorsRequest
 
 	// Indicates whether burstable performance instance types are included, excluded,
 	// or required. For more information, see [Burstable performance instances]in the Amazon EC2 User Guide for Linux
@@ -2164,6 +2249,55 @@ type NotificationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic.
 	TopicARN *string
+
+	noSmithyDocumentSerde
+}
+
+//	Specify an instance family to use as the baseline reference for CPU
+//
+// performance. All instance types that All instance types that match your
+// specified attributes will be compared against the CPU performance of the
+// referenced instance family, regardless of CPU manufacturer or architecture
+// differences.
+//
+// Currently only one instance family can be specified in the list.
+type PerformanceFactorReferenceRequest struct {
+
+	//  The instance family to use as a baseline reference.
+	//
+	// Make sure that you specify the correct value for the instance family. The
+	// instance family is everything before the period (.) in the instance type name.
+	// For example, in the instance c6i.large , the instance family is c6i , not c6 .
+	// For more information, see [Amazon EC2 instance type naming conventions]in Amazon EC2 Instance Types.
+	//
+	// The following instance types are not supported for performance protection.
+	//
+	//   - c1
+	//
+	//   - g3| g3s
+	//
+	//   - hpc7g
+	//
+	//   - m1| m2
+	//
+	//   - mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro
+	//
+	//   - p3dn | p4d | p5
+	//
+	//   - t1
+	//
+	//   - u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb |
+	//   u7in-16tb | u7in-24tb | u7in-32tb
+	//
+	// If you performance protection by specifying a supported instance family, the
+	// returned instance types will exclude the preceding unsupported instance
+	// families.
+	//
+	// If you specify an unsupported instance family as a value for baseline
+	// performance, the API returns an empty response.
+	//
+	// [Amazon EC2 instance type naming conventions]: https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html
+	InstanceFamily *string
 
 	noSmithyDocumentSerde
 }

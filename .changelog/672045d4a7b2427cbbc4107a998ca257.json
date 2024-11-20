@@ -1,0 +1,8 @@
+{
+    "id": "672045d4-a7b2-427c-bbc4-107a998ca257",
+    "type": "feature",
+    "description": "Add support to import data from commercially available discovery tools without file manipulation.",
+    "modules": [
+        "service/applicationdiscoveryservice"
+    ]
+}

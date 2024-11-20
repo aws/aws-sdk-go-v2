@@ -17,7 +17,7 @@ import (
 //
 // If you enabled QueryInsights , this API also returns insights and metrics
 // related to the query that you executed. QueryInsights helps with performance
-// tuning of your query.
+// tuning of your query. For more information about QueryInsights , see [Using query insights to optimize queries in Amazon Timestream].
 //
 // The maximum number of Query API requests you're allowed to make with
 // QueryInsights enabled is 1 query per second (QPS). If you exceed this query
@@ -47,6 +47,7 @@ import (
 //	pagination token error.
 //
 // [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html
+// [Using query insights to optimize queries in Amazon Timestream]: https://docs.aws.amazon.com/timestream/latest/developerguide/using-query-insights.html
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}

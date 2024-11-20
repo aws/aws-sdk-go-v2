@@ -1023,8 +1023,9 @@ type CapacityReservationPreference string
 
 // Enum values for CapacityReservationPreference
 const (
-	CapacityReservationPreferenceOpen CapacityReservationPreference = "open"
-	CapacityReservationPreferenceNone CapacityReservationPreference = "none"
+	CapacityReservationPreferenceCapacityReservationsOnly CapacityReservationPreference = "capacity-reservations-only"
+	CapacityReservationPreferenceOpen                     CapacityReservationPreference = "open"
+	CapacityReservationPreferenceNone                     CapacityReservationPreference = "none"
 )
 
 // Values returns all known values for CapacityReservationPreference. Note that
@@ -1034,6 +1035,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationPreference) Values() []CapacityReservationPreference {
 	return []CapacityReservationPreference{
+		"capacity-reservations-only",
 		"open",
 		"none",
 	}
@@ -1405,6 +1407,7 @@ const (
 	CpuManufacturerIntel             CpuManufacturer = "intel"
 	CpuManufacturerAmd               CpuManufacturer = "amd"
 	CpuManufacturerAmazonWebServices CpuManufacturer = "amazon-web-services"
+	CpuManufacturerApple             CpuManufacturer = "apple"
 )
 
 // Values returns all known values for CpuManufacturer. Note that this can be
@@ -1416,6 +1419,7 @@ func (CpuManufacturer) Values() []CpuManufacturer {
 		"intel",
 		"amd",
 		"amazon-web-services",
+		"apple",
 	}
 }
 

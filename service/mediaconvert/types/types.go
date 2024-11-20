@@ -7221,6 +7221,9 @@ type Queue struct {
 	// An identifier for this resource that is unique within all of AWS.
 	Arn *string
 
+	// The maximum number of jobs your queue can process concurrently.
+	ConcurrentJobs *int32
+
 	// The timestamp in epoch seconds for when you created the queue.
 	CreatedAt *time.Time
 
@@ -7242,6 +7245,11 @@ type Queue struct {
 	// Details about the pricing plan for your reserved queue. Required for reserved
 	// queues and not applicable to on-demand queues.
 	ReservationPlan *ReservationPlan
+
+	// A list of any service overrides applied by MediaConvert to the settings that
+	// you have configured. If you see any overrides, we recommend that you contact AWS
+	// Support.
+	ServiceOverrides []ServiceOverride
 
 	// Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't begin
 	// processing jobs in that queue. Jobs that are running when you pause the queue
@@ -7507,6 +7515,26 @@ type SccDestinationSettings struct {
 	// video has video_insertion=true and drop_frame_timecode=true; otherwise, choose
 	// 29.97 non-dropframe.
 	Framerate SccDestinationFramerate
+
+	noSmithyDocumentSerde
+}
+
+// A service override applied by MediaConvert to the settings that you have
+// configured. If you see any overrides, we recommend that you contact AWS Support.
+type ServiceOverride struct {
+
+	// Details about the service override that MediaConvert has applied.
+	Message *string
+
+	// The name of the setting that MediaConvert has applied an override to.
+	Name *string
+
+	// The current value of the service override that MediaConvert has applied.
+	OverrideValue *string
+
+	// The value of the setting that you configured, prior to any overrides that
+	// MediaConvert has applied.
+	Value *string
 
 	noSmithyDocumentSerde
 }

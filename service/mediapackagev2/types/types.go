@@ -184,8 +184,6 @@ type CreateHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -234,8 +232,6 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -555,8 +551,6 @@ type GetHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -610,8 +604,6 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	// that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags
 	// aren't included in the manifest. The tags sync the stream to the wall clock so
 	// that viewers can seek to a specific time in the playback timeline on the player.
-	// ID3Timed metadata messages generate every 5 seconds whenever the content is
-	// ingested.
 	//
 	// Irrespective of this parameter, if any ID3Timed metadata is in the HLS input,
 	// it is passed through to the HLS output.
@@ -777,6 +769,17 @@ type IngestEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for input switching based on the media quality confidence
+// score (MQCS) as provided from AWS Elemental MediaLive.
+type InputSwitchConfiguration struct {
+
+	// When true, AWS Elemental MediaPackage performs input switching based on the
+	// MQCS. Default is true. This setting is valid only when InputType is CMAF .
+	MQCSInputSwitching *bool
+
+	noSmithyDocumentSerde
+}
+
 // List the DASH manifest configuration.
 type ListDashManifestConfiguration struct {
 
@@ -901,6 +904,17 @@ type OriginEndpointListConfiguration struct {
 
 	// The date and time the origin endpoint was modified.
 	ModifiedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The settings for what common media server data (CMSD) headers AWS Elemental
+// MediaPackage includes in responses to the CDN.
+type OutputHeaderConfiguration struct {
+
+	// When true, AWS Elemental MediaPackage includes the MQCS in responses to the
+	// CDN. This setting is valid only when InputType is CMAF .
+	PublishMQCS *bool
 
 	noSmithyDocumentSerde
 }

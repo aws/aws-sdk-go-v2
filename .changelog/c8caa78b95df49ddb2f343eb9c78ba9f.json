@@ -1,0 +1,8 @@
+{
+    "id": "c8caa78b-95df-49dd-b2f3-43eb9c78ba9f",
+    "type": "feature",
+    "description": "Adds support for child enabled baselines which allow you to see the enabled baseline status for individual accounts.",
+    "modules": [
+        "service/controltower"
+    ]
+}

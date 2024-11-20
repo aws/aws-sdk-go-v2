@@ -233,6 +233,18 @@ type AvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
+// The status of a capacity reservation.
+type CapacityReservationStatus struct {
+
+	// The status code.
+	Code CapacityReservationStateEnum
+
+	// The reason code for the status.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an SSL server certificate.
 type Certificate struct {
 
@@ -743,6 +755,15 @@ type Matcher struct {
 	// Note that when using shorthand syntax, some values such as commas need to be
 	// escaped.
 	HttpCode *string
+
+	noSmithyDocumentSerde
+}
+
+// The minimum capacity for a load balancer.
+type MinimumLoadBalancerCapacity struct {
+
+	// The number of capacity units.
+	CapacityUnits *int32
 
 	noSmithyDocumentSerde
 }
@@ -1532,6 +1553,21 @@ type TrustStoreRevocation struct {
 
 	// The Amazon Resource Name (ARN) of the trust store.
 	TrustStoreArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The capacity reservation status for each availability zone.
+type ZonalCapacityReservationState struct {
+
+	// Information about the availability zone.
+	AvailabilityZone *string
+
+	// The number of effective capacity units.
+	EffectiveCapacityUnits *float64
+
+	// The state of the capacity reservation.
+	State *CapacityReservationStatus
 
 	noSmithyDocumentSerde
 }

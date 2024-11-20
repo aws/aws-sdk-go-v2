@@ -15273,6 +15273,15 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "availabilityZoneRebalancing":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvailabilityZoneRebalancing to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZoneRebalancing = types.AvailabilityZoneRebalancing(jtv)
+			}
+
 		case "capacityProviderStrategy":
 			if err := awsAwsjson11_deserializeDocumentCapacityProviderStrategy(&sv.CapacityProviderStrategy, value); err != nil {
 				return err

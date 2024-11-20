@@ -1391,6 +1391,11 @@ func awsRestjson1_serializeOpDocumentListEnabledBaselinesInput(v *ListEnabledBas
 		}
 	}
 
+	if v.IncludeChildren {
+		ok := object.Key("includeChildren")
+		ok.Boolean(v.IncludeChildren)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -2550,6 +2555,13 @@ func awsRestjson1_serializeDocumentEnabledBaselineFilter(v *types.EnabledBaselin
 		}
 	}
 
+	if v.ParentIdentifiers != nil {
+		ok := object.Key("parentIdentifiers")
+		if err := awsRestjson1_serializeDocumentEnabledBaselineParentIdentifiers(v.ParentIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetIdentifiers != nil {
 		ok := object.Key("targetIdentifiers")
 		if err := awsRestjson1_serializeDocumentEnabledBaselineTargetIdentifiers(v.TargetIdentifiers, ok); err != nil {
@@ -2603,6 +2615,17 @@ func awsRestjson1_serializeDocumentEnabledBaselineParameters(v []types.EnabledBa
 		if err := awsRestjson1_serializeDocumentEnabledBaselineParameter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEnabledBaselineParentIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

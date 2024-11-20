@@ -2174,6 +2174,51 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAccountSettingsNotificationConfiguration(v **types.AccountSettingsNotificationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccountSettingsNotificationConfiguration
+	if *v == nil {
+		sv = &types.AccountSettingsNotificationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonResourceName to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "SnsConfiguration":
+			if err := awsAwsjson10_deserializeDocumentSnsConfiguration(&sv.SnsConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentColumnInfo(v **types.ColumnInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2822,6 +2867,68 @@ func awsAwsjson10_deserializeDocumentInvalidEndpointException(v **types.InvalidE
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentLastUpdate(v **types.LastUpdate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LastUpdate
+	if *v == nil {
+		sv = &types.LastUpdate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastUpdateStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.LastUpdateStatus(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "TargetQueryTCU":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected QueryTCU to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetQueryTCU = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentMixedMeasureMapping(v **types.MixedMeasureMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3213,6 +3320,105 @@ func awsAwsjson10_deserializeDocumentPartitionKeyList(v *[]string, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentProvisionedCapacityResponse(v **types.ProvisionedCapacityResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProvisionedCapacityResponse
+	if *v == nil {
+		sv = &types.ProvisionedCapacityResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActiveQueryTCU":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected QueryTCU to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveQueryTCU = ptr.Int32(int32(i64))
+			}
+
+		case "LastUpdate":
+			if err := awsAwsjson10_deserializeDocumentLastUpdate(&sv.LastUpdate, value); err != nil {
+				return err
+			}
+
+		case "NotificationConfiguration":
+			if err := awsAwsjson10_deserializeDocumentAccountSettingsNotificationConfiguration(&sv.NotificationConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentQueryComputeResponse(v **types.QueryComputeResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryComputeResponse
+	if *v == nil {
+		sv = &types.QueryComputeResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ComputeMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeMode to be of type string, got %T instead", value)
+				}
+				sv.ComputeMode = types.ComputeMode(jtv)
+			}
+
+		case "ProvisionedCapacity":
+			if err := awsAwsjson10_deserializeDocumentProvisionedCapacityResponse(&sv.ProvisionedCapacity, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -5269,6 +5475,11 @@ func awsAwsjson10_deserializeOpDocumentDescribeAccountSettingsOutput(v **Describ
 				sv.MaxQueryTCU = ptr.Int32(int32(i64))
 			}
 
+		case "QueryCompute":
+			if err := awsAwsjson10_deserializeDocumentQueryComputeResponse(&sv.QueryCompute, value); err != nil {
+				return err
+			}
+
 		case "QueryPricingModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5663,6 +5874,11 @@ func awsAwsjson10_deserializeOpDocumentUpdateAccountSettingsOutput(v **UpdateAcc
 					return err
 				}
 				sv.MaxQueryTCU = ptr.Int32(int32(i64))
+			}
+
+		case "QueryCompute":
+			if err := awsAwsjson10_deserializeDocumentQueryComputeResponse(&sv.QueryCompute, value); err != nil {
+				return err
 			}
 
 		case "QueryPricingModel":

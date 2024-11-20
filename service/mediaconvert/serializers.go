@@ -636,6 +636,11 @@ func awsRestjson1_serializeOpDocumentCreateQueueInput(v *CreateQueueInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConcurrentJobs != nil {
+		ok := object.Key("concurrentJobs")
+		ok.Integer(*v.ConcurrentJobs)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -2592,6 +2597,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateQueueInput(v *UpdateQueueInput, e
 func awsRestjson1_serializeOpDocumentUpdateQueueInput(v *UpdateQueueInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConcurrentJobs != nil {
+		ok := object.Key("concurrentJobs")
+		ok.Integer(*v.ConcurrentJobs)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")

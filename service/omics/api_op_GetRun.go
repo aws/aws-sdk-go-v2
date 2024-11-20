@@ -19,6 +19,13 @@ import (
 // Gets information about a workflow run.
 //
 // If a workflow is shared with you, you cannot export information about the run.
+//
+// HealthOmics stores a fixed number of runs that are available to the console and
+// API. If GetRun doesn't return the requested run, you can find run logs for all
+// runs in the CloudWatch logs. For more information about viewing the run logs,
+// see [CloudWatch logs]in the AWS HealthOmics User Guide.
+//
+// [CloudWatch logs]: https://docs.aws.amazon.com/omics/latest/dev/cloudwatch-logs.html
 func (c *Client) GetRun(ctx context.Context, params *GetRunInput, optFns ...func(*Options)) (*GetRunOutput, error) {
 	if params == nil {
 		params = &GetRunInput{}
@@ -55,6 +62,12 @@ type GetRunOutput struct {
 	// The run's ARN.
 	Arn *string
 
+	// The run cache behavior for the run.
+	CacheBehavior types.CacheBehavior
+
+	// The run cache associated with the run.
+	CacheId *string
+
 	// When the run was created.
 	CreationTime *time.Time
 
@@ -63,6 +76,9 @@ type GetRunOutput struct {
 
 	// The run's digest.
 	Digest *string
+
+	// The workflow engine version.
+	EngineVersion *string
 
 	// The reason a run has failed.
 	FailureReason *string

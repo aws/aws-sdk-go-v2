@@ -851,6 +851,76 @@ func (RejectRuleBehavior) Values() []RejectRuleBehavior {
 	}
 }
 
+type RuleAction string
+
+// Enum values for RuleAction
+const (
+	RuleActionCreateSubscriptionRequest RuleAction = "CREATE_SUBSCRIPTION_REQUEST"
+)
+
+// Values returns all known values for RuleAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleAction) Values() []RuleAction {
+	return []RuleAction{
+		"CREATE_SUBSCRIPTION_REQUEST",
+	}
+}
+
+type RuleScopeSelectionMode string
+
+// Enum values for RuleScopeSelectionMode
+const (
+	RuleScopeSelectionModeAll      RuleScopeSelectionMode = "ALL"
+	RuleScopeSelectionModeSpecific RuleScopeSelectionMode = "SPECIFIC"
+)
+
+// Values returns all known values for RuleScopeSelectionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleScopeSelectionMode) Values() []RuleScopeSelectionMode {
+	return []RuleScopeSelectionMode{
+		"ALL",
+		"SPECIFIC",
+	}
+}
+
+type RuleTargetType string
+
+// Enum values for RuleTargetType
+const (
+	RuleTargetTypeDomainUnit RuleTargetType = "DOMAIN_UNIT"
+)
+
+// Values returns all known values for RuleTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleTargetType) Values() []RuleTargetType {
+	return []RuleTargetType{
+		"DOMAIN_UNIT",
+	}
+}
+
+type RuleType string
+
+// Enum values for RuleType
+const (
+	RuleTypeMetadataFormEnforcement RuleType = "METADATA_FORM_ENFORCEMENT"
+)
+
+// Values returns all known values for RuleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleType) Values() []RuleType {
+	return []RuleType{
+		"METADATA_FORM_ENFORCEMENT",
+	}
+}
+
 type SearchOutputAdditionalAttribute string
 
 // Enum values for SearchOutputAdditionalAttribute

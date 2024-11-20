@@ -28,6 +28,16 @@ type FlowResponseStreamReader interface {
 	Err() error
 }
 
+// OptimizedPromptStreamReader provides the interface for reading events from a
+// stream.
+//
+// The writer's Close method must allow multiple concurrent calls.
+type OptimizedPromptStreamReader interface {
+	Events() <-chan types.OptimizedPromptStream
+	Close() error
+	Err() error
+}
+
 // ResponseStreamReader provides the interface for reading events from a stream.
 //
 // The writer's Close method must allow multiple concurrent calls.
@@ -162,6 +172,134 @@ func (r *responseStreamReader) Err() error {
 }
 
 func (r *responseStreamReader) Closed() <-chan struct{} {
+	return r.done
+}
+
+type optimizedPromptStreamReader struct {
+	stream      chan types.OptimizedPromptStream
+	decoder     *eventstream.Decoder
+	eventStream io.ReadCloser
+	err         *smithysync.OnceErr
+	payloadBuf  []byte
+	done        chan struct{}
+	closeOnce   sync.Once
+}
+
+func newOptimizedPromptStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *optimizedPromptStreamReader {
+	w := &optimizedPromptStreamReader{
+		stream:      make(chan types.OptimizedPromptStream),
+		decoder:     decoder,
+		eventStream: readCloser,
+		err:         smithysync.NewOnceErr(),
+		done:        make(chan struct{}),
+		payloadBuf:  make([]byte, 10*1024),
+	}
+
+	go w.readEventStream()
+
+	return w
+}
+
+func (r *optimizedPromptStreamReader) Events() <-chan types.OptimizedPromptStream {
+	return r.stream
+}
+
+func (r *optimizedPromptStreamReader) readEventStream() {
+	defer r.Close()
+	defer close(r.stream)
+
+	for {
+		r.payloadBuf = r.payloadBuf[0:0]
+		decodedMessage, err := r.decoder.Decode(r.eventStream, r.payloadBuf)
+		if err != nil {
+			if err == io.EOF {
+				return
+			}
+			select {
+			case <-r.done:
+				return
+			default:
+				r.err.SetError(err)
+				return
+			}
+		}
+
+		event, err := r.deserializeEventMessage(&decodedMessage)
+		if err != nil {
+			r.err.SetError(err)
+			return
+		}
+
+		select {
+		case r.stream <- event:
+		case <-r.done:
+			return
+		}
+
+	}
+}
+
+func (r *optimizedPromptStreamReader) deserializeEventMessage(msg *eventstream.Message) (types.OptimizedPromptStream, error) {
+	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
+	if messageType == nil {
+		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
+	}
+
+	switch messageType.String() {
+	case eventstreamapi.EventMessageType:
+		var v types.OptimizedPromptStream
+		if err := awsRestjson1_deserializeEventStreamOptimizedPromptStream(&v, msg); err != nil {
+			return nil, err
+		}
+		return v, nil
+
+	case eventstreamapi.ExceptionMessageType:
+		return nil, awsRestjson1_deserializeEventStreamExceptionOptimizedPromptStream(msg)
+
+	case eventstreamapi.ErrorMessageType:
+		errorCode := "UnknownError"
+		errorMessage := errorCode
+		if header := msg.Headers.Get(eventstreamapi.ErrorCodeHeader); header != nil {
+			errorCode = header.String()
+		}
+		if header := msg.Headers.Get(eventstreamapi.ErrorMessageHeader); header != nil {
+			errorMessage = header.String()
+		}
+		return nil, &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+
+	default:
+		mc := msg.Clone()
+		return nil, &UnknownEventMessageError{
+			Type:    messageType.String(),
+			Message: &mc,
+		}
+
+	}
+}
+
+func (r *optimizedPromptStreamReader) ErrorSet() <-chan struct{} {
+	return r.err.ErrorSet()
+}
+
+func (r *optimizedPromptStreamReader) Close() error {
+	r.closeOnce.Do(r.safeClose)
+	return r.Err()
+}
+
+func (r *optimizedPromptStreamReader) safeClose() {
+	close(r.done)
+	r.eventStream.Close()
+
+}
+
+func (r *optimizedPromptStreamReader) Err() error {
+	return r.err.Err()
+}
+
+func (r *optimizedPromptStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
@@ -469,6 +607,94 @@ func addEventStreamInvokeFlowMiddleware(stack *middleware.Stack, options Options
 
 }
 
+type awsRestjson1_deserializeOpEventStreamOptimizePrompt struct {
+	LogEventStreamWrites bool
+	LogEventStreamReads  bool
+}
+
+func (*awsRestjson1_deserializeOpEventStreamOptimizePrompt) ID() string {
+	return "OperationEventStreamDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpEventStreamOptimizePrompt) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	defer func() {
+		if err == nil {
+			return
+		}
+		m.closeResponseBody(out)
+	}()
+
+	logger := middleware.GetLogger(ctx)
+
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
+	}
+	_ = request
+
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	deserializeOutput, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type: %T", out.RawResponse)
+	}
+	_ = deserializeOutput
+
+	output, ok := out.Result.(*OptimizePromptOutput)
+	if out.Result != nil && !ok {
+		return out, metadata, fmt.Errorf("unexpected output result type: %T", out.Result)
+	} else if out.Result == nil {
+		output = &OptimizePromptOutput{}
+		out.Result = output
+	}
+
+	eventReader := newOptimizedPromptStreamReader(
+		deserializeOutput.Body,
+		eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+			options.Logger = logger
+			options.LogMessages = m.LogEventStreamReads
+
+		}),
+	)
+	defer func() {
+		if err == nil {
+			return
+		}
+		_ = eventReader.Close()
+	}()
+
+	output.eventStream = NewOptimizePromptEventStream(func(stream *OptimizePromptEventStream) {
+		stream.Reader = eventReader
+	})
+
+	go output.eventStream.waitStreamClose()
+
+	return out, metadata, nil
+}
+
+func (*awsRestjson1_deserializeOpEventStreamOptimizePrompt) closeResponseBody(out middleware.DeserializeOutput) {
+	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
+		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_ = resp.Body.Close()
+	}
+}
+
+func addEventStreamOptimizePromptMiddleware(stack *middleware.Stack, options Options) error {
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamOptimizePrompt{
+		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
+		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
+}
+
 // UnknownEventMessageError provides an error when a message is received from the stream,
 // but the reader is unable to determine what kind of message it is.
 type UnknownEventMessageError struct {
@@ -488,6 +714,10 @@ func setSafeEventStreamClientLogMode(o *Options, operation string) {
 		return
 
 	case "InvokeFlow":
+		toggleEventStreamClientLogMode(o, false, true)
+		return
+
+	case "OptimizePrompt":
 		toggleEventStreamClientLogMode(o, false, true)
 		return
 

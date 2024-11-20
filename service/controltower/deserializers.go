@@ -5576,6 +5576,15 @@ func awsRestjson1_deserializeDocumentEnabledBaselineDetails(v **types.EnabledBas
 				return err
 			}
 
+		case "parentIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ParentIdentifier = ptr.String(jtv)
+			}
+
 		case "statusSummary":
 			if err := awsRestjson1_deserializeDocumentEnablementStatusSummary(&sv.StatusSummary, value); err != nil {
 				return err
@@ -5767,6 +5776,15 @@ func awsRestjson1_deserializeDocumentEnabledBaselineSummary(v **types.EnabledBas
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.BaselineVersion = ptr.String(jtv)
+			}
+
+		case "parentIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ParentIdentifier = ptr.String(jtv)
 			}
 
 		case "statusSummary":

@@ -221,9 +221,23 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.InputSwitchConfiguration != nil {
+		ok := object.Key("InputSwitchConfiguration")
+		if err := awsRestjson1_serializeDocumentInputSwitchConfiguration(v.InputSwitchConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.InputType) > 0 {
 		ok := object.Key("InputType")
 		ok.String(string(v.InputType))
+	}
+
+	if v.OutputHeaderConfiguration != nil {
+		ok := object.Key("OutputHeaderConfiguration")
+		if err := awsRestjson1_serializeDocumentOutputHeaderConfiguration(v.OutputHeaderConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -2461,6 +2475,20 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.InputSwitchConfiguration != nil {
+		ok := object.Key("InputSwitchConfiguration")
+		if err := awsRestjson1_serializeDocumentInputSwitchConfiguration(v.InputSwitchConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputHeaderConfiguration != nil {
+		ok := object.Key("OutputHeaderConfiguration")
+		if err := awsRestjson1_serializeDocumentOutputHeaderConfiguration(v.OutputHeaderConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3220,6 +3248,30 @@ func awsRestjson1_serializeDocumentHarvesterScheduleConfiguration(v *types.Harve
 	if v.StartTime != nil {
 		ok := object.Key("StartTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInputSwitchConfiguration(v *types.InputSwitchConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MQCSInputSwitching != nil {
+		ok := object.Key("MQCSInputSwitching")
+		ok.Boolean(*v.MQCSInputSwitching)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutputHeaderConfiguration(v *types.OutputHeaderConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PublishMQCS != nil {
+		ok := object.Key("PublishMQCS")
+		ok.Boolean(*v.PublishMQCS)
 	}
 
 	return nil

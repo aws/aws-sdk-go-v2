@@ -69,6 +69,25 @@ func (AssignPublicIp) Values() []AssignPublicIp {
 	}
 }
 
+type AvailabilityZoneRebalancing string
+
+// Enum values for AvailabilityZoneRebalancing
+const (
+	AvailabilityZoneRebalancingEnabled  AvailabilityZoneRebalancing = "ENABLED"
+	AvailabilityZoneRebalancingDisabled AvailabilityZoneRebalancing = "DISABLED"
+)
+
+// Values returns all known values for AvailabilityZoneRebalancing. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AvailabilityZoneRebalancing) Values() []AvailabilityZoneRebalancing {
+	return []AvailabilityZoneRebalancing{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type CapacityProviderField string
 
 // Enum values for CapacityProviderField

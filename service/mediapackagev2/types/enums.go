@@ -471,6 +471,8 @@ const (
 	ValidationExceptionTypeHarvestJobCustomerEndpointReadAccessDenied            ValidationExceptionType = "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED"
 	ValidationExceptionTypeClipStartTimeWithStartOrEnd                           ValidationExceptionType = "CLIP_START_TIME_WITH_START_OR_END"
 	ValidationExceptionTypeStartTagTimeOffsetInvalid                             ValidationExceptionType = "START_TAG_TIME_OFFSET_INVALID"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsInputSwitching              ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowMqcsOutputConfiguration         ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -536,5 +538,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED",
 		"CLIP_START_TIME_WITH_START_OR_END",
 		"START_TAG_TIME_OFFSET_INVALID",
+		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING",
+		"ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION",
 	}
 }

@@ -200,6 +200,11 @@ type EnabledBaselineDetails struct {
 	// Shows the parameters that are applied when enabling this Baseline .
 	Parameters []EnabledBaselineParameterSummary
 
+	// An ARN that represents the parent EnabledBaseline at the Organizational Unit
+	// (OU) level, from which the child EnabledBaseline inherits its configuration.
+	// The value is returned by GetEnabledBaseline .
+	ParentIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -210,6 +215,10 @@ type EnabledBaselineFilter struct {
 
 	// Identifiers for the Baseline objects returned as part of the filter operation.
 	BaselineIdentifiers []string
+
+	// An optional filter that sets up a list of parentIdentifiers to filter the
+	// results of the ListEnabledBaseline output.
+	ParentIdentifiers []string
 
 	// Identifiers for the targets of the Baseline filter operation.
 	TargetIdentifiers []string
@@ -274,6 +283,10 @@ type EnabledBaselineSummary struct {
 
 	// The enabled version of the baseline.
 	BaselineVersion *string
+
+	// An ARN that represents an object returned by ListEnabledBaseline , to describe
+	// an enabled baseline.
+	ParentIdentifier *string
 
 	noSmithyDocumentSerde
 }

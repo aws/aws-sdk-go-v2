@@ -34,6 +34,13 @@ type UpdateQueueInput struct {
 	// This member is required.
 	Name *string
 
+	// Specify the maximum number of jobs your queue can process concurrently. For
+	// on-demand queues, the value you enter is constrained by your service quotas for
+	// Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per
+	// account. For reserved queues, update your reservation plan instead in order to
+	// increase your yearly commitment.
+	ConcurrentJobs *int32
+
 	// The new description for the queue, if you are changing it.
 	Description *string
 

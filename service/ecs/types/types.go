@@ -1929,10 +1929,7 @@ type DeploymentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The deployment controller to use for the service. For more information, see [Amazon ECS deployment types] in
-// the Amazon Elastic Container Service Developer Guide.
-//
-// [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+// The deployment controller to use for the service.
 type DeploymentController struct {
 
 	// The deployment controller type to use.
@@ -1945,14 +1942,26 @@ type DeploymentController struct {
 	// is controlled by adjusting the minimum and maximum number of healthy tasks
 	// allowed during a service deployment, as specified in the [DeploymentConfiguration].
 	//
+	// For more information about rolling deployments, see [Deploy Amazon ECS services by replacing tasks] in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
 	// CODE_DEPLOY The blue/green ( CODE_DEPLOY ) deployment type uses the blue/green
 	// deployment model powered by CodeDeploy, which allows you to verify a new
 	// deployment of a service before sending production traffic to it.
+	//
+	// For more information about blue/green deployments, see [Validate the state of an Amazon ECS service before deployment] in the Amazon Elastic
+	// Container Service Developer Guide.
 	//
 	// EXTERNAL The external ( EXTERNAL ) deployment type enables you to use any
 	// third-party deployment controller for full control over the deployment process
 	// for an Amazon ECS service.
 	//
+	// For more information about external deployments, see [Deploy Amazon ECS services using a third-party controller] in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
+	// [Validate the state of an Amazon ECS service before deployment]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html
+	// [Deploy Amazon ECS services by replacing tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
+	// [Deploy Amazon ECS services using a third-party controller]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-external.html
 	// [DeploymentConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html
 	//
 	// This member is required.
@@ -3742,6 +3751,14 @@ type Secret struct {
 
 // Details on a service within a cluster.
 type Service struct {
+
+	// Indicates whether to use Availability Zone rebalancing for the service.
+	//
+	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
+	AvailabilityZoneRebalancing AvailabilityZoneRebalancing
 
 	// The capacity provider strategy the service uses. When using the
 	// DescribeServices API, this field is omitted if the service was created using a

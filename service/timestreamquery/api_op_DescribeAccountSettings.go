@@ -38,12 +38,23 @@ type DescribeAccountSettingsInput struct {
 type DescribeAccountSettingsOutput struct {
 
 	// The maximum number of [Timestream compute units] (TCUs) the service will use at any point in time to
-	// serve your queries.
+	// serve your queries. To run queries, you must set a minimum capacity of 4 TCU.
+	// You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16,
+	// 32, and so on. This configuration is applicable only for on-demand usage of
+	// (TCUs).
 	//
 	// [Timestream compute units]: https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html
 	MaxQueryTCU *int32
 
+	// An object that contains the usage settings for Timestream Compute Units (TCUs)
+	// in your account for the query workload.
+	QueryCompute *types.QueryComputeResponse
+
 	// The pricing model for queries in your account.
+	//
+	// The QueryPricingModel parameter is used by several Timestream operations;
+	// however, the UpdateAccountSettings API operation doesn't recognize any values
+	// other than COMPUTE_UNITS .
 	QueryPricingModel types.QueryPricingModel
 
 	// Metadata pertaining to the operation's result.

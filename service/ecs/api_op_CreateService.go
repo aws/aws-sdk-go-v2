@@ -139,6 +139,14 @@ type CreateServiceInput struct {
 	// This member is required.
 	ServiceName *string
 
+	// Indicates whether to use Availability Zone rebalancing for the service.
+	//
+	// For more information, see [Balancing an Amazon ECS service across Availability Zones] in the Amazon Elastic Container Service Developer
+	// Guide.
+	//
+	// [Balancing an Amazon ECS service across Availability Zones]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html
+	AvailabilityZoneRebalancing types.AvailabilityZoneRebalancing
+
 	// The capacity provider strategy to use for the service.
 	//
 	// If a capacityProviderStrategy is specified, the launchType parameter must be

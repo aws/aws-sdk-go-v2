@@ -1,0 +1,8 @@
+{
+    "id": "4629a991-48fd-40c4-a2f6-2210e3f9c344",
+    "type": "feature",
+    "description": "This release adds action type \"Delete\" to the GetRecommendation, ListRecommendations and ListRecommendationSummaries APIs to support new EBS and ECS recommendations with action type \"Delete\".",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

@@ -55,6 +55,9 @@ type CreateSubscriptionRequestInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The metadata form included in the subscription request.
+	MetadataForms []types.FormInput
+
 	noSmithyDocumentSerde
 }
 
@@ -108,6 +111,12 @@ type CreateSubscriptionRequestOutput struct {
 
 	// The decision comment of the subscription request.
 	DecisionComment *string
+
+	// The ID of the existing subscription.
+	ExistingSubscriptionId *string
+
+	// The metadata form included in the subscription request.
+	MetadataForms []types.FormOutput
 
 	// The ID of the reviewer of the subscription request.
 	ReviewerId *string

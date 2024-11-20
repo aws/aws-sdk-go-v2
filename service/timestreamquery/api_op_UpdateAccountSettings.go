@@ -39,14 +39,26 @@ type UpdateAccountSettingsInput struct {
 	// The maximum number of compute units the service will use at any point in time
 	// to serve your queries. To run queries, you must set a minimum capacity of 4 TCU.
 	// You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16,
-	// 32, and so on.
+	// 32, and so on. The maximum value supported for MaxQueryTCU is 1000. To request
+	// an increase to this soft limit, contact Amazon Web Services Support. For
+	// information about the default quota for maxQueryTCU, see Default quotas. This
+	// configuration is applicable only for on-demand usage of Timestream Compute Units
+	// (TCUs).
 	//
 	// The maximum value supported for MaxQueryTCU is 1000. To request an increase to
 	// this soft limit, contact Amazon Web Services Support. For information about the
-	// default quota for maxQueryTCU, see [Default quotas].
+	// default quota for maxQueryTCU , see [Default quotas].
 	//
 	// [Default quotas]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default
 	MaxQueryTCU *int32
+
+	// Modifies the query compute settings configured in your account, including the
+	// query pricing model and provisioned Timestream Compute Units (TCUs) in your
+	// account.
+	//
+	// This API is idempotent, meaning that making the same request multiple times
+	// will have the same effect as making the request once.
+	QueryCompute *types.QueryComputeRequest
 
 	// The pricing model for queries in an account.
 	//
@@ -63,6 +75,9 @@ type UpdateAccountSettingsOutput struct {
 	// The configured maximum number of compute units the service will use at any
 	// point in time to serve your queries.
 	MaxQueryTCU *int32
+
+	// Confirms the updated account settings for querying data in your account.
+	QueryCompute *types.QueryComputeResponse
 
 	// The pricing model for an account.
 	QueryPricingModel types.QueryPricingModel
@@ -138,6 +153,9 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addOpUpdateAccountSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {

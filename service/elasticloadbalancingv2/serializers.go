@@ -1137,6 +1137,76 @@ func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeCapacityReservation struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeCapacityReservation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeCapacityReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCapacityReservationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeCapacityReservation")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeCapacityReservationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeListenerAttributes struct {
 }
 
@@ -2305,6 +2375,76 @@ func (m *awsAwsquery_serializeOpGetTrustStoreRevocationContent) HandleSerialize(
 	body.Key("Version").String("2015-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentGetTrustStoreRevocationContentInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpModifyCapacityReservation struct {
+}
+
+func (*awsAwsquery_serializeOpModifyCapacityReservation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyCapacityReservation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyCapacityReservationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyCapacityReservation")
+	body.Key("Version").String("2015-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyCapacityReservationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3855,6 +3995,18 @@ func awsAwsquery_serializeDocumentMatcher(v *types.Matcher, value query.Value) e
 	return nil
 }
 
+func awsAwsquery_serializeDocumentMinimumLoadBalancerCapacity(v *types.MinimumLoadBalancerCapacity, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityUnits != nil {
+		objectKey := object.Key("CapacityUnits")
+		objectKey.Integer(*v.CapacityUnits)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentMutualAuthenticationAttributes(v *types.MutualAuthenticationAttributes, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4890,6 +5042,18 @@ func awsAwsquery_serializeOpDocumentDescribeAccountLimitsInput(v *DescribeAccoun
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeCapacityReservationInput(v *DescribeCapacityReservationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.LoadBalancerArn != nil {
+		objectKey := object.Key("LoadBalancerArn")
+		objectKey.String(*v.LoadBalancerArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeListenerAttributesInput(v *DescribeListenerAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5260,6 +5424,30 @@ func awsAwsquery_serializeOpDocumentGetTrustStoreRevocationContentInput(v *GetTr
 	if v.TrustStoreArn != nil {
 		objectKey := object.Key("TrustStoreArn")
 		objectKey.String(*v.TrustStoreArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyCapacityReservationInput(v *ModifyCapacityReservationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.LoadBalancerArn != nil {
+		objectKey := object.Key("LoadBalancerArn")
+		objectKey.String(*v.LoadBalancerArn)
+	}
+
+	if v.MinimumLoadBalancerCapacity != nil {
+		objectKey := object.Key("MinimumLoadBalancerCapacity")
+		if err := awsAwsquery_serializeDocumentMinimumLoadBalancerCapacity(v.MinimumLoadBalancerCapacity, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ResetCapacityReservation != nil {
+		objectKey := object.Key("ResetCapacityReservation")
+		objectKey.Boolean(*v.ResetCapacityReservation)
 	}
 
 	return nil

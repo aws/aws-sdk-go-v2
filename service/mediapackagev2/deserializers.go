@@ -356,6 +356,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				return err
 			}
 
+		case "InputSwitchConfiguration":
+			if err := awsRestjson1_deserializeDocumentInputSwitchConfiguration(&sv.InputSwitchConfiguration, value); err != nil {
+				return err
+			}
+
 		case "InputType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -379,6 +384,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "OutputHeaderConfiguration":
+			if err := awsRestjson1_deserializeDocumentOutputHeaderConfiguration(&sv.OutputHeaderConfiguration, value); err != nil {
+				return err
 			}
 
 		case "Tags":
@@ -1956,6 +1966,11 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 				return err
 			}
 
+		case "InputSwitchConfiguration":
+			if err := awsRestjson1_deserializeDocumentInputSwitchConfiguration(&sv.InputSwitchConfiguration, value); err != nil {
+				return err
+			}
+
 		case "InputType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1979,6 +1994,11 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "OutputHeaderConfiguration":
+			if err := awsRestjson1_deserializeDocumentOutputHeaderConfiguration(&sv.OutputHeaderConfiguration, value); err != nil {
+				return err
 			}
 
 		case "Tags":
@@ -4660,6 +4680,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				return err
 			}
 
+		case "InputSwitchConfiguration":
+			if err := awsRestjson1_deserializeDocumentInputSwitchConfiguration(&sv.InputSwitchConfiguration, value); err != nil {
+				return err
+			}
+
 		case "InputType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4683,6 +4708,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "OutputHeaderConfiguration":
+			if err := awsRestjson1_deserializeDocumentOutputHeaderConfiguration(&sv.OutputHeaderConfiguration, value); err != nil {
+				return err
 			}
 
 		case "tags":
@@ -7390,6 +7420,46 @@ func awsRestjson1_deserializeDocumentIngestEndpointList(v *[]types.IngestEndpoin
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInputSwitchConfiguration(v **types.InputSwitchConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputSwitchConfiguration
+	if *v == nil {
+		sv = &types.InputSwitchConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MQCSInputSwitching":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.MQCSInputSwitching = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7865,6 +7935,46 @@ func awsRestjson1_deserializeDocumentOriginEndpointsList(v *[]types.OriginEndpoi
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOutputHeaderConfiguration(v **types.OutputHeaderConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutputHeaderConfiguration
+	if *v == nil {
+		sv = &types.OutputHeaderConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PublishMQCS":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PublishMQCS = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

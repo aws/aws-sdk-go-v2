@@ -104,6 +104,12 @@ type AcceptSubscriptionRequestOutput struct {
 	// Specifies the reason for accepting the subscription request.
 	DecisionComment *string
 
+	// The ID of the existing subscription.
+	ExistingSubscriptionId *string
+
+	// The metadata form in the subscription request.
+	MetadataForms []types.FormOutput
+
 	// Specifes the ID of the Amazon DataZone user who reviewed the subscription
 	// request.
 	ReviewerId *string

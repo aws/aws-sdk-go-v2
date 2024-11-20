@@ -94,6 +94,12 @@ type GetSubscriptionRequestDetailsOutput struct {
 	// The decision comment of the subscription request.
 	DecisionComment *string
 
+	// The ID of the existing subscription.
+	ExistingSubscriptionId *string
+
+	// The metadata forms included in the subscription request.
+	MetadataForms []types.FormOutput
+
 	// The identifier of the Amazon DataZone user who reviewed the subscription
 	// request.
 	ReviewerId *string

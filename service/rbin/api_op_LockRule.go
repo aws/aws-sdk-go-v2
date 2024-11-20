@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Locks a retention rule. A locked retention rule can't be modified or deleted.
+// Locks a Region-level retention rule. A locked retention rule can't be modified
+// or deleted.
+//
+// You can't lock tag-level retention rules, or Region-level retention rules that
+// have exclusion tags.
 func (c *Client) LockRule(ctx context.Context, params *LockRuleInput, optFns ...func(*Options)) (*LockRuleOutput, error) {
 	if params == nil {
 		params = &LockRuleInput{}
@@ -47,13 +51,18 @@ type LockRuleOutput struct {
 	// The retention rule description.
 	Description *string
 
+	// [Region-level retention rules only] Information about the exclusion tags used
+	// to identify resources that are to be excluded, or ignored, by the retention
+	// rule.
+	ExcludeResourceTags []types.ResourceTag
+
 	// The unique ID of the retention rule.
 	Identifier *string
 
 	// Information about the retention rule lock configuration.
 	LockConfiguration *types.LockConfiguration
 
-	// The lock state for the retention rule.
+	// [Region-level retention rules only] The lock state for the retention rule.
 	//
 	//   - locked - The retention rule is locked and can't be modified or deleted.
 	//
@@ -69,8 +78,8 @@ type LockRuleOutput struct {
 	//   can never transition back to null .
 	LockState types.LockState
 
-	// Information about the resource tags used to identify resources that are
-	// retained by the retention rule.
+	// [Tag-level retention rules only] Information about the resource tags used to
+	// identify resources that are retained by the retention rule.
 	ResourceTags []types.ResourceTag
 
 	// The resource type retained by the retention rule.

@@ -6629,6 +6629,11 @@ func awsAwsjson11_serializeOpDocumentCreateServiceInput(v *CreateServiceInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AvailabilityZoneRebalancing) > 0 {
+		ok := object.Key("availabilityZoneRebalancing")
+		ok.String(string(v.AvailabilityZoneRebalancing))
+	}
+
 	if v.CapacityProviderStrategy != nil {
 		ok := object.Key("capacityProviderStrategy")
 		if err := awsAwsjson11_serializeDocumentCapacityProviderStrategy(v.CapacityProviderStrategy, ok); err != nil {
@@ -8399,6 +8404,11 @@ func awsAwsjson11_serializeOpDocumentUpdateContainerInstancesStateInput(v *Updat
 func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AvailabilityZoneRebalancing) > 0 {
+		ok := object.Key("availabilityZoneRebalancing")
+		ok.String(string(v.AvailabilityZoneRebalancing))
+	}
 
 	if v.CapacityProviderStrategy != nil {
 		ok := object.Key("capacityProviderStrategy")

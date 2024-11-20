@@ -38,6 +38,10 @@ type ListEnabledBaselinesInput struct {
 	// either, or both.
 	Filter *types.EnabledBaselineFilter
 
+	// A value that can be set to include the child enabled baselines in responses.
+	// The default value is false.
+	IncludeChildren bool
+
 	// The maximum number of results to be shown.
 	MaxResults *int32
 
