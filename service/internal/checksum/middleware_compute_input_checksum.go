@@ -180,7 +180,9 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 	// Only seekable streams are supported for non-trailing checksums, because
 	// the stream needs to be rewound before the handler can continue.
 	if stream != nil && !req.IsStreamSeekable() {
-		return next.HandleFinalize(ctx, in)
+		return out, metadata, computeInputHeaderChecksumError{
+			Msg: "unseekable stream is not supported without TLS and trailing checksum",
+		}
 	}
 
 	var sha256Checksum string
