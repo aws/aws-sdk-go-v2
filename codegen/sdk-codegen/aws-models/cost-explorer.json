@@ -67,6 +67,9 @@
                     "target": "com.amazonaws.costexplorer#GetApproximateUsageRecords"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#GetCommitmentPurchaseAnalysis"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GetCostAndUsage"
                 },
                 {
@@ -115,6 +118,9 @@
                     "target": "com.amazonaws.costexplorer#GetUsageForecast"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalyses"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory"
                 },
                 {
@@ -131,6 +137,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#ProvideAnomalyFeedback"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysis"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfill"
@@ -966,6 +975,16 @@
                 }
             }
         },
+        "com.amazonaws.costexplorer#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.costexplorer#AccountScope": {
             "type": "enum",
             "members": {
@@ -988,6 +1007,151 @@
         },
         "com.amazonaws.costexplorer#AmortizedUpfrontFee": {
             "type": "string"
+        },
+        "com.amazonaws.costexplorer#AnalysisDetails": {
+            "type": "structure",
+            "members": {
+                "SavingsPlansPurchaseAnalysisDetails": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Savings Plans purchase\n            analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the analysis.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[\\S\\s]{8}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{12}$"
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#AnalysisId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 600
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.costexplorer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested analysis can't be\n            found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisSummary": {
+            "type": "structure",
+            "members": {
+                "EstimatedCompletionTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time for when the analysis will\n            complete.</p>"
+                    }
+                },
+                "AnalysisCompletionTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The completion time of the analysis.</p>"
+                    }
+                },
+                "AnalysisStartedTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the analysis.</p>"
+                    }
+                },
+                "AnalysisStatus": {
+                    "target": "com.amazonaws.costexplorer#AnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.costexplorer#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code used for the\n            analysis.</p>"
+                    }
+                },
+                "AnalysisId": {
+                    "target": "com.amazonaws.costexplorer#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment\n            purchase.</p>"
+                    }
+                },
+                "CommitmentPurchaseAnalysisConfiguration": {
+                    "target": "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis configuration for the commitment purchase\n            analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the analysis.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#AnalysisSummary"
+            }
+        },
+        "com.amazonaws.costexplorer#AnalysisType": {
+            "type": "enum",
+            "members": {
+                "MAX_SAVINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_SAVINGS"
+                    }
+                },
+                "CUSTOM_COMMITMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_COMMITMENT"
+                    }
+                }
+            }
         },
         "com.amazonaws.costexplorer#Anomalies": {
             "type": "list",
@@ -1020,7 +1184,7 @@
                 "DimensionValue": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dimension for the anomaly (for example, an Amazon Web Servicesservice in a service\n            monitor). </p>"
+                        "smithy.api#documentation": "<p>The dimension for the anomaly (for example, an Amazon Web Services service in a service\n            monitor). </p>"
                     }
                 },
                 "RootCauses": {
@@ -1363,6 +1527,20 @@
             "traits": {
                 "smithy.api#documentation": "<p>The requested report expired. Update the date interval and try again.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration": {
+            "type": "structure",
+            "members": {
+                "SavingsPlansPurchaseAnalysisConfiguration": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the Savings Plans purchase\n            analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the commitment purchase\n            analysis.</p>"
             }
         },
         "com.amazonaws.costexplorer#Context": {
@@ -1820,7 +1998,7 @@
                 "Rule": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, <code>USAGE_TYPE</code>, and <code>BILLING_ENTITY</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
                     }
                 },
                 "InheritedValue": {
@@ -3340,6 +3518,41 @@
         "com.amazonaws.costexplorer#Entity": {
             "type": "string"
         },
+        "com.amazonaws.costexplorer#ErrorCode": {
+            "type": "enum",
+            "members": {
+                "NO_USAGE_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_USAGE_FOUND"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                },
+                "INVALID_SAVINGS_PLANS_TO_ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SAVINGS_PLANS_TO_ADD"
+                    }
+                },
+                "INVALID_SAVINGS_PLANS_TO_EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SAVINGS_PLANS_TO_EXCLUDE"
+                    }
+                },
+                "INVALID_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ACCOUNT_ID"
+                    }
+                }
+            }
+        },
         "com.amazonaws.costexplorer#ErrorMessage": {
             "type": "string"
         },
@@ -3953,6 +4166,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.costexplorer#GetCommitmentPurchaseAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetCommitmentPurchaseAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetCommitmentPurchaseAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#AnalysisNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a commitment purchase analysis result based on the\n      <code>AnalysisId</code>.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#GetCommitmentPurchaseAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "AnalysisId": {
+                    "target": "com.amazonaws.costexplorer#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase\n      analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetCommitmentPurchaseAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "EstimatedCompletionTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time for when the analysis will\n      complete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisCompletionTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The completion time of the analysis.</p>"
+                    }
+                },
+                "AnalysisStartedTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisId": {
+                    "target": "com.amazonaws.costexplorer#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase\n      analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisStatus": {
+                    "target": "com.amazonaws.costexplorer#AnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.costexplorer#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code used for the analysis.</p>"
+                    }
+                },
+                "AnalysisDetails": {
+                    "target": "com.amazonaws.costexplorer#AnalysisDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the analysis.</p>"
+                    }
+                },
+                "CommitmentPurchaseAnalysisConfiguration": {
+                    "target": "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the commitment purchase\n      analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costexplorer#GetCostAndUsage": {
             "type": "operation",
             "input": {
@@ -4418,7 +4730,7 @@
                 "Context": {
                     "target": "com.amazonaws.costexplorer#Context",
                     "traits": {
-                        "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be\n        <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is\n        <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the\n      resulting dimension values can be used in the <code>GetReservationUtilization</code>\n      operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension\n      values can be used in the <code>GetCostAndUsage</code> operation.</p>\n         <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible\n          values are the following:</p>\n               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Servicesservices.</p>\n               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an acting\n          reseller for Amazon Web Servicesservices in India.</p>\n               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are built on\n            Amazon Web Services by third-party software providers.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are\n          Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use\n          cases. Examples are <code>Compute Optimized</code> (for example, <code>C4</code>,\n            <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory\n            Optimization</code> (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>,\n          and <code>R6g</code>).</p>\n            </li>\n            <li>\n               <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services\n          invoice.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services\n          services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and\n            <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.\n          Examples include On-Demand Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation\n          Instance.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response\n          for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples\n          include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2:\n          CloudWatch – Alarms. The response for this operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as Reserved Instance (RI) fees,\n          usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in\n          feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are\n          regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance\n          (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All\n          Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example,\n          <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be\n        <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is\n        <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the\n      resulting dimension values can be used in the <code>GetReservationUtilization</code>\n      operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension\n      values can be used in the <code>GetCostAndUsage</code> operation.</p>\n         <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible\n          values are the following:</p>\n               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services services.</p>\n               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an acting\n          reseller for Amazon Web Services services in India.</p>\n               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are built on\n            Amazon Web Services by third-party software providers.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are\n          Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use\n          cases. Examples are <code>Compute Optimized</code> (for example, <code>C4</code>,\n            <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory\n            Optimization</code> (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>,\n          and <code>R6g</code>).</p>\n            </li>\n            <li>\n               <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services\n          invoice.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services\n          services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and\n            <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.\n          Examples include On-Demand Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation\n          Instance.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response\n          for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples\n          include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2:\n          CloudWatch – Alarms. The response for this operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as Reserved Instance (RI) fees,\n          usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in\n          feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are\n          regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance\n          (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All\n          Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example,\n          <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filter": {
@@ -4754,7 +5066,7 @@
                 "Filter": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters utilization data by dimensions. You can filter by the following\n      dimensions:</p>\n         <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n            </li>\n            <li>\n               <p>SCOPE</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n         <p>\n            <code>GetReservationUtilization</code> uses the same <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object\n      as the other operations, but only <code>AND</code> is supported among each dimension, and\n      nesting is supported up to only one level deep. If there are multiple values for a dimension,\n      they are OR'd together.</p>"
+                        "smithy.api#documentation": "<p>Filters utilization data by dimensions. You can filter by the following\n      dimensions:</p>\n         <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n               <note>\n                  <p>If  not specified, the <code>SERVICE</code> filter defaults to Amazon Elastic\n            Compute Cloud - Compute. Supported values for <code>SERVICE</code> are Amazon Elastic\n            Compute Cloud - Compute, Amazon Relational Database Service, Amazon ElastiCache, Amazon\n            Redshift, and Amazon Elasticsearch Service. The value for the <code>SERVICE</code>\n            filter should not exceed \"1\".</p>\n               </note>\n            </li>\n            <li>\n               <p>SCOPE</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n         <p>\n            <code>GetReservationUtilization</code> uses the same <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object\n      as the other operations, but only <code>AND</code> is supported among each dimension, and\n      nesting is supported up to only one level deep. If there are multiple values for a dimension,\n      they are OR'd together.</p>"
                     }
                 },
                 "SortBy": {
@@ -5770,6 +6082,82 @@
             "traits": {
                 "smithy.api#documentation": "<p>You made too many calls in a short period of time. Try again later.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalyses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account based on the last 30\n      days.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesRequest": {
+            "type": "structure",
+            "members": {
+                "AnalysisStatus": {
+                    "target": "com.amazonaws.costexplorer#AnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of\n      results.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of analyses that you want returned in a single response\n      object.</p>"
+                    }
+                },
+                "AnalysisIds": {
+                    "target": "com.amazonaws.costexplorer#AnalysisIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis IDs associated with the commitment purchase\n      analyses.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesResponse": {
+            "type": "structure",
+            "members": {
+                "AnalysisSummaryList": {
+                    "target": "com.amazonaws.costexplorer#AnalysisSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of analyses.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of\n      results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory": {
@@ -7841,7 +8229,7 @@
                 "Service": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice name that's associated with the cost anomaly. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service name that's associated with the cost anomaly. </p>"
                     }
                 },
                 "Region": {
@@ -7870,7 +8258,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The combination of Amazon Web Servicesservice, linked account, linked account name,\n            Region, and usage type where a cost anomaly is observed. The linked account name will\n            only be available when the account name can be identified.</p>"
+                "smithy.api#documentation": "<p>The combination of Amazon Web Services service, linked account, linked account name,\n            Region, and usage type where a cost anomaly is observed. The linked account name will\n            only be available when the account name can be identified.</p>"
             }
         },
         "com.amazonaws.costexplorer#RootCauses": {
@@ -7881,6 +8269,56 @@
         },
         "com.amazonaws.costexplorer#SavingsPlanArn": {
             "type": "string"
+        },
+        "com.amazonaws.costexplorer#SavingsPlans": {
+            "type": "structure",
+            "members": {
+                "PaymentOption": {
+                    "target": "com.amazonaws.costexplorer#PaymentOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment option for the Savings Plans\n            commitment.</p>"
+                    }
+                },
+                "SavingsPlansType": {
+                    "target": "com.amazonaws.costexplorer#SupportedSavingsPlansType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Savings Plans type.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region associated with the Savings Plans\n            commitment.</p>"
+                    }
+                },
+                "InstanceFamily": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance family of the Savings Plans\n            commitment.</p>"
+                    }
+                },
+                "TermInYears": {
+                    "target": "com.amazonaws.costexplorer#TermInYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The term that you want the Savings Plans commitment\n            for.</p>"
+                    }
+                },
+                "SavingsPlansCommitment": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansCommitment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Savings Plans commitment.</p>"
+                    }
+                },
+                "OfferingId": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that's used to distinguish commitments from one\n            another.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Savings Plans commitment\n            details.</p>"
+            }
         },
         "com.amazonaws.costexplorer#SavingsPlansAmortizedCommitment": {
             "type": "structure",
@@ -7906,6 +8344,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The amortized amount of Savings Plans purchased in a specific account during a\n            specific time interval.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansCommitment": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.001,
+                    "max": 5000
+                }
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansCoverage": {
@@ -8028,6 +8475,203 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The attribute details on a specific Savings Plan.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[\\S\\s]{8}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{12}$"
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisConfiguration": {
+            "type": "structure",
+            "members": {
+                "AccountScope": {
+                    "target": "com.amazonaws.costexplorer#AccountScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account scope that you want your analysis\n            for.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.costexplorer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that the analysis is\n            for.</p>"
+                    }
+                },
+                "AnalysisType": {
+                    "target": "com.amazonaws.costexplorer#AnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SavingsPlansToAdd": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansToAdd",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Savings Plans to include in the\n            analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SavingsPlansToExclude": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansToExclude",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Savings Plans to exclude from the\n            analysis.</p>"
+                    }
+                },
+                "LookBackTimePeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period associated with the\n            analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the Savings Plans purchase\n            analysis.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisDetails": {
+            "type": "structure",
+            "members": {
+                "CurrencyCode": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency code used for the\n            analysis.</p>"
+                    }
+                },
+                "LookbackPeriodInHours": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lookback period in hours that's used to generate the\n            analysis.</p>"
+                    }
+                },
+                "CurrentAverageCoverage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average value of hourly coverage over the lookback\n            period.</p>"
+                    }
+                },
+                "CurrentAverageHourlyOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average value of hourly On-Demand spend over the lookback\n            period.</p>"
+                    }
+                },
+                "CurrentMaximumHourlyOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The highest value of hourly On-Demand spend over the lookback\n            period.</p>"
+                    }
+                },
+                "CurrentMinimumHourlyOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lowest value of hourly On-Demand spend over the lookback\n            period.</p>"
+                    }
+                },
+                "CurrentOnDemandSpend": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current total On-Demand spend over the lookback\n            period.</p>"
+                    }
+                },
+                "ExistingHourlyCommitment": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The existing hourly commitment for the Savings Plan\n            type.</p>"
+                    }
+                },
+                "HourlyCommitmentToPurchase": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended or custom hourly\n            commitment.</p>"
+                    }
+                },
+                "EstimatedAverageCoverage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated coverage of the Savings\n            Plan.</p>"
+                    }
+                },
+                "EstimatedAverageUtilization": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated utilization of the Savings\n            Plan.</p>"
+                    }
+                },
+                "EstimatedMonthlySavingsAmount": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated monthly savings amount based on the Savings\n            Plan.</p>"
+                    }
+                },
+                "EstimatedOnDemandCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the commitment, over the\n            length of the lookback period.</p>"
+                    }
+                },
+                "EstimatedOnDemandCostWithCurrentCommitment": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated On-Demand cost you expect with no additional commitment, based on your\n            usage of the selected time period and the Savings Plan you\n            own.</p>"
+                    }
+                },
+                "EstimatedROI": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated return on investment that's based on the purchase commitment and\n            estimated savings. This is calculated as\n            estimatedSavingsAmount/estimatedSPCost*100.</p>"
+                    }
+                },
+                "EstimatedSavingsAmount": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated savings amount that's based on the purchase commitment over the length\n            of the lookback period.</p>"
+                    }
+                },
+                "EstimatedSavingsPercentage": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated savings percentage relative to the total cost over the cost calculation\n            lookback period.</p>"
+                    }
+                },
+                "EstimatedCommitmentCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated cost of the purchase commitment over the length of the lookback\n            period.</p>"
+                    }
+                },
+                "LatestUsageTimestamp": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of the last hour that went into the\n            analysis.</p>"
+                    }
+                },
+                "UpfrontCost": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The upfront cost of the Savings Plan, based on the selected payment\n            option.</p>"
+                    }
+                },
+                "AdditionalMetadata": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metadata that might be applicable to the\n            commitment.</p>"
+                    }
+                },
+                "MetricsOverLookbackPeriod": {
+                    "target": "com.amazonaws.costexplorer#MetricsOverLookbackPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The related hourly cost, coverage, and utilization metrics over the lookback\n            period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the Savings Plans purchase\n            analysis.</p>"
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansPurchaseRecommendation": {
@@ -8316,6 +8960,30 @@
                 "smithy.api#documentation": "<p>The amount of savings that you're accumulating, against the public On-Demand rate of\n            the usage accrued in an account.</p>"
             }
         },
+        "com.amazonaws.costexplorer#SavingsPlansToAdd": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#SavingsPlans"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansToExclude": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#SavingsPlansId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.costexplorer#SavingsPlansUtilization": {
             "type": "structure",
             "members": {
@@ -8547,6 +9215,76 @@
                         "smithy.api#enumValue": "DESCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#GenerationExistsException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the parameters of a planned commitment purchase and starts the generation of the\n      analysis. This enables you to estimate the cost, coverage, and utilization impact of your\n      planned commitment purchases. You can request up to 20 analysis runs per\n      day.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "CommitmentPurchaseAnalysisConfiguration": {
+                    "target": "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the commitment purchase\n      analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "AnalysisId": {
+                    "target": "com.amazonaws.costexplorer#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase\n      analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisStartedTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EstimatedCompletionTime": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time for when the analysis will\n      complete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#StartCostAllocationTagBackfill": {

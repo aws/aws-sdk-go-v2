@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.xray#BatchGetTraces"
                 },
                 {
+                    "target": "com.amazonaws.xray#CancelTraceRetrieval"
+                },
+                {
                     "target": "com.amazonaws.xray#CreateGroup"
                 },
                 {
@@ -61,6 +64,9 @@
                     "target": "com.amazonaws.xray#GetGroups"
                 },
                 {
+                    "target": "com.amazonaws.xray#GetIndexingRules"
+                },
+                {
                     "target": "com.amazonaws.xray#GetInsight"
                 },
                 {
@@ -71,6 +77,9 @@
                 },
                 {
                     "target": "com.amazonaws.xray#GetInsightSummaries"
+                },
+                {
+                    "target": "com.amazonaws.xray#GetRetrievedTracesGraph"
                 },
                 {
                     "target": "com.amazonaws.xray#GetSamplingRules"
@@ -91,10 +100,16 @@
                     "target": "com.amazonaws.xray#GetTraceGraph"
                 },
                 {
+                    "target": "com.amazonaws.xray#GetTraceSegmentDestination"
+                },
+                {
                     "target": "com.amazonaws.xray#GetTraceSummaries"
                 },
                 {
                     "target": "com.amazonaws.xray#ListResourcePolicies"
+                },
+                {
+                    "target": "com.amazonaws.xray#ListRetrievedTraces"
                 },
                 {
                     "target": "com.amazonaws.xray#ListTagsForResource"
@@ -112,6 +127,9 @@
                     "target": "com.amazonaws.xray#PutTraceSegments"
                 },
                 {
+                    "target": "com.amazonaws.xray#StartTraceRetrieval"
+                },
+                {
                     "target": "com.amazonaws.xray#TagResource"
                 },
                 {
@@ -121,7 +139,13 @@
                     "target": "com.amazonaws.xray#UpdateGroup"
                 },
                 {
+                    "target": "com.amazonaws.xray#UpdateIndexingRule"
+                },
+                {
                     "target": "com.amazonaws.xray#UpdateSamplingRule"
+                },
+                {
+                    "target": "com.amazonaws.xray#UpdateTraceSegmentDestination"
                 }
             ],
             "traits": {
@@ -1329,7 +1353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of traces specified by ID. Each trace is a collection of segment\n      documents that originates from a single request. Use <code>GetTraceSummaries</code> to get a\n      list of trace IDs.</p>",
+                "smithy.api#documentation": "<note>\n            <p>You cannot find traces through this API if Transaction Search is enabled since trace is not indexed in X-Ray.</p>\n         </note>\n         <p>Retrieves a list of traces specified by ID. Each trace is a collection of segment\n      documents that originates from a single request. Use <code>GetTraceSummaries</code> to get a\n      list of trace IDs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/Traces",
@@ -1402,6 +1426,56 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.xray#CancelTraceRetrieval": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#CancelTraceRetrievalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#CancelTraceRetrievalResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCancels an ongoing trace retrieval job initiated by <code>StartTraceRetrieval</code> using the provided <code>RetrievalToken</code>. A successful cancellation will return an HTTP 200 response.\n</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CancelTraceRetrieval",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#CancelTraceRetrievalRequest": {
+            "type": "structure",
+            "members": {
+                "RetrievalToken": {
+                    "target": "com.amazonaws.xray#RetrievalToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRetrieval token.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#CancelTraceRetrievalResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.xray#ClientID": {
@@ -2025,7 +2099,7 @@
                 "ThrottleCount": {
                     "target": "com.amazonaws.xray#NullableLong",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of requests that failed with a 419 throttling status code.</p>"
+                        "smithy.api#documentation": "<p>The number of requests that failed with a 429 throttling status code.</p>"
                     }
                 },
                 "OtherCount": {
@@ -2387,6 +2461,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.xray#GetIndexingRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#GetIndexingRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#GetIndexingRulesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nRetrieves all indexing rules.</p>\n         <p>Indexing rules are used to determine the server-side sampling rate for spans ingested through the CloudWatchLogs destination and indexed by X-Ray. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html\">Transaction Search</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetIndexingRules",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#GetIndexingRulesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecify the pagination token returned by a previous request to retrieve the next page of indexes.\n  \n  \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#GetIndexingRulesResult": {
+            "type": "structure",
+            "members": {
+                "IndexingRules": {
+                    "target": "com.amazonaws.xray#IndexingRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Retrieves all indexing rules.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specify the pagination token returned by a previous request to retrieve the next page of indexes.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.xray#GetInsight": {
             "type": "operation",
             "input": {
@@ -2741,6 +2874,81 @@
                     "target": "com.amazonaws.xray#Token",
                     "traits": {
                         "smithy.api#documentation": "<p>Pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.xray#GetRetrievedTracesGraph": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#GetRetrievedTracesGraphRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#GetRetrievedTracesGraphResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Retrieves a service graph for traces based on the specified <code>RetrievalToken</code> from the CloudWatch log group generated by Transaction Search. This API does not initiate a retrieval job. You must first execute <code>StartTraceRetrieval</code> to obtain the required <code>RetrievalToken</code>.\n</p>\n         <p>The trace graph describes services that process incoming requests and any downstream services they call, which may include Amazon Web Services resources, external APIs, or databases.</p>\n         <p>The response is empty until the <code>RetrievalStatus</code> is <i>COMPLETE</i>. Retry the request after the status changes from <i>RUNNING</i> or <i>SCHEDULED</i> to <i>COMPLETE</i> to access the full service graph.</p>\n         <p>\n    When CloudWatch log is the destination, this API can support cross-account observability and service graph retrieval across linked accounts.</p>\n         <p>For retrieving graphs from X-Ray directly as opposed to the Transaction-Search Log group, see <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetTraceGraph.html\">GetTraceGraph</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetRetrievedTracesGraph",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#GetRetrievedTracesGraphRequest": {
+            "type": "structure",
+            "members": {
+                "RetrievalToken": {
+                    "target": "com.amazonaws.xray#RetrievalToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Retrieval token.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Specify the pagination token returned by a previous request to retrieve the next page of indexes.\n    \n    \n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#GetRetrievedTracesGraphResult": {
+            "type": "structure",
+            "members": {
+                "RetrievalStatus": {
+                    "target": "com.amazonaws.xray#RetrievalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nStatus of the retrieval.\n</p>"
+                    }
+                },
+                "Services": {
+                    "target": "com.amazonaws.xray#RetrievedServicesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRetrieved services.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Specify the pagination token returned by a previous request to retrieve the next page of indexes.\n    \n    \n  </p>"
                     }
                 }
             },
@@ -3237,6 +3445,58 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.xray#GetTraceSegmentDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#GetTraceSegmentDestinationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#GetTraceSegmentDestinationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Retrieves the current destination of data sent to <code>PutTraceSegments</code> and <i>OpenTelemetry</i> API. The Transaction Search feature requires a CloudWatchLogs destination. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html\">Transaction Search</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-OpenTelemetry-Sections.html\">OpenTelemetry</a>.\n</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetTraceSegmentDestination",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#GetTraceSegmentDestinationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#GetTraceSegmentDestinationResult": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.xray#TraceSegmentDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRetrieves the current destination.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.xray#TraceSegmentDestinationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Status of the retrieval.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.xray#GetTraceSummaries": {
             "type": "operation",
             "input": {
@@ -3254,7 +3514,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves IDs and annotations for traces available for a specified time frame using an\n      optional filter. To get the full traces, pass the trace IDs to\n      <code>BatchGetTraces</code>.</p>\n         <p>A filter expression can target traced requests that hit specific service nodes or\n      edges, have errors, or come from a known user. For example, the following filter expression\n      targets traces that pass through <code>api.example.com</code>:</p>\n         <p>\n            <code>service(\"api.example.com\")</code>\n         </p>\n         <p>This filter expression finds traces that have an annotation named <code>account</code>\n      with the value <code>12345</code>:</p>\n         <p>\n            <code>annotation.account = \"12345\"</code>\n         </p>\n         <p>For a full list of indexed fields and keywords that you can use in filter expressions,\n      see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html\">Using Filter\n        Expressions</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves IDs and annotations for traces available for a specified time frame using an\n      optional filter. To get the full traces, pass the trace IDs to\n      <code>BatchGetTraces</code>.</p>\n         <p>A filter expression can target traced requests that hit specific service nodes or\n      edges, have errors, or come from a known user. For example, the following filter expression\n      targets traces that pass through <code>api.example.com</code>:</p>\n         <p>\n            <code>service(\"api.example.com\")</code>\n         </p>\n         <p>This filter expression finds traces that have an annotation named <code>account</code>\n      with the value <code>12345</code>:</p>\n         <p>\n            <code>annotation.account = \"12345\"</code>\n         </p>\n         <p>For a full list of indexed fields and keywords that you can use in filter expressions,\n      see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-console.html#xray-console-filters\">Use filter\n        expressions</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TraceSummaries",
@@ -3287,7 +3547,7 @@
                 "TimeRangeType": {
                     "target": "com.amazonaws.xray#TimeRangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId, Event (trace update time), or Service (segment end time).</p>"
+                        "smithy.api#documentation": "<p>Query trace summaries by TraceId (trace start time), Event (trace update time), or Service (trace segment end time).</p>"
                     }
                 },
                 "Sampling": {
@@ -3349,6 +3609,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.xray#GraphLink": {
+            "type": "structure",
+            "members": {
+                "ReferenceType": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRelationship of a trace to the corresponding service.\n</p>"
+                    }
+                },
+                "SourceTraceId": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSource trace of a link relationship.\n</p>"
+                    }
+                },
+                "DestinationTraceIds": {
+                    "target": "com.amazonaws.xray#TraceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nDestination traces of a link relationship.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe relation between two services.\n</p>"
             }
         },
         "com.amazonaws.xray#Group": {
@@ -3530,6 +3816,72 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about an HTTP request.</p>"
+            }
+        },
+        "com.amazonaws.xray#IndexingRule": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.xray#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The name of the indexing rule.\n</p>"
+                    }
+                },
+                "ModifiedAt": {
+                    "target": "com.amazonaws.xray#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nDisplays when the rule was last modified, in Unix time seconds.\n</p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.xray#IndexingRuleValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The indexing rule.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nRule used to determine the server-side sampling rate for spans ingested through the CloudWatchLogs destination and indexed by X-Ray.\n</p>"
+            }
+        },
+        "com.amazonaws.xray#IndexingRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.xray#IndexingRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.xray#IndexingRuleValue": {
+            "type": "union",
+            "members": {
+                "Probabilistic": {
+                    "target": "com.amazonaws.xray#ProbabilisticRuleValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Indexing rule configuration that is used to probabilistically  sample traceIds.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  The indexing rule configuration.\n</p>"
+            }
+        },
+        "com.amazonaws.xray#IndexingRuleValueUpdate": {
+            "type": "union",
+            "members": {
+                "Probabilistic": {
+                    "target": "com.amazonaws.xray#ProbabilisticRuleValueUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Indexing rule configuration that is used to probabilistically  sample traceIds.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Update to an indexing rule.\n</p>"
             }
         },
         "com.amazonaws.xray#Insight": {
@@ -3932,6 +4284,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.xray#LinksList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.xray#GraphLink"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.xray#ListResourcePolicies": {
             "type": "operation",
             "input": {
@@ -3989,6 +4353,93 @@
                     "target": "com.amazonaws.xray#ResourcePolicyNextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Pagination token. Not currently supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.xray#ListRetrievedTraces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#ListRetrievedTracesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#ListRetrievedTracesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Retrieves a list of traces for a given <code>RetrievalToken</code> from the CloudWatch log group generated by Transaction Search. For information on what each trace returns, see <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html\">BatchGetTraces</a>.\n</p>\n         <p>This API does not initiate a retrieval job. To start a trace retrieval, use <code>StartTraceRetrieval</code>, which generates the required <code>RetrievalToken</code>.</p>\n         <p>\n    When the <code>RetrievalStatus</code> is not <i>COMPLETE</i>, the API will return an empty response. Retry the request once the retrieval has completed to access the full list of traces.</p>\n         <p>For cross-account observability, this API can retrieve traces from linked accounts when CloudWatch log is the destination across relevant accounts. For more details, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>\n         <p>For retrieving data from X-Ray directly as opposed to the Transaction-Search Log group, see <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html\">BatchGetTraces</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListRetrievedTraces",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#ListRetrievedTracesRequest": {
+            "type": "structure",
+            "members": {
+                "RetrievalToken": {
+                    "target": "com.amazonaws.xray#RetrievalToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRetrieval token.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TraceFormat": {
+                    "target": "com.amazonaws.xray#TraceFormatType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFormat of the requested traces.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Specify the pagination token returned by a previous request to retrieve the next page of indexes.\n    \n    \n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#ListRetrievedTracesResult": {
+            "type": "structure",
+            "members": {
+                "RetrievalStatus": {
+                    "target": "com.amazonaws.xray#RetrievalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Status of the retrieval.\n  </p>"
+                    }
+                },
+                "TraceFormat": {
+                    "target": "com.amazonaws.xray#TraceFormatType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Format of the requested traces.\n  </p>"
+                    }
+                },
+                "Traces": {
+                    "target": "com.amazonaws.xray#TraceSpanList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nFull traces for the specified requests.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Specify the pagination token returned by a previous request to retrieve the next page of indexes.\n    \n    \n  </p>"
                     }
                 }
             },
@@ -4157,6 +4608,42 @@
                     "min": 1,
                     "max": 9999
                 }
+            }
+        },
+        "com.amazonaws.xray#ProbabilisticRuleValue": {
+            "type": "structure",
+            "members": {
+                "DesiredSamplingPercentage": {
+                    "target": "com.amazonaws.xray#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Configured sampling percentage of traceIds. Note that sampling can be subject to limits to ensure completeness of data.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActualSamplingPercentage": {
+                    "target": "com.amazonaws.xray#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Applied sampling percentage of traceIds. \n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  The indexing rule configuration for probabilistic sampling.\n</p>"
+            }
+        },
+        "com.amazonaws.xray#ProbabilisticRuleValueUpdate": {
+            "type": "structure",
+            "members": {
+                "DesiredSamplingPercentage": {
+                    "target": "com.amazonaws.xray#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Configured sampling percentage of traceIds. Note that sampling can be subject to limits to ensure completeness of data.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Update to the indexing rule configuration for probabilistic sampling.\n</p>"
             }
         },
         "com.amazonaws.xray#PutEncryptionConfig": {
@@ -4387,7 +4874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads segment documents to Amazon Web Services X-Ray. The <a href=\"https://docs.aws.amazon.com/xray/index.html\">X-Ray SDK</a> generates segment documents and sends them to the X-Ray daemon, which uploads them in\n      batches. A segment document can be a completed segment, an in-progress segment, or an array of\n      subsegments.</p>\n         <p>Segments must include the following fields. For the full segment document schema, see\n      <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">Amazon Web Services X-Ray\n        Segment Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>\n         <p class=\"title\">\n            <b>Required segment document fields</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code> - The name of the service that handled the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16\n          hexadecimal digits.</p>\n            </li>\n            <li>\n               <p>\n                  <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from\n          a single client request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in\n          epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or\n            <code>1.480615200010E9</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>end_time</code> - Time the segment or subsegment was closed. For example,\n            <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or\n            <code>in_progress</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to\n          record that a segment has been started, but is not complete. Send an in-progress segment when your application\n          receives a request that will take a long time to serve, to trace that the request was received. When the\n          response is sent, send the complete segment to overwrite the in-progress segment.</p>\n            </li>\n         </ul>\n         <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example,\n      1-58406520-a006649127e371903a2de979. This includes:</p>\n         <p class=\"title\">\n            <b>Trace ID Format</b>\n         </p>\n         <ul>\n            <li>\n               <p>The version number, for instance, <code>1</code>.</p>\n            </li>\n            <li>\n               <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For\n          example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds,\n          or <code>58406520</code> in hexadecimal.</p>\n            </li>\n            <li>\n               <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal\n          digits.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Uploads segment documents to Amazon Web Services X-Ray. \n      A segment document can be a completed segment, an in-progress segment, or an array of\n      subsegments.</p>\n         <p>Segments must include the following fields. For the full segment document schema, see\n      <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-api.html#xray-api-segmentdocuments.html\">Amazon Web Services X-Ray\n        Segment Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>\n         <p class=\"title\">\n            <b>Required segment document fields</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code> - The name of the service that handled the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16\n          hexadecimal digits.</p>\n            </li>\n            <li>\n               <p>\n                  <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from\n          a single client request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in\n          epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or\n            <code>1.480615200010E9</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>end_time</code> - Time the segment or subsegment was closed. For example,\n            <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or\n            <code>in_progress</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to\n          record that a segment has been started, but is not complete. Send an in-progress segment when your application\n          receives a request that will take a long time to serve, to trace that the request was received. When the\n          response is sent, send the complete segment to overwrite the in-progress segment.</p>\n            </li>\n         </ul>\n         <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example,\n      1-58406520-a006649127e371903a2de979. For trace IDs created by an X-Ray SDK, or by Amazon Web Services services \n      integrated with X-Ray, a trace ID includes:</p>\n         <p class=\"title\">\n            <b>Trace ID Format</b>\n         </p>\n         <ul>\n            <li>\n               <p>The version number, for instance, <code>1</code>.</p>\n            </li>\n            <li>\n               <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For\n          example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds,\n          or <code>58406520</code> in hexadecimal.</p>\n            </li>\n            <li>\n               <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal\n          digits.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Trace IDs created via OpenTelemetry have a different format based on the \n      <a href=\"https://www.w3.org/TR/trace-context/\">W3C Trace Context specification</a>.\n      A W3C trace ID must be formatted in the X-Ray trace ID format when sending to X-Ray. For example, a W3C\n      trace ID <code>4efaaf4d1e8720b39541901950019ee5</code> should be formatted as \n      <code>1-4efaaf4d-1e8720b39541901950019ee5</code> when sending to X-Ray. While X-Ray trace IDs include \n      the original request timestamp in Unix epoch time, this is not required or validated.\n    </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TraceSegments",
@@ -4660,6 +5147,111 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.xray#ResponseTimeRootCause"
+            }
+        },
+        "com.amazonaws.xray#RetrievalStatus": {
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMEOUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.xray#RetrievalToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1020
+                }
+            }
+        },
+        "com.amazonaws.xray#RetrievedService": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.xray#Service"
+                },
+                "Links": {
+                    "target": "com.amazonaws.xray#LinksList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n Relation between two 2 services.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Retrieved information about an application that processed requests, users that made requests, or downstream services, resources, and applications that an application used.\n</p>"
+            }
+        },
+        "com.amazonaws.xray#RetrievedServicesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.xray#RetrievedService"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.xray#RetrievedTrace": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.xray#TraceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The unique identifier for the span.\n</p>"
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.xray#NullableDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The length of time in seconds between the start time of the root span and the end time of the last span that completed.\n</p>"
+                    }
+                },
+                "Spans": {
+                    "target": "com.amazonaws.xray#SpanList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Spans that comprise the trace.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Retrieved collection of spans with matching trace IDs.\n</p>"
             }
         },
         "com.amazonaws.xray#RootCauseException": {
@@ -5138,7 +5730,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be\n      compiled from documents uploaded with <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html\">PutTraceSegments</a>, or an\n        <code>inferred</code> segment for a downstream service, generated from a subsegment sent by\n      the service that called it.</p>\n         <p>For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">Amazon Web Services X-Ray Segment\n      Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be\n      compiled from documents uploaded with <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html\">PutTraceSegments</a>, or an\n        <code>inferred</code> segment for a downstream service, generated from a subsegment sent by\n      the service that called it.</p>\n         <p>For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-api.html#xray-api-segmentdocuments\">Amazon Web Services X-Ray segment\n      documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.xray#SegmentDocument": {
@@ -5348,6 +5940,127 @@
                     "min": 0,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.xray#Span": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.xray#SpanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The span ID.</p>"
+                    }
+                },
+                "Document": {
+                    "target": "com.amazonaws.xray#SpanDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe span document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n  A span from a trace that has been ingested by the X-Ray service. A span represents a unit of work or an operation performed by a service.\n</p>"
+            }
+        },
+        "com.amazonaws.xray#SpanDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 204800
+                }
+            }
+        },
+        "com.amazonaws.xray#SpanId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.xray#SpanList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.xray#Span"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.xray#StartTraceRetrieval": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#StartTraceRetrievalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#StartTraceRetrievalResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Initiates a trace retrieval process using the specified time range and for the give trace IDs on Transaction Search generated by the CloudWatch log group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html\">Transaction Search</a>.\n</p>\n         <p>API returns a <code>RetrievalToken</code>, which can be used with <code>ListRetrievedTraces</code> or <code>GetRetrievedTracesGraph</code> to fetch results. Retrievals will time out after 60 minutes. To execute long time ranges, consider segmenting into multiple retrievals.</p>\n         <p>If you are using <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>, you can use this operation in a monitoring account to retrieve data from a linked source account, as long as both accounts have transaction search enabled.</p>\n         <p>For retrieving data from X-Ray directly as opposed to the Transaction-Search Log group, see <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html\">BatchGetTraces</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartTraceRetrieval",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#StartTraceRetrievalRequest": {
+            "type": "structure",
+            "members": {
+                "TraceIds": {
+                    "target": "com.amazonaws.xray#TraceIdListForRetrieval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Specify the trace IDs of the traces to be retrieved.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.xray#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The start of the time range to retrieve traces. The range is inclusive, so the specified start time is included in the query. \n  Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.xray#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The end of the time range to retrieve traces. The range is inclusive, so the specified end time is included in the query. Specified as epoch time,\n  the number of seconds since January 1, 1970, 00:00:00 UTC.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#StartTraceRetrievalResult": {
+            "type": "structure",
+            "members": {
+                "RetrievalToken": {
+                    "target": "com.amazonaws.xray#RetrievalToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRetrieval token.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.xray#String": {
@@ -5668,6 +6381,23 @@
                 "target": "com.amazonaws.xray#AvailabilityZoneDetail"
             }
         },
+        "com.amazonaws.xray#TraceFormatType": {
+            "type": "enum",
+            "members": {
+                "XRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XRAY"
+                    }
+                },
+                "OTEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTEL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.xray#TraceId": {
             "type": "string",
             "traits": {
@@ -5681,6 +6411,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.xray#TraceId"
+            }
+        },
+        "com.amazonaws.xray#TraceIdListForRetrieval": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.xray#TraceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.xray#TraceInstanceIds": {
@@ -5701,6 +6443,40 @@
                 "target": "com.amazonaws.xray#ResourceARNDetail"
             }
         },
+        "com.amazonaws.xray#TraceSegmentDestination": {
+            "type": "enum",
+            "members": {
+                "XRay": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XRay"
+                    }
+                },
+                "CloudWatchLogs": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudWatchLogs"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.xray#TraceSegmentDestinationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.xray#TraceSegmentDocument": {
             "type": "string"
         },
@@ -5708,6 +6484,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.xray#TraceSegmentDocument"
+            }
+        },
+        "com.amazonaws.xray#TraceSpanList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.xray#RetrievedTrace"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.xray#TraceSummary": {
@@ -6084,6 +6872,70 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.xray#UpdateIndexingRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#UpdateIndexingRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#UpdateIndexingRuleResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nModifies an indexing rule’s configuration.\n</p>\n         <p>Indexing rules are used for determining the sampling rate for spans indexed from CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html\">Transaction Search</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateIndexingRule",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#UpdateIndexingRuleRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.xray#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Name of the indexing rule to be updated.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.xray#IndexingRuleValueUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Rule configuration to be updated.\n  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#UpdateIndexingRuleResult": {
+            "type": "structure",
+            "members": {
+                "IndexingRule": {
+                    "target": "com.amazonaws.xray#IndexingRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Updated indexing rule.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.xray#UpdateSamplingRule": {
             "type": "operation",
             "input": {
@@ -6131,6 +6983,65 @@
                     "target": "com.amazonaws.xray#SamplingRuleRecord",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated rule definition and metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.xray#UpdateTraceSegmentDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.xray#UpdateTraceSegmentDestinationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.xray#UpdateTraceSegmentDestinationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.xray#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.xray#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n  Modifies the destination of data sent to <code>PutTraceSegments</code>. The Transaction Search feature requires the CloudWatchLogs destination. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html\">Transaction Search</a>.\n</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateTraceSegmentDestination",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.xray#UpdateTraceSegmentDestinationRequest": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.xray#TraceSegmentDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe configured destination of trace segments.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.xray#UpdateTraceSegmentDestinationResult": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.xray#TraceSegmentDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    The destination of the trace segments.\n  </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.xray#TraceSegmentDestinationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of the update.\n</p>"
                     }
                 }
             },

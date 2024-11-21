@@ -116,6 +116,9 @@
                     "target": "com.amazonaws.applicationautoscaling#DescribeScheduledActions"
                 },
                 {
+                    "target": "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecast"
+                },
+                {
                     "target": "com.amazonaws.applicationautoscaling#ListTagsForResource"
                 },
                 {
@@ -1129,6 +1132,28 @@
                 }
             }
         },
+        "com.amazonaws.applicationautoscaling#CapacityForecast": {
+            "type": "structure",
+            "members": {
+                "Timestamps": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingForecastTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamps for the data points, in UTC format.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingForecastValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The values of the data points.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A <code>GetPredictiveScalingForecast</code> call returns the capacity forecast for a\n         predictive scaling policy. This structure includes the data points for that capacity\n         forecast, along with the timestamps of those data points.\n      </p>"
+            }
+        },
         "com.amazonaws.applicationautoscaling#ConcurrentUpdateException": {
             "type": "structure",
             "members": {
@@ -1999,6 +2024,102 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecast": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecastRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecastResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationautoscaling#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.applicationautoscaling#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the forecast data for a predictive scaling policy.</p>\n         <p>Load forecasts are predictions of the hourly load values using historical load data\n         from CloudWatch and an analysis of historical trends. Capacity forecasts are represented as\n         predicted values for the minimum capacity that is needed on an hourly basis, based on\n         the hourly load forecast.</p>\n         <p>A minimum of 24 hours of data is required to create the initial forecasts. However,\n         having a full 14 days of historical data results in more accurate forecasts.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecastRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceNamespace": {
+                    "target": "com.amazonaws.applicationautoscaling#ServiceNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The namespace of the Amazon Web Services service that provides the resource. For a resource provided\n         by your own application or service, use <code>custom-resource</code> instead. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceIdMaxLen1600",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier of the resource.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScalableDimension": {
+                    "target": "com.amazonaws.applicationautoscaling#ScalableDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The scalable dimension.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyName": {
+                    "target": "com.amazonaws.applicationautoscaling#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.applicationautoscaling#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The inclusive start time of the time range for the forecast data to get. At most, the\n         date and time can be one year before the current date and time\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.applicationautoscaling#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The exclusive end time of the time range for the forecast data to get. The maximum\n         time duration between the start and end time is 30 days. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.applicationautoscaling#GetPredictiveScalingForecastResponse": {
+            "type": "structure",
+            "members": {
+                "LoadForecast": {
+                    "target": "com.amazonaws.applicationautoscaling#LoadForecasts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The load forecast.\n      </p>"
+                    }
+                },
+                "CapacityForecast": {
+                    "target": "com.amazonaws.applicationautoscaling#CapacityForecast",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The capacity forecast.\n      </p>"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.applicationautoscaling#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The time the forecast was made.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.applicationautoscaling#Id": {
             "type": "string",
             "traits": {
@@ -2121,6 +2242,41 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.applicationautoscaling#LoadForecast": {
+            "type": "structure",
+            "members": {
+                "Timestamps": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingForecastTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamps for the data points, in UTC format.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingForecastValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The values of the data points.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The metric specification for the load forecast.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A <code>GetPredictiveScalingForecast</code> call returns the load forecast for a\n         predictive scaling policy. This structure includes the data points for that load\n         forecast, along with the timestamps of those data points and the metric specification.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#LoadForecasts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#LoadForecast"
             }
         },
         "com.amazonaws.applicationautoscaling#MaxResults": {
@@ -2480,6 +2636,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TargetTrackingScaling"
                     }
+                },
+                "PredictiveScaling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PredictiveScaling"
+                    }
                 }
             }
         },
@@ -2501,7 +2663,431 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a predefined metric for a target tracking scaling policy to use with\n         Application Auto Scaling.</p>\n         <p>For more information, <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/monitor-cloudwatch-metrics.html#predefined-metrics\">Predefined metrics for target tracking scaling policies</a> in the\n            <i>Application Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Represents a predefined metric for a target tracking scaling policy to use with\n         Application Auto Scaling.</p>\n         <p>For more information, <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html#predefined-metrics\">Predefined metrics for target tracking scaling policies</a> in the\n            <i>Application Auto Scaling User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingCustomizedMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "MetricDataQueries": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDataQueries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         One or more metric data queries to provide data points for a metric specification.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Represents a CloudWatch metric of your choosing for a predictive scaling policy.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingForecastTimestamps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#TimestampType"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingForecastValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#MetricScale"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMaxCapacityBreachBehavior": {
+            "type": "enum",
+            "members": {
+                "HonorMaxCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HonorMaxCapacity"
+                    }
+                },
+                "IncreaseMaxCapacity": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IncreaseMaxCapacity"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMaxCapacityBuffer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetric": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the dimensions of the metric.\n      </p>"
+                    }
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the metric.\n      </p>"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The namespace of the metric.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes the scaling metric.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDataQueries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDataQuery"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDataQuery": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.applicationautoscaling#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A short name that identifies the object's results in the response. This name must be\n         unique among all <code>MetricDataQuery</code> objects specified for a single scaling\n         policy. If you are performing math expressions on this set of data, this name represents\n         that data and can serve as a variable in the mathematical expression. The valid\n         characters are letters, numbers, and underscores. The first character must be a\n         lowercase letter.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.applicationautoscaling#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The math expression to perform on the returned data, if this object is performing a\n         math expression. This expression can use the <code>Id</code> of the other metrics to\n         refer to those metrics, and can also use the <code>Id</code> of other expressions to use\n         the result of those expressions.\n      </p>\n         <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either\n         <code>Expression</code> or <code>MetricStat</code>, but not both.</p>"
+                    }
+                },
+                "MetricStat": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricStat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Information about the metric data to return.\n      </p>\n         <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either\n         <code>Expression</code> or <code>MetricStat</code>, but not both.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "com.amazonaws.applicationautoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A human-readable label for this metric or expression. This is especially useful if\n         this is a math expression, so that you know what the value represents.\n      </p>"
+                    }
+                },
+                "ReturnData": {
+                    "target": "com.amazonaws.applicationautoscaling#ReturnData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates whether to return the timestamps and raw data values of this metric.\n      </p>\n         <p>If you use any math expressions, specify <code>true</code> for this value for only the\n         final math expression that the metric specification is based on. You must specify\n         <code>false</code> for <code>ReturnData</code> for all the other metrics and\n         expressions used in the metric specification.</p>\n         <p>If you are only retrieving metrics and not performing any math expressions, do not\n         specify anything for <code>ReturnData</code>. This sets it to its default\n         (<code>true</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The metric data to return. Also defines whether this call is returning data for one\n         metric only, or whether it is performing a math expression on the values of returned\n         metric statistics to create a new time series. A time series is a series of data points,\n         each of which is associated with a timestamp.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimension": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the dimension.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimensionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The value of the dimension.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes the dimension of a metric.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimensionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimensionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricDimension"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "TargetValue": {
+                    "target": "com.amazonaws.applicationautoscaling#MetricScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies the target utilization.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PredefinedMetricPairSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedMetricPairSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.\n      </p>"
+                    }
+                },
+                "PredefinedScalingMetricSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedScalingMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The predefined scaling metric specification.\n      </p>"
+                    }
+                },
+                "PredefinedLoadMetricSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedLoadMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The predefined load metric specification.\n      </p>"
+                    }
+                },
+                "CustomizedScalingMetricSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingCustomizedMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The customized scaling metric specification.\n      </p>"
+                    }
+                },
+                "CustomizedLoadMetricSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingCustomizedMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The customized load metric specification.\n      </p>"
+                    }
+                },
+                "CustomizedCapacityMetricSpecification": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingCustomizedMetricSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The customized capacity metric specification.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         This structure specifies the metrics and target utilization settings for a predictive\n         scaling policy.\n      </p>\n         <p>You must specify either a metric pair, or a load metric and a scaling metric\n         individually. Specifying a metric pair instead of individual metrics provides a simpler\n         way to configure metrics for a scaling policy. You choose the metric pair, and the\n         policy automatically knows the correct sum and average statistics to use for the load\n         metric and the scaling metric.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricSpecifications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricSpecification"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricStat": {
+            "type": "structure",
+            "members": {
+                "Metric": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The CloudWatch metric to return, including the metric name, namespace, and dimensions. To\n         get the exact metric name, namespace, and dimensions, inspect the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.    \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stat": {
+                    "target": "com.amazonaws.applicationautoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The statistic to return. It can include any CloudWatch statistic or extended statistic. For\n         a list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.\n      </p>\n         <p>The most commonly used metrics for predictive scaling are <code>Average</code> and\n         <code>Sum</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unit to use for the returned data points. For a complete list of the units that\n         CloudWatch supports, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a> \n         data type in the <i>Amazon CloudWatch API Reference</i>.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         This structure defines the CloudWatch metric to return, along with the statistic and unit.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMetricUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1023
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingMode": {
+            "type": "enum",
+            "members": {
+                "ForecastOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ForecastOnly"
+                    }
+                },
+                "ForecastAndScale": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ForecastAndScale"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingPolicyConfiguration": {
+            "type": "structure",
+            "members": {
+                "MetricSpecifications": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         This structure includes the metrics and target utilization to use for predictive scaling.\n      </p>\n         <p>This is an array, but we currently only support a single metric specification. That\n         is, you can specify a target value and a single metric pair, or a target value and one\n         scaling metric and one load metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The predictive scaling mode. Defaults to <code>ForecastOnly</code> if not specified.\n      </p>"
+                    }
+                },
+                "SchedulingBufferTime": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingSchedulingBufferTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The amount of time, in seconds, that the start time can be advanced.\n      </p>\n         <p>The value must be less than the forecast interval duration of 3600 seconds (60\n         minutes). Defaults to 300 seconds if not specified. </p>"
+                    }
+                },
+                "MaxCapacityBreachBehavior": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMaxCapacityBreachBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Defines the behavior that should be applied if the forecast capacity approaches or\n         exceeds the maximum capacity. Defaults to\n         <code>HonorMaxCapacity</code> if not specified.\n      </p>"
+                    }
+                },
+                "MaxCapacityBuffer": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMaxCapacityBuffer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The size of the capacity buffer to use when the forecast capacity is close to or\n         exceeds the maximum capacity. The value is specified as a percentage relative to the\n         forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer,\n         such that if the forecast capacity is 50, and the maximum capacity is 40, then the\n         effective maximum capacity is 55.\n      </p>\n         <p>Required if the <code>MaxCapacityBreachBehavior</code> property is set to\n         <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Represents a predictive scaling policy configuration.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedLoadMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "PredefinedMetricType": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The metric type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceLabel": {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A label that uniquely identifies a target group.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes a load metric for a predictive scaling policy.\n      </p>\n         <p>When returned in the output of <code>DescribePolicies</code>, it indicates that a\n         predictive scaling policy uses individually specified load and scaling metrics instead\n         of a metric pair.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedMetricPairSpecification": {
+            "type": "structure",
+            "members": {
+                "PredefinedMetricType": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates which metrics to use. There are two different types of metrics for each\n         metric type: one is a load metric and one is a scaling metric.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceLabel": {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A label that uniquely identifies a specific target group from which to determine\n         the total and average request count.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Represents a metric pair for a predictive scaling policy.\n      </p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingPredefinedScalingMetricSpecification": {
+            "type": "structure",
+            "members": {
+                "PredefinedMetricType": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The metric type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceLabel": {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A label that uniquely identifies a specific target group from which to determine\n         the average request count. \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes a scaling metric for a predictive scaling policy.\n      </p>\n         <p>When returned in the output of <code>DescribePolicies</code>, it indicates that a\n         predictive scaling policy uses individually specified load and scaling metrics instead\n         of a metric pair.</p>"
+            }
+        },
+        "com.amazonaws.applicationautoscaling#PredictiveScalingSchedulingBufferTime": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3600
+                }
             }
         },
         "com.amazonaws.applicationautoscaling#PutScalingPolicy": {
@@ -2617,6 +3203,12 @@
                     "target": "com.amazonaws.applicationautoscaling#TargetTrackingScalingPolicyConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>A target tracking scaling policy. Includes support for predefined or customized\n         metrics.</p>\n         <p>This parameter is required if you are creating a policy and the policy type is\n            <code>TargetTrackingScaling</code>.</p>"
+                    }
+                },
+                "PredictiveScalingPolicyConfiguration": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingPolicyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The configuration of the predictive scaling policy.\n      </p>"
                     }
                 }
             },
@@ -3122,6 +3714,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "PredictedCapacity": {
+                    "target": "com.amazonaws.applicationautoscaling#ResourceCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The predicted capacity of the scalable target.\n      </p>"
+                    }
+                },
                 "RoleARN": {
                     "target": "com.amazonaws.applicationautoscaling#ResourceIdMaxLen1600",
                     "traits": {
@@ -3378,6 +3976,12 @@
                     "target": "com.amazonaws.applicationautoscaling#TargetTrackingScalingPolicyConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>A target tracking scaling policy.</p>"
+                    }
+                },
+                "PredictiveScalingPolicyConfiguration": {
+                    "target": "com.amazonaws.applicationautoscaling#PredictiveScalingPolicyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The predictive scaling policy configuration.\n      </p>"
                     }
                 },
                 "Alarms": {

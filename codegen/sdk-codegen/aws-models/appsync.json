@@ -3881,6 +3881,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AMAZON_EVENTBRIDGE"
                     }
+                },
+                "AMAZON_BEDROCK_RUNTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_BEDROCK_RUNTIME"
+                    }
                 }
             }
         },
