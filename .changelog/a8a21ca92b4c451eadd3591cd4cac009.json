@@ -1,8 +1,0 @@
-{
-    "id": "a8a21ca9-2b4c-451e-add3-591cd4cac009",
-    "type": "feature",
-    "description": "Add support for the Amazon Bedrock Runtime.",
-    "modules": [
-        "service/appsync"
-    ]
-}

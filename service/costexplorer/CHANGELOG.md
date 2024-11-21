@@ -1,3 +1,7 @@
+# v1.44.0 (2024-11-21)
+
+* **Feature**: This release introduces three new APIs that enable you to estimate the cost, coverage, and utilization impact of Savings Plans you plan to purchase. The three APIs are StartCommitmentPurchaseAnalysis, GetCommitmentPurchaseAnalysis, and ListCommitmentPurchaseAnalyses.
+
 # v1.43.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

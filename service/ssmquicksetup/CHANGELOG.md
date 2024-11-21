@@ -1,3 +1,7 @@
+# v1.3.0 (2024-11-21)
+
+* **Feature**: Add methods that retrieve details about deployed configurations: ListConfigurations, GetConfiguration
+
 # v1.2.7 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

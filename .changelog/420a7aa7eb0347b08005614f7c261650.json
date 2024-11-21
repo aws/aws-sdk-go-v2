@@ -1,8 +1,0 @@
-{
-    "id": "420a7aa7-eb03-47b0-8005-614f7c261650",
-    "type": "feature",
-    "description": "Application Auto Scaling now supports Predictive Scaling to proactively increase the desired capacity ahead of predicted demand, ensuring improved availability and responsiveness for customers' applications. This feature is currently only made available for Amazon ECS Service scalable targets.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}

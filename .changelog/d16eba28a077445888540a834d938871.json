@@ -1,8 +1,0 @@
-{
-    "id": "d16eba28-a077-4458-8854-0a834d938871",
-    "type": "feature",
-    "description": "Adds support for Origin Selection between EMPv2 origins based on media quality score.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

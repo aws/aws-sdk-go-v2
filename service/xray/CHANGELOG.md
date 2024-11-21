@@ -1,3 +1,7 @@
+# v1.30.0 (2024-11-21)
+
+* **Feature**: AWS X-Ray introduces Transaction Search APIs, enabling span ingestion into CloudWatch Logs for high-scale trace data indexing. These APIs support span-level queries, trace graph generation, and metric correlation for deeper application insights.
+
 # v1.29.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

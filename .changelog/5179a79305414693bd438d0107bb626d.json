@@ -1,8 +1,0 @@
-{
-    "id": "5179a793-0541-4693-bd43-8d0107bb626d",
-    "type": "feature",
-    "description": "Added support for custom domain names for private APIs.",
-    "modules": [
-        "service/apigateway"
-    ]
-}

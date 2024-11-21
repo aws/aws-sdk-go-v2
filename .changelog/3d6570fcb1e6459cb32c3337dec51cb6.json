@@ -1,8 +1,0 @@
-{
-    "id": "3d6570fc-b1e6-459c-b32c-3337dec51cb6",
-    "type": "feature",
-    "description": "Added support for providing high-level overviews of managed nodes and previewing the potential impact of a runbook execution.",
-    "modules": [
-        "service/ssm"
-    ]
-}

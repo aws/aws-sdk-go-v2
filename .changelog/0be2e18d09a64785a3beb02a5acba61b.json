@@ -1,8 +1,0 @@
-{
-    "id": "0be2e18d-09a6-4785-a3be-b02a5acba61b",
-    "type": "feature",
-    "description": "Add support for conditional deletes for the S3 DeleteObject and DeleteObjects APIs. Add support for write offset bytes option used to append to objects with the S3 PutObject API.",
-    "modules": [
-        "service/s3"
-    ]
-}

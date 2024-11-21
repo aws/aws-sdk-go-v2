@@ -1,8 +1,0 @@
-{
-    "id": "b0faa1e9-ce5c-431d-a509-99321d2d4e55",
-    "type": "feature",
-    "description": "This release adds support for AWS User Notifications Contacts. You can now configure and view email contacts for AWS User Notifications using the AWS SDK.",
-    "modules": [
-        "service/notificationscontacts"
-    ]
-}

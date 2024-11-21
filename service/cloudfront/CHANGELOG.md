@@ -1,3 +1,7 @@
+# v1.43.0 (2024-11-21)
+
+* **Feature**: Adds support for Origin Selection between EMPv2 origins based on media quality score.
+
 # v1.42.0 (2024-11-20)
 
 * **Feature**: Add support for gRPC, VPC origins, and Anycast IP Lists. Allow LoggingConfig IncludeCookies to be set regardless of whether the LoggingConfig is enabled.

@@ -1,8 +1,0 @@
-{
-    "id": "30948245-ad19-4140-9b58-ee9b0aad7f8c",
-    "type": "feature",
-    "description": "This release adds support for AWS User Notifications. You can now configure and view notifications from AWS services in a central location using the AWS SDK.",
-    "modules": [
-        "service/notifications"
-    ]
-}

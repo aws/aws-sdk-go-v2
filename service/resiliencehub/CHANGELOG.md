@@ -1,3 +1,7 @@
+# v1.28.0 (2024-11-21)
+
+* **Feature**: AWS Resilience Hub's new summary view visually represents applications' resilience through charts, enabling efficient resilience management. It provides a consolidated view of the app portfolio's resilience state and allows data export for custom stakeholder reporting.
+
 # v1.27.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

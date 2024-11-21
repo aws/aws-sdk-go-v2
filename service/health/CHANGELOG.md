@@ -1,3 +1,7 @@
+# v1.29.0 (2024-11-21)
+
+* **Feature**: Adds metadata property to an AffectedEntity.
+
 # v1.28.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

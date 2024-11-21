@@ -1,8 +1,0 @@
-{
-    "id": "962fc92a-79e2-43da-90fc-63207b4010d2",
-    "type": "feature",
-    "description": "AWS Resilience Hub's new summary view visually represents applications' resilience through charts, enabling efficient resilience management. It provides a consolidated view of the app portfolio's resilience state and allows data export for custom stakeholder reporting.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

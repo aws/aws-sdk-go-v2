@@ -1,8 +1,0 @@
-{
-    "id": "71dccf14-3d71-4b66-8538-80862200028b",
-    "type": "feature",
-    "description": "Adds support for metrics for event source mappings for AWS Lambda",
-    "modules": [
-        "service/lambda"
-    ]
-}

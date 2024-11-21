@@ -1,8 +1,0 @@
-{
-    "id": "32014052-c372-48fd-b2fb-811bbe2895d2",
-    "type": "feature",
-    "description": "This release introduces new APIs for creating and managing CloudTrail Lake dashboards. It also adds support for resource-based policies on CloudTrail EventDataStore and Dashboard resource.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

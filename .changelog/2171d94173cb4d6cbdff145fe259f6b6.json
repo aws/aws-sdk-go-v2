@@ -1,8 +1,0 @@
-{
-    "id": "2171d941-73cb-4d6c-bdff-145fe259f6b6",
-    "type": "feature",
-    "description": "Add methods that retrieve details about deployed configurations: ListConfigurations, GetConfiguration",
-    "modules": [
-        "service/ssmquicksetup"
-    ]
-}

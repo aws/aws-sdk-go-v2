@@ -1,8 +1,0 @@
-{
-    "id": "45c2aded-d18b-4c0c-a93d-d3dadb1586f0",
-    "type": "feature",
-    "description": "General Availability (GA) release of AWS IoT Device Management - Commands, to trigger light-weight remote actions on targeted devices",
-    "modules": [
-        "service/iotjobsdataplane"
-    ]
-}
