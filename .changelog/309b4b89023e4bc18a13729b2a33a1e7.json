@@ -1,0 +1,8 @@
+{
+    "id": "309b4b89-023e-4bc1-8a13-729b2a33a1e7",
+    "type": "feature",
+    "description": "Added support to modify the engine type for existing ElastiCache Users and User Groups. Customers can now modify the engine type from redis to valkey.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

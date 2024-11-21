@@ -643,6 +643,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.Integer(*v.MaximumRetryAttempts)
 	}
 
+	if v.MetricsConfig != nil {
+		ok := object.Key("MetricsConfig")
+		if err := awsRestjson1_serializeDocumentEventSourceMappingMetricsConfig(v.MetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ParallelizationFactor != nil {
 		ok := object.Key("ParallelizationFactor")
 		ok.Integer(*v.ParallelizationFactor)
@@ -5815,6 +5822,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.Integer(*v.MaximumRetryAttempts)
 	}
 
+	if v.MetricsConfig != nil {
+		ok := object.Key("MetricsConfig")
+		if err := awsRestjson1_serializeDocumentEventSourceMappingMetricsConfig(v.MetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ParallelizationFactor != nil {
 		ok := object.Key("ParallelizationFactor")
 		ok.Integer(*v.ParallelizationFactor)
@@ -6692,6 +6706,31 @@ func awsRestjson1_serializeDocumentEphemeralStorage(v *types.EphemeralStorage, v
 	if v.Size != nil {
 		ok := object.Key("Size")
 		ok.Integer(*v.Size)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventSourceMappingMetricList(v []types.EventSourceMappingMetric, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventSourceMappingMetricsConfig(v *types.EventSourceMappingMetricsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Metrics != nil {
+		ok := object.Key("Metrics")
+		if err := awsRestjson1_serializeDocumentEventSourceMappingMetricList(v.Metrics, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

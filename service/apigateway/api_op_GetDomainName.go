@@ -37,6 +37,10 @@ type GetDomainNameInput struct {
 	// This member is required.
 	DomainName *string
 
+	//  The identifier for the domain name resource. Supported only for private custom
+	// domain names.
+	DomainNameId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -45,17 +49,16 @@ type GetDomainNameInput struct {
 type GetDomainNameOutput struct {
 
 	// The reference to an Amazon Web Services-managed certificate that will be used
-	// by edge-optimized endpoint for this domain name. Certificate Manager is the only
-	// supported source.
+	// by edge-optimized endpoint or private endpoint for this domain name. Certificate
+	// Manager is the only supported source.
 	CertificateArn *string
 
-	// The name of the certificate that will be used by edge-optimized endpoint for
-	// this domain name.
+	// The name of the certificate that will be used by edge-optimized endpoint or
+	// private endpoint for this domain name.
 	CertificateName *string
 
-	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded. API Gateway doesn't change this value if you
-	// update the certificate.
+	// The timestamp when the certificate that was used by edge-optimized endpoint or
+	// private endpoint for this domain name was uploaded.
 	CertificateUploadDate *time.Time
 
 	// The domain name of the Amazon CloudFront distribution associated with this
@@ -74,6 +77,13 @@ type GetDomainNameOutput struct {
 	// The custom domain name as an API host name, for example, my-api.example.com .
 	DomainName *string
 
+	// The ARN of the domain name. Supported only for private custom domain names.
+	DomainNameArn *string
+
+	// The identifier for the domain name resource. Supported only for private custom
+	// domain names.
+	DomainNameId *string
+
 	// The status of the DomainName migration. The valid values are AVAILABLE and
 	// UPDATING . If the status is UPDATING , the domain cannot be modified further
 	// until the existing operation is complete. If it is AVAILABLE , the domain can be
@@ -88,6 +98,12 @@ type GetDomainNameOutput struct {
 	// domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
+	// A stringified JSON policy document that applies to the API Gateway Management
+	// service for this DomainName. This policy document controls access for access
+	// association sources to create domain name access associations with this
+	// DomainName. Supported only for private custom domain names.
+	ManagementPolicy *string
+
 	// The mutual TLS authentication configuration for a custom domain name. If
 	// specified, API Gateway performs two-way authentication between the client and
 	// the server. Clients must present a trusted certificate to access your API.
@@ -97,6 +113,11 @@ type GetDomainNameOutput struct {
 	// custom domain. Only required when configuring mutual TLS and using an ACM
 	// imported or private CA certificate ARN as the regionalCertificateArn.
 	OwnershipVerificationCertificateArn *string
+
+	// A stringified JSON policy document that applies to the execute-api service for
+	// this DomainName regardless of the caller and Method configuration. Supported
+	// only for private custom domain names.
+	Policy *string
 
 	// The reference to an Amazon Web Services-managed certificate that will be used
 	// for validating the regional domain name. Certificate Manager is the only

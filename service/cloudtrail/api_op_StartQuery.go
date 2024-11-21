@@ -38,6 +38,9 @@ type StartQueryInput struct {
 	//  The URI for the S3 bucket where CloudTrail delivers the query results.
 	DeliveryS3Uri *string
 
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
+
 	//  The alias that identifies a query template.
 	QueryAlias *string
 
@@ -51,6 +54,9 @@ type StartQueryInput struct {
 }
 
 type StartQueryOutput struct {
+
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
 
 	// The ID of the started query.
 	QueryId *string

@@ -1,0 +1,8 @@
+{
+    "id": "f1c93f6a-441a-4bc3-823a-2fb24f9f0506",
+    "type": "feature",
+    "description": "Adds metadata property to an AffectedEntity.",
+    "modules": [
+        "service/health"
+    ]
+}

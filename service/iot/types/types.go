@@ -1250,6 +1250,160 @@ type CodeSigningSignature struct {
 	noSmithyDocumentSerde
 }
 
+// The result value of the command execution. The device can use the result field
+// to share additional details about the execution such as a return value of a
+// remote function call.
+//
+// This field is not applicable if you use the AWS-IoT-FleetWise namespace.
+type CommandExecutionResult struct {
+
+	// An attribute of type Boolean. For example:
+	//
+	//     "BOOL": true
+	B *bool
+
+	// An attribute of type Binary.
+	BIN []byte
+
+	// An attribute of type String. For example:
+	//
+	//     "S": "Hello"
+	S *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a particular command execution.
+type CommandExecutionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the command execution.
+	CommandArn *string
+
+	// The date and time at which the command completed executing on the target device.
+	CompletedAt *time.Time
+
+	// The date and time at which the command execution was created for the target
+	// device.
+	CreatedAt *time.Time
+
+	// The unique identifier of the command execution.
+	ExecutionId *string
+
+	// The date and time at which the command started executing on the target device.
+	StartedAt *time.Time
+
+	// The status of the command executions.
+	Status CommandExecutionStatus
+
+	// The Amazon Resource Name (ARN) of the target device for which the command is
+	// being executed.
+	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A map of key-value pairs that describe the command.
+type CommandParameter struct {
+
+	// The name of a specific parameter used in a command and command execution.
+	//
+	// This member is required.
+	Name *string
+
+	// The default value used to describe the command. This is the value assumed by
+	// the parameter if no other value is assigned to it.
+	DefaultValue *CommandParameterValue
+
+	// The description of the command parameter.
+	Description *string
+
+	// The value used to describe the command. When you assign a value to a parameter,
+	// it will override any default value that you had already specified.
+	Value *CommandParameterValue
+
+	noSmithyDocumentSerde
+}
+
+// The range of possible values that's used to describe a specific command
+// parameter.
+//
+// The commandParameterValue can only have one of the below fields listed.
+type CommandParameterValue struct {
+
+	// An attribute of type Boolean. For example:
+	//
+	//     "BOOL": true
+	B *bool
+
+	// An attribute of type Binary. For example:
+	//
+	//     "B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+	BIN []byte
+
+	// An attribute of type Double (Sixty-Four Bits).
+	D *float64
+
+	// An attribute of type Integer (Thirty-Two Bits).
+	I *int32
+
+	// An attribute of type Long.
+	L *int64
+
+	// An attribute of type String. For example:
+	//
+	//     "S": "Hello"
+	S *string
+
+	// An attribute of type unsigned long.
+	UL *string
+
+	noSmithyDocumentSerde
+}
+
+// The command payload object that contains the instructions for the device to
+// process.
+type CommandPayload struct {
+
+	// The static payload file for the command.
+	Content []byte
+
+	// The content type that specifies the format type of the payload file. This field
+	// must use a type/subtype format, such as application/json . For information about
+	// various content types, see [Common MIME types].
+	//
+	// [Common MIME types]: https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types
+	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a particular command resource.
+type CommandSummary struct {
+
+	// The Amazon Resource Name (ARN) of the command.
+	CommandArn *string
+
+	// The unique identifier of the command.
+	CommandId *string
+
+	// The timestamp, when the command was created.
+	CreatedAt *time.Time
+
+	// Indicates whether the command has been deprecated.
+	Deprecated *bool
+
+	// The display name of the command.
+	DisplayName *string
+
+	// The timestamp, when the command was last updated.
+	LastUpdatedAt *time.Time
+
+	// Indicates whether the command is pending deletion.
+	PendingDeletion *bool
+
+	noSmithyDocumentSerde
+}
+
 // Configuration.
 type Configuration struct {
 
@@ -3725,18 +3879,20 @@ type ServerCertificateConfig struct {
 	// response. The OCSP responder must sign responses using either this authorized
 	// responder certificate or the issuing certificate, depending on whether the ARN
 	// is provided or not. The certificate must be in the same Amazon Web Services
-	// region and account as the domain configuration.
+	// account and region as the domain configuration.
 	OcspAuthorizedResponderArn *string
 
 	// The Amazon Resource Name (ARN) for a Lambda function that acts as a Request for
 	// Comments (RFC) 6960-compliant Online Certificate Status Protocol (OCSP)
-	// responder, supporting basic OCSP responses. The Lambda function accepts a JSON
-	// string that's Base64-encoded. Therefore, you must convert your OCSP response,
-	// which is typically in the Distinguished Encoding Rules (DER) format, into a JSON
-	// string that's Base64-encoded. The Lambda function's response is also a
-	// Base64-encoded JSON string and the response payload must not exceed 8 kilobytes
-	// (KiB) in size. The Lambda function must be in the same Amazon Web Services
-	// region and account as the domain configuration.
+	// responder, supporting basic OCSP responses. The Lambda function accepts a
+	// base64-encoding of the OCSP request in the Distinguished Encoding Rules (DER)
+	// format. The Lambda function's response is also a base64-encoded OCSP response in
+	// the DER format. The response size must not exceed 4 kilobytes (KiB). The Lambda
+	// function must be in the same Amazon Web Services account and region as the
+	// domain configuration. For more information, see [Configuring server certificate OCSP for private endpoints in Amazon Web Services IoT Core]from the Amazon Web Services
+	// IoT Core developer guide.
+	//
+	// [Configuring server certificate OCSP for private endpoints in Amazon Web Services IoT Core]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html#iot-custom-endpoints-cert-config-ocsp-private-endpoint.html
 	OcspLambdaArn *string
 
 	noSmithyDocumentSerde
@@ -3901,6 +4057,22 @@ type Statistics struct {
 
 	// The variance of the aggregated field values.
 	Variance *float64
+
+	noSmithyDocumentSerde
+}
+
+// Provide additional context about the status of a command execution using a
+// reason code and description.
+type StatusReason struct {
+
+	// A code that provides additional context for the command execution status.
+	//
+	// This member is required.
+	ReasonCode *string
+
+	// A literal string for devices to optionally provide additional information about
+	// the reason code for a command execution status.
+	ReasonDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -4385,6 +4557,21 @@ type ThingTypeProperties struct {
 
 	// The description of the thing type.
 	ThingTypeDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that can be used to list command executions for a device that started
+// or completed before or after a particular date and time.
+type TimeFilter struct {
+
+	// Filter to display command executions that started or completed only after a
+	// particular date and time.
+	After *string
+
+	// Filter to display command executions that started or completed only before a
+	// particular date and time.
+	Before *string
 
 	noSmithyDocumentSerde
 }

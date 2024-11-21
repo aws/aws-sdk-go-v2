@@ -15,6 +15,7 @@
         "api_op_DescribeScalingActivities.go",
         "api_op_DescribeScalingPolicies.go",
         "api_op_DescribeScheduledActions.go",
+        "api_op_GetPredictiveScalingForecast.go",
         "api_op_ListTagsForResource.go",
         "api_op_PutScalingPolicy.go",
         "api_op_PutScheduledAction.go",

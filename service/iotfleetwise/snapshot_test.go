@@ -158,6 +158,18 @@ func TestCheckSnapshot_CreateSignalCatalog(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateStateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVehicle(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVehicle(context.Background(), nil, func(o *Options) {
@@ -223,6 +235,18 @@ func TestCheckSnapshot_DeleteSignalCatalog(t *testing.T) {
 	_, err := svc.DeleteSignalCatalog(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteSignalCatalog")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteStateTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -343,6 +367,18 @@ func TestCheckSnapshot_GetSignalCatalog(t *testing.T) {
 	_, err := svc.GetSignalCatalog(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSignalCatalog")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStateTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -518,6 +554,18 @@ func TestCheckSnapshot_ListSignalCatalogs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListStateTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStateTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListStateTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -674,6 +722,18 @@ func TestCheckSnapshot_UpdateSignalCatalog(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateStateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateVehicle(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateVehicle(context.Background(), nil, func(o *Options) {
@@ -781,6 +841,18 @@ func TestUpdateSnapshot_CreateSignalCatalog(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateStateTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVehicle(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVehicle(context.Background(), nil, func(o *Options) {
@@ -846,6 +918,18 @@ func TestUpdateSnapshot_DeleteSignalCatalog(t *testing.T) {
 	_, err := svc.DeleteSignalCatalog(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteSignalCatalog")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteStateTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -966,6 +1050,18 @@ func TestUpdateSnapshot_GetSignalCatalog(t *testing.T) {
 	_, err := svc.GetSignalCatalog(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSignalCatalog")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStateTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1141,6 +1237,18 @@ func TestUpdateSnapshot_ListSignalCatalogs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListStateTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStateTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListStateTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1398,18 @@ func TestUpdateSnapshot_UpdateSignalCatalog(t *testing.T) {
 	_, err := svc.UpdateSignalCatalog(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateSignalCatalog")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateStateTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStateTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateStateTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

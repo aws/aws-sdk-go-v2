@@ -346,6 +346,9 @@ func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 // The following is the format of an event data store ARN:
 // arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
 //
+// The following is the format of a dashboard ARN:
+// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
+//
 // The following is the format of a channel ARN:
 // arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 type CloudTrailARNInvalidException struct {
@@ -884,8 +887,12 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorFault() sm
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the policy on the S3 bucket or KMS key does not
-// have sufficient permissions for the operation.
+// For the CreateTrail PutInsightSelectors , UpdateTrail , StartQuery , and
+// StartImport operations, this exception is thrown when the policy on the S3
+// bucket or KMS key does not have sufficient permissions for the operation.
+//
+// For all other operations, this exception is thrown when the policy for the KMS
+// key does not have sufficient permissions for the operation.
 type InsufficientEncryptionPolicyException struct {
 	Message *string
 
@@ -2065,8 +2072,16 @@ func (e *QueryIdNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 
 //	This exception is thrown when the provided resource does not exist, or the ARN
 //
-// format of the resource is not valid. The following is the valid format for a
-// resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
+// format of the resource is not valid.
+//
+// The following is the format of an event data store ARN:
+// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+//
+// The following is the format of a dashboard ARN:
+// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
+//
+// The following is the format of a channel ARN:
+// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 type ResourceARNNotValidException struct {
 	Message *string
 
@@ -2147,16 +2162,6 @@ func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { retur
 //	This exception is thrown when the resouce-based policy has syntax errors, or
 //
 // contains a principal that is not valid.
-//
-// The following are requirements for the resource policy:
-//
-//   - Contains only one action: cloudtrail-data:PutAuditEvents
-//
-//   - Contains at least one statement. The policy can have a maximum of 20
-//     statements.
-//
-//   - Each statement contains at least one principal. A statement can have a
-//     maximum of 50 principals.
 type ResourcePolicyNotValidException struct {
 	Message *string
 
@@ -2235,8 +2240,38 @@ func (e *S3BucketDoesNotExistException) ErrorCode() string {
 }
 func (e *S3BucketDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of tags per trail, event data store, or channel has exceeded the
-// permitted amount. Currently, the limit is 50.
+//	This exception is thrown when the quota is exceeded. For information about
+//
+// CloudTrail quotas, see [Service quotas]in the Amazon Web Services General Reference.
+//
+// [Service quotas]: https://docs.aws.amazon.com/general/latest/gr/ct.html#limits_cloudtrail
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of tags per trail, event data store, dashboard, or channel has
+// exceeded the permitted amount. Currently, the limit is 50.
 type TagsLimitExceededException struct {
 	Message *string
 

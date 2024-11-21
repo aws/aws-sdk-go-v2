@@ -338,6 +338,18 @@ func TestCheckSnapshot_DescribeDraftAppVersionResourcesImportStatus(t *testing.T
 	}
 }
 
+func TestCheckSnapshot_DescribeMetricsExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetricsExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMetricsExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeResiliencyPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeResiliencyPolicy(context.Background(), nil, func(o *Options) {
@@ -518,6 +530,18 @@ func TestCheckSnapshot_ListAppVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRecommendationTemplates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRecommendationTemplates(context.Background(), nil, func(o *Options) {
@@ -679,6 +703,18 @@ func TestCheckSnapshot_StartAppAssessment(t *testing.T) {
 	_, err := svc.StartAppAssessment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAppAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartMetricsExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMetricsExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMetricsExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1057,6 +1093,18 @@ func TestUpdateSnapshot_DescribeDraftAppVersionResourcesImportStatus(t *testing.
 	}
 }
 
+func TestUpdateSnapshot_DescribeMetricsExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMetricsExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMetricsExport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeResiliencyPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeResiliencyPolicy(context.Background(), nil, func(o *Options) {
@@ -1237,6 +1285,18 @@ func TestUpdateSnapshot_ListAppVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRecommendationTemplates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRecommendationTemplates(context.Background(), nil, func(o *Options) {
@@ -1398,6 +1458,18 @@ func TestUpdateSnapshot_StartAppAssessment(t *testing.T) {
 	_, err := svc.StartAppAssessment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAppAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMetricsExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMetricsExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMetricsExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

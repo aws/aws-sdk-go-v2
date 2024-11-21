@@ -1,0 +1,8 @@
+{
+    "id": "1f955481-d9a0-4a70-83dc-729fca5f901b",
+    "type": "feature",
+    "description": "Adds \"Create field indexes to improve query performance and reduce scan volume\" and \"Transform logs during ingestion\". Updates documentation for \"PutLogEvents with Entity\".",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

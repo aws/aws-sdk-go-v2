@@ -35,7 +35,7 @@ func (c *Client) ListSignalCatalogs(ctx context.Context, params *ListSignalCatal
 
 type ListSignalCatalogsInput struct {
 
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
 	// A pagination token for the next set of results.
@@ -165,7 +165,7 @@ func (c *Client) addOperationListSignalCatalogsMiddlewares(stack *middleware.Sta
 // ListSignalCatalogsPaginatorOptions is the paginator options for
 // ListSignalCatalogs
 type ListSignalCatalogsPaginatorOptions struct {
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

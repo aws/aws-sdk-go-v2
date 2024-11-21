@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Indicates the list of compliance drifts that were detected while running an
-// assessment.
+// List of compliance drifts that were detected while running an assessment.
 func (c *Client) ListAppAssessmentComplianceDrifts(ctx context.Context, params *ListAppAssessmentComplianceDriftsInput, optFns ...func(*Options)) (*ListAppAssessmentComplianceDriftsOutput, error) {
 	if params == nil {
 		params = &ListAppAssessmentComplianceDriftsInput{}
@@ -39,7 +38,7 @@ type ListAppAssessmentComplianceDriftsInput struct {
 	// This member is required.
 	AssessmentArn *string
 
-	// Indicates the maximum number of compliance drifts requested.
+	// Maximum number of compliance drifts requested.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -168,7 +167,7 @@ func (c *Client) addOperationListAppAssessmentComplianceDriftsMiddlewares(stack 
 // ListAppAssessmentComplianceDriftsPaginatorOptions is the paginator options for
 // ListAppAssessmentComplianceDrifts
 type ListAppAssessmentComplianceDriftsPaginatorOptions struct {
-	// Indicates the maximum number of compliance drifts requested.
+	// Maximum number of compliance drifts requested.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

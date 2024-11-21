@@ -873,6 +873,120 @@ func awsAwsjson11_deserializeOpErrorDescribeScheduledActions(response *smithyhtt
 	}
 }
 
+type awsAwsjson11_deserializeOpGetPredictiveScalingForecast struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetPredictiveScalingForecast) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetPredictiveScalingForecast) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetPredictiveScalingForecast(response, &metadata)
+	}
+	output := &GetPredictiveScalingForecastOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetPredictiveScalingForecastOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetPredictiveScalingForecast(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListTagsForResource struct {
 }
 
@@ -1982,6 +2096,47 @@ func awsAwsjson11_deserializeDocumentAlarms(v *[]types.Alarm, value interface{})
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCapacityForecast(v **types.CapacityForecast, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapacityForecast
+	if *v == nil {
+		sv = &types.CapacityForecast{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Timestamps":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingForecastTimestamps(&sv.Timestamps, value); err != nil {
+				return err
+			}
+
+		case "Values":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingForecastValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConcurrentUpdateException(v **types.ConcurrentUpdateException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2256,6 +2411,86 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLoadForecast(v **types.LoadForecast, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LoadForecast
+	if *v == nil {
+		sv = &types.LoadForecast{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MetricSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricSpecification(&sv.MetricSpecification, value); err != nil {
+				return err
+			}
+
+		case "Timestamps":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingForecastTimestamps(&sv.Timestamps, value); err != nil {
+				return err
+			}
+
+		case "Values":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingForecastValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLoadForecasts(v *[]types.LoadForecast, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LoadForecast
+	if *v == nil {
+		cv = []types.LoadForecast{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LoadForecast
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLoadForecast(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -2544,6 +2779,799 @@ func awsAwsjson11_deserializeDocumentPredefinedMetricSpecification(v **types.Pre
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPredictiveScalingCustomizedMetricSpecification(v **types.PredictiveScalingCustomizedMetricSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingCustomizedMetricSpecification
+	if *v == nil {
+		sv = &types.PredictiveScalingCustomizedMetricSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MetricDataQueries":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricDataQueries(&sv.MetricDataQueries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingForecastTimestamps(v *[]time.Time, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []time.Time
+	if *v == nil {
+		cv = []time.Time{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col time.Time
+		if value != nil {
+			switch jtv := value.(type) {
+			case json.Number:
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				col = smithytime.ParseEpochSeconds(f64)
+
+			default:
+				return fmt.Errorf("expected TimestampType to be a JSON Number, got %T instead", value)
+
+			}
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingForecastValues(v *[]float64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []float64
+	if *v == nil {
+		cv = []float64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col float64
+		if value != nil {
+			switch jtv := value.(type) {
+			case json.Number:
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				col = f64
+
+			case string:
+				var f64 float64
+				switch {
+				case strings.EqualFold(jtv, "NaN"):
+					f64 = math.NaN()
+
+				case strings.EqualFold(jtv, "Infinity"):
+					f64 = math.Inf(1)
+
+				case strings.EqualFold(jtv, "-Infinity"):
+					f64 = math.Inf(-1)
+
+				default:
+					return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+				}
+				col = f64
+
+			default:
+				return fmt.Errorf("expected MetricScale to be a JSON Number, got %T instead", value)
+
+			}
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetric(v **types.PredictiveScalingMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingMetric
+	if *v == nil {
+		sv = &types.PredictiveScalingMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Dimensions":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricDimensions(&sv.Dimensions, value); err != nil {
+				return err
+			}
+
+		case "MetricName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricName to be of type string, got %T instead", value)
+				}
+				sv.MetricName = ptr.String(jtv)
+			}
+
+		case "Namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricNamespace to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricDataQueries(v *[]types.PredictiveScalingMetricDataQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PredictiveScalingMetricDataQuery
+	if *v == nil {
+		cv = []types.PredictiveScalingMetricDataQuery{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PredictiveScalingMetricDataQuery
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricDataQuery(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricDataQuery(v **types.PredictiveScalingMetricDataQuery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingMetricDataQuery
+	if *v == nil {
+		sv = &types.PredictiveScalingMetricDataQuery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Expression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "Label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		case "MetricStat":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricStat(&sv.MetricStat, value); err != nil {
+				return err
+			}
+
+		case "ReturnData":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ReturnData to be of type *bool, got %T instead", value)
+				}
+				sv.ReturnData = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricDimension(v **types.PredictiveScalingMetricDimension, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingMetricDimension
+	if *v == nil {
+		sv = &types.PredictiveScalingMetricDimension{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricDimensionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricDimensionValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricDimensions(v *[]types.PredictiveScalingMetricDimension, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PredictiveScalingMetricDimension
+	if *v == nil {
+		cv = []types.PredictiveScalingMetricDimension{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PredictiveScalingMetricDimension
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricDimension(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricSpecification(v **types.PredictiveScalingMetricSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingMetricSpecification
+	if *v == nil {
+		sv = &types.PredictiveScalingMetricSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomizedCapacityMetricSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingCustomizedMetricSpecification(&sv.CustomizedCapacityMetricSpecification, value); err != nil {
+				return err
+			}
+
+		case "CustomizedLoadMetricSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingCustomizedMetricSpecification(&sv.CustomizedLoadMetricSpecification, value); err != nil {
+				return err
+			}
+
+		case "CustomizedScalingMetricSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingCustomizedMetricSpecification(&sv.CustomizedScalingMetricSpecification, value); err != nil {
+				return err
+			}
+
+		case "PredefinedLoadMetricSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingPredefinedLoadMetricSpecification(&sv.PredefinedLoadMetricSpecification, value); err != nil {
+				return err
+			}
+
+		case "PredefinedMetricPairSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingPredefinedMetricPairSpecification(&sv.PredefinedMetricPairSpecification, value); err != nil {
+				return err
+			}
+
+		case "PredefinedScalingMetricSpecification":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingPredefinedScalingMetricSpecification(&sv.PredefinedScalingMetricSpecification, value); err != nil {
+				return err
+			}
+
+		case "TargetValue":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TargetValue = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TargetValue = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected MetricScale to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricSpecifications(v *[]types.PredictiveScalingMetricSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PredictiveScalingMetricSpecification
+	if *v == nil {
+		cv = []types.PredictiveScalingMetricSpecification{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PredictiveScalingMetricSpecification
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricSpecification(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingMetricStat(v **types.PredictiveScalingMetricStat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingMetricStat
+	if *v == nil {
+		sv = &types.PredictiveScalingMetricStat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Metric":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetric(&sv.Metric, value); err != nil {
+				return err
+			}
+
+		case "Stat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.Stat = ptr.String(jtv)
+			}
+
+		case "Unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricUnit to be of type string, got %T instead", value)
+				}
+				sv.Unit = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingPolicyConfiguration(v **types.PredictiveScalingPolicyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingPolicyConfiguration
+	if *v == nil {
+		sv = &types.PredictiveScalingPolicyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxCapacityBreachBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMaxCapacityBreachBehavior to be of type string, got %T instead", value)
+				}
+				sv.MaxCapacityBreachBehavior = types.PredictiveScalingMaxCapacityBreachBehavior(jtv)
+			}
+
+		case "MaxCapacityBuffer":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMaxCapacityBuffer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxCapacityBuffer = ptr.Int32(int32(i64))
+			}
+
+		case "MetricSpecifications":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingMetricSpecifications(&sv.MetricSpecifications, value); err != nil {
+				return err
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.PredictiveScalingMode(jtv)
+			}
+
+		case "SchedulingBufferTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingSchedulingBufferTime to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SchedulingBufferTime = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingPredefinedLoadMetricSpecification(v **types.PredictiveScalingPredefinedLoadMetricSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingPredefinedLoadMetricSpecification
+	if *v == nil {
+		sv = &types.PredictiveScalingPredefinedLoadMetricSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PredefinedMetricType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricType to be of type string, got %T instead", value)
+				}
+				sv.PredefinedMetricType = ptr.String(jtv)
+			}
+
+		case "ResourceLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceLabel to be of type string, got %T instead", value)
+				}
+				sv.ResourceLabel = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingPredefinedMetricPairSpecification(v **types.PredictiveScalingPredefinedMetricPairSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingPredefinedMetricPairSpecification
+	if *v == nil {
+		sv = &types.PredictiveScalingPredefinedMetricPairSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PredefinedMetricType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricType to be of type string, got %T instead", value)
+				}
+				sv.PredefinedMetricType = ptr.String(jtv)
+			}
+
+		case "ResourceLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceLabel to be of type string, got %T instead", value)
+				}
+				sv.ResourceLabel = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPredictiveScalingPredefinedScalingMetricSpecification(v **types.PredictiveScalingPredefinedScalingMetricSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PredictiveScalingPredefinedScalingMetricSpecification
+	if *v == nil {
+		sv = &types.PredictiveScalingPredefinedScalingMetricSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PredefinedMetricType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredictiveScalingMetricType to be of type string, got %T instead", value)
+				}
+				sv.PredefinedMetricType = ptr.String(jtv)
+			}
+
+		case "ResourceLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceLabel to be of type string, got %T instead", value)
+				}
+				sv.ResourceLabel = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2655,6 +3683,19 @@ func awsAwsjson11_deserializeDocumentScalableTarget(v **types.ScalableTarget, va
 					return err
 				}
 				sv.MinCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "PredictedCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResourceCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PredictedCapacity = ptr.Int32(int32(i64))
 			}
 
 		case "ResourceId":
@@ -3092,6 +4133,11 @@ func awsAwsjson11_deserializeDocumentScalingPolicy(v **types.ScalingPolicy, valu
 					return fmt.Errorf("expected PolicyType to be of type string, got %T instead", value)
 				}
 				sv.PolicyType = types.PolicyType(jtv)
+			}
+
+		case "PredictiveScalingPolicyConfiguration":
+			if err := awsAwsjson11_deserializeDocumentPredictiveScalingPolicyConfiguration(&sv.PredictiveScalingPolicyConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ResourceId":
@@ -4399,6 +5445,63 @@ func awsAwsjson11_deserializeOpDocumentDescribeScheduledActionsOutput(v **Descri
 		case "ScheduledActions":
 			if err := awsAwsjson11_deserializeDocumentScheduledActions(&sv.ScheduledActions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetPredictiveScalingForecastOutput(v **GetPredictiveScalingForecastOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetPredictiveScalingForecastOutput
+	if *v == nil {
+		sv = &GetPredictiveScalingForecastOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CapacityForecast":
+			if err := awsAwsjson11_deserializeDocumentCapacityForecast(&sv.CapacityForecast, value); err != nil {
+				return err
+			}
+
+		case "LoadForecast":
+			if err := awsAwsjson11_deserializeDocumentLoadForecasts(&sv.LoadForecast, value); err != nil {
+				return err
+			}
+
+		case "UpdateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TimestampType to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:

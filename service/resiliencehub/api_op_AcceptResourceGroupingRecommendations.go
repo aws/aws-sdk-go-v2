@@ -40,8 +40,8 @@ type AcceptResourceGroupingRecommendationsInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Indicates the list of resource grouping recommendations you want to include in
-	// your application.
+	// List of resource grouping recommendations you want to include in your
+	// application.
 	//
 	// This member is required.
 	Entries []types.AcceptGroupingRecommendationEntry
@@ -61,8 +61,8 @@ type AcceptResourceGroupingRecommendationsOutput struct {
 	// This member is required.
 	AppArn *string
 
-	// Indicates the list of resource grouping recommendations that could not be
-	// included in your application.
+	// List of resource grouping recommendations that could not be included in your
+	// application.
 	//
 	// This member is required.
 	FailedEntries []types.FailedGroupingRecommendationEntry

@@ -12,7 +12,13 @@ import (
 	"time"
 )
 
-// Retrieves information about a campaign.
+//	Retrieves information about a campaign.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
 func (c *Client) GetCampaign(ctx context.Context, params *GetCampaignInput, optFns ...func(*Options)) (*GetCampaignOutput, error) {
 	if params == nil {
 		params = &GetCampaignInput{}
@@ -55,8 +61,11 @@ type GetCampaignOutput struct {
 	// midnight UTC time).
 	CreationTime *time.Time
 
-	// The destination where the campaign sends data. You can choose to send data to
-	// be stored in Amazon S3 or Amazon Timestream.
+	// The destination where the campaign sends data. You can send data to an MQTT
+	// topic, or store it in Amazon S3 or Amazon Timestream.
+	//
+	// MQTT is the publish/subscribe messaging protocol used by Amazon Web Services
+	// IoT to communicate with your devices.
 	//
 	// Amazon S3 optimizes the cost of data storage and provides additional mechanisms
 	// to use vehicle data, such as data lakes, centralized data storage, data
@@ -68,6 +77,9 @@ type GetCampaignOutput struct {
 
 	//  A list of vehicle attributes associated with the campaign.
 	DataExtraDimensions []string
+
+	// The data partitions associated with the signals collected from the vehicle.
+	DataPartitions []types.DataPartition
 
 	// The description of the campaign.
 	Description *string
@@ -100,6 +112,9 @@ type GetCampaignOutput struct {
 
 	//  Information about a list of signals to collect data on.
 	SignalsToCollect []types.SignalInformation
+
+	// Information about a list of signals to fetch data from.
+	SignalsToFetch []types.SignalFetchInformation
 
 	//  Whether to store collected data after a vehicle lost a connection with the
 	// cloud. After a connection is re-established, the data is automatically forwarded

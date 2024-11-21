@@ -81,7 +81,7 @@ type App struct {
 	// This member is required.
 	AppArn *string
 
-	// Date and time when the app was created.
+	// Date and time when the application was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -642,6 +642,26 @@ type ComponentRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the condition based on which you want to filter the metrics.
+type Condition struct {
+
+	// Indicates the field in the metric.
+	//
+	// This member is required.
+	Field *string
+
+	// Indicates the type of operator or comparison to be used when evaluating a
+	// condition against the specified field.
+	//
+	// This member is required.
+	Operator ConditionOperatorType
+
+	// Indicates the value or data against which a condition is evaluated.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a recommendation configuration.
 type ConfigRecommendation struct {
 
@@ -855,6 +875,22 @@ type FailurePolicy struct {
 	//
 	// This member is required.
 	RtoInSecs int32
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the field or attribute of a resource or data structure on which a
+// condition is being applied or evaluated.
+type Field struct {
+
+	// Name of the field.
+	//
+	// This member is required.
+	Name *string
+
+	// (Optional) Indicates the type of aggregation or summary operation (such as Sum,
+	// Average, and so on) to be performed on a particular field or set of data.
+	Aggregation FieldAggregationType
 
 	noSmithyDocumentSerde
 }
@@ -1327,7 +1363,7 @@ type ResiliencyPolicy struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	PolicyArn *string
 
-	// The description for the policy.
+	// Description of the resiliency policy.
 	PolicyDescription *string
 
 	// The name of the policy
@@ -1559,6 +1595,23 @@ type SopRecommendation struct {
 
 	// Status of the recommended standard operating procedure.
 	RecommendationStatus RecommendationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the sorting order of the fields in the metrics.
+type Sort struct {
+
+	// Indicates the order in which you want to sort the metrics. By default, the list
+	// is sorted in ascending order. To sort the list in descending order, set this
+	// field to False.
+	//
+	// This member is required.
+	Field *string
+
+	// Indicates the name or identifier of the field or attribute that should be used
+	// as the basis for sorting the metrics.
+	Ascending *bool
 
 	noSmithyDocumentSerde
 }

@@ -48,8 +48,8 @@ import (
 //
 // This operation is valid for Valkey and Redis OSS only.
 //
-// [Scaling self-designed clusters]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
-// [Creating a Subnet Group]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html
+// [Scaling self-designed clusters]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Scaling.html
+// [Creating a Subnet Group]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SubnetGroups.Creating.html
 // [Amazon Service Limits]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
 func (c *Client) CreateReplicationGroup(ctx context.Context, params *CreateReplicationGroupInput, optFns ...func(*Options)) (*CreateReplicationGroupOutput, error) {
 	if params == nil {
@@ -233,7 +233,7 @@ type CreateReplicationGroupInput struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The name of the parameter group to associate with this replication group. If
@@ -259,7 +259,7 @@ type CreateReplicationGroupInput struct {
 	// If you're going to launch your cluster in an Amazon VPC, you need to create a
 	// subnet group before you start creating a cluster. For more information, see [Subnets and Subnet Groups].
 	//
-	// [Subnets and Subnet Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
+	// [Subnets and Subnet Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SubnetGroups.html
 	CacheSubnetGroupName *string
 
 	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
@@ -274,7 +274,7 @@ type CreateReplicationGroupInput struct {
 	// using the r6gd node type. This parameter must be set to true when using r6gd
 	// nodes. For more information, see [Data tiering].
 	//
-	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
+	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html
 	DataTieringEnabled *bool
 
 	// The name of the cache engine to be used for the clusters in this replication
@@ -290,7 +290,7 @@ type CreateReplicationGroupInput struct {
 	// to use an earlier engine version, you must delete the existing cluster or
 	// replication group and create it anew with the earlier engine version.
 	//
-	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
+	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html#VersionManagement
 	EngineVersion *string
 
 	// The name of the Global datastore
@@ -313,7 +313,7 @@ type CreateReplicationGroupInput struct {
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
 	// more information, see [Minimizing Downtime: Multi-AZ].
 	//
-	// [Minimizing Downtime: Multi-AZ]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
+	// [Minimizing Downtime: Multi-AZ]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/AutoFailover.html
 	MultiAZEnabled *bool
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using

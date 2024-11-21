@@ -1,0 +1,8 @@
+{
+    "id": "1f87085f-c572-456f-812a-9ba102b8a75d",
+    "type": "documentation",
+    "description": "This feature adds support for enabling zonal shift on cross-zone enabled Application Load Balancer, as well as modifying HTTP request and response headers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

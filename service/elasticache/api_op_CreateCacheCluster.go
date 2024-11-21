@@ -176,7 +176,7 @@ type CreateCacheClusterInput struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The name of the parameter group to associate with this cluster. If this
@@ -199,7 +199,7 @@ type CreateCacheClusterInput struct {
 	// If you're going to launch your cluster in an Amazon VPC, you need to create a
 	// subnet group before you start creating a cluster. For more information, see [Subnets and Subnet Groups].
 	//
-	// [Subnets and Subnet Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
+	// [Subnets and Subnet Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SubnetGroups.html
 	CacheSubnetGroupName *string
 
 	// The name of the cache engine to be used for this cluster.
@@ -215,7 +215,7 @@ type CreateCacheClusterInput struct {
 	// version, you must delete the existing cluster or replication group and create it
 	// anew with the earlier engine version.
 	//
-	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
+	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html#VersionManagement
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6

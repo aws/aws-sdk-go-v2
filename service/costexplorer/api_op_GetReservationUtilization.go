@@ -62,6 +62,12 @@ type GetReservationUtilizationInput struct {
 	//
 	//   - SERVICE
 	//
+	// If not specified, the SERVICE filter defaults to Amazon Elastic Compute Cloud -
+	//   Compute. Supported values for SERVICE are Amazon Elastic Compute Cloud -
+	//   Compute, Amazon Relational Database Service, Amazon ElastiCache, Amazon
+	//   Redshift, and Amazon Elasticsearch Service. The value for the SERVICE filter
+	//   should not exceed "1".
+	//
 	//   - SCOPE
 	//
 	//   - TENANCY

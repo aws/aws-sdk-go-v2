@@ -48,7 +48,17 @@ type CreateDecoderManifestInput struct {
 	// This member is required.
 	Name *string
 
-	//  A brief description of the decoder manifest.
+	// Use default decoders for all unmapped signals in the model. You don't need to
+	// provide any detailed decoding information.
+	//
+	// Access to certain Amazon Web Services IoT FleetWise features is currently
+	// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+	// Developer Guide.
+	//
+	// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+	DefaultForUnmappedSignals types.DefaultForUnmappedSignalsType
+
+	// A brief description of the decoder manifest.
 	Description *string
 
 	//  A list of information about available network interfaces.

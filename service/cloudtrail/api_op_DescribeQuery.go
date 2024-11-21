@@ -16,8 +16,10 @@ import (
 // were delivered to an S3 bucket, the response also provides the S3 URI and the
 // delivery status.
 //
-// You must specify either a QueryID or a QueryAlias . Specifying the QueryAlias
-// parameter returns information about the last query run for the alias.
+// You must specify either QueryId or QueryAlias . Specifying the QueryAlias
+// parameter returns information about the last query run for the alias. You can
+// provide RefreshId along with QueryAlias to view the query results of a
+// dashboard query for the specified RefreshId .
 func (c *Client) DescribeQuery(ctx context.Context, params *DescribeQueryInput, optFns ...func(*Options)) (*DescribeQueryOutput, error) {
 	if params == nil {
 		params = &DescribeQueryInput{}
@@ -41,11 +43,17 @@ type DescribeQueryInput struct {
 	// Deprecated: EventDataStore is no longer required by DescribeQueryRequest
 	EventDataStore *string
 
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
+
 	//  The alias that identifies a query template.
 	QueryAlias *string
 
 	// The query ID.
 	QueryId *string
+
+	//  The ID of the dashboard refresh.
+	RefreshId *string
 
 	noSmithyDocumentSerde
 }
@@ -61,6 +69,9 @@ type DescribeQueryOutput struct {
 
 	// The error message returned if a query failed.
 	ErrorMessage *string
+
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
 
 	//  The prompt used for a generated query. For information about generated
 	// queries, see [Create CloudTrail Lake queries from natural language prompts]in the CloudTrail user guide.

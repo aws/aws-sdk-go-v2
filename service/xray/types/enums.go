@@ -76,6 +76,33 @@ func (InsightState) Values() []InsightState {
 	}
 }
 
+type RetrievalStatus string
+
+// Enum values for RetrievalStatus
+const (
+	RetrievalStatusScheduled RetrievalStatus = "SCHEDULED"
+	RetrievalStatusRunning   RetrievalStatus = "RUNNING"
+	RetrievalStatusComplete  RetrievalStatus = "COMPLETE"
+	RetrievalStatusFailed    RetrievalStatus = "FAILED"
+	RetrievalStatusCancelled RetrievalStatus = "CANCELLED"
+	RetrievalStatusTimeout   RetrievalStatus = "TIMEOUT"
+)
+
+// Values returns all known values for RetrievalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalStatus) Values() []RetrievalStatus {
+	return []RetrievalStatus{
+		"SCHEDULED",
+		"RUNNING",
+		"COMPLETE",
+		"FAILED",
+		"CANCELLED",
+		"TIMEOUT",
+	}
+}
+
 type SamplingStrategyName string
 
 // Enum values for SamplingStrategyName
@@ -113,5 +140,63 @@ func (TimeRangeType) Values() []TimeRangeType {
 		"TraceId",
 		"Event",
 		"Service",
+	}
+}
+
+type TraceFormatType string
+
+// Enum values for TraceFormatType
+const (
+	TraceFormatTypeXray TraceFormatType = "XRAY"
+	TraceFormatTypeOtel TraceFormatType = "OTEL"
+)
+
+// Values returns all known values for TraceFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TraceFormatType) Values() []TraceFormatType {
+	return []TraceFormatType{
+		"XRAY",
+		"OTEL",
+	}
+}
+
+type TraceSegmentDestination string
+
+// Enum values for TraceSegmentDestination
+const (
+	TraceSegmentDestinationXRay           TraceSegmentDestination = "XRay"
+	TraceSegmentDestinationCloudWatchLogs TraceSegmentDestination = "CloudWatchLogs"
+)
+
+// Values returns all known values for TraceSegmentDestination. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TraceSegmentDestination) Values() []TraceSegmentDestination {
+	return []TraceSegmentDestination{
+		"XRay",
+		"CloudWatchLogs",
+	}
+}
+
+type TraceSegmentDestinationStatus string
+
+// Enum values for TraceSegmentDestinationStatus
+const (
+	TraceSegmentDestinationStatusPending TraceSegmentDestinationStatus = "PENDING"
+	TraceSegmentDestinationStatusActive  TraceSegmentDestinationStatus = "ACTIVE"
+)
+
+// Values returns all known values for TraceSegmentDestinationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TraceSegmentDestinationStatus) Values() []TraceSegmentDestinationStatus {
+	return []TraceSegmentDestinationStatus{
+		"PENDING",
+		"ACTIVE",
 	}
 }

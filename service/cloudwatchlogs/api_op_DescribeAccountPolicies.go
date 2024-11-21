@@ -44,6 +44,10 @@ type DescribeAccountPoliciesInput struct {
 	// If you omit this parameter, only the policy in the current account is returned.
 	AccountIdentifiers []string
 
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
+
 	// Use this parameter to limit the returned policies to only the policy with the
 	// name that you specify.
 	PolicyName *string
@@ -56,6 +60,10 @@ type DescribeAccountPoliciesOutput struct {
 	// An array of structures that contain information about the CloudWatch Logs
 	// account policies that match the specified filters.
 	AccountPolicies []types.AccountPolicy
+
+	// The token to use when requesting the next set of items. The token expires after
+	// 24 hours.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

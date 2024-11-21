@@ -2894,6 +2894,30 @@ func TestCheckSnapshot_DescribeByoipCidrs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCapacityBlockExtensionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlockExtensionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityBlockExtensionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityBlockExtensionOfferings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlockExtensionOfferings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityBlockExtensionOfferings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCapacityBlockOfferings(context.Background(), nil, func(o *Options) {
@@ -7022,6 +7046,18 @@ func TestCheckSnapshot_PurchaseCapacityBlock(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PurchaseCapacityBlockExtension(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PurchaseCapacityBlockExtension(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PurchaseCapacityBlockExtension")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PurchaseHostReservation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PurchaseHostReservation(context.Background(), nil, func(o *Options) {
@@ -10602,6 +10638,30 @@ func TestUpdateSnapshot_DescribeByoipCidrs(t *testing.T) {
 	_, err := svc.DescribeByoipCidrs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeByoipCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityBlockExtensionHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlockExtensionHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityBlockExtensionHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityBlockExtensionOfferings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityBlockExtensionOfferings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityBlockExtensionOfferings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14730,6 +14790,18 @@ func TestUpdateSnapshot_PurchaseCapacityBlock(t *testing.T) {
 	_, err := svc.PurchaseCapacityBlock(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PurchaseCapacityBlock")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PurchaseCapacityBlockExtension(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PurchaseCapacityBlockExtension(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PurchaseCapacityBlockExtension")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

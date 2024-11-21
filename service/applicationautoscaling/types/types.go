@@ -23,6 +23,25 @@ type Alarm struct {
 	noSmithyDocumentSerde
 }
 
+//	A GetPredictiveScalingForecast call returns the capacity forecast for a
+//
+// predictive scaling policy. This structure includes the data points for that
+// capacity forecast, along with the timestamps of those data points.
+type CapacityForecast struct {
+
+	//  The timestamps for the data points, in UTC format.
+	//
+	// This member is required.
+	Timestamps []time.Time
+
+	//  The values of the data points.
+	//
+	// This member is required.
+	Values []float64
+
+	noSmithyDocumentSerde
+}
+
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
 // policy to use with Application Auto Scaling.
 //
@@ -77,6 +96,30 @@ type CustomizedMetricSpecification struct {
 	//
 	// [MetricDatum]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
 	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+//	A GetPredictiveScalingForecast call returns the load forecast for a predictive
+//
+// scaling policy. This structure includes the data points for that load forecast,
+// along with the timestamps of those data points and the metric specification.
+type LoadForecast struct {
+
+	//  The metric specification for the load forecast.
+	//
+	// This member is required.
+	MetricSpecification *PredictiveScalingMetricSpecification
+
+	//  The timestamps for the data points, in UTC format.
+	//
+	// This member is required.
+	Timestamps []time.Time
+
+	//  The values of the data points.
+	//
+	// This member is required.
+	Values []float64
 
 	noSmithyDocumentSerde
 }
@@ -138,7 +181,7 @@ type NotScaledReason struct {
 //
 // For more information, [Predefined metrics for target tracking scaling policies] in the Application Auto Scaling User Guide.
 //
-// [Predefined metrics for target tracking scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/monitor-cloudwatch-metrics.html#predefined-metrics
+// [Predefined metrics for target tracking scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html#predefined-metrics
 type PredefinedMetricSpecification struct {
 
 	// The metric type. The ALBRequestCountPerTarget metric type applies only to Spot
@@ -168,6 +211,268 @@ type PredefinedMetricSpecification struct {
 	//
 	// [DescribeTargetGroups]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
 	// [DescribeLoadBalancers]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+	ResourceLabel *string
+
+	noSmithyDocumentSerde
+}
+
+//	Represents a CloudWatch metric of your choosing for a predictive scaling
+//
+// policy.
+type PredictiveScalingCustomizedMetricSpecification struct {
+
+	//  One or more metric data queries to provide data points for a metric
+	// specification.
+	//
+	// This member is required.
+	MetricDataQueries []PredictiveScalingMetricDataQuery
+
+	noSmithyDocumentSerde
+}
+
+// Describes the scaling metric.
+type PredictiveScalingMetric struct {
+
+	//  Describes the dimensions of the metric.
+	Dimensions []PredictiveScalingMetricDimension
+
+	//  The name of the metric.
+	MetricName *string
+
+	//  The namespace of the metric.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+//	The metric data to return. Also defines whether this call is returning data
+//
+// for one metric only, or whether it is performing a math expression on the values
+// of returned metric statistics to create a new time series. A time series is a
+// series of data points, each of which is associated with a timestamp.
+type PredictiveScalingMetricDataQuery struct {
+
+	//  A short name that identifies the object's results in the response. This name
+	// must be unique among all MetricDataQuery objects specified for a single scaling
+	// policy. If you are performing math expressions on this set of data, this name
+	// represents that data and can serve as a variable in the mathematical expression.
+	// The valid characters are letters, numbers, and underscores. The first character
+	// must be a lowercase letter.
+	//
+	// This member is required.
+	Id *string
+
+	//  The math expression to perform on the returned data, if this object is
+	// performing a math expression. This expression can use the Id of the other
+	// metrics to refer to those metrics, and can also use the Id of other expressions
+	// to use the result of those expressions.
+	//
+	// Conditional: Within each MetricDataQuery object, you must specify either
+	// Expression or MetricStat , but not both.
+	Expression *string
+
+	//  A human-readable label for this metric or expression. This is especially
+	// useful if this is a math expression, so that you know what the value represents.
+	Label *string
+
+	//  Information about the metric data to return.
+	//
+	// Conditional: Within each MetricDataQuery object, you must specify either
+	// Expression or MetricStat , but not both.
+	MetricStat *PredictiveScalingMetricStat
+
+	//  Indicates whether to return the timestamps and raw data values of this metric.
+	//
+	// If you use any math expressions, specify true for this value for only the final
+	// math expression that the metric specification is based on. You must specify
+	// false for ReturnData for all the other metrics and expressions used in the
+	// metric specification.
+	//
+	// If you are only retrieving metrics and not performing any math expressions, do
+	// not specify anything for ReturnData . This sets it to its default ( true ).
+	ReturnData *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the dimension of a metric.
+type PredictiveScalingMetricDimension struct {
+
+	//  The name of the dimension.
+	//
+	// This member is required.
+	Name *string
+
+	//  The value of the dimension.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+//	This structure specifies the metrics and target utilization settings for a
+//
+// predictive scaling policy.
+//
+// You must specify either a metric pair, or a load metric and a scaling metric
+// individually. Specifying a metric pair instead of individual metrics provides a
+// simpler way to configure metrics for a scaling policy. You choose the metric
+// pair, and the policy automatically knows the correct sum and average statistics
+// to use for the load metric and the scaling metric.
+type PredictiveScalingMetricSpecification struct {
+
+	//  Specifies the target utilization.
+	//
+	// This member is required.
+	TargetValue *float64
+
+	//  The customized capacity metric specification.
+	CustomizedCapacityMetricSpecification *PredictiveScalingCustomizedMetricSpecification
+
+	//  The customized load metric specification.
+	CustomizedLoadMetricSpecification *PredictiveScalingCustomizedMetricSpecification
+
+	//  The customized scaling metric specification.
+	CustomizedScalingMetricSpecification *PredictiveScalingCustomizedMetricSpecification
+
+	//  The predefined load metric specification.
+	PredefinedLoadMetricSpecification *PredictiveScalingPredefinedLoadMetricSpecification
+
+	//  The predefined metric pair specification that determines the appropriate
+	// scaling metric and load metric to use.
+	PredefinedMetricPairSpecification *PredictiveScalingPredefinedMetricPairSpecification
+
+	//  The predefined scaling metric specification.
+	PredefinedScalingMetricSpecification *PredictiveScalingPredefinedScalingMetricSpecification
+
+	noSmithyDocumentSerde
+}
+
+//	This structure defines the CloudWatch metric to return, along with the
+//
+// statistic and unit.
+type PredictiveScalingMetricStat struct {
+
+	//  The CloudWatch metric to return, including the metric name, namespace, and
+	// dimensions. To get the exact metric name, namespace, and dimensions, inspect the
+	// [Metric]object that is returned by a call to [ListMetrics].
+	//
+	// [ListMetrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
+	// [Metric]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html
+	//
+	// This member is required.
+	Metric *PredictiveScalingMetric
+
+	//  The statistic to return. It can include any CloudWatch statistic or extended
+	// statistic. For a list of valid values, see the table in [Statistics]in the Amazon
+	// CloudWatch User Guide.
+	//
+	// The most commonly used metrics for predictive scaling are Average and Sum .
+	//
+	// [Statistics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic
+	//
+	// This member is required.
+	Stat *string
+
+	//  The unit to use for the returned data points. For a complete list of the units
+	// that CloudWatch supports, see the [MetricDatum]data type in the Amazon CloudWatch API
+	// Reference.
+	//
+	// [MetricDatum]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a predictive scaling policy configuration.
+type PredictiveScalingPolicyConfiguration struct {
+
+	//  This structure includes the metrics and target utilization to use for
+	// predictive scaling.
+	//
+	// This is an array, but we currently only support a single metric specification.
+	// That is, you can specify a target value and a single metric pair, or a target
+	// value and one scaling metric and one load metric.
+	//
+	// This member is required.
+	MetricSpecifications []PredictiveScalingMetricSpecification
+
+	//  Defines the behavior that should be applied if the forecast capacity
+	// approaches or exceeds the maximum capacity. Defaults to HonorMaxCapacity if not
+	// specified.
+	MaxCapacityBreachBehavior PredictiveScalingMaxCapacityBreachBehavior
+
+	//  The size of the capacity buffer to use when the forecast capacity is close to
+	// or exceeds the maximum capacity. The value is specified as a percentage relative
+	// to the forecast capacity. For example, if the buffer is 10, this means a 10
+	// percent buffer, such that if the forecast capacity is 50, and the maximum
+	// capacity is 40, then the effective maximum capacity is 55.
+	//
+	// Required if the MaxCapacityBreachBehavior property is set to IncreaseMaxCapacity
+	// , and cannot be used otherwise.
+	MaxCapacityBuffer *int32
+
+	//  The predictive scaling mode. Defaults to ForecastOnly if not specified.
+	Mode PredictiveScalingMode
+
+	//  The amount of time, in seconds, that the start time can be advanced.
+	//
+	// The value must be less than the forecast interval duration of 3600 seconds (60
+	// minutes). Defaults to 300 seconds if not specified.
+	SchedulingBufferTime *int32
+
+	noSmithyDocumentSerde
+}
+
+//	Describes a load metric for a predictive scaling policy.
+//
+// When returned in the output of DescribePolicies , it indicates that a predictive
+// scaling policy uses individually specified load and scaling metrics instead of a
+// metric pair.
+type PredictiveScalingPredefinedLoadMetricSpecification struct {
+
+	//  The metric type.
+	//
+	// This member is required.
+	PredefinedMetricType *string
+
+	//  A label that uniquely identifies a target group.
+	ResourceLabel *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a metric pair for a predictive scaling policy.
+type PredictiveScalingPredefinedMetricPairSpecification struct {
+
+	//  Indicates which metrics to use. There are two different types of metrics for
+	// each metric type: one is a load metric and one is a scaling metric.
+	//
+	// This member is required.
+	PredefinedMetricType *string
+
+	//  A label that uniquely identifies a specific target group from which to
+	// determine the total and average request count.
+	ResourceLabel *string
+
+	noSmithyDocumentSerde
+}
+
+//	Describes a scaling metric for a predictive scaling policy.
+//
+// When returned in the output of DescribePolicies , it indicates that a predictive
+// scaling policy uses individually specified load and scaling metrics instead of a
+// metric pair.
+type PredictiveScalingPredefinedScalingMetricSpecification struct {
+
+	//  The metric type.
+	//
+	// This member is required.
+	PredefinedMetricType *string
+
+	//  A label that uniquely identifies a specific target group from which to
+	// determine the average request count.
 	ResourceLabel *string
 
 	noSmithyDocumentSerde
@@ -355,6 +660,9 @@ type ScalableTarget struct {
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
+
+	//  The predicted capacity of the scalable target.
+	PredictedCapacity *int32
 
 	// The ARN of the scalable target.
 	ScalableTargetARN *string
@@ -792,6 +1100,9 @@ type ScalingPolicy struct {
 
 	// The CloudWatch alarms associated with the scaling policy.
 	Alarms []Alarm
+
+	//  The predictive scaling policy configuration.
+	PredictiveScalingPolicyConfiguration *PredictiveScalingPolicyConfiguration
 
 	// A step scaling policy.
 	StepScalingPolicyConfiguration *StepScalingPolicyConfiguration

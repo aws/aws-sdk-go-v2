@@ -37,6 +37,9 @@ type GetDomainNamesInput struct {
 	// The current pagination position in the paged result set.
 	Position *string
 
+	// The owner of the domain name access association.
+	ResourceOwner types.ResourceOwner
+
 	noSmithyDocumentSerde
 }
 

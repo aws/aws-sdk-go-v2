@@ -470,6 +470,26 @@ func (m *validateOpDescribeDraftAppVersionResourcesImportStatus) HandleInitializ
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMetricsExport struct {
+}
+
+func (*validateOpDescribeMetricsExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMetricsExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMetricsExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMetricsExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeResiliencyPolicy struct {
 }
 
@@ -725,6 +745,26 @@ func (m *validateOpListAppVersions) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAppVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMetrics struct {
+}
+
+func (*validateOpListMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1182,6 +1222,10 @@ func addOpDescribeDraftAppVersionResourcesImportStatusValidationMiddleware(stack
 	return stack.Initialize.Add(&validateOpDescribeDraftAppVersionResourcesImportStatus{}, middleware.After)
 }
 
+func addOpDescribeMetricsExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMetricsExport{}, middleware.After)
+}
+
 func addOpDescribeResiliencyPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResiliencyPolicy{}, middleware.After)
 }
@@ -1232,6 +1276,10 @@ func addOpListAppVersionResourcesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListAppVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAppVersions{}, middleware.After)
+}
+
+func addOpListMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMetrics{}, middleware.After)
 }
 
 func addOpListSopRecommendationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1330,6 +1378,41 @@ func validateAcceptGroupingRecommendationEntry(v *types.AcceptGroupingRecommenda
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptGroupingRecommendationEntry"}
 	if v.GroupingRecommendationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupingRecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCondition(v *types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Condition"}
+	if v.Field == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Field"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionList(v []types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionList"}
+	for i := range v {
+		if err := validateCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1456,6 +1539,38 @@ func validateFailurePolicy(v *types.FailurePolicy) error {
 	}
 }
 
+func validateField(v *types.Field) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Field"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldList(v []types.Field) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldList"}
+	for i := range v {
+		if err := validateField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLogicalResourceId(v *types.LogicalResourceId) error {
 	if v == nil {
 		return nil
@@ -1565,6 +1680,38 @@ func validateResourceMappingList(v []types.ResourceMapping) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceMappingList"}
 	for i := range v {
 		if err := validateResourceMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSort(v *types.Sort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Sort"}
+	if v.Field == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Field"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortList(v []types.Sort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortList"}
+	for i := range v {
+		if err := validateSort(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2097,6 +2244,21 @@ func validateOpDescribeDraftAppVersionResourcesImportStatusInput(v *DescribeDraf
 	}
 }
 
+func validateOpDescribeMetricsExportInput(v *DescribeMetricsExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetricsExportInput"}
+	if v.MetricsExportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricsExportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeResiliencyPolicyInput(v *DescribeResiliencyPolicyInput) error {
 	if v == nil {
 		return nil
@@ -2306,6 +2468,33 @@ func validateOpListAppVersionsInput(v *ListAppVersionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAppVersionsInput"}
 	if v.AppArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMetricsInput(v *ListMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMetricsInput"}
+	if v.Fields != nil {
+		if err := validateFieldList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Conditions != nil {
+		if err := validateConditionList(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sorts != nil {
+		if err := validateSortList(v.Sorts); err != nil {
+			invalidParams.AddNested("Sorts", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

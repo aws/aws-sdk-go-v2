@@ -10,10 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Deletes a vehicle model (model manifest).
-//
-// If the vehicle model is successfully deleted, Amazon Web Services IoT FleetWise
-// sends back an HTTP 200 response with an empty body.
+// Deletes a vehicle model (model manifest).
 func (c *Client) DeleteModelManifest(ctx context.Context, params *DeleteModelManifestInput, optFns ...func(*Options)) (*DeleteModelManifestOutput, error) {
 	if params == nil {
 		params = &DeleteModelManifestInput{}

@@ -40,7 +40,7 @@ type DescribeResourceGroupingRecommendationTaskInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Indicates the identifier of the grouping recommendation task.
+	// Identifier of the grouping recommendation task.
 	GroupingId *string
 
 	noSmithyDocumentSerde
@@ -48,7 +48,7 @@ type DescribeResourceGroupingRecommendationTaskInput struct {
 
 type DescribeResourceGroupingRecommendationTaskOutput struct {
 
-	// Indicates the identifier of the grouping recommendation task.
+	// Identifier of the grouping recommendation task.
 	//
 	// This member is required.
 	GroupingId *string
@@ -58,7 +58,7 @@ type DescribeResourceGroupingRecommendationTaskOutput struct {
 	// This member is required.
 	Status types.ResourcesGroupingRecGenStatusType
 
-	// Indicates the error that occurred while generating a grouping recommendation.
+	// Error that occurred while generating a grouping recommendation.
 	ErrorMessage *string
 
 	// Metadata pertaining to the operation's result.

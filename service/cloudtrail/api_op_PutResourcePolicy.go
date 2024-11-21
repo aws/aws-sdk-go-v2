@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Attaches a resource-based permission policy to a CloudTrail channel that is
+//	Attaches a resource-based permission policy to a CloudTrail event data store,
 //
-// used for an integration with an event source outside of Amazon Web Services. For
-// more information about resource-based policies, see [CloudTrail resource-based policy examples]in the CloudTrail User
-// Guide.
+// dashboard, or channel. For more information about resource-based policies, see [CloudTrail resource-based policy examples]
+// in the CloudTrail User Guide.
 //
 // [CloudTrail resource-based policy examples]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
@@ -34,24 +33,26 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
-	// resource-based policy. The following is the format of a resource ARN:
-	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
+	//  The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard,
+	// or channel attached to the resource-based policy.
+	//
+	// Example event data store ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	//
+	// Example dashboard ARN format:
+	// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
+	//
+	// Example channel ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	//
 	// This member is required.
 	ResourceArn *string
 
 	//  A JSON-formatted string for an Amazon Web Services resource-based policy.
 	//
-	// The following are requirements for the resource policy:
+	// For example resource-based policies, see [CloudTrail resource-based policy examples] in the CloudTrail User Guide.
 	//
-	//   - Contains only one action: cloudtrail-data:PutAuditEvents
-	//
-	//   - Contains at least one statement. The policy can have a maximum of 20
-	//   statements.
-	//
-	//   - Each statement contains at least one principal. A statement can have a
-	//   maximum of 50 principals.
+	// [CloudTrail resource-based policy examples]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html
 	//
 	// This member is required.
 	ResourcePolicy *string
@@ -61,12 +62,29 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
-	// resource-based policy.
+	//  The default resource-based policy that is automatically generated for the
+	// delegated administrator of an Organizations organization. This policy will be
+	// evaluated in tandem with any policy you submit for the resource. For more
+	// information about this policy, see [Default resource policy for delegated administrators].
+	//
+	// [Default resource policy for delegated administrators]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp
+	DelegatedAdminResourcePolicy *string
+
+	//  The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard,
+	// or channel attached to the resource-based policy.
+	//
+	// Example event data store ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	//
+	// Example dashboard ARN format:
+	// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
+	//
+	// Example channel ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	ResourceArn *string
 
 	//  The JSON-formatted string of the Amazon Web Services resource-based policy
-	// attached to the CloudTrail channel.
+	// attached to the CloudTrail event data store, dashboard, or channel.
 	ResourcePolicy *string
 
 	// Metadata pertaining to the operation's result.

@@ -565,6 +565,52 @@ func (CertificateStatus) Values() []CertificateStatus {
 	}
 }
 
+type CommandExecutionStatus string
+
+// Enum values for CommandExecutionStatus
+const (
+	CommandExecutionStatusCreated    CommandExecutionStatus = "CREATED"
+	CommandExecutionStatusInProgress CommandExecutionStatus = "IN_PROGRESS"
+	CommandExecutionStatusSucceeded  CommandExecutionStatus = "SUCCEEDED"
+	CommandExecutionStatusFailed     CommandExecutionStatus = "FAILED"
+	CommandExecutionStatusRejected   CommandExecutionStatus = "REJECTED"
+	CommandExecutionStatusTimedOut   CommandExecutionStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for CommandExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommandExecutionStatus) Values() []CommandExecutionStatus {
+	return []CommandExecutionStatus{
+		"CREATED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"REJECTED",
+		"TIMED_OUT",
+	}
+}
+
+type CommandNamespace string
+
+// Enum values for CommandNamespace
+const (
+	CommandNamespaceAWSIoT          CommandNamespace = "AWS-IoT"
+	CommandNamespaceAWSIoTFleetWise CommandNamespace = "AWS-IoT-FleetWise"
+)
+
+// Values returns all known values for CommandNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommandNamespace) Values() []CommandNamespace {
+	return []CommandNamespace{
+		"AWS-IoT",
+		"AWS-IoT-FleetWise",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -1530,6 +1576,25 @@ func (ServiceType) Values() []ServiceType {
 		"DATA",
 		"CREDENTIAL_PROVIDER",
 		"JOBS",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

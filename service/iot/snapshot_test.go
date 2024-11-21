@@ -326,6 +326,18 @@ func TestCheckSnapshot_CreateCertificateProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCustomMetric(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCustomMetric(context.Background(), nil, func(o *Options) {
@@ -715,6 +727,30 @@ func TestCheckSnapshot_DeleteCertificateProvider(t *testing.T) {
 	_, err := svc.DeleteCertificateProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCertificateProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCommandExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1586,6 +1622,30 @@ func TestCheckSnapshot_GetCardinality(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCommandExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEffectivePolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEffectivePolicies(context.Background(), nil, func(o *Options) {
@@ -1927,6 +1987,30 @@ func TestCheckSnapshot_ListCertificatesByCA(t *testing.T) {
 	_, err := svc.ListCertificatesByCA(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCertificatesByCA")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCommandExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommandExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCommandExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCommands(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommands(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCommands")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2918,6 +3002,18 @@ func TestCheckSnapshot_UpdateCertificateProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCustomMetric(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCustomMetric(context.Background(), nil, func(o *Options) {
@@ -3457,6 +3553,18 @@ func TestUpdateSnapshot_CreateCertificateProvider(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCustomMetric(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCustomMetric(context.Background(), nil, func(o *Options) {
@@ -3846,6 +3954,30 @@ func TestUpdateSnapshot_DeleteCertificateProvider(t *testing.T) {
 	_, err := svc.DeleteCertificateProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCertificateProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCommandExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4717,6 +4849,30 @@ func TestUpdateSnapshot_GetCardinality(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCommandExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEffectivePolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEffectivePolicies(context.Background(), nil, func(o *Options) {
@@ -5058,6 +5214,30 @@ func TestUpdateSnapshot_ListCertificatesByCA(t *testing.T) {
 	_, err := svc.ListCertificatesByCA(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCertificatesByCA")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCommandExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommandExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCommandExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCommands(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommands(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCommands")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6042,6 +6222,18 @@ func TestUpdateSnapshot_UpdateCertificateProvider(t *testing.T) {
 	_, err := svc.UpdateCertificateProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCertificateProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCommand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCommand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCommand")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

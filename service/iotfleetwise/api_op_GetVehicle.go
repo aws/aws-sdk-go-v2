@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -60,6 +61,9 @@ type GetVehicleOutput struct {
 
 	//  The ARN of a vehicle model (model manifest) associated with the vehicle.
 	ModelManifestArn *string
+
+	// State templates associated with the vehicle.
+	StateTemplates []types.StateTemplateAssociation
 
 	// The ID of the vehicle.
 	VehicleName *string

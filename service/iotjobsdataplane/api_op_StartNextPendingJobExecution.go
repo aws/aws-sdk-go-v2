@@ -13,6 +13,10 @@ import (
 
 // Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution
 // for a thing.
+//
+// Requires permission to access the [StartNextPendingJobExecution] action.
+//
+// [StartNextPendingJobExecution]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) StartNextPendingJobExecution(ctx context.Context, params *StartNextPendingJobExecutionInput, optFns ...func(*Options)) (*StartNextPendingJobExecutionOutput, error) {
 	if params == nil {
 		params = &StartNextPendingJobExecutionInput{}
@@ -37,16 +41,20 @@ type StartNextPendingJobExecutionInput struct {
 
 	// A collection of name/value pairs that describe the status of the job execution.
 	// If not specified, the statusDetails are unchanged.
+	//
+	// The maximum length of the value in the name/value pair is 1,024 characters.
 	StatusDetails map[string]string
 
 	// Specifies the amount of time this device has to finish execution of this job.
 	// If the job execution status is not set to a terminal state before this timer
 	// expires, or before the timer is reset (by calling UpdateJobExecution , setting
-	// the status to IN_PROGRESS and specifying a new timeout value in field
+	// the status to IN_PROGRESS , and specifying a new timeout value in field
 	// stepTimeoutInMinutes ) the job execution status will be automatically set to
-	// TIMED_OUT . Note that setting this timeout has no effect on that job execution
-	// timeout which may have been specified when the job was created ( CreateJob
-	// using field timeoutConfig ).
+	// TIMED_OUT . Note that setting the step timeout has no effect on the in progress
+	// timeout that may have been specified when the job was created ( CreateJob using
+	// field timeoutConfig ).
+	//
+	// Valid values for this parameter range from 1 to 10080 (1 minute to 7 days).
 	StepTimeoutInMinutes *int64
 
 	noSmithyDocumentSerde

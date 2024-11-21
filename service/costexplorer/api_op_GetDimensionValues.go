@@ -62,10 +62,10 @@ type GetDimensionValuesInput struct {
 	//   Possible values are the following:
 	//
 	// - Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web
-	//   Servicesservices.
+	//   Services services.
 	//
 	// - AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an
-	//   acting reseller for Amazon Web Servicesservices in India.
+	//   acting reseller for Amazon Web Services services in India.
 	//
 	// - Amazon Web Services Marketplace: The entity that supports the sale of
 	//   solutions that are built on Amazon Web Services by third-party software

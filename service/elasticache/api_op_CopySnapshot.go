@@ -76,11 +76,11 @@ import (
 //
 //	ElastiCache User Guide.
 //
-// [Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
-// [Exporting Snapshots]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html
-// [Authentication & Access Control]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
+// [Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/backups-exporting.html#backups-exporting-grant-access
+// [Exporting Snapshots]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/backups-exporting.html
+// [Authentication & Access Control]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.html
 //
-// [Step 1: Create an Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket
+// [Step 1: Create an Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/backups-exporting.html#backups-exporting-create-s3-bucket
 func (c *Client) CopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*Options)) (*CopySnapshotOutput, error) {
 	if params == nil {
 		params = &CopySnapshotInput{}
@@ -127,8 +127,8 @@ type CopySnapshotInput struct {
 	//
 	// For more information, see [Exporting a Snapshot] in the Amazon ElastiCache User Guide.
 	//
-	// [Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
-	// [Exporting a Snapshot]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html
+	// [Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/backups-exporting.html#backups-exporting-grant-access
+	// [Exporting a Snapshot]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/backups-exporting.html
 	TargetBucket *string
 
 	noSmithyDocumentSerde

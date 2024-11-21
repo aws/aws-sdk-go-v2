@@ -175,6 +175,44 @@ func (ExportTaskStatusCode) Values() []ExportTaskStatusCode {
 	}
 }
 
+type FlattenedElement string
+
+// Enum values for FlattenedElement
+const (
+	FlattenedElementFirst FlattenedElement = "first"
+	FlattenedElementLast  FlattenedElement = "last"
+)
+
+// Values returns all known values for FlattenedElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlattenedElement) Values() []FlattenedElement {
+	return []FlattenedElement{
+		"first",
+		"last",
+	}
+}
+
+type IndexSource string
+
+// Enum values for IndexSource
+const (
+	IndexSourceAccount  IndexSource = "ACCOUNT"
+	IndexSourceLogGroup IndexSource = "LOG_GROUP"
+)
+
+// Values returns all known values for IndexSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IndexSource) Values() []IndexSource {
+	return []IndexSource{
+		"ACCOUNT",
+		"LOG_GROUP",
+	}
+}
+
 type InheritedProperty string
 
 // Enum values for InheritedProperty
@@ -261,6 +299,8 @@ type PolicyType string
 const (
 	PolicyTypeDataProtectionPolicy     PolicyType = "DATA_PROTECTION_POLICY"
 	PolicyTypeSubscriptionFilterPolicy PolicyType = "SUBSCRIPTION_FILTER_POLICY"
+	PolicyTypeFieldIndexPolicy         PolicyType = "FIELD_INDEX_POLICY"
+	PolicyTypeTransformerPolicy        PolicyType = "TRANSFORMER_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -271,6 +311,8 @@ func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"DATA_PROTECTION_POLICY",
 		"SUBSCRIPTION_FILTER_POLICY",
+		"FIELD_INDEX_POLICY",
+		"TRANSFORMER_POLICY",
 	}
 }
 
@@ -466,5 +508,28 @@ func (SuppressionUnit) Values() []SuppressionUnit {
 		"SECONDS",
 		"MINUTES",
 		"HOURS",
+	}
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeBoolean Type = "boolean"
+	TypeInteger Type = "integer"
+	TypeDouble  Type = "double"
+	TypeString  Type = "string"
+)
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"boolean",
+		"integer",
+		"double",
+		"string",
 	}
 }

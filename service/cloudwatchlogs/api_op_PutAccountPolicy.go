@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an account-level data protection policy or subscription filter policy
-// that applies to all log groups or a subset of log groups in the account.
+// Creates an account-level data protection policy, subscription filter policy, or
+// field index policy that applies to all log groups or a subset of log groups in
+// the account.
 //
 // # Data protection policy
 //
@@ -80,10 +81,100 @@ import (
 // any destination except a Lambda function, you must also have the iam:PassRole
 // permission.
 //
+// # Transformer policy
+//
+// Creates or updates a log transformer policy for your account. You use log
+// transformers to transform log events into a different format, making them easier
+// for you to process and analyze. You can also transform logs from different
+// sources into standardized formats that contain relevant, source-specific
+// information. After you have created a transformer, CloudWatch Logs performs this
+// transformation at the time of log ingestion. You can then refer to the
+// transformed versions of the logs during operations such as querying with
+// CloudWatch Logs Insights or creating metric filters or subscription filters.
+//
+// You can also use a transformer to copy metadata from metadata keys into the log
+// events themselves. This metadata can include log group name, log stream name,
+// account ID and Region.
+//
+// A transformer for a log group is a series of processors, where each processor
+// applies one type of transformation to the log events ingested into this log
+// group. For more information about the available processors to use in a
+// transformer, see [Processors that you can use].
+//
+// Having log events in standardized format enables visibility across your
+// applications for your log analysis, reporting, and alarming needs. CloudWatch
+// Logs provides transformation for common log types with out-of-the-box
+// transformation templates for major Amazon Web Services log sources such as VPC
+// flow logs, Lambda, and Amazon RDS. You can use pre-built transformation
+// templates or create custom transformation policies.
+//
+// You can create transformers only for the log groups in the Standard log class.
+//
+// You can have one account-level transformer policy that applies to all log
+// groups in the account. Or you can create as many as 20 account-level transformer
+// policies that are each scoped to a subset of log groups with the
+// selectionCriteria parameter. If you have multiple account-level transformer
+// policies with selection criteria, no two of them can use the same or overlapping
+// log group name prefixes. For example, if you have one policy filtered to log
+// groups that start with my-log , you can't have another field index policy
+// filtered to my-logpprod or my-logging .
+//
+// You can also set up a transformer at the log-group level. For more information,
+// see [PutTransformer]. If there is both a log-group level transformer created with PutTransformer
+// and an account-level transformer that could apply to the same log group, the log
+// group uses only the log-group level transformer. It ignores the account-level
+// transformer.
+//
+// # Field index policy
+//
+// You can use field index policies to create indexes on fields found in log
+// events in the log group. Creating field indexes can help lower the scan volume
+// for CloudWatch Logs Insights queries that reference those fields, because these
+// queries attempt to skip the processing of log events that are known to not match
+// the indexed field. Good fields to index are fields that you often need to query
+// for and fields or values that match only a small fraction of the total log
+// events. Common examples of indexes include request ID, session ID, user IDs, or
+// instance IDs. For more information, see [Create field indexes to improve query performance and reduce costs]
+//
+// To find the fields that are in your log group events, use the [GetLogGroupFields] operation.
+//
+// For example, suppose you have created a field index for requestId . Then, any
+// CloudWatch Logs Insights query on that log group that includes requestId =
+// value or requestId in [value, value, ...] will attempt to process only the log
+// events where the indexed field matches the specified value.
+//
+// Matches of log events to the names of indexed fields are case-sensitive. For
+// example, an indexed field of RequestId won't match a log event containing
+// requestId .
+//
+// You can have one account-level field index policy that applies to all log
+// groups in the account. Or you can create as many as 20 account-level field index
+// policies that are each scoped to a subset of log groups with the
+// selectionCriteria parameter. If you have multiple account-level index policies
+// with selection criteria, no two of them can use the same or overlapping log
+// group name prefixes. For example, if you have one policy filtered to log groups
+// that start with my-log , you can't have another field index policy filtered to
+// my-logpprod or my-logging .
+//
+// If you create an account-level field index policy in a monitoring account in
+// cross-account observability, the policy is applied only to the monitoring
+// account and not to any source accounts.
+//
+// If you want to create a field index policy for a single log group, you can use [PutIndexPolicy]
+// instead of PutAccountPolicy . If you do so, that log group will use only that
+// log-group level policy, and will ignore the account-level policy that you create
+// with [PutAccountPolicy].
+//
 // [PutDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
+// [PutTransformer]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
+// [PutIndexPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
 // [PutDataProtectionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
 // [Protect sensitive log data with masking]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
 // [FilterLogEvents]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html
+// [GetLogGroupFields]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
+// [Processors that you can use]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors
+// [PutAccountPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
+// [Create field indexes to improve query performance and reduce costs]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
 // [GetLogEvents]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
 func (c *Client) PutAccountPolicy(ctx context.Context, params *PutAccountPolicyInput, optFns ...func(*Options)) (*PutAccountPolicyOutput, error) {
 	if params == nil {
@@ -172,7 +263,27 @@ type PutAccountPolicyInput struct {
 	//   Random for a more even distribution. This property is only applicable when the
 	//   destination is an Kinesis Data Streams data stream.
 	//
+	// Transformer policy
+	//
+	// A transformer policy must include one JSON block with the array of processors
+	// and their configurations. For more information about available processors, see [Processors that you can use]
+	// .
+	//
+	// Field index policy
+	//
+	// A field index filter policy can include the following attribute in a JSON block:
+	//
+	//   - Fields The array of field indexes to create.
+	//
+	// It must contain at least one field index.
+	//
+	// The following is an example of an index policy document that creates two
+	// indexes, RequestId and TransactionId .
+	//
+	//     "policyDocument": "{ \"Fields\": [ \"RequestId\", \"TransactionId\" ] }"
+	//
 	// [PutDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
+	// [Processors that you can use]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-Processors
 	// [Types of data that you can mask]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html
 	//
 	// This member is required.
@@ -193,16 +304,24 @@ type PutAccountPolicyInput struct {
 	// this parameter, the default of ALL is used.
 	Scope types.Scope
 
-	// Use this parameter to apply the subscription filter policy to a subset of log
-	// groups in the account. Currently, the only supported filter is LogGroupName NOT
-	// IN [] . The selectionCriteria string can be up to 25KB in length. The length is
-	// determined by using its UTF-8 bytes.
-	//
-	// Using the selectionCriteria parameter is useful to help prevent infinite loops.
-	// For more information, see [Log recursion prevention].
+	// Use this parameter to apply the new policy to a subset of log groups in the
+	// account.
 	//
 	// Specifing selectionCriteria is valid only when you specify
-	// SUBSCRIPTION_FILTER_POLICY for policyType .
+	// SUBSCRIPTION_FILTER_POLICY , FIELD_INDEX_POLICY or TRANSFORMER_POLICY for
+	// policyType .
+	//
+	// If policyType is SUBSCRIPTION_FILTER_POLICY , the only supported
+	// selectionCriteria filter is LogGroupName NOT IN []
+	//
+	// If policyType is FIELD_INDEX_POLICY or TRANSFORMER_POLICY , the only supported
+	// selectionCriteria filter is LogGroupNamePrefix
+	//
+	// The selectionCriteria string can be up to 25KB in length. The length is
+	// determined by using its UTF-8 bytes.
+	//
+	// Using the selectionCriteria parameter with SUBSCRIPTION_FILTER_POLICY is useful
+	// to help prevent infinite loops. For more information, see [Log recursion prevention].
 	//
 	// [Log recursion prevention]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html
 	SelectionCriteria *string

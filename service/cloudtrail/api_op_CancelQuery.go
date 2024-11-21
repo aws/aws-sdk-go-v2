@@ -45,6 +45,9 @@ type CancelQueryInput struct {
 	// Deprecated: EventDataStore is no longer required by CancelQueryRequest
 	EventDataStore *string
 
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -60,6 +63,9 @@ type CancelQueryOutput struct {
 	//
 	// This member is required.
 	QueryStatus types.QueryStatus
+
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -12,7 +12,7 @@ import (
 
 //	Retrieves the JSON text of the resource-based policy document attached to the
 //
-// CloudTrail channel.
+// CloudTrail event data store, dashboard, or channel.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}
@@ -30,9 +30,17 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
-	// resource-based policy. The following is the format of a resource ARN:
-	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
+	//  The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard,
+	// or channel attached to the resource-based policy.
+	//
+	// Example event data store ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	//
+	// Example dashboard ARN format:
+	// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
+	//
+	// Example channel ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	//
 	// This member is required.
 	ResourceArn *string
@@ -42,12 +50,29 @@ type GetResourcePolicyInput struct {
 
 type GetResourcePolicyOutput struct {
 
-	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to
-	// resource-based policy.
+	//  The default resource-based policy that is automatically generated for the
+	// delegated administrator of an Organizations organization. This policy will be
+	// evaluated in tandem with any policy you submit for the resource. For more
+	// information about this policy, see [Default resource policy for delegated administrators].
+	//
+	// [Default resource policy for delegated administrators]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp
+	DelegatedAdminResourcePolicy *string
+
+	//  The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard,
+	// or channel attached to resource-based policy.
+	//
+	// Example event data store ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	//
+	// Example dashboard ARN format:
+	// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
+	//
+	// Example channel ARN format:
+	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	ResourceArn *string
 
 	//  A JSON-formatted string that contains the resource-based policy attached to
-	// the CloudTrail channel.
+	// the CloudTrail event data store, dashboard, or channel.
 	ResourcePolicy *string
 
 	// Metadata pertaining to the operation's result.

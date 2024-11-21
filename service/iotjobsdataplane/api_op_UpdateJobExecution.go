@@ -12,6 +12,10 @@ import (
 )
 
 // Updates the status of a job execution.
+//
+// Requires permission to access the [UpdateJobExecution] action.
+//
+// [UpdateJobExecution]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotjobsdataplane.html
 func (c *Client) UpdateJobExecution(ctx context.Context, params *UpdateJobExecutionInput, optFns ...func(*Options)) (*UpdateJobExecutionOutput, error) {
 	if params == nil {
 		params = &UpdateJobExecutionInput{}
@@ -68,16 +72,22 @@ type UpdateJobExecutionInput struct {
 
 	//  Optional. A collection of name/value pairs that describe the status of the job
 	// execution. If not specified, the statusDetails are unchanged.
+	//
+	// The maximum length of the value in the name/value pair is 1,024 characters.
 	StatusDetails map[string]string
 
 	// Specifies the amount of time this device has to finish execution of this job.
 	// If the job execution status is not set to a terminal state before this timer
 	// expires, or before the timer is reset (by again calling UpdateJobExecution ,
-	// setting the status to IN_PROGRESS and specifying a new timeout value in this
+	// setting the status to IN_PROGRESS , and specifying a new timeout value in this
 	// field) the job execution status will be automatically set to TIMED_OUT . Note
-	// that setting or resetting this timeout has no effect on that job execution
-	// timeout which may have been specified when the job was created ( CreateJob
-	// using field timeoutConfig ).
+	// that setting or resetting the step timeout has no effect on the in progress
+	// timeout that may have been specified when the job was created ( CreateJob using
+	// field timeoutConfig ).
+	//
+	// Valid values for this parameter range from 1 to 10080 (1 minute to 7 days). A
+	// value of -1 is also valid and will cancel the current step timer (created by an
+	// earlier use of UpdateJobExecutionRequest ).
 	StepTimeoutInMinutes *int64
 
 	noSmithyDocumentSerde

@@ -526,8 +526,8 @@ type ConfigurationDefinitionInput struct {
 	//
 	//   - RebootOption
 	//
-	//   - Description: (Optional) A boolean value that determines whether instances
-	//   are rebooted after patches are installed. The default value is " false ".
+	//   - Description: (Optional) Determines whether instances are rebooted after
+	//   patches are installed. Valid values are RebootIfNeeded and NoReboot .
 	//
 	//   - IsPolicyAttachAllowed
 	//
@@ -668,6 +668,43 @@ type ConfigurationManagerSummary struct {
 	// configuration manager. This includes deployment statuses, association statuses,
 	// drift statuses, health checks, and more.
 	StatusSummaries []StatusSummary
+
+	noSmithyDocumentSerde
+}
+
+// Details for a Quick Setup configuration.
+type ConfigurationSummary struct {
+
+	// The ID of the Amazon Web Services account where the configuration was deployed.
+	Account *string
+
+	// The ID of the configuration definition.
+	ConfigurationDefinitionId *string
+
+	// The datetime stamp when the configuration was created.
+	CreatedAt *time.Time
+
+	// The common parameters and values for the configuration definition.
+	FirstClassParameters map[string]string
+
+	// A service generated identifier for the configuration.
+	Id *string
+
+	// The ARN of the configuration manager.
+	ManagerArn *string
+
+	// The Amazon Web Services Region where the configuration was deployed.
+	Region *string
+
+	// A summary of the state of the configuration manager. This includes deployment
+	// statuses, association statuses, drift statuses, health checks, and more.
+	StatusSummaries []StatusSummary
+
+	// The type of the Quick Setup configuration.
+	Type *string
+
+	// The version of the Quick Setup type used.
+	TypeVersion *string
 
 	noSmithyDocumentSerde
 }

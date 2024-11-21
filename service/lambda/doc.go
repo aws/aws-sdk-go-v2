@@ -73,5 +73,5 @@
 // [Signature Version 4 signing process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 // [Tools for Amazon Web Services]: http://aws.amazon.com/tools/
 // [Amazon trust services]: https://www.amazontrust.com/repository/
-// [Lambda endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/lambda-service.html/
+// [Lambda endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/lambda-service.html
 package lambda

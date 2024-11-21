@@ -1056,6 +1056,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
 			}
 
+		case "MetricsConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
+			}
+
 		case "ParallelizationFactor":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2344,6 +2349,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 					return err
 				}
 				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
+			}
+
+		case "MetricsConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
 			}
 
 		case "ParallelizationFactor":
@@ -4017,6 +4027,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 					return err
 				}
 				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
+			}
+
+		case "MetricsConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
 			}
 
 		case "ParallelizationFactor":
@@ -12402,6 +12417,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
 			}
 
+		case "MetricsConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
+			}
+
 		case "ParallelizationFactor":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17433,6 +17453,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
 			}
 
+		case "MetricsConfig":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingMetricsConfig(&sv.MetricsConfig, value); err != nil {
+				return err
+			}
+
 		case "ParallelizationFactor":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17539,6 +17564,78 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UUID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEventSourceMappingMetricList(v *[]types.EventSourceMappingMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EventSourceMappingMetric
+	if *v == nil {
+		cv = []types.EventSourceMappingMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EventSourceMappingMetric
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EventSourceMappingMetric to be of type string, got %T instead", value)
+			}
+			col = types.EventSourceMappingMetric(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEventSourceMappingMetricsConfig(v **types.EventSourceMappingMetricsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventSourceMappingMetricsConfig
+	if *v == nil {
+		sv = &types.EventSourceMappingMetricsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Metrics":
+			if err := awsRestjson1_deserializeDocumentEventSourceMappingMetricList(&sv.Metrics, value); err != nil {
+				return err
 			}
 
 		default:

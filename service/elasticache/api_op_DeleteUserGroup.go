@@ -15,7 +15,7 @@ import (
 // group. The user group must first be disassociated from the replication group
 // before it can be deleted. For more information, see [Using Role Based Access Control (RBAC)].
 //
-// [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+// [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html
 func (c *Client) DeleteUserGroup(ctx context.Context, params *DeleteUserGroupInput, optFns ...func(*Options)) (*DeleteUserGroupOutput, error) {
 	if params == nil {
 		params = &DeleteUserGroupInput{}

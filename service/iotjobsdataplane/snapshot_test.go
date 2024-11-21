@@ -86,6 +86,18 @@ func TestCheckSnapshot_GetPendingJobExecutions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCommandExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartNextPendingJobExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartNextPendingJobExecution(context.Background(), nil, func(o *Options) {
@@ -126,6 +138,18 @@ func TestUpdateSnapshot_GetPendingJobExecutions(t *testing.T) {
 	_, err := svc.GetPendingJobExecutions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPendingJobExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCommandExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCommandExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCommandExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

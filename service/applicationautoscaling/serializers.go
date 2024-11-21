@@ -445,6 +445,67 @@ func (m *awsAwsjson11_serializeOpDescribeScheduledActions) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetPredictiveScalingForecast struct {
+}
+
+func (*awsAwsjson11_serializeOpGetPredictiveScalingForecast) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetPredictiveScalingForecast) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPredictiveScalingForecastInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleFrontendService.GetPredictiveScalingForecast")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetPredictiveScalingForecastInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListTagsForResource struct {
 }
 
@@ -888,6 +949,310 @@ func awsAwsjson11_serializeDocumentPredefinedMetricSpecification(v *types.Predef
 	if len(v.PredefinedMetricType) > 0 {
 		ok := object.Key("PredefinedMetricType")
 		ok.String(string(v.PredefinedMetricType))
+	}
+
+	if v.ResourceLabel != nil {
+		ok := object.Key("ResourceLabel")
+		ok.String(*v.ResourceLabel)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingCustomizedMetricSpecification(v *types.PredictiveScalingCustomizedMetricSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricDataQueries != nil {
+		ok := object.Key("MetricDataQueries")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricDataQueries(v.MetricDataQueries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetric(v *types.PredictiveScalingMetric, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("Dimensions")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricDimensions(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricName != nil {
+		ok := object.Key("MetricName")
+		ok.String(*v.MetricName)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		ok.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricDataQueries(v []types.PredictiveScalingMetricDataQuery, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricDataQuery(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricDataQuery(v *types.PredictiveScalingMetricDataQuery, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		ok.String(*v.Expression)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Label != nil {
+		ok := object.Key("Label")
+		ok.String(*v.Label)
+	}
+
+	if v.MetricStat != nil {
+		ok := object.Key("MetricStat")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricStat(v.MetricStat, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReturnData != nil {
+		ok := object.Key("ReturnData")
+		ok.Boolean(*v.ReturnData)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricDimension(v *types.PredictiveScalingMetricDimension, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricDimensions(v []types.PredictiveScalingMetricDimension, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricDimension(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricSpecification(v *types.PredictiveScalingMetricSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomizedCapacityMetricSpecification != nil {
+		ok := object.Key("CustomizedCapacityMetricSpecification")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingCustomizedMetricSpecification(v.CustomizedCapacityMetricSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomizedLoadMetricSpecification != nil {
+		ok := object.Key("CustomizedLoadMetricSpecification")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingCustomizedMetricSpecification(v.CustomizedLoadMetricSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomizedScalingMetricSpecification != nil {
+		ok := object.Key("CustomizedScalingMetricSpecification")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingCustomizedMetricSpecification(v.CustomizedScalingMetricSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PredefinedLoadMetricSpecification != nil {
+		ok := object.Key("PredefinedLoadMetricSpecification")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingPredefinedLoadMetricSpecification(v.PredefinedLoadMetricSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PredefinedMetricPairSpecification != nil {
+		ok := object.Key("PredefinedMetricPairSpecification")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingPredefinedMetricPairSpecification(v.PredefinedMetricPairSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PredefinedScalingMetricSpecification != nil {
+		ok := object.Key("PredefinedScalingMetricSpecification")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingPredefinedScalingMetricSpecification(v.PredefinedScalingMetricSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetValue != nil {
+		ok := object.Key("TargetValue")
+		switch {
+		case math.IsNaN(*v.TargetValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TargetValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TargetValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TargetValue)
+
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricSpecifications(v []types.PredictiveScalingMetricSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingMetricStat(v *types.PredictiveScalingMetricStat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Metric != nil {
+		ok := object.Key("Metric")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetric(v.Metric, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Stat != nil {
+		ok := object.Key("Stat")
+		ok.String(*v.Stat)
+	}
+
+	if v.Unit != nil {
+		ok := object.Key("Unit")
+		ok.String(*v.Unit)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingPolicyConfiguration(v *types.PredictiveScalingPolicyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MaxCapacityBreachBehavior) > 0 {
+		ok := object.Key("MaxCapacityBreachBehavior")
+		ok.String(string(v.MaxCapacityBreachBehavior))
+	}
+
+	if v.MaxCapacityBuffer != nil {
+		ok := object.Key("MaxCapacityBuffer")
+		ok.Integer(*v.MaxCapacityBuffer)
+	}
+
+	if v.MetricSpecifications != nil {
+		ok := object.Key("MetricSpecifications")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingMetricSpecifications(v.MetricSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	if v.SchedulingBufferTime != nil {
+		ok := object.Key("SchedulingBufferTime")
+		ok.Integer(*v.SchedulingBufferTime)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingPredefinedLoadMetricSpecification(v *types.PredictiveScalingPredefinedLoadMetricSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PredefinedMetricType != nil {
+		ok := object.Key("PredefinedMetricType")
+		ok.String(*v.PredefinedMetricType)
+	}
+
+	if v.ResourceLabel != nil {
+		ok := object.Key("ResourceLabel")
+		ok.String(*v.ResourceLabel)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingPredefinedMetricPairSpecification(v *types.PredictiveScalingPredefinedMetricPairSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PredefinedMetricType != nil {
+		ok := object.Key("PredefinedMetricType")
+		ok.String(*v.PredefinedMetricType)
+	}
+
+	if v.ResourceLabel != nil {
+		ok := object.Key("ResourceLabel")
+		ok.String(*v.ResourceLabel)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPredictiveScalingPredefinedScalingMetricSpecification(v *types.PredictiveScalingPredefinedScalingMetricSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PredefinedMetricType != nil {
+		ok := object.Key("PredefinedMetricType")
+		ok.String(*v.PredefinedMetricType)
 	}
 
 	if v.ResourceLabel != nil {
@@ -1469,6 +1834,43 @@ func awsAwsjson11_serializeOpDocumentDescribeScheduledActionsInput(v *DescribeSc
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetPredictiveScalingForecastInput(v *GetPredictiveScalingForecastInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.PolicyName != nil {
+		ok := object.Key("PolicyName")
+		ok.String(*v.PolicyName)
+	}
+
+	if v.ResourceId != nil {
+		ok := object.Key("ResourceId")
+		ok.String(*v.ResourceId)
+	}
+
+	if len(v.ScalableDimension) > 0 {
+		ok := object.Key("ScalableDimension")
+		ok.String(string(v.ScalableDimension))
+	}
+
+	if len(v.ServiceNamespace) > 0 {
+		ok := object.Key("ServiceNamespace")
+		ok.String(string(v.ServiceNamespace))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1493,6 +1895,13 @@ func awsAwsjson11_serializeOpDocumentPutScalingPolicyInput(v *PutScalingPolicyIn
 	if len(v.PolicyType) > 0 {
 		ok := object.Key("PolicyType")
 		ok.String(string(v.PolicyType))
+	}
+
+	if v.PredictiveScalingPolicyConfiguration != nil {
+		ok := object.Key("PredictiveScalingPolicyConfiguration")
+		if err := awsAwsjson11_serializeDocumentPredictiveScalingPolicyConfiguration(v.PredictiveScalingPolicyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ResourceId != nil {

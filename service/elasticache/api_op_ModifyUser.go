@@ -43,6 +43,9 @@ type ModifyUserInput struct {
 	// Specifies how to authenticate the user.
 	AuthenticationMode *types.AuthenticationMode
 
+	// The engine for a specific user.
+	Engine *string
+
 	// Indicates no password is required for the user.
 	NoPasswordRequired *bool
 

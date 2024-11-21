@@ -52,6 +52,12 @@ type UpdateVehicleInput struct {
 	// The ARN of a vehicle model (model manifest) associated with the vehicle.
 	ModelManifestArn *string
 
+	// Associate state templates with the vehicle.
+	StateTemplatesToAdd []types.StateTemplateAssociation
+
+	// Remove state templates from the vehicle.
+	StateTemplatesToRemove []string
+
 	noSmithyDocumentSerde
 }
 

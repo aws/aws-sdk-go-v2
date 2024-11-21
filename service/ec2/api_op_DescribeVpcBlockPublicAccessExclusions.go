@@ -50,7 +50,7 @@ type DescribeVpcBlockPublicAccessExclusionsInput struct {
 	//   - resource-arn - The Amazon Resource Name (ARN) of a exclusion.
 	//
 	//   - internet-gateway-exclusion-mode - The mode of a VPC BPA exclusion. Possible
-	//   values: bidirectional-access-allowed | egress-access-allowed .
+	//   values: allow-bidirectional | allow-egress .
 	//
 	//   - state - The state of VPC BPA. Possible values: create-in-progress |
 	//   create-complete | update-in-progress | update-complete | delete-in-progress |

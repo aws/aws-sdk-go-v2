@@ -615,7 +615,7 @@ func (e *GlobalReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 // The requested cache node type is not available in the specified Availability
 // Zone. For more information, see [InsufficientCacheClusterCapacity]in the ElastiCache User Guide.
 //
-// [InsufficientCacheClusterCapacity]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY
+// [InsufficientCacheClusterCapacity]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY
 type InsufficientCacheClusterCapacityFault struct {
 	Message *string
 

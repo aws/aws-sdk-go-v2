@@ -21,7 +21,7 @@ import (
 //   - The PrimaryReplicationGroupId represents the name of the primary cluster
 //     that accepts writes and will replicate updates to the secondary cluster.
 //
-// [Replication Across Regions Using Global Datastore]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html
+// [Replication Across Regions Using Global Datastore]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Redis-Global-Datastore.html
 func (c *Client) CreateGlobalReplicationGroup(ctx context.Context, params *CreateGlobalReplicationGroupInput, optFns ...func(*Options)) (*CreateGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &CreateGlobalReplicationGroupInput{}
@@ -49,7 +49,7 @@ type CreateGlobalReplicationGroupInput struct {
 	// For a full list of Amazon Regions and their respective Global datastore iD
 	// prefixes, see [Using the Amazon CLI with Global datastores].
 	//
-	// [Using the Amazon CLI with Global datastores]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
+	// [Using the Amazon CLI with Global datastores]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Redis-Global-Datastores-CLI.html
 	//
 	// This member is required.
 	GlobalReplicationGroupIdSuffix *string

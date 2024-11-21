@@ -1,0 +1,8 @@
+{
+    "id": "bb3caa3a-c53e-49c0-946a-b580caed3930",
+    "type": "feature",
+    "description": "Adds support for requesting future-dated Capacity Reservations with a minimum commitment duration, enabling IPAM for organizational units within AWS Organizations, reserving EC2 Capacity Blocks that start in 30 minutes, and extending the end date of existing Capacity Blocks.",
+    "modules": [
+        "service/ec2"
+    ]
+}

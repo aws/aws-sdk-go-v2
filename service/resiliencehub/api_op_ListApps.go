@@ -52,8 +52,8 @@ type ListAppsInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AwsApplicationArn *string
 
-	// Indicates the lower limit of the range that is used to filter applications
-	// based on their last assessment times.
+	// Lower limit of the range that is used to filter applications based on their
+	// last assessment times.
 	FromLastAssessmentTime *time.Time
 
 	// Maximum number of results to include in the response. If more results exist
@@ -73,8 +73,8 @@ type ListAppsInput struct {
 	// field to True .
 	ReverseOrder *bool
 
-	// Indicates the upper limit of the range that is used to filter the applications
-	// based on their last assessment times.
+	// Upper limit of the range that is used to filter the applications based on their
+	// last assessment times.
 	ToLastAssessmentTime *time.Time
 
 	noSmithyDocumentSerde

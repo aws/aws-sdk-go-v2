@@ -33,9 +33,8 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// A job identifier which must be unique for your Amazon Web Services account. We
-	// recommend using a UUID. Alpha-numeric characters, "-" and "_" are valid for use
-	// here.
+	// A job identifier which must be unique for your account. We recommend using a
+	// UUID. Alpha-numeric characters, "-" and "_" are valid for use here.
 	//
 	// This member is required.
 	JobId *string

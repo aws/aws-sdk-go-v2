@@ -50,14 +50,14 @@ type UpdateResiliencyPolicyInput struct {
 	// resilience policy data can be stored.
 	DataLocationConstraint types.DataLocationConstraint
 
-	// The type of resiliency policy to be created, including the recovery time
-	// objective (RTO) and recovery point objective (RPO) in seconds.
+	// Resiliency policy to be created, including the recovery time objective (RTO)
+	// and recovery point objective (RPO) in seconds.
 	Policy map[string]types.FailurePolicy
 
-	// The description for the policy.
+	// Description of the resiliency policy.
 	PolicyDescription *string
 
-	// The name of the policy
+	// Name of the resiliency policy.
 	PolicyName *string
 
 	// The tier for this resiliency policy, ranging from the highest severity (
@@ -69,8 +69,8 @@ type UpdateResiliencyPolicyInput struct {
 
 type UpdateResiliencyPolicyOutput struct {
 
-	// The type of resiliency policy that was updated, including the recovery time
-	// objective (RTO) and recovery point objective (RPO) in seconds.
+	// The resiliency policy that was updated, including the recovery time objective
+	// (RTO) and recovery point objective (RPO) in seconds.
 	//
 	// This member is required.
 	Policy *types.ResiliencyPolicy

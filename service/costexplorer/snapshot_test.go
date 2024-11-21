@@ -194,6 +194,18 @@ func TestCheckSnapshot_GetApproximateUsageRecords(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCommitmentPurchaseAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCommitmentPurchaseAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCommitmentPurchaseAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCostAndUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCostAndUsage(context.Background(), nil, func(o *Options) {
@@ -386,6 +398,18 @@ func TestCheckSnapshot_GetUsageForecast(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCommitmentPurchaseAnalyses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommitmentPurchaseAnalyses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCommitmentPurchaseAnalyses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCostAllocationTagBackfillHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCostAllocationTagBackfillHistory(context.Background(), nil, func(o *Options) {
@@ -451,6 +475,18 @@ func TestCheckSnapshot_ProvideAnomalyFeedback(t *testing.T) {
 	_, err := svc.ProvideAnomalyFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ProvideAnomalyFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartCommitmentPurchaseAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCommitmentPurchaseAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCommitmentPurchaseAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -685,6 +721,18 @@ func TestUpdateSnapshot_GetApproximateUsageRecords(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCommitmentPurchaseAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCommitmentPurchaseAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCommitmentPurchaseAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCostAndUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCostAndUsage(context.Background(), nil, func(o *Options) {
@@ -877,6 +925,18 @@ func TestUpdateSnapshot_GetUsageForecast(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCommitmentPurchaseAnalyses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCommitmentPurchaseAnalyses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCommitmentPurchaseAnalyses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCostAllocationTagBackfillHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCostAllocationTagBackfillHistory(context.Background(), nil, func(o *Options) {
@@ -942,6 +1002,18 @@ func TestUpdateSnapshot_ProvideAnomalyFeedback(t *testing.T) {
 	_, err := svc.ProvideAnomalyFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ProvideAnomalyFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCommitmentPurchaseAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCommitmentPurchaseAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCommitmentPurchaseAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -29,7 +29,7 @@ import (
 // mode enabled) cluster reboot for the changes to be applied, see [Rebooting a Cluster]for an
 // alternate process.
 //
-// [Rebooting a Cluster]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html
+// [Rebooting a Cluster]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/nodes.rebooting.html
 func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClusterInput, optFns ...func(*Options)) (*RebootCacheClusterOutput, error) {
 	if params == nil {
 		params = &RebootCacheClusterInput{}
