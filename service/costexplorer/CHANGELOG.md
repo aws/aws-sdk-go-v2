@@ -1,3 +1,7 @@
+# v1.45.0 (2024-11-22)
+
+* **Feature**: This release adds the Impact field(contains Contribution field) to the GetAnomalies API response under RootCause
+
 # v1.44.0 (2024-11-21)
 
 * **Feature**: This release introduces three new APIs that enable you to estimate the cost, coverage, and utilization impact of Savings Plans you plan to purchase. The three APIs are StartCommitmentPurchaseAnalysis, GetCommitmentPurchaseAnalysis, and ListCommitmentPurchaseAnalyses.

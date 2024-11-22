@@ -1,3 +1,7 @@
+# v1.28.0 (2024-11-22)
+
+* **Feature**: This release adds support for resource policy based cross account S3 access to sequence store read sets.
+
 # v1.27.0 (2024-11-20)
 
 * **Feature**: Enabling call caching feature that allows customers to reuse previously computed results from a set of completed tasks in a new workflow run.

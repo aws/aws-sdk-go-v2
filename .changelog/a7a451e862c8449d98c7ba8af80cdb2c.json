@@ -1,8 +1,0 @@
-{
-    "id": "a7a451e8-62c8-449d-98c7-ba8af80cdb2c",
-    "type": "feature",
-    "description": "Initial release of the AWS Billing and Cost Management Pricing Calculator API.",
-    "modules": [
-        "service/bcmpricingcalculator"
-    ]
-}

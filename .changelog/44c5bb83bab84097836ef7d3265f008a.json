@@ -1,8 +1,0 @@
-{
-    "id": "44c5bb83-bab8-4097-836e-f7d3265f008a",
-    "type": "feature",
-    "description": "Add support for variables and JSONata in TestState, GetExecutionHistory, DescribeStateMachine, and DescribeStateMachineForExecution",
-    "modules": [
-        "service/sfn"
-    ]
-}

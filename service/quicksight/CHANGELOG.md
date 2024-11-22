@@ -1,3 +1,7 @@
+# v1.80.0 (2024-11-22)
+
+* **Feature**: This release includes: Update APIs to support Image, Layer Map, font customization, and Plugin Visual. Add Identity center related information in ListNamsespace API. Update API for restrictedFolder support in topics and add API for SearchTopics, Describe/Update DashboardsQA Configration.
+
 # v1.79.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

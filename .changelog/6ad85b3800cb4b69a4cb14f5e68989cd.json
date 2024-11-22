@@ -1,8 +1,0 @@
-{
-    "id": "6ad85b38-00cb-4b69-a4cb-14f5e68989cd",
-    "type": "feature",
-    "description": "InvokeInlineAgent API release to help invoke runtime agents without any dependency on preconfigured agents.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

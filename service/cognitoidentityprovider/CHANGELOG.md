@@ -1,3 +1,7 @@
+# v1.47.0 (2024-11-22)
+
+* **Feature**: Add support for users to sign up and sign in without passwords, using email and SMS OTPs and Passkeys. Add support for Passkeys based on WebAuthn. Add support for enhanced branding customization for hosted authentication pages with Amazon Cognito Managed Login. Add feature tiers with new pricing.
+
 # v1.46.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

@@ -1,3 +1,7 @@
+# v1.168.0 (2024-11-22)
+
+* **Feature**: This release adds APIs for new features for SageMaker endpoint to scale down to zero instances, native support for multi-adapter inference, and endpoint scaling improvements.
+
 # v1.167.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

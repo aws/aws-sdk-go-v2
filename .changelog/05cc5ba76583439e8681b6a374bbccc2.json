@@ -1,8 +1,0 @@
-{
-    "id": "05cc5ba7-6583-439e-8681-b6a374bbccc2",
-    "type": "documentation",
-    "description": "ArchivePolicy attribute added to Archive and Replay feature",
-    "modules": [
-        "service/sns"
-    ]
-}

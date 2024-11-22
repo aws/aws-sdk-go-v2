@@ -1,8 +1,0 @@
-{
-    "id": "a88ddcd7-f312-4dd4-95d1-36b81fa66919",
-    "type": "feature",
-    "description": "Adds support for programmatic management of custom actions and aliases which can be associated with channel configurations.",
-    "modules": [
-        "service/chatbot"
-    ]
-}

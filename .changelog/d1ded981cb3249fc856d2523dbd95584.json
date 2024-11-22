@@ -1,8 +1,0 @@
-{
-    "id": "d1ded981-cb32-49fc-856d-2523dbd95584",
-    "type": "feature",
-    "description": "Add ProvisionedPollerConfig to Lambda event-source-mapping API.",
-    "modules": [
-        "service/lambda"
-    ]
-}

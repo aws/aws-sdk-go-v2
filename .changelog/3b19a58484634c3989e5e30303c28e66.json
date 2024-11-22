@@ -1,8 +1,0 @@
-{
-    "id": "3b19a584-8463-4c39-89e5-e30303c28e66",
-    "type": "feature",
-    "description": "Advanced Scaling in Amazon EMR Managed Scaling",
-    "modules": [
-        "service/emr"
-    ]
-}

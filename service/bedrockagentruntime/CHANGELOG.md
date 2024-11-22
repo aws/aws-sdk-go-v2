@@ -1,3 +1,7 @@
+# v1.26.0 (2024-11-22)
+
+* **Feature**: InvokeInlineAgent API release to help invoke runtime agents without any dependency on preconfigured agents.
+
 # v1.25.0 (2024-11-20)
 
 * **Feature**: Releasing new Prompt Optimization to enhance your prompts for improved performance

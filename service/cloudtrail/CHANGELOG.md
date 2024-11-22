@@ -1,3 +1,7 @@
+# v1.46.1 (2024-11-22)
+
+* No change notes available for this release.
+
 # v1.46.0 (2024-11-21)
 
 * **Feature**: This release introduces new APIs for creating and managing CloudTrail Lake dashboards. It also adds support for resource-based policies on CloudTrail EventDataStore and Dashboard resource.

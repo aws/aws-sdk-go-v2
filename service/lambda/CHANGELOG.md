@@ -1,3 +1,7 @@
+# v1.69.0 (2024-11-22)
+
+* **Feature**: Add ProvisionedPollerConfig to Lambda event-source-mapping API.
+
 # v1.68.0 (2024-11-21)
 
 * **Feature**: Adds support for metrics for event source mappings for AWS Lambda

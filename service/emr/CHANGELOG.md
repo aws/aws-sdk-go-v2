@@ -1,3 +1,7 @@
+# v1.47.0 (2024-11-22)
+
+* **Feature**: Advanced Scaling in Amazon EMR Managed Scaling
+
 # v1.46.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

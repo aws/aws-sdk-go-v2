@@ -1,3 +1,7 @@
+# v1.50.1 (2024-11-22)
+
+* **Documentation**: While integrating WSP-DCV rebrand, a few mentions were erroneously renamed from WSP to DCV. This release reverts those mentions back to WSP.
+
 # v1.50.0 (2024-11-20)
 
 * **Feature**: Added support for Rocky Linux 8 on Amazon WorkSpaces Personal.

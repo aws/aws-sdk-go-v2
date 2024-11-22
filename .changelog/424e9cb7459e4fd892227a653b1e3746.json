@@ -1,8 +1,0 @@
-{
-    "id": "424e9cb7-459e-4fd8-9222-7a653b1e3746",
-    "type": "feature",
-    "description": "This release adds support for starting email contacts in your Amazon Connect instance as an email receiving action.",
-    "modules": [
-        "service/ses"
-    ]
-}
