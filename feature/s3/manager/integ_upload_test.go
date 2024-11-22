@@ -161,8 +161,9 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 	}{
 		"auto single part": {
 			"no checksum": {
-				payload:    bytes.NewReader(singlePartBytes),
-				expectETag: singlePartETag,
+				payload:             bytes.NewReader(singlePartBytes),
+				expectChecksumCRC32: singlePartCRC32,
+				expectETag:          singlePartETag,
 			},
 			"CRC32": {
 				algorithm:           s3types.ChecksumAlgorithmCrc32,
@@ -215,30 +216,13 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 				expectETag:           singlePartETag,
 			},
 			"MD5": {
-				payload:    bytes.NewReader(singlePartBytes),
-				contentMD5: singlePartMD5,
-				expectETag: singlePartETag,
+				payload:             bytes.NewReader(singlePartBytes),
+				contentMD5:          singlePartMD5,
+				expectChecksumCRC32: singlePartCRC32,
+				expectETag:          singlePartETag,
 			},
 		},
 		"auto multipart part": {
-			"no checksum": {
-				payload: bytes.NewReader(multiPartBytes),
-				expectParts: []s3types.CompletedPart{
-					{
-						ETag:       aws.String(singlePartETag),
-						PartNumber: aws.Int32(1),
-					},
-					{
-						ETag:       aws.String(singlePartETag),
-						PartNumber: aws.Int32(2),
-					},
-					{
-						ETag:       aws.String(multiPartTailETag),
-						PartNumber: aws.Int32(3),
-					},
-				},
-				expectETag: multiPartETag,
-			},
 			"CRC32": {
 				algorithm: s3types.ChecksumAlgorithmCrc32,
 				payload:   bytes.NewReader(multiPartBytes),
