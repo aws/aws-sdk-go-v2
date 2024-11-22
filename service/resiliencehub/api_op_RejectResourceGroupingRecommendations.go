@@ -39,8 +39,8 @@ type RejectResourceGroupingRecommendationsInput struct {
 	// This member is required.
 	AppArn *string
 
-	// Indicates the list of resource grouping recommendations you have selected to
-	// exclude from your application.
+	// List of resource grouping recommendations you have selected to exclude from
+	// your application.
 	//
 	// This member is required.
 	Entries []types.RejectGroupingRecommendationEntry
@@ -60,8 +60,8 @@ type RejectResourceGroupingRecommendationsOutput struct {
 	// This member is required.
 	AppArn *string
 
-	// Indicates the list of resource grouping recommendations that failed to get
-	// excluded in your application.
+	// List of resource grouping recommendations that failed to get excluded in your
+	// application.
 	//
 	// This member is required.
 	FailedEntries []types.FailedGroupingRecommendationEntry

@@ -146,6 +146,18 @@ func TestCheckSnapshot_DescribeScheduledActions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPredictiveScalingForecast(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPredictiveScalingForecast(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPredictiveScalingForecast")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_DescribeScheduledActions(t *testing.T) {
 	_, err := svc.DescribeScheduledActions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeScheduledActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPredictiveScalingForecast(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPredictiveScalingForecast(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPredictiveScalingForecast")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

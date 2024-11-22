@@ -100,6 +100,9 @@
                     "target": "com.amazonaws.iot#CreateCertificateProvider"
                 },
                 {
+                    "target": "com.amazonaws.iot#CreateCommand"
+                },
+                {
                     "target": "com.amazonaws.iot#CreateCustomMetric"
                 },
                 {
@@ -197,6 +200,12 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteCertificateProvider"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeleteCommand"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeleteCommandExecution"
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteCustomMetric"
@@ -415,6 +424,12 @@
                     "target": "com.amazonaws.iot#GetCardinality"
                 },
                 {
+                    "target": "com.amazonaws.iot#GetCommand"
+                },
+                {
+                    "target": "com.amazonaws.iot#GetCommandExecution"
+                },
+                {
                     "target": "com.amazonaws.iot#GetEffectivePolicies"
                 },
                 {
@@ -500,6 +515,12 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListCertificatesByCA"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListCommandExecutions"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListCommands"
                 },
                 {
                     "target": "com.amazonaws.iot#ListCustomMetrics"
@@ -746,6 +767,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateCertificateProvider"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdateCommand"
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateCustomMetric"
@@ -1894,14 +1918,14 @@
                 "thresholdPercentage": {
                     "target": "com.amazonaws.iot#AbortThresholdPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>\n         <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>",
+                        "smithy.api#documentation": "<p>The minimum percentage of job execution failures that must occur to initiate the\n            job abort.</p>\n         <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99,\n            but not 10.999).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "minNumberOfExecutedThings": {
                     "target": "com.amazonaws.iot#MinimumNumberOfExecutedThings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of things which must receive job execution notifications before the job \n            can be aborted.</p>",
+                        "smithy.api#documentation": "<p>The minimum number of things which must receive job execution notifications before\n            the job can be aborted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2904,7 +2928,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a group with a continuous job. The following criteria must be met: </p>\n         <ul>\n            <li>\n               <p>The job must have been created with the <code>targetSelection</code> field set to\n                    \"CONTINUOUS\".</p>\n            </li>\n            <li>\n               <p>The job status must currently be \"IN_PROGRESS\".</p>\n            </li>\n            <li>\n               <p>The total number of targets associated with a job must not exceed 100.</p>\n            </li>\n         </ul>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateTargetsWithJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Associates a group with a continuous job. The following criteria must be met: </p>\n         <ul>\n            <li>\n               <p>The job must have been created with the <code>targetSelection</code> field\n                    set to \"CONTINUOUS\".</p>\n            </li>\n            <li>\n               <p>The job status must currently be \"IN_PROGRESS\".</p>\n            </li>\n            <li>\n               <p>The total number of targets associated with a job must not exceed\n                    100.</p>\n            </li>\n         </ul>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateTargetsWithJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/jobs/{jobId}/targets",
@@ -2933,13 +2957,13 @@
                 "comment": {
                     "target": "com.amazonaws.iot#Comment",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional comment string describing why the job was associated with the targets.</p>"
+                        "smithy.api#documentation": "<p>An optional comment string describing why the job was associated with the\n            targets.</p>"
                     }
                 },
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -4842,6 +4866,22 @@
                 "smithy.api#documentation": "<p>The properties of a billing group.</p>"
             }
         },
+        "com.amazonaws.iot#BinaryCommandExecutionResult": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#BinaryParameterValue": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.iot#Boolean": {
             "type": "boolean"
         },
@@ -4851,7 +4891,13 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.iot#BooleanCommandExecutionResult": {
+            "type": "boolean"
+        },
         "com.amazonaws.iot#BooleanKey": {
+            "type": "boolean"
+        },
+        "com.amazonaws.iot#BooleanParameterValue": {
             "type": "boolean"
         },
         "com.amazonaws.iot#BooleanWrapperObject": {
@@ -5363,20 +5409,20 @@
                     "target": "com.amazonaws.iot#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> the job execution will be canceled if it has status \n          IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has status \n          QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do not set \n          <code>force</code> to <code>true</code>, then an <code>InvalidStateTransitionException</code> \n          will be thrown. The default is <code>false</code>.</p>\n         <p>Canceling a job execution which is \"IN_PROGRESS\", will cause the device to be unable \n          to update the job execution status.  Use caution and ensure that the device is able to \n          recover to a valid state.</p>",
+                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> the job execution will be canceled if it has status\n            IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has\n            status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do\n            not set <code>force</code> to <code>true</code>, then an\n                <code>InvalidStateTransitionException</code> will be thrown. The default is\n                <code>false</code>.</p>\n         <p>Canceling a job execution which is \"IN_PROGRESS\", will cause the device to be\n            unable to update the job execution status. Use caution and ensure that the device is\n            able to recover to a valid state.</p>",
                         "smithy.api#httpQuery": "force"
                     }
                 },
                 "expectedVersion": {
                     "target": "com.amazonaws.iot#ExpectedVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The expected current version of the job execution. Each time you update the job \n          execution, its version is incremented. If the version of the job execution stored in Jobs does \n          not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that \n          contains the current job execution status data is returned. (This makes it unnecessary to \n          perform a separate DescribeJobExecution request in order to obtain the job execution status \n          data.)</p>"
+                        "smithy.api#documentation": "<p>(Optional) The expected current version of the job execution. Each time you update\n            the job execution, its version is incremented. If the version of the job execution\n            stored in Jobs does not match, the update is rejected with a VersionMismatch error, and\n            an ErrorResponse that contains the current job execution status data is returned. (This\n            makes it unnecessary to perform a separate DescribeJobExecution request in order to\n            obtain the job execution status data.)</p>"
                     }
                 },
                 "statusDetails": {
                     "target": "com.amazonaws.iot#DetailsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job execution. If not \n          specified, the statusDetails are unchanged. You can specify at most 10 name/value pairs.</p>"
+                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job execution. If\n            not specified, the statusDetails are unchanged. You can specify at most 10 name/value\n            pairs.</p>"
                     }
                 }
             },
@@ -5411,7 +5457,7 @@
                     "target": "com.amazonaws.iot#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> job executions with status \"IN_PROGRESS\" and \"QUEUED\" \n          are canceled, otherwise only job executions with status \"QUEUED\" are canceled. The default \n          is <code>false</code>.</p>\n         <p>Canceling a job which is \"IN_PROGRESS\", will cause a device which is executing \n          the job to be unable to update the job execution status.  Use caution and ensure that each \n          device executing a job which is canceled is able to recover to a valid state.</p>",
+                        "smithy.api#documentation": "<p>(Optional) If <code>true</code> job executions with status \"IN_PROGRESS\" and\n            \"QUEUED\" are canceled, otherwise only job executions with status \"QUEUED\" are canceled.\n            The default is <code>false</code>.</p>\n         <p>Canceling a job which is \"IN_PROGRESS\", will cause a device which is executing the\n            job to be unable to update the job execution status. Use caution and ensure that each\n            device executing a job which is canceled is able to recover to a valid state.</p>",
                         "smithy.api#httpQuery": "force"
                     }
                 }
@@ -6196,6 +6242,427 @@
         "com.amazonaws.iot#CognitoIdentityPoolId": {
             "type": "string"
         },
+        "com.amazonaws.iot#CommandArn": {
+            "type": "string"
+        },
+        "com.amazonaws.iot#CommandDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2028
+                },
+                "smithy.api#pattern": "^[^\\p{C}]*$"
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot#CommandParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot#CommandParameterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionResult": {
+            "type": "structure",
+            "members": {
+                "S": {
+                    "target": "com.amazonaws.iot#StringCommandExecutionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type String. For example:</p>\n         <p>\n            <code>\"S\": \"Hello\"</code>\n         </p>"
+                    }
+                },
+                "B": {
+                    "target": "com.amazonaws.iot#BooleanCommandExecutionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Boolean. For example:</p>\n         <p>\n            <code>\"BOOL\": true</code>\n         </p>"
+                    }
+                },
+                "BIN": {
+                    "target": "com.amazonaws.iot#BinaryCommandExecutionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Binary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result value of the command execution. The device can use the result field to\n            share additional details about the execution such as a return value of a remote function\n            call.</p>\n         <note>\n            <p>This field is not applicable if you use the <code>AWS-IoT-FleetWise</code>\n                namespace.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionResultMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot#CommandExecutionResultName"
+            },
+            "value": {
+                "target": "com.amazonaws.iot#CommandExecutionResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionResultName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionSummary": {
+            "type": "structure",
+            "members": {
+                "commandArn": {
+                    "target": "com.amazonaws.iot#CommandArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the command execution.</p>"
+                    }
+                },
+                "executionId": {
+                    "target": "com.amazonaws.iot#CommandExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command execution.</p>"
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.iot#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target device for which the command is being\n            executed.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#CommandExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the command executions.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the command execution was created for the target device.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the command started executing on the target device.</p>"
+                    }
+                },
+                "completedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the command completed executing on the target\n            device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a particular command execution.</p>"
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#CommandExecutionSummary"
+            }
+        },
+        "com.amazonaws.iot#CommandExecutionTimeoutInSeconds": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot#CommandMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandNamespace": {
+            "type": "enum",
+            "members": {
+                "AWSIoT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS-IoT"
+                    }
+                },
+                "AWSIoTFleetWise": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS-IoT-FleetWise"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.iot#CommandParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a specific parameter used in a command and command execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.iot#CommandParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value used to describe the command. When you assign a value to a parameter, it\n            will override any default value that you had already specified.</p>"
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.iot#CommandParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value used to describe the command. This is the value assumed by the\n            parameter if no other value is assigned to it.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#CommandParameterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the command parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of key-value pairs that describe the command.</p>"
+            }
+        },
+        "com.amazonaws.iot#CommandParameterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2028
+                },
+                "smithy.api#pattern": "^[^\\p{C}]*$"
+            }
+        },
+        "com.amazonaws.iot#CommandParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#CommandParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iot#CommandParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 192
+                },
+                "smithy.api#pattern": "^[.$a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot#CommandParameterValue": {
+            "type": "structure",
+            "members": {
+                "S": {
+                    "target": "com.amazonaws.iot#StringParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type String. For example:</p>\n         <p>\n            <code>\"S\": \"Hello\"</code>\n         </p>"
+                    }
+                },
+                "B": {
+                    "target": "com.amazonaws.iot#BooleanParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Boolean. For example:</p>\n         <p>\n            <code>\"BOOL\": true</code>\n         </p>"
+                    }
+                },
+                "I": {
+                    "target": "com.amazonaws.iot#IntegerParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Integer (Thirty-Two Bits).</p>"
+                    }
+                },
+                "L": {
+                    "target": "com.amazonaws.iot#LongParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Long.</p>"
+                    }
+                },
+                "D": {
+                    "target": "com.amazonaws.iot#DoubleParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Double (Sixty-Four Bits).</p>"
+                    }
+                },
+                "BIN": {
+                    "target": "com.amazonaws.iot#BinaryParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type Binary. For example:</p>\n         <p>\n            <code>\"B\": \"dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk\"</code>\n         </p>"
+                    }
+                },
+                "UL": {
+                    "target": "com.amazonaws.iot#UnsignedLongParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of type unsigned long.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The range of possible values that's used to describe a specific command\n            parameter.</p>\n         <note>\n            <p>The <code>commandParameterValue</code> can only have one of the below fields\n                listed.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.iot#CommandPayload": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.iot#CommandPayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static payload file for the command.</p>"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.iot#MimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type that specifies the format type of the payload file. This\n        field must use a type/subtype format, such as <code>application/json</code>.\n        For information about various content types, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types\">Common MIME types</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The command payload object that contains the instructions for the device\n        to process.</p>"
+            }
+        },
+        "com.amazonaws.iot#CommandPayloadBlob": {
+            "type": "blob"
+        },
+        "com.amazonaws.iot#CommandSummary": {
+            "type": "structure",
+            "members": {
+                "commandArn": {
+                    "target": "com.amazonaws.iot#CommandArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the command.</p>"
+                    }
+                },
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iot#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the command.</p>"
+                    }
+                },
+                "deprecated": {
+                    "target": "com.amazonaws.iot#DeprecationFlag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the command has been deprecated.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command was last updated.</p>"
+                    }
+                },
+                "pendingDeletion": {
+                    "target": "com.amazonaws.iot#BooleanWrapperObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the command is pending deletion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a particular command resource.</p>"
+            }
+        },
+        "com.amazonaws.iot#CommandSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#CommandSummary"
+            }
+        },
         "com.amazonaws.iot#Comment": {
             "type": "string",
             "traits": {
@@ -6392,7 +6859,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A resource with the same name already exists.</p>",
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -6940,6 +7407,118 @@
                     "target": "com.amazonaws.iot#CertificateProviderArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the certificate provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#CreateCommand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#CreateCommandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#CreateCommandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a command. A command contains reusable configurations that can be applied\n            before they are sent to the devices.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/commands/{commandId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#CreateCommandRequest": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the command. We recommend using UUID. Alpha-numeric\n            characters, hyphens, and underscores are valid for use here.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.iot#CommandNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the command. The MQTT reserved topics and validations will be used\n            for command executions according to the namespace setting.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iot#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name in the console for the command. This name doesn't have to be\n            unique. You can update the user-friendly name after you define it.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#CommandDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short text decription of the command.</p>"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.iot#CommandPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload object for the command. You must specify this information when using\n        the <code>AWS-IoT</code> namespace.</p>\n         <p>You can upload a static payload file from your local storage that contains the \n        instructions for the device to process. The payload file can use any format. To\n        make sure that the device correctly interprets the payload, we recommend you to\n        specify the payload content type.</p>"
+                    }
+                },
+                "mandatoryParameters": {
+                    "target": "com.amazonaws.iot#CommandParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameters that are required by the <code>StartCommandExecution</code> API.\n            These parameters need to be specified only when using the <code>AWS-IoT-FleetWise</code>\n            namespace. You can either specify them here or when running the command using the\n                <code>StartCommandExecution</code> API.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iot#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that allows access to create the command.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name-value pairs that are used as metadata to manage a command.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#CreateCommandResponse": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the command.</p>"
+                    }
+                },
+                "commandArn": {
+                    "target": "com.amazonaws.iot#CommandArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the command. For example,\n                <code>arn:aws:iot:<region>:<accountid>:command/<commandId></code>\n         </p>"
                     }
                 }
             },
@@ -7607,7 +8186,7 @@
                 "jobId": {
                     "target": "com.amazonaws.iot#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A job identifier which must be unique for your Amazon Web Services account. We recommend using a UUID. Alpha-numeric\n            characters, \"-\" and \"_\" are valid for use here.</p>",
+                        "smithy.api#documentation": "<p>A job identifier which must be unique for your account. We recommend using a UUID.\n            Alpha-numeric characters, \"-\" and \"_\" are valid for use here.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7622,13 +8201,13 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a bucket</a>.</p>"
+                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL\n            and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source\n                https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a\n                bucket</a>.</p>"
                     }
                 },
                 "document": {
                     "target": "com.amazonaws.iot#JobDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>"
+                        "smithy.api#documentation": "<p>The job document. Required if you don't specify a value for\n                <code>documentSource</code>.</p>"
                     }
                 },
                 "description": {
@@ -7646,7 +8225,7 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group.</p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete\n            after all those things specified as targets have completed the job (SNAPSHOT). If\n            continuous, the job may also be run on a thing when a change is detected in a target.\n            For example, a job will run on a thing when the thing is added to a target group, even\n            after the job was completed by all things originally in the group.</p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic\n                thing group targets. By using continuous jobs, devices that join the group receive\n                the job execution even after the job has been created.</p>\n         </note>"
                     }
                 },
                 "jobExecutionsRolloutConfig": {
@@ -7664,7 +8243,7 @@
                 "timeoutConfig": {
                     "target": "com.amazonaws.iot#TimeoutConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The timer \n           is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job \n           execution status is not set to another terminal state before the time expires, it will be \n           automatically set to <code>TIMED_OUT</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The\n            timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If\n            the job execution status is not set to another terminal state before the time expires,\n            it will be automatically set to <code>TIMED_OUT</code>.</p>"
                     }
                 },
                 "tags": {
@@ -7676,7 +8255,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>"
                     }
                 },
                 "jobTemplateArn": {
@@ -7694,7 +8273,7 @@
                 "documentParameters": {
                     "target": "com.amazonaws.iot#ParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameters of an Amazon Web Services managed template that you can specify to create the job document.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Parameters of an Amazon Web Services managed template that you can specify to create the job\n            document.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services\n                managed templates. This parameter can't be used with custom job templates or to\n                create jobs from them.</p>\n         </note>"
                     }
                 },
                 "schedulingConfig": {
@@ -7706,7 +8285,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n        Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job\n            successfully completes. The package version must be in either the Published or\n            Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a\n            single ARN. Up to 25 package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -7783,7 +8362,7 @@
                 "jobTemplateId": {
                     "target": "com.amazonaws.iot#JobTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the job template. We recommend using a UUID. Alpha-numeric \n        characters, \"-\", and \"_\" are valid for use here.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the job template. We recommend using a UUID. Alpha-numeric\n            characters, \"-\", and \"_\" are valid for use here.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7797,13 +8376,13 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a bucket</a>.</p>"
+                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL\n            and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source\n                https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a\n                bucket</a>.</p>"
                     }
                 },
                 "document": {
                     "target": "com.amazonaws.iot#JobDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>"
+                        "smithy.api#documentation": "<p>The job document. Required if you don't specify a value for\n                <code>documentSource</code>.</p>"
                     }
                 },
                 "description": {
@@ -7840,13 +8419,13 @@
                 "maintenanceWindows": {
                     "target": "com.amazonaws.iot#MaintenanceWindows",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.</p>"
+                        "smithy.api#documentation": "<p>Allows you to configure an optional maintenance window for the rollout of a job\n            document to all devices in the target group for a job.</p>"
                     }
                 },
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job\n            successfully completes. The package version must be in either the Published or\n            Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a\n            single ARN. Up to 25 package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -10443,6 +11022,131 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.iot#DeleteCommand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DeleteCommandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DeleteCommandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a command resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/commands/{commandId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DeleteCommandExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DeleteCommandExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DeleteCommandExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a command execution.</p>\n         <note>\n            <p>Only command executions that enter a terminal state can be deleted from\n        your account.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/command-executions/{executionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DeleteCommandExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "executionId": {
+                    "target": "com.amazonaws.iot#CommandExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command execution that you want to delete from your\n      account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.iot#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the target device for which you want to delete\n      command executions.</p>",
+                        "smithy.api#httpQuery": "targetArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DeleteCommandExecutionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#DeleteCommandRequest": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DeleteCommandResponse": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.iot#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The status code for the command deletion request. The status code is in the 200 range\n        for a successful request.</p>\n         <ul>\n            <li>\n               <p>If the command hasn't been deprecated, or has been deprecated for a duration that \n            is shorter than the maximum time out duration of 12 hours, when calling the\n            <code>DeleteCommand</code> request, the deletion will be scheduled and a 202 status code\n            will be returned. While the command is being deleted, it will be in a \n            <code>pendingDeletion</code> state. Once the time out duration has been reached,\n            the command will be permanently removed from your account.</p>\n            </li>\n            <li>\n               <p>If the command has been deprecated for a duration that is longer than the \n            maximum time out duration of 12 hours, when calling the <code>DeleteCommand</code> request,\n            the command will be deleted immediately and a 204 status code will be returned.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#DeleteConflictException": {
             "type": "structure",
             "members": {
@@ -10771,7 +11475,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a job and its related job executions.</p>\n         <p>Deleting a job may take time, depending on the number of job\n        executions created for the job and various other factors. While the job\n        is being deleted, the status of the job will be shown as \n        \"DELETION_IN_PROGRESS\". Attempting to delete or cancel a job whose status \n        is already \"DELETION_IN_PROGRESS\" will result in an error.</p>\n         <p>Only 10 jobs may have status \"DELETION_IN_PROGRESS\" at the same time, or\n        a LimitExceededException will occur.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteJob</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a job and its related job executions.</p>\n         <p>Deleting a job may take time, depending on the number of job executions created for\n            the job and various other factors. While the job is being deleted, the status of the job\n            will be shown as \"DELETION_IN_PROGRESS\". Attempting to delete or cancel a job whose\n            status is already \"DELETION_IN_PROGRESS\" will result in an error.</p>\n         <p>Only 10 jobs may have status \"DELETION_IN_PROGRESS\" at the same time, or a\n            LimitExceededException will occur.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteJob</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/jobs/{jobId}",
@@ -10835,7 +11539,7 @@
                 "executionNumber": {
                     "target": "com.amazonaws.iot#ExecutionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the job execution to be deleted. The <code>executionNumber</code> refers to the \n        execution of a particular job on a particular device.</p>\n         <p>Note that once a job execution is deleted, the <code>executionNumber</code> may be reused \n        by IoT, so be sure you get and use the correct value here.</p>",
+                        "smithy.api#documentation": "<p>The ID of the job execution to be deleted. The <code>executionNumber</code> refers\n            to the execution of a particular job on a particular device.</p>\n         <p>Note that once a job execution is deleted, the <code>executionNumber</code> may be\n            reused by IoT, so be sure you get and use the correct value here.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10844,14 +11548,14 @@
                     "target": "com.amazonaws.iot#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>(Optional) When true, you can delete a job execution which is \"IN_PROGRESS\". Otherwise, \n        you can only delete a job execution which is in a terminal state (\"SUCCEEDED\", \"FAILED\",\n        \"REJECTED\", \"REMOVED\" or \"CANCELED\") or an exception will occur. The default is false.</p>\n         <note>\n            <p>Deleting a job execution which is \"IN_PROGRESS\", will cause the device \n        to be unable to access job information or update the job execution status.\n        Use caution and ensure that the device is able to recover to a valid state.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>(Optional) When true, you can delete a job execution which is \"IN_PROGRESS\".\n            Otherwise, you can only delete a job execution which is in a terminal state\n            (\"SUCCEEDED\", \"FAILED\", \"REJECTED\", \"REMOVED\" or \"CANCELED\") or an exception will occur.\n            The default is false.</p>\n         <note>\n            <p>Deleting a job execution which is \"IN_PROGRESS\", will cause the device to be\n                unable to access job information or update the job execution status. Use caution and\n                ensure that the device is able to recover to a valid state.</p>\n         </note>",
                         "smithy.api#httpQuery": "force"
                     }
                 },
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -10866,7 +11570,7 @@
                 "jobId": {
                     "target": "com.amazonaws.iot#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the job to be deleted.</p>\n         <p>After a job deletion is completed, you may reuse this jobId when you create a new job. \n        However, this is not recommended, and you must ensure that your devices are not using the \n        jobId to refer to the deleted job.</p>",
+                        "smithy.api#documentation": "<p>The ID of the job to be deleted.</p>\n         <p>After a job deletion is completed, you may reuse this jobId when you create a new\n            job. However, this is not recommended, and you must ensure that your devices are not\n            using the jobId to refer to the deleted job.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10875,14 +11579,14 @@
                     "target": "com.amazonaws.iot#ForceFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>(Optional) When true, you can delete a job which is \"IN_PROGRESS\". Otherwise, you can\n        only delete a job which is in a terminal state (\"COMPLETED\" or \"CANCELED\") or an exception \n        will occur. The default is false.</p>\n         <note>\n            <p>Deleting a job which is \"IN_PROGRESS\", will cause a device which is executing \n        the job to be unable to access job information or update the job execution status.\n        Use caution and ensure that each device executing a job which is deleted is able to recover to \n        a valid state.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>(Optional) When true, you can delete a job which is \"IN_PROGRESS\". Otherwise, you\n            can only delete a job which is in a terminal state (\"COMPLETED\" or \"CANCELED\") or an\n            exception will occur. The default is false.</p>\n         <note>\n            <p>Deleting a job which is \"IN_PROGRESS\", will cause a device which is executing\n                the job to be unable to access job information or update the job execution status.\n                Use caution and ensure that each device executing a job which is deleted is able to\n                recover to a valid state.</p>\n         </note>",
                         "smithy.api#httpQuery": "force"
                     }
                 },
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -12210,6 +12914,9 @@
         },
         "com.amazonaws.iot#DeprecationDate": {
             "type": "timestamp"
+        },
+        "com.amazonaws.iot#DeprecationFlag": {
+            "type": "boolean"
         },
         "com.amazonaws.iot#DescribeAccountAuditConfiguration": {
             "type": "operation",
@@ -13867,7 +14574,7 @@
                 "executionNumber": {
                     "target": "com.amazonaws.iot#ExecutionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\" which is used to specify a particular job execution\n            on a particular device.</p>",
+                        "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\" which is used to specify a\n            particular job execution on a particular device.</p>",
                         "smithy.api#httpQuery": "executionNumber"
                     }
                 }
@@ -13905,7 +14612,7 @@
                     "target": "com.amazonaws.iot#BeforeSubstitutionFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that provides a view of the job document before and after the substitution parameters have been resolved with their exact values.</p>",
+                        "smithy.api#documentation": "<p>Provides a view of the job document before and after the substitution parameters have been resolved with their exact values.</p>",
                         "smithy.api#httpQuery": "beforeSubstitution"
                     }
                 }
@@ -14041,13 +14748,13 @@
                 "maintenanceWindows": {
                     "target": "com.amazonaws.iot#MaintenanceWindows",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.</p>"
+                        "smithy.api#documentation": "<p>Allows you to configure an optional maintenance window for the rollout of a job\n            document to all devices in the target group for a job.</p>"
                     }
                 },
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job\n            successfully completes. The package version must be in either the Published or\n            Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a\n            single ARN. Up to 25 package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -14100,7 +14807,7 @@
                 "templateVersion": {
                     "target": "com.amazonaws.iot#ManagedTemplateVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter to specify version of a managed template. If not specified, the \n            pre-defined default version is returned.</p>",
+                        "smithy.api#documentation": "<p>An optional parameter to specify version of a managed template. If not specified, the\n            pre-defined default version is returned.</p>",
                         "smithy.api#httpQuery": "templateVersion"
                     }
                 }
@@ -14145,7 +14852,7 @@
                 "documentParameters": {
                     "target": "com.amazonaws.iot#DocumentParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating \n            a job from a managed template.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for\n            creating a job from a managed template.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services\n                managed templates. This parameter can't be used with custom job templates or to\n                create jobs from them.</p>\n         </note>"
                     }
                 },
                 "document": {
@@ -16095,6 +16802,16 @@
         "com.amazonaws.iot#DisconnectReason": {
             "type": "string"
         },
+        "com.amazonaws.iot#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[^\\p{C}]*$"
+            }
+        },
         "com.amazonaws.iot#DocumentParameter": {
             "type": "structure",
             "members": {
@@ -16107,31 +16824,31 @@
                 "description": {
                     "target": "com.amazonaws.iot#JobDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the map field containing the patterns that need to be replaced in a \n            managed template job document schema.</p>"
+                        "smithy.api#documentation": "<p>Description of the map field containing the patterns that need to be replaced in a\n            managed template job document schema.</p>"
                     }
                 },
                 "regex": {
                     "target": "com.amazonaws.iot#Regex",
                     "traits": {
-                        "smithy.api#documentation": "<p>A regular expression of the patterns that need to be replaced in a managed template \n            job document schema.</p>"
+                        "smithy.api#documentation": "<p>A regular expression of the patterns that need to be replaced in a managed template\n            job document schema.</p>"
                     }
                 },
                 "example": {
                     "target": "com.amazonaws.iot#Example",
                     "traits": {
-                        "smithy.api#documentation": "<p>An example illustrating a pattern that need to be replaced in a managed template \n            job document schema.</p>"
+                        "smithy.api#documentation": "<p>An example illustrating a pattern that need to be replaced in a managed template job\n            document schema.</p>"
                     }
                 },
                 "optional": {
                     "target": "com.amazonaws.iot#Optional",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a pattern that needs to be replaced in a managed template job document \n            schema is optional or required.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether a pattern that needs to be replaced in a managed template job\n            document schema is optional or required.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed\n            template job document schema. You can use the description of each key as a guidance to specify \n            the inputs during runtime when creating a job.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed\n            template job document schema. You can use the description of each key as a guidance to\n            specify the inputs during runtime when creating a job.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services\n                managed templates. This parameter can't be used with custom job templates or to\n                create jobs from them.</p>\n         </note>"
             }
         },
         "com.amazonaws.iot#DocumentParameters": {
@@ -16234,6 +16951,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.iot#DoubleParameterValue": {
+            "type": "double"
         },
         "com.amazonaws.iot#DurationInMinutes": {
             "type": "integer",
@@ -16758,14 +17478,14 @@
                 "baseRatePerMinute": {
                     "target": "com.amazonaws.iot#RolloutRatePerMinute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of things that will be notified of a pending job, per minute at the start of job rollout.\n            This parameter allows you to define the initial rate of rollout.</p>",
+                        "smithy.api#documentation": "<p>The minimum number of things that will be notified of a pending job, per minute at\n            the start of job rollout. This parameter allows you to define the initial rate of\n            rollout.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "incrementFactor": {
                     "target": "com.amazonaws.iot#IncrementFactor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exponential factor to increase the rate of rollout for a job.</p>\n         <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>",
+                        "smithy.api#documentation": "<p>The exponential factor to increase the rate of rollout for a job.</p>\n         <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not\n            1.55).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17523,6 +18243,281 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#GetCommand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#GetCommandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#GetCommandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified command.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/commands/{commandId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#GetCommandExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#GetCommandExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#GetCommandExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specific command execution on a single device.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/command-executions/{executionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#GetCommandExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "executionId": {
+                    "target": "com.amazonaws.iot#CommandExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the command execution. This information is returned as a\n            response of the <code>StartCommandExecution</code> API request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.iot#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the device on which the command execution is being\n            performed.</p>",
+                        "smithy.api#httpQuery": "targetArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeResult": {
+                    "target": "com.amazonaws.iot#BooleanWrapperObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Can be used to specify whether to include the result of the command execution\n            in the <code>GetCommandExecution</code> API response. Your device can use this\n            field to provide additional information about the command execution. You only\n            need to specify this field when using the <code>AWS-IoT</code> namespace.</p>",
+                        "smithy.api#httpQuery": "includeResult"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#GetCommandExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "executionId": {
+                    "target": "com.amazonaws.iot#CommandExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command execution.</p>"
+                    }
+                },
+                "commandArn": {
+                    "target": "com.amazonaws.iot#CommandArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the command. For example,\n            <code></code>arn:aws:iot:<region>:<accountid>:command/<commandId></p>"
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.iot#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the device on which the command execution is being\n            performed.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#CommandExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the command execution. After your devices receive the command and start\n            performing the operations specified in the command, it can use the\n                <code>UpdateCommandExecution</code> MQTT API to update the status\n            information.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.iot#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your devices can use this parameter to provide additional context about the status of\n            a command execution using a reason code and description.</p>"
+                    }
+                },
+                "result": {
+                    "target": "com.amazonaws.iot#CommandExecutionResultMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result value for the current state of the command execution. The status provides\n            information about the progress of the command execution. The device can use the result\n            field to share additional details about the execution such as a return value of a remote\n            function call.</p>\n         <note>\n            <p>If you use the <code>AWS-IoT-FleetWise</code> namespace, then this field is not\n                applicable in the API response.</p>\n         </note>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.iot#CommandExecutionParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of parameters that the <code>StartCommandExecution</code> API used when\n            performing the command on the device.</p>"
+                    }
+                },
+                "executionTimeoutSeconds": {
+                    "target": "com.amazonaws.iot#CommandExecutionTimeoutInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the amount of time in seconds that the device can take to finish a command\n            execution. A timer starts when the command execution is created. If the command\n            execution status is not set to another terminal state before the timer expires, it will\n            automatically update to <code>TIMED_OUT</code>.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command execution was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command execution was last updated.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command execution was started.</p>"
+                    }
+                },
+                "completedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command execution was completed.</p>"
+                    }
+                },
+                "timeToLive": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time to live (TTL) parameter for the <code>GetCommandExecution</code> API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#GetCommandRequest": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command for which you want to retrieve\n            information.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#GetCommandResponse": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command.</p>"
+                    }
+                },
+                "commandArn": {
+                    "target": "com.amazonaws.iot#CommandArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the command. For example,\n                <code>arn:aws:iot:<region>:<accountid>:command/<commandId></code>\n         </p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.iot#CommandNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the command.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iot#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name in the console for the command.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#CommandDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short text description of the command.</p>"
+                    }
+                },
+                "mandatoryParameters": {
+                    "target": "com.amazonaws.iot#CommandParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameters for the command created.</p>"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.iot#CommandPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload object that you provided for the command.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iot#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that allows access to retrieve information about the command.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp, when the command was last updated.</p>"
+                    }
+                },
+                "deprecated": {
+                    "target": "com.amazonaws.iot#DeprecationFlag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the command has been deprecated.</p>"
+                    }
+                },
+                "pendingDeletion": {
+                    "target": "com.amazonaws.iot#BooleanWrapperObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the command is being deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#GetEffectivePolicies": {
             "type": "operation",
             "input": {
@@ -17711,7 +18706,7 @@
                     "target": "com.amazonaws.iot#BeforeSubstitutionFlag",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that provides a view of the job document before and after the substitution parameters have been resolved with their exact values.</p>",
+                        "smithy.api#documentation": "<p>Provides a view of the job document before and after the substitution parameters have been resolved with their exact values.</p>",
                         "smithy.api#httpQuery": "beforeSubstitution"
                     }
                 }
@@ -19148,6 +20143,9 @@
                 }
             }
         },
+        "com.amazonaws.iot#IntegerParameterValue": {
+            "type": "integer"
+        },
         "com.amazonaws.iot#InternalException": {
             "type": "structure",
             "members": {
@@ -19435,7 +20433,7 @@
                 "jobArn": {
                     "target": "com.amazonaws.iot#JobArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ARN identifying the job with format \"arn:aws:iot:region:account:job/jobId\".</p>"
+                        "smithy.api#documentation": "<p>An ARN identifying the job with format\n            \"arn:aws:iot:region:account:job/jobId\".</p>"
                     }
                 },
                 "jobId": {
@@ -19447,19 +20445,19 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a device when the thing representing\n            the device is added to a target group, even after the job was completed by all things originally in the \n            group. </p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete\n            after all those things specified as targets have completed the job (SNAPSHOT). If\n            continuous, the job may also be run on a thing when a change is detected in a target.\n            For example, a job will run on a device when the thing representing the device is added\n            to a target group, even after the job was completed by all things originally in the\n            group. </p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic\n                thing group targets. By using continuous jobs, devices that join the group receive\n                the job execution even after the job has been created.</p>\n         </note>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.iot#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the job, one of <code>IN_PROGRESS</code>, <code>CANCELED</code>, \n            <code>DELETION_IN_PROGRESS</code> or <code>COMPLETED</code>. </p>"
+                        "smithy.api#documentation": "<p>The status of the job, one of <code>IN_PROGRESS</code>, <code>CANCELED</code>,\n                <code>DELETION_IN_PROGRESS</code> or <code>COMPLETED</code>. </p>"
                     }
                 },
                 "forceCanceled": {
                     "target": "com.amazonaws.iot#Forced",
                     "traits": {
-                        "smithy.api#documentation": "<p>Will be <code>true</code> if the job was canceled with the optional <code>force</code> parameter set to \n          <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>Will be <code>true</code> if the job was canceled with the optional\n                <code>force</code> parameter set to <code>true</code>.</p>"
                     }
                 },
                 "reasonCode": {
@@ -19531,13 +20529,13 @@
                 "timeoutConfig": {
                     "target": "com.amazonaws.iot#TimeoutConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job.  A timer \n           is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job \n           execution status is not set to another terminal state before the timer expires, it will\n           be automatically set to <code>TIMED_OUT</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. A\n            timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If\n            the job execution status is not set to another terminal state before the timer expires,\n            it will be automatically set to <code>TIMED_OUT</code>.</p>"
                     }
                 },
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>"
                     }
                 },
                 "jobTemplateArn": {
@@ -19555,13 +20553,13 @@
                 "documentParameters": {
                     "target": "com.amazonaws.iot#ParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed \n            template job document schema. You can use the description of each key as a guidance \n            to specify the inputs during runtime when creating a job.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services \n                managed templates. This parameter can't be used with custom job templates or to \n                create jobs from them.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed\n            template job document schema. You can use the description of each key as a guidance to\n            specify the inputs during runtime when creating a job.</p>\n         <note>\n            <p>\n               <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services\n                managed templates. This parameter can't be used with custom job templates or to\n                create jobs from them.</p>\n         </note>"
                     }
                 },
                 "isConcurrent": {
                     "target": "com.amazonaws.iot#BooleanWrapperObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a job is concurrent. Will be true when a job is \n            rolling out new job executions or canceling previously created executions,\n            otherwise false.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job\n            executions or canceling previously created executions, otherwise false.</p>"
                     }
                 },
                 "schedulingConfig": {
@@ -19579,7 +20577,7 @@
                 "destinationPackageVersions": {
                     "target": "com.amazonaws.iot#DestinationPackageVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n            job successfully completes. The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.The package version must be in either the Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single ARN. \n            Up to 25  package version ARNs are allowed.</p>"
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job\n            successfully completes. The package version must be in either the Published or\n            Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.The package version must be in either the\n            Published or Deprecated state when the job deploys. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a\n            single ARN. Up to 25 package version ARNs are allowed.</p>"
                     }
                 }
             },
@@ -19653,19 +20651,19 @@
                 "status": {
                     "target": "com.amazonaws.iot#JobExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT, \n            CANCELED, or REJECTED).</p>"
+                        "smithy.api#documentation": "<p>The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT,\n            CANCELED, or REJECTED).</p>"
                     }
                 },
                 "forceCanceled": {
                     "target": "com.amazonaws.iot#Forced",
                     "traits": {
-                        "smithy.api#documentation": "<p>Will be <code>true</code> if the job execution was canceled with the optional <code>force</code> \n          parameter set to <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>Will be <code>true</code> if the job execution was canceled with the optional\n                <code>force</code> parameter set to <code>true</code>.</p>"
                     }
                 },
                 "statusDetails": {
                     "target": "com.amazonaws.iot#JobExecutionStatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job execution.</p>"
+                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job\n            execution.</p>"
                     }
                 },
                 "thingArn": {
@@ -19689,31 +20687,31 @@
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job execution was last updated.</p>"
+                        "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job execution was last\n            updated.</p>"
                     }
                 },
                 "executionNumber": {
                     "target": "com.amazonaws.iot#ExecutionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\") which identifies this particular job execution on\n            this particular device. It can be used in commands which return or update job execution information.\n        </p>"
+                        "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\") which identifies this\n            particular job execution on this particular device. It can be used in commands which\n            return or update job execution information. </p>"
                     }
                 },
                 "versionNumber": {
                     "target": "com.amazonaws.iot#VersionNumber",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The version of the job execution. Job execution versions are incremented each time they are updated\n      by a device.</p>"
+                        "smithy.api#documentation": "<p>The version of the job execution. Job execution versions are incremented each time\n            they are updated by a device.</p>"
                     }
                 },
                 "approximateSecondsBeforeTimedOut": {
                     "target": "com.amazonaws.iot#ApproximateSecondsBeforeTimedOut",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated number of seconds that remain before the job execution status will be\n           changed to <code>TIMED_OUT</code>. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). \n           The actual job execution timeout can occur up to 60 seconds later than the estimated duration. \n       This value will not be included if the job execution has reached a terminal status.</p>"
+                        "smithy.api#documentation": "<p>The estimated number of seconds that remain before the job execution status will be\n            changed to <code>TIMED_OUT</code>. The timeout interval can be anywhere between 1 minute\n            and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60\n            seconds later than the estimated duration. This value will not be included if the job\n            execution has reached a terminal status.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The job execution object represents the execution of a job on a particular device.</p>"
+                "smithy.api#documentation": "<p>The job execution object represents the execution of a job on a particular\n            device.</p>"
             }
         },
         "com.amazonaws.iot#JobExecutionFailureType": {
@@ -19836,19 +20834,19 @@
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job execution was last updated.</p>"
+                        "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job execution was last\n            updated.</p>"
                     }
                 },
                 "executionNumber": {
                     "target": "com.amazonaws.iot#ExecutionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\") which identifies this particular job execution on\n            this particular device. It can be used later in commands which return or update job execution\n            information.</p>"
+                        "smithy.api#documentation": "<p>A string (consisting of the digits \"0\" through \"9\") which identifies this\n            particular job execution on this particular device. It can be used later in commands\n            which return or update job execution information.</p>"
                     }
                 },
                 "retryAttempt": {
                     "target": "com.amazonaws.iot#RetryAttempt",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number that indicates how many retry attempts have been completed for this \n        job on this device.</p>"
+                        "smithy.api#documentation": "<p>The number that indicates how many retry attempts have been completed for this job on\n            this device.</p>"
                     }
                 }
             },
@@ -19873,7 +20871,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a summary of information about job executions for a specific job.</p>"
+                "smithy.api#documentation": "<p>Contains a summary of information about job executions for a specific\n            job.</p>"
             }
         },
         "com.amazonaws.iot#JobExecutionSummaryForJobList": {
@@ -19920,7 +20918,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that determines how many retries are allowed for each failure \n            type for a job.</p>"
+                "smithy.api#documentation": "<p>The configuration that determines how many retries are allowed for each failure type\n            for a job.</p>"
             }
         },
         "com.amazonaws.iot#JobExecutionsRolloutConfig": {
@@ -19929,13 +20927,13 @@
                 "maximumPerMinute": {
                     "target": "com.amazonaws.iot#MaxJobExecutionsPerMin",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of things that will be notified of a pending job, per minute.\n        This parameter allows you to create a staged rollout.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of things that will be notified of a pending job, per minute.\n            This parameter allows you to create a staged rollout.</p>"
                     }
                 },
                 "exponentialRate": {
                     "target": "com.amazonaws.iot#ExponentialRolloutRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rate of increase for a job rollout.\n            This parameter allows you to define an exponential rate for a job rollout.</p>"
+                        "smithy.api#documentation": "<p>The rate of increase for a job rollout. This parameter allows you to define an\n            exponential rate for a job rollout.</p>"
                     }
                 }
             },
@@ -19959,7 +20957,7 @@
                 "processingTargets": {
                     "target": "com.amazonaws.iot#ProcessingTargetNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target devices to which the job execution is being rolled out. This value will be null after the job execution has finished rolling out to all the target devices.</p>"
+                        "smithy.api#documentation": "<p>The target devices to which the job execution is being rolled out. This value will\n            be null after the job execution has finished rolling out to all the target\n            devices.</p>"
                     }
                 },
                 "numberOfCanceledThings": {
@@ -20001,7 +20999,7 @@
                 "numberOfRemovedThings": {
                     "target": "com.amazonaws.iot#RemovedThings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of things that are no longer scheduled to execute the job because they have been deleted or\n            have been removed from the group that was a target of the job.</p>"
+                        "smithy.api#documentation": "<p>The number of things that are no longer scheduled to execute the job because they\n            have been deleted or have been removed from the group that was a target of the\n            job.</p>"
                     }
                 },
                 "numberOfTimedOutThings": {
@@ -20074,7 +21072,7 @@
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group.</p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete\n            after all those things specified as targets have completed the job (SNAPSHOT). If\n            continuous, the job may also be run on a thing when a change is detected in a target.\n            For example, a job will run on a thing when the thing is added to a target group, even\n            after the job was completed by all things originally in the group.</p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic\n                thing group targets. By using continuous jobs, devices that join the group receive\n                the job execution even after the job has been created.</p>\n         </note>"
                     }
                 },
                 "status": {
@@ -20104,7 +21102,7 @@
                 "isConcurrent": {
                     "target": "com.amazonaws.iot#BooleanWrapperObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a job is concurrent. Will be true when a job is \n            rolling out new job executions or canceling previously created executions,\n            otherwise false.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job\n            executions or canceling previously created executions, otherwise false.</p>"
                     }
                 }
             },
@@ -21691,6 +22689,224 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#ListCommandExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListCommandExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListCommandExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all command executions.</p>\n         <important>\n            <p>You must provide only the\n                <code>startedTimeFilter</code> or the <code>completedTimeFilter</code> information. If you \n                provide both time filters, the API will generate an error.\n                You can use this information to find command executions that started within\n                a specific timeframe.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/command-executions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "commandExecutions",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListCommandExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.iot#CommandMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this operation.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous\n            response; otherwise <code>null</code> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.iot#CommandNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the command.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#CommandExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List all command executions for the device that have a particular status. For example,\n            you can filter the list to display only command executions that have failed or timed\n            out.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.iot#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to list the command executions that were created in the\n            ascending or descending order. By default, the API returns all commands in the\n            descending order based on the start time or completion time of the executions, that are\n            determined by the <code>startTimeFilter</code> and <code>completeTimeFilter</code>\n            parameters.</p>"
+                    }
+                },
+                "startedTimeFilter": {
+                    "target": "com.amazonaws.iot#TimeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List all command executions that started any time before or after the\n            date and time that you specify. The date and time uses the format\n                <code>yyyy-MM-dd'T'HH:mm</code>.</p>"
+                    }
+                },
+                "completedTimeFilter": {
+                    "target": "com.amazonaws.iot#TimeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List all command executions that completed any time before or after the\n            date and time that you specify. The date and time uses the format\n                <code>yyyy-MM-dd'T'HH:mm</code>.</p>"
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.iot#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the target device. You can use this information to\n            list all command executions for a particular device.</p>"
+                    }
+                },
+                "commandArn": {
+                    "target": "com.amazonaws.iot#CommandArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the command. You can use this information to\n            list all command executions for a particular command.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListCommandExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "commandExecutions": {
+                    "target": "com.amazonaws.iot#CommandExecutionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of command executions.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <code>null</code> if there are no\n            additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#ListCommands": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListCommandsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListCommandsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all commands in your account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/commands",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "commands",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListCommandsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.iot#CommandMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this operation. By default, the API returns\n            up to a maximum of 25 results. You can override this default value to return up to a\n            maximum of 100 results for this operation.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous\n            response; otherwise <code>null</code> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.iot#CommandNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the command. By default, the API returns all commands that have been\n            created for both <code>AWS-IoT</code> and <code>AWS-IoT-FleetWise</code> namespaces. You\n            can override this default value if you want to return all commands that have been\n            created only for a specific namespace.</p>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "commandParameterName": {
+                    "target": "com.amazonaws.iot#CommandParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that can be used to display the list of commands that have a specific command\n            parameter name.</p>",
+                        "smithy.api#httpQuery": "commandParameterName"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.iot#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to list the commands that you have created in the ascending or\n            descending order. By default, the API returns all commands in the descending order based\n            on the time that they were created.</p>",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListCommandsResponse": {
+            "type": "structure",
+            "members": {
+                "commands": {
+                    "target": "com.amazonaws.iot#CommandSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of commands.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <code>null</code> if there are no\n            additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#ListCustomMetrics": {
             "type": "operation",
             "input": {
@@ -22385,7 +23601,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if there are no\n            additional results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if\n            there are no additional results.</p>"
                     }
                 }
             },
@@ -22444,14 +23660,14 @@
                 "status": {
                     "target": "com.amazonaws.iot#JobExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional filter that lets you search for jobs that have the specified status.</p>",
+                        "smithy.api#documentation": "<p>An optional filter that lets you search for jobs that have the specified\n            status.</p>",
                         "smithy.api#httpQuery": "status"
                     }
                 },
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 },
@@ -22493,7 +23709,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if there are no\n            additional results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if\n            there are no additional results.</p>"
                     }
                 }
             },
@@ -22569,7 +23785,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if there are no\n            additional results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if\n            there are no additional results.</p>"
                     }
                 }
             },
@@ -22620,14 +23836,14 @@
                 "status": {
                     "target": "com.amazonaws.iot#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional filter that lets you search for jobs that have the specified status.</p>",
+                        "smithy.api#documentation": "<p>An optional filter that lets you search for jobs that have the specified\n            status.</p>",
                         "smithy.api#httpQuery": "status"
                     }
                 },
                 "targetSelection": {
                     "target": "com.amazonaws.iot#TargetSelection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things\n            specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing\n            when a change is detected in a target. For example, a job will run on a thing when the thing is added to a\n            target group, even after the job was completed by all things originally in the group. </p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. \n                By using continuous jobs, devices that join the group receive the job execution even after the job has\n                been created.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete\n            after all those things specified as targets have completed the job (SNAPSHOT). If\n            continuous, the job may also be run on a thing when a change is detected in a target.\n            For example, a job will run on a thing when the thing is added to a target group, even\n            after the job was completed by all things originally in the group. </p>\n         <note>\n            <p>We recommend that you use continuous jobs instead of snapshot jobs for dynamic\n                thing group targets. By using continuous jobs, devices that join the group receive\n                the job execution even after the job has been created.</p>\n         </note>",
                         "smithy.api#httpQuery": "targetSelection"
                     }
                 },
@@ -22662,7 +23878,7 @@
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 }
@@ -22683,7 +23899,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if there are no\n            additional results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if\n            there are no additional results.</p>"
                     }
                 }
             },
@@ -26523,6 +27739,9 @@
                 "smithy.api#documentation": "<p>Describes the logging options payload.</p>"
             }
         },
+        "com.amazonaws.iot#LongParameterValue": {
+            "type": "long"
+        },
         "com.amazonaws.iot#MachineLearningDetectionConfig": {
             "type": "structure",
             "members": {
@@ -26557,7 +27776,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.</p>"
+                "smithy.api#documentation": "<p>An optional configuration within the <code>SchedulingConfig</code> to setup a\n            recurring maintenance window with a predetermined start time and duration for the\n            rollout of a job document to all devices in a target group for a job.</p>"
             }
         },
         "com.amazonaws.iot#MaintenanceWindows": {
@@ -26891,6 +28110,14 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Set configurations for metrics export.</p>"
+            }
+        },
+        "com.amazonaws.iot#MimeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.iot#Minimum": {
@@ -28228,13 +29455,13 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an IAM role that grants permission to download files from the S3 bucket\n            where the job data/updates are stored. The role must also grant permission for IoT to\n            download the files.</p>\n         <important>\n            <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service\n                confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that grants permission to download files from the S3 bucket\n            where the job data/updates are stored. The role must also grant permission for IoT to\n            download the files.</p>\n         <important>\n            <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core\n                    developer guide</i>.</p>\n         </important>"
                     }
                 },
                 "expiresInSec": {
                     "target": "com.amazonaws.iot#ExpiresInSec",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 3600\n            seconds. Pre-signed URLs are generated when Jobs receives an MQTT request for the job document.</p>"
+                        "smithy.api#documentation": "<p>How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the\n            default value is 3600 seconds. Pre-signed URLs are generated when Jobs receives an MQTT\n            request for the job document.</p>"
                     }
                 }
             },
@@ -28694,18 +29921,18 @@
                 "numberOfNotifiedThings": {
                     "target": "com.amazonaws.iot#NumberOfThings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The threshold for number of notified things that will initiate the increase in rate of rollout.</p>"
+                        "smithy.api#documentation": "<p>The threshold for number of notified things that will initiate the increase in rate\n            of rollout.</p>"
                     }
                 },
                 "numberOfSucceededThings": {
                     "target": "com.amazonaws.iot#NumberOfThings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The threshold for number of succeeded things that will initiate the increase in rate of rollout.</p>"
+                        "smithy.api#documentation": "<p>The threshold for number of succeeded things that will initiate the increase in\n            rate of rollout.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to define a criteria to initiate the increase in rate of rollout for a job.</p>"
+                "smithy.api#documentation": "<p>Allows you to define a criteria to initiate the increase in rate of rollout for a\n            job.</p>"
             }
         },
         "com.amazonaws.iot#ReasonCode": {
@@ -29913,7 +31140,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The criteria that determines how many retries are allowed for each failure\n            type for a job.</p>"
+                "smithy.api#documentation": "<p>The criteria that determines how many retries are allowed for each failure type for a\n            job.</p>"
             }
         },
         "com.amazonaws.iot#RetryCriteriaList": {
@@ -30407,7 +31634,7 @@
                 "startTime": {
                     "target": "com.amazonaws.iot#StringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time a job will begin rollout of the job document to all devices in the target\n            group for a job. The <code>startTime</code> can be scheduled up to a year in advance and\n            must be scheduled a minimum of thirty minutes from the current time. The date and time\n            format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the\n            time.</p>\n         <p>For more information on the syntax for <code>startTime</code> when using an API\n                command or the Command Line Interface, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a>.</p>"
+                        "smithy.api#documentation": "<p>The time a job will begin rollout of the job document to all devices in the target\n            group for a job. The <code>startTime</code> can be scheduled up to a year in advance and\n            must be scheduled a minimum of thirty minutes from the current time. The date and time\n            format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the\n            time.</p>\n         <p>For more information on the syntax for <code>startTime</code> when using an API\n            command or the Command Line Interface, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp\">Timestamp</a>.</p>"
                     }
                 },
                 "endTime": {
@@ -30425,12 +31652,12 @@
                 "maintenanceWindows": {
                     "target": "com.amazonaws.iot#MaintenanceWindows",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.</p>"
+                        "smithy.api#documentation": "<p>An optional configuration within the <code>SchedulingConfig</code> to setup a\n            recurring maintenance window with a predetermined start time and duration for the\n            rollout of a job document to all devices in a target group for a job.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the date and time that a job will begin the rollout of the job document to all devices in the target group. Additionally, you can specify the end behavior for each job execution when it reaches the scheduled end time.</p>"
+                "smithy.api#documentation": "<p>Specifies the date and time that a job will begin the rollout of the job document to\n            all devices in the target group. Additionally, you can specify the end behavior for each\n            job execution when it reaches the scheduled end time.</p>"
             }
         },
         "com.amazonaws.iot#SearchIndex": {
@@ -30702,13 +31929,13 @@
                 "ocspLambdaArn": {
                     "target": "com.amazonaws.iot#OCSPLambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a Lambda function that acts as a Request for Comments\n         (RFC) 6960-compliant Online Certificate Status Protocol (OCSP) responder, supporting basic\n         OCSP responses.  The Lambda function accepts a JSON string that's Base64-encoded.\n         Therefore, you must convert your OCSP response, which is typically in the Distinguished\n         Encoding Rules (DER) format, into a JSON string that's Base64-encoded. The Lambda\n         function's response is also a Base64-encoded JSON string and the response payload must not\n         exceed 8 kilobytes (KiB) in size. The Lambda function must be in the same Amazon Web Services region and\n         account as the domain configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a Lambda function that acts as a Request for Comments\n         (RFC) 6960-compliant Online Certificate Status Protocol (OCSP) responder, supporting basic\n         OCSP responses. The Lambda function accepts a base64-encoding of the OCSP request in the\n         Distinguished Encoding Rules (DER) format. The Lambda function's response is also a\n         base64-encoded OCSP response in the DER format. The response size must not exceed 4\n         kilobytes (KiB). The Lambda function must be in the same Amazon Web Services account and region as the\n         domain configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html#iot-custom-endpoints-cert-config-ocsp-private-endpoint.html\">Configuring server certificate OCSP for private endpoints in Amazon Web Services IoT Core</a> from the\n         Amazon Web Services IoT Core developer guide.</p>"
                     }
                 },
                 "ocspAuthorizedResponderArn": {
                     "target": "com.amazonaws.iot#AcmCertificateArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an X.509 certificate stored in Amazon Web Services Certificate Manager (ACM). \n         If provided, Amazon Web Services IoT Core will use this certificate to validate the signature of the received OCSP response. \n         The OCSP responder must sign responses using either this authorized responder certificate or the issuing certificate, \n         depending on whether the ARN is provided or not. The certificate must be in the same Amazon Web Services region and account as the domain configuration.\n      </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an X.509 certificate stored in Amazon Web Services Certificate\n         Manager (ACM). If provided, Amazon Web Services IoT Core will use this certificate to validate the signature\n         of the received OCSP response. The OCSP responder must sign responses using either this\n         authorized responder certificate or the issuing certificate, depending on whether the ARN\n         is provided or not. The certificate must be in the same Amazon Web Services account and region as the\n         domain configuration.</p>"
                     }
                 }
             },
@@ -30789,7 +32016,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A limit has been exceeded.</p>",
+                "smithy.api#documentation": "<p>Service quota has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -31267,6 +32494,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 350
+                }
+            }
+        },
+        "com.amazonaws.iot#SortOrder": {
+            "type": "enum",
+            "members": {
+                "Ascending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                },
+                "Descending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
                 }
             }
         },
@@ -31793,6 +33037,53 @@
                 }
             }
         },
+        "com.amazonaws.iot#StatusCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.iot#StatusReason": {
+            "type": "structure",
+            "members": {
+                "reasonCode": {
+                    "target": "com.amazonaws.iot#StatusReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that provides additional context for the command execution status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reasonDescription": {
+                    "target": "com.amazonaws.iot#StatusReasonDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A literal string for devices to optionally provide additional information about the\n            reason code for a command execution status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provide additional context about the status of a command execution using a reason code\n            and description.</p>"
+            }
+        },
+        "com.amazonaws.iot#StatusReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot#StatusReasonDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[^\\p{C}]*$"
+            }
+        },
         "com.amazonaws.iot#StdDeviation": {
             "type": "double",
             "traits": {
@@ -32068,6 +33359,14 @@
         "com.amazonaws.iot#String": {
             "type": "string"
         },
+        "com.amazonaws.iot#StringCommandExecutionResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.iot#StringDateTime": {
             "type": "string",
             "traits": {
@@ -32090,6 +33389,14 @@
             },
             "value": {
                 "target": "com.amazonaws.iot#String"
+            }
+        },
+        "com.amazonaws.iot#StringParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.iot#SubnetId": {
@@ -33366,6 +34673,26 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iot#TimeFilter": {
+            "type": "structure",
+            "members": {
+                "after": {
+                    "target": "com.amazonaws.iot#StringDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter to display command executions that started or completed only after a particular\n            date and time.</p>"
+                    }
+                },
+                "before": {
+                    "target": "com.amazonaws.iot#StringDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter to display command executions that started or completed only before a\n            particular date and time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that can be used to list command executions for a device that started or\n            completed before or after a particular date and time.</p>"
+            }
+        },
         "com.amazonaws.iot#TimedOutThings": {
             "type": "integer"
         },
@@ -33375,12 +34702,12 @@
                 "inProgressTimeoutInMinutes": {
                     "target": "com.amazonaws.iot#InProgressTimeoutInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the amount of time, in minutes, this device has to finish execution of this job.  \n           The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The \n           in progress timer can't be updated and will apply to all job executions for the job. Whenever a job \n           execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail \n           and switch to the terminal <code>TIMED_OUT</code> status.</p>"
+                        "smithy.api#documentation": "<p>Specifies the amount of time, in minutes, this device has to finish execution of this\n            job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080\n            minutes). The in progress timer can't be updated and will apply to all job executions\n            for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than\n            this interval, the job execution will fail and switch to the terminal\n                <code>TIMED_OUT</code> status.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job.  A timer \n           is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job \n           execution status is not set to another terminal state before the timer expires, it will\n           be automatically set to <code>TIMED_OUT</code>.</p>"
+                "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. A\n            timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If\n            the job execution status is not set to another terminal state before the timer expires,\n            it will be automatically set to <code>TIMED_OUT</code>.</p>"
             }
         },
         "com.amazonaws.iot#Timestamp": {
@@ -34101,6 +35428,16 @@
                 }
             }
         },
+        "com.amazonaws.iot#UnsignedLongParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
         "com.amazonaws.iot#UntagResource": {
             "type": "operation",
             "input": {
@@ -34726,6 +36063,112 @@
             "traits": {
                 "smithy.api#documentation": "<p>The input for the UpdateCertificate operation.</p>",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdateCommand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdateCommandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdateCommandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update information about a command or mark a command for deprecation.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/commands/{commandId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#UpdateCommandRequest": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iot#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new user-friendly name to use in the console for the command.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#CommandDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short text description of the command.</p>"
+                    }
+                },
+                "deprecated": {
+                    "target": "com.amazonaws.iot#DeprecationFlag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that you can use to specify whether to deprecate a command.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdateCommandResponse": {
+            "type": "structure",
+            "members": {
+                "commandId": {
+                    "target": "com.amazonaws.iot#CommandId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the command.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iot#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated user-friendly display name in the console for the command.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#CommandDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated text description of the command.</p>"
+                    }
+                },
+                "deprecated": {
+                    "target": "com.amazonaws.iot#DeprecationFlag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boolean that indicates whether the command was deprecated.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (epoch timestamp in seconds) when the command was last\n            updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iot#UpdateCustomMetric": {
@@ -35462,13 +36905,13 @@
                 "timeoutConfig": {
                     "target": "com.amazonaws.iot#TimeoutConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. \n            If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>. </p>"
+                        "smithy.api#documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. The\n            timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If\n            the job execution status is not set to another terminal state before the time expires,\n            it will be automatically set to <code>TIMED_OUT</code>. </p>"
                     }
                 },
                 "namespaceId": {
                     "target": "com.amazonaws.iot#NamespaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at\n                this time. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting\n                    up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n         <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to\n            MQTT topics that contain the value in the following format.</p>\n         <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n         <note>\n            <p>The <code>namespaceId</code> feature is only supported by IoT Greengrass at this time. For\n                more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html\">Setting up IoT Greengrass core devices.</a>\n            </p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
                     }
                 },

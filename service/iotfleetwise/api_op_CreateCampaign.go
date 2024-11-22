@@ -21,6 +21,11 @@ import (
 // For more information, see [Collect and transfer data with campaigns] in the Amazon Web Services IoT FleetWise Developer
 // Guide.
 //
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
 // [Collect and transfer data with campaigns]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/campaigns.html
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
@@ -61,15 +66,18 @@ type CreateCampaignInput struct {
 	// This member is required.
 	TargetArn *string
 
-	//  (Optional) Whether to compress signals before transmitting data to Amazon Web
+	// Determines whether to compress signals before transmitting data to Amazon Web
 	// Services IoT FleetWise. If you don't want to compress the signals, use OFF . If
 	// it's not specified, SNAPPY is used.
 	//
 	// Default: SNAPPY
 	Compression types.Compression
 
-	// The destination where the campaign sends data. You can choose to send data to
-	// be stored in Amazon S3 or Amazon Timestream.
+	// The destination where the campaign sends data. You can send data to an MQTT
+	// topic, or store it in Amazon S3 or Amazon Timestream.
+	//
+	// MQTT is the publish/subscribe messaging protocol used by Amazon Web Services
+	// IoT to communicate with your devices.
 	//
 	// Amazon S3 optimizes the cost of data storage and provides additional mechanisms
 	// to use vehicle data, such as data lakes, centralized data storage, data
@@ -81,7 +89,7 @@ type CreateCampaignInput struct {
 	// Timestream to query vehicle data so that you can identify trends and patterns.
 	DataDestinationConfigs []types.DataDestinationConfig
 
-	//  (Optional) A list of vehicle attributes to associate with a campaign.
+	// A list of vehicle attributes to associate with a campaign.
 	//
 	// Enrich the data with specified vehicle attributes. For example, add make and
 	// model to the campaign, and Amazon Web Services IoT FleetWise will associate the
@@ -91,43 +99,50 @@ type CreateCampaignInput struct {
 	// Default: An empty array
 	DataExtraDimensions []string
 
+	// The data partitions associated with the signals collected from the vehicle.
+	DataPartitions []types.DataPartition
+
 	// An optional description of the campaign to help identify its purpose.
 	Description *string
 
-	//  (Optional) Option for a vehicle to send diagnostic trouble codes to Amazon Web
-	// Services IoT FleetWise. If you want to send diagnostic trouble codes, use
+	// Option for a vehicle to send diagnostic trouble codes to Amazon Web Services
+	// IoT FleetWise. If you want to send diagnostic trouble codes, use
 	// SEND_ACTIVE_DTCS . If it's not specified, OFF is used.
 	//
 	// Default: OFF
 	DiagnosticsMode types.DiagnosticsMode
 
-	//  (Optional) The time the campaign expires, in seconds since epoch (January 1,
-	// 1970 at midnight UTC time). Vehicle data isn't collected after the campaign
-	// expires.
+	// The time the campaign expires, in seconds since epoch (January 1, 1970 at
+	// midnight UTC time). Vehicle data isn't collected after the campaign expires.
 	//
 	// Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
 	ExpiryTime *time.Time
 
-	//  (Optional) How long (in milliseconds) to collect raw data after a triggering
-	// event initiates the collection. If it's not specified, 0 is used.
+	// How long (in milliseconds) to collect raw data after a triggering event
+	// initiates the collection. If it's not specified, 0 is used.
 	//
 	// Default: 0
 	PostTriggerCollectionDuration *int64
 
-	// (Optional) A number indicating the priority of one campaign over another
-	// campaign for a certain vehicle or fleet. A campaign with the lowest value is
-	// deployed to vehicles before any other campaigns. If it's not specified, 0 is
-	// used.
+	// A number indicating the priority of one campaign over another campaign for a
+	// certain vehicle or fleet. A campaign with the lowest value is deployed to
+	// vehicles before any other campaigns. If it's not specified, 0 is used.
 	//
 	// Default: 0
 	//
 	// Deprecated: priority is no longer used or needed as input
 	Priority *int32
 
-	// (Optional) A list of information about signals to collect.
+	// A list of information about signals to collect.
+	//
+	// If you upload a signal as a condition in a data partition for a campaign, then
+	// those same signals must be included in signalsToCollect .
 	SignalsToCollect []types.SignalInformation
 
-	// (Optional) Whether to store collected data after a vehicle lost a connection
+	// A list of information about signals to fetch.
+	SignalsToFetch []types.SignalFetchInformation
+
+	// Determines whether to store collected data after a vehicle lost a connection
 	// with the cloud. After a connection is re-established, the data is automatically
 	// forwarded to Amazon Web Services IoT FleetWise. If you want to store collected
 	// data when a vehicle loses connection with the cloud, use TO_DISK . If it's not
@@ -136,8 +151,8 @@ type CreateCampaignInput struct {
 	// Default: OFF
 	SpoolingMode types.SpoolingMode
 
-	// (Optional) The time, in milliseconds, to deliver a campaign after it was
-	// approved. If it's not specified, 0 is used.
+	// The time, in milliseconds, to deliver a campaign after it was approved. If it's
+	// not specified, 0 is used.
 	//
 	// Default: 0
 	StartTime *time.Time

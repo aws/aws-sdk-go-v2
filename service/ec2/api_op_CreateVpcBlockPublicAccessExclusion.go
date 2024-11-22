@@ -38,12 +38,12 @@ type CreateVpcBlockPublicAccessExclusionInput struct {
 
 	// The exclusion mode for internet gateway traffic.
 	//
-	//   - bidirectional-access-allowed : Allow all internet traffic to and from the
-	//   excluded VPCs and subnets.
+	//   - allow-bidirectional : Allow all internet traffic to and from the excluded
+	//   VPCs and subnets.
 	//
-	//   - egress-access-allowed : Allow outbound internet traffic from the excluded
-	//   VPCs and subnets. Block inbound internet traffic to the excluded VPCs and
-	//   subnets. Only applies when VPC Block Public Access is set to Bidirectional.
+	//   - allow-egress : Allow outbound internet traffic from the excluded VPCs and
+	//   subnets. Block inbound internet traffic to the excluded VPCs and subnets. Only
+	//   applies when VPC Block Public Access is set to Bidirectional.
 	//
 	// This member is required.
 	InternetGatewayExclusionMode types.InternetGatewayExclusionMode

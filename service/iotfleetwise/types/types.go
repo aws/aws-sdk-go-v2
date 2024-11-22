@@ -340,6 +340,22 @@ type ConditionBasedCollectionScheme struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the condition under which a signal fetch occurs.
+type ConditionBasedSignalFetchConfig struct {
+
+	// The condition that must be satisfied to trigger a signal fetch.
+	//
+	// This member is required.
+	ConditionExpression *string
+
+	// Indicates the mode in which the signal fetch is triggered.
+	//
+	// This member is required.
+	TriggerMode TriggerMode
+
+	noSmithyDocumentSerde
+}
+
 // An HTTP error resulting from creating a vehicle.
 type CreateVehicleError struct {
 
@@ -382,6 +398,10 @@ type CreateVehicleRequestItem struct {
 	// Type" : "v6"
 	Attributes map[string]string
 
+	// Associate state templates to track the state of the vehicle. State templates
+	// determine which signal updates the vehicle sends to the cloud.
+	StateTemplates []StateTemplateAssociation
+
 	// Metadata which can be used to manage the vehicle.
 	Tags []Tag
 
@@ -399,6 +419,41 @@ type CreateVehicleResponseItem struct {
 
 	// The unique ID of the vehicle to create.
 	VehicleName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a custom network interface as defined by the customer.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type CustomDecodingInterface struct {
+
+	// The name of the interface.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about signals using a custom decoding protocol as defined by the
+// customer.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type CustomDecodingSignal struct {
+
+	// The ID of the signal.
+	//
+	// This member is required.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -460,16 +515,33 @@ type CustomStruct struct {
 	noSmithyDocumentSerde
 }
 
-// The destination where the Amazon Web Services IoT FleetWise campaign sends
-// data. You can send data to be stored in Amazon S3 or Amazon Timestream.
+// The destination where the campaign sends data. You can send data to an MQTT
+// topic, or store it in Amazon S3 or Amazon Timestream.
 //
 // The following types satisfy this interface:
 //
+//	DataDestinationConfigMemberMqttTopicConfig
 //	DataDestinationConfigMemberS3Config
 //	DataDestinationConfigMemberTimestreamConfig
 type DataDestinationConfig interface {
 	isDataDestinationConfig()
 }
+
+// The MQTT topic to which the Amazon Web Services IoT FleetWise campaign routes
+// data.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type DataDestinationConfigMemberMqttTopicConfig struct {
+	Value MqttTopicConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDestinationConfigMemberMqttTopicConfig) isDataDestinationConfig() {}
 
 // The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends
 // data.
@@ -489,6 +561,90 @@ type DataDestinationConfigMemberTimestreamConfig struct {
 }
 
 func (*DataDestinationConfigMemberTimestreamConfig) isDataDestinationConfig() {}
+
+// The configuration for signal data storage and upload options. You can only
+// specify these options when the campaign's spooling mode is TO_DISK .
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type DataPartition struct {
+
+	// The ID of the data partition. The data partition ID must be unique within a
+	// campaign. You can establish a data partition as the default partition for a
+	// campaign by using default as the ID.
+	//
+	// This member is required.
+	Id *string
+
+	// The storage options for a data partition.
+	//
+	// This member is required.
+	StorageOptions *DataPartitionStorageOptions
+
+	// The upload options for the data partition.
+	UploadOptions *DataPartitionUploadOptions
+
+	noSmithyDocumentSerde
+}
+
+// Size, time, and location options for the data partition.
+type DataPartitionStorageOptions struct {
+
+	// The maximum storage size of the data stored in the data partition.
+	//
+	// Newer data overwrites older data when the partition reaches the maximum size.
+	//
+	// This member is required.
+	MaximumSize *StorageMaximumSize
+
+	// The amount of time that data in this partition will be kept on disk.
+	//
+	//   - After the designated amount of time passes, the data can be removed, but
+	//   it's not guaranteed to be removed.
+	//
+	//   - Before the time expires, data in this partition can still be deleted if the
+	//   partition reaches its configured maximum size.
+	//
+	//   - Newer data will overwrite older data when the partition reaches the maximum
+	//   size.
+	//
+	// This member is required.
+	MinimumTimeToLive *StorageMinimumTimeToLive
+
+	// The folder name for the data partition under the campaign storage folder.
+	//
+	// This member is required.
+	StorageLocation *string
+
+	noSmithyDocumentSerde
+}
+
+// The upload options for the data partition. If upload options are specified, you
+// must also specify storage options. See [DataPartitionStorageOptions].
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [DataPartitionStorageOptions]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DataPartitionStorageOptions.html
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type DataPartitionUploadOptions struct {
+
+	// The logical expression used to recognize what data to collect. For example,
+	// $variable.`Vehicle.OutsideAirTemperature` >= 105.0 .
+	//
+	// This member is required.
+	Expression *string
+
+	// The version of the condition language. Defaults to the most recent condition
+	// language version.
+	ConditionLanguageVersion *int32
+
+	noSmithyDocumentSerde
+}
 
 // Information about a created decoder manifest. You can use the API operation to
 // return this information about multiple decoder manifests.
@@ -722,6 +878,32 @@ type ModelManifestSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The MQTT topic to which the Amazon Web Services IoT FleetWise campaign routes
+// data. For more information, see [Device communication protocols]in the Amazon Web Services IoT Core Developer
+// Guide.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Device communication protocols]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type MqttTopicConfig struct {
+
+	// The ARN of the role that grants Amazon Web Services IoT FleetWise permission to
+	// access and act on messages sent to the MQTT topic.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// The ARN of the MQTT topic.
+	//
+	// This member is required.
+	MqttTopicArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifications for defining a vehicle network.
 //
 // The following types satisfy this interface:
@@ -765,7 +947,12 @@ type NetworkInterface struct {
 	// (CAN) protocol.
 	CanInterface *CanInterface
 
-	// Information about a network interface specified by the On-board diagnostic
+	// Information about a [custom network interface].
+	//
+	// [custom network interface]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CustomDecodingInterface.html
+	CustomDecodingInterface *CustomDecodingInterface
+
+	// Information about a network interface specified by the on-board diagnostic
 	// (OBD) II protocol.
 	ObdInterface *ObdInterface
 
@@ -882,7 +1069,7 @@ type NodeCounts struct {
 	noSmithyDocumentSerde
 }
 
-// A network interface that specifies the On-board diagnostic (OBD) II network
+// A network interface that specifies the on-board diagnostic (OBD) II network
 // protocol.
 type ObdInterface struct {
 
@@ -963,6 +1150,24 @@ type ObdSignal struct {
 	noSmithyDocumentSerde
 }
 
+// Vehicles associated with the state template will stream telemetry data when
+// there is a change.
+type OnChangeStateTemplateUpdateStrategy struct {
+	noSmithyDocumentSerde
+}
+
+// Vehicles associated with the state template will stream telemetry data during a
+// specified time period.
+type PeriodicStateTemplateUpdateStrategy struct {
+
+	// The length of time between state template updates.
+	//
+	// This member is required.
+	StateTemplateUpdateRate *TimePeriod
+
+	noSmithyDocumentSerde
+}
+
 // Represents a primitive type node of the complex data structure.
 //
 // The following types satisfy this interface:
@@ -1029,10 +1234,10 @@ type S3Config struct {
 	//   - JSON - Store data in a standard text-based JSON file format.
 	DataFormat DataFormat
 
-	// (Optional) Enter an S3 bucket prefix. The prefix is the string of characters
-	// after the bucket name and before the object name. You can use the prefix to
-	// organize data stored in Amazon S3 buckets. For more information, see [Organizing objects using prefixes]in the
-	// Amazon Simple Storage Service User Guide.
+	// Enter an S3 bucket prefix. The prefix is the string of characters after the
+	// bucket name and before the object name. You can use the prefix to organize data
+	// stored in Amazon S3 buckets. For more information, see [Organizing objects using prefixes]in the Amazon Simple
+	// Storage Service User Guide.
 	//
 	// By default, Amazon Web Services IoT FleetWise sets the prefix
 	// processed-data/year=YY/month=MM/date=DD/hour=HH/ (in UTC) to data it delivers to
@@ -1143,13 +1348,87 @@ type SignalDecoder struct {
 	// protocol.
 	CanSignal *CanSignal
 
+	// Information about a [custom signal decoder].
+	//
+	// Access to certain Amazon Web Services IoT FleetWise features is currently
+	// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+	// Developer Guide.
+	//
+	// [custom signal decoder]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CustomDecodingSignal.html
+	// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+	CustomDecodingSignal *CustomDecodingSignal
+
 	// The decoding information for a specific message which supports higher order
 	// data types.
 	MessageSignal *MessageSignal
 
-	// Information about signal decoder using the On-board diagnostic (OBD) II
+	// Information about signal decoder using the on-board diagnostic (OBD) II
 	// protocol.
 	ObdSignal *ObdSignal
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the signal fetch operation.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// The following types satisfy this interface:
+//
+//	SignalFetchConfigMemberConditionBased
+//	SignalFetchConfigMemberTimeBased
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type SignalFetchConfig interface {
+	isSignalFetchConfig()
+}
+
+// The configuration of a condition-based signal fetch operation.
+type SignalFetchConfigMemberConditionBased struct {
+	Value ConditionBasedSignalFetchConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*SignalFetchConfigMemberConditionBased) isSignalFetchConfig() {}
+
+// The configuration of a time-based signal fetch operation.
+type SignalFetchConfigMemberTimeBased struct {
+	Value TimeBasedSignalFetchConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*SignalFetchConfigMemberTimeBased) isSignalFetchConfig() {}
+
+// Information about the signal to be fetched.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type SignalFetchInformation struct {
+
+	// The actions to be performed by the signal fetch.
+	//
+	// This member is required.
+	Actions []string
+
+	// The fully qualified name of the signal to be fetched.
+	//
+	// This member is required.
+	FullyQualifiedName *string
+
+	// The configuration of the signal fetch operation.
+	//
+	// This member is required.
+	SignalFetchConfig SignalFetchConfig
+
+	// The version of the condition language used.
+	ConditionLanguageVersion *int32
 
 	noSmithyDocumentSerde
 }
@@ -1162,6 +1441,23 @@ type SignalInformation struct {
 	// This member is required.
 	Name *string
 
+	// The ID of the data partition this signal is associated with.
+	//
+	// The ID must match one of the IDs provided in dataPartitions . This is
+	// accomplished either by specifying a particular data partition ID or by using
+	// default for an established default partition. You can establish a default
+	// partition in the DataPartition data type.
+	//
+	// If you upload a signal as a condition for a campaign's data partition, the same
+	// signal must be included in signalsToCollect .
+	//
+	// Access to certain Amazon Web Services IoT FleetWise features is currently
+	// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+	// Developer Guide.
+	//
+	// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+	DataPartitionId *string
+
 	// The maximum number of samples to collect.
 	MaxSampleCount *int64
 
@@ -1170,6 +1466,157 @@ type SignalInformation struct {
 	//
 	// If a signal changes often, you might want to collect data at a slower rate.
 	MinimumSamplingIntervalMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// The state template associated with a vehicle. State templates contain state
+// properties, which are signals that belong to a signal catalog that is
+// synchronized between the Amazon Web Services IoT FleetWise Edge and the Amazon
+// Web Services Cloud.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type StateTemplateAssociation struct {
+
+	// A unique, service-generated identifier.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The update strategy for the state template. Vehicles associated with the state
+	// template can stream telemetry data with either an onChange or periodic update
+	// strategy.
+	//
+	// Access to certain Amazon Web Services IoT FleetWise features is currently
+	// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+	// Developer Guide.
+	//
+	// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+	//
+	// This member is required.
+	StateTemplateUpdateStrategy StateTemplateUpdateStrategy
+
+	noSmithyDocumentSerde
+}
+
+// Information about a state template.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type StateTemplateSummary struct {
+
+	// The Amazon Resource Name (ARN) of the state template.
+	Arn *string
+
+	// The time the state template was created, in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
+	CreationTime *time.Time
+
+	// A brief description of the state template.
+	Description *string
+
+	// The unique ID of the state template.
+	Id *string
+
+	// The time the state template was last updated, in seconds since epoch (January
+	// 1, 1970 at midnight UTC time).
+	LastModificationTime *time.Time
+
+	// The name of the state template.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the signal catalog associated with the state
+	// template.
+	SignalCatalogArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The update strategy for the state template. Vehicles associated with the state
+// template can stream telemetry data with either an onChange or periodic update
+// strategy.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// The following types satisfy this interface:
+//
+//	StateTemplateUpdateStrategyMemberOnChange
+//	StateTemplateUpdateStrategyMemberPeriodic
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type StateTemplateUpdateStrategy interface {
+	isStateTemplateUpdateStrategy()
+}
+
+// Vehicles associated with the state template will stream telemetry data when
+// there is a change.
+type StateTemplateUpdateStrategyMemberOnChange struct {
+	Value OnChangeStateTemplateUpdateStrategy
+
+	noSmithyDocumentSerde
+}
+
+func (*StateTemplateUpdateStrategyMemberOnChange) isStateTemplateUpdateStrategy() {}
+
+// Vehicles associated with the state template will stream telemetry data during a
+// specified time period.
+type StateTemplateUpdateStrategyMemberPeriodic struct {
+	Value PeriodicStateTemplateUpdateStrategy
+
+	noSmithyDocumentSerde
+}
+
+func (*StateTemplateUpdateStrategyMemberPeriodic) isStateTemplateUpdateStrategy() {}
+
+// The maximum storage size for the data partition.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type StorageMaximumSize struct {
+
+	// The data type of the data to store.
+	//
+	// This member is required.
+	Unit StorageMaximumSizeUnit
+
+	// The maximum amount of time to store data.
+	//
+	// This member is required.
+	Value *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the minimum amount of time that data will be kept.
+//
+// Access to certain Amazon Web Services IoT FleetWise features is currently
+// gated. For more information, see [Amazon Web Services Region and feature availability]in the Amazon Web Services IoT FleetWise
+// Developer Guide.
+//
+// [Amazon Web Services Region and feature availability]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-regions.html
+type StorageMinimumTimeToLive struct {
+
+	// The time increment type.
+	//
+	// This member is required.
+	Unit StorageMinimumTimeToLiveUnit
+
+	// The minimum amount of time to store the data.
+	//
+	// This member is required.
+	Value *int32
 
 	noSmithyDocumentSerde
 }
@@ -1282,6 +1729,33 @@ type TimeBasedCollectionScheme struct {
 	//
 	// This member is required.
 	PeriodMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// Used to configure a frequency-based vehicle signal fetch.
+type TimeBasedSignalFetchConfig struct {
+
+	// The frequency with which the signal fetch will be executed.
+	//
+	// This member is required.
+	ExecutionFrequencyMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// The length of time between state template updates.
+type TimePeriod struct {
+
+	// A unit of time.
+	//
+	// This member is required.
+	Unit TimeUnit
+
+	// A number of time units.
+	//
+	// This member is required.
+	Value *int32
 
 	noSmithyDocumentSerde
 }
@@ -1399,6 +1873,13 @@ type UpdateVehicleRequestItem struct {
 	// update.
 	ModelManifestArn *string
 
+	// Associate additional state templates to track the state of the vehicle. State
+	// templates determine which signal updates the vehicle sends to the cloud.
+	StateTemplatesToAdd []StateTemplateAssociation
+
+	// Remove existing state template associations from the vehicle.
+	StateTemplatesToRemove []string
+
 	noSmithyDocumentSerde
 }
 
@@ -1448,26 +1929,25 @@ type VehicleMiddleware struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the state of a vehicle and how it relates to the status of a
-// campaign.
+// Information about a campaign associated with a vehicle.
 type VehicleStatus struct {
 
 	// The name of a campaign.
 	CampaignName *string
 
-	// The state of a vehicle, which can be one of the following:
+	// The status of a campaign, which can be one of the following:
 	//
-	//   - CREATED - Amazon Web Services IoT FleetWise sucessfully created the vehicle.
+	//   - CREATED - The campaign has been created successfully but has not been
+	//   approved.
 	//
-	//   - READY - The vehicle is ready to receive a campaign deployment.
-	//
-	//   - HEALTHY - A campaign deployment was delivered to the vehicle.
-	//
-	//   - SUSPENDED - A campaign associated with the vehicle was suspended and data
-	//   collection was paused.
-	//
-	//   - DELETING - Amazon Web Services IoT FleetWise is removing a campaign from the
+	//   - READY - The campaign has been approved but has not been deployed to the
 	//   vehicle.
+	//
+	//   - HEALTHY - The campaign has been deployed to the vehicle.
+	//
+	//   - SUSPENDED - The campaign has been suspended and data collection is paused.
+	//
+	//   - DELETING - The campaign is being removed from the vehicle.
 	Status VehicleState
 
 	// The unique ID of the vehicle.
@@ -1533,10 +2013,12 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isCollectionScheme()           {}
-func (*UnknownUnionMember) isDataDestinationConfig()      {}
-func (*UnknownUnionMember) isFormattedVss()               {}
-func (*UnknownUnionMember) isNetworkFileDefinition()      {}
-func (*UnknownUnionMember) isNode()                       {}
-func (*UnknownUnionMember) isPrimitiveMessageDefinition() {}
-func (*UnknownUnionMember) isStructuredMessage()          {}
+func (*UnknownUnionMember) isCollectionScheme()            {}
+func (*UnknownUnionMember) isDataDestinationConfig()       {}
+func (*UnknownUnionMember) isFormattedVss()                {}
+func (*UnknownUnionMember) isNetworkFileDefinition()       {}
+func (*UnknownUnionMember) isNode()                        {}
+func (*UnknownUnionMember) isPrimitiveMessageDefinition()  {}
+func (*UnknownUnionMember) isSignalFetchConfig()           {}
+func (*UnknownUnionMember) isStateTemplateUpdateStrategy() {}
+func (*UnknownUnionMember) isStructuredMessage()           {}

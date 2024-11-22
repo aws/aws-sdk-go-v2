@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modify VPC Block Public Access (BPA) options. VPC Block public Access (BPA)
+// Modify VPC Block Public Access (BPA) options. VPC Block Public Access (BPA)
 // enables you to block resources in VPCs and subnets that you own in a Region from
 // reaching or being reached from the internet through internet gateways and
 // egress-only internet gateways. To learn more about VPC BPA, see [Block public access to VPCs and subnets]in the Amazon
@@ -37,16 +37,16 @@ type ModifyVpcBlockPublicAccessOptionsInput struct {
 
 	// The mode of VPC BPA.
 	//
-	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
-	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//   - off : VPC BPA is not enabled and traffic is allowed to and from internet
+	//   gateways and egress-only internet gateways in this Region.
 	//
-	//   - bidirectional-access-blocked : Block all traffic to and from internet
-	//   gateways and egress-only internet gateways in this Region (except for excluded
-	//   VPCs and subnets).
+	//   - block-bidirectional : Block all traffic to and from internet gateways and
+	//   egress-only internet gateways in this Region (except for excluded VPCs and
+	//   subnets).
 	//
-	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
-	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
-	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   - block-ingress : Block all internet traffic to the VPCs in this Region
+	//   (except for VPCs or subnets which are excluded). Only traffic to and from NAT
+	//   gateways and egress-only internet gateways is allowed because these gateways
 	//   only allow outbound connections to be established.
 	//
 	// This member is required.

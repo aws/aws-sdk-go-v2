@@ -902,6 +902,18 @@ func TestCheckSnapshot_GetDocument(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetExecutionPreview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExecutionPreview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExecutionPreview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInventory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInventory(context.Background(), nil, func(o *Options) {
@@ -1250,6 +1262,30 @@ func TestCheckSnapshot_ListInventoryEntries(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNodesSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNodesSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNodesSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListOpsItemEvents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOpsItemEvents(context.Background(), nil, func(o *Options) {
@@ -1519,6 +1555,18 @@ func TestCheckSnapshot_StartChangeRequestExecution(t *testing.T) {
 	_, err := svc.StartChangeRequestExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartChangeRequestExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartExecutionPreview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExecutionPreview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartExecutionPreview")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2581,6 +2629,18 @@ func TestUpdateSnapshot_GetDocument(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetExecutionPreview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExecutionPreview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExecutionPreview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInventory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInventory(context.Background(), nil, func(o *Options) {
@@ -2929,6 +2989,30 @@ func TestUpdateSnapshot_ListInventoryEntries(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNodesSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNodesSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNodesSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListOpsItemEvents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOpsItemEvents(context.Background(), nil, func(o *Options) {
@@ -3198,6 +3282,18 @@ func TestUpdateSnapshot_StartChangeRequestExecution(t *testing.T) {
 	_, err := svc.StartChangeRequestExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartChangeRequestExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartExecutionPreview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExecutionPreview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartExecutionPreview")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

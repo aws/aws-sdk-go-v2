@@ -28,7 +28,7 @@ import (
 //   - in the ElastiCache User Guide.
 //
 // [ModifyCacheParameterGroup]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html
-// [Parameters and Parameter Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html
+// [Parameters and Parameter Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ParameterGroups.html
 func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCacheParameterGroupInput, optFns ...func(*Options)) (*CreateCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheParameterGroupInput{}

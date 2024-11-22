@@ -28,9 +28,9 @@ import (
 //	annotation.account = "12345"
 //
 // For a full list of indexed fields and keywords that you can use in filter
-// expressions, see [Using Filter Expressions]in the Amazon Web Services X-Ray Developer Guide.
+// expressions, see [Use filter expressions]in the Amazon Web Services X-Ray Developer Guide.
 //
-// [Using Filter Expressions]: https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html
+// [Use filter expressions]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-console.html#xray-console-filters
 func (c *Client) GetTraceSummaries(ctx context.Context, params *GetTraceSummariesInput, optFns ...func(*Options)) (*GetTraceSummariesOutput, error) {
 	if params == nil {
 		params = &GetTraceSummariesInput{}
@@ -73,8 +73,8 @@ type GetTraceSummariesInput struct {
 	// parameters are Name and Value.
 	SamplingStrategy *types.SamplingStrategy
 
-	// A parameter to indicate whether to query trace summaries by TraceId, Event
-	// (trace update time), or Service (segment end time).
+	// Query trace summaries by TraceId (trace start time), Event (trace update time),
+	// or Service (trace segment end time).
 	TimeRangeType types.TimeRangeType
 
 	noSmithyDocumentSerde

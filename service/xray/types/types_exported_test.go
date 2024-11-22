@@ -32,3 +32,39 @@ func ExampleAnnotationValue_outputUsage() {
 var _ *string
 var _ *bool
 var _ *float64
+
+func ExampleIndexingRuleValue_outputUsage() {
+	var union types.IndexingRuleValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IndexingRuleValueMemberProbabilistic:
+		_ = v.Value // Value is types.ProbabilisticRuleValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProbabilisticRuleValue
+
+func ExampleIndexingRuleValueUpdate_outputUsage() {
+	var union types.IndexingRuleValueUpdate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IndexingRuleValueUpdateMemberProbabilistic:
+		_ = v.Value // Value is types.ProbabilisticRuleValueUpdate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProbabilisticRuleValueUpdate

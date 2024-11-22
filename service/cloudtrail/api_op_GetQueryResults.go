@@ -41,6 +41,9 @@ type GetQueryResultsInput struct {
 	// Deprecated: EventDataStore is no longer required by GetQueryResultsRequest
 	EventDataStore *string
 
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
+
 	// The maximum number of query results to display on a single page.
 	MaxQueryResults *int32
 

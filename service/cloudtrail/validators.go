@@ -70,6 +70,26 @@ func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDashboard struct {
+}
+
+func (*validateOpCreateDashboard) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDashboard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDashboardInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventDataStore struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDashboard struct {
+}
+
+func (*validateOpDeleteDashboard) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDashboard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDashboardInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDashboardInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +325,26 @@ func (m *validateOpGetChannel) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDashboard struct {
+}
+
+func (*validateOpGetDashboard) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDashboard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDashboardInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDashboardInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +710,26 @@ func (m *validateOpRestoreEventDataStore) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDashboardRefresh struct {
+}
+
+func (*validateOpStartDashboardRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDashboardRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDashboardRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDashboardRefreshInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartEventDataStoreIngestion struct {
 }
 
@@ -790,6 +870,26 @@ func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDashboard struct {
+}
+
+func (*validateOpUpdateDashboard) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDashboard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDashboardInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEventDataStore struct {
 }
 
@@ -842,6 +942,10 @@ func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
 }
 
+func addOpCreateDashboardValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDashboard{}, middleware.After)
+}
+
 func addOpCreateEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventDataStore{}, middleware.After)
 }
@@ -852,6 +956,10 @@ func addOpCreateTrailValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
+}
+
+func addOpDeleteDashboardValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDashboard{}, middleware.After)
 }
 
 func addOpDeleteEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -884,6 +992,10 @@ func addOpGenerateQueryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
+}
+
+func addOpGetDashboardValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDashboard{}, middleware.After)
 }
 
 func addOpGetEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -958,6 +1070,10 @@ func addOpRestoreEventDataStoreValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpRestoreEventDataStore{}, middleware.After)
 }
 
+func addOpStartDashboardRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDashboardRefresh{}, middleware.After)
+}
+
 func addOpStartEventDataStoreIngestionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartEventDataStoreIngestion{}, middleware.After)
 }
@@ -984,6 +1100,10 @@ func addOpStopLoggingValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func addOpUpdateDashboardValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDashboard{}, middleware.After)
 }
 
 func addOpUpdateEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -1151,6 +1271,41 @@ func validateLookupAttributesList(v []types.LookupAttribute) error {
 	}
 }
 
+func validateRequestWidget(v *types.RequestWidget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestWidget"}
+	if v.QueryStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if v.ViewProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestWidgetList(v []types.RequestWidget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestWidgetList"}
+	for i := range v {
+		if err := validateRequestWidget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3ImportSource(v *types.S3ImportSource) error {
 	if v == nil {
 		return nil
@@ -1271,6 +1426,31 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 }
 
+func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDashboardInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TagsList != nil {
+		if err := validateTagsList(v.TagsList); err != nil {
+			invalidParams.AddNested("TagsList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Widgets != nil {
+		if err := validateRequestWidgetList(v.Widgets); err != nil {
+			invalidParams.AddNested("Widgets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventDataStoreInput(v *CreateEventDataStoreInput) error {
 	if v == nil {
 		return nil
@@ -1326,6 +1506,21 @@ func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelInput"}
 	if v.Channel == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDashboardInput(v *DeleteDashboardInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDashboardInput"}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1452,6 +1647,21 @@ func validateOpGetChannelInput(v *GetChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetChannelInput"}
 	if v.Channel == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDashboardInput(v *GetDashboardInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDashboardInput"}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1753,6 +1963,21 @@ func validateOpRestoreEventDataStoreInput(v *RestoreEventDataStoreInput) error {
 	}
 }
 
+func validateOpStartDashboardRefreshInput(v *StartDashboardRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDashboardRefreshInput"}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartEventDataStoreIngestionInput(v *StartEventDataStoreIngestionInput) error {
 	if v == nil {
 		return nil
@@ -1856,6 +2081,26 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 	if v.Destinations != nil {
 		if err := validateDestinations(v.Destinations); err != nil {
 			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDashboardInput(v *UpdateDashboardInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDashboardInput"}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.Widgets != nil {
+		if err := validateRequestWidgetList(v.Widgets); err != nil {
+			invalidParams.AddNested("Widgets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

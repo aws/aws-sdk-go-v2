@@ -235,7 +235,7 @@ type ErrorStatistics struct {
 	// The number of requests that failed with untracked 4xx Client Error status codes.
 	OtherCount *int64
 
-	// The number of requests that failed with a 419 throttling status code.
+	// The number of requests that failed with a 429 throttling status code.
 	ThrottleCount *int64
 
 	// The total number of requests that failed with a 4xx Client Error status code.
@@ -322,6 +322,21 @@ type ForecastStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// The relation between two services.
+type GraphLink struct {
+
+	//  Destination traces of a link relationship.
+	DestinationTraceIds []string
+
+	//  Relationship of a trace to the corresponding service.
+	ReferenceType *string
+
+	//  Source trace of a link relationship.
+	SourceTraceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details and metadata for a group.
 type Group struct {
 
@@ -404,6 +419,59 @@ type Http struct {
 
 	noSmithyDocumentSerde
 }
+
+//	Rule used to determine the server-side sampling rate for spans ingested
+//
+// through the CloudWatchLogs destination and indexed by X-Ray.
+type IndexingRule struct {
+
+	//  Displays when the rule was last modified, in Unix time seconds.
+	ModifiedAt *time.Time
+
+	//  The name of the indexing rule.
+	Name *string
+
+	//  The indexing rule.
+	Rule IndexingRuleValue
+
+	noSmithyDocumentSerde
+}
+
+//	The indexing rule configuration.
+//
+// The following types satisfy this interface:
+//
+//	IndexingRuleValueMemberProbabilistic
+type IndexingRuleValue interface {
+	isIndexingRuleValue()
+}
+
+// Indexing rule configuration that is used to probabilistically sample traceIds.
+type IndexingRuleValueMemberProbabilistic struct {
+	Value ProbabilisticRuleValue
+
+	noSmithyDocumentSerde
+}
+
+func (*IndexingRuleValueMemberProbabilistic) isIndexingRuleValue() {}
+
+//	Update to an indexing rule.
+//
+// The following types satisfy this interface:
+//
+//	IndexingRuleValueUpdateMemberProbabilistic
+type IndexingRuleValueUpdate interface {
+	isIndexingRuleValueUpdate()
+}
+
+// Indexing rule configuration that is used to probabilistically sample traceIds.
+type IndexingRuleValueUpdateMemberProbabilistic struct {
+	Value ProbabilisticRuleValueUpdate
+
+	noSmithyDocumentSerde
+}
+
+func (*IndexingRuleValueUpdateMemberProbabilistic) isIndexingRuleValueUpdate() {}
 
 // When fault rates go outside of the expected range, X-Ray creates an insight.
 // Insights tracks emergent issues within your applications.
@@ -594,6 +662,33 @@ type InstanceIdDetail struct {
 	noSmithyDocumentSerde
 }
 
+// The indexing rule configuration for probabilistic sampling.
+type ProbabilisticRuleValue struct {
+
+	//  Configured sampling percentage of traceIds. Note that sampling can be subject
+	// to limits to ensure completeness of data.
+	//
+	// This member is required.
+	DesiredSamplingPercentage *float64
+
+	//  Applied sampling percentage of traceIds.
+	ActualSamplingPercentage *float64
+
+	noSmithyDocumentSerde
+}
+
+// Update to the indexing rule configuration for probabilistic sampling.
+type ProbabilisticRuleValueUpdate struct {
+
+	//  Configured sampling percentage of traceIds. Note that sampling can be subject
+	// to limits to ensure completeness of data.
+	//
+	// This member is required.
+	DesiredSamplingPercentage *float64
+
+	noSmithyDocumentSerde
+}
+
 // Statistics that describe how the incident has impacted a service.
 type RequestImpactStatistics struct {
 
@@ -688,6 +783,39 @@ type ResponseTimeRootCauseService struct {
 
 	// The type associated to the service.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+//	Retrieved information about an application that processed requests, users that
+//
+// made requests, or downstream services, resources, and applications that an
+// application used.
+type RetrievedService struct {
+
+	//  Relation between two 2 services.
+	Links []GraphLink
+
+	// Information about an application that processed requests, users that made
+	// requests, or downstream services, resources, and applications that an
+	// application used.
+	Service *Service
+
+	noSmithyDocumentSerde
+}
+
+// Retrieved collection of spans with matching trace IDs.
+type RetrievedTrace struct {
+
+	//  The length of time in seconds between the start time of the root span and the
+	// end time of the last span that completed.
+	Duration *float64
+
+	//  The unique identifier for the span.
+	Id *string
+
+	//  Spans that comprise the trace.
+	Spans []Span
 
 	noSmithyDocumentSerde
 }
@@ -944,11 +1072,11 @@ type SamplingTargetDocument struct {
 // downstream service, generated from a subsegment sent by the service that called
 // it.
 //
-// For the full segment document schema, see [Amazon Web Services X-Ray Segment Documents] in the Amazon Web Services X-Ray
+// For the full segment document schema, see [Amazon Web Services X-Ray segment documents] in the Amazon Web Services X-Ray
 // Developer Guide.
 //
+// [Amazon Web Services X-Ray segment documents]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-api.html#xray-api-segmentdocuments
 // [PutTraceSegments]: https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html
-// [Amazon Web Services X-Ray Segment Documents]: https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html
 type Segment struct {
 
 	// The segment document.
@@ -1053,6 +1181,20 @@ type ServiceStatistics struct {
 
 	// The aggregate response time of completed requests.
 	TotalResponseTime *float64
+
+	noSmithyDocumentSerde
+}
+
+//	A span from a trace that has been ingested by the X-Ray service. A span
+//
+// represents a unit of work or an operation performed by a service.
+type Span struct {
+
+	//  The span document.
+	Document *string
+
+	// The span ID.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -1302,4 +1444,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAnnotationValue() {}
+func (*UnknownUnionMember) isAnnotationValue()         {}
+func (*UnknownUnionMember) isIndexingRuleValue()       {}
+func (*UnknownUnionMember) isIndexingRuleValueUpdate() {}

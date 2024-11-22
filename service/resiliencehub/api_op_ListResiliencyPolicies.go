@@ -37,7 +37,7 @@ type ListResiliencyPoliciesInput struct {
 	// Null, or the token from a previous call to get the next set of results.
 	NextToken *string
 
-	// The name of the policy
+	// Name of the resiliency policy.
 	PolicyName *string
 
 	noSmithyDocumentSerde

@@ -14445,10 +14445,16 @@
                         "smithy.api#documentation": "<p>A complex type that contains information about the origins in an origin group.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SelectionCriteria": {
+                    "target": "com.amazonaws.cloudfront#OriginGroupSelectionCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection criteria for the origin group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating\">Create an origin group</a> in the <i>Amazon CloudFront\n\t\t\t\tDeveloper Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An origin group includes two origins (a primary origin and a second origin to failover to)\n\t\t\tand a failover criteria that you specify. You create an origin group to support origin\n\t\t\tfailover in  CloudFront. When you create or update a distribution, you can specify the\n\t\t\torigin group instead of a single origin, and CloudFront will failover from the primary\n\t\t\torigin to the second origin under the failover conditions that you've chosen.</p>"
+                "smithy.api#documentation": "<p>An origin group includes two origins (a primary origin and a secondary origin to failover\n\t\t\tto) and a failover criteria that you specify. You create an origin group to support\n\t\t\torigin failover in CloudFront. When you create or update a distribution, you can specify the\n\t\t\torigin group instead of a single origin, and CloudFront will failover from the primary origin\n\t\t\tto the secondary origin under the failover conditions that you've chosen.</p>\n         <p>Optionally, you can choose selection criteria for your origin group to specify how your origins are selected when your distribution routes viewer requests.</p>"
             }
         },
         "com.amazonaws.cloudfront#OriginGroupFailoverCriteria": {
@@ -14529,6 +14535,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex data type for the origins included in an origin group.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#OriginGroupSelectionCriteria": {
+            "type": "enum",
+            "members": {
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "MediaQualityBased": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "media-quality-based"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudfront#OriginGroups": {

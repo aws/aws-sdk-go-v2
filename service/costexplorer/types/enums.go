@@ -21,6 +21,46 @@ func (AccountScope) Values() []AccountScope {
 	}
 }
 
+type AnalysisStatus string
+
+// Enum values for AnalysisStatus
+const (
+	AnalysisStatusSucceeded  AnalysisStatus = "SUCCEEDED"
+	AnalysisStatusProcessing AnalysisStatus = "PROCESSING"
+	AnalysisStatusFailed     AnalysisStatus = "FAILED"
+)
+
+// Values returns all known values for AnalysisStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisStatus) Values() []AnalysisStatus {
+	return []AnalysisStatus{
+		"SUCCEEDED",
+		"PROCESSING",
+		"FAILED",
+	}
+}
+
+type AnalysisType string
+
+// Enum values for AnalysisType
+const (
+	AnalysisTypeMaxSavings       AnalysisType = "MAX_SAVINGS"
+	AnalysisTypeCustomCommitment AnalysisType = "CUSTOM_COMMITMENT"
+)
+
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisType) Values() []AnalysisType {
+	return []AnalysisType{
+		"MAX_SAVINGS",
+		"CUSTOM_COMMITMENT",
+	}
+}
+
 type AnomalyFeedbackType string
 
 // Enum values for AnomalyFeedbackType
@@ -376,6 +416,31 @@ func (Dimension) Values() []Dimension {
 		"INVOICING_ENTITY",
 		"ANOMALY_TOTAL_IMPACT_ABSOLUTE",
 		"ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+	}
+}
+
+type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	ErrorCodeNoUsageFound                 ErrorCode = "NO_USAGE_FOUND"
+	ErrorCodeInternalFailure              ErrorCode = "INTERNAL_FAILURE"
+	ErrorCodeInvalidSavingsPlansToAdd     ErrorCode = "INVALID_SAVINGS_PLANS_TO_ADD"
+	ErrorCodeInvalidSavingsPlansToExclude ErrorCode = "INVALID_SAVINGS_PLANS_TO_EXCLUDE"
+	ErrorCodeInvalidAccountId             ErrorCode = "INVALID_ACCOUNT_ID"
+)
+
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"NO_USAGE_FOUND",
+		"INTERNAL_FAILURE",
+		"INVALID_SAVINGS_PLANS_TO_ADD",
+		"INVALID_SAVINGS_PLANS_TO_EXCLUDE",
+		"INVALID_ACCOUNT_ID",
 	}
 }
 

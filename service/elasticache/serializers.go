@@ -8357,6 +8357,11 @@ func awsAwsquery_serializeOpDocumentModifyUserGroupInput(v *ModifyUserGroupInput
 	object := value.Object()
 	_ = object
 
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
 	if v.UserGroupId != nil {
 		objectKey := object.Key("UserGroupId")
 		objectKey.String(*v.UserGroupId)
@@ -8398,6 +8403,11 @@ func awsAwsquery_serializeOpDocumentModifyUserInput(v *ModifyUserInput, value qu
 		if err := awsAwsquery_serializeDocumentAuthenticationMode(v.AuthenticationMode, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
 	}
 
 	if v.NoPasswordRequired != nil {

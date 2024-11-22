@@ -144,6 +144,7 @@ type PolicyType string
 const (
 	PolicyTypeStepScaling           PolicyType = "StepScaling"
 	PolicyTypeTargetTrackingScaling PolicyType = "TargetTrackingScaling"
+	PolicyTypePredictiveScaling     PolicyType = "PredictiveScaling"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -154,6 +155,46 @@ func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"StepScaling",
 		"TargetTrackingScaling",
+		"PredictiveScaling",
+	}
+}
+
+type PredictiveScalingMaxCapacityBreachBehavior string
+
+// Enum values for PredictiveScalingMaxCapacityBreachBehavior
+const (
+	PredictiveScalingMaxCapacityBreachBehaviorHonorMaxCapacity    PredictiveScalingMaxCapacityBreachBehavior = "HonorMaxCapacity"
+	PredictiveScalingMaxCapacityBreachBehaviorIncreaseMaxCapacity PredictiveScalingMaxCapacityBreachBehavior = "IncreaseMaxCapacity"
+)
+
+// Values returns all known values for PredictiveScalingMaxCapacityBreachBehavior.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PredictiveScalingMaxCapacityBreachBehavior) Values() []PredictiveScalingMaxCapacityBreachBehavior {
+	return []PredictiveScalingMaxCapacityBreachBehavior{
+		"HonorMaxCapacity",
+		"IncreaseMaxCapacity",
+	}
+}
+
+type PredictiveScalingMode string
+
+// Enum values for PredictiveScalingMode
+const (
+	PredictiveScalingModeForecastOnly     PredictiveScalingMode = "ForecastOnly"
+	PredictiveScalingModeForecastAndScale PredictiveScalingMode = "ForecastAndScale"
+)
+
+// Values returns all known values for PredictiveScalingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PredictiveScalingMode) Values() []PredictiveScalingMode {
+	return []PredictiveScalingMode{
+		"ForecastOnly",
+		"ForecastAndScale",
 	}
 }
 

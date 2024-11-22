@@ -4090,6 +4090,26 @@ func (m *validateOpDescribeByoipCidrs) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCapacityBlockExtensionOfferings struct {
+}
+
+func (*validateOpDescribeCapacityBlockExtensionOfferings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCapacityBlockExtensionOfferings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCapacityBlockExtensionOfferingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCapacityBlockExtensionOfferingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCapacityBlockOfferings struct {
 }
 
@@ -7910,6 +7930,26 @@ func (m *validateOpProvisionPublicIpv4PoolCidr) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPurchaseCapacityBlockExtension struct {
+}
+
+func (*validateOpPurchaseCapacityBlockExtension) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPurchaseCapacityBlockExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PurchaseCapacityBlockExtensionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPurchaseCapacityBlockExtensionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPurchaseCapacityBlock struct {
 }
 
@@ -9886,6 +9926,10 @@ func addOpDescribeByoipCidrsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeByoipCidrs{}, middleware.After)
 }
 
+func addOpDescribeCapacityBlockExtensionOfferingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCapacityBlockExtensionOfferings{}, middleware.After)
+}
+
 func addOpDescribeCapacityBlockOfferingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCapacityBlockOfferings{}, middleware.After)
 }
@@ -10648,6 +10692,10 @@ func addOpProvisionIpamPoolCidrValidationMiddleware(stack *middleware.Stack) err
 
 func addOpProvisionPublicIpv4PoolCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpProvisionPublicIpv4PoolCidr{}, middleware.After)
+}
+
+func addOpPurchaseCapacityBlockExtensionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPurchaseCapacityBlockExtension{}, middleware.After)
 }
 
 func addOpPurchaseCapacityBlockValidationMiddleware(stack *middleware.Stack) error {
@@ -15198,6 +15246,24 @@ func validateOpDescribeByoipCidrsInput(v *DescribeByoipCidrsInput) error {
 	}
 }
 
+func validateOpDescribeCapacityBlockExtensionOfferingsInput(v *DescribeCapacityBlockExtensionOfferingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCapacityBlockExtensionOfferingsInput"}
+	if v.CapacityBlockExtensionDurationHours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityBlockExtensionDurationHours"))
+	}
+	if v.CapacityReservationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeCapacityBlockOfferingsInput(v *DescribeCapacityBlockOfferingsInput) error {
 	if v == nil {
 		return nil
@@ -18389,6 +18455,24 @@ func validateOpProvisionPublicIpv4PoolCidrInput(v *ProvisionPublicIpv4PoolCidrIn
 	}
 	if v.NetmaskLength == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetmaskLength"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPurchaseCapacityBlockExtensionInput(v *PurchaseCapacityBlockExtensionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurchaseCapacityBlockExtensionInput"}
+	if v.CapacityBlockExtensionOfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityBlockExtensionOfferingId"))
+	}
+	if v.CapacityReservationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,3 +1,7 @@
+# v1.44.0 (2024-11-21)
+
+* **Feature**: Added support to modify the engine type for existing ElastiCache Users and User Groups. Customers can now modify the engine type from redis to valkey.
+
 # v1.43.3 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

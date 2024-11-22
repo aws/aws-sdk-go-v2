@@ -14,7 +14,8 @@ import (
 // Returns a list of entities that have been affected by one or more events for
 // one or more accounts in your organization in Organizations, based on the filter
 // criteria. Entities can refer to individual customer resources, groups of
-// customer resources, or any other construct, depending on the Amazon Web Service.
+// customer resources, or any other construct, depending on the Amazon Web Services
+// service.
 //
 // At least one event Amazon Resource Name (ARN) and account ID are required.
 //

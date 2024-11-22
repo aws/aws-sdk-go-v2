@@ -1,3 +1,7 @@
+# v1.42.1 (2024-11-21)
+
+* **Documentation**: This feature adds support for enabling zonal shift on cross-zone enabled Application Load Balancer, as well as modifying HTTP request and response headers.
+
 # v1.42.0 (2024-11-20)
 
 * **Feature**: This release adds support for configuring Load balancer Capacity Unit reservations

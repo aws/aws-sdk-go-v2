@@ -42,7 +42,7 @@ type CreateResiliencyPolicyInput struct {
 	// This member is required.
 	Policy map[string]types.FailurePolicy
 
-	// The name of the policy
+	// Name of the resiliency policy.
 	//
 	// This member is required.
 	PolicyName *string
@@ -62,7 +62,7 @@ type CreateResiliencyPolicyInput struct {
 	// resilience policy data can be stored.
 	DataLocationConstraint types.DataLocationConstraint
 
-	// The description for the policy.
+	// Description of the resiliency policy.
 	PolicyDescription *string
 
 	// Tags assigned to the resource. A tag is a label that you assign to an Amazon

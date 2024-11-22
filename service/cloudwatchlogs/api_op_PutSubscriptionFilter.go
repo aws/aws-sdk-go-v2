@@ -108,6 +108,17 @@ type PutSubscriptionFilterInput struct {
 	// This member is required.
 	LogGroupName *string
 
+	// This parameter is valid only for log groups that have an active log
+	// transformer. For more information about log transformers, see [PutTransformer].
+	//
+	// If the log group uses either a log-group level or account-level transformer,
+	// and you specify true , the subscription filter will be applied on the
+	// transformed version of the log events instead of the original ingested log
+	// events.
+	//
+	// [PutTransformer]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
+	ApplyOnTransformedLogs bool
+
 	// The method used to distribute log data to the destination. By default, log data
 	// is grouped by log stream, but the grouping can be set to random for a more even
 	// distribution. This property is only applicable when the destination is an Amazon

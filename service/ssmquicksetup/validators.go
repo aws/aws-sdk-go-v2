@@ -50,6 +50,26 @@ func (m *validateOpDeleteConfigurationManager) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConfiguration struct {
+}
+
+func (*validateOpGetConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetConfigurationManager struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpListConfigurationManagers) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListConfigurationManagersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListConfigurations struct {
+}
+
+func (*validateOpListConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -198,12 +238,20 @@ func addOpDeleteConfigurationManagerValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeleteConfigurationManager{}, middleware.After)
 }
 
+func addOpGetConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguration{}, middleware.After)
+}
+
 func addOpGetConfigurationManagerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfigurationManager{}, middleware.After)
 }
 
 func addOpListConfigurationManagersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListConfigurationManagers{}, middleware.After)
+}
+
+func addOpListConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConfigurations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -330,6 +378,21 @@ func validateOpDeleteConfigurationManagerInput(v *DeleteConfigurationManagerInpu
 	}
 }
 
+func validateOpGetConfigurationInput(v *GetConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationInput"}
+	if v.ConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetConfigurationManagerInput(v *GetConfigurationManagerInput) error {
 	if v == nil {
 		return nil
@@ -350,6 +413,23 @@ func validateOpListConfigurationManagersInput(v *ListConfigurationManagersInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListConfigurationManagersInput"}
+	if v.Filters != nil {
+		if err := validateFiltersList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConfigurationsInput(v *ListConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConfigurationsInput"}
 	if v.Filters != nil {
 		if err := validateFiltersList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))

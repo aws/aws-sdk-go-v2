@@ -37,7 +37,7 @@ type ListSignalCatalogNodesInput struct {
 	// This member is required.
 	Name *string
 
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
 	// A pagination token for the next set of results.
@@ -173,7 +173,7 @@ func (c *Client) addOperationListSignalCatalogNodesMiddlewares(stack *middleware
 // ListSignalCatalogNodesPaginatorOptions is the paginator options for
 // ListSignalCatalogNodes
 type ListSignalCatalogNodesPaginatorOptions struct {
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

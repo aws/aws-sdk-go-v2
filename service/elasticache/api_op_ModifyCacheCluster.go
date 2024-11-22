@@ -92,7 +92,7 @@ type ModifyCacheClusterInput struct {
 	//
 	// For more information, see [Authenticating Users with AUTH]
 	//
-	// [Authenticating Users with AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+	// [Authenticating Users with AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/auth.html
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
 	//  If you are running Valkey 7.2 or Redis OSS engine version 6.0 or later, set
@@ -141,7 +141,7 @@ type ModifyCacheClusterInput struct {
 	// version, you must delete the existing cluster and create it anew with the
 	// earlier engine version.
 	//
-	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
+	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html#VersionManagement
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
@@ -225,7 +225,7 @@ type ModifyCacheClusterInput struct {
 	//   are performed immediately. If the new create request is Apply Immediately - No,
 	//   all creates are pending.
 	//
-	// [Cache Node Considerations for Memcached]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
+	// [Cache Node Considerations for Memcached]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html
 	NewAvailabilityZones []string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications

@@ -182,7 +182,7 @@ type CacheCluster struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// A list of cache nodes that are members of the cluster.
@@ -453,7 +453,7 @@ type CacheEngineVersion struct {
 //   - The configuration variables appendonly and appendfsync are not supported on
 //     Valkey, or on Redis OSS version 2.8.22 and later.
 //
-// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 type CacheNode struct {
 
 	// The date and time when the cache node was created.
@@ -502,7 +502,7 @@ type CacheNodeTypeSpecificParameter struct {
 	// a reboot for the change to be applied. You can force a reboot or wait until the
 	// next maintenance window's reboot. For more information, see [Rebooting a Cluster].
 	//
-	// [Rebooting a Cluster]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
+	// [Rebooting a Cluster]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.Rebooting.html
 	ChangeType ChangeType
 
 	// The valid data type for the parameter.
@@ -737,7 +737,7 @@ type ConfigureShard struct {
 	// find a Valkey or Redis OSS (cluster mode enabled)'s node group's (shard's) id,
 	// see [Finding a Shard's Id].
 	//
-	// [Finding a Shard's Id]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/shard-find-id.html
+	// [Finding a Shard's Id]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/shard-find-id.html
 	//
 	// This member is required.
 	NodeGroupId *string
@@ -1271,7 +1271,7 @@ type Parameter struct {
 	// a reboot for the change to be applied. You can force a reboot or wait until the
 	// next maintenance window's reboot. For more information, see [Rebooting a Cluster].
 	//
-	// [Rebooting a Cluster]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
+	// [Rebooting a Cluster]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.Rebooting.html
 	ChangeType ChangeType
 
 	// The valid data type for the parameter.
@@ -1486,7 +1486,7 @@ type ReplicationGroup struct {
 	// using the r6gd node type. This parameter must be set to true when using r6gd
 	// nodes. For more information, see [Data tiering].
 	//
-	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
+	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html
 	DataTiering DataTieringStatus
 
 	// The user supplied description of the replication group.
@@ -1523,7 +1523,7 @@ type ReplicationGroup struct {
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
 	// more information, see [Minimizing Downtime: Multi-AZ]
 	//
-	// [Minimizing Downtime: Multi-AZ]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
+	// [Minimizing Downtime: Multi-AZ]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/AutoFailover.html
 	MultiAZ MultiAZStatus
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
@@ -1739,7 +1739,7 @@ type ReservedCacheNode struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The duration of the reservation in seconds.
@@ -1881,7 +1881,7 @@ type ReservedCacheNodesOffering struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The duration of the offering. in seconds.
@@ -2104,7 +2104,7 @@ type ServiceUpdate struct {
 	// The recommendend date to apply the service update in order to ensure
 	// compliance. For information on compliance, see [Self-Service Security Updates for Compliance].
 	//
-	// [Self-Service Security Updates for Compliance]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service
+	// [Self-Service Security Updates for Compliance]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/elasticache-compliance.html#elasticache-compliance-self-service
 	ServiceUpdateRecommendedApplyByDate *time.Time
 
 	// The date when the service update is initially available
@@ -2250,7 +2250,7 @@ type Snapshot struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The cache parameter group that is associated with the source cluster.
@@ -2263,7 +2263,7 @@ type Snapshot struct {
 	// using the r6gd node type. This parameter must be set to true when using r6gd
 	// nodes. For more information, see [Data tiering].
 	//
-	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
+	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html
 	DataTiering DataTieringStatus
 
 	// The name of the cache engine ( memcached or redis ) used by the source cluster.
@@ -2481,7 +2481,7 @@ type UpdateAction struct {
 	// The recommended date to apply the service update to ensure compliance. For
 	// information on compliance, see [Self-Service Security Updates for Compliance].
 	//
-	// [Self-Service Security Updates for Compliance]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service
+	// [Self-Service Security Updates for Compliance]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/elasticache-compliance.html#elasticache-compliance-self-service
 	ServiceUpdateRecommendedApplyByDate *time.Time
 
 	// The date the update is first available

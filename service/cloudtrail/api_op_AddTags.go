@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to a trail, event data store, or channel, up to a limit
-// of 50. Overwrites an existing tag's value when a new value is specified for an
-// existing tag key. Tag key names must be unique; you cannot have two keys with
-// the same name but different values. If you specify a key without a value, the
-// tag will be created with the specified key and a value of null. You can tag a
-// trail or event data store that applies to all Amazon Web Services Regions only
-// from the Region in which the trail or event data store was created (also known
-// as its home Region).
+// Adds one or more tags to a trail, event data store, dashboard, or channel, up
+// to a limit of 50. Overwrites an existing tag's value when a new value is
+// specified for an existing tag key. Tag key names must be unique; you cannot have
+// two keys with the same name but different values. If you specify a key without a
+// value, the tag will be created with the specified key and a value of null. You
+// can tag a trail or event data store that applies to all Amazon Web Services
+// Regions only from the Region in which the trail or event data store was created
+// (also known as its home Region).
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -34,17 +34,20 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 	return out, nil
 }
 
-// Specifies the tags to add to a trail, event data store, or channel.
+// Specifies the tags to add to a trail, event data store, dashboard, or channel.
 type AddTagsInput struct {
 
-	// Specifies the ARN of the trail, event data store, or channel to which one or
-	// more tags will be added.
+	// Specifies the ARN of the trail, event data store, dashboard, or channel to
+	// which one or more tags will be added.
 	//
 	// The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// The format of an event data store ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	//
+	// The format of a dashboard ARN is:
+	// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
 	//
 	// The format of a channel ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890

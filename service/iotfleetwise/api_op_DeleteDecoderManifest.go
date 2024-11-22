@@ -13,9 +13,6 @@ import (
 //	Deletes a decoder manifest. You can't delete a decoder manifest if it has
 //
 // vehicles associated with it.
-//
-// If the decoder manifest is successfully deleted, Amazon Web Services IoT
-// FleetWise sends back an HTTP 200 response with an empty body.
 func (c *Client) DeleteDecoderManifest(ctx context.Context, params *DeleteDecoderManifestInput, optFns ...func(*Options)) (*DeleteDecoderManifestOutput, error) {
 	if params == nil {
 		params = &DeleteDecoderManifestInput{}

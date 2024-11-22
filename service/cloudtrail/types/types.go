@@ -268,6 +268,18 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about a CloudTrail Lake dashboard.
+type DashboardDetail struct {
+
+	//  The ARN for the dashboard.
+	DashboardArn *string
+
+	//  The type of dashboard.
+	Type DashboardType
+
+	noSmithyDocumentSerde
+}
+
 // You can configure the DataResource in an EventSelector to log data events for
 // the following three resource types:
 //
@@ -797,6 +809,77 @@ type QueryStatisticsForDescribeQuery struct {
 	noSmithyDocumentSerde
 }
 
+// The schedule for a dashboard refresh.
+type RefreshSchedule struct {
+
+	//  The frequency at which you want the dashboard refreshed.
+	Frequency *RefreshScheduleFrequency
+
+	//  Specifies whether the refresh schedule is enabled. Set the value to ENABLED to
+	// enable the refresh schedule, or to DISABLED to turn off the refresh schedule.
+	Status RefreshScheduleStatus
+
+	//  The time of day in UTC to run the schedule; for hourly only refer to minutes;
+	// default is 00:00.
+	TimeOfDay *string
+
+	noSmithyDocumentSerde
+}
+
+//	Specifies the frequency for a dashboard refresh schedule.
+//
+// For a custom dashboard, you can schedule a refresh for every 1, 6, 12, or 24
+// hours, or every day.
+type RefreshScheduleFrequency struct {
+
+	//  The unit to use for the refresh.
+	//
+	// For custom dashboards, the unit can be HOURS or DAYS .
+	//
+	// For the Highlights dashboard, the Unit must be HOURS .
+	Unit RefreshScheduleFrequencyUnit
+
+	//  The value for the refresh schedule.
+	//
+	// For custom dashboards, the following values are valid when the unit is HOURS : 1
+	// , 6 , 12 , 24
+	//
+	// For custom dashboards, the only valid value when the unit is DAYS is 1 .
+	//
+	// For the Highlights dashboard, the Value must be 6 .
+	Value *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a widget on a CloudTrail Lake dashboard.
+type RequestWidget struct {
+
+	//  The query statement for the widget. For custom dashboard widgets, you can
+	// query across multiple event data stores as long as all event data stores exist
+	// in your account.
+	//
+	// When a query uses ? with eventTime , ? must be surrounded by single quotes as
+	// follows: '?' .
+	//
+	// This member is required.
+	QueryStatement *string
+
+	//  The view properties for the widget. For more information about view
+	// properties, see [View properties for widgets]in the CloudTrail User Guide.
+	//
+	// [View properties for widgets]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-widget-properties.html
+	//
+	// This member is required.
+	ViewProperties map[string]string
+
+	//  The optional query parameters. The following query parameters are valid:
+	// $StartTime$ , $EndTime$ , and $Period$ .
+	QueryParameters []string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the type and name of a resource referenced by an event.
 type Resource struct {
 
@@ -864,7 +947,7 @@ type SourceConfig struct {
 }
 
 // A custom key-value pair associated with a resource such as a CloudTrail trail,
-// event data store, or channel.
+// event data store, dashboard, or channel.
 type Tag struct {
 
 	// The key in a key-value pair. The key must be must be no longer than 128 Unicode
@@ -968,6 +1051,27 @@ type TrailInfo struct {
 
 	// The ARN of a trail.
 	TrailARN *string
+
+	noSmithyDocumentSerde
+}
+
+// A widget on a CloudTrail Lake dashboard.
+type Widget struct {
+
+	// The query alias used to identify the query for the widget.
+	QueryAlias *string
+
+	//  The query parameters for the widget.
+	QueryParameters []string
+
+	//  The SQL query statement for the widget.
+	QueryStatement *string
+
+	//  The view properties for the widget. For more information about view
+	// properties, see [View properties for widgets]in the CloudTrail User Guide..
+	//
+	// [View properties for widgets]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-widget-properties.html
+	ViewProperties map[string]string
 
 	noSmithyDocumentSerde
 }

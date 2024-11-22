@@ -129,7 +129,7 @@ type DescribeReservedCacheNodesInput struct {
 	//   - The configuration variables appendonly and appendfsync are not supported on
 	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
-	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The duration filter value, specified in years or seconds. Use this parameter to

@@ -12,6 +12,10 @@ import (
 )
 
 // Gets the list of all jobs for a thing that are not in a terminal status.
+//
+// Requires permission to access the [GetPendingJobExecutions] action.
+//
+// [GetPendingJobExecutions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetPendingJobExecutions(ctx context.Context, params *GetPendingJobExecutionsInput, optFns ...func(*Options)) (*GetPendingJobExecutionsOutput, error) {
 	if params == nil {
 		params = &GetPendingJobExecutionsInput{}

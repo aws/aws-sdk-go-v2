@@ -147,6 +147,11 @@ type DeleteEventSourceMappingOutput struct {
 	// until the record expires in the event source.
 	MaximumRetryAttempts *int32
 
+	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].
+	//
+	// [Event source mapping metrics]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
+	MetricsConfig *types.EventSourceMappingMetricsConfig
+
 	// (Kinesis and DynamoDB Streams only) The number of batches to process
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32

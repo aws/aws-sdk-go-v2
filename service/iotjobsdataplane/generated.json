@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_DescribeJobExecution.go",
         "api_op_GetPendingJobExecutions.go",
+        "api_op_StartCommandExecution.go",
         "api_op_StartNextPendingJobExecution.go",
         "api_op_UpdateJobExecution.go",
         "auth.go",

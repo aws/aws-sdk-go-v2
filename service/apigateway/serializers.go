@@ -351,6 +351,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateBasePathMappingInput(v *CreateBas
 		}
 	}
 
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
+	}
+
 	return nil
 }
 
@@ -836,6 +840,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		ok.String(*v.OwnershipVerificationCertificateArn)
 	}
 
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
+	}
+
 	if v.RegionalCertificateArn != nil {
 		ok := object.Key("regionalCertificateArn")
 		ok.String(*v.RegionalCertificateArn)
@@ -849,6 +858,104 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 	if len(v.SecurityPolicy) > 0 {
 		ok := object.Key("securityPolicy")
 		ok.String(string(v.SecurityPolicy))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateDomainNameAccessAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpCreateDomainNameAccessAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateDomainNameAccessAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateDomainNameAccessAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domainnameaccessassociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateDomainNameAccessAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateDomainNameAccessAssociationInput(v *CreateDomainNameAccessAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateDomainNameAccessAssociationInput(v *CreateDomainNameAccessAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessAssociationSource != nil {
+		ok := object.Key("accessAssociationSource")
+		ok.String(*v.AccessAssociationSource)
+	}
+
+	if len(v.AccessAssociationSourceType) > 0 {
+		ok := object.Key("accessAssociationSourceType")
+		ok.String(string(v.AccessAssociationSourceType))
+	}
+
+	if v.DomainNameArn != nil {
+		ok := object.Key("domainNameArn")
+		ok.String(*v.DomainNameArn)
 	}
 
 	if v.Tags != nil {
@@ -2000,6 +2107,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteBasePathMappingInput(v *DeleteBas
 		}
 	}
 
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
+	}
+
 	return nil
 }
 
@@ -2378,6 +2489,81 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDomainNameInput(v *DeleteDomainNa
 	}
 	if v.DomainName != nil {
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteDomainNameAccessAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteDomainNameAccessAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteDomainNameAccessAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteDomainNameAccessAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domainnameaccessassociations/{domainNameAccessAssociationArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteDomainNameAccessAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteDomainNameAccessAssociationInput(v *DeleteDomainNameAccessAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainNameAccessAssociationArn == nil || len(*v.DomainNameAccessAssociationArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainNameAccessAssociationArn must not be empty")}
+	}
+	if v.DomainNameAccessAssociationArn != nil {
+		if err := encoder.SetURI("domainNameAccessAssociationArn").String(*v.DomainNameAccessAssociationArn); err != nil {
 			return err
 		}
 	}
@@ -4151,6 +4337,10 @@ func awsRestjson1_serializeOpHttpBindingsGetBasePathMappingInput(v *GetBasePathM
 		}
 	}
 
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
+	}
+
 	return nil
 }
 
@@ -4220,6 +4410,10 @@ func awsRestjson1_serializeOpHttpBindingsGetBasePathMappingsInput(v *GetBasePath
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
 			return err
 		}
+	}
+
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
 	}
 
 	if v.Limit != nil {
@@ -4941,6 +5135,84 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainNameInput(v *GetDomainNameInpu
 		}
 	}
 
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetDomainNameAccessAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpGetDomainNameAccessAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetDomainNameAccessAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDomainNameAccessAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domainnameaccessassociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetDomainNameAccessAssociationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetDomainNameAccessAssociationsInput(v *GetDomainNameAccessAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Limit != nil {
+		encoder.SetQuery("limit").Integer(*v.Limit)
+	}
+
+	if v.Position != nil {
+		encoder.SetQuery("position").String(*v.Position)
+	}
+
+	if len(v.ResourceOwner) > 0 {
+		encoder.SetQuery("resourceOwner").String(string(v.ResourceOwner))
+	}
+
 	return nil
 }
 
@@ -5009,6 +5281,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainNamesInput(v *GetDomainNamesIn
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
+	}
+
+	if len(v.ResourceOwner) > 0 {
+		encoder.SetQuery("resourceOwner").String(string(v.ResourceOwner))
 	}
 
 	return nil
@@ -8462,6 +8738,76 @@ func awsRestjson1_serializeOpHttpBindingsPutRestApiInput(v *PutRestApiInput, enc
 	return nil
 }
 
+type awsRestjson1_serializeOpRejectDomainNameAccessAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpRejectDomainNameAccessAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRejectDomainNameAccessAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RejectDomainNameAccessAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rejectdomainnameaccessassociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRejectDomainNameAccessAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRejectDomainNameAccessAssociationInput(v *RejectDomainNameAccessAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainNameAccessAssociationArn != nil {
+		encoder.SetQuery("domainNameAccessAssociationArn").String(*v.DomainNameAccessAssociationArn)
+	}
+
+	if v.DomainNameArn != nil {
+		encoder.SetQuery("domainNameArn").String(*v.DomainNameArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -9286,6 +9632,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateBasePathMappingInput(v *UpdateBas
 		}
 	}
 
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
+	}
+
 	return nil
 }
 
@@ -9791,6 +10141,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDomainNameInput(v *UpdateDomainNa
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
 			return err
 		}
+	}
+
+	if v.DomainNameId != nil {
+		encoder.SetQuery("domainNameId").String(*v.DomainNameId)
 	}
 
 	return nil

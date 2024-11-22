@@ -25,8 +25,8 @@ import (
 //
 // For more information, see [Using Cost Allocation Tags in Amazon ElastiCache] in the ElastiCache User Guide.
 //
-// [Using Cost Allocation Tags in Amazon ElastiCache]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
-// [Resource-level permissions]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
+// [Using Cost Allocation Tags in Amazon ElastiCache]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html
+// [Resource-level permissions]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}

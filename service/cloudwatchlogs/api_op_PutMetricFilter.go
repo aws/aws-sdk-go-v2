@@ -19,9 +19,9 @@ import (
 // 100.
 //
 // Using regular expressions to create metric filters is supported. For these
-// filters, there is a quotas of quota of two regular expression patterns within a
-// single filter pattern. There is also a quota of five regular expression patterns
-// per log group. For more information about using regular expressions in metric
+// filters, there is a quota of two regular expression patterns within a single
+// filter pattern. There is also a quota of five regular expression patterns per
+// log group. For more information about using regular expressions in metric
 // filters, see [Filter pattern syntax for metric filters, subscription filters, filter log events, and Live Tail].
 //
 // When you create a metric filter, you can also optionally assign a unit and
@@ -78,6 +78,16 @@ type PutMetricFilterInput struct {
 	//
 	// This member is required.
 	MetricTransformations []types.MetricTransformation
+
+	// This parameter is valid only for log groups that have an active log
+	// transformer. For more information about log transformers, see [PutTransformer].
+	//
+	// If the log group uses either a log-group level or account-level transformer,
+	// and you specify true , the metric filter will be applied on the transformed
+	// version of the log events instead of the original ingested log events.
+	//
+	// [PutTransformer]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
+	ApplyOnTransformedLogs bool
 
 	noSmithyDocumentSerde
 }

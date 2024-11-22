@@ -1,3 +1,56 @@
+# Release (2024-11-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.28.0](service/apigateway/CHANGELOG.md#v1280-2024-11-21)
+  * **Feature**: Added support for custom domain names for private APIs.
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.34.0](service/applicationautoscaling/CHANGELOG.md#v1340-2024-11-21)
+  * **Feature**: Application Auto Scaling now supports Predictive Scaling to proactively increase the desired capacity ahead of predicted demand, ensuring improved availability and responsiveness for customers' applications. This feature is currently only made available for Amazon ECS Service scalable targets.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.40.0](service/appsync/CHANGELOG.md#v1400-2024-11-21)
+  * **Feature**: Add support for the Amazon Bedrock Runtime.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.43.0](service/cloudfront/CHANGELOG.md#v1430-2024-11-21)
+  * **Feature**: Adds support for Origin Selection between EMPv2 origins based on media quality score.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.46.0](service/cloudtrail/CHANGELOG.md#v1460-2024-11-21)
+  * **Feature**: This release introduces new APIs for creating and managing CloudTrail Lake dashboards. It also adds support for resource-based policies on CloudTrail EventDataStore and Dashboard resource.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.44.0](service/cloudwatchlogs/CHANGELOG.md#v1440-2024-11-21)
+  * **Feature**: Adds "Create field indexes to improve query performance and reduce scan volume" and "Transform logs during ingestion". Updates documentation for "PutLogEvents with Entity".
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.44.0](service/costexplorer/CHANGELOG.md#v1440-2024-11-21)
+  * **Feature**: This release introduces three new APIs that enable you to estimate the cost, coverage, and utilization impact of Savings Plans you plan to purchase. The three APIs are StartCommitmentPurchaseAnalysis, GetCommitmentPurchaseAnalysis, and ListCommitmentPurchaseAnalyses.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.193.0](service/ec2/CHANGELOG.md#v11930-2024-11-21)
+  * **Feature**: Adds support for requesting future-dated Capacity Reservations with a minimum commitment duration, enabling IPAM for organizational units within AWS Organizations, reserving EC2 Capacity Blocks that start in 30 minutes, and extending the end date of existing Capacity Blocks.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.44.0](service/elasticache/CHANGELOG.md#v1440-2024-11-21)
+  * **Feature**: Added support to modify the engine type for existing ElastiCache Users and User Groups. Customers can now modify the engine type from redis to valkey.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.42.1](service/elasticloadbalancingv2/CHANGELOG.md#v1421-2024-11-21)
+  * **Documentation**: This feature adds support for enabling zonal shift on cross-zone enabled Application Load Balancer, as well as modifying HTTP request and response headers.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.29.0](service/health/CHANGELOG.md#v1290-2024-11-21)
+  * **Feature**: Adds metadata property to an AffectedEntity.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.61.0](service/iot/CHANGELOG.md#v1610-2024-11-21)
+  * **Feature**: General Availability (GA) release of AWS IoT Device Management - Commands, to trigger light-weight remote actions on targeted devices
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.22.0](service/iotfleetwise/CHANGELOG.md#v1220-2024-11-21)
+  * **Feature**: AWS IoT FleetWise now includes campaign parameters to store and forward data, configure MQTT topic as a data destination, and collect diagnostic trouble code data. It includes APIs for network agnostic data collection using custom decoding interfaces, and monitoring the last known state of vehicles.
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.24.0](service/iotjobsdataplane/CHANGELOG.md#v1240-2024-11-21)
+  * **Feature**: General Availability (GA) release of AWS IoT Device Management - Commands, to trigger light-weight remote actions on targeted devices
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.68.0](service/lambda/CHANGELOG.md#v1680-2024-11-21)
+  * **Feature**: Adds support for metrics for event source mappings for AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.0.0](service/notifications/CHANGELOG.md#v100-2024-11-21)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for AWS User Notifications. You can now configure and view notifications from AWS services in a central location using the AWS SDK.
+* `github.com/aws/aws-sdk-go-v2/service/notificationscontacts`: [v1.0.0](service/notificationscontacts/CHANGELOG.md#v100-2024-11-21)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for AWS User Notifications Contacts. You can now configure and view email contacts for AWS User Notifications using the AWS SDK.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.28.0](service/resiliencehub/CHANGELOG.md#v1280-2024-11-21)
+  * **Feature**: AWS Resilience Hub's new summary view visually represents applications' resilience through charts, enabling efficient resilience management. It provides a consolidated view of the app portfolio's resilience state and allows data export for custom stakeholder reporting.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.68.0](service/s3/CHANGELOG.md#v1680-2024-11-21)
+  * **Feature**: Add support for conditional deletes for the S3 DeleteObject and DeleteObjects APIs. Add support for write offset bytes option used to append to objects with the S3 PutObject API.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.56.0](service/ssm/CHANGELOG.md#v1560-2024-11-21)
+  * **Feature**: Added support for providing high-level overviews of managed nodes and previewing the potential impact of a runbook execution.
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.3.0](service/ssmquicksetup/CHANGELOG.md#v130-2024-11-21)
+  * **Feature**: Add methods that retrieve details about deployed configurations: ListConfigurations, GetConfiguration
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.30.0](service/xray/CHANGELOG.md#v1300-2024-11-21)
+  * **Feature**: AWS X-Ray introduces Transaction Search APIs, enabling span ingestion into CloudWatch Logs for high-scale trace data indexing. These APIs support span-level queries, trace graph generation, and metric correlation for deeper application insights.
+
 # Release (2024-11-20)
 
 ## Module Highlights

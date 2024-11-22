@@ -23,7 +23,7 @@ import (
 // This operation is valid for Valkey or Redis OSS only.
 //
 // [ModifyReplicationGroupShardConfiguration]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html
-// [Scaling for Valkey or Redis OSS (cluster mode enabled)]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html
+// [Scaling for Valkey or Redis OSS (cluster mode enabled)]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/scaling-redis-cluster-mode-enabled.html
 func (c *Client) ModifyReplicationGroup(ctx context.Context, params *ModifyReplicationGroupInput, optFns ...func(*Options)) (*ModifyReplicationGroupOutput, error) {
 	if params == nil {
 		params = &ModifyReplicationGroupInput{}
@@ -85,7 +85,7 @@ type ModifyReplicationGroupInput struct {
 	//
 	// For more information, see [Authenticating Users with AUTH]
 	//
-	// [Authenticating Users with AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+	// [Authenticating Users with AUTH]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/auth.html
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
 	//  If you are running Valkey or Redis OSS engine version 6.0 or later, set this
@@ -138,7 +138,7 @@ type ModifyReplicationGroupInput struct {
 	// version, you must delete the existing replication group and create it anew with
 	// the earlier engine version.
 	//
-	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
+	// [Selecting a Cache Engine and Version]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html#VersionManagement
 	EngineVersion *string
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6

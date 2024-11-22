@@ -42,6 +42,10 @@ type UpdateBasePathMappingInput struct {
 	// This member is required.
 	DomainName *string
 
+	//  The identifier for the domain name resource. Supported only for private custom
+	// domain names.
+	DomainNameId *string
+
 	// For more information about supported patch operations, see [Patch Operations].
 	//
 	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html

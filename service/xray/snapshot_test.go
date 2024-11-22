@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchGetTraces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelTraceRetrieval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTraceRetrieval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelTraceRetrieval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGroup(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_GetGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIndexingRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIndexingRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIndexingRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInsight(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInsight(context.Background(), nil, func(o *Options) {
@@ -211,6 +235,18 @@ func TestCheckSnapshot_GetInsightSummaries(t *testing.T) {
 	_, err := svc.GetInsightSummaries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetInsightSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRetrievedTracesGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRetrievedTracesGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRetrievedTracesGraph")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +326,18 @@ func TestCheckSnapshot_GetTraceGraph(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTraceSegmentDestination(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTraceSegmentDestination(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTraceSegmentDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTraceSummaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTraceSummaries(context.Background(), nil, func(o *Options) {
@@ -307,6 +355,18 @@ func TestCheckSnapshot_ListResourcePolicies(t *testing.T) {
 	_, err := svc.ListResourcePolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListResourcePolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRetrievedTraces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRetrievedTraces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRetrievedTraces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -374,6 +434,18 @@ func TestCheckSnapshot_PutTraceSegments(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartTraceRetrieval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTraceRetrieval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTraceRetrieval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -410,6 +482,18 @@ func TestCheckSnapshot_UpdateGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateIndexingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIndexingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIndexingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSamplingRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSamplingRule(context.Background(), nil, func(o *Options) {
@@ -421,11 +505,35 @@ func TestCheckSnapshot_UpdateSamplingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateTraceSegmentDestination(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTraceSegmentDestination(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTraceSegmentDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_BatchGetTraces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetTraces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetTraces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelTraceRetrieval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTraceRetrieval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelTraceRetrieval")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -529,6 +637,18 @@ func TestUpdateSnapshot_GetGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIndexingRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIndexingRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIndexingRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInsight(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInsight(context.Background(), nil, func(o *Options) {
@@ -570,6 +690,18 @@ func TestUpdateSnapshot_GetInsightSummaries(t *testing.T) {
 	_, err := svc.GetInsightSummaries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetInsightSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRetrievedTracesGraph(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRetrievedTracesGraph(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRetrievedTracesGraph")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -649,6 +781,18 @@ func TestUpdateSnapshot_GetTraceGraph(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTraceSegmentDestination(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTraceSegmentDestination(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTraceSegmentDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTraceSummaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTraceSummaries(context.Background(), nil, func(o *Options) {
@@ -666,6 +810,18 @@ func TestUpdateSnapshot_ListResourcePolicies(t *testing.T) {
 	_, err := svc.ListResourcePolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListResourcePolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRetrievedTraces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRetrievedTraces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRetrievedTraces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -733,6 +889,18 @@ func TestUpdateSnapshot_PutTraceSegments(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartTraceRetrieval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTraceRetrieval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTraceRetrieval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -769,11 +937,35 @@ func TestUpdateSnapshot_UpdateGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateIndexingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIndexingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIndexingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateSamplingRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSamplingRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateSamplingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTraceSegmentDestination(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTraceSegmentDestination(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTraceSegmentDestination")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

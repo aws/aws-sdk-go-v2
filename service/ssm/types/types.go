@@ -803,6 +803,37 @@ type AutomationExecutionFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the optional inputs that can be specified for an automation
+// execution preview.
+type AutomationExecutionInputs struct {
+
+	// Information about parameters that can be specified for the preview operation.
+	Parameters map[string][]string
+
+	// Information about the Amazon Web Services Regions and Amazon Web Services
+	// accounts targeted by the Automation execution preview operation.
+	TargetLocations []TargetLocation
+
+	// A publicly accessible URL for a file that contains the TargetLocations body.
+	// Currently, only files in presigned Amazon S3 buckets are supported.
+	TargetLocationsURL *string
+
+	// A key-value mapping of document parameters to target resources. Both Targets
+	// and TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
+
+	// The name of the parameter used as the target resource for the rate-controlled
+	// execution. Required if you specify targets.
+	TargetParameterName *string
+
+	// Information about the resources that would be included in the actual runbook
+	// execution, if it were to be run. Both Targets and TargetMaps can't be specified
+	// together.
+	Targets []Target
+
+	noSmithyDocumentSerde
+}
+
 // Details about a specific Automation execution.
 type AutomationExecutionMetadata struct {
 
@@ -911,6 +942,41 @@ type AutomationExecutionMetadata struct {
 
 	// The CloudWatch alarm that was invoked by the automation.
 	TriggeredAlarms []AlarmStateInformation
+
+	noSmithyDocumentSerde
+}
+
+// Information about the results of the execution preview.
+type AutomationExecutionPreview struct {
+
+	// Information about the Amazon Web Services Regions targeted by the execution
+	// preview.
+	Regions []string
+
+	// Information about the type of impact a runbook step would have on a resource.
+	//
+	//   - Mutating : The runbook step would make changes to the targets through
+	//   actions that create, modify, or delete resources.
+	//
+	//   - Non_Mutating : The runbook step would retrieve data about resources but not
+	//   make changes to them. This category generally includes Describe* , List* ,
+	//   Get* , and similar read-only API actions.
+	//
+	//   - Undetermined : An undetermined step invokes executions performed by another
+	//   orchestration service like Lambda, Step Functions, or Amazon Web Services
+	//   Systems Manager Run Command. An undetermined step might also call a third-party
+	//   API. Systems Manager Automation doesn't know the outcome of the orchestration
+	//   processes or third-party API executions, so the results of the steps are
+	//   undetermined.
+	StepPreviews map[string]int32
+
+	// Information that provides a preview of what the impact of running the specified
+	// Automation runbook would be.
+	TargetPreviews []TargetPreview
+
+	// Information about the Amazon Web Services accounts that were included in the
+	// execution preview.
+	TotalAccounts int32
 
 	noSmithyDocumentSerde
 }
@@ -2230,6 +2296,44 @@ type EffectivePatch struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the inputs for an execution preview.
+//
+// The following types satisfy this interface:
+//
+//	ExecutionInputsMemberAutomation
+type ExecutionInputs interface {
+	isExecutionInputs()
+}
+
+// Information about the optional inputs that can be specified for an automation
+// execution preview.
+type ExecutionInputsMemberAutomation struct {
+	Value AutomationExecutionInputs
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionInputsMemberAutomation) isExecutionInputs() {}
+
+// Information about the changes that would be made if an execution were run.
+//
+// The following types satisfy this interface:
+//
+//	ExecutionPreviewMemberAutomation
+type ExecutionPreview interface {
+	isExecutionPreview()
+}
+
+// Information about the changes that would be made if an Automation workflow were
+// run.
+type ExecutionPreviewMemberAutomation struct {
+	Value AutomationExecutionPreview
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionPreviewMemberAutomation) isExecutionPreview() {}
+
 // Describes a failed association.
 type FailedCreateAssociation struct {
 
@@ -2379,6 +2483,43 @@ type InstanceAssociationStatusInfo struct {
 
 	// Status information about the association.
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a specific managed node.
+type InstanceInfo struct {
+
+	// The type of agent installed on the node.
+	AgentType *string
+
+	// The version number of the agent installed on the node.
+	AgentVersion *string
+
+	// The fully qualified host name of the managed node.
+	ComputerName *string
+
+	// The current status of the managed node.
+	InstanceStatus *string
+
+	// The IP address of the managed node.
+	IpAddress *string
+
+	// Indicates whether the node is managed by Systems Manager.
+	ManagedStatus ManagedStatus
+
+	// The name of the operating system platform running on your managed node.
+	PlatformName *string
+
+	// The operating system platform type of the managed node.
+	PlatformType PlatformType
+
+	// The version of the OS platform running on your managed node.
+	PlatformVersion *string
+
+	// The type of instance, either an EC2 instance or another supported machine type
+	// in a hybrid fleet.
+	ResourceType ResourceType
 
 	noSmithyDocumentSerde
 }
@@ -2794,7 +2935,8 @@ type InstanceProperty struct {
 	// The name of the operating system platform running on your managed node.
 	PlatformName *string
 
-	// The operating system platform type of the managed node. For example, Windows.
+	// The operating system platform type of the managed node. For example, Windows
+	// Server or Amazon Linux 2.
 	PlatformType PlatformType
 
 	// The version of the OS platform running on your managed node.
@@ -3673,6 +3815,111 @@ type MetadataValue struct {
 	noSmithyDocumentSerde
 }
 
+// Details about an individual managed node.
+type Node struct {
+
+	// The UTC timestamp for when the managed node data was last captured.
+	CaptureTime *time.Time
+
+	// The ID of the managed node.
+	Id *string
+
+	// Information about the type of node.
+	NodeType NodeType
+
+	// Information about the ownership of the managed node.
+	Owner *NodeOwnerInfo
+
+	// The Amazon Web Services Region that a managed node was created in or assigned
+	// to.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// One or more aggregators for viewing counts of nodes using different dimensions.
+type NodeAggregator struct {
+
+	// The aggregator type for limiting a node summary. Currently, only Count is
+	// supported.
+	//
+	// This member is required.
+	AggregatorType NodeAggregatorType
+
+	// The name of a node attribute on which to limit the count of nodes.
+	//
+	// This member is required.
+	AttributeName NodeAttributeName
+
+	// The data type name to use for viewing counts of nodes. Currently, only Instance
+	// is supported.
+	//
+	// This member is required.
+	TypeName NodeTypeName
+
+	// Information about aggregators used to refine a node summary.
+	Aggregators []NodeAggregator
+
+	noSmithyDocumentSerde
+}
+
+// The filters for the operation.
+type NodeFilter struct {
+
+	// The name of the filter.
+	//
+	// This member is required.
+	Key NodeFilterKey
+
+	// A filter value supported by the specified key. For example, for the key
+	// PlatformType , supported values include Linux and Windows .
+	//
+	// This member is required.
+	Values []string
+
+	// The type of filter operator.
+	Type NodeFilterOperatorType
+
+	noSmithyDocumentSerde
+}
+
+// Information about ownership of a managed node.
+type NodeOwnerInfo struct {
+
+	// The ID of the Amazon Web Services account that owns the managed node.
+	AccountId *string
+
+	// The ID of the organization unit (OU) that the account is part of.
+	OrganizationalUnitId *string
+
+	// The path for the organizational unit (OU) that owns the managed node. The path
+	// for the OU is built using the IDs of the organization, root, and all OUs in the
+	// path down to and including the OU. For example:
+	//
+	//     o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/ou-jkl0-awsddddd/
+	OrganizationalUnitPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a managed node's type.
+//
+// The following types satisfy this interface:
+//
+//	NodeTypeMemberInstance
+type NodeType interface {
+	isNodeType()
+}
+
+// Information about a specific managed node.
+type NodeTypeMemberInstance struct {
+	Value InstanceInfo
+
+	noSmithyDocumentSerde
+}
+
+func (*NodeTypeMemberInstance) isNodeType() {}
+
 // A summary of resources that aren't compliant. The summary is organized
 // according to resource type.
 type NonCompliantSummary struct {
@@ -4345,7 +4592,7 @@ type ParameterInlinePolicy struct {
 // user to update the parameter and the date and time the parameter was last used.
 type ParameterMetadata struct {
 
-	// The (ARN) of the last user to update the parameter.
+	// The Amazon Resource Name (ARN) of the parameter.
 	ARN *string
 
 	// A parameter name can include only the following letters and symbols.
@@ -5699,4 +5946,30 @@ type TargetLocation struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the resources that would be included in the actual runbook
+// execution, if it were to be run.
+type TargetPreview struct {
+
+	// The number of resources of a certain type included in an execution preview.
+	Count int32
+
+	// A type of resource that was included in the execution preview.
+	TargetType *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isExecutionInputs()  {}
+func (*UnknownUnionMember) isExecutionPreview() {}
+func (*UnknownUnionMember) isNodeType()         {}

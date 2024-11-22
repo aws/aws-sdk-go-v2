@@ -14,7 +14,7 @@ import (
 // For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Creates a user
 // group. For more information, see [Using Role Based Access Control (RBAC)]
 //
-// [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+// [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html
 func (c *Client) CreateUserGroup(ctx context.Context, params *CreateUserGroupInput, optFns ...func(*Options)) (*CreateUserGroupOutput, error) {
 	if params == nil {
 		params = &CreateUserGroupInput{}

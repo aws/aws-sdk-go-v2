@@ -64,9 +64,14 @@ type CreateVehicleInput struct {
 	// Static information about a vehicle in a key-value pair. For example:
 	// "engineType" : "1.3 L R2"
 	//
-	// A campaign must include the keys (attribute names) in dataExtraDimensions for
-	// them to display in Amazon Timestream.
+	// To use attributes with Campaigns or State Templates, you must include them
+	// using the request parameters dataExtraDimensions and/or metadataExtraDimensions
+	// (for state templates only) when creating your campaign/state template.
 	Attributes map[string]string
+
+	// Associate state templates with the vehicle. You can monitor the last known
+	// state of the vehicle in near real time.
+	StateTemplates []types.StateTemplateAssociation
 
 	// Metadata that can be used to manage the vehicle.
 	Tags []types.Tag

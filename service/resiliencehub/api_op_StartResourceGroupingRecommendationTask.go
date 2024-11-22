@@ -54,7 +54,7 @@ type StartResourceGroupingRecommendationTaskOutput struct {
 	// This member is required.
 	AppArn *string
 
-	// Indicates the identifier of the grouping recommendation task.
+	// Identifier of the grouping recommendation task.
 	//
 	// This member is required.
 	GroupingId *string
@@ -64,8 +64,7 @@ type StartResourceGroupingRecommendationTaskOutput struct {
 	// This member is required.
 	Status types.ResourcesGroupingRecGenStatusType
 
-	// Indicates the error that occurred while executing a grouping recommendation
-	// task.
+	// Error that occurred while executing a grouping recommendation task.
 	ErrorMessage *string
 
 	// Metadata pertaining to the operation's result.

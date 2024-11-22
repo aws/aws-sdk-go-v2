@@ -450,6 +450,26 @@ func (OriginAccessControlSigningProtocols) Values() []OriginAccessControlSigning
 	}
 }
 
+type OriginGroupSelectionCriteria string
+
+// Enum values for OriginGroupSelectionCriteria
+const (
+	OriginGroupSelectionCriteriaDefault           OriginGroupSelectionCriteria = "default"
+	OriginGroupSelectionCriteriaMediaQualityBased OriginGroupSelectionCriteria = "media-quality-based"
+)
+
+// Values returns all known values for OriginGroupSelectionCriteria. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OriginGroupSelectionCriteria) Values() []OriginGroupSelectionCriteria {
+	return []OriginGroupSelectionCriteria{
+		"default",
+		"media-quality-based",
+	}
+}
+
 type OriginProtocolPolicy string
 
 // Enum values for OriginProtocolPolicy

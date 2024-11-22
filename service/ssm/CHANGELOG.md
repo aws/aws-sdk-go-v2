@@ -1,3 +1,7 @@
+# v1.56.0 (2024-11-21)
+
+* **Feature**: Added support for providing high-level overviews of managed nodes and previewing the potential impact of a runbook execution.
+
 # v1.55.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

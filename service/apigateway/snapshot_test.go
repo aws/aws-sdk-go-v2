@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateDomainName(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDomainNameAccessAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDomainNameAccessAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDomainNameAccessAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModel(context.Background(), nil, func(o *Options) {
@@ -331,6 +343,18 @@ func TestCheckSnapshot_DeleteDomainName(t *testing.T) {
 	_, err := svc.DeleteDomainName(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDomainName")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDomainNameAccessAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainNameAccessAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDomainNameAccessAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -715,6 +739,18 @@ func TestCheckSnapshot_GetDomainName(t *testing.T) {
 	_, err := svc.GetDomainName(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDomainName")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDomainNameAccessAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainNameAccessAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDomainNameAccessAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1190,6 +1226,18 @@ func TestCheckSnapshot_PutRestApi(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RejectDomainNameAccessAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectDomainNameAccessAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectDomainNameAccessAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1585,6 +1633,18 @@ func TestUpdateSnapshot_CreateDomainName(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDomainNameAccessAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDomainNameAccessAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDomainNameAccessAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModel(context.Background(), nil, func(o *Options) {
@@ -1770,6 +1830,18 @@ func TestUpdateSnapshot_DeleteDomainName(t *testing.T) {
 	_, err := svc.DeleteDomainName(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDomainName")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDomainNameAccessAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDomainNameAccessAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDomainNameAccessAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2154,6 +2226,18 @@ func TestUpdateSnapshot_GetDomainName(t *testing.T) {
 	_, err := svc.GetDomainName(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDomainName")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDomainNameAccessAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDomainNameAccessAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDomainNameAccessAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2622,6 +2706,18 @@ func TestUpdateSnapshot_PutRestApi(t *testing.T) {
 	_, err := svc.PutRestApi(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutRestApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RejectDomainNameAccessAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectDomainNameAccessAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectDomainNameAccessAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

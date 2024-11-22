@@ -1,3 +1,7 @@
+# v1.22.0 (2024-11-21)
+
+* **Feature**: AWS IoT FleetWise now includes campaign parameters to store and forward data, configure MQTT topic as a data destination, and collect diagnostic trouble code data. It includes APIs for network agnostic data collection using custom decoding interfaces, and monitoring the last known state of vehicles.
+
 # v1.21.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

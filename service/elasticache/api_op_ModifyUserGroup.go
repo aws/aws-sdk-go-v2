@@ -34,6 +34,9 @@ type ModifyUserGroupInput struct {
 	// This member is required.
 	UserGroupId *string
 
+	// The engine for a user group.
+	Engine *string
+
 	// The list of user IDs to add to the user group.
 	UserIdsToAdd []string
 

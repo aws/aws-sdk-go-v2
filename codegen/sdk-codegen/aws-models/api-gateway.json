@@ -29,6 +29,17 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.apigateway#AccessAssociationSourceType": {
+            "type": "enum",
+            "members": {
+                "VPCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPCE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.apigateway#AccessLogSettings": {
             "type": "structure",
             "members": {
@@ -394,6 +405,9 @@
                     "target": "com.amazonaws.apigateway#CreateDomainName"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#CreateDomainNameAccessAssociation"
+                },
+                {
                     "target": "com.amazonaws.apigateway#CreateModel"
                 },
                 {
@@ -440,6 +454,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#DeleteDomainName"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#DeleteDomainNameAccessAssociation"
                 },
                 {
                     "target": "com.amazonaws.apigateway#DeleteGatewayResponse"
@@ -536,6 +553,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#GetDomainName"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#GetDomainNameAccessAssociations"
                 },
                 {
                     "target": "com.amazonaws.apigateway#GetDomainNames"
@@ -653,6 +673,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#PutRestApi"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#RejectDomainNameAccessAssociation"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TagResource"
@@ -2229,6 +2252,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the domain name resource. Supported only for private custom domain names.</p>",
+                        "smithy.api#httpQuery": "domainNameId"
+                    }
+                },
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
@@ -2534,6 +2564,75 @@
                 }
             }
         },
+        "com.amazonaws.apigateway#CreateDomainNameAccessAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigateway#CreateDomainNameAccessAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigateway#DomainNameAccessAssociation"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Creates a domain name access association resource between an access association source and a private custom\n      domain name.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domainnameaccessassociations",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.apigateway#CreateDomainNameAccessAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "domainNameArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The ARN of the domain name.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessAssociationSourceType": {
+                    "target": "com.amazonaws.apigateway#AccessAssociationSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe type of the domain name access association source.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessAssociationSource": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe identifier of the domain name access association source. For a VPCE, the value is the VPC endpoint ID.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.apigateway#MapOfStringToString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.apigateway#CreateDomainNameRequest": {
             "type": "structure",
             "members": {
@@ -2547,13 +2646,13 @@
                 "certificateName": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user-friendly name of the certificate that will be used by edge-optimized endpoint for this domain name.</p>"
+                        "smithy.api#documentation": "<p>The user-friendly name of the certificate that will be used by edge-optimized endpoint or private endpoint for this domain name.</p>"
                     }
                 },
                 "certificateBody": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Deprecated] The body of the server certificate that will be used by edge-optimized endpoint for this domain name provided by your certificate authority.</p>"
+                        "smithy.api#documentation": "<p>[Deprecated] The body of the server certificate that will be used by edge-optimized endpoint or private endpoint for this domain name provided by your certificate authority.</p>"
                     }
                 },
                 "certificatePrivateKey": {
@@ -2571,7 +2670,7 @@
                 "certificateArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint for this domain name. Certificate Manager is the only supported source.</p>"
+                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint or private endpoint for this domain name. Certificate Manager is the only supported source.</p>"
                     }
                 },
                 "regionalCertificateName": {
@@ -2611,6 +2710,12 @@
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom\n      domain. Only required when configuring mutual TLS and using an ACM imported or private CA\n      certificate ARN as the regionalCertificateArn.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stringified JSON policy document that applies to the <code>execute-api</code> service for this DomainName regardless of the caller and Method\n      configuration. Supported only for private custom\n      domain names.</p>"
                     }
                 }
             },
@@ -3446,6 +3551,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
+                    }
+                },
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
@@ -3725,6 +3837,56 @@
                 }
             }
         },
+        "com.amazonaws.apigateway#DeleteDomainNameAccessAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigateway#DeleteDomainNameAccessAssociationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Deletes the DomainNameAccessAssociation resource.</p>\n         <p>Only the AWS account that created the DomainNameAccessAssociation resource can delete it. To stop an access association source in another AWS account from accessing your private custom domain name, use the RejectDomainNameAccessAssociation operation.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domainnameaccessassociations/{domainNameAccessAssociationArn}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.apigateway#DeleteDomainNameAccessAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "domainNameAccessAssociationArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The ARN of the domain name access association resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.apigateway#DeleteDomainNameRequest": {
             "type": "structure",
             "members": {
@@ -3734,6 +3896,13 @@
                         "smithy.api#documentation": "<p>The name of the DomainName resource to be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
                     }
                 }
             },
@@ -4862,22 +5031,34 @@
                         "smithy.api#documentation": "<p>The custom domain name as an API host name, for example, <code>my-api.example.com</code>.</p>"
                     }
                 },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the domain name resource. Supported only for private custom domain names.</p>"
+                    }
+                },
+                "domainNameArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the domain name. Supported only for private custom domain names.\n</p>"
+                    }
+                },
                 "certificateName": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the certificate that will be used by edge-optimized endpoint for this domain name.</p>"
+                        "smithy.api#documentation": "<p>The name of the certificate that will be used by edge-optimized endpoint or private endpoint for this domain name.</p>"
                     }
                 },
                 "certificateArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint for this domain name. Certificate Manager is the only supported source.</p>"
+                        "smithy.api#documentation": "<p>The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint or private endpoint for this domain name. Certificate Manager is the only supported source.</p>"
                     }
                 },
                 "certificateUploadDate": {
                     "target": "com.amazonaws.apigateway#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the certificate that was used by edge-optimized endpoint for this domain name was uploaded. API Gateway doesn't change this value if you update the certificate.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the certificate that was used by edge-optimized endpoint or private endpoint for this domain name was uploaded.</p>"
                     }
                 },
                 "regionalDomainName": {
@@ -4957,10 +5138,79 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom\n      domain. Only required when configuring mutual TLS and using an ACM imported or private CA\n      certificate ARN as the regionalCertificateArn.</p>"
                     }
+                },
+                "managementPolicy": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stringified JSON policy document that applies to the API Gateway Management service for this DomainName. This policy document controls access for access association sources to create domain name access associations with this DomainName. Supported only for private custom domain names.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stringified JSON policy document that applies to the <code>execute-api</code> service for this DomainName regardless of the caller and Method\n      configuration. Supported only for private custom\n      domain names.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents a custom domain name as a user-friendly host name of an API (RestApi).</p>"
+            }
+        },
+        "com.amazonaws.apigateway#DomainNameAccessAssociation": {
+            "type": "structure",
+            "members": {
+                "domainNameAccessAssociationArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the domain name access association resource.\n</p>"
+                    }
+                },
+                "domainNameArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the domain name.\n</p>"
+                    }
+                },
+                "accessAssociationSourceType": {
+                    "target": "com.amazonaws.apigateway#AccessAssociationSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The type of the domain name access association source.\n</p>"
+                    }
+                },
+                "accessAssociationSource": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The ARN of the domain name access association source. For a VPCE, the ARN must be a VPC endpoint. \n</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.apigateway#MapOfStringToString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe collection of tags. Each tag element is associated with a given resource.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a domain name access association between an access association source and a private custom domain name. With a domain name access association, an access association source can invoke a private custom domain name while isolated from the public internet.</p>"
+            }
+        },
+        "com.amazonaws.apigateway#DomainNameAccessAssociations": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.apigateway#ListOfDomainNameAccessAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe current page of elements from this collection.\n</p>",
+                        "smithy.api#jsonName": "item"
+                    }
+                },
+                "position": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current pagination position in the paged result set.\n</p>",
+                        "smithy.api#httpQuery": "position"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#DomainNameStatus": {
@@ -5808,6 +6058,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
+                    }
+                },
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
@@ -5868,6 +6125,13 @@
                         "smithy.api#documentation": "<p>The domain name of a BasePathMapping resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
                     }
                 },
                 "position": {
@@ -6427,6 +6691,66 @@
                 }
             }
         },
+        "com.amazonaws.apigateway#GetDomainNameAccessAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigateway#GetDomainNameAccessAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apigateway#DomainNameAccessAssociations"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a collection on DomainNameAccessAssociations resources.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domainnameaccessassociations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.apigateway#GetDomainNameAccessAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "position": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current pagination position in the paged result set.\n</p>",
+                        "smithy.api#httpQuery": "position"
+                    }
+                },
+                "limit": {
+                    "target": "com.amazonaws.apigateway#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.\n</p>",
+                        "smithy.api#httpQuery": "limit"
+                    }
+                },
+                "resourceOwner": {
+                    "target": "com.amazonaws.apigateway#ResourceOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The owner of the domain name access association. Use <code>SELF</code> to only list the domain name access associations owned by your own account.\n      Use <code>OTHER_ACCOUNTS</code> to list the domain name access associations with your private custom domain names that are owned by other AWS\n      accounts.</p>",
+                        "smithy.api#httpQuery": "resourceOwner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.apigateway#GetDomainNameRequest": {
             "type": "structure",
             "members": {
@@ -6436,6 +6760,13 @@
                         "smithy.api#documentation": "<p>The name of the DomainName resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
                     }
                 }
             },
@@ -6509,6 +6840,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of returned results per page. The default value is 25 and the maximum value is 500.</p>",
                         "smithy.api#httpQuery": "limit"
+                    }
+                },
+                "resourceOwner": {
+                    "target": "com.amazonaws.apigateway#ResourceOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the domain name access association.\n</p>",
+                        "smithy.api#httpQuery": "resourceOwner"
                     }
                 }
             },
@@ -8819,6 +9157,12 @@
                 "target": "com.amazonaws.apigateway#DomainName"
             }
         },
+        "com.amazonaws.apigateway#ListOfDomainNameAccessAssociation": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apigateway#DomainNameAccessAssociation"
+            }
+        },
         "com.amazonaws.apigateway#ListOfEndpointType": {
             "type": "list",
             "member": {
@@ -10142,6 +10486,64 @@
                 "smithy.api#documentation": "<p>Quotas configured for a usage plan.</p>"
             }
         },
+        "com.amazonaws.apigateway#RejectDomainNameAccessAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apigateway#RejectDomainNameAccessAssociationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Rejects a domain name access association with a private custom domain name.</p>\n         <p>To reject a domain name access association with an access association source in another AWS account, use this operation. To remove a domain name access association with an access association source in your own account, use the DeleteDomainNameAccessAssociation operation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/rejectdomainnameaccessassociations",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.apigateway#RejectDomainNameAccessAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "domainNameAccessAssociationArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the domain name access association resource.\n</p>",
+                        "smithy.api#httpQuery": "domainNameAccessAssociationArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainNameArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the domain name.\n</p>",
+                        "smithy.api#httpQuery": "domainNameArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.apigateway#RequestValidator": {
             "type": "structure",
             "members": {
@@ -10234,6 +10636,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents an API resource.</p>"
+            }
+        },
+        "com.amazonaws.apigateway#ResourceOwner": {
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
+                    }
+                },
+                "OTHER_ACCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER_ACCOUNTS"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#Resources": {
@@ -11447,6 +11866,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
+                    }
+                },
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
@@ -11780,6 +12206,13 @@
                         "smithy.api#documentation": "<p>The name of the DomainName resource to be changed.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "domainNameId": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The identifier for the domain name resource. Supported only for private custom domain names.\n</p>",
+                        "smithy.api#httpQuery": "domainNameId"
                     }
                 },
                 "patchOperations": {

@@ -15,7 +15,7 @@ import (
 // user. The user will be removed from all user groups and in turn removed from all
 // replication groups. For more information, see [Using Role Based Access Control (RBAC)].
 //
-// [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+// [Using Role Based Access Control (RBAC)]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Clusters.RBAC.html
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

@@ -16538,6 +16538,146 @@ func (m *awsEc2query_serializeOpDescribeByoipCidrs) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDescribeCapacityBlockExtensionHistory struct {
+}
+
+func (*awsEc2query_serializeOpDescribeCapacityBlockExtensionHistory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeCapacityBlockExtensionHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCapacityBlockExtensionHistoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeCapacityBlockExtensionHistory")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeCapacityBlockExtensionHistoryInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDescribeCapacityBlockExtensionOfferings struct {
+}
+
+func (*awsEc2query_serializeOpDescribeCapacityBlockExtensionOfferings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeCapacityBlockExtensionOfferings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCapacityBlockExtensionOfferingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeCapacityBlockExtensionOfferings")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeCapacityBlockExtensionOfferingsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDescribeCapacityBlockOfferings struct {
 }
 
@@ -40618,6 +40758,76 @@ func (m *awsEc2query_serializeOpPurchaseCapacityBlock) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpPurchaseCapacityBlockExtension struct {
+}
+
+func (*awsEc2query_serializeOpPurchaseCapacityBlockExtension) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpPurchaseCapacityBlockExtension) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PurchaseCapacityBlockExtensionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("PurchaseCapacityBlockExtension")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentPurchaseCapacityBlockExtensionInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpPurchaseHostReservation struct {
 }
 
@@ -45211,6 +45421,33 @@ func awsEc2query_serializeDocumentAddIpamOperatingRegionSet(v []types.AddIpamOpe
 	for i := range v {
 		av := array.Value()
 		if err := awsEc2query_serializeDocumentAddIpamOperatingRegion(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentAddIpamOrganizationalUnitExclusion(v *types.AddIpamOrganizationalUnitExclusion, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.OrganizationsEntityPath != nil {
+		objectKey := object.Key("OrganizationsEntityPath")
+		objectKey.String(*v.OrganizationsEntityPath)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentAddIpamOrganizationalUnitExclusionSet(v []types.AddIpamOrganizationalUnitExclusion, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentAddIpamOrganizationalUnitExclusion(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -51627,6 +51864,33 @@ func awsEc2query_serializeDocumentRemoveIpamOperatingRegionSet(v []types.RemoveI
 	return nil
 }
 
+func awsEc2query_serializeDocumentRemoveIpamOrganizationalUnitExclusion(v *types.RemoveIpamOrganizationalUnitExclusion, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.OrganizationsEntityPath != nil {
+		objectKey := object.Key("OrganizationsEntityPath")
+		objectKey.String(*v.OrganizationsEntityPath)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentRemoveIpamOrganizationalUnitExclusionSet(v []types.RemoveIpamOrganizationalUnitExclusion, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentRemoveIpamOrganizationalUnitExclusion(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentRemovePrefixListEntries(v []types.RemovePrefixListEntry, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -56898,6 +57162,16 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationInput(v *CreateCapa
 		objectKey.String(*v.ClientToken)
 	}
 
+	if v.CommitmentDuration != nil {
+		objectKey := object.Key("CommitmentDuration")
+		objectKey.Long(*v.CommitmentDuration)
+	}
+
+	if len(v.DeliveryPreference) > 0 {
+		objectKey := object.Key("DeliveryPreference")
+		objectKey.String(string(v.DeliveryPreference))
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
@@ -56951,6 +57225,11 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationInput(v *CreateCapa
 	if v.PlacementGroupArn != nil {
 		objectKey := object.Key("PlacementGroupArn")
 		objectKey.String(*v.PlacementGroupArn)
+	}
+
+	if v.StartDate != nil {
+		objectKey := object.Key("StartDate")
+		objectKey.String(smithytime.FormatDateTime(*v.StartDate))
 	}
 
 	if v.TagSpecifications != nil {
@@ -62439,6 +62718,74 @@ func awsEc2query_serializeOpDocumentDescribeBundleTasksInput(v *DescribeBundleTa
 func awsEc2query_serializeOpDocumentDescribeByoipCidrsInput(v *DescribeByoipCidrsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDescribeCapacityBlockExtensionHistoryInput(v *DescribeCapacityBlockExtensionHistoryInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityReservationIds != nil {
+		objectKey := object.FlatKey("CapacityReservationId")
+		if err := awsEc2query_serializeDocumentCapacityReservationIdSet(v.CapacityReservationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDescribeCapacityBlockExtensionOfferingsInput(v *DescribeCapacityBlockExtensionOfferingsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityBlockExtensionDurationHours != nil {
+		objectKey := object.Key("CapacityBlockExtensionDurationHours")
+		objectKey.Integer(*v.CapacityBlockExtensionDurationHours)
+	}
+
+	if v.CapacityReservationId != nil {
+		objectKey := object.Key("CapacityReservationId")
+		objectKey.String(*v.CapacityReservationId)
+	}
 
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
@@ -71671,6 +72018,13 @@ func awsEc2query_serializeOpDocumentModifyIpamResourceDiscoveryInput(v *ModifyIp
 		}
 	}
 
+	if v.AddOrganizationalUnitExclusions != nil {
+		objectKey := object.FlatKey("AddOrganizationalUnitExclusion")
+		if err := awsEc2query_serializeDocumentAddIpamOrganizationalUnitExclusionSet(v.AddOrganizationalUnitExclusions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
@@ -71689,6 +72043,13 @@ func awsEc2query_serializeOpDocumentModifyIpamResourceDiscoveryInput(v *ModifyIp
 	if v.RemoveOperatingRegions != nil {
 		objectKey := object.FlatKey("RemoveOperatingRegion")
 		if err := awsEc2query_serializeDocumentRemoveIpamOperatingRegionSet(v.RemoveOperatingRegions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoveOrganizationalUnitExclusions != nil {
+		objectKey := object.FlatKey("RemoveOrganizationalUnitExclusion")
+		if err := awsEc2query_serializeDocumentRemoveIpamOrganizationalUnitExclusionSet(v.RemoveOrganizationalUnitExclusions, objectKey); err != nil {
 			return err
 		}
 	}
@@ -73502,6 +73863,28 @@ func awsEc2query_serializeOpDocumentProvisionPublicIpv4PoolCidrInput(v *Provisio
 	if v.PoolId != nil {
 		objectKey := object.Key("PoolId")
 		objectKey.String(*v.PoolId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentPurchaseCapacityBlockExtensionInput(v *PurchaseCapacityBlockExtensionInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityBlockExtensionOfferingId != nil {
+		objectKey := object.Key("CapacityBlockExtensionOfferingId")
+		objectKey.String(*v.CapacityBlockExtensionOfferingId)
+	}
+
+	if v.CapacityReservationId != nil {
+		objectKey := object.Key("CapacityReservationId")
+		objectKey.String(*v.CapacityReservationId)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
 	}
 
 	return nil

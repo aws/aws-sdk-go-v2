@@ -13055,6 +13055,17 @@ func awsRestxml_serializeDocumentOriginGroup(v *types.OriginGroup, value smithyx
 			return err
 		}
 	}
+	if len(v.SelectionCriteria) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SelectionCriteria",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.SelectionCriteria))
+	}
 	return nil
 }
 

@@ -84,6 +84,23 @@ func (EndPointType) Values() []EndPointType {
 	}
 }
 
+type EventSourceMappingMetric string
+
+// Enum values for EventSourceMappingMetric
+const (
+	EventSourceMappingMetricEventCount EventSourceMappingMetric = "EventCount"
+)
+
+// Values returns all known values for EventSourceMappingMetric. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceMappingMetric) Values() []EventSourceMappingMetric {
+	return []EventSourceMappingMetric{
+		"EventCount",
+	}
+}
+
 type EventSourcePosition string
 
 // Enum values for EventSourcePosition

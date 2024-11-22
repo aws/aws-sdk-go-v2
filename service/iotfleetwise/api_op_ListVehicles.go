@@ -32,17 +32,31 @@ func (c *Client) ListVehicles(ctx context.Context, params *ListVehiclesInput, op
 
 type ListVehiclesInput struct {
 
-	// The fully qualified names of the attributes. For example, the fully qualified
-	// name of an attribute might be Vehicle.Body.Engine.Type .
+	// The fully qualified names of the attributes. You can use this optional
+	// parameter to list the vehicles containing all the attributes in the request. For
+	// example, attributeNames could be " Vehicle.Body.Engine.Type, Vehicle.Color " and
+	// the corresponding attributeValues could be " 1.3 L R2, Blue " . In this case,
+	// the API will filter vehicles with an attribute name Vehicle.Body.Engine.Type
+	// that contains a value of 1.3 L R2 AND an attribute name Vehicle.Color that
+	// contains a value of " Blue ". A request must contain unique values for the
+	// attributeNames filter and the matching number of attributeValues filters to
+	// return the subset of vehicles that match the attributes filter condition.
 	AttributeNames []string
 
-	// Static information about a vehicle attribute value in string format. For
-	// example:
-	//
-	//     "1.3 L R2"
+	// Static information about a vehicle attribute value in string format. You can
+	// use this optional parameter in conjunction with attributeNames to list the
+	// vehicles containing all the attributeValues corresponding to the attributeNames
+	// filter. For example, attributeValues could be " 1.3 L R2, Blue " and the
+	// corresponding attributeNames filter could be " Vehicle.Body.Engine.Type,
+	// Vehicle.Color ". In this case, the API will filter vehicles with attribute name
+	// Vehicle.Body.Engine.Type that contains a value of 1.3 L R2 AND an attribute
+	// name Vehicle.Color that contains a value of " Blue ". A request must contain
+	// unique values for the attributeNames filter and the matching number of
+	// attributeValues filter to return the subset of vehicles that match the
+	// attributes filter condition.
 	AttributeValues []string
 
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
 	//  The Amazon Resource Name (ARN) of a vehicle model (model manifest). You can
@@ -176,7 +190,7 @@ func (c *Client) addOperationListVehiclesMiddlewares(stack *middleware.Stack, op
 
 // ListVehiclesPaginatorOptions is the paginator options for ListVehicles
 type ListVehiclesPaginatorOptions struct {
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

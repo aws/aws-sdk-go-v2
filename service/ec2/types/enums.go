@@ -905,6 +905,28 @@ func (CancelSpotInstanceRequestState) Values() []CancelSpotInstanceRequestState 
 	}
 }
 
+type CapacityBlockExtensionStatus string
+
+// Enum values for CapacityBlockExtensionStatus
+const (
+	CapacityBlockExtensionStatusPaymentPending   CapacityBlockExtensionStatus = "payment-pending"
+	CapacityBlockExtensionStatusPaymentFailed    CapacityBlockExtensionStatus = "payment-failed"
+	CapacityBlockExtensionStatusPaymentSucceeded CapacityBlockExtensionStatus = "payment-succeeded"
+)
+
+// Values returns all known values for CapacityBlockExtensionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityBlockExtensionStatus) Values() []CapacityBlockExtensionStatus {
+	return []CapacityBlockExtensionStatus{
+		"payment-pending",
+		"payment-failed",
+		"payment-succeeded",
+	}
+}
+
 type CapacityReservationBillingRequestStatus string
 
 // Enum values for CapacityReservationBillingRequestStatus
@@ -930,6 +952,26 @@ func (CapacityReservationBillingRequestStatus) Values() []CapacityReservationBil
 		"cancelled",
 		"revoked",
 		"expired",
+	}
+}
+
+type CapacityReservationDeliveryPreference string
+
+// Enum values for CapacityReservationDeliveryPreference
+const (
+	CapacityReservationDeliveryPreferenceFixed       CapacityReservationDeliveryPreference = "fixed"
+	CapacityReservationDeliveryPreferenceIncremental CapacityReservationDeliveryPreference = "incremental"
+)
+
+// Values returns all known values for CapacityReservationDeliveryPreference. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationDeliveryPreference) Values() []CapacityReservationDeliveryPreference {
+	return []CapacityReservationDeliveryPreference{
+		"fixed",
+		"incremental",
 	}
 }
 
@@ -1053,6 +1095,9 @@ const (
 	CapacityReservationStateScheduled      CapacityReservationState = "scheduled"
 	CapacityReservationStatePaymentPending CapacityReservationState = "payment-pending"
 	CapacityReservationStatePaymentFailed  CapacityReservationState = "payment-failed"
+	CapacityReservationStateAssessing      CapacityReservationState = "assessing"
+	CapacityReservationStateDelayed        CapacityReservationState = "delayed"
+	CapacityReservationStateUnsupported    CapacityReservationState = "unsupported"
 )
 
 // Values returns all known values for CapacityReservationState. Note that this
@@ -1069,6 +1114,9 @@ func (CapacityReservationState) Values() []CapacityReservationState {
 		"scheduled",
 		"payment-pending",
 		"payment-failed",
+		"assessing",
+		"delayed",
+		"unsupported",
 	}
 }
 

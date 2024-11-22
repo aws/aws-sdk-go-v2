@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified trails, event data stores, or channels in the
-// current Region.
+// Lists the tags for the specified trails, event data stores, dashboards, or
+// channels in the current Region.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -31,14 +31,17 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 // Specifies a list of tags to return.
 type ListTagsInput struct {
 
-	// Specifies a list of trail, event data store, or channel ARNs whose tags will be
-	// listed. The list has a limit of 20 ARNs.
+	// Specifies a list of trail, event data store, dashboard, or channel ARNs whose
+	// tags will be listed. The list has a limit of 20 ARNs.
 	//
 	// Example trail ARN format:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// Example event data store ARN format:
 	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	//
+	// Example dashboard ARN format:
+	// arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash
 	//
 	// Example channel ARN format:
 	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890

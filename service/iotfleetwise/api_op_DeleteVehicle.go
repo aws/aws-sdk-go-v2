@@ -10,10 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Deletes a vehicle and removes it from any campaigns.
-//
-// If the vehicle is successfully deleted, Amazon Web Services IoT FleetWise sends
-// back an HTTP 200 response with an empty body.
+// Deletes a vehicle and removes it from any campaigns.
 func (c *Client) DeleteVehicle(ctx context.Context, params *DeleteVehicleInput, optFns ...func(*Options)) (*DeleteVehicleOutput, error) {
 	if params == nil {
 		params = &DeleteVehicleInput{}

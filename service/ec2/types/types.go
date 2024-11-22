@@ -190,6 +190,47 @@ type AddIpamOperatingRegion struct {
 	noSmithyDocumentSerde
 }
 
+// Add an Organizational Unit (OU) exclusion to your IPAM. If your IPAM is
+// integrated with Amazon Web Services Organizations and you add an organizational
+// unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that
+// OU exclusion. There is a limit on the number of exclusions you can create. For
+// more information, see [Quotas for your IPAM]in the Amazon VPC IPAM User Guide.
+//
+// [Quotas for your IPAM]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
+type AddIpamOrganizationalUnitExclusion struct {
+
+	// An Amazon Web Services Organizations entity path. Build the path for the OU(s)
+	// using Amazon Web Services Organizations IDs separated by a / . Include all child
+	// OUs by ending the path with /* .
+	//
+	//   - Example 1
+	//
+	//   - Path to a child OU:
+	//   o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/ou-jkl0-awsddddd/
+	//
+	//   - In this example, o-a1b2c3d4e5 is the organization ID, r-f6g7h8i9j0example is
+	//   the root ID , ou-ghi0-awsccccc is an OU ID, and ou-jkl0-awsddddd is a child OU
+	//   ID.
+	//
+	//   - IPAM will not manage the IP addresses in accounts in the child OU.
+	//
+	//   - Example 2
+	//
+	//   - Path where all child OUs will be part of the exclusion:
+	//   o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/*
+	//
+	//   - In this example, IPAM will not manage the IP addresses in accounts in the
+	//   OU ( ou-ghi0-awsccccc ) or in accounts in any OUs that are children of the OU.
+	//
+	// For more information on how to construct an entity path, see [Understand the Amazon Web Services Organizations entity path] in the Amazon Web
+	// Services Identity and Access Management User Guide.
+	//
+	// [Understand the Amazon Web Services Organizations entity path]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed-view-data-orgs.html#access_policies_access-advisor-viewing-orgs-entity-path
+	OrganizationsEntityPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an additional detail for a path analysis. For more information, see [Reachability Analyzer additional detail codes].
 //
 // [Reachability Analyzer additional detail codes]: https://docs.aws.amazon.com/vpc/latest/reachability/additional-detail-codes.html
@@ -938,16 +979,16 @@ type BlockPublicAccessStates struct {
 
 	// The mode of VPC BPA.
 	//
-	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
-	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//   - off : VPC BPA is not enabled and traffic is allowed to and from internet
+	//   gateways and egress-only internet gateways in this Region.
 	//
-	//   - bidirectional-access-blocked : Block all traffic to and from internet
-	//   gateways and egress-only internet gateways in this Region (except for excluded
-	//   VPCs and subnets).
+	//   - block-bidirectional : Block all traffic to and from internet gateways and
+	//   egress-only internet gateways in this Region (except for excluded VPCs and
+	//   subnets).
 	//
-	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
-	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
-	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   - block-ingress : Block all internet traffic to the VPCs in this Region
+	//   (except for VPCs or subnets which are excluded). Only traffic to and from NAT
+	//   gateways and egress-only internet gateways is allowed because these gateways
 	//   only allow outbound connections to be established.
 	InternetGatewayBlockMode BlockPublicAccessMode
 
@@ -1158,14 +1199,133 @@ type CapacityAllocation struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a Capacity Block extension. With an extension, you can extend the
+// duration of time for an existing Capacity Block.
+type CapacityBlockExtension struct {
+
+	// The Availability Zone of the Capacity Block extension.
+	AvailabilityZone *string
+
+	// The Availability Zone ID of the Capacity Block extension.
+	AvailabilityZoneId *string
+
+	// The duration of the Capacity Block extension in hours.
+	CapacityBlockExtensionDurationHours *int32
+
+	// The end date of the Capacity Block extension.
+	CapacityBlockExtensionEndDate *time.Time
+
+	// The ID of the Capacity Block extension offering.
+	CapacityBlockExtensionOfferingId *string
+
+	// The date when the Capacity Block extension was purchased.
+	CapacityBlockExtensionPurchaseDate *time.Time
+
+	// The start date of the Capacity Block extension.
+	CapacityBlockExtensionStartDate *time.Time
+
+	// The status of the Capacity Block extension. A Capacity Block extension can have
+	// one of the following statuses:
+	//
+	//   - payment-pending - The Capacity Block extension payment is processing. If
+	//   your payment can't be processed within 12 hours, the Capacity Block extension is
+	//   failed.
+	//
+	//   - payment-failed - Payment for the Capacity Block extension request was not
+	//   successful.
+	//
+	//   - payment-succeeded - Payment for the Capacity Block extension request was
+	//   successful. You receive an invoice that reflects the one-time upfront payment.
+	//   In the invoice, you can associate the paid amount with the Capacity Block
+	//   reservation ID.
+	CapacityBlockExtensionStatus CapacityBlockExtensionStatus
+
+	// The reservation ID of the Capacity Block extension.
+	CapacityReservationId *string
+
+	// The currency of the payment for the Capacity Block extension.
+	CurrencyCode *string
+
+	// The number of instances in the Capacity Block extension.
+	InstanceCount *int32
+
+	// The instance type of the Capacity Block extension.
+	InstanceType *string
+
+	// The total price to be paid up front.
+	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
+// The recommended Capacity Block extension that fits your search requirements.
+type CapacityBlockExtensionOffering struct {
+
+	// The Availability Zone of the Capacity Block that will be extended.
+	AvailabilityZone *string
+
+	// The Availability Zone ID of the Capacity Block that will be extended.
+	AvailabilityZoneId *string
+
+	// The amount of time of the Capacity Block extension offering in hours.
+	CapacityBlockExtensionDurationHours *int32
+
+	// The date and time at which the Capacity Block extension expires. When a
+	// Capacity Block expires, the reserved capacity is released and you can no longer
+	// launch instances into it. The Capacity Block's state changes to expired when it
+	// reaches its end date
+	CapacityBlockExtensionEndDate *time.Time
+
+	// The ID of the Capacity Block extension offering.
+	CapacityBlockExtensionOfferingId *string
+
+	// The date and time at which the Capacity Block extension will start. This date
+	// is also the same as the end date of the Capacity Block that will be extended.
+	CapacityBlockExtensionStartDate *time.Time
+
+	// The currency of the payment for the Capacity Block extension offering.
+	CurrencyCode *string
+
+	// The number of instances in the Capacity Block extension offering.
+	InstanceCount *int32
+
+	// The instance type of the Capacity Block that will be extended.
+	InstanceType *string
+
+	// The start date of the Capacity Block that will be extended.
+	StartDate *time.Time
+
+	// Indicates the tenancy of the Capacity Block extension offering. A Capacity
+	// Block can have one of the following tenancy settings:
+	//
+	//   - default - The Capacity Block is created on hardware that is shared with
+	//   other Amazon Web Services accounts.
+	//
+	//   - dedicated - The Capacity Block is created on single-tenant hardware that is
+	//   dedicated to a single Amazon Web Services account.
+	Tenancy CapacityReservationTenancy
+
+	// The total price of the Capacity Block extension offering, to be paid up front.
+	UpfrontFee *string
+
+	noSmithyDocumentSerde
+}
+
 // The recommended Capacity Block that fits your search requirements.
 type CapacityBlockOffering struct {
 
 	// The Availability Zone of the Capacity Block offering.
 	AvailabilityZone *string
 
-	// The amount of time of the Capacity Block reservation in hours.
+	// The number of hours (in addition to capacityBlockDurationMinutes ) for the
+	// duration of the Capacity Block reservation. For example, if a Capacity Block
+	// starts at 04:55 and ends at 11:30, the hours field would be 6.
 	CapacityBlockDurationHours *int32
+
+	// The number of minutes (in addition to capacityBlockDurationHours ) for the
+	// duration of the Capacity Block reservation. For example, if a Capacity Block
+	// starts at 08:55 and ends at 11:30, the minutes field would be 35.
+	CapacityBlockDurationMinutes *int32
 
 	// The ID of the Capacity Block offering.
 	CapacityBlockOfferingId *string
@@ -1221,8 +1381,17 @@ type CapacityReservation struct {
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
 
+	// Information about your commitment for a future-dated Capacity Reservation.
+	CommitmentInfo *CapacityReservationCommitmentInfo
+
 	// The date and time at which the Capacity Reservation was created.
 	CreateDate *time.Time
+
+	// The delivery method for a future-dated Capacity Reservation. incremental
+	// indicates that the requested capacity is delivered in addition to any running
+	// instances and reserved capacity that you have in your account at the requested
+	// date and time.
+	DeliveryPreference CapacityReservationDeliveryPreference
 
 	// Indicates whether the Capacity Reservation supports EBS-optimized instances.
 	// This optimization provides dedicated throughput to Amazon EBS and an optimized
@@ -1294,22 +1463,38 @@ type CapacityReservation struct {
 	// The current state of the Capacity Reservation. A Capacity Reservation can be in
 	// one of the following states:
 	//
-	//   - active - The Capacity Reservation is active and the capacity is available
-	//   for your use.
+	//   - active - The capacity is available for use.
 	//
 	//   - expired - The Capacity Reservation expired automatically at the date and
-	//   time specified in your request. The reserved capacity is no longer available for
-	//   your use.
+	//   time specified in your reservation request. The reserved capacity is no longer
+	//   available for your use.
 	//
-	//   - cancelled - The Capacity Reservation was cancelled. The reserved capacity is
+	//   - cancelled - The Capacity Reservation was canceled. The reserved capacity is
 	//   no longer available for your use.
 	//
 	//   - pending - The Capacity Reservation request was successful but the capacity
 	//   provisioning is still pending.
 	//
-	//   - failed - The Capacity Reservation request has failed. A request might fail
-	//   due to invalid request parameters, capacity constraints, or instance limit
-	//   constraints. Failed requests are retained for 60 minutes.
+	//   - failed - The Capacity Reservation request has failed. A request can fail due
+	//   to request parameters that are not valid, capacity constraints, or instance
+	//   limit constraints. You can view a failed request for 60 minutes.
+	//
+	//   - scheduled - (Future-dated Capacity Reservations only) The future-dated
+	//   Capacity Reservation request was approved and the Capacity Reservation is
+	//   scheduled for delivery on the requested start date.
+	//
+	//   - assessing - (Future-dated Capacity Reservations only) Amazon EC2 is
+	//   assessing your request for a future-dated Capacity Reservation.
+	//
+	//   - delayed - (Future-dated Capacity Reservations only) Amazon EC2 encountered a
+	//   delay in provisioning the requested future-dated Capacity Reservation. Amazon
+	//   EC2 is unable to deliver the requested capacity by the requested start date and
+	//   time.
+	//
+	//   - unsupported - (Future-dated Capacity Reservations only) Amazon EC2 can't
+	//   support the future-dated Capacity Reservation request due to capacity
+	//   constraints. You can view unsupported requests for 30 days. The Capacity
+	//   Reservation will not be delivered.
 	State CapacityReservationState
 
 	// Any tags assigned to the Capacity Reservation.
@@ -1362,6 +1547,21 @@ type CapacityReservationBillingRequest struct {
 
 	// The ID of the Amazon Web Services account to which the request was sent.
 	UnusedReservationBillingOwnerId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about your commitment for a future-dated Capacity Reservation.
+type CapacityReservationCommitmentInfo struct {
+
+	// The date and time at which the commitment duration expires, in the ISO8601
+	// format in the UTC time zone ( YYYY-MM-DDThh:mm:ss.sssZ ). You can't decrease the
+	// instance count or cancel the Capacity Reservation before this date and time.
+	CommitmentEndDate *time.Time
+
+	// The instance capacity that you committed to when you requested the future-dated
+	// Capacity Reservation.
+	CommittedInstanceCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -8739,6 +8939,9 @@ type IpamDiscoveredAccount struct {
 	// The last successful resource discovery time.
 	LastSuccessfulDiscoveryTime *time.Time
 
+	// The ID of an Organizational Unit in Amazon Web Services Organizations.
+	OrganizationalUnitId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -8965,6 +9168,21 @@ type IpamOperatingRegion struct {
 
 	// The name of the operating Region.
 	RegionName *string
+
+	noSmithyDocumentSerde
+}
+
+// If your IPAM is integrated with Amazon Web Services Organizations and you add
+// an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in
+// accounts in that OU exclusion.
+type IpamOrganizationalUnitExclusion struct {
+
+	// An Amazon Web Services Organizations entity path. For more information on the
+	// entity path, see [Understand the Amazon Web Services Organizations entity path]in the Amazon Web Services Identity and Access Management User
+	// Guide.
+	//
+	// [Understand the Amazon Web Services Organizations entity path]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed-view-data-orgs.html#access_policies_access-advisor-viewing-orgs-entity-path
+	OrganizationsEntityPath *string
 
 	noSmithyDocumentSerde
 }
@@ -9349,6 +9567,11 @@ type IpamResourceDiscovery struct {
 	// only discovers and monitors resources in the Amazon Web Services Regions you
 	// select as operating Regions.
 	OperatingRegions []IpamOperatingRegion
+
+	// If your IPAM is integrated with Amazon Web Services Organizations and you add
+	// an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in
+	// accounts in that OU exclusion.
+	OrganizationalUnitExclusions []IpamOrganizationalUnitExclusion
 
 	// The ID of the owner.
 	OwnerId *string
@@ -14013,6 +14236,47 @@ type RemoveIpamOperatingRegion struct {
 
 	// The name of the operating Region you want to remove.
 	RegionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Remove an Organizational Unit (OU) exclusion to your IPAM. If your IPAM is
+// integrated with Amazon Web Services Organizations and you add an organizational
+// unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that
+// OU exclusion. There is a limit on the number of exclusions you can create. For
+// more information, see [Quotas for your IPAM]in the Amazon VPC IPAM User Guide.
+//
+// [Quotas for your IPAM]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
+type RemoveIpamOrganizationalUnitExclusion struct {
+
+	// An Amazon Web Services Organizations entity path. Build the path for the OU(s)
+	// using Amazon Web Services Organizations IDs separated by a / . Include all child
+	// OUs by ending the path with /* .
+	//
+	//   - Example 1
+	//
+	//   - Path to a child OU:
+	//   o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/ou-jkl0-awsddddd/
+	//
+	//   - In this example, o-a1b2c3d4e5 is the organization ID, r-f6g7h8i9j0example is
+	//   the root ID , ou-ghi0-awsccccc is an OU ID, and ou-jkl0-awsddddd is a child OU
+	//   ID.
+	//
+	//   - IPAM will not manage the IP addresses in accounts in the child OU.
+	//
+	//   - Example 2
+	//
+	//   - Path where all child OUs will be part of the exclusion:
+	//   o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/*
+	//
+	//   - In this example, IPAM will not manage the IP addresses in accounts in the
+	//   OU ( ou-ghi0-awsccccc ) or in accounts in any OUs that are children of the OU.
+	//
+	// For more information on how to construct an entity path, see [Understand the Amazon Web Services Organizations entity path] in the Amazon Web
+	// Services Identity and Access Management User Guide.
+	//
+	// [Understand the Amazon Web Services Organizations entity path]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_last-accessed-view-data-orgs.html#access_policies_access-advisor-viewing-orgs-entity-path
+	OrganizationsEntityPath *string
 
 	noSmithyDocumentSerde
 }
@@ -20206,12 +20470,12 @@ type VpcBlockPublicAccessExclusion struct {
 
 	// The exclusion mode for internet gateway traffic.
 	//
-	//   - bidirectional-access-allowed : Allow all internet traffic to and from the
-	//   excluded VPCs and subnets.
+	//   - allow-bidirectional : Allow all internet traffic to and from the excluded
+	//   VPCs and subnets.
 	//
-	//   - egress-access-allowed : Allow outbound internet traffic from the excluded
-	//   VPCs and subnets. Block inbound internet traffic to the excluded VPCs and
-	//   subnets. Only applies when VPC Block Public Access is set to Bidirectional.
+	//   - allow-egress : Allow outbound internet traffic from the excluded VPCs and
+	//   subnets. Block inbound internet traffic to the excluded VPCs and subnets. Only
+	//   applies when VPC Block Public Access is set to Bidirectional.
 	InternetGatewayExclusionMode InternetGatewayExclusionMode
 
 	// When the exclusion was last updated.
@@ -20235,7 +20499,7 @@ type VpcBlockPublicAccessExclusion struct {
 	noSmithyDocumentSerde
 }
 
-// VPC Block public Access (BPA) enables you to block resources in VPCs and
+// VPC Block Public Access (BPA) enables you to block resources in VPCs and
 // subnets that you own in a Region from reaching or being reached from the
 // internet through internet gateways and egress-only internet gateways. To learn
 // more about VPC BPA, see [Block public access to VPCs and subnets]in the Amazon VPC User Guide.
@@ -20251,16 +20515,16 @@ type VpcBlockPublicAccessOptions struct {
 
 	// The current mode of VPC BPA.
 	//
-	//   - bidirectional-access-allowed : VPC BPA is not enabled and traffic is allowed
-	//   to and from internet gateways and egress-only internet gateways in this Region.
+	//   - off : VPC BPA is not enabled and traffic is allowed to and from internet
+	//   gateways and egress-only internet gateways in this Region.
 	//
-	//   - bidirectional-access-blocked : Block all traffic to and from internet
-	//   gateways and egress-only internet gateways in this Region (except for excluded
-	//   VPCs and subnets).
+	//   - block-bidirectional : Block all traffic to and from internet gateways and
+	//   egress-only internet gateways in this Region (except for excluded VPCs and
+	//   subnets).
 	//
-	//   - ingress-access-blocked : Block all internet traffic to the VPCs in this
-	//   Region (except for VPCs or subnets which are excluded). Only traffic to and from
-	//   NAT gateways and egress-only internet gateways is allowed because these gateways
+	//   - block-ingress : Block all internet traffic to the VPCs in this Region
+	//   (except for VPCs or subnets which are excluded). Only traffic to and from NAT
+	//   gateways and egress-only internet gateways is allowed because these gateways
 	//   only allow outbound connections to be established.
 	InternetGatewayBlockMode InternetGatewayBlockMode
 

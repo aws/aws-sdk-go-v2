@@ -49,6 +49,26 @@ func (m *validateOpGetPendingJobExecutions) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCommandExecution struct {
+}
+
+func (*validateOpStartCommandExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCommandExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCommandExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCommandExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartNextPendingJobExecution struct {
 }
 
@@ -97,6 +117,10 @@ func addOpGetPendingJobExecutionsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetPendingJobExecutions{}, middleware.After)
 }
 
+func addOpStartCommandExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCommandExecution{}, middleware.After)
+}
+
 func addOpStartNextPendingJobExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartNextPendingJobExecution{}, middleware.After)
 }
@@ -130,6 +154,24 @@ func validateOpGetPendingJobExecutionsInput(v *GetPendingJobExecutionsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetPendingJobExecutionsInput"}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCommandExecutionInput(v *StartCommandExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCommandExecutionInput"}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if v.CommandArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

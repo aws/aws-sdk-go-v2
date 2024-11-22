@@ -21,6 +21,50 @@ func (BillingMode) Values() []BillingMode {
 	}
 }
 
+type DashboardStatus string
+
+// Enum values for DashboardStatus
+const (
+	DashboardStatusCreating DashboardStatus = "CREATING"
+	DashboardStatusCreated  DashboardStatus = "CREATED"
+	DashboardStatusUpdating DashboardStatus = "UPDATING"
+	DashboardStatusUpdated  DashboardStatus = "UPDATED"
+	DashboardStatusDeleting DashboardStatus = "DELETING"
+)
+
+// Values returns all known values for DashboardStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardStatus) Values() []DashboardStatus {
+	return []DashboardStatus{
+		"CREATING",
+		"CREATED",
+		"UPDATING",
+		"UPDATED",
+		"DELETING",
+	}
+}
+
+type DashboardType string
+
+// Enum values for DashboardType
+const (
+	DashboardTypeManaged DashboardType = "MANAGED"
+	DashboardTypeCustom  DashboardType = "CUSTOM"
+)
+
+// Values returns all known values for DashboardType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardType) Values() []DashboardType {
+	return []DashboardType{
+		"MANAGED",
+		"CUSTOM",
+	}
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus
@@ -300,5 +344,44 @@ func (ReadWriteType) Values() []ReadWriteType {
 		"ReadOnly",
 		"WriteOnly",
 		"All",
+	}
+}
+
+type RefreshScheduleFrequencyUnit string
+
+// Enum values for RefreshScheduleFrequencyUnit
+const (
+	RefreshScheduleFrequencyUnitHours RefreshScheduleFrequencyUnit = "HOURS"
+	RefreshScheduleFrequencyUnitDays  RefreshScheduleFrequencyUnit = "DAYS"
+)
+
+// Values returns all known values for RefreshScheduleFrequencyUnit. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RefreshScheduleFrequencyUnit) Values() []RefreshScheduleFrequencyUnit {
+	return []RefreshScheduleFrequencyUnit{
+		"HOURS",
+		"DAYS",
+	}
+}
+
+type RefreshScheduleStatus string
+
+// Enum values for RefreshScheduleStatus
+const (
+	RefreshScheduleStatusEnabled  RefreshScheduleStatus = "ENABLED"
+	RefreshScheduleStatusDisabled RefreshScheduleStatus = "DISABLED"
+)
+
+// Values returns all known values for RefreshScheduleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RefreshScheduleStatus) Values() []RefreshScheduleStatus {
+	return []RefreshScheduleStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }

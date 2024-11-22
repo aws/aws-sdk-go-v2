@@ -110,6 +110,26 @@ func (m *validateOpCreateDocumentationVersion) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDomainNameAccessAssociation struct {
+}
+
+func (*validateOpCreateDomainNameAccessAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDomainNameAccessAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDomainNameAccessAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDomainNameAccessAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDomainName struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpDeleteDocumentationVersion) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDocumentationVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDomainNameAccessAssociation struct {
+}
+
+func (*validateOpDeleteDomainNameAccessAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDomainNameAccessAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDomainNameAccessAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDomainNameAccessAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1690,6 +1730,26 @@ func (m *validateOpPutRestApi) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRejectDomainNameAccessAssociation struct {
+}
+
+func (*validateOpRejectDomainNameAccessAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectDomainNameAccessAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectDomainNameAccessAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectDomainNameAccessAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -2210,6 +2270,10 @@ func addOpCreateDocumentationVersionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateDocumentationVersion{}, middleware.After)
 }
 
+func addOpCreateDomainNameAccessAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDomainNameAccessAssociation{}, middleware.After)
+}
+
 func addOpCreateDomainNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomainName{}, middleware.After)
 }
@@ -2272,6 +2336,10 @@ func addOpDeleteDocumentationPartValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteDocumentationVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDocumentationVersion{}, middleware.After)
+}
+
+func addOpDeleteDomainNameAccessAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDomainNameAccessAssociation{}, middleware.After)
 }
 
 func addOpDeleteDomainNameValidationMiddleware(stack *middleware.Stack) error {
@@ -2526,6 +2594,10 @@ func addOpPutRestApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRestApi{}, middleware.After)
 }
 
+func addOpRejectDomainNameAccessAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectDomainNameAccessAssociation{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -2730,6 +2802,27 @@ func validateOpCreateDocumentationVersionInput(v *CreateDocumentationVersionInpu
 	}
 	if v.DocumentationVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentationVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDomainNameAccessAssociationInput(v *CreateDomainNameAccessAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainNameAccessAssociationInput"}
+	if v.DomainNameArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainNameArn"))
+	}
+	if len(v.AccessAssociationSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessAssociationSourceType"))
+	}
+	if v.AccessAssociationSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessAssociationSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3012,6 +3105,21 @@ func validateOpDeleteDocumentationVersionInput(v *DeleteDocumentationVersionInpu
 	}
 	if v.DocumentationVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentationVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDomainNameAccessAssociationInput(v *DeleteDomainNameAccessAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainNameAccessAssociationInput"}
+	if v.DomainNameAccessAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainNameAccessAssociationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4143,6 +4251,24 @@ func validateOpPutRestApiInput(v *PutRestApiInput) error {
 	}
 	if v.Body == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRejectDomainNameAccessAssociationInput(v *RejectDomainNameAccessAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectDomainNameAccessAssociationInput"}
+	if v.DomainNameAccessAssociationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainNameAccessAssociationArn"))
+	}
+	if v.DomainNameArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainNameArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

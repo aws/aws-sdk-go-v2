@@ -65,6 +65,9 @@ type GenerateQueryInput struct {
 
 type GenerateQueryOutput struct {
 
+	//  The account ID of the event data store owner.
+	EventDataStoreOwnerAccountId *string
+
 	//  An alias that identifies the prompt. When you run the StartQuery operation,
 	// you can pass in either the QueryAlias or QueryStatement parameter.
 	QueryAlias *string

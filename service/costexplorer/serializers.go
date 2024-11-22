@@ -688,6 +688,67 @@ func (m *awsAwsjson11_serializeOpGetApproximateUsageRecords) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetCommitmentPurchaseAnalysis struct {
+}
+
+func (*awsAwsjson11_serializeOpGetCommitmentPurchaseAnalysis) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetCommitmentPurchaseAnalysis) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCommitmentPurchaseAnalysisInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetCommitmentPurchaseAnalysis")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetCommitmentPurchaseAnalysisInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetCostAndUsage struct {
 }
 
@@ -1664,6 +1725,67 @@ func (m *awsAwsjson11_serializeOpGetUsageForecast) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListCommitmentPurchaseAnalyses struct {
+}
+
+func (*awsAwsjson11_serializeOpListCommitmentPurchaseAnalyses) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListCommitmentPurchaseAnalyses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCommitmentPurchaseAnalysesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.ListCommitmentPurchaseAnalyses")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListCommitmentPurchaseAnalysesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListCostAllocationTagBackfillHistory struct {
 }
 
@@ -2013,6 +2135,67 @@ func (m *awsAwsjson11_serializeOpProvideAnomalyFeedback) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentProvideAnomalyFeedbackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpStartCommitmentPurchaseAnalysis struct {
+}
+
+func (*awsAwsjson11_serializeOpStartCommitmentPurchaseAnalysis) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartCommitmentPurchaseAnalysis) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartCommitmentPurchaseAnalysisInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.StartCommitmentPurchaseAnalysis")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartCommitmentPurchaseAnalysisInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2517,6 +2700,17 @@ func (m *awsAwsjson11_serializeOpUpdateCostCategoryDefinition) HandleSerialize(c
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAnalysisIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAnomalyDateInterval(v *types.AnomalyDateInterval, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2647,6 +2841,20 @@ func awsAwsjson11_serializeDocumentAnomalySubscription(v *types.AnomalySubscript
 	if v.ThresholdExpression != nil {
 		ok := object.Key("ThresholdExpression")
 		if err := awsAwsjson11_serializeDocumentExpression(v.ThresholdExpression, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCommitmentPurchaseAnalysisConfiguration(v *types.CommitmentPurchaseAnalysisConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SavingsPlansPurchaseAnalysisConfiguration != nil {
+		ok := object.Key("SavingsPlansPurchaseAnalysisConfiguration")
+		if err := awsAwsjson11_serializeDocumentSavingsPlansPurchaseAnalysisConfiguration(v.SavingsPlansPurchaseAnalysisConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -3129,6 +3337,61 @@ func awsAwsjson11_serializeDocumentRightsizingRecommendationConfiguration(v *typ
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSavingsPlans(v *types.SavingsPlans, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceFamily != nil {
+		ok := object.Key("InstanceFamily")
+		ok.String(*v.InstanceFamily)
+	}
+
+	if v.OfferingId != nil {
+		ok := object.Key("OfferingId")
+		ok.String(*v.OfferingId)
+	}
+
+	if len(v.PaymentOption) > 0 {
+		ok := object.Key("PaymentOption")
+		ok.String(string(v.PaymentOption))
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	if v.SavingsPlansCommitment != nil {
+		ok := object.Key("SavingsPlansCommitment")
+		switch {
+		case math.IsNaN(*v.SavingsPlansCommitment):
+			ok.String("NaN")
+
+		case math.IsInf(*v.SavingsPlansCommitment, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.SavingsPlansCommitment, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.SavingsPlansCommitment)
+
+		}
+	}
+
+	if len(v.SavingsPlansType) > 0 {
+		ok := object.Key("SavingsPlansType")
+		ok.String(string(v.SavingsPlansType))
+	}
+
+	if len(v.TermInYears) > 0 {
+		ok := object.Key("TermInYears")
+		ok.String(string(v.TermInYears))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSavingsPlansDataTypes(v []types.SavingsPlansDataType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3136,6 +3399,73 @@ func awsAwsjson11_serializeDocumentSavingsPlansDataTypes(v []types.SavingsPlansD
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSavingsPlansPurchaseAnalysisConfiguration(v *types.SavingsPlansPurchaseAnalysisConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	if len(v.AccountScope) > 0 {
+		ok := object.Key("AccountScope")
+		ok.String(string(v.AccountScope))
+	}
+
+	if len(v.AnalysisType) > 0 {
+		ok := object.Key("AnalysisType")
+		ok.String(string(v.AnalysisType))
+	}
+
+	if v.LookBackTimePeriod != nil {
+		ok := object.Key("LookBackTimePeriod")
+		if err := awsAwsjson11_serializeDocumentDateInterval(v.LookBackTimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SavingsPlansToAdd != nil {
+		ok := object.Key("SavingsPlansToAdd")
+		if err := awsAwsjson11_serializeDocumentSavingsPlansToAdd(v.SavingsPlansToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SavingsPlansToExclude != nil {
+		ok := object.Key("SavingsPlansToExclude")
+		if err := awsAwsjson11_serializeDocumentSavingsPlansToExclude(v.SavingsPlansToExclude, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSavingsPlansToAdd(v []types.SavingsPlans, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSavingsPlans(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSavingsPlansToExclude(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3571,6 +3901,18 @@ func awsAwsjson11_serializeOpDocumentGetApproximateUsageRecordsInput(v *GetAppro
 		if err := awsAwsjson11_serializeDocumentUsageServices(v.Services, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetCommitmentPurchaseAnalysisInput(v *GetCommitmentPurchaseAnalysisInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisId != nil {
+		ok := object.Key("AnalysisId")
+		ok.String(*v.AnalysisId)
 	}
 
 	return nil
@@ -4287,6 +4629,35 @@ func awsAwsjson11_serializeOpDocumentGetUsageForecastInput(v *GetUsageForecastIn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListCommitmentPurchaseAnalysesInput(v *ListCommitmentPurchaseAnalysesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisIds != nil {
+		ok := object.Key("AnalysisIds")
+		if err := awsAwsjson11_serializeDocumentAnalysisIds(v.AnalysisIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AnalysisStatus) > 0 {
+		ok := object.Key("AnalysisStatus")
+		ok.String(string(v.AnalysisStatus))
+	}
+
+	if v.NextPageToken != nil {
+		ok := object.Key("NextPageToken")
+		ok.String(*v.NextPageToken)
+	}
+
+	if v.PageSize != 0 {
+		ok := object.Key("PageSize")
+		ok.Integer(v.PageSize)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListCostAllocationTagBackfillHistoryInput(v *ListCostAllocationTagBackfillHistoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4413,6 +4784,20 @@ func awsAwsjson11_serializeOpDocumentProvideAnomalyFeedbackInput(v *ProvideAnoma
 	if len(v.Feedback) > 0 {
 		ok := object.Key("Feedback")
 		ok.String(string(v.Feedback))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStartCommitmentPurchaseAnalysisInput(v *StartCommitmentPurchaseAnalysisInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CommitmentPurchaseAnalysisConfiguration != nil {
+		ok := object.Key("CommitmentPurchaseAnalysisConfiguration")
+		if err := awsAwsjson11_serializeDocumentCommitmentPurchaseAnalysisConfiguration(v.CommitmentPurchaseAnalysisConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

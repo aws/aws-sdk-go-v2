@@ -45,6 +45,10 @@ type CreateBasePathMappingInput struct {
 	// name after the domain name.
 	BasePath *string
 
+	// The identifier for the domain name resource. Supported only for private custom
+	// domain names.
+	DomainNameId *string
+
 	// The name of the API's stage that you want to use for this mapping. Specify
 	// '(none)' if you want callers to explicitly specify the stage name after any base
 	// path name.

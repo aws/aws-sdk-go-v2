@@ -32,7 +32,7 @@ func (c *Client) ListDecoderManifests(ctx context.Context, params *ListDecoderMa
 
 type ListDecoderManifestsInput struct {
 
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
 	//  The Amazon Resource Name (ARN) of a vehicle model (model manifest) associated
@@ -166,7 +166,7 @@ func (c *Client) addOperationListDecoderManifestsMiddlewares(stack *middleware.S
 // ListDecoderManifestsPaginatorOptions is the paginator options for
 // ListDecoderManifests
 type ListDecoderManifestsPaginatorOptions struct {
-	//  The maximum number of items to return, between 1 and 100, inclusive.
+	// The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

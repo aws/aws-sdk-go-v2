@@ -270,6 +270,21 @@
                 }
             }
         },
+        "com.amazonaws.ssm#AgentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.ssm#AgentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
+            }
+        },
         "com.amazonaws.ssm#AggregatorSchemaOnly": {
             "type": "boolean",
             "traits": {
@@ -609,6 +624,9 @@
                     "target": "com.amazonaws.ssm#GetDocument"
                 },
                 {
+                    "target": "com.amazonaws.ssm#GetExecutionPreview"
+                },
+                {
                     "target": "com.amazonaws.ssm#GetInventory"
                 },
                 {
@@ -696,6 +714,12 @@
                     "target": "com.amazonaws.ssm#ListInventoryEntries"
                 },
                 {
+                    "target": "com.amazonaws.ssm#ListNodes"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ListNodesSummary"
+                },
+                {
                     "target": "com.amazonaws.ssm#ListOpsItemEvents"
                 },
                 {
@@ -763,6 +787,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#StartChangeRequestExecution"
+                },
+                {
+                    "target": "com.amazonaws.ssm#StartExecutionPreview"
                 },
                 {
                     "target": "com.amazonaws.ssm#StartSession"
@@ -3695,6 +3722,50 @@
                 }
             }
         },
+        "com.amazonaws.ssm#AutomationExecutionInputs": {
+            "type": "structure",
+            "members": {
+                "Parameters": {
+                    "target": "com.amazonaws.ssm#AutomationParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about parameters that can be specified for the preview operation.\n   </p>"
+                    }
+                },
+                "TargetParameterName": {
+                    "target": "com.amazonaws.ssm#AutomationParameterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter used as the target resource for the rate-controlled execution.\n   Required if you specify targets.</p>"
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.ssm#Targets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resources that would be included in the actual runbook execution, if\n   it were to be run. Both Targets and TargetMaps can't be specified together.</p>"
+                    }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
+                    }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Amazon Web Services Regions and Amazon Web Services accounts targeted by the Automation execution\n   preview operation.</p>"
+                    }
+                },
+                "TargetLocationsURL": {
+                    "target": "com.amazonaws.ssm#TargetLocationsURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A publicly accessible URL for a file that contains the <code>TargetLocations</code> body.\n   Currently, only files in presigned Amazon S3 buckets are supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the optional inputs that can be specified for an automation execution\n   preview.</p>"
+            }
+        },
         "com.amazonaws.ssm#AutomationExecutionLimitExceededException": {
             "type": "structure",
             "members": {
@@ -3925,6 +3996,39 @@
                 },
                 "smithy.api#documentation": "<p>There is no automation execution information for the requested automation execution\n   ID.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#AutomationExecutionPreview": {
+            "type": "structure",
+            "members": {
+                "StepPreviews": {
+                    "target": "com.amazonaws.ssm#StepPreviewMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the type of impact a runbook step would have on a resource.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Mutating</code>: The runbook step would make changes to the targets through actions\n     that create, modify, or delete resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Non_Mutating</code>: The runbook step would retrieve data about resources but not\n     make changes to them. This category generally includes <code>Describe*</code>,\n      <code>List*</code>, <code>Get*</code>, and similar read-only API actions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Undetermined</code>: An undetermined step invokes executions performed by another\n     orchestration service like Lambda, Step Functions, or Amazon Web Services Systems Manager Run Command. An undetermined step might also call a third-party API. Systems Manager Automation doesn't know the outcome of the orchestration processes or\n     third-party API executions, so the results of the steps are undetermined.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssm#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Amazon Web Services Regions targeted by the execution preview.</p>"
+                    }
+                },
+                "TargetPreviews": {
+                    "target": "com.amazonaws.ssm#TargetPreviewList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information that provides a preview of what the impact of running the specified Automation\n   runbook would be.</p>"
+                    }
+                },
+                "TotalAccounts": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Information about the Amazon Web Services accounts that were included in the execution\n   preview.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the results of the execution preview.</p>"
             }
         },
         "com.amazonaws.ssm#AutomationExecutionStatus": {
@@ -6662,7 +6766,7 @@
                 "GlobalFilters": {
                     "target": "com.amazonaws.ssm#PatchFilterGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of global filters used to include patches in the baseline.</p>"
+                        "smithy.api#documentation": "<p>A set of global filters used to include patches in the baseline.</p>\n         <important>\n            <p>The <code>GlobalFilters</code> parameter can be configured only by using the CLI or an Amazon Web Services SDK. It can't be configured from the Patch Manager\n    console, and its value isn't displayed in the console.</p>\n         </important>"
                     }
                 },
                 "ApprovalRules": {
@@ -6769,7 +6873,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location.\n   Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-create-resource-data-sync.html\">Creatinga a\n    resource data sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a\n   single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple\n   Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager\n    Explorer to display data from multiple accounts and Regions</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you\n    enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you\n    secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>\n         </note>"
+                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location.\n   Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-create-resource-data-sync.html\">Creating a\n    resource data sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a\n   single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple\n   Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager\n    Explorer to display data from multiple accounts and Regions</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you\n    enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you\n    secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateResourceDataSyncRequest": {
@@ -11830,6 +11934,20 @@
                 }
             }
         },
+        "com.amazonaws.ssm#ExecutionInputs": {
+            "type": "union",
+            "members": {
+                "Automation": {
+                    "target": "com.amazonaws.ssm#AutomationExecutionInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the optional inputs that can be specified for an automation execution\n   preview.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the inputs for an execution preview.</p>"
+            }
+        },
         "com.amazonaws.ssm#ExecutionMode": {
             "type": "enum",
             "members": {
@@ -11843,6 +11961,59 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Interactive"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ExecutionPreview": {
+            "type": "union",
+            "members": {
+                "Automation": {
+                    "target": "com.amazonaws.ssm#AutomationExecutionPreview",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the changes that would be made if an Automation workflow were run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the changes that would be made if an execution were run.</p>"
+            }
+        },
+        "com.amazonaws.ssm#ExecutionPreviewId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            }
+        },
+        "com.amazonaws.ssm#ExecutionPreviewStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
                     }
                 }
             }
@@ -12682,6 +12853,76 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current review status of a new custom Systems Manager document (SSM document) created by a member\n   of your organization, or of the latest version of an existing SSM document.</p>\n         <p>Only one version of an SSM document can be in the APPROVED state at a time. When a new\n   version is approved, the status of the previous version changes to REJECTED.</p>\n         <p>Only one version of an SSM document can be in review, or PENDING, at a time.</p>"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssm#GetExecutionPreview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#GetExecutionPreviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#GetExecutionPreviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates the process of retrieving an existing preview that shows the effects that running\n   a specified Automation runbook would have on the targeted resources.</p>"
+            }
+        },
+        "com.amazonaws.ssm#GetExecutionPreviewRequest": {
+            "type": "structure",
+            "members": {
+                "ExecutionPreviewId": {
+                    "target": "com.amazonaws.ssm#ExecutionPreviewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the existing execution preview.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#GetExecutionPreviewResponse": {
+            "type": "structure",
+            "members": {
+                "ExecutionPreviewId": {
+                    "target": "com.amazonaws.ssm#ExecutionPreviewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generated ID for the existing execution preview.</p>"
+                    }
+                },
+                "EndedAt": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A UTC timestamp indicating when the execution preview operation ended.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssm#ExecutionPreviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the execution preview operation.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Supplemental information about the current status of the execution preview.</p>"
+                    }
+                },
+                "ExecutionPreview": {
+                    "target": "com.amazonaws.ssm#ExecutionPreview"
                 }
             },
             "traits": {
@@ -14419,7 +14660,7 @@
                 "SettingId": {
                     "target": "com.amazonaws.ssm#ServiceSettingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the service setting to get. The setting ID can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ID of the service setting to get. The setting ID can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/appmanager/appmanager-enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>/ssm/automation/enable-adaptive-concurrency</p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14528,6 +14769,29 @@
                 },
                 "smithy.api#documentation": "<p>Error returned when an idempotent operation is retried and the parameters don't match the\n   original call to the API with the same idempotency token. </p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#ImpactType": {
+            "type": "enum",
+            "members": {
+                "MUTATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mutating"
+                    }
+                },
+                "NON_MUTATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NonMutating"
+                    }
+                },
+                "UNDETERMINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Undetermined"
+                    }
+                }
             }
         },
         "com.amazonaws.ssm#IncompatiblePolicyException": {
@@ -14770,6 +15034,74 @@
                 }
             }
         },
+        "com.amazonaws.ssm#InstanceInfo": {
+            "type": "structure",
+            "members": {
+                "AgentType": {
+                    "target": "com.amazonaws.ssm#AgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agent installed on the node.</p>"
+                    }
+                },
+                "AgentVersion": {
+                    "target": "com.amazonaws.ssm#AgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the agent installed on the node.</p>"
+                    }
+                },
+                "ComputerName": {
+                    "target": "com.amazonaws.ssm#ComputerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified host name of the managed node.</p>"
+                    }
+                },
+                "InstanceStatus": {
+                    "target": "com.amazonaws.ssm#InstanceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the managed node.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.ssm#IPAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the managed node.</p>"
+                    }
+                },
+                "ManagedStatus": {
+                    "target": "com.amazonaws.ssm#ManagedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the node is managed by Systems Manager.</p>"
+                    }
+                },
+                "PlatformType": {
+                    "target": "com.amazonaws.ssm#PlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system platform type of the managed node.</p>"
+                    }
+                },
+                "PlatformName": {
+                    "target": "com.amazonaws.ssm#PlatformName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operating system platform running on your managed node.</p>"
+                    }
+                },
+                "PlatformVersion": {
+                    "target": "com.amazonaws.ssm#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the OS platform running on your managed node. </p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssm#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instance, either an EC2 instance or another supported machine type in a hybrid\n   fleet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a specific managed node.</p>"
+            }
+        },
         "com.amazonaws.ssm#InstanceInformation": {
             "type": "structure",
             "members": {
@@ -14807,7 +15139,7 @@
                 "PlatformType": {
                     "target": "com.amazonaws.ssm#PlatformType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system platform type. </p>"
+                        "smithy.api#documentation": "<p>The operating system platform type.</p>"
                     }
                 },
                 "PlatformName": {
@@ -15435,7 +15767,7 @@
                 "PlatformType": {
                     "target": "com.amazonaws.ssm#PlatformType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system platform type of the managed node. For example, Windows.</p>"
+                        "smithy.api#documentation": "<p>The operating system platform type of the managed node. For example, Windows Server or\n    Amazon Linux 2.</p>"
                     }
                 },
                 "PlatformName": {
@@ -15745,6 +16077,15 @@
                 }
             }
         },
+        "com.amazonaws.ssm#InstanceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.ssm#InstanceTagName": {
             "type": "string",
             "traits": {
@@ -15819,7 +16160,7 @@
                     "code": "InvalidActivationId",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>The activation ID isn't valid. Verify the you entered the correct ActivationId or\n   ActivationCode and try again.</p>",
+                "smithy.api#documentation": "<p>The activation ID isn't valid. Verify that you entered the correct ActivationId or\n   ActivationCode and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -15835,7 +16176,7 @@
                     "code": "InvalidAggregator",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The specified aggregator isn't valid for inventory groups. Verify that the aggregator uses a\n   valid inventory type such as <code>AWS:Application</code> or\n   <code>AWS:InstanceInformation</code>.</p>",
+                "smithy.api#documentation": "<p>The specified aggregator isn't valid for the group type. Verify that the aggregator you\n   provided is supported.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -16096,7 +16437,7 @@
                     "code": "InvalidFilter",
                     "httpResponseCode": 441
                 },
-                "smithy.api#documentation": "<p>The filter name isn't valid. Verify the you entered the correct name and try again.</p>",
+                "smithy.api#documentation": "<p>The filter name isn't valid. Verify that you entered the correct name and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -18362,6 +18703,229 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ssm#ListNodes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#ListNodesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#ListNodesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidFilter"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidNextToken"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceDataSyncNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Takes in filters and returns a list of managed nodes matching the filter criteria.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Nodes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListNodesRequest": {
+            "type": "structure",
+            "members": {
+                "SyncName": {
+                    "target": "com.amazonaws.ssm#ResourceDataSyncName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource data sync to retrieve information about. Required for\n   cross-account/cross-Region configurations. Optional for single account/single-Region\n   configurations.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ssm#NodeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of managed nodes.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n   call.)</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssm#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#ListNodesResult": {
+            "type": "structure",
+            "members": {
+                "Nodes": {
+                    "target": "com.amazonaws.ssm#NodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of managed nodes that match the specified filter criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssm#ListNodesSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#ListNodesSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#ListNodesSummaryResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidAggregatorException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidFilter"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidNextToken"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ResourceDataSyncNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a summary of managed instance/node metadata based on the filters and aggregators\n   you specify. Results are grouped by the input aggregator you specify.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListNodesSummary",
+                        "documentation": "This example illustrates one usage of ListNodesSummary",
+                        "input": {
+                            "SyncName": "AWS-QuickSetup-ManagedNode",
+                            "Aggregators": [
+                                {
+                                    "AggregatorType": "Count",
+                                    "TypeName": "Instance",
+                                    "AttributeName": "Region"
+                                }
+                            ],
+                            "Filters": [
+                                {
+                                    "Key": "InstanceStatus",
+                                    "Values": [
+                                        "Active"
+                                    ],
+                                    "Type": "Equal"
+                                }
+                            ],
+                            "MaxResults": 2,
+                            "NextToken": "A9lT8CAxj9aDFRi+MNAoFq08I---EXAMPLE"
+                        },
+                        "output": {
+                            "Summary": [
+                                {
+                                    "Count": "26",
+                                    "Region": "us-east-1"
+                                },
+                                {
+                                    "Count": "7",
+                                    "Region": "us-east-2"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Summary",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListNodesSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "SyncName": {
+                    "target": "com.amazonaws.ssm#ResourceDataSyncName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource data sync to retrieve information about. Required for\n   cross-account/cross-Region configuration. Optional for single account/single-Region\n   configurations.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ssm#NodeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters. Use a filter to generate a summary that matches your specified filter\n   criteria.</p>"
+                    }
+                },
+                "Aggregators": {
+                    "target": "com.amazonaws.ssm#NodeAggregatorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify one or more aggregators to return a count of managed nodes that match that\n   expression. For example, a count of managed nodes by operating system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n   call.) The call also returns a token that you can specify in a subsequent call to get the next\n   set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssm#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#ListNodesSummaryResult": {
+            "type": "structure",
+            "members": {
+                "Summary": {
+                    "target": "com.amazonaws.ssm#NodeSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of objects reporting information about your managed nodes, such as the count of\n   nodes by operating system.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ssm#ListOpsItemEvents": {
             "type": "operation",
             "input": {
@@ -20008,6 +20572,29 @@
                 "smithy.api#pattern": "^(^mi-[0-9a-f]{17}$)|(^eks_c:[0-9A-Za-z][A-Za-z0-9\\-_]{0,99}_\\w{17}$)$"
             }
         },
+        "com.amazonaws.ssm#ManagedStatus": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                },
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Managed"
+                    }
+                },
+                "UNMANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unmanaged"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#MaxConcurrency": {
             "type": "string",
             "traits": {
@@ -20210,6 +20797,465 @@
         },
         "com.amazonaws.ssm#NextToken": {
             "type": "string"
+        },
+        "com.amazonaws.ssm#Node": {
+            "type": "structure",
+            "members": {
+                "CaptureTime": {
+                    "target": "com.amazonaws.ssm#NodeCaptureTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC timestamp for when the managed node data was last captured.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.ssm#NodeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the managed node.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.ssm#NodeOwnerInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the ownership of the managed node.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.ssm#NodeRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that a managed node was created in or assigned to.</p>"
+                    }
+                },
+                "NodeType": {
+                    "target": "com.amazonaws.ssm#NodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the type of node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an individual managed node.</p>"
+            }
+        },
+        "com.amazonaws.ssm#NodeAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.ssm#NodeAggregator": {
+            "type": "structure",
+            "members": {
+                "AggregatorType": {
+                    "target": "com.amazonaws.ssm#NodeAggregatorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregator type for limiting a node summary. Currently, only <code>Count</code> is\n   supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.ssm#NodeTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type name to use for viewing counts of nodes. Currently, only <code>Instance</code>\n   is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeName": {
+                    "target": "com.amazonaws.ssm#NodeAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a node attribute on which to limit the count of nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Aggregators": {
+                    "target": "com.amazonaws.ssm#NodeAggregatorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about aggregators used to refine a node summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more aggregators for viewing counts of nodes using different\n   dimensions.</p>"
+            }
+        },
+        "com.amazonaws.ssm#NodeAggregatorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#NodeAggregator",
+                "traits": {
+                    "smithy.api#xmlName": "NodeAggregator"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeAggregatorType": {
+            "type": "enum",
+            "members": {
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeAttributeName": {
+            "type": "enum",
+            "members": {
+                "AGENT_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AgentVersion"
+                    }
+                },
+                "PLATFORM_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformName"
+                    }
+                },
+                "PLATFORM_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformType"
+                    }
+                },
+                "PLATFORM_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformVersion"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeCaptureTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.ssm#NodeFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ssm#NodeFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.ssm#NodeFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter value supported by the specified key. For example, for the key\n    <code>PlatformType</code>, supported values include <code>Linux</code> and\n   <code>Windows</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssm#NodeFilterOperatorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of filter operator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters for the operation.</p>"
+            }
+        },
+        "com.amazonaws.ssm#NodeFilterKey": {
+            "type": "enum",
+            "members": {
+                "AGENT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AgentType"
+                    }
+                },
+                "AGENT_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AgentVersion"
+                    }
+                },
+                "COMPUTER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ComputerName"
+                    }
+                },
+                "INSTANCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceId"
+                    }
+                },
+                "INSTANCE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceStatus"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IpAddress"
+                    }
+                },
+                "MANAGED_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManagedStatus"
+                    }
+                },
+                "PLATFORM_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformName"
+                    }
+                },
+                "PLATFORM_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformType"
+                    }
+                },
+                "PLATFORM_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformVersion"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                },
+                "ORGANIZATIONAL_UNIT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OrganizationalUnitId"
+                    }
+                },
+                "ORGANIZATIONAL_UNIT_PATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OrganizationalUnitPath"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                },
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#NodeFilter",
+                "traits": {
+                    "smithy.api#xmlName": "NodeFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeFilterOperatorType": {
+            "type": "enum",
+            "members": {
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Equal"
+                    }
+                },
+                "NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEqual"
+                    }
+                },
+                "BEGIN_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BeginWith"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.ssm#NodeFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#NodeFilterValue",
+                "traits": {
+                    "smithy.api#xmlName": "FilterValue"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)$"
+            }
+        },
+        "com.amazonaws.ssm#NodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#Node"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeOrganizationalUnitId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 68
+                },
+                "smithy.api#pattern": "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$"
+            }
+        },
+        "com.amazonaws.ssm#NodeOrganizationalUnitPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeOwnerInfo": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.ssm#NodeAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the managed node.</p>"
+                    }
+                },
+                "OrganizationalUnitId": {
+                    "target": "com.amazonaws.ssm#NodeOrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organization unit (OU) that the account is part of.</p>"
+                    }
+                },
+                "OrganizationalUnitPath": {
+                    "target": "com.amazonaws.ssm#NodeOrganizationalUnitPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path for the organizational unit (OU) that owns the managed node. The path for the OU is\n   built using the IDs of the organization, root, and all OUs in the path down to and including the\n   OU. For example:</p>\n         <p>\n            <code>o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-ghi0-awsccccc/ou-jkl0-awsddddd/</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about ownership of a managed node.</p>"
+            }
+        },
+        "com.amazonaws.ssm#NodeRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeSummary": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssm#AttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.ssm#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#NodeSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssm#NodeType": {
+            "type": "union",
+            "members": {
+                "Instance": {
+                    "target": "com.amazonaws.ssm#InstanceInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a specific managed node.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a managed node's type.</p>"
+            }
+        },
+        "com.amazonaws.ssm#NodeTypeName": {
+            "type": "enum",
+            "members": {
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Instance"
+                    }
+                }
+            }
         },
         "com.amazonaws.ssm#NonCompliantSummary": {
             "type": "structure",
@@ -22666,7 +23712,7 @@
                 "ARN": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The (ARN) of the last user to update the parameter.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parameter.</p>"
                     }
                 },
                 "Type": {
@@ -24832,6 +25878,18 @@
         "com.amazonaws.ssm#Region": {
             "type": "string"
         },
+        "com.amazonaws.ssm#RegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#Region"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.ssm#Regions": {
             "type": "list",
             "member": {
@@ -25407,7 +26465,7 @@
                 "SettingId": {
                     "target": "com.amazonaws.ssm#ServiceSettingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of\n   the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of\n   the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/appmanager/appmanager-enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>/ssm/automation/enable-adaptive-concurrency</p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -27761,6 +28819,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ssm#StartExecutionPreview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#StartExecutionPreviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#StartExecutionPreviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates the process of creating a preview showing the effects that running a specified\n   Automation runbook would have on the targeted resources.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "StartExecutionPreview",
+                        "documentation": "This example illustrates one usage of StartExecutionPreview",
+                        "input": {
+                            "DocumentName": "AWS-StartEC2Instance"
+                        },
+                        "output": {
+                            "ExecutionPreviewId": "2f27d6e5-9676-4708-b8bd-aef0ab47bb26"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#StartExecutionPreviewRequest": {
+            "type": "structure",
+            "members": {
+                "DocumentName": {
+                    "target": "com.amazonaws.ssm#DocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Automation runbook to run. The result of the execution preview indicates\n   what the impact would be of running this runbook.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Automation runbook to run. The default value is\n   <code>$DEFAULT</code>.</p>"
+                    }
+                },
+                "ExecutionInputs": {
+                    "target": "com.amazonaws.ssm#ExecutionInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the inputs that can be specified for the preview operation.\n   </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#StartExecutionPreviewResponse": {
+            "type": "structure",
+            "members": {
+                "ExecutionPreviewId": {
+                    "target": "com.amazonaws.ssm#ExecutionPreviewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the execution preview generated by the system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ssm#StartSession": {
             "type": "operation",
             "input": {
@@ -28161,6 +29292,15 @@
                 "target": "com.amazonaws.ssm#StepExecution"
             }
         },
+        "com.amazonaws.ssm#StepPreviewMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssm#ImpactType"
+            },
+            "value": {
+                "target": "com.amazonaws.ssm#Integer"
+            }
+        },
         "com.amazonaws.ssm#StopAutomationExecution": {
             "type": "operation",
             "input": {
@@ -28538,6 +29678,39 @@
                 "target": "com.amazonaws.ssm#ParameterValue"
             }
         },
+        "com.amazonaws.ssm#TargetPreview": {
+            "type": "structure",
+            "members": {
+                "Count": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of resources of a certain type included in an execution preview.</p>"
+                    }
+                },
+                "TargetType": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A type of resource that was included in the execution preview.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the resources that would be included in the actual runbook execution, if\n   it were to be run.</p>"
+            }
+        },
+        "com.amazonaws.ssm#TargetPreviewList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#TargetPreview"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.ssm#TargetType": {
             "type": "string",
             "traits": {
@@ -28851,6 +30024,22 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The operating systems you specified isn't supported, or the operation isn't supported for\n   the operating system.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#UnsupportedOperationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnsupportedOperation",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This operation is not supported for the current account. You must first enable the Systems Manager integrated experience in your account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -30243,7 +31432,7 @@
                 "GlobalFilters": {
                     "target": "com.amazonaws.ssm#PatchFilterGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of global filters used to include patches in the baseline.</p>"
+                        "smithy.api#documentation": "<p>A set of global filters used to include patches in the baseline.</p>\n         <important>\n            <p>The <code>GlobalFilters</code> parameter can be configured only by using the CLI or an Amazon Web Services SDK. It can't be configured from the Patch Manager\n    console, and its value isn't displayed in the console.</p>\n         </important>"
                     }
                 },
                 "ApprovalRules": {
@@ -30491,14 +31680,14 @@
                 "SettingId": {
                     "target": "com.amazonaws.ssm#ServiceSettingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service setting to update. For example,\n    <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.\n   The setting ID can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Permissions to update the\n     <code>/ssm/managed-instance/default-ec2-instance-management-role</code> setting should only be\n    provided to administrators. Implement least privilege access when allowing individuals to\n    configure or modify the Default Host Management Configuration.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service setting to update. For example,\n    <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.\n   The setting ID can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/appmanager/appmanager-enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>/ssm/automation/enable-adaptive-concurrency</p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Permissions to update the\n     <code>/ssm/managed-instance/default-ec2-instance-management-role</code> setting should only be\n    provided to administrators. Implement least privilege access when allowing individuals to\n    configure or modify the Default Host Management Configuration.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "SettingValue": {
                     "target": "com.amazonaws.ssm#ServiceSettingValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new value to specify for the service setting. The following list specifies the available\n   values for each setting.</p>\n         <ul>\n            <li>\n               <p>For <code>/ssm/managed-instance/default-ec2-instance-management-role</code>, enter the\n     name of an IAM role. </p>\n            </li>\n            <li>\n               <p>For <code>/ssm/automation/customer-script-log-destination</code>, enter <code>CloudWatch</code>.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/automation/customer-script-log-group-name</code>, enter the name of an\n      Amazon CloudWatch Logs log group.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/documents/console/public-sharing-permission</code>, enter\n      <code>Enable</code> or <code>Disable</code>.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/managed-instance/activation-tier</code>, enter <code>standard</code> or\n      <code>advanced</code>.</p>\n            </li>\n            <li>\n               <p> For <code>/ssm/opsinsights/opscenter</code>, enter <code>Enabled</code> or\n      <code>Disabled</code>. </p>\n            </li>\n            <li>\n               <p>For <code>/ssm/parameter-store/default-parameter-tier</code>, enter <code>Standard</code>,\n      <code>Advanced</code>, or <code>Intelligent-Tiering</code>\n               </p>\n            </li>\n            <li>\n               <p>For <code>/ssm/parameter-store/high-throughput-enabled</code>, enter <code>true</code> or\n      <code>false</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The new value to specify for the service setting. The following list specifies the available\n   values for each setting.</p>\n         <ul>\n            <li>\n               <p>For <code>/ssm/appmanager/appmanager-enabled</code>, enter <code>True</code> or\n      <code>False</code>.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/automation/customer-script-log-destination</code>, enter <code>CloudWatch</code>.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/automation/customer-script-log-group-name</code>, enter the name of an\n      Amazon CloudWatch Logs log group.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/documents/console/public-sharing-permission</code>, enter\n      <code>Enable</code> or <code>Disable</code>.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/managed-instance/activation-tier</code>, enter <code>standard</code> or\n      <code>advanced</code>.</p>\n            </li>\n            <li>\n               <p>For <code>/ssm/managed-instance/default-ec2-instance-management-role</code>, enter the\n     name of an IAM role. </p>\n            </li>\n            <li>\n               <p> For <code>/ssm/opsinsights/opscenter</code>, enter <code>Enabled</code> or\n      <code>Disabled</code>. </p>\n            </li>\n            <li>\n               <p>For <code>/ssm/parameter-store/default-parameter-tier</code>, enter <code>Standard</code>,\n      <code>Advanced</code>, or <code>Intelligent-Tiering</code>\n               </p>\n            </li>\n            <li>\n               <p>For <code>/ssm/parameter-store/high-throughput-enabled</code>, enter <code>true</code> or\n      <code>false</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30532,6 +31721,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ssm#ValidNextStep"
+            }
+        },
+        "com.amazonaws.ssm#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                },
+                "ReasonCode": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason code for the invalid request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request isn't valid. Verify that you entered valid contents for the command and try\n   again.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ssm#Version": {

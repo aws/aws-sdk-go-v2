@@ -6,6 +6,42 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Details about the analysis.
+type AnalysisDetails struct {
+
+	// Details about the Savings Plans purchase analysis.
+	SavingsPlansPurchaseAnalysisDetails *SavingsPlansPurchaseAnalysisDetails
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the analysis.
+type AnalysisSummary struct {
+
+	// The completion time of the analysis.
+	AnalysisCompletionTime *string
+
+	// The analysis ID that's associated with the commitment purchase.
+	AnalysisId *string
+
+	// The start time of the analysis.
+	AnalysisStartedTime *string
+
+	// The status of the analysis.
+	AnalysisStatus AnalysisStatus
+
+	// The analysis configuration for the commitment purchase analysis.
+	CommitmentPurchaseAnalysisConfiguration *CommitmentPurchaseAnalysisConfiguration
+
+	// The error code used for the analysis.
+	ErrorCode ErrorCode
+
+	// The estimated time for when the analysis will complete.
+	EstimatedCompletionTime *string
+
+	noSmithyDocumentSerde
+}
+
 // An unusual cost pattern. This consists of the detailed metadata and the current
 // status of the anomaly object.
 type Anomaly struct {
@@ -37,7 +73,7 @@ type Anomaly struct {
 	// The first day the anomaly is detected.
 	AnomalyStartDate *string
 
-	// The dimension for the anomaly (for example, an Amazon Web Servicesservice in a
+	// The dimension for the anomaly (for example, an Amazon Web Services service in a
 	// service monitor).
 	DimensionValue *string
 
@@ -299,6 +335,15 @@ type AnomalySubscription struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the commitment purchase analysis.
+type CommitmentPurchaseAnalysisConfiguration struct {
+
+	// The configuration for the Savings Plans purchase analysis.
+	SavingsPlansPurchaseAnalysisConfiguration *SavingsPlansPurchaseAnalysisConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The cost allocation tag structure. This includes detailed metadata for the
 // CostAllocationTag object.
 type CostAllocationTag struct {
@@ -500,7 +545,8 @@ type CostCategoryRule struct {
 	// An [Expression] object used to categorize costs. This supports dimensions, tags, and nested
 	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT ,
 	//
-	// SERVICE_CODE , RECORD_TYPE , LINKED_ACCOUNT_NAME , REGION , and USAGE_TYPE .
+	// SERVICE_CODE , RECORD_TYPE , LINKED_ACCOUNT_NAME , REGION , USAGE_TYPE , and
+	// BILLING_ENTITY .
 	//
 	// RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported
 	// for Cost Category expressions. This dimension uses different terms, depending on
@@ -1913,7 +1959,7 @@ type RightsizingRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The combination of Amazon Web Servicesservice, linked account, linked account
+// The combination of Amazon Web Services service, linked account, linked account
 // name, Region, and usage type where a cost anomaly is observed. The linked
 // account name will only be available when the account name can be identified.
 type RootCause struct {
@@ -1927,11 +1973,38 @@ type RootCause struct {
 	// The Amazon Web Services Region that's associated with the cost anomaly.
 	Region *string
 
-	// The Amazon Web Servicesservice name that's associated with the cost anomaly.
+	// The Amazon Web Services service name that's associated with the cost anomaly.
 	Service *string
 
 	// The UsageType value that's associated with the cost anomaly.
 	UsageType *string
+
+	noSmithyDocumentSerde
+}
+
+// The Savings Plans commitment details.
+type SavingsPlans struct {
+
+	// The instance family of the Savings Plans commitment.
+	InstanceFamily *string
+
+	// The unique ID that's used to distinguish commitments from one another.
+	OfferingId *string
+
+	// The payment option for the Savings Plans commitment.
+	PaymentOption PaymentOption
+
+	// The Region associated with the Savings Plans commitment.
+	Region *string
+
+	// The Savings Plans commitment.
+	SavingsPlansCommitment *float64
+
+	// The Savings Plans type.
+	SavingsPlansType SupportedSavingsPlansType
+
+	// The term that you want the Savings Plans commitment for.
+	TermInYears TermInYears
 
 	noSmithyDocumentSerde
 }
@@ -2004,6 +2077,116 @@ type SavingsPlansDetails struct {
 	// A collection of Amazon Web Services resources in a geographic area. Each Amazon
 	// Web Services Region is isolated and independent of the other Regions.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the Savings Plans purchase analysis.
+type SavingsPlansPurchaseAnalysisConfiguration struct {
+
+	// The type of analysis.
+	//
+	// This member is required.
+	AnalysisType AnalysisType
+
+	// The time period associated with the analysis.
+	//
+	// This member is required.
+	LookBackTimePeriod *DateInterval
+
+	// Savings Plans to include in the analysis.
+	//
+	// This member is required.
+	SavingsPlansToAdd []SavingsPlans
+
+	// The account that the analysis is for.
+	AccountId *string
+
+	// The account scope that you want your analysis for.
+	AccountScope AccountScope
+
+	// Savings Plans to exclude from the analysis.
+	SavingsPlansToExclude []string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the Savings Plans purchase analysis.
+type SavingsPlansPurchaseAnalysisDetails struct {
+
+	// Additional metadata that might be applicable to the commitment.
+	AdditionalMetadata *string
+
+	// The currency code used for the analysis.
+	CurrencyCode *string
+
+	// The average value of hourly coverage over the lookback period.
+	CurrentAverageCoverage *string
+
+	// The average value of hourly On-Demand spend over the lookback period.
+	CurrentAverageHourlyOnDemandSpend *string
+
+	// The highest value of hourly On-Demand spend over the lookback period.
+	CurrentMaximumHourlyOnDemandSpend *string
+
+	// The lowest value of hourly On-Demand spend over the lookback period.
+	CurrentMinimumHourlyOnDemandSpend *string
+
+	// The current total On-Demand spend over the lookback period.
+	CurrentOnDemandSpend *string
+
+	// The estimated coverage of the Savings Plan.
+	EstimatedAverageCoverage *string
+
+	// The estimated utilization of the Savings Plan.
+	EstimatedAverageUtilization *string
+
+	// The estimated cost of the purchase commitment over the length of the lookback
+	// period.
+	EstimatedCommitmentCost *string
+
+	// The estimated monthly savings amount based on the Savings Plan.
+	EstimatedMonthlySavingsAmount *string
+
+	// The remaining On-Demand cost estimated to not be covered by the commitment,
+	// over the length of the lookback period.
+	EstimatedOnDemandCost *string
+
+	// The estimated On-Demand cost you expect with no additional commitment, based on
+	// your usage of the selected time period and the Savings Plan you own.
+	EstimatedOnDemandCostWithCurrentCommitment *string
+
+	// The estimated return on investment that's based on the purchase commitment and
+	// estimated savings. This is calculated as
+	// estimatedSavingsAmount/estimatedSPCost*100.
+	EstimatedROI *string
+
+	// The estimated savings amount that's based on the purchase commitment over the
+	// length of the lookback period.
+	EstimatedSavingsAmount *string
+
+	// The estimated savings percentage relative to the total cost over the cost
+	// calculation lookback period.
+	EstimatedSavingsPercentage *string
+
+	// The existing hourly commitment for the Savings Plan type.
+	ExistingHourlyCommitment *string
+
+	// The recommended or custom hourly commitment.
+	HourlyCommitmentToPurchase *string
+
+	// The date and time of the last hour that went into the analysis.
+	LatestUsageTimestamp *string
+
+	// The lookback period in hours that's used to generate the analysis.
+	LookbackPeriodInHours *string
+
+	// The related hourly cost, coverage, and utilization metrics over the lookback
+	// period.
+	MetricsOverLookbackPeriod []RecommendationDetailHourlyMetrics
+
+	// The upfront cost of the Savings Plan, based on the selected payment option.
+	UpfrontCost *string
 
 	noSmithyDocumentSerde
 }

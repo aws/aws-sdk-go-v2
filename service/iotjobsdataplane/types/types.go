@@ -6,11 +6,43 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The list of values used to describe a specific command parameter.
+type CommandParameterValue struct {
+
+	// An attribute of type Boolean. For example:
+	//
+	//     "BOOL": true
+	B *bool
+
+	// An attribute of type Binary.
+	BIN []byte
+
+	// An attribute of type Double (Sixty-Four Bits).
+	D *float64
+
+	// An attribute of type Integer (Thirty-Two Bits).
+	I *int32
+
+	// An attribute of type Long.
+	L *int64
+
+	// An attribute of type String. For example:
+	//
+	//     "S": "Hello"
+	S *string
+
+	// An attribute of type Unsigned Long.
+	UL *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains data about a job execution.
 type JobExecution struct {
 
 	// The estimated number of seconds that remain before the job execution status
-	// will be changed to TIMED_OUT .
+	// will be changed to TIMED_OUT . The actual job execution timeout can occur up to
+	// 60 seconds later than the estimated duration.
 	ApproximateSecondsBeforeTimedOut *int64
 
 	// A number that identifies a particular job execution on a particular device. It
@@ -23,21 +55,22 @@ type JobExecution struct {
 	// The unique identifier you assigned to this job when it was created.
 	JobId *string
 
-	// The time, in milliseconds since the epoch, when the job execution was last
-	// updated.
+	// The time, in seconds since the epoch, when the job execution was last updated.
 	LastUpdatedAt int64
 
-	// The time, in milliseconds since the epoch, when the job execution was enqueued.
+	// The time, in seconds since the epoch, when the job execution was enqueued.
 	QueuedAt int64
 
-	// The time, in milliseconds since the epoch, when the job execution was started.
+	// The time, in seconds since the epoch, when the job execution was started.
 	StartedAt *int64
 
 	// The status of the job execution. Can be one of: "QUEUED", "IN_PROGRESS",
-	// "FAILED", "SUCCESS", "CANCELED", "REJECTED", or "REMOVED".
+	// "FAILED", "SUCCESS", "CANCELED", "TIMED_OUT", "REJECTED", or "REMOVED".
 	Status JobExecutionStatus
 
 	// A collection of name/value pairs that describe the status of the job execution.
+	//
+	// The maximum length of the value in the name/value pair is 1,024 characters.
 	StatusDetails map[string]string
 
 	// The name of the thing that is executing the job.
@@ -54,10 +87,12 @@ type JobExecution struct {
 type JobExecutionState struct {
 
 	// The status of the job execution. Can be one of: "QUEUED", "IN_PROGRESS",
-	// "FAILED", "SUCCESS", "CANCELED", "REJECTED", or "REMOVED".
+	// "FAILED", "SUCCESS", "CANCELED", "TIMED_OUT", "REJECTED", or "REMOVED".
 	Status JobExecutionStatus
 
 	// A collection of name/value pairs that describe the status of the job execution.
+	//
+	// The maximum length of the value in the name/value pair is 1,024 characters.
 	StatusDetails map[string]string
 
 	// The version of the job execution. Job execution versions are incremented each
@@ -76,18 +111,17 @@ type JobExecutionSummary struct {
 	// The unique identifier you assigned to this job when it was created.
 	JobId *string
 
-	// The time, in milliseconds since the epoch, when the job execution was last
-	// updated.
+	// The time, in seconds since the epoch, when the job execution was last updated.
 	LastUpdatedAt int64
 
-	// The time, in milliseconds since the epoch, when the job execution was enqueued.
+	// The time, in seconds since the epoch, when the job execution was enqueued.
 	QueuedAt int64
 
-	// The time, in milliseconds since the epoch, when the job execution started.
+	// The time, in seconds since the epoch, when the job execution started.
 	StartedAt *int64
 
 	// The version of the job execution. Job execution versions are incremented each
-	// time AWS IoT Jobs receives an update from a device.
+	// time IoT Jobs receives an update from a device.
 	VersionNumber int64
 
 	noSmithyDocumentSerde

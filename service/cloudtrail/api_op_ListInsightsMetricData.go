@@ -71,7 +71,7 @@ type ListInsightsMetricDataInput struct {
 	// This member is required.
 	InsightType types.InsightType
 
-	// Type of datapoints to return. Valid values are NonZeroData and FillWithZeros .
+	// Type of data points to return. Valid values are NonZeroData and FillWithZeros .
 	// The default is NonZeroData .
 	DataType types.InsightsMetricDataType
 
@@ -88,8 +88,8 @@ type ListInsightsMetricDataInput struct {
 	// error to retrieve data for. For example, AccessDenied .
 	ErrorCode *string
 
-	// The maximum number of datapoints to return. Valid values are integers from 1 to
-	// 21600. The default value is 21600.
+	// The maximum number of data points to return. Valid values are integers from 1
+	// to 21600. The default value is 21600.
 	MaxResults *int32
 
 	// Returned if all datapoints can't be returned in a single call. For example, due
@@ -257,8 +257,8 @@ func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware
 // ListInsightsMetricDataPaginatorOptions is the paginator options for
 // ListInsightsMetricData
 type ListInsightsMetricDataPaginatorOptions struct {
-	// The maximum number of datapoints to return. Valid values are integers from 1 to
-	// 21600. The default value is 21600.
+	// The maximum number of data points to return. Valid values are integers from 1
+	// to 21600. The default value is 21600.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

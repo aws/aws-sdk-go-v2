@@ -32,14 +32,11 @@ import (
 //
 // [Amazon DocumentDB]
 //
-// The following error handling options are available only for stream sources
-// (DynamoDB and Kinesis):
+// The following error handling options are available only for DynamoDB and
+// Kinesis event sources:
 //
 //   - BisectBatchOnFunctionError – If the function returns an error, split the
 //     batch in two and retry.
-//
-//   - DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon
-//     SNS topic.
 //
 //   - MaximumRecordAgeInSeconds – Discard records older than the specified age.
 //     The default value is infinite (-1). When set to infinite (-1), failed records
@@ -51,6 +48,12 @@ import (
 //
 //   - ParallelizationFactor – Process multiple batches from each shard
 //     concurrently.
+//
+// For stream sources (DynamoDB, Kinesis, Amazon MSK, and self-managed Apache
+// Kafka), the following option is also available:
+//
+//   - DestinationConfig – Send discarded records to an Amazon SQS queue, Amazon
+//     SNS topic, or Amazon S3 bucket.
 //
 // For information about which configuration parameters apply to each event
 // source, see the following topics.
@@ -217,6 +220,11 @@ type CreateEventSourceMappingInput struct {
 	// failed records are retried until the record expires.
 	MaximumRetryAttempts *int32
 
+	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].
+	//
+	// [Event source mapping metrics]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
+	MetricsConfig *types.EventSourceMappingMetricsConfig
+
 	// (Kinesis and DynamoDB Streams only) The number of batches to process from each
 	// shard concurrently.
 	ParallelizationFactor *int32
@@ -367,6 +375,11 @@ type CreateEventSourceMappingOutput struct {
 	// infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records
 	// until the record expires in the event source.
 	MaximumRetryAttempts *int32
+
+	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].
+	//
+	// [Event source mapping metrics]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics
+	MetricsConfig *types.EventSourceMappingMetricsConfig
 
 	// (Kinesis and DynamoDB Streams only) The number of batches to process
 	// concurrently from each shard. The default value is 1.

@@ -1,3 +1,7 @@
+# v1.68.0 (2024-11-21)
+
+* **Feature**: Adds support for metrics for event source mappings for AWS Lambda
+
 # v1.67.0 (2024-11-20)
 
 * **Feature**: Add Node 22.x (node22.x) support to AWS Lambda

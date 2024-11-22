@@ -14,6 +14,9 @@ import (
 //	Creates a decoder manifest using your existing CAN DBC file from your local
 //
 // device.
+//
+// The CAN signal name must be unique and not repeated across CAN message
+// definitions in a .dbc file.
 func (c *Client) ImportDecoderManifest(ctx context.Context, params *ImportDecoderManifestInput, optFns ...func(*Options)) (*ImportDecoderManifestOutput, error) {
 	if params == nil {
 		params = &ImportDecoderManifestInput{}

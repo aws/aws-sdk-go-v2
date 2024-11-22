@@ -30,6 +30,26 @@ func (m *validateOpBatchGetTraces) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelTraceRetrieval struct {
+}
+
+func (*validateOpCancelTraceRetrieval) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelTraceRetrieval) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelTraceRetrievalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelTraceRetrievalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGroup struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpGetInsightSummaries) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRetrievedTracesGraph struct {
+}
+
+func (*validateOpGetRetrievedTracesGraph) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRetrievedTracesGraph) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRetrievedTracesGraphInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRetrievedTracesGraphInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSamplingTargets struct {
 }
 
@@ -265,6 +305,26 @@ func (m *validateOpGetTraceSummaries) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTraceSummariesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRetrievedTraces struct {
+}
+
+func (*validateOpListRetrievedTraces) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRetrievedTraces) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRetrievedTracesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRetrievedTracesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +430,26 @@ func (m *validateOpPutTraceSegments) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartTraceRetrieval struct {
+}
+
+func (*validateOpStartTraceRetrieval) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTraceRetrieval) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTraceRetrievalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTraceRetrievalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -410,6 +490,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIndexingRule struct {
+}
+
+func (*validateOpUpdateIndexingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIndexingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIndexingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIndexingRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSamplingRule struct {
 }
 
@@ -432,6 +532,10 @@ func (m *validateOpUpdateSamplingRule) HandleInitialize(ctx context.Context, in 
 
 func addOpBatchGetTracesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetTraces{}, middleware.After)
+}
+
+func addOpCancelTraceRetrievalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelTraceRetrieval{}, middleware.After)
 }
 
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -462,6 +566,10 @@ func addOpGetInsightSummariesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetInsightSummaries{}, middleware.After)
 }
 
+func addOpGetRetrievedTracesGraphValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRetrievedTracesGraph{}, middleware.After)
+}
+
 func addOpGetSamplingTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSamplingTargets{}, middleware.After)
 }
@@ -480,6 +588,10 @@ func addOpGetTraceGraphValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTraceSummariesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTraceSummaries{}, middleware.After)
+}
+
+func addOpListRetrievedTracesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRetrievedTraces{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -502,6 +614,10 @@ func addOpPutTraceSegmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTraceSegments{}, middleware.After)
 }
 
+func addOpStartTraceRetrievalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTraceRetrieval{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -510,8 +626,46 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateIndexingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIndexingRule{}, middleware.After)
+}
+
 func addOpUpdateSamplingRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSamplingRule{}, middleware.After)
+}
+
+func validateIndexingRuleValueUpdate(v types.IndexingRuleValueUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IndexingRuleValueUpdate"}
+	switch uv := v.(type) {
+	case *types.IndexingRuleValueUpdateMemberProbabilistic:
+		if err := validateProbabilisticRuleValueUpdate(&uv.Value); err != nil {
+			invalidParams.AddNested("[Probabilistic]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProbabilisticRuleValueUpdate(v *types.ProbabilisticRuleValueUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProbabilisticRuleValueUpdate"}
+	if v.DesiredSamplingPercentage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DesiredSamplingPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateSamplingRule(v *types.SamplingRule) error {
@@ -670,6 +824,21 @@ func validateOpBatchGetTracesInput(v *BatchGetTracesInput) error {
 	}
 }
 
+func validateOpCancelTraceRetrievalInput(v *CancelTraceRetrievalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelTraceRetrievalInput"}
+	if v.RetrievalToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGroupInput(v *CreateGroupInput) error {
 	if v == nil {
 		return nil
@@ -798,6 +967,21 @@ func validateOpGetInsightSummariesInput(v *GetInsightSummariesInput) error {
 	}
 }
 
+func validateOpGetRetrievedTracesGraphInput(v *GetRetrievedTracesGraphInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRetrievedTracesGraphInput"}
+	if v.RetrievalToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSamplingTargetsInput(v *GetSamplingTargetsInput) error {
 	if v == nil {
 		return nil
@@ -878,6 +1062,21 @@ func validateOpGetTraceSummariesInput(v *GetTraceSummariesInput) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRetrievedTracesInput(v *ListRetrievedTracesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRetrievedTracesInput"}
+	if v.RetrievalToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetrievalToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -968,6 +1167,27 @@ func validateOpPutTraceSegmentsInput(v *PutTraceSegmentsInput) error {
 	}
 }
 
+func validateOpStartTraceRetrievalInput(v *StartTraceRetrievalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTraceRetrievalInput"}
+	if v.TraceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TraceIds"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -1000,6 +1220,28 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIndexingRuleInput(v *UpdateIndexingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIndexingRuleInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Rule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
+	} else if v.Rule != nil {
+		if err := validateIndexingRuleValueUpdate(v.Rule); err != nil {
+			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -198,7 +198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an\n         existing tag's value when a new value is specified for an existing tag key. Tag key names\n         must be unique; you cannot have two keys with the same name but different\n         values. If you specify a key without a value, the tag will be created with the specified\n         key and a value of null. You can tag a trail or event data store that applies to all\n            Amazon Web Services Regions only from the Region in which the trail or event data store\n         was created (also known as its home Region).</p>",
+                "smithy.api#documentation": "<p>Adds one or more tags to a trail, event data store, dashboard, or channel, up to a limit of 50. Overwrites an\n         existing tag's value when a new value is specified for an existing tag key. Tag key names\n         must be unique; you cannot have two keys with the same name but different\n         values. If you specify a key without a value, the tag will be created with the specified\n         key and a value of null. You can tag a trail or event data store that applies to all\n            Amazon Web Services Regions only from the Region in which the trail or event data store\n         was created (also known as its home Region).</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -208,7 +208,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail, event data store, or channel to which one or more tags will be\n         added.</p>\n         <p>The format of a trail ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>The format of an event data store ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>The format of a channel ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail, event data store, dashboard, or channel to which one or more tags will be\n         added.</p>\n         <p>The format of a trail ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>The format of an event data store ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>The format of a dashboard ARN is: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>The format of a channel ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -221,7 +221,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the tags to add to a trail, event data store, or channel.</p>",
+                "smithy.api#documentation": "<p>Specifies the tags to add to a trail, event data store, dashboard, or channel.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -408,6 +408,12 @@
                         "smithy.api#documentation": "<p>The ID of the query that you want to cancel. The <code>QueryId</code> comes from the\n         response of a <code>StartQuery</code> operation.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe account ID of the event data store owner.\n</p>"
+                    }
                 }
             },
             "traits": {
@@ -429,6 +435,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Shows the status of a query after a <code>CancelQuery</code> request. Typically, the\n         values shown are either <code>RUNNING</code> or <code>CANCELLED</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The account ID of the event data store owner.\n</p>"
                     }
                 }
             },
@@ -617,7 +629,7 @@
                     "code": "CloudTrailARNInvalid",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when an operation is called with an ARN that is not valid.</p>\n         <p>The following is the format of a trail ARN: <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>The following is the format of an event data store ARN:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>The following is the format of a channel ARN:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
+                "smithy.api#documentation": "<p>This exception is thrown when an operation is called with an ARN that is not valid.</p>\n         <p>The following is the format of a trail ARN: <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>The following is the format of an event data store ARN:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>The following is the format of a dashboard ARN: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>The following is the format of a channel ARN:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -676,6 +688,9 @@
                     "target": "com.amazonaws.cloudtrail#CreateChannel"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#CreateDashboard"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#CreateEventDataStore"
                 },
                 {
@@ -683,6 +698,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#DeleteChannel"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#DeleteDashboard"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#DeleteEventDataStore"
@@ -715,6 +733,9 @@
                     "target": "com.amazonaws.cloudtrail#GetChannel"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#GetDashboard"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#GetEventDataStore"
                 },
                 {
@@ -740,6 +761,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#ListChannels"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ListDashboards"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#ListEventDataStores"
@@ -787,6 +811,9 @@
                     "target": "com.amazonaws.cloudtrail#RestoreEventDataStore"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#StartDashboardRefresh"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#StartEventDataStoreIngestion"
                 },
                 {
@@ -809,6 +836,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#UpdateChannel"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UpdateDashboard"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#UpdateEventDataStore"
@@ -2043,6 +2073,128 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudtrail#CreateDashboard": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#CreateDashboardRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#CreateDashboardResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidQueryStatementException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidTagParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a custom dashboard or the Highlights dashboard.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Custom dashboards</b> - Custom dashboards allow you to query \n            events in any event data store type. You can add up to 10 widgets to a custom dashboard. You can manually refresh a custom dashboard, or you can set a refresh schedule.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Highlights dashboard</b> - You can create\n            the Highlights dashboard to see a summary of key user activities and API usage across all your event data stores. \n            CloudTrail Lake manages the Highlights dashboard and refreshes the dashboard every 6 hours. To create the Highlights dashboard, you must set and enable a refresh schedule.</p>\n            </li>\n         </ul>\n         <p>\n      CloudTrail runs queries to populate the dashboard's widgets during a manual or scheduled refresh. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information, \n      see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard\">Example: Allow CloudTrail to run queries to populate a dashboard</a> in the <i>CloudTrail User Guide</i>.\n   </p>\n         <p>\n      To set a refresh schedule, CloudTrail must be granted permissions to run the <code>StartDashboardRefresh</code> operation to refresh the dashboard on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to the dashboard. For more information, \n      see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards\">\n         Resource-based policy example for a dashboard</a> in the <i>CloudTrail User Guide</i>.\n   </p>\n         <p>For more information about dashboards, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-dashboard.html\">CloudTrail Lake dashboards</a> in the <i>CloudTrail User Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#CreateDashboardRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudtrail#DashboardName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The name of the dashboard. The name must be unique to your account.\n</p>\n         <p>To create the Highlights dashboard, the name must be <code>AWSCloudTrail-Highlights</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RefreshSchedule": {
+                    "target": "com.amazonaws.cloudtrail#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The refresh schedule configuration for the dashboard.\n</p>\n         <p>To create the Highlights dashboard, you must set a refresh schedule and set the <code>Status</code> to <code>ENABLED</code>. The <code>Unit</code> for the refresh schedule must be <code>HOURS</code> \n   and the <code>Value</code> must be <code>6</code>.</p>"
+                    }
+                },
+                "TagsList": {
+                    "target": "com.amazonaws.cloudtrail#TagsList"
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.cloudtrail#TerminationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Specifies whether termination protection is enabled for the dashboard. If termination protection is enabled, you cannot delete the dashboard until termination protection is disabled.\n</p>"
+                    }
+                },
+                "Widgets": {
+                    "target": "com.amazonaws.cloudtrail#RequestWidgetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn array of widgets for a custom dashboard. A custom dashboard can have a maximum of ten widgets.\n</p>\n         <p>You do not need to specify widgets for the Highlights dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#CreateDashboardResponse": {
+            "type": "structure",
+            "members": {
+                "DashboardArn": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN for the dashboard.\n</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudtrail#DashboardName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the dashboard.\n</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#DashboardType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe dashboard type.\n</p>"
+                    }
+                },
+                "Widgets": {
+                    "target": "com.amazonaws.cloudtrail#WidgetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn array of widgets for the dashboard.\n</p>"
+                    }
+                },
+                "TagsList": {
+                    "target": "com.amazonaws.cloudtrail#TagsList"
+                },
+                "RefreshSchedule": {
+                    "target": "com.amazonaws.cloudtrail#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe refresh schedule for the dashboard, if configured.\n</p>"
+                    }
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.cloudtrail#TerminationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Indicates whether termination protection is enabled for the dashboard.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudtrail#CreateEventDataStore": {
             "type": "operation",
             "input": {
@@ -2542,6 +2694,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudtrail#DashboardArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#DashboardDetail": {
+            "type": "structure",
+            "members": {
+                "DashboardArn": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN for the dashboard.\n</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#DashboardType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe type of dashboard.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nProvides information about a CloudTrail Lake dashboard.\n</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#DashboardName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#DashboardStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#DashboardType": {
+            "type": "enum",
+            "members": {
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#Dashboards": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#DashboardDetail"
+            }
+        },
         "com.amazonaws.cloudtrail#DataResource": {
             "type": "structure",
             "members": {
@@ -2645,6 +2891,52 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudtrail#DeleteDashboard": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#DeleteDashboardRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#DeleteDashboardResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes the specified dashboard. You cannot delete a dashboard that has termination protection enabled.\n</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#DeleteDashboardRequest": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name or ARN for the dashboard.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#DeleteDashboardResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudtrail#DeleteEventDataStore": {
             "type": "operation",
             "input": {
@@ -2733,6 +3025,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
@@ -2752,7 +3047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Deletes the resource-based policy attached to the CloudTrail channel.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Deletes the resource-based policy attached to the CloudTrail event data store, dashboard, or channel.\n      </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2762,7 +3057,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cloudtrail#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail channel you're deleting the resource-based policy from. \n         The following is the format of a resource ARN: \n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel</code>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel you're deleting the resource-based policy from.</p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3026,7 +3321,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about a query, including query run time in milliseconds, number of\n         events scanned and matched, and query status. If the query results were delivered to an S3 bucket, \n         the response also provides the S3 URI and the delivery status.</p>\n         <p>You must specify either a <code>QueryID</code> or a <code>QueryAlias</code>. Specifying\n         the <code>QueryAlias</code> parameter returns information about the last query run for the\n         alias.</p>",
+                "smithy.api#documentation": "<p>Returns metadata about a query, including query run time in milliseconds, number of\n         events scanned and matched, and query status. If the query results were delivered to an S3 bucket, \n         the response also provides the S3 URI and the delivery status.</p>\n         <p>You must specify either <code>QueryId</code> or <code>QueryAlias</code>. Specifying the <code>QueryAlias</code> parameter \n         returns information about the last query run for the alias. You can provide \n         <code>RefreshId</code> along with <code>QueryAlias</code> to view the query results \n         of a dashboard query for the specified <code>RefreshId</code>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3052,6 +3347,18 @@
                     "target": "com.amazonaws.cloudtrail#QueryAlias",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The alias that identifies a query template.\n      </p>"
+                    }
+                },
+                "RefreshId": {
+                    "target": "com.amazonaws.cloudtrail#RefreshId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID of the dashboard refresh.\n</p>"
+                    }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe account ID of the event data store owner.\n</p>"
                     }
                 }
             },
@@ -3108,6 +3415,12 @@
                     "target": "com.amazonaws.cloudtrail#Prompt",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The prompt used for a generated query. For information about generated queries, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html\">Create CloudTrail Lake queries from natural language prompts</a> \n         in the <i>CloudTrail </i> user guide.\n      </p>"
+                    }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The account ID of the event data store owner.\n</p>"
                     }
                 }
             },
@@ -4044,6 +4357,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         An alias that identifies the prompt. When you run the <code>StartQuery</code> operation, you can pass in either the <code>QueryAlias</code> or \n         <code>QueryStatement</code> parameter.\n      </p>"
                     }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The account ID of the event data store owner.\n</p>"
+                    }
                 }
             },
             "traits": {
@@ -4149,6 +4468,110 @@
                     "target": "com.amazonaws.cloudtrail#IngestionStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>A table showing information about the most recent successful and failed attempts \n      to ingest events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#GetDashboard": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#GetDashboardRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#GetDashboardResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nReturns the specified dashboard.\n</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#GetDashboardRequest": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name or ARN for the dashboard.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#GetDashboardResponse": {
+            "type": "structure",
+            "members": {
+                "DashboardArn": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The ARN for the dashboard.\n</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#DashboardType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe type of dashboard.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudtrail#DashboardStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status of the dashboard.\n</p>"
+                    }
+                },
+                "Widgets": {
+                    "target": "com.amazonaws.cloudtrail#WidgetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn array of widgets for the dashboard.\n</p>"
+                    }
+                },
+                "RefreshSchedule": {
+                    "target": "com.amazonaws.cloudtrail#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe refresh schedule for the dashboard, if configured.\n</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp that shows when the dashboard was created.\n</p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp that shows when the dashboard was last updated.\n</p>"
+                    }
+                },
+                "LastRefreshId": {
+                    "target": "com.amazonaws.cloudtrail#RefreshId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID of the last dashboard refresh.\n</p>"
+                    }
+                },
+                "LastRefreshFailureReason": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nProvides information about failures for the last scheduled refresh.\n</p>"
+                    }
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.cloudtrail#TerminationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether termination protection is enabled for the dashboard.\n</p>"
                     }
                 }
             },
@@ -4657,6 +5080,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of query results to display on a single page.</p>"
                     }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe account ID of the event data store owner.\n</p>"
+                    }
                 }
             },
             "traits": {
@@ -4730,7 +5159,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Retrieves the JSON text of the resource-based policy document attached to the CloudTrail channel.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Retrieves the JSON text of the resource-based policy document attached to the CloudTrail event data store, dashboard, or channel.\n      </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4740,7 +5169,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cloudtrail#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. \n         The following is the format of a resource ARN: \n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel</code>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.</p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4755,13 +5184,19 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cloudtrail#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail channel attached to resource-based policy. \n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to resource-based policy. \n      </p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>"
                     }
                 },
                 "ResourcePolicy": {
                     "target": "com.amazonaws.cloudtrail#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A JSON-formatted string that contains the resource-based policy attached to the CloudTrail channel.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         A JSON-formatted string that contains the resource-based policy attached to the CloudTrail event data store, dashboard, or channel.\n      </p>"
+                    }
+                },
+                "DelegatedAdminResourcePolicy": {
+                    "target": "com.amazonaws.cloudtrail#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The default resource-based policy that is automatically generated for the delegated administrator of an Organizations organization. \n         This policy will be evaluated in tandem with any policy you submit for the resource. For more information about this policy, \n         see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp\">Default resource policy for delegated administrators</a>.\n      </p>"
                     }
                 }
             },
@@ -4861,7 +5296,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which you are\n         requesting status. To get the status of a shadow trail (a replication of the trail in\n         another Region), you must specify its ARN. The following is the format of a trail\n         ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which you are\n         requesting status. To get the status of a shadow trail (a replication of the trail in\n         another Region), you must specify its ARN.</p>\n         <p>\n         The following is the format of a trail\n         ARN: <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <note>\n            <p>If the trail is an organization trail and you are a member account in the organization in Organizations, you must provide the full ARN of that trail, and not just the name.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5433,7 +5868,7 @@
                     "code": "InsufficientEncryptionPolicy",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when the policy on the S3 bucket or KMS key does\n         not have sufficient permissions for the operation.</p>",
+                "smithy.api#documentation": "<p>For the <code>CreateTrail</code>\n            <code>PutInsightSelectors</code>, <code>UpdateTrail</code>, <code>StartQuery</code>, and <code>StartImport</code> operations, this exception is thrown \n         when the policy on the S3 bucket or KMS key does\n         not have sufficient permissions for the operation.</p>\n         <p>For all other operations, this exception is thrown when the policy for the KMS key does\n         not have sufficient permissions for the operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6140,6 +6575,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudtrail#ListDashboards": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#ListDashboardsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#ListDashboardsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Returns information about all dashboards in the account, in the current Region.\n</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#ListDashboardsMaxResultsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListDashboardsRequest": {
+            "type": "structure",
+            "members": {
+                "NamePrefix": {
+                    "target": "com.amazonaws.cloudtrail#DashboardName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecify a name prefix to filter on.\n</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#DashboardType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecify a dashboard type to filter on: <code>CUSTOM</code> or <code>MANAGED</code>.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A token you can use to get the next page of dashboard results.\n</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudtrail#ListDashboardsMaxResultsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The maximum number of dashboards to display on a single page.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#ListDashboardsResponse": {
+            "type": "structure",
+            "members": {
+                "Dashboards": {
+                    "target": "com.amazonaws.cloudtrail#Dashboards",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Contains information about dashboards in the account, in the current Region that match the applied filters.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   A token you can use to get the next page of dashboard results.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudtrail#ListEventDataStores": {
             "type": "operation",
             "input": {
@@ -6490,13 +7004,13 @@
                 "DataType": {
                     "target": "com.amazonaws.cloudtrail#InsightsMetricDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of datapoints to return. Valid values are <code>NonZeroData</code> and \n         <code>FillWithZeros</code>. The default is <code>NonZeroData</code>.</p>"
+                        "smithy.api#documentation": "<p>Type of data points to return. Valid values are <code>NonZeroData</code> and \n         <code>FillWithZeros</code>. The default is <code>NonZeroData</code>.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.cloudtrail#InsightsMetricMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of datapoints to return. Valid values are integers from 1 to 21600. \n         The default value is 21600.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of data points to return. Valid values are integers from 1 to 21600. \n         The default value is 21600.</p>"
                     }
                 },
                 "NextToken": {
@@ -6814,7 +7328,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for the specified trails, event data stores, or channels in the current Region.</p>",
+                "smithy.api#documentation": "<p>Lists the tags for the specified trails, event data stores, dashboards, or channels in the current Region.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -6829,7 +7343,7 @@
                 "ResourceIdList": {
                     "target": "com.amazonaws.cloudtrail#ResourceIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of trail, event data store, or channel ARNs whose tags will be listed. The list\n         has a limit of 20 ARNs.</p>\n         <p> Example trail ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies a list of trail, event data store, dashboard, or channel ARNs whose tags will be listed. The list\n         has a limit of 20 ARNs.</p>\n         <p> Example trail ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7693,6 +8207,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
@@ -7712,7 +8229,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Attaches a resource-based permission policy to a CloudTrail channel that is used for an integration with an event source outside of Amazon Web Services. For more information about resource-based policies, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html\">CloudTrail resource-based policy examples</a> \n         in the <i>CloudTrail User Guide</i>.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Attaches a resource-based permission policy to a CloudTrail event data store, dashboard, or channel. For more information about resource-based policies, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html\">CloudTrail resource-based policy examples</a> \n         in the <i>CloudTrail User Guide</i>.\n      </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7722,14 +8239,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cloudtrail#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. \n         The following is the format of a resource ARN: \n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel</code>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.</p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourcePolicy": {
                     "target": "com.amazonaws.cloudtrail#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A JSON-formatted string for an Amazon Web Services resource-based policy.\n      </p>\n         <p>The following are requirements for the resource policy:</p>\n         <ul>\n            <li>\n               <p>\n               Contains only one action: cloudtrail-data:PutAuditEvents\n            </p>\n            </li>\n            <li>\n               <p>\n               Contains at least one statement. The policy can have a maximum of 20 statements.\n            </p>\n            </li>\n            <li>\n               <p>\n               Each statement contains at least one principal. A statement can have a maximum of 50 principals.\n            </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n         A JSON-formatted string for an Amazon Web Services resource-based policy.\n      </p>\n         <p> For example resource-based policies, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html\">CloudTrail resource-based policy examples</a> \n         in the <i>CloudTrail User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7744,13 +8261,19 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cloudtrail#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.\n      </p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>"
                     }
                 },
                 "ResourcePolicy": {
                     "target": "com.amazonaws.cloudtrail#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The JSON-formatted string of the Amazon Web Services resource-based policy attached to the CloudTrail channel.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The JSON-formatted string of the Amazon Web Services resource-based policy attached to the CloudTrail event data store, dashboard, or channel.\n      </p>"
+                    }
+                },
+                "DelegatedAdminResourcePolicy": {
+                    "target": "com.amazonaws.cloudtrail#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The default resource-based policy that is automatically generated for the delegated administrator of an Organizations organization. \n         This policy will be evaluated in tandem with any policy you submit for the resource. For more information about this policy, \n         see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp\">Default resource policy for delegated administrators</a>.\n      </p>"
                     }
                 }
             },
@@ -7828,6 +8351,35 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.cloudtrail#QueryParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:$]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#QueryParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#QueryParameterValues": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cloudtrail#QueryParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cloudtrail#QueryParameterValue"
             }
         },
         "com.amazonaws.cloudtrail#QueryParameters": {
@@ -8007,6 +8559,99 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#RefreshId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^\\d+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#RefreshSchedule": {
+            "type": "structure",
+            "members": {
+                "Frequency": {
+                    "target": "com.amazonaws.cloudtrail#RefreshScheduleFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe frequency at which you want the dashboard refreshed.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudtrail#RefreshScheduleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies whether the refresh schedule is enabled. Set the value to <code>ENABLED</code> to enable the refresh schedule, or to <code>DISABLED</code> to turn off the refresh schedule.\n</p>"
+                    }
+                },
+                "TimeOfDay": {
+                    "target": "com.amazonaws.cloudtrail#TimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The time of day in UTC to run the schedule; for hourly only refer to minutes; default is 00:00.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe schedule for a dashboard refresh.\n</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#RefreshScheduleFrequency": {
+            "type": "structure",
+            "members": {
+                "Unit": {
+                    "target": "com.amazonaws.cloudtrail#RefreshScheduleFrequencyUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The unit to use for the refresh.\n</p>\n         <p>For custom dashboards, the unit can be <code>HOURS</code> or <code>DAYS</code>.</p>\n         <p>For the Highlights dashboard, the <code>Unit</code> must be <code>HOURS</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudtrail#RefreshScheduleFrequencyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe value for the refresh schedule.\n</p>\n         <p>\n   For custom dashboards, the following values are valid when the unit is <code>HOURS</code>: <code>1</code>, <code>6</code>, <code>12</code>, <code>24</code>\n         </p>\n         <p>For custom dashboards, the only valid value when the unit is <code>DAYS</code> is <code>1</code>.</p>\n         <p>For the Highlights dashboard, the <code>Value</code> must be <code>6</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nSpecifies the frequency for a dashboard refresh schedule.\n</p>\n         <p>\n      For a custom dashboard, you can schedule a refresh for every 1, 6, 12, or 24 hours, or every day.\n   </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#RefreshScheduleFrequencyUnit": {
+            "type": "enum",
+            "members": {
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURS"
+                    }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#RefreshScheduleFrequencyValue": {
+            "type": "integer"
+        },
+        "com.amazonaws.cloudtrail#RefreshScheduleStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdmin": {
             "type": "operation",
             "input": {
@@ -8141,7 +8786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from a trail, event data store, or channel.</p>",
+                "smithy.api#documentation": "<p>Removes the specified tags from a trail, event data store, dashboard, or channel.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8151,7 +8796,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail, event data store, or channel from which tags should be\n         removed.</p>\n         <p> Example trail ARN format:\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail, event data store, dashboard, or channel from which tags should be\n         removed.</p>\n         <p> Example trail ARN format:\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>Example event data store ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>Example dashboard ARN format: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>Example channel ARN format:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8164,7 +8809,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the tags to remove from a trail, event data store, or channel.</p>",
+                "smithy.api#documentation": "<p>Specifies the tags to remove from a trail, event data store, dashboard, or channel.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -8174,6 +8819,40 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns the objects or data listed below if successful. Otherwise, returns an\n         error.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#RequestWidget": {
+            "type": "structure",
+            "members": {
+                "QueryStatement": {
+                    "target": "com.amazonaws.cloudtrail#QueryStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe query statement for the widget. For custom dashboard widgets, you can query across multiple event data stores as long as all event data stores exist in your account.\n</p>\n         <note>\n            <p>When a query uses <code>?</code> with <code>eventTime</code>, <code>?</code> must be surrounded by single quotes as follows: <code>'?'</code>.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryParameters": {
+                    "target": "com.amazonaws.cloudtrail#QueryParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The optional query parameters. The following query parameters are valid: <code>$StartTime$</code>, <code>$EndTime$</code>, and <code>$Period$</code>.\n</p>"
+                    }
+                },
+                "ViewProperties": {
+                    "target": "com.amazonaws.cloudtrail#ViewPropertiesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The view properties for the widget. For more information about view properties, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-widget-properties.html\">\n      View properties for widgets\n   </a> in the <i>CloudTrail User Guide</i>.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nContains information about a widget on a CloudTrail Lake dashboard.\n</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#RequestWidgetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#RequestWidget"
             }
         },
         "com.amazonaws.cloudtrail#Resource": {
@@ -8211,7 +8890,7 @@
                     "code": "ResourceARNNotValid",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>\n         This exception is thrown when the provided resource does not exist, or the ARN format of the resource is not valid. The following is the valid format for a resource ARN: \n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel</code>.\n      </p>",
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the provided resource does not exist, or the ARN format of the resource is not valid.\n      </p>\n         <p>The following is the format of an event data store ARN:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>\n         <p>The following is the format of a dashboard ARN: <code>arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash</code>\n         </p>\n         <p>The following is the format of a channel ARN:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890</code>\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8305,7 +8984,7 @@
                     "code": "ResourcePolicyNotValid",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>\n         This exception is thrown when the resouce-based policy has syntax errors, or contains a principal that is not valid.\n      </p>\n         <p>The following are requirements for the resource policy:</p>\n         <ul>\n            <li>\n               <p>\n               Contains only one action: cloudtrail-data:PutAuditEvents\n            </p>\n            </li>\n            <li>\n               <p>\n               Contains at least one statement. The policy can have a maximum of 20 statements.\n            </p>\n            </li>\n            <li>\n               <p>\n               Each statement contains at least one principal. A statement can have a maximum of 50 principals.\n            </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the resouce-based policy has syntax errors, or contains a principal that is not valid.\n      </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8582,6 +9261,26 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.cloudtrail#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceQuotaExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n   This exception is thrown when the quota is exceeded. For information about CloudTrail quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ct.html#limits_cloudtrail\">Service quotas</a> \n   in the <i>Amazon Web Services General Reference</i>.\n</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#Source": {
             "type": "string",
             "traits": {
@@ -8610,6 +9309,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Contains configuration information about the channel. </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#StartDashboardRefresh": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#StartDashboardRefreshRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#StartDashboardRefreshResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nStarts a refresh of the specified dashboard.\n</p>\n         <p>\n   Each time a dashboard is refreshed, CloudTrail runs queries to populate the dashboard's widgets. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information, \n   see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard\">Example: Allow CloudTrail to run queries to populate a dashboard</a> in the <i>CloudTrail User Guide</i>.\n</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#StartDashboardRefreshRequest": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name or ARN of the dashboard.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryParameterValues": {
+                    "target": "com.amazonaws.cloudtrail#QueryParameterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The query parameter values for the dashboard\n</p>\n         <p>For custom dashboards, the following query parameters are valid: <code>$StartTime$</code>, <code>$EndTime$</code>, and <code>$Period$</code>.</p>\n         <p>For managed dashboards, the following query parameters are valid: <code>$StartTime$</code>,\n            <code>$EndTime$</code>, <code>$Period$</code>, and <code>$EventDataStoreId$</code>. The\n            <code>$EventDataStoreId$</code> query parameter is required.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#StartDashboardRefreshResponse": {
+            "type": "structure",
+            "members": {
+                "RefreshId": {
+                    "target": "com.amazonaws.cloudtrail#RefreshId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe refresh ID for the dashboard.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudtrail#StartEventDataStoreIngestion": {
@@ -8977,6 +9741,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The query parameters for the specified <code>QueryAlias</code>.\n      </p>"
                     }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe account ID of the event data store owner.\n</p>"
+                    }
                 }
             },
             "traits": {
@@ -8990,6 +9760,12 @@
                     "target": "com.amazonaws.cloudtrail#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the started query.</p>"
+                    }
+                },
+                "EventDataStoreOwnerAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The account ID of the event data store owner.\n</p>"
                     }
                 }
             },
@@ -9259,7 +10035,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A custom key-value pair associated with a resource such as a CloudTrail\n         trail, event data store, or channel.</p>"
+                "smithy.api#documentation": "<p>A custom key-value pair associated with a resource such as a CloudTrail\n         trail, event data store, dashboard, or channel.</p>"
             }
         },
         "com.amazonaws.cloudtrail#TagKey": {
@@ -9295,7 +10071,7 @@
                     "code": "TagsLimitExceeded",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The number of tags per trail, event data store, or channel has exceeded the permitted amount. Currently, the limit is\n         50.</p>",
+                "smithy.api#documentation": "<p>The number of tags per trail, event data store, dashboard, or channel has exceeded the permitted amount. Currently, the limit is\n         50.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -9334,6 +10110,12 @@
                 "smithy.api#documentation": "<p>\n         This exception is thrown when the request rate exceeds the limit. \n      </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.cloudtrail#TimeOfDay": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{2}:[0-9]{2}$"
             }
         },
         "com.amazonaws.cloudtrail#Timestamps": {
@@ -9678,6 +10460,134 @@
                     "target": "com.amazonaws.cloudtrail#Destinations",
                     "traits": {
                         "smithy.api#documentation": "<p>The event data stores that log events arriving through the channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#UpdateDashboard": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#UpdateDashboardRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#UpdateDashboardResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidQueryStatementException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nUpdates the specified dashboard.\n</p>\n         <p>\n      To set a refresh schedule, CloudTrail must be granted permissions to run the <code>StartDashboardRefresh</code> operation to refresh the dashboard on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to the dashboard. For more information, \n      see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards\">\n         Resource-based policy example for a dashboard</a> in the <i>CloudTrail User Guide</i>.\n   </p>\n         <p>\n      CloudTrail runs queries to populate the dashboard's widgets during a manual or scheduled refresh. CloudTrail must be granted permissions to run the <code>StartQuery</code> operation on your behalf. To provide permissions, run the <code>PutResourcePolicy</code> operation to attach a resource-based policy to each event data store. For more information, \n      see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard\">Example: Allow CloudTrail to run queries to populate a dashboard</a> in the <i>CloudTrail User Guide</i>.\n   </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#UpdateDashboardRequest": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The name or ARN of the dashboard.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Widgets": {
+                    "target": "com.amazonaws.cloudtrail#RequestWidgetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn array of widgets for the dashboard. A custom dashboard can have a maximum of 10 widgets.\n</p>\n         <p>To add new widgets, pass in an array that includes the existing widgets along with any new widgets. Run the <code>GetDashboard</code> operation to get the list of widgets for the dashboard.</p>\n         <p>To remove widgets, pass in an array that includes the existing widgets minus the widgets you want removed.</p>"
+                    }
+                },
+                "RefreshSchedule": {
+                    "target": "com.amazonaws.cloudtrail#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe refresh schedule configuration for the dashboard.\n</p>"
+                    }
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.cloudtrail#TerminationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Specifies whether termination protection is enabled for the dashboard. If termination protection is enabled, you cannot delete the dashboard until termination protection is disabled.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#UpdateDashboardResponse": {
+            "type": "structure",
+            "members": {
+                "DashboardArn": {
+                    "target": "com.amazonaws.cloudtrail#DashboardArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN for the dashboard.\n</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudtrail#DashboardName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name for the dashboard.\n</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#DashboardType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe type of dashboard.\n</p>"
+                    }
+                },
+                "Widgets": {
+                    "target": "com.amazonaws.cloudtrail#WidgetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn array of widgets for the dashboard.\n</p>"
+                    }
+                },
+                "RefreshSchedule": {
+                    "target": "com.amazonaws.cloudtrail#RefreshSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe refresh schedule for the dashboard, if configured.\n</p>"
+                    }
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.cloudtrail#TerminationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Indicates whether termination protection is enabled for the dashboard.\n</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp that shows when the dashboard was created.\n</p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The timestamp that shows when the dashboard was updated.\n</p>"
                     }
                 }
             },
@@ -10191,6 +11101,73 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns the objects or data listed below if successful. Otherwise, returns an\n         error.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#ViewPropertiesKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._\\-]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#ViewPropertiesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cloudtrail#ViewPropertiesKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cloudtrail#ViewPropertiesValue"
+            }
+        },
+        "com.amazonaws.cloudtrail#ViewPropertiesValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._\\- ]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#Widget": {
+            "type": "structure",
+            "members": {
+                "QueryAlias": {
+                    "target": "com.amazonaws.cloudtrail#QueryAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query alias used to identify the query for the widget.\n</p>"
+                    }
+                },
+                "QueryStatement": {
+                    "target": "com.amazonaws.cloudtrail#QueryStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe SQL query statement for the widget.\n</p>"
+                    }
+                },
+                "QueryParameters": {
+                    "target": "com.amazonaws.cloudtrail#QueryParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The query parameters for the widget.\n</p>"
+                    }
+                },
+                "ViewProperties": {
+                    "target": "com.amazonaws.cloudtrail#ViewPropertiesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The view properties for the widget. For more information about view properties, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-widget-properties.html\">\n      View properties for widgets\n</a> in the <i>CloudTrail User Guide</i>..\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   A widget on a CloudTrail Lake dashboard.\n</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#WidgetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#Widget"
             }
         }
     }

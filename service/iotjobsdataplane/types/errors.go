@@ -33,9 +33,61 @@ func (e *CertificateValidationException) ErrorCode() string {
 }
 func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The contents of the request were invalid. For example, this code is returned
-// when an UpdateJobExecution request contains invalid status details. The message
-// contains details about the error.
+// A conflict has occurred when performing the API request.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An internal server error occurred when performing the API request.
+type InternalServerException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalServerException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalServerException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalServerException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The contents of the request were invalid.
 type InvalidRequestException struct {
 	Message *string
 
@@ -116,6 +168,32 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The service quota has been exceeded for this request.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
@@ -195,3 +273,29 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A validation error occurred when performing the API request.
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

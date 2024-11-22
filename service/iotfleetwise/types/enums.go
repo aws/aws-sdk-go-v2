@@ -63,6 +63,24 @@ func (DataFormat) Values() []DataFormat {
 	}
 }
 
+type DefaultForUnmappedSignalsType string
+
+// Enum values for DefaultForUnmappedSignalsType
+const (
+	DefaultForUnmappedSignalsTypeCustomDecoding DefaultForUnmappedSignalsType = "CUSTOM_DECODING"
+)
+
+// Values returns all known values for DefaultForUnmappedSignalsType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultForUnmappedSignalsType) Values() []DefaultForUnmappedSignalsType {
+	return []DefaultForUnmappedSignalsType{
+		"CUSTOM_DECODING",
+	}
+}
+
 type DiagnosticsMode string
 
 // Enum values for DiagnosticsMode
@@ -168,13 +186,14 @@ type NetworkInterfaceFailureReason string
 
 // Enum values for NetworkInterfaceFailureReason
 const (
-	NetworkInterfaceFailureReasonDuplicateInterface                            NetworkInterfaceFailureReason = "DUPLICATE_NETWORK_INTERFACE"
-	NetworkInterfaceFailureReasonConflictingNetworkInterface                   NetworkInterfaceFailureReason = "CONFLICTING_NETWORK_INTERFACE"
-	NetworkInterfaceFailureReasonNetworkInterfaceToAddAlreadyExists            NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS"
-	NetworkInterfaceFailureReasonCanNetworkInterfaceInfoIsNull                 NetworkInterfaceFailureReason = "CAN_NETWORK_INTERFACE_INFO_IS_NULL"
-	NetworkInterfaceFailureReasonObdNetworkInterfaceInfoIsNull                 NetworkInterfaceFailureReason = "OBD_NETWORK_INTERFACE_INFO_IS_NULL"
-	NetworkInterfaceFailureReasonNetworkInterfaceToRemoveAssociatedWithSignals NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
-	NetworkInterfaceFailureReasonVehicleMiddlewareNetworkInterfaceInfoIsNull   NetworkInterfaceFailureReason = "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonDuplicateInterface                             NetworkInterfaceFailureReason = "DUPLICATE_NETWORK_INTERFACE"
+	NetworkInterfaceFailureReasonConflictingNetworkInterface                    NetworkInterfaceFailureReason = "CONFLICTING_NETWORK_INTERFACE"
+	NetworkInterfaceFailureReasonNetworkInterfaceToAddAlreadyExists             NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS"
+	NetworkInterfaceFailureReasonCanNetworkInterfaceInfoIsNull                  NetworkInterfaceFailureReason = "CAN_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonObdNetworkInterfaceInfoIsNull                  NetworkInterfaceFailureReason = "OBD_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonNetworkInterfaceToRemoveAssociatedWithSignals  NetworkInterfaceFailureReason = "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS"
+	NetworkInterfaceFailureReasonVehicleMiddlewareNetworkInterfaceInfoIsNull    NetworkInterfaceFailureReason = "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL"
+	NetworkInterfaceFailureReasonCustomDecodingSignalNetworkInterfaceInfoIsNull NetworkInterfaceFailureReason = "CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL"
 )
 
 // Values returns all known values for NetworkInterfaceFailureReason. Note that
@@ -191,6 +210,7 @@ func (NetworkInterfaceFailureReason) Values() []NetworkInterfaceFailureReason {
 		"OBD_NETWORK_INTERFACE_INFO_IS_NULL",
 		"NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS",
 		"VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL",
+		"CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL",
 	}
 }
 
@@ -198,9 +218,10 @@ type NetworkInterfaceType string
 
 // Enum values for NetworkInterfaceType
 const (
-	NetworkInterfaceTypeCanInterface      NetworkInterfaceType = "CAN_INTERFACE"
-	NetworkInterfaceTypeObdInterface      NetworkInterfaceType = "OBD_INTERFACE"
-	NetworkInterfaceTypeVehicleMiddleware NetworkInterfaceType = "VEHICLE_MIDDLEWARE"
+	NetworkInterfaceTypeCanInterface            NetworkInterfaceType = "CAN_INTERFACE"
+	NetworkInterfaceTypeObdInterface            NetworkInterfaceType = "OBD_INTERFACE"
+	NetworkInterfaceTypeVehicleMiddleware       NetworkInterfaceType = "VEHICLE_MIDDLEWARE"
+	NetworkInterfaceTypeCustomDecodingInterface NetworkInterfaceType = "CUSTOM_DECODING_INTERFACE"
 )
 
 // Values returns all known values for NetworkInterfaceType. Note that this can be
@@ -212,6 +233,7 @@ func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 		"CAN_INTERFACE",
 		"OBD_INTERFACE",
 		"VEHICLE_MIDDLEWARE",
+		"CUSTOM_DECODING_INTERFACE",
 	}
 }
 
@@ -392,6 +414,7 @@ const (
 	SignalDecoderFailureReasonNoSignalInCatalogForDecoderSignal                     SignalDecoderFailureReason = "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL"
 	SignalDecoderFailureReasonSignalDecoderIncompatibleWithSignalCatalog            SignalDecoderFailureReason = "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG"
 	SignalDecoderFailureReasonEmptyMessageSignal                                    SignalDecoderFailureReason = "EMPTY_MESSAGE_SIGNAL"
+	SignalDecoderFailureReasonCustomDecodingSignalInfoIsNull                        SignalDecoderFailureReason = "CUSTOM_DECODING_SIGNAL_INFO_IS_NULL"
 )
 
 // Values returns all known values for SignalDecoderFailureReason. Note that this
@@ -415,6 +438,7 @@ func (SignalDecoderFailureReason) Values() []SignalDecoderFailureReason {
 		"NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL",
 		"SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG",
 		"EMPTY_MESSAGE_SIGNAL",
+		"CUSTOM_DECODING_SIGNAL_INFO_IS_NULL",
 	}
 }
 
@@ -422,9 +446,10 @@ type SignalDecoderType string
 
 // Enum values for SignalDecoderType
 const (
-	SignalDecoderTypeCanSignal     SignalDecoderType = "CAN_SIGNAL"
-	SignalDecoderTypeObdSignal     SignalDecoderType = "OBD_SIGNAL"
-	SignalDecoderTypeMessageSignal SignalDecoderType = "MESSAGE_SIGNAL"
+	SignalDecoderTypeCanSignal            SignalDecoderType = "CAN_SIGNAL"
+	SignalDecoderTypeObdSignal            SignalDecoderType = "OBD_SIGNAL"
+	SignalDecoderTypeMessageSignal        SignalDecoderType = "MESSAGE_SIGNAL"
+	SignalDecoderTypeCustomDecodingSignal SignalDecoderType = "CUSTOM_DECODING_SIGNAL"
 )
 
 // Values returns all known values for SignalDecoderType. Note that this can be
@@ -436,6 +461,7 @@ func (SignalDecoderType) Values() []SignalDecoderType {
 		"CAN_SIGNAL",
 		"OBD_SIGNAL",
 		"MESSAGE_SIGNAL",
+		"CUSTOM_DECODING_SIGNAL",
 	}
 }
 
@@ -504,6 +530,49 @@ func (StorageCompressionFormat) Values() []StorageCompressionFormat {
 	}
 }
 
+type StorageMaximumSizeUnit string
+
+// Enum values for StorageMaximumSizeUnit
+const (
+	StorageMaximumSizeUnitMb StorageMaximumSizeUnit = "MB"
+	StorageMaximumSizeUnitGb StorageMaximumSizeUnit = "GB"
+	StorageMaximumSizeUnitTb StorageMaximumSizeUnit = "TB"
+)
+
+// Values returns all known values for StorageMaximumSizeUnit. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageMaximumSizeUnit) Values() []StorageMaximumSizeUnit {
+	return []StorageMaximumSizeUnit{
+		"MB",
+		"GB",
+		"TB",
+	}
+}
+
+type StorageMinimumTimeToLiveUnit string
+
+// Enum values for StorageMinimumTimeToLiveUnit
+const (
+	StorageMinimumTimeToLiveUnitHours StorageMinimumTimeToLiveUnit = "HOURS"
+	StorageMinimumTimeToLiveUnitDays  StorageMinimumTimeToLiveUnit = "DAYS"
+	StorageMinimumTimeToLiveUnitWeeks StorageMinimumTimeToLiveUnit = "WEEKS"
+)
+
+// Values returns all known values for StorageMinimumTimeToLiveUnit. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageMinimumTimeToLiveUnit) Values() []StorageMinimumTimeToLiveUnit {
+	return []StorageMinimumTimeToLiveUnit{
+		"HOURS",
+		"DAYS",
+		"WEEKS",
+	}
+}
+
 type StructuredMessageListType string
 
 // Enum values for StructuredMessageListType
@@ -522,6 +591,29 @@ func (StructuredMessageListType) Values() []StructuredMessageListType {
 		"FIXED_CAPACITY",
 		"DYNAMIC_UNBOUNDED_CAPACITY",
 		"DYNAMIC_BOUNDED_CAPACITY",
+	}
+}
+
+type TimeUnit string
+
+// Enum values for TimeUnit
+const (
+	TimeUnitMillisecond TimeUnit = "MILLISECOND"
+	TimeUnitSecond      TimeUnit = "SECOND"
+	TimeUnitMinute      TimeUnit = "MINUTE"
+	TimeUnitHour        TimeUnit = "HOUR"
+)
+
+// Values returns all known values for TimeUnit. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TimeUnit) Values() []TimeUnit {
+	return []TimeUnit{
+		"MILLISECOND",
+		"SECOND",
+		"MINUTE",
+		"HOUR",
 	}
 }
 

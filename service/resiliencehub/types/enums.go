@@ -178,6 +178,33 @@ func (ComplianceStatus) Values() []ComplianceStatus {
 	}
 }
 
+type ConditionOperatorType string
+
+// Enum values for ConditionOperatorType
+const (
+	ConditionOperatorTypeEquals          ConditionOperatorType = "Equals"
+	ConditionOperatorTypeNotEquals       ConditionOperatorType = "NotEquals"
+	ConditionOperatorTypeGreaterThen     ConditionOperatorType = "GreaterThen"
+	ConditionOperatorTypeGreaterOrEquals ConditionOperatorType = "GreaterOrEquals"
+	ConditionOperatorTypeLessThen        ConditionOperatorType = "LessThen"
+	ConditionOperatorTypeLessOrEquals    ConditionOperatorType = "LessOrEquals"
+)
+
+// Values returns all known values for ConditionOperatorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConditionOperatorType) Values() []ConditionOperatorType {
+	return []ConditionOperatorType{
+		"Equals",
+		"NotEquals",
+		"GreaterThen",
+		"GreaterOrEquals",
+		"LessThen",
+		"LessOrEquals",
+	}
+}
+
 type ConfigRecommendationOptimizationType string
 
 // Enum values for ConfigRecommendationOptimizationType
@@ -397,6 +424,31 @@ func (ExcludeRecommendationReason) Values() []ExcludeRecommendationReason {
 	}
 }
 
+type FieldAggregationType string
+
+// Enum values for FieldAggregationType
+const (
+	FieldAggregationTypeMin   FieldAggregationType = "Min"
+	FieldAggregationTypeMax   FieldAggregationType = "Max"
+	FieldAggregationTypeSum   FieldAggregationType = "Sum"
+	FieldAggregationTypeAvg   FieldAggregationType = "Avg"
+	FieldAggregationTypeCount FieldAggregationType = "Count"
+)
+
+// Values returns all known values for FieldAggregationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FieldAggregationType) Values() []FieldAggregationType {
+	return []FieldAggregationType{
+		"Min",
+		"Max",
+		"Sum",
+		"Avg",
+		"Count",
+	}
+}
+
 type GroupingRecommendationConfidenceLevel string
 
 // Enum values for GroupingRecommendationConfidenceLevel
@@ -485,6 +537,29 @@ func (HaArchitecture) Values() []HaArchitecture {
 		"PilotLight",
 		"BackupAndRestore",
 		"NoRecoveryPlan",
+	}
+}
+
+type MetricsExportStatusType string
+
+// Enum values for MetricsExportStatusType
+const (
+	MetricsExportStatusTypePending    MetricsExportStatusType = "Pending"
+	MetricsExportStatusTypeInProgress MetricsExportStatusType = "InProgress"
+	MetricsExportStatusTypeFailed     MetricsExportStatusType = "Failed"
+	MetricsExportStatusTypeSuccess    MetricsExportStatusType = "Success"
+)
+
+// Values returns all known values for MetricsExportStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricsExportStatusType) Values() []MetricsExportStatusType {
+	return []MetricsExportStatusType{
+		"Pending",
+		"InProgress",
+		"Failed",
+		"Success",
 	}
 }
 

@@ -390,6 +390,26 @@ func (m *validateOpCreateCertificateProvider) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCommand struct {
+}
+
+func (*validateOpCreateCommand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCommandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCommandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCustomMetric struct {
 }
 
@@ -1005,6 +1025,46 @@ func (m *validateOpDeleteCertificateProvider) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCertificateProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCommandExecution struct {
+}
+
+func (*validateOpDeleteCommandExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCommandExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCommandExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCommandExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCommand struct {
+}
+
+func (*validateOpDeleteCommand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCommandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCommandInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2325,6 +2385,46 @@ func (m *validateOpGetCardinality) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCardinalityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCommandExecution struct {
+}
+
+func (*validateOpGetCommandExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCommandExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCommandExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCommandExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCommand struct {
+}
+
+func (*validateOpGetCommand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCommandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCommandInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3670,6 +3770,26 @@ func (m *validateOpUpdateCertificateProvider) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCommand struct {
+}
+
+func (*validateOpUpdateCommand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCommandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCommandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCustomMetric struct {
 }
 
@@ -4146,6 +4266,10 @@ func addOpCreateCertificateProviderValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateCertificateProvider{}, middleware.After)
 }
 
+func addOpCreateCommandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCommand{}, middleware.After)
+}
+
 func addOpCreateCustomMetricValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomMetric{}, middleware.After)
 }
@@ -4268,6 +4392,14 @@ func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteCertificateProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCertificateProvider{}, middleware.After)
+}
+
+func addOpDeleteCommandExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCommandExecution{}, middleware.After)
+}
+
+func addOpDeleteCommandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCommand{}, middleware.After)
 }
 
 func addOpDeleteCustomMetricValidationMiddleware(stack *middleware.Stack) error {
@@ -4532,6 +4664,14 @@ func addOpGetBucketsAggregationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetCardinalityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCardinality{}, middleware.After)
+}
+
+func addOpGetCommandExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCommandExecution{}, middleware.After)
+}
+
+func addOpGetCommandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCommand{}, middleware.After)
 }
 
 func addOpGetJobDocumentValidationMiddleware(stack *middleware.Stack) error {
@@ -4800,6 +4940,10 @@ func addOpUpdateCertificateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCertificateProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCertificateProvider{}, middleware.After)
+}
+
+func addOpUpdateCommandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCommand{}, middleware.After)
 }
 
 func addOpUpdateCustomMetricValidationMiddleware(stack *middleware.Stack) error {
@@ -5465,6 +5609,38 @@ func validateCloudwatchMetricAction(v *types.CloudwatchMetricAction) error {
 	}
 	if v.MetricUnit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricUnit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandParameter(v *types.CommandParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCommandParameterList(v []types.CommandParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommandParameterList"}
+	for i := range v {
+		if err := validateCommandParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7056,6 +7232,31 @@ func validateOpCreateCertificateProviderInput(v *CreateCertificateProviderInput)
 	}
 }
 
+func validateOpCreateCommandInput(v *CreateCommandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCommandInput"}
+	if v.CommandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandId"))
+	}
+	if v.MandatoryParameters != nil {
+		if err := validateCommandParameterList(v.MandatoryParameters); err != nil {
+			invalidParams.AddNested("MandatoryParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCustomMetricInput(v *CreateCustomMetricInput) error {
 	if v == nil {
 		return nil
@@ -7779,6 +7980,39 @@ func validateOpDeleteCertificateProviderInput(v *DeleteCertificateProviderInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCertificateProviderInput"}
 	if v.CertificateProviderName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateProviderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCommandExecutionInput(v *DeleteCommandExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCommandExecutionInput"}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
+	}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCommandInput(v *DeleteCommandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCommandInput"}
+	if v.CommandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8817,6 +9051,39 @@ func validateOpGetCardinalityInput(v *GetCardinalityInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetCardinalityInput"}
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCommandExecutionInput(v *GetCommandExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCommandExecutionInput"}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
+	}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCommandInput(v *GetCommandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCommandInput"}
+	if v.CommandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9945,6 +10212,21 @@ func validateOpUpdateCertificateProviderInput(v *UpdateCertificateProviderInput)
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCertificateProviderInput"}
 	if v.CertificateProviderName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateProviderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCommandInput(v *UpdateCommandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCommandInput"}
+	if v.CommandId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

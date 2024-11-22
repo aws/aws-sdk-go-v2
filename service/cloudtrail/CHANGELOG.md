@@ -1,3 +1,7 @@
+# v1.46.0 (2024-11-21)
+
+* **Feature**: This release introduces new APIs for creating and managing CloudTrail Lake dashboards. It also adds support for resource-based policies on CloudTrail EventDataStore and Dashboard resource.
+
 # v1.45.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

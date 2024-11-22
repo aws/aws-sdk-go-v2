@@ -61,8 +61,8 @@ import (
 // Also see, [Testing Multi-AZ] in the ElastiCache User Guide.
 //
 // [DescribeEvents]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html
-// [Testing Multi-AZ]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test
-// [Viewing ElastiCache Events]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html
+// [Testing Multi-AZ]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/AutoFailover.html#auto-failover-test
+// [Viewing ElastiCache Events]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ECEvents.Viewing.html
 func (c *Client) TestFailover(ctx context.Context, params *TestFailoverInput, optFns ...func(*Options)) (*TestFailoverOutput, error) {
 	if params == nil {
 		params = &TestFailoverInput{}

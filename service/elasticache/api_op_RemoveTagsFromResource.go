@@ -18,7 +18,7 @@ import (
 // those actions will be replicated to all nodes in the replication group. For more
 // information, see [Resource-level permissions].
 //
-// [Resource-level permissions]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
+// [Resource-level permissions]: http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html
 func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsFromResourceInput, optFns ...func(*Options)) (*RemoveTagsFromResourceOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromResourceInput{}

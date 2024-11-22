@@ -86,6 +86,18 @@ func TestCheckSnapshot_DeleteConfigurationManager(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetConfigurationManager(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetConfigurationManager(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_ListConfigurationManagers(t *testing.T) {
 	_, err := svc.ListConfigurationManagers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListConfigurationManagers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -229,6 +253,18 @@ func TestUpdateSnapshot_DeleteConfigurationManager(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetConfigurationManager(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetConfigurationManager(context.Background(), nil, func(o *Options) {
@@ -258,6 +294,18 @@ func TestUpdateSnapshot_ListConfigurationManagers(t *testing.T) {
 	_, err := svc.ListConfigurationManagers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListConfigurationManagers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

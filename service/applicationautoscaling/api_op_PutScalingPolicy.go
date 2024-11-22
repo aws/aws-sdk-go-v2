@@ -248,6 +248,9 @@ type PutScalingPolicyInput struct {
 	// [Target tracking scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
 	PolicyType types.PolicyType
 
+	//  The configuration of the predictive scaling policy.
+	PredictiveScalingPolicyConfiguration *types.PredictiveScalingPolicyConfiguration
+
 	// A step scaling policy.
 	//
 	// This parameter is required if you are creating a policy and the policy type is
