@@ -7299,6 +7299,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon EC2 unit limits for a managed scaling policy. The managed scaling\n         activity of a cluster is not allowed to go above or below these limits. The limit only\n         applies to the core and task nodes. The master node cannot be scaled after initial\n         configuration.</p>"
                     }
+                },
+                "UtilizationPerformanceIndex": {
+                    "target": "com.amazonaws.emr#UtilizationPerformanceIndexInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer value that represents an advanced scaling strategy. Setting a higher value optimizes for performance. Setting a lower value optimizes for resource conservation. Setting the value \n         to 50 balances performance and resource conservation. Possible values are 1, 25, 50, 75, and 100.</p>"
+                    }
+                },
+                "ScalingStrategy": {
+                    "target": "com.amazonaws.emr#ScalingStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether a custom scaling utilization performance index can be set. Possible values include <i>ADVANCED</i> or <i>DEFAULT</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8864,6 +8876,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#ScalingRule"
+            }
+        },
+        "com.amazonaws.emr#ScalingStrategy": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "ADVANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADVANCED"
+                    }
+                }
             }
         },
         "com.amazonaws.emr#ScalingTrigger": {
@@ -10698,6 +10727,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>The username and password that you use to connect to cluster endpoints.</p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emr#UtilizationPerformanceIndexInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.emr#VolumeSpecification": {

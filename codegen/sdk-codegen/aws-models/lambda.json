@@ -2780,6 +2780,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metrics configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\">Event source mapping metrics</a>.</p>"
                     }
+                },
+                "ProvisionedPollerConfig": {
+                    "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">Provisioned Mode</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4346,6 +4352,12 @@
                     "target": "com.amazonaws.lambda#EventSourceMappingMetricsConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The metrics configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\">Event source mapping metrics</a>.</p>"
+                    }
+                },
+                "ProvisionedPollerConfig": {
+                    "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">Provisioned Mode</a>.</p>"
                     }
                 }
             },
@@ -9569,6 +9581,15 @@
                 }
             }
         },
+        "com.amazonaws.lambda#MaximumNumberOfPollers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.lambda#MaximumRecordAgeInSeconds": {
             "type": "integer",
             "traits": {
@@ -9613,6 +9634,15 @@
                     "max": 6
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.lambda#MinimumNumberOfPollers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.lambda#NameSpacedFunctionArn": {
@@ -9891,6 +9921,26 @@
                         "smithy.api#enumValue": "FAILED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lambda#ProvisionedPollerConfig": {
+            "type": "structure",
+            "members": {
+                "MinimumPollers": {
+                    "target": "com.amazonaws.lambda#MinimumNumberOfPollers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of event pollers this event source can scale down to.</p>"
+                    }
+                },
+                "MaximumPollers": {
+                    "target": "com.amazonaws.lambda#MaximumNumberOfPollers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of event pollers this event source can scale up to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">\n      Provisioned Mode</a> configuration for the event source. Use Provisioned Mode to customize the minimum and maximum number of event pollers\n      for your event source. An event poller is a compute unit that provides approximately 5 MBps of throughput.</p>"
             }
         },
         "com.amazonaws.lambda#PublishLayerVersion": {
@@ -12708,6 +12758,12 @@
                     "target": "com.amazonaws.lambda#EventSourceMappingMetricsConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The metrics configuration for your event source. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics\">Event source mapping metrics</a>.</p>"
+                    }
+                },
+                "ProvisionedPollerConfig": {
+                    "target": "com.amazonaws.lambda#ProvisionedPollerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode configuration for the event source.\n  For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode\">Provisioned Mode</a>.</p>"
                     }
                 }
             },

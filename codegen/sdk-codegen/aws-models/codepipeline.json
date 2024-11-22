@@ -567,6 +567,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details of an error returned by a URL external to Amazon Web Services.</p>"
                     }
+                },
+                "logStreamARN": {
+                    "target": "com.amazonaws.codepipeline#LogStreamARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the log stream for the action compute.</p>"
+                    }
                 }
             },
             "traits": {
@@ -772,6 +778,12 @@
                 },
                 "errorDetails": {
                     "target": "com.amazonaws.codepipeline#ErrorDetails"
+                },
+                "logStreamARN": {
+                    "target": "com.amazonaws.codepipeline#LogStreamARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the log stream for the action compute.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5834,6 +5846,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codepipeline#LogStreamARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
         "com.amazonaws.codepipeline#MatchEquals": {
             "type": "string",
             "traits": {
@@ -7130,7 +7151,7 @@
                 "token": {
                     "target": "com.amazonaws.codepipeline#ApprovalToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system-generated token used to identify a unique approval request. The token\n            for each open approval request can be obtained using the <a>GetPipelineState</a> action. It is used to validate that the approval\n            request corresponding to this token is still valid.</p>",
+                        "smithy.api#documentation": "<p>The system-generated token used to identify a unique approval request. The token\n            for each open approval request can be obtained using the <a>GetPipelineState</a> action. It is used to validate that the approval\n            request corresponding to this token is still valid.</p>\n         <important>\n            <p>For a pipeline where the execution mode is set to PARALLEL, the token required to\n                approve/reject approval request as detailed above is not available. Instead, use the\n                    <code>externalExecutionId</code> from the <code>GetPipelineState</code> action\n                as the token in the approval request.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }

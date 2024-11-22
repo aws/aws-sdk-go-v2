@@ -720,6 +720,12 @@
                 },
                 "QueryExecutionOptions": {
                     "target": "com.amazonaws.quicksight#QueryExecutionOptions"
+                },
+                "StaticFiles": {
+                    "target": "com.amazonaws.quicksight#StaticFileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static files for the definition.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3442,13 +3448,13 @@
                 "Body": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportBodyBlob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB.</p>\n         <p>If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or\n         PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using\n         an SDK for a different language or receiving related errors, try to base64 encode your data.</p>"
+                        "smithy.api#documentation": "<p>The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB. If the size of the file that you want to upload is more than 20 MB, add the file to your Amazon S3 bucket and use <code>S3Uri</code> of the file for this operation.</p>\n         <p>If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using an SDK for a different language or receiving related errors, try to base64 encode your data.</p>"
                     }
                 },
                 "S3Uri": {
                     "target": "com.amazonaws.quicksight#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller\n         has read access to. The file must be a zip format file and can't exceed 20 MB.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 1 GB.</p>"
                     }
                 }
             },
@@ -4417,6 +4423,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5277,6 +5289,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -7322,6 +7340,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -11139,6 +11163,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a map of the key-value pairs for the resource tag or tags that are assigned to\n         the dataset.</p>"
                     }
+                },
+                "FolderArns": {
+                    "target": "com.amazonaws.quicksight#FolderArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Folder ARN of the folder that you want the topic to reside in.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11744,6 +11774,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The dataset that is used to create the custom content visual. You can't create a visual without a dataset.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -12584,6 +12620,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of option definitions for a dashboard.</p>"
                     }
+                },
+                "StaticFiles": {
+                    "target": "com.amazonaws.quicksight#StaticFileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static files for the definition.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12687,6 +12729,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The visual publish options of a visual in a dashboard</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DashboardsQAStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DataAggregation": {
@@ -20556,6 +20615,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeDashboardsQAConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeDashboardsQAConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeDashboardsQAConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an existing dashboard QA configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/dashboards-qa-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardsQAConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeDashboardsQAConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "DashboardsQAStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardsQAStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of dashboards QA configuration that you want described.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeDataSet": {
             "type": "operation",
             "input": {
@@ -24969,6 +25109,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26129,6 +26275,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Determines the text display face that is inherited by the given font family.</p>"
                     }
+                },
+                "FontFamily": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The font family that you want to use.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26171,6 +26323,12 @@
                     "target": "com.amazonaws.quicksight#RelativeFontSize",
                     "traits": {
                         "smithy.api#documentation": "<p>The lexical name for the text size, proportional to its surrounding context.</p>"
+                    }
+                },
+                "Absolute": {
+                    "target": "com.amazonaws.quicksight#PixelLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The font size that you want to use in px.</p>"
                     }
                 }
             },
@@ -26865,6 +27023,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27117,6 +27281,12 @@
                     "target": "com.amazonaws.quicksight#VisualCustomActionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -27465,6 +27635,156 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#GeospatialCategoricalColor": {
+            "type": "structure",
+            "members": {
+                "CategoryDataColors": {
+                    "target": "com.amazonaws.quicksight#GeospatialCategoricalDataColorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of categorical data colors for each category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NullDataVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of visibility for null data.</p>"
+                    }
+                },
+                "NullDataSettings": {
+                    "target": "com.amazonaws.quicksight#GeospatialNullDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The null data visualization settings.</p>"
+                    }
+                },
+                "DefaultOpacity": {
+                    "target": "com.amazonaws.quicksight#Opacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default opacity of a categorical color.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a categorical color.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialCategoricalDataColor": {
+            "type": "structure",
+            "members": {
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the category data color.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataValue": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data value for the category data color.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The categorical data color for a single category.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialCategoricalDataColorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#GeospatialCategoricalDataColor"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialCircleRadius": {
+            "type": "structure",
+            "members": {
+                "Radius": {
+                    "target": "com.amazonaws.quicksight#GeospatialRadius",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The positive value for the radius of a circle.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geospatial radius for a circle.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialCircleSymbolStyle": {
+            "type": "structure",
+            "members": {
+                "FillColor": {
+                    "target": "com.amazonaws.quicksight#GeospatialColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the fill color.</p>"
+                    }
+                },
+                "StrokeColor": {
+                    "target": "com.amazonaws.quicksight#GeospatialColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the stroke color.</p>"
+                    }
+                },
+                "StrokeWidth": {
+                    "target": "com.amazonaws.quicksight#GeospatialLineWidth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the stroke (border).</p>"
+                    }
+                },
+                "CircleRadius": {
+                    "target": "com.amazonaws.quicksight#GeospatialCircleRadius",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The radius of the circle.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties for a circle symbol style.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialColor": {
+            "type": "structure",
+            "members": {
+                "Solid": {
+                    "target": "com.amazonaws.quicksight#GeospatialSolidColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visualization properties for the solid color.</p>"
+                    }
+                },
+                "Gradient": {
+                    "target": "com.amazonaws.quicksight#GeospatialGradientColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visualization properties for the gradient color.</p>"
+                    }
+                },
+                "Categorical": {
+                    "target": "com.amazonaws.quicksight#GeospatialCategoricalColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visualization properties for the categorical color.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The visualization properties for solid, gradient, and categorical colors.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialColorState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#GeospatialCoordinateBounds": {
             "type": "structure",
             "members": {
@@ -27499,6 +27819,88 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The bound\n            options (north, south, west, east) of the geospatial window options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialDataSourceItem": {
+            "type": "structure",
+            "members": {
+                "StaticFileDataSource": {
+                    "target": "com.amazonaws.quicksight#GeospatialStaticFileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static file data source properties for the geospatial data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data source properties for the geospatial data.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialGradientColor": {
+            "type": "structure",
+            "members": {
+                "StepColors": {
+                    "target": "com.amazonaws.quicksight#GeospatialGradientStepColorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of gradient step colors for the gradient.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NullDataVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of visibility for null data.</p>"
+                    }
+                },
+                "NullDataSettings": {
+                    "target": "com.amazonaws.quicksight#GeospatialNullDataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The null data visualization settings.</p>"
+                    }
+                },
+                "DefaultOpacity": {
+                    "target": "com.amazonaws.quicksight#Opacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default opacity for the gradient color.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a gradient color.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialGradientStepColor": {
+            "type": "structure",
+            "members": {
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the gradient step color.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataValue": {
+                    "target": "com.amazonaws.quicksight#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The data value for the gradient step color.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The gradient step color for a single step.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialGradientStepColorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#GeospatialGradientStepColor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.quicksight#GeospatialHeatmapColorScale": {
@@ -27554,6 +27956,277 @@
                     "min": 2,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerColorField": {
+            "type": "structure",
+            "members": {
+                "ColorDimensionsFields": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerDimensionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of color dimension fields.</p>"
+                    }
+                },
+                "ColorValuesFields": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerMeasureFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of color measure fields.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color field that defines a gradient or categorical style.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerDefinition": {
+            "type": "structure",
+            "members": {
+                "PointLayer": {
+                    "target": "com.amazonaws.quicksight#GeospatialPointLayer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition for a point layer.</p>"
+                    }
+                },
+                "LineLayer": {
+                    "target": "com.amazonaws.quicksight#GeospatialLineLayer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition for a line layer.</p>"
+                    }
+                },
+                "PolygonLayer": {
+                    "target": "com.amazonaws.quicksight#GeospatialPolygonLayer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition for a polygon layer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition properties for a geospatial layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerDimensionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DimensionField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerItem": {
+            "type": "structure",
+            "members": {
+                "LayerId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LayerType": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layer type.</p>"
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.quicksight#GeospatialDataSourceItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source for the layer.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label that is displayed for the layer.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of visibility for the layer.</p>"
+                    }
+                },
+                "LayerDefinition": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition properties for a layer.</p>"
+                    }
+                },
+                "Tooltip": {
+                    "target": "com.amazonaws.quicksight#TooltipOptions"
+                },
+                "JoinDefinition": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerJoinDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The join definition properties for a layer.</p>"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.quicksight#LayerCustomActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom actions for a layer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties for a single geospatial layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerJoinDefinition": {
+            "type": "structure",
+            "members": {
+                "ShapeKeyField": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field or property in the geospatial data source.</p>"
+                    }
+                },
+                "DatasetKeyField": {
+                    "target": "com.amazonaws.quicksight#UnaggregatedField"
+                },
+                "ColorField": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerColorField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geospatial color field for the join definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom actions for a layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerMapConfiguration": {
+            "type": "structure",
+            "members": {
+                "Legend": {
+                    "target": "com.amazonaws.quicksight#LegendOptions"
+                },
+                "MapLayers": {
+                    "target": "com.amazonaws.quicksight#GeospatialMapLayerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geospatial layers to visualize on the map.</p>"
+                    }
+                },
+                "MapState": {
+                    "target": "com.amazonaws.quicksight#GeospatialMapState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map state properties for the map.</p>"
+                    }
+                },
+                "MapStyle": {
+                    "target": "com.amazonaws.quicksight#GeospatialMapStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map style properties for the map.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#VisualInteractionOptions"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The map definition that defines map state, map style, and geospatial layers.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerMeasureFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#MeasureField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLayerType": {
+            "type": "enum",
+            "members": {
+                "POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POINT"
+                    }
+                },
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                },
+                "POLYGON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLYGON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLineLayer": {
+            "type": "structure",
+            "members": {
+                "Style": {
+                    "target": "com.amazonaws.quicksight#GeospatialLineStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visualization style for a line layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geospatial Line layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLineStyle": {
+            "type": "structure",
+            "members": {
+                "LineSymbolStyle": {
+                    "target": "com.amazonaws.quicksight#GeospatialLineSymbolStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The symbol style for a line style.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The visualization style for a line layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLineSymbolStyle": {
+            "type": "structure",
+            "members": {
+                "FillColor": {
+                    "target": "com.amazonaws.quicksight#GeospatialColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the fill color.</p>"
+                    }
+                },
+                "LineWidth": {
+                    "target": "com.amazonaws.quicksight#GeospatialLineWidth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width value for a line.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The symbol style for a line layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialLineWidth": {
+            "type": "structure",
+            "members": {
+                "LineWidth": {
+                    "target": "com.amazonaws.quicksight#GeospatialWidth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The positive value for the width of a line.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The width properties for a line.</p>"
             }
         },
         "com.amazonaws.quicksight#GeospatialMapAggregatedFieldWells": {
@@ -27649,6 +28322,72 @@
                 "smithy.api#documentation": "<p>The field wells of a <code>GeospatialMapVisual</code>.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
             }
         },
+        "com.amazonaws.quicksight#GeospatialMapLayerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#GeospatialLayerItem"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialMapNavigation": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialMapState": {
+            "type": "structure",
+            "members": {
+                "Bounds": {
+                    "target": "com.amazonaws.quicksight#GeospatialCoordinateBounds"
+                },
+                "MapNavigation": {
+                    "target": "com.amazonaws.quicksight#GeospatialMapNavigation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables map navigation for a map.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The map state properties for a map.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialMapStyle": {
+            "type": "structure",
+            "members": {
+                "BaseMapStyle": {
+                    "target": "com.amazonaws.quicksight#BaseMapStyleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selected base map style.</p>"
+                    }
+                },
+                "BackgroundColor": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background color and opacity values for a map.</p>"
+                    }
+                },
+                "BaseMapVisibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of visibility for the base map.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The map style properties for a map.</p>"
+            }
+        },
         "com.amazonaws.quicksight#GeospatialMapStyleOptions": {
             "type": "structure",
             "members": {
@@ -27702,10 +28441,86 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A geospatial map or a points on map visual.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html\">Creating point maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialNullDataSettings": {
+            "type": "structure",
+            "members": {
+                "SymbolStyle": {
+                    "target": "com.amazonaws.quicksight#GeospatialNullSymbolStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The symbol style for null data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties for the visualization of null data.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialNullSymbolStyle": {
+            "type": "structure",
+            "members": {
+                "FillColor": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the fill color.</p>"
+                    }
+                },
+                "StrokeColor": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the stroke color.</p>"
+                    }
+                },
+                "StrokeWidth": {
+                    "target": "com.amazonaws.quicksight#GeospatialWidth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the border stroke.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The symbol style for null data.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialPointLayer": {
+            "type": "structure",
+            "members": {
+                "Style": {
+                    "target": "com.amazonaws.quicksight#GeospatialPointStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visualization style for a point layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geospatial Point layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialPointStyle": {
+            "type": "structure",
+            "members": {
+                "CircleSymbolStyle": {
+                    "target": "com.amazonaws.quicksight#GeospatialCircleSymbolStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The circle symbol style for a point layer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The point style for a point layer.</p>"
             }
         },
         "com.amazonaws.quicksight#GeospatialPointStyleOptions": {
@@ -27734,6 +28549,69 @@
                 "smithy.api#documentation": "<p>The point style of the geospatial map.</p>"
             }
         },
+        "com.amazonaws.quicksight#GeospatialPolygonLayer": {
+            "type": "structure",
+            "members": {
+                "Style": {
+                    "target": "com.amazonaws.quicksight#GeospatialPolygonStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visualization style for a polygon layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geospatial polygon layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialPolygonStyle": {
+            "type": "structure",
+            "members": {
+                "PolygonSymbolStyle": {
+                    "target": "com.amazonaws.quicksight#GeospatialPolygonSymbolStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The polygon symbol style for a polygon layer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The polygon style for a polygon layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialPolygonSymbolStyle": {
+            "type": "structure",
+            "members": {
+                "FillColor": {
+                    "target": "com.amazonaws.quicksight#GeospatialColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the fill color.</p>"
+                    }
+                },
+                "StrokeColor": {
+                    "target": "com.amazonaws.quicksight#GeospatialColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the stroke color.</p>"
+                    }
+                },
+                "StrokeWidth": {
+                    "target": "com.amazonaws.quicksight#GeospatialLineWidth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the border stroke.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The polygon symbol style for a polygon layer.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialRadius": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.quicksight#GeospatialSelectedPointStyle": {
             "type": "enum",
             "members": {
@@ -27754,6 +28632,50 @@
                     "traits": {
                         "smithy.api#enumValue": "HEATMAP"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialSolidColor": {
+            "type": "structure",
+            "members": {
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColorWithTransparency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color and opacity values for the color.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.quicksight#GeospatialColorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables and disables the view state of the color.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition for a solid color.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialStaticFileSource": {
+            "type": "structure",
+            "members": {
+                "StaticFileId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the static file.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source properties for a geospatial static file.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialWidth": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -28741,6 +29663,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -28952,6 +29880,12 @@
                     "target": "com.amazonaws.quicksight#VisualCustomActionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -29396,6 +30330,143 @@
                 "smithy.api#documentation": "<p>The logo image configuration.</p>"
             }
         },
+        "com.amazonaws.quicksight#ImageCustomAction": {
+            "type": "structure",
+            "members": {
+                "CustomActionId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the custom action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ImageCustomActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#WidgetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the custom action.</p>"
+                    }
+                },
+                "Trigger": {
+                    "target": "com.amazonaws.quicksight#ImageCustomActionTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trigger of the <code>VisualCustomAction</code>.</p>\n         <p>Valid values are defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLICK</code>: Initiates a custom action by a left pointer click on a data point.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MENU</code>: Initiates a custom action by right pointer click from the menu.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActionOperations": {
+                    "target": "com.amazonaws.quicksight#ImageCustomActionOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ImageCustomActionOperations</code>.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A custom action defined on an image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageCustomActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ImageCustomAction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ImageCustomActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ImageCustomActionOperation": {
+            "type": "structure",
+            "members": {
+                "NavigationOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionNavigationOperation"
+                },
+                "URLOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionURLOperation"
+                },
+                "SetParametersOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionSetParametersOperation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation that is defined by the custom action.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageCustomActionOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ImageCustomActionOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ImageCustomActionTrigger": {
+            "type": "enum",
+            "members": {
+                "CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLICK"
+                    }
+                },
+                "MENU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MENU"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ImageInteractionOptions": {
+            "type": "structure",
+            "members": {
+                "ImageMenuOption": {
+                    "target": "com.amazonaws.quicksight#ImageMenuOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The menu options for the image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The general image interactions setup for image publish options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageMenuOption": {
+            "type": "structure",
+            "members": {
+                "AvailabilityStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability status of the image menu. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the image menu.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The menu options for the interactions of an image.</p>"
+            }
+        },
         "com.amazonaws.quicksight#ImageSet": {
             "type": "structure",
             "members": {
@@ -29456,6 +30527,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The source of the image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageStaticFile": {
+            "type": "structure",
+            "members": {
+                "StaticFileId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the static file that contains an image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#StaticFileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the image static file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A static file that contains an image.</p>"
             }
         },
         "com.amazonaws.quicksight#IncludeFolderMembers": {
@@ -30145,6 +31237,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The dataset that is used in the insight visual.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -30984,6 +32082,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31077,6 +32181,158 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#LayerCustomAction": {
+            "type": "structure",
+            "members": {
+                "CustomActionId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the custom action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#LayerCustomActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#WidgetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the <code>LayerCustomAction</code>.</p>"
+                    }
+                },
+                "Trigger": {
+                    "target": "com.amazonaws.quicksight#LayerCustomActionTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trigger of the <code>LayerCustomAction</code>.</p>\n         <p>Valid values are defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DATA_POINT_CLICK</code>: Initiates a custom action by a left pointer click on a data point.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DATA_POINT_MENU</code>: Initiates a custom action by right pointer click from the menu.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActionOperations": {
+                    "target": "com.amazonaws.quicksight#LayerCustomActionOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>LayerCustomActionOperations</code>.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A layer custom action.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LayerCustomActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#LayerCustomAction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#LayerCustomActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.quicksight#LayerCustomActionOperation": {
+            "type": "structure",
+            "members": {
+                "FilterOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionFilterOperation"
+                },
+                "NavigationOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionNavigationOperation"
+                },
+                "URLOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionURLOperation"
+                },
+                "SetParametersOperation": {
+                    "target": "com.amazonaws.quicksight#CustomActionSetParametersOperation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation that is defined by the custom action.</p>\n         <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LayerCustomActionOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#LayerCustomActionOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#LayerCustomActionTrigger": {
+            "type": "enum",
+            "members": {
+                "DATA_POINT_CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_POINT_CLICK"
+                    }
+                },
+                "DATA_POINT_MENU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_POINT_MENU"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#LayerMapVisual": {
+            "type": "structure",
+            "members": {
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the visual.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.quicksight#VisualTitleLabelOptions"
+                },
+                "Subtitle": {
+                    "target": "com.amazonaws.quicksight#VisualSubtitleLabelOptions"
+                },
+                "ChartConfiguration": {
+                    "target": "com.amazonaws.quicksight#GeospatialLayerMapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings of the visual.</p>"
+                    }
+                },
+                "DataSetIdentifier": {
+                    "target": "com.amazonaws.quicksight#DataSetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset that is used to create the layer map visual. You can't create a visual without a dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A layer map visual.</p>"
+            }
+        },
         "com.amazonaws.quicksight#Layout": {
             "type": "structure",
             "members": {
@@ -31144,6 +32400,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TEXT_BOX"
                     }
+                },
+                "IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE"
+                    }
                 }
             }
         },
@@ -31191,6 +32453,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The height of the legend. If this value is omitted, a default height is used when\n            rendering.</p>"
                     }
+                },
+                "ValueFontConfiguration": {
+                    "target": "com.amazonaws.quicksight#FontConfiguration"
                 }
             },
             "traits": {
@@ -31710,6 +32975,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -36716,6 +37987,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An error that occurred when the namespace was created.</p>"
                     }
+                },
+                "IamIdentityCenterApplicationArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM Identity Center application.</p>"
+                    }
+                },
+                "IamIdentityCenterInstanceArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37640,6 +38923,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.quicksight#Opacity": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
                 }
             }
         },
@@ -38965,6 +40257,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39761,6 +41059,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39827,6 +41131,222 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "String based length that is composed of value and unit in px"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisual": {
+            "type": "structure",
+            "members": {
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the visual that you want to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PluginArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that reflects the plugin and version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.quicksight#VisualTitleLabelOptions"
+                },
+                "Subtitle": {
+                    "target": "com.amazonaws.quicksight#VisualSubtitleLabelOptions"
+                },
+                "ChartConfiguration": {
+                    "target": "com.amazonaws.quicksight#PluginVisualConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       A description of the plugin field wells and their persisted properties.\n      </p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A flexible visualization type that allows engineers \n      to create new custom charts in Amazon QuickSight.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualAxisName": {
+            "type": "enum",
+            "members": {
+                "GROUP_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP_BY"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualConfiguration": {
+            "type": "structure",
+            "members": {
+                "FieldWells": {
+                    "target": "com.amazonaws.quicksight#PluginVisualFieldWells",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field wells configuration of the plugin visual.</p>"
+                    }
+                },
+                "VisualOptions": {
+                    "target": "com.amazonaws.quicksight#PluginVisualOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persisted properties of the plugin visual.</p>"
+                    }
+                },
+                "SortConfiguration": {
+                    "target": "com.amazonaws.quicksight#PluginVisualSortConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration of the plugin visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The plugin visual configuration. This includes the field wells, sorting options, and persisted options of the plugin visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualFieldWell": {
+            "type": "structure",
+            "members": {
+                "AxisName": {
+                    "target": "com.amazonaws.quicksight#PluginVisualAxisName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic axis name for the field well.</p>"
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.quicksight#DimensionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dimensions for the field well.</p>"
+                    }
+                },
+                "Measures": {
+                    "target": "com.amazonaws.quicksight#MeasureFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of measures that exist in the field well.</p>"
+                    }
+                },
+                "Unaggregated": {
+                    "target": "com.amazonaws.quicksight#UnaggregatedFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unaggregated fields that exist in the field well.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of field wells for a plugin visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualFieldWells": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#PluginVisualFieldWell"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualItemsLimitConfiguration": {
+            "type": "structure",
+            "members": {
+                "ItemsLimit": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Determines how many values are be fetched at once.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query limits configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualOptions": {
+            "type": "structure",
+            "members": {
+                "VisualProperties": {
+                    "target": "com.amazonaws.quicksight#PluginVisualPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persisted properties and their values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options and persisted properties for the plugin visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#PluginVisualProperty"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualProperty": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the plugin visual property.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the plugin visual property.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key value pair of the persisted property.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualSortConfiguration": {
+            "type": "structure",
+            "members": {
+                "PluginVisualTableQuerySort": {
+                    "target": "com.amazonaws.quicksight#PluginVisualTableQuerySort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table query sorting options for the plugin visual.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines how the plugin visual sorts the data during query.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PluginVisualTableQuerySort": {
+            "type": "structure",
+            "members": {
+                "RowSort": {
+                    "target": "com.amazonaws.quicksight#RowSortList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how data is sorted in the response.</p>"
+                    }
+                },
+                "ItemsLimitConfiguration": {
+                    "target": "com.amazonaws.quicksight#PluginVisualItemsLimitConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of data to be returned by a query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The table query sorting options for the plugin visual.</p>"
             }
         },
         "com.amazonaws.quicksight#Port": {
@@ -40545,6 +42065,9 @@
                     "target": "com.amazonaws.quicksight#DescribeDashboardSnapshotJobResult"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeDashboardsQAConfiguration"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeDataSet"
                 },
                 {
@@ -40779,6 +42302,9 @@
                     "target": "com.amazonaws.quicksight#SearchGroups"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#SearchTopics"
+                },
+                {
                     "target": "com.amazonaws.quicksight#StartAssetBundleExportJob"
                 },
                 {
@@ -40831,6 +42357,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateDashboardPublishedVersion"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateDashboardsQAConfiguration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateDataSet"
@@ -42083,6 +43612,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -44280,6 +45815,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -44505,6 +46046,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -45246,6 +46793,118 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#SearchTopics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchTopicsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchTopicsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for any Q topic that exists in an Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/search/topics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TopicSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchTopicsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the topic that you want to find.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#TopicSearchFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters that you want to use to search for the topic.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchTopicsResponse": {
+            "type": "structure",
+            "members": {
+                "TopicSummaryList": {
+                    "target": "com.amazonaws.quicksight#TopicSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of topic summaries that is returned by the search topic request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#Seasonality": {
             "type": "integer",
             "traits": {
@@ -45919,6 +47578,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of a sheet. This name is displayed on the sheet's tab in the Amazon QuickSight\n            console.</p>"
                     }
+                },
+                "Images": {
+                    "target": "com.amazonaws.quicksight#SheetImageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of images on a sheet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -46138,6 +47803,12 @@
                         "smithy.api#documentation": "<p>The text boxes that are on a sheet.</p>"
                     }
                 },
+                "Images": {
+                    "target": "com.amazonaws.quicksight#SheetImageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of images on a sheet.</p>"
+                    }
+                },
                 "Layouts": {
                     "target": "com.amazonaws.quicksight#LayoutList",
                     "traits": {
@@ -46228,6 +47899,176 @@
                     "min": 0,
                     "max": 10000
                 }
+            }
+        },
+        "com.amazonaws.quicksight#SheetImage": {
+            "type": "structure",
+            "members": {
+                "SheetImageId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sheet image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#SheetImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scaling": {
+                    "target": "com.amazonaws.quicksight#SheetImageScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how the image is scaled.</p>"
+                    }
+                },
+                "Tooltip": {
+                    "target": "com.amazonaws.quicksight#SheetImageTooltipConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tooltip to be shown when hovering over the image.</p>"
+                    }
+                },
+                "ImageContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the image.</p>"
+                    }
+                },
+                "Interactions": {
+                    "target": "com.amazonaws.quicksight#ImageInteractionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The general image interactions setup for an image.</p>"
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.quicksight#ImageCustomActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom actions that are configured for an image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An image that is located on a sheet.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SheetImage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScalingType": {
+                    "target": "com.amazonaws.quicksight#SheetImageScalingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling option to use when fitting the image inside the container.</p>\n         <p>Valid values are defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SCALE_TO_WIDTH</code>: The image takes up the entire width of the container. The image aspect ratio is preserved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCALE_TO_HEIGHT</code>: The image takes up the entire height of the container. The image aspect ratio is preserved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCALE_TO_CONTAINER</code>: The image takes up the entire width and height of the container. The image aspect ratio is not preserved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SCALE_NONE</code>: The image is displayed in its original size and is not scaled to the container.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines how the image is scaled</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageScalingType": {
+            "type": "enum",
+            "members": {
+                "SCALE_TO_WIDTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCALE_TO_WIDTH"
+                    }
+                },
+                "SCALE_TO_HEIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCALE_TO_HEIGHT"
+                    }
+                },
+                "SCALE_TO_CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCALE_TO_CONTAINER"
+                    }
+                },
+                "SCALE_NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCALE_NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageSource": {
+            "type": "structure",
+            "members": {
+                "SheetImageStaticFileSource": {
+                    "target": "com.amazonaws.quicksight#SheetImageStaticFileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the static file that contains the image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageStaticFileSource": {
+            "type": "structure",
+            "members": {
+                "StaticFileId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the static file that contains the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the static file that contains the image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageTooltipConfiguration": {
+            "type": "structure",
+            "members": {
+                "TooltipText": {
+                    "target": "com.amazonaws.quicksight#SheetImageTooltipText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text that appears in the tooltip.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#Visibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the tooltip.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tooltip configuration for a sheet image.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SheetImageTooltipText": {
+            "type": "structure",
+            "members": {
+                "PlainText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The plain text format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The text that appears in the sheet image tooltip.</p>"
             }
         },
         "com.amazonaws.quicksight#SheetLayoutElementMaximizationOption": {
@@ -47340,6 +49181,27 @@
                 "smithy.api#documentation": "<p>The parameters for Spark.</p>"
             }
         },
+        "com.amazonaws.quicksight#SpatialStaticFile": {
+            "type": "structure",
+            "members": {
+                "StaticFileId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the spatial static file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.quicksight#StaticFileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the spatial static file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A static file that contains the geospatial data.</p>"
+            }
+        },
         "com.amazonaws.quicksight#SpecialValue": {
             "type": "enum",
             "members": {
@@ -48019,6 +49881,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The state perssitence configuration of an embedded dashboard.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StaticFile": {
+            "type": "structure",
+            "members": {
+                "ImageStaticFile": {
+                    "target": "com.amazonaws.quicksight#ImageStaticFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image static file.</p>"
+                    }
+                },
+                "SpatialStaticFile": {
+                    "target": "com.amazonaws.quicksight#SpatialStaticFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spacial static file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The static file.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StaticFileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#StaticFile"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StaticFileS3SourceOptions": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectKey": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the static file in the Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the Amazon S3 account that contains the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that contains the Amazon S3 location to download the static file from.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StaticFileSource": {
+            "type": "structure",
+            "members": {
+                "UrlOptions": {
+                    "target": "com.amazonaws.quicksight#StaticFileUrlSourceOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the URL to download the static file from.</p>"
+                    }
+                },
+                "S3Options": {
+                    "target": "com.amazonaws.quicksight#StaticFileS3SourceOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the Amazon S3 location to download the static file from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the static file.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StaticFileUrlSourceOptions": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to download the static file from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that contains the URL to download the static file from.</p>"
             }
         },
         "com.amazonaws.quicksight#Status": {
@@ -49275,6 +51233,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of custom actions that are configured for a visual.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -49855,6 +51819,12 @@
                 },
                 "QueryExecutionOptions": {
                     "target": "com.amazonaws.quicksight#QueryExecutionOptions"
+                },
+                "StaticFiles": {
+                    "target": "com.amazonaws.quicksight#StaticFileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static files for the definition.</p>"
+                    }
                 }
             },
             "traits": {
@@ -51596,6 +53566,70 @@
                 "smithy.api#documentation": "<p>A structure that represents a filter used to select items for a topic.</p>"
             }
         },
+        "com.amazonaws.quicksight#TopicFilterAttribute": {
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_USER"
+                    }
+                },
+                "QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "TOPIC_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPIC_NAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#TopicFilterOperator": {
+            "type": "enum",
+            "members": {
+                "StringEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEquals"
+                    }
+                },
+                "StringLike": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringLike"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#TopicFilters": {
             "type": "list",
             "member": {
@@ -52530,6 +54564,47 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#TopicSearchFilter": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#TopicFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator like equals or like.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#TopicFilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the topic search filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the topic search filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter that is used to search for a topic.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#TopicSearchFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#TopicSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.quicksight#TopicSingularFilterConstant": {
             "type": "structure",
             "members": {
@@ -53125,6 +55200,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
@@ -54926,6 +57007,94 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDashboardsQAConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateDashboardsQAConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateDashboardsQAConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Dashboard QA configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/dashboards-qa-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDashboardsQAConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardsQAStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardsQAStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of dashboards QA configuration that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateDashboardsQAConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "DashboardsQAStatus": {
+                    "target": "com.amazonaws.quicksight#DashboardsQAStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the dashboard QA configuration is enabled or not.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
                     }
                 }
             },
@@ -58818,6 +60987,12 @@
                         "smithy.api#documentation": "<p>A filled map.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html\">Creating filled maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
                     }
                 },
+                "LayerMapVisual": {
+                    "target": "com.amazonaws.quicksight#LayerMapVisual",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties for a layer map visual</p>"
+                    }
+                },
                 "FunnelChartVisual": {
                     "target": "com.amazonaws.quicksight#FunnelChartVisual",
                     "traits": {
@@ -58888,6 +61063,12 @@
                     "target": "com.amazonaws.quicksight#RadarChartVisual",
                     "traits": {
                         "smithy.api#documentation": "<p>A radar chart visual.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html\">Using radar charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
+                    }
+                },
+                "PluginVisual": {
+                    "target": "com.amazonaws.quicksight#PluginVisual",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom plugin visual type.</p>"
                     }
                 }
             },
@@ -59501,6 +61682,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
                     }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
+                    }
                 }
             },
             "traits": {
@@ -59801,6 +61988,12 @@
                     "target": "com.amazonaws.quicksight#ColumnHierarchyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The column hierarchy that is used during drill-downs and drill-ups.</p>"
+                    }
+                },
+                "VisualContentAltText": {
+                    "target": "com.amazonaws.quicksight#LongPlainText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alt text for the visual.</p>"
                     }
                 }
             },
