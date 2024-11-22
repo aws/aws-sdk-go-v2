@@ -4910,6 +4910,11 @@ func awsAwsquery_serializeDocumentCustomizedMetricSpecification(v *types.Customi
 		objectKey.String(*v.Namespace)
 	}
 
+	if v.Period != nil {
+		objectKey := object.Key("Period")
+		objectKey.Integer(*v.Period)
+	}
+
 	if len(v.Statistic) > 0 {
 		objectKey := object.Key("Statistic")
 		objectKey.String(string(v.Statistic))
@@ -6397,6 +6402,11 @@ func awsAwsquery_serializeDocumentTargetTrackingMetricDataQuery(v *types.TargetT
 		}
 	}
 
+	if v.Period != nil {
+		objectKey := object.Key("Period")
+		objectKey.Integer(*v.Period)
+	}
+
 	if v.ReturnData != nil {
 		objectKey := object.Key("ReturnData")
 		objectKey.Boolean(*v.ReturnData)
@@ -6414,6 +6424,11 @@ func awsAwsquery_serializeDocumentTargetTrackingMetricStat(v *types.TargetTracki
 		if err := awsAwsquery_serializeDocumentMetric(v.Metric, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.Period != nil {
+		objectKey := object.Key("Period")
+		objectKey.Integer(*v.Period)
 	}
 
 	if v.Stat != nil {

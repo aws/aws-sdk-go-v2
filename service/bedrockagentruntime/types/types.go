@@ -8,6 +8,41 @@ import (
 	"time"
 )
 
+//	Contains details about the Lambda function containing the business logic that
+//
+// is carried out upon invoking the action or the custom control method for
+// handling the information elicited from the user.
+//
+// The following types satisfy this interface:
+//
+//	ActionGroupExecutorMemberCustomControl
+//	ActionGroupExecutorMemberLambda
+type ActionGroupExecutor interface {
+	isActionGroupExecutor()
+}
+
+//	To return the action group invocation results directly in the InvokeInlineAgent
+//
+// response, specify RETURN_CONTROL .
+type ActionGroupExecutorMemberCustomControl struct {
+	Value CustomControlMethod
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionGroupExecutorMemberCustomControl) isActionGroupExecutor() {}
+
+//	The Amazon Resource Name (ARN) of the Lambda function containing the business
+//
+// logic that is carried out upon invoking the action.
+type ActionGroupExecutorMemberLambda struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionGroupExecutorMemberLambda) isActionGroupExecutor() {}
+
 // Contains information about the action group being invoked. For more information
 // about the possible structures, see the InvocationInput tab in [OrchestrationTrace]in the [Amazon Bedrock User Guide].
 //
@@ -51,6 +86,54 @@ type ActionGroupInvocationOutput struct {
 
 	// The JSON-formatted string returned by the API invoked by the action group.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details of the inline agent's action group.
+type AgentActionGroup struct {
+
+	//  The name of the action group.
+	//
+	// This member is required.
+	ActionGroupName *string
+
+	//  The Amazon Resource Name (ARN) of the Lambda function containing the business
+	// logic that is carried out upon invoking the action or the custom control method
+	// for handling the information elicited from the user.
+	ActionGroupExecutor ActionGroupExecutor
+
+	//  Contains either details about the S3 object containing the OpenAPI schema for
+	// the action group or the JSON or YAML-formatted payload defining the schema. For
+	// more information, see [Action group OpenAPI schemas].
+	//
+	// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
+	ApiSchema APISchema
+
+	//  A description of the action group.
+	Description *string
+
+	//  Contains details about the function schema for the action group or the JSON or
+	// YAML-formatted payload defining the schema.
+	FunctionSchema FunctionSchema
+
+	//  To allow your agent to request the user for additional information when trying
+	// to complete a task, set this field to AMAZON.UserInput . You must leave the
+	// description , apiSchema , and actionGroupExecutor fields blank for this action
+	// group.
+	//
+	// To allow your agent to generate, run, and troubleshoot code when trying to
+	// complete a task, set this field to AMAZON.CodeInterpreter . You must leave the
+	// description , apiSchema , and actionGroupExecutor fields blank for this action
+	// group.
+	//
+	// During orchestration, if your agent determines that it needs to invoke an API
+	// in an action group, but doesn't have enough information to complete the API
+	// request, it will invoke this action group instead and return an [Observation]reprompting the
+	// user for more information.
+	//
+	// [Observation]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
+	ParentActionGroupSignature ActionGroupSignature
 
 	noSmithyDocumentSerde
 }
@@ -178,6 +261,44 @@ type ApiResult struct {
 
 	noSmithyDocumentSerde
 }
+
+//	Contains details about the OpenAPI schema for the action group. For more
+//
+// information, see [Action group OpenAPI schemas]. You can either include the schema directly in the payload
+// field or you can upload it to an S3 bucket and specify the S3 bucket location in
+// the s3 field.
+//
+// The following types satisfy this interface:
+//
+//	APISchemaMemberPayload
+//	APISchemaMemberS3
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
+type APISchema interface {
+	isAPISchema()
+}
+
+//	The JSON or YAML-formatted payload defining the OpenAPI schema for the action
+//
+// group.
+type APISchemaMemberPayload struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*APISchemaMemberPayload) isAPISchema() {}
+
+//	Contains details about the S3 object containing the OpenAPI schema for the
+//
+// action group.
+type APISchemaMemberS3 struct {
+	Value S3Identifier
+
+	noSmithyDocumentSerde
+}
+
+func (*APISchemaMemberS3) isAPISchema() {}
 
 // Contains citations for a part of an agent response.
 type Attribution struct {
@@ -777,6 +898,28 @@ type FlowTraceNodeOutputField struct {
 	noSmithyDocumentSerde
 }
 
+//	Defines parameters that the agent needs to invoke from the user to complete
+//
+// the function. Corresponds to an action in an action group.
+type FunctionDefinition struct {
+
+	//  A name for the function.
+	//
+	// This member is required.
+	Name *string
+
+	//  A description of the function and its purpose.
+	Description *string
+
+	//  The parameters that the agent elicits from the user to fulfill the function.
+	Parameters map[string]ParameterDetail
+
+	//  Contains information if user confirmation is required to invoke the function.
+	RequireConfirmation RequireConfirmation
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the function that the agent predicts should be
 // called.
 //
@@ -860,6 +1003,26 @@ type FunctionResult struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains details about the function schema for the action group or the JSON or
+//
+// YAML-formatted payload defining the schema.
+//
+// The following types satisfy this interface:
+//
+//	FunctionSchemaMemberFunctions
+type FunctionSchema interface {
+	isFunctionSchema()
+}
+
+// A list of functions that each define an action in the action group.
+type FunctionSchemaMemberFunctions struct {
+	Value []FunctionDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
+
 // Contains metadata about a part of the generated response that is accompanied by
 // a citation.
 //
@@ -941,6 +1104,22 @@ type GuardrailConfiguration struct {
 	GuardrailId *string
 
 	// The version of the guardrail.
+	//
+	// This member is required.
+	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the guardrail.
+type GuardrailConfigurationWithArn struct {
+
+	//  The unique identifier for the guardrail.
+	//
+	// This member is required.
+	GuardrailIdentifier *string
+
+	//  The version of the guardrail.
 	//
 	// This member is required.
 	GuardrailVersion *string
@@ -1153,6 +1332,170 @@ type InferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains intermediate response for code interpreter if any files have been
+// generated.
+type InlineAgentFilePart struct {
+
+	// Files containing intermediate response for the user.
+	Files []OutputFile
+
+	noSmithyDocumentSerde
+}
+
+// Contains a part of an agent response and citations for it.
+type InlineAgentPayloadPart struct {
+
+	// Contains citations for a part of an agent response.
+	Attribution *Attribution
+
+	// A part of the agent response in bytes.
+	Bytes []byte
+
+	noSmithyDocumentSerde
+}
+
+// The response from invoking the agent and associated citations and trace
+// information.
+//
+// The following types satisfy this interface:
+//
+//	InlineAgentResponseStreamMemberChunk
+//	InlineAgentResponseStreamMemberFiles
+//	InlineAgentResponseStreamMemberReturnControl
+//	InlineAgentResponseStreamMemberTrace
+type InlineAgentResponseStream interface {
+	isInlineAgentResponseStream()
+}
+
+// Contains a part of an agent response and citations for it.
+type InlineAgentResponseStreamMemberChunk struct {
+	Value InlineAgentPayloadPart
+
+	noSmithyDocumentSerde
+}
+
+func (*InlineAgentResponseStreamMemberChunk) isInlineAgentResponseStream() {}
+
+// Contains intermediate response for code interpreter if any files have been
+// generated.
+type InlineAgentResponseStreamMemberFiles struct {
+	Value InlineAgentFilePart
+
+	noSmithyDocumentSerde
+}
+
+func (*InlineAgentResponseStreamMemberFiles) isInlineAgentResponseStream() {}
+
+// Contains the parameters and information that the agent elicited from the
+// customer to carry out an action. This information is returned to the system and
+// can be used in your own setup for fulfilling the action.
+type InlineAgentResponseStreamMemberReturnControl struct {
+	Value InlineAgentReturnControlPayload
+
+	noSmithyDocumentSerde
+}
+
+func (*InlineAgentResponseStreamMemberReturnControl) isInlineAgentResponseStream() {}
+
+// Contains information about the agent and session, alongside the agent's
+// reasoning process and results from calling actions and querying knowledge bases
+// and metadata about the trace. You can use the trace to understand how the agent
+// arrived at the response it provided the customer. For more information, see [Trace events].
+//
+// [Trace events]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html
+type InlineAgentResponseStreamMemberTrace struct {
+	Value InlineAgentTracePart
+
+	noSmithyDocumentSerde
+}
+
+func (*InlineAgentResponseStreamMemberTrace) isInlineAgentResponseStream() {}
+
+// Contains information to return from the action group that the agent has
+// predicted to invoke.
+//
+// This data type is used in the [InvokeAgent response] API operation.
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type InlineAgentReturnControlPayload struct {
+
+	// The identifier of the action group invocation.
+	InvocationId *string
+
+	// A list of objects that contain information about the parameters and inputs that
+	// need to be sent into the API operation or function, based on what the agent
+	// determines from its session with the user.
+	InvocationInputs []InvocationInputMember
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the agent and session, alongside the agent's
+// reasoning process and results from calling API actions and querying knowledge
+// bases and metadata about the trace. You can use the trace to understand how the
+// agent arrived at the response it provided the customer. For more information,
+// see [Trace enablement].
+//
+// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
+type InlineAgentTracePart struct {
+
+	// The unique identifier of the session with the agent.
+	SessionId *string
+
+	// Contains one part of the agent's reasoning process and results from calling API
+	// actions and querying knowledge bases. You can use the trace to understand how
+	// the agent arrived at the response it provided the customer. For more
+	// information, see [Trace enablement].
+	//
+	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
+	Trace Trace
+
+	noSmithyDocumentSerde
+}
+
+//	Contains parameters that specify various attributes that persist across a
+//
+// session or prompt. You can define session state attributes as key-value pairs
+// when writing a [Lambda function]for an action group or pass them when making an InvokeInlineAgent
+// request. Use session state attributes to control and provide conversational
+// context for your inline agent and to help customize your agent's behavior. For
+// more information, see [Control session context]
+//
+// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+// [Lambda function]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
+type InlineSessionState struct {
+
+	//  Contains information about the files used by code interpreter.
+	Files []InputFile
+
+	//  The identifier of the invocation of an action. This value must match the
+	// invocationId returned in the InvokeInlineAgent response for the action whose
+	// results are provided in the returnControlInvocationResults field. For more
+	// information, see [Return control to the agent developer].
+	//
+	// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+	InvocationId *string
+
+	//  Contains attributes that persist across a session and the values of those
+	// attributes.
+	PromptSessionAttributes map[string]string
+
+	//  Contains information about the results from the action group invocation. For
+	// more information, see [Return control to the agent developer].
+	//
+	// If you include this field in the sessionState field, the inputText field will
+	// be ignored.
+	//
+	// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+	ReturnControlInvocationResults []InvocationResultMember
+
+	//  Contains attributes that persist across a session and the values of those
+	// attributes.
+	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details of the source files.
 type InputFile struct {
 
@@ -1286,6 +1629,28 @@ type InvocationResultMemberMemberFunctionResult struct {
 }
 
 func (*InvocationResultMemberMemberFunctionResult) isInvocationResultMember() {}
+
+// Details of the knowledge base associated withe inline agent.
+type KnowledgeBase struct {
+
+	//  The description of the knowledge base associated with the inline agent.
+	//
+	// This member is required.
+	Description *string
+
+	//  The unique identifier for a knowledge base associated with the inline agent.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	//  The configurations to apply to the knowledge base during query. For more
+	// information, see [Query configurations].
+	//
+	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+	RetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
+
+	noSmithyDocumentSerde
+}
 
 // Configurations to apply to a knowledge base attached to the agent during query.
 // For more information, see [Knowledge base retrieval configurations].
@@ -1820,6 +2185,25 @@ type Parameter struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a parameter in a function for an action group.
+type ParameterDetail struct {
+
+	//  The data type of the parameter.
+	//
+	// This member is required.
+	Type ParameterType
+
+	//  A description of the parameter. Helps the foundation model determine how to
+	// elicit the parameters from the user.
+	Description *string
+
+	//  Whether the parameter is required for the agent to complete the function for
+	// action group invocation.
+	Required *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains a part of an agent response and citations for it.
 type PayloadPart struct {
 
@@ -1971,6 +2355,86 @@ type PreProcessingTraceMemberModelInvocationOutput struct {
 }
 
 func (*PreProcessingTraceMemberModelInvocationOutput) isPreProcessingTrace() {}
+
+//	Contains configurations to override a prompt template in one part of an agent
+//
+// sequence. For more information, see [Advanced prompts].
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+type PromptConfiguration struct {
+
+	// Defines the prompt template with which to replace the default prompt template.
+	// You can use placeholder variables in the base prompt template to customize the
+	// prompt. For more information, see [Prompt template placeholder variables]. For more information, see [Configure the prompt templates].
+	//
+	// [Configure the prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
+	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
+	BasePromptTemplate *string
+
+	// Contains inference parameters to use when the agent invokes a foundation model
+	// in the part of the agent sequence defined by the promptType . For more
+	// information, see [Inference parameters for foundation models].
+	//
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	InferenceConfiguration *InferenceConfiguration
+
+	// Specifies whether to override the default parser Lambda function when parsing
+	// the raw foundation model output in the part of the agent sequence defined by the
+	// promptType . If you set the field as OVERRIDEN , the overrideLambda field in
+	// the [PromptOverrideConfiguration]must be specified with the ARN of a Lambda function.
+	//
+	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
+	ParserMode CreationMode
+
+	// Specifies whether to override the default prompt template for this promptType .
+	// Set this value to OVERRIDDEN to use the prompt that you provide in the
+	// basePromptTemplate . If you leave it as DEFAULT , the agent uses a default
+	// prompt template.
+	PromptCreationMode CreationMode
+
+	// Specifies whether to allow the inline agent to carry out the step specified in
+	// the promptType . If you set this value to DISABLED , the agent skips that step.
+	// The default state for each promptType is as follows.
+	//
+	//   - PRE_PROCESSING – ENABLED
+	//
+	//   - ORCHESTRATION – ENABLED
+	//
+	//   - KNOWLEDGE_BASE_RESPONSE_GENERATION – ENABLED
+	//
+	//   - POST_PROCESSING – DISABLED
+	PromptState PromptState
+
+	//  The step in the agent sequence that this prompt configuration applies to.
+	PromptType PromptType
+
+	noSmithyDocumentSerde
+}
+
+// Contains configurations to override prompts in different parts of an agent
+// sequence. For more information, see [Advanced prompts].
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+type PromptOverrideConfiguration struct {
+
+	// Contains configurations to override a prompt template in one part of an agent
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+	//
+	// This member is required.
+	PromptConfigurations []PromptConfiguration
+
+	// The ARN of the Lambda function to use when parsing the raw foundation model
+	// output in parts of the agent sequence. If you specify this field, at least one
+	// of the promptConfigurations must contain a parserMode value that is set to
+	// OVERRIDDEN . For more information, see [Parser Lambda function in Amazon Bedrock Agents].
+	//
+	// [Parser Lambda function in Amazon Bedrock Agents]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
+	OverrideLambda *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains the template for the prompt that's sent to the model for response
 // generation. For more information, see [Knowledge base prompt templates].
@@ -2623,6 +3087,18 @@ type ReturnControlPayload struct {
 	noSmithyDocumentSerde
 }
 
+// The identifier information for an Amazon S3 bucket.
+type S3Identifier struct {
+
+	//  The name of the S3 bucket.
+	S3BucketName *string
+
+	//  The S3 object key for the S3 resource.
+	S3ObjectKey *string
+
+	noSmithyDocumentSerde
+}
+
 // The unique wrapper object of the document from the S3 location.
 type S3ObjectDoc struct {
 
@@ -2914,12 +3390,16 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isActionGroupExecutor()        {}
+func (*UnknownUnionMember) isAPISchema()                  {}
 func (*UnknownUnionMember) isFlowInputContent()           {}
 func (*UnknownUnionMember) isFlowOutputContent()          {}
 func (*UnknownUnionMember) isFlowResponseStream()         {}
 func (*UnknownUnionMember) isFlowTrace()                  {}
 func (*UnknownUnionMember) isFlowTraceNodeInputContent()  {}
 func (*UnknownUnionMember) isFlowTraceNodeOutputContent() {}
+func (*UnknownUnionMember) isFunctionSchema()             {}
+func (*UnknownUnionMember) isInlineAgentResponseStream()  {}
 func (*UnknownUnionMember) isInputPrompt()                {}
 func (*UnknownUnionMember) isInvocationInputMember()      {}
 func (*UnknownUnionMember) isInvocationResultMember()     {}

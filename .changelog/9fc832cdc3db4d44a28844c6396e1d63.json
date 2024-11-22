@@ -1,0 +1,8 @@
+{
+    "id": "9fc832cd-c3db-4d44-a288-44c6396e1d63",
+    "type": "feature",
+    "description": "This release adds support for advertising trusted CA certificate names in associated trust stores.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

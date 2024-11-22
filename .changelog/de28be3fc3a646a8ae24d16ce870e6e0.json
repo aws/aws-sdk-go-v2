@@ -1,0 +1,8 @@
+{
+    "id": "de28be3f-c3a6-46a8-ae24-d16ce870e6e0",
+    "type": "feature",
+    "description": "AWS CodePipeline V2 type pipelines now support ECRBuildAndPublish and InspectorScan actions.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

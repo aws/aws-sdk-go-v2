@@ -1,0 +1,8 @@
+{
+    "id": "dc789918-de36-4787-a9d2-61e03c53fb9c",
+    "type": "feature",
+    "description": "Extend inspector2 service model to include ServiceQuotaExceededException.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

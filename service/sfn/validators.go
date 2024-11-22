@@ -1330,9 +1330,6 @@ func validateOpTestStateInput(v *TestStateInput) error {
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

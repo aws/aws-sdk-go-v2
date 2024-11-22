@@ -1,0 +1,8 @@
+{
+    "id": "7d0afee4-dfd4-487a-ad8c-f2f8ad2908d8",
+    "type": "feature",
+    "description": "This release adds APIs for new features for SageMaker endpoint to scale down to zero instances, native support for multi-adapter inference, and endpoint scaling improvements.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

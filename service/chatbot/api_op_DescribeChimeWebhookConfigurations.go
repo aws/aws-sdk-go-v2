@@ -30,7 +30,7 @@ func (c *Client) DescribeChimeWebhookConfigurations(ctx context.Context, params 
 
 type DescribeChimeWebhookConfigurationsInput struct {
 
-	// An optional Amazon Resource Number (ARN) of a ChimeWebhookConfiguration to
+	// An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to
 	// describe.
 	ChatConfigurationArn *string
 

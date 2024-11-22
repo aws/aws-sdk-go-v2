@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the user pool multi-factor authentication (MFA) configuration.
+// Sets the user pool multi-factor authentication (MFA) and passkey configuration.
 //
 // This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
@@ -22,7 +22,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
+// Amazon Web Services service, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -82,6 +82,11 @@ type SetUserPoolMfaConfigInput struct {
 	// disables TOTP.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
+	// The configuration of your user pool for passkey, or webauthN, authentication
+	// and registration. You can set this configuration independent of the MFA
+	// configuration options in this operation.
+	WebAuthnConfiguration *types.WebAuthnConfigurationType
+
 	noSmithyDocumentSerde
 }
 
@@ -111,6 +116,10 @@ type SetUserPoolMfaConfigOutput struct {
 	// Shows user pool configuration for time-based one-time password (TOTP) MFA.
 	// Includes TOTP enabled or disabled state.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
+
+	// The configuration of your user pool for passkey, or webauthN, biometric and
+	// security-key devices.
+	WebAuthnConfiguration *types.WebAuthnConfigurationType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

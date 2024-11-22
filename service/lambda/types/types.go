@@ -427,6 +427,12 @@ type EventSourceMappingConfiguration struct {
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32
 
+	// (Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+	// configuration for the event source. For more information, see [Provisioned Mode].
+	//
+	// [Provisioned Mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
+	ProvisionedPollerConfig *ProvisionedPollerConfig
+
 	//  (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
@@ -1183,6 +1189,22 @@ type ProvisionedConcurrencyConfigListItem struct {
 	// For failed allocations, the reason that provisioned concurrency could not be
 	// allocated.
 	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The [Provisioned Mode] configuration for the event source. Use Provisioned Mode to customize the
+// minimum and maximum number of event pollers for your event source. An event
+// poller is a compute unit that provides approximately 5 MBps of throughput.
+//
+// [Provisioned Mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
+type ProvisionedPollerConfig struct {
+
+	// The maximum number of event pollers this event source can scale up to.
+	MaximumPollers *int32
+
+	// The minimum number of event pollers this event source can scale down to.
+	MinimumPollers *int32
 
 	noSmithyDocumentSerde
 }

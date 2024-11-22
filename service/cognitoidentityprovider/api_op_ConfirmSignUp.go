@@ -117,6 +117,10 @@ type ConfirmSignUpInput struct {
 	// of a user pool client and username plus the client ID in the message.
 	SecretHash *string
 
+	// The optional session ID from a SignUp API request. You can sign in a user
+	// directly from the sign-up process with the USER_AUTH authentication flow.
+	Session *string
+
 	// Contextual data about your user session, such as the device fingerprint, IP
 	// address, or location. Amazon Cognito advanced security evaluates the risk of an
 	// authentication event based on the context that your app generates and passes to
@@ -128,6 +132,16 @@ type ConfirmSignUpInput struct {
 
 // Represents the response from the server for the registration confirmation.
 type ConfirmSignUpOutput struct {
+
+	// You can automatically sign users in with the one-time password that they
+	// provided in a successful ConfirmSignUp request. To do this, pass the Session
+	// parameter from the ConfirmSignUp response in the Session parameter of an [InitiateAuth] or [AdminInitiateAuth]
+	// request.
+	//
+	// [AdminInitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html
+	// [InitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html
+	Session *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

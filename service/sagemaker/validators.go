@@ -7609,6 +7609,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 			invalidParams.AddNested("InstanceStorageConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OverrideVpcConfig != nil {
+		if err := validateVpcConfig(v.OverrideVpcConfig); err != nil {
+			invalidParams.AddNested("OverrideVpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9472,9 +9477,7 @@ func validateInferenceComponentSpecification(v *types.InferenceComponentSpecific
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentSpecification"}
-	if v.ComputeResourceRequirements == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComputeResourceRequirements"))
-	} else if v.ComputeResourceRequirements != nil {
+	if v.ComputeResourceRequirements != nil {
 		if err := validateInferenceComponentComputeResourceRequirements(v.ComputeResourceRequirements); err != nil {
 			invalidParams.AddNested("ComputeResourceRequirements", err.(smithy.InvalidParamsError))
 		}
@@ -13975,9 +13978,6 @@ func validateOpCreateInferenceComponentInput(v *CreateInferenceComponentInput) e
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
-	if v.VariantName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VariantName"))
-	}
 	if v.Specification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Specification"))
 	} else if v.Specification != nil {
@@ -13985,9 +13985,7 @@ func validateOpCreateInferenceComponentInput(v *CreateInferenceComponentInput) e
 			invalidParams.AddNested("Specification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RuntimeConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuntimeConfig"))
-	} else if v.RuntimeConfig != nil {
+	if v.RuntimeConfig != nil {
 		if err := validateInferenceComponentRuntimeConfig(v.RuntimeConfig); err != nil {
 			invalidParams.AddNested("RuntimeConfig", err.(smithy.InvalidParamsError))
 		}

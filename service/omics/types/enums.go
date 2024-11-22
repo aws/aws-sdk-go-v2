@@ -751,6 +751,31 @@ func (SchemaValueType) Values() []SchemaValueType {
 	}
 }
 
+type SequenceStoreStatus string
+
+// Enum values for SequenceStoreStatus
+const (
+	SequenceStoreStatusCreating SequenceStoreStatus = "CREATING"
+	SequenceStoreStatusActive   SequenceStoreStatus = "ACTIVE"
+	SequenceStoreStatusUpdating SequenceStoreStatus = "UPDATING"
+	SequenceStoreStatusDeleting SequenceStoreStatus = "DELETING"
+	SequenceStoreStatusFailed   SequenceStoreStatus = "FAILED"
+)
+
+// Values returns all known values for SequenceStoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SequenceStoreStatus) Values() []SequenceStoreStatus {
+	return []SequenceStoreStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type ShareResourceType string
 
 // Enum values for ShareResourceType
@@ -878,6 +903,25 @@ func (StoreStatus) Values() []StoreStatus {
 		"DELETING",
 		"ACTIVE",
 		"FAILED",
+	}
+}
+
+type StoreType string
+
+// Enum values for StoreType
+const (
+	StoreTypeSequenceStore  StoreType = "SEQUENCE_STORE"
+	StoreTypeReferenceStore StoreType = "REFERENCE_STORE"
+)
+
+// Values returns all known values for StoreType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StoreType) Values() []StoreType {
+	return []StoreType{
+		"SEQUENCE_STORE",
+		"REFERENCE_STORE",
 	}
 }
 

@@ -29,7 +29,7 @@ func (c *Client) UpdateSlackChannelConfiguration(ctx context.Context, params *Up
 
 type UpdateSlackChannelConfigurationInput struct {
 
-	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration to update.
+	// The Amazon Resource Name (ARN) of the SlackChannelConfiguration to update.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

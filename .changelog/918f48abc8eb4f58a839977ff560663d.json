@@ -1,0 +1,8 @@
+{
+    "id": "918f48ab-c8eb-4f58-a839-977ff560663d",
+    "type": "documentation",
+    "description": "While integrating WSP-DCV rebrand, a few mentions were erroneously renamed from WSP to DCV. This release reverts those mentions back to WSP.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

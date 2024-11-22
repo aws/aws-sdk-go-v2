@@ -29,7 +29,7 @@ func (c *Client) GetMicrosoftTeamsChannelConfiguration(ctx context.Context, para
 
 type GetMicrosoftTeamsChannelConfigurationInput struct {
 
-	// The Amazon Resource Number (ARN) of the MicrosoftTeamsChannelConfiguration to
+	// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to
 	// retrieve.
 	//
 	// This member is required.

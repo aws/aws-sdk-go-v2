@@ -29,7 +29,7 @@ func (c *Client) ListMicrosoftTeamsUserIdentities(ctx context.Context, params *L
 
 type ListMicrosoftTeamsUserIdentitiesInput struct {
 
-	// The Amazon Resource Number (ARN) of the MicrosoftTeamsChannelConfiguration
+	// The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration
 	// associated with the user identities to list.
 	ChatConfigurationArn *string
 

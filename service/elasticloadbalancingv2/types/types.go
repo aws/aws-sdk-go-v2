@@ -840,6 +840,9 @@ type MinimumLoadBalancerCapacity struct {
 // Information about the mutual authentication attributes of a listener.
 type MutualAuthenticationAttributes struct {
 
+	// Indicates whether trust store CA certificate names are advertised.
+	AdvertiseTrustStoreCaNames AdvertiseTrustStoreCaNamesEnum
+
 	// Indicates whether expired client certificates are ignored.
 	IgnoreClientCertificateExpiry *bool
 

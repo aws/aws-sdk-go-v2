@@ -15360,6 +15360,200 @@ func awsRestjson1_deserializeOpDocumentDescribeDashboardSnapshotJobResultOutput(
 	return nil
 }
 
+type awsRestjson1_deserializeOpDescribeDashboardsQAConfiguration struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeDashboardsQAConfiguration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeDashboardsQAConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeDashboardsQAConfiguration(response, &metadata)
+	}
+	output := &DescribeDashboardsQAConfigurationOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsDescribeDashboardsQAConfigurationOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeDashboardsQAConfigurationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeDashboardsQAConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsDescribeDashboardsQAConfigurationOutput(v *DescribeDashboardsQAConfigurationOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentDescribeDashboardsQAConfigurationOutput(v **DescribeDashboardsQAConfigurationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeDashboardsQAConfigurationOutput
+	if *v == nil {
+		sv = &DescribeDashboardsQAConfigurationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DashboardsQAStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardsQAStatus to be of type string, got %T instead", value)
+				}
+				sv.DashboardsQAStatus = types.DashboardsQAStatus(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDescribeDataSet struct {
 }
 
@@ -30950,6 +31144,205 @@ func awsRestjson1_deserializeOpDocumentSearchGroupsOutput(v **SearchGroupsOutput
 	return nil
 }
 
+type awsRestjson1_deserializeOpSearchTopics struct {
+}
+
+func (*awsRestjson1_deserializeOpSearchTopics) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpSearchTopics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorSearchTopics(response, &metadata)
+	}
+	output := &SearchTopicsOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsSearchTopicsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentSearchTopicsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorSearchTopics(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedUserEditionException", errorCode):
+		return awsRestjson1_deserializeErrorUnsupportedUserEditionException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsSearchTopicsOutput(v *SearchTopicsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentSearchTopicsOutput(v **SearchTopicsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *SearchTopicsOutput
+	if *v == nil {
+		sv = &SearchTopicsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		case "TopicSummaryList":
+			if err := awsRestjson1_deserializeDocumentTopicSummaries(&sv.TopicSummaryList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpStartAssetBundleExportJob struct {
 }
 
@@ -34524,6 +34917,200 @@ func awsRestjson1_deserializeOpDocumentUpdateDashboardPublishedVersionOutput(v *
 					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.DashboardId = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpUpdateDashboardsQAConfiguration struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateDashboardsQAConfiguration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateDashboardsQAConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateDashboardsQAConfiguration(response, &metadata)
+	}
+	output := &UpdateDashboardsQAConfigurationOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsUpdateDashboardsQAConfigurationOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateDashboardsQAConfigurationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateDashboardsQAConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalFailureException", errorCode):
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsUpdateDashboardsQAConfigurationOutput(v *UpdateDashboardsQAConfigurationOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	v.Status = int32(response.StatusCode)
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentUpdateDashboardsQAConfigurationOutput(v **UpdateDashboardsQAConfigurationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateDashboardsQAConfigurationOutput
+	if *v == nil {
+		sv = &UpdateDashboardsQAConfigurationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DashboardsQAStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardsQAStatus to be of type string, got %T instead", value)
+				}
+				sv.DashboardsQAStatus = types.DashboardsQAStatus(jtv)
 			}
 
 		case "RequestId":
@@ -42139,6 +42726,11 @@ func awsRestjson1_deserializeDocumentAnalysisDefinition(v **types.AnalysisDefini
 				return err
 			}
 
+		case "StaticFiles":
+			if err := awsRestjson1_deserializeDocumentStaticFileList(&sv.StaticFiles, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -48313,6 +48905,15 @@ func awsRestjson1_deserializeDocumentBarChartVisual(v **types.BarChartVisual, va
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -49387,6 +49988,15 @@ func awsRestjson1_deserializeDocumentBoxPlotVisual(v **types.BoxPlotVisual, valu
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":
@@ -52556,6 +53166,15 @@ func awsRestjson1_deserializeDocumentComboChartVisual(v **types.ComboChartVisual
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54093,6 +54712,15 @@ func awsRestjson1_deserializeDocumentCustomContentVisual(v **types.CustomContent
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -55208,6 +55836,11 @@ func awsRestjson1_deserializeDocumentDashboardVersionDefinition(v **types.Dashbo
 
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetDefinitionList(&sv.Sheets, value); err != nil {
+				return err
+			}
+
+		case "StaticFiles":
+			if err := awsRestjson1_deserializeDocumentStaticFileList(&sv.StaticFiles, value); err != nil {
 				return err
 			}
 
@@ -62239,6 +62872,15 @@ func awsRestjson1_deserializeDocumentFilledMapVisual(v **types.FilledMapVisual, 
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -64174,6 +64816,15 @@ func awsRestjson1_deserializeDocumentFontConfiguration(v **types.FontConfigurati
 				sv.FontDecoration = types.FontDecoration(jtv)
 			}
 
+		case "FontFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FontFamily = ptr.String(jtv)
+			}
+
 		case "FontSize":
 			if err := awsRestjson1_deserializeDocumentFontSize(&sv.FontSize, value); err != nil {
 				return err
@@ -64258,6 +64909,15 @@ func awsRestjson1_deserializeDocumentFontSize(v **types.FontSize, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "Absolute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PixelLength to be of type string, got %T instead", value)
+				}
+				sv.Absolute = ptr.String(jtv)
+			}
+
 		case "Relative":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -65464,6 +66124,15 @@ func awsRestjson1_deserializeDocumentFunnelChartVisual(v **types.FunnelChartVisu
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -65933,6 +66602,15 @@ func awsRestjson1_deserializeDocumentGaugeChartVisual(v **types.GaugeChartVisual
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -65940,6 +66618,335 @@ func awsRestjson1_deserializeDocumentGaugeChartVisual(v **types.GaugeChartVisual
 					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialCategoricalColor(v **types.GeospatialCategoricalColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialCategoricalColor
+	if *v == nil {
+		sv = &types.GeospatialCategoricalColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CategoryDataColors":
+			if err := awsRestjson1_deserializeDocumentGeospatialCategoricalDataColorList(&sv.CategoryDataColors, value); err != nil {
+				return err
+			}
+
+		case "DefaultOpacity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DefaultOpacity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DefaultOpacity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Opacity to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "NullDataSettings":
+			if err := awsRestjson1_deserializeDocumentGeospatialNullDataSettings(&sv.NullDataSettings, value); err != nil {
+				return err
+			}
+
+		case "NullDataVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.NullDataVisibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialCategoricalDataColor(v **types.GeospatialCategoricalDataColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialCategoricalDataColor
+	if *v == nil {
+		sv = &types.GeospatialCategoricalDataColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "DataValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DataValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialCategoricalDataColorList(v *[]types.GeospatialCategoricalDataColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GeospatialCategoricalDataColor
+	if *v == nil {
+		cv = []types.GeospatialCategoricalDataColor{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GeospatialCategoricalDataColor
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGeospatialCategoricalDataColor(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialCircleRadius(v **types.GeospatialCircleRadius, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialCircleRadius
+	if *v == nil {
+		sv = &types.GeospatialCircleRadius{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Radius":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Radius = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Radius = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected GeospatialRadius to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialCircleSymbolStyle(v **types.GeospatialCircleSymbolStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialCircleSymbolStyle
+	if *v == nil {
+		sv = &types.GeospatialCircleSymbolStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CircleRadius":
+			if err := awsRestjson1_deserializeDocumentGeospatialCircleRadius(&sv.CircleRadius, value); err != nil {
+				return err
+			}
+
+		case "FillColor":
+			if err := awsRestjson1_deserializeDocumentGeospatialColor(&sv.FillColor, value); err != nil {
+				return err
+			}
+
+		case "StrokeColor":
+			if err := awsRestjson1_deserializeDocumentGeospatialColor(&sv.StrokeColor, value); err != nil {
+				return err
+			}
+
+		case "StrokeWidth":
+			if err := awsRestjson1_deserializeDocumentGeospatialLineWidth(&sv.StrokeWidth, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialColor(v **types.GeospatialColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialColor
+	if *v == nil {
+		sv = &types.GeospatialColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Categorical":
+			if err := awsRestjson1_deserializeDocumentGeospatialCategoricalColor(&sv.Categorical, value); err != nil {
+				return err
+			}
+
+		case "Gradient":
+			if err := awsRestjson1_deserializeDocumentGeospatialGradientColor(&sv.Gradient, value); err != nil {
+				return err
+			}
+
+		case "Solid":
+			if err := awsRestjson1_deserializeDocumentGeospatialSolidColor(&sv.Solid, value); err != nil {
+				return err
 			}
 
 		default:
@@ -66172,6 +67179,234 @@ func awsRestjson1_deserializeDocumentGeospatialCoordinateBounds(v **types.Geospa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGeospatialDataSourceItem(v **types.GeospatialDataSourceItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialDataSourceItem
+	if *v == nil {
+		sv = &types.GeospatialDataSourceItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StaticFileDataSource":
+			if err := awsRestjson1_deserializeDocumentGeospatialStaticFileSource(&sv.StaticFileDataSource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialGradientColor(v **types.GeospatialGradientColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialGradientColor
+	if *v == nil {
+		sv = &types.GeospatialGradientColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultOpacity":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DefaultOpacity = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DefaultOpacity = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Opacity to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "NullDataSettings":
+			if err := awsRestjson1_deserializeDocumentGeospatialNullDataSettings(&sv.NullDataSettings, value); err != nil {
+				return err
+			}
+
+		case "NullDataVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.NullDataVisibility = types.Visibility(jtv)
+			}
+
+		case "StepColors":
+			if err := awsRestjson1_deserializeDocumentGeospatialGradientStepColorList(&sv.StepColors, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialGradientStepColor(v **types.GeospatialGradientStepColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialGradientStepColor
+	if *v == nil {
+		sv = &types.GeospatialGradientStepColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "DataValue":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataValue = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DataValue = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialGradientStepColorList(v *[]types.GeospatialGradientStepColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GeospatialGradientStepColor
+	if *v == nil {
+		cv = []types.GeospatialGradientStepColor{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GeospatialGradientStepColor
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGeospatialGradientStepColor(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGeospatialHeatmapColorScale(v **types.GeospatialHeatmapColorScale, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -66315,6 +67550,537 @@ func awsRestjson1_deserializeDocumentGeospatialHeatmapDataColorList(v *[]types.G
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerColorField(v **types.GeospatialLayerColorField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLayerColorField
+	if *v == nil {
+		sv = &types.GeospatialLayerColorField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColorDimensionsFields":
+			if err := awsRestjson1_deserializeDocumentGeospatialLayerDimensionFieldList(&sv.ColorDimensionsFields, value); err != nil {
+				return err
+			}
+
+		case "ColorValuesFields":
+			if err := awsRestjson1_deserializeDocumentGeospatialLayerMeasureFieldList(&sv.ColorValuesFields, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerDefinition(v **types.GeospatialLayerDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLayerDefinition
+	if *v == nil {
+		sv = &types.GeospatialLayerDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LineLayer":
+			if err := awsRestjson1_deserializeDocumentGeospatialLineLayer(&sv.LineLayer, value); err != nil {
+				return err
+			}
+
+		case "PointLayer":
+			if err := awsRestjson1_deserializeDocumentGeospatialPointLayer(&sv.PointLayer, value); err != nil {
+				return err
+			}
+
+		case "PolygonLayer":
+			if err := awsRestjson1_deserializeDocumentGeospatialPolygonLayer(&sv.PolygonLayer, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerDimensionFieldList(v *[]types.DimensionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DimensionField
+	if *v == nil {
+		cv = []types.DimensionField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DimensionField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDimensionField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerItem(v **types.GeospatialLayerItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLayerItem
+	if *v == nil {
+		sv = &types.GeospatialLayerItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Actions":
+			if err := awsRestjson1_deserializeDocumentLayerCustomActionList(&sv.Actions, value); err != nil {
+				return err
+			}
+
+		case "DataSource":
+			if err := awsRestjson1_deserializeDocumentGeospatialDataSourceItem(&sv.DataSource, value); err != nil {
+				return err
+			}
+
+		case "JoinDefinition":
+			if err := awsRestjson1_deserializeDocumentGeospatialLayerJoinDefinition(&sv.JoinDefinition, value); err != nil {
+				return err
+			}
+
+		case "Label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		case "LayerDefinition":
+			if err := awsRestjson1_deserializeDocumentGeospatialLayerDefinition(&sv.LayerDefinition, value); err != nil {
+				return err
+			}
+
+		case "LayerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LayerId = ptr.String(jtv)
+			}
+
+		case "LayerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeospatialLayerType to be of type string, got %T instead", value)
+				}
+				sv.LayerType = types.GeospatialLayerType(jtv)
+			}
+
+		case "Tooltip":
+			if err := awsRestjson1_deserializeDocumentTooltipOptions(&sv.Tooltip, value); err != nil {
+				return err
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerJoinDefinition(v **types.GeospatialLayerJoinDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLayerJoinDefinition
+	if *v == nil {
+		sv = &types.GeospatialLayerJoinDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColorField":
+			if err := awsRestjson1_deserializeDocumentGeospatialLayerColorField(&sv.ColorField, value); err != nil {
+				return err
+			}
+
+		case "DatasetKeyField":
+			if err := awsRestjson1_deserializeDocumentUnaggregatedField(&sv.DatasetKeyField, value); err != nil {
+				return err
+			}
+
+		case "ShapeKeyField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ShapeKeyField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerMapConfiguration(v **types.GeospatialLayerMapConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLayerMapConfiguration
+	if *v == nil {
+		sv = &types.GeospatialLayerMapConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentVisualInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
+		case "Legend":
+			if err := awsRestjson1_deserializeDocumentLegendOptions(&sv.Legend, value); err != nil {
+				return err
+			}
+
+		case "MapLayers":
+			if err := awsRestjson1_deserializeDocumentGeospatialMapLayerList(&sv.MapLayers, value); err != nil {
+				return err
+			}
+
+		case "MapState":
+			if err := awsRestjson1_deserializeDocumentGeospatialMapState(&sv.MapState, value); err != nil {
+				return err
+			}
+
+		case "MapStyle":
+			if err := awsRestjson1_deserializeDocumentGeospatialMapStyle(&sv.MapStyle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLayerMeasureFieldList(v *[]types.MeasureField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MeasureField
+	if *v == nil {
+		cv = []types.MeasureField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MeasureField
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMeasureField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLineLayer(v **types.GeospatialLineLayer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLineLayer
+	if *v == nil {
+		sv = &types.GeospatialLineLayer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Style":
+			if err := awsRestjson1_deserializeDocumentGeospatialLineStyle(&sv.Style, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLineStyle(v **types.GeospatialLineStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLineStyle
+	if *v == nil {
+		sv = &types.GeospatialLineStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LineSymbolStyle":
+			if err := awsRestjson1_deserializeDocumentGeospatialLineSymbolStyle(&sv.LineSymbolStyle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLineSymbolStyle(v **types.GeospatialLineSymbolStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLineSymbolStyle
+	if *v == nil {
+		sv = &types.GeospatialLineSymbolStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FillColor":
+			if err := awsRestjson1_deserializeDocumentGeospatialColor(&sv.FillColor, value); err != nil {
+				return err
+			}
+
+		case "LineWidth":
+			if err := awsRestjson1_deserializeDocumentGeospatialLineWidth(&sv.LineWidth, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialLineWidth(v **types.GeospatialLineWidth, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialLineWidth
+	if *v == nil {
+		sv = &types.GeospatialLineWidth{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LineWidth":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LineWidth = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LineWidth = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected GeospatialWidth to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -66471,6 +68237,143 @@ func awsRestjson1_deserializeDocumentGeospatialMapFieldWells(v **types.Geospatia
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGeospatialMapLayerList(v *[]types.GeospatialLayerItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GeospatialLayerItem
+	if *v == nil {
+		cv = []types.GeospatialLayerItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GeospatialLayerItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGeospatialLayerItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialMapState(v **types.GeospatialMapState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialMapState
+	if *v == nil {
+		sv = &types.GeospatialMapState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bounds":
+			if err := awsRestjson1_deserializeDocumentGeospatialCoordinateBounds(&sv.Bounds, value); err != nil {
+				return err
+			}
+
+		case "MapNavigation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeospatialMapNavigation to be of type string, got %T instead", value)
+				}
+				sv.MapNavigation = types.GeospatialMapNavigation(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialMapStyle(v **types.GeospatialMapStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialMapStyle
+	if *v == nil {
+		sv = &types.GeospatialMapStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackgroundColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.BackgroundColor = ptr.String(jtv)
+			}
+
+		case "BaseMapStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BaseMapStyleType to be of type string, got %T instead", value)
+				}
+				sv.BaseMapStyle = types.BaseMapStyleType(jtv)
+			}
+
+		case "BaseMapVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.BaseMapVisibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGeospatialMapStyleOptions(v **types.GeospatialMapStyleOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -66558,6 +68461,15 @@ func awsRestjson1_deserializeDocumentGeospatialMapVisual(v **types.GeospatialMap
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -66565,6 +68477,197 @@ func awsRestjson1_deserializeDocumentGeospatialMapVisual(v **types.GeospatialMap
 					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialNullDataSettings(v **types.GeospatialNullDataSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialNullDataSettings
+	if *v == nil {
+		sv = &types.GeospatialNullDataSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SymbolStyle":
+			if err := awsRestjson1_deserializeDocumentGeospatialNullSymbolStyle(&sv.SymbolStyle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialNullSymbolStyle(v **types.GeospatialNullSymbolStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialNullSymbolStyle
+	if *v == nil {
+		sv = &types.GeospatialNullSymbolStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FillColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.FillColor = ptr.String(jtv)
+			}
+
+		case "StrokeColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.StrokeColor = ptr.String(jtv)
+			}
+
+		case "StrokeWidth":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StrokeWidth = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.StrokeWidth = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected GeospatialWidth to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialPointLayer(v **types.GeospatialPointLayer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialPointLayer
+	if *v == nil {
+		sv = &types.GeospatialPointLayer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Style":
+			if err := awsRestjson1_deserializeDocumentGeospatialPointStyle(&sv.Style, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialPointStyle(v **types.GeospatialPointStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialPointStyle
+	if *v == nil {
+		sv = &types.GeospatialPointStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CircleSymbolStyle":
+			if err := awsRestjson1_deserializeDocumentGeospatialCircleSymbolStyle(&sv.CircleSymbolStyle, value); err != nil {
+				return err
 			}
 
 		default:
@@ -66615,6 +68718,213 @@ func awsRestjson1_deserializeDocumentGeospatialPointStyleOptions(v **types.Geosp
 					return fmt.Errorf("expected GeospatialSelectedPointStyle to be of type string, got %T instead", value)
 				}
 				sv.SelectedPointStyle = types.GeospatialSelectedPointStyle(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialPolygonLayer(v **types.GeospatialPolygonLayer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialPolygonLayer
+	if *v == nil {
+		sv = &types.GeospatialPolygonLayer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Style":
+			if err := awsRestjson1_deserializeDocumentGeospatialPolygonStyle(&sv.Style, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialPolygonStyle(v **types.GeospatialPolygonStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialPolygonStyle
+	if *v == nil {
+		sv = &types.GeospatialPolygonStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PolygonSymbolStyle":
+			if err := awsRestjson1_deserializeDocumentGeospatialPolygonSymbolStyle(&sv.PolygonSymbolStyle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialPolygonSymbolStyle(v **types.GeospatialPolygonSymbolStyle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialPolygonSymbolStyle
+	if *v == nil {
+		sv = &types.GeospatialPolygonSymbolStyle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FillColor":
+			if err := awsRestjson1_deserializeDocumentGeospatialColor(&sv.FillColor, value); err != nil {
+				return err
+			}
+
+		case "StrokeColor":
+			if err := awsRestjson1_deserializeDocumentGeospatialColor(&sv.StrokeColor, value); err != nil {
+				return err
+			}
+
+		case "StrokeWidth":
+			if err := awsRestjson1_deserializeDocumentGeospatialLineWidth(&sv.StrokeWidth, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialSolidColor(v **types.GeospatialSolidColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialSolidColor
+	if *v == nil {
+		sv = &types.GeospatialSolidColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColorWithTransparency to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeospatialColorState to be of type string, got %T instead", value)
+				}
+				sv.State = types.GeospatialColorState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGeospatialStaticFileSource(v **types.GeospatialStaticFileSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeospatialStaticFileSource
+	if *v == nil {
+		sv = &types.GeospatialStaticFileSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StaticFileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.StaticFileId = ptr.String(jtv)
 			}
 
 		default:
@@ -67891,6 +70201,15 @@ func awsRestjson1_deserializeDocumentHeatMapVisual(v **types.HeatMapVisual, valu
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -68215,6 +70534,15 @@ func awsRestjson1_deserializeDocumentHistogramVisual(v **types.HistogramVisual, 
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":
@@ -68679,6 +71007,268 @@ func awsRestjson1_deserializeDocumentImageConfiguration(v **types.ImageConfigura
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImageCustomAction(v **types.ImageCustomAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageCustomAction
+	if *v == nil {
+		sv = &types.ImageCustomAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionOperations":
+			if err := awsRestjson1_deserializeDocumentImageCustomActionOperationList(&sv.ActionOperations, value); err != nil {
+				return err
+			}
+
+		case "CustomActionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.CustomActionId = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageCustomActionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WidgetStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.WidgetStatus(jtv)
+			}
+
+		case "Trigger":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageCustomActionTrigger to be of type string, got %T instead", value)
+				}
+				sv.Trigger = types.ImageCustomActionTrigger(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageCustomActionList(v *[]types.ImageCustomAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ImageCustomAction
+	if *v == nil {
+		cv = []types.ImageCustomAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ImageCustomAction
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentImageCustomAction(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageCustomActionOperation(v **types.ImageCustomActionOperation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageCustomActionOperation
+	if *v == nil {
+		sv = &types.ImageCustomActionOperation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NavigationOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionNavigationOperation(&sv.NavigationOperation, value); err != nil {
+				return err
+			}
+
+		case "SetParametersOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionSetParametersOperation(&sv.SetParametersOperation, value); err != nil {
+				return err
+			}
+
+		case "URLOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionURLOperation(&sv.URLOperation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageCustomActionOperationList(v *[]types.ImageCustomActionOperation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ImageCustomActionOperation
+	if *v == nil {
+		cv = []types.ImageCustomActionOperation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ImageCustomActionOperation
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentImageCustomActionOperation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageInteractionOptions(v **types.ImageInteractionOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageInteractionOptions
+	if *v == nil {
+		sv = &types.ImageInteractionOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImageMenuOption":
+			if err := awsRestjson1_deserializeDocumentImageMenuOption(&sv.ImageMenuOption, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageMenuOption(v **types.ImageMenuOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageMenuOption
+	if *v == nil {
+		sv = &types.ImageMenuOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashboardBehavior to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityStatus = types.DashboardBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImageSet(v **types.ImageSet, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -68812,6 +71402,51 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageStaticFile(v **types.ImageStaticFile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageStaticFile
+	if *v == nil {
+		sv = &types.ImageStaticFile{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Source":
+			if err := awsRestjson1_deserializeDocumentStaticFileSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "StaticFileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.StaticFileId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -69241,6 +71876,15 @@ func awsRestjson1_deserializeDocumentInsightVisual(v **types.InsightVisual, valu
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":
@@ -70888,6 +73532,15 @@ func awsRestjson1_deserializeDocumentKPIVisual(v **types.KPIVisual, value interf
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -71025,6 +73678,270 @@ func awsRestjson1_deserializeDocumentLabelOptions(v **types.LabelOptions, value 
 					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
 				}
 				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLayerCustomAction(v **types.LayerCustomAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LayerCustomAction
+	if *v == nil {
+		sv = &types.LayerCustomAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionOperations":
+			if err := awsRestjson1_deserializeDocumentLayerCustomActionOperationList(&sv.ActionOperations, value); err != nil {
+				return err
+			}
+
+		case "CustomActionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.CustomActionId = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LayerCustomActionName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WidgetStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.WidgetStatus(jtv)
+			}
+
+		case "Trigger":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LayerCustomActionTrigger to be of type string, got %T instead", value)
+				}
+				sv.Trigger = types.LayerCustomActionTrigger(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLayerCustomActionList(v *[]types.LayerCustomAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LayerCustomAction
+	if *v == nil {
+		cv = []types.LayerCustomAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LayerCustomAction
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLayerCustomAction(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLayerCustomActionOperation(v **types.LayerCustomActionOperation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LayerCustomActionOperation
+	if *v == nil {
+		sv = &types.LayerCustomActionOperation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FilterOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionFilterOperation(&sv.FilterOperation, value); err != nil {
+				return err
+			}
+
+		case "NavigationOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionNavigationOperation(&sv.NavigationOperation, value); err != nil {
+				return err
+			}
+
+		case "SetParametersOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionSetParametersOperation(&sv.SetParametersOperation, value); err != nil {
+				return err
+			}
+
+		case "URLOperation":
+			if err := awsRestjson1_deserializeDocumentCustomActionURLOperation(&sv.URLOperation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLayerCustomActionOperationList(v *[]types.LayerCustomActionOperation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LayerCustomActionOperation
+	if *v == nil {
+		cv = []types.LayerCustomActionOperation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LayerCustomActionOperation
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLayerCustomActionOperation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLayerMapVisual(v **types.LayerMapVisual, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LayerMapVisual
+	if *v == nil {
+		sv = &types.LayerMapVisual{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChartConfiguration":
+			if err := awsRestjson1_deserializeDocumentGeospatialLayerMapConfiguration(&sv.ChartConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DataSetIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSetIdentifier to be of type string, got %T instead", value)
+				}
+				sv.DataSetIdentifier = ptr.String(jtv)
+			}
+
+		case "Subtitle":
+			if err := awsRestjson1_deserializeDocumentVisualSubtitleLabelOptions(&sv.Subtitle, value); err != nil {
+				return err
+			}
+
+		case "Title":
+			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
+				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
+		case "VisualId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.VisualId = ptr.String(jtv)
 			}
 
 		default:
@@ -71194,6 +74111,11 @@ func awsRestjson1_deserializeDocumentLegendOptions(v **types.LegendOptions, valu
 
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentLabelOptions(&sv.Title, value); err != nil {
+				return err
+			}
+
+		case "ValueFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.ValueFontConfiguration, value); err != nil {
 				return err
 			}
 
@@ -71835,6 +74757,15 @@ func awsRestjson1_deserializeDocumentLineChartVisual(v **types.LineChartVisual, 
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":
@@ -73604,6 +76535,24 @@ func awsRestjson1_deserializeDocumentNamespaceInfoV2(v **types.NamespaceInfoV2, 
 					return fmt.Errorf("expected NamespaceStatus to be of type string, got %T instead", value)
 				}
 				sv.CreationStatus = types.NamespaceStatus(jtv)
+			}
+
+		case "IamIdentityCenterApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IamIdentityCenterApplicationArn = ptr.String(jtv)
+			}
+
+		case "IamIdentityCenterInstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IamIdentityCenterInstanceArn = ptr.String(jtv)
 			}
 
 		case "IdentityStore":
@@ -77060,6 +80009,15 @@ func awsRestjson1_deserializeDocumentPieChartVisual(v **types.PieChartVisual, va
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -78425,6 +81383,15 @@ func awsRestjson1_deserializeDocumentPivotTableVisual(v **types.PivotTableVisual
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -78518,6 +81485,454 @@ func awsRestjson1_deserializeDocumentPivotTotalOptions(v **types.PivotTotalOptio
 
 		case "ValueCellStyle":
 			if err := awsRestjson1_deserializeDocumentTableCellStyle(&sv.ValueCellStyle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisual(v **types.PluginVisual, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisual
+	if *v == nil {
+		sv = &types.PluginVisual{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChartConfiguration":
+			if err := awsRestjson1_deserializeDocumentPluginVisualConfiguration(&sv.ChartConfiguration, value); err != nil {
+				return err
+			}
+
+		case "PluginArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.PluginArn = ptr.String(jtv)
+			}
+
+		case "Subtitle":
+			if err := awsRestjson1_deserializeDocumentVisualSubtitleLabelOptions(&sv.Subtitle, value); err != nil {
+				return err
+			}
+
+		case "Title":
+			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
+				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
+		case "VisualId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.VisualId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualConfiguration(v **types.PluginVisualConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualConfiguration
+	if *v == nil {
+		sv = &types.PluginVisualConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldWells":
+			if err := awsRestjson1_deserializeDocumentPluginVisualFieldWells(&sv.FieldWells, value); err != nil {
+				return err
+			}
+
+		case "SortConfiguration":
+			if err := awsRestjson1_deserializeDocumentPluginVisualSortConfiguration(&sv.SortConfiguration, value); err != nil {
+				return err
+			}
+
+		case "VisualOptions":
+			if err := awsRestjson1_deserializeDocumentPluginVisualOptions(&sv.VisualOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualFieldWell(v **types.PluginVisualFieldWell, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualFieldWell
+	if *v == nil {
+		sv = &types.PluginVisualFieldWell{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AxisName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PluginVisualAxisName to be of type string, got %T instead", value)
+				}
+				sv.AxisName = types.PluginVisualAxisName(jtv)
+			}
+
+		case "Dimensions":
+			if err := awsRestjson1_deserializeDocumentDimensionFieldList(&sv.Dimensions, value); err != nil {
+				return err
+			}
+
+		case "Measures":
+			if err := awsRestjson1_deserializeDocumentMeasureFieldList(&sv.Measures, value); err != nil {
+				return err
+			}
+
+		case "Unaggregated":
+			if err := awsRestjson1_deserializeDocumentUnaggregatedFieldList(&sv.Unaggregated, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualFieldWells(v *[]types.PluginVisualFieldWell, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PluginVisualFieldWell
+	if *v == nil {
+		cv = []types.PluginVisualFieldWell{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PluginVisualFieldWell
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPluginVisualFieldWell(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualItemsLimitConfiguration(v **types.PluginVisualItemsLimitConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualItemsLimitConfiguration
+	if *v == nil {
+		sv = &types.PluginVisualItemsLimitConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ItemsLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ItemsLimit = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualOptions(v **types.PluginVisualOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualOptions
+	if *v == nil {
+		sv = &types.PluginVisualOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "VisualProperties":
+			if err := awsRestjson1_deserializeDocumentPluginVisualPropertiesList(&sv.VisualProperties, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualPropertiesList(v *[]types.PluginVisualProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PluginVisualProperty
+	if *v == nil {
+		cv = []types.PluginVisualProperty{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PluginVisualProperty
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPluginVisualProperty(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualProperty(v **types.PluginVisualProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualProperty
+	if *v == nil {
+		sv = &types.PluginVisualProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualSortConfiguration(v **types.PluginVisualSortConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualSortConfiguration
+	if *v == nil {
+		sv = &types.PluginVisualSortConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PluginVisualTableQuerySort":
+			if err := awsRestjson1_deserializeDocumentPluginVisualTableQuerySort(&sv.PluginVisualTableQuerySort, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPluginVisualTableQuerySort(v **types.PluginVisualTableQuerySort, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PluginVisualTableQuerySort
+	if *v == nil {
+		sv = &types.PluginVisualTableQuerySort{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ItemsLimitConfiguration":
+			if err := awsRestjson1_deserializeDocumentPluginVisualItemsLimitConfiguration(&sv.ItemsLimitConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RowSort":
+			if err := awsRestjson1_deserializeDocumentRowSortList(&sv.RowSort, value); err != nil {
 				return err
 			}
 
@@ -79589,6 +83004,15 @@ func awsRestjson1_deserializeDocumentRadarChartVisual(v **types.RadarChartVisual
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":
@@ -82117,6 +85541,15 @@ func awsRestjson1_deserializeDocumentSankeyDiagramVisual(v **types.SankeyDiagram
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -82455,6 +85888,15 @@ func awsRestjson1_deserializeDocumentScatterPlotVisual(v **types.ScatterPlotVisu
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":
@@ -83668,6 +87110,11 @@ func awsRestjson1_deserializeDocumentSheet(v **types.Sheet, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "Images":
+			if err := awsRestjson1_deserializeDocumentSheetImageList(&sv.Images, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -83935,6 +87382,11 @@ func awsRestjson1_deserializeDocumentSheetDefinition(v **types.SheetDefinition, 
 				return err
 			}
 
+		case "Images":
+			if err := awsRestjson1_deserializeDocumentSheetImageList(&sv.Images, value); err != nil {
+				return err
+			}
+
 		case "Layouts":
 			if err := awsRestjson1_deserializeDocumentLayoutList(&sv.Layouts, value); err != nil {
 				return err
@@ -84146,6 +87598,315 @@ func awsRestjson1_deserializeDocumentSheetElementRenderingRuleList(v *[]types.Sh
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImage(v **types.SheetImage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetImage
+	if *v == nil {
+		sv = &types.SheetImage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Actions":
+			if err := awsRestjson1_deserializeDocumentImageCustomActionList(&sv.Actions, value); err != nil {
+				return err
+			}
+
+		case "ImageContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.ImageContentAltText = ptr.String(jtv)
+			}
+
+		case "Interactions":
+			if err := awsRestjson1_deserializeDocumentImageInteractionOptions(&sv.Interactions, value); err != nil {
+				return err
+			}
+
+		case "Scaling":
+			if err := awsRestjson1_deserializeDocumentSheetImageScalingConfiguration(&sv.Scaling, value); err != nil {
+				return err
+			}
+
+		case "SheetImageId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.SheetImageId = ptr.String(jtv)
+			}
+
+		case "Source":
+			if err := awsRestjson1_deserializeDocumentSheetImageSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "Tooltip":
+			if err := awsRestjson1_deserializeDocumentSheetImageTooltipConfiguration(&sv.Tooltip, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImageList(v *[]types.SheetImage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SheetImage
+	if *v == nil {
+		cv = []types.SheetImage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SheetImage
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSheetImage(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImageScalingConfiguration(v **types.SheetImageScalingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetImageScalingConfiguration
+	if *v == nil {
+		sv = &types.SheetImageScalingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ScalingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetImageScalingType to be of type string, got %T instead", value)
+				}
+				sv.ScalingType = types.SheetImageScalingType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImageSource(v **types.SheetImageSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetImageSource
+	if *v == nil {
+		sv = &types.SheetImageSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SheetImageStaticFileSource":
+			if err := awsRestjson1_deserializeDocumentSheetImageStaticFileSource(&sv.SheetImageStaticFileSource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImageStaticFileSource(v **types.SheetImageStaticFileSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetImageStaticFileSource
+	if *v == nil {
+		sv = &types.SheetImageStaticFileSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StaticFileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.StaticFileId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImageTooltipConfiguration(v **types.SheetImageTooltipConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetImageTooltipConfiguration
+	if *v == nil {
+		sv = &types.SheetImageTooltipConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TooltipText":
+			if err := awsRestjson1_deserializeDocumentSheetImageTooltipText(&sv.TooltipText, value); err != nil {
+				return err
+			}
+
+		case "Visibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Visibility to be of type string, got %T instead", value)
+				}
+				sv.Visibility = types.Visibility(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSheetImageTooltipText(v **types.SheetImageTooltipText, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SheetImageTooltipText
+	if *v == nil {
+		sv = &types.SheetImageTooltipText{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PlainText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.PlainText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -85965,6 +89726,51 @@ func awsRestjson1_deserializeDocumentSparkParameters(v **types.SparkParameters, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSpatialStaticFile(v **types.SpatialStaticFile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpatialStaticFile
+	if *v == nil {
+		sv = &types.SpatialStaticFile{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Source":
+			if err := awsRestjson1_deserializeDocumentStaticFileSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "StaticFileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.StaticFileId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSqlServerParameters(v **types.SqlServerParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -86150,6 +89956,220 @@ func awsRestjson1_deserializeDocumentStarburstParameters(v **types.StarburstPara
 					return fmt.Errorf("expected StarburstProductType to be of type string, got %T instead", value)
 				}
 				sv.ProductType = types.StarburstProductType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticFile(v **types.StaticFile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StaticFile
+	if *v == nil {
+		sv = &types.StaticFile{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImageStaticFile":
+			if err := awsRestjson1_deserializeDocumentImageStaticFile(&sv.ImageStaticFile, value); err != nil {
+				return err
+			}
+
+		case "SpatialStaticFile":
+			if err := awsRestjson1_deserializeDocumentSpatialStaticFile(&sv.SpatialStaticFile, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticFileList(v *[]types.StaticFile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StaticFile
+	if *v == nil {
+		cv = []types.StaticFile{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StaticFile
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentStaticFile(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticFileS3SourceOptions(v **types.StaticFileS3SourceOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StaticFileS3SourceOptions
+	if *v == nil {
+		sv = &types.StaticFileS3SourceOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "ObjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ObjectKey = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticFileSource(v **types.StaticFileSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StaticFileSource
+	if *v == nil {
+		sv = &types.StaticFileSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Options":
+			if err := awsRestjson1_deserializeDocumentStaticFileS3SourceOptions(&sv.S3Options, value); err != nil {
+				return err
+			}
+
+		case "UrlOptions":
+			if err := awsRestjson1_deserializeDocumentStaticFileUrlSourceOptions(&sv.UrlOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStaticFileUrlSourceOptions(v **types.StaticFileUrlSourceOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StaticFileUrlSourceOptions
+	if *v == nil {
+		sv = &types.StaticFileUrlSourceOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:
@@ -88414,6 +92434,15 @@ func awsRestjson1_deserializeDocumentTableVisual(v **types.TableVisual, value in
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -89187,6 +93216,11 @@ func awsRestjson1_deserializeDocumentTemplateVersionDefinition(v **types.Templat
 
 		case "Sheets":
 			if err := awsRestjson1_deserializeDocumentSheetDefinitionList(&sv.Sheets, value); err != nil {
+				return err
+			}
+
+		case "StaticFiles":
+			if err := awsRestjson1_deserializeDocumentStaticFileList(&sv.StaticFiles, value); err != nil {
 				return err
 			}
 
@@ -94494,6 +98528,15 @@ func awsRestjson1_deserializeDocumentTreeMapVisual(v **types.TreeMapVisual, valu
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -95596,6 +99639,11 @@ func awsRestjson1_deserializeDocumentVisual(v **types.Visual, value interface{})
 				return err
 			}
 
+		case "LayerMapVisual":
+			if err := awsRestjson1_deserializeDocumentLayerMapVisual(&sv.LayerMapVisual, value); err != nil {
+				return err
+			}
+
 		case "LineChartVisual":
 			if err := awsRestjson1_deserializeDocumentLineChartVisual(&sv.LineChartVisual, value); err != nil {
 				return err
@@ -95608,6 +99656,11 @@ func awsRestjson1_deserializeDocumentVisual(v **types.Visual, value interface{})
 
 		case "PivotTableVisual":
 			if err := awsRestjson1_deserializeDocumentPivotTableVisual(&sv.PivotTableVisual, value); err != nil {
+				return err
+			}
+
+		case "PluginVisual":
+			if err := awsRestjson1_deserializeDocumentPluginVisual(&sv.PluginVisual, value); err != nil {
 				return err
 			}
 
@@ -96999,6 +101052,15 @@ func awsRestjson1_deserializeDocumentWaterfallVisual(v **types.WaterfallVisual, 
 				return err
 			}
 
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
+			}
+
 		case "VisualId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -97571,6 +101633,15 @@ func awsRestjson1_deserializeDocumentWordCloudVisual(v **types.WordCloudVisual, 
 		case "Title":
 			if err := awsRestjson1_deserializeDocumentVisualTitleLabelOptions(&sv.Title, value); err != nil {
 				return err
+			}
+
+		case "VisualContentAltText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongPlainText to be of type string, got %T instead", value)
+				}
+				sv.VisualContentAltText = ptr.String(jtv)
 			}
 
 		case "VisualId":

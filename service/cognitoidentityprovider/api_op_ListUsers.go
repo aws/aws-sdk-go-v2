@@ -61,7 +61,7 @@ type ListUsersInput struct {
 	// user profile before an AttributesToGet parameter returns results.
 	AttributesToGet []string
 
-	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
+	// A filter string of the form "AttributeName Filter-Type "AttributeValue" .
 	// Quotation marks within the filter string must be escaped using the backslash ( \
 	// ) character. For example, "family_name = \"Reddy\"" .
 	//

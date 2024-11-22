@@ -34,7 +34,7 @@ type UpdateMicrosoftTeamsChannelConfigurationInput struct {
 	// This member is required.
 	ChannelId *string
 
-	// The Amazon Resource Number (ARN) of the TeamsChannelConfiguration to update.
+	// The Amazon Resource Name (ARN) of the TeamsChannelConfiguration to update.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

@@ -179,6 +179,26 @@ func (AttachedFileInvalidRequestExceptionReason) Values() []AttachedFileInvalidR
 	}
 }
 
+type AttachedFileServiceQuotaExceededExceptionReason string
+
+// Enum values for AttachedFileServiceQuotaExceededExceptionReason
+const (
+	AttachedFileServiceQuotaExceededExceptionReasonTotalFileSizeExceeded  AttachedFileServiceQuotaExceededExceptionReason = "TOTAL_FILE_SIZE_EXCEEDED"
+	AttachedFileServiceQuotaExceededExceptionReasonTotalFileCountExceeded AttachedFileServiceQuotaExceededExceptionReason = "TOTAL_FILE_COUNT_EXCEEDED"
+)
+
+// Values returns all known values for
+// AttachedFileServiceQuotaExceededExceptionReason. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachedFileServiceQuotaExceededExceptionReason) Values() []AttachedFileServiceQuotaExceededExceptionReason {
+	return []AttachedFileServiceQuotaExceededExceptionReason{
+		"TOTAL_FILE_SIZE_EXCEEDED",
+		"TOTAL_FILE_COUNT_EXCEEDED",
+	}
+}
+
 type BehaviorType string
 
 // Enum values for BehaviorType
@@ -205,6 +225,7 @@ const (
 	ChannelVoice Channel = "VOICE"
 	ChannelChat  Channel = "CHAT"
 	ChannelTask  Channel = "TASK"
+	ChannelEmail Channel = "EMAIL"
 )
 
 // Values returns all known values for Channel. Note that this can be expanded in
@@ -216,6 +237,7 @@ func (Channel) Values() []Channel {
 		"VOICE",
 		"CHAT",
 		"TASK",
+		"EMAIL",
 	}
 }
 
@@ -379,6 +401,9 @@ const (
 	ContactInitiationMethodDisconnect       ContactInitiationMethod = "DISCONNECT"
 	ContactInitiationMethodMonitor          ContactInitiationMethod = "MONITOR"
 	ContactInitiationMethodExternalOutbound ContactInitiationMethod = "EXTERNAL_OUTBOUND"
+	ContactInitiationMethodWebrtcApi        ContactInitiationMethod = "WEBRTC_API"
+	ContactInitiationMethodAgentReply       ContactInitiationMethod = "AGENT_REPLY"
+	ContactInitiationMethodFlow             ContactInitiationMethod = "FLOW"
 )
 
 // Values returns all known values for ContactInitiationMethod. Note that this can
@@ -396,6 +421,9 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 		"DISCONNECT",
 		"MONITOR",
 		"EXTERNAL_OUTBOUND",
+		"WEBRTC_API",
+		"AGENT_REPLY",
+		"FLOW",
 	}
 }
 
@@ -494,6 +522,31 @@ func (DirectoryType) Values() []DirectoryType {
 	}
 }
 
+type EmailHeaderType string
+
+// Enum values for EmailHeaderType
+const (
+	EmailHeaderTypeReferences       EmailHeaderType = "REFERENCES"
+	EmailHeaderTypeMessageId        EmailHeaderType = "MESSAGE_ID"
+	EmailHeaderTypeInReplyTo        EmailHeaderType = "IN_REPLY_TO"
+	EmailHeaderTypeXSesSpamVerdict  EmailHeaderType = "X_SES_SPAM_VERDICT"
+	EmailHeaderTypeXSesVirusVerdict EmailHeaderType = "X_SES_VIRUS_VERDICT"
+)
+
+// Values returns all known values for EmailHeaderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmailHeaderType) Values() []EmailHeaderType {
+	return []EmailHeaderType{
+		"REFERENCES",
+		"MESSAGE_ID",
+		"IN_REPLY_TO",
+		"X_SES_SPAM_VERDICT",
+		"X_SES_VIRUS_VERDICT",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType
@@ -519,6 +572,7 @@ const (
 	EndpointTypeVoip                  EndpointType = "VOIP"
 	EndpointTypeContactFlow           EndpointType = "CONTACT_FLOW"
 	EndpointTypeConnectPhonenumberArn EndpointType = "CONNECT_PHONENUMBER_ARN"
+	EndpointTypeEmailAddress          EndpointType = "EMAIL_ADDRESS"
 )
 
 // Values returns all known values for EndpointType. Note that this can be
@@ -531,6 +585,7 @@ func (EndpointType) Values() []EndpointType {
 		"VOIP",
 		"CONTACT_FLOW",
 		"CONNECT_PHONENUMBER_ARN",
+		"EMAIL_ADDRESS",
 	}
 }
 
@@ -750,7 +805,8 @@ type FileUseCaseType string
 
 // Enum values for FileUseCaseType
 const (
-	FileUseCaseTypeAttachment FileUseCaseType = "ATTACHMENT"
+	FileUseCaseTypeEmailMessage FileUseCaseType = "EMAIL_MESSAGE"
+	FileUseCaseTypeAttachment   FileUseCaseType = "ATTACHMENT"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -759,6 +815,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FileUseCaseType) Values() []FileUseCaseType {
 	return []FileUseCaseType{
+		"EMAIL_MESSAGE",
 		"ATTACHMENT",
 	}
 }
@@ -768,6 +825,8 @@ type FlowAssociationResourceType string
 // Enum values for FlowAssociationResourceType
 const (
 	FlowAssociationResourceTypeSmsPhoneNumber FlowAssociationResourceType = "SMS_PHONE_NUMBER"
+	FlowAssociationResourceTypeInboundEmail   FlowAssociationResourceType = "INBOUND_EMAIL"
+	FlowAssociationResourceTypeOutboundEmail  FlowAssociationResourceType = "OUTBOUND_EMAIL"
 )
 
 // Values returns all known values for FlowAssociationResourceType. Note that this
@@ -777,6 +836,8 @@ const (
 func (FlowAssociationResourceType) Values() []FlowAssociationResourceType {
 	return []FlowAssociationResourceType{
 		"SMS_PHONE_NUMBER",
+		"INBOUND_EMAIL",
+		"OUTBOUND_EMAIL",
 	}
 }
 
@@ -916,6 +977,40 @@ func (HoursOfOperationDays) Values() []HoursOfOperationDays {
 	}
 }
 
+type InboundMessageSourceType string
+
+// Enum values for InboundMessageSourceType
+const (
+	InboundMessageSourceTypeRaw InboundMessageSourceType = "RAW"
+)
+
+// Values returns all known values for InboundMessageSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InboundMessageSourceType) Values() []InboundMessageSourceType {
+	return []InboundMessageSourceType{
+		"RAW",
+	}
+}
+
+type InitiateAs string
+
+// Enum values for InitiateAs
+const (
+	InitiateAsConnectedToUser InitiateAs = "CONNECTED_TO_USER"
+)
+
+// Values returns all known values for InitiateAs. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InitiateAs) Values() []InitiateAs {
+	return []InitiateAs{
+		"CONNECTED_TO_USER",
+	}
+}
+
 type InstanceAttributeType string
 
 // Enum values for InstanceAttributeType
@@ -1017,6 +1112,7 @@ const (
 	InstanceStorageResourceTypeScreenRecordings                     InstanceStorageResourceType = "SCREEN_RECORDINGS"
 	InstanceStorageResourceTypeRealTimeContactAnalysisChatSegments  InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS"
 	InstanceStorageResourceTypeRealTimeContactAnalysisVoiceSegments InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"
+	InstanceStorageResourceTypeEmailMessages                        InstanceStorageResourceType = "EMAIL_MESSAGES"
 )
 
 // Values returns all known values for InstanceStorageResourceType. Note that this
@@ -1037,6 +1133,7 @@ func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 		"SCREEN_RECORDINGS",
 		"REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
 		"REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
+		"EMAIL_MESSAGES",
 	}
 }
 
@@ -1054,6 +1151,7 @@ const (
 	IntegrationTypeCasesDomain          IntegrationType = "CASES_DOMAIN"
 	IntegrationTypeApplication          IntegrationType = "APPLICATION"
 	IntegrationTypeFileScanner          IntegrationType = "FILE_SCANNER"
+	IntegrationTypeSesIdentity          IntegrationType = "SES_IDENTITY"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -1072,6 +1170,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"CASES_DOMAIN",
 		"APPLICATION",
 		"FILE_SCANNER",
+		"SES_IDENTITY",
 	}
 }
 
@@ -1126,6 +1225,8 @@ type ListFlowAssociationResourceType string
 // Enum values for ListFlowAssociationResourceType
 const (
 	ListFlowAssociationResourceTypeVoicePhoneNumber ListFlowAssociationResourceType = "VOICE_PHONE_NUMBER"
+	ListFlowAssociationResourceTypeInboundEmail     ListFlowAssociationResourceType = "INBOUND_EMAIL"
+	ListFlowAssociationResourceTypeOutboundEmail    ListFlowAssociationResourceType = "OUTBOUND_EMAIL"
 )
 
 // Values returns all known values for ListFlowAssociationResourceType. Note that
@@ -1136,6 +1237,8 @@ const (
 func (ListFlowAssociationResourceType) Values() []ListFlowAssociationResourceType {
 	return []ListFlowAssociationResourceType{
 		"VOICE_PHONE_NUMBER",
+		"INBOUND_EMAIL",
+		"OUTBOUND_EMAIL",
 	}
 }
 
@@ -1269,6 +1372,25 @@ func (NumericQuestionPropertyAutomationLabel) Values() []NumericQuestionProperty
 		"CONTACT_DURATION",
 		"AGENT_INTERACTION_DURATION",
 		"CUSTOMER_HOLD_TIME",
+	}
+}
+
+type OutboundMessageSourceType string
+
+// Enum values for OutboundMessageSourceType
+const (
+	OutboundMessageSourceTypeTemplate OutboundMessageSourceType = "TEMPLATE"
+	OutboundMessageSourceTypeRaw      OutboundMessageSourceType = "RAW"
+)
+
+// Values returns all known values for OutboundMessageSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutboundMessageSourceType) Values() []OutboundMessageSourceType {
+	return []OutboundMessageSourceType{
+		"TEMPLATE",
+		"RAW",
 	}
 }
 
@@ -2140,8 +2262,12 @@ type ReferenceStatus string
 
 // Enum values for ReferenceStatus
 const (
-	ReferenceStatusApproved ReferenceStatus = "APPROVED"
-	ReferenceStatusRejected ReferenceStatus = "REJECTED"
+	ReferenceStatusAvailable  ReferenceStatus = "AVAILABLE"
+	ReferenceStatusDeleted    ReferenceStatus = "DELETED"
+	ReferenceStatusApproved   ReferenceStatus = "APPROVED"
+	ReferenceStatusRejected   ReferenceStatus = "REJECTED"
+	ReferenceStatusProcessing ReferenceStatus = "PROCESSING"
+	ReferenceStatusFailed     ReferenceStatus = "FAILED"
 )
 
 // Values returns all known values for ReferenceStatus. Note that this can be
@@ -2150,8 +2276,12 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReferenceStatus) Values() []ReferenceStatus {
 	return []ReferenceStatus{
+		"AVAILABLE",
+		"DELETED",
 		"APPROVED",
 		"REJECTED",
+		"PROCESSING",
+		"FAILED",
 	}
 }
 
@@ -2159,12 +2289,14 @@ type ReferenceType string
 
 // Enum values for ReferenceType
 const (
-	ReferenceTypeUrl        ReferenceType = "URL"
-	ReferenceTypeAttachment ReferenceType = "ATTACHMENT"
-	ReferenceTypeNumber     ReferenceType = "NUMBER"
-	ReferenceTypeString     ReferenceType = "STRING"
-	ReferenceTypeDate       ReferenceType = "DATE"
-	ReferenceTypeEmail      ReferenceType = "EMAIL"
+	ReferenceTypeUrl             ReferenceType = "URL"
+	ReferenceTypeAttachment      ReferenceType = "ATTACHMENT"
+	ReferenceTypeContactAnalysis ReferenceType = "CONTACT_ANALYSIS"
+	ReferenceTypeNumber          ReferenceType = "NUMBER"
+	ReferenceTypeString          ReferenceType = "STRING"
+	ReferenceTypeDate            ReferenceType = "DATE"
+	ReferenceTypeEmail           ReferenceType = "EMAIL"
+	ReferenceTypeEmailMessage    ReferenceType = "EMAIL_MESSAGE"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -2175,10 +2307,12 @@ func (ReferenceType) Values() []ReferenceType {
 	return []ReferenceType{
 		"URL",
 		"ATTACHMENT",
+		"CONTACT_ANALYSIS",
 		"NUMBER",
 		"STRING",
 		"DATE",
 		"EMAIL",
+		"EMAIL_MESSAGE",
 	}
 }
 
@@ -2523,18 +2657,20 @@ type TaskTemplateFieldType string
 
 // Enum values for TaskTemplateFieldType
 const (
-	TaskTemplateFieldTypeName          TaskTemplateFieldType = "NAME"
-	TaskTemplateFieldTypeDescription   TaskTemplateFieldType = "DESCRIPTION"
-	TaskTemplateFieldTypeScheduledTime TaskTemplateFieldType = "SCHEDULED_TIME"
-	TaskTemplateFieldTypeQuickConnect  TaskTemplateFieldType = "QUICK_CONNECT"
-	TaskTemplateFieldTypeUrl           TaskTemplateFieldType = "URL"
-	TaskTemplateFieldTypeNumber        TaskTemplateFieldType = "NUMBER"
-	TaskTemplateFieldTypeText          TaskTemplateFieldType = "TEXT"
-	TaskTemplateFieldTypeTextArea      TaskTemplateFieldType = "TEXT_AREA"
-	TaskTemplateFieldTypeDateTime      TaskTemplateFieldType = "DATE_TIME"
-	TaskTemplateFieldTypeBoolean       TaskTemplateFieldType = "BOOLEAN"
-	TaskTemplateFieldTypeSingleSelect  TaskTemplateFieldType = "SINGLE_SELECT"
-	TaskTemplateFieldTypeEmail         TaskTemplateFieldType = "EMAIL"
+	TaskTemplateFieldTypeName           TaskTemplateFieldType = "NAME"
+	TaskTemplateFieldTypeDescription    TaskTemplateFieldType = "DESCRIPTION"
+	TaskTemplateFieldTypeScheduledTime  TaskTemplateFieldType = "SCHEDULED_TIME"
+	TaskTemplateFieldTypeQuickConnect   TaskTemplateFieldType = "QUICK_CONNECT"
+	TaskTemplateFieldTypeUrl            TaskTemplateFieldType = "URL"
+	TaskTemplateFieldTypeNumber         TaskTemplateFieldType = "NUMBER"
+	TaskTemplateFieldTypeText           TaskTemplateFieldType = "TEXT"
+	TaskTemplateFieldTypeTextArea       TaskTemplateFieldType = "TEXT_AREA"
+	TaskTemplateFieldTypeDateTime       TaskTemplateFieldType = "DATE_TIME"
+	TaskTemplateFieldTypeBoolean        TaskTemplateFieldType = "BOOLEAN"
+	TaskTemplateFieldTypeSingleSelect   TaskTemplateFieldType = "SINGLE_SELECT"
+	TaskTemplateFieldTypeEmail          TaskTemplateFieldType = "EMAIL"
+	TaskTemplateFieldTypeSelfAssign     TaskTemplateFieldType = "SELF_ASSIGN"
+	TaskTemplateFieldTypeExpiryDuration TaskTemplateFieldType = "EXPIRY_DURATION"
 )
 
 // Values returns all known values for TaskTemplateFieldType. Note that this can
@@ -2555,6 +2691,8 @@ func (TaskTemplateFieldType) Values() []TaskTemplateFieldType {
 		"BOOLEAN",
 		"SINGLE_SELECT",
 		"EMAIL",
+		"SELF_ASSIGN",
+		"EXPIRY_DURATION",
 	}
 }
 

@@ -22340,6 +22340,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 		}
 	}
 
+	if v.OverrideVpcConfig != nil {
+		ok := object.Key("OverrideVpcConfig")
+		if err := awsAwsjson11_serializeDocumentVpcConfig(v.OverrideVpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ThreadsPerCore != nil {
 		ok := object.Key("ThreadsPerCore")
 		ok.Integer(*v.ThreadsPerCore)
@@ -25643,6 +25650,11 @@ func awsAwsjson11_serializeDocumentInferenceComponentSpecification(v *types.Infe
 	object := value.Object()
 	defer object.Close()
 
+	if v.BaseInferenceComponentName != nil {
+		ok := object.Key("BaseInferenceComponentName")
+		ok.String(*v.BaseInferenceComponentName)
+	}
+
 	if v.ComputeResourceRequirements != nil {
 		ok := object.Key("ComputeResourceRequirements")
 		if err := awsAwsjson11_serializeDocumentInferenceComponentComputeResourceRequirements(v.ComputeResourceRequirements, ok); err != nil {
@@ -27250,6 +27262,25 @@ func awsAwsjson11_serializeDocumentModelRegisterSettings(v *types.ModelRegisterS
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelShardingConfig(v *types.ModelShardingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Image != nil {
+		ok := object.Key("Image")
+		ok.String(*v.Image)
+	}
+
+	if v.OverrideEnvironment != nil {
+		ok := object.Key("OverrideEnvironment")
+		if err := awsAwsjson11_serializeDocumentOptimizationJobEnvironmentVariables(v.OverrideEnvironment, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelVariantActionMap(v map[string]types.ModelVariantAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -28100,6 +28131,12 @@ func awsAwsjson11_serializeDocumentOptimizationConfig(v types.OptimizationConfig
 	case *types.OptimizationConfigMemberModelQuantizationConfig:
 		av := object.Key("ModelQuantizationConfig")
 		if err := awsAwsjson11_serializeDocumentModelQuantizationConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.OptimizationConfigMemberModelShardingConfig:
+		av := object.Key("ModelShardingConfig")
+		if err := awsAwsjson11_serializeDocumentModelShardingConfig(&uv.Value, av); err != nil {
 			return err
 		}
 

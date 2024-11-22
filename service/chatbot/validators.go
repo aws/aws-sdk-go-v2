@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateToConfiguration struct {
+}
+
+func (*validateOpAssociateToConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateToConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateToConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateToConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateChimeWebhookConfiguration struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpCreateChimeWebhookConfiguration) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateChimeWebhookConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomAction struct {
+}
+
+func (*validateOpCreateCustomAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -85,6 +125,26 @@ func (m *validateOpDeleteChimeWebhookConfiguration) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteChimeWebhookConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomAction struct {
+}
+
+func (*validateOpDeleteCustomAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +270,46 @@ func (m *validateOpDeleteSlackWorkspaceAuthorization) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateFromConfiguration struct {
+}
+
+func (*validateOpDisassociateFromConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateFromConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateFromConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateFromConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomAction struct {
+}
+
+func (*validateOpGetCustomAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMicrosoftTeamsChannelConfiguration struct {
 }
 
@@ -225,6 +325,26 @@ func (m *validateOpGetMicrosoftTeamsChannelConfiguration) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMicrosoftTeamsChannelConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssociations struct {
+}
+
+func (*validateOpListAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +430,26 @@ func (m *validateOpUpdateChimeWebhookConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCustomAction struct {
+}
+
+func (*validateOpUpdateCustomAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMicrosoftTeamsChannelConfiguration struct {
 }
 
@@ -350,8 +490,16 @@ func (m *validateOpUpdateSlackChannelConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateToConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateToConfiguration{}, middleware.After)
+}
+
 func addOpCreateChimeWebhookConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChimeWebhookConfiguration{}, middleware.After)
+}
+
+func addOpCreateCustomActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomAction{}, middleware.After)
 }
 
 func addOpCreateMicrosoftTeamsChannelConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -364,6 +512,10 @@ func addOpCreateSlackChannelConfigurationValidationMiddleware(stack *middleware.
 
 func addOpDeleteChimeWebhookConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChimeWebhookConfiguration{}, middleware.After)
+}
+
+func addOpDeleteCustomActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomAction{}, middleware.After)
 }
 
 func addOpDeleteMicrosoftTeamsChannelConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -390,8 +542,20 @@ func addOpDeleteSlackWorkspaceAuthorizationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDeleteSlackWorkspaceAuthorization{}, middleware.After)
 }
 
+func addOpDisassociateFromConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateFromConfiguration{}, middleware.After)
+}
+
+func addOpGetCustomActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomAction{}, middleware.After)
+}
+
 func addOpGetMicrosoftTeamsChannelConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMicrosoftTeamsChannelConfiguration{}, middleware.After)
+}
+
+func addOpListAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssociations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -410,12 +574,100 @@ func addOpUpdateChimeWebhookConfigurationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpUpdateChimeWebhookConfiguration{}, middleware.After)
 }
 
+func addOpUpdateCustomActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomAction{}, middleware.After)
+}
+
 func addOpUpdateMicrosoftTeamsChannelConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMicrosoftTeamsChannelConfiguration{}, middleware.After)
 }
 
 func addOpUpdateSlackChannelConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSlackChannelConfiguration{}, middleware.After)
+}
+
+func validateCustomActionAttachment(v *types.CustomActionAttachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomActionAttachment"}
+	if v.Criteria != nil {
+		if err := validateCustomActionAttachmentCriteriaList(v.Criteria); err != nil {
+			invalidParams.AddNested("Criteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomActionAttachmentCriteria(v *types.CustomActionAttachmentCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomActionAttachmentCriteria"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.VariableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VariableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomActionAttachmentCriteriaList(v []types.CustomActionAttachmentCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomActionAttachmentCriteriaList"}
+	for i := range v {
+		if err := validateCustomActionAttachmentCriteria(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomActionAttachmentList(v []types.CustomActionAttachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomActionAttachmentList"}
+	for i := range v {
+		if err := validateCustomActionAttachment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomActionDefinition(v *types.CustomActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomActionDefinition"}
+	if v.CommandText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommandText"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -470,6 +722,24 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateOpAssociateToConfigurationInput(v *AssociateToConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateToConfigurationInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if v.ChatConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateChimeWebhookConfigurationInput(v *CreateChimeWebhookConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -494,6 +764,38 @@ func validateOpCreateChimeWebhookConfigurationInput(v *CreateChimeWebhookConfigu
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomActionInput(v *CreateCustomActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomActionInput"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	} else if v.Definition != nil {
+		if err := validateCustomActionDefinition(v.Definition); err != nil {
+			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attachments != nil {
+		if err := validateCustomActionAttachmentList(v.Attachments); err != nil {
+			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -570,6 +872,21 @@ func validateOpDeleteChimeWebhookConfigurationInput(v *DeleteChimeWebhookConfigu
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteChimeWebhookConfigurationInput"}
 	if v.ChatConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChatConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomActionInput(v *DeleteCustomActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomActionInput"}
+	if v.CustomActionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomActionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -677,6 +994,39 @@ func validateOpDeleteSlackWorkspaceAuthorizationInput(v *DeleteSlackWorkspaceAut
 	}
 }
 
+func validateOpDisassociateFromConfigurationInput(v *DisassociateFromConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFromConfigurationInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	}
+	if v.ChatConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomActionInput(v *GetCustomActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomActionInput"}
+	if v.CustomActionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomActionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMicrosoftTeamsChannelConfigurationInput(v *GetMicrosoftTeamsChannelConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -684,6 +1034,21 @@ func validateOpGetMicrosoftTeamsChannelConfigurationInput(v *GetMicrosoftTeamsCh
 	invalidParams := smithy.InvalidParamsError{Context: "GetMicrosoftTeamsChannelConfigurationInput"}
 	if v.ChatConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChatConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssociationsInput(v *ListAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssociationsInput"}
+	if v.ChatConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -754,6 +1119,33 @@ func validateOpUpdateChimeWebhookConfigurationInput(v *UpdateChimeWebhookConfigu
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChimeWebhookConfigurationInput"}
 	if v.ChatConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChatConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomActionInput(v *UpdateCustomActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomActionInput"}
+	if v.CustomActionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomActionArn"))
+	}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	} else if v.Definition != nil {
+		if err := validateCustomActionDefinition(v.Definition); err != nil {
+			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attachments != nil {
+		if err := validateCustomActionAttachmentList(v.Attachments); err != nil {
+			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

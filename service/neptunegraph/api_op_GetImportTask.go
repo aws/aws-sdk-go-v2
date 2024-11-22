@@ -99,7 +99,7 @@ type GetImportTaskOutput struct {
 	// This member is required.
 	TaskId *string
 
-	// The number of the current attempt to execute the import task.
+	// The number of the current attempts to execute the import task.
 	AttemptNumber *int32
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
@@ -120,6 +120,9 @@ type GetImportTaskOutput struct {
 
 	// Contains details about the specified import task.
 	ImportTaskDetails *types.ImportTaskDetails
+
+	// The parquet type of the import task.
+	ParquetType types.ParquetType
 
 	// The reason that the import task has this status value.
 	StatusReason *string

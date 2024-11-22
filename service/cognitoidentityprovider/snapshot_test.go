@@ -410,6 +410,18 @@ func TestCheckSnapshot_ChangePassword(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CompleteWebAuthnRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteWebAuthnRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CompleteWebAuthnRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ConfirmDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ConfirmDevice(context.Background(), nil, func(o *Options) {
@@ -463,6 +475,18 @@ func TestCheckSnapshot_CreateIdentityProvider(t *testing.T) {
 	_, err := svc.CreateIdentityProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateIdentityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateManagedLoginBranding")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,6 +578,18 @@ func TestCheckSnapshot_DeleteIdentityProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteResourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResourceServer(context.Background(), nil, func(o *Options) {
@@ -626,11 +662,47 @@ func TestCheckSnapshot_DeleteUserPoolDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteWebAuthnCredential(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWebAuthnCredential(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteWebAuthnCredential")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeIdentityProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIdentityProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeIdentityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeManagedLoginBrandingByClient(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeManagedLoginBrandingByClient")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -842,6 +914,18 @@ func TestCheckSnapshot_GetUserAttributeVerificationCode(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUserAuthFactors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUserAuthFactors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUserAuthFactors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserPoolMfaConfig(context.Background(), nil, func(o *Options) {
@@ -998,6 +1082,18 @@ func TestCheckSnapshot_ListUsersInGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListWebAuthnCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWebAuthnCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListWebAuthnCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ResendConfirmationCode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ResendConfirmationCode(context.Background(), nil, func(o *Options) {
@@ -1130,6 +1226,18 @@ func TestCheckSnapshot_StartUserImportJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartWebAuthnRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartWebAuthnRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartWebAuthnRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopUserImportJob(context.Background(), nil, func(o *Options) {
@@ -1207,6 +1315,18 @@ func TestCheckSnapshot_UpdateIdentityProvider(t *testing.T) {
 	_, err := svc.UpdateIdentityProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateIdentityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateManagedLoginBranding")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1645,6 +1765,18 @@ func TestUpdateSnapshot_ChangePassword(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CompleteWebAuthnRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteWebAuthnRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CompleteWebAuthnRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ConfirmDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ConfirmDevice(context.Background(), nil, func(o *Options) {
@@ -1698,6 +1830,18 @@ func TestUpdateSnapshot_CreateIdentityProvider(t *testing.T) {
 	_, err := svc.CreateIdentityProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateIdentityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateManagedLoginBranding")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1789,6 +1933,18 @@ func TestUpdateSnapshot_DeleteIdentityProvider(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteResourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResourceServer(context.Background(), nil, func(o *Options) {
@@ -1861,11 +2017,47 @@ func TestUpdateSnapshot_DeleteUserPoolDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteWebAuthnCredential(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteWebAuthnCredential(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteWebAuthnCredential")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeIdentityProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIdentityProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeIdentityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeManagedLoginBrandingByClient(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeManagedLoginBrandingByClient")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2077,6 +2269,18 @@ func TestUpdateSnapshot_GetUserAttributeVerificationCode(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetUserAuthFactors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUserAuthFactors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUserAuthFactors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetUserPoolMfaConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserPoolMfaConfig(context.Background(), nil, func(o *Options) {
@@ -2233,6 +2437,18 @@ func TestUpdateSnapshot_ListUsersInGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListWebAuthnCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListWebAuthnCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListWebAuthnCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ResendConfirmationCode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ResendConfirmationCode(context.Background(), nil, func(o *Options) {
@@ -2365,6 +2581,18 @@ func TestUpdateSnapshot_StartUserImportJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartWebAuthnRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartWebAuthnRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartWebAuthnRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopUserImportJob(context.Background(), nil, func(o *Options) {
@@ -2442,6 +2670,18 @@ func TestUpdateSnapshot_UpdateIdentityProvider(t *testing.T) {
 	_, err := svc.UpdateIdentityProvider(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIdentityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateManagedLoginBranding(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateManagedLoginBranding(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateManagedLoginBranding")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

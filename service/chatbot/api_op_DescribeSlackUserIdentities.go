@@ -29,8 +29,8 @@ func (c *Client) DescribeSlackUserIdentities(ctx context.Context, params *Descri
 
 type DescribeSlackUserIdentitiesInput struct {
 
-	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration associated
-	// with the user identities to describe.
+	// The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with
+	// the user identities to describe.
 	ChatConfigurationArn *string
 
 	// The maximum number of results to include in the response. If more results exist

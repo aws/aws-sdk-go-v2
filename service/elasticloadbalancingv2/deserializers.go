@@ -13073,6 +13073,19 @@ func awsAwsquery_deserializeDocumentMutualAuthenticationAttributes(v **types.Mut
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AdvertiseTrustStoreCaNames", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AdvertiseTrustStoreCaNames = types.AdvertiseTrustStoreCaNamesEnum(xtv)
+			}
+
 		case strings.EqualFold("IgnoreClientCertificateExpiry", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -1212,6 +1212,15 @@ type RunLogLocation struct {
 	noSmithyDocumentSerde
 }
 
+// S3 access configuration parameters.
+type S3AccessConfig struct {
+
+	// Location of the access logs.
+	AccessLogLocation *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about a sequence.
 type SequenceInformation struct {
 
@@ -1263,6 +1272,15 @@ type SequenceStoreDetail struct {
 	// The store's server-side encryption (SSE) settings.
 	SseConfig *SseConfig
 
+	// Status of the sequence store.
+	Status SequenceStoreStatus
+
+	// The status message of the sequence store.
+	StatusMessage *string
+
+	// The last-updated time of the Sequence Store.
+	UpdateTime *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -1278,11 +1296,23 @@ type SequenceStoreFilter struct {
 	// A name to filter on.
 	Name *string
 
+	// Filter results based on status.
+	Status SequenceStoreStatus
+
+	// Filter results based on stores updated after the specified time.
+	UpdatedAfter *time.Time
+
+	// Filter results based on stores updated before the specified time.
+	UpdatedBefore *time.Time
+
 	noSmithyDocumentSerde
 }
 
 // The S3 access metadata of the sequence store.
 type SequenceStoreS3Access struct {
+
+	// Location of the access logs.
+	AccessLogLocation *string
 
 	// This is ARN of the access point associated with the S3 bucket storing read sets.
 	S3AccessPointArn *string

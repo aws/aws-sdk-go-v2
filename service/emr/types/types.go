@@ -1974,6 +1974,16 @@ type ManagedScalingPolicy struct {
 	// after initial configuration.
 	ComputeLimits *ComputeLimits
 
+	// Determines whether a custom scaling utilization performance index can be set.
+	// Possible values include ADVANCED or DEFAULT.
+	ScalingStrategy ScalingStrategy
+
+	// An integer value that represents an advanced scaling strategy. Setting a higher
+	// value optimizes for performance. Setting a lower value optimizes for resource
+	// conservation. Setting the value to 50 balances performance and resource
+	// conservation. Possible values are 1, 25, 50, 75, and 100.
+	UtilizationPerformanceIndex *int32
+
 	noSmithyDocumentSerde
 }
 

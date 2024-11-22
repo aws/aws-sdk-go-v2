@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the commitment purchase analyses for your account based on the last 30
-// days.
+// Lists the commitment purchase analyses for your account.
 func (c *Client) ListCommitmentPurchaseAnalyses(ctx context.Context, params *ListCommitmentPurchaseAnalysesInput, optFns ...func(*Options)) (*ListCommitmentPurchaseAnalysesOutput, error) {
 	if params == nil {
 		params = &ListCommitmentPurchaseAnalysesInput{}

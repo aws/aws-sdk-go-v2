@@ -47,28 +47,24 @@ type CreateInferenceComponentInput struct {
 	// This member is required.
 	InferenceComponentName *string
 
-	// Runtime settings for a model that is deployed with an inference component.
-	//
-	// This member is required.
-	RuntimeConfig *types.InferenceComponentRuntimeConfig
-
 	// Details about the resources to deploy with this inference component, including
 	// the model, container, and compute resources.
 	//
 	// This member is required.
 	Specification *types.InferenceComponentSpecification
 
-	// The name of an existing production variant where you host the inference
-	// component.
-	//
-	// This member is required.
-	VariantName *string
+	// Runtime settings for a model that is deployed with an inference component.
+	RuntimeConfig *types.InferenceComponentRuntimeConfig
 
 	// A list of key-value pairs associated with the model. For more information, see [Tagging Amazon Web Services resources]
 	// in the Amazon Web Services General Reference.
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
+
+	// The name of an existing production variant where you host the inference
+	// component.
+	VariantName *string
 
 	noSmithyDocumentSerde
 }

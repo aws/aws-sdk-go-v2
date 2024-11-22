@@ -197,6 +197,33 @@ func (e *ExpiredCodeException) ErrorCode() string {
 }
 func (e *ExpiredCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when a feature you attempted to configure isn't
+// available in your current feature plan.
+type FeatureUnavailableInTierException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FeatureUnavailableInTierException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FeatureUnavailableInTierException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FeatureUnavailableInTierException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FeatureUnavailableInTierException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FeatureUnavailableInTierException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when WAF doesn't allow your request based on a web ACL
 // that's associated with your user pool.
 type ForbiddenException struct {
@@ -366,6 +393,8 @@ type InvalidParameterException struct {
 
 	ErrorCodeOverride *string
 
+	ReasonCode *string
+
 	noSmithyDocumentSerde
 }
 
@@ -526,6 +555,35 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when you attempt to apply a managed login branding
+// style to an app client that already has an assigned style.
+type ManagedLoginBrandingExistsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ManagedLoginBrandingExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ManagedLoginBrandingExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ManagedLoginBrandingExistsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ManagedLoginBrandingExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ManagedLoginBrandingExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // This exception is thrown when Amazon Cognito can't find a multi-factor
 // authentication (MFA) method.
@@ -740,6 +798,33 @@ func (e *SoftwareTokenMFANotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SoftwareTokenMFANotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when you've attempted to change your feature plan but
+// the operation isn't permitted.
+type TierChangeNotAllowedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TierChangeNotAllowedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TierChangeNotAllowedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TierChangeNotAllowedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TierChangeNotAllowedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TierChangeNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the user has made too many failed attempts for a
 // given action, such as sign-in.
@@ -1140,3 +1225,200 @@ func (e *UserPoolTaggingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UserPoolTaggingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the challenge from StartWebAuthn registration has
+// expired.
+type WebAuthnChallengeNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnChallengeNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnChallengeNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnChallengeNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnChallengeNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnChallengeNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// This exception is thrown when the access token is for a different client than
+// the one in the original StartWebAuthnRegistration request.
+type WebAuthnClientMismatchException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnClientMismatchException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnClientMismatchException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnClientMismatchException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnClientMismatchException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnClientMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when a user pool doesn't have a configured relying
+// party id or a user pool domain.
+type WebAuthnConfigurationMissingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnConfigurationMissingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnConfigurationMissingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnConfigurationMissingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnConfigurationMissingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnConfigurationMissingException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// This exception is thrown when a user presents passkey credentials from an
+// unsupported device or provider.
+type WebAuthnCredentialNotSupportedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnCredentialNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnCredentialNotSupportedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnCredentialNotSupportedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnCredentialNotSupportedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnCredentialNotSupportedException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// This exception is thrown when the passkey feature isn't enabled for the user
+// pool.
+type WebAuthnNotEnabledException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnNotEnabledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnNotEnabledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnNotEnabledException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnNotEnabledException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the passkey credential's registration origin does
+// not align with the user pool relying party id.
+type WebAuthnOriginNotAllowedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnOriginNotAllowedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnOriginNotAllowedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnOriginNotAllowedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnOriginNotAllowedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnOriginNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the given passkey credential is associated with a
+// different relying party ID than the user pool relying party ID.
+type WebAuthnRelyingPartyMismatchException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WebAuthnRelyingPartyMismatchException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WebAuthnRelyingPartyMismatchException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WebAuthnRelyingPartyMismatchException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WebAuthnRelyingPartyMismatchException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WebAuthnRelyingPartyMismatchException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}

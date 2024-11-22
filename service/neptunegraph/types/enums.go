@@ -55,12 +55,61 @@ func (ExplainMode) Values() []ExplainMode {
 	}
 }
 
+type ExportFormat string
+
+// Enum values for ExportFormat
+const (
+	ExportFormatParquet ExportFormat = "PARQUET"
+	ExportFormatCsv     ExportFormat = "CSV"
+)
+
+// Values returns all known values for ExportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportFormat) Values() []ExportFormat {
+	return []ExportFormat{
+		"PARQUET",
+		"CSV",
+	}
+}
+
+type ExportTaskStatus string
+
+// Enum values for ExportTaskStatus
+const (
+	ExportTaskStatusInitializing ExportTaskStatus = "INITIALIZING"
+	ExportTaskStatusExporting    ExportTaskStatus = "EXPORTING"
+	ExportTaskStatusSucceeded    ExportTaskStatus = "SUCCEEDED"
+	ExportTaskStatusFailed       ExportTaskStatus = "FAILED"
+	ExportTaskStatusCancelling   ExportTaskStatus = "CANCELLING"
+	ExportTaskStatusCancelled    ExportTaskStatus = "CANCELLED"
+	ExportTaskStatusDeleted      ExportTaskStatus = "DELETED"
+)
+
+// Values returns all known values for ExportTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportTaskStatus) Values() []ExportTaskStatus {
+	return []ExportTaskStatus{
+		"INITIALIZING",
+		"EXPORTING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLING",
+		"CANCELLED",
+		"DELETED",
+	}
+}
+
 type Format string
 
 // Enum values for Format
 const (
 	FormatCsv        Format = "CSV"
 	FormatOpenCypher Format = "OPEN_CYPHER"
+	FormatParquet    Format = "PARQUET"
 	FormatNtriples   Format = "NTRIPLES"
 )
 
@@ -72,6 +121,7 @@ func (Format) Values() []Format {
 	return []Format{
 		"CSV",
 		"OPEN_CYPHER",
+		"PARQUET",
 		"NTRIPLES",
 	}
 }
@@ -140,6 +190,7 @@ const (
 	ImportTaskStatusFailed         ImportTaskStatus = "FAILED"
 	ImportTaskStatusCancelling     ImportTaskStatus = "CANCELLING"
 	ImportTaskStatusCancelled      ImportTaskStatus = "CANCELLED"
+	ImportTaskStatusDeleted        ImportTaskStatus = "DELETED"
 )
 
 // Values returns all known values for ImportTaskStatus. Note that this can be
@@ -158,6 +209,43 @@ func (ImportTaskStatus) Values() []ImportTaskStatus {
 		"FAILED",
 		"CANCELLING",
 		"CANCELLED",
+		"DELETED",
+	}
+}
+
+type MultiValueHandlingType string
+
+// Enum values for MultiValueHandlingType
+const (
+	MultiValueHandlingTypeToList    MultiValueHandlingType = "TO_LIST"
+	MultiValueHandlingTypePickFirst MultiValueHandlingType = "PICK_FIRST"
+)
+
+// Values returns all known values for MultiValueHandlingType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultiValueHandlingType) Values() []MultiValueHandlingType {
+	return []MultiValueHandlingType{
+		"TO_LIST",
+		"PICK_FIRST",
+	}
+}
+
+type ParquetType string
+
+// Enum values for ParquetType
+const (
+	ParquetTypeColumnar ParquetType = "COLUMNAR"
+)
+
+// Values returns all known values for ParquetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParquetType) Values() []ParquetType {
+	return []ParquetType{
+		"COLUMNAR",
 	}
 }
 

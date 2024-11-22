@@ -13,7 +13,8 @@ import (
 )
 
 // Gets the specified user by user name in a user pool as an administrator. Works
-// on any user.
+// on any user. This operation contributes to your monthly active user (MAU) count
+// for the purpose of billing.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM

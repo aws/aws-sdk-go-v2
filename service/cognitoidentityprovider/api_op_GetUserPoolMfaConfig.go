@@ -64,6 +64,10 @@ type GetUserPoolMfaConfigOutput struct {
 	// Includes TOTP enabled or disabled state.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
+	// Shows user pool configuration for MFA with passkeys from biometric devices and
+	// security keys.
+	WebAuthnConfiguration *types.WebAuthnConfigurationType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

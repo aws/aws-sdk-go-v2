@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new domain for a user pool.
+// Creates a new domain for a user pool. The domain hosts user pool domain
+// services like managed login, the hosted UI (classic), and the user pool
+// authorization server.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -50,7 +52,7 @@ type CreateUserPoolDomainInput struct {
 	// This member is required.
 	Domain *string
 
-	// The user pool ID.
+	// The ID of the user pool where you want to add a domain.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -67,6 +69,16 @@ type CreateUserPoolDomainInput struct {
 	// [Configuring a User Pool Domain]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html
 	CustomDomainConfig *types.CustomDomainConfigType
 
+	// The version of managed login branding that you want to apply to your domain. A
+	// value of 1 indicates hosted UI (classic) branding and a version of 2 indicates
+	// managed login branding.
+	//
+	// Managed login requires that your user pool be configured for any [feature plan] other than
+	// Lite .
+	//
+	// [feature plan]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+	ManagedLoginVersion *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -77,6 +89,11 @@ type CreateUserPoolDomainOutput struct {
 	// value if you set a custom domain with CustomDomainConfig . If you set an Amazon
 	// Cognito prefix domain, this operation returns a blank response.
 	CloudFrontDomain *string
+
+	// The version of managed login branding applied your domain. A value of 1
+	// indicates hosted UI (classic) branding and a version of 2 indicates managed
+	// login branding.
+	ManagedLoginVersion *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

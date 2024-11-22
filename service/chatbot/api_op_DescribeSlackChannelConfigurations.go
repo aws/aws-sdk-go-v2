@@ -29,7 +29,7 @@ func (c *Client) DescribeSlackChannelConfigurations(ctx context.Context, params 
 
 type DescribeSlackChannelConfigurationsInput struct {
 
-	// An optional Amazon Resource Number (ARN) of a SlackChannelConfiguration to
+	// An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to
 	// describe.
 	ChatConfigurationArn *string
 

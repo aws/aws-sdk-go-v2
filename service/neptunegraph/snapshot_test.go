@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CancelExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelImportTask(context.Background(), nil, func(o *Options) {
@@ -182,6 +194,18 @@ func TestCheckSnapshot_ExecuteQuery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetGraph(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGraph(context.Background(), nil, func(o *Options) {
@@ -247,6 +271,18 @@ func TestCheckSnapshot_GetQuery(t *testing.T) {
 	_, err := svc.GetQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExportTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExportTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExportTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +386,18 @@ func TestCheckSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartImportTask(context.Background(), nil, func(o *Options) {
@@ -397,6 +445,18 @@ func TestCheckSnapshot_UpdateGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CancelExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelImportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelImportTask(context.Background(), nil, func(o *Options) {
@@ -517,6 +577,18 @@ func TestUpdateSnapshot_ExecuteQuery(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetGraph(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetGraph(context.Background(), nil, func(o *Options) {
@@ -582,6 +654,18 @@ func TestUpdateSnapshot_GetQuery(t *testing.T) {
 	_, err := svc.GetQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExportTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExportTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExportTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -678,6 +762,18 @@ func TestUpdateSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 	_, err := svc.RestoreGraphFromSnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RestoreGraphFromSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartExportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartExportTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

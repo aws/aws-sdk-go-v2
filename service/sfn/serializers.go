@@ -3108,6 +3108,11 @@ func awsAwsjson10_serializeOpDocumentTestStateInput(v *TestStateInput, value smi
 		ok.String(*v.RoleArn)
 	}
 
+	if v.Variables != nil {
+		ok := object.Key("variables")
+		ok.String(*v.Variables)
+	}
+
 	return nil
 }
 

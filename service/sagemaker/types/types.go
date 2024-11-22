@@ -3274,6 +3274,13 @@ type ClusterInstanceGroupDetails struct {
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
 
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	OverrideVpcConfig *VpcConfig
+
 	// The number of instances you specified to add to the instance group of a
 	// SageMaker HyperPod cluster.
 	TargetCount *int32
@@ -3326,6 +3333,13 @@ type ClusterInstanceGroupSpecification struct {
 	// A flag indicating whether deep health checks should be performed when the
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
+
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	OverrideVpcConfig *VpcConfig
 
 	// Specifies the value for Threads per core. For instance types that support
 	// multithreading, you can specify 1 for disabling multithreading and 2 for
@@ -3442,6 +3456,13 @@ type ClusterNodeDetails struct {
 
 	// The LifeCycle configuration applied to the instance.
 	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
+	// hosted models, and compute resources have access to. You can control access to
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+	OverrideVpcConfig *VpcConfig
 
 	// The placement details of the SageMaker HyperPod cluster node.
 	Placement *ClusterInstancePlacement
@@ -8832,9 +8853,9 @@ type ImageVersion struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the compute resources to allocate to run a model that you assign to an
-// inference component. These resources include CPU cores, accelerators, and
-// memory.
+// Defines the compute resources to allocate to run a model, plus any adapter
+// models, that you assign to an inference component. These resources include CPU
+// cores, accelerators, and memory.
 type InferenceComponentComputeResourceRequirements struct {
 
 	// The minimum MB of memory to allocate to run a model that you assign to an
@@ -8935,10 +8956,30 @@ type InferenceComponentRuntimeConfigSummary struct {
 // the model, container, and compute resources.
 type InferenceComponentSpecification struct {
 
-	// The compute resources allocated to run the model assigned to the inference
-	// component.
+	// The name of an existing inference component that is to contain the inference
+	// component that you're creating with your request.
 	//
-	// This member is required.
+	// Specify this parameter only if your request is meant to create an adapter
+	// inference component. An adapter inference component contains the path to an
+	// adapter model. The purpose of the adapter model is to tailor the inference
+	// output of a base foundation model, which is hosted by the base inference
+	// component. The adapter inference component uses the compute resources that you
+	// assigned to the base inference component.
+	//
+	// When you create an adapter inference component, use the Container parameter to
+	// specify the location of the adapter artifacts. In the parameter value, use the
+	// ArtifactUrl parameter of the InferenceComponentContainerSpecification data type.
+	//
+	// Before you can create an adapter inference component, you must have an existing
+	// inference component that contains the foundation model that you want to adapt.
+	BaseInferenceComponentName *string
+
+	// The compute resources allocated to run the model, plus any adapter models, that
+	// you assign to the inference component.
+	//
+	// Omit this parameter if your request is meant to create an adapter inference
+	// component. An adapter inference component is loaded by a base inference
+	// component, and it uses the compute resources of the base inference component.
 	ComputeResourceRequirements *InferenceComponentComputeResourceRequirements
 
 	// Defines a container that provides the runtime environment for a model that you
@@ -8958,8 +8999,11 @@ type InferenceComponentSpecification struct {
 // Details about the resources that are deployed with this inference component.
 type InferenceComponentSpecificationSummary struct {
 
-	// The compute resources allocated to run the model assigned to the inference
-	// component.
+	// The name of the base inference component that contains this inference component.
+	BaseInferenceComponentName *string
+
+	// The compute resources allocated to run the model, plus any adapter models, that
+	// you assign to the inference component.
 	ComputeResourceRequirements *InferenceComponentComputeResourceRequirements
 
 	// Details about the container that provides the runtime environment for the model
@@ -11678,6 +11722,20 @@ type ModelRegisterSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Settings for the model sharding technique that's applied by a model
+// optimization job.
+type ModelShardingConfig struct {
+
+	// The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the
+	// optimization.
+	Image *string
+
+	// Environment variables that override the default ones in the model container.
+	OverrideEnvironment map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata for Model steps.
 type ModelStepMetadata struct {
 
@@ -12817,6 +12875,7 @@ type OnlineStoreSecurityConfig struct {
 //
 //	OptimizationConfigMemberModelCompilationConfig
 //	OptimizationConfigMemberModelQuantizationConfig
+//	OptimizationConfigMemberModelShardingConfig
 type OptimizationConfig interface {
 	isOptimizationConfig()
 }
@@ -12840,6 +12899,16 @@ type OptimizationConfigMemberModelQuantizationConfig struct {
 }
 
 func (*OptimizationConfigMemberModelQuantizationConfig) isOptimizationConfig() {}
+
+// Settings for the model sharding technique that's applied by a model
+// optimization job.
+type OptimizationConfigMemberModelShardingConfig struct {
+	Value ModelShardingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OptimizationConfigMemberModelShardingConfig) isOptimizationConfig() {}
 
 // The location of the source model to optimize with an optimization job.
 type OptimizationJobModelSource struct {

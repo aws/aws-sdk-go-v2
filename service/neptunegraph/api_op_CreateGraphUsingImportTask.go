@@ -103,6 +103,9 @@ type CreateGraphUsingImportTaskInput struct {
 	// for the graph. Default: 128
 	MinProvisionedMemory *int32
 
+	// The parquet type of the import task.
+	ParquetType types.ParquetType
+
 	// Specifies whether or not the graph can be reachable over the internet. All
 	// access to graphs is IAM authenticated. ( true to enable, or false to disable).
 	PublicConnectivity *bool
@@ -171,6 +174,9 @@ type CreateGraphUsingImportTaskOutput struct {
 	// continue (whereas if set to true , the default, or if omitted, the import
 	// operation halts immediately when an error is encountered.
 	ImportOptions types.ImportOptions
+
+	// The parquet type of the import task.
+	ParquetType types.ParquetType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

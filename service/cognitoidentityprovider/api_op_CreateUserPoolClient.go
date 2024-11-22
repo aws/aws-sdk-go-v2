@@ -183,7 +183,7 @@ type CreateUserPoolClientInput struct {
 	// EnablePropagateAdditionalUserContextData in an app client that has a client
 	// secret.
 	//
-	// [Adding advanced security to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	// [Adding advanced security to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-threat-protection.html
 	EnablePropagateAdditionalUserContextData *bool
 
 	// Activates or deactivates token revocation. For more information about revoking
@@ -205,6 +205,14 @@ type CreateUserPoolClientInput struct {
 	// ALLOW_REFRESH_TOKEN_AUTH , ALLOW_USER_SRP_AUTH , and ALLOW_CUSTOM_AUTH .
 	//
 	// Valid values include:
+	//
+	//   - ALLOW_USER_AUTH : Enable selection-based sign-in with USER_AUTH . This
+	//   setting covers username-password, secure remote password (SRP), passwordless,
+	//   and passkey authentication. This authentiation flow can do username-password and
+	//   SRP authentication without other ExplicitAuthFlows permitting them. For
+	//   example users can complete an SRP challenge through USER_AUTH without the flow
+	//   USER_SRP_AUTH being active for the app client. This flow doesn't include
+	//   CUSTOM_AUTH .
 	//
 	//   - ALLOW_ADMIN_USER_PASSWORD_AUTH : Enable admin based user password
 	//   authentication flow ADMIN_USER_PASSWORD_AUTH . This setting replaces the
@@ -308,6 +316,14 @@ type CreateUserPoolClientInput struct {
 	// SignInWithApple , and LoginWithAmazon . You can also specify the names that you
 	// configured for the SAML and OIDC IdPs in your user pool, for example MySAMLIdP
 	// or MyOIDCIdP .
+	//
+	// This setting applies to providers that you can access with the [hosted UI and OAuth 2.0 authorization server]. The removal of
+	// COGNITO from this list doesn't prevent authentication operations for local users
+	// with the user pools API in an Amazon Web Services SDK. The only way to prevent
+	// API-based authentication is to block access with a [WAF rule].
+	//
+	// [WAF rule]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html
+	// [hosted UI and OAuth 2.0 authorization server]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-app-integration.html
 	SupportedIdentityProviders []string
 
 	// The units in which the validity times are represented. The default unit for

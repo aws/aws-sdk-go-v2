@@ -4483,6 +4483,16 @@ func awsAwsjson11_serializeDocumentManagedScalingPolicy(v *types.ManagedScalingP
 		}
 	}
 
+	if len(v.ScalingStrategy) > 0 {
+		ok := object.Key("ScalingStrategy")
+		ok.String(string(v.ScalingStrategy))
+	}
+
+	if v.UtilizationPerformanceIndex != nil {
+		ok := object.Key("UtilizationPerformanceIndex")
+		ok.Integer(*v.UtilizationPerformanceIndex)
+	}
+
 	return nil
 }
 

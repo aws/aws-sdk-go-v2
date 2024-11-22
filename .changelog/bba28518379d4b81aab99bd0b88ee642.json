@@ -1,0 +1,8 @@
+{
+    "id": "bba28518-379d-4b81-aab9-9bd0b88ee642",
+    "type": "feature",
+    "description": "Amazon Connect Service Feature: Add APIs for Amazon Connect Email Channel",
+    "modules": [
+        "service/connect"
+    ]
+}

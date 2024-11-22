@@ -48,6 +48,13 @@ type CreateSequenceStoreInput struct {
 	// An S3 location that is used to store files that have failed a direct upload.
 	FallbackLocation *string
 
+	// The tags keys to propagate to the S3 objects associated with read sets in the
+	// sequence store.
+	PropagatedSetLevelTags []string
+
+	// S3 access configuration parameters
+	S3AccessConfig *types.S3AccessConfig
+
 	// Server-side encryption (SSE) settings for the store.
 	SseConfig *types.SseConfig
 
@@ -86,8 +93,21 @@ type CreateSequenceStoreOutput struct {
 	// The store's name.
 	Name *string
 
+	// The tags keys to propagate to the S3 objects associated with read sets in the
+	// sequence store.
+	PropagatedSetLevelTags []string
+
+	// The S3 access metadata of the sequence store.
+	S3Access *types.SequenceStoreS3Access
+
 	// The store's SSE settings.
 	SseConfig *types.SseConfig
+
+	// The status of the sequence store.
+	Status types.SequenceStoreStatus
+
+	// The status message of the sequence store.
+	StatusMessage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -162,6 +182,9 @@ func (c *Client) addOperationCreateSequenceStoreMiddlewares(stack *middleware.St
 	if err = addEndpointPrefix_opCreateSequenceStoreMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateSequenceStoreMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateSequenceStoreValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -223,6 +246,39 @@ func (m *endpointPrefix_opCreateSequenceStoreMiddleware) HandleFinalize(ctx cont
 }
 func addEndpointPrefix_opCreateSequenceStoreMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateSequenceStoreMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+type idempotencyToken_initializeOpCreateSequenceStore struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateSequenceStore) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateSequenceStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateSequenceStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateSequenceStoreInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateSequenceStoreMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSequenceStore{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateSequenceStore(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -113,7 +113,7 @@ func (e *DataUnavailableException) ErrorCode() string {
 }
 func (e *DataUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A request to generate a recommendation is already in progress.
+// A request to generate a recommendation or analysis is already in progress.
 type GenerationExistsException struct {
 	Message *string
 

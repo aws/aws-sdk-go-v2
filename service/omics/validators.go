@@ -490,6 +490,26 @@ func (m *validateOpDeleteRun) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteS3AccessPolicy struct {
+}
+
+func (*validateOpDeleteS3AccessPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteS3AccessPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteS3AccessPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteS3AccessPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSequenceStore struct {
 }
 
@@ -890,6 +910,26 @@ func (m *validateOpGetRunTask) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetS3AccessPolicy struct {
+}
+
+func (*validateOpGetS3AccessPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetS3AccessPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetS3AccessPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetS3AccessPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSequenceStore struct {
 }
 
@@ -1230,6 +1270,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutS3AccessPolicy struct {
+}
+
+func (*validateOpPutS3AccessPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutS3AccessPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutS3AccessPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutS3AccessPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartAnnotationImportJob struct {
 }
 
@@ -1490,6 +1550,26 @@ func (m *validateOpUpdateRunGroup) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSequenceStore struct {
+}
+
+func (*validateOpUpdateSequenceStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSequenceStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSequenceStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSequenceStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateVariantStore struct {
 }
 
@@ -1646,6 +1726,10 @@ func addOpDeleteRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRun{}, middleware.After)
 }
 
+func addOpDeleteS3AccessPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteS3AccessPolicy{}, middleware.After)
+}
+
 func addOpDeleteSequenceStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSequenceStore{}, middleware.After)
 }
@@ -1726,6 +1810,10 @@ func addOpGetRunTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRunTask{}, middleware.After)
 }
 
+func addOpGetS3AccessPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetS3AccessPolicy{}, middleware.After)
+}
+
 func addOpGetSequenceStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSequenceStore{}, middleware.After)
 }
@@ -1794,6 +1882,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutS3AccessPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutS3AccessPolicy{}, middleware.After)
+}
+
 func addOpStartAnnotationImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAnnotationImportJob{}, middleware.After)
 }
@@ -1844,6 +1936,10 @@ func addOpUpdateRunCacheValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateRunGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRunGroup{}, middleware.After)
+}
+
+func addOpUpdateSequenceStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSequenceStore{}, middleware.After)
 }
 
 func addOpUpdateVariantStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -2557,6 +2653,21 @@ func validateOpDeleteRunInput(v *DeleteRunInput) error {
 	}
 }
 
+func validateOpDeleteS3AccessPolicyInput(v *DeleteS3AccessPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteS3AccessPolicyInput"}
+	if v.S3AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3AccessPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteSequenceStoreInput(v *DeleteSequenceStoreInput) error {
 	if v == nil {
 		return nil
@@ -2893,6 +3004,21 @@ func validateOpGetRunTaskInput(v *GetRunTaskInput) error {
 	}
 }
 
+func validateOpGetS3AccessPolicyInput(v *GetS3AccessPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetS3AccessPolicyInput"}
+	if v.S3AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3AccessPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSequenceStoreInput(v *GetSequenceStoreInput) error {
 	if v == nil {
 		return nil
@@ -3146,6 +3272,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutS3AccessPolicyInput(v *PutS3AccessPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutS3AccessPolicyInput"}
+	if v.S3AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3AccessPointArn"))
+	}
+	if v.S3AccessPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3AccessPolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3411,6 +3555,21 @@ func validateOpUpdateRunGroupInput(v *UpdateRunGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRunGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSequenceStoreInput(v *UpdateSequenceStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSequenceStoreInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}

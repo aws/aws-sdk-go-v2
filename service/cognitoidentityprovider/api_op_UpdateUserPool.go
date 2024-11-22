@@ -20,7 +20,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
+// Amazon Web Services service, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -140,6 +140,9 @@ type UpdateUserPoolInput struct {
 	// A container with the policies you want to update in a user pool.
 	Policies *types.UserPoolPolicyType
 
+	// The updated name of your user pool.
+	PoolName *string
+
 	// The contents of the SMS authentication message.
 	SmsAuthenticationMessage *string
 
@@ -177,6 +180,13 @@ type UpdateUserPoolInput struct {
 	// can use to categorize and manage user pools in different ways, such as by
 	// purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]string
+
+	// The user pool [feature plan], or tier. This parameter determines the eligibility of the user
+	// pool for features like managed login, access-token customization, and threat
+	// protection. Defaults to ESSENTIALS .
+	//
+	// [feature plan]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+	UserPoolTier types.UserPoolTierType
 
 	// The template for verification messages.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType

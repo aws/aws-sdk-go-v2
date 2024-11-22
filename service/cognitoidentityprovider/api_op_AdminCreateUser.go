@@ -25,7 +25,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
+// Amazon Web Services service, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -38,8 +38,13 @@ import (
 // Alternatively, you can call AdminCreateUser with SUPPRESS for the MessageAction
 // parameter, and Amazon Cognito won't send any email.
 //
-// In either case, the user will be in the FORCE_CHANGE_PASSWORD state until they
-// sign in and change their password.
+// In either case, if the user has a password, they will be in the
+// FORCE_CHANGE_PASSWORD state until they sign in and set their password. Your
+// invitation message template must have the {####} password placeholder if your
+// users have passwords. If your template doesn't have this placeholder, Amazon
+// Cognito doesn't deliver the invitation message. In this case, you must update
+// your message template and resend the password with a new AdminCreateUser
+// request with a MessageAction value of RESEND .
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -72,7 +77,7 @@ func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInp
 	return out, nil
 }
 
-// Represents the request to create a user in the specified user pool.
+// Creates a new user in the specified user pool.
 type AdminCreateUserInput struct {
 
 	// The user pool ID for the user pool where the user will be created.
@@ -153,17 +158,26 @@ type AdminCreateUserInput struct {
 	// The user's temporary password. This password must conform to the password
 	// policy that you specified when you created the user pool.
 	//
+	// The exception to the requirement for a password is when your user pool supports
+	// passwordless sign-in with email or SMS OTPs. To create a user with no password,
+	// omit this parameter or submit a blank value. You can only create a passwordless
+	// user when passwordless sign-in is available. See [the SignInPolicyType]property of [CreateUserPool] and [UpdateUserPool].
+	//
 	// The temporary password is valid only once. To complete the Admin Create User
 	// flow, the user must enter the temporary password in the sign-in page, along with
 	// a new password to be used in all future sign-ins.
 	//
-	// This parameter isn't required. If you don't specify a value, Amazon Cognito
-	// generates one for you.
+	// If you don't specify a value, Amazon Cognito generates one for you unless you
+	// have passwordless options active for your user pool.
 	//
 	// The temporary password can only be used until the user account expiration limit
 	// that you set for your user pool. To reset the account after that time limit, you
 	// must call AdminCreateUser again and specify RESEND for the MessageAction
 	// parameter.
+	//
+	// [UpdateUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserPool.html
+	// [CreateUserPool]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateUserPool.html
+	// [the SignInPolicyType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SignInPolicyType.html
 	TemporaryPassword *string
 
 	// An array of name-value pairs that contain user attributes and attribute values
@@ -179,6 +193,11 @@ type AdminCreateUserInput struct {
 	// To send a message inviting the user to sign up, you must specify the user's
 	// email address or phone number. You can do this in your call to AdminCreateUser
 	// or in the Users tab of the Amazon Cognito console for managing your user pools.
+	//
+	// You must also provide an email address or phone number when you expect the user
+	// to do passwordless sign-in with an email or SMS OTP. These attributes must be
+	// provided when passwordless options are the only available, or when you don't
+	// submit a TemporaryPassword .
 	//
 	// In your call to AdminCreateUser , you can set the email_verified attribute to
 	// True , and you can set the phone_number_verified attribute to True . You can

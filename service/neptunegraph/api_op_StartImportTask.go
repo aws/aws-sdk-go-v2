@@ -67,6 +67,9 @@ type StartImportTaskInput struct {
 	// Options for how to perform an import.
 	ImportOptions types.ImportOptions
 
+	// The parquet type of the import task.
+	ParquetType types.ParquetType
+
 	noSmithyDocumentSerde
 }
 
@@ -109,6 +112,9 @@ type StartImportTaskOutput struct {
 
 	// Options for how to perform an import.
 	ImportOptions types.ImportOptions
+
+	// The parquet type of the import task.
+	ParquetType types.ParquetType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,6 +45,9 @@ type CreateTopicInput struct {
 	// This member is required.
 	TopicId *string
 
+	// The Folder ARN of the folder that you want the topic to reside in.
+	FolderArns []string
+
 	// Contains a map of the key-value pairs for the resource tag or tags that are
 	// assigned to the dataset.
 	Tags []types.Tag

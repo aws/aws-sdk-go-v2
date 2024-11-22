@@ -1,0 +1,8 @@
+{
+    "id": "3c56c5fb-e31e-4f3f-b0a1-82721fb71726",
+    "type": "feature",
+    "description": "Now, Amazon EC2 Auto Scaling customers can enable target tracking policies to take quicker scaling decisions, enhancing their application performance and EC2 utilization. To get started, specify target tracking to monitor a metric that is available on Amazon CloudWatch at seconds-level interval.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

@@ -27,10 +27,21 @@ type AccountPreferences struct {
 	noSmithyDocumentSerde
 }
 
+// A listing of an association with a channel configuration.
+type AssociationListing struct {
+
+	// The Amazon Resource Name (ARN) of the resource (for example, a custom action).
+	//
+	// This member is required.
+	Resource *string
+
+	noSmithyDocumentSerde
+}
+
 // An AWS Chatbot configuration for Amazon Chime.
 type ChimeWebhookConfiguration struct {
 
-	// The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration.
+	// The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
@@ -118,10 +129,90 @@ type ConfiguredTeam struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a parameterized command that can be invoked as an alias or as a
+// notification button in the chat client.
+type CustomAction struct {
+
+	// The fully defined Amazon Resource Name (ARN) of the custom action.
+	//
+	// This member is required.
+	CustomActionArn *string
+
+	// The definition of the command to run when invoked an alias or as an action
+	// button.
+	//
+	// This member is required.
+	Definition *CustomActionDefinition
+
+	// The name of the custom action that is included in the ARN.
+	ActionName *string
+
+	// The name used to invoke this action in the chat channel. For example, @aws run
+	// my-alias .
+	AliasName *string
+
+	// Defines when this custom action button should be attached to a notification.
+	Attachments []CustomActionAttachment
+
+	noSmithyDocumentSerde
+}
+
+// Defines when a custom action button should be attached to a notification.
+type CustomActionAttachment struct {
+
+	// The text of the button that appears on the notification.
+	ButtonText *string
+
+	// The criteria for when a button should be shown based on values in the
+	// notification.
+	Criteria []CustomActionAttachmentCriteria
+
+	// The type of notification that the custom action should be attached to.
+	NotificationType *string
+
+	// The variables to extract from the notification.
+	Variables map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A criteria for when a button should be shown based on values in the notification
+type CustomActionAttachmentCriteria struct {
+
+	// The operation to perform on the named variable.
+	//
+	// This member is required.
+	Operator CustomActionAttachmentCriteriaOperator
+
+	// The name of the variable to operate on.
+	//
+	// This member is required.
+	VariableName *string
+
+	// A value that is compared with the actual value of the variable based on the
+	// behavior of the operator.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of the command to run when invoked as an alias or as an action
+// button.
+type CustomActionDefinition struct {
+
+	// The command string to run which may include variables by prefixing with a
+	// dollar sign ($).
+	//
+	// This member is required.
+	CommandText *string
+
+	noSmithyDocumentSerde
+}
+
 // An AWS Chatbot configuration for Slack.
 type SlackChannelConfiguration struct {
 
-	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration.
+	// The Amazon Resource Name (ARN) of the SlackChannelConfiguration.
 	//
 	// This member is required.
 	ChatConfigurationArn *string
@@ -197,8 +288,8 @@ type SlackChannelConfiguration struct {
 // Identifes a user level permission for a channel configuration.
 type SlackUserIdentity struct {
 
-	// The Amazon Resource Number (ARN) of the SlackChannelConfiguration associated
-	// with the user identity to delete.
+	// The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with
+	// the user identity to delete.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

@@ -1,0 +1,8 @@
+{
+    "id": "50a6d189-b7c0-41ce-9b40-d04adefaf62e",
+    "type": "feature",
+    "description": "Added new \"DeliverToQBusiness\" rule action to MailManager RulesSet for ingesting email data into Amazon Q Business customer applications",
+    "modules": [
+        "service/mailmanager"
+    ]
+}

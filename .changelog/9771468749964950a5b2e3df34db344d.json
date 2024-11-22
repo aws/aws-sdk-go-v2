@@ -1,0 +1,8 @@
+{
+    "id": "97714687-4996-4950-a5b2-e3df34db344d",
+    "type": "feature",
+    "description": "This release adds support for resource policy based cross account S3 access to sequence store read sets.",
+    "modules": [
+        "service/omics"
+    ]
+}

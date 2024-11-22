@@ -153,6 +153,7 @@ const (
 	HistoryEventTypeMapRunSucceeded              HistoryEventType = "MapRunSucceeded"
 	HistoryEventTypeExecutionRedriven            HistoryEventType = "ExecutionRedriven"
 	HistoryEventTypeMapRunRedriven               HistoryEventType = "MapRunRedriven"
+	HistoryEventTypeEvaluationFailed             HistoryEventType = "EvaluationFailed"
 )
 
 // Values returns all known values for HistoryEventType. Note that this can be
@@ -222,6 +223,7 @@ func (HistoryEventType) Values() []HistoryEventType {
 		"MapRunSucceeded",
 		"ExecutionRedriven",
 		"MapRunRedriven",
+		"EvaluationFailed",
 	}
 }
 
