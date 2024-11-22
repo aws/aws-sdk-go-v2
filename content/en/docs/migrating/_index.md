@@ -800,7 +800,7 @@ import "github.com/aws/smithy-go"
 
 client := s3.NewFromConfig(cfg)
 
-output, err := s3.GetObject(context.TODO(), &s3.GetObjectInput{
+output, err := client.GetObject(context.TODO(), &s3.GetObjectInput{
 	// input parameters
 })
 if err != nil {
