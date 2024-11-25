@@ -1,3 +1,7 @@
+# v1.30.0 (2024-11-25)
+
+* **Feature**: Update DescribeDirectConnectGatewayAssociations API to return associated core network information if a Direct Connect gateway is attached to a Cloud WAN core network.
+
 # v1.29.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

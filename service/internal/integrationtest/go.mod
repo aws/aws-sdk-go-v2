@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.5
 	github.com/aws/aws-sdk-go-v2/config v1.28.5
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.40
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.41
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.6
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.34.0
@@ -25,7 +25,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.44.4
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.6
-	github.com/aws/aws-sdk-go-v2/service/directconnect v1.29.6
+	github.com/aws/aws-sdk-go-v2/service/directconnect v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.7
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.37.1
@@ -62,7 +62,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.6
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.34.1
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.68.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.69.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.50.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.6
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.32.6

@@ -1,3 +1,16 @@
+# Release (2024-11-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.30.0](service/directconnect/CHANGELOG.md#v1300-2024-11-25)
+  * **Feature**: Update DescribeDirectConnectGatewayAssociations API to return associated core network information if a Direct Connect gateway is attached to a Cloud WAN core network.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.32.0](service/networkmanager/CHANGELOG.md#v1320-2024-11-25)
+  * **Feature**: This release adds native Direct Connect integration on Cloud WAN enabling customers to directly attach their Direct Connect gateways to Cloud WAN without the need for an intermediate Transit Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.69.0](service/s3/CHANGELOG.md#v1690-2024-11-25)
+  * **Feature**: Amazon Simple Storage Service / Features: Add support for ETag based conditional writes in PutObject and CompleteMultiPartUpload APIs to prevent unintended object modifications.
+
 # Release (2024-11-22)
 
 ## Module Highlights

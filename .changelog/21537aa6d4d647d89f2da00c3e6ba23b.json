@@ -1,8 +1,0 @@
-{
-    "id": "21537aa6-d4d6-47d8-9f2d-a00c3e6ba23b",
-    "type": "feature",
-    "description": "Amazon Simple Storage Service / Features: Add support for ETag based conditional writes in PutObject and CompleteMultiPartUpload APIs to prevent unintended object modifications.",
-    "modules": [
-        "service/s3"
-    ]
-}
