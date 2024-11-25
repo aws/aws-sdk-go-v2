@@ -658,6 +658,32 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.directconnect#AssociatedCoreNetwork": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.directconnect#CoreNetworkIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Cloud WAN core network.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "com.amazonaws.directconnect#OwnerAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account owner of the Cloud WAN core network.</p>"
+                    }
+                },
+                "attachmentId": {
+                    "target": "com.amazonaws.directconnect#CoreNetworkAttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>the ID of the Direct Connect attachment</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Web Services Cloud WAN core network that the Direct Connect attachment is associated with.</p>"
+            }
+        },
         "com.amazonaws.directconnect#AssociatedGateway": {
             "type": "structure",
             "members": {
@@ -1364,6 +1390,26 @@
                         "smithy.api#documentation": "<p>The connections.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.directconnect#CoreNetworkAttachmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^attachment-([0-9a-f]{1,17})$"
+            }
+        },
+        "com.amazonaws.directconnect#CoreNetworkIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 14,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^core-network-([0-9a-f]{1,17})$"
             }
         },
         "com.amazonaws.directconnect#Count": {
@@ -3454,6 +3500,12 @@
                     "target": "com.amazonaws.directconnect#RouteFilterPrefixList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>"
+                    }
+                },
+                "associatedCoreNetwork": {
+                    "target": "com.amazonaws.directconnect#AssociatedCoreNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Cloud WAN core network associated with the Direct Connect attachment.</p>"
                     }
                 },
                 "virtualGatewayId": {
