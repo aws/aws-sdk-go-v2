@@ -7,6 +7,22 @@ import (
 	"time"
 )
 
+// The Amazon Web Services Cloud WAN core network that the Direct Connect
+// attachment is associated with.
+type AssociatedCoreNetwork struct {
+
+	// the ID of the Direct Connect attachment
+	AttachmentId *string
+
+	// The ID of the Cloud WAN core network.
+	Id *string
+
+	// The account owner of the Cloud WAN core network.
+	OwnerAccount *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the associated gateway.
 type AssociatedGateway struct {
 
@@ -239,6 +255,10 @@ type DirectConnectGatewayAssociation struct {
 
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
 	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
+
+	// The ID of the Cloud WAN core network associated with the Direct Connect
+	// attachment.
+	AssociatedCoreNetwork *AssociatedCoreNetwork
 
 	// Information about the associated gateway.
 	AssociatedGateway *AssociatedGateway

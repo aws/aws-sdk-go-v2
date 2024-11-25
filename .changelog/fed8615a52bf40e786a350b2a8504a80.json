@@ -1,0 +1,8 @@
+{
+    "id": "fed8615a-52bf-40e7-86a3-50b2a8504a80",
+    "type": "feature",
+    "description": "This release adds native Direct Connect integration on Cloud WAN enabling customers to directly attach their Direct Connect gateways to Cloud WAN without the need for an intermediate Transit Gateway.",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

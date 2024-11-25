@@ -6,14 +6,17 @@ type AttachmentErrorCode string
 
 // Enum values for AttachmentErrorCode
 const (
-	AttachmentErrorCodeVpcNotFound                        AttachmentErrorCode = "VPC_NOT_FOUND"
-	AttachmentErrorCodeSubnetNotFound                     AttachmentErrorCode = "SUBNET_NOT_FOUND"
-	AttachmentErrorCodeSubnetDuplicatedInAvailabilityZone AttachmentErrorCode = "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"
-	AttachmentErrorCodeSubnetNoFreeAddresses              AttachmentErrorCode = "SUBNET_NO_FREE_ADDRESSES"
-	AttachmentErrorCodeSubnetUnsupportedAvailabilityZone  AttachmentErrorCode = "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"
-	AttachmentErrorCodeSubnetNoIpv6Cidrs                  AttachmentErrorCode = "SUBNET_NO_IPV6_CIDRS"
-	AttachmentErrorCodeVpnConnectionNotFound              AttachmentErrorCode = "VPN_CONNECTION_NOT_FOUND"
-	AttachmentErrorCodeMaximumNoEncapLimitExceeded        AttachmentErrorCode = "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+	AttachmentErrorCodeVpcNotFound                             AttachmentErrorCode = "VPC_NOT_FOUND"
+	AttachmentErrorCodeSubnetNotFound                          AttachmentErrorCode = "SUBNET_NOT_FOUND"
+	AttachmentErrorCodeSubnetDuplicatedInAvailabilityZone      AttachmentErrorCode = "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE"
+	AttachmentErrorCodeSubnetNoFreeAddresses                   AttachmentErrorCode = "SUBNET_NO_FREE_ADDRESSES"
+	AttachmentErrorCodeSubnetUnsupportedAvailabilityZone       AttachmentErrorCode = "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE"
+	AttachmentErrorCodeSubnetNoIpv6Cidrs                       AttachmentErrorCode = "SUBNET_NO_IPV6_CIDRS"
+	AttachmentErrorCodeVpnConnectionNotFound                   AttachmentErrorCode = "VPN_CONNECTION_NOT_FOUND"
+	AttachmentErrorCodeMaximumNoEncapLimitExceeded             AttachmentErrorCode = "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+	AttachmentErrorCodeDirectConnectGatewayNotFound            AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NOT_FOUND"
+	AttachmentErrorCodeDirectConnectGatewayExistingAttachments AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS"
+	AttachmentErrorCodeDirectConnectGatewayNoPrivateVif        AttachmentErrorCode = "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"
 )
 
 // Values returns all known values for AttachmentErrorCode. Note that this can be
@@ -30,6 +33,9 @@ func (AttachmentErrorCode) Values() []AttachmentErrorCode {
 		"SUBNET_NO_IPV6_CIDRS",
 		"VPN_CONNECTION_NOT_FOUND",
 		"MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED",
+		"DIRECT_CONNECT_GATEWAY_NOT_FOUND",
+		"DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS",
+		"DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF",
 	}
 }
 
@@ -73,6 +79,7 @@ const (
 	AttachmentTypeConnect                  AttachmentType = "CONNECT"
 	AttachmentTypeSiteToSiteVpn            AttachmentType = "SITE_TO_SITE_VPN"
 	AttachmentTypeVpc                      AttachmentType = "VPC"
+	AttachmentTypeDirectConnectGateway     AttachmentType = "DIRECT_CONNECT_GATEWAY"
 	AttachmentTypeTransitGatewayRouteTable AttachmentType = "TRANSIT_GATEWAY_ROUTE_TABLE"
 )
 
@@ -85,6 +92,7 @@ func (AttachmentType) Values() []AttachmentType {
 		"CONNECT",
 		"SITE_TO_SITE_VPN",
 		"VPC",
+		"DIRECT_CONNECT_GATEWAY",
 		"TRANSIT_GATEWAY_ROUTE_TABLE",
 	}
 }

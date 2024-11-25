@@ -209,6 +209,26 @@ func (m *validateOpCreateDevice) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDirectConnectGatewayAttachment struct {
+}
+
+func (*validateOpCreateDirectConnectGatewayAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDirectConnectGatewayAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDirectConnectGatewayAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDirectConnectGatewayAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLink struct {
 }
 
@@ -869,6 +889,26 @@ func (m *validateOpGetDevices) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDirectConnectGatewayAttachment struct {
+}
+
+func (*validateOpGetDirectConnectGatewayAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDirectConnectGatewayAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDirectConnectGatewayAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDirectConnectGatewayAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLinkAssociations struct {
 }
 
@@ -1469,6 +1509,26 @@ func (m *validateOpUpdateDevice) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDirectConnectGatewayAttachment struct {
+}
+
+func (*validateOpUpdateDirectConnectGatewayAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDirectConnectGatewayAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDirectConnectGatewayAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDirectConnectGatewayAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateGlobalNetwork struct {
 }
 
@@ -1609,6 +1669,10 @@ func addOpCreateDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDevice{}, middleware.After)
 }
 
+func addOpCreateDirectConnectGatewayAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDirectConnectGatewayAttachment{}, middleware.After)
+}
+
 func addOpCreateLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLink{}, middleware.After)
 }
@@ -1741,6 +1805,10 @@ func addOpGetDevicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDevices{}, middleware.After)
 }
 
+func addOpGetDirectConnectGatewayAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDirectConnectGatewayAttachment{}, middleware.After)
+}
+
 func addOpGetLinkAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLinkAssociations{}, middleware.After)
 }
@@ -1859,6 +1927,10 @@ func addOpUpdateCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDevice{}, middleware.After)
+}
+
+func addOpUpdateDirectConnectGatewayAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDirectConnectGatewayAttachment{}, middleware.After)
 }
 
 func addOpUpdateGlobalNetworkValidationMiddleware(stack *middleware.Stack) error {
@@ -2065,6 +2137,27 @@ func validateOpCreateDeviceInput(v *CreateDeviceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeviceInput"}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDirectConnectGatewayAttachmentInput(v *CreateDirectConnectGatewayAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDirectConnectGatewayAttachmentInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.DirectConnectGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectConnectGatewayArn"))
+	}
+	if v.EdgeLocations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeLocations"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2631,6 +2724,21 @@ func validateOpGetDevicesInput(v *GetDevicesInput) error {
 	}
 }
 
+func validateOpGetDirectConnectGatewayAttachmentInput(v *GetDirectConnectGatewayAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDirectConnectGatewayAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLinkAssociationsInput(v *GetLinkAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -3109,6 +3217,21 @@ func validateOpUpdateDeviceInput(v *UpdateDeviceInput) error {
 	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDirectConnectGatewayAttachmentInput(v *UpdateDirectConnectGatewayAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDirectConnectGatewayAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
