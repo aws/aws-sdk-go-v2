@@ -1,6 +1,9 @@
 package transfermanager
 
-import "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+import (
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/smithy-go/logging"
+)
 
 // Options provides params needed for transfer api calls
 type Options struct {
@@ -33,6 +36,9 @@ type Options struct {
 
 	// PartBodyMaxRetries is the number of retry attempts to make for failed part downloads.
 	PartBodyMaxRetries int
+
+	// Logger to send logging message to
+	Logger logging.Logger
 }
 
 func (o *Options) init() {

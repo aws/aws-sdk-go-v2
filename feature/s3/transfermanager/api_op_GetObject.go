@@ -1,9 +1,11 @@
 package transfermanager
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"strconv"
 	"strings"
 	"sync"
@@ -12,11 +14,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/logging"
-	"github.com/aws/smithy-go/middleware"
+	smithymiddleware "github.com/aws/smithy-go/middleware"
 )
 
 type GetObjectInput struct {
@@ -232,9 +233,9 @@ func (i GetObjectInput) mapGetObjectInput() *s3.GetObjectInput {
 	if i.ChecksumMode != "" {
 		input.ChecksumMode = s3types.ChecksumMode(i.ChecksumMode)
 	}
-	if i.PartNumber > 0 && i.PartNumber < 10001 {
-		input.PartNumber = aws.Int32(i.PartNumber)
-	}
+	// if i.PartNumber > 0 && i.PartNumber < 10001 {
+	//	input.PartNumber = aws.Int32(i.PartNumber)
+	// }
 	if i.RequestPayer != "" {
 		input.RequestPayer = s3types.RequestPayer(i.RequestPayer)
 	}
@@ -244,7 +245,7 @@ func (i GetObjectInput) mapGetObjectInput() *s3.GetObjectInput {
 	input.IfNoneMatch = nzstring(i.IfNoneMatch)
 	input.IfModifiedSince = nztime(i.IfModifiedSince)
 	input.IfUnmodifiedSince = nztime(i.IfUnmodifiedSince)
-	input.Range = nzstring(i.Range)
+	// input.Range = nzstring(i.Range)
 	input.ResponseCacheControl = nzstring(i.ResponseCacheControl)
 	input.ResponseContentDisposition = nzstring(i.ResponseContentDisposition)
 	input.ResponseContentEncoding = nzstring(i.ResponseContentEncoding)
@@ -470,7 +471,7 @@ type GetObjectOutput struct {
 	WebsiteRedirectLocation string
 
 	// Metadata pertaining to the operation's result.
-	ResultMetadata middleware.Metadata
+	ResultMetadata smithymiddleware.Metadata
 }
 
 func (o *GetObjectOutput) mapFromGetObjectOutput(out *s3.GetObjectOutput) {
@@ -536,6 +537,7 @@ type downloader struct {
 	options Options
 	in      *GetObjectInput
 	w       io.WriterAt
+	buf     []byte
 
 	wg sync.WaitGroup
 	m  sync.Mutex
@@ -548,7 +550,7 @@ type downloader struct {
 }
 
 func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
-	if err := d.init(); err != nil {
+	if err := d.init(ctx); err != nil {
 		return nil, fmt.Errorf("unable to initialize download: %w", err)
 	}
 
@@ -563,35 +565,94 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		return d.singleDownload(ctx)
 	}
 
-	return nil, nil
+	var output *GetObjectOutput
+	if d.options.MultipartDownloadType == types.MultipartDownloadTypePart {
+		if d.in.Range != "" {
+			return d.singleDownload(ctx)
+		}
+		output = d.getChunk(1, "")
+		if output.PartsCount > 1 {
+			partSize := out.ContentLength
+			ch := make(chan dlchunk, d.options.Concurrency)
+			for i = 0; i <= d.options.Concurrency; i++ {
+				d.wg.Add(1)
+				go d.downloadPart(ch)
+			}
+
+			for i := 2; i <= out.PartsCount; i++ {
+				if d.getErr() != nil {
+					break
+				}
+
+				ch <- dlchunk{w: d.w, size: partSize}
+			}
+
+			close(ch)
+			d.wg.Wait()
+		}
+	} else {
+		if d.in.Range == nil {
+		} else {
+		}
+	}
+
+	if d.err == nil {
+		output.Body = io.NopCloser(bytes.NewReader(d.buf))
+	}
+
+	return output, d.err
 }
 
-func (d *downloader) init() error {
-	if u.options.PartSizeBytes < minPartSizeBytes {
+func (d *downloader) init(ctx context.Context) error {
+	if d.options.PartSizeBytes < minPartSizeBytes {
 		return fmt.Errorf("part size must be at least %d bytes", minPartSizeBytes)
 	}
 
-	if u.options.PartBodyMaxRetries < 0 {
+	if d.options.PartBodyMaxRetries < 0 {
 		return fmt.Error("part body retry must be non-negative")
 	}
+
+	d.options.Logger = logging.WithContext(ctx, d.options.Logger)
 }
 
-func (d *downloader) singleDownload(ctx context.Context) {
+func (d *downloader) singleDownload(ctx context.Context, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
+	chunk := dlchunk{w: d.w, size: 1} // size set to 1 to enable chunk.Write()
 
+	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
+	if err != nil {
+		d.setErr(err)
+	}
+
+	return output, err
+}
+
+// getChunk grabs a chunk of data from the body.
+// Not thread safe. Should only used when grabbing data on a single thread.
+func (d *downloader) getChunk(part int32, rng string) *GetObjectOutput {
+	chunk := dlchunk{w: d.w, start: d.written, part: part, withRange: rng}
+
+	output, err := d.downloadChunk(chunk)
+	if err != nil {
+		d.setErr(err)
+	}
+	return output
 }
 
 // downloadChunk downloads the chunk from s3
-func (d *downloader) downloadChunk(chunk dlchunk) (*GetObjectOutput, error) {
-	var params s3.GetObjectInput
-	awsutil.Copy(&params, d.in)
+func (d *downloader) downloadChunk(ctx context.Context, chunk dlchunk, clientOptions ...func(*s3.Options)) (*GetObjectOutput, error) {
+	params := d.in.mapGetObjectInput()
+	if chunk.part != 0 {
+		params.PartNumber = aws.Int32(chunk.part)
+	}
+	if chunk.withRange != "" {
+		params.Range = aws.String(chunk.withRange)
+	}
 
-	// Get the next byte range of data
-	params.Range = aws.String(chunk.ByteRange())
-
+	var out *s3.GetObjectOutput
 	var n int64
 	var err error
 	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
-		n, err = d.tryDownloadChunk(&params, &chunk)
+		out, n, err = d.tryDownloadChunk(ctx, params, &chunk, clientOptions)
 		if err == nil {
 			break
 		}
@@ -603,40 +664,54 @@ func (d *downloader) downloadChunk(chunk dlchunk) (*GetObjectOutput, error) {
 		if bodyErr, ok := err.(*errReadingBody); ok {
 			err = bodyErr.Unwrap()
 		} else {
-			return err
+			return nil, err
 		}
 
 		chunk.cur = 0
 
-		d.cfg.Logger.Logf(logging.Debug,
+		d.options.Logger.Logf(logging.Debug,
 			"object part body download interrupted %s, err, %v, retrying attempt %d",
 			aws.ToString(params.Key), err, retry)
 	}
 
 	d.incrWritten(n)
 
-	return err
+	output := GetObjectOutput{}
+	output.mapFromGetObjectOutput(out)
+	return &output, err
 }
 
-func (d *downloader) tryDownloadChunk(params *s3.GetObjectInput, chunk dlchunk) (*GetObjectOutput, error) {
-	out, err := d.cfg.S3.GetObject(d.ctx, params, d.cfg.ClientOptions...)
+func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectInput, chunk *dlchunk, clientOptions ...func(*s3.Options)) (*s3.GetObjectOutput, int64, error) {
+	out, err := d.options.S3.GetObject(ctx, params, clientOptions...)
 	if err != nil {
-		return 0, err
+		return nil, 0, err
 	}
-	d.setTotalBytes(resp) // Set total if not yet set.
 
-	var output GetObjectOutput
-	output.mapFromGetObjectOutput(out)
+	d.setTotalBytes(out) // Set total if not yet set.
 
+	var n int64
+	defer out.Body.Close()
 	if chunk.w != nil {
-		_, err := io.Copy(chunk, out.Body)
-		resp.Body.Close()
+		n, err = io.Copy(chunk, out.Body)
 		if err != nil {
-			return nil, &errReadingBody{err: err}
+			return nil, 0, &errReadingBody{err: err}
 		}
+	} else {
+		part, err := ioutil.ReadAll(out.Body)
+		if err != nil {
+			return nil, 0, &errReadingBody{err: err}
+		}
+		n = len(part)
+		d.buf = append(d.buf, part)
 	}
 
-	return &output, nil
+	return out, n, nil
+}
+func (d *downloader) incrWritten(n int64) {
+	d.m.Lock()
+	defer d.m.Unlock()
+
+	d.written += n
 }
 
 // getTotalBytes is a thread-safe getter for retrieving the total byte status.
@@ -707,6 +782,7 @@ type dlchunk struct {
 	size  int64
 	cur   int64
 
+	part      int32
 	withRange string
 }
 
