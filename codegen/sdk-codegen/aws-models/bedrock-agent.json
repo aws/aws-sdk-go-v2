@@ -223,6 +223,18 @@
                         "smithy.api#documentation": "<p>The description of the agent.</p>"
                     }
                 },
+                "orchestrationType": {
+                    "target": "com.amazonaws.bedrockagent#OrchestrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies the orchestration strategy for the agent.\n    </p>"
+                    }
+                },
+                "customOrchestration": {
+                    "target": "com.amazonaws.bedrockagent#CustomOrchestration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contains custom orchestration configurations for the agent.\n    </p>"
+                    }
+                },
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.bedrockagent#SessionTTL",
                     "traits": {
@@ -2717,6 +2729,18 @@
                         "smithy.api#documentation": "<p>A description of the agent.</p>"
                     }
                 },
+                "orchestrationType": {
+                    "target": "com.amazonaws.bedrockagent#OrchestrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies the type of orchestration strategy for the agent. This is set to <code>DEFAULT</code> orchestration type, by default.\n    </p>"
+                    }
+                },
+                "customOrchestration": {
+                    "target": "com.amazonaws.bedrockagent#CustomOrchestration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contains details of the custom orchestration configured for the agent.\n    </p>"
+                    }
+                },
                 "idleSessionTTLInSeconds": {
                     "target": "com.amazonaws.bedrockagent#SessionTTL",
                     "traits": {
@@ -3840,6 +3864,20 @@
                         "smithy.api#enumValue": "RETURN_CONTROL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagent#CustomOrchestration": {
+            "type": "structure",
+            "members": {
+                "executor": {
+                    "target": "com.amazonaws.bedrockagent#OrchestrationExecutor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The structure of the executor invoking the actions in custom orchestration. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n     Details of custom orchestration.\n    </p>"
             }
         },
         "com.amazonaws.bedrockagent#CustomTransformationConfiguration": {
@@ -10684,6 +10722,37 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#OrchestrationExecutor": {
+            "type": "union",
+            "members": {
+                "lambda": {
+                    "target": "com.amazonaws.bedrockagent#LambdaArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Contains details about the Lambda function containing the orchestration logic carried out upon invoking the custom orchestration.\n    </p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#OrchestrationType": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "CUSTOM_ORCHESTRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_ORCHESTRATION"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#OutputFlowNodeConfiguration": {
             "type": "structure",
             "members": {},
@@ -13878,6 +13947,18 @@
                     "target": "com.amazonaws.bedrockagent#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a new description of the agent.</p>"
+                    }
+                },
+                "orchestrationType": {
+                    "target": "com.amazonaws.bedrockagent#OrchestrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies the type of orchestration strategy for the agent. This is set to <code>DEFAULT</code> orchestration type, by default.\n    </p>"
+                    }
+                },
+                "customOrchestration": {
+                    "target": "com.amazonaws.bedrockagent#CustomOrchestration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contains details of the custom orchestration configured for the agent.\n    </p>"
                     }
                 },
                 "idleSessionTTLInSeconds": {

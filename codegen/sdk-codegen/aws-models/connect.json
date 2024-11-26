@@ -237,18 +237,18 @@
                 "ToList": {
                     "target": "com.amazonaws.connect#EmailRecipientsList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of additional TO email recipients for an email contact.</p>"
                     }
                 },
                 "CcList": {
                     "target": "com.amazonaws.connect#EmailRecipientsList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of additional CC email recipients for an email contact.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>List of additional email addresses for an email contact.</p>"
             }
         },
         "com.amazonaws.connect#AfterContactWorkTimeLimit": {
@@ -3749,60 +3749,60 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
                     }
                 },
                 "ContactArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact</p>"
                     }
                 },
                 "InitiationTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The date and time this contact was initiated, in UTC time.</p>"
                     }
                 },
                 "DisconnectTimestamp": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The timestamp when the customer endpoint disconnected from Amazon Connect.</p>"
                     }
                 },
                 "InitialContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>If this contact is related to other contacts, this is the ID of the initial contact.</p>"
                     }
                 },
                 "PreviousContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>If this contact is not the first contact, this is the ID of the previous contact.</p>"
                     }
                 },
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The contactId that is related to this contact.</p>"
                     }
                 },
                 "InitiationMethod": {
                     "target": "com.amazonaws.connect#ContactInitiationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Indicates how the contact was initiated.</p>"
                     }
                 },
                 "Channel": {
                     "target": "com.amazonaws.connect#Channel",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>How the contact reached your contact center.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Contact summary of a contact in contact tree associated with unique identifier.</p>"
             }
         },
         "com.amazonaws.connect#AssociatedContactSummaryList": {
@@ -4011,7 +4011,7 @@
                 "Arn": {
                     "target": "com.amazonaws.connect#ReferenceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the attachment reference.</p>"
                     }
                 }
             },
@@ -4625,7 +4625,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -5388,7 +5388,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -5444,7 +5444,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>A conditional check failed.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -5518,7 +5518,7 @@
                 "ContactAssociationId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>This is the root contactId which is used as a unique identifier for all subsequent contacts\n   in a contact tree.</p>"
                     }
                 },
                 "InitiationMethod": {
@@ -5620,13 +5620,13 @@
                 "CustomerEndpoint": {
                     "target": "com.amazonaws.connect#EndpointInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The customer or external third party participant endpoint.</p>"
                     }
                 },
                 "SystemEndpoint": {
                     "target": "com.amazonaws.connect#EndpointInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The system endpoint. For <code>INBOUND</code>, this is the phone number or email address\n   that the customer dialed. For <code>OUTBOUND</code> and <code>EXTERNAL_OUTBOUND</code>, this is\n   the outbound caller ID number assigned to the outbound queue that is used to dial the customer.\n   For callback, this shows up as Softphone for calls handled by agents with softphone.</p>"
                     }
                 },
                 "QueueTimeAdjustmentSeconds": {
@@ -5695,7 +5695,7 @@
                 "AdditionalEmailRecipients": {
                     "target": "com.amazonaws.connect#AdditionalEmailRecipients",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of additional email addresses for an email contact.</p>"
                     }
                 },
                 "SegmentAttributes": {
@@ -5720,7 +5720,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using analysis outputs from Amazon\n   Connect Contact Lens.</p>"
+                "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using analysis outputs from Amazon Connect Contact Lens.</p>"
             }
         },
         "com.amazonaws.connect#ContactDataRequest": {
@@ -5829,7 +5829,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ContactFlowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the contact flow.</p>"
+                        "smithy.api#documentation": "<p>The status of the flow.</p>"
                     }
                 },
                 "Description": {
@@ -5848,13 +5848,6 @@
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
-                    }
-                },
-                "IsDefault": {
-                    "target": "com.amazonaws.connect#Boolean",
-                    "traits": {
-                        "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Amazon Connect includes a set of default flows that have already been published. It uses\n   them to power your contact center.</p>"
                     }
                 },
                 "FlowContentSha256": {
@@ -5878,13 +5871,13 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the contact flow was last modified.</p>"
+                        "smithy.api#documentation": "<p>The time at which the flow was last modified.</p>"
                     }
                 },
                 "LastModifiedRegion": {
                     "target": "com.amazonaws.connect#RegionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The region in which the contact flow was last modified</p>"
+                        "smithy.api#documentation": "<p>The region in which the flow was last modified</p>"
                     }
                 }
             },
@@ -6184,7 +6177,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return contact flows.</p>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return flows.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowSearchFilter": {
@@ -6274,7 +6267,7 @@
                 "ContactFlowStatus": {
                     "target": "com.amazonaws.connect#ContactFlowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the contact flow.</p>"
+                        "smithy.api#documentation": "<p>The status of the flow.</p>"
                     }
                 }
             },
@@ -6382,7 +6375,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of a contact flow version's metadata.</p>"
+                "smithy.api#documentation": "<p>A summary of a flow version's metadata.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowVersionSummaryList": {
@@ -6578,7 +6571,7 @@
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#ContactSearchSummarySegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Set of segment attributes for a contact.</p>"
                     }
                 }
             },
@@ -6632,12 +6625,12 @@
                 "ValueString": {
                     "target": "com.amazonaws.connect#SegmentAttributeValueString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The value of a segment attribute represented as a string.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The value of a segment attribute. This is structured as a map with a single key-value pair.\n   The key 'valueString' indicates that the attribute type is a string, and its corresponding value\n   is the actual string value of the segment attribute.</p>"
             }
         },
         "com.amazonaws.connect#ContactSearchSummarySegmentAttributes": {
@@ -7033,7 +7026,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Creates a new contact.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/create-contact",
@@ -7397,83 +7390,83 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
                     }
                 },
                 "Attributes": {
                     "target": "com.amazonaws.connect#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in flows just like any other contact attributes.</p>\n         <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys\n   can include only alphanumeric, dash, and underscore characters.</p>"
                     }
                 },
                 "References": {
                     "target": "com.amazonaws.connect#ContactReferences",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A formatted URL that is shown to an agent in the Contact Control Panel (CCP). Tasks can have\n   the following reference types at the time of creation: URL | NUMBER | STRING | DATE | EMAIL |\n   ATTACHMENT.</p>"
                     }
                 },
                 "Channel": {
                     "target": "com.amazonaws.connect#Channel",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The channel for the contact</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InitiationMethod": {
                     "target": "com.amazonaws.connect#ContactInitiationMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Indicates how the contact was initiated.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExpiryDurationInMinutes": {
                     "target": "com.amazonaws.connect#ExpiryDurationInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Number of minutes the contact will be active for before expiring</p>"
                     }
                 },
                 "UserInfo": {
                     "target": "com.amazonaws.connect#UserInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>User details for the contact</p>"
                     }
                 },
                 "InitiateAs": {
                     "target": "com.amazonaws.connect#InitiateAs",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Initial state of the contact when it's created</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.connect#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of a the contact.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A description of the contact.</p>"
                     }
                 },
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique\n   contact ID) using an attribute map. The attributes are standard Amazon Connect attributes.\n   They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to set Segment Contact Expiry as a duration in minutes.</p>\n         <note>\n            <p>To set contact expiry, a ValueMap must be specified containing the integer number of\n    minutes the contact will be active for before expiring, with <code>SegmentAttributes</code> like\n    { <code> \"connect:ContactExpiry\": {\"ValueMap\" : { \"ExpiryDuration\": { \"ValueInteger\":\n     135}}}}</code>. </p>\n         </note>"
                     }
                 }
             },
@@ -7487,13 +7480,13 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
                     }
                 },
                 "ContactArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created contact.</p>"
                     }
                 }
             },
@@ -7542,7 +7535,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Create new email address in the specified Amazon Connect instance. For more information\n   about email addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html\">Create email addresses</a> in the\n    Amazon Connect Administrator Guide.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/email-addresses/{InstanceId}",
@@ -7556,13 +7549,13 @@
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The description of the email address.</p>"
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7570,26 +7563,26 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address with the instance, in [^\\s@]+@[^\\s@]+\\.[^\\s@]+ format.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EmailAddressDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The display name of email address</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
                     }
                 }
             },
@@ -7603,13 +7596,13 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>"
                     }
                 },
                 "EmailAddressArn": {
                     "target": "com.amazonaws.connect#EmailAddressArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the email address.</p>"
                     }
                 }
             },
@@ -8477,7 +8470,7 @@
                 "OutboundEmailConfig": {
                     "target": "com.amazonaws.connect#OutboundEmailConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The outbound email address ID for a specified queue.</p>"
                     }
                 },
                 "HoursOfOperationId": {
@@ -9086,7 +9079,7 @@
                 "SelfAssignFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a\n   self-assigned task.</p>"
                     }
                 },
                 "Constraints": {
@@ -10701,7 +10694,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Deletes email address from the specified Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/email-addresses/{InstanceId}/{EmailAddressId}",
@@ -10715,7 +10708,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10723,7 +10716,7 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12215,7 +12208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. Once a contact flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>\n         <p>In the response, <b>Status</b> indicates the flow status as either\n    <code>SAVED</code> or <code>PUBLISHED</code>. The <code>PUBLISHED</code> status will initiate\n   validation on the content. <code>SAVED</code> does not initiate validation of the content.\n    <code>SAVED</code> | <code>PUBLISHED</code>\n         </p>",
+                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. After a flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>\n         <p>In the response, <b>Status</b> indicates the flow status as either\n    <code>SAVED</code> or <code>PUBLISHED</code>. The <code>PUBLISHED</code> status will initiate\n   validation on the content. <code>SAVED</code> does not initiate validation of the content.\n    <code>SAVED</code> | <code>PUBLISHED</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}",
@@ -12252,7 +12245,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified flow module.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. Once a contact flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>",
+                "smithy.api#documentation": "<p>Describes the specified flow module.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. After a flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}",
@@ -12403,7 +12396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Describe email address form the specified Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/email-addresses/{InstanceId}/{EmailAddressId}",
@@ -12417,7 +12410,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12425,7 +12418,7 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -12441,49 +12434,49 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>"
                     }
                 },
                 "EmailAddressArn": {
                     "target": "com.amazonaws.connect#EmailAddressArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the email address.</p>"
                     }
                 },
                 "EmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The email address with the instance, in [^\\s@]+@[^\\s@]+\\.[^\\s@]+ format.</p>"
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EmailAddressDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The display name of email address</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The description of the email address.</p>"
                     }
                 },
                 "CreateTimestamp": {
                     "target": "com.amazonaws.connect#ISO8601Datetime",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The email address creation timestamp in ISO 8601 Datetime.</p>"
                     }
                 },
                 "ModifiedTimestamp": {
                     "target": "com.amazonaws.connect#ISO8601Datetime",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The email address last modification timestamp in ISO 8601 Datetime.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -15077,19 +15070,19 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address with the instance, in [^\\s@]+@[^\\s@]+\\.[^\\s@]+ format.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EmailAddressDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The display name of email address.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Contains information about a source or destination email address</p>"
             }
         },
         "com.amazonaws.connect#EmailAddressList": {
@@ -15104,36 +15097,36 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>"
                     }
                 },
                 "EmailAddressArn": {
                     "target": "com.amazonaws.connect#EmailAddressArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the email address.</p>"
                     }
                 },
                 "EmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The email address with the instance, in [^\\s@]+@[^\\s@]+\\.[^\\s@]+ format.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The description of the email address.</p>"
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EmailAddressDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The display name of email address.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Contains information about an email address for a contact center.</p>"
             }
         },
         "com.amazonaws.connect#EmailAddressRecipientList": {
@@ -15160,13 +15153,13 @@
                 "OrConditions": {
                     "target": "com.amazonaws.connect#EmailAddressSearchConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
                     }
                 },
                 "AndConditions": {
                     "target": "com.amazonaws.connect#EmailAddressSearchConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
                     }
                 },
                 "StringCondition": {
@@ -15174,7 +15167,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return email addresses.</p>"
             }
         },
         "com.amazonaws.connect#EmailAddressSearchFilter": {
@@ -15185,7 +15178,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
             }
         },
         "com.amazonaws.connect#EmailAttachment": {
@@ -15194,20 +15187,20 @@
                 "FileName": {
                     "target": "com.amazonaws.connect#FileName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attached file being uploaded.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "S3Url": {
                     "target": "com.amazonaws.connect#PreSignedAttachmentUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The pre-signed URLs for the S3 bucket where the email attachment is stored.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the email attachment files.</p>"
             }
         },
         "com.amazonaws.connect#EmailAttachments": {
@@ -15291,18 +15284,18 @@
                 "Name": {
                     "target": "com.amazonaws.connect#ReferenceKey",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the email message reference</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.connect#ReferenceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the email message reference</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the reference when the referenceType is <code>EMAIL_MESSAGE</code>.\n   Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#EmailRecipient": {
@@ -15311,18 +15304,18 @@
                 "Address": {
                     "target": "com.amazonaws.connect#EndpointAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Address of the email recipient.</p>\n         <p>Type: String</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 256.</p>"
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EndpointDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Display name of the email recipient.</p>\n         <p>Type: String</p>\n         <p>Length Constraints: Minimum length of 1. Maximum length of 256.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the email recipient</p>"
             }
         },
         "com.amazonaws.connect#EmailRecipientsList": {
@@ -15442,24 +15435,24 @@
                 "Type": {
                     "target": "com.amazonaws.connect#EndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Type of endpoint.</p>"
                     }
                 },
                 "Address": {
                     "target": "com.amazonaws.connect#EndpointAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Address of the endpoint.</p>"
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EndpointDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Display name of the endpoint.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the endpoint.</p>"
             }
         },
         "com.amazonaws.connect#EndpointType": {
@@ -17439,7 +17432,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Connect instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17462,7 +17455,7 @@
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -18461,7 +18454,7 @@
                 "SelfAssignFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>ContactFlowId for the flow that will be run if this template is used to create a\n   self-assigned task</p>"
                     }
                 },
                 "Constraints": {
@@ -19773,18 +19766,18 @@
                 "ToAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressRecipientList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The additional recipients information present in to list.</p>"
                     }
                 },
                 "CcAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressRecipientList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The additional recipients information present in cc list.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The additional TO CC recipients information of inbound email.</p>"
             }
         },
         "com.amazonaws.connect#InboundCallsEnabled": {
@@ -19796,19 +19789,19 @@
                 "MessageSourceType": {
                     "target": "com.amazonaws.connect#InboundMessageSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The message source type, that is, <code>RAW</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RawMessage": {
                     "target": "com.amazonaws.connect#InboundRawMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The raw email body content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about email body content.</p>"
             }
         },
         "com.amazonaws.connect#InboundMessageSourceType": {
@@ -19828,33 +19821,33 @@
                 "Subject": {
                     "target": "com.amazonaws.connect#InboundSubject",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email subject.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Body": {
                     "target": "com.amazonaws.connect#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email message body.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ContentType": {
                     "target": "com.amazonaws.connect#EmailMessageContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Type of content, that is, <code>text/plain</code> or <code>text/html</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Headers": {
                     "target": "com.amazonaws.connect#EmailHeaders",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Headers present in inbound email.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the raw email body content.</p>"
             }
         },
         "com.amazonaws.connect#InboundSubject": {
@@ -21204,7 +21197,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Provides information about contact tree, a list of associated contacts with a unique\n   identifier.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact/associated/{InstanceId}",
@@ -21218,7 +21211,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -21226,7 +21219,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
                         "smithy.api#httpQuery": "contactId",
                         "smithy.api#required": {}
                     }
@@ -21234,14 +21227,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.connect#ListAssociatedContactsRequestMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>\n         <p>The maximum number of results to return per page. The default MaxResult size is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -21265,13 +21258,13 @@
                 "ContactSummaryList": {
                     "target": "com.amazonaws.connect#AssociatedContactSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of the contact summary for all the contacts in contact tree associated with unique\n   identifier.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             },
@@ -26433,12 +26426,12 @@
                 "CcEmailAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressRecipientList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The additional CC email address recipients information.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The additional recipients information of outbound email.</p>"
             }
         },
         "com.amazonaws.connect#OutboundCallerConfig": {
@@ -26505,12 +26498,12 @@
                 "OutboundEmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The outbound email address Id.</p>"
             }
         },
         "com.amazonaws.connect#OutboundEmailContent": {
@@ -26519,25 +26512,25 @@
                 "MessageSourceType": {
                     "target": "com.amazonaws.connect#OutboundMessageSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The message source type, that is, <code>RAW</code> or <code>TEMPLATE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TemplatedMessageConfig": {
                     "target": "com.amazonaws.connect#TemplatedMessageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Information about template message configuration.</p>"
                     }
                 },
                 "RawMessage": {
                     "target": "com.amazonaws.connect#OutboundRawMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The raw email body content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about email body content.</p>"
             }
         },
         "com.amazonaws.connect#OutboundMessageSourceType": {
@@ -26563,27 +26556,27 @@
                 "Subject": {
                     "target": "com.amazonaws.connect#OutboundSubject",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email subject.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Body": {
                     "target": "com.amazonaws.connect#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email message body.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ContentType": {
                     "target": "com.amazonaws.connect#EmailMessageContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Type of content, that is, <code>text/plain</code> or <code>text/html</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the raw email body content.</p>"
             }
         },
         "com.amazonaws.connect#OutboundRequestId": {
@@ -26613,7 +26606,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Thrown for analyzed content when requested OutputType was not enabled for a given contact.\n   For example, if an OutputType.Raw was requested for a contact that had `RedactedOnly` Redaction\n   policy set in Contact flow.</p>",
+                "smithy.api#documentation": "<p>Thrown for analyzed content when requested OutputType was not enabled for a given contact.\n   For example, if an OutputType.Raw was requested for a contact that had `RedactedOnly` Redaction\n   policy set in the flow.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -29317,7 +29310,7 @@
                 "OutboundEmailConfig": {
                     "target": "com.amazonaws.connect#OutboundEmailConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The outbound email address ID for a specified queue.</p>"
                     }
                 },
                 "HoursOfOperationId": {
@@ -30694,19 +30687,19 @@
                 "Status": {
                     "target": "com.amazonaws.connect#ReferenceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Status of the attachment reference type.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.connect#ReferenceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the reference</p>"
                     }
                 },
                 "StatusReason": {
                     "target": "com.amazonaws.connect#ReferenceStatusReason",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Relevant details why the reference was not successfully created.</p>"
                     }
                 }
             },
@@ -30810,7 +30803,7 @@
                 "EmailMessage": {
                     "target": "com.amazonaws.connect#EmailMessageReference",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Information about the reference when the referenceType is <code>EMAIL_MESSAGE</code>.\n   Otherwise, null.</p>"
                     }
                 },
                 "String": {
@@ -32644,7 +32637,7 @@
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#ContactFlowModuleSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return contact flow modules.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with a\n    minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will result in invalid results.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return flow modules.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with a\n    minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will result in invalid results.</p>\n         </note>"
                     }
                 }
             },
@@ -32658,7 +32651,7 @@
                 "ContactFlowModules": {
                     "target": "com.amazonaws.connect#ContactFlowModuleSearchSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return contact flow modules.</p>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return flow modules.</p>"
                     }
                 },
                 "NextToken": {
@@ -32670,7 +32663,7 @@
                 "ApproximateTotalCount": {
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of contact flows which matched your search query.</p>"
+                        "smithy.api#documentation": "<p>The total number of flows which matched your search query.</p>"
                     }
                 }
             },
@@ -32704,7 +32697,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches the contact flows in an Amazon Connect instance, with optional\n   filtering.</p>",
+                "smithy.api#documentation": "<p>Searches the flows in an Amazon Connect instance, with optional filtering.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-contact-flows",
@@ -32775,7 +32768,7 @@
                 "ApproximateTotalCount": {
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of contact flows which matched your search query.</p>"
+                        "smithy.api#documentation": "<p>The total number of flows which matched your search query.</p>"
                     }
                 }
             },
@@ -33019,7 +33012,7 @@
                 "SearchableSegmentAttributes": {
                     "target": "com.amazonaws.connect#SearchableSegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The search criteria based on searchable segment attributes of a contact.</p>"
                     }
                 }
             },
@@ -33056,7 +33049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Searches email address in an instance, with optional filtering.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-email-addresses",
@@ -33070,32 +33063,32 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.connect#MaxResult100",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken2500",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
                     }
                 },
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#EmailAddressSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return email addresses.</p>"
                     }
                 },
                 "SearchFilter": {
                     "target": "com.amazonaws.connect#EmailAddressSearchFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
                     }
                 }
             },
@@ -33109,19 +33102,19 @@
                 "NextToken": {
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 },
                 "EmailAddresses": {
                     "target": "com.amazonaws.connect#EmailAddressList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of email addresses matching SearchFilter and SearchCriteria </p>"
                     }
                 },
                 "ApproximateTotalCount": {
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The total number of email addresses which matched your search query.</p>"
                     }
                 }
             },
@@ -34364,7 +34357,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria based on user-defned contact attribute key and values to search\n   on.</p>"
+                "smithy.api#documentation": "<p>The search criteria based on user-defined contact attribute key and values to search\n   on.</p>"
             }
         },
         "com.amazonaws.connect#SearchableContactAttributesCriteriaList": {
@@ -34429,19 +34422,19 @@
                 "Criteria": {
                     "target": "com.amazonaws.connect#SearchableSegmentAttributesCriteriaList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The list of criteria based on searchable segment attributes.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MatchType": {
                     "target": "com.amazonaws.connect#SearchContactsMatchType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The match type combining search criteria using multiple searchable segment\n   attributes.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The search criteria based on searchable segment attributes of a contact</p>"
             }
         },
         "com.amazonaws.connect#SearchableSegmentAttributesCriteria": {
@@ -34450,20 +34443,20 @@
                 "Key": {
                     "target": "com.amazonaws.connect#SearchableSegmentAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The key containing a searchable segment attribute.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.connect#SearchableSegmentAttributeValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The list of values to search for within a searchable segment attribute.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The search criteria based on searchable segment attribute key and values to search\n   on.</p>"
             }
         },
         "com.amazonaws.connect#SearchableSegmentAttributesCriteriaList": {
@@ -34801,10 +34794,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of a segment attribute.</p>"
                     }
+                },
+                "ValueMap": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a segment attribute.</p>"
+                    }
+                },
+                "ValueInteger": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a segment attribute.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A value for a segment attribute. This is structured as a map where the key is\n    <code>valueString</code> and the value is a string.</p>"
+            }
+        },
+        "com.amazonaws.connect#SegmentAttributeValueInteger": {
+            "type": "integer"
+        },
+        "com.amazonaws.connect#SegmentAttributeValueMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#SegmentAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#SegmentAttributeValue"
             }
         },
         "com.amazonaws.connect#SegmentAttributeValueString": {
@@ -34994,7 +35011,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Send outbound email for outbound campaigns. For more information about outbound campaigns,\n   see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html\">Set up Amazon Connect outbound campaigns</a>.</p>\n         <note>\n            <p>Only the Amazon Connect outbound campaigns service principal is allowed to assume a\n    role in your account and call this API.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/outbound-email",
@@ -35008,7 +35025,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -35016,47 +35033,47 @@
                 "FromEmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddressInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address to be used for sending email.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationEmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddressInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address to send the email to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AdditionalRecipients": {
                     "target": "com.amazonaws.connect#OutboundAdditionalRecipients",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The additional recipients address of the email in CC.</p>"
                     }
                 },
                 "EmailMessage": {
                     "target": "com.amazonaws.connect#OutboundEmailContent",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email message body to be sent to the newly created email.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TrafficType": {
                     "target": "com.amazonaws.connect#TrafficType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Denotes the class of traffic.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceCampaign": {
                     "target": "com.amazonaws.connect#SourceCampaign",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A Campaign object need for Campaign traffic type.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -35094,12 +35111,12 @@
                 "AttachedFileServiceQuotaExceededExceptionReason": {
                     "target": "com.amazonaws.connect#AttachedFileServiceQuotaExceededExceptionReason",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Total file size of all files or total number of files exceeds the service quota</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The reason for the exception.</p>"
             }
         },
         "com.amazonaws.connect#SignInConfig": {
@@ -35306,18 +35323,18 @@
                 "CampaignId": {
                     "target": "com.amazonaws.connect#CampaignId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A unique identifier for a campaign.</p>"
                     }
                 },
                 "OutboundRequestId": {
                     "target": "com.amazonaws.connect#OutboundRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A unique identifier for a each request part of same campaign.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the campaign.</p>"
             }
         },
         "com.amazonaws.connect#SourceId": {
@@ -35381,7 +35398,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to an <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Amazon Connect Case</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to an <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Amazon Connect Case</a> or\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Amazon Connect\n     Email</a>. </p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/attached-files/{InstanceId}",
@@ -35430,14 +35447,14 @@
                 "FileUseCaseType": {
                     "target": "com.amazonaws.connect#FileUseCaseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The use case for the file.</p>",
+                        "smithy.api#documentation": "<p>The use case for the file.</p>\n         <important>\n            <p> Only <code>ATTACHMENTS</code> are supported.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "AssociatedResourceArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
                     }
@@ -35551,7 +35568,7 @@
                 "ContactFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the flow for initiating the chat.\n   To\n   see the ContactFlowId in the Amazon Connect admin website, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the flow. On the\n   flow page, under the name of the flow, choose <b>Show additional flow\n    information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier of the flow for initiating the chat.\n   To\n   see the ContactFlowId in the Amazon Connect admin website, on the navigation menu go to <b>Routing</b>, <b>Flows</b>. Choose the flow. On the flow page,\n   under the name of the flow, choose <b>Show additional flow\n    information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -35937,7 +35954,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Creates an inbound email contact and initiates a flow to start the email contact for the\n   customer. Response of this API provides the ContactId of the email contact created.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/email",
@@ -35951,89 +35968,89 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FromEmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddressInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address of the customer.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationEmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address associated with the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A description of the email contact.</p>"
                     }
                 },
                 "References": {
                     "target": "com.amazonaws.connect#ContactReferences",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A formatted URL that is shown to an agent in the Contact Control Panel (CCP). Emails can\n   have the following reference types at the time of creation: <code>URL</code> |\n    <code>NUMBER</code> | <code>STRING</code> | <code>DATE</code>. <code>EMAIL</code> |\n    <code>EMAIL_MESSAGE</code> |<code>ATTACHMENT</code> are not a supported reference type during\n   email creation.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.connect#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of a email that is shown to an agent in the Contact Control Panel (CCP).</p>"
                     }
                 },
                 "EmailMessage": {
                     "target": "com.amazonaws.connect#InboundEmailContent",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email message body to be sent to the newly created email.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AdditionalRecipients": {
                     "target": "com.amazonaws.connect#InboundAdditionalRecipients",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The addtional recipients address of the email.</p>"
                     }
                 },
                 "Attachments": {
                     "target": "com.amazonaws.connect#EmailAttachments",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of S3 presigned URLs of email attachments and their file name. </p>"
                     }
                 },
                 "ContactFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the flow for initiating the emails. To see the ContactFlowId in the Amazon Connect admin website,\n   on the navigation menu go to <b>Routing</b>, <b>Flows</b>. Choose the flow. On the flow page, under the name of the flow, choose\n    <b>Show additional flow information</b>. The ContactFlowId is the last\n   part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>"
                     }
                 },
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The contactId that is related to this contact. Linking emails together by using\n    <code>RelatedContactID</code> copies over contact attributes from the related email contact to\n   the new email contact. All updates to user-defined attributes in the new email contact are\n   limited to the individual contact ID. There are no limits to the number of contacts that can be\n   linked by using <code>RelatedContactId</code>. </p>"
                     }
                 },
                 "Attributes": {
                     "target": "com.amazonaws.connect#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in flows just like any other contact attributes.</p>\n         <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys\n   can include only alphanumeric, dash, and underscore characters.</p>"
                     }
                 },
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments using an\n   attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in\n   flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <note>\n            <p>To set contact expiry, a <code>ValueMap</code> must be specified containing the integer\n    number of minutes the contact will be active for before expiring, with\n     <code>SegmentAttributes</code> like { <code> \"connect:ContactExpiry\": {\"ValueMap\" : {\n     \"ExpiryDuration\": { \"ValueInteger\":135}}}}</code>.</p>\n         </note>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -36048,7 +36065,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of this contact within the Amazon Connect instance.</p>"
                     }
                 }
             },
@@ -36220,7 +36237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Initiates a flow to send an agent reply or outbound email contact (created from the\n   CreateContact API) to a customer.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/outbound-email",
@@ -36234,47 +36251,47 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FromEmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddressInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The email address associated with the instance.</p>"
                     }
                 },
                 "DestinationEmailAddress": {
                     "target": "com.amazonaws.connect#EmailAddressInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email address of the customer.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AdditionalRecipients": {
                     "target": "com.amazonaws.connect#OutboundAdditionalRecipients",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The addtional recipients address of email in CC.</p>"
                     }
                 },
                 "EmailMessage": {
                     "target": "com.amazonaws.connect#OutboundEmailContent",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The email message body to be sent to the newly created email.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -36289,7 +36306,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
                     }
                 }
             },
@@ -36576,7 +36593,7 @@
                 "ContactFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect admin website,\n   on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the flow. On the flow page, under the name of the flow, choose\n    <b>Show additional flow information</b>. The ContactFlowId is the last\n   part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>"
+                        "smithy.api#documentation": "<p>The identifier of the flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect admin website,\n   on the navigation menu go to <b>Routing</b>, <b>Flows</b>. Choose the flow. On the flow page, under the name of the flow, choose\n    <b>Show additional flow information</b>. The ContactFlowId is the last\n   part of the ARN, shown here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>"
                     }
                 },
                 "Attributes": {
@@ -36638,7 +36655,7 @@
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique\n   contact ID) using an attribute map. The attributes are standard Amazon Connect attributes.\n   They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to set Contact Expiry as a duration in minutes and set a UserId for\n   the User who created a task.</p>\n         <note>\n            <p>To set contact expiry, a ValueMap must be specified containing the integer number of\n    minutes the contact will be active for before expiring, with <code>SegmentAttributes</code> like\n    { <code> \"connect:ContactExpiry\": {\"ValueMap\" : { \"ExpiryDuration\": { \"ValueInteger\":\n     135}}}}</code>. </p>\n            <p>To set the created by user, a valid AgentResourceId must be supplied, with\n     <code>SegmentAttributes</code> like { <code>\"connect:CreatedByUser\" { \"ValueString\":\n     \"arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/agent/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"}}}</code>.\n   </p>\n         </note>"
                     }
                 }
             },
@@ -37561,7 +37578,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>Some of the supported resource types are agents, routing profiles, queues, quick connects,\n   contact flows, agent statuses, hours of operation, phone numbers, security profiles, and task\n   templates. For a complete list, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html\">Tagging resources in Amazon Connect</a>.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect\n    Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>Some of the supported resource types are agents, routing profiles, queues, quick connects,\n   flows, agent statuses, hours of operation, phone numbers, security profiles, and task templates.\n   For a complete list, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html\">Tagging resources in Amazon Connect</a>.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect\n    Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -38126,18 +38143,18 @@
                 "CustomAttributes": {
                     "target": "com.amazonaws.connect#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>An object that specifies the custom attributes values to use for variables in the message\n   template. This object contains different categories of key-value pairs. Each key defines a\n   variable or placeholder in the message template. </p>"
                     }
                 },
                 "CustomerProfileAttributes": {
                     "target": "com.amazonaws.connect#CustomerProfileAttributesSerialized",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>An object that specifies the customer profile attributes values to use for variables in the\n   message template. This object contains different categories of key-value pairs. Each key defines\n   a variable or placeholder in the message template. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about the template attributes.</p>"
             }
         },
         "com.amazonaws.connect#TemplateId": {
@@ -38155,27 +38172,27 @@
                 "KnowledgeBaseId": {
                     "target": "com.amazonaws.connect#MessageTemplateKnowledgeBaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain\n   the ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MessageTemplateId": {
                     "target": "com.amazonaws.connect#MessageTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the message template Id.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TemplateAttributes": {
                     "target": "com.amazonaws.connect#TemplateAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Information about template attributes, that is, CustomAttributes or\n   CustomerProfileAttributes.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Information about template message configuration.</p>"
             }
         },
         "com.amazonaws.connect#Threshold": {
@@ -39294,7 +39311,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. Once a contact flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>",
+                "smithy.api#documentation": "<p>Updates the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. After a flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/content",
@@ -39455,7 +39472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates specified flow module for the specified Amazon Connect instance. </p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. Once a contact flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>",
+                "smithy.api#documentation": "<p>Updates specified flow module for the specified Amazon Connect instance. </p>\n         <p>Use the <code>$SAVED</code> alias in the request to describe the <code>SAVED</code> content\n   of a Flow. For example, <code>arn:aws:.../contact-flow/{id}:$SAVED</code>. After a flow is\n   published, <code>$SAVED</code> needs to be supplied to view saved content that has not been\n   published.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact-flow-modules/{InstanceId}/{ContactFlowModuleId}/content",
@@ -39710,7 +39727,7 @@
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A set of system defined key-value pairs stored on individual contact segments (unique\n   contact ID) using an attribute map. The attributes are standard Amazon Connect attributes.\n   They can be accessed in flows.</p>\n         <p>Attribute keys can include only alphanumeric, -, and _.</p>\n         <p>This field can be used to show channel subtype, such as <code>connect:Guide</code>.</p>\n         <p>Currently Contact Expiry is the only segment attribute which can be updated by using the\n   UpdateContact API.</p>"
                     }
                 }
             },
@@ -39916,7 +39933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Updates an email address metadata. For more information about email addresses, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html\">Create email\n    addresses</a> in the Amazon Connect Administrator Guide.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/email-addresses/{InstanceId}/{EmailAddressId}",
@@ -39930,7 +39947,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -39938,7 +39955,7 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -39946,19 +39963,19 @@
                 "Description": {
                     "target": "com.amazonaws.connect#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The description of the email address.</p>"
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.connect#EmailAddressDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The display name of email address.</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
                     }
                 }
             },
@@ -39972,13 +39989,13 @@
                 "EmailAddressId": {
                     "target": "com.amazonaws.connect#EmailAddressId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier of the email address.</p>"
                     }
                 },
                 "EmailAddressArn": {
                     "target": "com.amazonaws.connect#EmailAddressArn",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the email address.</p>"
                     }
                 }
             },
@@ -41073,7 +41090,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Updates the outbound email address Id for a specified queue.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/queues/{InstanceId}/{QueueId}/outbound-email-config",
@@ -41087,7 +41104,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -41095,7 +41112,7 @@
                 "QueueId": {
                     "target": "com.amazonaws.connect#QueueId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The identifier for the queue.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -41103,7 +41120,7 @@
                 "OutboundEmailConfig": {
                     "target": "com.amazonaws.connect#OutboundEmailConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The outbound email address ID for a specified queue.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -41920,7 +41937,7 @@
                 "SelfAssignFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a\n   self-assigned task.</p>"
                     }
                 },
                 "Constraints": {
@@ -41994,7 +42011,7 @@
                 "SelfAssignFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a\n   self-assigned task.</p>"
                     }
                 },
                 "Constraints": {
@@ -43268,12 +43285,12 @@
                 "UserId": {
                     "target": "com.amazonaws.connect#AgentResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The user identifier for the contact.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The user details for the contact.</p>"
             }
         },
         "com.amazonaws.connect#UserNotFoundException": {

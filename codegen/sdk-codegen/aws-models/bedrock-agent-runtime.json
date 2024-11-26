@@ -1432,6 +1432,42 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#CustomOrchestrationTrace": {
+            "type": "structure",
+            "members": {
+                "traceId": {
+                    "target": "com.amazonaws.bedrockagentruntime#TraceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier of the trace. \n        </p>"
+                    }
+                },
+                "event": {
+                    "target": "com.amazonaws.bedrockagentruntime#CustomOrchestrationTraceEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The trace event details used with the custom orchestration.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The trace behavior for the custom orchestration. \n        </p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#CustomOrchestrationTraceEvent": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The text that prompted the event at this step.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n           The event in the custom orchestration sequence.\n        </p>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#DateTimestamp": {
             "type": "timestamp",
             "traits": {
@@ -4065,6 +4101,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#MemoryId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the agent memory.</p>"
+                    }
+                },
+                "streamingConfigurations": {
+                    "target": "com.amazonaws.bedrockagentruntime#StreamingConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n           Specifies the configurations for streaming.\n        </p>"
                     }
                 }
             },
@@ -7002,6 +7044,30 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#StreamingConfigurations": {
+            "type": "structure",
+            "members": {
+                "streamFinalResponse": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n            Specifies whether to enable streaming for the final response. This is set to <code>false</code> by default.\n        </p>"
+                    }
+                },
+                "applyGuardrailInterval": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The guardrail interval to apply as response is generated.\n        </p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Configurations for streaming.\n        </p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#SummaryText": {
             "type": "string",
             "traits": {
@@ -7165,6 +7231,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#FailureTrace",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the failure of the interaction.</p>"
+                    }
+                },
+                "customOrchestrationTrace": {
+                    "target": "com.amazonaws.bedrockagentruntime#CustomOrchestrationTrace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Details about the custom orchestration step in which the agent determines the order in which actions are executed. \n        </p>"
                     }
                 }
             },

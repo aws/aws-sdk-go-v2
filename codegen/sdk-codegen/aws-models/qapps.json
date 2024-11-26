@@ -17,6 +17,23 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.qapps#Action": {
+            "type": "enum",
+            "members": {
+                "READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "read"
+                    }
+                },
+                "WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "write"
+                    }
+                }
+            }
+        },
         "com.amazonaws.qapps#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -671,6 +688,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A container for the properties of the file upload card.</p>"
                     }
+                },
+                "formInput": {
+                    "target": "com.amazonaws.qapps#FormInputCard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for the properties of the form input card.</p>"
+                    }
                 }
             },
             "traits": {
@@ -702,6 +725,12 @@
                     "target": "com.amazonaws.qapps#FileUploadCardInput",
                     "traits": {
                         "smithy.api#documentation": "<p>A container for the properties of the file upload input card.</p>"
+                    }
+                },
+                "formInput": {
+                    "target": "com.amazonaws.qapps#FormInputCardInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for the properties of the form input card.</p>"
                     }
                 }
             },
@@ -764,6 +793,12 @@
                         "smithy.api#documentation": "<p>The current value or result associated with the card.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "submissions": {
+                    "target": "com.amazonaws.qapps#SubmissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of previous submissions, if the card is a form card.</p>"
+                    }
                 }
             },
             "traits": {
@@ -805,6 +840,12 @@
                     "traits": {
                         "smithy.api#enumValue": "q-plugin"
                     }
+                },
+                "FORM_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "form-input"
+                    }
                 }
             }
         },
@@ -823,9 +864,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value or result associated with the card.</p>",
                         "smithy.api#length": {
-                            "max": 5000
+                            "max": 40000
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "submissionMutation": {
+                    "target": "com.amazonaws.qapps#SubmissionMutation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that describes how the current form card value is mutated.\n      Only applies for form cards when multiple responses are allowed.</p>"
                     }
                 }
             },
@@ -1198,6 +1245,180 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the library item has been verified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qapps#CreatePresignedUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#CreatePresignedUrlInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#CreatePresignedUrlOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a presigned URL for an S3 POST operation to upload a file.\n      You can use this URL to set a default file for a <code>FileUploadCard</code>\n      in a Q App definition or to provide a file for a single Q App run.\n      The <code>scope</code> parameter determines how the file will be used,\n      either at the app definition level or the app session level.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Upload a file to a specific session",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "fileContentsSha256": "myMXwslBoXkTDQ0olhq1QsiHRWWL4yj1V0IuoK+PYOg=",
+                            "fileName": "myFile.txt",
+                            "cardId": "82f69028-22a9-4bea-8727-0eabf58e9fed",
+                            "appId": "4263767c-d889-4cb2-a8f6-8b649bc66af0",
+                            "scope": "SESSION",
+                            "sessionId": "4f0e5b87-9d38-41cd-9eb4-ebce2f2917cc"
+                        },
+                        "output": {
+                            "fileId": "412aa1b4-341c-45af-936d-da52f8a1a3b4",
+                            "presignedUrl": "https://presign-test-omg-6f98533b-3f9f-4e8a-8183-63793b9ffef0.s3.us-west-2.amazonaws.com/",
+                            "presignedUrlFields": {
+                                "x-amz-server-side-encryption": "aws:kms",
+                                "x-amz-server-side-encryption-aws-kms-key-id": "0a6a474b-f2ca-46ea-9e72-deea9077d92f",
+                                "x-amz-server-side-encryption-context": "eyJzb21ldGhpbmciOiJ0aGVyZSJ9",
+                                "x-amz-checksum-sha256": "fmHCdgdPjOGub9TVZ4NIOpAYP4UlIOaPRUwHw8nihR4="
+                            },
+                            "presignedUrlExpiration": "2024-09-14T00:11:54.232Z"
+                        }
+                    },
+                    {
+                        "title": "Upload a file into a application",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "fileContentsSha256": "myMXwslBoXkTDQ0olhq1QsiHRWWL4yj1V0IuoK+PYOg=",
+                            "fileName": "anApplicationFile.txt",
+                            "appId": "4263767c-d889-4cb2-a8f6-8b649bc66af0",
+                            "cardId": "7a11f34b-42d4-4bc8-b668-ae4a788dae1e",
+                            "scope": "APPLICATION"
+                        },
+                        "output": {
+                            "fileId": "412aa1b4-341c-45af-936d-da52f8a1a3b4",
+                            "presignedUrl": "https://presign-test-omg-6f98533b-3f9f-4e8a-8183-63793b9ffef0.s3.us-west-2.amazonaws.com/",
+                            "presignedUrlFields": {
+                                "x-amz-server-side-encryption": "aws:kms",
+                                "x-amz-server-side-encryption-aws-kms-key-id": "0a6a474b-f2ca-46ea-9e72-deea9077d92f",
+                                "x-amz-server-side-encryption-context": "eyJzb21ldGhpbmciOiJ0aGVyZSJ9",
+                                "x-amz-checksum-sha256": "fmHCdgdPjOGub9TVZ4NIOpAYP4UlIOaPRUwHw8nihR4="
+                            },
+                            "presignedUrlExpiration": "2024-09-14T00:11:54.232Z"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/apps.createPresignedUrl"
+                }
+            }
+        },
+        "com.amazonaws.qapps#CreatePresignedUrlInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cardId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the card the file is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "appId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App the file is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileContentsSha256": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Base64-encoded SHA-256 digest of the contents of the file to be uploaded.</p>",
+                        "smithy.api#pattern": "^[A-Za-z0-9+/]{43}=$|^[A-Za-z0-9+/]{42}==$|^[A-Za-z0-9+/]{44}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileName": {
+                    "target": "com.amazonaws.qapps#Filename",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the file to be uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.qapps#DocumentScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the file is associated with a Q App definition or a specific Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App session the file is associated with, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#CreatePresignedUrlOutput": {
+            "type": "structure",
+            "members": {
+                "fileId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the file to be uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "presignedUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for a presigned S3 POST operation used to upload a file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "presignedUrlFields": {
+                    "target": "com.amazonaws.qapps#PresignedUrlFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The form fields to include in the presigned S3 POST operation used to upload a file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "presignedUrlExpiration": {
+                    "target": "com.amazonaws.qapps#QAppsTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the presigned URL will expire in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1588,6 +1809,122 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.qapps#DescribeQAppPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#DescribeQAppPermissionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#DescribeQAppPermissionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Describes read permissions for a Amazon Q App in Amazon Q Business application environment instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe permissions for the app",
+                        "input": {
+                            "instanceId": "01793661-ad73-4c7d-8eaa-1c95a10151c2",
+                            "appId": "fe0acf86-49e5-4def-a0c2-40ce0cafee14"
+                        },
+                        "output": {
+                            "resourceArn": "arn:aws:qapps:us-west-2:111111111111:application/01793661-ad73-4c7d-8eaa-1c95a10151c2/qapp/fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "appId": "fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "permissions": [
+                                {
+                                    "action": "write",
+                                    "principal": {
+                                        "userId": "f8f15330-b091-708b-d46e-adb0d914b699",
+                                        "email": "user1@example.com"
+                                    }
+                                },
+                                {
+                                    "action": "read",
+                                    "principal": {
+                                        "userId": "c81133d0-10d1-70eb-aaa3-d427ea6fc0f3",
+                                        "email": "user2@example.com"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/apps.describeQAppPermissions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qapps#DescribeQAppPermissionsInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "appId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q App for which to retrieve permissions.</p>",
+                        "smithy.api#httpQuery": "appId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#DescribeQAppPermissionsOutput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q App for which permissions are returned.</p>"
+                    }
+                },
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q App for which permissions are returned.</p>"
+                    }
+                },
+                "permissions": {
+                    "target": "com.amazonaws.qapps#PermissionsOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of permissions granted for the Amazon Q App.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qapps#Description": {
             "type": "string",
             "traits": {
@@ -1856,7 +2193,107 @@
                     "traits": {
                         "smithy.api#enumValue": "COMPLETED"
                     }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.qapps#ExportQAppSessionData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#ExportQAppSessionDataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#ExportQAppSessionDataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports the collected data of a Q App data collection session.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/runtime.exportQAppSessionData"
+                }
+            }
+        },
+        "com.amazonaws.qapps#ExportQAppSessionDataInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#ExportQAppSessionDataOutput": {
+            "type": "structure",
+            "members": {
+                "csvFileLink": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The link where the exported Q App session data can be downloaded from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresAt": {
+                    "target": "com.amazonaws.qapps#QAppsTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the link for the exported Q App session data expires.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qapps#FileUploadCard": {
@@ -1968,6 +2405,116 @@
                     "max": 100
                 }
             }
+        },
+        "com.amazonaws.qapps#FormInputCard": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the form input card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.qapps#Title",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the form input card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dependencies": {
+                    "target": "com.amazonaws.qapps#DependencyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any dependencies or requirements for the form input card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qapps#CardType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.qapps#FormInputCardMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that defines the form input card data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "computeMode": {
+                    "target": "com.amazonaws.qapps#InputCardComputeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute mode of the form input card.\n      This property determines whether individual participants of a\n      data collection session can submit multiple response or one response.\n      A compute mode of <code>append</code> shall allow participants\n      to submit the same form multiple times with different values.\n      A compute mode of <code>replace</code>code&gt; shall overwrite\n      the current value for each participant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A card in an Amazon Q App that allows the user to submit a response.</p>"
+            }
+        },
+        "com.amazonaws.qapps#FormInputCardInput": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.qapps#Title",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title or label of the form input card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the form input card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qapps#CardType",
+                    "traits": {
+                        "smithy.api#default": "form-input",
+                        "smithy.api#documentation": "<p>The type of the card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.qapps#FormInputCardMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that defines the form input card data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "computeMode": {
+                    "target": "com.amazonaws.qapps#InputCardComputeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute mode of the form input card.\n      This property determines whether individual participants of a\n      data collection session can submit multiple response or one response.\n      A compute mode of <code>append</code> shall allow participants\n      to submit the same form multiple times with different values.\n      A compute mode of <code>replace</code>code&gt; shall overwrite\n      the current value for each participant.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a form input card for an Amazon Q App.</p>"
+            }
+        },
+        "com.amazonaws.qapps#FormInputCardMetadata": {
+            "type": "structure",
+            "members": {
+                "schema": {
+                    "target": "com.amazonaws.qapps#FormInputCardMetadataSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON schema that defines the shape of the response data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata of the form input card.</p>"
+            }
+        },
+        "com.amazonaws.qapps#FormInputCardMetadataSchema": {
+            "type": "document"
         },
         "com.amazonaws.qapps#GetLibraryItem": {
             "type": "operation",
@@ -2268,6 +2815,13 @@
                         "smithy.api#httpQuery": "appId",
                         "smithy.api#required": {}
                     }
+                },
+                "appVersion": {
+                    "target": "com.amazonaws.qapps#AppVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Q App.</p>",
+                        "smithy.api#httpQuery": "appVersion"
+                    }
                 }
             },
             "traits": {
@@ -2417,7 +2971,17 @@
                             "cardStatus": {
                                 "6fb5b404-3b7b-48a4-8a8b-56406922a606": {
                                     "currentState": "COMPLETED",
-                                    "currentValue": ""
+                                    "currentValue": "",
+                                    "submissions": [
+                                        {
+                                            "value": {
+                                                "d52030f9-6c4b-47a9-a946-377f632c77cc": "red",
+                                                "18cee4cb-253e-4f87-9154-849fbb98e482": "user1"
+                                            },
+                                            "submissionId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                                            "timestamp": "2023-06-15T14:30:45Z"
+                                        }
+                                    ]
                                 },
                                 "1e6caeac-b481-45ff-a082-8b9a4a0b72e8": {
                                     "currentState": "COMPLETED",
@@ -2458,6 +3022,131 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.qapps#GetQAppSessionMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#GetQAppSessionMetadataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#GetQAppSessionMetadataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current configuration of a Q App session.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Retrieves an existing session metadata for an Amazon Q App",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "sessionId": "56ae47c3-10bc-4c2c-8b27-9b9fe23b3edb"
+                        },
+                        "output": {
+                            "sessionId": "56ae47c3-10bc-4c2c-8b27-9b9fe23b3edb",
+                            "sessionArn": "arn:aws:qapps:us-west-2:0123456789012:application/cbea8329-41c0-4566-a112-19250921a220/qapp/387ccac9-4717-489f-841f-729b7d7de355/session/56ae47c3-10bc-4c2c-8b27-9b9fe23b3edb",
+                            "sessionName": "Trip itinerary collection session",
+                            "sharingConfiguration": {
+                                "enabled": true,
+                                "acceptResponses": true,
+                                "revealCards": false
+                            },
+                            "sessionOwner": true
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/runtime.getQAppSessionMetadata"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qapps#GetQAppSessionMetadataInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App session.</p>",
+                        "smithy.api#httpQuery": "sessionId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#GetQAppSessionMetadataOutput": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionName": {
+                    "target": "com.amazonaws.qapps#SessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Q App session.</p>"
+                    }
+                },
+                "sharingConfiguration": {
+                    "target": "com.amazonaws.qapps#SessionSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sharing configuration of the Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionOwner": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the current user is the owner of the Q App session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qapps#GetQAppSessionOutput": {
             "type": "structure",
             "members": {
@@ -2475,6 +3164,24 @@
                         "smithy.api#required": {}
                     }
                 },
+                "sessionName": {
+                    "target": "com.amazonaws.qapps#SessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Q App session.</p>"
+                    }
+                },
+                "appVersion": {
+                    "target": "com.amazonaws.qapps#AppVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Q App used for the session.</p>"
+                    }
+                },
+                "latestPublishedAppVersion": {
+                    "target": "com.amazonaws.qapps#AppVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest published version of the Q App used for the session.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.qapps#ExecutionStatus",
                     "traits": {
@@ -2487,6 +3194,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status for each card in the Q App session.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "userIsHost": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the current user is the owner of the Q App data collection session.</p>"
                     }
                 }
             },
@@ -2581,7 +3294,7 @@
                 "cardId": {
                     "target": "com.amazonaws.qapps#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the card the file is associated with, if applicable.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the card the file is associated with.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2609,7 +3322,7 @@
                 "scope": {
                     "target": "com.amazonaws.qapps#DocumentScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the file is associated with an Q App definition or a specific Q App session.</p>",
+                        "smithy.api#documentation": "<p>Whether the file is associated with a Q App definition or a specific Q App session.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2643,6 +3356,23 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.qapps#InputCardComputeMode": {
+            "type": "enum",
+            "members": {
+                "APPEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "append"
+                    }
+                },
+                "REPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "replace"
+                    }
                 }
             }
         },
@@ -3059,6 +3789,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qapps#ListQAppSessionData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#ListQAppSessionDataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#ListQAppSessionDataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the collected data of a Q App data collection session.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/runtime.listQAppSessionData"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qapps#ListQAppSessionDataInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App data collection session.</p>",
+                        "smithy.api#httpQuery": "sessionId",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#ListQAppSessionDataOutput": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionData": {
+                    "target": "com.amazonaws.qapps#QAppSessionDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collected responses of a Q App session.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qapps#ListQApps": {
             "type": "operation",
             "input": {
@@ -3314,6 +4142,12 @@
         "com.amazonaws.qapps#Long": {
             "type": "long"
         },
+        "com.amazonaws.qapps#MemoryReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.qapps#MessageList": {
             "type": "list",
             "member": {
@@ -3335,6 +4169,84 @@
                 "smithy.api#length": {
                     "max": 300
                 }
+            }
+        },
+        "com.amazonaws.qapps#PermissionInput": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.qapps#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action associated with the permission.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal user to which the permission applies.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The permission to grant or revoke for a Amazon Q App.</p>"
+            }
+        },
+        "com.amazonaws.qapps#PermissionOutput": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.qapps#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action associated with the permission.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 20
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.qapps#PrincipalOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal user to which the permission applies.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The permission granted to the Amazon Q App.</p>"
+            }
+        },
+        "com.amazonaws.qapps#PermissionsInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#PermissionInput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of permissions to grant or revoke for a Amazon Q App.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.qapps#PermissionsOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#PermissionOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of permissions granted for a Amazon Q App.</p>"
             }
         },
         "com.amazonaws.qapps#Placeholder": {
@@ -3533,12 +4445,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qapps#PresignedUrlFields": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.qapps#PrincipalOutput": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the user.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        }
+                    }
+                },
+                "userType": {
+                    "target": "com.amazonaws.qapps#UserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the user.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        }
+                    }
+                },
+                "email": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address associated with the user.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The principal for which the permission applies.</p>"
+            }
+        },
         "com.amazonaws.qapps#Prompt": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "max": 7000
+                    "max": 50000
                 }
+            }
+        },
+        "com.amazonaws.qapps#QAppSessionData": {
+            "type": "structure",
+            "members": {
+                "cardId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The card Id associated with the response submitted for a Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response submitted for a Q App session.</p>"
+                    }
+                },
+                "user": {
+                    "target": "com.amazonaws.qapps#User",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who submitted the response for a Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "submissionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the submission.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.qapps#QAppsTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the session data is submitted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response collected for a Amazon Q App session.\n      This container represents a single response to a Q App session.</p>"
+            }
+        },
+        "com.amazonaws.qapps#QAppSessionDataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#QAppSessionData"
             }
         },
         "com.amazonaws.qapps#QAppsService": {
@@ -3564,6 +4569,9 @@
                     "target": "com.amazonaws.qapps#CreateLibraryItem"
                 },
                 {
+                    "target": "com.amazonaws.qapps#CreatePresignedUrl"
+                },
+                {
                     "target": "com.amazonaws.qapps#CreateQApp"
                 },
                 {
@@ -3573,10 +4581,16 @@
                     "target": "com.amazonaws.qapps#DeleteQApp"
                 },
                 {
+                    "target": "com.amazonaws.qapps#DescribeQAppPermissions"
+                },
+                {
                     "target": "com.amazonaws.qapps#DisassociateLibraryItemReview"
                 },
                 {
                     "target": "com.amazonaws.qapps#DisassociateQAppFromUser"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ExportQAppSessionData"
                 },
                 {
                     "target": "com.amazonaws.qapps#GetLibraryItem"
@@ -3586,6 +4600,9 @@
                 },
                 {
                     "target": "com.amazonaws.qapps#GetQAppSession"
+                },
+                {
+                    "target": "com.amazonaws.qapps#GetQAppSessionMetadata"
                 },
                 {
                     "target": "com.amazonaws.qapps#ImportDocument"
@@ -3598,6 +4615,9 @@
                 },
                 {
                     "target": "com.amazonaws.qapps#ListQApps"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ListQAppSessionData"
                 },
                 {
                     "target": "com.amazonaws.qapps#ListTagsForResource"
@@ -3627,7 +4647,13 @@
                     "target": "com.amazonaws.qapps#UpdateQApp"
                 },
                 {
+                    "target": "com.amazonaws.qapps#UpdateQAppPermissions"
+                },
+                {
                     "target": "com.amazonaws.qapps#UpdateQAppSession"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UpdateQAppSessionMetadata"
                 }
             ],
             "traits": {
@@ -4465,6 +5491,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Q Business filters applied in this query card when resolving data sources</p>"
                     }
+                },
+                "memoryReferences": {
+                    "target": "com.amazonaws.qapps#MemoryReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any dependencies for the query card, where the dependencies are references to the collected responses.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4612,6 +5644,50 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.qapps#SessionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.qapps#SessionSharingAcceptResponses": {
+            "type": "boolean"
+        },
+        "com.amazonaws.qapps#SessionSharingConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.qapps#SessionSharingEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether an Q App session is shareable with other users.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "acceptResponses": {
+                    "target": "com.amazonaws.qapps#SessionSharingAcceptResponses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether an Q App session can accept responses from users.</p>"
+                    }
+                },
+                "revealCards": {
+                    "target": "com.amazonaws.qapps#SessionSharingRevealCards",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether collected responses for an Q App session are revealed for all users.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sharing configuration of an Amazon Q App data collection session.</p>"
+            }
+        },
+        "com.amazonaws.qapps#SessionSharingEnabled": {
+            "type": "boolean"
+        },
+        "com.amazonaws.qapps#SessionSharingRevealCards": {
+            "type": "boolean"
+        },
         "com.amazonaws.qapps#StartQAppSession": {
             "type": "operation",
             "input": {
@@ -4702,6 +5778,12 @@
                         "smithy.api#documentation": "<p>Optional initial input values to provide for the Q App session.</p>"
                     }
                 },
+                "sessionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the a Q App session.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.qapps#TagMap",
                     "traits": {
@@ -4719,7 +5801,7 @@
                 "sessionId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the new Q App session.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the new or retrieved Q App session.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4795,6 +5877,83 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#Submission": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data submitted by the user.</p>"
+                    }
+                },
+                "submissionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the submission.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.qapps#QAppsTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the card is submitted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A record created when a user submits a form card.</p>"
+            }
+        },
+        "com.amazonaws.qapps#SubmissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#Submission"
+            }
+        },
+        "com.amazonaws.qapps#SubmissionMutation": {
+            "type": "structure",
+            "members": {
+                "submissionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the submission.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mutationType": {
+                    "target": "com.amazonaws.qapps#SubmissionMutationKind",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation that is performed on a submission.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an action performed on a submission.</p>"
+            }
+        },
+        "com.amazonaws.qapps#SubmissionMutationKind": {
+            "type": "enum",
+            "members": {
+                "edit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "edit"
+                    }
+                },
+                "delete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "delete"
+                    }
+                },
+                "add": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "add"
+                    }
+                }
             }
         },
         "com.amazonaws.qapps#TagKey": {
@@ -5679,6 +6838,172 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qapps#UpdateQAppPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#UpdateQAppPermissionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#UpdateQAppPermissionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates read permissions for a Amazon Q App in Amazon Q Business application environment instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Grant permissions for the app",
+                        "input": {
+                            "instanceId": "01793661-ad73-4c7d-8eaa-1c95a10151c2",
+                            "appId": "fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "grantPermissions": [
+                                {
+                                    "action": "read",
+                                    "principal": "user2@example.com"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "resourceArn": "arn:aws:qapps:us-west-2:111111111111:application/01793661-ad73-4c7d-8eaa-1c95a10151c2/qapp/fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "appId": "fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "permissions": [
+                                {
+                                    "action": "write",
+                                    "principal": {
+                                        "userId": "f8f15330-b091-708b-d46e-adb0d914b699",
+                                        "email": "user1@example.com"
+                                    }
+                                },
+                                {
+                                    "action": "read",
+                                    "principal": {
+                                        "userId": "c81133d0-10d1-70eb-aaa3-d427ea6fc0f3",
+                                        "email": "user2@example.com"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Revoke permissions for the app",
+                        "input": {
+                            "instanceId": "01793661-ad73-4c7d-8eaa-1c95a10151c2",
+                            "appId": "fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "revokePermissions": [
+                                {
+                                    "action": "read",
+                                    "principal": "user2@example.com"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "resourceArn": "arn:aws:qapps:us-west-2:111111111111:application/01793661-ad73-4c7d-8eaa-1c95a10151c2/qapp/fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "appId": "fe0acf86-49e5-4def-a0c2-40ce0cafee14",
+                            "permissions": [
+                                {
+                                    "action": "write",
+                                    "principal": {
+                                        "userId": "f8f15330-b091-708b-d46e-adb0d914b699",
+                                        "email": "user1@example.com"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/apps.updateQAppPermissions"
+                }
+            }
+        },
+        "com.amazonaws.qapps#UpdateQAppPermissionsInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "appId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q App for which permissions are being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "grantPermissions": {
+                    "target": "com.amazonaws.qapps#PermissionsInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of permissions to grant for the Amazon Q App.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 100
+                        }
+                    }
+                },
+                "revokePermissions": {
+                    "target": "com.amazonaws.qapps#PermissionsInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of permissions to revoke for the Amazon Q App.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#UpdateQAppPermissionsOutput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q App for which permissions were updated.</p>"
+                    }
+                },
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q App for which permissions were updated.</p>"
+                    }
+                },
+                "permissions": {
+                    "target": "com.amazonaws.qapps#PermissionsOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated list of permissions for the Amazon Q App.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qapps#UpdateQAppSession": {
             "type": "operation",
             "input": {
@@ -5747,6 +7072,141 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.qapps#UpdateQAppSessionMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#UpdateQAppSessionMetadataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#UpdateQAppSessionMetadataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration metadata of a session for a given Q App <code>sessionId</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Updates an existing session metadata for an Amazon Q App",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "sessionId": "56ae47c3-10bc-4c2c-8b27-9b9fe23b3edb",
+                            "sessionName": "Trip itinerary collection session",
+                            "sharingConfiguration": {
+                                "enabled": true,
+                                "acceptResponses": true,
+                                "revealCards": false
+                            }
+                        },
+                        "output": {
+                            "sessionId": "56ae47c3-10bc-4c2c-8b27-9b9fe23b3edb",
+                            "sessionArn": "arn:aws:qapps:us-west-2:0123456789012:application/cbea8329-41c0-4566-a112-19250921a220/qapp/387ccac9-4717-489f-841f-729b7d7de355/session/56ae47c3-10bc-4c2c-8b27-9b9fe23b3edb",
+                            "sessionName": "Trip itinerary collection session",
+                            "sharingConfiguration": {
+                                "enabled": true,
+                                "acceptResponses": true,
+                                "revealCards": false
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/runtime.updateQAppSessionMetadata"
+                }
+            }
+        },
+        "com.amazonaws.qapps#UpdateQAppSessionMetadataInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Q App session to update configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionName": {
+                    "target": "com.amazonaws.qapps#SessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name for the Q App session.</p>"
+                    }
+                },
+                "sharingConfiguration": {
+                    "target": "com.amazonaws.qapps#SessionSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new sharing configuration for the Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#UpdateQAppSessionMetadataOutput": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated Q App session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionName": {
+                    "target": "com.amazonaws.qapps#SessionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name of the updated Q App session.</p>"
+                    }
+                },
+                "sharingConfiguration": {
+                    "target": "com.amazonaws.qapps#SessionSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new sharing configuration of the updated Q App data collection session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qapps#UpdateQAppSessionOutput": {
             "type": "structure",
             "members": {
@@ -5767,6 +7227,20 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qapps#User": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.qapps#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A user of an Amazon Q App.</p>"
             }
         },
         "com.amazonaws.qapps#UserAppItem": {
@@ -5834,6 +7308,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qapps#UserAppItem"
+            }
+        },
+        "com.amazonaws.qapps#UserId": {
+            "type": "string"
+        },
+        "com.amazonaws.qapps#UserType": {
+            "type": "enum",
+            "members": {
+                "OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "owner"
+                    }
+                },
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "user"
+                    }
+                }
             }
         },
         "com.amazonaws.qapps#ValidationException": {
