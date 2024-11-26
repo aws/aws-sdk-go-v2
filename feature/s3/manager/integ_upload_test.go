@@ -160,7 +160,7 @@ func TestInteg_UploadPresetChecksum(t *testing.T) {
 		expectETag           string
 	}{
 		"auto single part": {
-			"no checksum": {
+			"no checksum algorithm passed": {
 				payload:             bytes.NewReader(singlePartBytes),
 				expectChecksumCRC32: singlePartCRC32,
 				expectETag:          singlePartETag,
