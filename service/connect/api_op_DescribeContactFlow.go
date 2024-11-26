@@ -16,9 +16,8 @@ import (
 // You can also create and update flows using the [Amazon Connect Flow language].
 //
 // Use the $SAVED alias in the request to describe the SAVED content of a Flow.
-// For example, arn:aws:.../contact-flow/{id}:$SAVED . Once a contact flow is
-// published, $SAVED needs to be supplied to view saved content that has not been
-// published.
+// For example, arn:aws:.../contact-flow/{id}:$SAVED . After a flow is published,
+// $SAVED needs to be supplied to view saved content that has not been published.
 //
 // In the response, Status indicates the flow status as either SAVED or PUBLISHED .
 // The PUBLISHED status will initiate validation on the content. SAVED does not

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches the contact flows in an Amazon Connect instance, with optional
-// filtering.
+// Searches the flows in an Amazon Connect instance, with optional filtering.
 func (c *Client) SearchContactFlows(ctx context.Context, params *SearchContactFlowsInput, optFns ...func(*Options)) (*SearchContactFlowsOutput, error) {
 	if params == nil {
 		params = &SearchContactFlowsInput{}
@@ -58,7 +57,7 @@ type SearchContactFlowsInput struct {
 
 type SearchContactFlowsOutput struct {
 
-	// The total number of contact flows which matched your search query.
+	// The total number of flows which matched your search query.
 	ApproximateTotalCount *int64
 
 	// Information about the flows.

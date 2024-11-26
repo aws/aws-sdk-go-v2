@@ -1,0 +1,8 @@
+{
+    "id": "dd6a5585-8c83-4d75-98c0-2406d20e178d",
+    "type": "feature",
+    "description": "Custom Orchestration and Streaming configurations API release for AWSBedrockAgents.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}

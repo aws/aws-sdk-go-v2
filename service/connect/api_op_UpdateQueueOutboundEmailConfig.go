@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the outbound email address Id for a specified queue.
 func (c *Client) UpdateQueueOutboundEmailConfig(ctx context.Context, params *UpdateQueueOutboundEmailConfigInput, optFns ...func(*Options)) (*UpdateQueueOutboundEmailConfigOutput, error) {
 	if params == nil {
 		params = &UpdateQueueOutboundEmailConfigInput{}
@@ -28,17 +29,20 @@ func (c *Client) UpdateQueueOutboundEmailConfig(ctx context.Context, params *Upd
 
 type UpdateQueueOutboundEmailConfigInput struct {
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	//
+	// The outbound email address ID for a specified queue.
 	//
 	// This member is required.
 	OutboundEmailConfig *types.OutboundEmailConfig
 
-	//
+	// The identifier for the queue.
 	//
 	// This member is required.
 	QueueId *string

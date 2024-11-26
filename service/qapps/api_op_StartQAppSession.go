@@ -51,6 +51,9 @@ type StartQAppSessionInput struct {
 	// Optional initial input values to provide for the Q App session.
 	InitialValues []types.CardValue
 
+	// The unique identifier of the a Q App session.
+	SessionId *string
+
 	// Optional tags to associate with the new Q App session.
 	Tags map[string]string
 
@@ -64,7 +67,7 @@ type StartQAppSessionOutput struct {
 	// This member is required.
 	SessionArn *string
 
-	// The unique identifier of the new Q App session.
+	// The unique identifier of the new or retrieved Q App session.
 	//
 	// This member is required.
 	SessionId *string

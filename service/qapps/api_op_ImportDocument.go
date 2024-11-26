@@ -37,7 +37,7 @@ type ImportDocumentInput struct {
 	// This member is required.
 	AppId *string
 
-	// The unique identifier of the card the file is associated with, if applicable.
+	// The unique identifier of the card the file is associated with.
 	//
 	// This member is required.
 	CardId *string
@@ -57,7 +57,7 @@ type ImportDocumentInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// Whether the file is associated with an Q App definition or a specific Q App
+	// Whether the file is associated with a Q App definition or a specific Q App
 	// session.
 	//
 	// This member is required.

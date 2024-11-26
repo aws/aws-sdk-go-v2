@@ -12145,6 +12145,11 @@ func awsRestjson1_deserializeDocumentAgent(v **types.Agent, value interface{}) e
 				sv.CustomerEncryptionKeyArn = ptr.String(jtv)
 			}
 
+		case "customOrchestration":
+			if err := awsRestjson1_deserializeDocumentCustomOrchestration(&sv.CustomOrchestration, value); err != nil {
+				return err
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12198,6 +12203,15 @@ func awsRestjson1_deserializeDocumentAgent(v **types.Agent, value interface{}) e
 		case "memoryConfiguration":
 			if err := awsRestjson1_deserializeDocumentMemoryConfiguration(&sv.MemoryConfiguration, value); err != nil {
 				return err
+			}
+
+		case "orchestrationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrchestrationType to be of type string, got %T instead", value)
+				}
+				sv.OrchestrationType = types.OrchestrationType(jtv)
 			}
 
 		case "preparedAt":
@@ -14195,6 +14209,42 @@ func awsRestjson1_deserializeDocumentCrawlFilterConfiguration(v **types.CrawlFil
 					return fmt.Errorf("expected CrawlFilterConfigurationType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.CrawlFilterConfigurationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomOrchestration(v **types.CustomOrchestration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomOrchestration
+	if *v == nil {
+		sv = &types.CustomOrchestration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "executor":
+			if err := awsRestjson1_deserializeDocumentOrchestrationExecutor(&sv.Executor, value); err != nil {
+				return err
 			}
 
 		default:
@@ -18916,6 +18966,48 @@ func awsRestjson1_deserializeDocumentOpenSearchServerlessFieldMapping(v **types.
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOrchestrationExecutor(v *types.OrchestrationExecutor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.OrchestrationExecutor
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "lambda":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.OrchestrationExecutorMemberLambda{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 

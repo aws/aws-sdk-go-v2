@@ -2549,6 +2549,91 @@ func awsRestjson1_deserializeDocumentContentMap(v *map[string][]types.Parameter,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomOrchestrationTrace(v **types.CustomOrchestrationTrace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomOrchestrationTrace
+	if *v == nil {
+		sv = &types.CustomOrchestrationTrace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "event":
+			if err := awsRestjson1_deserializeDocumentCustomOrchestrationTraceEvent(&sv.Event, value); err != nil {
+				return err
+			}
+
+		case "traceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TraceId to be of type string, got %T instead", value)
+				}
+				sv.TraceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomOrchestrationTraceEvent(v **types.CustomOrchestrationTraceEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomOrchestrationTraceEvent
+	if *v == nil {
+		sv = &types.CustomOrchestrationTraceEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "text":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Text = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDependencyFailedException(v **types.DependencyFailedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6061,6 +6146,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "customOrchestrationTrace":
+			var mv types.CustomOrchestrationTrace
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCustomOrchestrationTrace(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TraceMemberCustomOrchestrationTrace{Value: mv}
+			break loop
+
 		case "failureTrace":
 			var mv types.FailureTrace
 			destAddr := &mv

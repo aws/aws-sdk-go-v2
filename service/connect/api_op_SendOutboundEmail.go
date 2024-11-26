@@ -11,6 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Send outbound email for outbound campaigns. For more information about outbound
+// campaigns, see [Set up Amazon Connect outbound campaigns].
+//
+// Only the Amazon Connect outbound campaigns service principal is allowed to
+// assume a role in your account and call this API.
+//
+// [Set up Amazon Connect outbound campaigns]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html
 func (c *Client) SendOutboundEmail(ctx context.Context, params *SendOutboundEmailInput, optFns ...func(*Options)) (*SendOutboundEmailOutput, error) {
 	if params == nil {
 		params = &SendOutboundEmailInput{}
@@ -28,38 +35,45 @@ func (c *Client) SendOutboundEmail(ctx context.Context, params *SendOutboundEmai
 
 type SendOutboundEmailInput struct {
 
-	//
+	// The email address to send the email to.
 	//
 	// This member is required.
 	DestinationEmailAddress *types.EmailAddressInfo
 
-	//
+	// The email message body to be sent to the newly created email.
 	//
 	// This member is required.
 	EmailMessage *types.OutboundEmailContent
 
-	//
+	// The email address to be used for sending email.
 	//
 	// This member is required.
 	FromEmailAddress *types.EmailAddressInfo
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	//
+	// Denotes the class of traffic.
 	//
 	// This member is required.
 	TrafficType types.TrafficType
 
-	//
+	// The additional recipients address of the email in CC.
 	AdditionalRecipients *types.OutboundAdditionalRecipients
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
 	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	//
+	// A Campaign object need for Campaign traffic type.
 	SourceCampaign *types.SourceCampaign
 
 	noSmithyDocumentSerde

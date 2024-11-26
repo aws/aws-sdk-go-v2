@@ -148,6 +148,9 @@ type Agent struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	//  Contains custom orchestration configurations for the agent.
+	CustomOrchestration *CustomOrchestration
+
 	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
@@ -169,6 +172,9 @@ type Agent struct {
 
 	// Contains memory configuration for the agent.
 	MemoryConfiguration *MemoryConfiguration
+
+	//  Specifies the orchestration strategy for the agent.
+	OrchestrationType OrchestrationType
 
 	// The time at which the agent was last prepared.
 	PreparedAt *time.Time
@@ -930,6 +936,15 @@ type CrawlFilterConfiguration struct {
 	// The configuration of filtering certain objects or content types of the data
 	// source.
 	PatternObjectFilter *PatternObjectFilterConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Details of custom orchestration.
+type CustomOrchestration struct {
+
+	//  The structure of the executor invoking the actions in custom orchestration.
+	Executor OrchestrationExecutor
 
 	noSmithyDocumentSerde
 }
@@ -2824,6 +2839,28 @@ type OpenSearchServerlessFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
+//	Contains details about the Lambda function containing the orchestration logic
+//
+// carried out upon invoking the custom orchestration.
+//
+// The following types satisfy this interface:
+//
+//	OrchestrationExecutorMemberLambda
+type OrchestrationExecutor interface {
+	isOrchestrationExecutor()
+}
+
+//	The Amazon Resource Name (ARN) of the Lambda function containing the business
+//
+// logic that is carried out upon invoking the action.
+type OrchestrationExecutorMemberLambda struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*OrchestrationExecutorMemberLambda) isOrchestrationExecutor() {}
+
 // Contains configurations for an output flow node in the flow. You specify the
 // data type expected for the input into the node in the type field and how to
 // return the final output in the expression field.
@@ -4316,6 +4353,7 @@ func (*UnknownUnionMember) isFlowConnectionConfiguration()           {}
 func (*UnknownUnionMember) isFlowNodeConfiguration()                 {}
 func (*UnknownUnionMember) isFlowValidationDetails()                 {}
 func (*UnknownUnionMember) isFunctionSchema()                        {}
+func (*UnknownUnionMember) isOrchestrationExecutor()                 {}
 func (*UnknownUnionMember) isPromptFlowNodeSourceConfiguration()     {}
 func (*UnknownUnionMember) isPromptGenAiResource()                   {}
 func (*UnknownUnionMember) isPromptInferenceConfiguration()          {}

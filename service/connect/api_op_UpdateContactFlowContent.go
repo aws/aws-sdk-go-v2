@@ -15,9 +15,8 @@ import (
 // You can also create and update flows using the [Amazon Connect Flow language].
 //
 // Use the $SAVED alias in the request to describe the SAVED content of a Flow.
-// For example, arn:aws:.../contact-flow/{id}:$SAVED . Once a contact flow is
-// published, $SAVED needs to be supplied to view saved content that has not been
-// published.
+// For example, arn:aws:.../contact-flow/{id}:$SAVED . After a flow is published,
+// $SAVED needs to be supplied to view saved content that has not been published.
 //
 // [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) UpdateContactFlowContent(ctx context.Context, params *UpdateContactFlowContentInput, optFns ...func(*Options)) (*UpdateContactFlowContentOutput, error) {

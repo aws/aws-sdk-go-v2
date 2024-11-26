@@ -78,6 +78,9 @@ type UpdateAgentInput struct {
 	// This member is required.
 	FoundationModel *string
 
+	//  Contains details of the custom orchestration configured for the agent.
+	CustomOrchestration *types.CustomOrchestration
+
 	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
 	CustomerEncryptionKeyArn *string
 
@@ -101,6 +104,10 @@ type UpdateAgentInput struct {
 
 	// Specifies the new memory configuration for the agent.
 	MemoryConfiguration *types.MemoryConfiguration
+
+	//  Specifies the type of orchestration strategy for the agent. This is set to
+	// DEFAULT orchestration type, by default.
+	OrchestrationType types.OrchestrationType
 
 	// Contains configurations to override prompts in different parts of an agent
 	// sequence. For more information, see [Advanced prompts].

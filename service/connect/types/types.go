@@ -18,12 +18,13 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// List of additional email addresses for an email contact.
 type AdditionalEmailRecipients struct {
 
-	//
+	// List of additional CC email recipients for an email contact.
 	CcList []EmailRecipient
 
-	//
+	// List of additional TO email recipients for an email contact.
 	ToList []EmailRecipient
 
 	noSmithyDocumentSerde
@@ -341,33 +342,36 @@ type AssignContactCategoryActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Contact summary of a contact in contact tree associated with unique identifier.
 type AssociatedContactSummary struct {
 
-	//
+	// How the contact reached your contact center.
 	Channel Channel
 
-	//
+	// The Amazon Resource Name (ARN) of the contact
 	ContactArn *string
 
-	//
+	// The identifier of the contact in this instance of Amazon Connect.
 	ContactId *string
 
-	//
+	// The timestamp when the customer endpoint disconnected from Amazon Connect.
 	DisconnectTimestamp *time.Time
 
-	//
+	// If this contact is related to other contacts, this is the ID of the initial
+	// contact.
 	InitialContactId *string
 
-	//
+	// Indicates how the contact was initiated.
 	InitiationMethod ContactInitiationMethod
 
-	//
+	// The date and time this contact was initiated, in UTC time.
 	InitiationTimestamp *time.Time
 
-	//
+	// If this contact is not the first contact, this is the ID of the previous
+	// contact.
 	PreviousContactId *string
 
-	//
+	// The contactId that is related to this contact.
 	RelatedContactId *string
 
 	noSmithyDocumentSerde
@@ -449,7 +453,7 @@ type AttachedFileError struct {
 // null.
 type AttachmentReference struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the attachment reference.
 	Arn *string
 
 	// Identifier of the attachment reference.
@@ -876,7 +880,7 @@ type ConnectionData struct {
 // Contains information about a contact.
 type Contact struct {
 
-	//
+	// List of additional email addresses for an email contact.
 	AdditionalEmailRecipients *AdditionalEmailRecipients
 
 	// Information about the agent who accepted the contact.
@@ -900,13 +904,14 @@ type Contact struct {
 	// The timestamp when customer endpoint connected to Amazon Connect.
 	ConnectedToSystemTimestamp *time.Time
 
-	//
+	// This is the root contactId which is used as a unique identifier for all
+	// subsequent contacts in a contact tree.
 	ContactAssociationId *string
 
 	// Information about the Customer on the contact.
 	Customer *Customer
 
-	//
+	// The customer or external third party participant endpoint.
 	CustomerEndpoint *EndpointInfo
 
 	// Information about customer’s voice activity.
@@ -993,7 +998,11 @@ type Contact struct {
 	// connect:Guide or connect:SMS .
 	SegmentAttributes map[string]SegmentAttributeValue
 
-	//
+	// The system endpoint. For INBOUND , this is the phone number or email address
+	// that the customer dialed. For OUTBOUND and EXTERNAL_OUTBOUND , this is the
+	// outbound caller ID number assigned to the outbound queue that is used to dial
+	// the customer. For callback, this shows up as Softphone for calls handled by
+	// agents with softphone.
 	SystemEndpoint *EndpointInfo
 
 	// Tags associated with the contact. This contains both Amazon Web Services
@@ -1084,14 +1093,10 @@ type ContactFlow struct {
 	// The identifier of the flow.
 	Id *string
 
-	// Amazon Connect includes a set of default flows that have already been
-	// published. It uses them to power your contact center.
-	IsDefault bool
-
-	// The region in which the contact flow was last modified
+	// The region in which the flow was last modified
 	LastModifiedRegion *string
 
-	// The time at which the contact flow was last modified.
+	// The time at which the flow was last modified.
 	LastModifiedTime *time.Time
 
 	// The name of the flow.
@@ -1100,7 +1105,7 @@ type ContactFlow struct {
 	// The type of flow.
 	State ContactFlowState
 
-	// The status of the contact flow.
+	// The status of the flow.
 	Status ContactFlowStatus
 
 	// The tags used to organize, track, or control access for this resource. For
@@ -1202,7 +1207,7 @@ type ContactFlowModuleSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria to be used to return contact flows.
+// The search criteria to be used to return flows.
 type ContactFlowSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.
@@ -1253,7 +1258,7 @@ type ContactFlowSummary struct {
 	// The type of flow.
 	ContactFlowState ContactFlowState
 
-	// The status of the contact flow.
+	// The status of the flow.
 	ContactFlowStatus ContactFlowStatus
 
 	// The type of flow.
@@ -1268,7 +1273,7 @@ type ContactFlowSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of a contact flow version's metadata.
+// A summary of a flow version's metadata.
 type ContactFlowVersionSummary struct {
 
 	// The Amazon Resource Name (ARN) of the view version.
@@ -1328,7 +1333,7 @@ type ContactSearchSummary struct {
 	// flow.
 	ScheduledTimestamp *time.Time
 
-	//
+	// Set of segment attributes for a contact.
 	SegmentAttributes map[string]ContactSearchSummarySegmentAttributeValue
 
 	noSmithyDocumentSerde
@@ -1358,9 +1363,13 @@ type ContactSearchSummaryQueueInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The value of a segment attribute. This is structured as a map with a single
+// key-value pair. The key 'valueString' indicates that the attribute type is a
+// string, and its corresponding value is the actual string value of the segment
+// attribute.
 type ContactSearchSummarySegmentAttributeValue struct {
 
-	//
+	// The value of a segment attribute represented as a string.
 	ValueString *string
 
 	noSmithyDocumentSerde
@@ -1738,45 +1747,48 @@ type DownloadUrlMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a source or destination email address
 type EmailAddressInfo struct {
 
-	//
+	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
 	//
 	// This member is required.
 	EmailAddress *string
 
-	//
+	// The display name of email address.
 	DisplayName *string
 
 	noSmithyDocumentSerde
 }
 
+// Contains information about an email address for a contact center.
 type EmailAddressMetadata struct {
 
-	//
+	// The description of the email address.
 	Description *string
 
-	//
+	// The display name of email address.
 	DisplayName *string
 
-	//
+	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
 	EmailAddress *string
 
-	//
+	// The Amazon Resource Name (ARN) of the email address.
 	EmailAddressArn *string
 
-	//
+	// The identifier of the email address.
 	EmailAddressId *string
 
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return email addresses.
 type EmailAddressSearchCriteria struct {
 
-	//
+	// A list of conditions which would be applied together with an AND condition.
 	AndConditions []EmailAddressSearchCriteria
 
-	//
+	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []EmailAddressSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition.
@@ -1785,6 +1797,7 @@ type EmailAddressSearchCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// Filters to be applied to search results.
 type EmailAddressSearchFilter struct {
 
 	// An object that can be used to specify Tag conditions inside the SearchFilter .
@@ -1798,14 +1811,15 @@ type EmailAddressSearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the email attachment files.
 type EmailAttachment struct {
 
-	//
+	// A case-sensitive name of the attached file being uploaded.
 	//
 	// This member is required.
 	FileName *string
 
-	//
+	// The pre-signed URLs for the S3 bucket where the email attachment is stored.
 	//
 	// This member is required.
 	S3Url *string
@@ -1813,23 +1827,34 @@ type EmailAttachment struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
 type EmailMessageReference struct {
 
-	//
+	// The Amazon Resource Name (ARN) of the email message reference
 	Arn *string
 
-	//
+	// The name of the email message reference
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
+// Information about the email recipient
 type EmailRecipient struct {
 
+	// Address of the email recipient.
 	//
+	// Type: String
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	Address *string
 
+	// Display name of the email recipient.
 	//
+	// Type: String
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256.
 	DisplayName *string
 
 	noSmithyDocumentSerde
@@ -1892,15 +1917,16 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the endpoint.
 type EndpointInfo struct {
 
-	//
+	// Address of the endpoint.
 	Address *string
 
-	//
+	// Display name of the endpoint.
 	DisplayName *string
 
-	//
+	// Type of endpoint.
 	Type EndpointType
 
 	noSmithyDocumentSerde
@@ -3159,48 +3185,51 @@ type HoursOfOperationTimeSlice struct {
 	noSmithyDocumentSerde
 }
 
+// The additional TO CC recipients information of inbound email.
 type InboundAdditionalRecipients struct {
 
-	//
+	// The additional recipients information present in cc list.
 	CcAddresses []EmailAddressInfo
 
-	//
+	// The additional recipients information present in to list.
 	ToAddresses []EmailAddressInfo
 
 	noSmithyDocumentSerde
 }
 
+// Information about email body content.
 type InboundEmailContent struct {
 
-	//
+	// The message source type, that is, RAW .
 	//
 	// This member is required.
 	MessageSourceType InboundMessageSourceType
 
-	//
+	// The raw email body content.
 	RawMessage *InboundRawMessage
 
 	noSmithyDocumentSerde
 }
 
+// Information about the raw email body content.
 type InboundRawMessage struct {
 
-	//
+	// The email message body.
 	//
 	// This member is required.
 	Body *string
 
-	//
+	// Type of content, that is, text/plain or text/html .
 	//
 	// This member is required.
 	ContentType *string
 
-	//
+	// The email subject.
 	//
 	// This member is required.
 	Subject *string
 
-	//
+	// Headers present in inbound email.
 	Headers map[string]string
 
 	noSmithyDocumentSerde
@@ -3860,9 +3889,10 @@ type NumericQuestionPropertyValueAutomation struct {
 	noSmithyDocumentSerde
 }
 
+// The additional recipients information of outbound email.
 type OutboundAdditionalRecipients struct {
 
-	//
+	// The additional CC email address recipients information.
 	CcEmailAddresses []EmailAddressInfo
 
 	noSmithyDocumentSerde
@@ -3883,43 +3913,46 @@ type OutboundCallerConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The outbound email address Id.
 type OutboundEmailConfig struct {
 
-	//
+	// The identifier of the email address.
 	OutboundEmailAddressId *string
 
 	noSmithyDocumentSerde
 }
 
+// Information about email body content.
 type OutboundEmailContent struct {
 
-	//
+	// The message source type, that is, RAW or TEMPLATE .
 	//
 	// This member is required.
 	MessageSourceType OutboundMessageSourceType
 
-	//
+	// The raw email body content.
 	RawMessage *OutboundRawMessage
 
-	//
+	// Information about template message configuration.
 	TemplatedMessageConfig *TemplatedMessageConfig
 
 	noSmithyDocumentSerde
 }
 
+// Information about the raw email body content.
 type OutboundRawMessage struct {
 
-	//
+	// The email message body.
 	//
 	// This member is required.
 	Body *string
 
-	//
+	// Type of content, that is, text/plain or text/html .
 	//
 	// This member is required.
 	ContentType *string
 
-	//
+	// The email subject.
 	//
 	// This member is required.
 	Subject *string
@@ -4354,7 +4387,7 @@ type Queue struct {
 	// The outbound caller ID name, number, and outbound whisper flow.
 	OutboundCallerConfig *OutboundCallerConfig
 
-	//
+	// The outbound email address ID for a specified queue.
 	OutboundEmailConfig *OutboundEmailConfig
 
 	// The Amazon Resource Name (ARN) for the queue.
@@ -4988,13 +5021,13 @@ type Reference struct {
 	// This member is required.
 	Type ReferenceType
 
-	//
+	// The Amazon Resource Name (ARN) of the reference
 	Arn *string
 
-	//
+	// Status of the attachment reference type.
 	Status ReferenceStatus
 
-	//
+	// Relevant details why the reference was not successfully created.
 	StatusReason *string
 
 	// A valid value for the reference. For example, for a URL reference, a formatted
@@ -5048,6 +5081,8 @@ type ReferenceSummaryMemberEmail struct {
 
 func (*ReferenceSummaryMemberEmail) isReferenceSummary() {}
 
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
 type ReferenceSummaryMemberEmailMessage struct {
 	Value EmailMessageReference
 
@@ -5644,7 +5679,7 @@ type SearchableContactAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria based on user-defned contact attribute key and values to
+// The search criteria based on user-defined contact attribute key and values to
 // search on.
 type SearchableContactAttributesCriteria struct {
 
@@ -5661,27 +5696,31 @@ type SearchableContactAttributesCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria based on searchable segment attributes of a contact
 type SearchableSegmentAttributes struct {
 
-	//
+	// The list of criteria based on searchable segment attributes.
 	//
 	// This member is required.
 	Criteria []SearchableSegmentAttributesCriteria
 
-	//
+	// The match type combining search criteria using multiple searchable segment
+	// attributes.
 	MatchType SearchContactsMatchType
 
 	noSmithyDocumentSerde
 }
 
+// The search criteria based on searchable segment attribute key and values to
+// search on.
 type SearchableSegmentAttributesCriteria struct {
 
-	//
+	// The key containing a searchable segment attribute.
 	//
 	// This member is required.
 	Key *string
 
-	//
+	// The list of values to search for within a searchable segment attribute.
 	//
 	// This member is required.
 	Values []string
@@ -5743,7 +5782,7 @@ type SearchCriteria struct {
 	// [Search by custom contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
 	SearchableContactAttributes *SearchableContactAttributes
 
-	//
+	// The search criteria based on searchable segment attributes of a contact.
 	SearchableSegmentAttributes *SearchableSegmentAttributes
 
 	noSmithyDocumentSerde
@@ -5896,6 +5935,12 @@ type SecurityProfileSummary struct {
 type SegmentAttributeValue struct {
 
 	// The value of a segment attribute.
+	ValueInteger *int32
+
+	// The value of a segment attribute.
+	ValueMap map[string]SegmentAttributeValue
+
+	// The value of a segment attribute.
 	ValueString *string
 
 	noSmithyDocumentSerde
@@ -5936,6 +5981,8 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The reason for the exception.
+//
 // The following types satisfy this interface:
 //
 //	ServiceQuotaExceededExceptionReasonMemberAttachedFileServiceQuotaExceededExceptionReason
@@ -5943,6 +5990,7 @@ type ServiceQuotaExceededExceptionReason interface {
 	isServiceQuotaExceededExceptionReason()
 }
 
+// Total file size of all files or total number of files exceeds the service quota
 type ServiceQuotaExceededExceptionReasonMemberAttachedFileServiceQuotaExceededExceptionReason struct {
 	Value AttachedFileServiceQuotaExceededExceptionReason
 
@@ -6021,12 +6069,13 @@ type Sort struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the campaign.
 type SourceCampaign struct {
 
-	//
+	// A unique identifier for a campaign.
 	CampaignId *string
 
-	//
+	// A unique identifier for a each request part of same campaign.
 	OutboundRequestId *string
 
 	noSmithyDocumentSerde
@@ -6277,30 +6326,39 @@ type TelephonyConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the template attributes.
 type TemplateAttributes struct {
 
-	//
+	// An object that specifies the custom attributes values to use for variables in
+	// the message template. This object contains different categories of key-value
+	// pairs. Each key defines a variable or placeholder in the message template.
 	CustomAttributes map[string]string
 
-	//
+	// An object that specifies the customer profile attributes values to use for
+	// variables in the message template. This object contains different categories of
+	// key-value pairs. Each key defines a variable or placeholder in the message
+	// template.
 	CustomerProfileAttributes *string
 
 	noSmithyDocumentSerde
 }
 
+// Information about template message configuration.
 type TemplatedMessageConfig struct {
 
-	//
+	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
+	// cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	//
+	// The identifier of the message template Id.
 	//
 	// This member is required.
 	MessageTemplateId *string
 
-	//
+	// Information about template attributes, that is, CustomAttributes or
+	// CustomerProfileAttributes.
 	//
 	// This member is required.
 	TemplateAttributes *TemplateAttributes
@@ -6754,9 +6812,10 @@ type UserIdentityInfoLite struct {
 	noSmithyDocumentSerde
 }
 
+// The user details for the contact.
 type UserInfo struct {
 
-	//
+	// The user identifier for the contact.
 	UserId *string
 
 	noSmithyDocumentSerde

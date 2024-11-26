@@ -1,0 +1,8 @@
+{
+    "id": "1342a5c9-741f-4580-bbe4-6bd362f647bd",
+    "type": "feature",
+    "description": "Enables access to ValueMap and ValueInteger types for SegmentAttributes and fixes deserialization bug for DescribeContactFlow in AmazonConnect Public API",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -58,7 +58,16 @@ type UpdateContactInput struct {
 	// Well-formed data on contact, shown to agents on Contact Control Panel (CCP).
 	References map[string]types.Reference
 
+	// A set of system defined key-value pairs stored on individual contact segments
+	// (unique contact ID) using an attribute map. The attributes are standard Amazon
+	// Connect attributes. They can be accessed in flows.
 	//
+	// Attribute keys can include only alphanumeric, -, and _.
+	//
+	// This field can be used to show channel subtype, such as connect:Guide .
+	//
+	// Currently Contact Expiry is the only segment attribute which can be updated by
+	// using the UpdateContact API.
 	SegmentAttributes map[string]types.SegmentAttributeValue
 
 	noSmithyDocumentSerde

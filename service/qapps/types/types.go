@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/qapps/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -124,6 +125,7 @@ type BatchCreateCategoryInputCategory struct {
 // The following types satisfy this interface:
 //
 //	CardMemberFileUpload
+//	CardMemberFormInput
 //	CardMemberQPlugin
 //	CardMemberQQuery
 //	CardMemberTextInput
@@ -139,6 +141,15 @@ type CardMemberFileUpload struct {
 }
 
 func (*CardMemberFileUpload) isCard() {}
+
+// A container for the properties of the form input card.
+type CardMemberFormInput struct {
+	Value FormInputCard
+
+	noSmithyDocumentSerde
+}
+
+func (*CardMemberFormInput) isCard() {}
 
 // A container for the properties of the plugin card.
 type CardMemberQPlugin struct {
@@ -172,6 +183,7 @@ func (*CardMemberTextInput) isCard() {}
 // The following types satisfy this interface:
 //
 //	CardInputMemberFileUpload
+//	CardInputMemberFormInput
 //	CardInputMemberQPlugin
 //	CardInputMemberQQuery
 //	CardInputMemberTextInput
@@ -187,6 +199,15 @@ type CardInputMemberFileUpload struct {
 }
 
 func (*CardInputMemberFileUpload) isCardInput() {}
+
+// A container for the properties of the form input card.
+type CardInputMemberFormInput struct {
+	Value FormInputCardInput
+
+	noSmithyDocumentSerde
+}
+
+func (*CardInputMemberFormInput) isCardInput() {}
 
 // A container for the properties of the plugin input card.
 type CardInputMemberQPlugin struct {
@@ -228,6 +249,9 @@ type CardStatus struct {
 	// This member is required.
 	CurrentValue *string
 
+	// A list of previous submissions, if the card is a form card.
+	Submissions []Submission
+
 	noSmithyDocumentSerde
 }
 
@@ -243,6 +267,10 @@ type CardValue struct {
 	//
 	// This member is required.
 	Value *string
+
+	// The structure that describes how the current form card value is mutated. Only
+	// applies for form cards when multiple responses are allowed.
+	SubmissionMutation *SubmissionMutation
 
 	noSmithyDocumentSerde
 }
@@ -443,6 +471,88 @@ type FileUploadCardInput struct {
 	noSmithyDocumentSerde
 }
 
+// A card in an Amazon Q App that allows the user to submit a response.
+type FormInputCard struct {
+
+	// Any dependencies or requirements for the form input card.
+	//
+	// This member is required.
+	Dependencies []string
+
+	// The unique identifier of the form input card.
+	//
+	// This member is required.
+	Id *string
+
+	// The metadata that defines the form input card data.
+	//
+	// This member is required.
+	Metadata *FormInputCardMetadata
+
+	// The title of the form input card.
+	//
+	// This member is required.
+	Title *string
+
+	// The type of the card.
+	//
+	// This member is required.
+	Type CardType
+
+	// The compute mode of the form input card. This property determines whether
+	// individual participants of a data collection session can submit multiple
+	// response or one response. A compute mode of append shall allow participants to
+	// submit the same form multiple times with different values. A compute mode of
+	// replace code> shall overwrite the current value for each participant.
+	ComputeMode InputCardComputeMode
+
+	noSmithyDocumentSerde
+}
+
+// Represents a form input card for an Amazon Q App.
+type FormInputCardInput struct {
+
+	// The unique identifier of the form input card.
+	//
+	// This member is required.
+	Id *string
+
+	// The metadata that defines the form input card data.
+	//
+	// This member is required.
+	Metadata *FormInputCardMetadata
+
+	// The title or label of the form input card.
+	//
+	// This member is required.
+	Title *string
+
+	// The type of the card.
+	//
+	// This member is required.
+	Type CardType
+
+	// The compute mode of the form input card. This property determines whether
+	// individual participants of a data collection session can submit multiple
+	// response or one response. A compute mode of append shall allow participants to
+	// submit the same form multiple times with different values. A compute mode of
+	// replace code> shall overwrite the current value for each participant.
+	ComputeMode InputCardComputeMode
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the form input card.
+type FormInputCardMetadata struct {
+
+	// The JSON schema that defines the shape of the response data.
+	//
+	// This member is required.
+	Schema document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // A library item is a snapshot of an Amazon Q App that can be published so the
 // users in their Amazon Q Apps library can discover it, clone it, and run it.
 type LibraryItemMember struct {
@@ -505,6 +615,38 @@ type LibraryItemMember struct {
 	noSmithyDocumentSerde
 }
 
+// The permission to grant or revoke for a Amazon Q App.
+type PermissionInput struct {
+
+	// The action associated with the permission.
+	//
+	// This member is required.
+	Action Action
+
+	// The principal user to which the permission applies.
+	//
+	// This member is required.
+	Principal *string
+
+	noSmithyDocumentSerde
+}
+
+// The permission granted to the Amazon Q App.
+type PermissionOutput struct {
+
+	// The action associated with the permission.
+	//
+	// This member is required.
+	Action Action
+
+	// The principal user to which the permission applies.
+	//
+	// This member is required.
+	Principal *PrincipalOutput
+
+	noSmithyDocumentSerde
+}
+
 // The definition of an Amazon Q App generated based on input such as a
 // conversation or problem statement.
 type PredictAppDefinition struct {
@@ -552,6 +694,47 @@ type PredictQAppInputOptionsMemberProblemStatement struct {
 }
 
 func (*PredictQAppInputOptionsMemberProblemStatement) isPredictQAppInputOptions() {}
+
+// The principal for which the permission applies.
+type PrincipalOutput struct {
+
+	// The email address associated with the user.
+	Email *string
+
+	// The unique identifier of the user.
+	UserId *string
+
+	// The type of the user.
+	UserType UserType
+
+	noSmithyDocumentSerde
+}
+
+// The response collected for a Amazon Q App session. This container represents a
+// single response to a Q App session.
+type QAppSessionData struct {
+
+	// The card Id associated with the response submitted for a Q App session.
+	//
+	// This member is required.
+	CardId *string
+
+	// The user who submitted the response for a Q App session.
+	//
+	// This member is required.
+	User *User
+
+	// The unique identifier of the submission.
+	SubmissionId *string
+
+	// The date and time when the session data is submitted.
+	Timestamp *time.Time
+
+	// The response submitted for a Q App session.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
 
 // A card in an Q App that integrates with a third-party plugin or service.
 type QPluginCard struct {
@@ -663,6 +846,10 @@ type QQueryCard struct {
 	// sources
 	AttributeFilter *AttributeFilter
 
+	// Any dependencies for the query card, where the dependencies are references to
+	// the collected responses.
+	MemoryReferences []string
+
 	noSmithyDocumentSerde
 }
 
@@ -694,6 +881,55 @@ type QQueryCardInput struct {
 
 	// The source or type of output to generate for the query card.
 	OutputSource CardOutputSource
+
+	noSmithyDocumentSerde
+}
+
+// The sharing configuration of an Amazon Q App data collection session.
+type SessionSharingConfiguration struct {
+
+	// Indicates whether an Q App session is shareable with other users.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// Indicates whether an Q App session can accept responses from users.
+	AcceptResponses *bool
+
+	// Indicates whether collected responses for an Q App session are revealed for all
+	// users.
+	RevealCards *bool
+
+	noSmithyDocumentSerde
+}
+
+// A record created when a user submits a form card.
+type Submission struct {
+
+	// The unique identifier of the submission.
+	SubmissionId *string
+
+	// The date and time when the card is submitted.
+	Timestamp *time.Time
+
+	// The data submitted by the user.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Represents an action performed on a submission.
+type SubmissionMutation struct {
+
+	// The operation that is performed on a submission.
+	//
+	// This member is required.
+	MutationType SubmissionMutationKind
+
+	// The unique identifier of the submission.
+	//
+	// This member is required.
+	SubmissionId *string
 
 	noSmithyDocumentSerde
 }
@@ -753,6 +989,15 @@ type TextInputCardInput struct {
 
 	// The placeholder text to display in the text input field.
 	Placeholder *string
+
+	noSmithyDocumentSerde
+}
+
+// A user of an Amazon Q App.
+type User struct {
+
+	// The unique identifier of a user.
+	UserId *string
 
 	noSmithyDocumentSerde
 }

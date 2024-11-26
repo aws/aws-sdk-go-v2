@@ -98,9 +98,9 @@ type StartTaskContactInput struct {
 
 	// The identifier of the flow for initiating the tasks. To see the ContactFlowId
 	// in the Amazon Connect admin website, on the navigation menu go to Routing,
-	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
-	// choose Show additional flow information. The ContactFlowId is the last part of
-	// the ARN, shown here in bold:
+	// Flows. Choose the flow. On the flow page, under the name of the flow, choose
+	// Show additional flow information. The ContactFlowId is the last part of the ARN,
+	// shown here in bold:
 	//
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	ContactFlowId *string
@@ -143,7 +143,24 @@ type StartTaskContactInput struct {
 	// 6 days in future.
 	ScheduledTime *time.Time
 
+	// A set of system defined key-value pairs stored on individual contact segments
+	// (unique contact ID) using an attribute map. The attributes are standard Amazon
+	// Connect attributes. They can be accessed in flows.
 	//
+	// Attribute keys can include only alphanumeric, -, and _.
+	//
+	// This field can be used to set Contact Expiry as a duration in minutes and set a
+	// UserId for the User who created a task.
+	//
+	// To set contact expiry, a ValueMap must be specified containing the integer
+	// number of minutes the contact will be active for before expiring, with
+	// SegmentAttributes like {  "connect:ContactExpiry": {"ValueMap" : {
+	// "ExpiryDuration": { "ValueInteger": 135}}}} .
+	//
+	// To set the created by user, a valid AgentResourceId must be supplied, with
+	// SegmentAttributes like { "connect:CreatedByUser" { "ValueString":
+	// "arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/agent/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}}}
+	// .
 	SegmentAttributes map[string]types.SegmentAttributeValue
 
 	// A unique identifier for the task template. For more information about task

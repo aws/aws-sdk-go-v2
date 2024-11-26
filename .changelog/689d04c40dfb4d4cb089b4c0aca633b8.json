@@ -1,0 +1,8 @@
+{
+    "id": "689d04c4-0dfb-4d4c-b089-b4c0aca633b8",
+    "type": "feature",
+    "description": "Private sharing, file upload and data collection feature support for Q Apps",
+    "modules": [
+        "service/qapps"
+    ]
+}

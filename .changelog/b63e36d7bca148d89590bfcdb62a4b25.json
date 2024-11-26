@@ -1,0 +1,8 @@
+{
+    "id": "b63e36d7-bca1-48d8-9590-bfcdb62a4b25",
+    "type": "feature",
+    "description": "Custom Orchestration API release for AWSBedrockAgents.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -68,7 +68,8 @@ type CreateTaskTemplateInput struct {
 	// The description of the task template.
 	Description *string
 
-	//
+	// The ContactFlowId for the flow that will be run if this template is used to
+	// create a self-assigned task.
 	SelfAssignFlowId *string
 
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can

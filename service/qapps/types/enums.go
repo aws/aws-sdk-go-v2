@@ -2,6 +2,25 @@
 
 package types
 
+type Action string
+
+// Enum values for Action
+const (
+	ActionRead  Action = "read"
+	ActionWrite Action = "write"
+)
+
+// Values returns all known values for Action. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Action) Values() []Action {
+	return []Action{
+		"read",
+		"write",
+	}
+}
+
 type AppRequiredCapability string
 
 // Enum values for AppRequiredCapability
@@ -73,6 +92,7 @@ const (
 	CardTypeQQuery     CardType = "q-query"
 	CardTypeFileUpload CardType = "file-upload"
 	CardTypeQPlugin    CardType = "q-plugin"
+	CardTypeFormInput  CardType = "form-input"
 )
 
 // Values returns all known values for CardType. Note that this can be expanded in
@@ -85,6 +105,7 @@ func (CardType) Values() []CardType {
 		"q-query",
 		"file-upload",
 		"q-plugin",
+		"form-input",
 	}
 }
 
@@ -114,6 +135,7 @@ const (
 	ExecutionStatusInProgress ExecutionStatus = "IN_PROGRESS"
 	ExecutionStatusWaiting    ExecutionStatus = "WAITING"
 	ExecutionStatusCompleted  ExecutionStatus = "COMPLETED"
+	ExecutionStatusError      ExecutionStatus = "ERROR"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -125,6 +147,26 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"IN_PROGRESS",
 		"WAITING",
 		"COMPLETED",
+		"ERROR",
+	}
+}
+
+type InputCardComputeMode string
+
+// Enum values for InputCardComputeMode
+const (
+	InputCardComputeModeAppend  InputCardComputeMode = "append"
+	InputCardComputeModeReplace InputCardComputeMode = "replace"
+)
+
+// Values returns all known values for InputCardComputeMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InputCardComputeMode) Values() []InputCardComputeMode {
+	return []InputCardComputeMode{
+		"append",
+		"replace",
 	}
 }
 
@@ -188,5 +230,45 @@ func (Sender) Values() []Sender {
 	return []Sender{
 		"USER",
 		"SYSTEM",
+	}
+}
+
+type SubmissionMutationKind string
+
+// Enum values for SubmissionMutationKind
+const (
+	SubmissionMutationKindEdit   SubmissionMutationKind = "edit"
+	SubmissionMutationKindDelete SubmissionMutationKind = "delete"
+	SubmissionMutationKindAdd    SubmissionMutationKind = "add"
+)
+
+// Values returns all known values for SubmissionMutationKind. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubmissionMutationKind) Values() []SubmissionMutationKind {
+	return []SubmissionMutationKind{
+		"edit",
+		"delete",
+		"add",
+	}
+}
+
+type UserType string
+
+// Enum values for UserType
+const (
+	UserTypeOwner UserType = "owner"
+	UserTypeUser  UserType = "user"
+)
+
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserType) Values() []UserType {
+	return []UserType{
+		"owner",
+		"user",
 	}
 }

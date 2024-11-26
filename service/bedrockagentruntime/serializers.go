@@ -329,6 +329,13 @@ func awsRestjson1_serializeOpDocumentInvokeAgentInput(v *InvokeAgentInput, value
 		}
 	}
 
+	if v.StreamingConfigurations != nil {
+		ok := object.Key("streamingConfigurations")
+		if err := awsRestjson1_serializeDocumentStreamingConfigurations(v.StreamingConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2332,6 +2339,23 @@ func awsRestjson1_serializeDocumentStopSequences(v []string, value smithyjson.Va
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamingConfigurations(v *types.StreamingConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplyGuardrailInterval != nil {
+		ok := object.Key("applyGuardrailInterval")
+		ok.Integer(*v.ApplyGuardrailInterval)
+	}
+
+	if v.StreamFinalResponse {
+		ok := object.Key("streamFinalResponse")
+		ok.Boolean(v.StreamFinalResponse)
+	}
+
 	return nil
 }
 

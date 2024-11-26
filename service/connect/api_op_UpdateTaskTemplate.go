@@ -65,7 +65,8 @@ type UpdateTaskTemplateInput struct {
 	// The name of the task template.
 	Name *string
 
-	//
+	// The ContactFlowId for the flow that will be run if this template is used to
+	// create a self-assigned task.
 	SelfAssignFlowId *string
 
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
@@ -116,7 +117,8 @@ type UpdateTaskTemplateOutput struct {
 	// The name of the task template.
 	Name *string
 
-	//
+	// The ContactFlowId for the flow that will be run if this template is used to
+	// create a self-assigned task.
 	SelfAssignFlowId *string
 
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can

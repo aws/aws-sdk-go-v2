@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Describe email address form the specified Amazon Connect instance.
 func (c *Client) DescribeEmailAddress(ctx context.Context, params *DescribeEmailAddressInput, optFns ...func(*Options)) (*DescribeEmailAddressOutput, error) {
 	if params == nil {
 		params = &DescribeEmailAddressInput{}
@@ -27,12 +28,15 @@ func (c *Client) DescribeEmailAddress(ctx context.Context, params *DescribeEmail
 
 type DescribeEmailAddressInput struct {
 
-	//
+	// The identifier of the email address.
 	//
 	// This member is required.
 	EmailAddressId *string
 
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
 	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -42,28 +46,29 @@ type DescribeEmailAddressInput struct {
 
 type DescribeEmailAddressOutput struct {
 
-	//
+	// The email address creation timestamp in ISO 8601 Datetime.
 	CreateTimestamp *string
 
-	//
+	// The description of the email address.
 	Description *string
 
-	//
+	// The display name of email address
 	DisplayName *string
 
-	//
+	// The email address with the instance, in [^\s@]+@[^\s@]+\.[^\s@]+ format.
 	EmailAddress *string
 
-	//
+	// The Amazon Resource Name (ARN) of the email address.
 	EmailAddressArn *string
 
-	//
+	// The identifier of the email address.
 	EmailAddressId *string
 
-	//
+	// The email address last modification timestamp in ISO 8601 Datetime.
 	ModifiedTimestamp *string
 
-	//
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

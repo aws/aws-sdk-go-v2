@@ -417,6 +417,27 @@ type ContentBody struct {
 	noSmithyDocumentSerde
 }
 
+// The trace behavior for the custom orchestration.
+type CustomOrchestrationTrace struct {
+
+	//  The trace event details used with the custom orchestration.
+	Event *CustomOrchestrationTraceEvent
+
+	//  The unique identifier of the trace.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// The event in the custom orchestration sequence.
+type CustomOrchestrationTraceEvent struct {
+
+	//  The text that prompted the event at this step.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // The unique external source of the content contained in the wrapper object.
 type ExternalSource struct {
 
@@ -3196,6 +3217,19 @@ type Span struct {
 	noSmithyDocumentSerde
 }
 
+// Configurations for streaming.
+type StreamingConfigurations struct {
+
+	//  The guardrail interval to apply as response is generated.
+	ApplyGuardrailInterval *int32
+
+	//  Specifies whether to enable streaming for the final response. This is set to
+	// false by default.
+	StreamFinalResponse bool
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for text generation using a language model via the
 // RetrieveAndGenerate operation. Includes parameters like temperature, top-p,
 // maximum token count, and stop sequences.
@@ -3277,6 +3311,7 @@ type TextResponsePart struct {
 //
 // The following types satisfy this interface:
 //
+//	TraceMemberCustomOrchestrationTrace
 //	TraceMemberFailureTrace
 //	TraceMemberGuardrailTrace
 //	TraceMemberOrchestrationTrace
@@ -3287,6 +3322,17 @@ type TextResponsePart struct {
 type Trace interface {
 	isTrace()
 }
+
+//	Details about the custom orchestration step in which the agent determines the
+//
+// order in which actions are executed.
+type TraceMemberCustomOrchestrationTrace struct {
+	Value CustomOrchestrationTrace
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceMemberCustomOrchestrationTrace) isTrace() {}
 
 // Contains information about the failure of the interaction.
 type TraceMemberFailureTrace struct {

@@ -30444,11 +30444,37 @@ func awsRestjson1_serializeDocumentSegmentAttributeValue(v *types.SegmentAttribu
 	object := value.Object()
 	defer object.Close()
 
+	if v.ValueInteger != nil {
+		ok := object.Key("ValueInteger")
+		ok.Integer(*v.ValueInteger)
+	}
+
+	if v.ValueMap != nil {
+		ok := object.Key("ValueMap")
+		if err := awsRestjson1_serializeDocumentSegmentAttributeValueMap(v.ValueMap, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ValueString != nil {
 		ok := object.Key("ValueString")
 		ok.String(*v.ValueString)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSegmentAttributeValueMap(v map[string]types.SegmentAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentSegmentAttributeValue(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

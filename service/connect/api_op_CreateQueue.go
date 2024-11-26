@@ -79,7 +79,7 @@ type CreateQueueInput struct {
 	// The outbound caller ID name, number, and outbound whisper flow.
 	OutboundCallerConfig *types.OutboundCallerConfig
 
-	//
+	// The outbound email address ID for a specified queue.
 	OutboundEmailConfig *types.OutboundEmailConfig
 
 	// The quick connects available to agents who are working the queue.

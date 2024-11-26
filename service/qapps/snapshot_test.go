@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateLibraryItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePresignedUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePresignedUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePresignedUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateQApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateQApp(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_DeleteQApp(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeQAppPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQAppPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeQAppPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateLibraryItemReview(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateLibraryItemReview(context.Background(), nil, func(o *Options) {
@@ -187,6 +211,18 @@ func TestCheckSnapshot_DisassociateQAppFromUser(t *testing.T) {
 	_, err := svc.DisassociateQAppFromUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateQAppFromUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ExportQAppSessionData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportQAppSessionData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExportQAppSessionData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -223,6 +259,18 @@ func TestCheckSnapshot_GetQAppSession(t *testing.T) {
 	_, err := svc.GetQAppSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetQAppSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQAppSessionMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQAppSessionMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQAppSessionMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -271,6 +319,18 @@ func TestCheckSnapshot_ListQApps(t *testing.T) {
 	_, err := svc.ListQApps(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListQApps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQAppSessionData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQAppSessionData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQAppSessionData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -386,11 +446,35 @@ func TestCheckSnapshot_UpdateQApp(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateQAppPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQAppPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQAppPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateQAppSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateQAppSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateQAppSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateQAppSessionMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQAppSessionMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQAppSessionMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -469,6 +553,18 @@ func TestUpdateSnapshot_CreateLibraryItem(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePresignedUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePresignedUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePresignedUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateQApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateQApp(context.Background(), nil, func(o *Options) {
@@ -505,6 +601,18 @@ func TestUpdateSnapshot_DeleteQApp(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeQAppPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQAppPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeQAppPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateLibraryItemReview(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateLibraryItemReview(context.Background(), nil, func(o *Options) {
@@ -522,6 +630,18 @@ func TestUpdateSnapshot_DisassociateQAppFromUser(t *testing.T) {
 	_, err := svc.DisassociateQAppFromUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateQAppFromUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ExportQAppSessionData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportQAppSessionData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExportQAppSessionData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -558,6 +678,18 @@ func TestUpdateSnapshot_GetQAppSession(t *testing.T) {
 	_, err := svc.GetQAppSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetQAppSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQAppSessionMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQAppSessionMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQAppSessionMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -606,6 +738,18 @@ func TestUpdateSnapshot_ListQApps(t *testing.T) {
 	_, err := svc.ListQApps(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListQApps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQAppSessionData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQAppSessionData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQAppSessionData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -721,11 +865,35 @@ func TestUpdateSnapshot_UpdateQApp(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateQAppPermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQAppPermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQAppPermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateQAppSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateQAppSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateQAppSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQAppSessionMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQAppSessionMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQAppSessionMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

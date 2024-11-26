@@ -65,6 +65,19 @@ type GetQAppSessionOutput struct {
 	// This member is required.
 	Status types.ExecutionStatus
 
+	// The version of the Q App used for the session.
+	AppVersion *int32
+
+	// The latest published version of the Q App used for the session.
+	LatestPublishedAppVersion *int32
+
+	// The name of the Q App session.
+	SessionName *string
+
+	// Indicates whether the current user is the owner of the Q App data collection
+	// session.
+	UserIsHost *bool
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

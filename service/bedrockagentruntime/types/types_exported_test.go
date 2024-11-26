@@ -511,6 +511,9 @@ func ExampleTrace_outputUsage() {
 	var union types.Trace
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.TraceMemberCustomOrchestrationTrace:
+		_ = v.Value // Value is types.CustomOrchestrationTrace
+
 	case *types.TraceMemberFailureTrace:
 		_ = v.Value // Value is types.FailureTrace
 
@@ -537,6 +540,7 @@ func ExampleTrace_outputUsage() {
 
 var _ *types.FailureTrace
 var _ *types.GuardrailTrace
+var _ *types.CustomOrchestrationTrace
 var _ types.PreProcessingTrace
 var _ types.PostProcessingTrace
 var _ types.OrchestrationTrace
