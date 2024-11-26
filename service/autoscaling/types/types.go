@@ -559,6 +559,13 @@ type CustomizedMetricSpecification struct {
 	// The namespace of the metric.
 	Namespace *string
 
+	//  The period of the metric in seconds. The default value is 60. Accepted values
+	// are 10, 30, and 60. For high resolution metric, set the value to less than 60.
+	// For more information, see [Create a target tracking policy using high-resolution metrics for faster response].
+	//
+	// [Create a target tracking policy using high-resolution metrics for faster response]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html
+	Period *int32
+
 	// The statistic of the metric.
 	Statistic MetricStatistic
 
@@ -3204,6 +3211,13 @@ type TargetTrackingMetricDataQuery struct {
 	// either Expression or MetricStat , but not both.
 	MetricStat *TargetTrackingMetricStat
 
+	//  The period of the metric in seconds. The default value is 60. Accepted values
+	// are 10, 30, and 60. For high resolution metric, set the value to less than 60.
+	// For more information, see [Create a target tracking policy using high-resolution metrics for faster response].
+	//
+	// [Create a target tracking policy using high-resolution metrics for faster response]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html
+	Period *int32
+
 	// Indicates whether to return the timestamps and raw data values of this metric.
 	//
 	// If you use any math expressions, specify true for this value for only the final
@@ -3242,6 +3256,13 @@ type TargetTrackingMetricStat struct {
 	//
 	// This member is required.
 	Stat *string
+
+	//  The period of the metric in seconds. The default value is 60. Accepted values
+	// are 10, 30, and 60. For high resolution metric, set the value to less than 60.
+	// For more information, see [Create a target tracking policy using high-resolution metrics for faster response].
+	//
+	// [Create a target tracking policy using high-resolution metrics for faster response]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html
+	Period *int32
 
 	// The unit to use for the returned data points. For a complete list of the units
 	// that CloudWatch supports, see the [MetricDatum]data type in the Amazon CloudWatch API

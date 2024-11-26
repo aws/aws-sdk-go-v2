@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateDevice(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDirectConnectGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDirectConnectGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDirectConnectGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGlobalNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGlobalNetwork(context.Background(), nil, func(o *Options) {
@@ -595,6 +607,18 @@ func TestCheckSnapshot_GetDevices(t *testing.T) {
 	_, err := svc.GetDevices(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDevices")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDirectConnectGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDirectConnectGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDirectConnectGatewayAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1022,6 +1046,18 @@ func TestCheckSnapshot_UpdateDevice(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDirectConnectGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDirectConnectGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDirectConnectGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateGlobalNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateGlobalNetwork(context.Background(), nil, func(o *Options) {
@@ -1194,6 +1230,18 @@ func TestUpdateSnapshot_CreateDevice(t *testing.T) {
 	_, err := svc.CreateDevice(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateDevice")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDirectConnectGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDirectConnectGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDirectConnectGatewayAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1621,6 +1669,18 @@ func TestUpdateSnapshot_GetDevices(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDirectConnectGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDirectConnectGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDirectConnectGatewayAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLinkAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLinkAssociations(context.Background(), nil, func(o *Options) {
@@ -2034,6 +2094,18 @@ func TestUpdateSnapshot_UpdateDevice(t *testing.T) {
 	_, err := svc.UpdateDevice(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDevice")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDirectConnectGatewayAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDirectConnectGatewayAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDirectConnectGatewayAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

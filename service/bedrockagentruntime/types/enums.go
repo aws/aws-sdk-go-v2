@@ -2,6 +2,25 @@
 
 package types
 
+type ActionGroupSignature string
+
+// Enum values for ActionGroupSignature
+const (
+	ActionGroupSignatureAmazonUserinput       ActionGroupSignature = "AMAZON.UserInput"
+	ActionGroupSignatureAmazonCodeinterpreter ActionGroupSignature = "AMAZON.CodeInterpreter"
+)
+
+// Values returns all known values for ActionGroupSignature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionGroupSignature) Values() []ActionGroupSignature {
+	return []ActionGroupSignature{
+		"AMAZON.UserInput",
+		"AMAZON.CodeInterpreter",
+	}
+}
+
 type ActionInvocationType string
 
 // Enum values for ActionInvocationType
@@ -58,6 +77,23 @@ func (CreationMode) Values() []CreationMode {
 	return []CreationMode{
 		"DEFAULT",
 		"OVERRIDDEN",
+	}
+}
+
+type CustomControlMethod string
+
+// Enum values for CustomControlMethod
+const (
+	CustomControlMethodReturnControl CustomControlMethod = "RETURN_CONTROL"
+)
+
+// Values returns all known values for CustomControlMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomControlMethod) Values() []CustomControlMethod {
+	return []CustomControlMethod{
+		"RETURN_CONTROL",
 	}
 }
 
@@ -495,6 +531,50 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type ParameterType string
+
+// Enum values for ParameterType
+const (
+	ParameterTypeString  ParameterType = "string"
+	ParameterTypeNumber  ParameterType = "number"
+	ParameterTypeInteger ParameterType = "integer"
+	ParameterTypeBoolean ParameterType = "boolean"
+	ParameterTypeArray   ParameterType = "array"
+)
+
+// Values returns all known values for ParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterType) Values() []ParameterType {
+	return []ParameterType{
+		"string",
+		"number",
+		"integer",
+		"boolean",
+		"array",
+	}
+}
+
+type PromptState string
+
+// Enum values for PromptState
+const (
+	PromptStateEnabled  PromptState = "ENABLED"
+	PromptStateDisabled PromptState = "DISABLED"
+)
+
+// Values returns all known values for PromptState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PromptState) Values() []PromptState {
+	return []PromptState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type PromptType string
 
 // Enum values for PromptType
@@ -503,6 +583,7 @@ const (
 	PromptTypeOrchestration                   PromptType = "ORCHESTRATION"
 	PromptTypeKnowledgeBaseResponseGeneration PromptType = "KNOWLEDGE_BASE_RESPONSE_GENERATION"
 	PromptTypePostProcessing                  PromptType = "POST_PROCESSING"
+	PromptTypeRoutingClassifier               PromptType = "ROUTING_CLASSIFIER"
 )
 
 // Values returns all known values for PromptType. Note that this can be expanded
@@ -515,6 +596,7 @@ func (PromptType) Values() []PromptType {
 		"ORCHESTRATION",
 		"KNOWLEDGE_BASE_RESPONSE_GENERATION",
 		"POST_PROCESSING",
+		"ROUTING_CLASSIFIER",
 	}
 }
 
@@ -532,6 +614,25 @@ const (
 func (QueryTransformationType) Values() []QueryTransformationType {
 	return []QueryTransformationType{
 		"QUERY_DECOMPOSITION",
+	}
+}
+
+type RequireConfirmation string
+
+// Enum values for RequireConfirmation
+const (
+	RequireConfirmationEnabled  RequireConfirmation = "ENABLED"
+	RequireConfirmationDisabled RequireConfirmation = "DISABLED"
+)
+
+// Values returns all known values for RequireConfirmation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RequireConfirmation) Values() []RequireConfirmation {
+	return []RequireConfirmation{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

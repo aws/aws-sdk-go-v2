@@ -262,6 +262,9 @@ func ExampleReferenceSummary_outputUsage() {
 	case *types.ReferenceSummaryMemberEmail:
 		_ = v.Value // Value is types.EmailReference
 
+	case *types.ReferenceSummaryMemberEmailMessage:
+		_ = v.Value // Value is types.EmailMessageReference
+
 	case *types.ReferenceSummaryMemberNumber:
 		_ = v.Value // Value is types.NumberReference
 
@@ -282,10 +285,29 @@ func ExampleReferenceSummary_outputUsage() {
 
 var _ *types.AttachmentReference
 var _ *types.UrlReference
+var _ *types.EmailMessageReference
 var _ *types.NumberReference
 var _ *types.StringReference
 var _ *types.DateReference
 var _ *types.EmailReference
+
+func ExampleServiceQuotaExceededExceptionReason_outputUsage() {
+	var union types.ServiceQuotaExceededExceptionReason
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ServiceQuotaExceededExceptionReasonMemberAttachedFileServiceQuotaExceededExceptionReason:
+		_ = v.Value // Value is types.AttachedFileServiceQuotaExceededExceptionReason
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.AttachedFileServiceQuotaExceededExceptionReason
 
 func ExampleUpdateParticipantRoleConfigChannelInfo_outputUsage() {
 	var union types.UpdateParticipantRoleConfigChannelInfo

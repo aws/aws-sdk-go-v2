@@ -1,3 +1,7 @@
+# v1.32.0 (2024-11-25)
+
+* **Feature**: This release adds native Direct Connect integration on Cloud WAN enabling customers to directly attach their Direct Connect gateways to Cloud WAN without the need for an intermediate Transit Gateway.
+
 # v1.31.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

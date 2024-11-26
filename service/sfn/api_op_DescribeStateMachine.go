@@ -175,6 +175,10 @@ type DescribeStateMachineOutput struct {
 	// Selects whether X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration
 
+	// A map of state name to a list of variables referenced by that state. States
+	// that do not use variable references will not be shown in the response.
+	VariableReferences map[string][]string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

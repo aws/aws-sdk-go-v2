@@ -6889,6 +6889,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster\n         instance group is created or updated.</p>"
                     }
+                },
+                "OverrideVpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig"
                 }
             },
             "traits": {
@@ -6971,6 +6974,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster\n         instance group is created or updated.</p>"
                     }
+                },
+                "OverrideVpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig"
                 }
             },
             "traits": {
@@ -7537,6 +7543,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The LifeCycle configuration applied to the instance.</p>"
                     }
+                },
+                "OverrideVpcConfig": {
+                    "target": "com.amazonaws.sagemaker#VpcConfig"
                 },
                 "ThreadsPerCore": {
                     "target": "com.amazonaws.sagemaker#ClusterThreadsPerCore",
@@ -11411,9 +11420,7 @@
                 "VariantName": {
                     "target": "com.amazonaws.sagemaker#VariantName",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of an existing production variant where you host the inference\n         component.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of an existing production variant where you host the inference\n         component.</p>"
                     }
                 },
                 "Specification": {
@@ -11427,9 +11434,7 @@
                 "RuntimeConfig": {
                     "target": "com.amazonaws.sagemaker#InferenceComponentRuntimeConfig",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Runtime settings for a model that is deployed with an inference component.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Runtime settings for a model that is deployed with an inference component.</p>"
                     }
                 },
                 "Tags": {
@@ -33161,7 +33166,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
+                "smithy.api#pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)$"
             }
         },
         "com.amazonaws.sagemaker#ImageVersionNumber": {
@@ -33430,7 +33435,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the compute resources to allocate to run a model that you assign to an inference\n         component. These resources include CPU cores, accelerators, and memory.</p>"
+                "smithy.api#documentation": "<p>Defines the compute resources to allocate to run a model, plus any adapter models, that\n         you assign to an inference component. These resources include CPU cores, accelerators, and\n         memory.</p>"
             }
         },
         "com.amazonaws.sagemaker#InferenceComponentContainerSpecification": {
@@ -33593,9 +33598,13 @@
                 "ComputeResourceRequirements": {
                     "target": "com.amazonaws.sagemaker#InferenceComponentComputeResourceRequirements",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The compute resources allocated to run the model assigned \n         to the inference component.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The compute resources allocated to run the model, plus any \n         adapter models, that you assign to the inference component.</p>\n         <p>Omit this parameter if your request is meant to create an adapter inference component.\n         An adapter inference component is loaded by a base inference component, and it uses the\n         compute resources of the base inference component.</p>"
+                    }
+                },
+                "BaseInferenceComponentName": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an existing inference component that is to contain the inference component\n         that you're creating with your request.</p>\n         <p>Specify this parameter only if your request is meant to create an adapter inference\n         component. An adapter inference component contains the path to an adapter model. The\n         purpose of the adapter model is to tailor the inference output of a base foundation model,\n         which is hosted by the base inference component. The adapter inference component uses the\n         compute resources that you assigned to the base inference component.</p>\n         <p>When you create an adapter inference component, use the <code>Container</code> parameter\n         to specify the location of the adapter artifacts. In the parameter value, use the\n            <code>ArtifactUrl</code> parameter of the\n            <code>InferenceComponentContainerSpecification</code> data type.</p>\n         <p>Before you can create an adapter inference component, you must have an existing\n         inference component that contains the foundation model that you want to adapt.</p>"
                     }
                 }
             },
@@ -33627,7 +33636,13 @@
                 "ComputeResourceRequirements": {
                     "target": "com.amazonaws.sagemaker#InferenceComponentComputeResourceRequirements",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute resources allocated to run the model assigned \n         to the inference component.</p>"
+                        "smithy.api#documentation": "<p>The compute resources allocated to run the model, plus any \n         adapter models, that you assign to the inference component.</p>"
+                    }
+                },
+                "BaseInferenceComponentName": {
+                    "target": "com.amazonaws.sagemaker#InferenceComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the base inference component that contains this inference component.</p>"
                     }
                 }
             },
@@ -44480,7 +44495,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1
+                    "min": 0
                 }
             }
         },
@@ -47598,6 +47613,26 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ModelShardingConfig": {
+            "type": "structure",
+            "members": {
+                "Image": {
+                    "target": "com.amazonaws.sagemaker#OptimizationContainerImage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to run the optimization.</p>"
+                    }
+                },
+                "OverrideEnvironment": {
+                    "target": "com.amazonaws.sagemaker#OptimizationJobEnvironmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Environment variables that override the default ones in the model container.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for the model sharding technique that's applied by a model optimization job.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ModelSortKey": {
             "type": "enum",
             "members": {
@@ -50126,6 +50161,12 @@
                     "target": "com.amazonaws.sagemaker#ModelCompilationConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Settings for the model compilation technique that's applied by a model optimization job.</p>"
+                    }
+                },
+                "ModelShardingConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelShardingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for the model sharding technique that's applied by a model optimization job.</p>"
                     }
                 }
             },
@@ -53709,6 +53750,114 @@
                         "smithy.api#enumValue": "ml.c6i.32xlarge"
                     }
                 },
+                "ML_M6I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.large"
+                    }
+                },
+                "ML_M6I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.xlarge"
+                    }
+                },
+                "ML_M6I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.2xlarge"
+                    }
+                },
+                "ML_M6I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.4xlarge"
+                    }
+                },
+                "ML_M6I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.8xlarge"
+                    }
+                },
+                "ML_M6I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.12xlarge"
+                    }
+                },
+                "ML_M6I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.16xlarge"
+                    }
+                },
+                "ML_M6I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.24xlarge"
+                    }
+                },
+                "ML_M6I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.m6i.32xlarge"
+                    }
+                },
+                "ML_R6I_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.large"
+                    }
+                },
+                "ML_R6I_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.xlarge"
+                    }
+                },
+                "ML_R6I_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.2xlarge"
+                    }
+                },
+                "ML_R6I_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.4xlarge"
+                    }
+                },
+                "ML_R6I_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.8xlarge"
+                    }
+                },
+                "ML_R6I_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.12xlarge"
+                    }
+                },
+                "ML_R6I_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.16xlarge"
+                    }
+                },
+                "ML_R6I_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.24xlarge"
+                    }
+                },
+                "ML_R6I_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.r6i.32xlarge"
+                    }
+                },
                 "ML_G5_XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -53803,6 +53952,54 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_G6E_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.xlarge"
+                    }
+                },
+                "ML_G6E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.2xlarge"
+                    }
+                },
+                "ML_G6E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.4xlarge"
+                    }
+                },
+                "ML_G6E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.8xlarge"
+                    }
+                },
+                "ML_G6E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.12xlarge"
+                    }
+                },
+                "ML_G6E_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.16xlarge"
+                    }
+                },
+                "ML_G6E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.24xlarge"
+                    }
+                },
+                "ML_G6E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.48xlarge"
                     }
                 },
                 "ML_P4D_24XLARGE": {
@@ -54171,6 +54368,12 @@
                         "smithy.api#enumValue": "ml.trn1n.32xlarge"
                     }
                 },
+                "ML_TRN2_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn2.48xlarge"
+                    }
+                },
                 "ML_INF2_XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -54199,6 +54402,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.p5.48xlarge"
+                    }
+                },
+                "ML_P5E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5e.48xlarge"
                     }
                 },
                 "ML_M7I_LARGE": {

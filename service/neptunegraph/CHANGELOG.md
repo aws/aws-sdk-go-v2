@@ -1,3 +1,7 @@
+# v1.15.0 (2024-11-22)
+
+* **Feature**: Add 4 new APIs to support new Export features, allowing Parquet and CSV formats. Add new arguments in Import APIs to support Parquet import. Add a new query "neptune.read" to run algorithms without loading data into database
+
 # v1.14.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

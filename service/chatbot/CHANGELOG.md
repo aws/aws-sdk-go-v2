@@ -1,3 +1,7 @@
+# v1.9.0 (2024-11-22)
+
+* **Feature**: Adds support for programmatic management of custom actions and aliases which can be associated with channel configurations.
+
 # v1.8.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

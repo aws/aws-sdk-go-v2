@@ -1,3 +1,7 @@
+# v1.34.0 (2024-11-22)
+
+* **Feature**: Add support for variables and JSONata in TestState, GetExecutionHistory, DescribeStateMachine, and DescribeStateMachineForExecution
+
 # v1.33.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

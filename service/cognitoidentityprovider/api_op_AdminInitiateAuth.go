@@ -22,7 +22,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
+// Amazon Web Services service, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -62,35 +62,47 @@ func (c *Client) AdminInitiateAuth(ctx context.Context, params *AdminInitiateAut
 // Initiates the authorization request, as an administrator.
 type AdminInitiateAuthInput struct {
 
-	// The authentication flow for this call to run. The API action will depend on
-	// this value. For example:
+	// The authentication flow that you want to initiate. The AuthParameters that you
+	// must submit are linked to the flow that you submit. For example:
 	//
-	//   - REFRESH_TOKEN_AUTH will take in a valid refresh token and return new tokens.
+	//   - USER_AUTH : Request a preferred authentication type or review available
+	//   authentication types. From the offered authentication types, select one in a
+	//   challenge response and then authenticate with that method in an additional
+	//   challenge response.
 	//
-	//   - USER_SRP_AUTH will take in USERNAME and SRP_A and return the Secure Remote
-	//   Password (SRP) protocol variables to be used for next challenge execution.
+	//   - REFRESH_TOKEN_AUTH : Receive new ID and access tokens when you pass a
+	//   REFRESH_TOKEN parameter with a valid refresh token as the value.
 	//
-	//   - ADMIN_USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the
-	//   next challenge or tokens.
+	//   - USER_SRP_AUTH : Receive secure remote password (SRP) variables for the next
+	//   challenge, PASSWORD_VERIFIER , when you pass USERNAME and SRP_A parameters..
 	//
-	// Valid values include:
+	//   - ADMIN_USER_PASSWORD_AUTH : Receive new tokens or the next challenge, for
+	//   example SOFTWARE_TOKEN_MFA , when you pass USERNAME and PASSWORD parameters.
 	//
-	//   - USER_SRP_AUTH : Authentication flow for the Secure Remote Password (SRP)
-	//   protocol.
+	// Valid values include the following:
 	//
-	//   - REFRESH_TOKEN_AUTH / REFRESH_TOKEN : Authentication flow for refreshing the
-	//   access token and ID token by supplying a valid refresh token.
+	// USER_AUTH The entry point for sign-in with passwords, one-time passwords,
+	// biometric devices, and security keys.
 	//
-	//   - CUSTOM_AUTH : Custom authentication flow.
+	// USER_SRP_AUTH Username-password authentication with the Secure Remote Password
+	// (SRP) protocol. For more information, see [Use SRP password verification in custom authentication flow].
 	//
-	//   - ADMIN_NO_SRP_AUTH : Non-SRP authentication flow; you can pass in the
-	//   USERNAME and PASSWORD directly if the flow is enabled for calling the app
-	//   client.
+	// REFRESH_TOKEN_AUTH and REFRESH_TOKEN Provide a valid refresh token and receive
+	// new ID and access tokens. For more information, see [Using the refresh token].
 	//
-	//   - ADMIN_USER_PASSWORD_AUTH : Admin-based user password authentication. This
-	//   replaces the ADMIN_NO_SRP_AUTH authentication flow. In this flow, Amazon
-	//   Cognito receives the password in the request instead of using the SRP process to
-	//   verify passwords.
+	// CUSTOM_AUTH Custom authentication with Lambda triggers. For more information,
+	// see [Custom authentication challenge Lambda triggers].
+	//
+	// ADMIN_USER_PASSWORD_AUTH Username-password authentication with the password
+	// sent directly in the request. For more information, see [Admin authentication flow].
+	//
+	// USER_PASSWORD_AUTH is a flow type of [InitiateAuth] and isn't valid for AdminInitiateAuth.
+	//
+	// [Use SRP password verification in custom authentication flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow.html#Using-SRP-password-verification-in-custom-authentication-flow
+	// [InitiateAuth]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html
+	// [Using the refresh token]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-refresh-token.html
+	// [Admin authentication flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow.html#Built-in-authentication-flow-and-challenges
+	// [Custom authentication challenge Lambda triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
 	//
 	// This member is required.
 	AuthFlow types.AuthFlowType
@@ -111,6 +123,10 @@ type AdminInitiateAuthInput struct {
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you're invoking. The required values depend on the value of AuthFlow :
+	//
+	//   - For USER_AUTH : USERNAME (required), PREFERRED_CHALLENGE . If you don't
+	//   provide a value for PREFERRED_CHALLENGE , Amazon Cognito responds with the
+	//   AvailableChallenges parameter that specifies the available sign-in methods.
 	//
 	//   - For USER_SRP_AUTH : USERNAME (required), SRP_A (required), SECRET_HASH
 	//   (required if the app client is configured with a client secret), DEVICE_KEY .
@@ -169,6 +185,10 @@ type AdminInitiateAuthInput struct {
 	//
 	//   - Define auth challenge
 	//
+	//   - Custom email sender
+	//
+	//   - Custom SMS sender
+	//
 	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
 	//
 	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
@@ -193,6 +213,10 @@ type AdminInitiateAuthInput struct {
 	// Amazon Cognito when it makes API requests.
 	ContextData *types.ContextDataType
 
+	// The optional session ID from a ConfirmSignUp API request. You can sign in a
+	// user directly from the sign-up process with the USER_AUTH authentication flow.
+	Session *string
+
 	noSmithyDocumentSerde
 }
 
@@ -207,6 +231,22 @@ type AdminInitiateAuthOutput struct {
 
 	// The name of the challenge that you're responding to with this call. This is
 	// returned in the AdminInitiateAuth response if you must pass another challenge.
+	//
+	//   - WEB_AUTHN : Respond to the challenge with the results of a successful
+	//   authentication with a passkey, or webauthN, factor. These are typically
+	//   biometric devices or security keys.
+	//
+	//   - PASSWORD : Respond with USER_PASSWORD_AUTH parameters: USERNAME (required),
+	//   PASSWORD (required), SECRET_HASH (required if the app client is configured
+	//   with a client secret), DEVICE_KEY .
+	//
+	//   - PASSWORD_SRP : Respond with USER_SRP_AUTH parameters: USERNAME (required),
+	//   SRP_A (required), SECRET_HASH (required if the app client is configured with a
+	//   client secret), DEVICE_KEY .
+	//
+	//   - SELECT_CHALLENGE : Respond to the challenge with USERNAME and an ANSWER that
+	//   matches one of the challenge types in the AvailableChallenges response
+	//   parameter.
 	//
 	//   - MFA_SETUP : If MFA is required, users who don't have at least one of the MFA
 	//   methods set up are presented with an MFA_SETUP challenge. The user must set up
@@ -244,6 +284,14 @@ type AdminInitiateAuthOutput struct {
 	//   any required attributes that Amazon Cognito returned in the requiredAttributes
 	//   parameter. You can also set values for attributes that aren't required by your
 	//   user pool and that your app client can write. For more information, see [AdminRespondToAuthChallenge].
+	//
+	// Amazon Cognito only returns this challenge for users who have temporary
+	//   passwords. Because of this, and because in some cases you can create users who
+	//   don't have values for required attributes, take care to collect and submit
+	//   required-attribute values for all users who don't have passwords. You can create
+	//   a user in the Amazon Cognito console without, for example, a required
+	//   birthdate attribute. The API response from Amazon Cognito won't prompt you to
+	//   submit a birthdate for the user if they don't have a password.
 	//
 	// In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required
 	//   attribute that already has a value. In AdminRespondToAuthChallenge , set a

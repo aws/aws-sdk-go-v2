@@ -182,6 +182,12 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.omics#AccessLogLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^$|^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,800})/)?$"
+            }
+        },
         "com.amazonaws.omics#ActivateReadSetFilter": {
             "type": "structure",
             "members": {
@@ -2246,7 +2252,8 @@
                 "clientToken": {
                     "target": "com.amazonaws.omics#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique token for each request.</p>"
+                        "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique token for each request.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "fallbackLocation": {
@@ -2259,6 +2266,18 @@
                     "target": "com.amazonaws.omics#ETagAlgorithmFamily",
                     "traits": {
                         "smithy.api#documentation": "<p>The ETag algorithm family to use for ingested read sets.</p>"
+                    }
+                },
+                "propagatedSetLevelTags": {
+                    "target": "com.amazonaws.omics#PropagatedSetLevelTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>"
+                    }
+                },
+                "s3AccessConfig": {
+                    "target": "com.amazonaws.omics#S3AccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 access configuration parameters</p>"
                     }
                 }
             },
@@ -2320,6 +2339,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The algorithm family of the ETag.</p>"
                     }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sequence store.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the sequence store.</p>"
+                    }
+                },
+                "propagatedSetLevelTags": {
+                    "target": "com.amazonaws.omics#PropagatedSetLevelTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>"
+                    }
+                },
+                "s3Access": {
+                    "target": "com.amazonaws.omics#SequenceStoreS3Access"
                 }
             },
             "traits": {
@@ -3240,6 +3280,75 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteS3AccessPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#DeleteS3AccessPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#DeleteS3AccessPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an access policy on a given store"
+                },
+                "smithy.api#documentation": "<p>Deletes an access policy for the specified store.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/s3accesspolicy/{s3AccessPointArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteS3AccessPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "s3AccessPointArn": {
+                    "target": "com.amazonaws.omics#S3AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point ARN that has the access policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteS3AccessPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.omics#DeleteSequenceStore": {
@@ -7173,6 +7282,111 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#GetS3AccessPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#GetS3AccessPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#GetS3AccessPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get details about an access policy on a given store"
+                },
+                "smithy.api#documentation": "<p>Retrieves details about an access policy on a given store.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/s3accesspolicy/{s3AccessPointArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#GetS3AccessPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "s3AccessPointArn": {
+                    "target": "com.amazonaws.omics#S3AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point ARN that has the access policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#GetS3AccessPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "s3AccessPointArn": {
+                    "target": "com.amazonaws.omics#S3AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point ARN that has the access policy.</p>"
+                    }
+                },
+                "storeId": {
+                    "target": "com.amazonaws.omics#StoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated Sequence Store or Reference Store ID.</p>"
+                    }
+                },
+                "storeType": {
+                    "target": "com.amazonaws.omics#StoreType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of store associated with the access point.</p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the policy was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "s3AccessPolicy": {
+                    "target": "com.amazonaws.omics#S3AccessPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current resource policy that controls S3 access on the store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#GetSequenceStore": {
             "type": "operation",
             "input": {
@@ -7290,6 +7504,31 @@
                     "target": "com.amazonaws.omics#ETagAlgorithmFamily",
                     "traits": {
                         "smithy.api#documentation": "<p>The algorithm family of the ETag.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sequence store.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the sequence store.</p>"
+                    }
+                },
+                "propagatedSetLevelTags": {
+                    "target": "com.amazonaws.omics#PropagatedSetLevelTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last-updated time of the sequence store.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -11058,6 +11297,17 @@
         "com.amazonaws.omics#Omics": {
             "type": "service",
             "version": "2022-11-28",
+            "operations": [
+                {
+                    "target": "com.amazonaws.omics#DeleteS3AccessPolicy"
+                },
+                {
+                    "target": "com.amazonaws.omics#GetS3AccessPolicy"
+                },
+                {
+                    "target": "com.amazonaws.omics#PutS3AccessPolicy"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.omics#AnnotationImportJob"
@@ -11798,6 +12048,112 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.omics#PropagatedSetLevelTags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.omics#PutS3AccessPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#PutS3AccessPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#PutS3AccessPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to put an access policy on a given store"
+                },
+                "smithy.api#documentation": "<p>Adds an access policy to the specified store.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/s3accesspolicy/{s3AccessPointArn}"
+                }
+            }
+        },
+        "com.amazonaws.omics#PutS3AccessPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "s3AccessPointArn": {
+                    "target": "com.amazonaws.omics#S3AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point ARN where you want to put the access policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3AccessPolicy": {
+                    "target": "com.amazonaws.omics#S3AccessPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy that controls S3 access to the store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#PutS3AccessPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "s3AccessPointArn": {
+                    "target": "com.amazonaws.omics#S3AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 access point ARN that now has the access policy.</p>"
+                    }
+                },
+                "storeId": {
+                    "target": "com.amazonaws.omics#StoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated Sequence Store or Reference Store ID.</p>"
+                    }
+                },
+                "storeType": {
+                    "target": "com.amazonaws.omics#StoreType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of store associated with the access point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.omics#Quote": {
@@ -13939,6 +14295,20 @@
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
+        "com.amazonaws.omics#S3AccessConfig": {
+            "type": "structure",
+            "members": {
+                "accessLogLocation": {
+                    "target": "com.amazonaws.omics#AccessLogLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location of the access logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>S3 access configuration parameters.</p>"
+            }
+        },
         "com.amazonaws.omics#S3AccessPointArn": {
             "type": "string",
             "traits": {
@@ -13947,6 +14317,16 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$"
+            }
+        },
+        "com.amazonaws.omics#S3AccessPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#mediaType": "application/json"
             }
         },
         "com.amazonaws.omics#S3Destination": {
@@ -14154,6 +14534,25 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The algorithm family of the ETag.</p>"
                     }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the sequence store.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the sequence store.</p>"
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last-updated time of the Sequence Store.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
                 }
             },
             "traits": {
@@ -14186,6 +14585,26 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The filter's end date.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results based on status.</p>"
+                    }
+                },
+                "updatedAfter": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results based on stores updated after the specified time.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedBefore": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results based on stores updated before the specified time.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 }
@@ -14226,6 +14645,9 @@
             },
             "read": {
                 "target": "com.amazonaws.omics#GetSequenceStore"
+            },
+            "update": {
+                "target": "com.amazonaws.omics#UpdateSequenceStore"
             },
             "delete": {
                 "target": "com.amazonaws.omics#DeleteSequenceStore"
@@ -14316,10 +14738,53 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This is ARN of the access point associated with the S3 bucket storing read sets.</p>"
                     }
+                },
+                "accessLogLocation": {
+                    "target": "com.amazonaws.omics#AccessLogLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location of the access logs.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The S3 access metadata of the sequence store.</p>"
+            }
+        },
+        "com.amazonaws.omics#SequenceStoreStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.omics#SequenceStoreStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
         "com.amazonaws.omics#ServiceQuotaExceededException": {
@@ -15671,6 +16136,16 @@
                 ]
             }
         },
+        "com.amazonaws.omics#StoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
         "com.amazonaws.omics#StoreName": {
             "type": "string",
             "traits": {
@@ -15725,6 +16200,23 @@
                         "documentation": "The Store creation failed"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.omics#StoreType": {
+            "type": "enum",
+            "members": {
+                "SEQUENCE_STORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEQUENCE_STORE"
+                    }
+                },
+                "REFERENCE_STORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERENCE_STORE"
+                    }
+                }
             }
         },
         "com.amazonaws.omics#SubjectId": {
@@ -16740,6 +17232,187 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#UpdateSequenceStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#UpdateSequenceStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#UpdateSequenceStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update one or more parameters for the sequence store.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/sequencestore/{id}"
+                }
+            }
+        },
+        "com.amazonaws.omics#UpdateSequenceStoreRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sequence store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "sequenceStoreId"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#SequenceStoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the sequence store.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#SequenceStoreDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the sequence store.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.omics#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique token for each request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "fallbackLocation": {
+                    "target": "com.amazonaws.omics#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI of a bucket and folder to store Read Sets that fail to upload.</p>"
+                    }
+                },
+                "propagatedSetLevelTags": {
+                    "target": "com.amazonaws.omics#PropagatedSetLevelTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>"
+                    }
+                },
+                "s3AccessConfig": {
+                    "target": "com.amazonaws.omics#S3AccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 access configuration parameters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#UpdateSequenceStoreResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sequence store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.omics#SequenceStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sequence store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#SequenceStoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sequence store.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#SequenceStoreDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the sequence store.</p>"
+                    }
+                },
+                "sseConfig": {
+                    "target": "com.amazonaws.omics#SseConfig"
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the store was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last-updated time of the Sequence Store.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "propagatedSetLevelTags": {
+                    "target": "com.amazonaws.omics#PropagatedSetLevelTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags keys to propagate to the S3 objects associated with read sets in the sequence store.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sequence store.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#SequenceStoreStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the sequence store.</p>"
+                    }
+                },
+                "fallbackLocation": {
+                    "target": "com.amazonaws.omics#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI of a bucket and folder to store Read Sets that fail to upload.</p>"
+                    }
+                },
+                "s3Access": {
+                    "target": "com.amazonaws.omics#SequenceStoreS3Access"
+                },
+                "eTagAlgorithmFamily": {
+                    "target": "com.amazonaws.omics#ETagAlgorithmFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag algorithm family to use on ingested read sets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.omics#UpdateTime": {

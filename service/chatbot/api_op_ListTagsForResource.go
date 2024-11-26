@@ -30,7 +30,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN you specified to list the tags of.
+	// The ARN of the resource to list tags for.
 	//
 	// This member is required.
 	ResourceARN *string

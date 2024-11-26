@@ -327,6 +327,9 @@ type AnalysisDefinition struct {
 	// detailed information about a sheet within this analysis.
 	Sheets []SheetDefinition
 
+	// The static files for the definition.
+	StaticFiles []StaticFile
+
 	noSmithyDocumentSerde
 }
 
@@ -1543,7 +1546,9 @@ type AssetBundleImportJobWarning struct {
 type AssetBundleImportSource struct {
 
 	// The bytes of the base64 encoded asset bundle import zip file. This file can't
-	// exceed 20 MB.
+	// exceed 20 MB. If the size of the file that you want to upload is more than 20
+	// MB, add the file to your Amazon S3 bucket and use S3Uri of the file for this
+	// operation.
 	//
 	// If you are calling the API operations from the Amazon Web Services SDK for
 	// Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow
@@ -1553,7 +1558,7 @@ type AssetBundleImportSource struct {
 
 	// The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3
 	// bucket that the caller has read access to. The file must be a zip format file
-	// and can't exceed 20 MB.
+	// and can't exceed 1 GB.
 	S3Uri *string
 
 	noSmithyDocumentSerde
@@ -2041,6 +2046,9 @@ type BarChartVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2352,6 +2360,9 @@ type BoxPlotVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -3219,6 +3230,9 @@ type ComboChartVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -3705,6 +3719,9 @@ type CustomContentVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -4141,6 +4158,9 @@ type DashboardVersionDefinition struct {
 
 	// An array of sheet definitions for a dashboard.
 	Sheets []SheetDefinition
+
+	// The static files for the definition.
+	StaticFiles []StaticFile
 
 	noSmithyDocumentSerde
 }
@@ -6428,6 +6448,9 @@ type FilledMapVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -7080,6 +7103,9 @@ type FontConfiguration struct {
 	// Determines the appearance of decorative lines on the text.
 	FontDecoration FontDecoration
 
+	// The font family that you want to use.
+	FontFamily *string
+
 	// The option that determines the text display size.
 	FontSize *FontSize
 
@@ -7094,6 +7120,9 @@ type FontConfiguration struct {
 
 // The option that determines the text display size.
 type FontSize struct {
+
+	// The font size that you want to use in px.
+	Absolute *string
 
 	// The lexical name for the text size, proportional to its surrounding context.
 	Relative RelativeFontSize
@@ -7447,6 +7476,9 @@ type FunnelChartVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -7593,6 +7625,87 @@ type GaugeChartVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a categorical color.
+type GeospatialCategoricalColor struct {
+
+	// A list of categorical data colors for each category.
+	//
+	// This member is required.
+	CategoryDataColors []GeospatialCategoricalDataColor
+
+	// The default opacity of a categorical color.
+	DefaultOpacity *float64
+
+	// The null data visualization settings.
+	NullDataSettings *GeospatialNullDataSettings
+
+	// The state of visibility for null data.
+	NullDataVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The categorical data color for a single category.
+type GeospatialCategoricalDataColor struct {
+
+	// The color and opacity values for the category data color.
+	//
+	// This member is required.
+	Color *string
+
+	// The data value for the category data color.
+	//
+	// This member is required.
+	DataValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The geospatial radius for a circle.
+type GeospatialCircleRadius struct {
+
+	// The positive value for the radius of a circle.
+	Radius *float64
+
+	noSmithyDocumentSerde
+}
+
+// The properties for a circle symbol style.
+type GeospatialCircleSymbolStyle struct {
+
+	// The radius of the circle.
+	CircleRadius *GeospatialCircleRadius
+
+	// The color and opacity values for the fill color.
+	FillColor *GeospatialColor
+
+	// The color and opacity values for the stroke color.
+	StrokeColor *GeospatialColor
+
+	// The width of the stroke (border).
+	StrokeWidth *GeospatialLineWidth
+
+	noSmithyDocumentSerde
+}
+
+// The visualization properties for solid, gradient, and categorical colors.
+type GeospatialColor struct {
+
+	// The visualization properties for the categorical color.
+	Categorical *GeospatialCategoricalColor
+
+	// The visualization properties for the gradient color.
+	Gradient *GeospatialGradientColor
+
+	// The visualization properties for the solid color.
+	Solid *GeospatialSolidColor
+
 	noSmithyDocumentSerde
 }
 
@@ -7641,6 +7754,51 @@ type GeospatialCoordinateBounds struct {
 	noSmithyDocumentSerde
 }
 
+// The data source properties for the geospatial data.
+type GeospatialDataSourceItem struct {
+
+	// The static file data source properties for the geospatial data.
+	StaticFileDataSource *GeospatialStaticFileSource
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a gradient color.
+type GeospatialGradientColor struct {
+
+	// A list of gradient step colors for the gradient.
+	//
+	// This member is required.
+	StepColors []GeospatialGradientStepColor
+
+	// The default opacity for the gradient color.
+	DefaultOpacity *float64
+
+	// The null data visualization settings.
+	NullDataSettings *GeospatialNullDataSettings
+
+	// The state of visibility for null data.
+	NullDataVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The gradient step color for a single step.
+type GeospatialGradientStepColor struct {
+
+	// The color and opacity values for the gradient step color.
+	//
+	// This member is required.
+	Color *string
+
+	// The data value for the gradient step color.
+	//
+	// This member is required.
+	DataValue float64
+
+	noSmithyDocumentSerde
+}
+
 // The color scale specification for the heatmap point style.
 type GeospatialHeatmapColorScale struct {
 
@@ -7666,6 +7824,145 @@ type GeospatialHeatmapDataColor struct {
 	//
 	// This member is required.
 	Color *string
+
+	noSmithyDocumentSerde
+}
+
+// The color field that defines a gradient or categorical style.
+type GeospatialLayerColorField struct {
+
+	// A list of color dimension fields.
+	ColorDimensionsFields []DimensionField
+
+	// A list of color measure fields.
+	ColorValuesFields []MeasureField
+
+	noSmithyDocumentSerde
+}
+
+// The definition properties for a geospatial layer.
+type GeospatialLayerDefinition struct {
+
+	// The definition for a line layer.
+	LineLayer *GeospatialLineLayer
+
+	// The definition for a point layer.
+	PointLayer *GeospatialPointLayer
+
+	// The definition for a polygon layer.
+	PolygonLayer *GeospatialPolygonLayer
+
+	noSmithyDocumentSerde
+}
+
+// The properties for a single geospatial layer.
+type GeospatialLayerItem struct {
+
+	// The ID of the layer.
+	//
+	// This member is required.
+	LayerId *string
+
+	// A list of custom actions for a layer.
+	Actions []LayerCustomAction
+
+	// The data source for the layer.
+	DataSource *GeospatialDataSourceItem
+
+	// The join definition properties for a layer.
+	JoinDefinition *GeospatialLayerJoinDefinition
+
+	// The label that is displayed for the layer.
+	Label *string
+
+	// The definition properties for a layer.
+	LayerDefinition *GeospatialLayerDefinition
+
+	// The layer type.
+	LayerType GeospatialLayerType
+
+	// The display options for the visual tooltip.
+	Tooltip *TooltipOptions
+
+	// The state of visibility for the layer.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The custom actions for a layer.
+type GeospatialLayerJoinDefinition struct {
+
+	// The geospatial color field for the join definition.
+	ColorField *GeospatialLayerColorField
+
+	// The unaggregated field for a table.
+	DatasetKeyField *UnaggregatedField
+
+	// The name of the field or property in the geospatial data source.
+	ShapeKeyField *string
+
+	noSmithyDocumentSerde
+}
+
+// The map definition that defines map state, map style, and geospatial layers.
+type GeospatialLayerMapConfiguration struct {
+
+	// The general visual interactions setup for visual publish options
+	Interactions *VisualInteractionOptions
+
+	// The options for the legend setup of a visual.
+	Legend *LegendOptions
+
+	// The geospatial layers to visualize on the map.
+	MapLayers []GeospatialLayerItem
+
+	// The map state properties for the map.
+	MapState *GeospatialMapState
+
+	// The map style properties for the map.
+	MapStyle *GeospatialMapStyle
+
+	noSmithyDocumentSerde
+}
+
+// The geospatial Line layer.
+type GeospatialLineLayer struct {
+
+	// The visualization style for a line layer.
+	//
+	// This member is required.
+	Style *GeospatialLineStyle
+
+	noSmithyDocumentSerde
+}
+
+// The visualization style for a line layer.
+type GeospatialLineStyle struct {
+
+	// The symbol style for a line style.
+	LineSymbolStyle *GeospatialLineSymbolStyle
+
+	noSmithyDocumentSerde
+}
+
+// The symbol style for a line layer.
+type GeospatialLineSymbolStyle struct {
+
+	// The color and opacity values for the fill color.
+	FillColor *GeospatialColor
+
+	// The width value for a line.
+	LineWidth *GeospatialLineWidth
+
+	noSmithyDocumentSerde
+}
+
+// The width properties for a line.
+type GeospatialLineWidth struct {
+
+	// The positive value for the width of a line.
+	LineWidth *float64
 
 	noSmithyDocumentSerde
 }
@@ -7729,6 +8026,33 @@ type GeospatialMapFieldWells struct {
 	noSmithyDocumentSerde
 }
 
+// The map state properties for a map.
+type GeospatialMapState struct {
+
+	// The bound options (north, south, west, east) of the geospatial window options.
+	Bounds *GeospatialCoordinateBounds
+
+	// Enables or disables map navigation for a map.
+	MapNavigation GeospatialMapNavigation
+
+	noSmithyDocumentSerde
+}
+
+// The map style properties for a map.
+type GeospatialMapStyle struct {
+
+	// The background color and opacity values for a map.
+	BackgroundColor *string
+
+	// The selected base map style.
+	BaseMapStyle BaseMapStyleType
+
+	// The state of visibility for the base map.
+	BaseMapVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
 // The map style options of the geospatial map.
 type GeospatialMapStyleOptions struct {
 
@@ -7767,6 +8091,55 @@ type GeospatialMapVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties for the visualization of null data.
+type GeospatialNullDataSettings struct {
+
+	// The symbol style for null data.
+	//
+	// This member is required.
+	SymbolStyle *GeospatialNullSymbolStyle
+
+	noSmithyDocumentSerde
+}
+
+// The symbol style for null data.
+type GeospatialNullSymbolStyle struct {
+
+	// The color and opacity values for the fill color.
+	FillColor *string
+
+	// The color and opacity values for the stroke color.
+	StrokeColor *string
+
+	// The width of the border stroke.
+	StrokeWidth *float64
+
+	noSmithyDocumentSerde
+}
+
+// The geospatial Point layer.
+type GeospatialPointLayer struct {
+
+	// The visualization style for a point layer.
+	//
+	// This member is required.
+	Style *GeospatialPointStyle
+
+	noSmithyDocumentSerde
+}
+
+// The point style for a point layer.
+type GeospatialPointStyle struct {
+
+	// The circle symbol style for a point layer.
+	CircleSymbolStyle *GeospatialCircleSymbolStyle
+
 	noSmithyDocumentSerde
 }
 
@@ -7781,6 +8154,66 @@ type GeospatialPointStyleOptions struct {
 
 	// The selected point styles (point, cluster) of the geospatial map.
 	SelectedPointStyle GeospatialSelectedPointStyle
+
+	noSmithyDocumentSerde
+}
+
+// The geospatial polygon layer.
+type GeospatialPolygonLayer struct {
+
+	// The visualization style for a polygon layer.
+	//
+	// This member is required.
+	Style *GeospatialPolygonStyle
+
+	noSmithyDocumentSerde
+}
+
+// The polygon style for a polygon layer.
+type GeospatialPolygonStyle struct {
+
+	// The polygon symbol style for a polygon layer.
+	PolygonSymbolStyle *GeospatialPolygonSymbolStyle
+
+	noSmithyDocumentSerde
+}
+
+// The polygon symbol style for a polygon layer.
+type GeospatialPolygonSymbolStyle struct {
+
+	// The color and opacity values for the fill color.
+	FillColor *GeospatialColor
+
+	// The color and opacity values for the stroke color.
+	StrokeColor *GeospatialColor
+
+	// The width of the border stroke.
+	StrokeWidth *GeospatialLineWidth
+
+	noSmithyDocumentSerde
+}
+
+// The definition for a solid color.
+type GeospatialSolidColor struct {
+
+	// The color and opacity values for the color.
+	//
+	// This member is required.
+	Color *string
+
+	// Enables and disables the view state of the color.
+	State GeospatialColorState
+
+	noSmithyDocumentSerde
+}
+
+// The source properties for a geospatial static file.
+type GeospatialStaticFileSource struct {
+
+	// The ID of the static file.
+	//
+	// This member is required.
+	StaticFileId *string
 
 	noSmithyDocumentSerde
 }
@@ -8129,6 +8562,9 @@ type HeatMapVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -8228,6 +8664,9 @@ type HistogramVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -8309,6 +8748,85 @@ type ImageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A custom action defined on an image.
+type ImageCustomAction struct {
+
+	// A list of ImageCustomActionOperations .
+	//
+	// This is a union type structure. For this structure to be valid, only one of the
+	// attributes can be defined.
+	//
+	// This member is required.
+	ActionOperations []ImageCustomActionOperation
+
+	// The ID of the custom action.
+	//
+	// This member is required.
+	CustomActionId *string
+
+	// The name of the custom action.
+	//
+	// This member is required.
+	Name *string
+
+	// The trigger of the VisualCustomAction .
+	//
+	// Valid values are defined as follows:
+	//
+	//   - CLICK : Initiates a custom action by a left pointer click on a data point.
+	//
+	//   - MENU : Initiates a custom action by right pointer click from the menu.
+	//
+	// This member is required.
+	Trigger ImageCustomActionTrigger
+
+	// The status of the custom action.
+	Status WidgetStatus
+
+	noSmithyDocumentSerde
+}
+
+// The operation that is defined by the custom action.
+//
+// This is a union type structure. For this structure to be valid, only one of the
+// attributes can be defined.
+type ImageCustomActionOperation struct {
+
+	// The navigation operation that navigates between different sheets in the same
+	// analysis.
+	//
+	// This is a union type structure. For this structure to be valid, only one of the
+	// attributes can be defined.
+	NavigationOperation *CustomActionNavigationOperation
+
+	// The set parameter operation that sets parameters in custom action.
+	SetParametersOperation *CustomActionSetParametersOperation
+
+	// The URL operation that opens a link to another webpage.
+	URLOperation *CustomActionURLOperation
+
+	noSmithyDocumentSerde
+}
+
+// The general image interactions setup for image publish options.
+type ImageInteractionOptions struct {
+
+	// The menu options for the image.
+	ImageMenuOption *ImageMenuOption
+
+	noSmithyDocumentSerde
+}
+
+// The menu options for the interactions of an image.
+type ImageMenuOption struct {
+
+	// The availability status of the image menu. If the value of this property is set
+	// to ENABLED , dashboard readers can interact with the image menu.
+	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
 // The image set.
 type ImageSet struct {
 
@@ -8364,6 +8882,20 @@ type ImageSourceMemberS3Uri struct {
 }
 
 func (*ImageSourceMemberS3Uri) isImageSource() {}
+
+// A static file that contains an image.
+type ImageStaticFile struct {
+
+	// The ID of the static file that contains an image.
+	//
+	// This member is required.
+	StaticFileId *string
+
+	// The source of the image static file.
+	Source *StaticFileSource
+
+	noSmithyDocumentSerde
+}
 
 // The incremental refresh configuration for a dataset.
 type IncrementalRefresh struct {
@@ -8495,6 +9027,9 @@ type InsightVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -8894,6 +9429,9 @@ type KPIVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -8928,6 +9466,101 @@ type LabelOptions struct {
 
 	// Determines whether or not the label is visible.
 	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// A layer custom action.
+type LayerCustomAction struct {
+
+	// A list of LayerCustomActionOperations .
+	//
+	// This is a union type structure. For this structure to be valid, only one of the
+	// attributes can be defined.
+	//
+	// This member is required.
+	ActionOperations []LayerCustomActionOperation
+
+	// The ID of the custom action.
+	//
+	// This member is required.
+	CustomActionId *string
+
+	// The name of the custom action.
+	//
+	// This member is required.
+	Name *string
+
+	// The trigger of the LayerCustomAction .
+	//
+	// Valid values are defined as follows:
+	//
+	//   - DATA_POINT_CLICK : Initiates a custom action by a left pointer click on a
+	//   data point.
+	//
+	//   - DATA_POINT_MENU : Initiates a custom action by right pointer click from the
+	//   menu.
+	//
+	// This member is required.
+	Trigger LayerCustomActionTrigger
+
+	// The status of the LayerCustomAction .
+	Status WidgetStatus
+
+	noSmithyDocumentSerde
+}
+
+// The operation that is defined by the custom action.
+//
+// This is a union type structure. For this structure to be valid, only one of the
+// attributes can be defined.
+type LayerCustomActionOperation struct {
+
+	// The filter operation that filters data included in a visual or in an entire
+	// sheet.
+	FilterOperation *CustomActionFilterOperation
+
+	// The navigation operation that navigates between different sheets in the same
+	// analysis.
+	//
+	// This is a union type structure. For this structure to be valid, only one of the
+	// attributes can be defined.
+	NavigationOperation *CustomActionNavigationOperation
+
+	// The set parameter operation that sets parameters in custom action.
+	SetParametersOperation *CustomActionSetParametersOperation
+
+	// The URL operation that opens a link to another webpage.
+	URLOperation *CustomActionURLOperation
+
+	noSmithyDocumentSerde
+}
+
+// A layer map visual.
+type LayerMapVisual struct {
+
+	// The dataset that is used to create the layer map visual. You can't create a
+	// visual without a dataset.
+	//
+	// This member is required.
+	DataSetIdentifier *string
+
+	// The ID of the visual.
+	//
+	// This member is required.
+	VisualId *string
+
+	// The configuration settings of the visual.
+	ChartConfiguration *GeospatialLayerMapConfiguration
+
+	// The subtitle label options for a visual.
+	Subtitle *VisualSubtitleLabelOptions
+
+	// The title label options for a visual.
+	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -8995,6 +9628,9 @@ type LegendOptions struct {
 
 	// The custom title for the legend.
 	Title *LabelOptions
+
+	// Configures the display properties of the given text.
+	ValueFontConfiguration *FontConfiguration
 
 	// Determines whether or not the legend is visible.
 	Visibility Visibility
@@ -9239,6 +9875,9 @@ type LineChartVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -9728,6 +10367,12 @@ type NamespaceInfoV2 struct {
 
 	// The creation status of a namespace that is not yet completely created.
 	CreationStatus NamespaceStatus
+
+	// The Amazon Resource Name (ARN) for the IAM Identity Center application.
+	IamIdentityCenterApplicationArn *string
+
+	// The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+	IamIdentityCenterInstanceArn *string
 
 	// The identity store used for the namespace.
 	IdentityStore IdentityStore
@@ -10839,6 +11484,9 @@ type PieChartVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -11198,6 +11846,9 @@ type PivotTableVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -11227,6 +11878,120 @@ type PivotTotalOptions struct {
 
 	// The cell styling options for the totals of value cells.
 	ValueCellStyle *TableCellStyle
+
+	noSmithyDocumentSerde
+}
+
+// A flexible visualization type that allows engineers to create new custom charts
+// in Amazon QuickSight.
+type PluginVisual struct {
+
+	// The Amazon Resource Name (ARN) that reflects the plugin and version.
+	//
+	// This member is required.
+	PluginArn *string
+
+	// The ID of the visual that you want to use.
+	//
+	// This member is required.
+	VisualId *string
+
+	//  A description of the plugin field wells and their persisted properties.
+	ChartConfiguration *PluginVisualConfiguration
+
+	// The subtitle label options for a visual.
+	Subtitle *VisualSubtitleLabelOptions
+
+	// The title label options for a visual.
+	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
+
+	noSmithyDocumentSerde
+}
+
+// The plugin visual configuration. This includes the field wells, sorting
+// options, and persisted options of the plugin visual.
+type PluginVisualConfiguration struct {
+
+	// The field wells configuration of the plugin visual.
+	FieldWells []PluginVisualFieldWell
+
+	// The sort configuration of the plugin visual.
+	SortConfiguration *PluginVisualSortConfiguration
+
+	// The persisted properties of the plugin visual.
+	VisualOptions *PluginVisualOptions
+
+	noSmithyDocumentSerde
+}
+
+// A collection of field wells for a plugin visual.
+type PluginVisualFieldWell struct {
+
+	// The semantic axis name for the field well.
+	AxisName PluginVisualAxisName
+
+	// A list of dimensions for the field well.
+	Dimensions []DimensionField
+
+	// A list of measures that exist in the field well.
+	Measures []MeasureField
+
+	// A list of unaggregated fields that exist in the field well.
+	Unaggregated []UnaggregatedField
+
+	noSmithyDocumentSerde
+}
+
+// A query limits configuration.
+type PluginVisualItemsLimitConfiguration struct {
+
+	// Determines how many values are be fetched at once.
+	ItemsLimit *int64
+
+	noSmithyDocumentSerde
+}
+
+// The options and persisted properties for the plugin visual.
+type PluginVisualOptions struct {
+
+	// The persisted properties and their values.
+	VisualProperties []PluginVisualProperty
+
+	noSmithyDocumentSerde
+}
+
+// The key value pair of the persisted property.
+type PluginVisualProperty struct {
+
+	// The name of the plugin visual property.
+	Name *string
+
+	// The value of the plugin visual property.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Determines how the plugin visual sorts the data during query.
+type PluginVisualSortConfiguration struct {
+
+	// The table query sorting options for the plugin visual.
+	PluginVisualTableQuerySort *PluginVisualTableQuerySort
+
+	noSmithyDocumentSerde
+}
+
+// The table query sorting options for the plugin visual.
+type PluginVisualTableQuerySort struct {
+
+	// The maximum amount of data to be returned by a query.
+	ItemsLimitConfiguration *PluginVisualItemsLimitConfiguration
+
+	// Determines how data is sorted in the response.
+	RowSort []FieldSortOptions
 
 	noSmithyDocumentSerde
 }
@@ -11479,6 +12244,9 @@ type RadarChartVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -12512,6 +13280,9 @@ type SankeyDiagramVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -12662,6 +13433,9 @@ type ScatterPlotVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -12950,6 +13724,9 @@ type SharedViewConfigurations struct {
 // with other components, such as controls, filters, and so on.
 type Sheet struct {
 
+	// A list of images on a sheet.
+	Images []SheetImage
+
 	// The name of a sheet. This name is displayed on the sheet's tab in the Amazon
 	// QuickSight console.
 	Name *string
@@ -13031,6 +13808,9 @@ type SheetDefinition struct {
 	// [Adding filter controls to analysis sheets]: https://docs.aws.amazon.com/quicksight/latest/user/filter-controls.html
 	FilterControls []FilterControl
 
+	// A list of images on a sheet.
+	Images []SheetImage
+
 	// Layouts define how the components of a sheet are arranged.
 	//
 	// For more information, see [Types of layout] in the Amazon QuickSight User Guide.
@@ -13091,6 +13871,101 @@ type SheetElementRenderingRule struct {
 	//
 	// This member is required.
 	Expression *string
+
+	noSmithyDocumentSerde
+}
+
+// An image that is located on a sheet.
+type SheetImage struct {
+
+	// The ID of the sheet image.
+	//
+	// This member is required.
+	SheetImageId *string
+
+	// The source of the image.
+	//
+	// This member is required.
+	Source *SheetImageSource
+
+	// A list of custom actions that are configured for an image.
+	Actions []ImageCustomAction
+
+	// The alt text for the image.
+	ImageContentAltText *string
+
+	// The general image interactions setup for an image.
+	Interactions *ImageInteractionOptions
+
+	// Determines how the image is scaled.
+	Scaling *SheetImageScalingConfiguration
+
+	// The tooltip to be shown when hovering over the image.
+	Tooltip *SheetImageTooltipConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Determines how the image is scaled
+type SheetImageScalingConfiguration struct {
+
+	// The scaling option to use when fitting the image inside the container.
+	//
+	// Valid values are defined as follows:
+	//
+	//   - SCALE_TO_WIDTH : The image takes up the entire width of the container. The
+	//   image aspect ratio is preserved.
+	//
+	//   - SCALE_TO_HEIGHT : The image takes up the entire height of the container. The
+	//   image aspect ratio is preserved.
+	//
+	//   - SCALE_TO_CONTAINER : The image takes up the entire width and height of the
+	//   container. The image aspect ratio is not preserved.
+	//
+	//   - SCALE_NONE : The image is displayed in its original size and is not scaled
+	//   to the container.
+	ScalingType SheetImageScalingType
+
+	noSmithyDocumentSerde
+}
+
+// The source of the image.
+type SheetImageSource struct {
+
+	// The source of the static file that contains the image.
+	SheetImageStaticFileSource *SheetImageStaticFileSource
+
+	noSmithyDocumentSerde
+}
+
+// The source of the static file that contains the image.
+type SheetImageStaticFileSource struct {
+
+	// The ID of the static file that contains the image.
+	//
+	// This member is required.
+	StaticFileId *string
+
+	noSmithyDocumentSerde
+}
+
+// The tooltip configuration for a sheet image.
+type SheetImageTooltipConfiguration struct {
+
+	// The text that appears in the tooltip.
+	TooltipText *SheetImageTooltipText
+
+	// The visibility of the tooltip.
+	Visibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// The text that appears in the sheet image tooltip.
+type SheetImageTooltipText struct {
+
+	// The plain text format.
+	PlainText *string
 
 	noSmithyDocumentSerde
 }
@@ -13574,6 +14449,20 @@ type SparkParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A static file that contains the geospatial data.
+type SpatialStaticFile struct {
+
+	// The ID of the spatial static file.
+	//
+	// This member is required.
+	StaticFileId *string
+
+	// The source of the spatial static file.
+	Source *StaticFileSource
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for SQL Server.
 type SqlServerParameters struct {
 
@@ -13648,6 +14537,64 @@ type StatePersistenceConfigurations struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The static file.
+type StaticFile struct {
+
+	// The image static file.
+	ImageStaticFile *ImageStaticFile
+
+	// The spacial static file.
+	SpatialStaticFile *SpatialStaticFile
+
+	noSmithyDocumentSerde
+}
+
+// The structure that contains the Amazon S3 location to download the static file
+// from.
+type StaticFileS3SourceOptions struct {
+
+	// The name of the Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The identifier of the static file in the Amazon S3 bucket.
+	//
+	// This member is required.
+	ObjectKey *string
+
+	// The Region of the Amazon S3 account that contains the bucket.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of the static file.
+type StaticFileSource struct {
+
+	// The structure that contains the Amazon S3 location to download the static file
+	// from.
+	S3Options *StaticFileS3SourceOptions
+
+	// The structure that contains the URL to download the static file from.
+	UrlOptions *StaticFileUrlSourceOptions
+
+	noSmithyDocumentSerde
+}
+
+// The structure that contains the URL to download the static file from.
+type StaticFileUrlSourceOptions struct {
+
+	// The URL to download the static file from.
+	//
+	// This member is required.
+	Url *string
 
 	noSmithyDocumentSerde
 }
@@ -14241,6 +15188,9 @@ type TableVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -14503,6 +15453,9 @@ type TemplateVersionDefinition struct {
 
 	// An array of sheet definitions for a template.
 	Sheets []SheetDefinition
+
+	// The static files for the definition.
+	StaticFiles []StaticFile
 
 	noSmithyDocumentSerde
 }
@@ -15745,6 +16698,27 @@ type TopicReviewedAnswer struct {
 	noSmithyDocumentSerde
 }
 
+// The filter that is used to search for a topic.
+type TopicSearchFilter struct {
+
+	// The name of the topic search filter.
+	//
+	// This member is required.
+	Name TopicFilterAttribute
+
+	// The operator like equals or like.
+	//
+	// This member is required.
+	Operator TopicFilterOperator
+
+	// The value of the topic search filter.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that represents a singular filter constant, used in filters to
 // specify a single value to match against.
 type TopicSingularFilterConstant struct {
@@ -16087,6 +17061,9 @@ type TreeMapVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }
@@ -16480,6 +17457,9 @@ type Visual struct {
 	// [Using KPIs]: https://docs.aws.amazon.com/quicksight/latest/user/kpi.html
 	KPIVisual *KPIVisual
 
+	// The properties for a layer map visual
+	LayerMapVisual *LayerMapVisual
+
 	// A line chart.
 	//
 	// For more information, see [Using line charts] in the Amazon QuickSight User Guide.
@@ -16500,6 +17480,9 @@ type Visual struct {
 	//
 	// [Using pivot tables]: https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html
 	PivotTableVisual *PivotTableVisual
+
+	// The custom plugin visual type.
+	PluginVisual *PluginVisual
 
 	// A radar chart visual.
 	//
@@ -16930,6 +17913,9 @@ type WaterfallVisual struct {
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
 
+	// The alt text for the visual.
+	VisualContentAltText *string
+
 	noSmithyDocumentSerde
 }
 
@@ -17084,6 +18070,9 @@ type WordCloudVisual struct {
 
 	// The title that is displayed on the visual.
 	Title *VisualTitleLabelOptions
+
+	// The alt text for the visual.
+	VisualContentAltText *string
 
 	noSmithyDocumentSerde
 }

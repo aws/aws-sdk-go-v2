@@ -67,12 +67,25 @@ type GetSequenceStoreOutput struct {
 	// The store's name.
 	Name *string
 
+	// The tags keys to propagate to the S3 objects associated with read sets in the
+	// sequence store.
+	PropagatedSetLevelTags []string
+
 	// The S3 metadata of a sequence store, including the ARN and S3 URI of the S3
 	// bucket.
 	S3Access *types.SequenceStoreS3Access
 
 	// The store's server-side encryption (SSE) settings.
 	SseConfig *types.SseConfig
+
+	// The status of the sequence store.
+	Status types.SequenceStoreStatus
+
+	// The status message of the sequence store.
+	StatusMessage *string
+
+	// The last-updated time of the sequence store.
+	UpdateTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

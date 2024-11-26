@@ -88,6 +88,76 @@ func (AliasAttributeType) Values() []AliasAttributeType {
 	}
 }
 
+type AssetCategoryType string
+
+// Enum values for AssetCategoryType
+const (
+	AssetCategoryTypeFaviconIco           AssetCategoryType = "FAVICON_ICO"
+	AssetCategoryTypeFaviconSvg           AssetCategoryType = "FAVICON_SVG"
+	AssetCategoryTypeEmailGraphic         AssetCategoryType = "EMAIL_GRAPHIC"
+	AssetCategoryTypeSmsGraphic           AssetCategoryType = "SMS_GRAPHIC"
+	AssetCategoryTypeAuthAppGraphic       AssetCategoryType = "AUTH_APP_GRAPHIC"
+	AssetCategoryTypePasswordGraphic      AssetCategoryType = "PASSWORD_GRAPHIC"
+	AssetCategoryTypePasskeyGraphic       AssetCategoryType = "PASSKEY_GRAPHIC"
+	AssetCategoryTypePageHeaderLogo       AssetCategoryType = "PAGE_HEADER_LOGO"
+	AssetCategoryTypePageHeaderBackground AssetCategoryType = "PAGE_HEADER_BACKGROUND"
+	AssetCategoryTypePageFooterLogo       AssetCategoryType = "PAGE_FOOTER_LOGO"
+	AssetCategoryTypePageFooterBackground AssetCategoryType = "PAGE_FOOTER_BACKGROUND"
+	AssetCategoryTypePageBackground       AssetCategoryType = "PAGE_BACKGROUND"
+	AssetCategoryTypeFormBackground       AssetCategoryType = "FORM_BACKGROUND"
+	AssetCategoryTypeFormLogo             AssetCategoryType = "FORM_LOGO"
+	AssetCategoryTypeIdpButtonIcon        AssetCategoryType = "IDP_BUTTON_ICON"
+)
+
+// Values returns all known values for AssetCategoryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetCategoryType) Values() []AssetCategoryType {
+	return []AssetCategoryType{
+		"FAVICON_ICO",
+		"FAVICON_SVG",
+		"EMAIL_GRAPHIC",
+		"SMS_GRAPHIC",
+		"AUTH_APP_GRAPHIC",
+		"PASSWORD_GRAPHIC",
+		"PASSKEY_GRAPHIC",
+		"PAGE_HEADER_LOGO",
+		"PAGE_HEADER_BACKGROUND",
+		"PAGE_FOOTER_LOGO",
+		"PAGE_FOOTER_BACKGROUND",
+		"PAGE_BACKGROUND",
+		"FORM_BACKGROUND",
+		"FORM_LOGO",
+		"IDP_BUTTON_ICON",
+	}
+}
+
+type AssetExtensionType string
+
+// Enum values for AssetExtensionType
+const (
+	AssetExtensionTypeIco  AssetExtensionType = "ICO"
+	AssetExtensionTypeJpeg AssetExtensionType = "JPEG"
+	AssetExtensionTypePng  AssetExtensionType = "PNG"
+	AssetExtensionTypeSvg  AssetExtensionType = "SVG"
+	AssetExtensionTypeWebp AssetExtensionType = "WEBP"
+)
+
+// Values returns all known values for AssetExtensionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetExtensionType) Values() []AssetExtensionType {
+	return []AssetExtensionType{
+		"ICO",
+		"JPEG",
+		"PNG",
+		"SVG",
+		"WEBP",
+	}
+}
+
 type AttributeDataType string
 
 // Enum values for AttributeDataType
@@ -111,6 +181,29 @@ func (AttributeDataType) Values() []AttributeDataType {
 	}
 }
 
+type AuthFactorType string
+
+// Enum values for AuthFactorType
+const (
+	AuthFactorTypePassword AuthFactorType = "PASSWORD"
+	AuthFactorTypeEmailOtp AuthFactorType = "EMAIL_OTP"
+	AuthFactorTypeSmsOtp   AuthFactorType = "SMS_OTP"
+	AuthFactorTypeWebAuthn AuthFactorType = "WEB_AUTHN"
+)
+
+// Values returns all known values for AuthFactorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthFactorType) Values() []AuthFactorType {
+	return []AuthFactorType{
+		"PASSWORD",
+		"EMAIL_OTP",
+		"SMS_OTP",
+		"WEB_AUTHN",
+	}
+}
+
 type AuthFlowType string
 
 // Enum values for AuthFlowType
@@ -122,6 +215,7 @@ const (
 	AuthFlowTypeAdminNoSrpAuth        AuthFlowType = "ADMIN_NO_SRP_AUTH"
 	AuthFlowTypeUserPasswordAuth      AuthFlowType = "USER_PASSWORD_AUTH"
 	AuthFlowTypeAdminUserPasswordAuth AuthFlowType = "ADMIN_USER_PASSWORD_AUTH"
+	AuthFlowTypeUserAuth              AuthFlowType = "USER_AUTH"
 )
 
 // Values returns all known values for AuthFlowType. Note that this can be
@@ -137,6 +231,7 @@ func (AuthFlowType) Values() []AuthFlowType {
 		"ADMIN_NO_SRP_AUTH",
 		"USER_PASSWORD_AUTH",
 		"ADMIN_USER_PASSWORD_AUTH",
+		"USER_AUTH",
 	}
 }
 
@@ -170,10 +265,15 @@ const (
 	ChallengeNameTypeMfaSetup               ChallengeNameType = "MFA_SETUP"
 	ChallengeNameTypePasswordVerifier       ChallengeNameType = "PASSWORD_VERIFIER"
 	ChallengeNameTypeCustomChallenge        ChallengeNameType = "CUSTOM_CHALLENGE"
+	ChallengeNameTypeSelectChallenge        ChallengeNameType = "SELECT_CHALLENGE"
 	ChallengeNameTypeDeviceSrpAuth          ChallengeNameType = "DEVICE_SRP_AUTH"
 	ChallengeNameTypeDevicePasswordVerifier ChallengeNameType = "DEVICE_PASSWORD_VERIFIER"
 	ChallengeNameTypeAdminNoSrpAuth         ChallengeNameType = "ADMIN_NO_SRP_AUTH"
 	ChallengeNameTypeNewPasswordRequired    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
+	ChallengeNameTypeSmsOtp                 ChallengeNameType = "SMS_OTP"
+	ChallengeNameTypePassword               ChallengeNameType = "PASSWORD"
+	ChallengeNameTypeWebAuthn               ChallengeNameType = "WEB_AUTHN"
+	ChallengeNameTypePasswordSrp            ChallengeNameType = "PASSWORD_SRP"
 )
 
 // Values returns all known values for ChallengeNameType. Note that this can be
@@ -189,10 +289,15 @@ func (ChallengeNameType) Values() []ChallengeNameType {
 		"MFA_SETUP",
 		"PASSWORD_VERIFIER",
 		"CUSTOM_CHALLENGE",
+		"SELECT_CHALLENGE",
 		"DEVICE_SRP_AUTH",
 		"DEVICE_PASSWORD_VERIFIER",
 		"ADMIN_NO_SRP_AUTH",
 		"NEW_PASSWORD_REQUIRED",
+		"SMS_OTP",
+		"PASSWORD",
+		"WEB_AUTHN",
+		"PASSWORD_SRP",
 	}
 }
 
@@ -212,6 +317,27 @@ func (ChallengeResponse) Values() []ChallengeResponse {
 	return []ChallengeResponse{
 		"Success",
 		"Failure",
+	}
+}
+
+type ColorSchemeModeType string
+
+// Enum values for ColorSchemeModeType
+const (
+	ColorSchemeModeTypeLight   ColorSchemeModeType = "LIGHT"
+	ColorSchemeModeTypeDark    ColorSchemeModeType = "DARK"
+	ColorSchemeModeTypeDynamic ColorSchemeModeType = "DYNAMIC"
+)
+
+// Values returns all known values for ColorSchemeModeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ColorSchemeModeType) Values() []ColorSchemeModeType {
+	return []ColorSchemeModeType{
+		"LIGHT",
+		"DARK",
+		"DYNAMIC",
 	}
 }
 
@@ -489,6 +615,7 @@ const (
 	ExplicitAuthFlowsTypeAllowUserPasswordAuth      ExplicitAuthFlowsType = "ALLOW_USER_PASSWORD_AUTH"
 	ExplicitAuthFlowsTypeAllowUserSrpAuth           ExplicitAuthFlowsType = "ALLOW_USER_SRP_AUTH"
 	ExplicitAuthFlowsTypeAllowRefreshTokenAuth      ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
+	ExplicitAuthFlowsTypeAllowUserAuth              ExplicitAuthFlowsType = "ALLOW_USER_AUTH"
 )
 
 // Values returns all known values for ExplicitAuthFlowsType. Note that this can
@@ -505,6 +632,7 @@ func (ExplicitAuthFlowsType) Values() []ExplicitAuthFlowsType {
 		"ALLOW_USER_PASSWORD_AUTH",
 		"ALLOW_USER_SRP_AUTH",
 		"ALLOW_REFRESH_TOKEN_AUTH",
+		"ALLOW_USER_AUTH",
 	}
 }
 
@@ -829,6 +957,27 @@ func (UserPoolMfaType) Values() []UserPoolMfaType {
 	}
 }
 
+type UserPoolTierType string
+
+// Enum values for UserPoolTierType
+const (
+	UserPoolTierTypeLite       UserPoolTierType = "LITE"
+	UserPoolTierTypeEssentials UserPoolTierType = "ESSENTIALS"
+	UserPoolTierTypePlus       UserPoolTierType = "PLUS"
+)
+
+// Values returns all known values for UserPoolTierType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserPoolTierType) Values() []UserPoolTierType {
+	return []UserPoolTierType{
+		"LITE",
+		"ESSENTIALS",
+		"PLUS",
+	}
+}
+
 type UserStatusType string
 
 // Enum values for UserStatusType
@@ -857,6 +1006,25 @@ func (UserStatusType) Values() []UserStatusType {
 		"RESET_REQUIRED",
 		"FORCE_CHANGE_PASSWORD",
 		"EXTERNAL_PROVIDER",
+	}
+}
+
+type UserVerificationType string
+
+// Enum values for UserVerificationType
+const (
+	UserVerificationTypeRequired  UserVerificationType = "required"
+	UserVerificationTypePreferred UserVerificationType = "preferred"
+)
+
+// Values returns all known values for UserVerificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserVerificationType) Values() []UserVerificationType {
+	return []UserVerificationType{
+		"required",
+		"preferred",
 	}
 }
 

@@ -176,6 +176,9 @@ type ActionExecution struct {
 	// The ARN of the user who last changed the pipeline.
 	LastUpdatedBy *string
 
+	// The Amazon Resource Name (ARN) of the log stream for the action compute.
+	LogStreamARN *string
+
 	// A percentage of completeness of the action as it runs.
 	PercentComplete *int32
 
@@ -317,6 +320,9 @@ type ActionExecutionResult struct {
 	// The deepest external link to the external resource (for example, a repository
 	// URL or deployment endpoint) that is used when running the action.
 	ExternalExecutionUrl *string
+
+	// The Amazon Resource Name (ARN) of the log stream for the action compute.
+	LogStreamARN *string
 
 	noSmithyDocumentSerde
 }

@@ -6686,6 +6686,73 @@ func awsAwsjson10_deserializeDocumentDeliverToMailboxAction(v **types.DeliverToM
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentDeliverToQBusinessAction(v **types.DeliverToQBusinessAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeliverToQBusinessAction
+	if *v == nil {
+		sv = &types.DeliverToQBusinessAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionFailurePolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionFailurePolicy to be of type string, got %T instead", value)
+				}
+				sv.ActionFailurePolicy = types.ActionFailurePolicy(jtv)
+			}
+
+		case "ApplicationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QBusinessApplicationId to be of type string, got %T instead", value)
+				}
+				sv.ApplicationId = ptr.String(jtv)
+			}
+
+		case "IndexId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QBusinessIndexId to be of type string, got %T instead", value)
+				}
+				sv.IndexId = ptr.String(jtv)
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDropAction(v **types.DropAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8707,6 +8774,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.RuleActionMemberDeliverToMailbox{Value: mv}
+			break loop
+
+		case "DeliverToQBusiness":
+			var mv types.DeliverToQBusinessAction
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentDeliverToQBusinessAction(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RuleActionMemberDeliverToQBusiness{Value: mv}
 			break loop
 
 		case "Drop":

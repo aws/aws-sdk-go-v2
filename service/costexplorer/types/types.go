@@ -21,7 +21,7 @@ type AnalysisSummary struct {
 	// The completion time of the analysis.
 	AnalysisCompletionTime *string
 
-	// The analysis ID that's associated with the commitment purchase.
+	// The analysis ID that's associated with the commitment purchase analysis.
 	AnalysisId *string
 
 	// The start time of the analysis.
@@ -30,7 +30,7 @@ type AnalysisSummary struct {
 	// The status of the analysis.
 	AnalysisStatus AnalysisStatus
 
-	// The analysis configuration for the commitment purchase analysis.
+	// The configuration for the commitment purchase analysis.
 	CommitmentPurchaseAnalysisConfiguration *CommitmentPurchaseAnalysisConfiguration
 
 	// The error code used for the analysis.
@@ -545,8 +545,7 @@ type CostCategoryRule struct {
 	// An [Expression] object used to categorize costs. This supports dimensions, tags, and nested
 	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT ,
 	//
-	// SERVICE_CODE , RECORD_TYPE , LINKED_ACCOUNT_NAME , REGION , USAGE_TYPE , and
-	// BILLING_ENTITY .
+	// SERVICE_CODE , RECORD_TYPE , LINKED_ACCOUNT_NAME , REGION , and USAGE_TYPE .
 	//
 	// RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported
 	// for Cost Category expressions. This dimension uses different terms, depending on
@@ -1654,8 +1653,11 @@ type ReservationPurchaseRecommendationDetail struct {
 	AverageNormalizedUnitsUsedPerHour *string
 
 	// The average number of provisioned capacity units that you used in an hour
-	// during the historical period. Amazon Web Services uses this to calculate your
-	// recommended reservation purchases.
+	// during the
+	//
+	// historical period. Amazon Web Services uses this to calculate your recommended
+	//
+	// reservation purchases.
 	AverageNumberOfCapacityUnitsUsedPerHour *string
 
 	// The average number of instances that you used in an hour during the historical
@@ -1663,16 +1665,16 @@ type ReservationPurchaseRecommendationDetail struct {
 	// purchases.
 	AverageNumberOfInstancesUsedPerHour *string
 
-	// The average utilization of your recommendations. Amazon Web Services uses this
-	// to calculate your recommended reservation purchases.
+	// The average utilization of your instances. Amazon Web Services uses this to
+	// calculate your recommended reservation purchases.
 	AverageUtilization *string
 
 	// The currency code that Amazon Web Services used to calculate the costs for this
-	// recommendation.
+	// instance.
 	CurrencyCode *string
 
-	// How long Amazon Web Services estimates that it takes for this recommendation to
-	// start saving you money, in months.
+	// How long Amazon Web Services estimates that it takes for this instance to start
+	// saving you money, in months.
 	EstimatedBreakEvenInMonths *string
 
 	// How much Amazon Web Services estimates that you spend on On-Demand Instances in
@@ -1701,8 +1703,11 @@ type ReservationPurchaseRecommendationDetail struct {
 	MaximumNormalizedUnitsUsedPerHour *string
 
 	// The maximum number of provisioned capacity units that you used in an hour
-	// during the historical period. Amazon Web Services uses this to calculate your
-	// recommended reservation purchases.
+	// during the
+	//
+	// historical period. Amazon Web Services uses this to calculate your recommended
+	//
+	// reservation purchases.
 	MaximumNumberOfCapacityUnitsUsedPerHour *string
 
 	// The maximum number of instances that you used in an hour during the historical
@@ -1716,8 +1721,11 @@ type ReservationPurchaseRecommendationDetail struct {
 	MinimumNormalizedUnitsUsedPerHour *string
 
 	// The minimum number of provisioned capacity units that you used in an hour
-	// during the historical period. Amazon Web Services uses this to calculate your
-	// recommended reservation purchases.
+	// during the
+	//
+	// historical period. Amazon Web Services uses this to calculate your recommended
+	//
+	// reservation purchases.
 	MinimumNumberOfCapacityUnitsUsedPerHour *string
 
 	// The minimum number of instances that you used in an hour during the historical
@@ -1730,20 +1738,23 @@ type ReservationPurchaseRecommendationDetail struct {
 	RecommendedNormalizedUnitsToPurchase *string
 
 	// The number of reserved capacity units that Amazon Web Services recommends that
-	// you purchase.
+	// you
+	//
+	// purchase.
 	RecommendedNumberOfCapacityUnitsToPurchase *string
 
 	// The number of instances that Amazon Web Services recommends that you purchase.
 	RecommendedNumberOfInstancesToPurchase *string
 
-	// How much purchasing this recommendation costs you on a monthly basis.
+	// How much purchasing this instance costs you on a monthly basis.
 	RecurringStandardMonthlyCost *string
 
 	// Details about the reservations that Amazon Web Services recommends that you
+	//
 	// purchase.
 	ReservedCapacityDetails *ReservedCapacityDetails
 
-	// How much purchasing this recommendation costs you upfront.
+	// How much purchasing this instance costs you upfront.
 	UpfrontCost *string
 
 	noSmithyDocumentSerde
@@ -1803,6 +1814,7 @@ type ReservationUtilizationGroup struct {
 }
 
 // Details about the reservations that Amazon Web Services recommends that you
+//
 // purchase.
 type ReservedCapacityDetails struct {
 
@@ -1960,9 +1972,13 @@ type RightsizingRecommendationSummary struct {
 }
 
 // The combination of Amazon Web Services service, linked account, linked account
-// name, Region, and usage type where a cost anomaly is observed. The linked
-// account name will only be available when the account name can be identified.
+// name, Region, and usage type where a cost anomaly is observed, along with the
+// dollar and percentage amount of the anomaly impact. The linked account name will
+// only be available when the account name can be identified.
 type RootCause struct {
+
+	// The dollar impact for the root cause.
+	Impact *RootCauseImpact
 
 	// The member account value that's associated with the cost anomaly.
 	LinkedAccount *string
@@ -1982,13 +1998,25 @@ type RootCause struct {
 	noSmithyDocumentSerde
 }
 
+// The dollar value of the root cause.
+type RootCauseImpact struct {
+
+	// The dollar amount that this root cause contributed to the anomaly's TotalImpact.
+	//
+	// This member is required.
+	Contribution float64
+
+	noSmithyDocumentSerde
+}
+
 // The Savings Plans commitment details.
 type SavingsPlans struct {
 
 	// The instance family of the Savings Plans commitment.
 	InstanceFamily *string
 
-	// The unique ID that's used to distinguish commitments from one another.
+	// The unique ID that's used to distinguish Savings Plans commitments from one
+	// another.
 	OfferingId *string
 
 	// The payment option for the Savings Plans commitment.
@@ -2141,28 +2169,27 @@ type SavingsPlansPurchaseAnalysisDetails struct {
 	// The estimated utilization of the Savings Plan.
 	EstimatedAverageUtilization *string
 
-	// The estimated cost of the purchase commitment over the length of the lookback
-	// period.
+	// The estimated cost of the Savings Plan over the length of the lookback period.
 	EstimatedCommitmentCost *string
 
 	// The estimated monthly savings amount based on the Savings Plan.
 	EstimatedMonthlySavingsAmount *string
 
-	// The remaining On-Demand cost estimated to not be covered by the commitment,
+	// The remaining On-Demand cost estimated to not be covered by the Savings Plan
 	// over the length of the lookback period.
 	EstimatedOnDemandCost *string
 
-	// The estimated On-Demand cost you expect with no additional commitment, based on
+	// The estimated On-Demand cost you expect with no additional commitment based on
 	// your usage of the selected time period and the Savings Plan you own.
 	EstimatedOnDemandCostWithCurrentCommitment *string
 
-	// The estimated return on investment that's based on the purchase commitment and
+	// The estimated return on investment that's based on the Savings Plan and
 	// estimated savings. This is calculated as
 	// estimatedSavingsAmount/estimatedSPCost*100.
 	EstimatedROI *string
 
-	// The estimated savings amount that's based on the purchase commitment over the
-	// length of the lookback period.
+	// The estimated savings amount that's based on the Savings Plan over the length
+	// of the lookback period.
 	EstimatedSavingsAmount *string
 
 	// The estimated savings percentage relative to the total cost over the cost
@@ -2185,7 +2212,7 @@ type SavingsPlansPurchaseAnalysisDetails struct {
 	// period.
 	MetricsOverLookbackPeriod []RecommendationDetailHourlyMetrics
 
-	// The upfront cost of the Savings Plan, based on the selected payment option.
+	// The upfront cost of the Savings Plan based on the selected payment option.
 	UpfrontCost *string
 
 	noSmithyDocumentSerde

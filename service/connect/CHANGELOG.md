@@ -1,3 +1,7 @@
+# v1.117.0 (2024-11-22)
+
+* **Feature**: Amazon Connect Service Feature: Add APIs for Amazon Connect Email Channel
+
 # v1.116.0 (2024-11-18)
 
 * **Feature**: Adds CreateContactFlowVersion and ListContactFlowVersions APIs to create and view the versions of a contact flow.

@@ -7452,6 +7452,64 @@ func awsAwsjson11_deserializeDocumentAgreementList(v *[]types.CustomerAgreement,
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAssociatedCoreNetwork(v **types.AssociatedCoreNetwork, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssociatedCoreNetwork
+	if *v == nil {
+		sv = &types.AssociatedCoreNetwork{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "attachmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreNetworkAttachmentId to be of type string, got %T instead", value)
+				}
+				sv.AttachmentId = ptr.String(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreNetworkIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "ownerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGateway, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8254,6 +8312,11 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 		switch key {
 		case "allowedPrefixesToDirectConnectGateway":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.AllowedPrefixesToDirectConnectGateway, value); err != nil {
+				return err
+			}
+
+		case "associatedCoreNetwork":
+			if err := awsAwsjson11_deserializeDocumentAssociatedCoreNetwork(&sv.AssociatedCoreNetwork, value); err != nil {
 				return err
 			}
 

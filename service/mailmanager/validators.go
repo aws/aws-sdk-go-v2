@@ -1141,6 +1141,27 @@ func validateDeliverToMailboxAction(v *types.DeliverToMailboxAction) error {
 	}
 }
 
+func validateDeliverToQBusinessAction(v *types.DeliverToQBusinessAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeliverToQBusinessAction"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIngressAnalysis(v *types.IngressAnalysis) error {
 	if v == nil {
 		return nil
@@ -1416,6 +1437,11 @@ func validateRuleAction(v types.RuleAction) error {
 	case *types.RuleActionMemberDeliverToMailbox:
 		if err := validateDeliverToMailboxAction(&uv.Value); err != nil {
 			invalidParams.AddNested("[DeliverToMailbox]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RuleActionMemberDeliverToQBusiness:
+		if err := validateDeliverToQBusinessAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[DeliverToQBusiness]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.RuleActionMemberRelay:

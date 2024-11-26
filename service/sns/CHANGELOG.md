@@ -1,3 +1,7 @@
+# v1.33.6 (2024-11-22)
+
+* **Documentation**: ArchivePolicy attribute added to Archive and Replay feature
+
 # v1.33.5 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

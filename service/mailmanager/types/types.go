@@ -282,6 +282,38 @@ type DeliverToMailboxAction struct {
 	noSmithyDocumentSerde
 }
 
+// The action to deliver incoming emails to an Amazon Q Business application for
+// indexing.
+type DeliverToQBusinessAction struct {
+
+	// The unique identifier of the Amazon Q Business application instance where the
+	// email content will be delivered.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The identifier of the knowledge base index within the Amazon Q Business
+	// application where the email content will be stored and indexed.
+	//
+	// This member is required.
+	IndexId *string
+
+	// The Amazon Resource Name (ARN) of the IAM Role to use while delivering to
+	// Amazon Q Business. This role must have access to the qbusiness:BatchPutDocument
+	// API for the given application and index.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A policy that states what to do in the case of failure. The action will fail if
+	// there are configuration errors. For example, the specified application has been
+	// deleted or the role lacks necessary permissions to call the
+	// qbusiness:BatchPutDocument API.
+	ActionFailurePolicy ActionFailurePolicy
+
+	noSmithyDocumentSerde
+}
+
 // This action causes processing to stop and the email to be dropped. If the
 // action applies only to certain recipients, only those recipients are dropped,
 // and processing continues for other recipients.
@@ -917,6 +949,7 @@ type Rule struct {
 //	RuleActionMemberAddHeader
 //	RuleActionMemberArchive
 //	RuleActionMemberDeliverToMailbox
+//	RuleActionMemberDeliverToQBusiness
 //	RuleActionMemberDrop
 //	RuleActionMemberRelay
 //	RuleActionMemberReplaceRecipient
@@ -953,6 +986,16 @@ type RuleActionMemberDeliverToMailbox struct {
 }
 
 func (*RuleActionMemberDeliverToMailbox) isRuleAction() {}
+
+// This action delivers an email to an Amazon Q Business application for ingestion
+// into its knowledge base.
+type RuleActionMemberDeliverToQBusiness struct {
+	Value DeliverToQBusinessAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleActionMemberDeliverToQBusiness) isRuleAction() {}
 
 // This action terminates the evaluation of rules in the rule set.
 type RuleActionMemberDrop struct {

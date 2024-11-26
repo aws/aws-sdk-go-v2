@@ -27,6 +27,26 @@ func (ActionTypeEnum) Values() []ActionTypeEnum {
 	}
 }
 
+type AdvertiseTrustStoreCaNamesEnum string
+
+// Enum values for AdvertiseTrustStoreCaNamesEnum
+const (
+	AdvertiseTrustStoreCaNamesEnumOn  AdvertiseTrustStoreCaNamesEnum = "on"
+	AdvertiseTrustStoreCaNamesEnumOff AdvertiseTrustStoreCaNamesEnum = "off"
+)
+
+// Values returns all known values for AdvertiseTrustStoreCaNamesEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdvertiseTrustStoreCaNamesEnum) Values() []AdvertiseTrustStoreCaNamesEnum {
+	return []AdvertiseTrustStoreCaNamesEnum{
+		"on",
+		"off",
+	}
+}
+
 type AnomalyResultEnum string
 
 // Enum values for AnomalyResultEnum

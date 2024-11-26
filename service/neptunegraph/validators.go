@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCancelExportTask struct {
+}
+
+func (*validateOpCancelExportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelExportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelExportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelImportTask struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpExecuteQuery) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpExecuteQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetExportTask struct {
+}
+
+func (*validateOpGetExportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExportTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +470,26 @@ func (m *validateOpRestoreGraphFromSnapshot) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartExportTask struct {
+}
+
+func (*validateOpStartExportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartExportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartExportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartExportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartImportTask struct {
 }
 
@@ -510,6 +570,10 @@ func (m *validateOpUpdateGraph) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCancelExportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelExportTask{}, middleware.After)
+}
+
 func addOpCancelImportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelImportTask{}, middleware.After)
 }
@@ -548,6 +612,10 @@ func addOpDeletePrivateGraphEndpointValidationMiddleware(stack *middleware.Stack
 
 func addOpExecuteQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExecuteQuery{}, middleware.After)
+}
+
+func addOpGetExportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExportTask{}, middleware.After)
 }
 
 func addOpGetGraphValidationMiddleware(stack *middleware.Stack) error {
@@ -592,6 +660,10 @@ func addOpResetGraphValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRestoreGraphFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreGraphFromSnapshot{}, middleware.After)
+}
+
+func addOpStartExportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartExportTask{}, middleware.After)
 }
 
 func addOpStartImportTaskValidationMiddleware(stack *middleware.Stack) error {
@@ -654,6 +726,21 @@ func validateVectorSearchConfiguration(v *types.VectorSearchConfiguration) error
 	invalidParams := smithy.InvalidParamsError{Context: "VectorSearchConfiguration"}
 	if v.Dimension == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelExportTaskInput(v *CancelExportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelExportTaskInput"}
+	if v.TaskIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -854,6 +941,21 @@ func validateOpExecuteQueryInput(v *ExecuteQueryInput) error {
 	}
 }
 
+func validateOpGetExportTaskInput(v *GetExportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExportTaskInput"}
+	if v.TaskIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetGraphInput(v *GetGraphInput) error {
 	if v == nil {
 		return nil
@@ -1026,6 +1128,33 @@ func validateOpRestoreGraphFromSnapshotInput(v *RestoreGraphFromSnapshotInput) e
 	}
 	if v.GraphName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartExportTaskInput(v *StartExportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartExportTaskInput"}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.KmsKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

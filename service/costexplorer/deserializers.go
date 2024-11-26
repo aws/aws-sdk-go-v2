@@ -12301,6 +12301,11 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "Impact":
+			if err := awsAwsjson11_deserializeDocumentRootCauseImpact(&sv.Impact, value); err != nil {
+				return err
+			}
+
 		case "LinkedAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12344,6 +12349,71 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
 				sv.UsageType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRootCauseImpact(v **types.RootCauseImpact, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RootCauseImpact
+	if *v == nil {
+		sv = &types.RootCauseImpact{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Contribution":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Contribution = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Contribution = f64
+
+				default:
+					return fmt.Errorf("expected GenericDouble to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:

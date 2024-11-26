@@ -128,6 +128,17 @@ type ActivityTimedOutEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about assigned variables in an execution history event.
+type AssignedVariablesDetails struct {
+
+	// Indicates whether assigned variables were truncated in the response. Always
+	// false for API calls. In CloudWatch logs, the value will be true if the data is
+	// truncated due to size limits.
+	Truncated bool
+
+	noSmithyDocumentSerde
+}
+
 // An object that describes workflow billing details.
 type BillingDetails struct {
 
@@ -192,6 +203,29 @@ type EncryptionConfiguration struct {
 	// encrypt data. To specify a KMS key in a different Amazon Web Services account,
 	// you must use the key ARN or alias ARN.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about an evaluation failure that occurred while processing a
+// state, for example, when a JSONata expression throws an error. This event will
+// only be present in state machines that have QueryLanguage set to JSONata, or
+// individual states set to JSONata.
+type EvaluationFailedEventDetails struct {
+
+	// The name of the state in which the evaluation error occurred.
+	//
+	// This member is required.
+	State *string
+
+	// A more detailed explanation of the cause of the failure.
+	Cause *string
+
+	// The error code of the failure.
+	Error *string
+
+	// The location of the field in the state in which the evaluation error occurred.
+	Location *string
 
 	noSmithyDocumentSerde
 }
@@ -404,6 +438,10 @@ type HistoryEvent struct {
 	// Contains details about an activity timeout that occurred during an execution.
 	ActivityTimedOutEventDetails *ActivityTimedOutEventDetails
 
+	// Contains details about an evaluation failure that occurred while processing a
+	// state.
+	EvaluationFailedEventDetails *EvaluationFailedEventDetails
+
 	// Contains details about an abort of an execution.
 	ExecutionAbortedEventDetails *ExecutionAbortedEventDetails
 
@@ -509,7 +547,8 @@ type HistoryEvent struct {
 type HistoryEventExecutionDataDetails struct {
 
 	// Indicates whether input or output was truncated in the response. Always false
-	// for API calls.
+	// for API calls. In CloudWatch logs, the value will be true if the data is
+	// truncated due to size limits.
 	Truncated bool
 
 	noSmithyDocumentSerde
@@ -519,23 +558,33 @@ type HistoryEventExecutionDataDetails struct {
 // and output data processing flow, and HTTP request and response information.
 type InspectionData struct {
 
-	// The input after Step Functions applies the [InputPath] filter.
+	// The input after Step Functions applies an Arguments filter. This event will
+	// only be present when QueryLanguage for the state machine or individual states is
+	// set to JSONata. For more info, see [Transforming data with Step Functions].
+	//
+	// [Transforming data with Step Functions]: https://docs.aws.amazon.com/step-functions/latest/dg/data-transform.html
+	AfterArguments *string
+
+	// The input after Step Functions applies the [InputPath] filter. Not populated when
+	// QueryLanguage is JSONata.
 	//
 	// [InputPath]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath
 	AfterInputPath *string
 
-	// The effective input after Step Functions applies the [Parameters] filter.
+	// The effective input after Step Functions applies the [Parameters] filter. Not populated
+	// when QueryLanguage is JSONata.
 	//
 	// [Parameters]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-parameters
 	AfterParameters *string
 
 	// The effective result combined with the raw state input after Step Functions
-	// applies the [ResultPath]filter.
+	// applies the [ResultPath]filter. Not populated when QueryLanguage is JSONata.
 	//
 	// [ResultPath]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html
 	AfterResultPath *string
 
-	// The effective result after Step Functions applies the [ResultSelector] filter.
+	// The effective result after Step Functions applies the [ResultSelector] filter. Not populated
+	// when QueryLanguage is JSONata.
 	//
 	// [ResultSelector]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector
 	AfterResultSelector *string
@@ -551,6 +600,11 @@ type InspectionData struct {
 
 	// The state's raw result.
 	Result *string
+
+	// JSON string that contains the set of workflow variables after execution of the
+	// state. The set will include variables assigned in the state and variables set up
+	// as test state input.
+	Variables *string
 
 	noSmithyDocumentSerde
 }
@@ -1005,6 +1059,12 @@ type StateExitedEventDetails struct {
 	// This member is required.
 	Name *string
 
+	// Map of variable name and value as a serialized JSON representation.
+	AssignedVariables map[string]string
+
+	// Provides details about input or output in an execution history event.
+	AssignedVariablesDetails *AssignedVariablesDetails
+
 	// The JSON output data of the state. Length constraints apply to the payload
 	// size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
@@ -1322,9 +1382,58 @@ type TracingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an error found during validation. Validation errors found in the
-// definition return in the response as diagnostic elements, rather than raise an
-// exception.
+// Describes potential issues found during state machine validation. Rather than
+// raise an exception, validation will return a list of diagnostic elements
+// containing diagnostic information.
+//
+// The [ValidateStateMachineDefinitionlAPI] might add new diagnostics in the future, adjust diagnostic codes, or
+// change the message wording. Your automated processes should only rely on the
+// value of the result field value (OK, FAIL). Do not rely on the exact order,
+// count, or wording of diagnostic messages.
+//
+// # List of warning codes
+//
+// NO_DOLLAR No .$ on a field that appears to be a JSONPath or Intrinsic Function.
+//
+// NO_PATH Field value looks like a path, but field name does not end with 'Path'.
+//
+// PASS_RESULT_IS_STATIC Attempt to use a path in the result of a pass state.
+//
+// # List of error codes
+//
+// INVALID_JSON_DESCRIPTION JSON syntax problem found.
+//
+// MISSING_DESCRIPTION Received a null or empty workflow input.
+//
+// SCHEMA_VALIDATION_FAILED Schema validation reported errors.
+//
+// INVALID_RESOURCE The value of a Task-state resource field is invalid.
+//
+// MISSING_END_STATE The workflow does not have a terminal state.
+//
+// DUPLICATE_STATE_NAME The same state name appears more than once.
+//
+// INVALID_STATE_NAME The state name does not follow the naming convention.
+//
+// STATE_MACHINE_NAME_EMPTY The state machine name has not been specified.
+//
+// STATE_MACHINE_NAME_INVALID The state machine name does not follow the naming
+// convention.
+//
+// STATE_MACHINE_NAME_TOO_LONG The state name exceeds the allowed length.
+//
+// STATE_MACHINE_NAME_ALREADY_EXISTS The state name already exists.
+//
+// DUPLICATE_LABEL_NAME A label name appears more than once.
+//
+// INVALID_LABEL_NAME You have provided an invalid label name.
+//
+// MISSING_TRANSITION_TARGET The value of "Next" field doesn't match a known state
+// name.
+//
+// TOO_DEEPLY_NESTED The states are too deeply nested.
+//
+// [ValidateStateMachineDefinitionlAPI]: https://docs.aws.amazon.com/step-functions/latest/apireference/API_ValidateStateMachineDefinition.html
 type ValidateStateMachineDefinitionDiagnostic struct {
 
 	// Identifying code for the diagnostic.
@@ -1339,6 +1448,9 @@ type ValidateStateMachineDefinitionDiagnostic struct {
 
 	// A value of ERROR means that you cannot create or update a state machine with
 	// this definition.
+	//
+	// WARNING level diagnostics alert you to potential issues, but they will not
+	// prevent you from creating or updating your state machine.
 	//
 	// This member is required.
 	Severity ValidateStateMachineDefinitionSeverity

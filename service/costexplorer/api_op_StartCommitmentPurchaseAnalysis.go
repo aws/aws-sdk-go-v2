@@ -13,8 +13,7 @@ import (
 
 // Specifies the parameters of a planned commitment purchase and starts the
 // generation of the analysis. This enables you to estimate the cost, coverage, and
-// utilization impact of your planned commitment purchases. You can request up to
-// 20 analysis runs per day.
+// utilization impact of your planned commitment purchases.
 func (c *Client) StartCommitmentPurchaseAnalysis(ctx context.Context, params *StartCommitmentPurchaseAnalysisInput, optFns ...func(*Options)) (*StartCommitmentPurchaseAnalysisOutput, error) {
 	if params == nil {
 		params = &StartCommitmentPurchaseAnalysisInput{}

@@ -350,6 +350,18 @@ func TestCheckSnapshot_DeleteRunGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteS3AccessPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteS3AccessPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteS3AccessPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteSequenceStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteSequenceStore(context.Background(), nil, func(o *Options) {
@@ -583,6 +595,18 @@ func TestCheckSnapshot_GetRunTask(t *testing.T) {
 	_, err := svc.GetRunTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRunTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetS3AccessPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetS3AccessPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetS3AccessPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -914,6 +938,18 @@ func TestCheckSnapshot_ListWorkflows(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutS3AccessPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutS3AccessPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutS3AccessPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAnnotationImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAnnotationImportJob(context.Background(), nil, func(o *Options) {
@@ -1063,6 +1099,18 @@ func TestCheckSnapshot_UpdateRunGroup(t *testing.T) {
 	_, err := svc.UpdateRunGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateRunGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateSequenceStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSequenceStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSequenceStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,6 +1441,18 @@ func TestUpdateSnapshot_DeleteRunGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteS3AccessPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteS3AccessPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteS3AccessPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteSequenceStore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteSequenceStore(context.Background(), nil, func(o *Options) {
@@ -1626,6 +1686,18 @@ func TestUpdateSnapshot_GetRunTask(t *testing.T) {
 	_, err := svc.GetRunTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRunTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetS3AccessPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetS3AccessPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetS3AccessPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1957,6 +2029,18 @@ func TestUpdateSnapshot_ListWorkflows(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutS3AccessPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutS3AccessPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutS3AccessPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartAnnotationImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAnnotationImportJob(context.Background(), nil, func(o *Options) {
@@ -2106,6 +2190,18 @@ func TestUpdateSnapshot_UpdateRunGroup(t *testing.T) {
 	_, err := svc.UpdateRunGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRunGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSequenceStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSequenceStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSequenceStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

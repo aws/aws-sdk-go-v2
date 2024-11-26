@@ -29,7 +29,7 @@ func (c *Client) UpdateChimeWebhookConfiguration(ctx context.Context, params *Up
 
 type UpdateChimeWebhookConfigurationInput struct {
 
-	// The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration to update.
+	// The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.
 	//
 	// This member is required.
 	ChatConfigurationArn *string

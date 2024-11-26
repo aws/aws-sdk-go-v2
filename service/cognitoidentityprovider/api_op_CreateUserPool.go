@@ -20,7 +20,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
+// Amazon Web Services service, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -122,18 +122,9 @@ type CreateUserPoolInput struct {
 	// [VerificationMessageTemplateType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html
 	EmailVerificationSubject *string
 
-	// The Lambda trigger configuration information for the new user pool.
-	//
-	// In a push model, event sources (such as Amazon S3 and custom applications) need
-	// permission to invoke a function. So you must make an extra call to add
-	// permission for these event sources to invoke your Lambda function.
-	//
-	// For more information on using the Lambda API to add permission, see[AddPermission] .
-	//
-	// For adding permission using the CLI, see[add-permission] .
-	//
-	// [AddPermission]: https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html
-	// [add-permission]: https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html
+	// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
+	// several possible stages of authentication operations. Triggers can modify the
+	// outcome of the operations that invoked them.
 	LambdaConfig *types.LambdaConfigType
 
 	// Specifies MFA configuration details.
@@ -184,6 +175,13 @@ type CreateUserPoolInput struct {
 	// purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]string
 
+	// The user pool [feature plan], or tier. This parameter determines the eligibility of the user
+	// pool for features like managed login, access-token customization, and threat
+	// protection. Defaults to ESSENTIALS .
+	//
+	// [feature plan]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+	UserPoolTier types.UserPoolTierType
+
 	// Specifies whether a user can use an email address or phone number as a username
 	// when they sign up.
 	UsernameAttributes []types.UsernameAttributeType
@@ -202,8 +200,14 @@ type CreateUserPoolInput struct {
 	// [UsernameConfigurationType]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html
 	UsernameConfiguration *types.UsernameConfigurationType
 
-	// The template for the verification message that the user sees when the app
-	// requests permission to access the user's information.
+	// The template for the verification message that your user pool delivers to users
+	// who set an email address or phone number attribute.
+	//
+	// Set the email message type that corresponds to your DefaultEmailOption
+	// selection. For CONFIRM_WITH_LINK , specify an EmailMessageByLink and leave
+	// EmailMessage blank. For CONFIRM_WITH_CODE , specify an EmailMessage and leave
+	// EmailMessageByLink blank. When you supply both parameters with either choice,
+	// Amazon Cognito returns an error.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType
 
 	noSmithyDocumentSerde

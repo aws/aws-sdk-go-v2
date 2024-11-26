@@ -530,6 +530,46 @@ func (m *validateOpCreateContactFlowVersion) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContact struct {
+}
+
+func (*validateOpCreateContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEmailAddress struct {
+}
+
+func (*validateOpCreateEmailAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEmailAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEmailAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEmailAddressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvaluationForm struct {
 }
 
@@ -1050,6 +1090,26 @@ func (m *validateOpDeleteContactFlowModule) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEmailAddress struct {
+}
+
+func (*validateOpDeleteEmailAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEmailAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEmailAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEmailAddressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEvaluationForm struct {
 }
 
@@ -1545,6 +1605,26 @@ func (m *validateOpDescribeContact) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEmailAddress struct {
+}
+
+func (*validateOpDescribeEmailAddress) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEmailAddress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEmailAddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEmailAddressInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2505,6 +2585,26 @@ func (m *validateOpListApprovedOrigins) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListApprovedOriginsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssociatedContacts struct {
+}
+
+func (*validateOpListAssociatedContacts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssociatedContacts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssociatedContactsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssociatedContactsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3550,6 +3650,26 @@ func (m *validateOpSearchContacts) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchEmailAddresses struct {
+}
+
+func (*validateOpSearchEmailAddresses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchEmailAddresses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchEmailAddressesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchEmailAddressesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchHoursOfOperations struct {
 }
 
@@ -3790,6 +3910,26 @@ func (m *validateOpSendChatIntegrationEvent) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendOutboundEmail struct {
+}
+
+func (*validateOpSendOutboundEmail) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendOutboundEmail) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendOutboundEmailInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendOutboundEmailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartAttachedFileUpload struct {
 }
 
@@ -3890,6 +4030,26 @@ func (m *validateOpStartContactStreaming) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartEmailContact struct {
+}
+
+func (*validateOpStartEmailContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartEmailContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartEmailContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartEmailContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartOutboundChatContact struct {
 }
 
@@ -3905,6 +4065,26 @@ func (m *validateOpStartOutboundChatContact) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartOutboundChatContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartOutboundEmailContact struct {
+}
+
+func (*validateOpStartOutboundEmailContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOutboundEmailContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOutboundEmailContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOutboundEmailContactInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4430,6 +4610,26 @@ func (m *validateOpUpdateContactSchedule) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEmailAddressMetadata struct {
+}
+
+func (*validateOpUpdateEmailAddressMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEmailAddressMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEmailAddressMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEmailAddressMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEvaluationForm struct {
 }
 
@@ -4685,6 +4885,26 @@ func (m *validateOpUpdateQueueOutboundCallerConfig) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateQueueOutboundCallerConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueOutboundEmailConfig struct {
+}
+
+func (*validateOpUpdateQueueOutboundEmailConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueOutboundEmailConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueOutboundEmailConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueOutboundEmailConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5234,6 +5454,14 @@ func addOpCreateContactFlowVersionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateContactFlowVersion{}, middleware.After)
 }
 
+func addOpCreateContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContact{}, middleware.After)
+}
+
+func addOpCreateEmailAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEmailAddress{}, middleware.After)
+}
+
 func addOpCreateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvaluationForm{}, middleware.After)
 }
@@ -5338,6 +5566,10 @@ func addOpDeleteContactFlowModuleValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteContactFlowModule{}, middleware.After)
 }
 
+func addOpDeleteEmailAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEmailAddress{}, middleware.After)
+}
+
 func addOpDeleteEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEvaluationForm{}, middleware.After)
 }
@@ -5436,6 +5668,10 @@ func addOpDescribeContactFlowModuleValidationMiddleware(stack *middleware.Stack)
 
 func addOpDescribeContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContact{}, middleware.After)
+}
+
+func addOpDescribeEmailAddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEmailAddress{}, middleware.After)
 }
 
 func addOpDescribeEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
@@ -5628,6 +5864,10 @@ func addOpListAnalyticsDataAssociationsValidationMiddleware(stack *middleware.St
 
 func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApprovedOrigins{}, middleware.After)
+}
+
+func addOpListAssociatedContactsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssociatedContacts{}, middleware.After)
 }
 
 func addOpListAuthenticationProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -5838,6 +6078,10 @@ func addOpSearchContactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchContacts{}, middleware.After)
 }
 
+func addOpSearchEmailAddressesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchEmailAddresses{}, middleware.After)
+}
+
 func addOpSearchHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchHoursOfOperations{}, middleware.After)
 }
@@ -5886,6 +6130,10 @@ func addOpSendChatIntegrationEventValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpSendChatIntegrationEvent{}, middleware.After)
 }
 
+func addOpSendOutboundEmailValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendOutboundEmail{}, middleware.After)
+}
+
 func addOpStartAttachedFileUploadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAttachedFileUpload{}, middleware.After)
 }
@@ -5906,8 +6154,16 @@ func addOpStartContactStreamingValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpStartContactStreaming{}, middleware.After)
 }
 
+func addOpStartEmailContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartEmailContact{}, middleware.After)
+}
+
 func addOpStartOutboundChatContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartOutboundChatContact{}, middleware.After)
+}
+
+func addOpStartOutboundEmailContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOutboundEmailContact{}, middleware.After)
 }
 
 func addOpStartOutboundVoiceContactValidationMiddleware(stack *middleware.Stack) error {
@@ -6014,6 +6270,10 @@ func addOpUpdateContactScheduleValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateContactSchedule{}, middleware.After)
 }
 
+func addOpUpdateEmailAddressMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEmailAddressMetadata{}, middleware.After)
+}
+
 func addOpUpdateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEvaluationForm{}, middleware.After)
 }
@@ -6064,6 +6324,10 @@ func addOpUpdateQueueNameValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateQueueOutboundCallerConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateQueueOutboundCallerConfig{}, middleware.After)
+}
+
+func addOpUpdateQueueOutboundEmailConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueOutboundEmailConfig{}, middleware.After)
 }
 
 func addOpUpdateQueueStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -6334,6 +6598,73 @@ func validateDistributionList(v []types.Distribution) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DistributionList"}
 	for i := range v {
 		if err := validateDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailAddressInfo(v *types.EmailAddressInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailAddressInfo"}
+	if v.EmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailAddressRecipientList(v []types.EmailAddressInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailAddressRecipientList"}
+	for i := range v {
+		if err := validateEmailAddressInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailAttachment(v *types.EmailAttachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailAttachment"}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if v.S3Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailAttachments(v []types.EmailAttachment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailAttachments"}
+	for i := range v {
+		if err := validateEmailAttachment(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -6846,6 +7177,69 @@ func validateHoursOfOperationTimeSlice(v *types.HoursOfOperationTimeSlice) error
 	}
 }
 
+func validateInboundAdditionalRecipients(v *types.InboundAdditionalRecipients) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InboundAdditionalRecipients"}
+	if v.ToAddresses != nil {
+		if err := validateEmailAddressRecipientList(v.ToAddresses); err != nil {
+			invalidParams.AddNested("ToAddresses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CcAddresses != nil {
+		if err := validateEmailAddressRecipientList(v.CcAddresses); err != nil {
+			invalidParams.AddNested("CcAddresses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInboundEmailContent(v *types.InboundEmailContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InboundEmailContent"}
+	if len(v.MessageSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageSourceType"))
+	}
+	if v.RawMessage != nil {
+		if err := validateInboundRawMessage(v.RawMessage); err != nil {
+			invalidParams.AddNested("RawMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInboundRawMessage(v *types.InboundRawMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InboundRawMessage"}
+	if v.Subject == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInstanceStorageConfig(v *types.InstanceStorageConfig) error {
 	if v == nil {
 		return nil
@@ -7028,6 +7422,69 @@ func validateNumericQuestionPropertyValueAutomation(v *types.NumericQuestionProp
 	}
 }
 
+func validateOutboundAdditionalRecipients(v *types.OutboundAdditionalRecipients) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutboundAdditionalRecipients"}
+	if v.CcEmailAddresses != nil {
+		if err := validateEmailAddressRecipientList(v.CcEmailAddresses); err != nil {
+			invalidParams.AddNested("CcEmailAddresses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutboundEmailContent(v *types.OutboundEmailContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutboundEmailContent"}
+	if len(v.MessageSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageSourceType"))
+	}
+	if v.TemplatedMessageConfig != nil {
+		if err := validateTemplatedMessageConfig(v.TemplatedMessageConfig); err != nil {
+			invalidParams.AddNested("TemplatedMessageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RawMessage != nil {
+		if err := validateOutboundRawMessage(v.RawMessage); err != nil {
+			invalidParams.AddNested("RawMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutboundRawMessage(v *types.OutboundRawMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutboundRawMessage"}
+	if v.Subject == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParticipantDetails(v *types.ParticipantDetails) error {
 	if v == nil {
 		return nil
@@ -7149,9 +7606,6 @@ func validateReference(v *types.Reference) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Reference"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -7393,6 +7847,60 @@ func validateSearchableContactAttributesCriteriaList(v []types.SearchableContact
 	}
 }
 
+func validateSearchableSegmentAttributes(v *types.SearchableSegmentAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchableSegmentAttributes"}
+	if v.Criteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Criteria"))
+	} else if v.Criteria != nil {
+		if err := validateSearchableSegmentAttributesCriteriaList(v.Criteria); err != nil {
+			invalidParams.AddNested("Criteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchableSegmentAttributesCriteria(v *types.SearchableSegmentAttributesCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchableSegmentAttributesCriteria"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchableSegmentAttributesCriteriaList(v []types.SearchableSegmentAttributesCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchableSegmentAttributesCriteriaList"}
+	for i := range v {
+		if err := validateSearchableSegmentAttributesCriteria(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchContactsTimeRange(v *types.SearchContactsTimeRange) error {
 	if v == nil {
 		return nil
@@ -7427,6 +7935,11 @@ func validateSearchCriteria(v *types.SearchCriteria) error {
 	if v.SearchableContactAttributes != nil {
 		if err := validateSearchableContactAttributes(v.SearchableContactAttributes); err != nil {
 			invalidParams.AddNested("SearchableContactAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SearchableSegmentAttributes != nil {
+		if err := validateSearchableSegmentAttributes(v.SearchableSegmentAttributes); err != nil {
+			invalidParams.AddNested("SearchableSegmentAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7631,6 +8144,27 @@ func validateTelephonyConfig(v *types.TelephonyConfig) error {
 		if err := validateDistributionList(v.Distributions); err != nil {
 			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplatedMessageConfig(v *types.TemplatedMessageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplatedMessageConfig"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MessageTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageTemplateId"))
+	}
+	if v.TemplateAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateAttributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8365,6 +8899,50 @@ func validateOpCreateContactFlowVersionInput(v *CreateContactFlowVersionInput) e
 	}
 }
 
+func validateOpCreateContactInput(v *CreateContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.References != nil {
+		if err := validateContactReferences(v.References); err != nil {
+			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Channel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if len(v.InitiationMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InitiationMethod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEmailAddressInput(v *CreateEmailAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEmailAddressInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEvaluationFormInput(v *CreateEvaluationFormInput) error {
 	if v == nil {
 		return nil
@@ -8962,6 +9540,24 @@ func validateOpDeleteContactFlowModuleInput(v *DeleteContactFlowModuleInput) err
 	}
 }
 
+func validateOpDeleteEmailAddressInput(v *DeleteEmailAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEmailAddressInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEvaluationFormInput(v *DeleteEvaluationFormInput) error {
 	if v == nil {
 		return nil
@@ -9404,6 +10000,24 @@ func validateOpDescribeContactInput(v *DescribeContactInput) error {
 	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEmailAddressInput(v *DescribeEmailAddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEmailAddressInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10313,6 +10927,24 @@ func validateOpListApprovedOriginsInput(v *ListApprovedOriginsInput) error {
 	}
 }
 
+func validateOpListAssociatedContactsInput(v *ListAssociatedContactsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssociatedContactsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAuthenticationProfilesInput(v *ListAuthenticationProfilesInput) error {
 	if v == nil {
 		return nil
@@ -11194,6 +11826,21 @@ func validateOpSearchContactsInput(v *SearchContactsInput) error {
 	}
 }
 
+func validateOpSearchEmailAddressesInput(v *SearchEmailAddressesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchEmailAddressesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchHoursOfOperationsInput(v *SearchHoursOfOperationsInput) error {
 	if v == nil {
 		return nil
@@ -11389,6 +12036,50 @@ func validateOpSendChatIntegrationEventInput(v *SendChatIntegrationEventInput) e
 	}
 }
 
+func validateOpSendOutboundEmailInput(v *SendOutboundEmailInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendOutboundEmailInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FromEmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromEmailAddress"))
+	} else if v.FromEmailAddress != nil {
+		if err := validateEmailAddressInfo(v.FromEmailAddress); err != nil {
+			invalidParams.AddNested("FromEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationEmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationEmailAddress"))
+	} else if v.DestinationEmailAddress != nil {
+		if err := validateEmailAddressInfo(v.DestinationEmailAddress); err != nil {
+			invalidParams.AddNested("DestinationEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalRecipients != nil {
+		if err := validateOutboundAdditionalRecipients(v.AdditionalRecipients); err != nil {
+			invalidParams.AddNested("AdditionalRecipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EmailMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailMessage"))
+	} else if v.EmailMessage != nil {
+		if err := validateOutboundEmailContent(v.EmailMessage); err != nil {
+			invalidParams.AddNested("EmailMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.TrafficType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartAttachedFileUploadInput(v *StartAttachedFileUploadInput) error {
 	if v == nil {
 		return nil
@@ -11519,6 +12210,53 @@ func validateOpStartContactStreamingInput(v *StartContactStreamingInput) error {
 	}
 }
 
+func validateOpStartEmailContactInput(v *StartEmailContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartEmailContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FromEmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromEmailAddress"))
+	} else if v.FromEmailAddress != nil {
+		if err := validateEmailAddressInfo(v.FromEmailAddress); err != nil {
+			invalidParams.AddNested("FromEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationEmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationEmailAddress"))
+	}
+	if v.References != nil {
+		if err := validateContactReferences(v.References); err != nil {
+			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EmailMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailMessage"))
+	} else if v.EmailMessage != nil {
+		if err := validateInboundEmailContent(v.EmailMessage); err != nil {
+			invalidParams.AddNested("EmailMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalRecipients != nil {
+		if err := validateInboundAdditionalRecipients(v.AdditionalRecipients); err != nil {
+			invalidParams.AddNested("AdditionalRecipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attachments != nil {
+		if err := validateEmailAttachments(v.Attachments); err != nil {
+			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartOutboundChatContactInput(v *StartOutboundChatContactInput) error {
 	if v == nil {
 		return nil
@@ -11547,6 +12285,48 @@ func validateOpStartOutboundChatContactInput(v *StartOutboundChatContactInput) e
 	if v.InitialSystemMessage != nil {
 		if err := validateChatMessage(v.InitialSystemMessage); err != nil {
 			invalidParams.AddNested("InitialSystemMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartOutboundEmailContactInput(v *StartOutboundEmailContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOutboundEmailContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.FromEmailAddress != nil {
+		if err := validateEmailAddressInfo(v.FromEmailAddress); err != nil {
+			invalidParams.AddNested("FromEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationEmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationEmailAddress"))
+	} else if v.DestinationEmailAddress != nil {
+		if err := validateEmailAddressInfo(v.DestinationEmailAddress); err != nil {
+			invalidParams.AddNested("DestinationEmailAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalRecipients != nil {
+		if err := validateOutboundAdditionalRecipients(v.AdditionalRecipients); err != nil {
+			invalidParams.AddNested("AdditionalRecipients", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EmailMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailMessage"))
+	} else if v.EmailMessage != nil {
+		if err := validateOutboundEmailContent(v.EmailMessage); err != nil {
+			invalidParams.AddNested("EmailMessage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12084,6 +12864,24 @@ func validateOpUpdateContactScheduleInput(v *UpdateContactScheduleInput) error {
 	}
 }
 
+func validateOpUpdateEmailAddressMetadataInput(v *UpdateEmailAddressMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEmailAddressMetadataInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EmailAddressId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateEvaluationFormInput(v *UpdateEvaluationFormInput) error {
 	if v == nil {
 		return nil
@@ -12350,6 +13148,27 @@ func validateOpUpdateQueueOutboundCallerConfigInput(v *UpdateQueueOutboundCaller
 	}
 	if v.OutboundCallerConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutboundCallerConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueOutboundEmailConfigInput(v *UpdateQueueOutboundEmailConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueOutboundEmailConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.OutboundEmailConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutboundEmailConfig"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateToConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateToConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateToConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateChimeWebhookConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateChimeWebhookConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateChimeWebhookConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -103,6 +127,18 @@ func TestCheckSnapshot_DeleteChimeWebhookConfiguration(t *testing.T) {
 	_, err := svc.DeleteChimeWebhookConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteChimeWebhookConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCustomAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +266,18 @@ func TestCheckSnapshot_DescribeSlackWorkspaces(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateFromConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateFromConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateFromConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAccountPreferences(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountPreferences(context.Background(), nil, func(o *Options) {
@@ -242,11 +290,47 @@ func TestCheckSnapshot_GetAccountPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMicrosoftTeamsChannelConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMicrosoftTeamsChannelConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetMicrosoftTeamsChannelConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCustomActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +434,18 @@ func TestCheckSnapshot_UpdateChimeWebhookConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCustomAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMicrosoftTeamsChannelConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMicrosoftTeamsChannelConfiguration(context.Background(), nil, func(o *Options) {
@@ -373,11 +469,35 @@ func TestCheckSnapshot_UpdateSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateToConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateToConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateToConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateChimeWebhookConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateChimeWebhookConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateChimeWebhookConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -414,6 +534,18 @@ func TestUpdateSnapshot_DeleteChimeWebhookConfiguration(t *testing.T) {
 	_, err := svc.DeleteChimeWebhookConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteChimeWebhookConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCustomAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -541,6 +673,18 @@ func TestUpdateSnapshot_DescribeSlackWorkspaces(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateFromConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateFromConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateFromConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAccountPreferences(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountPreferences(context.Background(), nil, func(o *Options) {
@@ -553,11 +697,47 @@ func TestUpdateSnapshot_GetAccountPreferences(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMicrosoftTeamsChannelConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMicrosoftTeamsChannelConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetMicrosoftTeamsChannelConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -654,6 +834,18 @@ func TestUpdateSnapshot_UpdateChimeWebhookConfiguration(t *testing.T) {
 	_, err := svc.UpdateChimeWebhookConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateChimeWebhookConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCustomAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCustomAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

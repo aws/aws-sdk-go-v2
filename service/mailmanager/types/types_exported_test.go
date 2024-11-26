@@ -260,6 +260,9 @@ func ExampleRuleAction_outputUsage() {
 	case *types.RuleActionMemberDeliverToMailbox:
 		_ = v.Value // Value is types.DeliverToMailboxAction
 
+	case *types.RuleActionMemberDeliverToQBusiness:
+		_ = v.Value // Value is types.DeliverToQBusinessAction
+
 	case *types.RuleActionMemberDrop:
 		_ = v.Value // Value is types.DropAction
 
@@ -290,6 +293,7 @@ var _ *types.ArchiveAction
 var _ *types.DeliverToMailboxAction
 var _ *types.DropAction
 var _ *types.RelayAction
+var _ *types.DeliverToQBusinessAction
 var _ *types.ReplaceRecipientAction
 var _ *types.S3Action
 

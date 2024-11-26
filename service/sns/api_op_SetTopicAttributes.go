@@ -145,6 +145,9 @@ type SetTopicAttributesInput struct {
 	//
 	// The following attribute applies only to [FIFO topics]:
 	//
+	//   - ArchivePolicy – The policy that sets the retention period for messages
+	//   stored in the message archive of an Amazon SNS FIFO topic.
+	//
 	//   - ContentBasedDeduplication – Enables content-based deduplication for FIFO
 	//   topics.
 	//

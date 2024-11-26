@@ -1545,6 +1545,135 @@
                 }
             }
         },
+        "com.amazonaws.neptunegraph#CancelExportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#CancelExportTaskInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#CancelExportTaskOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Cancel the specified export task.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/exporttasks/{taskIdentifier}"
+                },
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "ControlPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#CancelExportTaskInput": {
+            "type": "structure",
+            "members": {
+                "taskIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#CancelExportTaskOutput": {
+            "type": "structure",
+            "members": {
+                "graphId": {
+                    "target": "com.amazonaws.neptunegraph#GraphId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source graph identifier of the cancelled export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.neptunegraph#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that will allow the exporting of data to the destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export task. The status is <code>CANCELLING</code> when the \n      export task is cancelled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.neptunegraph#ExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the cancelled export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the cancelled export task where data will be exported to.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier of the cancelled export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the cancelled export task.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the export task has this status value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunegraph#CancelImportTask": {
             "type": "operation",
             "input": {
@@ -1628,6 +1757,12 @@
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the cancelled import task.</p>"
                     }
                 },
                 "roleArn": {
@@ -2198,6 +2333,12 @@
                         "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n        CSV format</a>, <code>OPEN_CYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n          load format</a>, or <code>ntriples</code>, which identifies the\n      <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
                     }
                 },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the import task.</p>"
+                    }
+                },
                 "blankNodeHandling": {
                     "target": "com.amazonaws.neptunegraph#BlankNodeHandling",
                     "traits": {
@@ -2243,6 +2384,12 @@
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a>, <code>OPENCYPHER</code>, which identifies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>, or <code>ntriples</code>, which identifies the\n     <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html\">RDF n-triples</a> format.</p>"
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the import task.</p>"
                     }
                 },
                 "roleArn": {
@@ -2935,6 +3082,309 @@
                 }
             }
         },
+        "com.amazonaws.neptunegraph#ExportFilter": {
+            "type": "structure",
+            "members": {
+                "vertexFilter": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilterPerLabelMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to specify filters on a per-label basis for vertices. This allows you to control which vertex labels \n      and properties are included in the export.</p>"
+                    }
+                },
+                "edgeFilter": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilterPerLabelMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to specify filters on a per-label basis for edges. This allows you to control which edge labels \n      and properties are included in the export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is the top-level field for specifying vertex or edge filters. If the ExportFilter is not provided, \n      then all properties for all labels will be exported. If the ExportFilter is provided but is an empty object, \n      then no data will be exported.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterElement": {
+            "type": "structure",
+            "members": {
+                "properties": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilterPropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Each property is defined by a key-value pair, where the key is the desired output property name (e.g. \"name\"), \n      and the value is an object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whihc properties of that label should be included in the export.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterOutputDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(Any|Byte|Short|Int|Long|Float|Double|String|Bool|Boolean|Float\\[\\]|Double\\[\\])$"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterOutputPropertyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_]+$"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterPerLabelMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.neptunegraph#ExportFilterLabel"
+            },
+            "value": {
+                "target": "com.amazonaws.neptunegraph#ExportFilterElement"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterPropertyAttributes": {
+            "type": "structure",
+            "members": {
+                "outputType": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilterOutputDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data type to use for the property in the exported data (e.g. \"String\", \"Int\", \"Float\"). \n       If a type is not provided, the export process will determine the type. If a given property is present as multiple \n       types (e.g. one vertex has \"height\" stored as a double, and another edge has it stored as a string), the type \n       will be of Any type, otherwise, it will be the type of the property as present in vertices.</p>"
+                    }
+                },
+                "sourcePropertyName": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilterSourcePropertyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property as it exists in the original graph data. If not provided, it is assumed that the key \n       matches the desired sourcePropertyName.</p>"
+                    }
+                },
+                "multiValueHandling": {
+                    "target": "com.amazonaws.neptunegraph#MultiValueHandlingType",
+                    "traits": {
+                        "smithy.api#default": "PICK_FIRST",
+                        "smithy.api#documentation": "<p>Specifies how to handle properties that have multiple values. Can be either <code>TO_LIST</code> to export all \n      values as a list, or <code>PICK_FIRST</code> to export the first value encountered. If not specified, the default \n      value is <code>PICK_FIRST</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure representing a property's attributes. It is a map object of outputType, sourcePropertyName \n       and multiValueHandling.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterPropertyMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.neptunegraph#ExportFilterOutputPropertyName"
+            },
+            "value": {
+                "target": "com.amazonaws.neptunegraph#ExportFilterPropertyAttributes"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFilterSourcePropertyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportFormat": {
+            "type": "enum",
+            "members": {
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportTaskDetails": {
+            "type": "structure",
+            "members": {
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeElapsedSeconds": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time elapsed, in seconds, since the start time of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "progressPercentage": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of progress percentage of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "numVerticesWritten": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of exported vertices.</p>"
+                    }
+                },
+                "numEdgesWritten": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of exported edges.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the specified export task.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportTaskId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^t-[a-z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportTaskStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "EXPORTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPORTING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportTaskSummary": {
+            "type": "structure",
+            "members": {
+                "graphId": {
+                    "target": "com.amazonaws.neptunegraph#GraphId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source graph identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.neptunegraph#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that will allow the data to be exported to the destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.neptunegraph#ExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the export task where data will be exported to.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the export task.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the export task has this status value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an export task.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#ExportTaskSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptunegraph#ExportTaskSummary"
+            }
+        },
         "com.amazonaws.neptunegraph#Format": {
             "type": "enum",
             "members": {
@@ -2950,12 +3400,233 @@
                         "smithy.api#enumValue": "OPEN_CYPHER"
                     }
                 },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                },
                 "NTRIPLES": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NTRIPLES"
                     }
                 }
+            }
+        },
+        "com.amazonaws.neptunegraph#GetExportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#GetExportTaskInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#GetExportTaskOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Retrieves a specified export task.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/exporttasks/{taskIdentifier}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "ControlPlane"
+                    }
+                },
+                "smithy.waiters#waitable": {
+                    "ExportTaskSuccessful": {
+                        "documentation": "Wait until Export Task is Successful",
+                        "minDelay": 60,
+                        "maxDelay": 28800,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CANCELLING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "ExportTaskCancelled": {
+                        "documentation": "Wait until Export Task is Cancelled",
+                        "minDelay": 60,
+                        "maxDelay": 3600,
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status != 'CANCELLING' && status != 'CANCELLED'",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#GetExportTaskInput": {
+            "type": "structure",
+            "members": {
+                "taskIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export task.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#GetExportTaskOutput": {
+            "type": "structure",
+            "members": {
+                "graphId": {
+                    "target": "com.amazonaws.neptunegraph#GraphId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source graph identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.neptunegraph#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that will allow data to be exported to the destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.neptunegraph#ExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the export task where data will be exported.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the export task.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the export task has this status value.</p>"
+                    }
+                },
+                "exportTaskDetails": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the export task.</p>"
+                    }
+                },
+                "exportFilter": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export filter of the export task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.neptunegraph#GetGraph": {
@@ -3605,6 +4276,12 @@
                         "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
                     }
                 },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the import task.</p>"
+                    }
+                },
                 "roleArn": {
                     "target": "com.amazonaws.neptunegraph#RoleArn",
                     "traits": {
@@ -3634,7 +4311,7 @@
                 "attemptNumber": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of the current attempt to execute the import task.</p>"
+                        "smithy.api#documentation": "<p>The number of the current attempts to execute the import task.</p>"
                     }
                 },
                 "statusReason": {
@@ -4399,6 +5076,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CANCELLED"
                     }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
                 }
             }
         },
@@ -4429,6 +5112,12 @@
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies\n      the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin\n      CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher\n      load format</a>.</p>"
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the import task.</p>"
                     }
                 },
                 "roleArn": {
@@ -4482,6 +5171,93 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+            }
+        },
+        "com.amazonaws.neptunegraph#ListExportTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#ListExportTasksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#ListExportTasksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Retrieves a list of export tasks.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/exporttasks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "tasks"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "ControlPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ListExportTasksInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.neptunegraph#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token used to paginate input.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.neptunegraph#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of export tasks to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#ListExportTasksOutput": {
+            "type": "structure",
+            "members": {
+                "tasks": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested list of export tasks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.neptunegraph#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token used to paginate output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.neptunegraph#ListGraphSnapshots": {
@@ -5023,6 +5799,23 @@
                 }
             }
         },
+        "com.amazonaws.neptunegraph#MultiValueHandlingType": {
+            "type": "enum",
+            "members": {
+                "TO_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TO_LIST"
+                    }
+                },
+                "PICK_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PICK_FIRST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.neptunegraph#NeptuneImportOptions": {
             "type": "structure",
             "members": {
@@ -5121,6 +5914,17 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 8192
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#ParquetType": {
+            "type": "enum",
+            "members": {
+                "COLUMNAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMNAR"
+                    }
                 }
             }
         },
@@ -5870,6 +6674,190 @@
                 }
             }
         },
+        "com.amazonaws.neptunegraph#StartExportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunegraph#StartExportTaskInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunegraph#StartExportTaskOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunegraph#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Export data from an existing Neptune Analytics graph to Amazon S3. The graph state should be <code>AVAILABLE</code>.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/exporttasks"
+                },
+                "smithy.rules#staticContextParams": {
+                    "ApiType": {
+                        "value": "ControlPlane"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptunegraph#StartExportTaskInput": {
+            "type": "structure",
+            "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source graph identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.neptunegraph#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that will allow data to be exported to the destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.neptunegraph#ExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where data will be exported to.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the export task.</p>"
+                    }
+                },
+                "exportFilter": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export filter of the export task.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.neptunegraph#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to be applied to the export task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunegraph#StartExportTaskOutput": {
+            "type": "structure",
+            "members": {
+                "graphId": {
+                    "target": "com.amazonaws.neptunegraph#GraphId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source graph identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.neptunegraph#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that will allow data to be exported to the destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "taskId": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.neptunegraph#ExportTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.neptunegraph#ExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the export task where data will be exported to.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier of the export task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the export task.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the export task has this status value.</p>"
+                    }
+                },
+                "exportFilter": {
+                    "target": "com.amazonaws.neptunegraph#ExportFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export filter of the export task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunegraph#StartImportTask": {
             "type": "operation",
             "input": {
@@ -5935,6 +6923,12 @@
                         "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or \n      OPENCYPHER, which identies the openCypher load format.</p>"
                     }
                 },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the import task.</p>"
+                    }
+                },
                 "blankNodeHandling": {
                     "target": "com.amazonaws.neptunegraph#BlankNodeHandling",
                     "traits": {
@@ -5988,6 +6982,12 @@
                     "target": "com.amazonaws.neptunegraph#Format",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or \n      OPENCYPHER, which identies the openCypher load format.</p>"
+                    }
+                },
+                "parquetType": {
+                    "target": "com.amazonaws.neptunegraph#ParquetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parquet type of the import task.</p>"
                     }
                 },
                 "roleArn": {
@@ -6154,16 +7154,28 @@
             "type": "resource",
             "operations": [
                 {
+                    "target": "com.amazonaws.neptunegraph#CancelExportTask"
+                },
+                {
                     "target": "com.amazonaws.neptunegraph#CancelImportTask"
                 },
                 {
                     "target": "com.amazonaws.neptunegraph#CreateGraphUsingImportTask"
                 },
                 {
+                    "target": "com.amazonaws.neptunegraph#GetExportTask"
+                },
+                {
                     "target": "com.amazonaws.neptunegraph#GetImportTask"
                 },
                 {
+                    "target": "com.amazonaws.neptunegraph#ListExportTasks"
+                },
+                {
                     "target": "com.amazonaws.neptunegraph#ListImportTasks"
+                },
+                {
+                    "target": "com.amazonaws.neptunegraph#StartExportTask"
                 },
                 {
                     "target": "com.amazonaws.neptunegraph#StartImportTask"

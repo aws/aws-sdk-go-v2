@@ -58,6 +58,9 @@ type UpdateContactInput struct {
 	// Well-formed data on contact, shown to agents on Contact Control Panel (CCP).
 	References map[string]types.Reference
 
+	//
+	SegmentAttributes map[string]types.SegmentAttributeValue
+
 	noSmithyDocumentSerde
 }
 

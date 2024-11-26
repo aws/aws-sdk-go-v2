@@ -41,6 +41,105 @@
                 "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
             }
         },
+        "com.amazonaws.chatbot#AssociateToConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#AssociateToConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#AssociateToConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to associate a resource with a configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {},
+                            "custom-action": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Links a resource (for example, a custom action) to a channel configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Associate a custom action to a configuration",
+                        "documentation": "Associate a custom action to a channel configuration, allowing it to be used in that channel",
+                        "input": {
+                            "Resource": "arn:aws:chatbot::1234567890:custom-action/my-custom-action",
+                            "ChatConfiguration": "arn:aws:chatbot::1234567890:chat-configuration/slack-channel/my-channel"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/associate-to-configuration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.chatbot#AssociateToConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Resource": {
+                    "target": "com.amazonaws.chatbot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource Amazon Resource Name (ARN) to link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfiguration": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel configuration to associate with the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#AssociateToConfigurationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#AssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#AssociationListing"
+            }
+        },
+        "com.amazonaws.chatbot#AssociationListing": {
+            "type": "structure",
+            "members": {
+                "Resource": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource (for example, a custom action).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A listing of an association with a channel configuration.</p>"
+            }
+        },
         "com.amazonaws.chatbot#AwsUserIdentity": {
             "type": "string",
             "traits": {
@@ -77,7 +176,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -155,6 +254,16 @@
                 },
                 "smithy.api#pattern": "^https://hooks\\.chime\\.aws/incomingwebhooks/[A-Za-z0-9\\-]+?\\?token=[A-Za-z0-9\\-]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chatbot#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 33,
+                    "max": 126
+                },
+                "smithy.api#pattern": "^[\\x21-\\x7F]+$"
             }
         },
         "com.amazonaws.chatbot#ConfigurationName": {
@@ -252,6 +361,12 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an AWS Chatbot Chime Webhook Configuration",
+                    "createsResources": [
+                        "ChatbotConfiguration"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Creates an AWS Chatbot configuration for Amazon Chime.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -342,6 +457,142 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#CreateCustomAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#CreateCustomActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#CreateCustomActionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a custom action"
+                },
+                "smithy.api#documentation": "<p>Creates a custom action that can be invoked as an alias or as a button on a notification.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create an alias that invokes a Lambda function",
+                        "documentation": "Creates an alias that invokes a Lambda function from chat channels. You can use this alias by entering 'run invoke', after which you're prompted for the function name.",
+                        "input": {
+                            "ActionName": "my-custom-action",
+                            "Definition": {
+                                "CommandText": "lambda invoke $functionName"
+                            },
+                            "AliasName": "invoke"
+                        },
+                        "output": {
+                            "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+                        }
+                    },
+                    {
+                        "title": "Create a custom action to list alarms",
+                        "documentation": "Creates a button on all Cloudwatch notifications that lists alarms in the ‘ALARM’ state.",
+                        "input": {
+                            "ActionName": "describe-alarms",
+                            "Definition": {
+                                "CommandText": "cloudwatch describe-alarms --state-value ALARM"
+                            },
+                            "Attachments": [
+                                {
+                                    "NotificationType": "CloudWatch",
+                                    "ButtonText": "List alarms"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/describe-alarms"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/create-custom-action"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateCustomActionRequest": {
+            "type": "structure",
+            "members": {
+                "Definition": {
+                    "target": "com.amazonaws.chatbot#CustomActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the command to run when invoked as an alias or as an action button.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.chatbot#CustomActionAliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name used to invoke this action in a chat channel. For example, <code>@aws run my-alias</code>.</p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when this custom action button should be attached to a notification.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.chatbot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.</p>\n         <p>If you do not specify a client token, one is automatically generated by the SDK.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ActionName": {
+                    "target": "com.amazonaws.chatbot#CustomActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom action. This name is included in the Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateCustomActionResult": {
+            "type": "structure",
+            "members": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully defined ARN of the custom action.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CustomActionArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#CreateMicrosoftTeamsChannelConfiguration": {
             "type": "operation",
             "input": {
@@ -368,6 +619,12 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an AWS Chatbot Microsoft Teams Channel Configuration",
+                    "createsResources": [
+                        "ChatbotConfiguration"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Creates an AWS Chatbot configuration for Microsoft Teams.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -406,6 +663,12 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an AWS Chatbot Slack Channel Configuration",
+                    "createsResources": [
+                        "ChatbotConfiguration"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Creates an AWS Chatbot confugration for Slack.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -625,6 +888,313 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#CustomAction": {
+            "type": "structure",
+            "members": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully defined Amazon Resource Name (ARN) of the custom action.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CustomActionArn"
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.chatbot#CustomActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the command to run when invoked an alias or as an action button.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.chatbot#CustomActionAliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name used to invoke this action in the chat channel. For example, <code>@aws run my-alias</code>.</p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when this custom action button should be attached to a notification.</p>"
+                    }
+                },
+                "ActionName": {
+                    "target": "com.amazonaws.chatbot#CustomActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom action that is included in the ARN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a parameterized command that can be invoked as an alias or as a notification button in the chat client.</p>"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAliasName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Chatbot::CustomAction",
+                    "service": "com.amazonaws.chatbot#WheatleyOrchestration_20171011",
+                    "resource": "com.amazonaws.chatbot#CustomActionResource"
+                },
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws:chatbot:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:custom-action/[a-zA-Z0-9_-]{1,64}$"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#CustomActionArn"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachment": {
+            "type": "structure",
+            "members": {
+                "NotificationType": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentNotificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of notification that the custom action should be attached to.</p>"
+                    }
+                },
+                "ButtonText": {
+                    "target": "com.amazonaws.chatbot#CustomActionButtonText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the button that appears on the notification.</p>"
+                    }
+                },
+                "Criteria": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria for when a button should be shown based on values in the notification.</p>"
+                    }
+                },
+                "Variables": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The variables to extract from the notification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines when a custom action button should be attached to a notification.</p>"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachmentCriteria": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentCriteriaOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to perform on the named variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VariableName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the variable to operate on.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9-_]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that is compared with the actual value of the variable based on the behavior of the operator.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[\\S\\s]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A criteria for when a button should be shown based on values in the notification</p>"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachmentCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#CustomActionAttachmentCriteria"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachmentCriteriaOperator": {
+            "type": "enum",
+            "members": {
+                "HAS_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HAS_VALUE"
+                    }
+                },
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#CustomActionAttachment"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachmentNotificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionAttachmentVariables": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    },
+                    "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 0,
+                        "max": 1024
+                    },
+                    "smithy.api#pattern": "^[\\x21-\\x7F]+$"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionButtonText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[\\S\\s]+$"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionDefinition": {
+            "type": "structure",
+            "members": {
+                "CommandText": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command string to run which may include variables by prefixing with a dollar sign ($).</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^[\\S\\s]+$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of the command to run when invoked as an alias or as an action button.</p>"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,64}$"
+            }
+        },
+        "com.amazonaws.chatbot#CustomActionResource": {
+            "type": "resource",
+            "identifiers": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn"
+                }
+            },
+            "properties": {
+                "ActionName": {
+                    "target": "com.amazonaws.chatbot#CustomActionName"
+                },
+                "Definition": {
+                    "target": "com.amazonaws.chatbot#CustomActionDefinition"
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.chatbot#CustomActionAliasName"
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentList"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#TagList"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.chatbot#CreateCustomAction"
+            },
+            "read": {
+                "target": "com.amazonaws.chatbot#GetCustomAction"
+            },
+            "update": {
+                "target": "com.amazonaws.chatbot#UpdateCustomAction"
+            },
+            "delete": {
+                "target": "com.amazonaws.chatbot#DeleteCustomAction"
+            },
+            "list": {
+                "target": "com.amazonaws.chatbot#ListCustomActions"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{CustomActionArn}",
+                    "absolute": true
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "custom-action",
+                    "relativeDocumentation": "what-is.html"
+                }
+            }
+        },
         "com.amazonaws.chatbot#CustomerCwLogLevel": {
             "type": "string",
             "traits": {
@@ -658,6 +1228,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Chatbot Chime Webhook Configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Deletes a Amazon Chime webhook configuration for AWS Chatbot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -701,6 +1279,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#DeleteCustomAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteCustomActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteCustomActionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a custom action"
+                },
+                "smithy.api#documentation": "<p>Deletes a custom action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete a custom action",
+                        "input": {
+                            "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "POST",
+                    "uri": "/delete-custom-action"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteCustomActionRequest": {
+            "type": "structure",
+            "members": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully defined ARN of the custom action.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CustomActionArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteCustomActionResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#DeleteMicrosoftTeamsChannelConfiguration": {
             "type": "operation",
             "input": {
@@ -724,6 +1369,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Chatbot Microsoft Teams Channel Configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Deletes a Microsoft Teams channel configuration for AWS Chatbot</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -753,6 +1406,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the Microsoft Teams configured with AWS Chatbot in an AWS account"
+                },
                 "smithy.api#documentation": "<p>Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team. Note that the Microsoft Teams team must have no channels configured to remove it.\n </p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -785,6 +1441,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Chatbot Microsoft Teams User Identity"
+                },
                 "smithy.api#documentation": "<p>Identifes a user level permission for a channel configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -858,6 +1517,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Chatbot Slack Channel Configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Deletes a Slack channel configuration for AWS Chatbot</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -921,6 +1588,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Chatbot Slack User Identity"
+                },
                 "smithy.api#documentation": "<p>Deletes a user level permission for a Slack channel configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -995,6 +1665,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the Slack workspace authorization with AWS Chatbot, associated with an AWS account"
+                },
                 "smithy.api#documentation": "<p>Deletes the Slack workspace authorization that allows channels to be configured in that workspace. This requires all configured channels in the workspace to be deleted.\n  </p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1128,6 +1801,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list all AWS Chatbot Chime Webhook Configurations in an AWS Account"
+                },
                 "smithy.api#documentation": "<p>Lists Amazon Chime webhook configurations optionally filtered by ChatConfigurationArn</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1174,7 +1850,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional Amazon Resource Number (ARN) of a ChimeWebhookConfiguration to describe.</p>"
+                        "smithy.api#documentation": "<p>An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.</p>"
                     }
                 }
             },
@@ -1222,6 +1898,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list all AWS Chatbot Slack Channel Configurations in an AWS account"
+                },
                 "smithy.api#documentation": "<p>Lists Slack channel configurations optionally filtered by ChatConfigurationArn</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1268,7 +1947,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional Amazon Resource Number (ARN) of a SlackChannelConfiguration to describe.</p>"
+                        "smithy.api#documentation": "<p>An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.</p>"
                     }
                 }
             },
@@ -1316,6 +1995,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe AWS Chatbot Slack User Identities"
+                },
                 "smithy.api#documentation": "<p>Lists all Slack user identities with a mapped role.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1350,7 +2032,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the SlackChannelConfiguration associated with the user identities to describe.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identities to describe.</p>"
                     }
                 },
                 "NextToken": {
@@ -1410,6 +2092,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot service"
+                },
                 "smithy.api#documentation": "<p>List all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1478,6 +2163,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#DisassociateFromConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DisassociateFromConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DisassociateFromConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to disassociate a resource from a configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {},
+                            "custom-action": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Unlink a resource, for example a custom action, from a channel configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Disassociate a custom action from a configuration",
+                        "input": {
+                            "Resource": "arn:aws:chatbot::1234567890:custom-action/my-custom-action",
+                            "ChatConfiguration": "arn:aws:chatbot::1234567890:chat-configuration/slack-channel/my-channel"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "POST",
+                    "uri": "/disassociate-from-configuration"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.chatbot#DisassociateFromConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Resource": {
+                    "target": "com.amazonaws.chatbot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfiguration": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel configuration the resource is being disassociated from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DisassociateFromConfigurationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#ErrorMessage": {
             "type": "string"
         },
@@ -1498,6 +2260,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve AWS Chatbot account preferences"
+                },
                 "smithy.api#documentation": "<p>Returns AWS Chatbot account preferences.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1541,6 +2306,89 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#GetCustomAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#GetCustomActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#GetCustomActionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a custom action"
+                },
+                "smithy.api#documentation": "<p>Returns a custom action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get a custom action",
+                        "input": {
+                            "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+                        },
+                        "output": {
+                            "CustomAction": {
+                                "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/my-custom-action",
+                                "ActionName": "my-custom-action",
+                                "Definition": {
+                                    "CommandText": "lambda invoke $functionName"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-custom-action"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.chatbot#GetCustomActionRequest": {
+            "type": "structure",
+            "members": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the fully defined Amazon Resource Name (ARN) of the custom action.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CustomActionArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#GetCustomActionResult": {
+            "type": "structure",
+            "members": {
+                "CustomAction": {
+                    "target": "com.amazonaws.chatbot#CustomAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the custom action.</p>",
+                        "smithy.api#nestedProperties": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#GetMicrosoftTeamsChannelConfiguration": {
             "type": "operation",
             "input": {
@@ -1561,6 +2409,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a single AWS Chatbot Microsoft Teams Channel Configurations in an AWS account"
+                },
                 "smithy.api#documentation": "<p>Returns a Microsoft Teams channel configuration in an AWS account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1593,7 +2444,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1684,6 +2535,219 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.chatbot#ListAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListAssociationsResult"
+            },
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list resources associated with a configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists resources associated with a channel configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List custom actions associated with a configuration",
+                        "input": {
+                            "ChatConfiguration": "arn:aws:chatbot::1234567890:chat-configuration/slack-channel/my-channel"
+                        },
+                        "output": {
+                            "Associations": [
+                                {
+                                    "Resource": "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-associations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Associations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfiguration": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel configuration to list associations for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[\\x20-\\x7F]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.chatbot#AssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources associated with this channel configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[\\x20-\\x7F]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListCustomActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListCustomActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListCustomActionsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list custom actions"
+                },
+                "smithy.api#documentation": "<p>Lists custom actions defined in this account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List custom actions",
+                        "input": {},
+                        "output": {
+                            "CustomActions": [
+                                "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-custom-actions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "CustomActions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListCustomActionsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[\\x20-\\x7F]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListCustomActionsResult": {
+            "type": "structure",
+            "members": {
+                "CustomActions": {
+                    "target": "com.amazonaws.chatbot#CustomActionArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom actions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[\\x20-\\x7F]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#ListMicrosoftTeamsChannelConfigurations": {
             "type": "operation",
             "input": {
@@ -1704,6 +2768,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list all AWS Chatbot Microsoft Teams Channel Configurations in an AWS account"
+                },
                 "smithy.api#documentation": "<p>Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1743,6 +2810,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list all Microsoft Teams connected to the AWS Account onboarded with AWS Chatbot service"
+                },
                 "smithy.api#documentation": "<p>Lists all authorized Microsoft Teams for an AWS Account</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1831,6 +2901,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe AWS Chatbot Microsoft Teams User Identities"
+                },
                 "smithy.api#documentation": "<p>A list all Microsoft Teams user identities with a mapped role.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1865,7 +2938,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.</p>"
                     }
                 },
                 "NextToken": {
@@ -1925,6 +2998,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to List all tags associated with the AWS Chatbot Channel Configuration"
+                },
                 "smithy.api#documentation": "<p>Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The resource can be a user, server, or role.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -1940,7 +3016,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.chatbot#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN you specified to list the tags of.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource to list tags for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2041,6 +3117,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9=\\/+_.\\-,#:\\\\\"{}]{4,1276}$"
             }
         },
+        "com.amazonaws.chatbot#ResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws:chatbot:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:custom-action/[a-zA-Z0-9_-]{1,64}$"
+            }
+        },
         "com.amazonaws.chatbot#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -2107,7 +3193,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the SlackChannelConfiguration.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SlackChannelConfiguration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2246,7 +3332,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the SlackChannelConfiguration associated with the user identity to delete.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identity to delete.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2361,6 +3447,7 @@
                 "target": "com.amazonaws.chatbot#TagKey"
             },
             "traits": {
+                "aws.api#data": "tagging",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
@@ -2402,6 +3489,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create tags on AWS Chatbot Channel Configuration"
+                },
                 "smithy.api#documentation": "<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2423,6 +3513,7 @@
                 "Tags": {
                     "target": "com.amazonaws.chatbot#TagList",
                     "traits": {
+                        "aws.api#data": "tagging",
                         "smithy.api#documentation": "<p>A list of tags to apply to the configuration.</p>",
                         "smithy.api#required": {}
                     }
@@ -2678,6 +3769,19 @@
                 "smithy.api#pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
             }
         },
+        "com.amazonaws.chatbot#UnauthorizedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because it doesn't have valid credentials for the target resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.chatbot#UntagResource": {
             "type": "operation",
             "input": {
@@ -2698,6 +3802,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to remove tags on AWS Chatbot Channel Configuration"
+                },
                 "smithy.api#documentation": "<p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2719,6 +3826,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.chatbot#TagKeyList",
                     "traits": {
+                        "aws.api#data": "tagging",
                         "smithy.api#documentation": "<p>TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type. This metadata can be attached to resources for any purpose.</p>",
                         "smithy.api#required": {}
                     }
@@ -2755,6 +3863,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update AWS Chatbot account preferences"
+                },
                 "smithy.api#documentation": "<p>Updates AWS Chatbot account preferences.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2833,6 +3944,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update an AWS Chatbot Chime Webhook Configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Updates a Amazon Chime webhook configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2860,7 +3979,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration to update.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2913,6 +4032,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.chatbot#UpdateCustomAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UpdateCustomActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UpdateCustomActionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a custom action"
+                },
+                "smithy.api#documentation": "<p>Updates a custom action.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update the command definition of an existing action",
+                        "documentation": "Updates the command text of a custom action without altering the existing alias name or attachment criteria",
+                        "input": {
+                            "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/my-custom-action",
+                            "Definition": {
+                                "CommandText": "lambda invoke MyNewFunction"
+                            }
+                        },
+                        "output": {
+                            "CustomActionArn": "arn:aws:chatbot::1234567890:custom-action/my-custom-action"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/update-custom-action"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UpdateCustomActionRequest": {
+            "type": "structure",
+            "members": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully defined Amazon Resource Name (ARN) of the custom action.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CustomActionArn"
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.chatbot#CustomActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the command to run when invoked as an alias or as an action button.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.chatbot#CustomActionAliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name used to invoke this action in the chat channel. For example, <code>@aws run my-alias</code>.</p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.chatbot#CustomActionAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when this custom action button should be attached to a notification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateCustomActionResult": {
+            "type": "structure",
+            "members": {
+                "CustomActionArn": {
+                    "target": "com.amazonaws.chatbot#CustomActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully defined ARN of the custom action.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CustomActionArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.chatbot#UpdateMicrosoftTeamsChannelConfiguration": {
             "type": "operation",
             "input": {
@@ -2936,6 +4155,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update an AWS Chatbot Microsoft Teams Channel Configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Updates an Microsoft Teams channel configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2971,6 +4198,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update an AWS Chatbot Slack Channel Configuration",
+                    "resources": {
+                        "required": {
+                            "ChatbotConfiguration": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Updates a Slack channel configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2998,7 +4233,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the SlackChannelConfiguration to update.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SlackChannelConfiguration to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3083,7 +4318,7 @@
                 "ChatConfigurationArn": {
                     "target": "com.amazonaws.chatbot#ChatConfigurationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the TeamsChannelConfiguration to update.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the TeamsChannelConfiguration to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3154,6 +4389,9 @@
             "version": "2017-10-11",
             "operations": [
                 {
+                    "target": "com.amazonaws.chatbot#AssociateToConfiguration"
+                },
+                {
                     "target": "com.amazonaws.chatbot#CreateChimeWebhookConfiguration"
                 },
                 {
@@ -3196,10 +4434,16 @@
                     "target": "com.amazonaws.chatbot#DescribeSlackWorkspaces"
                 },
                 {
+                    "target": "com.amazonaws.chatbot#DisassociateFromConfiguration"
+                },
+                {
                     "target": "com.amazonaws.chatbot#GetAccountPreferences"
                 },
                 {
                     "target": "com.amazonaws.chatbot#GetMicrosoftTeamsChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListAssociations"
                 },
                 {
                     "target": "com.amazonaws.chatbot#ListMicrosoftTeamsChannelConfigurations"
@@ -3232,6 +4476,11 @@
                     "target": "com.amazonaws.chatbot#UpdateSlackChannelConfiguration"
                 }
             ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.chatbot#CustomActionResource"
+                }
+            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "chatbot",
@@ -3243,6 +4492,12 @@
                 "aws.auth#sigv4": {
                     "name": "chatbot"
                 },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
                 "aws.protocols#restJson1": {},
                 "smithy.api#auth": [
                     "aws.auth#sigv4"

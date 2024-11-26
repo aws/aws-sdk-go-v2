@@ -57,6 +57,11 @@ type PutApprovalResultInput struct {
 	// used to validate that the approval request corresponding to this token is still
 	// valid.
 	//
+	// For a pipeline where the execution mode is set to PARALLEL, the token required
+	// to approve/reject approval request as detailed above is not available. Instead,
+	// use the externalExecutionId from the GetPipelineState action as the token in
+	// the approval request.
+	//
 	// This member is required.
 	Token *string
 

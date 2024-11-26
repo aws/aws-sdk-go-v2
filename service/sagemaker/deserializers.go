@@ -42842,6 +42842,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				return err
 			}
 
+		case "OverrideVpcConfig":
+			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.OverrideVpcConfig, value); err != nil {
+				return err
+			}
+
 		case "TargetCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -43207,6 +43212,11 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 
 		case "LifeCycleConfig":
 			if err := awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(&sv.LifeCycleConfig, value); err != nil {
+				return err
+			}
+
+		case "OverrideVpcConfig":
+			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.OverrideVpcConfig, value); err != nil {
 				return err
 			}
 
@@ -56570,6 +56580,15 @@ func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(v **
 
 	for key, value := range shape {
 		switch key {
+		case "BaseInferenceComponentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferenceComponentName to be of type string, got %T instead", value)
+				}
+				sv.BaseInferenceComponentName = ptr.String(jtv)
+			}
+
 		case "ComputeResourceRequirements":
 			if err := awsAwsjson11_deserializeDocumentInferenceComponentComputeResourceRequirements(&sv.ComputeResourceRequirements, value); err != nil {
 				return err
@@ -64304,6 +64323,51 @@ func awsAwsjson11_deserializeDocumentModelRegisterSettings(v **types.ModelRegist
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentModelShardingConfig(v **types.ModelShardingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelShardingConfig
+	if *v == nil {
+		sv = &types.ModelShardingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Image":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OptimizationContainerImage to be of type string, got %T instead", value)
+				}
+				sv.Image = ptr.String(jtv)
+			}
+
+		case "OverrideEnvironment":
+			if err := awsAwsjson11_deserializeDocumentOptimizationJobEnvironmentVariables(&sv.OverrideEnvironment, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentModelStepMetadata(v **types.ModelStepMetadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -67626,6 +67690,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.OptimizationConfigMemberModelQuantizationConfig{Value: mv}
+			break loop
+
+		case "ModelShardingConfig":
+			var mv types.ModelShardingConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentModelShardingConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OptimizationConfigMemberModelShardingConfig{Value: mv}
 			break loop
 
 		default:

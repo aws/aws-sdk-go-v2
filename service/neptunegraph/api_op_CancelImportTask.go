@@ -78,6 +78,9 @@ type CancelImportTaskOutput struct {
 	// The unique identifier of the Neptune Analytics graph.
 	GraphId *string
 
+	// The parquet type of the cancelled import task.
+	ParquetType types.ParquetType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -1,3 +1,63 @@
+# Release (2024-11-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.30.0](service/directconnect/CHANGELOG.md#v1300-2024-11-25)
+  * **Feature**: Update DescribeDirectConnectGatewayAssociations API to return associated core network information if a Direct Connect gateway is attached to a Cloud WAN core network.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.32.0](service/networkmanager/CHANGELOG.md#v1320-2024-11-25)
+  * **Feature**: This release adds native Direct Connect integration on Cloud WAN enabling customers to directly attach their Direct Connect gateways to Cloud WAN without the need for an intermediate Transit Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.69.0](service/s3/CHANGELOG.md#v1690-2024-11-25)
+  * **Feature**: Amazon Simple Storage Service / Features: Add support for ETag based conditional writes in PutObject and CompleteMultiPartUpload APIs to prevent unintended object modifications.
+
+# Release (2024-11-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.51.0](service/autoscaling/CHANGELOG.md#v1510-2024-11-22)
+  * **Feature**: Now, Amazon EC2 Auto Scaling customers can enable target tracking policies to take quicker scaling decisions, enhancing their application performance and EC2 utilization. To get started, specify target tracking to monitor a metric that is available on Amazon CloudWatch at seconds-level interval.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.0.0](service/bcmpricingcalculator/CHANGELOG.md#v100-2024-11-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of the AWS Billing and Cost Management Pricing Calculator API.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.26.0](service/bedrockagentruntime/CHANGELOG.md#v1260-2024-11-22)
+  * **Feature**: InvokeInlineAgent API release to help invoke runtime agents without any dependency on preconfigured agents.
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.9.0](service/chatbot/CHANGELOG.md#v190-2024-11-22)
+  * **Feature**: Adds support for programmatic management of custom actions and aliases which can be associated with channel configurations.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.37.0](service/codepipeline/CHANGELOG.md#v1370-2024-11-22)
+  * **Feature**: AWS CodePipeline V2 type pipelines now support ECRBuildAndPublish and InspectorScan actions.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.47.0](service/cognitoidentityprovider/CHANGELOG.md#v1470-2024-11-22)
+  * **Feature**: Add support for users to sign up and sign in without passwords, using email and SMS OTPs and Passkeys. Add support for Passkeys based on WebAuthn. Add support for enhanced branding customization for hosted authentication pages with Amazon Cognito Managed Login. Add feature tiers with new pricing.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.117.0](service/connect/CHANGELOG.md#v11170-2024-11-22)
+  * **Feature**: Amazon Connect Service Feature: Add APIs for Amazon Connect Email Channel
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.45.0](service/costexplorer/CHANGELOG.md#v1450-2024-11-22)
+  * **Feature**: This release adds the Impact field(contains Contribution field) to the GetAnomalies API response under RootCause
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.43.0](service/elasticloadbalancingv2/CHANGELOG.md#v1430-2024-11-22)
+  * **Feature**: This release adds support for advertising trusted CA certificate names in associated trust stores.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.47.0](service/emr/CHANGELOG.md#v1470-2024-11-22)
+  * **Feature**: Advanced Scaling in Amazon EMR Managed Scaling
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.34.0](service/inspector2/CHANGELOG.md#v1340-2024-11-22)
+  * **Feature**: Extend inspector2 service model to include ServiceQuotaExceededException.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.69.0](service/lambda/CHANGELOG.md#v1690-2024-11-22)
+  * **Feature**: Add ProvisionedPollerConfig to Lambda event-source-mapping API.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.7.0](service/mailmanager/CHANGELOG.md#v170-2024-11-22)
+  * **Feature**: Added new "DeliverToQBusiness" rule action to MailManager RulesSet for ingesting email data into Amazon Q Business customer applications
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.15.0](service/neptunegraph/CHANGELOG.md#v1150-2024-11-22)
+  * **Feature**: Add 4 new APIs to support new Export features, allowing Parquet and CSV formats. Add new arguments in Import APIs to support Parquet import. Add a new query "neptune.read" to run algorithms without loading data into database
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.28.0](service/omics/CHANGELOG.md#v1280-2024-11-22)
+  * **Feature**: This release adds support for resource policy based cross account S3 access to sequence store read sets.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.80.0](service/quicksight/CHANGELOG.md#v1800-2024-11-22)
+  * **Feature**: This release includes: Update APIs to support Image, Layer Map, font customization, and Plugin Visual. Add Identity center related information in ListNamsespace API. Update API for restrictedFolder support in topics and add API for SearchTopics, Describe/Update DashboardsQA Configration.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.168.0](service/sagemaker/CHANGELOG.md#v11680-2024-11-22)
+  * **Feature**: This release adds APIs for new features for SageMaker endpoint to scale down to zero instances, native support for multi-adapter inference, and endpoint scaling improvements.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.29.0](service/ses/CHANGELOG.md#v1290-2024-11-22)
+  * **Feature**: This release adds support for starting email contacts in your Amazon Connect instance as an email receiving action.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.34.0](service/sfn/CHANGELOG.md#v1340-2024-11-22)
+  * **Feature**: Add support for variables and JSONata in TestState, GetExecutionHistory, DescribeStateMachine, and DescribeStateMachineForExecution
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.33.6](service/sns/CHANGELOG.md#v1336-2024-11-22)
+  * **Documentation**: ArchivePolicy attribute added to Archive and Replay feature
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.50.1](service/workspaces/CHANGELOG.md#v1501-2024-11-22)
+  * **Documentation**: While integrating WSP-DCV rebrand, a few mentions were erroneously renamed from WSP to DCV. This release reverts those mentions back to WSP.
+
 # Release (2024-11-21)
 
 ## General Highlights

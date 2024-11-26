@@ -1014,7 +1014,7 @@
                 "SavingsPlansPurchaseAnalysisDetails": {
                     "target": "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the Savings Plans purchase\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>Details about the Savings Plans purchase analysis.</p>"
                     }
                 }
             },
@@ -1052,7 +1052,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested analysis can't be\n            found.</p>",
+                "smithy.api#documentation": "<p>The requested analysis can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1086,7 +1086,7 @@
                 "EstimatedCompletionTime": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time for when the analysis will\n            complete.</p>"
+                        "smithy.api#documentation": "<p>The estimated time for when the analysis will complete.</p>"
                     }
                 },
                 "AnalysisCompletionTime": {
@@ -1110,19 +1110,19 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.costexplorer#ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error code used for the\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>The error code used for the analysis.</p>"
                     }
                 },
                 "AnalysisId": {
                     "target": "com.amazonaws.costexplorer#AnalysisId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment\n            purchase.</p>"
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase analysis.</p>"
                     }
                 },
                 "CommitmentPurchaseAnalysisConfiguration": {
                     "target": "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis configuration for the commitment purchase\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>The configuration for the commitment purchase analysis.</p>"
                     }
                 }
             },
@@ -1535,12 +1535,12 @@
                 "SavingsPlansPurchaseAnalysisConfiguration": {
                     "target": "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the Savings Plans purchase\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>The configuration for the Savings Plans purchase analysis.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for the commitment purchase\n            analysis.</p>"
+                "smithy.api#documentation": "<p>The configuration for the commitment purchase analysis.</p>"
             }
         },
         "com.amazonaws.costexplorer#Context": {
@@ -1998,7 +1998,7 @@
                 "Rule": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, <code>USAGE_TYPE</code>, and <code>BILLING_ENTITY</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
                     }
                 },
                 "InheritedValue": {
@@ -3765,7 +3765,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to generate a recommendation is already in progress.</p>",
+                "smithy.api#documentation": "<p>A request to generate a recommendation or analysis is already in progress.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4195,7 +4195,7 @@
                 "AnalysisId": {
                     "target": "com.amazonaws.costexplorer#AnalysisId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase\n      analysis.</p>",
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase analysis.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4210,7 +4210,7 @@
                 "EstimatedCompletionTime": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time for when the analysis will\n      complete.</p>",
+                        "smithy.api#documentation": "<p>The estimated time for when the analysis will complete.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4230,7 +4230,7 @@
                 "AnalysisId": {
                     "target": "com.amazonaws.costexplorer#AnalysisId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase\n      analysis.</p>",
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase analysis.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4256,7 +4256,7 @@
                 "CommitmentPurchaseAnalysisConfiguration": {
                     "target": "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the commitment purchase\n      analysis.</p>",
+                        "smithy.api#documentation": "<p>The configuration for the commitment purchase analysis.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6104,7 +6104,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account based on the last 30\n      days.</p>"
+                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account.</p>"
             }
         },
         "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesRequest": {
@@ -6119,20 +6119,20 @@
                 "NextPageToken": {
                     "target": "com.amazonaws.costexplorer#NextPageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of\n      results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
                     }
                 },
                 "PageSize": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of analyses that you want returned in a single response\n      object.</p>"
+                        "smithy.api#documentation": "<p>The number of analyses that you want returned in a single response object.</p>"
                     }
                 },
                 "AnalysisIds": {
                     "target": "com.amazonaws.costexplorer#AnalysisIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis IDs associated with the commitment purchase\n      analyses.</p>"
+                        "smithy.api#documentation": "<p>The analysis IDs associated with the commitment purchase analyses.</p>"
                     }
                 }
             },
@@ -6152,7 +6152,7 @@
                 "NextPageToken": {
                     "target": "com.amazonaws.costexplorer#NextPageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of\n      results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
                     }
                 }
             },
@@ -7712,19 +7712,19 @@
                 "AverageUtilization": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average utilization of your recommendations. Amazon Web Services uses this to\n            calculate your recommended reservation purchases.</p>"
+                        "smithy.api#documentation": "<p>The average utilization of your instances. Amazon Web Services uses this to calculate\n            your recommended reservation purchases.</p>"
                     }
                 },
                 "EstimatedBreakEvenInMonths": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long Amazon Web Services estimates that it takes for this recommendation to start\n            saving you money, in months.</p>"
+                        "smithy.api#documentation": "<p>How long Amazon Web Services estimates that it takes for this instance to start saving\n            you money, in months.</p>"
                     }
                 },
                 "CurrencyCode": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The currency code that Amazon Web Services used to calculate the costs for this\n            recommendation.</p>"
+                        "smithy.api#documentation": "<p>The currency code that Amazon Web Services used to calculate the costs for this\n            instance.</p>"
                     }
                 },
                 "EstimatedMonthlySavingsAmount": {
@@ -7754,43 +7754,43 @@
                 "UpfrontCost": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>How much purchasing this recommendation costs you upfront.</p>"
+                        "smithy.api#documentation": "<p>How much purchasing this instance costs you upfront.</p>"
                     }
                 },
                 "RecurringStandardMonthlyCost": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>How much purchasing this recommendation costs you on a monthly basis.</p>"
+                        "smithy.api#documentation": "<p>How much purchasing this instance costs you on a monthly basis.</p>"
                     }
                 },
                 "ReservedCapacityDetails": {
                     "target": "com.amazonaws.costexplorer#ReservedCapacityDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the reservations that Amazon Web Services recommends that you\n            purchase.</p>"
+                        "smithy.api#documentation": "<p>Details about the reservations that Amazon Web Services recommends that you\n            \n            purchase.</p>"
                     }
                 },
                 "RecommendedNumberOfCapacityUnitsToPurchase": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of reserved capacity units that Amazon Web Services recommends that you\n            purchase.</p>"
+                        "smithy.api#documentation": "<p>The number of reserved capacity units that Amazon Web Services recommends that you\n            \n            purchase.</p>"
                     }
                 },
                 "MinimumNumberOfCapacityUnitsUsedPerHour": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of provisioned capacity units that you used in an hour during the\n            historical period. Amazon Web Services uses this to calculate your recommended\n            reservation purchases.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of provisioned capacity units that you used in an hour during the\n            \n            historical period. Amazon Web Services uses this to calculate your recommended\n            \n            reservation purchases.</p>"
                     }
                 },
                 "MaximumNumberOfCapacityUnitsUsedPerHour": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of provisioned capacity units that you used in an hour during the\n            historical period. Amazon Web Services uses this to calculate your recommended\n            reservation purchases.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of provisioned capacity units that you used in an hour during the\n            \n            historical period. Amazon Web Services uses this to calculate your recommended\n            \n            reservation purchases.</p>"
                     }
                 },
                 "AverageNumberOfCapacityUnitsUsedPerHour": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average number of provisioned capacity units that you used in an hour during the\n            historical period. Amazon Web Services uses this to calculate your recommended\n            reservation purchases.</p>"
+                        "smithy.api#documentation": "<p>The average number of provisioned capacity units that you used in an hour during the\n            \n            historical period. Amazon Web Services uses this to calculate your recommended\n            \n            reservation purchases.</p>"
                     }
                 }
             },
@@ -7911,7 +7911,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the reservations that Amazon Web Services recommends that you\n            purchase.</p>"
+                "smithy.api#documentation": "<p>Details about the reservations that Amazon Web Services recommends that you\n            \n            purchase.</p>"
             }
         },
         "com.amazonaws.costexplorer#ReservedHours": {
@@ -8244,21 +8244,43 @@
                         "smithy.api#documentation": "<p>The member account value that's associated with the cost anomaly. </p>"
                     }
                 },
+                "LinkedAccountName": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member account name value that's associated with the cost anomaly.</p>"
+                    }
+                },
                 "UsageType": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>UsageType</code> value that's associated with the cost anomaly. </p>"
                     }
                 },
-                "LinkedAccountName": {
-                    "target": "com.amazonaws.costexplorer#GenericString",
+                "Impact": {
+                    "target": "com.amazonaws.costexplorer#RootCauseImpact",
                     "traits": {
-                        "smithy.api#documentation": "<p>The member account name value that's associated with the cost anomaly.</p>"
+                        "smithy.api#documentation": "<p>The dollar impact for the root cause.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The combination of Amazon Web Services service, linked account, linked account name,\n            Region, and usage type where a cost anomaly is observed. The linked account name will\n            only be available when the account name can be identified.</p>"
+                "smithy.api#documentation": "<p>The combination of Amazon Web Services service, linked account, linked account name,\n            Region, and usage type where a cost anomaly is observed, along with the dollar and\n            percentage amount of the anomaly impact. The linked account name will only be available\n            when the account name can be identified.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#RootCauseImpact": {
+            "type": "structure",
+            "members": {
+                "Contribution": {
+                    "target": "com.amazonaws.costexplorer#GenericDouble",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The dollar amount that this root cause contributed to the anomaly's\n            TotalImpact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dollar value of the root cause.</p>"
             }
         },
         "com.amazonaws.costexplorer#RootCauses": {
@@ -8276,7 +8298,7 @@
                 "PaymentOption": {
                     "target": "com.amazonaws.costexplorer#PaymentOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The payment option for the Savings Plans\n            commitment.</p>"
+                        "smithy.api#documentation": "<p>The payment option for the Savings Plans commitment.</p>"
                     }
                 },
                 "SavingsPlansType": {
@@ -8288,19 +8310,19 @@
                 "Region": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region associated with the Savings Plans\n            commitment.</p>"
+                        "smithy.api#documentation": "<p>The Region associated with the Savings Plans commitment.</p>"
                     }
                 },
                 "InstanceFamily": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance family of the Savings Plans\n            commitment.</p>"
+                        "smithy.api#documentation": "<p>The instance family of the Savings Plans commitment.</p>"
                     }
                 },
                 "TermInYears": {
                     "target": "com.amazonaws.costexplorer#TermInYears",
                     "traits": {
-                        "smithy.api#documentation": "<p>The term that you want the Savings Plans commitment\n            for.</p>"
+                        "smithy.api#documentation": "<p>The term that you want the Savings Plans commitment for.</p>"
                     }
                 },
                 "SavingsPlansCommitment": {
@@ -8312,12 +8334,12 @@
                 "OfferingId": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID that's used to distinguish commitments from one\n            another.</p>"
+                        "smithy.api#documentation": "<p>The unique ID that's used to distinguish Savings Plans commitments from one\n            another.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Savings Plans commitment\n            details.</p>"
+                "smithy.api#documentation": "<p>The Savings Plans commitment details.</p>"
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansAmortizedCommitment": {
@@ -8493,13 +8515,13 @@
                 "AccountScope": {
                     "target": "com.amazonaws.costexplorer#AccountScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account scope that you want your analysis\n            for.</p>"
+                        "smithy.api#documentation": "<p>The account scope that you want your analysis for.</p>"
                     }
                 },
                 "AccountId": {
                     "target": "com.amazonaws.costexplorer#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account that the analysis is\n            for.</p>"
+                        "smithy.api#documentation": "<p>The account that the analysis is for.</p>"
                     }
                 },
                 "AnalysisType": {
@@ -8512,26 +8534,26 @@
                 "SavingsPlansToAdd": {
                     "target": "com.amazonaws.costexplorer#SavingsPlansToAdd",
                     "traits": {
-                        "smithy.api#documentation": "<p>Savings Plans to include in the\n            analysis.</p>",
+                        "smithy.api#documentation": "<p>Savings Plans to include in the analysis.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SavingsPlansToExclude": {
                     "target": "com.amazonaws.costexplorer#SavingsPlansToExclude",
                     "traits": {
-                        "smithy.api#documentation": "<p>Savings Plans to exclude from the\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>Savings Plans to exclude from the analysis.</p>"
                     }
                 },
                 "LookBackTimePeriod": {
                     "target": "com.amazonaws.costexplorer#DateInterval",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time period associated with the\n            analysis.</p>",
+                        "smithy.api#documentation": "<p>The time period associated with the analysis.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for the Savings Plans purchase\n            analysis.</p>"
+                "smithy.api#documentation": "<p>The configuration for the Savings Plans purchase analysis.</p>"
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansPurchaseAnalysisDetails": {
@@ -8540,97 +8562,97 @@
                 "CurrencyCode": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The currency code used for the\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>The currency code used for the analysis.</p>"
                     }
                 },
                 "LookbackPeriodInHours": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lookback period in hours that's used to generate the\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>The lookback period in hours that's used to generate the analysis.</p>"
                     }
                 },
                 "CurrentAverageCoverage": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average value of hourly coverage over the lookback\n            period.</p>"
+                        "smithy.api#documentation": "<p>The average value of hourly coverage over the lookback period.</p>"
                     }
                 },
                 "CurrentAverageHourlyOnDemandSpend": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average value of hourly On-Demand spend over the lookback\n            period.</p>"
+                        "smithy.api#documentation": "<p>The average value of hourly On-Demand spend over the lookback period.</p>"
                     }
                 },
                 "CurrentMaximumHourlyOnDemandSpend": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The highest value of hourly On-Demand spend over the lookback\n            period.</p>"
+                        "smithy.api#documentation": "<p>The highest value of hourly On-Demand spend over the lookback period.</p>"
                     }
                 },
                 "CurrentMinimumHourlyOnDemandSpend": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lowest value of hourly On-Demand spend over the lookback\n            period.</p>"
+                        "smithy.api#documentation": "<p>The lowest value of hourly On-Demand spend over the lookback period.</p>"
                     }
                 },
                 "CurrentOnDemandSpend": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current total On-Demand spend over the lookback\n            period.</p>"
+                        "smithy.api#documentation": "<p>The current total On-Demand spend over the lookback period.</p>"
                     }
                 },
                 "ExistingHourlyCommitment": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The existing hourly commitment for the Savings Plan\n            type.</p>"
+                        "smithy.api#documentation": "<p>The existing hourly commitment for the Savings Plan type.</p>"
                     }
                 },
                 "HourlyCommitmentToPurchase": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recommended or custom hourly\n            commitment.</p>"
+                        "smithy.api#documentation": "<p>The recommended or custom hourly commitment.</p>"
                     }
                 },
                 "EstimatedAverageCoverage": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated coverage of the Savings\n            Plan.</p>"
+                        "smithy.api#documentation": "<p>The estimated coverage of the Savings Plan.</p>"
                     }
                 },
                 "EstimatedAverageUtilization": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated utilization of the Savings\n            Plan.</p>"
+                        "smithy.api#documentation": "<p>The estimated utilization of the Savings Plan.</p>"
                     }
                 },
                 "EstimatedMonthlySavingsAmount": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated monthly savings amount based on the Savings\n            Plan.</p>"
+                        "smithy.api#documentation": "<p>The estimated monthly savings amount based on the Savings Plan.</p>"
                     }
                 },
                 "EstimatedOnDemandCost": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the commitment, over the\n            length of the lookback period.</p>"
+                        "smithy.api#documentation": "<p>The remaining On-Demand cost estimated to not be covered by the Savings Plan over the\n            length of the lookback period.</p>"
                     }
                 },
                 "EstimatedOnDemandCostWithCurrentCommitment": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated On-Demand cost you expect with no additional commitment, based on your\n            usage of the selected time period and the Savings Plan you\n            own.</p>"
+                        "smithy.api#documentation": "<p>The estimated On-Demand cost you expect with no additional commitment based on your\n            usage of the selected time period and the Savings Plan you own.</p>"
                     }
                 },
                 "EstimatedROI": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated return on investment that's based on the purchase commitment and\n            estimated savings. This is calculated as\n            estimatedSavingsAmount/estimatedSPCost*100.</p>"
+                        "smithy.api#documentation": "<p>The estimated return on investment that's based on the Savings Plan and estimated\n            savings. This is calculated as estimatedSavingsAmount/estimatedSPCost*100.</p>"
                     }
                 },
                 "EstimatedSavingsAmount": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated savings amount that's based on the purchase commitment over the length\n            of the lookback period.</p>"
+                        "smithy.api#documentation": "<p>The estimated savings amount that's based on the Savings Plan over the length of the\n            lookback period.</p>"
                     }
                 },
                 "EstimatedSavingsPercentage": {
@@ -8642,25 +8664,25 @@
                 "EstimatedCommitmentCost": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated cost of the purchase commitment over the length of the lookback\n            period.</p>"
+                        "smithy.api#documentation": "<p>The estimated cost of the Savings Plan over the length of the lookback period.</p>"
                     }
                 },
                 "LatestUsageTimestamp": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time of the last hour that went into the\n            analysis.</p>"
+                        "smithy.api#documentation": "<p>The date and time of the last hour that went into the analysis.</p>"
                     }
                 },
                 "UpfrontCost": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upfront cost of the Savings Plan, based on the selected payment\n            option.</p>"
+                        "smithy.api#documentation": "<p>The upfront cost of the Savings Plan based on the selected payment option.</p>"
                     }
                 },
                 "AdditionalMetadata": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional metadata that might be applicable to the\n            commitment.</p>"
+                        "smithy.api#documentation": "<p>Additional metadata that might be applicable to the commitment.</p>"
                     }
                 },
                 "MetricsOverLookbackPeriod": {
@@ -8671,7 +8693,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Savings Plans purchase\n            analysis.</p>"
+                "smithy.api#documentation": "<p>Details about the Savings Plans purchase analysis.</p>"
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansPurchaseRecommendation": {
@@ -9240,7 +9262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the parameters of a planned commitment purchase and starts the generation of the\n      analysis. This enables you to estimate the cost, coverage, and utilization impact of your\n      planned commitment purchases. You can request up to 20 analysis runs per\n      day.</p>"
+                "smithy.api#documentation": "<p>Specifies the parameters of a planned commitment purchase and starts the generation of the\n      analysis. This enables you to estimate the cost, coverage, and utilization impact of your\n      planned commitment purchases.</p>"
             }
         },
         "com.amazonaws.costexplorer#StartCommitmentPurchaseAnalysisRequest": {
@@ -9249,7 +9271,7 @@
                 "CommitmentPurchaseAnalysisConfiguration": {
                     "target": "com.amazonaws.costexplorer#CommitmentPurchaseAnalysisConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the commitment purchase\n      analysis.</p>",
+                        "smithy.api#documentation": "<p>The configuration for the commitment purchase analysis.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9264,7 +9286,7 @@
                 "AnalysisId": {
                     "target": "com.amazonaws.costexplorer#AnalysisId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase\n      analysis.</p>",
+                        "smithy.api#documentation": "<p>The analysis ID that's associated with the commitment purchase analysis.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9278,7 +9300,7 @@
                 "EstimatedCompletionTime": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time for when the analysis will\n      complete.</p>",
+                        "smithy.api#documentation": "<p>The estimated time for when the analysis will complete.</p>",
                         "smithy.api#required": {}
                     }
                 }

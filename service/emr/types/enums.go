@@ -780,6 +780,25 @@ func (ScaleDownBehavior) Values() []ScaleDownBehavior {
 	}
 }
 
+type ScalingStrategy string
+
+// Enum values for ScalingStrategy
+const (
+	ScalingStrategyDefault  ScalingStrategy = "DEFAULT"
+	ScalingStrategyAdvanced ScalingStrategy = "ADVANCED"
+)
+
+// Values returns all known values for ScalingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingStrategy) Values() []ScalingStrategy {
+	return []ScalingStrategy{
+		"DEFAULT",
+		"ADVANCED",
+	}
+}
+
 type SpotProvisioningAllocationStrategy string
 
 // Enum values for SpotProvisioningAllocationStrategy

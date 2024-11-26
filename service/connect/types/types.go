@@ -18,6 +18,17 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+type AdditionalEmailRecipients struct {
+
+	//
+	CcList []EmailRecipient
+
+	//
+	ToList []EmailRecipient
+
+	noSmithyDocumentSerde
+}
+
 // The distribution of agents between the instance and its replica(s).
 type AgentConfig struct {
 
@@ -330,6 +341,38 @@ type AssignContactCategoryActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+type AssociatedContactSummary struct {
+
+	//
+	Channel Channel
+
+	//
+	ContactArn *string
+
+	//
+	ContactId *string
+
+	//
+	DisconnectTimestamp *time.Time
+
+	//
+	InitialContactId *string
+
+	//
+	InitiationMethod ContactInitiationMethod
+
+	//
+	InitiationTimestamp *time.Time
+
+	//
+	PreviousContactId *string
+
+	//
+	RelatedContactId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the attached file.
 type AttachedFile struct {
 
@@ -405,6 +448,9 @@ type AttachedFileError struct {
 // Information about a reference when the referenceType is ATTACHMENT . Otherwise,
 // null.
 type AttachmentReference struct {
+
+	//
+	Arn *string
 
 	// Identifier of the attachment reference.
 	Name *string
@@ -830,6 +876,9 @@ type ConnectionData struct {
 // Contains information about a contact.
 type Contact struct {
 
+	//
+	AdditionalEmailRecipients *AdditionalEmailRecipients
+
 	// Information about the agent who accepted the contact.
 	AgentInfo *AgentInfo
 
@@ -851,8 +900,14 @@ type Contact struct {
 	// The timestamp when customer endpoint connected to Amazon Connect.
 	ConnectedToSystemTimestamp *time.Time
 
+	//
+	ContactAssociationId *string
+
 	// Information about the Customer on the contact.
 	Customer *Customer
+
+	//
+	CustomerEndpoint *EndpointInfo
 
 	// Information about customer’s voice activity.
 	CustomerVoiceActivity *CustomerVoiceActivity
@@ -937,6 +992,9 @@ type Contact struct {
 	// and _ characters. This field can be used to show channel subtype. For example,
 	// connect:Guide or connect:SMS .
 	SegmentAttributes map[string]SegmentAttributeValue
+
+	//
+	SystemEndpoint *EndpointInfo
 
 	// Tags associated with the contact. This contains both Amazon Web Services
 	// generated and user-defined tags.
@@ -1270,6 +1328,9 @@ type ContactSearchSummary struct {
 	// flow.
 	ScheduledTimestamp *time.Time
 
+	//
+	SegmentAttributes map[string]ContactSearchSummarySegmentAttributeValue
+
 	noSmithyDocumentSerde
 }
 
@@ -1293,6 +1354,14 @@ type ContactSearchSummaryQueueInfo struct {
 
 	// The unique identifier for the queue.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+type ContactSearchSummarySegmentAttributeValue struct {
+
+	//
+	ValueString *string
 
 	noSmithyDocumentSerde
 }
@@ -1669,6 +1738,103 @@ type DownloadUrlMetadata struct {
 	noSmithyDocumentSerde
 }
 
+type EmailAddressInfo struct {
+
+	//
+	//
+	// This member is required.
+	EmailAddress *string
+
+	//
+	DisplayName *string
+
+	noSmithyDocumentSerde
+}
+
+type EmailAddressMetadata struct {
+
+	//
+	Description *string
+
+	//
+	DisplayName *string
+
+	//
+	EmailAddress *string
+
+	//
+	EmailAddressArn *string
+
+	//
+	EmailAddressId *string
+
+	noSmithyDocumentSerde
+}
+
+type EmailAddressSearchCriteria struct {
+
+	//
+	AndConditions []EmailAddressSearchCriteria
+
+	//
+	OrConditions []EmailAddressSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+type EmailAddressSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
+type EmailAttachment struct {
+
+	//
+	//
+	// This member is required.
+	FileName *string
+
+	//
+	//
+	// This member is required.
+	S3Url *string
+
+	noSmithyDocumentSerde
+}
+
+type EmailMessageReference struct {
+
+	//
+	Arn *string
+
+	//
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+type EmailRecipient struct {
+
+	//
+	Address *string
+
+	//
+	DisplayName *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is EMAIL . Otherwise, null.
 type EmailReference struct {
 
@@ -1721,6 +1887,20 @@ type Endpoint struct {
 	Address *string
 
 	// Type of the endpoint.
+	Type EndpointType
+
+	noSmithyDocumentSerde
+}
+
+type EndpointInfo struct {
+
+	//
+	Address *string
+
+	//
+	DisplayName *string
+
+	//
 	Type EndpointType
 
 	noSmithyDocumentSerde
@@ -2979,6 +3159,53 @@ type HoursOfOperationTimeSlice struct {
 	noSmithyDocumentSerde
 }
 
+type InboundAdditionalRecipients struct {
+
+	//
+	CcAddresses []EmailAddressInfo
+
+	//
+	ToAddresses []EmailAddressInfo
+
+	noSmithyDocumentSerde
+}
+
+type InboundEmailContent struct {
+
+	//
+	//
+	// This member is required.
+	MessageSourceType InboundMessageSourceType
+
+	//
+	RawMessage *InboundRawMessage
+
+	noSmithyDocumentSerde
+}
+
+type InboundRawMessage struct {
+
+	//
+	//
+	// This member is required.
+	Body *string
+
+	//
+	//
+	// This member is required.
+	ContentType *string
+
+	//
+	//
+	// This member is required.
+	Subject *string
+
+	//
+	Headers map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Connect instance.
 type Instance struct {
 
@@ -3633,6 +3860,14 @@ type NumericQuestionPropertyValueAutomation struct {
 	noSmithyDocumentSerde
 }
 
+type OutboundAdditionalRecipients struct {
+
+	//
+	CcEmailAddresses []EmailAddressInfo
+
+	noSmithyDocumentSerde
+}
+
 // The outbound caller ID name, number, and outbound whisper flow.
 type OutboundCallerConfig struct {
 
@@ -3644,6 +3879,50 @@ type OutboundCallerConfig struct {
 
 	// The outbound whisper flow to be used during an outbound call.
 	OutboundFlowId *string
+
+	noSmithyDocumentSerde
+}
+
+type OutboundEmailConfig struct {
+
+	//
+	OutboundEmailAddressId *string
+
+	noSmithyDocumentSerde
+}
+
+type OutboundEmailContent struct {
+
+	//
+	//
+	// This member is required.
+	MessageSourceType OutboundMessageSourceType
+
+	//
+	RawMessage *OutboundRawMessage
+
+	//
+	TemplatedMessageConfig *TemplatedMessageConfig
+
+	noSmithyDocumentSerde
+}
+
+type OutboundRawMessage struct {
+
+	//
+	//
+	// This member is required.
+	Body *string
+
+	//
+	//
+	// This member is required.
+	ContentType *string
+
+	//
+	//
+	// This member is required.
+	Subject *string
 
 	noSmithyDocumentSerde
 }
@@ -4074,6 +4353,9 @@ type Queue struct {
 
 	// The outbound caller ID name, number, and outbound whisper flow.
 	OutboundCallerConfig *OutboundCallerConfig
+
+	//
+	OutboundEmailConfig *OutboundEmailConfig
 
 	// The Amazon Resource Name (ARN) for the queue.
 	QueueArn *string
@@ -4706,10 +4988,17 @@ type Reference struct {
 	// This member is required.
 	Type ReferenceType
 
+	//
+	Arn *string
+
+	//
+	Status ReferenceStatus
+
+	//
+	StatusReason *string
+
 	// A valid value for the reference. For example, for a URL reference, a formatted
 	// URL that is displayed to an agent in the Contact Control Panel (CCP).
-	//
-	// This member is required.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -4723,6 +5012,7 @@ type Reference struct {
 //	ReferenceSummaryMemberAttachment
 //	ReferenceSummaryMemberDate
 //	ReferenceSummaryMemberEmail
+//	ReferenceSummaryMemberEmailMessage
 //	ReferenceSummaryMemberNumber
 //	ReferenceSummaryMemberString
 //	ReferenceSummaryMemberUrl
@@ -4757,6 +5047,14 @@ type ReferenceSummaryMemberEmail struct {
 }
 
 func (*ReferenceSummaryMemberEmail) isReferenceSummary() {}
+
+type ReferenceSummaryMemberEmailMessage struct {
+	Value EmailMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmailMessage) isReferenceSummary() {}
 
 // Information about a reference when the referenceType is NUMBER . Otherwise, null.
 type ReferenceSummaryMemberNumber struct {
@@ -5363,6 +5661,34 @@ type SearchableContactAttributesCriteria struct {
 	noSmithyDocumentSerde
 }
 
+type SearchableSegmentAttributes struct {
+
+	//
+	//
+	// This member is required.
+	Criteria []SearchableSegmentAttributesCriteria
+
+	//
+	MatchType SearchContactsMatchType
+
+	noSmithyDocumentSerde
+}
+
+type SearchableSegmentAttributesCriteria struct {
+
+	//
+	//
+	// This member is required.
+	Key *string
+
+	//
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // A structure of time range that you want to search results.
 type SearchContactsTimeRange struct {
 
@@ -5416,6 +5742,9 @@ type SearchCriteria struct {
 	// [https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions
 	// [Search by custom contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
 	SearchableContactAttributes *SearchableContactAttributes
+
+	//
+	SearchableSegmentAttributes *SearchableSegmentAttributes
 
 	noSmithyDocumentSerde
 }
@@ -5607,6 +5936,22 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The following types satisfy this interface:
+//
+//	ServiceQuotaExceededExceptionReasonMemberAttachedFileServiceQuotaExceededExceptionReason
+type ServiceQuotaExceededExceptionReason interface {
+	isServiceQuotaExceededExceptionReason()
+}
+
+type ServiceQuotaExceededExceptionReasonMemberAttachedFileServiceQuotaExceededExceptionReason struct {
+	Value AttachedFileServiceQuotaExceededExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceQuotaExceededExceptionReasonMemberAttachedFileServiceQuotaExceededExceptionReason) isServiceQuotaExceededExceptionReason() {
+}
+
 // The distribution that determines which Amazon Web Services Regions should be
 // used to sign in agents in to both the instance and its replica(s).
 type SignInConfig struct {
@@ -5672,6 +6017,17 @@ type Sort struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+type SourceCampaign struct {
+
+	//
+	CampaignId *string
+
+	//
+	OutboundRequestId *string
 
 	noSmithyDocumentSerde
 }
@@ -5917,6 +6273,37 @@ type TelephonyConfig struct {
 	//
 	// This member is required.
 	Distributions []Distribution
+
+	noSmithyDocumentSerde
+}
+
+type TemplateAttributes struct {
+
+	//
+	CustomAttributes map[string]string
+
+	//
+	CustomerProfileAttributes *string
+
+	noSmithyDocumentSerde
+}
+
+type TemplatedMessageConfig struct {
+
+	//
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	//
+	//
+	// This member is required.
+	MessageTemplateId *string
+
+	//
+	//
+	// This member is required.
+	TemplateAttributes *TemplateAttributes
 
 	noSmithyDocumentSerde
 }
@@ -6363,6 +6750,14 @@ type UserIdentityInfoLite struct {
 
 	// The user's last name.
 	LastName *string
+
+	noSmithyDocumentSerde
+}
+
+type UserInfo struct {
+
+	//
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -6847,4 +7242,5 @@ func (*UnknownUnionMember) isPredefinedAttributeValues()                        
 func (*UnknownUnionMember) isRealtimeContactAnalysisSegment()                     {}
 func (*UnknownUnionMember) isRealTimeContactAnalysisTimeData()                    {}
 func (*UnknownUnionMember) isReferenceSummary()                                   {}
+func (*UnknownUnionMember) isServiceQuotaExceededExceptionReason()                {}
 func (*UnknownUnionMember) isUpdateParticipantRoleConfigChannelInfo()             {}

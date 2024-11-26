@@ -10994,6 +10994,28 @@ func awsAwsjson11_deserializeDocumentManagedScalingPolicy(v **types.ManagedScali
 				return err
 			}
 
+		case "ScalingStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScalingStrategy to be of type string, got %T instead", value)
+				}
+				sv.ScalingStrategy = types.ScalingStrategy(jtv)
+			}
+
+		case "UtilizationPerformanceIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UtilizationPerformanceIndexInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UtilizationPerformanceIndex = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 

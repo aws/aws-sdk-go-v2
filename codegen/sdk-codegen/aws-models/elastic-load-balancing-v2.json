@@ -390,6 +390,23 @@
                 "smithy.api#documentation": "<p>Information about the override status applied to a target.</p>"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#AdvertiseTrustStoreCaNamesEnum": {
+            "type": "enum",
+            "members": {
+                "on": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on"
+                    }
+                },
+                "off": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "off"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#AllocationId": {
             "type": "string"
         },
@@ -7377,6 +7394,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TrustStoreAssociationStatusEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates a shared trust stores association status.</p>"
+                    }
+                },
+                "AdvertiseTrustStoreCaNames": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#AdvertiseTrustStoreCaNamesEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether trust store CA certificate names are advertised.</p>"
                     }
                 }
             },

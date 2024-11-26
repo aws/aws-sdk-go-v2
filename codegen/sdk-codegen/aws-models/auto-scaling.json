@@ -3571,6 +3571,12 @@
                         "smithy.api#documentation": "<p>The unit of the metric. For a complete list of the units that CloudWatch supports, see the\n                <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a>\n            data type in the <i>Amazon CloudWatch API Reference</i>.</p>"
                     }
                 },
+                "Period": {
+                    "target": "com.amazonaws.autoscaling#MetricGranularityInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The period of the metric in seconds. The default value is 60. Accepted values are 10, 30, and 60. For high resolution metric, set the value to less than 60. For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html\">Create a target tracking policy using high-resolution metrics for faster response</a>.\n        </p>"
+                    }
+                },
                 "Metrics": {
                     "target": "com.amazonaws.autoscaling#TargetTrackingMetricDataQueries",
                     "traits": {
@@ -8151,6 +8157,14 @@
                 "target": "com.amazonaws.autoscaling#MetricDimension"
             }
         },
+        "com.amazonaws.autoscaling#MetricGranularityInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.autoscaling#MetricGranularityType": {
             "type": "structure",
             "members": {
@@ -10859,6 +10873,12 @@
                         "smithy.api#documentation": "<p>A human-readable label for this metric or expression. This is especially useful if\n            this is a math expression, so that you know what the value represents.</p>"
                     }
                 },
+                "Period": {
+                    "target": "com.amazonaws.autoscaling#MetricGranularityInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The period of the metric in seconds. The default value is 60. Accepted values are 10, 30, and 60. For high resolution metric, set the value to less than 60. For more information, see\n        <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html\">Create a target tracking policy using high-resolution metrics for faster response</a>.\n    </p>"
+                    }
+                },
                 "ReturnData": {
                     "target": "com.amazonaws.autoscaling#ReturnData",
                     "traits": {
@@ -10893,6 +10913,12 @@
                     "target": "com.amazonaws.autoscaling#MetricUnit",
                     "traits": {
                         "smithy.api#documentation": "<p>The unit to use for the returned data points. For a complete list of the units that\n            CloudWatch supports, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a>\n            data type in the <i>Amazon CloudWatch API Reference</i>.</p>"
+                    }
+                },
+                "Period": {
+                    "target": "com.amazonaws.autoscaling#MetricGranularityInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The period of the metric in seconds. The default value is 60. Accepted values are 10, 30, and 60. For high resolution metric, set the value to less than 60. For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/policy-creating-high-resolution-metrics.html\">Create a target tracking policy using high-resolution metrics for faster response</a>.\n        </p>"
                     }
                 }
             },

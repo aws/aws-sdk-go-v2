@@ -76,6 +76,14 @@ type UpdateUserPoolDomainInput struct {
 	// for your application. Use this object to specify an SSL certificate that is
 	// managed by ACM.
 	//
+	// When you create a custom domain, the passkey RP ID defaults to the custom
+	// domain. If you had a prefix domain active, this will cause passkey integration
+	// for your prefix domain to stop working due to a mismatch in RP ID. To keep the
+	// prefix domain passkey integration working, you can explicitly set RP ID to the
+	// prefix domain. Update the RP ID in a [SetUserPoolMfaConfig]request.
+	//
+	// [SetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
+	//
 	// This member is required.
 	CustomDomainConfig *types.CustomDomainConfigType
 
@@ -95,6 +103,13 @@ type UpdateUserPoolDomainInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// A version number that indicates the state of managed login for your domain.
+	// Version 1 is hosted UI (classic). Version 2 is the newer managed login with the
+	// branding designer. For more information, see [Managed login].
+	//
+	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
+	ManagedLoginVersion *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -104,6 +119,13 @@ type UpdateUserPoolDomainOutput struct {
 	// The Amazon CloudFront endpoint that Amazon Cognito set up when you added the
 	// custom domain to your user pool.
 	CloudFrontDomain *string
+
+	// A version number that indicates the state of managed login for your domain.
+	// Version 1 is hosted UI (classic). Version 2 is the newer managed login with the
+	// branding designer. For more information, see [Managed login].
+	//
+	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
+	ManagedLoginVersion *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

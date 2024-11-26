@@ -1,3 +1,7 @@
+# v1.29.0 (2024-11-22)
+
+* **Feature**: This release adds support for starting email contacts in your Amazon Connect instance as an email receiving action.
+
 # v1.28.5 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

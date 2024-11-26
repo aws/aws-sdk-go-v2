@@ -41,8 +41,14 @@ type Attachment struct {
 	// The timestamp when the attachment was created.
 	CreatedAt *time.Time
 
-	// The Region where the edge is located.
+	// The Region where the edge is located. This is returned for all attachment types
+	// except a Direct Connect gateway attachment, which instead returns EdgeLocations .
 	EdgeLocation *string
+
+	// The edge locations that the Direct Connect gateway is associated with. This is
+	// returned only for Direct Connect gateway attachments. All other attachment types
+	// retrun EdgeLocation .
+	EdgeLocations []string
 
 	// Describes the error associated with the attachment request.
 	LastModificationErrors []AttachmentError
@@ -742,6 +748,18 @@ type Device struct {
 
 	// The device vendor.
 	Vendor *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Direct Connect gateway attachment.
+type DirectConnectGatewayAttachment struct {
+
+	// Describes a core network attachment.
+	Attachment *Attachment
+
+	// The Direct Connect gateway attachment ARN.
+	DirectConnectGatewayArn *string
 
 	noSmithyDocumentSerde
 }

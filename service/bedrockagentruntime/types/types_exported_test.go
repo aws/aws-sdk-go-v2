@@ -8,6 +8,50 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 )
 
+func ExampleActionGroupExecutor_outputUsage() {
+	var union types.ActionGroupExecutor
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ActionGroupExecutorMemberCustomControl:
+		_ = v.Value // Value is types.CustomControlMethod
+
+	case *types.ActionGroupExecutorMemberLambda:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ types.CustomControlMethod
+
+func ExampleAPISchema_outputUsage() {
+	var union types.APISchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.APISchemaMemberPayload:
+		_ = v.Value // Value is string
+
+	case *types.APISchemaMemberS3:
+		_ = v.Value // Value is types.S3Identifier
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Identifier
+var _ *string
+
 func ExampleFlowInputContent_outputUsage() {
 	var union types.FlowInputContent
 	// type switches can be used to check the union value
@@ -131,6 +175,54 @@ func ExampleFlowTraceNodeOutputContent_outputUsage() {
 }
 
 var _ document.Interface
+
+func ExampleFunctionSchema_outputUsage() {
+	var union types.FunctionSchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FunctionSchemaMemberFunctions:
+		_ = v.Value // Value is []types.FunctionDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.FunctionDefinition
+
+func ExampleInlineAgentResponseStream_outputUsage() {
+	var union types.InlineAgentResponseStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InlineAgentResponseStreamMemberChunk:
+		_ = v.Value // Value is types.InlineAgentPayloadPart
+
+	case *types.InlineAgentResponseStreamMemberFiles:
+		_ = v.Value // Value is types.InlineAgentFilePart
+
+	case *types.InlineAgentResponseStreamMemberReturnControl:
+		_ = v.Value // Value is types.InlineAgentReturnControlPayload
+
+	case *types.InlineAgentResponseStreamMemberTrace:
+		_ = v.Value // Value is types.InlineAgentTracePart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InlineAgentTracePart
+var _ *types.InlineAgentPayloadPart
+var _ *types.InlineAgentReturnControlPayload
+var _ *types.InlineAgentFilePart
 
 func ExampleInputPrompt_outputUsage() {
 	var union types.InputPrompt

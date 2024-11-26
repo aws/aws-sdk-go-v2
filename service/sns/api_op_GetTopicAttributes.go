@@ -92,7 +92,12 @@ type GetTopicAttributesOutput struct {
 	//
 	// The following attributes apply only to [FIFO topics]:
 	//
-	//   - FifoTopic – When this is set to true , a FIFO topic is created.
+	//   - ArchivePolicy – The policy that sets the retention period for messages
+	//   stored in the message archive of an Amazon SNS FIFO topic.
+	//
+	//   - BeginningArchiveTime – The earliest starting point at which a message in the
+	//   topic’s archive can be replayed from. This point in time is based on the
+	//   configured message retention period set by the topic’s message archiving policy.
 	//
 	//   - ContentBasedDeduplication – Enables content-based deduplication for FIFO
 	//   topics.
@@ -107,6 +112,8 @@ type GetTopicAttributesOutput struct {
 	//
 	// (Optional) To override the generated value, you can specify a value for the
 	//   MessageDeduplicationId parameter for the Publish action.
+	//
+	//   - FifoTopic – When this is set to true , a FIFO topic is created.
 	//
 	// [Key Terms]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
 	// [KeyId]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters

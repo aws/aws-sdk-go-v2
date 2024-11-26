@@ -950,6 +950,18 @@ func TestCheckSnapshot_DescribeDashboardSnapshotJobResult(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDashboardsQAConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDashboardsQAConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDashboardsQAConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDataSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDataSet(context.Background(), nil, func(o *Options) {
@@ -1886,6 +1898,18 @@ func TestCheckSnapshot_SearchGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchTopics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchTopics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchTopics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAssetBundleExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAssetBundleExportJob(context.Background(), nil, func(o *Options) {
@@ -2095,6 +2119,18 @@ func TestCheckSnapshot_UpdateDashboardPublishedVersion(t *testing.T) {
 	_, err := svc.UpdateDashboardPublishedVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDashboardPublishedVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDashboardsQAConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDashboardsQAConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDashboardsQAConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3325,6 +3361,18 @@ func TestUpdateSnapshot_DescribeDashboardSnapshotJobResult(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDashboardsQAConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDashboardsQAConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDashboardsQAConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDataSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDataSet(context.Background(), nil, func(o *Options) {
@@ -4261,6 +4309,18 @@ func TestUpdateSnapshot_SearchGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchTopics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchTopics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchTopics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartAssetBundleExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAssetBundleExportJob(context.Background(), nil, func(o *Options) {
@@ -4470,6 +4530,18 @@ func TestUpdateSnapshot_UpdateDashboardPublishedVersion(t *testing.T) {
 	_, err := svc.UpdateDashboardPublishedVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDashboardPublishedVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDashboardsQAConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDashboardsQAConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDashboardsQAConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

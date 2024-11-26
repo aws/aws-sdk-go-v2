@@ -1074,6 +1074,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
 			}
 
+		case "ProvisionedPollerConfig":
+			if err := awsRestjson1_deserializeDocumentProvisionedPollerConfig(&sv.ProvisionedPollerConfig, value); err != nil {
+				return err
+			}
+
 		case "Queues":
 			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
 				return err
@@ -2367,6 +2372,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 					return err
 				}
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
+			}
+
+		case "ProvisionedPollerConfig":
+			if err := awsRestjson1_deserializeDocumentProvisionedPollerConfig(&sv.ProvisionedPollerConfig, value); err != nil {
+				return err
 			}
 
 		case "Queues":
@@ -4045,6 +4055,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 					return err
 				}
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
+			}
+
+		case "ProvisionedPollerConfig":
+			if err := awsRestjson1_deserializeDocumentProvisionedPollerConfig(&sv.ProvisionedPollerConfig, value); err != nil {
+				return err
 			}
 
 		case "Queues":
@@ -12435,6 +12450,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
 			}
 
+		case "ProvisionedPollerConfig":
+			if err := awsRestjson1_deserializeDocumentProvisionedPollerConfig(&sv.ProvisionedPollerConfig, value); err != nil {
+				return err
+			}
+
 		case "Queues":
 			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
 				return err
@@ -17471,6 +17491,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				sv.ParallelizationFactor = ptr.Int32(int32(i64))
 			}
 
+		case "ProvisionedPollerConfig":
+			if err := awsRestjson1_deserializeDocumentProvisionedPollerConfig(&sv.ProvisionedPollerConfig, value); err != nil {
+				return err
+			}
+
 		case "Queues":
 			if err := awsRestjson1_deserializeDocumentQueues(&sv.Queues, value); err != nil {
 				return err
@@ -20204,6 +20229,63 @@ func awsRestjson1_deserializeDocumentProvisionedConcurrencyConfigNotFoundExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProvisionedPollerConfig(v **types.ProvisionedPollerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProvisionedPollerConfig
+	if *v == nil {
+		sv = &types.ProvisionedPollerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumPollers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumNumberOfPollers to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumPollers = ptr.Int32(int32(i64))
+			}
+
+		case "MinimumPollers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinimumNumberOfPollers to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumPollers = ptr.Int32(int32(i64))
 			}
 
 		default:

@@ -68,6 +68,9 @@ type CreateTaskTemplateInput struct {
 	// The description of the task template.
 	Description *string
 
+	//
+	SelfAssignFlowId *string
+
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
 	// only be created from ACTIVE templates. If a template is marked as INACTIVE ,
 	// then a task that refers to this template cannot be created.

@@ -10,12 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an Amazon Web Services account with an Amazon Inspector delegated
-// administrator. An HTTP 200 response indicates the association was successfully
-// started, but doesn’t indicate whether it was completed. You can check if the
-// association completed by using [ListMembers]for multiple accounts or [GetMembers] for a single account.
+//	Associates an Amazon Web Services account with an Amazon Inspector delegated
+//
+// administrator. An HTTP 200 response indicates the association was started but
+// doesn’t indicate whether it completed. You can check if the association
+// completed using [ListMembers]for multiple accounts or [GetMembers] for a single account. An HTTP 402
+// response indicates the association failed because the organization size exceeded
+// its limit. For information on limits, see [Amazon Inspector quotas].
 //
 // [ListMembers]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html
+// [Amazon Inspector quotas]: https://docs.aws.amazon.com/inspector/latest/user/quotas.html
 // [GetMembers]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html
 func (c *Client) AssociateMember(ctx context.Context, params *AssociateMemberInput, optFns ...func(*Options)) (*AssociateMemberOutput, error) {
 	if params == nil {

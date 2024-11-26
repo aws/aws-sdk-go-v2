@@ -1,3 +1,7 @@
+# v1.7.0 (2024-11-22)
+
+* **Feature**: Added new "DeliverToQBusiness" rule action to MailManager RulesSet for ingesting email data into Amazon Q Business customer applications
+
 # v1.6.4 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

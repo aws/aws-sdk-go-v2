@@ -20,7 +20,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
+// Amazon Web Services service, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -82,11 +82,12 @@ type AdminUpdateUserAttributesInput struct {
 	// updates the attribute value. Your user can sign in and receive messages with the
 	// original attribute value until they verify the new value.
 	//
-	// To update the value of an attribute that requires verification in the same API
-	// request, include the email_verified or phone_number_verified attribute, with a
-	// value of true . If you set the email_verified or phone_number_verified value
-	// for an email or phone_number attribute that requires verification to true ,
-	// Amazon Cognito doesn’t send a verification message to your user.
+	// To skip the verification message and update the value of an attribute that
+	// requires verification in the same API request, include the email_verified or
+	// phone_number_verified attribute, with a value of true . If you set the
+	// email_verified or phone_number_verified value for an email or phone_number
+	// attribute that requires verification to true , Amazon Cognito doesn’t send a
+	// verification message to your user.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType

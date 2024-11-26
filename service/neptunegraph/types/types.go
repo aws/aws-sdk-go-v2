@@ -19,6 +19,132 @@ type EdgeStructure struct {
 	noSmithyDocumentSerde
 }
 
+// This is the top-level field for specifying vertex or edge filters. If the
+// ExportFilter is not provided, then all properties for all labels will be
+// exported. If the ExportFilter is provided but is an empty object, then no data
+// will be exported.
+type ExportFilter struct {
+
+	// Used to specify filters on a per-label basis for edges. This allows you to
+	// control which edge labels and properties are included in the export.
+	EdgeFilter map[string]ExportFilterElement
+
+	// Used to specify filters on a per-label basis for vertices. This allows you to
+	// control which vertex labels and properties are included in the export.
+	VertexFilter map[string]ExportFilterElement
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whihc properties of that label should be included in the export.
+type ExportFilterElement struct {
+
+	// Each property is defined by a key-value pair, where the key is the desired
+	// output property name (e.g. "name"), and the value is an object.
+	Properties map[string]ExportFilterPropertyAttributes
+
+	noSmithyDocumentSerde
+}
+
+// A structure representing a property's attributes. It is a map object of
+// outputType, sourcePropertyName and multiValueHandling.
+type ExportFilterPropertyAttributes struct {
+
+	// Specifies how to handle properties that have multiple values. Can be either
+	// TO_LIST to export all values as a list, or PICK_FIRST to export the first value
+	// encountered. If not specified, the default value is PICK_FIRST .
+	MultiValueHandling MultiValueHandlingType
+
+	// Specifies the data type to use for the property in the exported data (e.g.
+	// "String", "Int", "Float"). If a type is not provided, the export process will
+	// determine the type. If a given property is present as multiple types (e.g. one
+	// vertex has "height" stored as a double, and another edge has it stored as a
+	// string), the type will be of Any type, otherwise, it will be the type of the
+	// property as present in vertices.
+	OutputType *string
+
+	// The name of the property as it exists in the original graph data. If not
+	// provided, it is assumed that the key matches the desired sourcePropertyName.
+	SourcePropertyName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the specified export task.
+type ExportTaskDetails struct {
+
+	// The number of progress percentage of the export task.
+	//
+	// This member is required.
+	ProgressPercentage *int32
+
+	// The start time of the export task.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The time elapsed, in seconds, since the start time of the export task.
+	//
+	// This member is required.
+	TimeElapsedSeconds *int64
+
+	// The number of exported edges.
+	NumEdgesWritten *int64
+
+	// The number of exported vertices.
+	NumVerticesWritten *int64
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an export task.
+type ExportTaskSummary struct {
+
+	// The Amazon S3 URI of the export task where data will be exported to.
+	//
+	// This member is required.
+	Destination *string
+
+	// The format of the export task.
+	//
+	// This member is required.
+	Format ExportFormat
+
+	// The source graph identifier of the export task.
+	//
+	// This member is required.
+	GraphId *string
+
+	// The KMS key identifier of the export task.
+	//
+	// This member is required.
+	KmsKeyIdentifier *string
+
+	// The ARN of the IAM role that will allow the data to be exported to the
+	// destination.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The current status of the export task.
+	//
+	// This member is required.
+	Status ExportTaskStatus
+
+	// The unique identifier of the export task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The parquet type of the export task.
+	ParquetType ParquetType
+
+	// The reason that the export task has this status value.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about the graph.
 type GraphDataSummary struct {
 
@@ -247,6 +373,9 @@ type ImportTaskSummary struct {
 
 	// The unique identifier of the Neptune Analytics graph.
 	GraphId *string
+
+	// The parquet type of the import task.
+	ParquetType ParquetType
 
 	noSmithyDocumentSerde
 }

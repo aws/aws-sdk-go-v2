@@ -10393,6 +10393,23 @@ func awsAwsquery_deserializeDocumentCustomizedMetricSpecification(v **types.Cust
 				sv.Namespace = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("Period", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Period = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("Statistic", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -17995,6 +18012,23 @@ func awsAwsquery_deserializeDocumentTargetTrackingMetricDataQuery(v **types.Targ
 				return err
 			}
 
+		case strings.EqualFold("Period", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Period = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("ReturnData", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -18051,6 +18085,23 @@ func awsAwsquery_deserializeDocumentTargetTrackingMetricStat(v **types.TargetTra
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentMetric(&sv.Metric, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("Period", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Period = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("Stat", t.Name.Local):

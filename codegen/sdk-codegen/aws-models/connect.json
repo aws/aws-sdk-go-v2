@@ -231,6 +231,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#AdditionalEmailRecipients": {
+            "type": "structure",
+            "members": {
+                "ToList": {
+                    "target": "com.amazonaws.connect#EmailRecipientsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "CcList": {
+                    "target": "com.amazonaws.connect#EmailRecipientsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
         "com.amazonaws.connect#AfterContactWorkTimeLimit": {
             "type": "integer",
             "traits": {
@@ -939,6 +959,9 @@
                     "target": "com.amazonaws.connect#CreateAgentStatus"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateContact"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateContactFlow"
                 },
                 {
@@ -946,6 +969,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#CreateContactFlowVersion"
+                },
+                {
+                    "target": "com.amazonaws.connect#CreateEmailAddress"
                 },
                 {
                     "target": "com.amazonaws.connect#CreateEvaluationForm"
@@ -1026,6 +1052,9 @@
                     "target": "com.amazonaws.connect#DeleteContactFlowModule"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteEmailAddress"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteEvaluationForm"
                 },
                 {
@@ -1099,6 +1128,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeContactFlowModule"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeEmailAddress"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeEvaluationForm"
@@ -1243,6 +1275,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListApprovedOrigins"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListAssociatedContacts"
                 },
                 {
                     "target": "com.amazonaws.connect#ListAuthenticationProfiles"
@@ -1410,6 +1445,9 @@
                     "target": "com.amazonaws.connect#SearchContacts"
                 },
                 {
+                    "target": "com.amazonaws.connect#SearchEmailAddresses"
+                },
+                {
                     "target": "com.amazonaws.connect#SearchHoursOfOperations"
                 },
                 {
@@ -1446,6 +1484,9 @@
                     "target": "com.amazonaws.connect#SendChatIntegrationEvent"
                 },
                 {
+                    "target": "com.amazonaws.connect#SendOutboundEmail"
+                },
+                {
                     "target": "com.amazonaws.connect#StartAttachedFileUpload"
                 },
                 {
@@ -1461,7 +1502,13 @@
                     "target": "com.amazonaws.connect#StartContactStreaming"
                 },
                 {
+                    "target": "com.amazonaws.connect#StartEmailContact"
+                },
+                {
                     "target": "com.amazonaws.connect#StartOutboundChatContact"
+                },
+                {
+                    "target": "com.amazonaws.connect#StartOutboundEmailContact"
                 },
                 {
                     "target": "com.amazonaws.connect#StartOutboundVoiceContact"
@@ -1542,6 +1589,9 @@
                     "target": "com.amazonaws.connect#UpdateContactSchedule"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateEmailAddressMetadata"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateEvaluationForm"
                 },
                 {
@@ -1579,6 +1629,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateQueueOutboundCallerConfig"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateQueueOutboundEmailConfig"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateQueueStatus"
@@ -3690,6 +3743,74 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#AssociatedContactSummary": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "InitiationTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DisconnectTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "InitialContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "PreviousContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "RelatedContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "InitiationMethod": {
+                    "target": "com.amazonaws.connect#ContactInitiationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#AssociatedContactSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AssociatedContactSummary"
+            }
+        },
         "com.amazonaws.connect#AssociatedQueueIdList": {
             "type": "list",
             "member": {
@@ -3834,6 +3955,23 @@
                 }
             }
         },
+        "com.amazonaws.connect#AttachedFileServiceQuotaExceededExceptionReason": {
+            "type": "enum",
+            "members": {
+                "TOTAL_FILE_SIZE_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOTAL_FILE_SIZE_EXCEEDED"
+                    }
+                },
+                "TOTAL_FILE_COUNT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOTAL_FILE_COUNT_EXCEEDED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#AttachedFilesList": {
             "type": "list",
             "member": {
@@ -3868,6 +4006,12 @@
                     "target": "com.amazonaws.connect#ReferenceStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Status of the attachment reference type.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ReferenceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -4696,6 +4840,16 @@
                 }
             }
         },
+        "com.amazonaws.connect#Body": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5242880
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connect#Boolean": {
             "type": "boolean",
             "traits": {
@@ -4769,6 +4923,12 @@
                     "traits": {
                         "smithy.api#enumValue": "TASK"
                     }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
                 }
             }
         },
@@ -4795,7 +4955,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 3
+                    "max": 4
                 }
             }
         },
@@ -5276,6 +5436,19 @@
                 "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a ProficiencyName, ProficiencyValue and\n   ProficiencyLimit.</p>"
             }
         },
+        "com.amazonaws.connect#ConditionalOperationFailedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connect#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.connect#Conditions": {
             "type": "list",
             "member": {
@@ -5340,6 +5513,12 @@
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
                         "smithy.api#documentation": "<p>If this contact is not the first contact, this is the ID of the previous contact.</p>"
+                    }
+                },
+                "ContactAssociationId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "InitiationMethod": {
@@ -5438,6 +5617,18 @@
                         "smithy.api#documentation": "<p>Information about Amazon Connect Wisdom.</p>"
                     }
                 },
+                "CustomerEndpoint": {
+                    "target": "com.amazonaws.connect#EndpointInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "SystemEndpoint": {
+                    "target": "com.amazonaws.connect#EndpointInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
                 "QueueTimeAdjustmentSeconds": {
                     "target": "com.amazonaws.connect#QueueTimeAdjustmentSeconds",
                     "traits": {
@@ -5499,6 +5690,12 @@
                     "target": "com.amazonaws.connect#DisconnectDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the call disconnect experience.</p>"
+                    }
+                },
+                "AdditionalEmailRecipients": {
+                    "target": "com.amazonaws.connect#AdditionalEmailRecipients",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "SegmentAttributes": {
@@ -6259,6 +6456,24 @@
                     "traits": {
                         "smithy.api#enumValue": "EXTERNAL_OUTBOUND"
                     }
+                },
+                "WEBRTC_API": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBRTC_API"
+                    }
+                },
+                "AGENT_REPLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_REPLY"
+                    }
+                },
+                "FLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOW"
+                    }
                 }
             }
         },
@@ -6359,6 +6574,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp, in Unix epoch time format, at which to start running the inbound flow.</p>"
                     }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#ContactSearchSummarySegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             },
             "traits": {
@@ -6403,6 +6624,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>If this contact was queued, this contains information about the queue.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactSearchSummarySegmentAttributeValue": {
+            "type": "structure",
+            "members": {
+                "ValueString": {
+                    "target": "com.amazonaws.connect#SegmentAttributeValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#ContactSearchSummarySegmentAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#SegmentAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#ContactSearchSummarySegmentAttributeValue"
             }
         },
         "com.amazonaws.connect#ContactState": {
@@ -6751,6 +6995,52 @@
                 "smithy.api#documentation": "<p>The <code>CreateCase</code> action definition.</p>"
             }
         },
+        "com.amazonaws.connect#CreateContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact/create-contact",
+                    "code": 200
+                }
+            }
+        },
         "com.amazonaws.connect#CreateContactFlow": {
             "type": "operation",
             "input": {
@@ -7094,6 +7384,232 @@
                     "target": "com.amazonaws.connect#ResourceVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the flow version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateContactRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "RelatedContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.connect#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "References": {
+                    "target": "com.amazonaws.connect#ContactReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InitiationMethod": {
+                    "target": "com.amazonaws.connect#ContactInitiationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiryDurationInMinutes": {
+                    "target": "com.amazonaws.connect#ExpiryDurationInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "UserInfo": {
+                    "target": "com.amazonaws.connect#UserInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "InitiateAs": {
+                    "target": "com.amazonaws.connect#InitiateAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#SegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateContactResponse": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#CreateEmailAddress": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateEmailAddressRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateEmailAddressResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/email-addresses/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateEmailAddressRequest": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.connect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EmailAddressDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateEmailAddressResponse": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddressArn": {
+                    "target": "com.amazonaws.connect#EmailAddressArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7958,6 +8474,12 @@
                         "smithy.api#documentation": "<p>The outbound caller ID name, number, and outbound whisper flow.</p>"
                     }
                 },
+                "OutboundEmailConfig": {
+                    "target": "com.amazonaws.connect#OutboundEmailConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
                 "HoursOfOperationId": {
                     "target": "com.amazonaws.connect#HoursOfOperationId",
                     "traits": {
@@ -8559,6 +9081,12 @@
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "SelfAssignFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "Constraints": {
@@ -9651,6 +10179,9 @@
                 "smithy.api#documentation": "<p>Information about the Customer on the contact.</p>"
             }
         },
+        "com.amazonaws.connect#CustomerProfileAttributesSerialized": {
+            "type": "string"
+        },
         "com.amazonaws.connect#CustomerQualityMetrics": {
             "type": "structure",
             "members": {
@@ -10132,6 +10663,77 @@
             }
         },
         "com.amazonaws.connect#DeleteContactFlowResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteEmailAddress": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteEmailAddressRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteEmailAddressResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/email-addresses/{InstanceId}/{EmailAddressId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteEmailAddressRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteEmailAddressResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -11765,6 +12367,123 @@
                     "target": "com.amazonaws.connect#Contact",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeEmailAddress": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeEmailAddressRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeEmailAddressResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/email-addresses/{InstanceId}/{EmailAddressId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeEmailAddressRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeEmailAddressResponse": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddressArn": {
+                    "target": "com.amazonaws.connect#EmailAddressArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EmailAddressDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "CreateTimestamp": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ModifiedTimestamp": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -14313,6 +15032,305 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.connect#EmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#EmailAddressArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#EmailAddressDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#EmailAddressId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#EmailAddressInfo": {
+            "type": "structure",
+            "members": {
+                "EmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EmailAddressDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailAddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EmailAddressMetadata"
+            }
+        },
+        "com.amazonaws.connect#EmailAddressMetadata": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddressArn": {
+                    "target": "com.amazonaws.connect#EmailAddressArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EmailAddressDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailAddressRecipientList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EmailAddressInfo"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#EmailAddressSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EmailAddressSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#EmailAddressSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#EmailAddressSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#EmailAddressSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailAddressSearchFilter": {
+            "type": "structure",
+            "members": {
+                "TagFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailAttachment": {
+            "type": "structure",
+            "members": {
+                "FileName": {
+                    "target": "com.amazonaws.connect#FileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Url": {
+                    "target": "com.amazonaws.connect#PreSignedAttachmentUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailAttachments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EmailAttachment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#EmailHeaderType": {
+            "type": "enum",
+            "members": {
+                "REFERENCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERENCES"
+                    }
+                },
+                "MESSAGE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_ID"
+                    }
+                },
+                "IN_REPLY_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_REPLY_TO"
+                    }
+                },
+                "X_SES_SPAM_VERDICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X_SES_SPAM_VERDICT"
+                    }
+                },
+                "X_SES_VIRUS_VERDICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X_SES_VIRUS_VERDICT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EmailHeaderValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20000
+                }
+            }
+        },
+        "com.amazonaws.connect#EmailHeaders": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#EmailHeaderType"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#EmailHeaderValue"
+            }
+        },
+        "com.amazonaws.connect#EmailMessageContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#EmailMessageReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ReferenceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailRecipient": {
+            "type": "structure",
+            "members": {
+                "Address": {
+                    "target": "com.amazonaws.connect#EndpointAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EndpointDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#EmailRecipientsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EmailRecipient"
+            }
+        },
         "com.amazonaws.connect#EmailReference": {
             "type": "structure",
             "members": {
@@ -14409,6 +15427,41 @@
                 }
             }
         },
+        "com.amazonaws.connect#EndpointDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#EndpointInfo": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.connect#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.connect#EndpointAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EndpointDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
         "com.amazonaws.connect#EndpointType": {
             "type": "enum",
             "members": {
@@ -14434,6 +15487,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CONNECT_PHONENUMBER_ARN"
+                    }
+                },
+                "EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_ADDRESS"
                     }
                 }
             }
@@ -15888,6 +16947,9 @@
                 "smithy.api#documentation": "<p>An object to specify the expiration of a routing step.</p>"
             }
         },
+        "com.amazonaws.connect#ExpiryDurationInMinutes": {
+            "type": "integer"
+        },
         "com.amazonaws.connect#Expression": {
             "type": "structure",
             "members": {
@@ -16112,7 +17174,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -16166,6 +17229,12 @@
         "com.amazonaws.connect#FileUseCaseType": {
             "type": "enum",
             "members": {
+                "EMAIL_MESSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_MESSAGE"
+                    }
+                },
                 "ATTACHMENT": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -16257,6 +17326,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SMS_PHONE_NUMBER"
+                    }
+                },
+                "INBOUND_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOUND_EMAIL"
+                    }
+                },
+                "OUTBOUND_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTBOUND_EMAIL"
                     }
                 }
             }
@@ -17375,6 +18456,12 @@
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "SelfAssignFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "Constraints": {
@@ -18680,11 +19767,119 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#InboundAdditionalRecipients": {
+            "type": "structure",
+            "members": {
+                "ToAddresses": {
+                    "target": "com.amazonaws.connect#EmailAddressRecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "CcAddresses": {
+                    "target": "com.amazonaws.connect#EmailAddressRecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
         "com.amazonaws.connect#InboundCallsEnabled": {
             "type": "boolean"
         },
+        "com.amazonaws.connect#InboundEmailContent": {
+            "type": "structure",
+            "members": {
+                "MessageSourceType": {
+                    "target": "com.amazonaws.connect#InboundMessageSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RawMessage": {
+                    "target": "com.amazonaws.connect#InboundRawMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#InboundMessageSourceType": {
+            "type": "enum",
+            "members": {
+                "RAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RAW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#InboundRawMessage": {
+            "type": "structure",
+            "members": {
+                "Subject": {
+                    "target": "com.amazonaws.connect#InboundSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.connect#Body",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.connect#EmailMessageContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Headers": {
+                    "target": "com.amazonaws.connect#EmailHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#InboundSubject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 998
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connect#Index": {
             "type": "integer"
+        },
+        "com.amazonaws.connect#InitiateAs": {
+            "type": "enum",
+            "members": {
+                "CONNECTED_TO_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED_TO_USER"
+                    }
+                }
+            }
         },
         "com.amazonaws.connect#InitiationMethodList": {
             "type": "list",
@@ -19080,6 +20275,12 @@
                     "traits": {
                         "smithy.api#enumValue": "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"
                     }
+                },
+                "EMAIL_MESSAGES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_MESSAGES"
+                    }
                 }
             }
         },
@@ -19303,6 +20504,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FILE_SCANNER"
+                    }
+                },
+                "SES_IDENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SES_IDENTITY"
                     }
                 }
             }
@@ -19964,6 +21171,107 @@
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListAssociatedContacts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListAssociatedContactsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListAssociatedContactsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/contact/associated/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ListAssociatedContactsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpQuery": "contactId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#ListAssociatedContactsRequestMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListAssociatedContactsRequestMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#ListAssociatedContactsResponse": {
+            "type": "structure",
+            "members": {
+                "ContactSummaryList": {
+                    "target": "com.amazonaws.connect#AssociatedContactSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -20943,6 +22251,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VOICE_PHONE_NUMBER"
+                    }
+                },
+                "INBOUND_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOUND_EMAIL"
+                    }
+                },
+                "OUTBOUND_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTBOUND_EMAIL"
                     }
                 }
             }
@@ -24466,6 +25786,24 @@
         "com.amazonaws.connect#Message": {
             "type": "string"
         },
+        "com.amazonaws.connect#MessageTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#MessageTemplateKnowledgeBaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.connect#MetadataUrl": {
             "type": "string",
             "traits": {
@@ -24779,7 +26117,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 1024
                 },
                 "smithy.api#sensitive": {}
             }
@@ -25089,6 +26427,20 @@
                 "target": "com.amazonaws.connect#Origin"
             }
         },
+        "com.amazonaws.connect#OutboundAdditionalRecipients": {
+            "type": "structure",
+            "members": {
+                "CcEmailAddresses": {
+                    "target": "com.amazonaws.connect#EmailAddressRecipientList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
         "com.amazonaws.connect#OutboundCallerConfig": {
             "type": "structure",
             "members": {
@@ -25145,6 +26497,112 @@
                 "smithy.api#documentation": "<p>The contact is not permitted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.connect#OutboundEmailConfig": {
+            "type": "structure",
+            "members": {
+                "OutboundEmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#OutboundEmailContent": {
+            "type": "structure",
+            "members": {
+                "MessageSourceType": {
+                    "target": "com.amazonaws.connect#OutboundMessageSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplatedMessageConfig": {
+                    "target": "com.amazonaws.connect#TemplatedMessageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "RawMessage": {
+                    "target": "com.amazonaws.connect#OutboundRawMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#OutboundMessageSourceType": {
+            "type": "enum",
+            "members": {
+                "TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEMPLATE"
+                    }
+                },
+                "RAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RAW"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#OutboundRawMessage": {
+            "type": "structure",
+            "members": {
+                "Subject": {
+                    "target": "com.amazonaws.connect#OutboundSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.connect#Body",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.connect#EmailMessageContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#OutboundRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.connect#OutboundSubject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 998
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.connect#OutputTypeNotFoundException": {
@@ -27231,6 +28689,15 @@
                 }
             }
         },
+        "com.amazonaws.connect#PreSignedAttachmentUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.connect#PredefinedAttribute": {
             "type": "structure",
             "members": {
@@ -27845,6 +29312,12 @@
                     "target": "com.amazonaws.connect#OutboundCallerConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The outbound caller ID name, number, and outbound whisper flow.</p>"
+                    }
+                },
+                "OutboundEmailConfig": {
+                    "target": "com.amazonaws.connect#OutboundEmailConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "HoursOfOperationId": {
@@ -29206,8 +30679,9 @@
                 "Value": {
                     "target": "com.amazonaws.connect#ReferenceValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A valid value for the reference. For example, for a URL reference, a formatted URL that is\n   displayed to an agent in the Contact Control Panel (CCP).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>A valid value for the reference. For example, for a URL reference, a formatted URL that is\n   displayed to an agent in the Contact Control Panel (CCP).</p>"
                     }
                 },
                 "Type": {
@@ -29216,10 +30690,38 @@
                         "smithy.api#documentation": "<p>The type of the reference. <code>DATE</code> must be of type Epoch timestamp.\n   </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ReferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ReferenceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.connect#ReferenceStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Well-formed data on a contact, used by agents to complete a contact request. You can have up\n   to 4,096 UTF-8 bytes across all references for a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ReferenceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[-:/A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.connect#ReferenceId": {
@@ -29243,6 +30745,18 @@
         "com.amazonaws.connect#ReferenceStatus": {
             "type": "enum",
             "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
                 "APPROVED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -29254,6 +30768,27 @@
                     "traits": {
                         "smithy.api#enumValue": "REJECTED"
                     }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ReferenceStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -29270,6 +30805,12 @@
                     "target": "com.amazonaws.connect#AttachmentReference",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is\n    <code>ATTACHMENT</code>. Otherwise, null.</p>"
+                    }
+                },
+                "EmailMessage": {
+                    "target": "com.amazonaws.connect#EmailMessageReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "String": {
@@ -29322,6 +30863,12 @@
                         "smithy.api#enumValue": "ATTACHMENT"
                     }
                 },
+                "CONTACT_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT_ANALYSIS"
+                    }
+                },
                 "NUMBER": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -29344,6 +30891,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "EMAIL_MESSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_MESSAGE"
                     }
                 }
             }
@@ -31462,10 +33015,118 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The search criteria based on user-defined contact attributes that have been configured for\n   contact search. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html\">Search by custom contact\n    attributes</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <important>\n            <p>To use <code>SearchableContactAttributes</code> in a search request, the\n     <code>GetContactAttributes</code> action is required to perform an API request. For more\n    information, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions\">https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions</a>Actions defined by Amazon Connect.</p>\n         </important>"
                     }
+                },
+                "SearchableSegmentAttributes": {
+                    "target": "com.amazonaws.connect#SearchableSegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure of search criteria to be used to return contacts.</p>"
+            }
+        },
+        "com.amazonaws.connect#SearchEmailAddresses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchEmailAddressesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchEmailAddressesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-email-addresses",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchEmailAddressesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#EmailAddressSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#EmailAddressSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchEmailAddressesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddresses": {
+                    "target": "com.amazonaws.connect#EmailAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#SearchHoursOfOperations": {
@@ -32635,7 +34296,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 100
                 },
                 "smithy.api#sensitive": {}
@@ -32726,6 +34387,94 @@
                     "traits": {
                         "smithy.api#enumValue": "STANDARD"
                     }
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchableSegmentAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#SearchableSegmentAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#SearchableSegmentAttributeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SearchableSegmentAttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connect#SearchableSegmentAttributes": {
+            "type": "structure",
+            "members": {
+                "Criteria": {
+                    "target": "com.amazonaws.connect#SearchableSegmentAttributesCriteriaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchType": {
+                    "target": "com.amazonaws.connect#SearchContactsMatchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#SearchableSegmentAttributesCriteria": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.connect#SearchableSegmentAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.connect#SearchableSegmentAttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.connect#SearchableSegmentAttributesCriteriaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#SearchableSegmentAttributesCriteria"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
                 }
             }
         },
@@ -33062,7 +34811,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1024
                 }
             }
@@ -33213,17 +34962,144 @@
                 "smithy.api#documentation": "<p>Information about the send notification action.</p>"
             }
         },
+        "com.amazonaws.connect#SendOutboundEmail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SendOutboundEmailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SendOutboundEmailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/instance/{InstanceId}/outbound-email",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#SendOutboundEmailRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromEmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddressInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationEmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddressInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalRecipients": {
+                    "target": "com.amazonaws.connect#OutboundAdditionalRecipients",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailMessage": {
+                    "target": "com.amazonaws.connect#OutboundEmailContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrafficType": {
+                    "target": "com.amazonaws.connect#TrafficType",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceCampaign": {
+                    "target": "com.amazonaws.connect#SourceCampaign",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SendOutboundEmailResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
                 "Message": {
                     "target": "com.amazonaws.connect#Message"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededExceptionReason"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The service quota has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.connect#ServiceQuotaExceededExceptionReason": {
+            "type": "union",
+            "members": {
+                "AttachedFileServiceQuotaExceededExceptionReason": {
+                    "target": "com.amazonaws.connect#AttachedFileServiceQuotaExceededExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
             }
         },
         "com.amazonaws.connect#SignInConfig": {
@@ -33422,6 +35298,26 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_ -]+$"
+            }
+        },
+        "com.amazonaws.connect#SourceCampaign": {
+            "type": "structure",
+            "members": {
+                "CampaignId": {
+                    "target": "com.amazonaws.connect#CampaignId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "OutboundRequestId": {
+                    "target": "com.amazonaws.connect#OutboundRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
             }
         },
         "com.amazonaws.connect#SourceId": {
@@ -34009,6 +35905,157 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#StartEmailContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#StartEmailContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#StartEmailContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact/email",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#StartEmailContactRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromEmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddressInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationEmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "References": {
+                    "target": "com.amazonaws.connect#ContactReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailMessage": {
+                    "target": "com.amazonaws.connect#InboundEmailContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalRecipients": {
+                    "target": "com.amazonaws.connect#InboundAdditionalRecipients",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.connect#EmailAttachments",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "RelatedContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.connect#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#SegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#StartEmailContactResponse": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#StartOutboundChatContact": {
             "type": "operation",
             "input": {
@@ -34134,6 +36181,115 @@
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of this contact within the Amazon Connect instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#StartOutboundEmailContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#StartOutboundEmailContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#StartOutboundEmailContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact/outbound-email",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#StartOutboundEmailContactRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromEmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddressInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DestinationEmailAddress": {
+                    "target": "com.amazonaws.connect#EmailAddressInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalRecipients": {
+                    "target": "com.amazonaws.connect#OutboundAdditionalRecipients",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailMessage": {
+                    "target": "com.amazonaws.connect#OutboundEmailContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#StartOutboundEmailContactResponse": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -34477,6 +36633,12 @@
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
                         "smithy.api#documentation": "<p>The contactId that is <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks\">related</a> to this contact. Linking\n   tasks together by using <code>RelatedContactID</code> copies over contact attributes from the\n   related task contact to the new task contact. All updates to user-defined attributes in the new\n   task contact are limited to the individual contact ID, unlike what happens when tasks are linked\n   by using <code>PreviousContactID</code>. There are no limits to the number of contacts that can\n   be linked by using <code>RelatedContactId</code>. </p>"
+                    }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#SegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -35813,6 +37975,18 @@
                     "traits": {
                         "smithy.api#enumValue": "EMAIL"
                     }
+                },
+                "SELF_ASSIGN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF_ASSIGN"
+                    }
+                },
+                "EXPIRY_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRY_DURATION"
+                    }
                 }
             }
         },
@@ -35946,6 +38120,26 @@
                 "smithy.api#documentation": "<p>The distribution of traffic between the instance and its replicas.</p>"
             }
         },
+        "com.amazonaws.connect#TemplateAttributes": {
+            "type": "structure",
+            "members": {
+                "CustomAttributes": {
+                    "target": "com.amazonaws.connect#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "CustomerProfileAttributes": {
+                    "target": "com.amazonaws.connect#CustomerProfileAttributesSerialized",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
         "com.amazonaws.connect#TemplateId": {
             "type": "string",
             "traits": {
@@ -35953,6 +38147,35 @@
                     "min": 1,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.connect#TemplatedMessageConfig": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.connect#MessageTemplateKnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MessageTemplateId": {
+                    "target": "com.amazonaws.connect#MessageTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateAttributes": {
+                    "target": "com.amazonaws.connect#TemplateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
             }
         },
         "com.amazonaws.connect#Threshold": {
@@ -37483,6 +39706,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Well-formed data on contact, shown to agents on Contact Control Panel (CCP).</p>"
                     }
+                },
+                "SegmentAttributes": {
+                    "target": "com.amazonaws.connect#SegmentAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             },
             "traits": {
@@ -37651,6 +39880,108 @@
         "com.amazonaws.connect#UpdateContactScheduleResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateEmailAddressMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateEmailAddressMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateEmailAddressMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/email-addresses/{InstanceId}/{EmailAddressId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateEmailAddressMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.connect#EmailAddressDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateEmailAddressMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "EmailAddressId": {
+                    "target": "com.amazonaws.connect#EmailAddressId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "EmailAddressArn": {
+                    "target": "com.amazonaws.connect#EmailAddressArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -38710,6 +41041,77 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#UpdateQueueOutboundEmailConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateQueueOutboundEmailConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ConditionalOperationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/queues/{InstanceId}/{QueueId}/outbound-email-config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateQueueOutboundEmailConfigRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueueId": {
+                    "target": "com.amazonaws.connect#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutboundEmailConfig": {
+                    "target": "com.amazonaws.connect#OutboundEmailConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.connect#UpdateQueueStatus": {
             "type": "operation",
             "input": {
@@ -39515,6 +41917,12 @@
                         "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
                     }
                 },
+                "SelfAssignFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
                 "Constraints": {
                     "target": "com.amazonaws.connect#TaskTemplateConstraints",
                     "traits": {
@@ -39581,6 +41989,12 @@
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "SelfAssignFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "Constraints": {
@@ -40846,6 +43260,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The user's first name and last name.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserInfo": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.connect#AgentResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
             }
         },
         "com.amazonaws.connect#UserNotFoundException": {

@@ -229,6 +229,12 @@ type CreateEventSourceMappingInput struct {
 	// shard concurrently.
 	ParallelizationFactor *int32
 
+	// (Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+	// configuration for the event source. For more information, see [Provisioned Mode].
+	//
+	// [Provisioned Mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
+	ProvisionedPollerConfig *types.ProvisionedPollerConfig
+
 	//  (MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
@@ -384,6 +390,12 @@ type CreateEventSourceMappingOutput struct {
 	// (Kinesis and DynamoDB Streams only) The number of batches to process
 	// concurrently from each shard. The default value is 1.
 	ParallelizationFactor *int32
+
+	// (Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+	// configuration for the event source. For more information, see [Provisioned Mode].
+	//
+	// [Provisioned Mode]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode
+	ProvisionedPollerConfig *types.ProvisionedPollerConfig
 
 	//  (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string

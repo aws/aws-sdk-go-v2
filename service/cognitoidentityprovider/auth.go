@@ -132,6 +132,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 		}
 	},
 
+	"CompleteWebAuthnRegistration": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
 	"ConfirmDevice": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
@@ -157,6 +163,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 	},
 
 	"DeleteUserAttributes": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
+	"DeleteWebAuthnCredential": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
 		}
@@ -192,6 +204,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 		}
 	},
 
+	"GetUserAuthFactors": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
 	"GlobalSignOut": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
@@ -205,6 +223,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 	},
 
 	"ListDevices": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
+	"ListWebAuthnCredentials": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
 		}
@@ -241,6 +265,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 	},
 
 	"SignUp": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
+	"StartWebAuthnRegistration": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
 		}

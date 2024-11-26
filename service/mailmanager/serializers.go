@@ -3111,6 +3111,33 @@ func awsAwsjson10_serializeDocumentDeliverToMailboxAction(v *types.DeliverToMail
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentDeliverToQBusinessAction(v *types.DeliverToQBusinessAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActionFailurePolicy) > 0 {
+		ok := object.Key("ActionFailurePolicy")
+		ok.String(string(v.ActionFailurePolicy))
+	}
+
+	if v.ApplicationId != nil {
+		ok := object.Key("ApplicationId")
+		ok.String(*v.ApplicationId)
+	}
+
+	if v.IndexId != nil {
+		ok := object.Key("IndexId")
+		ok.String(*v.IndexId)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDropAction(v *types.DropAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3558,6 +3585,12 @@ func awsAwsjson10_serializeDocumentRuleAction(v types.RuleAction, value smithyjs
 	case *types.RuleActionMemberDeliverToMailbox:
 		av := object.Key("DeliverToMailbox")
 		if err := awsAwsjson10_serializeDocumentDeliverToMailboxAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RuleActionMemberDeliverToQBusiness:
+		av := object.Key("DeliverToQBusiness")
+		if err := awsAwsjson10_serializeDocumentDeliverToQBusinessAction(&uv.Value, av); err != nil {
 			return err
 		}
 

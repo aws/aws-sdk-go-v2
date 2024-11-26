@@ -143,6 +143,9 @@ type StartTaskContactInput struct {
 	// 6 days in future.
 	ScheduledTime *time.Time
 
+	//
+	SegmentAttributes map[string]types.SegmentAttributeValue
+
 	// A unique identifier for the task template. For more information about task
 	// templates, see [Create task templates]in the Amazon Connect Administrator Guide.
 	//

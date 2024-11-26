@@ -6800,6 +6800,15 @@ func awsAwsjson11_deserializeDocumentActionExecution(v **types.ActionExecution, 
 				sv.LastUpdatedBy = ptr.String(jtv)
 			}
 
+		case "logStreamARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogStreamARN to be of type string, got %T instead", value)
+				}
+				sv.LogStreamARN = ptr.String(jtv)
+			}
+
 		case "percentComplete":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7199,6 +7208,15 @@ func awsAwsjson11_deserializeDocumentActionExecutionResult(v **types.ActionExecu
 					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
 				}
 				sv.ExternalExecutionUrl = ptr.String(jtv)
+			}
+
+		case "logStreamARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogStreamARN to be of type string, got %T instead", value)
+				}
+				sv.LogStreamARN = ptr.String(jtv)
 			}
 
 		default:

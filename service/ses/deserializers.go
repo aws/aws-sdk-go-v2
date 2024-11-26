@@ -10353,6 +10353,68 @@ func awsAwsquery_deserializeDocumentConfigurationSetSendingPausedException(v **t
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentConnectAction(v **types.ConnectAction, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ConnectAction
+	if *v == nil {
+		sv = &types.ConnectAction{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IAMRoleARN", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IAMRoleARN = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("InstanceARN", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.InstanceARN = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentCustomVerificationEmailInvalidContentException(v **types.CustomVerificationEmailInvalidContentException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13237,6 +13299,12 @@ func awsAwsquery_deserializeDocumentReceiptAction(v **types.ReceiptAction, decod
 		case strings.EqualFold("BounceAction", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentBounceAction(&sv.BounceAction, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("ConnectAction", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentConnectAction(&sv.ConnectAction, nodeDecoder); err != nil {
 				return err
 			}
 

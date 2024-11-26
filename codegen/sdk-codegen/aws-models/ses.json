@@ -697,6 +697,34 @@
                 "target": "com.amazonaws.ses#ConfigurationSet"
             }
         },
+        "com.amazonaws.ses#ConnectAction": {
+            "type": "structure",
+            "members": {
+                "InstanceARN": {
+                    "target": "com.amazonaws.ses#ConnectInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Amazon Connect instance that Amazon SES integrates with for starting\n            email contacts.</p>\n         <p>For more information about Amazon Connect instances, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html\">Amazon Connect Administrator Guide</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IAMRoleARN": {
+                    "target": "com.amazonaws.ses#IAMRoleARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the IAM role to be used by Amazon Simple Email Service while starting email contacts\n            to the Amazon Connect instance. This role should have permission to invoke <code>connect:StartEmailContact</code>\n            for the given Amazon Connect instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>When included in a receipt rule, this action parses the received message and\n            starts an email contact in Amazon Connect on your behalf.</p>\n         <note>\n            <p>When you receive emails, the maximum email size (including headers) is 40 MB.\n                Additionally, emails may only have up to 10 attachments.\n                Emails larger than 40 MB or with more than 10 attachments will be bounced.</p>\n         </note>\n         <p>We recommend that you configure this action via Amazon Connect.</p>"
+            }
+        },
+        "com.amazonaws.ses#ConnectInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9-]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
         "com.amazonaws.ses#Content": {
             "type": "structure",
             "members": {
@@ -3168,7 +3196,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:[\\w-]+:iam::[0-9]+:role/[\\w-]+$"
+                "smithy.api#pattern": "^arn:[\\w-]+:iam::[0-9]+:role(\\u002F)([\\u0021-\\u007E]+\\u002F)?([\\w+=,.@-]+)$"
             }
         },
         "com.amazonaws.ses#Identity": {
@@ -4608,6 +4636,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Publishes the email content within a notification to Amazon SNS.</p>"
                     }
+                },
+                "ConnectAction": {
+                    "target": "com.amazonaws.ses#ConnectAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parses the received message and starts an email contact in Amazon Connect on your behalf.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5017,13 +5051,13 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.ses#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer managed key that Amazon SES should use to encrypt your emails before saving\n            them to the Amazon S3 bucket. You can use the default managed key or a custom managed key that\n            you created in Amazon Web Services KMS as follows:</p>\n         <ul>\n            <li>\n               <p>To use the default managed key, provide an ARN in the form of\n                        <code>arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses</code>.\n                    For example, if your Amazon Web Services account ID is 123456789012 and you want to use the\n                    default managed key in the US West (Oregon) Region, the ARN of the default master\n                    key would be <code>arn:aws:kms:us-west-2:123456789012:alias/aws/ses</code>. If\n                    you use the default managed key, you don't need to perform any extra steps to\n                    give Amazon SES permission to use the key.</p>\n            </li>\n            <li>\n               <p>To use a custom managed key that you created in Amazon Web Services KMS, provide the ARN of\n                    the managed key and ensure that you add a statement to your key's policy to give\n                    Amazon SES permission to use it. For more information about giving permissions, see\n                    the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-permissions.html\">Amazon SES Developer\n                        Guide</a>.</p>\n            </li>\n         </ul>\n         <p>For more information about key policies, see the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Amazon Web Services KMS Developer Guide</a>. If\n            you do not specify a managed key, Amazon SES does not encrypt your emails.</p>\n         <important>\n            <p>Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail\n                is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side\n                encryption. This means that you must use the Amazon S3 encryption client to decrypt the\n                email after retrieving it from Amazon S3, as the service has no access to use your\n                Amazon Web Services KMS keys for decryption. This encryption client is currently available with\n                the <a href=\"http://aws.amazon.com/sdk-for-java/\">Amazon Web Services SDK for Java</a> and\n                    <a href=\"http://aws.amazon.com/sdk-for-ruby/\">Amazon Web Services SDK for Ruby</a> only. For\n                more information about client-side encryption using Amazon Web Services KMS managed keys, see the\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3 Developer Guide</a>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The customer managed key that Amazon SES should use to encrypt your emails before saving\n            them to the Amazon S3 bucket. You can use the Amazon Web Services managed key or a customer managed key\n            that you created in Amazon Web Services KMS as follows:</p>\n         <ul>\n            <li>\n               <p>To use the Amazon Web Services managed key, provide an ARN in the form of\n                        <code>arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses</code>.\n                    For example, if your Amazon Web Services account ID is 123456789012 and you want to use the\n                    Amazon Web Services managed key in the US West (Oregon) Region, the ARN of the Amazon Web Services managed\n                    key would be <code>arn:aws:kms:us-west-2:123456789012:alias/aws/ses</code>. If\n                    you use the Amazon Web Services managed key, you don't need to perform any extra steps to give\n                    Amazon SES permission to use the key.</p>\n            </li>\n            <li>\n               <p>To use a customer managed key that you created in Amazon Web Services KMS, provide the ARN\n                    of the customer managed key and ensure that you add a statement to your key's\n                    policy to give Amazon SES permission to use it. For more information about giving\n                    permissions, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/receiving-email-permissions.html\">Amazon SES Developer\n                        Guide</a>.</p>\n            </li>\n         </ul>\n         <p>For more information about key policies, see the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Amazon Web Services KMS Developer Guide</a>. If\n            you do not specify an Amazon Web Services KMS key, Amazon SES does not encrypt your emails.</p>\n         <important>\n            <p>Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail\n                is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side\n                encryption. This means that you must use the Amazon S3 encryption client to decrypt the\n                email after retrieving it from Amazon S3, as the service has no access to use your\n                Amazon Web Services KMS keys for decryption. This encryption client is currently available with\n                the <a href=\"http://aws.amazon.com/sdk-for-java/\">Amazon Web Services SDK for Java</a> and\n                    <a href=\"http://aws.amazon.com/sdk-for-ruby/\">Amazon Web Services SDK for Ruby</a> only. For\n                more information about client-side encryption using Amazon Web Services KMS managed keys, see the\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3 Developer Guide</a>.</p>\n         </important>"
                     }
                 },
                 "IamRoleArn": {
                     "target": "com.amazonaws.ses#IAMRoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of the IAM role to be used by Amazon Simple Email Service while writing to the Amazon S3 bucket,\n            optionally encrypting your mail via the provided customer managed key, and publishing to\n            the Amazon SNS topic.\n            This role should have access to the following APIs:\n        </p>\n         <ul>\n            <li>\n               <p>\n                  <code>s3:PutObject</code>, <code>kms:Encrypt</code> and\n                    <code>kms:GenerateDataKey</code> for the given Amazon S3 bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:GenerateDataKey</code> for the given Amazon Web Services KMS customer managed key.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>sns:Publish</code> for the given Amazon SNS topic.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If an IAM role ARN is provided, the role (and only the role) is used to access all\n                the given resources (Amazon S3 bucket, Amazon Web Services KMS customer managed key and Amazon SNS topic).\n                Therefore, setting up individual resource access permissions is not required.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> The ARN of the IAM role to be used by Amazon Simple Email Service while writing to the Amazon S3 bucket,\n            optionally encrypting your mail via the provided customer managed key, and publishing to\n            the Amazon SNS topic. This role should have access to the following APIs: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>s3:PutObject</code>, <code>kms:Encrypt</code> and\n                        <code>kms:GenerateDataKey</code> for the given Amazon S3 bucket.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:GenerateDataKey</code> for the given Amazon Web Services KMS customer managed key.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>sns:Publish</code> for the given Amazon SNS topic.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If an IAM role ARN is provided, the role (and only the role) is used to access all\n                the given resources (Amazon S3 bucket, Amazon Web Services KMS customer managed key and Amazon SNS topic).\n                Therefore, setting up individual resource access permissions is not required.</p>\n         </note>"
                     }
                 }
             },

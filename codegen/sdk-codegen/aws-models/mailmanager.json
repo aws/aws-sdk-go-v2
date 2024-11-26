@@ -1729,6 +1729,41 @@
                 "smithy.api#documentation": "<p>This action to delivers an email to a mailbox.</p>"
             }
         },
+        "com.amazonaws.mailmanager#DeliverToQBusinessAction": {
+            "type": "structure",
+            "members": {
+                "ActionFailurePolicy": {
+                    "target": "com.amazonaws.mailmanager#ActionFailurePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A policy that states what to do in the case of failure. The action will fail if there are\n            configuration errors. For example, the specified application has been deleted or the role lacks\n            necessary permissions to call the qbusiness:BatchPutDocument API.</p>"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.mailmanager#QBusinessApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application instance where the email\n            content will be delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndexId": {
+                    "target": "com.amazonaws.mailmanager#QBusinessIndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base index within the Amazon Q Business application\n            where the email content will be stored and indexed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.mailmanager#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role to use while delivering to Amazon Q Business. This role must have access\n            to the qbusiness:BatchPutDocument API for the given application and index.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action to deliver incoming emails to an Amazon Q Business application for indexing.</p>"
+            }
+        },
         "com.amazonaws.mailmanager#DropAction": {
             "type": "structure",
             "members": {},
@@ -5338,6 +5373,26 @@
                 "target": "com.amazonaws.mailmanager#PolicyStatement"
             }
         },
+        "com.amazonaws.mailmanager#QBusinessApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.mailmanager#QBusinessIndexId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
         "com.amazonaws.mailmanager#Recipients": {
             "type": "list",
             "member": {
@@ -5871,6 +5926,12 @@
                     "target": "com.amazonaws.mailmanager#DeliverToMailboxAction",
                     "traits": {
                         "smithy.api#documentation": "<p>This action delivers an email to a WorkMail mailbox.</p>"
+                    }
+                },
+                "DeliverToQBusiness": {
+                    "target": "com.amazonaws.mailmanager#DeliverToQBusinessAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This action delivers an email to an Amazon Q Business application for ingestion into\n            its knowledge base.</p>"
                     }
                 }
             },

@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -1785,6 +1787,67 @@ func (m *awsAwsjson11_serializeOpChangePassword) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCompleteWebAuthnRegistration struct {
+}
+
+func (*awsAwsjson11_serializeOpCompleteWebAuthnRegistration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCompleteWebAuthnRegistration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CompleteWebAuthnRegistrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.CompleteWebAuthnRegistration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCompleteWebAuthnRegistrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpConfirmDevice struct {
 }
 
@@ -2073,6 +2136,67 @@ func (m *awsAwsjson11_serializeOpCreateIdentityProvider) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentCreateIdentityProviderInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateManagedLoginBranding struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateManagedLoginBranding) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateManagedLoginBranding) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateManagedLoginBrandingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.CreateManagedLoginBranding")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateManagedLoginBrandingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2517,6 +2641,67 @@ func (m *awsAwsjson11_serializeOpDeleteIdentityProvider) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteManagedLoginBranding struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteManagedLoginBranding) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteManagedLoginBranding) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteManagedLoginBrandingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.DeleteManagedLoginBranding")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteManagedLoginBrandingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteResourceServer struct {
 }
 
@@ -2883,6 +3068,67 @@ func (m *awsAwsjson11_serializeOpDeleteUserPoolDomain) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteWebAuthnCredential struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteWebAuthnCredential) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteWebAuthnCredential) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteWebAuthnCredentialInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.DeleteWebAuthnCredential")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteWebAuthnCredentialInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeIdentityProvider struct {
 }
 
@@ -2927,6 +3173,128 @@ func (m *awsAwsjson11_serializeOpDescribeIdentityProvider) HandleSerialize(ctx c
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeIdentityProviderInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeManagedLoginBranding struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeManagedLoginBranding) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeManagedLoginBranding) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeManagedLoginBrandingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.DescribeManagedLoginBranding")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeManagedLoginBrandingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeManagedLoginBrandingByClient struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeManagedLoginBrandingByClient) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeManagedLoginBrandingByClient) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeManagedLoginBrandingByClientInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.DescribeManagedLoginBrandingByClient")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeManagedLoginBrandingByClientInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3981,6 +4349,67 @@ func (m *awsAwsjson11_serializeOpGetUserAttributeVerificationCode) HandleSeriali
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetUserAuthFactors struct {
+}
+
+func (*awsAwsjson11_serializeOpGetUserAuthFactors) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetUserAuthFactors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetUserAuthFactorsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.GetUserAuthFactors")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetUserAuthFactorsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetUserPoolMfaConfig struct {
 }
 
@@ -4774,6 +5203,67 @@ func (m *awsAwsjson11_serializeOpListUsersInGroup) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListWebAuthnCredentials struct {
+}
+
+func (*awsAwsjson11_serializeOpListWebAuthnCredentials) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListWebAuthnCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWebAuthnCredentialsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.ListWebAuthnCredentials")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListWebAuthnCredentialsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpResendConfirmationCode struct {
 }
 
@@ -5445,6 +5935,67 @@ func (m *awsAwsjson11_serializeOpStartUserImportJob) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartWebAuthnRegistration struct {
+}
+
+func (*awsAwsjson11_serializeOpStartWebAuthnRegistration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartWebAuthnRegistration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartWebAuthnRegistrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.StartWebAuthnRegistration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartWebAuthnRegistrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStopUserImportJob struct {
 }
 
@@ -5855,6 +6406,67 @@ func (m *awsAwsjson11_serializeOpUpdateIdentityProvider) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdateIdentityProviderInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateManagedLoginBranding struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateManagedLoginBranding) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateManagedLoginBranding) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateManagedLoginBrandingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.UpdateManagedLoginBranding")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateManagedLoginBrandingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6425,6 +7037,17 @@ func awsAwsjson11_serializeDocumentAliasAttributesListType(v []types.AliasAttrib
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAllowedFirstAuthFactorsListType(v []types.AuthFactorType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAnalyticsConfigurationType(v *types.AnalyticsConfigurationType, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6464,6 +7087,51 @@ func awsAwsjson11_serializeDocumentAnalyticsMetadataType(v *types.AnalyticsMetad
 	if v.AnalyticsEndpointId != nil {
 		ok := object.Key("AnalyticsEndpointId")
 		ok.String(*v.AnalyticsEndpointId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAssetListType(v []types.AssetType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAssetType(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAssetType(v *types.AssetType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bytes != nil {
+		ok := object.Key("Bytes")
+		ok.Base64EncodeBytes(v.Bytes)
+	}
+
+	if len(v.Category) > 0 {
+		ok := object.Key("Category")
+		ok.String(string(v.Category))
+	}
+
+	if len(v.ColorMode) > 0 {
+		ok := object.Key("ColorMode")
+		ok.String(string(v.ColorMode))
+	}
+
+	if len(v.Extension) > 0 {
+		ok := object.Key("Extension")
+		ok.String(string(v.Extension))
+	}
+
+	if v.ResourceId != nil {
+		ok := object.Key("ResourceId")
+		ok.String(*v.ResourceId)
 	}
 
 	return nil
@@ -6778,6 +7446,21 @@ func awsAwsjson11_serializeDocumentDeviceSecretVerifierConfigType(v *types.Devic
 		ok.String(*v.Salt)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 
@@ -7478,6 +8161,20 @@ func awsAwsjson11_serializeDocumentSearchedAttributeNamesListType(v []string, va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSignInPolicyType(v *types.SignInPolicyType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedFirstAuthFactors != nil {
+		ok := object.Key("AllowedFirstAuthFactors")
+		if err := awsAwsjson11_serializeDocumentAllowedFirstAuthFactorsListType(v.AllowedFirstAuthFactors, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSkippedIPRangeListType(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7710,6 +8407,13 @@ func awsAwsjson11_serializeDocumentUserPoolPolicyType(v *types.UserPoolPolicyTyp
 		}
 	}
 
+	if v.SignInPolicy != nil {
+		ok := object.Key("SignInPolicy")
+		if err := awsAwsjson11_serializeDocumentSignInPolicyType(v.SignInPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7780,6 +8484,23 @@ func awsAwsjson11_serializeDocumentVerifiedAttributesListType(v []types.Verified
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWebAuthnConfigurationType(v *types.WebAuthnConfigurationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RelyingPartyId != nil {
+		ok := object.Key("RelyingPartyId")
+		ok.String(*v.RelyingPartyId)
+	}
+
+	if len(v.UserVerification) > 0 {
+		ok := object.Key("UserVerification")
+		ok.String(string(v.UserVerification))
+	}
+
 	return nil
 }
 
@@ -8103,6 +8824,11 @@ func awsAwsjson11_serializeOpDocumentAdminInitiateAuthInput(v *AdminInitiateAuth
 		if err := awsAwsjson11_serializeDocumentContextDataType(v.ContextData, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Session != nil {
+		ok := object.Key("Session")
+		ok.String(*v.Session)
 	}
 
 	if v.UserPoolId != nil {
@@ -8551,6 +9277,25 @@ func awsAwsjson11_serializeOpDocumentChangePasswordInput(v *ChangePasswordInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCompleteWebAuthnRegistrationInput(v *CompleteWebAuthnRegistrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("AccessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	if v.Credential != nil {
+		ok := object.Key("Credential")
+		if err := awsAwsjson11_serializeDocumentDocument(v.Credential, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentConfirmDeviceInput(v *ConfirmDeviceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8671,6 +9416,11 @@ func awsAwsjson11_serializeOpDocumentConfirmSignUpInput(v *ConfirmSignUpInput, v
 		ok.String(*v.SecretHash)
 	}
 
+	if v.Session != nil {
+		ok := object.Key("Session")
+		ok.String(*v.Session)
+	}
+
 	if v.UserContextData != nil {
 		ok := object.Key("UserContextData")
 		if err := awsAwsjson11_serializeDocumentUserContextDataType(v.UserContextData, ok); err != nil {
@@ -8751,6 +9501,42 @@ func awsAwsjson11_serializeOpDocumentCreateIdentityProviderInput(v *CreateIdenti
 	if len(v.ProviderType) > 0 {
 		ok := object.Key("ProviderType")
 		ok.String(string(v.ProviderType))
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateManagedLoginBrandingInput(v *CreateManagedLoginBrandingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Assets != nil {
+		ok := object.Key("Assets")
+		if err := awsAwsjson11_serializeDocumentAssetListType(v.Assets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentDocument(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UseCognitoProvidedValues {
+		ok := object.Key("UseCognitoProvidedValues")
+		ok.Boolean(v.UseCognitoProvidedValues)
 	}
 
 	if v.UserPoolId != nil {
@@ -8965,6 +9751,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolDomainInput(v *CreateUserPool
 		ok.String(*v.Domain)
 	}
 
+	if v.ManagedLoginVersion != nil {
+		ok := object.Key("ManagedLoginVersion")
+		ok.Integer(*v.ManagedLoginVersion)
+	}
+
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
@@ -9117,6 +9908,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolInput(v *CreateUserPoolInput,
 		}
 	}
 
+	if len(v.UserPoolTier) > 0 {
+		ok := object.Key("UserPoolTier")
+		ok.String(string(v.UserPoolTier))
+	}
+
 	if v.VerificationMessageTemplate != nil {
 		ok := object.Key("VerificationMessageTemplate")
 		if err := awsAwsjson11_serializeDocumentVerificationMessageTemplateType(v.VerificationMessageTemplate, ok); err != nil {
@@ -9151,6 +9947,23 @@ func awsAwsjson11_serializeOpDocumentDeleteIdentityProviderInput(v *DeleteIdenti
 	if v.ProviderName != nil {
 		ok := object.Key("ProviderName")
 		ok.String(*v.ProviderName)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteManagedLoginBrandingInput(v *DeleteManagedLoginBrandingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManagedLoginBrandingId != nil {
+		ok := object.Key("ManagedLoginBrandingId")
+		ok.String(*v.ManagedLoginBrandingId)
 	}
 
 	if v.UserPoolId != nil {
@@ -9255,6 +10068,23 @@ func awsAwsjson11_serializeOpDocumentDeleteUserPoolInput(v *DeleteUserPoolInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteWebAuthnCredentialInput(v *DeleteWebAuthnCredentialInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("AccessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	if v.CredentialId != nil {
+		ok := object.Key("CredentialId")
+		ok.String(*v.CredentialId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeIdentityProviderInput(v *DescribeIdentityProviderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9262,6 +10092,50 @@ func awsAwsjson11_serializeOpDocumentDescribeIdentityProviderInput(v *DescribeId
 	if v.ProviderName != nil {
 		ok := object.Key("ProviderName")
 		ok.String(*v.ProviderName)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeManagedLoginBrandingByClientInput(v *DescribeManagedLoginBrandingByClientInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ReturnMergedResources {
+		ok := object.Key("ReturnMergedResources")
+		ok.Boolean(v.ReturnMergedResources)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeManagedLoginBrandingInput(v *DescribeManagedLoginBrandingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManagedLoginBrandingId != nil {
+		ok := object.Key("ManagedLoginBrandingId")
+		ok.String(*v.ManagedLoginBrandingId)
+	}
+
+	if v.ReturnMergedResources {
+		ok := object.Key("ReturnMergedResources")
+		ok.Boolean(v.ReturnMergedResources)
 	}
 
 	if v.UserPoolId != nil {
@@ -9552,6 +10426,18 @@ func awsAwsjson11_serializeOpDocumentGetUserAttributeVerificationCodeInput(v *Ge
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetUserAuthFactorsInput(v *GetUserAuthFactorsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("AccessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetUserInput(v *GetUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9621,6 +10507,11 @@ func awsAwsjson11_serializeOpDocumentInitiateAuthInput(v *InitiateAuthInput, val
 		if err := awsAwsjson11_serializeDocumentClientMetadataType(v.ClientMetadata, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Session != nil {
+		ok := object.Key("Session")
+		ok.String(*v.Session)
 	}
 
 	if v.UserContextData != nil {
@@ -9850,6 +10741,28 @@ func awsAwsjson11_serializeOpDocumentListUsersInput(v *ListUsersInput, value smi
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListWebAuthnCredentialsInput(v *ListWebAuthnCredentialsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("AccessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -10122,6 +11035,13 @@ func awsAwsjson11_serializeOpDocumentSetUserPoolMfaConfigInput(v *SetUserPoolMfa
 		ok.String(*v.UserPoolId)
 	}
 
+	if v.WebAuthnConfiguration != nil {
+		ok := object.Key("WebAuthnConfiguration")
+		if err := awsAwsjson11_serializeDocumentWebAuthnConfigurationType(v.WebAuthnConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10218,6 +11138,18 @@ func awsAwsjson11_serializeOpDocumentStartUserImportJobInput(v *StartUserImportJ
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStartWebAuthnRegistrationInput(v *StartWebAuthnRegistrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("AccessToken")
+		ok.String(*v.AccessToken)
 	}
 
 	return nil
@@ -10392,6 +11324,42 @@ func awsAwsjson11_serializeOpDocumentUpdateIdentityProviderInput(v *UpdateIdenti
 	if v.ProviderName != nil {
 		ok := object.Key("ProviderName")
 		ok.String(*v.ProviderName)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateManagedLoginBrandingInput(v *UpdateManagedLoginBrandingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Assets != nil {
+		ok := object.Key("Assets")
+		if err := awsAwsjson11_serializeDocumentAssetListType(v.Assets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManagedLoginBrandingId != nil {
+		ok := object.Key("ManagedLoginBrandingId")
+		ok.String(*v.ManagedLoginBrandingId)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentDocument(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UseCognitoProvidedValues {
+		ok := object.Key("UseCognitoProvidedValues")
+		ok.Boolean(v.UseCognitoProvidedValues)
 	}
 
 	if v.UserPoolId != nil {
@@ -10610,6 +11578,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolDomainInput(v *UpdateUserPool
 		ok.String(*v.Domain)
 	}
 
+	if v.ManagedLoginVersion != nil {
+		ok := object.Key("ManagedLoginVersion")
+		ok.Integer(*v.ManagedLoginVersion)
+	}
+
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
@@ -10691,6 +11664,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolInput(v *UpdateUserPoolInput,
 		}
 	}
 
+	if v.PoolName != nil {
+		ok := object.Key("PoolName")
+		ok.String(*v.PoolName)
+	}
+
 	if v.SmsAuthenticationMessage != nil {
 		ok := object.Key("SmsAuthenticationMessage")
 		ok.String(*v.SmsAuthenticationMessage)
@@ -10732,6 +11710,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolInput(v *UpdateUserPoolInput,
 		if err := awsAwsjson11_serializeDocumentUserPoolTagsType(v.UserPoolTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UserPoolTier) > 0 {
+		ok := object.Key("UserPoolTier")
+		ok.String(string(v.UserPoolTier))
 	}
 
 	if v.VerificationMessageTemplate != nil {

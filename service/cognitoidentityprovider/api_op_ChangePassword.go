@@ -46,15 +46,15 @@ type ChangePasswordInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The old password.
-	//
-	// This member is required.
-	PreviousPassword *string
-
 	// The new password.
 	//
 	// This member is required.
 	ProposedPassword *string
+
+	// The user's previous password. Required if the user has a password. If the user
+	// has no password and only signs in with passwordless authentication options, you
+	// can omit this parameter.
+	PreviousPassword *string
 
 	noSmithyDocumentSerde
 }

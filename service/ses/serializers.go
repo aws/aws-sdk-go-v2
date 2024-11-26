@@ -5191,6 +5191,23 @@ func awsAwsquery_serializeDocumentConfigurationSetAttributeList(v []types.Config
 	return nil
 }
 
+func awsAwsquery_serializeDocumentConnectAction(v *types.ConnectAction, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.IAMRoleARN != nil {
+		objectKey := object.Key("IAMRoleARN")
+		objectKey.String(*v.IAMRoleARN)
+	}
+
+	if v.InstanceARN != nil {
+		objectKey := object.Key("InstanceARN")
+		objectKey.String(*v.InstanceARN)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentContent(v *types.Content, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5491,6 +5508,13 @@ func awsAwsquery_serializeDocumentReceiptAction(v *types.ReceiptAction, value qu
 	if v.BounceAction != nil {
 		objectKey := object.Key("BounceAction")
 		if err := awsAwsquery_serializeDocumentBounceAction(v.BounceAction, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ConnectAction != nil {
+		objectKey := object.Key("ConnectAction")
+		if err := awsAwsquery_serializeDocumentConnectAction(v.ConnectAction, objectKey); err != nil {
 			return err
 		}
 	}

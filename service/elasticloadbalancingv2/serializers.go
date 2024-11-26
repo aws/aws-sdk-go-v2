@@ -4011,6 +4011,11 @@ func awsAwsquery_serializeDocumentMutualAuthenticationAttributes(v *types.Mutual
 	object := value.Object()
 	_ = object
 
+	if len(v.AdvertiseTrustStoreCaNames) > 0 {
+		objectKey := object.Key("AdvertiseTrustStoreCaNames")
+		objectKey.String(string(v.AdvertiseTrustStoreCaNames))
+	}
+
 	if v.IgnoreClientCertificateExpiry != nil {
 		objectKey := object.Key("IgnoreClientCertificateExpiry")
 		objectKey.Boolean(*v.IgnoreClientCertificateExpiry)

@@ -655,6 +655,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.Integer(*v.ParallelizationFactor)
 	}
 
+	if v.ProvisionedPollerConfig != nil {
+		ok := object.Key("ProvisionedPollerConfig")
+		if err := awsRestjson1_serializeDocumentProvisionedPollerConfig(v.ProvisionedPollerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Queues != nil {
 		ok := object.Key("Queues")
 		if err := awsRestjson1_serializeDocumentQueues(v.Queues, ok); err != nil {
@@ -5834,6 +5841,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.Integer(*v.ParallelizationFactor)
 	}
 
+	if v.ProvisionedPollerConfig != nil {
+		ok := object.Key("ProvisionedPollerConfig")
+		if err := awsRestjson1_serializeDocumentProvisionedPollerConfig(v.ProvisionedPollerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScalingConfig != nil {
 		ok := object.Key("ScalingConfig")
 		if err := awsRestjson1_serializeDocumentScalingConfig(v.ScalingConfig, ok); err != nil {
@@ -6974,6 +6988,23 @@ func awsRestjson1_serializeDocumentOnSuccess(v *types.OnSuccess, value smithyjso
 	if v.Destination != nil {
 		ok := object.Key("Destination")
 		ok.String(*v.Destination)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProvisionedPollerConfig(v *types.ProvisionedPollerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumPollers != nil {
+		ok := object.Key("MaximumPollers")
+		ok.Integer(*v.MaximumPollers)
+	}
+
+	if v.MinimumPollers != nil {
+		ok := object.Key("MinimumPollers")
+		ok.Integer(*v.MinimumPollers)
 	}
 
 	return nil

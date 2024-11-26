@@ -1365,6 +1365,25 @@ func (DashboardFilterAttribute) Values() []DashboardFilterAttribute {
 	}
 }
 
+type DashboardsQAStatus string
+
+// Enum values for DashboardsQAStatus
+const (
+	DashboardsQAStatusEnabled  DashboardsQAStatus = "ENABLED"
+	DashboardsQAStatusDisabled DashboardsQAStatus = "DISABLED"
+)
+
+// Values returns all known values for DashboardsQAStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashboardsQAStatus) Values() []DashboardsQAStatus {
+	return []DashboardsQAStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type DashboardUIState string
 
 // Enum values for DashboardUIState
@@ -2121,6 +2140,25 @@ func (FunnelChartMeasureDataLabelStyle) Values() []FunnelChartMeasureDataLabelSt
 	}
 }
 
+type GeospatialColorState string
+
+// Enum values for GeospatialColorState
+const (
+	GeospatialColorStateEnabled  GeospatialColorState = "ENABLED"
+	GeospatialColorStateDisabled GeospatialColorState = "DISABLED"
+)
+
+// Values returns all known values for GeospatialColorState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeospatialColorState) Values() []GeospatialColorState {
+	return []GeospatialColorState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type GeoSpatialCountryCode string
 
 // Enum values for GeoSpatialCountryCode
@@ -2164,6 +2202,46 @@ func (GeoSpatialDataRole) Values() []GeoSpatialDataRole {
 		"POSTCODE",
 		"LONGITUDE",
 		"LATITUDE",
+	}
+}
+
+type GeospatialLayerType string
+
+// Enum values for GeospatialLayerType
+const (
+	GeospatialLayerTypePoint   GeospatialLayerType = "POINT"
+	GeospatialLayerTypeLine    GeospatialLayerType = "LINE"
+	GeospatialLayerTypePolygon GeospatialLayerType = "POLYGON"
+)
+
+// Values returns all known values for GeospatialLayerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeospatialLayerType) Values() []GeospatialLayerType {
+	return []GeospatialLayerType{
+		"POINT",
+		"LINE",
+		"POLYGON",
+	}
+}
+
+type GeospatialMapNavigation string
+
+// Enum values for GeospatialMapNavigation
+const (
+	GeospatialMapNavigationEnabled  GeospatialMapNavigation = "ENABLED"
+	GeospatialMapNavigationDisabled GeospatialMapNavigation = "DISABLED"
+)
+
+// Values returns all known values for GeospatialMapNavigation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeospatialMapNavigation) Values() []GeospatialMapNavigation {
+	return []GeospatialMapNavigation{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -2367,6 +2445,25 @@ func (IdentityType) Values() []IdentityType {
 		"IAM",
 		"QUICKSIGHT",
 		"IAM_IDENTITY_CENTER",
+	}
+}
+
+type ImageCustomActionTrigger string
+
+// Enum values for ImageCustomActionTrigger
+const (
+	ImageCustomActionTriggerClick ImageCustomActionTrigger = "CLICK"
+	ImageCustomActionTriggerMenu  ImageCustomActionTrigger = "MENU"
+)
+
+// Values returns all known values for ImageCustomActionTrigger. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageCustomActionTrigger) Values() []ImageCustomActionTrigger {
+	return []ImageCustomActionTrigger{
+		"CLICK",
+		"MENU",
 	}
 }
 
@@ -2674,6 +2771,25 @@ func (KPIVisualStandardLayoutType) Values() []KPIVisualStandardLayoutType {
 	}
 }
 
+type LayerCustomActionTrigger string
+
+// Enum values for LayerCustomActionTrigger
+const (
+	LayerCustomActionTriggerDataPointClick LayerCustomActionTrigger = "DATA_POINT_CLICK"
+	LayerCustomActionTriggerDataPointMenu  LayerCustomActionTrigger = "DATA_POINT_MENU"
+)
+
+// Values returns all known values for LayerCustomActionTrigger. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LayerCustomActionTrigger) Values() []LayerCustomActionTrigger {
+	return []LayerCustomActionTrigger{
+		"DATA_POINT_CLICK",
+		"DATA_POINT_MENU",
+	}
+}
+
 type LayoutElementType string
 
 // Enum values for LayoutElementType
@@ -2682,6 +2798,7 @@ const (
 	LayoutElementTypeFilterControl    LayoutElementType = "FILTER_CONTROL"
 	LayoutElementTypeParameterControl LayoutElementType = "PARAMETER_CONTROL"
 	LayoutElementTypeTextBox          LayoutElementType = "TEXT_BOX"
+	LayoutElementTypeImage            LayoutElementType = "IMAGE"
 )
 
 // Values returns all known values for LayoutElementType. Note that this can be
@@ -2694,6 +2811,7 @@ func (LayoutElementType) Values() []LayoutElementType {
 		"FILTER_CONTROL",
 		"PARAMETER_CONTROL",
 		"TEXT_BOX",
+		"IMAGE",
 	}
 }
 
@@ -3482,6 +3600,25 @@ func (PivotTableSubtotalLevel) Values() []PivotTableSubtotalLevel {
 	}
 }
 
+type PluginVisualAxisName string
+
+// Enum values for PluginVisualAxisName
+const (
+	PluginVisualAxisNameGroupBy PluginVisualAxisName = "GROUP_BY"
+	PluginVisualAxisNameValue   PluginVisualAxisName = "VALUE"
+)
+
+// Values returns all known values for PluginVisualAxisName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PluginVisualAxisName) Values() []PluginVisualAxisName {
+	return []PluginVisualAxisName{
+		"GROUP_BY",
+		"VALUE",
+	}
+}
+
 type PrimaryValueDisplayType string
 
 // Enum values for PrimaryValueDisplayType
@@ -4128,6 +4265,29 @@ func (SheetControlSliderType) Values() []SheetControlSliderType {
 	}
 }
 
+type SheetImageScalingType string
+
+// Enum values for SheetImageScalingType
+const (
+	SheetImageScalingTypeScaleToWidth     SheetImageScalingType = "SCALE_TO_WIDTH"
+	SheetImageScalingTypeScaleToHeight    SheetImageScalingType = "SCALE_TO_HEIGHT"
+	SheetImageScalingTypeScaleToContainer SheetImageScalingType = "SCALE_TO_CONTAINER"
+	SheetImageScalingTypeScaleNone        SheetImageScalingType = "SCALE_NONE"
+)
+
+// Values returns all known values for SheetImageScalingType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SheetImageScalingType) Values() []SheetImageScalingType {
+	return []SheetImageScalingType{
+		"SCALE_TO_WIDTH",
+		"SCALE_TO_HEIGHT",
+		"SCALE_TO_CONTAINER",
+		"SCALE_NONE",
+	}
+}
+
 type SimpleAttributeAggregationFunction string
 
 // Enum values for SimpleAttributeAggregationFunction
@@ -4771,6 +4931,54 @@ func (TopBottomSortOrder) Values() []TopBottomSortOrder {
 	return []TopBottomSortOrder{
 		"PERCENT_DIFFERENCE",
 		"ABSOLUTE_DIFFERENCE",
+	}
+}
+
+type TopicFilterAttribute string
+
+// Enum values for TopicFilterAttribute
+const (
+	TopicFilterAttributeQuicksightUser                TopicFilterAttribute = "QUICKSIGHT_USER"
+	TopicFilterAttributeQuicksightViewerOrOwner       TopicFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"
+	TopicFilterAttributeDirectQuicksightViewerOrOwner TopicFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	TopicFilterAttributeQuicksightOwner               TopicFilterAttribute = "QUICKSIGHT_OWNER"
+	TopicFilterAttributeDirectQuicksightOwner         TopicFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	TopicFilterAttributeDirectQuicksightSoleOwner     TopicFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	TopicFilterAttributeTopicName                     TopicFilterAttribute = "TOPIC_NAME"
+)
+
+// Values returns all known values for TopicFilterAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicFilterAttribute) Values() []TopicFilterAttribute {
+	return []TopicFilterAttribute{
+		"QUICKSIGHT_USER",
+		"QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"TOPIC_NAME",
+	}
+}
+
+type TopicFilterOperator string
+
+// Enum values for TopicFilterOperator
+const (
+	TopicFilterOperatorStringEquals TopicFilterOperator = "StringEquals"
+	TopicFilterOperatorStringLike   TopicFilterOperator = "StringLike"
+)
+
+// Values returns all known values for TopicFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicFilterOperator) Values() []TopicFilterOperator {
+	return []TopicFilterOperator{
+		"StringEquals",
+		"StringLike",
 	}
 }
 
