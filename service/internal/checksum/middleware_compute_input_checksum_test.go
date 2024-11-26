@@ -483,6 +483,21 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				expectErr:      "failed to parse algorithm",
 				expectBuildErr: true,
 			},
+			"unsupported algorithm": {
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC64NVME))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("http://example.aws")
+						r = requestMust(r.SetStream(bytes.NewBuffer([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectErr:      "failed to parse algorithm",
+				expectBuildErr: true,
+			},
 			"http unseekable stream": {
 				initContext: func(ctx context.Context) context.Context {
 					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmSHA1))
