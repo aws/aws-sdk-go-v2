@@ -1,3 +1,7 @@
+# v1.28.0 (2024-11-26)
+
+* **Feature**: Custom Orchestration API release for AWSBedrockAgents.
+
 # v1.27.1 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

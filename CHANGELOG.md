@@ -1,3 +1,17 @@
+# Release (2024-11-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.28.0](service/bedrockagent/CHANGELOG.md#v1280-2024-11-26)
+  * **Feature**: Custom Orchestration API release for AWSBedrockAgents.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.27.0](service/bedrockagentruntime/CHANGELOG.md#v1270-2024-11-26)
+  * **Feature**: Custom Orchestration and Streaming configurations API release for AWSBedrockAgents.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.118.0](service/connect/CHANGELOG.md#v11180-2024-11-26)
+  * **Feature**: Enables access to ValueMap and ValueInteger types for SegmentAttributes and fixes deserialization bug for DescribeContactFlow in AmazonConnect Public API
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.194.0](service/ec2/CHANGELOG.md#v11940-2024-11-26)
+  * **Feature**: Adds support for Time-based Copy for EBS Snapshots and Cross Region PrivateLink. Time-based Copy ensures that EBS Snapshots are copied within and across AWS Regions in a specified timeframe. Cross Region PrivateLink enables customers to connect to VPC endpoint services hosted in other AWS Regions.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.5.0](service/qapps/CHANGELOG.md#v150-2024-11-26)
+  * **Feature**: Private sharing, file upload and data collection feature support for Q Apps
+
 # Release (2024-11-25)
 
 ## General Highlights

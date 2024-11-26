@@ -1,3 +1,7 @@
+# v1.118.0 (2024-11-26)
+
+* **Feature**: Enables access to ValueMap and ValueInteger types for SegmentAttributes and fixes deserialization bug for DescribeContactFlow in AmazonConnect Public API
+
 # v1.117.0 (2024-11-22)
 
 * **Feature**: Amazon Connect Service Feature: Add APIs for Amazon Connect Email Channel

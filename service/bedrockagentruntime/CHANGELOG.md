@@ -1,3 +1,7 @@
+# v1.27.0 (2024-11-26)
+
+* **Feature**: Custom Orchestration and Streaming configurations API release for AWSBedrockAgents.
+
 # v1.26.0 (2024-11-22)
 
 * **Feature**: InvokeInlineAgent API release to help invoke runtime agents without any dependency on preconfigured agents.
