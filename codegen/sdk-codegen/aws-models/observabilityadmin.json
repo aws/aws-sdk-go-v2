@@ -1,0 +1,1492 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.observabilityadmin#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the exception.\n    </p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Indicates you don't have permissions to perform the requested operation. The user or role that is making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access management for AWS resources</a> in the IAM user guide.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.observabilityadmin#AccountIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AccountIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AccountIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#FailureReason": {
+            "type": "string"
+        },
+        "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Returns the current onboarding status of the telemetry config feature, including the status of the feature and reason the feature failed to start or stop.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetTelemetryEvaluationStatus"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetTelemetryEvaluationStatus",
+                        "params": {},
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusForOrganizationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      This returns the onboarding status of the telemetry configuration feature for the organization. It can only be called by a Management Account of an AWS Organization or an assigned Delegated Admin Account of AWS CloudWatch telemetry config.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetTelemetryEvaluationStatusForOrganization"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetTelemetryEvaluationStatusForOrganization",
+                        "params": {},
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The onboarding status of the telemetry config feature for the organization.\n    </p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.observabilityadmin#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      This field describes the reason for the failure status. The field will only be populated if <code>Status</code> is <code>FAILED_START</code> or <code>FAILED_STOP</code>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The onboarding status of the telemetry config feature.\n    </p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.observabilityadmin#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Describes the reason for the failure status. The field will only be populated if <code>Status</code> is <code>FAILED_START</code> or <code>FAILED_STOP</code>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the exception.\n    </p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Indicates the request has failed to process because of an unknown server error, exception, or failure.\n    </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetry": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Returns a list of telemetry configurations for AWS resources supported by telemetry config. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/telemetry-config-cloudwatch.html\">Auditing CloudWatch telemetry configurations</a>.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListResourceTelemetry"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "TelemetryConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Returns a list of telemetry configurations for AWS resources supported by telemetry config in the organization.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListResourceTelemetryForOrganization"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "TelemetryConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationInput": {
+            "type": "structure",
+            "members": {
+                "AccountIdentifiers": {
+                    "target": "com.amazonaws.observabilityadmin#AccountIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of AWS account IDs used to filter the resources to those associated with the specified accounts.\n    </p>"
+                    }
+                },
+                "ResourceIdentifierPrefix": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceIdentifierPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A string used to filter resources in the organization which have a <code>ResourceIdentifier</code> starting with the <code>ResourceIdentifierPrefix</code>.\n    </p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    A list of resource types used to filter resources in the organization. If this parameter is provided, the resources will be returned in the same order used in the request.\n    </p>"
+                    }
+                },
+                "TelemetryConfigurationState": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A key-value pair to filter resources in the organization based on the telemetry type and the state of the telemetry configuration. The key is the telemetry type and the value is the state.\n    </p>"
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A key-value pair to filter resources in the organization based on tags associated with the resource. Fore more information about tags, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/what-are-tags.html\">What are tags?</a>\n         </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>\n      A number field used to limit the number of results within the returned list.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token for the next set of items to return. A previous call provides this token.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganizationOutput": {
+            "type": "structure",
+            "members": {
+                "TelemetryConfigurations": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of telemetry configurations for AWS resources supported by telemetry config in the organization.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token for the next set of items to return. A previous call provides this token.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryInput": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifierPrefix": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceIdentifierPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A string used to filter resources which have a <code>ResourceIdentifier</code> starting with the <code>ResourceIdentifierPrefix</code>.\n    </p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of resource types used to filter resources supported by telemetry config. If this parameter is provided, the resources will be returned in the same order used in the request.\n    </p>"
+                    }
+                },
+                "TelemetryConfigurationState": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A key-value pair to filter resources based on the telemetry type and the state of the telemetry configuration. The key is the telemetry type and the value is the state.\n    </p>"
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A key-value pair to filter resources based on tags associated with the resource. For more information about tags, see <a href=\"https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/what-are-tags.html\">What are tags?</a>\n         </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>\n      A number field used to limit the number of results within the returned list.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token for the next set of items to return. A previous call generates this token.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourceTelemetryOutput": {
+            "type": "structure",
+            "members": {
+                "TelemetryConfigurations": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of telemetry configurations for AWS resources supported by telemetry config in the caller's account.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token for the next set of items to return. A previous call generates this token.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.observabilityadmin#ObservabilityAdmin": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatus"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetTelemetryEvaluationStatusForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ListResourceTelemetry"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ListResourceTelemetryForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#StartTelemetryEvaluation"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#StartTelemetryEvaluationForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#StopTelemetryEvaluation"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#StopTelemetryEvaluationForOrganization"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ObservabilityAdmin",
+                    "arnNamespace": "observabilityadmin"
+                },
+                "aws.auth#sigv4": {
+                    "name": "observabilityadmin"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>\n      Amazon CloudWatch Obsersavability Admin to control temletry config for your AWS Organization or account. Telemetry config conﬁg to discover and understand the state of telemetry conﬁguration for your AWS resources from a central view in the CloudWatch console. Telemetry conﬁg simpliﬁes the process of auditing your telemetry collection conﬁgurations across multiple resource types across your AWS Organization or account. \n      For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/telemetry-config-cloudwatch.html\">Auditing CloudWatch telemetry conﬁgurations</a> in the CloudWatch User Guide.</p>\n         <p>For information on the permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html\">Identity and access management for Amazon CloudWatch</a> in the CloudWatch User Guide.</p>",
+                "smithy.api#title": "CloudWatch Observability Admin Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://observabilityadmin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://observabilityadmin-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://observabilityadmin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://observabilityadmin.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://observabilityadmin.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ResourceIdentifier": {
+            "type": "string"
+        },
+        "com.amazonaws.observabilityadmin#ResourceIdentifierPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 768
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ResourceType": {
+            "type": "enum",
+            "members": {
+                "AWS_EC2_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::Instance"
+                    }
+                },
+                "AWS_EC2_VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::VPC"
+                    }
+                },
+                "AWS_LAMDBA_FUNCTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Lambda::Function"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ResourceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#ResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartTelemetryEvaluation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      This action begins onboarding onboarding the caller AWS account to the telemetry config feature.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartTelemetryEvaluation"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartTelemetryEvaluationForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      This actions begins onboarding the organization and all member accounts to the telemetry config feature.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartTelemetryEvaluationForOrganization"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#Status": {
+            "type": "enum",
+            "members": {
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "FAILED_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_START"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "FAILED_STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_STOP"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#StopTelemetryEvaluation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      This action begins offboarding the caller AWS account from the telemetry config feature.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StopTelemetryEvaluation"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#StopTelemetryEvaluationForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      This action offboards the Organization of the caller AWS account from thef telemetry config feature.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StopTelemetryEvaluationForOrganization"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagKey": {
+            "type": "string",
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagMapInput": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.observabilityadmin#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.observabilityadmin#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagMapOutput": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagValue": {
+            "type": "string",
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryConfiguration": {
+            "type": "structure",
+            "members": {
+                "AccountIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#AccountIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The account ID which contains the resource managed in telemetry configuration. An example of a valid account ID is <code>012345678901</code>.\n    </p>"
+                    }
+                },
+                "TelemetryConfigurationState": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The configuration state for the resource, for example <code>{ Logs: NotApplicable; Metrics: Enabled; Traces: NotApplicable; }</code>.\n      </p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of resource, for example <code>AWS::EC2::Instance</code>.\n    </p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n     The identifier of the resource, for example <code>i-0b22a22eec53b9321</code>.\n    </p>"
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n     Tags associated with the resource, for example <code>{ Name: \"ExampleInstance\", Environment: \"Development\" }</code>.\n    </p>"
+                    }
+                },
+                "LastUpdateTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The timestamp of the last change to the telemetry configuration for the resource.  For example, <code>1728679196318</code>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      A model representing the state of a resource within an account according to telemetry config.\n    </p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryConfigurationState": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.observabilityadmin#TelemetryType"
+            },
+            "value": {
+                "target": "com.amazonaws.observabilityadmin#TelemetryState"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#TelemetryConfiguration"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotApplicable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryType": {
+            "type": "enum",
+            "members": {
+                "LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Logs"
+                    }
+                },
+                "METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Metrics"
+                    }
+                },
+                "TRACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Traces"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n     Indicates input validation failed. Check your request parameters and retry the request.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

@@ -586,6 +586,77 @@
                 "target": "com.amazonaws.configservice#AggregationAuthorization"
             }
         },
+        "com.amazonaws.configservice#AggregatorFilterResourceType": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.configservice#AggregatorFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource type filter to apply. <code>INCLUDE</code> specifies that the list of resource types in the <code>Value</code> field will be aggregated and no other resource types will be filtered.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.configservice#ResourceTypeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Comma-separate list of resource types to filter your aggregated configuration recorders.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to filter the configuration recorders based on the resource types in scope for recording.</p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregatorFilterServicePrincipal": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.configservice#AggregatorFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of service principal filter to apply. <code>INCLUDE</code> specifies that the list of service principals in the <code>Value</code> field will be aggregated and no other service principals will be filtered.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.configservice#ServicePrincipalValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Comma-separated list of service principals for the linked Amazon Web Services services to filter your aggregated service-linked configuration recorders.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to filter service-linked configuration recorders in an aggregator based on the linked Amazon Web Services service.</p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregatorFilterType": {
+            "type": "enum",
+            "members": {
+                "INCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#AggregatorFilters": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.configservice#AggregatorFilterResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to filter the configuration recorders based on the resource types in scope for recording.</p>"
+                    }
+                },
+                "ServicePrincipal": {
+                    "target": "com.amazonaws.configservice#AggregatorFilterServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to filter service-linked configuration recorders in an aggregator based on the linked Amazon Web Services service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to filter the data you specify for an aggregator.</p>"
+            }
+        },
         "com.amazonaws.configservice#AggregatorRegionList": {
             "type": "list",
             "member": {
@@ -619,6 +690,65 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.configservice#AssociateResourceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#AssociateResourceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#AssociateResourceTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds all resource types specified in the <code>ResourceTypes</code> list to the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> of specified configuration recorder and includes those resource types when recording.</p>\n         <p>For this operation, the specified configuration recorder must use a <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> that is either <code>INCLUSION_BY_RESOURCE_TYPES</code> or <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p>"
+            }
+        },
+        "com.amazonaws.configservice#AssociateResourceTypesRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationRecorderArn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.configservice#ResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource types you want to add to the recording group of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#AssociateResourceTypesResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationRecorder": {
+                    "target": "com.amazonaws.configservice#ConfigurationRecorder",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.configservice#AutoRemediationAttemptSeconds": {
@@ -1420,7 +1550,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Status information for your Config Managed rules and Config Custom Policy rules. The\n\t\t\tstatus includes information such as the last time the rule ran, the\n\t\t\tlast time it failed, and the related error for the last\n\t\t\tfailure.</p>\n         <p>This action does not return status information about Config Custom Lambda rules.</p>"
+                "smithy.api#documentation": "<p>Status information for your Config Managed rules and Config Custom Policy rules. The\n\t\t\tstatus includes information such as the last time the rule ran, the\n\t\t\tlast time it failed, and the related error for the last\n\t\t\tfailure.</p>\n         <p>This operation does not return status information about Config Custom Lambda rules.</p>"
             }
         },
         "com.amazonaws.configservice#ConfigRuleEvaluationStatusList": {
@@ -1578,6 +1708,12 @@
                     "target": "com.amazonaws.configservice#StringWithCharLimit256",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Web Services service that created the configuration aggregator.</p>"
+                    }
+                },
+                "AggregatorFilters": {
+                    "target": "com.amazonaws.configservice#AggregatorFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to filter the data you specify for an aggregator.</p>"
                     }
                 }
             },
@@ -1800,33 +1936,100 @@
         "com.amazonaws.configservice#ConfigurationRecorder": {
             "type": "structure",
             "members": {
+                "arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.configservice#RecorderName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration recorder. Config automatically assigns the name of \"default\" when creating the configuration recorder.</p>\n         <note>\n            <p>You cannot change the name of the configuration recorder after it has been created. To change the configuration recorder name, you must delete it and create a new configuration recorder with a new name. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the configuration recorder.</p>\n         <p>For customer managed configuration recorders, Config automatically assigns the name of \"default\" when creating a configuration recorder if you do not specify a name at creation time.</p>\n         <p>For service-linked configuration recorders, Config automatically assigns a name that has the prefix \"<code>AWS</code>\" to a new service-linked configuration recorder.</p>\n         <note>\n            <p>\n               <b>Changing the name of a configuration recorder</b>\n            </p>\n            <p>To change the name of the customer managed configuration recorder, you must delete it and create a new customer managed configuration recorder with a new name.</p>\n            <p>You cannot change the name of a service-linked configuration recorder.</p>\n         </note>"
                     }
                 },
                 "roleARN": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the configuration recorder.</p>\n         <note>\n            <p>While the API model does not require this field, the server will reject a request without a defined <code>roleARN</code> for the configuration recorder.</p>\n         </note>\n         <note>\n            <p>\n               <b>Pre-existing Config role</b>\n            </p>\n            <p>If you have used an Amazon Web Services service that uses Config, such as Security Hub or\n\t\t\t\tControl Tower, and an Config role has already been created, make sure that the\n\t\t\t\tIAM role that you use when setting up Config keeps the same minimum\n\t\t\t\tpermissions as the already created Config role. You must do this so that the\n\t\t\t\tother Amazon Web Services service continues to run as expected. </p>\n            <p>For example, if Control Tower has an IAM role that allows Config to read\n\t\t\t\tAmazon Simple Storage Service  (Amazon S3) objects, make sure that the same permissions are granted\n\t\t\t\twithin the IAM  role you use when setting up Config. Otherwise, it may\n\t\t\t\tinterfere with how Control Tower  operates. For more information about IAM\n\t\t\t\troles for Config,\n\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/security-iam.html\">\n                  <b>Identity and Access Management for Config</b>\n               </a> in the <i>Config Developer Guide</i>.\n\t\t\t</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the specified configuration recorder.</p>\n         <note>\n            <p>\n               <b>The server will reject a request without a defined <code>roleARN</code> for the configuration recorder</b>\n            </p>\n            <p>While the API model does not require this field, the server will reject a request without a defined <code>roleARN</code> for the configuration recorder.</p>\n            <p>\n               <b>Policies and compliance results</b>\n            </p>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM policies</a>\n\t\t\t\tand <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html\">other policies managed in Organizations</a>\n\t\t\t\tcan impact whether Config\n\t\t\t\thas permissions to record configuration changes for your resources. Additionally, rules directly evaluate the configuration of a resource and rules don't take into account these policies when running evaluations.\n\t\t\t\tMake sure that the policies in effect align with how you intend to use Config.</p>\n            <p>\n               <b>Keep Minimum Permisions When Reusing an IAM role</b>\n            </p>\n            <p>If you use an Amazon Web Services service that uses Config, such as Security Hub or\n\t\t\t\tControl Tower, and an IAM role has already been created, make sure that the\n\t\t\t\tIAM role that you use when setting up Config keeps the same minimum\n\t\t\t\tpermissions as the pre-existing IAM role. You must do this to ensure that the\n\t\t\t\tother Amazon Web Services service continues to run as expected. </p>\n            <p>For example, if Control Tower has an IAM role that allows Config to read\n\t\t\t\tS3 objects, make sure that the same permissions are granted\n\t\t\t\tto the IAM role you use when setting up Config. Otherwise, it may\n\t\t\t\tinterfere with how Control Tower operates.</p>\n            <p>\n               <b>The service-linked IAM role for Config must be used for service-linked configuration recorders</b>\n            </p>\n            <p>For service-linked configuration recorders, you must use the service-linked IAM role for Config: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html\">AWSServiceRoleForConfig</a>.</p>\n         </note>"
                     }
                 },
                 "recordingGroup": {
                     "target": "com.amazonaws.configservice#RecordingGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which resource types Config\n\t\t\trecords for configuration changes.</p>\n         <note>\n            <p>\n               <b> High Number of Config Evaluations</b>\n            </p>\n            <p>You may notice increased activity in your account during your initial month recording with Config when compared to subsequent months. During the\n\t\t\t\tinitial bootstrapping process, Config runs evaluations on all the resources in your account that you have selected\n\t\t\t\tfor Config to record.</p>\n            <p>If you are running ephemeral workloads, you may see increased activity from Config as it records configuration changes associated with creating and deleting these\n\t\t\t\ttemporary resources. An <i>ephemeral workload</i> is a temporary use of computing resources that are loaded\n\t\t\t\tand run when needed. Examples include Amazon Elastic Compute Cloud (Amazon EC2)\n\t\t\t\tSpot Instances, Amazon EMR jobs, and Auto Scaling. If you want\n\t\t\t\tto avoid the increased activity from running ephemeral workloads, you can run these\n\t\t\t\ttypes of workloads in a separate account with Config turned off to avoid\n\t\t\t\tincreased configuration recording and rule evaluations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies which resource types are in scope for the configuration recorder to record.</p>\n         <note>\n            <p>\n               <b> High Number of Config Evaluations</b>\n            </p>\n            <p>You might notice increased activity in your account during your initial month recording with Config when compared to subsequent months. During the\n\t\t\t\tinitial bootstrapping process, Config runs evaluations on all the resources in your account that you have selected\n\t\t\t\tfor Config to record.</p>\n            <p>If you are running ephemeral workloads, you may see increased activity from Config as it records configuration changes associated with creating and deleting these\n\t\t\t\ttemporary resources. An <i>ephemeral workload</i> is a temporary use of computing resources that are loaded\n\t\t\t\tand run when needed. Examples include Amazon Elastic Compute Cloud (Amazon EC2)\n\t\t\t\tSpot Instances, Amazon EMR jobs, and Auto Scaling.</p>\n            <p>If you want to avoid the increased activity from running ephemeral workloads, you can set up the configuration recorder to exclude these resource types from being recorded, or run these types of workloads in a separate account with Config turned off to avoid\n\t\t\t\tincreased configuration recording and rule evaluations.</p>\n         </note>"
                     }
                 },
                 "recordingMode": {
                     "target": "com.amazonaws.configservice#RecordingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the default recording frequency that Config uses to record configuration changes.\n\t\t\t\n\t\t\tConfig supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded.\n\t\t\t</p>\n            </li>\n         </ul>\n         <note>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>\n         <p>You can also override the recording frequency for specific resource types.</p>"
+                        "smithy.api#documentation": "<p>Specifies the default recording frequency for the configuration recorder.\n\t\t\t\n\t\t\tConfig supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>\n         <ul>\n            <li>\n               <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p>\n            </li>\n            <li>\n               <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded.\n\t\t\t</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <b>Some resource types require continuous recording</b>\n            </p>\n            <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager,\n\t\t\tit is recommended that you set the recording frequency to Continuous.</p>\n         </note>\n         <p>You can also override the recording frequency for specific resource types.</p>"
+                    }
+                },
+                "recordingScope": {
+                    "target": "com.amazonaws.configservice#RecordingScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html\">ConfigurationItems</a> in scope for the specified configuration recorder are recorded for free (<code>INTERNAL</code>) or if it impacts the costs to your bill (<code>PAID</code>).</p>"
+                    }
+                },
+                "servicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, specifies the linked Amazon Web Services service for the configuration recorder.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Records configuration changes to your specified resource types.\n\t\t\tFor more information about the configuration recorder,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html\">\n               <b>Managing the Configuration Recorder</b>\n            </a> in the <i>Config Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Records configuration changes to the resource types in scope.</p>\n         <p>For more information about the configuration recorder,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html\">\n               <b>Working with the Configuration Recorder</b>\n            </a> in the <i>Config Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConfigurationRecorderFilter": {
+            "type": "structure",
+            "members": {
+                "filterName": {
+                    "target": "com.amazonaws.configservice#ConfigurationRecorderFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the type of filter. Currently, only <code>recordingScope</code> is supported.</p>"
+                    }
+                },
+                "filterValue": {
+                    "target": "com.amazonaws.configservice#ConfigurationRecorderFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter. For <code>recordingScope</code>, valid values include: <code>INTERNAL</code> and <code>PAID</code>.</p>\n         <p>\n            <code>INTERNAL</code> indicates that the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html\">ConfigurationItems</a> in scope for the configuration recorder are recorded for free.</p>\n         <p>\n            <code>PAID</code> indicates that the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html\">ConfigurationItems</a> in scope for the configuration recorder impact the costs to your bill.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters configuration recorders by recording scope.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConfigurationRecorderFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConfigurationRecorderFilter"
+            }
+        },
+        "com.amazonaws.configservice#ConfigurationRecorderFilterName": {
+            "type": "enum",
+            "members": {
+                "RecordingScope": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "recordingScope"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#ConfigurationRecorderFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-zA-Z\\\\*\\\\.\\\\\\/\\\\?-]*$"
+            }
+        },
+        "com.amazonaws.configservice#ConfigurationRecorderFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConfigurationRecorderFilterValue"
             }
         },
         "com.amazonaws.configservice#ConfigurationRecorderList": {
@@ -1844,6 +2047,12 @@
         "com.amazonaws.configservice#ConfigurationRecorderStatus": {
             "type": "structure",
             "members": {
+                "arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration recorder.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
@@ -1892,10 +2101,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time of the latest change in status of an recording event processed by the recorder.</p>"
                     }
+                },
+                "servicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, the service principal of the linked Amazon Web Services service.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The current status of the configuration recorder.</p>\n         <note>\n            <p>For a detailed status of recording events over time, add your Config events to CloudWatch metrics and use CloudWatch metrics.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The current status of the configuration recorder.</p>\n         <p>For a detailed status of recording events over time, add your Config events to CloudWatch metrics and use CloudWatch metrics.</p>"
             }
         },
         "com.amazonaws.configservice#ConfigurationRecorderStatusList": {
@@ -1904,8 +2119,64 @@
                 "target": "com.amazonaws.configservice#ConfigurationRecorderStatus"
             }
         },
+        "com.amazonaws.configservice#ConfigurationRecorderSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConfigurationRecorderSummary"
+            }
+        },
+        "com.amazonaws.configservice#ConfigurationRecorderSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.configservice#RecorderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "servicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, indicates which Amazon Web Services service the configuration recorder is linked to.</p>"
+                    }
+                },
+                "recordingScope": {
+                    "target": "com.amazonaws.configservice#RecordingScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html\">ConfigurationItems</a> in scope for the configuration recorder are recorded for free (<code>INTERNAL</code>) or if you are charged a service fee for recording (<code>PAID</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a configuration recorder, including the <code>arn</code>, <code>name</code>, <code>servicePrincipal</code>, and <code>recordingScope</code>.</p>"
+            }
+        },
         "com.amazonaws.configservice#ConfigurationStateId": {
             "type": "string"
+        },
+        "com.amazonaws.configservice#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.configservice#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error executing the command</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a>, you cannot delete the service-linked recorder because it is currently in use by the linked Amazon Web Services service.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html\">DeleteDeliveryChannel</a>, you cannot delete the specified delivery channel because the customer managed configuration recorder is running. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html\">StopConfigurationRecorder</a> operation to stop the customer managed configuration\n\t\t\trecorder.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html\">AssociateResourceTypes</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html\">DisassociateResourceTypes</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For service-linked configuration recorders, the configuration recorder is not in use by the service. No association or dissociation of resource types is permitted.</p>\n            </li>\n            <li>\n               <p>For service-linked configuration recorders, your requested change to the configuration recorder has been denied by its linked Amazon Web Services service.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client"
+            }
         },
         "com.amazonaws.configservice#ConformancePackArn": {
             "type": "string",
@@ -2608,7 +2879,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified Config rule and all of its evaluation\n\t\t\tresults.</p>\n         <p>Config sets the state of a rule to <code>DELETING</code>\n\t\t\tuntil the deletion is complete. You cannot update a rule while it is\n\t\t\tin this state. If you make a <code>PutConfigRule</code> or\n\t\t\t\t<code>DeleteConfigRule</code> request for the rule, you will\n\t\t\treceive a <code>ResourceInUseException</code>.</p>\n         <p>You can check the state of a rule by using the\n\t\t\t\t<code>DescribeConfigRules</code> request.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified Config rule and all of its evaluation\n\t\t\tresults.</p>\n         <p>Config sets the state of a rule to <code>DELETING</code>\n\t\t\tuntil the deletion is complete. You cannot update a rule while it is\n\t\t\tin this state. If you make a <code>PutConfigRule</code> or\n\t\t\t\t<code>DeleteConfigRule</code> request for the rule, you will\n\t\t\treceive a <code>ResourceInUseException</code>.</p>\n         <p>You can check the state of a rule by using the\n\t\t\t\t<code>DescribeConfigRules</code> request.</p>\n         <note>\n            <p>\n               <b>Recommendation: Stop recording resource compliance before deleting rules</b>\n            </p>\n            <p>It is highly recommended that you stop recording for the <code>AWS::Config::ResourceCompliance</code> resource type before you delete rules in your account.\n\t\t\t\tDeleting rules creates CIs for <code>AWS::Config::ResourceCompliance</code> and can affect your Config <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html\">configuration recorder</a> costs.\n\t\t\t\t\n\t\t\t\tIf you are deleting rules which evaluate a large number of resource types, \n\t\t\t\tthis can lead to a spike in the number of CIs recorded.</p>\n            <p>Best practice:</p>\n            <ol>\n               <li>\n                  <p>Stop recording <code>AWS::Config::ResourceCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>Delete rule(s)</p>\n               </li>\n               <li>\n                  <p>Turn on recording for <code>AWS::Config::ResourceCompliance</code>\n                  </p>\n               </li>\n            </ol>\n         </note>"
             }
         },
         "com.amazonaws.configservice#DeleteConfigRuleRequest": {
@@ -2670,10 +2941,13 @@
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#UnmodifiableEntityException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the configuration recorder.</p>\n         <p>After the configuration recorder is deleted, Config will\n\t\t\tnot record resource configuration changes until you create a new\n\t\t\tconfiguration recorder.</p>\n         <p>This action does not delete the configuration information that\n\t\t\twas previously recorded. You will be able to access the previously\n\t\t\trecorded information by using the\n\t\t\t\t<code>GetResourceConfigHistory</code> action, but you will not\n\t\t\tbe able to access this information in the Config console until\n\t\t\tyou create a new configuration recorder.</p>"
+                "smithy.api#documentation": "<p>Deletes the customer managed configuration recorder.</p>\n         <p>This operation does not delete the configuration information that\n\t\t\twas previously recorded. You will be able to access the previously\n\t\t\trecorded information by using the\n\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceConfigHistory.html\">GetResourceConfigHistory</a> operation, but you will not\n\t\t\tbe able to access this information in the Config console until\n\t\t\tyou have created a new customer managed configuration recorder.</p>"
             }
         },
         "com.amazonaws.configservice#DeleteConfigurationRecorderRequest": {
@@ -2682,13 +2956,13 @@
                 "ConfigurationRecorderName": {
                     "target": "com.amazonaws.configservice#RecorderName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration recorder to be deleted. You can\n\t\t\tretrieve the name of your configuration recorder by using the\n\t\t\t\t<code>DescribeConfigurationRecorders</code> action.</p>",
+                        "smithy.api#documentation": "<p>The name of the customer managed configuration recorder that you want to delete. You can\n\t\t\tretrieve the name of your configuration recorders by using the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html\">DescribeConfigurationRecorders</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request object for the\n\t\t\t\t<code>DeleteConfigurationRecorder</code> action.</p>",
+                "smithy.api#documentation": "<p>The request object for the\n\t\t\t\t<code>DeleteConfigurationRecorder</code> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -2744,7 +3018,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the delivery channel.</p>\n         <p>Before you can delete the delivery channel, you must stop the\n\t\t\tconfiguration recorder by using the <a>StopConfigurationRecorder</a> action.</p>"
+                "smithy.api#documentation": "<p>Deletes the delivery channel.</p>\n         <p>Before you can delete the delivery channel, you must stop the customer managed configuration recorder. You can use the <a>StopConfigurationRecorder</a> operation to stop the customer managed configuration recorder.</p>"
             }
         },
         "com.amazonaws.configservice#DeleteDeliveryChannelRequest": {
@@ -2753,7 +3027,7 @@
                 "DeliveryChannelName": {
                     "target": "com.amazonaws.configservice#ChannelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the delivery channel to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the delivery channel that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3106,6 +3380,66 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing service-linked configuration recorder.</p>\n         <p>This operation does not delete the configuration information that was previously recorded. You will be able to access the previously\n\t\t\trecorded information by using the\n\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceConfigHistory.html\">GetResourceConfigHistory</a> operation, but you will not\n\t\t\tbe able to access this information in the Config console until\n\t\t\tyou have created a new service-linked configuration recorder for the same service.</p>\n         <note>\n            <p>\n               <b>The recording scope determines if you receive configuration items</b>\n            </p>\n            <p>The recording scope is set by the service that is linked to the configuration recorder and determines whether you receive configuration items (CIs) in the delivery channel. If the recording scope is internal, you will not receive CIs in the delivery channel.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorderRequest": {
+            "type": "structure",
+            "members": {
+                "ServicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorderResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.configservice#RecorderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.configservice#DeleteStoredQuery": {
             "type": "operation",
             "input": {
@@ -3445,7 +3779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each \n\t\t\tconformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>\n         <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of the existing and deleted conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each \n\t\t\tconformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>\n         <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3598,7 +3932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether the specified Config rules are compliant.\n\t\t\tIf a rule is noncompliant, this action returns the number of Amazon Web Services\n\t\t\tresources that do not comply with the rule.</p>\n         <p>A rule is compliant if all of the evaluated resources comply\n\t\t\twith it. It is noncompliant if any of these resources do not\n\t\t\tcomply.</p>\n         <p>If Config has no current evaluation results for the rule,\n\t\t\tit returns <code>INSUFFICIENT_DATA</code>. This result might\n\t\t\tindicate one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function is failing to send\n\t\t\t\t\tevaluation results to Config. Verify that the role you\n\t\t\t\t\tassigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Indicates whether the specified Config rules are compliant.\n\t\t\tIf a rule is noncompliant, this operation returns the number of Amazon Web Services\n\t\t\tresources that do not comply with the rule.</p>\n         <p>A rule is compliant if all of the evaluated resources comply\n\t\t\twith it. It is noncompliant if any of these resources do not\n\t\t\tcomply.</p>\n         <p>If Config has no current evaluation results for the rule,\n\t\t\tit returns <code>INSUFFICIENT_DATA</code>. This result might\n\t\t\tindicate one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function is failing to send\n\t\t\t\t\tevaluation results to Config. Verify that the role you\n\t\t\t\t\tassigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3671,7 +4005,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether the specified Amazon Web Services resources are compliant. If\n\t\t\ta resource is noncompliant, this action returns the number of Config rules that the resource does not comply with.</p>\n         <p>A resource is compliant if it complies with all the Config\n\t\t\trules that evaluate it. It is noncompliant if it does not comply\n\t\t\twith one or more of these rules.</p>\n         <p>If Config has no current evaluation results for the\n\t\t\tresource, it returns <code>INSUFFICIENT_DATA</code>. This result\n\t\t\tmight indicate one of the following conditions about the rules that\n\t\t\tevaluate the resource:</p>\n         <ul>\n            <li>\n               <p>Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function is failing to send\n\t\t\t\t\tevaluation results to Config. Verify that the role that\n\t\t\t\t\tyou assigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Indicates whether the specified Amazon Web Services resources are compliant. If\n\t\t\ta resource is noncompliant, this operation returns the number of Config rules that the resource does not comply with.</p>\n         <p>A resource is compliant if it complies with all the Config\n\t\t\trules that evaluate it. It is noncompliant if it does not comply\n\t\t\twith one or more of these rules.</p>\n         <p>If Config has no current evaluation results for the\n\t\t\tresource, it returns <code>INSUFFICIENT_DATA</code>. This result\n\t\t\tmight indicate one of the following conditions about the rules that\n\t\t\tevaluate the resource:</p>\n         <ul>\n            <li>\n               <p>Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function is failing to send\n\t\t\t\t\tevaluation results to Config. Verify that the role that\n\t\t\t\t\tyou assigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n            </li>\n            <li>\n               <p>The rule's Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3686,7 +4020,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of Amazon Web Services resources for which you want compliance\n\t\t\tinformation (for example, <code>AWS::EC2::Instance</code>). For this\n\t\t\taction, you can specify that the resource type is an Amazon Web Services account by\n\t\t\tspecifying <code>AWS::::Account</code>.</p>"
+                        "smithy.api#documentation": "<p>The types of Amazon Web Services resources for which you want compliance\n\t\t\tinformation (for example, <code>AWS::EC2::Instance</code>). For this operation, you can specify that the resource type is an Amazon Web Services account by\n\t\t\tspecifying <code>AWS::::Account</code>.</p>"
                     }
                 },
                 "ResourceId": {
@@ -4018,7 +4352,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of one or more configuration aggregators.\n\t\t\tIf the configuration aggregator is not specified, this action\n\t\t\treturns the details for all the configuration aggregators associated\n\t\t\twith the account. </p>",
+                "smithy.api#documentation": "<p>Returns the details of one or more configuration aggregators.\n\t\t\tIf the configuration aggregator is not specified, this operation\n\t\t\treturns the details for all the configuration aggregators associated\n\t\t\twith the account. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4085,10 +4419,13 @@
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current status of the specified configuration\n\t\t\trecorder as well as the status of the last recording event for the recorder. If a configuration recorder is not specified, this action\n\t\t\treturns the status of all configuration recorders associated with\n\t\t\tthe account.</p>\n         <note>\n            <p>>You can specify only one configuration recorder for each Amazon Web Services Region for each account.\n\t\t\t\tFor a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns the current status of the configuration\n\t\t\trecorder you specify as well as the status of the last recording event for the configuration recorders.</p>\n         <p>For a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics.</p>\n         <p>If a configuration recorder is not specified, this operation returns the status for the customer managed configuration recorder configured for the\n\t\t\taccount, if applicable.</p>\n         <note>\n            <p>When making a request to this operation, you can only specify one configuration recorder.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#DescribeConfigurationRecorderStatusRequest": {
@@ -4097,7 +4434,19 @@
                 "ConfigurationRecorderNames": {
                     "target": "com.amazonaws.configservice#ConfigurationRecorderNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name(s) of the configuration recorder. If the name is not\n\t\t\tspecified, the action returns the current status of all the\n\t\t\tconfiguration recorders associated with the account.</p>"
+                        "smithy.api#documentation": "<p>The name of the configuration recorder. If the name is not\n\t\t\tspecified, the opertation returns the status for the customer managed configuration recorder configured for the\n\t\t\taccount, if applicable.</p>\n         <note>\n            <p>When making a request to this operation, you can only specify one configuration recorder.</p>\n         </note>"
+                    }
+                },
+                "ServicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.</p>"
                     }
                 }
             },
@@ -4132,10 +4481,13 @@
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details for the specified configuration recorders.\n\t\t\tIf the configuration recorder is not specified, this action returns\n\t\t\tthe details for all configuration recorders associated with the\n\t\t\taccount.</p>\n         <note>\n            <p>You can specify only one configuration recorder for each Amazon Web Services Region for each account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns details for the configuration recorder you specify.</p>\n         <p>If a configuration recorder is not specified, this operation returns details for the customer managed configuration recorder configured for the\n\t\t\taccount, if applicable.</p>\n         <note>\n            <p>When making a request to this operation, you can only specify one configuration recorder.</p>\n         </note>",
                 "smithy.test#smokeTests": [
                     {
                         "id": "DescribeConfigurationRecordersSuccess",
@@ -4157,7 +4509,19 @@
                 "ConfigurationRecorderNames": {
                     "target": "com.amazonaws.configservice#ConfigurationRecorderNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of configuration recorder names.</p>"
+                        "smithy.api#documentation": "<p>A list of names of the configuration recorders that you want to specify.</p>"
+                    }
+                },
+                "ServicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.</p>"
                     }
                 }
             },
@@ -4456,7 +4820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current status of the specified delivery channel.\n\t\t\tIf a delivery channel is not specified, this action returns the\n\t\t\tcurrent status of all delivery channels associated with the\n\t\t\taccount.</p>\n         <note>\n            <p>Currently, you can specify only one delivery channel per\n\t\t\t\tregion in your account.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns the current status of the specified delivery channel.\n\t\t\tIf a delivery channel is not specified, this operation returns the\n\t\t\tcurrent status of all delivery channels associated with the\n\t\t\taccount.</p>\n         <note>\n            <p>Currently, you can specify only one delivery channel per\n\t\t\t\tregion in your account.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#DescribeDeliveryChannelStatusRequest": {
@@ -4503,7 +4867,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns details about the specified delivery channel. If a\n\t\t\tdelivery channel is not specified, this action returns the details\n\t\t\tof all delivery channels associated with the account.</p>\n         <note>\n            <p>Currently, you can specify only one delivery channel per\n\t\t\t\tregion in your account.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns details about the specified delivery channel. If a\n\t\t\tdelivery channel is not specified, this operation returns the details\n\t\t\tof all delivery channels associated with the account.</p>\n         <note>\n            <p>Currently, you can specify only one delivery channel per\n\t\t\t\tregion in your account.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#DescribeDeliveryChannelsRequest": {
@@ -5087,7 +5451,7 @@
                 "ConfigRuleName": {
                     "target": "com.amazonaws.configservice#ConfigRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Config rule names.</p>",
+                        "smithy.api#documentation": "<p>The name of the Config rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5155,7 +5519,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of one or more retention configurations. If\n\t\t\tthe retention configuration name is not specified, this action\n\t\t\treturns the details for all the retention configurations for that\n\t\t\taccount.</p>\n         <note>\n            <p>Currently, Config supports only one retention\n\t\t\t\tconfiguration per region in your account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the details of one or more retention configurations. If\n\t\t\tthe retention configuration name is not specified, this operation\n\t\t\treturns the details for all the retention configurations for that\n\t\t\taccount.</p>\n         <note>\n            <p>Currently, Config supports only one retention\n\t\t\t\tconfiguration per region in your account.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5210,6 +5574,65 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.configservice#DisassociateResourceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#DisassociateResourceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#DisassociateResourceTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes all resource types specified in the <code>ResourceTypes</code> list from the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> of configuration recorder and excludes these resource types when recording.</p>\n         <p>For this operation, the configuration recorder must use a <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> that is either <code>INCLUSION_BY_RESOURCE_TYPES</code> or <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p>"
+            }
+        },
+        "com.amazonaws.configservice#DisassociateResourceTypesRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationRecorderArn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.configservice#ResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource types you want to remove from the recording group of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#DisassociateResourceTypesResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationRecorder": {
+                    "target": "com.amazonaws.configservice#ConfigurationRecorder",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.configservice#DiscoveredResourceIdentifierList": {
@@ -5520,7 +5943,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether the configuration recorder excludes certain resource types from being recorded.\n\t\t\tUse the <code>resourceTypes</code> field to enter a comma-separated list of resource types you want to exclude from recording.</p>\n         <p>By default, when Config adds support for a new resource type in the Region where you set up the configuration recorder,\n\t\t\tincluding global resource types, Config starts recording resources of that type automatically.</p>\n         <note>\n            <p>\n               <b>How to use the exclusion recording strategy </b>\n            </p>\n            <p>To use this option, you must set the <code>useOnly</code>\n\t\t\t\tfield of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a>\n\t\t\t\tto <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p>\n            <p>Config will then record configuration changes for all supported resource types, except the resource types that you specify to exclude from being recorded.</p>\n            <p>\n               <b>Global resource types and the exclusion recording strategy </b>\n            </p>\n            <p>Unless specifically listed as exclusions,\n\t\t\t\t<code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported  Config Regions were the configuration recorder is enabled.</p>\n            <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config was available before February 2022.\n\t\t\t\tYou cannot be record the global IAM resouce types in Regions supported by Config after February 2022. This list where you cannot record the global IAM resource types includes the following Regions:</p>\n            <ul>\n               <li>\n                  <p>Asia Pacific (Hyderabad)</p>\n               </li>\n               <li>\n                  <p>Asia Pacific (Melbourne)</p>\n               </li>\n               <li>\n                  <p>Canada West (Calgary)</p>\n               </li>\n               <li>\n                  <p>Europe (Spain)</p>\n               </li>\n               <li>\n                  <p>Europe (Zurich)</p>\n               </li>\n               <li>\n                  <p>Israel (Tel Aviv)</p>\n               </li>\n               <li>\n                  <p>Middle East (UAE)</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies whether the configuration recorder excludes certain resource types from being recorded.\n\t\t\tUse the <code>resourceTypes</code> field to enter a comma-separated list of resource types you want to exclude from recording.</p>\n         <p>By default, when Config adds support for a new resource type in the Region where you set up the configuration recorder,\n\t\t\tincluding global resource types, Config starts recording resources of that type automatically.</p>\n         <note>\n            <p>\n               <b>How to use the exclusion recording strategy </b>\n            </p>\n            <p>To use this option, you must set the <code>useOnly</code>\n\t\t\t\tfield of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a>\n\t\t\t\tto <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p>\n            <p>Config will then record configuration changes for all supported resource types, except the resource types that you specify to exclude from being recorded.</p>\n            <p>\n               <b>Global resource types and the exclusion recording strategy </b>\n            </p>\n            <p>Unless specifically listed as exclusions,\n\t\t\t\t<code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported  Config Regions were the configuration recorder is enabled.</p>\n            <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config was available before February 2022.\n\t\t\t\tYou cannot be record the global IAM resouce types in Regions supported by Config after February 2022. For a list of those Regions,\n\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all\">Recording Amazon Web Services Resources | Global Resources</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#ExecutionControls": {
@@ -6118,7 +6541,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns configuration item that is aggregated for your specific resource in a specific source account and region.</p>"
+                "smithy.api#documentation": "<p>Returns configuration item that is aggregated for your specific resource in a specific source account and region.</p>\n         <note>\n            <p>The API does not return results for deleted resources.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#GetAggregateResourceConfigRequest": {
@@ -7241,7 +7664,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your Amazon S3 bucket policy does not permit Config to\n\t\t\twrite to it.</p>",
+                "smithy.api#documentation": "<p>Your Amazon S3 bucket policy does not allow Config to\n\t\t\twrite to it.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7256,7 +7679,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For PutConfigRule, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For PutConfigRule, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For PutOrganizationConfigRule, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because you do not have the following permissions: </p>\n               <ul>\n                  <li>\n                     <p>You do not have permission to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n                  </li>\n                  <li>\n                     <p>You do not have permission to read Amazon S3 bucket or call SSM:GetDocument.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html\">PutConfigRule</a>, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html\">PutConfigRule</a>, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConfigRule.html\">PutOrganizationConfigRule</a>, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html\">PutConformancePack</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConformancePack.html\">PutOrganizationConformancePack</a>, a conformance pack cannot be created because you do not have the following permissions: </p>\n               <ul>\n                  <li>\n                     <p>You do not have permission to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n                  </li>\n                  <li>\n                     <p>You do not have permission to read Amazon S3 bucket or call SSM:GetDocument.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a>, a service-linked configuration recorder cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -7277,7 +7700,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have provided a name for the configuration recorder that is not\n\t\t\tvalid.</p>",
+                "smithy.api#documentation": "<p>You have provided a name for the customer managed configuration recorder that is not\n\t\t\tvalid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7367,7 +7790,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n         <ul>\n            <li>\n               <p>You have provided a combination of parameter values that is not valid. For example:</p>\n               <ul>\n                  <li>\n                     <p>Setting the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>,\n\t\t\t\t\t\tbut providing a non-empty list for the <code>resourceTypes</code>field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>.</p>\n                  </li>\n                  <li>\n                     <p>Setting the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>, but also setting the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Every parameter is either null, false, or empty.</p>\n            </li>\n            <li>\n               <p>You have reached the limit of the number of resource types you can provide for the recording group.</p>\n            </li>\n            <li>\n               <p>You have provided resource types or a recording strategy that are not valid.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>One of the following errors:</p>\n         <ul>\n            <li>\n               <p>You have provided a combination of parameter values that is not valid. For example:</p>\n               <ul>\n                  <li>\n                     <p>Setting the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>,\n\t\t\t\t\t\tbut providing a non-empty list for the <code>resourceTypes</code>field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>.</p>\n                  </li>\n                  <li>\n                     <p>Setting the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>, but also setting the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Every parameter is either null, false, or empty.</p>\n            </li>\n            <li>\n               <p>You have reached the limit of the number of resource types you can provide for the recording group.</p>\n            </li>\n            <li>\n               <p>You have provided resource types or a recording strategy that are not valid.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -7397,7 +7820,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have provided a null or empty Amazon Resource Name (ARN) for the IAM role assumed by Config and used by the configuration recorder.</p>",
+                "smithy.api#documentation": "<p>You have provided a null or empty Amazon Resource Name (ARN) for the IAM role assumed by Config and used by the customer managed configuration recorder.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7472,7 +7895,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You cannot delete the delivery channel you specified because\n\t\t\tthe configuration recorder is running.</p>",
+                "smithy.api#documentation": "<p>You cannot delete the delivery channel you specified because the customer managed configuration recorder is running.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7503,7 +7926,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For <code>StartConfigRulesEvaluation</code> API, this exception\n\t\t\tis thrown if an evaluation is in progress or if you call the <a>StartConfigRulesEvaluation</a> API more than once per\n\t\t\tminute.</p>\n         <p>For <code>PutConfigurationAggregator</code> API, this exception\n\t\t\tis thrown if the number of accounts and aggregators exceeds the\n\t\t\tlimit.</p>",
+                "smithy.api#documentation": "<p>For <code>PutServiceLinkedConfigurationRecorder</code> API, this exception\n\t\t\tis thrown if the number of service-linked roles in the account exceeds the limit.</p>\n         <p>For <code>StartConfigRulesEvaluation</code> API, this exception\n\t\t\tis thrown if an evaluation is in progress or if you call the <a>StartConfigRulesEvaluation</a> API more than once per\n\t\t\tminute.</p>\n         <p>For <code>PutConfigurationAggregator</code> API, this exception\n\t\t\tis thrown if the number of accounts and aggregators exceeds the\n\t\t\tlimit.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7593,6 +8016,77 @@
                     "target": "com.amazonaws.configservice#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.configservice#ListConfigurationRecorders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#ListConfigurationRecordersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#ListConfigurationRecordersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of configuration recorders depending on the filters you specify.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConfigurationRecorderSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.configservice#ListConfigurationRecordersRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.configservice#ConfigurationRecorderFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results based on a list of <code>ConfigurationRecorderFilter</code> objects that you specify.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.configservice#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#ListConfigurationRecordersResponse": {
+            "type": "structure",
+            "members": {
+                "ConfigurationRecorderSummaries": {
+                    "target": "com.amazonaws.configservice#ConfigurationRecorderSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ConfigurationRecorderSummary</code> objects that includes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
                     }
                 }
             },
@@ -7933,7 +8427,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. \n\t\t\tTo retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. \n\t\t\tIf there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. \n\t\t\tTo retrieve the next set of results, call this operation again and assign that token to the request object's <code>NextToken</code> parameter. \n\t\t\tIf there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>. </p>"
                     }
                 }
             },
@@ -7979,7 +8473,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.configservice#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8145,6 +8639,16 @@
             "traits": {
                 "smithy.api#documentation": "<p>Failed to add the retention configuration because a retention configuration with that name already exists.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.configservice#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.configservice#MaximumExecutionFrequency": {
@@ -8334,7 +8838,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There are no configuration recorders available to provide the\n\t\t\trole needed to describe your resources. Create a configuration\n\t\t\trecorder.</p>",
+                "smithy.api#documentation": "<p>There are no customer managed configuration recorders available to record your resources. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationRecorder.html\">PutConfigurationRecorder</a> operation to create the customer managed configuration\n\t\t\trecorder.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8577,7 +9081,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For <code>PutConfigurationAggregator</code> API, you can see this exception for the following reasons:</p>\n         <ul>\n            <li>\n               <p>No permission to call <code>EnableAWSServiceAccess</code> API</p>\n            </li>\n            <li>\n               <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed. \n\t\t\t\tDelete this aggregator and create a new one with the current Amazon Web Services Organization.</p>\n            </li>\n            <li>\n               <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization. \n\t\t\t\tDelete this aggregator and create a new one with the current Amazon Web Services Organization.</p>\n            </li>\n            <li>\n               <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API. \n\t\t\tEnsure that the management account registers delagated administrator for Config service principle name before the delegated administrator creates an aggregator.</p>\n            </li>\n         </ul>\n         <p>For all <code>OrganizationConfigRule</code> and <code>OrganizationConformancePack</code> APIs, Config throws an exception if APIs are called from member accounts. All APIs must be called from organization management account.</p>",
+                "smithy.api#documentation": "<p>For <code>PutConfigurationAggregator</code> API, you can see this exception for the following reasons:</p>\n         <ul>\n            <li>\n               <p>No permission to call <code>EnableAWSServiceAccess</code> API</p>\n            </li>\n            <li>\n               <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed. \n\t\t\t\tDelete this aggregator and create a new one with the current Amazon Web Services Organization.</p>\n            </li>\n            <li>\n               <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization. \n\t\t\t\tDelete this aggregator and create a new one with the current Amazon Web Services Organization.</p>\n            </li>\n            <li>\n               <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API. \n\t\t\tEnsure that the management account registers delagated administrator for Config service principal name before the delegated administrator creates an aggregator.</p>\n            </li>\n         </ul>\n         <p>For all <code>OrganizationConfigRule</code> and <code>OrganizationConformancePack</code> APIs, Config throws an exception if APIs are called from member accounts. All APIs must be called from organization management account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -9599,7 +10103,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Authorizes the aggregator account and region to collect data\n\t\t\tfrom the source account and region. </p>\n         <note>\n            <p>\n               <code>PutAggregationAuthorization</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Authorizes the aggregator account and region to collect data\n\t\t\tfrom the source account and region. </p>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>\n               <code>PutAggregationAuthorization</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutAggregationAuthorizationRequest": {
@@ -9670,7 +10174,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates an Config rule to evaluate if your\n\t\t\tAmazon Web Services resources comply with your desired configurations. For information on how many Config rules you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <p>There are two types of rules: <i>Config Managed Rules</i> and <i>Config Custom Rules</i>.\n\t\t\tYou can use <code>PutConfigRule</code> to create both Config Managed Rules and  Config Custom Rules.</p>\n         <p>Config Managed Rules are predefined,\n\t\t\tcustomizable rules created by Config. For a list of managed rules, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">List of Config\n\t\t\t\tManaged Rules</a>. If you are adding an Config managed rule, you must specify the\n\t\t\trule's identifier for the <code>SourceIdentifier</code> key.</p>\n         <p>Config Custom Rules are rules that you create from scratch. There are two ways to create Config custom rules: with Lambda functions\n\t\t\t(<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function\"> Lambda Developer Guide</a>) and with Guard (<a href=\"https://github.com/aws-cloudformation/cloudformation-guard\">Guard GitHub\n\t\t\t\t\tRepository</a>), a policy-as-code language.\n\t\t\t\n\t\t\tConfig custom rules created with Lambda\n\t\t\tare called <i>Config Custom Lambda Rules</i> and Config custom rules created with\n\t\t\tGuard are called <i>Config Custom Policy Rules</i>.</p>\n         <p>If you are adding a new Config Custom Lambda rule,\n\t\t\tyou first need to create an Lambda function that the rule invokes to evaluate\n\t\t\tyour resources. When you use <code>PutConfigRule</code> to add a Custom Lambda rule to Config, you must specify the Amazon Resource\n\t\t\tName (ARN) that Lambda assigns to the function. You specify the ARN\n\t\t\tin the <code>SourceIdentifier</code> key. This key is part of the\n\t\t\t<code>Source</code> object, which is part of the\n\t\t\t<code>ConfigRule</code> object. </p>\n         <p>For any new Config rule that you add, specify the\n\t\t\t\t<code>ConfigRuleName</code> in the <code>ConfigRule</code>\n\t\t\tobject. Do not specify the <code>ConfigRuleArn</code> or the\n\t\t\t<code>ConfigRuleId</code>. These values are generated by Config for new rules.</p>\n         <p>If you are updating a rule that you added previously, you can\n\t\t\tspecify the rule by <code>ConfigRuleName</code>,\n\t\t\t\t<code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the\n\t\t\t\t<code>ConfigRule</code> data type that you use in this\n\t\t\trequest.</p>\n         <p>For more information about developing and using Config\n\t\t\trules, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating Resources with Config Rules</a>\n\t\t\tin the <i>Config Developer Guide</i>.</p>\n         <note>\n            <p>\n               <code>PutConfigRule</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds or updates an Config rule to evaluate if your\n\t\t\tAmazon Web Services resources comply with your desired configurations. For information on how many Config rules you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <p>There are two types of rules: <i>Config Managed Rules</i> and <i>Config Custom Rules</i>.\n\t\t\tYou can use <code>PutConfigRule</code> to create both Config Managed Rules and  Config Custom Rules.</p>\n         <p>Config Managed Rules are predefined,\n\t\t\tcustomizable rules created by Config. For a list of managed rules, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">List of Config\n\t\t\t\tManaged Rules</a>. If you are adding an Config managed rule, you must specify the\n\t\t\trule's identifier for the <code>SourceIdentifier</code> key.</p>\n         <p>Config Custom Rules are rules that you create from scratch. There are two ways to create Config custom rules: with Lambda functions\n\t\t\t(<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function\"> Lambda Developer Guide</a>) and with Guard (<a href=\"https://github.com/aws-cloudformation/cloudformation-guard\">Guard GitHub\n\t\t\t\t\tRepository</a>), a policy-as-code language.\n\t\t\t\n\t\t\tConfig custom rules created with Lambda\n\t\t\tare called <i>Config Custom Lambda Rules</i> and Config custom rules created with\n\t\t\tGuard are called <i>Config Custom Policy Rules</i>.</p>\n         <p>If you are adding a new Config Custom Lambda rule,\n\t\t\tyou first need to create an Lambda function that the rule invokes to evaluate\n\t\t\tyour resources. When you use <code>PutConfigRule</code> to add a Custom Lambda rule to Config, you must specify the Amazon Resource\n\t\t\tName (ARN) that Lambda assigns to the function. You specify the ARN\n\t\t\tin the <code>SourceIdentifier</code> key. This key is part of the\n\t\t\t<code>Source</code> object, which is part of the\n\t\t\t<code>ConfigRule</code> object. </p>\n         <p>For any new Config rule that you add, specify the\n\t\t\t\t<code>ConfigRuleName</code> in the <code>ConfigRule</code>\n\t\t\tobject. Do not specify the <code>ConfigRuleArn</code> or the\n\t\t\t<code>ConfigRuleId</code>. These values are generated by Config for new rules.</p>\n         <p>If you are updating a rule that you added previously, you can\n\t\t\tspecify the rule by <code>ConfigRuleName</code>,\n\t\t\t\t<code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the\n\t\t\t\t<code>ConfigRule</code> data type that you use in this\n\t\t\trequest.</p>\n         <p>For more information about developing and using Config\n\t\t\trules, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html\">Evaluating Resources with Config Rules</a>\n\t\t\tin the <i>Config Developer Guide</i>.</p>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>\n               <code>PutConfigRule</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutConfigRuleRequest": {
@@ -9723,7 +10227,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and updates the configuration aggregator with the\n\t\t\tselected source accounts and regions. The source account can be\n\t\t\tindividual account(s) or an organization.</p>\n         <p>\n            <code>accountIds</code> that are passed will be replaced with existing accounts.\n\t\t\tIf you want to add additional accounts into the aggregator, call <code>DescribeConfigurationAggregators</code> to get the previous accounts and then append new ones.</p>\n         <note>\n            <p>Config should be enabled in source accounts and regions\n\t\t\t\tyou want to aggregate.</p>\n            <p>If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. \n\t\t\t\tIf the caller is a management account, Config calls <code>EnableAwsServiceAccess</code> API to enable integration between Config and Organizations.\n\t\t\t\tIf the caller is a registered delegated administrator, Config calls <code>ListDelegatedAdministrators</code> API to verify whether the caller is a valid delegated administrator.</p>\n            <p>To register a delegated administrator, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli\">Register a Delegated Administrator</a> in the <i>Config developer guide</i>. </p>\n         </note>\n         <note>\n            <p>\n               <code>PutConfigurationAggregator</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates and updates the configuration aggregator with the\n\t\t\tselected source accounts and regions. The source account can be\n\t\t\tindividual account(s) or an organization.</p>\n         <p>\n            <code>accountIds</code> that are passed will be replaced with existing accounts.\n\t\t\tIf you want to add additional accounts into the aggregator, call <code>DescribeConfigurationAggregators</code> to get the previous accounts and then append new ones.</p>\n         <note>\n            <p>Config should be enabled in source accounts and regions\n\t\t\t\tyou want to aggregate.</p>\n            <p>If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. \n\t\t\t\tIf the caller is a management account, Config calls <code>EnableAwsServiceAccess</code> API to enable integration between Config and Organizations.\n\t\t\t\tIf the caller is a registered delegated administrator, Config calls <code>ListDelegatedAdministrators</code> API to verify whether the caller is a valid delegated administrator.</p>\n            <p>To register a delegated administrator, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli\">Register a Delegated Administrator</a> in the <i>Config developer guide</i>. </p>\n         </note>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>\n               <code>PutConfigurationAggregator</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutConfigurationAggregatorRequest": {
@@ -9752,6 +10256,12 @@
                     "target": "com.amazonaws.configservice#TagsList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of tag object.</p>"
+                    }
+                },
+                "AggregatorFilters": {
+                    "target": "com.amazonaws.configservice#AggregatorFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to filter configuration recorders in an aggregator. Either <code>ResourceType</code> or <code>ServicePrincipal</code> is required.</p>"
                     }
                 }
             },
@@ -9795,11 +10305,14 @@
                     "target": "com.amazonaws.configservice#MaxNumberOfConfigurationRecordersExceededException"
                 },
                 {
+                    "target": "com.amazonaws.configservice#UnmodifiableEntityException"
+                },
+                {
                     "target": "com.amazonaws.configservice#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new configuration recorder to record configuration changes for specified resource types.</p>\n         <p>You can also use this action to change the <code>roleARN</code>\n\t\t\tor the <code>recordingGroup</code> of an existing recorder.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html\">\n               <b>Managing the Configuration Recorder</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <note>\n            <p>You can specify only one configuration recorder for each Amazon Web Services Region for each account.</p>\n            <p>If the configuration recorder does not have the\n\t\t\t\t\t<code>recordingGroup</code> field\n\t\t\t\tspecified, the default is to record all supported resource\n\t\t\t\ttypes.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates the customer managed configuration recorder.</p>\n         <p>You can use this operation to create a new customer managed configuration recorder or to update the <code>roleARN</code> and the <code>recordingGroup</code> for an existing customer managed configuration recorder.</p>\n         <p>To start the customer managed configuration recorder and begin recording configuration changes for the resource types you specify,\n\t\t\tuse the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_StartConfigurationRecorder.html\">StartConfigurationRecorder</a> operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html\">\n               <b>Working with the Configuration Recorder</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <note>\n            <p>\n               <b>One customer managed configuration recorder per account per Region</b>\n            </p>\n            <p>You can create only one customer managed configuration recorder for each account for each Amazon Web Services Region.</p>\n            <p>\n               <b>Default is to record all supported resource types, excluding the global IAM resource types</b>\n            </p>\n            <p>If you have not specified values for the <code>recordingGroup</code> field, the default for the customer managed configuration recorder is to record all supported resource\n\t\t\t\ttypes, excluding the global IAM resource types: <code>AWS::IAM::Group</code>, <code>AWS::IAM::Policy</code>, <code>AWS::IAM::Role</code>, and <code>AWS::IAM::User</code>.</p>\n            <p>\n               <b>Tags are added at creation and cannot be updated</b>\n            </p>\n            <p>\n               <code>PutConfigurationRecorder</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different tags values,\n\t\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, tags will not be updated, even if they are different.</p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutConfigurationRecorderRequest": {
@@ -9808,8 +10321,14 @@
                 "ConfigurationRecorder": {
                     "target": "com.amazonaws.configservice#ConfigurationRecorder",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object for the configuration recorder to record configuration changes for specified resource types.</p>",
+                        "smithy.api#documentation": "<p>An object for the configuration recorder. A configuration recorder records configuration changes for the resource types in scope.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.configservice#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the customer managed configuration recorder. Each tag consists of a key and an optional value, both of which you define.</p>"
                     }
                 }
             },
@@ -9947,7 +10466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a delivery channel object to deliver configuration\n\t\t\tinformation and other compliance information to an Amazon S3 bucket and Amazon SNS topic.\n\t\t\tFor more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/notifications-for-AWS-Config.html\">Notifications that Config Sends to an Amazon SNS topic</a>.</p>\n         <p>Before you can create a delivery channel, you must create a\n\t\t\tconfiguration recorder.</p>\n         <p>You can use this action to change the Amazon S3 bucket or an\n\t\t\tAmazon SNS topic of the existing delivery channel. To change the\n\t\t\tAmazon S3 bucket or an Amazon SNS topic, call this action and\n\t\t\tspecify the changed values for the S3 bucket and the SNS topic. If\n\t\t\tyou specify a different value for either the S3 bucket or the SNS\n\t\t\ttopic, this action will keep the existing value for the parameter\n\t\t\tthat is not changed.</p>\n         <note>\n            <p>You can have only one delivery channel per region in your\n\t\t\t\taccount.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a delivery channel to deliver configuration\n\t\t\tinformation and other compliance information.</p>\n         <p>You can use this operation to create a new delivery channel or to update the Amazon S3 bucket and the\n\t\t\tAmazon SNS topic of an existing delivery channel.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/manage-delivery-channel.html\">\n               <b>Working with the Delivery Channel</b>\n            </a> in the <i>Config Developer Guide.</i>\n         </p>\n         <note>\n            <p>\n               <b>One delivery channel per account per Region</b>\n            </p>\n            <p>You can have only one delivery channel for each account for each Amazon Web Services Region.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutDeliveryChannelRequest": {
@@ -9956,7 +10475,7 @@
                 "DeliveryChannel": {
                     "target": "com.amazonaws.configservice#DeliveryChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration delivery channel object that delivers the\n\t\t\tconfiguration information to an Amazon S3 bucket and to an Amazon\n\t\t\tSNS topic.</p>",
+                        "smithy.api#documentation": "<p>An object for the delivery channel. A delivery channel sends notifications and updated configuration states.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9986,7 +10505,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by an Lambda function to deliver evaluation results to\n\t\t\tConfig. This action is required in every Lambda function\n\t\t\tthat is invoked by an Config rule.</p>"
+                "smithy.api#documentation": "<p>Used by an Lambda function to deliver evaluation results to\n\t\t\tConfig. This operation is required in every Lambda function\n\t\t\tthat is invoked by an Config rule.</p>"
             }
         },
         "com.amazonaws.configservice#PutEvaluationsRequest": {
@@ -10342,7 +10861,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A remediation exception is when a specified resource is no longer considered for auto-remediation. \n\t\t\tThis API adds a new exception or updates an existing exception for a specified resource with a specified Config rule. </p>\n         <note>\n            <p>\n               <b>Exceptions block auto remediation</b>\n            </p>\n            <p>Config generates a remediation exception when a problem occurs running a remediation action for a specified resource. \n\t\t\tRemediation exceptions blocks auto-remediation until the exception is cleared.</p>\n         </note>\n         <note>\n            <p>\n               <b>Manual remediation is recommended when placing an exception</b>\n            </p>\n            <p>When placing an exception on an Amazon Web Services resource, it is recommended that remediation is set as manual remediation until\n\t\t\tthe given Config rule for the specified resource evaluates the resource as <code>NON_COMPLIANT</code>.\n\t\t\tOnce the resource has been evaluated as <code>NON_COMPLIANT</code>, you can add remediation exceptions and change the remediation type back from Manual to Auto if you want to use auto-remediation.\n\t\t\tOtherwise, using auto-remediation before a <code>NON_COMPLIANT</code> evaluation result can delete resources before the exception is applied.</p>\n         </note>\n         <note>\n            <p>\n               <b>Exceptions can only be performed on non-compliant resources</b>\n            </p>\n            <p>Placing an exception can only be performed on resources that are <code>NON_COMPLIANT</code>.\n\t\t\tIf you use this API for <code>COMPLIANT</code> resources or resources that are <code>NOT_APPLICABLE</code>, a remediation exception will not be generated.\n\t\t\tFor more information on the conditions that initiate the possible Config evaluation results,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#aws-config-rules\">Concepts | Config  Rules</a> in the <i>Config Developer Guide</i>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Auto remediation can be initiated even for compliant resources</b>\n            </p>\n            <p>If you enable auto remediation for a specific Config rule using the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/emAPI_PutRemediationConfigurations.html\">PutRemediationConfigurations</a> API or the Config console,\n\t\t\t\tit initiates the remediation process for all non-compliant resources for that specific rule.\n\t\t\t\tThe auto remediation process relies on the compliance data snapshot which is captured on a periodic basis.\n\t\t\t\tAny non-compliant resource that is updated between the snapshot schedule will continue to be remediated based on the last known compliance data snapshot.</p>\n            <p>This means that in some cases auto remediation can be initiated even for compliant resources, since the bootstrap processor uses a database that can have stale evaluation results based on the last known compliance data snapshot.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A remediation exception is when a specified resource is no longer considered for auto-remediation. \n\t\t\tThis API adds a new exception or updates an existing exception for a specified resource with a specified Config rule. </p>\n         <note>\n            <p>\n               <b>Exceptions block auto remediation</b>\n            </p>\n            <p>Config generates a remediation exception when a problem occurs running a remediation action for a specified resource. \n\t\t\tRemediation exceptions blocks auto-remediation until the exception is cleared.</p>\n         </note>\n         <note>\n            <p>\n               <b>Manual remediation is recommended when placing an exception</b>\n            </p>\n            <p>When placing an exception on an Amazon Web Services resource, it is recommended that remediation is set as manual remediation until\n\t\t\tthe given Config rule for the specified resource evaluates the resource as <code>NON_COMPLIANT</code>.\n\t\t\tOnce the resource has been evaluated as <code>NON_COMPLIANT</code>, you can add remediation exceptions and change the remediation type back from Manual to Auto if you want to use auto-remediation.\n\t\t\tOtherwise, using auto-remediation before a <code>NON_COMPLIANT</code> evaluation result can delete resources before the exception is applied.</p>\n         </note>\n         <note>\n            <p>\n               <b>Exceptions can only be performed on non-compliant resources</b>\n            </p>\n            <p>Placing an exception can only be performed on resources that are <code>NON_COMPLIANT</code>.\n\t\t\tIf you use this API for <code>COMPLIANT</code> resources or resources that are <code>NOT_APPLICABLE</code>, a remediation exception will not be generated.\n\t\t\tFor more information on the conditions that initiate the possible Config evaluation results,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#aws-config-rules\">Concepts | Config  Rules</a> in the <i>Config Developer Guide</i>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Exceptions cannot be placed on service-linked remediation actions</b>\n            </p>\n            <p>You cannot place an exception on service-linked remediation actions, such as remediation actions put by an organizational conformance pack.</p>\n         </note>\n         <note>\n            <p>\n               <b>Auto remediation can be initiated even for compliant resources</b>\n            </p>\n            <p>If you enable auto remediation for a specific Config rule using the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/emAPI_PutRemediationConfigurations.html\">PutRemediationConfigurations</a> API or the Config console,\n\t\t\t\tit initiates the remediation process for all non-compliant resources for that specific rule.\n\t\t\t\tThe auto remediation process relies on the compliance data snapshot which is captured on a periodic basis.\n\t\t\t\tAny non-compliant resource that is updated between the snapshot schedule will continue to be remediated based on the last known compliance data snapshot.</p>\n            <p>This means that in some cases auto remediation can be initiated even for compliant resources, since the bootstrap processor uses a database that can have stale evaluation results based on the last known compliance data snapshot.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutRemediationExceptionsRequest": {
@@ -10516,6 +11035,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InsufficientPermissionsException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a service-linked configuration recorder that is linked to a specific Amazon Web Services service based on the <code>ServicePrincipal</code> you specify.</p>\n         <p>The configuration recorder's <code>name</code>, <code>recordingGroup</code>, <code>recordingMode</code>, and <code>recordingScope</code> is set by the service that is linked to the configuration recorder.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html\">\n               <b>Working with the Configuration Recorder</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <p>This API creates a service-linked role <code>AWSServiceRoleForConfig</code> in your account. The service-linked role is created only when the role does not exist in your account.</p>\n         <note>\n            <p>\n               <b>The recording scope determines if you receive configuration items</b>\n            </p>\n            <p>The recording scope is set by the service that is linked to the configuration recorder and determines whether you receive configuration items (CIs) in the delivery channel. If the recording scope is internal, you will not receive CIs in the delivery channel.</p>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorderRequest": {
+            "type": "structure",
+            "members": {
+                "ServicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.configservice#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for a service-linked configuration recorder. Each tag consists of a key and an optional value, both of which you define.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorderResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.configservice#RecorderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the specified configuration recorder.</p>\n         <p>For service-linked configuration recorders, Config automatically assigns a name that has the prefix \"<code>AWS</code>\" to the new service-linked configuration recorder.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.configservice#PutStoredQuery": {
             "type": "operation",
             "input": {
@@ -10536,7 +11122,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Saves a new query or updates an existing saved query. The <code>QueryName</code> must be unique for a single Amazon Web Services account and a single Amazon Web Services Region.\n\t\t\tYou can create upto 300 queries in a single Amazon Web Services account and a single Amazon Web Services Region.</p>\n         <note>\n            <p>\n               <code>PutStoredQuery</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Saves a new query or updates an existing saved query. The <code>QueryName</code> must be unique for a single Amazon Web Services account and a single Amazon Web Services Region.\n\t\t\tYou can create upto 300 queries in a single Amazon Web Services account and a single Amazon Web Services Region.</p>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated</b>\n            </p>\n            <p>\n               <code>PutStoredQuery</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutStoredQueryRequest": {
@@ -10667,6 +11253,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Failure"
                     }
+                },
+                "NotApplicable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotApplicable"
+                    }
                 }
             }
         },
@@ -10701,7 +11293,7 @@
                     "target": "com.amazonaws.configservice#IncludeGlobalResourceTypes",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>This option is a bundle which only applies to the global IAM resource types:\n\t\t\tIAM users, groups, roles, and customer managed policies. These global IAM resource types can only be recorded\n\t\t\tby Config in Regions where Config was available before February 2022.\n\t\t\tYou cannot be record the global IAM resouce types in Regions supported by Config after February 2022.\n\t\t\tThis list where you cannot record the global IAM resource types includes the following Regions:</p>\n         <ul>\n            <li>\n               <p>Asia Pacific (Hyderabad)</p>\n            </li>\n            <li>\n               <p>Asia Pacific (Melbourne)</p>\n            </li>\n            <li>\n               <p>Canada West (Calgary)</p>\n            </li>\n            <li>\n               <p>Europe (Spain)</p>\n            </li>\n            <li>\n               <p>Europe (Zurich)</p>\n            </li>\n            <li>\n               <p>Israel (Tel Aviv)</p>\n            </li>\n            <li>\n               <p>Middle East (UAE)</p>\n            </li>\n         </ul>\n         <important>\n            <p>\n               <b>Aurora global clusters are recorded in all enabled Regions</b>\n            </p>\n            <p>The <code>AWS::RDS::GlobalCluster</code> resource type will be recorded in all supported Config Regions where the configuration recorder is enabled, even if <code>includeGlobalResourceTypes</code> is set<code>false</code>.\n\t\t\t\tThe <code>includeGlobalResourceTypes</code> option is a bundle which only applies to IAM users, groups, roles, and customer managed policies.\n\t\t\t</p>\n            <p>If you do not want to record <code>AWS::RDS::GlobalCluster</code> in all enabled Regions, use one of the following recording strategies:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Record all current and future resource types with exclusions</b> (<code>EXCLUSION_BY_RESOURCE_TYPES</code>), or</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Record specific resource types</b> (<code>INCLUSION_BY_RESOURCE_TYPES</code>).</p>\n               </li>\n            </ol>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all\">Selecting Which Resources are Recorded</a> in the <i>Config developer guide</i>.</p>\n         </important>\n         <important>\n            <p>\n               <b>includeGlobalResourceTypes and the exclusion recording strategy</b>\n            </p>\n            <p>The <code>includeGlobalResourceTypes</code> field has no impact on the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy.\n\t\t\t\tThis means that the global IAM resource types (IAM users, groups, roles, and customer managed policies) will\n\t\t\t\tnot be automatically added as exclusions for <code>exclusionByResourceTypes</code> when <code>includeGlobalResourceTypes</code> is set to <code>false</code>.</p>\n            <p>The <code>includeGlobalResourceTypes</code> field should only be used to modify the <code>AllSupported</code> field, as the default for\n\t\t\t\tthe <code>AllSupported</code> field is to record configuration changes for all supported resource types excluding the global\n\t\t\t\tIAM resource types. To include the global IAM resource types when <code>AllSupported</code> is set to <code>true</code>, make sure to set <code>includeGlobalResourceTypes</code> to <code>true</code>.</p>\n            <p>To exclude the global IAM resource types for the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy, you need to manually add them to the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p>\n         </important>\n         <note>\n            <p>\n               <b>Required and optional fields</b>\n            </p>\n            <p>Before you set this field to <code>true</code>,\n\t\t\tset the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to\n\t\t\t<code>true</code>. Optionally, you can set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Overriding fields</b>\n            </p>\n            <p>If you set this field to <code>false</code> but list global IAM resource types in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>,\n\t\t\tConfig will still record configuration changes for those specified resource types <i>regardless</i> of if you set the <code>includeGlobalResourceTypes</code> field to false.</p>\n            <p>If you do not want to record configuration changes to the global IAM resource types (IAM users, groups, roles, and customer managed policies), make sure to not list them in the <code>resourceTypes</code> field\n\t\t\tin addition to setting the <code>includeGlobalResourceTypes</code> field to false.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>This option is a bundle which only applies to the global IAM resource types:\n\t\t\tIAM users, groups, roles, and customer managed policies. These global IAM resource types can only be recorded\n\t\t\tby Config in Regions where Config was available before February 2022.\n\t\t\tYou cannot be record the global IAM resouce types in Regions supported by Config after February 2022. For a list of those Regions,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all\">Recording Amazon Web Services Resources | Global Resources</a>.</p>\n         <important>\n            <p>\n               <b>Aurora global clusters are recorded in all enabled Regions</b>\n            </p>\n            <p>The <code>AWS::RDS::GlobalCluster</code> resource type will be recorded in all supported Config Regions where the configuration recorder is enabled, even if <code>includeGlobalResourceTypes</code> is set<code>false</code>.\n\t\t\t\tThe <code>includeGlobalResourceTypes</code> option is a bundle which only applies to IAM users, groups, roles, and customer managed policies.\n\t\t\t</p>\n            <p>If you do not want to record <code>AWS::RDS::GlobalCluster</code> in all enabled Regions, use one of the following recording strategies:</p>\n            <ol>\n               <li>\n                  <p>\n                     <b>Record all current and future resource types with exclusions</b> (<code>EXCLUSION_BY_RESOURCE_TYPES</code>), or</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Record specific resource types</b> (<code>INCLUSION_BY_RESOURCE_TYPES</code>).</p>\n               </li>\n            </ol>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all\">Selecting Which Resources are Recorded</a> in the <i>Config developer guide</i>.</p>\n         </important>\n         <important>\n            <p>\n               <b>includeGlobalResourceTypes and the exclusion recording strategy</b>\n            </p>\n            <p>The <code>includeGlobalResourceTypes</code> field has no impact on the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy.\n\t\t\t\tThis means that the global IAM resource types (IAM users, groups, roles, and customer managed policies) will\n\t\t\t\tnot be automatically added as exclusions for <code>exclusionByResourceTypes</code> when <code>includeGlobalResourceTypes</code> is set to <code>false</code>.</p>\n            <p>The <code>includeGlobalResourceTypes</code> field should only be used to modify the <code>AllSupported</code> field, as the default for\n\t\t\t\tthe <code>AllSupported</code> field is to record configuration changes for all supported resource types excluding the global\n\t\t\t\tIAM resource types. To include the global IAM resource types when <code>AllSupported</code> is set to <code>true</code>, make sure to set <code>includeGlobalResourceTypes</code> to <code>true</code>.</p>\n            <p>To exclude the global IAM resource types for the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy, you need to manually add them to the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p>\n         </important>\n         <note>\n            <p>\n               <b>Required and optional fields</b>\n            </p>\n            <p>Before you set this field to <code>true</code>,\n\t\t\tset the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to\n\t\t\t<code>true</code>. Optionally, you can set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Overriding fields</b>\n            </p>\n            <p>If you set this field to <code>false</code> but list global IAM resource types in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>,\n\t\t\tConfig will still record configuration changes for those specified resource types <i>regardless</i> of if you set the <code>includeGlobalResourceTypes</code> field to false.</p>\n            <p>If you do not want to record configuration changes to the global IAM resource types (IAM users, groups, roles, and customer managed policies), make sure to not list them in the <code>resourceTypes</code> field\n\t\t\tin addition to setting the <code>includeGlobalResourceTypes</code> field to false.</p>\n         </note>"
                     }
                 },
                 "resourceTypes": {
@@ -10719,7 +11311,7 @@
                 "recordingStrategy": {
                     "target": "com.amazonaws.configservice#RecordingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that specifies the recording strategy for the configuration recorder.</p>\n         <ul>\n            <li>\n               <p>If you set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, excluding the global IAM resource types. You also must set the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>. When Config adds support for a new resource type, Config automatically starts recording resources of that type.</p>\n            </li>\n            <li>\n               <p>If you set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>INCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for only the resource types you specify in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>.</p>\n            </li>\n            <li>\n               <p>If you set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>EXCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types\n\t\t\t\texcept the resource types that you specify to exclude from being recorded in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html\">ExclusionByResourceTypes</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <b>Required and optional fields</b>\n            </p>\n            <p>The <code>recordingStrategy</code> field is optional when you set the\n\t\t\t<code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>.</p>\n            <p>The <code>recordingStrategy</code> field is optional when you list resource types in the\n\t\t\t\t<code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>.</p>\n            <p>The <code>recordingStrategy</code> field is required if you list resource types to exclude from recording in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html\">ExclusionByResourceTypes</a>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Overriding fields</b>\n            </p>\n            <p>If you choose <code>EXCLUSION_BY_RESOURCE_TYPES</code> for the recording strategy, the <code>exclusionByResourceTypes</code> field will override other properties in the request.</p>\n            <p>For example, even if you set <code>includeGlobalResourceTypes</code> to false, global IAM resource types will still be automatically\n\t\t\trecorded in this option unless those resource types are specifically listed as exclusions in the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Global resources types and the resource exclusion recording strategy</b>\n            </p>\n            <p>By default, if you choose the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy,\n\t\t\twhen Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types,\n\t\t\tConfig starts recording resources of that type automatically.</p>\n            <p>Unless specifically listed as exclusions,\n\t\t\t\t<code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported Config Regions were the configuration recorder is enabled.</p>\n            <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config  was available before February 2022.\n\t\t\t\tYou cannot be record the global IAM resouce types in Regions supported by Config after February 2022. This list where you cannot record the global IAM  resource types includes the following Regions:</p>\n            <ul>\n               <li>\n                  <p>Asia Pacific (Hyderabad)</p>\n               </li>\n               <li>\n                  <p>Asia Pacific (Melbourne)</p>\n               </li>\n               <li>\n                  <p>Canada West (Calgary)</p>\n               </li>\n               <li>\n                  <p>Europe (Spain)</p>\n               </li>\n               <li>\n                  <p>Europe (Zurich)</p>\n               </li>\n               <li>\n                  <p>Israel (Tel Aviv)</p>\n               </li>\n               <li>\n                  <p>Middle East (UAE)</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>An object that specifies the recording strategy for the configuration recorder.</p>\n         <ul>\n            <li>\n               <p>If you set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, excluding the global IAM resource types. You also must set the <code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>. When Config adds support for a new resource type, Config automatically starts recording resources of that type.</p>\n            </li>\n            <li>\n               <p>If you set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>INCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for only the resource types you specify in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>.</p>\n            </li>\n            <li>\n               <p>If you set the <code>useOnly</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html\">RecordingStrategy</a> to <code>EXCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types\n\t\t\t\texcept the resource types that you specify to exclude from being recorded in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html\">ExclusionByResourceTypes</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <b>Required and optional fields</b>\n            </p>\n            <p>The <code>recordingStrategy</code> field is optional when you set the\n\t\t\t<code>allSupported</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a> to <code>true</code>.</p>\n            <p>The <code>recordingStrategy</code> field is optional when you list resource types in the\n\t\t\t\t<code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html\">RecordingGroup</a>.</p>\n            <p>The <code>recordingStrategy</code> field is required if you list resource types to exclude from recording in the <code>resourceTypes</code> field of <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html\">ExclusionByResourceTypes</a>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Overriding fields</b>\n            </p>\n            <p>If you choose <code>EXCLUSION_BY_RESOURCE_TYPES</code> for the recording strategy, the <code>exclusionByResourceTypes</code> field will override other properties in the request.</p>\n            <p>For example, even if you set <code>includeGlobalResourceTypes</code> to false, global IAM resource types will still be automatically\n\t\t\trecorded in this option unless those resource types are specifically listed as exclusions in the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Global resources types and the resource exclusion recording strategy</b>\n            </p>\n            <p>By default, if you choose the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy,\n\t\t\twhen Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types,\n\t\t\tConfig starts recording resources of that type automatically.</p>\n            <p>Unless specifically listed as exclusions,\n\t\t\t\t<code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported Config Regions were the configuration recorder is enabled.</p>\n            <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config  was available before February 2022.\n\t\t\t\tYou cannot be record the global IAM resouce types in Regions supported by Config after February 2022. For a list of those Regions,\n\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all\">Recording Amazon Web Services Resources | Global Resources</a>.</p>\n         </note>"
                     }
                 }
             },
@@ -10733,7 +11325,7 @@
                 "recordingFrequency": {
                     "target": "com.amazonaws.configservice#RecordingFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default recording frequency that Config uses to record configuration changes.</p>\n         <important>\n            <p>Daily recording is not supported for the following resource types:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::Config::ResourceCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConformancePackCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConfigurationRecorder</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For the <b>allSupported</b> (<code>ALL_SUPPORTED_RESOURCE_TYPES</code>) recording strategy, these resource types will be set to Continuous recording.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The default recording frequency that Config uses to record configuration changes.</p>\n         <important>\n            <p>Daily recording cannot be specified for the following resource types:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::Config::ResourceCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConformancePackCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConfigurationRecorder</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For the <b>allSupported</b> (<code>ALL_SUPPORTED_RESOURCE_TYPES</code>) recording strategy, these resource types will be set to Continuous recording.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10760,7 +11352,7 @@
                 "resourceTypes": {
                     "target": "com.amazonaws.configservice#RecordingModeResourceTypesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list that specifies which resource types Config\n\t\t\tincludes in the override.</p>\n         <important>\n            <p>Daily recording is not supported for the following resource types:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::Config::ResourceCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConformancePackCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConfigurationRecorder</code>\n                  </p>\n               </li>\n            </ul>\n         </important>",
+                        "smithy.api#documentation": "<p>A comma-separated list that specifies which resource types Config\n\t\t\tincludes in the override.</p>\n         <important>\n            <p>Daily recording cannot be specified for the following resource types:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::Config::ResourceCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConformancePackCompliance</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::Config::ConfigurationRecorder</code>\n                  </p>\n               </li>\n            </ul>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10792,6 +11384,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.configservice#ResourceType"
+            }
+        },
+        "com.amazonaws.configservice#RecordingScope": {
+            "type": "enum",
+            "members": {
+                "INTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL"
+                    }
+                },
+                "PAID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAID"
+                    }
+                }
             }
         },
         "com.amazonaws.configservice#RecordingStrategy": {
@@ -14152,6 +14761,22 @@
                 }
             }
         },
+        "com.amazonaws.configservice#ResourceTypeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{2,64}::[a-zA-Z0-9]{2,64}::[a-zA-Z0-9]{2,64}$"
+            }
+        },
+        "com.amazonaws.configservice#ResourceTypeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ResourceTypeValue"
+            }
+        },
         "com.amazonaws.configservice#ResourceTypes": {
             "type": "list",
             "member": {
@@ -14511,6 +15136,32 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.configservice#ServicePrincipal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.configservice#ServicePrincipalValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.configservice#ServicePrincipalValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ServicePrincipalValue"
+            }
+        },
         "com.amazonaws.configservice#SortBy": {
             "type": "enum",
             "members": {
@@ -14644,6 +15295,9 @@
             "version": "2014-11-12",
             "operations": [
                 {
+                    "target": "com.amazonaws.configservice#AssociateResourceTypes"
+                },
+                {
                     "target": "com.amazonaws.configservice#BatchGetAggregateResourceConfig"
                 },
                 {
@@ -14690,6 +15344,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#DeleteRetentionConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.configservice#DeleteServiceLinkedConfigurationRecorder"
                 },
                 {
                     "target": "com.amazonaws.configservice#DeleteStoredQuery"
@@ -14773,6 +15430,9 @@
                     "target": "com.amazonaws.configservice#DescribeRetentionConfigurations"
                 },
                 {
+                    "target": "com.amazonaws.configservice#DisassociateResourceTypes"
+                },
+                {
                     "target": "com.amazonaws.configservice#GetAggregateComplianceDetailsByConfigRule"
                 },
                 {
@@ -14833,6 +15493,9 @@
                     "target": "com.amazonaws.configservice#ListAggregateDiscoveredResources"
                 },
                 {
+                    "target": "com.amazonaws.configservice#ListConfigurationRecorders"
+                },
+                {
                     "target": "com.amazonaws.configservice#ListConformancePackComplianceScores"
                 },
                 {
@@ -14888,6 +15551,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#PutRetentionConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.configservice#PutServiceLinkedConfigurationRecorder"
                 },
                 {
                     "target": "com.amazonaws.configservice#PutStoredQuery"
@@ -16020,10 +16686,13 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#UnmodifiableEntityException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts recording configurations of the Amazon Web Services resources you have\n\t\t\tselected to record in your Amazon Web Services account.</p>\n         <p>You must have created at least one delivery channel to\n\t\t\tsuccessfully start the configuration recorder.</p>"
+                "smithy.api#documentation": "<p>Starts the customer managed configuration recorder. The customer managed configuration recorder will begin recording configuration changes for the resource types you specify.</p>\n         <p>You must have created a delivery channel to\n\t\t\tsuccessfully start the customer managed configuration recorder. You can use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutDeliveryChannel.html\">PutDeliveryChannel</a> operation to create a delivery channel.</p>"
             }
         },
         "com.amazonaws.configservice#StartConfigurationRecorderRequest": {
@@ -16032,13 +16701,13 @@
                 "ConfigurationRecorderName": {
                     "target": "com.amazonaws.configservice#RecorderName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the recorder object that records each configuration\n\t\t\tchange made to the resources.</p>",
+                        "smithy.api#documentation": "<p>The name of the customer managed configuration recorder that you want to start.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input for the <a>StartConfigurationRecorder</a>\n\t\t\taction.</p>",
+                "smithy.api#documentation": "<p>The input for the <a>StartConfigurationRecorder</a>\n\t\t\toperation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -16240,10 +16909,13 @@
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigurationRecorderException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#UnmodifiableEntityException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops recording configurations of the Amazon Web Services resources you have selected to record in your Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Stops the customer managed configuration recorder. The customer managed configuration recorder will stop recording configuration changes for the resource types you have specified.</p>"
             }
         },
         "com.amazonaws.configservice#StopConfigurationRecorderRequest": {
@@ -16252,13 +16924,13 @@
                 "ConfigurationRecorderName": {
                     "target": "com.amazonaws.configservice#RecorderName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the recorder object that records each configuration change made to the resources.</p>",
+                        "smithy.api#documentation": "<p>The name of the customer managed configuration recorder that you want to stop.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input for the <a>StopConfigurationRecorder</a> action.</p>",
+                "smithy.api#documentation": "<p>The input for the <a>StopConfigurationRecorder</a> operation.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -16496,7 +17168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed.\n\t\t\tIf existing tags are specified, however, then their values will be updated. When a resource is deleted, the tags associated with that resource are deleted as well.</p>"
+                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>ResourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed.\n\t\t\tIf existing tags are specified, however, then their values will be updated. When a resource is deleted, the tags associated with that resource are deleted as well.</p>"
             }
         },
         "com.amazonaws.configservice#TagResourceRequest": {
@@ -16505,7 +17177,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.configservice#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16626,6 +17298,21 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.configservice#UnmodifiableEntityException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.configservice#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error executing the command</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested operation is not valid.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationRecorder.html\">PutConfigurationRecorder</a>,\n\t\t\tyou will see this exception because you cannot use this operation to create a service-linked configuration recorder. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a> operation to create a service-linked configuration\n\t\t\trecorder.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConfigurationRecorder.html\">DeleteConfigurationRecorder</a>, you will see this exception because you cannot use this operation to delete a service-linked configuration recorder. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a> operation to delete a service-linked configuration\n\t\t\trecorder.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_StartConfigurationRecorder.html\">StartConfigurationRecorder</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html\">StopConfigurationRecorder</a>, you will see this exception because these operations do not affect service-linked configuration recorders.\n\t\t\tService-linked configuration recorders are always recording. To stop recording, you must delete the service-linked configuration recorder. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a> operation to delete a service-linked configuration\n\t\t\trecorder.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.configservice#UnprocessedResourceIdentifierList": {
             "type": "list",
             "member": {
@@ -16658,7 +17345,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.configservice#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16685,7 +17372,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested action is not valid.</p>\n         <p>For PutStoredQuery, you will see this exception if there are missing required fields or if the input value fails the validation, or if you are trying to create more than 300 queries.</p>\n         <p>For GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this exception if there are missing required fields or if the input value fails the validation.</p>",
+                "smithy.api#documentation": "<p>The requested operation is not valid. You will see this exception if there are missing required fields or if the input value fails the validation.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html\">PutStoredQuery</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>There are missing required fields.</p>\n            </li>\n            <li>\n               <p>The input value fails the validation.</p>\n            </li>\n            <li>\n               <p>You are trying to create more than 300 queries.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html\">DescribeConfigurationRecorders</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html\">DescribeConfigurationRecorderStatus</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>You have specified more than one configuration recorder.</p>\n            </li>\n            <li>\n               <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html\">AssociateResourceTypes</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html\">DisassociateResourceTypes</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>Your configuraiton recorder has a recording strategy that does not allow the association or disassociation of resource types.</p>\n            </li>\n            <li>\n               <p>One or more of the specified resource types are already associated or disassociated with the configuration recorder.</p>\n            </li>\n            <li>\n               <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },

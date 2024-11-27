@@ -2047,6 +2047,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The dimensions details for the vector configuration used on the Bedrock embeddings model.</p>"
                     }
+                },
+                "embeddingDataType": {
+                    "target": "com.amazonaws.bedrockagent#EmbeddingDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for the vectors when using a model to convert text into vector \n      embeddings. The model must support the specified data type for vector embeddings. \n      Floating-point (float32) is the default data type, and is supported by most models \n      for vector embeddings. See <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html\">Supported embeddings \n        models</a> for information on the available models and their vector data types.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5243,6 +5249,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about duplicate connections found between two nodes in the flow.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#EmbeddingDataType": {
+            "type": "enum",
+            "members": {
+                "FLOAT32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT32"
+                    }
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bedrock models embedding data type. Can be either float32 or binary"
             }
         },
         "com.amazonaws.bedrockagent#EmbeddingModelConfiguration": {

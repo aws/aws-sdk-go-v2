@@ -3229,6 +3229,12 @@
                         "smithy.api#documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code>\n            can have the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code> - (Default) Data compression is turned off when\n                the file system is created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LZ4</code> - Data compression is turned on with the LZ4\n                algorithm.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a> \n            in the <i>Amazon FSx for Lustre User Guide</i>.</p>"
                     }
                 },
+                "EfaEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS)\n            support is enabled for the Amazon FSx for Lustre file system.</p>\n         <p>(Default = <code>false</code>)</p>"
+                    }
+                },
                 "LogConfiguration": {
                     "target": "com.amazonaws.fsx#LustreLogCreateConfiguration",
                     "traits": {
@@ -8081,6 +8087,12 @@
                     "target": "com.amazonaws.fsx#FileSystemLustreMetadataConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Lustre metadata performance configuration for an Amazon FSx for Lustre file system\n            using a <code>PERSISTENT_2</code> deployment type.</p>"
+                    }
+                },
+                "EfaEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS)\n            support is enabled for the Amazon FSx for Lustre file system.</p>"
                     }
                 }
             },
