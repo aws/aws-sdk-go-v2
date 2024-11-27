@@ -592,6 +592,7 @@ func (d *downloader) download(ctx context.Context) (*GetObjectOutput, error) {
 		}
 	} else {
 		if d.in.Range == nil {
+
 		} else {
 		}
 	}
