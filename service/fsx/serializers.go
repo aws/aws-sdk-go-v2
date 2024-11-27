@@ -2965,6 +2965,11 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		ok.String(string(v.DriveCacheType))
 	}
 
+	if v.EfaEnabled != nil {
+		ok := object.Key("EfaEnabled")
+		ok.Boolean(*v.EfaEnabled)
+	}
+
 	if v.ExportPath != nil {
 		ok := object.Key("ExportPath")
 		ok.String(*v.ExportPath)

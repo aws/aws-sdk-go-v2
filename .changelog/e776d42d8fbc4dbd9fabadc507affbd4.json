@@ -1,0 +1,8 @@
+{
+    "id": "e776d42d-8fbc-4dbd-9fab-adc507affbd4",
+    "type": "feature",
+    "description": "Add support for specifying embeddingDataType, either FLOAT32 or BINARY",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "97a0c976-b62d-40dd-8040-7dfe1f5c452b",
+    "type": "feature",
+    "description": "AWS Config adds support for service-linked recorders, a new type of Config recorder managed by AWS services to record specific subsets of resource configuration data and functioning independently from customer managed AWS Config recorders.",
+    "modules": [
+        "service/configservice"
+    ]
+}

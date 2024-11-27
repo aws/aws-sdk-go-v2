@@ -1,0 +1,8 @@
+{
+    "id": "cfb3185d-1da3-47b4-a93d-97425da9e354",
+    "type": "feature",
+    "description": "Amazon CloudWatch Observability Admin adds the ability to audit telemetry configuration for AWS resources in customers AWS Accounts and Organizations. The release introduces new APIs to turn on/off the new experience, which supports discovering supported AWS resources and their state of telemetry.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

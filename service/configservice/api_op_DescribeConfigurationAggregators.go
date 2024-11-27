@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the details of one or more configuration aggregators. If the
-// configuration aggregator is not specified, this action returns the details for
-// all the configuration aggregators associated with the account.
+// configuration aggregator is not specified, this operation returns the details
+// for all the configuration aggregators associated with the account.
 func (c *Client) DescribeConfigurationAggregators(ctx context.Context, params *DescribeConfigurationAggregatorsInput, optFns ...func(*Options)) (*DescribeConfigurationAggregatorsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationAggregatorsInput{}

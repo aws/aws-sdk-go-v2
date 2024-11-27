@@ -10,11 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts recording configurations of the Amazon Web Services resources you have
-// selected to record in your Amazon Web Services account.
+// Starts the customer managed configuration recorder. The customer managed
+// configuration recorder will begin recording configuration changes for the
+// resource types you specify.
 //
-// You must have created at least one delivery channel to successfully start the
-// configuration recorder.
+// You must have created a delivery channel to successfully start the customer
+// managed configuration recorder. You can use the [PutDeliveryChannel]operation to create a delivery
+// channel.
+//
+// [PutDeliveryChannel]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutDeliveryChannel.html
 func (c *Client) StartConfigurationRecorder(ctx context.Context, params *StartConfigurationRecorderInput, optFns ...func(*Options)) (*StartConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &StartConfigurationRecorderInput{}
@@ -30,11 +34,10 @@ func (c *Client) StartConfigurationRecorder(ctx context.Context, params *StartCo
 	return out, nil
 }
 
-// The input for the StartConfigurationRecorder action.
+// The input for the StartConfigurationRecorder operation.
 type StartConfigurationRecorderInput struct {
 
-	// The name of the recorder object that records each configuration change made to
-	// the resources.
+	// The name of the customer managed configuration recorder that you want to start.
 	//
 	// This member is required.
 	ConfigurationRecorderName *string

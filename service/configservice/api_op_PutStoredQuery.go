@@ -16,6 +16,8 @@ import (
 // Region. You can create upto 300 queries in a single Amazon Web Services account
 // and a single Amazon Web Services Region.
 //
+// # Tags are added at creation and cannot be updated
+//
 // PutStoredQuery is an idempotent API. Subsequent requests won’t create a
 // duplicate resource if one was already created. If a following request has
 // different tags values, Config will ignore these differences and treat it as an

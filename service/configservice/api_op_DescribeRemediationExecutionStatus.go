@@ -32,7 +32,7 @@ func (c *Client) DescribeRemediationExecutionStatus(ctx context.Context, params 
 
 type DescribeRemediationExecutionStatusInput struct {
 
-	// A list of Config rule names.
+	// The name of the Config rule.
 	//
 	// This member is required.
 	ConfigRuleName *string

@@ -11,19 +11,44 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new configuration recorder to record configuration changes for
-// specified resource types.
+// Creates or updates the customer managed configuration recorder.
 //
-// You can also use this action to change the roleARN or the recordingGroup of an
-// existing recorder. For more information, see [Managing the Configuration Recorder]in the Config Developer Guide.
+// You can use this operation to create a new customer managed configuration
+// recorder or to update the roleARN and the recordingGroup for an existing
+// customer managed configuration recorder.
 //
-// You can specify only one configuration recorder for each Amazon Web Services
-// Region for each account.
+// To start the customer managed configuration recorder and begin recording
+// configuration changes for the resource types you specify, use the [StartConfigurationRecorder]operation.
 //
-// If the configuration recorder does not have the recordingGroup field specified,
-// the default is to record all supported resource types.
+// For more information, see [Working with the Configuration Recorder] in the Config Developer Guide.
 //
-// [Managing the Configuration Recorder]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
+// # One customer managed configuration recorder per account per Region
+//
+// You can create only one customer managed configuration recorder for each
+// account for each Amazon Web Services Region.
+//
+// Default is to record all supported resource types, excluding the global IAM
+// resource types
+//
+// If you have not specified values for the recordingGroup field, the default for
+// the customer managed configuration recorder is to record all supported resource
+// types, excluding the global IAM resource types: AWS::IAM::Group ,
+// AWS::IAM::Policy , AWS::IAM::Role , and AWS::IAM::User .
+//
+// # Tags are added at creation and cannot be updated
+//
+// PutConfigurationRecorder is an idempotent API. Subsequent requests won’t create
+// a duplicate resource if one was already created. If a following request has
+// different tags values, Config will ignore these differences and treat it as an
+// idempotent request of the previous. In this case, tags will not be updated, even
+// if they are different.
+//
+// Use [TagResource] and [UntagResource] to update tags after creation.
+//
+// [Working with the Configuration Recorder]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
+// [TagResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html
+// [StartConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_StartConfigurationRecorder.html
 func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfigurationRecorderInput, optFns ...func(*Options)) (*PutConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &PutConfigurationRecorderInput{}
@@ -42,11 +67,15 @@ func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfig
 // The input for the PutConfigurationRecorder action.
 type PutConfigurationRecorderInput struct {
 
-	// An object for the configuration recorder to record configuration changes for
-	// specified resource types.
+	// An object for the configuration recorder. A configuration recorder records
+	// configuration changes for the resource types in scope.
 	//
 	// This member is required.
 	ConfigurationRecorder *types.ConfigurationRecorder
+
+	// The tags for the customer managed configuration recorder. Each tag consists of
+	// a key and an optional value, both of which you define.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

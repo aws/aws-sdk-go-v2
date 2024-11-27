@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateResourceTypes struct {
+}
+
+func (*validateOpAssociateResourceTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateResourceTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateResourceTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateResourceTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetAggregateResourceConfig struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpDeleteRetentionConfiguration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteServiceLinkedConfigurationRecorder struct {
+}
+
+func (*validateOpDeleteServiceLinkedConfigurationRecorder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServiceLinkedConfigurationRecorder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServiceLinkedConfigurationRecorderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServiceLinkedConfigurationRecorderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteStoredQuery struct {
 }
 
@@ -505,6 +545,26 @@ func (m *validateOpDescribeRemediationExecutionStatus) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRemediationExecutionStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateResourceTypes struct {
+}
+
+func (*validateOpDisassociateResourceTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateResourceTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateResourceTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateResourceTypesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1150,6 +1210,26 @@ func (m *validateOpPutRetentionConfiguration) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutServiceLinkedConfigurationRecorder struct {
+}
+
+func (*validateOpPutServiceLinkedConfigurationRecorder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutServiceLinkedConfigurationRecorder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutServiceLinkedConfigurationRecorderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutServiceLinkedConfigurationRecorderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutStoredQuery struct {
 }
 
@@ -1330,6 +1410,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateResourceTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateResourceTypes{}, middleware.After)
+}
+
 func addOpBatchGetAggregateResourceConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetAggregateResourceConfig{}, middleware.After)
 }
@@ -1394,6 +1478,10 @@ func addOpDeleteRetentionConfigurationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDeleteRetentionConfiguration{}, middleware.After)
 }
 
+func addOpDeleteServiceLinkedConfigurationRecorderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServiceLinkedConfigurationRecorder{}, middleware.After)
+}
+
 func addOpDeleteStoredQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStoredQuery{}, middleware.After)
 }
@@ -1428,6 +1516,10 @@ func addOpDescribeRemediationExceptionsValidationMiddleware(stack *middleware.St
 
 func addOpDescribeRemediationExecutionStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRemediationExecutionStatus{}, middleware.After)
+}
+
+func addOpDisassociateResourceTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateResourceTypes{}, middleware.After)
 }
 
 func addOpGetAggregateComplianceDetailsByConfigRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -1556,6 +1648,10 @@ func addOpPutResourceConfigValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutRetentionConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRetentionConfiguration{}, middleware.After)
+}
+
+func addOpPutServiceLinkedConfigurationRecorderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutServiceLinkedConfigurationRecorder{}, middleware.After)
 }
 
 func addOpPutStoredQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -2176,6 +2272,24 @@ func validateTemplateSSMDocumentDetails(v *types.TemplateSSMDocumentDetails) err
 	}
 }
 
+func validateOpAssociateResourceTypesInput(v *AssociateResourceTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateResourceTypesInput"}
+	if v.ConfigurationRecorderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRecorderArn"))
+	}
+	if v.ResourceTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetAggregateResourceConfigInput(v *BatchGetAggregateResourceConfigInput) error {
 	if v == nil {
 		return nil
@@ -2439,6 +2553,21 @@ func validateOpDeleteRetentionConfigurationInput(v *DeleteRetentionConfiguration
 	}
 }
 
+func validateOpDeleteServiceLinkedConfigurationRecorderInput(v *DeleteServiceLinkedConfigurationRecorderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceLinkedConfigurationRecorderInput"}
+	if v.ServicePrincipal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServicePrincipal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteStoredQueryInput(v *DeleteStoredQueryInput) error {
 	if v == nil {
 		return nil
@@ -2571,6 +2700,24 @@ func validateOpDescribeRemediationExecutionStatusInput(v *DescribeRemediationExe
 		if err := validateResourceKeys(v.ResourceKeys); err != nil {
 			invalidParams.AddNested("ResourceKeys", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateResourceTypesInput(v *DisassociateResourceTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateResourceTypesInput"}
+	if v.ConfigurationRecorderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationRecorderArn"))
+	}
+	if v.ResourceTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3154,6 +3301,21 @@ func validateOpPutRetentionConfigurationInput(v *PutRetentionConfigurationInput)
 	invalidParams := smithy.InvalidParamsError{Context: "PutRetentionConfigurationInput"}
 	if v.RetentionPeriodInDays == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriodInDays"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutServiceLinkedConfigurationRecorderInput(v *PutServiceLinkedConfigurationRecorderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutServiceLinkedConfigurationRecorderInput"}
+	if v.ServicePrincipal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServicePrincipal"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -10870,6 +10870,15 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 				sv.DriveCacheType = types.DriveCacheType(jtv)
 			}
 
+		case "EfaEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.EfaEnabled = ptr.Bool(jtv)
+			}
+
 		case "LogConfiguration":
 			if err := awsAwsjson11_deserializeDocumentLustreLogConfiguration(&sv.LogConfiguration, value); err != nil {
 				return err

@@ -670,6 +670,12 @@ type CreateFileSystemLustreConfiguration struct {
 	// This parameter is required when StorageType is set to HDD .
 	DriveCacheType DriveCacheType
 
+	// (Optional) Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage
+	// (GDS) support is enabled for the Amazon FSx for Lustre file system.
+	//
+	// (Default = false )
+	EfaEnabled *bool
+
 	// (Optional) Specifies the path in the Amazon S3 bucket where the root of your
 	// Amazon FSx file system is exported. The path must use the same Amazon S3 bucket
 	// as specified in ImportPath. You can provide an optional prefix to which new and
@@ -2782,6 +2788,10 @@ type LustreFileSystemConfiguration struct {
 	//
 	// This parameter is required when StorageType is set to HDD.
 	DriveCacheType DriveCacheType
+
+	// Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS)
+	// support is enabled for the Amazon FSx for Lustre file system.
+	EfaEnabled *bool
 
 	// The Lustre logging configuration. Lustre logging writes the enabled log events
 	// for your file system to Amazon CloudWatch Logs.

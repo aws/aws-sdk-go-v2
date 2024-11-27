@@ -7,6 +7,57 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// For [PutServiceLinkedConfigurationRecorder], you cannot create a service-linked recorder because a service-linked
+// recorder already exists for the specified service.
+//
+// For [DeleteServiceLinkedConfigurationRecorder], you cannot delete the service-linked recorder because it is currently in
+// use by the linked Amazon Web Services service.
+//
+// For [DeleteDeliveryChannel], you cannot delete the specified delivery channel because the customer
+// managed configuration recorder is running. Use the [StopConfigurationRecorder]operation to stop the
+// customer managed configuration recorder.
+//
+// For [AssociateResourceTypes] and [DisassociateResourceTypes], one of the following errors:
+//
+//   - For service-linked configuration recorders, the configuration recorder is
+//     not in use by the service. No association or dissociation of resource types is
+//     permitted.
+//
+//   - For service-linked configuration recorders, your requested change to the
+//     configuration recorder has been denied by its linked Amazon Web Services
+//     service.
+//
+// [PutServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
+// [DisassociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
+// [DeleteServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
+// [StopConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html
+// [AssociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
+// [DeleteDeliveryChannel]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You have specified a template that is not valid or supported.
 type ConformancePackTemplateValidationException struct {
 	Message *string
@@ -62,7 +113,7 @@ func (e *IdempotentParameterMismatch) ErrorCode() string {
 }
 func (e *IdempotentParameterMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your Amazon S3 bucket policy does not permit Config to write to it.
+// Your Amazon S3 bucket policy does not allow Config to write to it.
 type InsufficientDeliveryPolicyException struct {
 	Message *string
 
@@ -92,23 +143,31 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 
 // Indicates one of the following errors:
 //
-//   - For PutConfigRule, the rule cannot be created because the IAM role assigned
-//     to Config lacks permissions to perform the config:Put* action.
+//   - For [PutConfigRule], the rule cannot be created because the IAM role assigned to Config
+//     lacks permissions to perform the config:Put* action.
 //
-//   - For PutConfigRule, the Lambda function cannot be invoked. Check the
-//     function ARN, and check the function's permissions.
+//   - For [PutConfigRule], the Lambda function cannot be invoked. Check the function ARN, and
+//     check the function's permissions.
 //
-//   - For PutOrganizationConfigRule, organization Config rule cannot be created
-//     because you do not have permissions to call IAM GetRole action or create a
-//     service-linked role.
+//   - For [PutOrganizationConfigRule], organization Config rule cannot be created because you do not have
+//     permissions to call IAM GetRole action or create a service-linked role.
 //
-//   - For PutConformancePack and PutOrganizationConformancePack, a conformance
-//     pack cannot be created because you do not have the following permissions:
+//   - For [PutConformancePack]and [PutOrganizationConformancePack], a conformance pack cannot be created because you do not have the
+//     following permissions:
 //
 //   - You do not have permission to call IAM GetRole action or create a
 //     service-linked role.
 //
 //   - You do not have permission to read Amazon S3 bucket or call SSM:GetDocument.
+//
+//   - For [PutServiceLinkedConfigurationRecorder], a service-linked configuration recorder cannot be created because you
+//     do not have the following permissions: IAM CreateServiceLinkedRole .
+//
+// [PutOrganizationConfigRule]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConfigRule.html
+// [PutServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
+// [PutConfigRule]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html
+// [PutConformancePack]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html
+// [PutOrganizationConformancePack]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConformancePack.html
 type InsufficientPermissionsException struct {
 	Message *string
 
@@ -134,7 +193,8 @@ func (e *InsufficientPermissionsException) ErrorCode() string {
 }
 func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have provided a name for the configuration recorder that is not valid.
+// You have provided a name for the customer managed configuration recorder that
+// is not valid.
 type InvalidConfigurationRecorderNameException struct {
 	Message *string
 
@@ -296,7 +356,7 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates one of the following errors:
+// One of the following errors:
 //
 //   - You have provided a combination of parameter values that is not valid. For
 //     example:
@@ -368,7 +428,7 @@ func (e *InvalidResultTokenException) ErrorCode() string {
 func (e *InvalidResultTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have provided a null or empty Amazon Resource Name (ARN) for the IAM role
-// assumed by Config and used by the configuration recorder.
+// assumed by Config and used by the customer managed configuration recorder.
 type InvalidRoleException struct {
 	Message *string
 
@@ -499,8 +559,8 @@ func (e *InvalidTimeRangeException) ErrorCode() string {
 }
 func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You cannot delete the delivery channel you specified because the configuration
-// recorder is running.
+// You cannot delete the delivery channel you specified because the customer
+// managed configuration recorder is running.
 type LastDeliveryChannelDeleteFailedException struct {
 	Message *string
 
@@ -528,6 +588,9 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// For PutServiceLinkedConfigurationRecorder API, this exception is thrown if the
+// number of service-linked roles in the account exceeds the limit.
+//
 // For StartConfigRulesEvaluation API, this exception is thrown if an evaluation
 // is in progress or if you call the StartConfigRulesEvaluationAPI more than once per minute.
 //
@@ -799,8 +862,11 @@ func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorFault() smith
 	return smithy.FaultClient
 }
 
-// There are no configuration recorders available to provide the role needed to
-// describe your resources. Create a configuration recorder.
+// There are no customer managed configuration recorders available to record your
+// resources. Use the [PutConfigurationRecorder]operation to create the customer managed configuration
+// recorder.
+//
+// [PutConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationRecorder.html
 type NoAvailableConfigurationRecorderException struct {
 	Message *string
 
@@ -1264,7 +1330,7 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 //   - You are not a registered delegated administrator for Config with
 //     permissions to call ListDelegatedAdministrators API. Ensure that the
 //     management account registers delagated administrator for Config service
-//     principle name before the delegated administrator creates an aggregator.
+//     principal name before the delegated administrator creates an aggregator.
 //
 // For all OrganizationConfigRule and OrganizationConformancePack APIs, Config
 // throws an exception if APIs are called from member accounts. All APIs must be
@@ -1565,15 +1631,87 @@ func (e *TooManyTagsException) ErrorCode() string {
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested action is not valid.
+// The requested operation is not valid.
 //
-// For PutStoredQuery, you will see this exception if there are missing required
-// fields or if the input value fails the validation, or if you are trying to
-// create more than 300 queries.
+// For [PutConfigurationRecorder], you will see this exception because you cannot use this operation to
+// create a service-linked configuration recorder. Use the [PutServiceLinkedConfigurationRecorder]operation to create a
+// service-linked configuration recorder.
 //
-// For GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this
-// exception if there are missing required fields or if the input value fails the
-// validation.
+// For [DeleteConfigurationRecorder], you will see this exception because you cannot use this operation to
+// delete a service-linked configuration recorder. Use the [DeleteServiceLinkedConfigurationRecorder]operation to delete a
+// service-linked configuration recorder.
+//
+// For [StartConfigurationRecorder] and [StopConfigurationRecorder], you will see this exception because these operations do not affect
+// service-linked configuration recorders. Service-linked configuration recorders
+// are always recording. To stop recording, you must delete the service-linked
+// configuration recorder. Use the [DeleteServiceLinkedConfigurationRecorder]operation to delete a service-linked
+// configuration recorder.
+//
+// [PutServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
+// [DeleteConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConfigurationRecorder.html
+// [DeleteServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
+// [StopConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html
+// [StartConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_StartConfigurationRecorder.html
+// [PutConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationRecorder.html
+type UnmodifiableEntityException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnmodifiableEntityException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnmodifiableEntityException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnmodifiableEntityException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnmodifiableEntityException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnmodifiableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The requested operation is not valid. You will see this exception if there are
+// missing required fields or if the input value fails the validation.
+//
+// For [PutStoredQuery], one of the following errors:
+//
+//   - There are missing required fields.
+//
+//   - The input value fails the validation.
+//
+//   - You are trying to create more than 300 queries.
+//
+// For [DescribeConfigurationRecorders] and [DescribeConfigurationRecorderStatus], one of the following errors:
+//
+//   - You have specified more than one configuration recorder.
+//
+//   - You have provided a service principal for service-linked configuration
+//     recorder that is not valid.
+//
+// For [AssociateResourceTypes] and [DisassociateResourceTypes], one of the following errors:
+//
+//   - Your configuraiton recorder has a recording strategy that does not allow
+//     the association or disassociation of resource types.
+//
+//   - One or more of the specified resource types are already associated or
+//     disassociated with the configuration recorder.
+//
+//   - For service-linked configuration recorders, the configuration recorder does
+//     not record one or more of the specified resource types.
+//
+// [DescribeConfigurationRecorders]: https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html
+// [PutStoredQuery]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html
+// [DisassociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
+// [DescribeConfigurationRecorderStatus]: https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html
+// [AssociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
 type ValidationException struct {
 	Message *string
 

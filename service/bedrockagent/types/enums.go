@@ -293,6 +293,25 @@ func (DataSourceType) Values() []DataSourceType {
 	}
 }
 
+type EmbeddingDataType string
+
+// Enum values for EmbeddingDataType
+const (
+	EmbeddingDataTypeFloat32 EmbeddingDataType = "FLOAT32"
+	EmbeddingDataTypeBinary  EmbeddingDataType = "BINARY"
+)
+
+// Values returns all known values for EmbeddingDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddingDataType) Values() []EmbeddingDataType {
+	return []EmbeddingDataType{
+		"FLOAT32",
+		"BINARY",
+	}
+}
+
 type FlowConnectionType string
 
 // Enum values for FlowConnectionType

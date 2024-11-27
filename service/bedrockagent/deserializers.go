@@ -13690,6 +13690,15 @@ func awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(v **type
 				sv.Dimensions = ptr.Int32(int32(i64))
 			}
 
+		case "embeddingDataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmbeddingDataType to be of type string, got %T instead", value)
+				}
+				sv.EmbeddingDataType = types.EmbeddingDataType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

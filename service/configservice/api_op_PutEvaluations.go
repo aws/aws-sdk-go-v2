@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by an Lambda function to deliver evaluation results to Config. This action
-// is required in every Lambda function that is invoked by an Config rule.
+// Used by an Lambda function to deliver evaluation results to Config. This
+// operation is required in every Lambda function that is invoked by an Config
+// rule.
 func (c *Client) PutEvaluations(ctx context.Context, params *PutEvaluationsInput, optFns ...func(*Options)) (*PutEvaluationsOutput, error) {
 	if params == nil {
 		params = &PutEvaluationsInput{}

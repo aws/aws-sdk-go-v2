@@ -6208,6 +6208,11 @@ func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.B
 		ok.Integer(*v.Dimensions)
 	}
 
+	if len(v.EmbeddingDataType) > 0 {
+		ok := object.Key("embeddingDataType")
+		ok.String(string(v.EmbeddingDataType))
+	}
+
 	return nil
 }
 

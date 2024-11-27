@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateResourceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateResourceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetAggregateResourceConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetAggregateResourceConfig(context.Background(), nil, func(o *Options) {
@@ -247,6 +259,18 @@ func TestCheckSnapshot_DeleteRetentionConfiguration(t *testing.T) {
 	_, err := svc.DeleteRetentionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRetentionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteServiceLinkedConfigurationRecorder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceLinkedConfigurationRecorder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteServiceLinkedConfigurationRecorder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +602,18 @@ func TestCheckSnapshot_DescribeRetentionConfigurations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateResourceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateResourceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAggregateComplianceDetailsByConfigRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAggregateComplianceDetailsByConfigRule(context.Background(), nil, func(o *Options) {
@@ -818,6 +854,18 @@ func TestCheckSnapshot_ListAggregateDiscoveredResources(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConfigurationRecorders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationRecorders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurationRecorders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListConformancePackComplianceScores(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConformancePackComplianceScores(context.Background(), nil, func(o *Options) {
@@ -1046,6 +1094,18 @@ func TestCheckSnapshot_PutRetentionConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutServiceLinkedConfigurationRecorder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutServiceLinkedConfigurationRecorder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutServiceLinkedConfigurationRecorder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutStoredQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutStoredQuery(context.Background(), nil, func(o *Options) {
@@ -1165,6 +1225,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateResourceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateResourceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetAggregateResourceConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetAggregateResourceConfig(context.Background(), nil, func(o *Options) {
@@ -1350,6 +1422,18 @@ func TestUpdateSnapshot_DeleteRetentionConfiguration(t *testing.T) {
 	_, err := svc.DeleteRetentionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRetentionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteServiceLinkedConfigurationRecorder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceLinkedConfigurationRecorder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteServiceLinkedConfigurationRecorder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1681,6 +1765,18 @@ func TestUpdateSnapshot_DescribeRetentionConfigurations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateResourceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateResourceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAggregateComplianceDetailsByConfigRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAggregateComplianceDetailsByConfigRule(context.Background(), nil, func(o *Options) {
@@ -1921,6 +2017,18 @@ func TestUpdateSnapshot_ListAggregateDiscoveredResources(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConfigurationRecorders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationRecorders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurationRecorders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListConformancePackComplianceScores(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConformancePackComplianceScores(context.Background(), nil, func(o *Options) {
@@ -2142,6 +2250,18 @@ func TestUpdateSnapshot_PutRetentionConfiguration(t *testing.T) {
 	_, err := svc.PutRetentionConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutRetentionConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutServiceLinkedConfigurationRecorder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutServiceLinkedConfigurationRecorder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutServiceLinkedConfigurationRecorder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
