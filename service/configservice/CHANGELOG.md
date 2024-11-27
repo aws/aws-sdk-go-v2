@@ -1,3 +1,7 @@
+# v1.51.0 (2024-11-27)
+
+* **Feature**: AWS Config adds support for service-linked recorders, a new type of Config recorder managed by AWS services to record specific subsets of resource configuration data and functioning independently from customer managed AWS Config recorders.
+
 # v1.50.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.

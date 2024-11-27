@@ -1,3 +1,7 @@
+# v1.29.0 (2024-11-27)
+
+* **Feature**: Add support for specifying embeddingDataType, either FLOAT32 or BINARY
+
 # v1.28.0 (2024-11-26)
 
 * **Feature**: Custom Orchestration API release for AWSBedrockAgents.

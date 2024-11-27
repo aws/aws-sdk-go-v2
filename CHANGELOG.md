@@ -1,3 +1,16 @@
+# Release (2024-11-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.29.0](service/bedrockagent/CHANGELOG.md#v1290-2024-11-27)
+  * **Feature**: Add support for specifying embeddingDataType, either FLOAT32 or BINARY
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.51.0](service/configservice/CHANGELOG.md#v1510-2024-11-27)
+  * **Feature**: AWS Config adds support for service-linked recorders, a new type of Config recorder managed by AWS services to record specific subsets of resource configuration data and functioning independently from customer managed AWS Config recorders.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.50.0](service/fsx/CHANGELOG.md#v1500-2024-11-27)
+  * **Feature**: This release adds EFA support to increase FSx for Lustre file systems' throughput performance to a single client instance. This can be done by specifying EfaEnabled=true at the time of creation of Persistent_2 file systems.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.0.0](service/observabilityadmin/CHANGELOG.md#v100-2024-11-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon CloudWatch Observability Admin adds the ability to audit telemetry configuration for AWS resources in customers AWS Accounts and Organizations. The release introduces new APIs to turn on/off the new experience, which supports discovering supported AWS resources and their state of telemetry.
+
 # Release (2024-11-26)
 
 ## Module Highlights

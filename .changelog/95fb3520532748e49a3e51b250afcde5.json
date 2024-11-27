@@ -1,8 +1,0 @@
-{
-    "id": "95fb3520-5327-48e4-9a3e-51b250afcde5",
-    "type": "feature",
-    "description": "This release adds EFA support to increase FSx for Lustre file systems' throughput performance to a single client instance. This can be done by specifying EfaEnabled=true at the time of creation of Persistent_2 file systems.",
-    "modules": [
-        "service/fsx"
-    ]
-}

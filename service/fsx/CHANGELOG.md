@@ -1,3 +1,7 @@
+# v1.50.0 (2024-11-27)
+
+* **Feature**: This release adds EFA support to increase FSx for Lustre file systems' throughput performance to a single client instance. This can be done by specifying EfaEnabled=true at the time of creation of Persistent_2 file systems.
+
 # v1.49.6 (2024-11-18)
 
 * **Dependency Update**: Update to smithy-go v1.22.1.
