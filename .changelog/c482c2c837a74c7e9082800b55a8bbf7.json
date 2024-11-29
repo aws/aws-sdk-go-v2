@@ -1,0 +1,8 @@
+{
+    "id": "c482c2c8-37a7-4c7e-9082-800b55a8bbf7",
+    "type": "bugfix",
+    "description": "Fix user agent to add business metrics at the end instead of prepend them",
+    "modules": [
+        "."
+    ]
+}
